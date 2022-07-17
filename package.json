@@ -19,11 +19,12 @@
     "eslint": "^8.20.0",
     "eslint-plugin-astro": "^0.15.0",
     "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-validate-jsx-nesting": "^0.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.1.1",
-    "solid-js": "^1.4.3"
+    "solid-js": "^1.4.7"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,astro}": [
