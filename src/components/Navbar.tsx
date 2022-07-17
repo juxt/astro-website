@@ -8,18 +8,18 @@ export default function Counter() {
 
   return (
     <>
-      <nav class="w-full bg-red-500 h-14">
-        <div class="container mx-auto flex items-center justify-between h-full">
+      <nav class="w-full bg-black h-14">
+        <div class="container mx-auto px-2 2xl:px-0 max-w-6xl flex items-center justify-between h-full">
           <div class="flex items-center">
-            <img src={logo} width="100px" />
+            <img src={logo} width="80px" />
           </div>
-          <div class="flex items-center">
-            <button class="bg-white text-red-500 font-bold py-2 px-4 rounded-full">
-              Sign in
-            </button>
-            <button class="bg-white text-red-500 font-bold py-2 px-4 rounded-full ml-4">
-              Sign up
-            </button>
+          <div class="flex items-center uppercase tracking-wider text-sm text-white">
+            <a href="" class="px-4">
+              About
+            </a>
+            <a href="" class="px-4">
+              Blog
+            </a>
           </div>
         </div>
       </nav>
