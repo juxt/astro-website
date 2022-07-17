@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        juxt: "#f4901d",
+      },
     },
   },
   plugins: [],

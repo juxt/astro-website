@@ -1,32 +1,6 @@
-# Welcome to [Astro](https://astro.build)
+# JUXT Website
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components or layouts.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
+## Quick Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -37,6 +11,21 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
 
-## 👀 Want to learn more?
+## Components
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+After reading this section, you should be able to perform the most common changes to the site.
+
+### Navbar
+
+The Navbar can be found in `components/Navbar.astro`. The links in the Navbar are driven by the `metadata` variable that is defined at the `page` level.
+For a page to appear in the Navbar, it needs a `navbar` key with optional `label` and `weight` attributes, the latter controls the position.
+An example follows:
+
+```js
+// somewhere in the frontmatter of about.astro page
+
+export const metadata = { navbar: { weight: 1 } };
+```
+
+Here, we are saying that we want the about page to be linked in the navbar (presence of navbar key) and that it has to be the first link (weight of 1).
+Note that without a `label` key the label will default to the name of the `*pageName*.astro` file, so in this example it will be `about`.

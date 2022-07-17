@@ -1,0 +1,42 @@
+---
+import logo from '../assets/images/logo.svg'
+import { removeLeadingSlash } from '../utils'
+import NavLink from './NavLink.astro'
+
+const url = new URL(Astro.request.url)
+const currentPage = url.pathname
+
+type PageProps = {
+  metadata?: { navbar?: { weight?: number; label?: string } }
+  url: string
+}
+
+const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
+
+const pagesInNavbar = pages
+  .filter((page) => page?.metadata?.navbar)
+  .map((page) => ({
+    url: page.url,
+    weight: page.metadata?.navbar?.weight,
+    label: page.metadata?.navbar?.label || removeLeadingSlash(page.url),
+    active: page.url === currentPage
+  }))
+  .sort((a, b) => a.weight - b.weight)
+---
+
+<nav class='w-full bg-black h-14'>
+  <div
+    class='container mx-auto px-2 sm:px-12 2xl:px-0 max-w-6xl flex items-center justify-between h-full'
+  >
+    <a href='/' class='flex items-center'>
+      <img src={logo} width='80px' alt='Juxt Logo' />
+    </a>
+    <div
+      class='flex items-center gap-8 uppercase tracking-widest text-xs text-white'
+    >
+      {pagesInNavbar.map((page) => (
+        <NavLink href={page.url} label={page.label} active={page.active} />
+      ))}
+    </div>
+  </div>
+</nav>
