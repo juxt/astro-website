@@ -27,7 +27,7 @@ export default function DarkModeSwitch() {
   }
 
   return (
-    <div class='w-8 h-8' onClick={toggleTheme}>
+    <div class='w-6 h-6' onClick={toggleTheme}>
       <button
         class='flex items-center justify-center h-full w-full bg-none border-none text-inherit cursor-pointer p-0'
         type='button'
