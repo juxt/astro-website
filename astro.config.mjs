@@ -6,5 +6,6 @@ import preact from '@astrojs/preact'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), image(), preact()]
+  integrations: [mdx(), tailwind(), image(), preact()],
+  server: { port: 3000, host: '0.0.0.0' }
 })

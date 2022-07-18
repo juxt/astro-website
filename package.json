@@ -33,5 +33,8 @@
       "eslint --fix",
       "prettier --write --ignore-unknown --plugin-search-dir=. ."
     ]
+  },
+  "dependencies": {
+    "classnames": "^2.3.1"
   }
 }

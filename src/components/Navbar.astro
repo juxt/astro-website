@@ -1,8 +1,6 @@
 ---
-import logo from '../assets/images/logo.svg'
 import { removeLeadingSlash } from '../utils'
-import NavLink from './NavLink.astro'
-import DarkModeSwitch from './DarkModeSwitch'
+import Navbar from './Navbar'
 
 const url = new URL(Astro.request.url)
 const currentPage = url.pathname
@@ -27,20 +25,4 @@ const pagesInNavbar = pages
 const isBlog = Astro.canonicalURL.pathname.includes('/blog/')
 ---
 
-<nav class='w-full bg-black h-14'>
-  <div
-    class='container mx-auto px-2 sm:px-12 2xl:px-0 max-w-6xl flex items-center justify-between h-full'
-  >
-    <a href='/' class='flex items-center'>
-      <img src={logo} width='80px' alt='Juxt Logo' />
-    </a>
-    <div
-      class='flex items-center gap-8 uppercase tracking-widest text-xs text-white'
-    >
-      {pagesInNavbar.map((page) => (
-        <NavLink href={page.url} label={page.label} active={page.active} />
-      ))}
-      {isBlog && <DarkModeSwitch client:visible />}
-    </div>
-  </div>
-</nav>
+<Navbar client:visible navLinks={pagesInNavbar} isBlog={isBlog} />
