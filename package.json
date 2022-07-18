@@ -12,8 +12,9 @@
   "devDependencies": {
     "@astrojs/image": "^0.1.2",
     "@astrojs/mdx": "^0.2.0",
-    "@astrojs/solid-js": "^0.4.0",
+    "@astrojs/preact": "^0.5.1",
     "@astrojs/tailwind": "^0.2.4",
+    "@tailwindcss/typography": "^0.5.4",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "astro": "^1.0.0-beta.72",
@@ -23,9 +24,9 @@
     "eslint-plugin-validate-jsx-nesting": "^0.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "preact": "^10.6.5",
     "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.1.1",
-    "solid-js": "^1.4.7"
+    "prettier-plugin-astro": "^0.1.1"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,astro}": [

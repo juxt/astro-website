@@ -24,7 +24,7 @@ An example follows:
 ```js
 // somewhere in the frontmatter of about.astro page
 
-export const metadata = { navbar: { weight: 1 } };
+export const metadata = { navbar: { weight: 1 } }
 ```
 
 Here, we are saying that we want the about page to be linked in the navbar (presence of navbar key) and that it has to be the first link (weight of 1).

@@ -2,6 +2,7 @@
 import logo from '../assets/images/logo.svg'
 import { removeLeadingSlash } from '../utils'
 import NavLink from './NavLink.astro'
+import DarkModeSwitch from './DarkModeSwitch'
 
 const url = new URL(Astro.request.url)
 const currentPage = url.pathname
@@ -22,6 +23,10 @@ const pagesInNavbar = pages
     active: page.url === currentPage
   }))
   .sort((a, b) => a.weight - b.weight)
+
+const isBlog = Astro.canonicalURL.pathname.includes('/blog/')
+
+console.log(Astro.canonicalURL.pathname)
 ---
 
 <nav class='w-full bg-black h-14'>
@@ -37,6 +42,7 @@ const pagesInNavbar = pages
       {pagesInNavbar.map((page) => (
         <NavLink href={page.url} label={page.label} active={page.active} />
       ))}
+      {isBlog && <DarkModeSwitch client:visible />}
     </div>
   </div>
 </nav>
