@@ -1,5 +1,5 @@
 ---
-draft: true;
+draft: true
 author: 'lda'
 layout: '../../layouts/BlogPost.astro'
 title: 'Hello world!'
