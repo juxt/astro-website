@@ -2,7 +2,7 @@
 draft: true;
 author: 'lda'
 layout: '../../layouts/BlogPost.astro'
-title: 'Hello world!'
+title: 'hello world 2'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
 heroImage:
@@ -10,7 +10,7 @@ heroImage:
   alt: 'Space shuttle leaving curved trail in the sky'
 ---
 
-# hello world
+# hello world 2
 
 From October 2020 until July 2021, I had the chance to work on an exciting greenfield project in the investment sector. The goal was to develop a data-intensive webapp able to handle hundreds of UI changes per second along with the resolution of thousands of formulas, taking as inputs live market data and user entered values.
 
