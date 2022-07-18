@@ -49,3 +49,21 @@ heroImage:
 ```
 
 When a post is ready to go live, you can set the `draft` value to be false and it will be included in the build.
+
+### Optimized Images
+
+Through the `setup` attribute in the frontmatter you can import the `Image` component that can be easily consumed from your article.
+
+```md
+---
+setup: |
+  import { Image } from '@astrojs/image'
+  import hero from '../../assets/images/mock.webp'
+---
+
+# hello world
+
+<Image src={hero} width={640} aspectRatio="16:9" />
+```
+
+Remember to import also the pictures, which are stored in `src/assets/images`.
