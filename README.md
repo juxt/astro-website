@@ -30,7 +30,40 @@ export const metadata = { navbar: { weight: 1 } }
 ```
 
 Here, we are saying that we want the about page to be linked in the navbar (presence of navbar key) and that it has to be the first link (weight of 1).
-Note that without a `label` key the label will default to the name of the `*pageName*.astro` file, so in this example it will be `about`.
+Note that without a `label` key the label will default to the name of the `*name*.astro` file, so in this example it will be `about`.
+
+### New Page
+
+All site pages are `*name*.astro` and `*name*.md` files defined in the `src/pages` folder. To reach an individual page in your browser you can simply walk the file system and construct the `url` accordingly.
+
+Let's assume the following folder structure:
+
+```
+├── src/
+│   └── pages/
+│   │   ├── blog/
+│   │   │   ├── post1.md
+│   │   │   ├── post2.md
+│   │   │   └── post3.md
+│   │   │   └── index.astro
+│   │   └── index.astro
+```
+
+The `url` to visit `post1.md` would be: `/blog/post1`. Notice that the `index.astro` files play a special role, as they are the default page under each single page folder. For example, if you visit: `/blog`, the `/blog/index.astro` file is the one served. Clearly, the site homepage is `/pages/index.astro`.
+
+All you need to create a new page is a `*name*.astro` file with the following content:
+
+```astro
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout navbar={true}>
+  <main>new page here</main>
+</Layout>
+```
+
+From here, the sky's the limit.
 
 ### Articles
 
