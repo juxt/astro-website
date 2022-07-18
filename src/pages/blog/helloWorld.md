@@ -9,13 +9,12 @@ heroImage:
   src: '/assets/blog/introducing-astro.jpg'
   alt: 'Space shuttle leaving curved trail in the sky'
 setup: |
-  import { Image } from '@astrojs/image'
   import hero from '../../assets/images/mock.webp'
 ---
 
 # hello world
 
-<Image src={hero} width={640} aspectRatio="16:9"  />
+<img src={hero} width={640} aspectRatio="16:9"  />
 
 From October 2020 until July 2021, I had the chance to work on an exciting greenfield project in the investment sector. The goal was to develop a data-intensive webapp able to handle hundreds of UI changes per second along with the resolution of thousands of formulas, taking as inputs live market data and user entered values.
 
