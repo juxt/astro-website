@@ -93,7 +93,7 @@ function BlogCard({
         </div>
         <div className='opacity-0 group-hover:opacity-100 transition-opacity flex flex-col'>
           <div className='flex gap-4'>
-            <div className='flex-shrink-0 flex flex-col gap-4'>
+            <div className='flex-shrink-0 flex flex-col gap-3'>
               <div className='w-28 h-28 rounded-lg relative overflow-hidden'>
                 <img
                   className='absolute w-full h-full object-cover'
@@ -101,14 +101,14 @@ function BlogCard({
                   alt='author picture'
                 />
               </div>
-              <div className='flex justify-center gap-4 text-sm items-center'>
-                <a className='w-5 h-5' href={github}>
+              <div className='flex justify-around text-sm items-center'>
+                <a className='w-4 h-4' href={github}>
                   {githubLogo}
                 </a>
-                <a className='w-5 h-5' href={linkedin}>
+                <a className='w-4 h-4' href={linkedin}>
                   {linkedInLogo}
                 </a>
-                <a className='w-5 h-5' href={twitter}>
+                <a className='w-4 h-4' href={twitter}>
                   {twitterLogo}
                 </a>
               </div>
