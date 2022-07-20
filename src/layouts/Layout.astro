@@ -1,6 +1,10 @@
 ---
 import Navbar from '../components/Navbar.astro'
-import { capitalizeFirstLetter, removeLeadingSlash } from '../utils'
+import {
+  capitalizeFirstLetter,
+  removeLeadingSlash,
+  removeTrailingSlash
+} from '../utils'
 
 type LayoutProps = {
   title?: string
@@ -8,7 +12,7 @@ type LayoutProps = {
 }
 
 const url = new URL(Astro.request.url)
-const currentPage = removeLeadingSlash(removeLeadingSlash(url.pathname))
+const currentPage = removeTrailingSlash(removeLeadingSlash(url.pathname))
 
 const { title, navbar } = Astro.props as LayoutProps
 ---
@@ -39,7 +43,7 @@ const { title, navbar } = Astro.props as LayoutProps
     </script>
   </head>
   <body>
-    {navbar && <Navbar client:visible />}
+    {navbar && <Navbar />}
     <slot></slot>
   </body>
 </html>

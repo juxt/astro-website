@@ -33,6 +33,5 @@ const blogs = pages.map((page) => {
 })
 ---
 
-<Layout navbar={true}>
-  <Blog blogs={blogs} isDev={isDev} />
-</Layout>
+<Layout navbar={true} />
+<Blog client:load blogs={blogs} isDev={isDev} />

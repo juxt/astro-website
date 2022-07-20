@@ -76,10 +76,12 @@ function BlogCard({
 }: {
   blog: BlogProps
 }) {
+  const [_isOpen, _setIsOpen] = useState(false)
+
   return (
     <div className='w-80 aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img class='absolute w-full h-full object-cover' src={src} alt={alt} />
-      <div className='group px-4 py-4 w-full h-28 hover:rounded-b hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 flex flex-col justify-between'>
+      <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none hover:rounded-b hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 flex flex-col justify-between'>
         <div className='flex flex-col h-28 gap-1'>
           <div className='flex justify-between text-xs'>
             <div className='text-slate-600 font-medium'>{publishDate}</div>
@@ -91,7 +93,7 @@ function BlogCard({
             </h2>
           </a>
         </div>
-        <div className='opacity-0 group-hover:opacity-100 transition-opacity flex flex-col'>
+        <div className='md:opacity-0 group-hover:opacity-100 transition-opacity flex flex-col'>
           <div className='flex gap-4'>
             <div className='flex-shrink-0 flex flex-col gap-3'>
               <div className='w-28 h-28 rounded-lg relative overflow-hidden'>
@@ -134,10 +136,9 @@ export default function Blog({
   blogs: BlogProps[]
   isDev: boolean
 }) {
-  const [_isMenuOpen, _setIsMenuOpen] = useState(false)
   return (
     <main class='dark:bg-gray-900 pb-80 transition-colors'>
-      <section class='pt-6 flex justify-center gap-4'>
+      <section class='pt-6 flex flex-wrap justify-center gap-4'>
         {blogs
           .filter((blog) => isDev || !blog.draft)
           .map((blog) => {
