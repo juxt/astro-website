@@ -61,11 +61,31 @@ const linkedInLogo = (
   </svg>
 )
 
-// const chevronDown = (
-//   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-//     <path d='M12,15a1,1,0,0,1-.71-.29l-4-4A1,1,0,0,1,8.71,9.29L12,12.59l3.29-3.29a1,1,0,0,1,1.41,1.41l-4,4A1,1,0,0,1,12,15Z' />
-//   </svg>
-// )
+const warningIcon = (
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'>
+    <rect fill='none' />
+    <line
+      x1='128'
+      x2='128'
+      y1='104'
+      y2='144'
+      fill='none'
+      stroke='#000'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      stroke-width='16'
+    />
+    <path
+      fill='none'
+      stroke='#000'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      stroke-width='16'
+      d='M114.15243,39.98472,26.17616,191.977a16.00005,16.00005,0,0,0,13.84762,24.01535H215.97625A16,16,0,0,0,229.82386,191.977L141.84757,39.98472A16,16,0,0,0,114.15243,39.98472Z'
+    />
+    <circle cx='128' cy='180' r='12' />
+  </svg>
+)
 
 function BlogCard({
   blog: {
@@ -74,16 +94,21 @@ function BlogCard({
     publishDate,
     author,
     href,
+    draft,
     person: { name, lastName, jobTitle, image, linkedin, twitter, github }
   }
 }: {
   blog: BlogProps
 }) {
-  const [_isOpen, _setIsOpen] = useState(false)
-
   return (
     <div className='w-80 mx-auto aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img class='absolute w-full h-full object-cover' src={src} alt={alt} />
+      {draft && (
+        <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
+          <div class='w-5 h-5'>{warningIcon}</div>
+          This Blog is a draft and won't be published
+        </div>
+      )}
       <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none hover:rounded-b-lg hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 dark:bg-black/80 flex flex-col justify-between'>
         <div className='flex flex-col h-28 gap-2'>
           <div className='flex justify-between text-xs'>
@@ -143,10 +168,12 @@ export default function Blog({
   blogs: BlogProps[]
   isDev: boolean
 }) {
+  const [blogsToShow, _setBlogsToShow] = useState(blogs)
+
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
       <section class='mx-auto pt-40 grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] max-w-6xl justify-center gap-16'>
-        {blogs
+        {blogsToShow
           .filter((blog) => isDev || !blog.draft)
           .map((blog) => {
             return <BlogCard blog={blog} />
