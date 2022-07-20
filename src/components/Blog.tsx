@@ -85,7 +85,7 @@ function BlogCard({
     <div className='w-80 mx-auto aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img class='absolute w-full h-full object-cover' src={src} alt={alt} />
       <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none hover:rounded-b-lg hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 dark:bg-black/80 flex flex-col justify-between'>
-        <div className='flex flex-col h-28 gap-1'>
+        <div className='flex flex-col h-28 gap-2'>
           <div className='flex justify-between text-xs'>
             <div className='text-zinc-600 dark:text-zinc-300 font-medium'>
               {publishDate}
