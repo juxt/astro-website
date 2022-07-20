@@ -26,9 +26,12 @@ export type BlogProps = {
   }
 }
 
+const logoClasses =
+  'fill-zinc-700 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-all'
+
 const githubLogo = (
   <svg
-    class='fill-slate-700 hover:fill-juxt transition-all'
+    class={logoClasses}
     xmlns='http://www.w3.org/2000/svg'
     viewBox='0 0 16 16'
   >
@@ -38,7 +41,7 @@ const githubLogo = (
 
 const twitterLogo = (
   <svg
-    class='fill-slate-700 hover:fill-juxt transition-all'
+    class={logoClasses}
     xmlns='http://www.w3.org/2000/svg'
     data-name='Layer 1'
     viewBox='0 0 24 24'
@@ -49,7 +52,7 @@ const twitterLogo = (
 
 const linkedInLogo = (
   <svg
-    class='fill-slate-700 hover:fill-juxt transition-all'
+    class={logoClasses}
     xmlns='http://www.w3.org/2000/svg'
     viewBox='0 0 16 16'
   >
@@ -79,16 +82,18 @@ function BlogCard({
   const [_isOpen, _setIsOpen] = useState(false)
 
   return (
-    <div className='w-80 aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
+    <div className='w-80 mx-auto aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img class='absolute w-full h-full object-cover' src={src} alt={alt} />
-      <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none hover:rounded-b hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 flex flex-col justify-between'>
+      <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none hover:rounded-b-lg hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 dark:bg-black/50 flex flex-col justify-between'>
         <div className='flex flex-col h-28 gap-1'>
           <div className='flex justify-between text-xs'>
-            <div className='text-slate-600 font-medium'>{publishDate}</div>
-            <div className='text-slate-900'>{author}</div>
+            <div className='text-zinc-600 dark:text-zinc-300 font-medium'>
+              {publishDate}
+            </div>
+            <div className='text-zinc-900 dark:text-zinc-200'>{author}</div>
           </div>
           <a href={href}>
-            <h2 className='capitalize font-medium w-60 underline-offset-4 underline md:no-underline hover:underline'>
+            <h2 className='dark:text-zinc-50 capitalize font-medium w-60 underline-offset-4 underline md:no-underline hover:underline'>
               {title}
             </h2>
           </a>
@@ -116,11 +121,13 @@ function BlogCard({
               </div>
             </div>
             <div className='flex flex-col gap-2'>
-              <div className=''>
+              <div className='dark:text-zinc-100'>
                 <div>{name}</div>
                 <div>{lastName}</div>
               </div>
-              <div className='text-sm font-light'>{jobTitle}</div>
+              <div className='text-sm font-light dark:text-zinc-300'>
+                {jobTitle}
+              </div>
             </div>
           </div>
         </div>
@@ -137,8 +144,8 @@ export default function Blog({
   isDev: boolean
 }) {
   return (
-    <main class='dark:bg-gray-900 pb-80 transition-colors'>
-      <section class='pt-6 flex flex-wrap justify-center gap-4'>
+    <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
+      <section class='mx-auto pt-40 grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] max-w-6xl justify-center gap-16'>
         {blogs
           .filter((blog) => isDev || !blog.draft)
           .map((blog) => {
