@@ -224,25 +224,24 @@ export default function Blog({
   blogs: BlogProps[]
   isDev: boolean
 }) {
+  const [blogsToShow, _setBlogsToShow] = useState(
+    blogs.filter((blog) => isDev || !blog.draft)
+  )
+
   const paginationProps = usePagination({
     defaultRowsPerPage: 9,
-    data: blogs
+    data: blogsToShow
   })
 
   const { filterFrom, filterTo } = paginationProps
-
-  const [blogsToShow, _setBlogsToShow] = useState(blogs)
 
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
       <section className='mx-auto max-w-6xl pt-40'>
         <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-16'>
-          {blogsToShow
-            .filter((blog) => isDev || !blog.draft)
-            .slice(filterFrom, filterTo)
-            .map((blog) => {
-              return <BlogCard blog={blog} />
-            })}
+          {blogsToShow.slice(filterFrom, filterTo).map((blog) => {
+            return <BlogCard blog={blog} />
+          })}
         </div>
         <div className='flex justify-center pt-10'>
           <PaginationArrows {...paginationProps} />
