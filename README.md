@@ -78,14 +78,14 @@ title: 'Hello world!'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
 heroImage:
-  src: '/assets/blog/introducing-astro.jpg'
+  src: '/images/blog/introducing-astro.jpg'
   alt: 'Space shuttle leaving curved trail in the sky'
 ---
 ```
 
 When a post is ready to go live, you can set the `draft` value to be false and it will be included in the build.
 
-### Optimized Images
+### Optimized Images (NOT SUPPORTED CURRENTLY)
 
 Through the `setup` attribute in the frontmatter you can import the `Image` component that can be easily consumed from your article.
 

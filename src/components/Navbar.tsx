@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { useState } from 'preact/hooks'
-import logo from '../assets/images/logo.svg'
+import logo from '/images/logo.svg'
 import { useOutsideClick } from '../utils'
 import DarkModeSwitch from './DarkModeSwitch'
 

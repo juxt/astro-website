@@ -1,11 +1,11 @@
 ---
 author: 'alx'
 layout: '../../layouts/BlogPost.astro'
-title: 'hello world 2'
+title: 'Writing Mobile apps in ClojureScript in 2021'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
 heroImage:
-  src: '/assets/blog/introducing-astro.jpg'
+  src: '/images/blog/mock3.jpeg'
   alt: 'Space shuttle leaving curved trail in the sky'
 ---
 

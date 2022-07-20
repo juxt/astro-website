@@ -1,55 +1,38 @@
 ---
 import classNames from 'classnames'
 import Layout from '../../layouts/Layout.astro'
+import Blog from '../../components/Blog'
+import type { BlogProps, Person } from '../../components/Blog'
 
 export const metadata = { navbar: { weight: 3 } }
 
-type BlogProps = {
-  draft?: boolean
-  title: string
-  description: string
-  publishDate: string
-  author: string
-  slug: string
-  href: string
-}
-
 const pages = await Astro.glob<BlogProps>('./*.md')
+const people = await Astro.glob<Person & { default: Person }>(
+  '../../data/*.json'
+)
+
+const peopleByThreeLetterCode = people.reduce((acc, person) => {
+  const code = person.code
+  acc[code] = person.default
+  return acc
+}, {})
 
 const isDev = import.meta.env.DEV
 
 const blogs = pages.map((page) => {
-  return { ...page.frontmatter, href: page.url }
+  const author = page.frontmatter.author
+  const person = peopleByThreeLetterCode[author]
+  if (!person)
+    throw new Error(`No person found for author: '${author}' in '${page.url}'`)
+
+  return {
+    ...page.frontmatter,
+    href: page.url,
+    person: peopleByThreeLetterCode[page.frontmatter.author]
+  }
 })
 ---
 
 <Layout navbar={true}>
-  <main class='dark:bg-gray-900 pb-80 transition-colors'>
-    <section class='pt-6 flex justify-center gap-4'>
-      {blogs
-        .filter((blog) => isDev || !blog.draft)
-        .map((blog) => {
-          return (
-            <div
-              class={classNames(
-                'flex flex-col gap-2 p-2 bg-slate-400 w-fit',
-                blog.draft && ' bg-red-50'
-              )}
-            >
-              <a href={blog.href}>
-                <h1 class='text-lg font-bold'>{blog.title}</h1>
-                {blog.draft && (
-                  <p class='text-red-500'>
-                    This is a draft. It will not be published on the website.
-                  </p>
-                )}
-                <p>{blog.description}</p>
-                <p>{blog.publishDate}</p>
-                <p>{blog.author}</p>
-              </a>
-            </div>
-          )
-        })}
-    </section>
-  </main>
+  <Blog blogs={blogs} isDev={isDev} />
 </Layout>
