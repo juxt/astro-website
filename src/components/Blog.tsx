@@ -58,6 +58,12 @@ const linkedInLogo = (
   </svg>
 )
 
+// const chevronDown = (
+//   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+//     <path d='M12,15a1,1,0,0,1-.71-.29l-4-4A1,1,0,0,1,8.71,9.29L12,12.59l3.29-3.29a1,1,0,0,1,1.41,1.41l-4,4A1,1,0,0,1,12,15Z' />
+//   </svg>
+// )
+
 function BlogCard({
   blog: {
     heroImage: { src, alt },
@@ -73,19 +79,19 @@ function BlogCard({
   return (
     <div className='w-80 aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img class='absolute w-full h-full object-cover' src={src} alt={alt} />
-      <div className='group px-4 py-4 w-full md:h-28 hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 flex flex-col justify-between'>
+      <div className='group px-4 py-4 w-full h-28 hover:rounded-b hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 flex flex-col justify-between'>
         <div className='flex flex-col h-28 gap-1'>
           <div className='flex justify-between text-xs'>
             <div className='text-slate-600 font-medium'>{publishDate}</div>
             <div className='text-slate-900'>{author}</div>
           </div>
           <a href={href}>
-            <h2 className='capitalize font-medium w-60 underline-offset-4 hover:underline'>
+            <h2 className='capitalize font-medium w-60 underline-offset-4 underline md:no-underline hover:underline'>
               {title}
             </h2>
           </a>
         </div>
-        <div className='md:opacity-0 group-hover:opacity-100 transition-opacity flex flex-col'>
+        <div className='opacity-0 group-hover:opacity-100 transition-opacity flex flex-col'>
           <div className='flex gap-4'>
             <div className='flex-shrink-0 flex flex-col gap-4'>
               <div className='w-28 h-28 rounded-lg relative overflow-hidden'>
@@ -131,7 +137,6 @@ export default function Blog({
   const [_isMenuOpen, _setIsMenuOpen] = useState(false)
   return (
     <main class='dark:bg-gray-900 pb-80 transition-colors'>
-      <div className='flex justify-end p-10'></div>
       <section class='pt-6 flex justify-center gap-4'>
         {blogs
           .filter((blog) => isDev || !blog.draft)
