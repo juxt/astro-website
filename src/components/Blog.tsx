@@ -1,4 +1,6 @@
+import classNames from 'classnames'
 import { useState } from 'preact/hooks'
+import { usePagination, UsePaginationProps } from '../utils'
 
 export type Person = {
   code: string
@@ -87,6 +89,24 @@ const warningIcon = (
   </svg>
 )
 
+const chevronLeft = (className) => (
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class={className}>
+    <g data-name='16'>
+      <rect width='24' height='24' fill='none' />
+      <path d='M14.16,14.72a.75.75,0,0,1,0,1.06.76.76,0,0,1-1.07,0L9.84,12.53a.75.75,0,0,1,0-1.06l3.25-3.25a.77.77,0,0,1,1.07,0,.75.75,0,0,1,0,1.06L11.44,12Z' />
+    </g>
+  </svg>
+)
+
+const chevronRight = (className) => (
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' class={className}>
+    <g data-name='17'>
+      <rect width='24' height='24' fill='none' transform='rotate(180 12 12)' />
+      <path d='M9.84,14.72A.75.75,0,0,0,10.38,16a.74.74,0,0,0,.53-.22l3.25-3.25a.75.75,0,0,0,0-1.06L10.91,8.22a.77.77,0,0,0-1.07,0,.75.75,0,0,0,0,1.06L12.56,12Z' />
+    </g>
+  </svg>
+)
+
 function BlogCard({
   blog: {
     heroImage: { src, alt },
@@ -161,6 +181,42 @@ function BlogCard({
   )
 }
 
+function PaginationArrows({
+  prevPageExists,
+  nextPageExists,
+  offsetState
+}: UsePaginationProps) {
+  const [offset, setOffset] = offsetState
+  return (
+    <div className='flex items-center'>
+      <div
+        className={classNames('w-12 aspect-square', {
+          'cursor-pointer': prevPageExists
+        })}
+        onClick={() => prevPageExists && setOffset(offset - 1)}
+      >
+        {chevronLeft(
+          classNames('fill-zinc-600 dark:fill-zinc-300', {
+            'fill-zinc-300 dark:fill-zinc-500': !prevPageExists
+          })
+        )}
+      </div>
+      <div
+        className={classNames('w-12 aspect-square', {
+          'cursor-pointer': nextPageExists
+        })}
+        onClick={() => nextPageExists && setOffset(offset + 1)}
+      >
+        {chevronRight(
+          classNames('fill-zinc-600 dark:fill-zinc-300', {
+            'fill-zinc-300 dark:fill-zinc-500': !nextPageExists
+          })
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function Blog({
   blogs,
   isDev
@@ -168,16 +224,29 @@ export default function Blog({
   blogs: BlogProps[]
   isDev: boolean
 }) {
+  const paginationProps = usePagination({
+    defaultRowsPerPage: 9,
+    data: blogs
+  })
+
+  const { filterFrom, filterTo } = paginationProps
+
   const [blogsToShow, _setBlogsToShow] = useState(blogs)
 
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
-      <section class='mx-auto pt-40 grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] max-w-6xl justify-center gap-16'>
-        {blogsToShow
-          .filter((blog) => isDev || !blog.draft)
-          .map((blog) => {
-            return <BlogCard blog={blog} />
-          })}
+      <section className='mx-auto max-w-6xl pt-40'>
+        <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-16'>
+          {blogsToShow
+            .filter((blog) => isDev || !blog.draft)
+            .slice(filterFrom, filterTo)
+            .map((blog) => {
+              return <BlogCard blog={blog} />
+            })}
+        </div>
+        <div className='flex justify-center pt-10'>
+          <PaginationArrows {...paginationProps} />
+        </div>
       </section>
     </main>
   )
