@@ -1,5 +1,6 @@
 ---
 author: 'lda'
+category: 'technology'
 layout: '../../layouts/BlogPost.astro'
 title: 'Abstract Clojure'
 description: "Bring your markdown, we'll handle the rest"

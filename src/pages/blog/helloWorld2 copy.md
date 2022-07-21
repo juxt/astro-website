@@ -1,5 +1,6 @@
 ---
 draft: true
+category: 'technology'
 author: 'lda'
 layout: '../../layouts/BlogPost.astro'
 title: 'Abstract Clojure'

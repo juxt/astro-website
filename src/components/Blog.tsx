@@ -20,6 +20,7 @@ export type BlogProps = {
   publishDate: string
   author: string
   person: Person
+  category: string
   slug: string
   href: string
   heroImage: {
@@ -29,17 +30,17 @@ export type BlogProps = {
 }
 
 const logoClasses =
-  'fill-zinc-700 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-all'
+  'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-all'
 
-const githubLogo = (
-  <svg
-    class={logoClasses}
-    xmlns='http://www.w3.org/2000/svg'
-    viewBox='0 0 16 16'
-  >
-    <path d='M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z' />
-  </svg>
-)
+// const githubLogo = (
+//   <svg
+//     class={logoClasses}
+//     xmlns='http://www.w3.org/2000/svg'
+//     viewBox='0 0 16 16'
+//   >
+//     <path d='M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z' />
+//   </svg>
+// )
 
 const twitterLogo = (
   <svg
@@ -52,16 +53,16 @@ const twitterLogo = (
   </svg>
 )
 
-const linkedInLogo = (
-  <svg
-    class={logoClasses}
-    xmlns='http://www.w3.org/2000/svg'
-    viewBox='0 0 16 16'
-  >
-    <path d='M0 5h3.578v11H0zM13.324 5.129c-.038-.012-.074-.025-.114-.036a2.32 2.32 0 0 0-.145-.028A3.207 3.207 0 0 0 12.423 5c-2.086 0-3.409 1.517-3.845 2.103V5H5v11h3.578v-6s2.704-3.766 3.845-1v7H16V8.577a3.568 3.568 0 0 0-2.676-3.448z' />
-    <circle cx='1.75' cy='1.75' r='1.75' />
-  </svg>
-)
+// const linkedInLogo = (
+//   <svg
+//     class={logoClasses}
+//     xmlns='http://www.w3.org/2000/svg'
+//     viewBox='0 0 16 16'
+//   >
+//     <path d='M0 5h3.578v11H0zM13.324 5.129c-.038-.012-.074-.025-.114-.036a2.32 2.32 0 0 0-.145-.028A3.207 3.207 0 0 0 12.423 5c-2.086 0-3.409 1.517-3.845 2.103V5H5v11h3.578v-6s2.704-3.766 3.845-1v7H16V8.577a3.568 3.568 0 0 0-2.676-3.448z' />
+//     <circle cx='1.75' cy='1.75' r='1.75' />
+//   </svg>
+// )
 
 const warningIcon = (
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'>
@@ -127,14 +128,19 @@ function BlogCard({
     heroImage: { src, alt },
     title,
     publishDate,
-    author,
+    category,
     href,
     draft,
-    person: { name, lastName, jobTitle, image, linkedin, twitter, github }
-  }
+    person: { name, lastName, jobTitle, image }
+  },
+  host
 }: {
   blog: BlogProps
+  host: string
 }) {
+  const url = `${host}${href}`
+  const encodedPostUrl = encodeURI(url)
+
   return (
     <div className='w-80 mx-auto h-[26rem] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img
@@ -143,19 +149,13 @@ function BlogCard({
         alt={alt}
         onClick={() => window.location.assign(href)}
       />
-      {draft && (
-        <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
-          <div class='w-5 h-5'>{warningIcon}</div>
-          This Blog is a draft and won't be published
-        </div>
-      )}
+
       <div className='px-4 py-4 w-full rounded-b-lg overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-zinc-900/80 flex flex-col justify-between'>
-        <div className='flex flex-col h-28 gap-2'>
+        <div className='flex flex-col pb-6 gap-2'>
           <div className='flex justify-between text-xs'>
-            <div className='text-zinc-600 dark:text-zinc-300 font-medium'>
-              {publishDate}
+            <div className='text-zinc-600 dark:text-zinc-300 font-medium uppercase'>
+              {category}
             </div>
-            <div className='text-zinc-900 dark:text-zinc-200'>{author}</div>
           </div>
           <a href={href}>
             <h2 className='dark:text-zinc-50 capitalize font-medium w-60 underline-offset-4 underline md:no-underline hover:underline'>
@@ -163,40 +163,48 @@ function BlogCard({
             </h2>
           </a>
         </div>
-        <div className='flex flex-col'>
-          <div className='flex gap-4'>
-            <div className='flex-shrink-0 flex flex-col gap-3'>
-              <div className='w-28 h-28 rounded-lg relative overflow-hidden'>
-                <img
-                  className='absolute w-full h-full object-cover'
-                  src={`/images/people/${image}`}
-                  alt='author picture'
-                />
-              </div>
-              <div className='flex justify-around text-sm items-center'>
-                <a className='w-4 h-4' href={github}>
-                  {githubLogo}
-                </a>
-                <a className='w-4 h-4' href={linkedin}>
-                  {linkedInLogo}
-                </a>
-                <a className='w-4 h-4' href={twitter}>
-                  {twitterLogo}
-                </a>
-              </div>
-            </div>
-            <div className='flex flex-col gap-2'>
-              <div className='dark:text-zinc-100'>
-                <div>{name}</div>
-                <div>{lastName}</div>
-              </div>
-              <div className='text-sm font-light dark:text-zinc-300'>
-                {jobTitle}
-              </div>
+        <a href='' className='group flex gap-4 w-fit'>
+          <div className='flex-shrink-0 flex flex-col gap-3'>
+            <div className='w-20 h-20 rounded-lg relative overflow-hidden'>
+              <img
+                className='absolute w-full h-full object-cover'
+                src={`/images/people/${image}`}
+                alt='author picture'
+              />
             </div>
           </div>
-        </div>
+          <div className='flex flex-col gap-1'>
+            <div className='text-sm group-hover:underline dark:text-zinc-100 underline-offset-2'>
+              <div>{name}</div>
+              <div>{lastName}</div>
+            </div>
+            <div className='text-xs w-28 dark:text-zinc-300'>{jobTitle}</div>
+          </div>
+        </a>
       </div>
+
+      {draft ? (
+        <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
+          <div class='w-5 h-5'>{warningIcon}</div>
+          This Blog is a draft and won't be published
+        </div>
+      ) : (
+        <div className='flex items-center justify-between gap-1 text-xs absolute bottom-0 w-full bg-zinc-100/90 dark:bg-zinc-800/90'>
+          <div className='text-zinc-800 dark:text-zinc-300 font-medium px-4 py-4'>
+            {publishDate}
+          </div>
+          <div className='flex gap-2 px-4 items-center justify-end'>
+            <a
+              class='w-6'
+              target='_blank'
+              href={`https://twitter.com/intent/tweet?text=${title}&url=${encodedPostUrl}`}
+              data-size='large'
+            >
+              {twitterLogo}
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -278,10 +286,12 @@ function Filters({
 
 export default function Blog({
   blogs,
-  isDev
+  isDev,
+  host
 }: {
   blogs: BlogProps[]
   isDev: boolean
+  host: string
 }) {
   const publishedBlogs = blogs.filter((blog) => isDev || !blog.draft)
 
@@ -309,7 +319,7 @@ export default function Blog({
         <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-16'>
           {blogsToShow.length
             ? blogsToShow.slice(filterFrom, filterTo).map((blog) => {
-                return <BlogCard blog={blog} />
+                return <BlogCard blog={blog} host={host} />
               })
             : ''}
         </div>

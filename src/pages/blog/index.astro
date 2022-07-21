@@ -8,8 +8,11 @@ export const metadata = { navbar: { weight: 3 } }
 
 const pages = await Astro.glob<BlogProps>('./*.md')
 const people = await Astro.glob<Person & { default: Person }>(
-  '../../data/*.json'
+  '../../data/people/*.json'
 )
+
+const global = await Astro.glob<{ host: string }>('../../data/global.json')
+const { host } = global[0]
 
 const peopleByThreeLetterCode = people.reduce((acc, person) => {
   const code = person.code
@@ -34,4 +37,4 @@ const blogs = pages.map((page) => {
 ---
 
 <Layout navbar={true} />
-<Blog client:load blogs={blogs} isDev={isDev} />
+<Blog client:load blogs={blogs} isDev={isDev} host={host} />

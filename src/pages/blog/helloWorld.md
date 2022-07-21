@@ -1,5 +1,6 @@
 ---
 author: 'lda'
+category: 'technology'
 layout: '../../layouts/BlogPost.astro'
 title: 'Speed up your ClojureScript Webapp'
 description: "Bring your markdown, we'll handle the rest"
