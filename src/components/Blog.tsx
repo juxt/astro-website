@@ -136,7 +136,7 @@ function BlogCard({
   blog: BlogProps
 }) {
   return (
-    <div className='w-80 mx-auto aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
+    <div className='w-80 mx-auto h-[26rem] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img
         class='absolute w-full h-full object-cover cursor-pointer'
         src={src}
@@ -149,7 +149,7 @@ function BlogCard({
           This Blog is a draft and won't be published
         </div>
       )}
-      <div className='px-4 py-4 w-full rounded-b-lg overflow-hidden backdrop-blur-sm bg-white/70 dark:bg-zinc-900/80 flex flex-col justify-between'>
+      <div className='px-4 py-4 w-full rounded-b-lg overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-zinc-900/80 flex flex-col justify-between'>
         <div className='flex flex-col h-28 gap-2'>
           <div className='flex justify-between text-xs'>
             <div className='text-zinc-600 dark:text-zinc-300 font-medium'>
