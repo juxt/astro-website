@@ -11,9 +11,6 @@ const people = await Astro.glob<Person & { default: Person }>(
   '../../data/people/*.json'
 )
 
-const global = await Astro.glob<{ host: string }>('../../data/global.json')
-const { host } = global[0]
-
 const peopleByThreeLetterCode = people.reduce((acc, person) => {
   const code = person.code
   acc[code] = person.default
@@ -37,4 +34,4 @@ const blogs = pages.map((page) => {
 ---
 
 <Layout navbar={true} />
-<Blog client:load blogs={blogs} isDev={isDev} host={host} />
+<Blog client:load blogs={blogs} isDev={isDev} />
