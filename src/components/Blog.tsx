@@ -137,7 +137,12 @@ function BlogCard({
 }) {
   return (
     <div className='w-80 mx-auto aspect-[3/4] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
-      <img class='absolute w-full h-full object-cover' src={src} alt={alt} />
+      <img
+        class='absolute w-full h-full object-cover cursor-pointer'
+        src={src}
+        alt={alt}
+        onClick={() => window.location.assign(href)}
+      />
       {draft && (
         <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
           <div class='w-5 h-5'>{warningIcon}</div>
@@ -287,7 +292,7 @@ export default function Blog({
     data: blogsToShow
   })
 
-  const { filterFrom, filterTo } = paginationProps
+  const { filterFrom, filterTo, totalPages } = paginationProps
 
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
@@ -309,7 +314,7 @@ export default function Blog({
             : ''}
         </div>
         <div className='flex justify-center pt-10'>
-          <PaginationArrows {...paginationProps} />
+          {totalPages > 1 && <PaginationArrows {...paginationProps} />}
         </div>
       </section>
     </main>
