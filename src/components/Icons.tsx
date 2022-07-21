@@ -1,4 +1,4 @@
-import 'astro/jsx-runtime'
+import 'preact/jsx-runtime'
 
 export function githubIcon(className?: string) {
   return (

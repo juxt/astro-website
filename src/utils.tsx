@@ -1,4 +1,4 @@
-import 'astro/jsx-runtime'
+import 'preact/jsx-runtime'
 import { useRef, useEffect, useState } from 'preact/hooks'
 
 /** Remove \ and / from beginning of string */
