@@ -270,7 +270,7 @@ function Filters({
         value={searchValue}
         placeholder='Search'
         onInput={(e) => setSearchValue((e.target as HTMLInputElement).value)}
-        class='w-1/3 py-2 font-light border-b bg-transparent dark:text-zinc-200 border-zinc-400 outline-none focus:border-zinc-700 dark:focus:border-zinc-300'
+        class='lg:w-1/3 w-1/2 py-2 font-light border-b bg-transparent dark:text-zinc-200 border-zinc-400 outline-none focus:border-zinc-700 dark:focus:border-zinc-300'
       />
     </div>
   )
