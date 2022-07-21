@@ -296,11 +296,11 @@ export default function Blog({
 
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
-      <section className='mx-auto max-w-6xl pt-40'>
-        <div className='pb-40'>
+      <section className='mx-auto max-w-6xl'>
+        <div className='py-20'>
           <Filters blogs={publishedBlogs} setBlogsToShow={setBlogsToShow} />
           {!blogsToShow.length && (
-            <div className='pt-32 text-xl justify-center flex dark:text-zinc-200'>
+            <div className='pt-20 text-xl justify-center flex dark:text-zinc-200'>
               No articles found with this search
             </div>
           )}
