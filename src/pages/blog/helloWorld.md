@@ -1,5 +1,4 @@
 ---
-draft: true
 author: 'lda'
 layout: '../../layouts/BlogPost.astro'
 title: 'Speed up your ClojureScript Webapp'
