@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import { useEffect, useState } from 'preact/hooks'
-import { useDebounce } from 'use-debounce-preact'
 import { usePagination, UsePaginationProps } from '../utils'
 
 export type Person = {
@@ -241,11 +240,10 @@ function Filters({
   setBlogsToShow: (blogs: BlogProps[]) => void
 }) {
   const [searchValue, setSearchValue] = useState('')
-  const [debouncedSearchValue] = useDebounce(searchValue, 200)
 
   useEffect(() => {
-    if (debouncedSearchValue !== '') {
-      const parsedSearchValue = debouncedSearchValue.toLowerCase().trim()
+    if (searchValue !== '') {
+      const parsedSearchValue = searchValue.toLowerCase().trim()
 
       const filteredBlogs = blogs.filter(
         (blog) =>
@@ -256,7 +254,7 @@ function Filters({
     } else {
       setBlogsToShow(blogs)
     }
-  }, [debouncedSearchValue])
+  }, [searchValue])
 
   return (
     <div class='flex items-center gap-2 justify-center'>

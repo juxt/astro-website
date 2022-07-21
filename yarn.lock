@@ -4072,11 +4072,6 @@ preact@^10.6.5:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.10.0.tgz#7434750a24b59dae1957d95dc0aa47a4a8e9a180"
   integrity sha512-fszkg1iJJjq68I4lI8ZsmBiaoQiQHbxf1lNq+72EmC/mZOsFF5zn3k1yv9QGoFgIXzgsdSKtYymLJsrJPoamjQ==
 
-preact@^8.4.2:
-  version "8.5.3"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-8.5.3.tgz#78c2a5562fcecb1fed1d0055fa4ac1e27bde17c1"
-  integrity sha512-O3kKP+1YdgqHOFsZF2a9JVdtqD+RPzCQc3rP+Ualf7V6rmRDchZ9MJbiGTT7LuyqFKZqlHSOyO/oMFmI2lVTsw==
-
 prebuild-install@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.1.1.tgz#de97d5b34a70a0c81334fd24641f2a1702352e45"
@@ -5069,13 +5064,6 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
-
-use-debounce-preact@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/use-debounce-preact/-/use-debounce-preact-1.0.2.tgz#ca9cf09e8b979ed0bc0e423602999baf2ccaa694"
-  integrity sha512-C6QxfUWFF/x7VSVA717obKAzyPMpWMlTvAXEQuyrkw4ByFqpuOko1gUsu3kXcttKeL8qrm+csjpXeZKHLzXCaQ==
-  dependencies:
-    preact "^8.4.2"
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"
