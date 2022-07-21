@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
+import { useDebounce } from 'use-debounce-preact'
 import { usePagination, UsePaginationProps } from '../utils'
 
 export type Person = {
@@ -107,6 +108,21 @@ const chevronRight = (className) => (
   </svg>
 )
 
+const SearchIcon = (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    class='fill-zinc-600 dark:fill-zinc-400'
+    fill='none'
+    viewBox='0 0 24 24'
+  >
+    <path
+      fill-rule='evenodd'
+      d='M14.1922 15.6064C13.0236 16.4816 11.5723 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 11.5723 16.4816 13.0236 15.6064 14.1922L20.7782 19.364C21.1687 19.7545 21.1687 20.3877 20.7782 20.7782C20.3876 21.1687 19.7545 21.1687 19.364 20.7782L14.1922 15.6064ZM15 10C15 12.7614 12.7614 15 10 15C7.23858 15 5 12.7614 5 10C5 7.23858 7.23858 5 10 5C12.7614 5 15 7.23858 15 10Z'
+      clip-rule='evenodd'
+    />
+  </svg>
+)
+
 function BlogCard({
   blog: {
     heroImage: { src, alt },
@@ -129,7 +145,7 @@ function BlogCard({
           This Blog is a draft and won't be published
         </div>
       )}
-      <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none md:overflow-hidden hover:rounded-b-lg hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 dark:bg-black/80 flex flex-col justify-between'>
+      <div className='group px-4 py-4 w-full md:h-28 rounded-b md:rounded-none md:overflow-hidden hover:rounded-b-lg hover:h-2/3 overflow-hidden transition-all backdrop-blur-sm bg-white/70 dark:bg-zinc-900/80 flex flex-col justify-between'>
         <div className='flex flex-col h-28 gap-2'>
           <div className='flex justify-between text-xs'>
             <div className='text-zinc-600 dark:text-zinc-300 font-medium'>
@@ -217,6 +233,46 @@ function PaginationArrows({
   )
 }
 
+function Filters({
+  blogs,
+  setBlogsToShow
+}: {
+  blogs: BlogProps[]
+  setBlogsToShow: (blogs: BlogProps[]) => void
+}) {
+  const [searchValue, setSearchValue] = useState('')
+  const [debouncedSearchValue] = useDebounce(searchValue, 200)
+
+  useEffect(() => {
+    if (debouncedSearchValue !== '') {
+      const parsedSearchValue = debouncedSearchValue.toLowerCase().trim()
+
+      const filteredBlogs = blogs.filter(
+        (blog) =>
+          blog.title.toLowerCase().includes(parsedSearchValue) ||
+          blog.author.toLowerCase().includes(parsedSearchValue)
+      )
+      setBlogsToShow(filteredBlogs)
+    } else {
+      setBlogsToShow(blogs)
+    }
+  }, [debouncedSearchValue])
+
+  return (
+    <div class='flex items-center gap-2 justify-center'>
+      <div className='w-8 aspect-square'>{SearchIcon}</div>
+      <input
+        type='text'
+        name='name'
+        value={searchValue}
+        placeholder='Search'
+        onInput={(e) => setSearchValue((e.target as HTMLInputElement).value)}
+        class='w-1/3 py-2 font-light border-b bg-transparent dark:text-zinc-200 border-zinc-400 outline-none focus:border-zinc-700 dark:focus:border-zinc-300'
+      />
+    </div>
+  )
+}
+
 export default function Blog({
   blogs,
   isDev
@@ -224,9 +280,9 @@ export default function Blog({
   blogs: BlogProps[]
   isDev: boolean
 }) {
-  const [blogsToShow, _setBlogsToShow] = useState(
-    blogs.filter((blog) => isDev || !blog.draft)
-  )
+  const publishedBlogs = blogs.filter((blog) => isDev || !blog.draft)
+
+  const [blogsToShow, setBlogsToShow] = useState(publishedBlogs)
 
   const paginationProps = usePagination({
     defaultRowsPerPage: 9,
@@ -238,10 +294,21 @@ export default function Blog({
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
       <section className='mx-auto max-w-6xl pt-40'>
+        <div className='pb-40'>
+          <Filters blogs={publishedBlogs} setBlogsToShow={setBlogsToShow} />
+          {!blogsToShow.length && (
+            <div className='pt-32 text-xl justify-center flex dark:text-zinc-200'>
+              No articles found with this search
+            </div>
+          )}
+        </div>
+
         <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-16'>
-          {blogsToShow.slice(filterFrom, filterTo).map((blog) => {
-            return <BlogCard blog={blog} />
-          })}
+          {blogsToShow.length
+            ? blogsToShow.slice(filterFrom, filterTo).map((blog) => {
+                return <BlogCard blog={blog} />
+              })
+            : ''}
         </div>
         <div className='flex justify-center pt-10'>
           <PaginationArrows {...paginationProps} />
