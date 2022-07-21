@@ -49,7 +49,7 @@ function BlogCard({
   blog: BlogProps
 }) {
   return (
-    <div className='w-80 mx-auto h-[26rem] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
+    <div className='flex justify-between flex-col w-80 mx-auto h-[26rem] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img
         class='absolute w-full h-full object-cover cursor-pointer'
         src={src}
@@ -64,6 +64,9 @@ function BlogCard({
           <div className='flex justify-between text-xs'>
             <div className='text-zinc-600 dark:text-zinc-300 font-medium uppercase'>
               {category}
+            </div>
+            <div className='text-zinc-600 dark:text-zinc-300'>
+              {publishDate}
             </div>
           </div>
           <a href={href}>
@@ -92,16 +95,10 @@ function BlogCard({
         </a>
       </div>
 
-      {draft ? (
+      {draft && (
         <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
           <div class='w-5 h-5'>{warningIcon()}</div>
           This Blog is a draft and won't be published
-        </div>
-      ) : (
-        <div className='flex items-center justify-between gap-1 text-xs absolute bottom-0 w-full bg-zinc-100/90 dark:bg-zinc-800/90'>
-          <div className='text-zinc-800 dark:text-zinc-300 font-medium px-4 py-4'>
-            {publishDate}
-          </div>
         </div>
       )}
     </div>
