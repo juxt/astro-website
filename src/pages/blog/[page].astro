@@ -3,11 +3,6 @@ import type { BlogProps, Person } from '../../components/Blog'
 import Blog from '../../components/Blog'
 import Layout from '../../layouts/Layout.astro'
 
-export const metadata = {
-  navbar: { weight: 3, label: 'Blog', url: '/blog/1' },
-  footer: { weight: 3, label: 'Blog', url: '/blog/1' }
-}
-
 const isDev = import.meta.env.DEV
 
 export async function getStaticPaths({ paginate }) {
