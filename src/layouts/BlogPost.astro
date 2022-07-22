@@ -29,8 +29,6 @@ const { name, lastName, jobTitle, image } = people.find(
   (person) => person.default.code === author
 ).default
 
-const global = await Astro.glob<{ host: string }>('../data/global.json')
-
 const blogHref = Astro.canonicalURL.href
 ---
 
