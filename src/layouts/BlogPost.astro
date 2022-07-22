@@ -93,6 +93,7 @@ const shareIconStyle =
         <div class='flex justify-around text-sm items-center'>
           <a
             class='w-6 h-6'
+            target='_blank'
             href={`https://twitter.com/intent/tweet?url=${blogHref}&title=${title}`}
           >
             {(<TwitterIcon className={shareIconStyle} />)}
@@ -101,6 +102,7 @@ const shareIconStyle =
         <div class='flex justify-around text-sm items-center'>
           <a
             class='w-6 h-6'
+            target='_blank'
             href={`https://www.reddit.com/submit?url=${blogHref}&title=${title}`}
           >
             {(<RedditIcon className={shareIconStyle} />)}
@@ -109,6 +111,7 @@ const shareIconStyle =
         <div class='flex justify-around text-sm items-center'>
           <a
             class='w-6 h-6'
+            target='_blank'
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${blogHref}&title=${title}`}
           >
             {(<LinkedInIcon className={shareIconStyle} />)}
