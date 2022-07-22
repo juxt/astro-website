@@ -1,7 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-export const metadata = { navbar: { weight: 1 } }
+export const metadata = {
+  navbar: { weight: 1 },
+  footer: { sitemap: { weight: 2 } }
+}
 ---
 
 <Layout navbar={true}>

@@ -2,13 +2,16 @@
 import { removeLeadingSlash } from '../utils'
 import Navbar from './Navbar'
 
-const url = new URL(Astro.request.url)
-const currentPage = url.pathname
-
-type PageProps = {
-  metadata?: { navbar?: { weight?: number; label?: string } }
+export type PageProps = {
+  metadata?: {
+    navbar?: { weight?: number; label?: string }
+    footer?: { weight?: number; label?: string }
+  }
   url: string
 }
+
+const url = new URL(Astro.request.url)
+const currentPage = url.pathname
 
 const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 

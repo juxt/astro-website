@@ -150,3 +150,30 @@ export function LinkIcon({ className }: IconProps) {
     </svg>
   )
 }
+
+export function UserIcon({ className }: IconProps) {
+  return (
+    <svg
+      class={className}
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+    >
+      <path d='M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z' />
+    </svg>
+  )
+}
+
+export function ZulipIcon({ className }: IconProps) {
+  return (
+    <svg
+      class={className}
+      xmlns='http://www.w3.org/2000/svg'
+      version='1.1'
+      viewBox='0 0 256 298'
+    >
+      <path d='M 0,0 H 220.5 L 154,68 H 32 z' />
+      <path d='M 224,0 L 256,68 L 100.5,227.5 L 2.5,227.5 z' />
+      <path d='M 0,230 H 224 L256,298 H 32 z' />
+    </svg>
+  )
+}

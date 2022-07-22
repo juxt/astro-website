@@ -205,7 +205,7 @@ export default function Blog({
   const { filterFrom, filterTo, totalPages } = paginationProps
 
   return (
-    <main class='dark:bg-zinc-900 bg-zinc-100 pb-80 transition-colors'>
+    <main class='dark:bg-zinc-900 bg-zinc-100 pb-40 transition-colors'>
       <section className='mx-auto max-w-6xl'>
         <div className='py-20'>
           <Filters blogs={publishedBlogs} setBlogsToShow={setBlogsToShow} />
