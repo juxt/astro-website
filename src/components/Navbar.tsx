@@ -29,7 +29,7 @@ export default function Navbar({ navLinks, isBlog }) {
   const ref = useOutsideClick(() => setIsMenuOpen(false))
   const linkClasses = 'items-center gap-8 uppercase tracking-widest text-xs'
   return (
-    <nav className='w-full bg-black md:py-4 py-2' ref={ref}>
+    <nav className='w-full fixed z-50 bg-black md:py-4 h-14' ref={ref}>
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-6xl flex flex-wrap items-center justify-between h-full'>
         <a href='/' class='flex items-center'>
           <img src={logo} width='80px' alt='Juxt Logo' />

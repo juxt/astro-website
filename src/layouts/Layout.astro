@@ -44,6 +44,8 @@ const { title, navbar } = Astro.props as LayoutProps
   </head>
   <body>
     {navbar && <Navbar />}
-    <slot></slot>
+    <div class='pt-14'>
+      <slot></slot>
+    </div>
   </body>
 </html>
