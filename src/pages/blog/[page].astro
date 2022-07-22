@@ -1,0 +1,52 @@
+---
+import type { BlogProps, Person } from '../../components/Blog'
+import Blog from '../../components/Blog'
+import Layout from '../../layouts/Layout.astro'
+
+export const metadata = {
+  navbar: { weight: 3, label: 'Blog', url: '/blog/1' },
+  footer: { weight: 3, label: 'Blog', url: '/blog/1' }
+}
+
+const isDev = import.meta.env.DEV
+
+export async function getStaticPaths({ paginate }) {
+  const pages = await Astro.glob<BlogProps>('./*.md')
+  const people = await Astro.glob<Person & { default: Person }>(
+    '../../data/people/*.json'
+  )
+
+  const peopleByThreeLetterCode = people.reduce((acc, person) => {
+    const code = person.code
+    acc[code] = person.default
+    return acc
+  }, {})
+
+  const blogs = pages.map((page) => {
+    const author = page.frontmatter.author
+    const person = peopleByThreeLetterCode[author]
+    if (!person)
+      throw new Error(
+        `No person found for author: '${author}' in '${page.url}'`
+      )
+
+    return {
+      ...page.frontmatter,
+      href: page.url,
+      person: peopleByThreeLetterCode[page.frontmatter.author]
+    }
+  })
+
+  return paginate(blogs, { pageSize: 9 })
+}
+
+const { page } = Astro.props
+
+const {
+  url: { next, prev }
+} = page
+---
+
+<Layout navbar={true}>
+  <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />
+</Layout>

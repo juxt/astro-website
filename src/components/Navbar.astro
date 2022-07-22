@@ -4,8 +4,8 @@ import Navbar from './Navbar'
 
 export type PageProps = {
   metadata?: {
-    navbar?: { weight?: number; label?: string }
-    footer?: { weight?: number; label?: string }
+    navbar?: { weight?: number; label?: string; url?: string }
+    footer?: { weight?: number; label?: string; url?: string }
   }
   url: string
 }
@@ -18,7 +18,7 @@ const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 const pagesInNavbar = pages
   .filter((page) => page?.metadata?.navbar)
   .map((page) => ({
-    url: page.url,
+    url: page.metadata?.navbar?.url || page.url,
     weight: page.metadata?.navbar?.weight,
     label: page.metadata?.navbar?.label || removeLeadingSlash(page.url),
     active: page.url === currentPage

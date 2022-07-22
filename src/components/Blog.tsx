@@ -1,12 +1,6 @@
+import 'preact/jsx-runtime'
 import classNames from 'classnames'
-import { useEffect, useState } from 'preact/hooks'
-import { usePagination, UsePaginationProps } from '../utils'
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  SearchIcon,
-  WarningIcon
-} from './Icons'
+import { ChevronLeftIcon, ChevronRightIcon, WarningIcon } from './Icons'
 
 export type Person = {
   code: string
@@ -105,126 +99,66 @@ function BlogCard({
   )
 }
 
-function PaginationArrows({
-  prevPageExists,
-  nextPageExists,
-  offsetState
-}: UsePaginationProps) {
-  const [offset, setOffset] = offsetState
+function PaginationArrows({ prev, next }: { prev: string; next: string }) {
   return (
     <div className='flex items-center'>
-      <div
+      <a
+        href={prev}
         className={classNames('w-12 aspect-square', {
-          'cursor-pointer': prevPageExists
+          'cursor-pointer': prev
         })}
-        onClick={() => prevPageExists && setOffset(offset - 1)}
       >
         {
           <ChevronLeftIcon
             className={classNames('fill-zinc-600 dark:fill-zinc-300', {
-              'fill-zinc-300 dark:fill-zinc-500': !prevPageExists
+              'fill-zinc-300 dark:fill-zinc-500': !prev
             })}
           ></ChevronLeftIcon>
         }
-      </div>
-      <div
+      </a>
+      <a
+        href={next}
         className={classNames('w-12 aspect-square', {
-          'cursor-pointer': nextPageExists
+          'cursor-pointer': next
         })}
-        onClick={() => nextPageExists && setOffset(offset + 1)}
       >
         {
           <ChevronRightIcon
             className={classNames('fill-zinc-600 dark:fill-zinc-300', {
-              'fill-zinc-300 dark:fill-zinc-500': !nextPageExists
+              'fill-zinc-300 dark:fill-zinc-500': !next
             })}
           ></ChevronRightIcon>
         }
-      </div>
-    </div>
-  )
-}
-
-function Filters({
-  blogs,
-  setBlogsToShow
-}: {
-  blogs: BlogProps[]
-  setBlogsToShow: (blogs: BlogProps[]) => void
-}) {
-  const [searchValue, setSearchValue] = useState('')
-
-  useEffect(() => {
-    if (searchValue !== '') {
-      const parsedSearchValue = searchValue.toLowerCase().trim()
-
-      const filteredBlogs = blogs.filter(
-        (blog) =>
-          blog.title.toLowerCase().includes(parsedSearchValue) ||
-          blog.author.toLowerCase().includes(parsedSearchValue)
-      )
-      setBlogsToShow(filteredBlogs)
-    } else {
-      setBlogsToShow(blogs)
-    }
-  }, [searchValue])
-
-  return (
-    <div class='flex items-center gap-2 justify-center'>
-      <div className='w-8 aspect-square'>
-        {<SearchIcon className='fill-zinc-600 dark:fill-zinc-400' />}
-      </div>
-      <input
-        type='text'
-        name='name'
-        value={searchValue}
-        placeholder='Search'
-        onInput={(e) => setSearchValue((e.target as HTMLInputElement).value)}
-        class='lg:w-1/3 w-1/2 py-2 font-light rounded-none border-b bg-transparent dark:text-zinc-200 border-zinc-400 outline-none focus:border-zinc-700 dark:focus:border-zinc-300'
-      />
+      </a>
     </div>
   )
 }
 
 export default function Blog({
   blogs,
-  isDev
+  isDev,
+  prev,
+  next
 }: {
   blogs: BlogProps[]
   isDev: boolean
+  prev: string
+  next: string
 }) {
   const publishedBlogs = blogs.filter((blog) => isDev || !blog.draft)
 
-  const [blogsToShow, setBlogsToShow] = useState(publishedBlogs)
-
-  const paginationProps = usePagination({
-    defaultRowsPerPage: 9,
-    data: blogsToShow
-  })
-
-  const { filterFrom, filterTo, totalPages } = paginationProps
-
   return (
     <main class='dark:bg-zinc-900 bg-zinc-100 pb-40 transition-colors'>
-      <section className='mx-auto max-w-6xl'>
-        <div className='py-20'>
-          <Filters blogs={publishedBlogs} setBlogsToShow={setBlogsToShow} />
-          {!blogsToShow.length && (
-            <div className='pt-20 text-xl justify-center flex dark:text-zinc-200'>
-              No articles found with this search
-            </div>
-          )}
-        </div>
-
-        <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-16'>
-          {blogsToShow.length
-            ? blogsToShow.slice(filterFrom, filterTo).map((blog) => {
+      <section className='mx-auto max-w-6xl pt-10'>
+        <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'>
+          {publishedBlogs.length
+            ? publishedBlogs.map((blog) => {
                 return <BlogCard blog={blog} />
               })
             : ''}
         </div>
         <div className='flex justify-center pt-10'>
-          {totalPages > 1 && <PaginationArrows {...paginationProps} />}
+          {(prev || next) && <PaginationArrows prev={prev} next={next} />}
         </div>
       </section>
     </main>

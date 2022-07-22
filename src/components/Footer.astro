@@ -3,7 +3,6 @@ import { removeLeadingSlash } from '../utils'
 import {
   GithubIcon,
   LinkedInIcon,
-  LinkIcon,
   TwitterIcon,
   UserIcon,
   ZulipIcon
@@ -15,8 +14,8 @@ const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 const pagesInFooter = pages
   .filter((page) => page?.metadata?.footer)
   .map((page) => ({
-    url: page.url,
-    label: page.metadata?.navbar?.label || removeLeadingSlash(page.url),
+    url: page.metadata?.footer?.url || page.url,
+    label: page.metadata?.footer?.label || removeLeadingSlash(page.url),
     weight: page.metadata?.footer?.weight
   }))
   .sort((a, b) => a.weight - b.weight)
