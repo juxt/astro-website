@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import { useEffect, useState } from 'preact/hooks'
 import { usePagination, UsePaginationProps } from '../utils'
 import {
-  chevronLeftIcon,
-  chevronRightIcon,
-  searchIcon,
-  warningIcon
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SearchIcon,
+  WarningIcon
 } from './Icons'
 
 export type Person = {
@@ -97,7 +97,7 @@ function BlogCard({
 
       {draft && (
         <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
-          <div class='w-5 h-5'>{warningIcon()}</div>
+          <div class='w-5 h-5'>{<WarningIcon />}</div>
           This Blog is a draft and won't be published
         </div>
       )}
@@ -119,11 +119,13 @@ function PaginationArrows({
         })}
         onClick={() => prevPageExists && setOffset(offset - 1)}
       >
-        {chevronLeftIcon(
-          classNames('fill-zinc-600 dark:fill-zinc-300', {
-            'fill-zinc-300 dark:fill-zinc-500': !prevPageExists
-          })
-        )}
+        {
+          <ChevronLeftIcon
+            className={classNames('fill-zinc-600 dark:fill-zinc-300', {
+              'fill-zinc-300 dark:fill-zinc-500': !prevPageExists
+            })}
+          ></ChevronLeftIcon>
+        }
       </div>
       <div
         className={classNames('w-12 aspect-square', {
@@ -131,11 +133,13 @@ function PaginationArrows({
         })}
         onClick={() => nextPageExists && setOffset(offset + 1)}
       >
-        {chevronRightIcon(
-          classNames('fill-zinc-600 dark:fill-zinc-300', {
-            'fill-zinc-300 dark:fill-zinc-500': !nextPageExists
-          })
-        )}
+        {
+          <ChevronRightIcon
+            className={classNames('fill-zinc-600 dark:fill-zinc-300', {
+              'fill-zinc-300 dark:fill-zinc-500': !nextPageExists
+            })}
+          ></ChevronRightIcon>
+        }
       </div>
     </div>
   )
@@ -168,7 +172,7 @@ function Filters({
   return (
     <div class='flex items-center gap-2 justify-center'>
       <div className='w-8 aspect-square'>
-        {searchIcon('fill-zinc-600 dark:fill-zinc-400')}
+        {<SearchIcon className='fill-zinc-600 dark:fill-zinc-400' />}
       </div>
       <input
         type='text'

@@ -1,6 +1,7 @@
 ---
-import Layout from './Layout.astro'
 import type { Person } from '../components/Blog'
+import { TwitterIcon } from '../components/Icons'
+import Layout from './Layout.astro'
 
 export interface Props {
   content: {
@@ -17,13 +18,8 @@ export interface Props {
 }
 
 const {
-  content: { title, description, publishDate, heroImage, category, author }
+  content: { title, description, heroImage, category, author }
 } = Astro.props as Props
-
-// wtf.. apparently this errors...
-// const authorData = await Astro.glob<Person & { default: Person }>(
-//   `../data/people/${author}.json`
-// )
 
 const people = await Astro.glob<Person & { default: Person }>(
   '../data/people/*.json'
@@ -32,6 +28,10 @@ const people = await Astro.glob<Person & { default: Person }>(
 const { name, lastName, jobTitle, image } = people.find(
   (person) => person.default.code === author
 ).default
+
+const global = await Astro.glob<{ host: string }>('../data/global.json')
+
+const blogHref = Astro.canonicalURL.href
 ---
 
 <Layout navbar={true}>
@@ -88,7 +88,22 @@ const { name, lastName, jobTitle, image } = people.find(
       </div>
 
       <div class='pb-20 pt-6 flex justify-center lg:justify-end'>
-        Social Links for sharing here
+        <div class='flex justify-around text-sm items-center'>
+          <a
+            class='w-6 h-6'
+            href={`https://twitter.com/intent/tweet?url=${blogHref}&title=${title}`}
+          >
+            {(<TwitterIcon />)}
+          </a>
+        </div>
+        <div class='flex justify-around text-sm items-center'>
+          <a
+            class='w-6 h-6'
+            href={`https://www.reddit.com/submit?url=${blogHref}&title=${title}`}
+          >
+            {(<TwitterIcon />)}
+          </a>
+        </div>
       </div>
     </div>
 

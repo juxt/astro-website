@@ -1,6 +1,10 @@
 import 'preact/jsx-runtime'
 
-export function githubIcon(className?: string) {
+type IconProps = {
+  className?: string
+}
+
+export function GithubIcon({ className }: IconProps) {
   return (
     <svg
       class={className}
@@ -12,7 +16,7 @@ export function githubIcon(className?: string) {
   )
 }
 
-export function twitterIcon(className?: string) {
+export function TwitterIcon({ className }: IconProps) {
   return (
     <svg
       class={className}
@@ -25,7 +29,7 @@ export function twitterIcon(className?: string) {
   )
 }
 
-export function linkedInIcon(className?: string) {
+export function LinkedInIcon({ className }: IconProps) {
   return (
     <svg
       class={className}
@@ -38,7 +42,7 @@ export function linkedInIcon(className?: string) {
   )
 }
 
-export function warningIcon(className?: string) {
+export function WarningIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -70,7 +74,7 @@ export function warningIcon(className?: string) {
   )
 }
 
-export function chevronLeftIcon(className?: string) {
+export function ChevronLeftIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -85,7 +89,7 @@ export function chevronLeftIcon(className?: string) {
   )
 }
 
-export function chevronRightIcon(className?: string) {
+export function ChevronRightIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -105,7 +109,7 @@ export function chevronRightIcon(className?: string) {
   )
 }
 
-export function searchIcon(className?: string) {
+export function SearchIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
