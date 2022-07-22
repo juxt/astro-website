@@ -1,4 +1,5 @@
 ---
+import Footer from '../components/Footer.astro'
 import Navbar from '../components/Navbar.astro'
 import {
   capitalizeFirstLetter,
@@ -46,6 +47,7 @@ const { title, navbar } = Astro.props as LayoutProps
     {navbar && <Navbar />}
     <div class='pt-14'>
       <slot></slot>
+      <Footer />
     </div>
   </body>
 </html>

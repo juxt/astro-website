@@ -31,8 +31,8 @@ export default function Navbar({ navLinks, isBlog }) {
   return (
     <nav className='w-full fixed z-50 bg-black md:py-4 h-14' ref={ref}>
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-6xl flex flex-wrap items-center justify-between h-full'>
-        <a href='/' class='flex items-center'>
-          <img src={logo} width='80px' alt='Juxt Logo' />
+        <a href='/' class='flex items-center w-20'>
+          <img src={logo} width='w-full' alt='Juxt Logo' />
         </a>
         <button
           data-collapse-toggle='navbar-default'
