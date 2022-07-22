@@ -49,7 +49,7 @@ function BlogCard({
   blog: BlogProps
 }) {
   return (
-    <div className='flex justify-between flex-col w-80 mx-auto h-[26rem] overflow-hidden rounded-lg relative shadow-lg hover:shadow-2xl transition-shadow'>
+    <div className='flex justify-between flex-col w-80 mx-auto h-[26rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-shadow'>
       <img
         class='absolute w-full h-full object-cover cursor-pointer'
         src={src}
@@ -58,7 +58,7 @@ function BlogCard({
       />
       <div
         onClick={() => window.location.assign(href)}
-        className='cursor-pointer px-4 py-4 w-full rounded-b overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-zinc-900/80 flex flex-col justify-between'
+        className='cursor-pointer px-4 py-4 w-full overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-zinc-900/80 flex flex-col justify-between'
       >
         <div className='flex flex-col pb-6 gap-2'>
           <div className='flex justify-between text-xs'>
@@ -77,7 +77,7 @@ function BlogCard({
         </div>
         <a href='/to/some/profile' className='group flex gap-4 w-fit'>
           <div className='flex-shrink-0 flex flex-col gap-3'>
-            <div className='w-20 h-20 rounded-lg relative overflow-hidden'>
+            <div className='w-20 h-20 rounded relative overflow-hidden'>
               <img
                 className='absolute w-full h-full object-cover'
                 src={`/images/people/${image}`}
