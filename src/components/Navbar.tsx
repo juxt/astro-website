@@ -15,7 +15,7 @@ function NavLink({ label, href, active }: NavLinkProp) {
   return (
     <a
       className={classNames(
-        'hover:text-juxt transition-colors first-of-type:pt-4',
+        'hover:text-juxt transition-colors first-of-type:pt-4 sm:first-of-type:pt-0',
         active ? 'text-juxt' : 'text-white'
       )}
       href={href}
