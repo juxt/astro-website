@@ -15,7 +15,7 @@ function NavLink({ label, href, active }: NavLinkProp) {
   return (
     <a
       className={classNames(
-        'hover:text-juxt transition-colors',
+        'hover:text-juxt transition-colors first-of-type:pt-4',
         active ? 'text-juxt' : 'text-white'
       )}
       href={href}
@@ -97,7 +97,7 @@ export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
               'top-14': !navbarNoBg,
               'pt-14': navbarNoBg && isMenuOpen,
               'max-h-0': !isMenuOpen,
-              'max-h-screen py-4': isMenuOpen
+              'max-h-screen pb-4': isMenuOpen
             }
           )}
         >
