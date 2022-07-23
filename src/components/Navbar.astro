@@ -10,10 +10,14 @@ export type PageProps = {
   url: string
 }
 
+export interface Props {
+  pages: PageProps[]
+}
+
+const { pages } = Astro.props as Props
+
 const url = new URL(Astro.request.url)
 const currentPage = url.pathname
-
-const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 
 const pagesInNavbar = pages
   .filter((page) => page?.metadata?.navbar)

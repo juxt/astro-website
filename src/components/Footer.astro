@@ -9,7 +9,11 @@ import {
 } from './Icons'
 import type { PageProps } from './Navbar.astro'
 
-const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
+export interface Props {
+  pages: PageProps[]
+}
+
+const { pages } = Astro.props as Props
 
 const pagesInFooter = pages
   .filter((page) => page?.metadata?.footer)

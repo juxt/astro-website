@@ -1,6 +1,7 @@
 ---
 import Footer from '../components/Footer.astro'
 import Navbar from '../components/Navbar.astro'
+import type { PageProps } from '../components/Navbar.astro'
 import {
   capitalizeFirstLetter,
   removeLeadingSlash,
@@ -14,6 +15,8 @@ type LayoutProps = {
 
 const url = new URL(Astro.request.url)
 const currentPage = removeTrailingSlash(removeLeadingSlash(url.pathname))
+
+const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 
 const { title, navbar } = Astro.props as LayoutProps
 ---
@@ -44,10 +47,10 @@ const { title, navbar } = Astro.props as LayoutProps
     </script>
   </head>
   <body>
-    {navbar && <Navbar />}
+    {navbar && <Navbar pages={pages} />}
     <div class='pt-14'>
       <slot></slot>
-      <Footer />
+      <Footer pages={pages} />
     </div>
   </body>
 </html>
