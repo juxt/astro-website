@@ -148,7 +148,7 @@ export default function Blog({
   const publishedBlogs = blogs.filter((blog) => isDev || !blog.draft)
 
   return (
-    <main class='dark:bg-zinc-900 bg-zinc-100 pb-40 transition-colors'>
+    <main class='pb-40 transition-colors'>
       <section className='mx-auto max-w-6xl pt-10'>
         <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'>
           {publishedBlogs.length
