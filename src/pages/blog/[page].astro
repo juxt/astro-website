@@ -43,5 +43,9 @@ const {
 ---
 
 <Layout navbar>
+  <div
+    class='w-full h-screen bg-[url("/images/site/homepage-banner.jpeg")] bg-cover bg-top'
+  >
+  </div>
   <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />
 </Layout>
