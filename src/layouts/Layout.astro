@@ -11,6 +11,7 @@ import {
 type LayoutProps = {
   title?: string
   navbar?: boolean
+  navbarNoBg?: boolean
 }
 
 const url = new URL(Astro.request.url)
@@ -19,7 +20,7 @@ const currentPage = removeTrailingSlash(removeLeadingSlash(url.pathname))
 const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 const isBlog = Astro.canonicalURL.pathname.includes('/blog/')
 
-const { title, navbar } = Astro.props as LayoutProps
+const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
 ---
 
 <!DOCTYPE html>
@@ -48,8 +49,8 @@ const { title, navbar } = Astro.props as LayoutProps
     </script>
   </head>
   <body class:list={['bg-zinc-50', { 'dark:bg-zinc-900': isBlog }]}>
-    {navbar && <Navbar pages={pages} />}
-    <div class='pt-14'>
+    {navbar && <Navbar pages={pages} navbarNoBg={navbarNoBg} />}
+    <div class:list={[{ 'pt-14': !navbarNoBg }]}>
       <slot></slot>
       <Footer pages={pages} />
     </div>

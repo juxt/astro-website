@@ -58,7 +58,7 @@ All you need to create a new page is a `*name*.astro` file with the following co
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout navbar={true}>
+<Layout navbar>
   <main>new page here</main>
 </Layout>
 ```

@@ -12,9 +12,10 @@ export type PageProps = {
 
 export interface Props {
   pages: PageProps[]
+  navbarNoBg: boolean
 }
 
-const { pages } = Astro.props as Props
+const { pages, navbarNoBg } = Astro.props as Props
 
 const url = new URL(Astro.request.url)
 const currentPage = url.pathname
@@ -32,4 +33,9 @@ const pagesInNavbar = pages
 const isBlog = Astro.canonicalURL.pathname.includes('/blog/')
 ---
 
-<Navbar client:visible navLinks={pagesInNavbar} isBlog={isBlog} />
+<Navbar
+  client:visible
+  navLinks={pagesInNavbar}
+  isBlog={isBlog}
+  navbarNoBg={navbarNoBg}
+/>

@@ -24,20 +24,27 @@ function NavLink({ label, href, active }: NavLinkProp) {
   )
 }
 
-export default function Navbar({ navLinks, isBlog }) {
+export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const ref = useOutsideClick(() => setIsMenuOpen(false))
   const linkClasses = 'items-center gap-8 uppercase tracking-widest text-xs'
+  console.log('in here', navbarNoBg)
+
   return (
-    <nav className='w-full fixed z-50 bg-black md:py-4 h-14' ref={ref}>
+    <nav
+      className={classNames('w-full fixed z-50 md:py-4 h-14', {
+        'bg-black': !navbarNoBg
+      })}
+      ref={ref}
+    >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-6xl flex flex-wrap items-center justify-between h-full'>
-        <a href='/' class='flex items-center w-20'>
+        <a href='/' class='flex items-center w-20 z-10'>
           <img src={logo} width='w-full' alt='Juxt Logo' />
         </a>
         <button
           data-collapse-toggle='navbar-default'
           type='button'
-          className='inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600'
+          className='z-10 inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600'
           aria-controls='navbar-default'
           aria-expanded='false'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -69,9 +76,12 @@ export default function Navbar({ navLinks, isBlog }) {
         {/* mobile */}
         <div
           className={classNames(
-            'absolute top-14 left-0 flex bg-black w-full flex-col md:hidden overflow-hidden transition-all',
+            'absolute left-0 flex bg-black w-full flex-col md:hidden overflow-hidden transition-all',
             linkClasses,
             {
+              'top-0': navbarNoBg,
+              'top-14': !navbarNoBg,
+              'pt-14': navbarNoBg && isMenuOpen,
               'max-h-0': !isMenuOpen,
               'max-h-screen py-4': isMenuOpen
             }

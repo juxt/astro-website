@@ -2,8 +2,13 @@
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title='Welcome to Astro.' navbar={true}>
+<Layout title='Welcome to Astro.' navbar navbarNoBg>
   <main>
+    <div
+      class='w-full h-screen bg-[url("/images/site/homepage-banner.jpeg")] bg-cover bg-top'
+    >
+    </div>
+
     <h1>Welcome to <span class='text-gradient'>Astro</span></h1>
     <p class='instructions'>
       Check out the <code>src/pages</code> directory to get started.<br />

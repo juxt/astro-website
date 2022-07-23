@@ -42,6 +42,6 @@ const {
 } = page
 ---
 
-<Layout navbar={true}>
+<Layout navbar>
   <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />
 </Layout>
