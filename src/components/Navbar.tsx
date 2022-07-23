@@ -1,5 +1,6 @@
+import 'preact/jsx-runtime'
 import classNames from 'classnames'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import logo from '/images/logo.svg'
 import { useOutsideClick } from '../utils'
 import DarkModeSwitch from './DarkModeSwitch'
@@ -28,11 +29,24 @@ export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const ref = useOutsideClick(() => setIsMenuOpen(false))
   const linkClasses = 'items-center gap-8 uppercase tracking-widest text-xs'
-  console.log('in here', navbarNoBg)
+
+  useEffect(() => {
+    function updateNavBg() {
+      if (window.scrollY > 0) {
+        ref.current.classList.add('bg-black')
+      } else {
+        ref.current.classList.remove('bg-black')
+      }
+    }
+    navbarNoBg && window.addEventListener('scroll', updateNavBg)
+    return () => {
+      navbarNoBg && window.removeEventListener('scroll', updateNavBg)
+    }
+  }, [])
 
   return (
     <nav
-      className={classNames('w-full fixed z-50 md:py-4 h-14', {
+      className={classNames('w-full fixed transition-all z-50 md:py-4 h-14', {
         'bg-black': !navbarNoBg
       })}
       ref={ref}
