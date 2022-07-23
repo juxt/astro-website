@@ -69,11 +69,11 @@ export default function Navbar({ navLinks, isBlog }) {
         {/* mobile */}
         <div
           className={classNames(
-            'flex w-full flex-col md:hidden overflow-hidden transition-all',
+            'absolute top-14 left-0 flex bg-black w-full flex-col md:hidden overflow-hidden transition-all',
             linkClasses,
             {
               'max-h-0': !isMenuOpen,
-              'max-h-screen py-2': isMenuOpen
+              'max-h-screen py-4': isMenuOpen
             }
           )}
         >
