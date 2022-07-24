@@ -1,0 +1,27 @@
+---
+export type BannerProps = {
+  text: string
+  background: string
+  navbarNoBg: boolean
+}
+
+const { text, background, navbarNoBg } = Astro.props as BannerProps
+---
+
+<div
+  class:list={[
+    'w-full h-screen bg-cover bg-top',
+    background,
+    { '-mt-14': !navbarNoBg }
+  ]}
+>
+  <div
+    class='flex justify-center md:justify-start text-center md:text-left items-end h-full mx-auto px-4 sm:px-12 2xl:px-0 max-w-6xl pb-10'
+  >
+    <h1
+      class='text-white drop-shadow-sm shadow-black text-5xl uppercase tracking-widest leading-snug font-sans w-96'
+    >
+      {text}
+    </h1>
+  </div>
+</div>

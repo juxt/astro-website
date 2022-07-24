@@ -1,4 +1,5 @@
 ---
+import Banner from '../../components/Banner.astro'
 import type { BlogProps, Person } from '../../components/Blog'
 import Blog from '../../components/Blog'
 import Layout from '../../layouts/Layout.astro'
@@ -48,9 +49,7 @@ const {
 ---
 
 <Layout navbar>
-  <div
-    class='w-full h-screen bg-[url("/images/site/homepage-banner.jpeg")] bg-cover bg-top'
-  >
-  </div>
+  <Banner text='Blog' background={'bg-[url("/images/site/blog-banner.jpeg")]'}
+  />
   <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />
 </Layout>

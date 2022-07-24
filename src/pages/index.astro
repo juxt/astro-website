@@ -1,13 +1,15 @@
 ---
+import Banner from '../components/Banner.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title='Welcome to Astro.' navbar navbarNoBg>
+<Layout title='JUXT' navbar navbarNoBg>
   <main>
-    <div
-      class='w-full h-screen bg-[url("/images/site/homepage-banner.jpeg")] bg-cover bg-top'
-    >
-    </div>
+    <Banner
+      navbarNoBg
+      text='Scaling Simplicity'
+      background={'bg-[url("/images/site/homepage-banner.jpeg")]'}
+    />
 
     <h1>Welcome to <span class='text-gradient'>Astro</span></h1>
     <p class='instructions pb-96'>
