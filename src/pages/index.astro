@@ -1,5 +1,7 @@
 ---
 import Banner from '../components/Banner.astro'
+import { TickIcon } from '../components/Icons'
+import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -10,11 +12,72 @@ import Layout from '../layouts/Layout.astro'
       text='Scaling Simplicity'
       background={'bg-[url("/images/site/homepage-banner.jpeg")]'}
     />
+    <Section className='bg-gray-800 py-28 text-white'>
+      <h2 class='pb-4 text-3xl md:text-4xl'>
+        Complexity limits your organisation’s potential
+      </h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        We are a unique software engineering firm, with a track record of
+        rapidly delivering high-quality IT systems to meet challenging business
+        objectives.
+      </p>
+    </Section>
 
-    <h1>Welcome to <span class='text-gradient'>Astro</span></h1>
-    <p class='instructions pb-96'>
-      Check out the <code>src/pages</code> directory to get started.<br />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-    </p>
+    <Section
+      className={'bg-slate-900 bg-[url("/images/site/threads.svg")] bg-no-repeat bg-right bg-contain py-20 text-white'}
+    >
+      <div class='w-1/2'>
+        <h2 class='text-4xl pb-10'>Our Approach</h2>
+        <div class='text-lg font-extralight flex flex-col gap-8'>
+          <p class=''>
+            Complexity, still the primary cause of failure and delay of IT
+            projects, arises from the <span class='italic'>
+              interaction of concerns.
+            </span>
+          </p>
+          <p class=''>
+            The fundamental concerns in IT systems are
+            <span class='font-bold text-juxt'>code</span>,
+            <span class='font-bold text-juxt'>form</span>,
+            <span class='font-bold text-juxt'>data</span>, and
+            <span class='font-bold text-juxt'>time</span>
+             — their subtle interactions and couplings combine to have a suffocating
+            impact on software projects.
+          </p>
+          <p class=''>
+            Our approach to building IT systems is defined by a unique
+            methodology and a set of supporting tools that allow us to keep
+            these four concerns separate, resulting in:
+          </p>
+          <div class='flex flex-col gap-6'>
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Rapid development of large IT systems</p>
+            </div>
+
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Increased levels of agility and software re-use</p>
+            </div>
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Lower maintenance costs</p>
+            </div>
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Secure, reliable systems that are robust yet flexible</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
   </main>
 </Layout>

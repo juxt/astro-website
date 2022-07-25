@@ -177,3 +177,15 @@ export function ZulipIcon({ className }: IconProps) {
     </svg>
   )
 }
+
+export function TickIcon({ className }: IconProps) {
+  return (
+    <svg
+      class={className}
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 66.1 66.1'
+    >
+      <path d='M8.86,33a4.69,4.69,0,0,1,.75.24q7,3.53,14,7.06a.53.53,0,0,0,.7-.08q8.48-7.66,17-15.3L56.39,11.35a2.43,2.43,0,0,1,2.2-.75,1.87,1.87,0,0,1,1,3.11l-4.08,4.84L39.16,38,27.05,52.35l-2.29,2.73a.93.93,0,0,1-1.6,0L6.45,37a1.23,1.23,0,0,1-.06-1.77c.38-.49.77-1,1.13-1.5A1.7,1.7,0,0,1,8.86,33Z' />
+    </svg>
+  )
+}

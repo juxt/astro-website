@@ -10,7 +10,7 @@ const { text, background, navbarNoBg } = Astro.props as BannerProps
 
 <div
   class:list={[
-    'w-full h-screen bg-cover bg-top bg-fixed',
+    'w-full h-screen bg-cover bg-top md:bg-fixed',
     background,
     { '-mt-14': !navbarNoBg }
   ]}
