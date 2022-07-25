@@ -1,6 +1,6 @@
 ---
 import Banner from '../components/Banner.astro'
-import { TickIcon } from '../components/Icons'
+import { ChevronRightIcon, TickIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 ---
@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro'
     </Section>
 
     <Section
-      className={'bg-slate-900 bg-[url("/images/site/threads.svg")] bg-no-repeat bg-right bg-contain py-20 text-white'}
+      className={'bg-slate-900 bg-[url("/images/site/threads.png")] bg-no-repeat bg-right bg-contain py-20 text-white'}
     >
       <div class='w-1/2'>
         <h2 class='text-4xl pb-10'>Our Approach</h2>
@@ -51,31 +51,92 @@ import Layout from '../layouts/Layout.astro'
           </p>
           <div class='flex flex-col gap-6'>
             <div class='flex gap-4 items-center'>
-              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
                 <TickIcon className={'fill-white'} />
               </div>
               <p>Rapid development of large IT systems</p>
             </div>
 
             <div class='flex gap-4 items-center'>
-              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
                 <TickIcon className={'fill-white'} />
               </div>
               <p>Increased levels of agility and software re-use</p>
             </div>
             <div class='flex gap-4 items-center'>
-              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
                 <TickIcon className={'fill-white'} />
               </div>
               <p>Lower maintenance costs</p>
             </div>
             <div class='flex gap-4 items-center'>
-              <div class='bg-gray-800 w-6 h-6 border border-juxt'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
                 <TickIcon className={'fill-white'} />
               </div>
               <p>Secure, reliable systems that are robust yet flexible</p>
             </div>
           </div>
+        </div>
+      </div>
+    </Section>
+    <Section className={'bg-white py-20'}>
+      <div class='flex justify-between'>
+        <div class='w-1/2'>
+          <h2 class='text-7xl font-semibold pb-10 uppercase'>Time</h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p class=''>
+              We believe that systems should be built on the conceptual bedrock
+              of a dual timeline. This provides a universal set of essential
+              capabilities for organisations who operate within disparate and
+              ever-evolving landscapes of information, and who require an
+              accurate and consistent view of information at any point:
+              <span class='italic'>past</span>,
+              <span class='italic'>present</span> and
+              <span class='italic'>future</span>.
+            </p>
+            <p class=''>
+              The main timeline is fully controllable and it allows for:
+            </p>
+            <div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>Historical corrections</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>The integration of imported records</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>The previewable orchestration of future states</p>
+              </div>
+            </div>
+            <p>
+              The secondary timeline is immutable and provides a guaranteed
+              audit trail, 'built-in'.
+            </p>
+            <p>
+              The secondary timeline is immutable and provides a guaranteed
+              audit trail, 'built-in'.
+            </p>
+            <p>
+              The secondary timeline is immutable and provides a guaranteed
+              audit trail, 'built-in'.
+            </p>
+            <p>
+              The secondary timeline is immutable and provides a guaranteed
+              audit trail, 'built-in'.
+            </p>
+          </div>
+        </div>
+        <div class='w-1/2 self-center'>
+          <img class='w-11/12' src='/images/site/sphere-time.png' alt='' />
         </div>
       </div>
     </Section>
