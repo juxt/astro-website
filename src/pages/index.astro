@@ -24,9 +24,9 @@ import Layout from '../layouts/Layout.astro'
     </Section>
 
     <Section
-      className={'bg-slate-900 bg-[url("/images/site/threads.png")] bg-no-repeat bg-right bg-contain py-20 text-white'}
+      className={'bg-slate-900 md:bg-[url("/images/site/threads.png")] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
     >
-      <div class='w-1/2'>
+      <div class='md:w-1/2'>
         <h2 class='text-4xl pb-10'>Our Approach</h2>
         <div class='text-lg font-extralight flex flex-col gap-8'>
           <p class=''>
@@ -80,9 +80,11 @@ import Layout from '../layouts/Layout.astro'
       </div>
     </Section>
     <Section className={'bg-white py-20'}>
-      <div class='flex justify-between'>
-        <div class='w-1/2'>
-          <h2 class='text-7xl font-semibold pb-10 uppercase'>Time</h2>
+      <div class='flex justify-between flex-col lg:flex-row'>
+        <div class='lg:w-1/2'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Time
+          </h2>
           <div class='font-extralight flex flex-col gap-6'>
             <p class=''>
               We believe that systems should be built on the conceptual bedrock
@@ -94,9 +96,7 @@ import Layout from '../layouts/Layout.astro'
               <span class='italic'>present</span> and
               <span class='italic'>future</span>.
             </p>
-            <p class=''>
-              The main timeline is fully controllable and it allows for:
-            </p>
+            <p>The main timeline is fully controllable and it allows for:</p>
             <div>
               <div class='flex items-center'>
                 <div class='w-8 h-8 shrink-0'>
@@ -121,22 +121,183 @@ import Layout from '../layouts/Layout.astro'
               The secondary timeline is immutable and provides a guaranteed
               audit trail, 'built-in'.
             </p>
+          </div>
+        </div>
+        <div class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end'>
+          <img
+            class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
+            src='/images/site/sphere-time.png'
+            alt=''
+          />
+        </div>
+      </div>
+    </Section>
+    <Section className={'bg-black py-20'}>
+      <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start'
+        >
+          <img
+            class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
+            src='/images/site/sphere-data.png'
+            alt=''
+          />
+        </div>
+        <div class='lg:w-1/2'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Data
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
             <p>
-              The secondary timeline is immutable and provides a guaranteed
-              audit trail, 'built-in'.
+              Data is fundamental to the creation of software. It will routinely
+              outlive the interpretations we derive from it and the applications
+              we build on top of it. Therefore, we will always seek to lay the
+              foundations of data management independently of a particular
+              application or use-case, and above a
+              <span class='italic'>common timeline</span>.
             </p>
             <p>
-              The secondary timeline is immutable and provides a guaranteed
-              audit trail, 'built-in'.
+              Table-based structures, found in spreadsheets and traditional SQL
+              databases, are helpful for displaying and analysing data, but they
+              are not an appropriate format for storing data.
             </p>
             <p>
-              The secondary timeline is immutable and provides a guaranteed
-              audit trail, 'built-in'.
+              Tables are insufficient for representing data in its purest form,
+              and this is particularly obvious when modelling sparse data or
+              multi-valued attributes, or coping with the evolution of data over
+              time.
+            </p>
+            <p>
+              Instead, we believe that data is best recorded as units of facts
+              and relationships, without constraints.
+            </p>
+            <p>
+              More simply put, we believe graph-oriented systems point us
+              towards the correct approach for data management, and
+              organisations such as
+              <span class='font-bold text-juxt'>Facebook</span> and
+              <span class='font-bold text-juxt'>Google</span> have proved how powerful
+              the widespread use of graph-structured data can be.
             </p>
           </div>
         </div>
-        <div class='w-1/2 self-center'>
-          <img class='w-11/12' src='/images/site/sphere-time.png' alt='' />
+      </div>
+    </Section>
+    <Section className={'bg-white py-20'}>
+      <div class='flex justify-between flex-col lg:flex-row'>
+        <div class='lg:w-1/2'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Form
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p>
+              Organisations can unlock different amounts of value from data
+              depending on how they interpret it, how they shape it and the
+              constraints they place on it.
+            </p>
+            <p>
+              Complex
+              <span class='italic'>
+                types & tables, schemas & structures, classes & containers,
+                models & metadata, formats & encodings, representations.
+              </span>
+            </p>
+            <p>
+              These are the <span class='font-bold text-juxt'>forms</span> we construct
+              for interpreting, analysing and extracting value from our data. Tools
+              such as relational schemas and ontologies are common structures we
+              use for understanding, analysing and managing our information.
+            </p>
+            <p>
+              Too often, software developers will attempt to "codify" these
+              structures into their software as types and objects.
+            </p>
+            <p>
+              By understanding that schema is just another form of data, on a
+              timeline, we let our information systems grow and flex with the
+              businesses they serve. This is how we are able to build
+              maintainable models of the real world.
+            </p>
+          </div>
+        </div>
+        <div class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end'>
+          <img
+            class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
+            src='/images/site/sphere-form.png'
+            alt=''
+          />
+        </div>
+      </div>
+    </Section>
+    <Section className={'bg-black py-20'}>
+      <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start relative'
+        >
+          <img
+            class='sm:w-4/5 lg:w-10/12 animate-[spin_100s_linear_infinite]'
+            src='/images/site/sphere-code.png'
+            alt=''
+          />
+          <img
+            class='sm:w-4/5 lg:w-10/12 absolute top-0 left-1/2 lg:left-0 transform lg:translate-x-0 -translate-x-1/2'
+            src='/images/site/sphere-form.png'
+            alt=''
+          />
+        </div>
+        <div class='lg:w-1/2 pb-16'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Code
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p>
+              The software <span class='italic'>patterns</span> and
+              <span class='italic'>practices</span> that underlie your application
+              architecture are certainly important, but less fundamentally relevant
+              than making the correct choices with regards to the structure of your
+              data in time. Assuming those other foundations are in place, we believe
+              that the best approach to code is to keep it
+              <span class='italic'>short, readable</span> and
+              <span class='italic'>expressive</span>.
+            </p>
+            <p>In reality this means we prefer:</p>
+            <div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-white'} />
+                </div>
+                <p>
+                  Writing modular & generic libraries of functions that operate
+                  over many types of data structures
+                </p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-white'} />
+                </div>
+                <p>Minimising the use of state wherever possible</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-white'} />
+                </div>
+                <p>
+                  Maintaining declarative structures that avoid the need for
+                  reasoning about imperative control flows
+                </p>
+              </div>
+            </div>
+            <p>
+              By pulling out the state and domain, the remaining code is simple.
+              Developers can focus on writing code to implement business
+              <span class='italic'>logic</span>, pure functional
+              <span class='italic'>calculations</span> and
+              <span class='italic'>derivations</span>, with resulting
+              <span class='italic'>actions</span> that automate the execution of
+              business processes.
+            </p>
+            <p>As software complexity is tamed, productivity soars.</p>
+          </div>
         </div>
       </div>
     </Section>
