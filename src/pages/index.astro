@@ -301,5 +301,61 @@ import Layout from '../layouts/Layout.astro'
         </div>
       </div>
     </Section>
+    <Section className={'bg-white py-20'}>
+      <div>
+        <div class='w-2/3'>
+          <h2 class='text-5xl pb-10'>Enabling Technologies</h2>
+          <h3 class='text-2xl font-extralight pb-10'>
+            We select and develop particular tools and technologies that compose
+            harmoniously, chosen to support our methodology.
+          </h3>
+        </div>
+      </div>
+      <div class='flex justify-around flex-col lg:flex-row'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start'
+        >
+          <img
+            class='sm:w-4/5 lg:w-11/12'
+            src='/images/site/tech-talking.jpg'
+            alt=''
+          />
+        </div>
+        <div class='lg:w-1/2'>
+          <h2 class='text-4xl font-semibold pb-10 uppercase'>XTDB</h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p>XTDB is our unbundled bitemporal graph database:</p>
+            <div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>Transactional consistency</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>Query with Datalog, EQL, or SQL</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>
+                  Pluggable backends include PostgreSQL, Kafka, RocksDB and many
+                  more
+                </p>
+              </div>
+            </div>
+            <p>
+              XTDB provides the data 'time-line' as a value, storing both
+              'valid' time and 'transaction' time. Queries that are often
+              impossible in other databases are made simple in XTDB.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Section>
   </main>
 </Layout>
