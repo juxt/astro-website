@@ -52,7 +52,7 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
   <body class:list={['bg-zinc-50', { 'dark:bg-zinc-900': isBlog }]}>
     {navbar && <Navbar pages={pages} navbarNoBg={navbarNoBg} />}
     <div class:list={[{ 'pt-14': !navbarNoBg }]}>
-      <slot></slot>
+      <slot />
       <Footer pages={pages} />
     </div>
   </body>
