@@ -124,7 +124,9 @@ import Layout from '../layouts/Layout.astro'
             </p>
           </div>
         </div>
-        <div class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end overflow-hidden'
+        >
           <img
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
             src='/images/site/sphere-time.png'
@@ -136,7 +138,7 @@ import Layout from '../layouts/Layout.astro'
     <Section className={'bg-black py-20'}>
       <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
         <div
-          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start'
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start overflow-hidden'
         >
           <img
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
@@ -221,7 +223,9 @@ import Layout from '../layouts/Layout.astro'
             </p>
           </div>
         </div>
-        <div class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end overflow-hidden'
+        >
           <img
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
             src='/images/site/sphere-form.png'
@@ -233,7 +237,7 @@ import Layout from '../layouts/Layout.astro'
     <Section className={'bg-black py-20'}>
       <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
         <div
-          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start relative'
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start relative overflow-hidden'
         >
           <img
             class='sm:w-4/5 lg:w-10/12 animate-[spin_100s_linear_infinite]'
@@ -304,59 +308,255 @@ import Layout from '../layouts/Layout.astro'
     </Section>
     <Section className={'bg-white py-20'}>
       <div>
-        <div class='w-2/3'>
+        <div class='lg:w-2/3'>
           <h2 class='text-4xl pb-10'>Enabling Technologies</h2>
-          <h3 class='text-xl font-extralight pb-10'>
+          <h3 class='text-xl font-extralight pb-14 lg:pb-20'>
             We select and develop particular tools and technologies that compose
             harmoniously, chosen to support our methodology.
           </h3>
         </div>
       </div>
-      <div class='flex justify-center gap-14 flex-col lg:flex-row'>
-        <div class='lg:w-1/2 shrink-0'>
-          <img
-            class='w-full h-full object-cover'
-            src='/images/site/tech-talking.jpg'
-            alt=''
-          />
-        </div>
-        <div class='lg:w-1/2'>
-          <h2 class='text-4xl font-semibold pb-10 uppercase'>XTDB</h2>
-          <div class='font-extralight flex flex-col gap-6'>
-            <p>XTDB is our unbundled bitemporal graph database:</p>
-            <div>
-              <div class='flex items-center'>
-                <div class='w-8 h-8 shrink-0'>
-                  <ChevronRightIcon className={'fill-black'} />
+
+      <div class='flex flex-col gap-24'>
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <img
+              class='w-full h-full object-cover'
+              src='/images/site/tech-talking.jpg'
+              alt=''
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>XTDB</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>XTDB is our unbundled bitemporal graph database:</p>
+              <div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>Transactional consistency</p>
                 </div>
-                <p>Transactional consistency</p>
-              </div>
-              <div class='flex items-center'>
-                <div class='w-8 h-8 shrink-0'>
-                  <ChevronRightIcon className={'fill-black'} />
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>Query with Datalog, EQL, or SQL</p>
                 </div>
-                <p>Query with Datalog, EQL, or SQL</p>
-              </div>
-              <div class='flex items-center'>
-                <div class='w-8 h-8 shrink-0'>
-                  <ChevronRightIcon className={'fill-black'} />
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>
+                    Pluggable backends include PostgreSQL, Kafka, RocksDB and
+                    many more
+                  </p>
                 </div>
-                <p>
-                  Pluggable backends include PostgreSQL, Kafka, RocksDB and many
-                  more
-                </p>
               </div>
+              <p>
+                XTDB provides the data 'time-line' as a value, storing both
+                'valid' time and 'transaction' time. Queries that are often
+                impossible in other databases are made simple in XTDB.
+              </p>
+              <Clickable>
+                <a href='https://xtdb.com/' target='_blank'>
+                  See more at xtdb.com
+                </a>
+              </Clickable>
             </div>
-            <p>
-              XTDB provides the data 'time-line' as a value, storing both
-              'valid' time and 'transaction' time. Queries that are often
-              impossible in other databases are made simple in XTDB.
-            </p>
-            <Clickable>
-              <a href='https://xtdb.com/' target='_blank'>
-                See more at xtdb.com
-              </a>
-            </Clickable>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <img
+              class='w-full h-full object-cover'
+              src='/images/site/funding-circle-mal.webp'
+              alt=''
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Clojure</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                Many object-oriented programming languages coax the developer
+                into coupling code with data.
+              </p>
+              <p>
+                Functional programming languages pull them apart. Our go-to
+                functional programming language  — Clojure — goes further,
+                providing language features to protect simplicity.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <img
+              class='w-full h-full object-cover'
+              src='/images/site/mal-teaching.jpeg'
+              alt=''
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Agile</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                JUXT's leadership is made up of experienced software consultants
+                who have led Agile projects, run Agile training courses and
+                brought Agile methodologies into large organisations.
+              </p>
+              <p>
+                We have taken the best parts of Agile methodologies and combined
+                them into a process that scales and delivers. We deploy often,
+                provide regular showcases and encourage daily stand-ups. We use
+                best-of-breed tools to provide transparency and to manage
+                project work-streams.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <img
+              class='w-full h-full object-cover'
+              src='/images/site/funding-circle-jon.jpeg'
+              alt=''
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Cloud</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                We’ve been building systems on AWS since early 2014, over that
+                time we’ve accumulated first-hand knowledge and expertise of
+                managing and automating AWS infrastructure.
+              </p>
+              <p>
+                Our AWS systems have been successfully audited for PCI DSS
+                compliance and won praise for their operational stability,
+                information security and regulatory compliance. We have
+                experience in meeting GDPR requirements and protecting data
+                privacy.
+              </p>
+
+              <img
+                class='w-full sm:max-w-md'
+                src='/images/site/cloud-provider-logos.png'
+                alt='aws, google cloud, heroku'
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    <Section
+      className={'bg-zinc-900 lg:bg-[url("/images/site/waves.jpeg")] bg-bottom bg-cover bg-no-repeat py-20'}
+    >
+      <h2 class='text-4xl pb-20 text-white'>Simplicity Delivers Results</h2>
+      <div class='flex flex-wrap gap-20'>
+        <div class='flex w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
+          <div
+            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
+          >
+            1
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-lg text-white font-medium'>Delivery Focus</div>
+            <div class='font-extralight text-slate-300'>
+              We can lead complex multi-team engineering projects and meet tough
+              deadlines
+            </div>
+          </div>
+        </div>
+
+        <div class='flex w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
+          <div
+            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
+          >
+            2
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-lg text-white font-medium'>
+              Precision Engineering
+            </div>
+            <div class='font-extralight text-slate-300'>
+              Our highly skilled teams are collaborative and iterate quickly
+            </div>
+          </div>
+        </div>
+
+        <div class='flex w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
+          <div
+            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
+          >
+            3
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-lg text-white font-medium'>Visibility</div>
+            <div class='font-extralight text-slate-300'>
+              We use development processes that are optimised for visibility, to
+              keep projects on track
+            </div>
+          </div>
+        </div>
+
+        <div class='flex w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
+          <div
+            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
+          >
+            4
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-lg text-white font-medium'>Modern</div>
+            <div class='font-extralight text-slate-300'>
+              Our tool-set empowers us to satisfy today’s demanding standards
+              and user expectations, and our systems utilise the latest
+              techniques for maximising performance, scalability and
+              cost-efficiency
+            </div>
+          </div>
+        </div>
+
+        <div class='flex w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
+          <div
+            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
+          >
+            5
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-lg text-white font-medium'>Automation</div>
+            <div class='font-extralight text-slate-300'>
+              We are able to deploy into any cloud or private environment with
+              speed and with reliability
+            </div>
+          </div>
+        </div>
+
+        <div class='flex w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
+          <div
+            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
+          >
+            6
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-lg text-white font-medium'>Re-use</div>
+            <div class='font-extralight text-slate-300'>
+              We maintain an extensive library of battle-tested open-source
+              components that fit together and allows us to deliver custom
+              systems rapidly
+            </div>
           </div>
         </div>
       </div>
