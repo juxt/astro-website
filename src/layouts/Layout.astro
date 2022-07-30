@@ -31,7 +31,8 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
 
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/x-icon' href='/favicon.ico' />
+    <link href='/images/favicon.png' rel='shortcut icon' type='image/x-icon' />
+    <link href='/images/favicon-apple.svg' rel='apple-touch-icon' />
     <link rel='stylesheet' href='/styles/inter.css' />
     <title>{title || capitalizeFirstLetter(currentPage)}</title>
     <!-- This is intentionally inlined to avoid FOUC -->
