@@ -29,7 +29,7 @@ const { name, lastName, jobTitle, image } = people.find(
   (person) => person.default.code === author
 ).default
 
-const blogHref = Astro.canonicalURL.href
+const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
 ---
@@ -46,7 +46,9 @@ const shareIconStyle =
           >
             {category}
           </div>
-          <h1 class='text-4xl dark:text-white font-semibold leading-tight pb-4'>
+          <h1
+            class='text-black text-4xl dark:text-white font-semibold leading-tight pb-4'
+          >
             {title}
           </h1>
           <h2 class='text-lg text-zinc-400 dark:text-zinc-300'>

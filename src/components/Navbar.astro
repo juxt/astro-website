@@ -30,7 +30,7 @@ const pagesInNavbar = pages
   }))
   .sort((a, b) => a.weight - b.weight)
 
-const isBlog = Astro.canonicalURL.pathname.includes('/blog/')
+const isBlog = Astro.url.pathname.includes('/blog/')
 ---
 
 <Navbar

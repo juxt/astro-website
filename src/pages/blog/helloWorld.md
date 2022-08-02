@@ -12,6 +12,134 @@ heroImage:
 
 # hello world
 
+```js
+// this is a comment
+const a = 'a string'
+function $initHighlight(block, cls) {
+  try {
+    if (cls.search(/\bno\-highlight\b/) != -1)
+      return process(block, true, 0x0F) +
+             ` class="${cls}"`;
+  } catch (e) {
+    /* handle exception */
+  }
+  for (var i = 0 / 2; i < classes.length; i++) {
+    if (checkCondition(classes[i]) === undefined)
+      console.log('undefined');
+  }
+
+  return (
+    <div>
+      <web-component>{block}</web-component>
+    </div>
+  )
+}
+
+export  $initHighlight;
+```
+
+```json
+JSON
+[
+  {
+    "title": "apples",
+    "count": [12000, 20000],
+    "description": {"text": "...", "sensitive": false}
+  },
+  {
+    "title": "oranges",
+    "count": [17500, null],
+    "description": {"text": "...", "sensitive": false}
+  }
+]
+```
+
+```kotlin
+import kotlinx.serialization.Serializable
+import kotlin.random.Random
+
+interface Building
+
+@Serializable
+class House(
+    private val rooms: Int? = 3,
+    val name: String = "Palace"
+) : Building {
+    var residents: Int = 4
+        get() {
+            println("Current residents: $field")
+            return field
+        }
+
+    fun burn(evacuation: (people: Int) -> Boolean) {
+        rooms ?: return
+        if (evacuation((0..residents).random()))
+            residents = 0
+    }
+}
+
+fun main() {
+    val house = House(name = "Skyscraper 1")
+    house.burn {
+        Random.nextBoolean()
+    }
+}
+```
+
+```graphql
+# Graphql detection template
+
+mutation Hero($episode: Episode, $withFriends: Boolean!) {
+  hero(episode: $episode) {
+    name
+    friends @include(if: $withFriends) {
+      name
+      ... on Droid {
+        primaryFunction
+      }
+      ... on Human {
+        height
+      }
+    }
+  }
+}
+
+query HeroNameAndFriends {
+  hero {
+    name
+    friends {
+      name
+    }
+  }
+}
+
+fragment comparisonFields on Character {
+  name
+  appearsIn
+  friends {
+    name
+  }
+}
+
+input StoryLikeSubscribeInput {
+  storyId: string
+  clientSubscriptionId: string
+}
+```
+
+```clojure
+{:options
+ :data [{:value 1}]
+ :width 300
+ :height 100
+ :series [{:type "column"
+           :xKey "type"
+           :yKeys ["value"]}]
+ :axes [{:type "category"}
+        {:type "number"}]}
+
+```
+
 <img src="/images/blog/mock.webp" width={640} aspectRatio="16:9"  />
 
 From October 2020 until July 2021, I had the chance to work on an exciting greenfield project in the investment sector. The goal was to develop a data-intensive webapp able to handle hundreds of UI changes per second along with the resolution of thousands of formulas, taking as inputs live market data and user entered values.
@@ -57,7 +185,7 @@ When possible, you should avoid going back and forth between JS and CLJS data st
 
 For example, AG Charts, a charting library, expects an array of objects as one of the parameters i.e. `[{value: 1}, {value: 2}]`. Instead of providing a CLJS vector and letting it be converted to JS, which implies an extra recursive pass over the full collection, some interop can be used to directly create a mutable JS array. The following example shows how to generate a JS array from your CLJS code.
 
-```clojure
+```clj
 
 (reduce
 (fn [col value]
@@ -74,18 +202,3 @@ Even though this code with interop is definitely less readable than normal Cloju
 When processing props for components, Reagent doesn't touch any JS data structure it encounters, in fact, it simply returns it, as can be seen from here.
 
 To show the level of improvement that JS data structures can achieve let's use the AG Charts example. A sample of the charting library props follows:
-
-```clojure
-
-{:options
-{:data [{:value 1} ... ]
-:width 300
-:height 100
-:series
-[{:type "column"
-:xKey "type"
-:yKeys ["value"]}]
-:axes [{:type "category"}
-{:type "number"}]}}
-
-```

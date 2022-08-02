@@ -11,7 +11,8 @@ module.exports = {
         sans: ['Inter', ...defaultTheme.fontFamily.sans]
       },
       colors: {
-        juxt: '#f4901d'
+        juxt: '#f4901d',
+        moonlight: '#0b0e14'
       }
     }
   },
