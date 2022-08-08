@@ -3,6 +3,8 @@ import Banner from '../../components/Banner.astro'
 import type { BlogProps, Person } from '../../components/Blog'
 import Blog from '../../components/Blog'
 import Layout from '../../layouts/Layout.astro'
+import { cloudImage } from '../../utils'
+const url = Astro.url
 
 export const metadata = {
   navbar: { weight: 3, label: 'Blog', url: '/blog/1' },
@@ -46,10 +48,15 @@ const { page } = Astro.props
 const {
   url: { next, prev }
 } = page
+
+const blogBannerPicture = cloudImage(
+  '/images/site/blog-banner.jpeg?width=1500',
+  url
+)
 ---
 
 <Layout navbar>
-  <Banner text='Blog' background={'bg-[url("/images/site/blog-banner.jpeg")]'}
+  <Banner text='Blog' style={{ backgroundImage: `url(${blogBannerPicture})` }}
   />
   <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />
 </Layout>
