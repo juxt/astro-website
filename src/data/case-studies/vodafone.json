@@ -5,11 +5,12 @@
     "Highly scalable platform, delivered into production in 8 months, on time and on budget.",
     "Successfully launched, currently serving >3 million active users, the system has proven highly reliable, with 100% uptime and zero outages."
   ],
+  "image": "",
   "tech": ["AWS", "Clojure"],
   "testimonial": {
     "quote": "We worked with JUXT in a close partnership for a number of years. JUXT were instrumental to deliver a solution with great quality and time to market.",
     "by": "Mattia Piccinini",
     "role": "Senior Director"
   },
-  "pages": { "home": { "weight": 1 }, "case-studies": { "weight": 1 } }
+  "pages": { "/": { "weight": 2 }, "/case-studies": { "weight": 2 } }
 }

@@ -89,3 +89,7 @@ export function cloudImage(image: string, url: URL) {
       : ''
   return `${domain}${image}`
 }
+
+export function currentPage(pathname: string) {
+  return removeTrailingSlash(removeLeadingSlash(pathname))
+}

@@ -2,11 +2,7 @@
 import Footer from '../components/Footer.astro'
 import Navbar from '../components/Navbar.astro'
 import type { PageProps } from '../components/Navbar.astro'
-import {
-  capitalizeFirstLetter,
-  removeLeadingSlash,
-  removeTrailingSlash
-} from '../utils'
+import { capitalizeFirstLetter, currentPage } from '../utils'
 
 import '../shiki-theme.css'
 
@@ -17,7 +13,7 @@ type LayoutProps = {
 }
 
 const url = new URL(Astro.request.url)
-const currentPage = removeTrailingSlash(removeLeadingSlash(url.pathname))
+const currentPageName = currentPage(url.pathname)
 
 const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
 const isBlog = Astro.url.pathname.includes('/blog/')
@@ -37,7 +33,7 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     <link href='/images/favicon-apple.svg' rel='apple-touch-icon' />
     <link rel='stylesheet' href='/styles/inter.css' />
 
-    <title>{title || capitalizeFirstLetter(currentPage)}</title>
+    <title>{title || capitalizeFirstLetter(currentPageName)}</title>
     <!-- This is intentionally inlined to avoid FOUC -->
     <script>
       const root = document.documentElement

@@ -21,14 +21,11 @@ const {
   content: { title, description, heroImage, category, author }
 } = Astro.props as Props
 
-const people = await Astro.glob<Person & { default: Person }>(
-  '../data/people/*.json'
-)
+const people = await Astro.glob<Person>('../data/people/*.json')
 
 const { name, lastName, jobTitle, image } = people.find(
-  (person) => person.default.code === author
-).default
-
+  (person) => person.code === author
+)
 const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
