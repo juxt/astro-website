@@ -1,0 +1,17 @@
+---
+export type CaseStudyProps = {
+  title: string
+  subtitle: string
+  outcome: string[]
+  tech: string[]
+  testimonial: { by: string; quote: string; role: string }
+  pages: { [key: string]: { weight: number } }
+}
+
+const { title, subtitle, outcome, tech, testimonial, pages } =
+  Astro.props as CaseStudyProps
+---
+
+<div class='transition-colors text-black'>
+  {title}
+</div>

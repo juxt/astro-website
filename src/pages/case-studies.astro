@@ -1,0 +1,30 @@
+---
+import Banner from '../components/Banner.astro'
+import Layout from '../layouts/Layout.astro'
+import Section from '../components/Section.astro'
+import type { CaseStudyProps } from '../layouts/CaseStudy.astro'
+import CaseStudy from '../layouts/CaseStudy.astro'
+
+export const metadata = {
+  navbar: { weight: 4, label: 'Case Studies' },
+  footer: { weight: 4, label: 'Case Studies' }
+}
+
+const caseStudies = await Astro.glob<
+  CaseStudyProps & { default: CaseStudyProps }
+>('../data/case-studies/*.json')
+---
+
+<Layout navbar>
+  <main>
+    <Banner
+      text='Scaling Simplicity'
+      style={{
+        backgroundImage: `url(${''})`
+      }}
+    />
+    <Section>
+      {caseStudies.map((caseStudy) => <CaseStudy {...caseStudy} />)}
+    </Section>
+  </main>
+</Layout>
