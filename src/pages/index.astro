@@ -48,6 +48,7 @@ const cloudProvidersPicture = cloudImage(
   '/images/site/cloud-provider-logos.png?width=500',
   url
 )
+const wavesPicture = cloudImage('/images/site/waves.png?width=1500', url)
 ---
 
 <Layout title='JUXT' navbar navbarNoBg>
@@ -511,7 +512,8 @@ const cloudProvidersPicture = cloudImage(
     </Section>
 
     <Section
-      className={'bg-zinc-900 lg:bg-[url("/images/site/waves.jpeg")] bg-bottom bg-cover bg-no-repeat py-20'}
+      style={{ backgroundImage: `url(${wavesPicture})` }}
+      className={'bg-zinc-900 bg-bottom bg-cover bg-no-repeat py-20'}
     >
       <h2 class='text-4xl pb-20 text-white'>Simplicity Delivers Results</h2>
       <div class='flex flex-wrap gap-20'>
