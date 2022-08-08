@@ -1,12 +1,13 @@
 ---
 export type SectionProps = {
   className?: string
+  style?: any
 }
 
-const { className } = Astro.props as SectionProps
+const { className, style } = Astro.props as SectionProps
 ---
 
-<div class={className}>
+<div style={style} class={className}>
   <div class='mx-auto px-4 sm:px-12 2xl:px-0 max-w-6xl'>
     <slot />
   </div>

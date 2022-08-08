@@ -8,7 +8,24 @@ import { cloudImage } from '../utils'
 const url = Astro.url
 
 const homepageBannerPicture = cloudImage(
-  '/images/site/homepage-banner.jpeg?width=2000',
+  '/images/site/homepage-banner.jpeg?width=1500',
+  url
+)
+const threadsPicture = cloudImage('/images/site/threads.png?width=600', url)
+const sphereTimePicture = cloudImage(
+  '/images/site/sphere-time.png?width=500',
+  url
+)
+const sphereDataPicture = cloudImage(
+  '/images/site/sphere-data.png?width=500',
+  url
+)
+const sphereFormPicture = cloudImage(
+  '/images/site/sphere-form.png?width=500',
+  url
+)
+const sphereCodePicture = cloudImage(
+  '/images/site/sphere-code.png?width=500',
   url
 )
 ---
@@ -34,7 +51,10 @@ const homepageBannerPicture = cloudImage(
     </Section>
 
     <Section
-      className={'bg-slate-900 md:bg-[url("/images/site/threads.png")] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
+      style={{
+        backgroundImage: `url(${threadsPicture})`
+      }}
+      className={'bg-slate-900 md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
     >
       <div class='md:w-1/2'>
         <h2 class='text-4xl pb-10'>Our Approach</h2>
@@ -138,7 +158,7 @@ const homepageBannerPicture = cloudImage(
         >
           <img
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
-            src='/images/site/sphere-time.png'
+            src={sphereTimePicture}
             alt=''
           />
         </div>
@@ -151,7 +171,7 @@ const homepageBannerPicture = cloudImage(
         >
           <img
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
-            src='/images/site/sphere-data.png'
+            src={sphereDataPicture}
             alt=''
           />
         </div>
@@ -237,7 +257,7 @@ const homepageBannerPicture = cloudImage(
         >
           <img
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
-            src='/images/site/sphere-form.png'
+            src={sphereFormPicture}
             alt=''
           />
         </div>
@@ -250,12 +270,12 @@ const homepageBannerPicture = cloudImage(
         >
           <img
             class='sm:w-4/5 lg:w-10/12 animate-[spin_100s_linear_infinite]'
-            src='/images/site/sphere-code.png'
+            src={sphereCodePicture}
             alt=''
           />
           <img
             class='sm:w-4/5 lg:w-10/12 absolute top-0 left-1/2 lg:left-0 transform lg:translate-x-0 -translate-x-1/2'
-            src='/images/site/sphere-form.png'
+            src={sphereFormPicture}
             alt=''
           />
         </div>
