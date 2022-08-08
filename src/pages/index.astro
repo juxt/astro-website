@@ -28,6 +28,26 @@ const sphereCodePicture = cloudImage(
   '/images/site/sphere-code.png?width=500',
   url
 )
+const techTalkingPicture = cloudImage(
+  '/images/site/tech-talking.jpg?width=400',
+  url
+)
+const fundingCircleMalPicture = cloudImage(
+  '/images/site/funding-circle-mal.webp?width=400',
+  url
+)
+const malTeachingPicture = cloudImage(
+  '/images/site/mal-teaching.jpeg?width=400',
+  url
+)
+const fundingCircleJonPicture = cloudImage(
+  '/images/site/funding-circle-jon.jpeg?width=400',
+  url
+)
+const cloudProvidersPicture = cloudImage(
+  '/images/site/cloud-provider-logos.png?width=400',
+  url
+)
 ---
 
 <Layout title='JUXT' navbar navbarNoBg>
@@ -353,7 +373,7 @@ const sphereCodePicture = cloudImage(
           <div class='w-full h-96'>
             <img
               class='w-full h-full object-cover'
-              src='/images/site/tech-talking.jpg'
+              src={techTalkingPicture}
               alt=''
             />
           </div>
@@ -404,7 +424,7 @@ const sphereCodePicture = cloudImage(
           <div class='w-full h-96'>
             <img
               class='w-full h-full object-cover'
-              src='/images/site/funding-circle-mal.webp'
+              src={fundingCircleMalPicture}
               alt=''
             />
           </div>
@@ -430,7 +450,7 @@ const sphereCodePicture = cloudImage(
           <div class='w-full h-96'>
             <img
               class='w-full h-full object-cover'
-              src='/images/site/mal-teaching.jpeg'
+              src={malTeachingPicture}
               alt=''
             />
           </div>
@@ -459,7 +479,7 @@ const sphereCodePicture = cloudImage(
           <div class='w-full h-96'>
             <img
               class='w-full h-full object-cover'
-              src='/images/site/funding-circle-jon.jpeg'
+              src={fundingCircleJonPicture}
               alt=''
             />
           </div>
@@ -481,7 +501,7 @@ const sphereCodePicture = cloudImage(
 
               <img
                 class='w-full sm:max-w-md'
-                src='/images/site/cloud-provider-logos.png'
+                src={cloudProvidersPicture}
                 alt='aws, google cloud, heroku'
               />
             </div>
