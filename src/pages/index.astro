@@ -4,6 +4,13 @@ import Clickable from '../components/Clickable.astro'
 import { ChevronRightIcon, TickIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
+import { cloudImage } from '../utils'
+const url = Astro.url
+
+const homepageBannerPicture = cloudImage(
+  '/images/site/homepage-banner.jpeg',
+  url
+)
 ---
 
 <Layout title='JUXT' navbar navbarNoBg>
@@ -11,7 +18,9 @@ import Layout from '../layouts/Layout.astro'
     <Banner
       navbarNoBg
       text='Scaling Simplicity'
-      background={'bg-[url("/images/site/homepage-banner.jpeg")]'}
+      style={{
+        backgroundImage: `url(${homepageBannerPicture})`
+      }}
     />
     <Section className='bg-gray-800 py-28 text-white'>
       <h2 class='pb-4 text-3xl md:text-4xl'>

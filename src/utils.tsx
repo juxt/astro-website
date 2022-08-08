@@ -81,3 +81,11 @@ export const usePagination = ({
     currentPage
   }
 }
+
+export function cloudImage(image: string, url: URL) {
+  const domain =
+    url.hostname !== 'localhost'
+      ? `https://ampyikzikq.cloudimg.io/${url.host}`
+      : ''
+  return `${domain}${image}`
+}

@@ -3,15 +3,16 @@ export type BannerProps = {
   text: string
   background: string
   navbarNoBg: boolean
+  style?: any
 }
 
-const { text, background, navbarNoBg } = Astro.props as BannerProps
+const { text, style, navbarNoBg } = Astro.props as BannerProps
 ---
 
 <div
+  style={style}
   class:list={[
     'w-full h-screen bg-cover bg-top md:bg-fixed',
-    background,
     { '-mt-14': !navbarNoBg }
   ]}
 >
