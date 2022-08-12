@@ -11,5 +11,5 @@
     "by": "Morgan Ross"
   },
   "image": "/images/site/on-the-market-ui.png",
-  "pages": { "/": { "weight": 5 }, "/case-studies": { "weight": 5 } }
+  "pages": { "/case-studies": { "weight": 5 } }
 }

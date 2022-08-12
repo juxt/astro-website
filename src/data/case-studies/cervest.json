@@ -8,5 +8,5 @@
   "tech": ["Clojure", "Heorku", "Datomic", "Reagent", "Re-frame"],
 
   "image": "/images/site/cervest-ui.png",
-  "pages": { "/": { "weight": 7 }, "/case-studies": { "weight": 7 } }
+  "pages": { "/case-studies": { "weight": 7 } }
 }
