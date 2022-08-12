@@ -66,10 +66,13 @@ function caseStudyPicture(src: string) {
         </svg>
         <div class='flex flex-col gap-2'>
           <div class='italic font-light'>{testimonial.quote}</div>
-          {testimonial.by && (
-            <div class='text-sm'>
-              — {testimonial.by},{' '}
-              {testimonial.role && <span>{testimonial.role}</span>}
+          {(testimonial.by || testimonial.role) && (
+            <div class='flex items-center gap-1'>
+              <span>—</span>
+              {testimonial.by && <div class='text-sm'> {testimonial.by},</div>}
+              {testimonial.role && (
+                <div class='text-sm'>{testimonial.role}</div>
+              )}
             </div>
           )}
         </div>
