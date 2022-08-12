@@ -52,7 +52,7 @@ function BlogCard({
       />
       <div
         onClick={() => window.location.assign(href)}
-        className='cursor-pointer px-4 py-4 w-full overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-gray-900/80 flex flex-col justify-between'
+        className='cursor-pointer text-black px-4 py-4 w-full overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-gray-900/80 flex flex-col justify-between'
       >
         <div className='flex flex-col pb-6 gap-2'>
           <div className='flex justify-between text-xs'>
