@@ -5,14 +5,68 @@ export type CaseStudyProps = {
   outcome: string[]
   tech: string[]
   image: string
-  testimonial: { by: string; quote: string; role: string }
+  testimonial?: { by?: string; quote?: string; role?: string }
   pages: { [key: string]: { weight: number } }
 }
 
-const { title, subtitle, outcome, tech, testimonial, pages, image } =
+const { title, subtitle, outcome, tech, testimonial, image } =
   Astro.props as CaseStudyProps
 ---
 
-<div class='transition-colors text-black'>
-  {title}, {outcome}
+<div
+  class='transition-colors text-black flex flex-col lg:flex-row lg:even:flex-row-reverse items-center gap-16'
+>
+  <div class='lg:w-1/2 flex flex-col gap-6'>
+    <div class='flex flex-col gap-2'>
+      <h2 class='text-4xl'>{title}</h2>
+      <h3 class='text-2xl font-light'>{subtitle}</h3>
+    </div>
+    <div class='flex flex-col gap-2'>
+      <div class='text-lg uppercase font-semibold text-zinc-600'>Outcome</div>
+      <div class='flex flex-col gap-4 font-light text-lg'>
+        {outcome.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+    <div class='flex flex-col gap-2'>
+      <div class='text-lg uppercase font-semibold text-zinc-600'>tech</div>
+      <div class='flex gap-2 font-medium'>
+        {tech.join(' | ')}
+      </div>
+    </div>
+  </div>
+  <div class='lg:w-1/2 flex flex-col gap-6'>
+    <img class='w-full' src={image} alt='' />
+    {testimonial?.quote && (
+      <div class='flex gap-2 items-baseline'>
+        <svg
+          class='fill-juxt w-6 shrink-0'
+          version='1.1'
+          id='Layer_1'
+          xmlns='http://www.w3.org/2000/svg'
+          xmlns:xlink='http://www.w3.org/1999/xlink'
+          x='0px'
+          y='0px'
+          viewBox='0 0 3.04 2.81'
+          style='enable-background:new 0 0 3.04 2.81;'
+          xml:space='preserve'
+        >
+          <g>
+            <path
+              d='M1.13,1.58v1.22H0V1.85c0-0.53,0.07-0.93,0.21-1.2S0.6,0.16,0.96,0l0.26,0.41C0.79,0.59,0.58,0.98,0.58,1.58H1.13z
+		 M2.94,1.58v1.22H1.81V1.85c0-0.47,0.06-0.85,0.18-1.15C2.11,0.41,2.37,0.18,2.77,0l0.26,0.41C2.6,0.59,2.39,0.98,2.39,1.58H2.94z'
+            />
+          </g>
+        </svg>
+        <div class='flex flex-col gap-2'>
+          <div class='italic font-light'>{testimonial.quote}</div>
+          {testimonial.by && (
+            <div class='text-sm'>
+              — {testimonial.by},{' '}
+              {testimonial.role && <span>{testimonial.role}</span>}
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
 </div>

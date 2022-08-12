@@ -44,7 +44,9 @@ const caseStudiesPicture = cloudImage(
       </p>
     </Section>
     <Section>
-      {caseStudiesParsed.map((caseStudy) => <CaseStudy {...caseStudy} />)}
+      <div class='flex flex-col gap-36 py-28'>
+        {caseStudiesParsed.map((caseStudy) => <CaseStudy {...caseStudy} />)}
+      </div>
     </Section>
   </main>
 </Layout>
