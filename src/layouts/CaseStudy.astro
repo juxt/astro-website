@@ -11,6 +11,13 @@ export type CaseStudyProps = {
 
 const { title, subtitle, outcome, tech, testimonial, image } =
   Astro.props as CaseStudyProps
+
+import { cloudImage } from '../utils'
+const url = Astro.url
+
+function caseStudyPicture(src: string) {
+  return cloudImage(`${src}?width=1000`, url)
+}
 ---
 
 <div
@@ -35,7 +42,7 @@ const { title, subtitle, outcome, tech, testimonial, image } =
     </div>
   </div>
   <div class='lg:w-1/2 flex flex-col gap-6'>
-    <img class='w-full' src={image} alt='' />
+    <img class='w-full' src={caseStudyPicture(image)} alt='' />
     {testimonial?.quote && (
       <div class='flex gap-2 items-baseline'>
         <svg
