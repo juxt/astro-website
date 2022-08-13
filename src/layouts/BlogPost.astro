@@ -4,22 +4,19 @@ import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
 import Layout from './Layout.astro'
 
 export interface Props {
-  content: {
-    title: string
-    description: string
-    category: string
-    publishDate: string
-    author: string
-    heroImage?: {
-      src: string
-      alt: string
-    }
+  title: string
+  description: string
+  category: string
+  publishDate: string
+  author: string
+  heroImage?: {
+    src: string
+    alt: string
   }
 }
 
-const {
-  content: { title, description, heroImage, category, author }
-} = Astro.props as Props
+const { title, description, heroImage, category, author } = Astro.props
+  .content as Props
 
 const people = await Astro.glob<Person>('../data/people/*.json')
 
