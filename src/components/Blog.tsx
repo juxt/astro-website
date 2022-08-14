@@ -65,7 +65,7 @@ function BlogCard({
             </div>
           </div>
 
-          <a href={href} className='flex flex-col gap-2'>
+          <a href={href} className='flex flex-col gap-4'>
             <h2 className='dark:text-zinc-50 text-2xl font-light capitalize underline-offset-4 underline md:no-underline hover:underline'>
               {title}
             </h2>
