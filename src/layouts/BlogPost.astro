@@ -1,5 +1,6 @@
 ---
 import type { Person } from '../components/Blog'
+import DraftBanner from '../components/DraftBanner'
 import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
 import Layout from './Layout.astro'
 
@@ -15,8 +16,8 @@ export interface Props {
   }
 }
 
-const { title, description, heroImage, category, author } = Astro.props
-  .content as Props
+const { title, description, heroImage, category, author, draft } = Astro.props
+  .content as Props & { draft: boolean }
 
 const people = await Astro.glob<Person>('../data/people/*.json')
 
@@ -29,6 +30,7 @@ const shareIconStyle =
 ---
 
 <Layout navbar>
+  <DraftBanner draft={draft} pageName='Blog' />
   <main class='transition-colors'>
     <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
       <div class='flex flex-col lg:flex-row gap-12 items-center pt-10'>

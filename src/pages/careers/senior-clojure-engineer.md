@@ -3,12 +3,12 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Remote'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Graduate Software Engineer (Banking)'
-weight: 1
+position: 'Senior Clojure Engineer'
+weight: 3
 googleJobs:
   {
     location: 'London',
-    position: 'Graduate Software Engineer',
+    position: 'Senior Clojure Engineer',
     publishedDate: '11-03-2021'
   }
 ---

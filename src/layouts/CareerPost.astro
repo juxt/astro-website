@@ -5,6 +5,7 @@ export type CareerPostProps = {
   contract: string
   position: string
   draft: boolean
+  weight: number
   googleJobs: {
     location: string
     position: string
@@ -17,7 +18,7 @@ const { location, department, contract, position, draft, googleJobs } = Astro
 
 import Banner from '../components/Banner.astro'
 import Clickable from '../components/Clickable.astro'
-import { WarningIcon } from '../components/Icons'
+import DraftBanner from '../components/DraftBanner'
 import Section from '../components/Section.astro'
 import { cloudImage } from '../utils'
 import Layout from './Layout.astro'
@@ -73,12 +74,7 @@ const schema = JSON.stringify({
         backgroundImage: `url(${bannerPicture})`
       }}
     />
-    {draft && (
-      <div class='flex items-center gap-1 text-xs w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
-        <div class='w-5 h-5'>{<WarningIcon />}</div>
-        This Job Profile is a draft and won't be published
-      </div>
-    )}
+    <DraftBanner draft={draft} pageName='Job Profile' />
     <Section>
       <div
         class='flex flex-col lg:flex-row gap-20 py-16 text-black overflow-visible relative'

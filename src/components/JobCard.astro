@@ -1,0 +1,56 @@
+---
+import { CareerPostProps } from '../layouts/CareerPost.astro'
+import Clickable from './Clickable.astro'
+import DraftBanner from './DraftBanner'
+import { ClockIcon, LocationIcon, StarIcon } from './Icons'
+
+const { location, department, contract, position, url, draft } =
+  Astro.props as CareerPostProps & { url: string }
+
+const slug = url.split('/').pop()
+
+const careerJobLink = `/careers/${slug}`
+---
+
+<div
+  class='flex flex-col justify-between gap-10 w-72 bg-gradient-to-b from-white to-neutral-100 shadow-lg'
+>
+  <div class='flex flex-col justify-between'>
+    <DraftBanner draft={draft} pageName='Job Profile' />
+    <div class='p-4 flex flex-col justify-between gap-20 '>
+      <div class='gap-10 flex flex-col'>
+        <div class='flex gap-2 items-center font-mono'>
+          <div
+            class='flex items-center justify-center bg-orange-100 rounded-full w-8 h-8'
+          >
+            <StarIcon className='w-full stroke-juxt' />
+          </div>
+          <div class='text-juxt'>{department}</div>
+        </div>
+        <div class='flex flex-col gap-4'>
+          <div class='text-2xl font-light'>{position}</div>
+          <div class='flex flex-col gap-2'>
+            <div class='flex gap-1 items-center'>
+              <LocationIcon className='w-5 h-5 stroke-black' />
+              <div>{location}</div>
+            </div>
+            <div class='flex gap-1 items-center'>
+              <ClockIcon className='w-5 h-5 stroke-black' />
+              <div>{contract}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='flex gap-4 p-4'>
+    <Clickable>
+      <a href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`}>
+        Apply Now
+      </a>
+    </Clickable>
+    <Clickable>
+      <a href={careerJobLink}> Full Job Profile</a>
+    </Clickable>
+  </div>
+</div>

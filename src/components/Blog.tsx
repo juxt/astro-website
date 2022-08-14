@@ -1,6 +1,7 @@
 import 'preact/jsx-runtime'
 import classNames from 'classnames'
-import { ChevronLeftIcon, ChevronRightIcon, WarningIcon } from './Icons'
+import DraftBanner from './DraftBanner'
+import { ChevronLeftIcon, ChevronRightIcon } from './Icons'
 
 export type Person = {
   code: string
@@ -88,13 +89,7 @@ function BlogCard({
           </div>
         </a>
       </div>
-
-      {draft && (
-        <div className='flex items-center gap-1 text-xs absolute bottom-0 w-full px-4 py-4 backdrop-blur-sm bg-yellow-400/70'>
-          <div class='w-5 h-5'>{<WarningIcon />}</div>
-          This Blog is a draft and won't be published
-        </div>
-      )}
+      <DraftBanner draft={draft} pageName='Blog' />
     </div>
   )
 }

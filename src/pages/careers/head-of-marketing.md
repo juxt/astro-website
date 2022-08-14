@@ -1,14 +1,15 @@
 ---
 layout: '../../layouts/CareerPost.astro'
 location: 'London / Remote'
-department: 'Engineering'
+department: 'Marketing'
 contract: 'Full Time'
-position: 'Graduate Software Engineer (Banking)'
-weight: 1
+position: 'Head of Marketing'
+draft: true
+weight: 4
 googleJobs:
   {
     location: 'London',
-    position: 'Graduate Software Engineer',
+    position: 'Head of Marketing',
     publishedDate: '11-03-2021'
   }
 ---

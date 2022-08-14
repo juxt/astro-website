@@ -189,3 +189,65 @@ export function TickIcon({ className }: IconProps) {
     </svg>
   )
 }
+
+export function StarIcon({ className }: IconProps) {
+  return (
+    <svg
+      class={className}
+      xmlns='http://www.w3.org/2000/svg'
+      width='16'
+      height='16'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+    >
+      <polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'></polygon>
+    </svg>
+  )
+}
+
+export function ClockIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      class={className}
+      fill='none'
+      viewBox='0 0 24 24'
+      stroke='currentColor'
+      stroke-width='2'
+    >
+      <path
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+      />
+    </svg>
+  )
+}
+
+export function LocationIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      class={className}
+      fill='none'
+      viewBox='0 0 24 24'
+      stroke='currentColor'
+      stroke-width='2'
+    >
+      <path
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+      />
+      <path
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+      />
+    </svg>
+  )
+}
