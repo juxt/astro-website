@@ -2,6 +2,7 @@
 author: 'alx'
 layout: '../../layouts/BlogPost.astro'
 title: 'Writing Mobile apps in ClojureScript in 2021'
+category: 'Mobile'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
 heroImage:

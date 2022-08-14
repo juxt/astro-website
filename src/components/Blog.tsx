@@ -1,7 +1,7 @@
 import 'preact/jsx-runtime'
 import classNames from 'classnames'
 import DraftBanner from './DraftBanner'
-import { ChevronLeftIcon, ChevronRightIcon } from './Icons'
+import { ChevronLeftIcon, ChevronRightIcon, PencilIcon } from './Icons'
 
 export type Person = {
   code: string
@@ -32,9 +32,9 @@ export type BlogProps = {
 
 function BlogCard({
   blog: {
-    heroImage: { src, alt },
     title,
     publishDate,
+    description,
     category,
     href,
     draft,
@@ -44,35 +44,37 @@ function BlogCard({
   blog: BlogProps
 }) {
   return (
-    <div className='flex justify-between flex-col w-80 mx-auto h-[26rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-shadow'>
-      <img
-        class='absolute w-full h-full object-cover cursor-pointer'
-        src={src}
-        alt={alt}
-        onClick={() => window.location.assign(href)}
-      />
-      <div
-        onClick={() => window.location.assign(href)}
-        className='cursor-pointer text-black px-4 py-4 w-full overflow-hidden relative backdrop-blur-sm bg-white/70 dark:bg-gray-900/80 flex flex-col justify-between'
-      >
-        <div className='flex flex-col pb-6 gap-2'>
-          <div className='flex justify-between text-xs'>
-            <div className='text-zinc-600 dark:text-zinc-300 font-medium uppercase'>
-              {category}
+    <div
+      onClick={() => window.location.assign(href)}
+      className='cursor-pointer flex justify-between flex-col w-80 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-shadow'
+    >
+      <div className='text-black px-4 py-4 w-full h-full relative flex flex-col justify-between'>
+        <div className='flex flex-col pb-10 gap-10'>
+          <div className='flex justify-between items-center font-mono'>
+            <div class='flex gap-2 items-center'>
+              <div class='flex items-center justify-center bg-orange-100 dark:bg-gray-800 rounded-full w-8 h-8'>
+                <PencilIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
+              </div>
+              <div class='text-juxt dark:text-zinc-300 capitalize text-sm'>
+                {category}
+              </div>
             </div>
-            <div className='text-zinc-600 dark:text-zinc-300'>
+
+            <div className='text-zinc-600 dark:text-zinc-300 text-xs'>
               {publishDate}
             </div>
           </div>
-          <a href={href}>
-            <h2 className='dark:text-zinc-50 capitalize font-medium w-60 underline-offset-4 underline md:no-underline hover:underline'>
+
+          <a href={href} className='flex flex-col gap-2'>
+            <h2 className='dark:text-zinc-50 text-2xl font-light capitalize underline-offset-4 underline md:no-underline hover:underline'>
               {title}
             </h2>
+            <h3 className='dark:text-zinc-50 font-light'>{description}</h3>
           </a>
         </div>
         <a href='/to/some/profile' className='group flex gap-4 w-fit'>
           <div className='flex-shrink-0 flex flex-col gap-3'>
-            <div className='w-20 h-20 rounded relative overflow-hidden'>
+            <div className='w-20 h-20 relative overflow-hidden'>
               <img
                 className='absolute w-full h-full object-cover'
                 src={`/images/people/${image}`}
