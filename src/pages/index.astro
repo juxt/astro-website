@@ -687,7 +687,7 @@ const testimonials = [
       </div>
     </Section>
 
-    <div class='splide pt-40 pb-20 bg-black'>
+    <div class='splide py-20 bg-black'>
       <div class='splide__track'>
         <ul class='splide__list  '>
           {testimonials.map(({ quote, name, bg }) => (
@@ -736,7 +736,8 @@ const testimonials = [
           breakpoints: {
             768: {
               perPage: 1,
-              padding: 0
+              padding: 0,
+              arrows: false
             }
           }
         }).mount()
