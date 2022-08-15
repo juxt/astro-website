@@ -71,36 +71,45 @@ const testimonials = [
     name: 'MANAGING DIRECTOR, T1 INVESTMENT BANK',
     quote:
       'The JUXT team are tremendously technically capable – delivering elegant solutions to complex problems.',
-    bg: 'bg-green-600'
+    bg: 'bg-green-800'
   },
   {
     name: 'ANDY DWELLEY',
     quote: 'XTDB has been an absolute dream to use.',
-    bg: 'bg-slate-600'
+    bg: 'bg-slate-800'
   },
   {
     name: 'PATRICK GALVIN',
     quote: 'XTDB has been working great for me. It is a lovely lovely project.',
-    bg: 'bg-blue-600'
+    bg: 'bg-blue-800'
   },
   {
     name: 'JULIAN GAMBLE',
     quote:
       'JUXT have made a huge contribution to the Open Source and Clojure community',
-    bg: 'bg-pink-600'
+    bg: 'bg-pink-800'
   },
   {
     name: 'NIC FERRIER',
     quote:
       'They are programmers employing programmers to do work with the best tools in the most interesting ways.',
-    bg: 'bg-violet-600'
+    bg: 'bg-violet-800'
   },
   {
     name: "JACOB O'BRYANT",
     quote:
       'I really appreciate the straightforward simplicity of schemaless persistence. With XTDB it was just so easy.',
-    bg: 'bg-gray-600'
+    bg: 'bg-gray-800'
   }
+]
+
+const clientLogos = [
+  'credit-suisse.svg',
+  'citi.svg',
+  'vodafone.svg',
+  'on-the-market.svg',
+  'mail-online.svg',
+  'bbc.svg'
 ]
 ---
 
@@ -687,28 +696,30 @@ const testimonials = [
       </div>
     </Section>
 
-    <div class='splide py-20 bg-black'>
-      <div class='splide__track'>
-        <ul class='splide__list  '>
-          {testimonials.map(({ quote, name, bg }) => (
-            <li class='splide__slide'>
-              <div
-                class:list={[
-                  'w-full md:w-[35rem] h-72 md:h-80 border border-black p-4 md:py-10 md:px-8',
-                  bg
-                ]}
-              >
-                <div class='flex py-16 md:py-0 gap-6 h-full'>
-                  <QuoteIcon className='w-6 h-6 md:w-10 fill-juxt shrink-0' />
-                  <div class='flex flex-col justify-between gap-4 max-w-xs sm:max-w-sm md:max-w-none'>
-                    <div class='text-xl md:text-2xl text-white'>{quote}</div>
-                    <div class='text-sm uppercase font-semibold'>{name}</div>
+    <div class='pb-20 bg-black'>
+      <div class='splide py-20'>
+        <div class='splide__track'>
+          <ul class='splide__list  '>
+            {testimonials.map(({ quote, name, bg }) => (
+              <li class='splide__slide'>
+                <div
+                  class:list={[
+                    'w-full md:w-[35rem] h-72 md:h-80 border border-black p-4 md:py-10 md:px-8',
+                    bg
+                  ]}
+                >
+                  <div class='flex py-16 md:py-0 gap-6 h-full'>
+                    <QuoteIcon className='w-6 h-6 md:w-10 fill-juxt shrink-0' />
+                    <div class='flex flex-col justify-between gap-4 max-w-xs sm:max-w-sm md:max-w-none'>
+                      <div class='text-xl md:text-2xl text-white'>{quote}</div>
+                      <div class='text-sm uppercase font-semibold'>{name}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -730,7 +741,7 @@ const testimonials = [
           padding: '10%',
           gap: '10%',
           autoplay: true,
-          interval: 2000,
+          interval: 4000,
           pagination: true,
           throttle: 300,
           breakpoints: {
@@ -743,5 +754,29 @@ const testimonials = [
         }).mount()
       })
     </script>
+
+    <Section className='pt-20 pb-40 bg-black'>
+      <div
+        class='flex flex-wrap py-6 justify-center border-b border-t border-gray-800'
+      >
+        {clientLogos.map((logo) => (
+          <img
+            src={`/images/client-logos/${logo}`}
+            alt=''
+            class='w-32 h-32 md:w-40 md:h-40'
+          />
+        ))}
+      </div>
+    </Section>
+    <Section className='text-black py-40'>
+      <div class='flex justify-center gap-20 items-start'>
+        <div class='flex flex-col gap-6'>
+          <div class='text-6xl'>Talk to us</div>
+          <div class='text-3xl font-light'>info@juxt.pro</div>
+          <div class='text-3xl font-light'>+44 (0) 333 93 98 309</div>
+        </div>
+        <img class='w-60' src='/images/site/airplane.png' alt='' />
+      </div>
+    </Section>
   </main>
 </Layout>
