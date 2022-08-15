@@ -59,6 +59,49 @@ const cloudProvidersPicture = cloudImage(
   url
 )
 const wavesPicture = cloudImage('/images/site/waves.png?width=1500', url)
+
+const testimonials = [
+  {
+    name: 'MORGAN ROSS, TECHNICAL DIRECTOR, ONTHEMARKET PLC',
+    quote:
+      'JUXT led the development team through this period of incredible achievements.',
+    bg: 'bg-red-600'
+  },
+  {
+    name: 'MANAGING DIRECTOR, T1 INVESTMENT BANK',
+    quote:
+      'The JUXT team are tremendously technically capable – delivering elegant solutions to complex problems.',
+    bg: 'bg-green-600'
+  },
+  {
+    name: 'ANDY DWELLEY',
+    quote: 'XTDB has been an absolute dream to use.',
+    bg: 'bg-slate-600'
+  },
+  {
+    name: 'PATRICK GALVIN',
+    quote: 'XTDB has been working great for me. It is a lovely lovely project.',
+    bg: 'bg-blue-600'
+  },
+  {
+    name: 'JULIAN GAMBLE',
+    quote:
+      'JUXT have made a huge contribution to the Open Source and Clojure community',
+    bg: 'bg-pink-600'
+  },
+  {
+    name: 'NIC FERRIER',
+    quote:
+      'They are programmers employing programmers to do work with the best tools in the most interesting ways.',
+    bg: 'bg-violet-600'
+  },
+  {
+    name: "JACOB O'BRYANT",
+    quote:
+      'I really appreciate the straightforward simplicity of schemaless persistence. With XTDB it was just so easy.',
+    bg: 'bg-gray-600'
+  }
+]
 ---
 
 <Layout title='JUXT' navbar navbarNoBg>
@@ -644,26 +687,22 @@ const wavesPicture = cloudImage('/images/site/waves.png?width=1500', url)
       </div>
     </Section>
 
-    <div class='splide py-20 bg-black'>
+    <div class='splide pt-40 pb-20 bg-black'>
       <div class='splide__track'>
         <ul class='splide__list  '>
-          {[1, 2, 3, 4, 5, 6].map((x) => (
+          {testimonials.map(({ quote, name, bg }) => (
             <li class='splide__slide'>
-              <div class='md:w-[35rem] h-80 bg-red-300 border border-black p-4 md:py-10 md:px-8'>
-                <div class='flex gap-6'>
+              <div
+                class:list={[
+                  'w-full md:w-[35rem] h-72 md:h-80 border border-black p-4 md:py-10 md:px-8',
+                  bg
+                ]}
+              >
+                <div class='flex py-16 md:py-0 gap-6 h-full'>
                   <QuoteIcon className='w-6 h-6 md:w-10 fill-juxt shrink-0' />
-                  <div class='flex flex-col gap-4'>
-                    <div class='md:text-lg text-white max-w-[16rem] sm:max-w-sm'>
-                      I asked JUXT to use their Clojure wizardry to make sense
-                      of some very big and very awkwardly structured data, which
-                      we needed urgently. They were a lifesaver: they produced
-                      exactly what was needed, in a tight timescale, while
-                      maintaining very high levels of data security. I'll
-                      certainly go to JUXT again.
-                    </div>
-                    <div class='text-sm uppercase font-semibold'>
-                      ADRIAN ULISSE, BETTER CITIES Ceo & FOUNDER
-                    </div>
+                  <div class='flex flex-col justify-between gap-4 max-w-xs sm:max-w-sm md:max-w-none'>
+                    <div class='text-xl md:text-2xl text-white'>{quote}</div>
+                    <div class='text-sm uppercase font-semibold'>{name}</div>
                   </div>
                 </div>
               </div>
@@ -691,8 +730,8 @@ const wavesPicture = cloudImage('/images/site/waves.png?width=1500', url)
           padding: '10%',
           gap: '10%',
           autoplay: true,
-          interval: 4000,
-          pagination: false,
+          interval: 2000,
+          pagination: true,
           throttle: 300,
           breakpoints: {
             768: {
