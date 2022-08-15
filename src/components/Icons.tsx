@@ -270,3 +270,23 @@ export function PencilIcon({ className }: IconProps) {
     </svg>
   )
 }
+
+export function QuoteIcon({ className }: IconProps) {
+  return (
+    <svg
+      class={className}
+      version='1.1'
+      x='0px'
+      y='0px'
+      viewBox='0 0 3.04 2.81'
+      style='enable-background:new 0 0 3.04 2.81;'
+    >
+      <g>
+        <path
+          d='M1.13,1.58v1.22H0V1.85c0-0.53,0.07-0.93,0.21-1.2S0.6,0.16,0.96,0l0.26,0.41C0.79,0.59,0.58,0.98,0.58,1.58H1.13z
+M2.94,1.58v1.22H1.81V1.85c0-0.47,0.06-0.85,0.18-1.15C2.11,0.41,2.37,0.18,2.77,0l0.26,0.41C2.6,0.59,2.39,0.98,2.39,1.58H2.94z'
+        />
+      </g>
+    </svg>
+  )
+}

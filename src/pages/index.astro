@@ -1,7 +1,7 @@
 ---
 import Banner from '../components/Banner.astro'
 import Clickable from '../components/Clickable.astro'
-import { ChevronRightIcon, TickIcon } from '../components/Icons'
+import { ChevronRightIcon, QuoteIcon, TickIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
 import { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import Layout from '../layouts/Layout.astro'
@@ -643,5 +643,65 @@ const wavesPicture = cloudImage('/images/site/waves.png?width=1500', url)
         </Clickable>
       </div>
     </Section>
+
+    <div class='splide py-20 bg-black'>
+      <div class='splide__track'>
+        <ul class='splide__list  '>
+          {[1, 2, 3, 4, 5, 6].map((x) => (
+            <li class='splide__slide'>
+              <div class='md:w-[35rem] h-80 bg-red-300 border border-black p-4 md:py-10 md:px-8'>
+                <div class='flex gap-6'>
+                  <QuoteIcon className='w-6 h-6 md:w-10 fill-juxt shrink-0' />
+                  <div class='flex flex-col gap-4'>
+                    <div class='md:text-lg text-white max-w-[16rem] sm:max-w-sm'>
+                      I asked JUXT to use their Clojure wizardry to make sense
+                      of some very big and very awkwardly structured data, which
+                      we needed urgently. They were a lifesaver: they produced
+                      exactly what was needed, in a tight timescale, while
+                      maintaining very high levels of data security. I'll
+                      certainly go to JUXT again.
+                    </div>
+                    <div class='text-sm uppercase font-semibold'>
+                      ADRIAN ULISSE, BETTER CITIES Ceo & FOUNDER
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <link rel='stylesheet' href='/styles/splide.min.css' />
+    <script is:inline src='/scripts/splide.min.js'>
+
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // @ts-ignore
+        new Splide('.splide', {
+          type: 'loop',
+          perPage: 2,
+          focus: 'center',
+          autoWidth: true,
+          rewind: true,
+          rewindByDrag: true,
+          padding: '10%',
+          gap: '10%',
+          autoplay: true,
+          interval: 4000,
+          pagination: false,
+          throttle: 300,
+          breakpoints: {
+            768: {
+              perPage: 1,
+              padding: 0
+            }
+          }
+        }).mount()
+      })
+    </script>
   </main>
 </Layout>

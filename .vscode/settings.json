@@ -8,6 +8,15 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "files.associations": {
+    "*.min.js": "minified"
+  },
+  "[minified]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false
+    }
+  },
   "prettier.documentSelectors": ["**/*.astro"],
   "eslint.validate": [
     "javascript",
