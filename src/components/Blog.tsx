@@ -19,6 +19,7 @@ export type BlogProps = {
   title: string
   description: string
   publishDate: string
+  featured: { weight: number }
   author: string
   person: Person
   category: string
@@ -30,7 +31,7 @@ export type BlogProps = {
   }
 }
 
-function BlogCard({
+export function BlogCard({
   blog: {
     title,
     publishDate,

@@ -5,6 +5,8 @@ layout: '../../layouts/BlogPost.astro'
 title: 'AWS Lambda, now with first class parentheses'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
+featured:
+  weight: 4
 heroImage:
   src: '/images/blog/mock.jpeg'
   alt: 'Space shuttle leaving curved trail in the sky'

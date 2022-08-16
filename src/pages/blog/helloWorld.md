@@ -5,6 +5,8 @@ layout: '../../layouts/BlogPost.astro'
 title: 'Speed up your ClojureScript Webapp'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
+featured:
+  weight: 2
 heroImage:
   src: '/images/blog/mock.webp'
   alt: 'Space shuttle leaving curved trail in the sky'
