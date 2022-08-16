@@ -8,7 +8,6 @@ import Layout from '../layouts/Layout.astro'
 import { cloudImage } from '../utils'
 import CaseStudy from '../layouts/CaseStudy.astro'
 import { BlogCard, BlogProps, Person } from '../components/Blog'
-import { Newsletter } from '../components/Newsletter'
 const url = Astro.url
 
 const caseStudies = await Astro.glob<CaseStudyProps>(
