@@ -8,6 +8,7 @@ import Layout from '../layouts/Layout.astro'
 import { cloudImage } from '../utils'
 import CaseStudy from '../layouts/CaseStudy.astro'
 import { BlogCard, BlogProps, Person } from '../components/Blog'
+import { Newsletter } from '../components/Newsletter'
 const url = Astro.url
 
 const caseStudies = await Astro.glob<CaseStudyProps>(
@@ -170,7 +171,7 @@ const featuredBlogs = pages
       className={'bg-slate-900 bg-[length:0px_0px] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
     >
       <div class='md:w-1/2'>
-        <h2 class='text-4xl pb-10'>Our Approach</h2>
+        <h2 class='text-4xl pb-10 font-bold'>Our Approach</h2>
         <div class='text-lg font-extralight flex flex-col gap-8'>
           <p class=''>
             Complexity, still the primary cause of failure and delay of IT
@@ -451,7 +452,7 @@ const featuredBlogs = pages
     <Section className={'bg-white py-20 text-black'}>
       <div>
         <div class='lg:w-2/3'>
-          <h2 class='text-4xl pb-10'>Enabling Technologies</h2>
+          <h2 class='text-4xl pb-10 font-bold'>Enabling Technologies</h2>
           <h3 class='text-xl font-extralight pb-14 lg:pb-20'>
             We select and develop particular tools and technologies that compose
             harmoniously, chosen to support our methodology.
@@ -607,7 +608,9 @@ const featuredBlogs = pages
       style={{ backgroundImage: `url(${wavesPicture})` }}
       className={'bg-zinc-900 bg-[length:0px_0px] bg-bottom lg:bg-cover bg-no-repeat py-20'}
     >
-      <h2 class='text-4xl pb-20 text-white'>Simplicity Delivers Results</h2>
+      <h2 class='text-4xl pb-20 text-white font-bold'>
+        Simplicity Delivers Results
+      </h2>
       <div class='flex flex-wrap gap-20'>
         <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
           <div
@@ -800,10 +803,10 @@ const featuredBlogs = pages
     </Section>
     <Section className='text-black py-20 md:py-40'>
       <div
-        class='flex flex-col-reverse items-center md:flex-row justify-center gap-10 md:gap-20 '
+        class='flex flex-col-reverse items-center md:flex-row justify-center gap-10 md:gap-16'
       >
-        <div class='flex flex-col gap-6 text-center md:text-left'>
-          <div class='text-5xl md:text-6xl'>Talk to us</div>
+        <div class='flex flex-col gap-4 text-center md:text-left'>
+          <div class='text-5xl md:text-6xl font-bold'>Talk to us</div>
           <div class='text-2xl md:text-3xl font-light'>info@juxt.pro</div>
           <div class='text-2xl md:text-3xl font-light'>
             +44 (0) 333 93 98 309
@@ -815,7 +818,9 @@ const featuredBlogs = pages
     <Section
       className='py-20 dark:bg-gray-900 bg-zinc-100 text-black dark:text-white'
     >
-      <h2 class='justify-center flex text-4xl pb-10'>Featured Articles</h2>
+      <h2 class='justify-center flex text-4xl pb-10 font-bold'>
+        Featured Articles
+      </h2>
       <div class='mx-auto max-w-6xl pt-10'>
         <div class='grid md:grid-cols-[repeat(2,_20rem)] justify-center gap-20'>
           {featuredBlogs.length
@@ -824,6 +829,63 @@ const featuredBlogs = pages
               })
             : ''}
         </div>
+      </div>
+    </Section>
+    <Section className='py-20 text-white bg-black'>
+      <div>
+        <header class='py-16 sm:text-center'>
+          <h1
+            class='mb-4 text-4xl font-bold tracking-tight dark:text-slate-200'
+          >
+            Stay in touch
+          </h1>
+          <p class='lg:w-1/2 mx-auto text-lg text-slate-400'>
+            We'll let you know when new blogs are updated along with the latest
+            in JUXT news.
+          </p>
+          <section class='mt-3 max-w-sm sm:mx-auto sm:px-4'>
+            <h2 class='sr-only'>Sign up for our newsletter</h2>
+            <form
+              target='_blank'
+              action='https://JUXT.us13.list-manage.com/subscribe/post?u=b72ef384b5199134185cbeed8&id=a5edacb9c2'
+              method='post'
+              class='flex flex-wrap -mx-2'
+            >
+              <div class='px-2 grow-[9999] basis-64 mt-3'>
+                <div class='group relative'>
+                  <svg
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    aria-hidden='true'
+                    class='w-6 h-full absolute inset-y-0 left-3 text-slate-400 pointer-events-none group-focus-within:text-slate-400'
+                  >
+                    <path
+                      d='M5 7.92C5 6.86 5.865 6 6.931 6h10.138C18.135 6 19 6.86 19 7.92v8.16c0 1.06-.865 1.92-1.931 1.92H6.931A1.926 1.926 0 0 1 5 16.08V7.92Z'
+                    ></path>
+                    <path d='m6 7 6 5 6-5'></path>
+                  </svg>
+                  <input
+                    type='email'
+                    id='EMAIL-2'
+                    name='EMAIL-2'
+                    aria-label='Email address'
+                    class='appearance-none shadow ring-1 leading-5 sm:text-sm border border-transparent py-2 placeholder:text-slate-400 pl-12 pr-3 block w-full focus:outline-none focus:ring-2 bg-white bg-slate-700/20 ring-slate-200/30 focus:ring-slate-500 text-white'
+                    placeholder='Subscribe via email'
+                  />
+                </div>
+              </div>
+              <div
+                class='grow flex mt-3 border border-juxt px-4 py-1.5 w-fit hover:bg-juxt transition-colors cursor-pointer hover:text-white visited:text-white active:text-white font-normal text-sm'
+              >
+                <button type='submit'> Subscribe</button>
+              </div>
+            </form>
+          </section>
+        </header>
       </div>
     </Section>
   </main>
