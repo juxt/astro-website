@@ -38,6 +38,7 @@ export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
         ref.current.classList.remove('bg-black')
       }
     }
+    updateNavBg()
     navbarNoBg && window.addEventListener('scroll', updateNavBg)
     return () => {
       navbarNoBg && window.removeEventListener('scroll', updateNavBg)
