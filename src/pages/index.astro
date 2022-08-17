@@ -124,6 +124,8 @@ const peopleByThreeLetterCode = people.reduce((acc, person) => {
   return acc
 }, {})
 
+const isDev = import.meta.env.DEV
+
 const featuredBlogs = pages
   .map((page) => {
     const author = page.frontmatter.author
@@ -139,7 +141,7 @@ const featuredBlogs = pages
       person: peopleByThreeLetterCode[page.frontmatter.author]
     }
   })
-  .filter(({ featured }) => featured)
+  .filter(({ featured, draft }) => featured && (isDev || !draft))
   .sort((a, b) => b.featured.weight - a.featured.weight)
 ---
 
