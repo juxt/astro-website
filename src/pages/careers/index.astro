@@ -18,7 +18,7 @@ const jobPosts = await Astro.glob<CareerPostProps>('./*.md')
 
 const jobPostsParsed = jobPosts
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
-  .filter((jobPost) => isDev && !jobPost.frontmatter.draft)
+  .filter((jobPost) => isDev || !jobPost.frontmatter.draft)
 
 const url = Astro.url
 const careersBannerPicture = cloudImage(
