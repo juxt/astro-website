@@ -55,7 +55,7 @@ const blogBannerPicture = cloudImage(
 )
 ---
 
-<Layout navbar>
+<Layout navbar title='Blog'>
   <Banner text='Blog' style={{ backgroundImage: `url(${blogBannerPicture})` }}
   />
   <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />

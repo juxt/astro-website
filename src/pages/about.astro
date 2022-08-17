@@ -1,12 +1,155 @@
 ---
+import Banner from '../components/Banner.astro'
+import { Person } from '../components/Blog'
+import {
+  GithubIcon,
+  LinkedInIcon,
+  LinkIcon,
+  TwitterIcon
+} from '../components/Icons'
+import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
+import { cloudImage } from '../utils'
 
 export const metadata = {
   navbar: { weight: 1 },
   footer: { weight: 2 }
 }
+
+const url = Astro.url
+
+const bannerPicture = cloudImage(
+  '/images/site/about-us-banner.jpeg?width=1500',
+  url
+)
+const pplPicture = cloudImage('/images/site/about-us-ppl.jpeg?width=1500', url)
+
+const values = [
+  [
+    'V',
+    'Vision',
+    'Technology is a fast moving industry, susceptible to fads and fashions. But we prefer to make conservative decisions that optimise the longer-term.'
+  ],
+  [
+    'A',
+    'Authenticity',
+    'We are honest. We have in-depth knowledge and understanding of the systems we build and support. We are self-reliant and able to speak from the facts.'
+  ],
+  [
+    'L',
+    'Leverage',
+    'Rather than picking "the best tool for the job", we choose to master a small number of powerful and composable tools, applicable in a broad range of situations.'
+  ],
+  [
+    'U',
+    'Understanding',
+    'We take time to understand a problem or domain in depth, rather than jumping to quick fixes and rushing to a temporary solution.'
+  ],
+  [
+    'E',
+    'Excellence',
+    'We strive to meet the highest standards in ourselves and our creations. We meet deadlines, respect budgets, communicate clearly, and deliver the highest-quality software.'
+  ],
+  [
+    'S',
+    'Simplicity',
+    'We take time to untangle separate concerns. We erect defences against the creeping complexity that starves projects of their agility. Simplicity underpins all the values above.'
+  ]
+]
+
+const people = await Astro.glob<Person & { default: Person }>(
+  '../data/people/*.json'
+)
+
+const featuredPeople = people
+  .filter((p) => p.featured)
+  .sort((a, b) => a.featured.weight - b.featured.weight)
+  .map((p) => p.default)
+
+console.log('featuredPeople', featuredPeople)
 ---
 
-<Layout navbar>
-  <main class='pb-96'>about page here</main>
+<Layout navbar title='About'>
+  <main>
+    <Banner
+      text='About Us'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+    <Section className='bg-zinc-900 py-28 text-white'>
+      <h2 class='pb-4 text-3xl md:text-4xl'>Our Mission</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        To unlock the potential of software to expand human horizons.
+      </p>
+    </Section>
+    <Section
+      className='bg-fixed relative py-60 bg-cover bg-top bg-no-repeat before:absolute before:w-full before:top-0 before:left-0 before:h-full before:bg-black/60'
+      style={{
+        backgroundImage: `url(${pplPicture})`
+      }}
+    >
+      <div
+        class='relative text-white font-light text-3xl md:text-4xl lg:text-5xl leading-normal'
+      >
+        Teamwork is at the heart of our culture, our internal knowledge sharing
+        and collaborative culture are what allow us to deliver as efficiently as
+        we do.
+      </div>
+    </Section>
+    <Section className='text-black py-20'>
+      <div
+        class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'
+      >
+        {values.map(([initial, value, text]) => (
+          <div class='p-4 flex flex-col gap-4'>
+            <div class='text-6xl text-center font-bold text-slate-500'>
+              {initial}
+            </div>
+            <div class='text-4xl text-center font-bold'>{value}</div>
+            <div class='text-center'>{text}</div>
+          </div>
+        ))}
+      </div>
+    </Section>
+    <Section className='bg-black text-white py-20'>
+      <h2 class='text-4xl pb-20 font-bold'>Leadership Team</h2>
+      <div
+        class='grid md:grid-cols-[repeat(2,_auto)] xl:grid-cols-[repeat(3,_auto)] justify-center gap-28'
+      >
+        <!--  TODO: optimize images -->
+        {featuredPeople.map(({ image, jobTitle, name, lastName }) => (
+          <div class='flex w-64 flex-col gap-4'>
+            <div class='group relative w-full'>
+              <img
+                class='w-full object-cover'
+                src={`/images/people/${image}`}
+                alt=''
+              />
+
+              <a
+                href='/#'
+                class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
+              >
+                <div class='flex gap-2 justify-center items-center'>
+                  <LinkIcon className='w-5 h-5 fill-slate-800' />
+                  <p class='text-lg font-medium text-slate-800'>
+                    Visit Profile
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div>
+              <div class='text-sm uppercase text-juxt font-medium'>
+                {jobTitle}
+              </div>
+              <div class='text-lg text-gray-300 font-light'>
+                {name} {lastName}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  </main>
 </Layout>

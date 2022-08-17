@@ -1,0 +1,10 @@
+{
+  "code": "kth",
+  "name": "Kath",
+  "lastName": "Read",
+  "jobTitle": "CFO",
+  "image": "kth.jpeg",
+  "linkedin": "#",
+  "twitter": "#",
+  "featured": { "weight": 3 }
+}

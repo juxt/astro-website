@@ -9,9 +9,10 @@ export type Person = {
   lastName: string
   jobTitle: string
   image: string
-  linkedin: string
-  twitter: string
-  github: string
+  linkedin?: string
+  twitter?: string
+  github?: string
+  featured?: { weight: number }
 }
 
 export type BlogProps = {

@@ -1,0 +1,11 @@
+{
+  "code": "joe",
+  "name": "Joe",
+  "lastName": "Littlejohn",
+  "jobTitle": "Head of Delivery",
+  "image": "joe.jpeg",
+  "linkedin": "#",
+  "twitter": "#",
+  "github": "#",
+  "featured": { "weight": 6 }
+}

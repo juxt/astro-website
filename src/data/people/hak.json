@@ -1,0 +1,11 @@
+{
+  "code": "hak",
+  "name": "Håkan",
+  "lastName": "Råberg",
+  "jobTitle": "Head of Research",
+  "image": "hak.jpeg",
+  "linkedin": "#",
+  "twitter": "#",
+  "github": "#",
+  "featured": { "weight": 4 }
+}
