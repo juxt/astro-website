@@ -12,11 +12,13 @@ export const metadata = {
   navbar: { weight: 5 },
   footer: { weight: 5 }
 }
+
+const isDev = import.meta.env.DEV
 const jobPosts = await Astro.glob<CareerPostProps>('./*.md')
 
-const jobPostsParsed = jobPosts.sort(
-  (a, b) => a.frontmatter.weight - b.frontmatter.weight
-)
+const jobPostsParsed = jobPosts
+  .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
+  .filter((jobPost) => isDev && !jobPost.frontmatter.draft)
 
 const url = Astro.url
 const careersBannerPicture = cloudImage(
