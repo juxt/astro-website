@@ -11,8 +11,6 @@ export const metadata = {
   footer: { weight: 3, label: 'Blog', url: '/blog/1' }
 }
 
-const isDev = import.meta.env.DEV
-
 export async function getStaticPaths({ paginate }) {
   const pages = await Astro.glob<BlogProps>('./*.md')
   const people = await Astro.glob<Person & { default: Person }>(
@@ -25,20 +23,24 @@ export async function getStaticPaths({ paginate }) {
     return acc
   }, {})
 
-  const blogs = pages.map((page) => {
-    const author = page.frontmatter.author
-    const person = peopleByThreeLetterCode[author]
-    if (!person)
-      throw new Error(
-        `No person found for author: '${author}' in '${page.url}'`
-      )
+  const isDev = import.meta.env.DEV
 
-    return {
-      ...page.frontmatter,
-      href: page.url,
-      person: peopleByThreeLetterCode[page.frontmatter.author]
-    }
-  })
+  const blogs = pages
+    .map((page) => {
+      const author = page.frontmatter.author
+      const person = peopleByThreeLetterCode[author]
+      if (!person)
+        throw new Error(
+          `No person found for author: '${author}' in '${page.url}'`
+        )
+
+      return {
+        ...page.frontmatter,
+        href: page.url,
+        person: peopleByThreeLetterCode[page.frontmatter.author]
+      }
+    })
+    .filter(({ draft }) => isDev || !draft)
 
   return paginate(blogs, { pageSize: 9 })
 }
@@ -58,5 +60,5 @@ const blogBannerPicture = cloudImage(
 <Layout navbar title='Blog'>
   <Banner text='Blog' style={{ backgroundImage: `url(${blogBannerPicture})` }}
   />
-  <Blog client:load blogs={page.data} isDev={isDev} prev={prev} next={next} />
+  <Blog client:load blogs={page.data} prev={prev} next={next} />
 </Layout>

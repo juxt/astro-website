@@ -135,23 +135,19 @@ function PaginationArrows({ prev, next }: { prev: string; next: string }) {
 
 export default function Blog({
   blogs,
-  isDev,
   prev,
   next
 }: {
   blogs: BlogProps[]
-  isDev: boolean
   prev: string
   next: string
 }) {
-  const publishedBlogs = blogs.filter((blog) => isDev || !blog.draft)
-
   return (
     <main class='pb-40 transition-colors'>
       <section className='mx-auto max-w-6xl pt-10'>
         <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'>
-          {publishedBlogs.length
-            ? publishedBlogs.map((blog) => {
+          {blogs.length
+            ? blogs.map((blog) => {
                 return <BlogCard blog={blog} />
               })
             : ''}
