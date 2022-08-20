@@ -20,6 +20,7 @@ const pagesInFooter = pages
   .map((page) => ({
     url: page.metadata?.footer?.url || page.url,
     label: page.metadata?.footer?.label || removeLeadingSlash(page.url),
+    flag: page.metadata?.footer?.flag,
     weight: page.metadata?.footer?.weight
   }))
   .sort((a, b) => a.weight - b.weight)
@@ -59,10 +60,15 @@ const pagesInFooter = pages
       <div class='flex flex-col gap-4 font-light'>
         {pagesInFooter.map((page) => (
           <a
-            class='text-zinc-100 text-xs capitalize hover:text-juxt transition-colors'
+            class='flex gap-1 items-center text-zinc-100 capitalize text-xs hover:text-juxt transition-colors'
             href={page.url}
           >
             {page.label}
+            {page.flag && (
+              <div class='font-normal uppercase text-[0.6rem] rounded-lg bg-gray-700 tracking-wider text-white px-1.5 py-[0.1rem]'>
+                {page.flag}
+              </div>
+            )}
           </a>
         ))}
       </div>
