@@ -23,12 +23,20 @@ export async function getStaticPaths({ paginate }) {
     return acc
   }, {})
 
+  const experts = await Astro.glob('../experts/*.md')
+  const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
+    const expertCode = expert.url.split('/').pop()
+    acc[expertCode] = expert.url
+    return acc
+  }, {})
+
   const isDev = import.meta.env.DEV
 
   const blogs = pages
     .map((page) => {
       const author = page.frontmatter.author
       const person = peopleByThreeLetterCode[author]
+      const expertUrl = expertsByThreeLetterCode[author]
       if (!person)
         throw new Error(
           `No person found for author: '${author}' in '${page.url}'`
@@ -37,7 +45,10 @@ export async function getStaticPaths({ paginate }) {
       return {
         ...page.frontmatter,
         href: page.url,
-        person: peopleByThreeLetterCode[page.frontmatter.author]
+        person: {
+          ...peopleByThreeLetterCode[page.frontmatter.author],
+          href: expertUrl
+        }
       }
     })
     .filter(({ draft }) => isDev || !draft)

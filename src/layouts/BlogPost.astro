@@ -24,6 +24,13 @@ const people = await Astro.glob<Person>('../data/people/*.json')
 const { name, lastName, jobTitle, image } = people.find(
   (person) => person.code === author
 )
+
+const experts = await Astro.glob('../pages/experts/*.md')
+
+const personHref = experts.find(
+  (expert) => author === expert.url.split('/').pop()
+)
+
 const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
@@ -52,8 +59,11 @@ const shareIconStyle =
           </h2>
 
           <a
-            href='/to/some/profile'
-            class='group flex gap-4 w-fit items-center pt-12'
+            href={personHref?.url || '#'}
+            class:list={[
+              'group flex gap-4 w-fit items-center pt-12',
+              { 'cursor-default': !personHref }
+            ]}
           >
             <div class='flex-shrink-0 flex flex-col gap-3'>
               <div class='w-24 h-24 rounded relative overflow-hidden'>
@@ -66,7 +76,10 @@ const shareIconStyle =
             </div>
             <div class='flex flex-col gap-1 text-left'>
               <div
-                class='text-lg font-bold group-hover:underline dark:text-zinc-100 underline-offset-2'
+                class:list={[
+                  'text-lg font-bold dark:text-zinc-100 underline-offset-2',
+                  { 'group-hover:underline': personHref }
+                ]}
               >
                 <div>{`${name} ${lastName}`}</div>
               </div>

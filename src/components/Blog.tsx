@@ -22,7 +22,7 @@ export type BlogProps = {
   publishDate: string
   featured: { weight: number }
   author: string
-  person: Person
+  person: Person & { personHref: string }
   category: string
   slug: string
   href: string
@@ -32,16 +32,42 @@ export type BlogProps = {
   }
 }
 
+function Author({
+  image,
+  name,
+  lastName,
+  jobTitle,
+  personHref
+}: Person & { personHref: string }) {
+  return (
+    <>
+      <div className='flex-shrink-0 flex flex-col gap-3'>
+        <div className='w-20 h-20 relative overflow-hidden'>
+          <img
+            className='absolute w-full h-full object-cover'
+            src={`/images/people/${image}`}
+            alt='author picture'
+          />
+        </div>
+      </div>
+      <div className='flex flex-col gap-1'>
+        <div
+          className={classNames(
+            'text-sm dark:text-zinc-100 underline-offset-2',
+            { 'group-hover:underline': personHref }
+          )}
+        >
+          <div>{name}</div>
+          <div>{lastName}</div>
+        </div>
+        <div className='text-xs w-28 dark:text-zinc-300'>{jobTitle}</div>
+      </div>
+    </>
+  )
+}
+
 export function BlogCard({
-  blog: {
-    title,
-    publishDate,
-    description,
-    category,
-    href,
-    draft,
-    person: { name, lastName, jobTitle, image }
-  }
+  blog: { title, publishDate, description, category, href, draft, person }
 }: {
   blog: BlogProps
 }) {
@@ -74,24 +100,15 @@ export function BlogCard({
             <h3 className='dark:text-zinc-50 font-light'>{description}</h3>
           </a>
         </div>
-        <a href='/to/some/profile' className='group flex gap-4 w-fit'>
-          <div className='flex-shrink-0 flex flex-col gap-3'>
-            <div className='w-20 h-20 relative overflow-hidden'>
-              <img
-                className='absolute w-full h-full object-cover'
-                src={`/images/people/${image}`}
-                alt='author picture'
-              />
-            </div>
+        {person.personHref ? (
+          <a href={person.personHref} className='group flex gap-4 w-fit'>
+            <Author {...person} />
+          </a>
+        ) : (
+          <div className='group flex gap-4 w-fit'>
+            <Author {...person} />
           </div>
-          <div className='flex flex-col gap-1'>
-            <div className='text-sm group-hover:underline dark:text-zinc-100 underline-offset-2'>
-              <div>{name}</div>
-              <div>{lastName}</div>
-            </div>
-            <div className='text-xs w-28 dark:text-zinc-300'>{jobTitle}</div>
-          </div>
-        </a>
+        )}
       </div>
       <DraftBanner draft={draft} pageName='Blog' />
     </div>

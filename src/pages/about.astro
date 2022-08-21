@@ -61,12 +61,22 @@ const people = await Astro.glob<Person & { default: Person }>(
   '../data/people/*.json'
 )
 
+const experts = await Astro.glob('./experts/*.md')
+const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
+  const expertCode = expert.url.split('/').pop()
+  acc[expertCode] = expert.url
+  return acc
+}, {})
+
 const featuredPeople = people
   .filter((p) => p.featured)
   .sort((a, b) => a.featured.weight - b.featured.weight)
-  .map((p) => p.default)
-
-console.log('featuredPeople', featuredPeople)
+  .map((p) => {
+    return {
+      ...p.default,
+      personHref: expertsByThreeLetterCode[p.default.code]
+    }
+  })
 ---
 
 <Layout navbar title='About'>
@@ -118,37 +128,41 @@ console.log('featuredPeople', featuredPeople)
         class='grid md:grid-cols-[repeat(2,_auto)] xl:grid-cols-[repeat(3,_auto)] justify-center gap-28'
       >
         <!--  TODO: optimize images -->
-        {featuredPeople.map(({ image, jobTitle, name, lastName }) => (
-          <div class='flex w-64 flex-col gap-4'>
-            <div class='group relative w-full'>
-              <img
-                class='w-full object-cover'
-                src={`/images/people/${image}`}
-                alt=''
-              />
+        {featuredPeople.map(
+          ({ image, jobTitle, name, lastName, personHref }) => (
+            <div class='flex w-64 flex-col gap-4'>
+              <div class='group relative w-full'>
+                <img
+                  class='w-full object-cover'
+                  src={`/images/people/${image}`}
+                  alt=''
+                />
 
-              <a
-                href='/#'
-                class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
-              >
-                <div class='flex gap-2 justify-center items-center'>
-                  <LinkIcon className='w-5 h-5 fill-slate-800' />
-                  <p class='text-lg font-medium text-slate-800'>
-                    Visit Profile
-                  </p>
+                {personHref && (
+                  <a
+                    href={personHref}
+                    class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
+                  >
+                    <div class='flex gap-2 justify-center items-center'>
+                      <LinkIcon className='w-5 h-5 fill-slate-800' />
+                      <p class='text-lg font-medium text-slate-800'>
+                        Visit Profile
+                      </p>
+                    </div>
+                  </a>
+                )}
+              </div>
+              <div>
+                <div class='text-sm uppercase text-juxt font-medium'>
+                  {jobTitle}
                 </div>
-              </a>
-            </div>
-            <div>
-              <div class='text-sm uppercase text-juxt font-medium'>
-                {jobTitle}
-              </div>
-              <div class='text-lg text-gray-300 font-light'>
-                {name} {lastName}
+                <div class='text-lg text-gray-300 font-light'>
+                  {name} {lastName}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
     </Section>
     <Section>
