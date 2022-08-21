@@ -1,0 +1,94 @@
+---
+export type ExpertProps = {
+  expertise: string[]
+  draft?: boolean
+}
+
+const { expertise, draft } = Astro.props.content as ExpertProps
+
+import { Person } from '../components/Blog'
+import DraftBanner from '../components/DraftBanner'
+import {
+  GithubIcon,
+  LinkedInIcon,
+  RedditIcon,
+  TwitterIcon
+} from '../components/Icons'
+import { cloudImage } from '../utils'
+import Layout from './Layout.astro'
+const url = Astro.url
+
+const people = await Astro.glob<Person>('../data/people/*.json')
+
+const personCode = url.pathname.split('/').pop()
+
+const { image, jobTitle, name, lastName, github, linkedin, twitter } =
+  people.find((person) => person.code === personCode)
+
+const expertPicture = cloudImage(`/images/people/${image}?width=1000`, url)
+const shareIconStyle = 'fill-zinc-800 hover:fill-juxt transition-colors'
+---
+
+<Layout navbar>
+  <DraftBanner draft={draft} pageName='Expert' />
+  <main class='transition-colors text-black'>
+    <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
+      <div class='flex flex-col lg:flex-row gap-12 items-center pt-10'>
+        <div
+          class='flex text-center max-w-xl mx-auto lg:text-left lg:max-w-none lg:w-1/2 lg:mx-0 flex-col lg:justify-center items-center lg:items-start'
+        >
+          <h1
+            class='flex flex-col gap-2 text-4xl font-semibold leading-tight pb-4'
+          >
+            <span>
+              {name}
+            </span>
+            <span>
+              {lastName}
+            </span>
+          </h1>
+          <h2 class='text-lg text-zinc-600'>
+            {jobTitle}
+          </h2>
+        </div>
+        <img
+          class='w-full max-w-3xl lg:max-w-none lg:w-1/2 object-cover'
+          src={expertPicture}
+          alt=''
+        />
+      </div>
+
+      <div
+        class='pb-20 pt-6 flex justify-center items-center gap-4 lg:justify-end'
+      >
+        {twitter && (
+          <div class='flex justify-around text-sm items-center'>
+            <a class='w-6 h-6' target='_blank' href={twitter}>
+              {<TwitterIcon className={shareIconStyle} />}
+            </a>
+          </div>
+        )}
+        {github && (
+          <div class='flex justify-around text-sm items-center'>
+            <a class='w-6 h-6' target='_blank' href={github}>
+              {<GithubIcon className={shareIconStyle} />}
+            </a>
+          </div>
+        )}
+        {linkedin && (
+          <div class='flex justify-around text-sm items-center'>
+            <a class='w-6 h-6' target='_blank' href={linkedin}>
+              {<LinkedInIcon className={shareIconStyle} />}
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <article
+      class='px-4 pb-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors'
+    >
+      <slot />
+    </article>
+  </main>
+</Layout>
