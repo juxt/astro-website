@@ -1,8 +1,9 @@
 ---
-import type { Person } from '../components/Blog'
 import DraftBanner from '../components/DraftBanner'
 import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
+import { Person } from './Expert.astro'
 import Layout from './Layout.astro'
+import { Image } from '@astrojs/image/components'
 
 export interface Props {
   title: string
@@ -25,15 +26,18 @@ const { name, lastName, jobTitle, image } = people.find(
   (person) => person.code === author
 )
 
-const experts = await Astro.glob('../pages/experts/*.md')
+const experts = await Astro.glob('../pages/experts/{*.mdx,*.md}')
 
-const personHref = experts.find(
+const expertHref = experts.find(
   (expert) => author === expert.url.split('/').pop()
 )
 
 const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
+
+const heroImageFilename = heroImage?.src.split('.').slice(0, -1)
+const personImageFilename = image.split('.').slice(0, -1)
 ---
 
 <Layout navbar>
@@ -59,18 +63,20 @@ const shareIconStyle =
           </h2>
 
           <a
-            href={personHref?.url || '#'}
+            href={expertHref?.url || '#'}
             class:list={[
               'group flex gap-4 w-fit items-center pt-12',
-              { 'cursor-default': !personHref }
+              { 'cursor-default': !expertHref }
             ]}
           >
             <div class='flex-shrink-0 flex flex-col gap-3'>
               <div class='w-24 h-24 rounded relative overflow-hidden'>
-                <img
+                <Image
+                  width={200}
+                  quality={80}
+                  alt='author picture'
                   class='absolute w-full h-full object-cover'
-                  src={`/images/people/${image}`}
-                  alt='author'
+                  src={import(`../assets/people/${personImageFilename}.jpg`)}
                 />
               </div>
             </div>
@@ -78,7 +84,7 @@ const shareIconStyle =
               <div
                 class:list={[
                   'text-lg font-bold dark:text-zinc-100 underline-offset-2',
-                  { 'group-hover:underline': personHref }
+                  { 'group-hover:underline': expertHref }
                 ]}
               >
                 <div>{`${name} ${lastName}`}</div>
@@ -89,10 +95,11 @@ const shareIconStyle =
             </div>
           </a>
         </div>
-        <img
-          class='w-full max-w-3xl lg:max-w-none lg:w-1/2 object-cover'
-          src={heroImage.src}
-          alt=''
+        <Image
+          width={800}
+          quality={80}
+          class='w-full max-w-3xl lg:max-w-none lg:w-1/2 aspect-square object-cover'
+          src={import(`../assets/blog/${heroImageFilename}.jpg`)}
         />
       </div>
 

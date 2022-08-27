@@ -7,6 +7,6 @@
   ],
   "tech": ["Clojure", "ClojureScript", "Postgres", "Datomic", "AWS"],
 
-  "image": "/images/site/ebike-ui.jpeg",
+  "image": "ebike-ui.jpg",
   "pages": { "/case-studies": { "weight": 9 } }
 }

@@ -23,7 +23,9 @@ module.exports = {
       },
       rules: {
         'astro/no-set-html-directive': 'error',
-        'validate-jsx-nesting/no-invalid-jsx-nesting': 'error'
+        'validate-jsx-nesting/no-invalid-jsx-nesting': 'error',
+        'astro/jsx-a11y/click-events-have-key-events': 'off',
+        'astro/jsx-a11y/no-static-element-interactions': 'off'
       }
     },
     {

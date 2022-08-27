@@ -7,6 +7,6 @@
   ],
   "tech": ["Clojure", "AWS", "Redis", "Datomic", "Rum", "React Native"],
 
-  "image": "/images/site/bet-connect-ui.png",
+  "image": "bet-connect-ui.jpg",
   "pages": { "/case-studies": { "weight": 8 } }
 }

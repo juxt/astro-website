@@ -1,9 +1,13 @@
 ---
+import { getImage } from '@astrojs/image'
+import { MarkdownInstance } from 'astro'
 import Banner from '../../components/Banner.astro'
-import type { BlogProps, Person } from '../../components/Blog'
-import Blog from '../../components/Blog'
+import BlogCard, { BlogProps } from '../../components/BlogCard.astro'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../components/Icons'
+import { Person } from '../../layouts/Expert.astro'
 import Layout from '../../layouts/Layout.astro'
-import { cloudImage } from '../../utils'
+import classNames from 'classnames'
+
 const url = Astro.url
 
 export const metadata = {
@@ -12,7 +16,7 @@ export const metadata = {
 }
 
 export async function getStaticPaths({ paginate }) {
-  const pages = await Astro.glob<BlogProps>('./*.md')
+  const pages = await Astro.glob<MarkdownInstance<BlogProps>>('./{*.mdx,*.md}')
   const people = await Astro.glob<Person & { default: Person }>(
     '../../data/people/*.json'
   )
@@ -23,7 +27,7 @@ export async function getStaticPaths({ paginate }) {
     return acc
   }, {})
 
-  const experts = await Astro.glob('../experts/*.md')
+  const experts = await Astro.glob('../experts/{*.mdx,*.md}')
   const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
     const expertCode = expert.url.split('/').pop()
     acc[expertCode] = expert.url
@@ -36,7 +40,7 @@ export async function getStaticPaths({ paginate }) {
     .map((page) => {
       const author = page.frontmatter.author
       const person = peopleByThreeLetterCode[author]
-      const expertUrl = expertsByThreeLetterCode[author]
+      const expertHref = expertsByThreeLetterCode[author]
       if (!person)
         throw new Error(
           `No person found for author: '${author}' in '${page.url}'`
@@ -47,29 +51,90 @@ export async function getStaticPaths({ paginate }) {
         href: page.url,
         person: {
           ...peopleByThreeLetterCode[page.frontmatter.author],
-          href: expertUrl
+          expertHref: expertHref
         }
       }
     })
     .filter(({ draft }) => isDev || !draft)
+    .sort((a, b) => {
+      const aDate = new Date(a.publishDate)
+      const bDate = new Date(b.publishDate)
+      return bDate.getTime() - aDate.getTime()
+    })
 
   return paginate(blogs, { pageSize: 9 })
 }
 
 const { page } = Astro.props
+const blogs = page.data
 
 const {
   url: { next, prev }
 } = page
 
-const blogBannerPicture = cloudImage(
-  '/images/site/blog-banner.jpeg?width=1500',
-  url
-)
+const blogBannerPicture = await getImage({
+  src: import('../../assets/site/blog-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 ---
 
 <Layout navbar title='Blog'>
   <Banner text='Blog' style={{ backgroundImage: `url(${blogBannerPicture})` }}
   />
-  <Blog client:load blogs={page.data} prev={prev} next={next} />
+
+  <main class='pb-40 transition-colors'>
+    <section class='mx-auto max-w-6xl pt-10'>
+      <div
+        class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'
+      >
+        {blogs.length
+          ? blogs.map((blog) => {
+              return <BlogCard {...blog} />
+            })
+          : ''}
+      </div>
+      <div class='flex justify-center pt-10'>
+        {(prev || next) && (
+          <div class='flex items-center'>
+            <a
+              href={prev}
+              class:list={[
+                'w-12 aspect-square',
+                {
+                  'cursor-pointer': prev
+                }
+              ]}
+            >
+              {
+                <ChevronLeftIcon
+                  className={classNames('fill-zinc-600 dark:fill-zinc-300', {
+                    'fill-zinc-300 dark:fill-zinc-500': !prev
+                  })}
+                />
+              }
+            </a>
+            <a
+              href={next}
+              class:list={[
+                'w-12 aspect-square',
+                {
+                  'cursor-pointer': next
+                }
+              ]}
+            >
+              {
+                <ChevronRightIcon
+                  className={classNames('fill-zinc-600 dark:fill-zinc-300', {
+                    'fill-zinc-300 dark:fill-zinc-500': !next
+                  })}
+                />
+              }
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
 </Layout>

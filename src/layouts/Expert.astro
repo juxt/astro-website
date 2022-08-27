@@ -4,9 +4,21 @@ export type ExpertProps = {
   draft?: boolean
 }
 
+export type Person = {
+  code: string
+  name: string
+  lastName: string
+  jobTitle: string
+  image: string
+  linkedin?: string
+  twitter?: string
+  github?: string
+  featured?: { weight: number }
+  expertHref?: string
+}
+
 const { expertise, draft } = Astro.props.content as ExpertProps
 
-import { Person } from '../components/Blog'
 import DraftBanner from '../components/DraftBanner'
 import {
   GithubIcon,

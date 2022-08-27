@@ -7,6 +7,6 @@
   ],
   "tech": ["Clojure", "Kafka Streams", "Data Mesh"],
 
-  "image": "/images/site/mental-wellbeing.jpeg",
+  "image": "mental-wellbeing.jpg",
   "pages": { "/": { "weight": 2 }, "/case-studies": { "weight": 2 } }
 }

@@ -1,12 +1,13 @@
 ---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
+import { MarkdownInstance } from 'astro'
 import Banner from '../../components/Banner.astro'
 import Clickable from '../../components/Clickable.astro'
-import { ClockIcon, StarIcon } from '../../components/Icons'
 import JobCard from '../../components/JobCard.astro'
 import Section from '../../components/Section.astro'
 import { CareerPostProps } from '../../layouts/CareerPost.astro'
 import Layout from '../../layouts/Layout.astro'
-import { cloudImage } from '../../utils'
 
 export const metadata = {
   navbar: { weight: 5 },
@@ -14,37 +15,34 @@ export const metadata = {
 }
 
 const isDev = import.meta.env.DEV
-const jobPosts = await Astro.glob<CareerPostProps>('./*.md')
+const jobPosts = await Astro.glob<MarkdownInstance<CareerPostProps>>(
+  './{*.mdx,*.md}'
+)
 
 const jobPostsParsed = jobPosts
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
   .filter((jobPost) => isDev || !jobPost.frontmatter.draft)
 
-const url = Astro.url
-const careersBannerPicture = cloudImage(
-  '/images/site/work-with-us-banner.jpeg?width=1500',
-  url
-)
+const careersBannerPicture = await getImage({
+  src: import('../../assets/site/work-with-us-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 
-const whyJuxtPicture = cloudImage(
-  '/images/site/careers-why-juxt.jpeg?width=1000',
-  url
-)
+const whyJuxtPicture = await getImage({
+  src: import('../../assets/site/careers-why-juxt.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 
-const wwuFirstPicture = cloudImage(
-  '/images/site/working-with-us1.jpeg?width=500',
-  url
-)
-
-const wwuSecondPicture = cloudImage(
-  '/images/site/working-with-us2.jpeg?width=500',
-  url
-)
-
-const benefitsPicture = cloudImage(
-  '/images/site/career-benefits.jpeg?width=1000',
-  url
-)
+const benefitsPicture = await getImage({
+  src: import('../../assets/site/career-benefits.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 ---
 
 <Layout navbar title='Careers'>
@@ -110,10 +108,11 @@ const benefitsPicture = cloudImage(
     <div
       class='flex flex-col-reverse md:flex-row gap-10 md:gap-12 lg:gap-16 items-center'
     >
-      <img
+      <Image
+        width={600}
+        quality={80}
         class='w-full max-w-3xl md:min-h-[400px] object-cover md:w-1/2 lg:w-7/12 shrink-0'
-        src={wwuFirstPicture}
-        alt=''
+        src={import('../../assets/site/working-with-us1.jpeg')}
       />
       <p class='text-2xl lg:text-3xl lg:leading-snug font-light'>
         We have a developer-led culture. Our developers are at the heart of our
@@ -143,10 +142,11 @@ const benefitsPicture = cloudImage(
           to know everyone.
         </p>
       </div>
-      <img
+      <Image
+        width={600}
+        quality={80}
         class='w-full max-w-3xl md:max-h-[600px] sm:min-h-[450px] object-cover md:w-5/12 lg:w-6/12 shrink-0'
-        src={wwuSecondPicture}
-        alt=''
+        src={import('../../assets/site/working-with-us2.jpeg')}
       />
     </div>
   </Section>

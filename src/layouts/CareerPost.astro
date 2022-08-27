@@ -1,4 +1,11 @@
 ---
+import { getImage } from '@astrojs/image'
+import Banner from '../components/Banner.astro'
+import Clickable from '../components/Clickable.astro'
+import DraftBanner from '../components/DraftBanner'
+import Section from '../components/Section.astro'
+import Layout from './Layout.astro'
+
 export type CareerPostProps = {
   location: string
   department: string
@@ -16,18 +23,12 @@ export type CareerPostProps = {
 const { location, department, contract, position, draft, googleJobs } = Astro
   .props.content as CareerPostProps
 
-import Banner from '../components/Banner.astro'
-import Clickable from '../components/Clickable.astro'
-import DraftBanner from '../components/DraftBanner'
-import Section from '../components/Section.astro'
-import { cloudImage } from '../utils'
-import Layout from './Layout.astro'
-const url = Astro.url
-
-const bannerPicture = cloudImage(
-  '/images/site/job-profile-banner.jpeg?width=1500',
-  url
-)
+const bannerPicture = await getImage({
+  src: import('../assets/site/job-profile-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 
 const slug = Astro.props.frontmatter.url.split('/').pop()
 
@@ -91,7 +92,7 @@ const schema = JSON.stringify({
           <div class='text-zinc-700 text-sm'>
             {contract}
           </div>
-          <div class='text-sm text-zinc-700'>
+          <div class='text-sm text-zinc-700'> 
             {location}
           </div>
 
@@ -100,7 +101,7 @@ const schema = JSON.stringify({
             <span class='text-zinc-600'> careers@juxt.pro</span>
           </div>
           <div class='mt-4'>
-            <Clickable>
+            <Clickable> 
               <a
                 href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`}
                 >APPLY NOW
@@ -120,4 +121,5 @@ const schema = JSON.stringify({
 {/* eslint-disable-next-line */}
 <script type='application/ld+json' set:html={schema}>
 
-</script>
+export { };
+

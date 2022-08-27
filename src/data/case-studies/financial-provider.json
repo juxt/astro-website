@@ -11,6 +11,6 @@
     "by": "Colin Reid",
     "role": "Development Manager"
   },
-  "image": "/images/site/financial-services-software.jpeg",
+  "image": "financial-services-software.jpg",
   "pages": { "/": { "weight": 1 }, "/case-studies": { "weight": 1 } }
 }

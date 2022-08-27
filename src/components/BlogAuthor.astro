@@ -1,0 +1,35 @@
+---
+import { Image } from '@astrojs/image/components'
+import { Person } from '../layouts/Expert.astro'
+
+const { name, lastName, jobTitle, expertHref, image } = Astro.props as Person
+
+const imageFilename = image.split('.').slice(0, -1)
+---
+
+<div class='flex-shrink-0 flex flex-col gap-3'>
+  <div class='w-20 h-20 relative overflow-hidden'>
+    <Image
+      width={200}
+      quality={80}
+      alt='author picture'
+      class='absolute w-full h-full object-cover'
+      src={import(`../assets/people/${imageFilename}.jpg`)}
+    />
+  </div>
+</div>
+<div class='flex flex-col gap-1'>
+  <div
+    class:list={[
+      'text-sm dark:text-zinc-100 underline-offset-2',
+      {
+        'group-hover:underline': expertHref,
+        'underline sm:no-underline': expertHref
+      }
+    ]}
+  >
+    <div>{name}</div>
+    <div>{lastName}</div>
+  </div>
+  <div class='text-xs w-28 dark:text-zinc-300'>{jobTitle}</div>
+</div>

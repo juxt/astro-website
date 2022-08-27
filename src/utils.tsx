@@ -82,6 +82,11 @@ export const usePagination = ({
   }
 }
 
+// !! Should use Image or getImage instead of this. !!
+// usage:
+// cloudImage('/images/site/homepage-banner.jpeg?width=1500', url)
+// where url is Astro.url
+
 export function cloudImage(image: string, url: URL) {
   const domain =
     url.hostname !== 'localhost'

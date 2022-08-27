@@ -15,7 +15,7 @@ All commands are run from the root of the project, from a terminal:
 
 ## Components
 
-After reading this section, you should be able to perform the most common changes to the site.
+After reading this section, you should be able to perform the most common updates to the site.
 
 ### Navbar
 
@@ -31,6 +31,37 @@ export const metadata = { navbar: { weight: 1 } }
 
 Here, we are saying that we want the about page to be linked in the navbar (presence of navbar key) and that it has to be the first link (weight of 1).
 Note that without a `label` key the label will default to the name of the `*name*.astro` file, so in this example it will be `about`.
+
+### Footer
+
+The Footer works similarly to the Navbar. The links in the Footer under the `Sitemap` section are driven by the `metadata` variable that is defined at the `page` level. For example, if you want the about page to show up under `Sitemap`, your `about.astro` metadata variable should look like this:
+
+```js
+export const metadata = {
+  navbar: { weight: 1 },
+  footer: { weight: 1 }
+}
+```
+
+You can also add a `label` key to the `footer` object to change the label of the link. i.e.:
+
+```js
+export const metadata = {
+  navbar: { weight: 1 },
+  footer: { weight: 1, label: 'About Us' }
+}
+```
+
+It's also possible to add a flag next to the link to drive more attention. For example, if you want to add a `New` flag next to the about page, your `about.astro` metadata variable should look like this:
+
+```js
+export const metadata = {
+  navbar: { weight: 1 },
+  footer: { weight: 1, label: 'About Us', flag: 'New' }
+}
+```
+
+The other elements in the footer can be changed directly by editing the `Footer.astro` file in the `src/components` folder.
 
 ### New Page
 
@@ -78,27 +109,96 @@ title: 'Hello world!'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
 heroImage:
-  src: '/images/blog/introducing-astro.jpg'
+  src: 'introducing-astro.jpg'
   alt: 'Space shuttle leaving curved trail in the sky'
 ---
 ```
 
-When a post is ready to go live, you can set the `draft` value to be false and it will be included in the build.
+When a post is ready to go live, you can remove the `draft` attribute and it will be included in the build.
 
-### Optimized Images (NOT SUPPORTED CURRENTLY)
+The `heroImage` picture must be stored in the `src/assets/blog` folder and it must be of `.jpg` format.
 
-Through the `setup` attribute in the frontmatter you can import the `Image` component that can be easily consumed from your article.
+### Optimized Images
 
-```md
+If your article body contains images, you want to use a `.mdx` file extension instead of `.md`. This is because you can import directly in your markdown an image optimizer module, which will make sure to keep your media content within a reasonable size. You can follow the example to see how it works:
+
+```mdx
 ---
-setup: |
-  import { Image } from '@astrojs/image'
-  import hero from '../../assets/images/mock.webp'
+author: 'lda'
+category: 'blog'
+...
+
 ---
+
+import { Image } from '@astrojs/image/components'
+import hero from '../../assets/blog/mock.jpg'
 
 # hello world
 
-<Image src={hero} width={640} aspectRatio="16:9" />
+<Image src={hero} />
 ```
 
-Remember to import also the pictures, which are stored in `src/assets/images`.
+The pictures that you use in your article body must be stored in the `src/assets/blog/` directory. To know more about the props you can pass to the `Image` component, check out this [link](https://docs.astro.build/en/guides/integrations-guide/image/#usage).
+
+### Case Studies
+
+Case studies are defined in the `src/data/case-studies` folder. Their format is `json` and they are structured as follows:
+
+```json
+{
+  "title": "Electric eBike provider",
+  "subtitle": "Building the infrastructure for an electric powered bikes scheme",
+  "outcome": [
+    "JUXT built the backend infrastructure, dashboards, allocation logic and tracking for a bike-hire scheme in Spanish cities.",
+
+    "In addition, JUXT built the public kiosk software (using ClojureScript) for individuals to register and hire bikes."
+  ],
+  "tech": ["Clojure", "ClojureScript", "Postgres", "Datomic", "AWS"],
+
+  "image": "ebike-ui.jpg",
+  "pages": { "/case-studies": { "weight": 9 } }
+}
+```
+
+For this specific case study to appear in the site, you need to specify in the `pages` object where you want it to appear. In this case, we want it to appear in the `case-studies` page, so we add a `/case-studies` key with a `weight` attribute. The `weight` attribute controls the position of the case study in the list.
+
+For the case studies featured in the homepage, the process is the same. You can simply add an extra key value pair in the `pages` object as follows:
+
+```json
+{
+ ...
+  "pages": {
+    "/case-studies": { "weight": 9 },
+    "/": { "weight": 1 }
+  }
+}
+```
+
+Notice that the image for the case study must be a `*.jpg` file, stored in the `src/assets/case-studies/` directory.
+
+### People
+
+People are defined in the `src/data/people` folder. Their format is `json` and they are structured as follows:
+
+```json
+{
+  "code": "alx",
+  "name": "Alex",
+  "lastName": "Davis",
+  "jobTitle": "Senior Software Engineer",
+  "image": "alx.jpg",
+  "linkedin": "#",
+  "twitter": "#",
+  "github": "#"
+}
+```
+
+A person's image must be a `*.jpg` file, stored in the `src/assets/people/` directory. Not all employees need to create an entry. Though, when they decide to write an article they will need to create one.
+
+### Experts
+
+The experts are those featured employees for which there will be a dedicated page.
+
+### Job Profile
+
+### Leadership Team

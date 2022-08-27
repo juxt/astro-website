@@ -10,6 +10,6 @@
     "role": "Technical Director",
     "by": "Morgan Ross"
   },
-  "image": "/images/site/on-the-market-ui.png",
+  "image": "on-the-market-ui.jpg",
   "pages": { "/case-studies": { "weight": 5 } }
 }

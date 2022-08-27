@@ -1,13 +1,16 @@
 ---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
+import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
+import BlogCard, { BlogProps } from '../components/BlogCard.astro'
 import Clickable from '../components/Clickable.astro'
 import { ChevronRightIcon, QuoteIcon, TickIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
-import { CaseStudyProps } from '../layouts/CaseStudy.astro'
+import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
+import { Person } from '../layouts/Expert.astro'
 import Layout from '../layouts/Layout.astro'
-import { cloudImage } from '../utils'
-import CaseStudy from '../layouts/CaseStudy.astro'
-import { BlogCard, BlogProps, Person } from '../components/Blog'
+
 const url = Astro.url
 
 const caseStudies = await Astro.glob<CaseStudyProps>(
@@ -18,48 +21,26 @@ const caseStudiesParsed = caseStudies
   .filter(({ pages }) => pages[url.pathname])
   .sort((a, b) => a.pages[url.pathname].weight - b.pages[url.pathname].weight)
 
-const homepageBannerPicture = cloudImage(
-  '/images/site/homepage-banner.jpeg?width=1500',
-  url
-)
-const threadsPicture = cloudImage('/images/site/threads.png?width=600', url)
-const sphereTimePicture = cloudImage(
-  '/images/site/sphere-time.png?width=500',
-  url
-)
-const sphereDataPicture = cloudImage(
-  '/images/site/sphere-data.png?width=500',
-  url
-)
-const sphereFormPicture = cloudImage(
-  '/images/site/sphere-form.png?width=500',
-  url
-)
-const sphereCodePicture = cloudImage(
-  '/images/site/sphere-code.png?width=500',
-  url
-)
-const techTalkingPicture = cloudImage(
-  '/images/site/tech-talking.jpg?width=500',
-  url
-)
-const fundingCircleMalPicture = cloudImage(
-  '/images/site/funding-circle-mal.webp?width=500',
-  url
-)
-const malTeachingPicture = cloudImage(
-  '/images/site/mal-teaching.jpeg?width=500',
-  url
-)
-const fundingCircleJonPicture = cloudImage(
-  '/images/site/funding-circle-jon.jpeg?width=500',
-  url
-)
-const cloudProvidersPicture = cloudImage(
-  '/images/site/cloud-provider-logos.png?width=500',
-  url
-)
-const wavesPicture = cloudImage('/images/site/waves.png?width=1500', url)
+const homepageBannerPicture = await getImage({
+  src: import('../assets/site/homepage-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
+
+const threadsPicture = await getImage({
+  src: import('../assets/site/threads.png'),
+  width: 600,
+  height: 1366,
+  quality: 80
+}).then((img) => img.src)
+
+const wavesPicture = await getImage({
+  src: import('../assets/site/waves.png'),
+  width: 1500,
+  height: 714,
+  quality: 80
+}).then((img) => img.src)
 
 const testimonials = [
   {
@@ -113,7 +94,9 @@ const clientLogos = [
   'bbc.svg'
 ]
 
-const pages = await Astro.glob<BlogProps>('./blog/*.md')
+const pages = await Astro.glob<MarkdownInstance<BlogProps>>(
+  './blog/{*.mdx,*.md}'
+)
 const people = await Astro.glob<Person & { default: Person }>(
   '../data/people/*.json'
 )
@@ -126,10 +109,18 @@ const peopleByThreeLetterCode = people.reduce((acc, person) => {
 
 const isDev = import.meta.env.DEV
 
+const experts = await Astro.glob('./experts/{*.mdx,*.md}')
+const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
+  const expertCode = expert.url.split('/').pop()
+  acc[expertCode] = expert.url
+  return acc
+}, {})
+
 const featuredBlogs = pages
   .map((page) => {
     const author = page.frontmatter.author
     const person = peopleByThreeLetterCode[author]
+    const expertHref = expertsByThreeLetterCode[author]
     if (!person)
       throw new Error(
         `No person found for author: '${author}' in '${page.url}'`
@@ -138,7 +129,10 @@ const featuredBlogs = pages
     return {
       ...page.frontmatter,
       href: page.url,
-      person: peopleByThreeLetterCode[page.frontmatter.author]
+      person: {
+        ...peopleByThreeLetterCode[page.frontmatter.author],
+        expertHref
+      }
     }
   })
   .filter(({ featured, draft }) => featured && (isDev || !draft))
@@ -271,10 +265,11 @@ const featuredBlogs = pages
         <div
           class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end overflow-hidden'
         >
-          <img
+          <Image
+            width={500}
+            quality={80}
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
-            src={sphereTimePicture}
-            alt=''
+            src={import('../assets/site/sphere-time.png')}
           />
         </div>
       </div>
@@ -284,10 +279,11 @@ const featuredBlogs = pages
         <div
           class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start overflow-hidden'
         >
-          <img
+          <Image
+            width={500}
+            quality={80}
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
-            src={sphereDataPicture}
-            alt=''
+            src={import('../assets/site/sphere-data.png')}
           />
         </div>
         <div class='lg:w-1/2'>
@@ -370,10 +366,11 @@ const featuredBlogs = pages
         <div
           class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end overflow-hidden'
         >
-          <img
+          <Image
+            width={500}
+            quality={80}
             class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
-            src={sphereFormPicture}
-            alt=''
+            src={import('../assets/site/sphere-form.png')}
           />
         </div>
       </div>
@@ -383,15 +380,17 @@ const featuredBlogs = pages
         <div
           class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start relative'
         >
-          <img
+          <Image
+            width={500}
+            quality={80}
             class='sm:w-4/5 lg:w-10/12 animate-[spin_100s_linear_infinite]'
-            src={sphereCodePicture}
-            alt=''
+            src={import('../assets/site/sphere-code.png')}
           />
-          <img
+          <Image
+            width={500}
+            quality={80}
             class='sm:w-4/5 lg:w-10/12 absolute top-0 left-1/2 lg:left-0 transform lg:translate-x-0 -translate-x-1/2'
-            src={sphereFormPicture}
-            alt=''
+            src={import('../assets/site/sphere-form.png')}
           />
         </div>
         <div class='lg:w-1/2 pb-16'>
@@ -466,10 +465,11 @@ const featuredBlogs = pages
           class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
         >
           <div class='w-full h-96'>
-            <img
+            <Image
+              width={500}
+              quality={80}
               class='w-full h-full object-cover'
-              src={techTalkingPicture}
-              alt=''
+              src={import('../assets/site/tech-talking.jpg')}
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
@@ -517,10 +517,11 @@ const featuredBlogs = pages
           class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
         >
           <div class='w-full h-96'>
-            <img
+            <Image
+              width={500}
+              quality={100}
               class='w-full h-full object-cover'
-              src={fundingCircleMalPicture}
-              alt=''
+              src={import('../assets/site/funding-circle-mal.webp')}
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
@@ -543,10 +544,11 @@ const featuredBlogs = pages
           class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
         >
           <div class='w-full h-96'>
-            <img
+            <Image
+              width={500}
+              quality={80}
               class='w-full h-full object-cover'
-              src={malTeachingPicture}
-              alt=''
+              src={import('../assets/site/mal-teaching.jpeg')}
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
@@ -572,10 +574,11 @@ const featuredBlogs = pages
           class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
         >
           <div class='w-full h-96'>
-            <img
+            <Image
+              width={500}
+              quality={80}
               class='w-full h-full object-cover'
-              src={fundingCircleJonPicture}
-              alt=''
+              src={import('../assets/site/funding-circle-jon.jpeg')}
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
@@ -593,11 +596,12 @@ const featuredBlogs = pages
                 experience in meeting GDPR requirements and protecting data
                 privacy.
               </p>
-
-              <img
+              <Image
+                width={500}
+                quality={100}
                 class='w-full sm:max-w-md'
-                src={cloudProvidersPicture}
                 alt='aws, google cloud, heroku'
+                src={import('../assets/site/cloud-provider-logos.png')}
               />
             </div>
           </div>
@@ -761,10 +765,8 @@ const featuredBlogs = pages
     <script is:inline src='/scripts/splide.min.js'>
 
     </script>
-
-    <script>
+    <script is:inline>
       document.addEventListener('DOMContentLoaded', function () {
-        // @ts-ignore
         new Splide('.splide', {
           type: 'loop',
           perPage: 2,
@@ -813,7 +815,12 @@ const featuredBlogs = pages
             +44 (0) 333 93 98 309
           </div>
         </div>
-        <img class='w-40 md:w-60' src='/images/site/airplane.png' alt='' />
+        <Image
+          width={400}
+          quality={80}
+          class='w-40 md:w-60'
+          src={import('../assets/site/airplane.png')}
+        />
       </div>
     </Section>
     <Section
@@ -826,7 +833,7 @@ const featuredBlogs = pages
         <div class='grid md:grid-cols-[repeat(2,_20rem)] justify-center gap-20'>
           {featuredBlogs.length
             ? featuredBlogs.map((blog) => {
-                return <BlogCard blog={blog} />
+                return <BlogCard {...blog} />
               })
             : ''}
         </div>

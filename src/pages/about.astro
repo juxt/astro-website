@@ -1,28 +1,30 @@
 ---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
 import Banner from '../components/Banner.astro'
-import { Person } from '../components/Blog'
-import {
-  GithubIcon,
-  LinkedInIcon,
-  LinkIcon,
-  TwitterIcon
-} from '../components/Icons'
+import { LinkIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
+import { Person } from '../layouts/Expert.astro'
 import Layout from '../layouts/Layout.astro'
-import { cloudImage } from '../utils'
 
 export const metadata = {
   navbar: { weight: 1 },
-  footer: { weight: 2 }
+  footer: { weight: 1 }
 }
 
-const url = Astro.url
+const bannerPicture = await getImage({
+  src: import('../assets/site/about-us-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 
-const bannerPicture = cloudImage(
-  '/images/site/about-us-banner.jpeg?width=1500',
-  url
-)
-const pplPicture = cloudImage('/images/site/about-us-ppl.jpeg?width=1500', url)
+const pplPicture = await getImage({
+  src: import('../assets/site/about-us-ppl.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
 
 const values = [
   [
@@ -61,7 +63,7 @@ const people = await Astro.glob<Person & { default: Person }>(
   '../data/people/*.json'
 )
 
-const experts = await Astro.glob('./experts/*.md')
+const experts = await Astro.glob('./experts/{*.mdx,*.md}')
 const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
   const expertCode = expert.url.split('/').pop()
   acc[expertCode] = expert.url
@@ -74,9 +76,13 @@ const featuredPeople = people
   .map((p) => {
     return {
       ...p.default,
-      personHref: expertsByThreeLetterCode[p.default.code]
+      expertHref: expertsByThreeLetterCode[p.default.code]
     }
   })
+
+function imageToFilename(image: string) {
+  return image.split('.').slice(0, -1)
+}
 ---
 
 <Layout navbar title='About'>
@@ -100,7 +106,7 @@ const featuredPeople = people
       }}
     >
       <div
-        class='relative text-white font-light text-3xl md:text-4xl md:leading-normal lg:text-5xl lg:leading-normal'
+        class='relative text-white font-extralight text-3xl md:text-4xl md:leading-normal lg:text-5xl lg:leading-normal'
       >
         Teamwork is at the heart of our culture, our internal knowledge sharing
         and collaborative culture are what allow us to deliver as efficiently as
@@ -127,20 +133,20 @@ const featuredPeople = people
       <div
         class='grid md:grid-cols-[repeat(2,_auto)] xl:grid-cols-[repeat(3,_auto)] justify-center gap-28'
       >
-        <!--  TODO: optimize images -->
         {featuredPeople.map(
-          ({ image, jobTitle, name, lastName, personHref }) => (
+          ({ image, jobTitle, name, lastName, expertHref }) => (
             <div class='flex w-64 flex-col gap-4'>
               <div class='group relative w-full'>
-                <img
+                <Image
+                  width={300}
+                  quality={80}
+                  alt={`${name} picture`}
                   class='w-full object-cover'
-                  src={`/images/people/${image}`}
-                  alt=''
+                  src={import(`../assets/people/${imageToFilename(image)}.jpg`)}
                 />
-
-                {personHref && (
+                {expertHref && (
                   <a
-                    href={personHref}
+                    href={expertHref}
                     class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
                   >
                     <div class='flex gap-2 justify-center items-center'>

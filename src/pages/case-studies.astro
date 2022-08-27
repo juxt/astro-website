@@ -1,9 +1,10 @@
 ---
+import { getImage } from '@astrojs/image'
 import Banner from '../components/Banner.astro'
-import Layout from '../layouts/Layout.astro'
 import Section from '../components/Section.astro'
 import type { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import CaseStudy from '../layouts/CaseStudy.astro'
+import Layout from '../layouts/Layout.astro'
 
 export const metadata = {
   navbar: { weight: 4, label: 'Case Studies' },
@@ -20,13 +21,12 @@ const caseStudiesParsed = caseStudies
   .filter(({ pages }) => pages[pathname])
   .sort((a, b) => a.pages[pathname].weight - b.pages[pathname].weight)
 
-import { cloudImage } from '../utils'
-const url = Astro.url
-
-const caseStudiesPicture = cloudImage(
-  '/images/site/case-studies-banner.jpeg?width=1500',
-  url
-)
+const caseStudiesPicture = await getImage({
+  src: import('../assets/site/case-studies-banner.jpeg'),
+  width: 1300,
+  height: 800,
+  quality: 80
+}).then((img) => img.src)
 ---
 
 <Layout navbar title='Case Studies'>

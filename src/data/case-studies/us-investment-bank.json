@@ -7,6 +7,6 @@
   ],
   "tech": ["Clojure", "GraphQL", "RocksDB"],
 
-  "image": "/images/site/citi-bank.jpeg",
+  "image": "citi-bank.jpg",
   "pages": { "/case-studies": { "weight": 6 } }
 }

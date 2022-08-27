@@ -1,4 +1,7 @@
 ---
+import { QuoteIcon } from '../components/Icons'
+import { Image } from '@astrojs/image/components'
+
 export type CaseStudyProps = {
   title: string
   subtitle: string
@@ -12,13 +15,7 @@ export type CaseStudyProps = {
 const { title, subtitle, outcome, tech, testimonial, image } =
   Astro.props as CaseStudyProps
 
-import { QuoteIcon } from '../components/Icons'
-import { cloudImage } from '../utils'
-const url = Astro.url
-
-function caseStudyPicture(src: string) {
-  return cloudImage(`${src}?width=1000`, url)
-}
+const caseStudyImageFilename = image.split('.').slice(0, -1)
 ---
 
 <div
@@ -43,7 +40,12 @@ function caseStudyPicture(src: string) {
     </div>
   </div>
   <div class='lg:w-1/2 flex flex-col gap-6'>
-    <img class='w-full' src={caseStudyPicture(image)} alt='' />
+    <Image
+      width={500}
+      quality={80}
+      class='w-full'
+      src={import(`../assets/case-studies/${caseStudyImageFilename}.jpg`)}
+    />
     {testimonial?.quote && (
       <div class='flex gap-2 items-baseline'>
         <QuoteIcon className='fill-juxt w-6 shrink-0' />
