@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/Expert.astro'
 expertise: ['Frontend', 'Data Driven Apps', 'Performance']
+draft: true
 ---
 
 ## Successes
