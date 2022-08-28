@@ -33,7 +33,7 @@ const bannerPicture = await getImage({
 const slug = Astro.props.frontmatter.url.split('/').pop()
 
 const schema = JSON.stringify({
-  '@context': 'https://schema.org/',
+  context: 'https://schema.org/',
   '@type': 'JobPosting',
   title: googleJobs.position,
   description:
@@ -92,7 +92,7 @@ const schema = JSON.stringify({
           <div class='text-zinc-700 text-sm'>
             {contract}
           </div>
-          <div class='text-sm text-zinc-700'> 
+          <div class='text-sm text-zinc-700'>
             {location}
           </div>
 
@@ -101,7 +101,7 @@ const schema = JSON.stringify({
             <span class='text-zinc-600'> careers@juxt.pro</span>
           </div>
           <div class='mt-4'>
-            <Clickable> 
+            <Clickable>
               <a
                 href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`}
                 >APPLY NOW
@@ -121,5 +121,4 @@ const schema = JSON.stringify({
 {/* eslint-disable-next-line */}
 <script type='application/ld+json' set:html={schema}>
 
-export { };
-
+</script>
