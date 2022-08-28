@@ -1,5 +1,5 @@
 ---
-author: 'lda'
+author: 'jdt'
 category: 'technology'
 layout: '../../layouts/BlogPost.astro'
 title: 'Code Snippets'

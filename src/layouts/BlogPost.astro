@@ -40,7 +40,7 @@ const heroImageFilename = heroImage?.src.split('.').slice(0, -1)
 const personImageFilename = image.split('.').slice(0, -1)
 ---
 
-<Layout navbar>
+<Layout navbar title={title}>
   <DraftBanner draft={draft} pageName='Blog' />
   <main class='transition-colors'>
     <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
