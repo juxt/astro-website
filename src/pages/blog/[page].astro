@@ -7,6 +7,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '../../components/Icons'
 import { Person } from '../../layouts/Expert.astro'
 import Layout from '../../layouts/Layout.astro'
 import classNames from 'classnames'
+import { BlogSearch } from '../../components/BlogSearch'
 
 const url = Astro.url
 
@@ -86,6 +87,13 @@ const blogBannerPicture = await getImage({
 
   <main class='pb-40 transition-colors'>
     <section class='mx-auto max-w-6xl pt-10'>
+      <!-- <div class='flex flex-col gap-2 items-center'>
+        <div id='searchbox' class='w-64'></div>
+        <div id='hits'></div>
+        <div id='pagination'></div>
+        <div id='brand-list'></div>
+      </div> -->
+      <BlogSearch client:only='preact' />
       <div
         class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'
       >
@@ -138,3 +146,76 @@ const blogBannerPicture = await getImage({
     </section>
   </main>
 </Layout>
+<!-- 
+<script>
+  import algoliasearch from 'algoliasearch/lite'
+  import instantsearch from 'instantsearch.js'
+  import {
+    searchBox,
+    hits,
+    configure,
+    panel,
+    pagination,
+    refinementList
+  } from 'instantsearch.js/es/widgets'
+
+  const algoliaClient = algoliasearch(
+    'UIDFJO4C3W',
+    '8eb8ba2a38de04f454d17a1ed47a9c2d'
+  )
+
+  const searchClient = {
+    ...algoliaClient,
+    search(requests) {
+      if (requests.every(({ params }) => !params.query)) {
+        return Promise.resolve({
+          results: requests.map(() => ({
+            hits: [],
+            nbHits: 0,
+            nbPages: 0,
+            page: 0,
+            processingTimeMS: 0
+          }))
+        })
+      }
+
+      return algoliaClient.search(requests)
+    }
+  }
+
+  const search = instantsearch({
+    indexName: 'blog',
+    searchClient
+  })
+
+  search.addWidgets([
+    searchBox({
+      container: '#searchbox'
+    }),
+    hits({
+      container: '#hits',
+      templates: {
+        item: `
+<article>
+  <h1>{{#helpers.highlight}}{ "attribute": "name" }{{/helpers.highlight}}</h1>
+  <p>{{#helpers.highlight}}{ "attribute": "description" }{{/helpers.highlight}}</p>
+</article>
+`
+      }
+    }),
+    configure({
+      hitsPerPage: 8
+    }),
+    panel({
+      templates: { header: 'brand' }
+    })(refinementList)({
+      container: '#brand-list',
+      attribute: 'brand'
+    }),
+    pagination({
+      container: '#pagination'
+    })
+  ])
+
+  search.start()
+</script> -->
