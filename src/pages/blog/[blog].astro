@@ -1,21 +1,61 @@
 ---
-import DraftBanner from '../components/DraftBanner'
-import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
-import { Blog, Person } from '../components/types'
-import Layout from './Layout.astro'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
+import DraftBanner from '../../components/DraftBanner'
+import { LinkedInIcon, RedditIcon, TwitterIcon } from '../../components/Icons'
+import { Blog, Person } from '../../components/types'
+import Layout from '../../layouts/Layout.astro'
 
-const { title, description, heroImage, category, author, draft } = Astro.props
-  .content as Blog
+export async function getStaticPaths() {
+  const pages = await Astro.glob<MarkdownInstance<Blog>>(
+    '../../data/blogs/{*.mdx,*.md}'
+  )
+  const people = await Astro.glob<MarkdownInstance<Person>>(
+    '../../data/people/{*.mdx,*.md}'
+  )
 
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-)
+  const peopleByCode = new Map(
+    people.map((person) => [person.frontmatter.code, person.frontmatter])
+  )
+
+  const isDev = import.meta.env.DEV
+
+  const blogs = pages
+    .map((page) => {
+      const author = page.frontmatter.author
+      const person = peopleByCode.get(author)
+      const expert = (isDev || !person.expertDraft) && person.expert
+      if (!person)
+        throw new Error(
+          `No person found for author: '${author}' in '${page.url}'`
+        )
+
+      const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+      return {
+        ...page,
+        href: permalink,
+        person: {
+          ...person,
+          expert
+        }
+      }
+    })
+    .filter(({ frontmatter: { draft } }) => isDev || !draft)
+    .map(({ frontmatter, compiledContent }) => ({
+      params: { blog: frontmatter.href },
+      props: { ...frontmatter, content: compiledContent() }
+    }))
+}
 
 const {
-  frontmatter: { name, lastName, jobTitle, image, expert }
-} = people.find((person) => person.frontmatter.code === author)
+  title,
+  description,
+  heroImage,
+  category,
+  content,
+  draft,
+  person: { name, lastName, jobTitle, image, expert, code }
+} = Astro.props.content as Blog & { content: string }
 
 const blogHref = Astro.url.href
 const shareIconStyle =
@@ -48,7 +88,7 @@ const personImageFilename = image.split('.').slice(0, -1)
           </h2>
 
           <a
-            href={expert ? `/people/${author}` : '#'}
+            href={(expert && `/people/${code}`) || '#'}
             class:list={[
               'group flex gap-4 w-fit items-center pt-12',
               { 'cursor-default': !expert }

@@ -1,44 +1,48 @@
 ---
+import { MarkdownInstance } from 'astro'
 import { Image } from '@astrojs/image/components'
-import DraftBanner from '../components/DraftBanner'
-import { GithubIcon, LinkedInIcon, TwitterIcon } from '../components/Icons'
-import Layout from './Layout.astro'
+import { GithubIcon, LinkedInIcon, TwitterIcon } from '../../components/Icons'
+import DraftBanner from '../../components/DraftBanner'
+import Layout from '../../layouts/Layout.astro'
+import { Person } from '../../components/types'
 
-export type ExpertProps = {
-  expertise: string[]
-  draft?: boolean
+export async function getStaticPaths() {
+  const people = await Astro.glob<MarkdownInstance<Person>>(
+    '../../data/people/{*.mdx,*.md}'
+  )
+
+  const isDev = import.meta.env.DEV
+
+  return people
+    .filter(
+      ({ frontmatter: { expertDraft, expert } }) =>
+        (isDev || !expertDraft) && expert
+    )
+    .map(({ frontmatter, compiledContent }) => ({
+      params: { code: frontmatter.code },
+      props: { ...frontmatter, content: compiledContent() }
+    }))
 }
 
-export type Person = {
-  code: string
-  name: string
-  lastName: string
-  jobTitle: string
-  image: string
-  linkedin?: string
-  twitter?: string
-  github?: string
-  featured?: { weight: number }
-  expertHref?: string
-}
-
-const { expertise, draft } = Astro.props.content as ExpertProps
-
-const url = Astro.url
-
-const people = await Astro.glob<Person>('../data/people/*.json')
-
-const personCode = url.pathname.split('/').pop()
-
-const { image, jobTitle, name, lastName, github, linkedin, twitter } =
-  people.find((person) => person.code === personCode)
+const {
+  image,
+  jobTitle,
+  name,
+  lastName,
+  github,
+  linkedin,
+  twitter,
+  expertDraft,
+  expertise,
+  content
+} = Astro.props
 
 const imageFilename = image.split('.').slice(0, -1)
 const shareIconStyle = 'fill-zinc-100 hover:fill-juxt transition-colors'
 ---
 
 <Layout navbar title='Experts'>
-  <DraftBanner draft={draft} pageName='Expert' />
+  <DraftBanner draft={expertDraft} pageName='Expert' />
   <main class='transition-colors text-black'>
     <div class='bg-zinc-900'>
       <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
@@ -73,7 +77,7 @@ const shareIconStyle = 'fill-zinc-100 hover:fill-juxt transition-colors'
             quality={80}
             alt='author picture'
             class='w-full max-w-3xl lg:max-w-none lg:w-1/2 object-cover'
-            src={import(`../assets/people/${imageFilename}.jpg`)}
+            src={import(`../../assets/people/${imageFilename}.jpg`)}
           />
         </div>
 
@@ -106,9 +110,10 @@ const shareIconStyle = 'fill-zinc-100 hover:fill-juxt transition-colors'
     </div>
 
     <article
+      {/* eslint-disable-next-line */}
+      set:html={content}
       class='px-4 py-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors'
     >
-      <slot />
     </article>
   </main>
 </Layout>

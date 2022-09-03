@@ -1,10 +1,11 @@
 ---
 author: 'lda'
 category: 'technology'
-layout: '../../layouts/BlogPost.astro'
-title: 'Speed up your ClojureScript Webapp'
+layout: '../../Layouts/BlogPost.astro'
+title: 'Test different blog'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
+tags: ['test', 'blog']
 heroImage:
   src: 'mock4.jpg'
   alt: 'Space shuttle leaving curved trail in the sky'

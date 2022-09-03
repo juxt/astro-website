@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 
 export type PageProps = {
   metadata?: {
+    dev?: boolean
     navbar?: { weight?: number; label?: string; url?: string }
     footer?: { weight?: number; label?: string; url?: string; flag?: string }
   }
@@ -19,9 +20,10 @@ const { pages, navbarNoBg } = Astro.props as Props
 
 const url = new URL(Astro.request.url)
 const currentPage = url.pathname
+const isDev = import.meta.env.DEV
 
 const pagesInNavbar = pages
-  .filter((page) => page?.metadata?.navbar)
+  .filter((page) => page?.metadata?.navbar && (isDev || !page.metadata.dev))
   .map((page) => ({
     url: page.metadata?.navbar?.url || page.url,
     weight: page.metadata?.navbar?.weight,
@@ -30,7 +32,7 @@ const pagesInNavbar = pages
   }))
   .sort((a, b) => a.weight - b.weight)
 
-const isBlog = Astro.url.pathname.includes('/blog/')
+const isBlog = Astro.url.pathname.includes('/blog')
 ---
 
 <Navbar

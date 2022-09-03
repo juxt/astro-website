@@ -3,13 +3,13 @@ import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
-import BlogCard, { BlogProps } from '../components/BlogCard.astro'
+import { BlogCard } from '../components/BlogCard'
 import Clickable from '../components/Clickable.astro'
 import { ChevronRightIcon, QuoteIcon, TickIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
 import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
-import { Person } from '../layouts/Expert.astro'
 import Layout from '../layouts/Layout.astro'
+import { Person, Blog } from '../components/types'
 
 const url = Astro.url
 
@@ -94,47 +94,53 @@ const clientLogos = [
   'bbc.svg'
 ]
 
-const pages = await Astro.glob<MarkdownInstance<BlogProps>>(
-  './blog/{*.mdx,*.md}'
-)
-const people = await Astro.glob<Person & { default: Person }>(
-  '../data/people/*.json'
-)
-
-const peopleByThreeLetterCode = people.reduce((acc, person) => {
-  const code = person.code
-  acc[code] = person.default
-  return acc
-}, {})
+const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
 
 const isDev = import.meta.env.DEV
 
-const experts = await Astro.glob('./experts/{*.mdx,*.md}')
-const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
-  const expertCode = expert.url.split('/').pop()
-  acc[expertCode] = expert.url
-  return acc
-}, {})
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
 
-const featuredBlogs = pages
-  .map((page) => {
+const peopleByCode = new Map(
+  people.map((person) => [person.frontmatter.code, person.frontmatter])
+)
+
+const unfilteredBlogs = await Promise.all(
+  blogs.map((page) => {
     const author = page.frontmatter.author
-    const person = peopleByThreeLetterCode[author]
-    const expertHref = expertsByThreeLetterCode[author]
+    const person = peopleByCode.get(author)
+    const expert = (isDev || !person.expertDraft) && person.expert
     if (!person)
       throw new Error(
         `No person found for author: '${author}' in '${page.url}'`
       )
+    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+    const parsedImage = person.image.split('.').slice(0, -1)
 
-    return {
-      ...page.frontmatter,
-      href: page.url,
-      person: {
-        ...peopleByThreeLetterCode[page.frontmatter.author],
-        expertHref
-      }
-    }
+    return new Promise<Blog>((res, rej) => {
+      getImage({
+        src: import(`../assets/people/${parsedImage}.jpg`),
+        width: 200,
+        height: 200,
+        quality: 80
+      })
+        .then((image) => {
+          res({
+            ...page.frontmatter,
+            href: permalink,
+            person: {
+              ...person,
+              expert,
+              image: image.src
+            }
+          })
+        })
+        .catch(rej)
+    })
   })
+)
+const featuredBlogs = unfilteredBlogs
   .filter(({ featured, draft }) => featured && (isDev || !draft))
   .sort((a, b) => b.featured.weight - a.featured.weight)
 ---
@@ -737,7 +743,7 @@ const featuredBlogs = pages
     <div class='pb-20 bg-black'>
       <div class='splide py-20'>
         <div class='splide__track'>
-          <ul class='splide__list  '>
+          <ul class='splide__list'>
             {testimonials.map(({ quote, name, bg }) => (
               <li class='splide__slide'>
                 <div
@@ -833,7 +839,7 @@ const featuredBlogs = pages
         <div class='grid md:grid-cols-[repeat(2,_20rem)] justify-center gap-20'>
           {featuredBlogs.length
             ? featuredBlogs.map((blog) => {
-                return <BlogCard {...blog} />
+                return <BlogCard client:only='preact' {...blog} />
               })
             : ''}
         </div>

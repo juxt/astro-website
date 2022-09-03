@@ -1,44 +1,45 @@
-// Install the API client: https://www.algolia.com/doc/api-client/getting-started/install/javascript/?client=javascript
 const algoliasearch = require('algoliasearch')
 const dotenv = require('dotenv')
 const path = require('path')
+const { parseAllFiles } = require('./md-parser')
 
 dotenv.config()
 
-// Get your Algolia Application ID and (admin) API key from the dashboard: https://www.algolia.com/account/api-keys
-// and choose a name for your index. Add these environment variables to a `.env` file:
-const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
-const ALGOLIA_API_KEY = process.env.ALGOLIA_API_KEY
-const ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME
+async function index() {
+  try {
+    const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
+    const ALGOLIA_API_KEY = process.env.ALGOLIA_API_KEY
+    const ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME
 
-// Start the API client
-// https://www.algolia.com/doc/api-client/getting-started/instantiate-client-index/
-const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
+    const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
 
-// Create an index (or connect to it, if an index with the name `ALGOLIA_INDEX_NAME` already exists)
-// https://www.algolia.com/doc/api-client/getting-started/instantiate-client-index/#initialize-an-index
-const index = client.initIndex(ALGOLIA_INDEX_NAME)
+    const index = client.initIndex(ALGOLIA_INDEX_NAME)
 
-// Add new objects to the index
-// https://www.algolia.com/doc/api-reference/api-methods/add-objects/
-const newObjects = [
-  { objectID: 1, name: 'Foo' },
-  { objectID: 2, name: 'Foo2' },
-  { objectID: 3, name: 'Foo3' },
-  { objectID: 4, name: 'Foo3' }
-]
+    const newObjects = await parseAllFiles(`${__dirname}/../src/pages/blog/`)
 
-index
-  .saveObjects(newObjects)
-  // Wait for the indexing task to complete
-  // https://www.algolia.com/doc/api-reference/api-methods/wait-task/
-  .wait()
-  .then((response) => {
-    console.log(response)
-    // Search the index for "Fo"
-    // https://www.algolia.com/doc/api-reference/api-methods/search/
-    index
-      .search('Fo')
-      .then((objects) => console.log(objects))
-      .catch()
-  })
+    await index.setSettings({
+      attributeForDistinct: 'permalink',
+      attributesForFaceting: [
+        'tags',
+        'searchable(tags)',
+        'author',
+        'searchable(author)',
+        'category',
+        'searchable(category)'
+      ]
+    })
+
+    await index.clearObjects()
+
+    const { taskIDs, objectIDs } = await index.saveObjects(newObjects, {
+      autoGenerateObjectIDIfNotExist: true
+    })
+
+    console.log('Algolia Task IDs:', taskIDs)
+    console.log('Indexed Records:', objectIDs.length)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+index()

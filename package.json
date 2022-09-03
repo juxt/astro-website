@@ -40,9 +40,11 @@
   "dependencies": {
     "@preact/compat": "^17.1.1",
     "instantsearch.css": "^7.4.5",
-    "instantsearch.js": "^4.44.1",
+    "markdown-it": "^13.0.1",
+    "markdown-it-front-matter": "^0.2.3",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
-    "react-instantsearch-hooks-web": "^6.32.0"
+    "react-instantsearch-hooks-web": "^6.32.0",
+    "yaml": "^2.1.1"
   }
 }

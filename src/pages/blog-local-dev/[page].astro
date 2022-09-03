@@ -1,0 +1,150 @@
+---
+import { getImage } from '@astrojs/image'
+import { MarkdownInstance } from 'astro'
+import Banner from '../../components/Banner.astro'
+import { BlogCard } from '../../components/BlogCard'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../components/Icons'
+import { Person, Blog } from '../../components/types'
+import Layout from '../../layouts/Layout.astro'
+import classNames from 'classnames'
+
+export const metadata = {
+  dev: true,
+  navbar: { weight: 3, label: 'Blog DEV', url: '/blog-local-dev/1' },
+  footer: { weight: 3, label: 'Blog DEV', url: '/blog-local-dev/1' }
+}
+
+export async function getStaticPaths({ paginate }) {
+  const pages = await Astro.glob<MarkdownInstance<Blog>>('../blog/{*.mdx,*.md}')
+  const people = await Astro.glob<MarkdownInstance<Person>>(
+    '../../data/people/{*.mdx,*.md}'
+  )
+
+  const isDev = import.meta.env.DEV
+
+  const peopleByCode = new Map(
+    people.map((person) => [person.frontmatter.code, person.frontmatter])
+  )
+
+  const unfilteredBlogs = await Promise.all(
+    pages.map((page) => {
+      const author = page.frontmatter.author
+      const person = peopleByCode.get(author)
+      const expert = (isDev || !person.expertDraft) && person.expert
+      if (!person)
+        throw new Error(
+          `No person found for author: '${author}' in '${page.url}'`
+        )
+
+      const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+      const parsedImage = person.image.split('.').slice(0, -1)
+
+      return new Promise<Blog>((res, rej) => {
+        getImage({
+          src: import(`../../assets/people/${parsedImage}.jpg`),
+          width: 200,
+          height: 200,
+          quality: 80
+        })
+          .then((image) => {
+            res({
+              ...page.frontmatter,
+              href: permalink,
+              person: {
+                ...person,
+                expert,
+                image: image.src
+              }
+            })
+          })
+          .catch(rej)
+      })
+    })
+  )
+
+  const blogs = unfilteredBlogs
+    .filter(({ draft }) => isDev || !draft)
+    .sort((a, b) => {
+      const aDate = new Date(a.publishDate)
+      const bDate = new Date(b.publishDate)
+      return bDate.getTime() - aDate.getTime()
+    })
+
+  return paginate(blogs, { pageSize: 9 })
+}
+
+const { page } = Astro.props
+const blogs = page.data
+
+const {
+  url: { next, prev }
+} = page
+
+const blogBannerPicture = await getImage({
+  src: import('../../assets/site/blog-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
+---
+
+<Layout navbar title='Blog DEV'>
+  <Banner
+    text='Blog DEV'
+    style={{ backgroundImage: `url(${blogBannerPicture})` }}
+  />
+
+  <main class='pb-40 transition-colors'>
+    <section class='mx-auto max-w-6xl pt-10'>
+      <div
+        class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'
+      >
+        {blogs.length
+          ? blogs.map((blog) => {
+              return <BlogCard {...blog} />
+            })
+          : ''}
+      </div>
+      <div class='flex justify-center pt-10'>
+        {(prev || next) && (
+          <div class='flex items-center'>
+            <a
+              href={prev}
+              class:list={[
+                'w-12 aspect-square',
+                {
+                  'cursor-pointer': prev
+                }
+              ]}
+            >
+              {
+                <ChevronLeftIcon
+                  className={classNames('fill-zinc-600 dark:fill-zinc-300', {
+                    'fill-zinc-300 dark:fill-zinc-500': !prev
+                  })}
+                />
+              }
+            </a>
+            <a
+              href={next}
+              class:list={[
+                'w-12 aspect-square',
+                {
+                  'cursor-pointer': next
+                }
+              ]}
+            >
+              {
+                <ChevronRightIcon
+                  className={classNames('fill-zinc-600 dark:fill-zinc-300', {
+                    'fill-zinc-300 dark:fill-zinc-500': !next
+                  })}
+                />
+              }
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+</Layout>

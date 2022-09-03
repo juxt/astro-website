@@ -1,0 +1,77 @@
+---
+import { MarkdownInstance } from 'astro'
+import { Blog, Person } from '../../components/types'
+import { BlogIndex } from '../../layouts/BlogIndex'
+import { getImage } from '@astrojs/image'
+import Layout from '../../layouts/Layout.astro'
+import Banner from '../../components/Banner.astro'
+
+export const metadata = {
+  navbar: { weight: 3, label: 'Blog' },
+  footer: { weight: 3, label: 'Blog' }
+}
+
+const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../../data/people/{*.mdx,*.md}'
+)
+
+const peopleByCode = new Map(
+  people.map((person) => [person.frontmatter.code, person.frontmatter])
+)
+
+const isDev = import.meta.env.DEV
+
+const unfilteredBlogs = await Promise.all(
+  pages.map((page) => {
+    const author = page.frontmatter.author
+    const person = peopleByCode.get(author)
+    const expert = (isDev || !person.expertDraft) && person.expert
+    if (!person)
+      throw new Error(
+        `No person found for author: '${author}' in '${page.url}'`
+      )
+    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+    const parsedImage = person.image.split('.').slice(0, -1)
+
+    return new Promise<Blog>((res, rej) => {
+      getImage({
+        src: import(`../../assets/people/${parsedImage}.jpg`),
+        width: 200,
+        height: 200,
+        quality: 80
+      })
+        .then((image) => {
+          res({
+            ...page.frontmatter,
+            href: permalink,
+            person: {
+              ...person,
+              expert,
+              image: image.src
+            }
+          })
+        })
+        .catch(rej)
+    })
+  })
+)
+
+const blogs = unfilteredBlogs.filter(({ draft }) => isDev || !draft)
+
+const blogsByHref = new Map(blogs.map((blog) => [blog.href, blog]))
+
+const blogBannerPicture = await getImage({
+  src: import('../../assets/site/blog-banner.jpeg'),
+  width: 1500,
+  height: 1000,
+  quality: 80
+}).then((img) => img.src)
+---
+
+<Layout navbar title='Blog'>
+  <Banner text='Blog' style={{ backgroundImage: `url(${blogBannerPicture})` }}
+  />
+  <BlogIndex client:only='preact' blogs={blogsByHref} />
+</Layout>

@@ -1,11 +1,12 @@
 ---
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
+import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
 import { LinkIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
-import { Person } from '../layouts/Expert.astro'
 import Layout from '../layouts/Layout.astro'
+import { Person } from './people/[code].astro'
 
 export const metadata = {
   navbar: { weight: 1 },
@@ -59,26 +60,18 @@ const values = [
   ]
 ]
 
-const people = await Astro.glob<Person & { default: Person }>(
-  '../data/people/*.json'
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
 )
 
-const experts = await Astro.glob('./experts/{*.mdx,*.md}')
-const expertsByThreeLetterCode = experts.reduce((acc, expert) => {
-  const expertCode = expert.url.split('/').pop()
-  acc[expertCode] = expert.url
-  return acc
-}, {})
+const experts = await people.filter(
+  ({ frontmatter }) => !frontmatter?.expertDraft && frontmatter?.expert
+)
 
 const featuredPeople = people
-  .filter((p) => p.featured)
-  .sort((a, b) => a.featured.weight - b.featured.weight)
-  .map((p) => {
-    return {
-      ...p.default,
-      expertHref: expertsByThreeLetterCode[p.default.code]
-    }
-  })
+  .filter(({ frontmatter: { featured } }) => featured)
+  .sort((a, b) => a.frontmatter.featured.weight - b.frontmatter.featured.weight)
+  .map(({ frontmatter }) => ({ ...frontmatter }))
 
 function imageToFilename(image: string) {
   return image.split('.').slice(0, -1)
@@ -134,7 +127,7 @@ function imageToFilename(image: string) {
         class='grid md:grid-cols-[repeat(2,_auto)] xl:grid-cols-[repeat(3,_auto)] justify-center gap-28'
       >
         {featuredPeople.map(
-          ({ image, jobTitle, name, lastName, expertHref }) => (
+          ({ image, jobTitle, name, lastName, expert, code }) => (
             <div class='flex w-64 flex-col gap-4'>
               <div class='group relative w-full'>
                 <Image
@@ -144,9 +137,9 @@ function imageToFilename(image: string) {
                   class='w-full object-cover'
                   src={import(`../assets/people/${imageToFilename(image)}.jpg`)}
                 />
-                {expertHref && (
+                {expert && (
                   <a
-                    href={expertHref}
+                    href={`/people/${code}`}
                     class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
                   >
                     <div class='flex gap-2 justify-center items-center'>

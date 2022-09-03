@@ -1,7 +1,20 @@
 ---
-layout: '../../layouts/Expert.astro'
-expertise: ['Frontend', 'Data Driven Apps', 'Performance']
-draft: true
+code: 'mal'
+name: 'Malcolm'
+lastName: 'Sparks'
+jobTitle: 'CTO'
+image: 'mal.jpg'
+linkedin: '#'
+twitter: '#'
+github: '#'
+featured:
+  weight: 2
+
+expert: true
+expertise:
+  - 'Frontend'
+  - 'Data Driven Apps'
+  - 'Performance'
 ---
 
 ## Successes

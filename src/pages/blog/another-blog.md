@@ -1,9 +1,10 @@
 ---
 author: 'mal'
 category: 'technology'
-layout: '../../layouts/BlogPost.astro'
+layout: '../../Layouts/BlogPost.astro'
 title: 'Speed up your ClojureScript Webapp'
 description: "Bring your markdown, we'll handle the rest. Space shuttle leaving curved trail in the sky."
+tags: [clojure, clojurescript, reagent, re-frame, performance, optimization]
 publishDate: '17 Jul 2022'
 heroImage:
   src: 'mock3.jpg'

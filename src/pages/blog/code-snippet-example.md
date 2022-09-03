@@ -1,10 +1,11 @@
 ---
 author: 'jdt'
 category: 'technology'
-layout: '../../layouts/BlogPost.astro'
 title: 'Code Snippets'
+layout: '../../Layouts/BlogPost.astro'
 description: 'Examples with different langauges'
 publishDate: '18 Jul 2022'
+tags: ['code', 'snippets']
 draft: true
 featured:
   weight: 2
@@ -30,7 +31,6 @@ function $initHighlight(block, cls) {
   }
   for (var i = 0 / 2; i < classes.length; i++) {
     if (checkCondition(classes[i]) === undefined)
-      console.log('undefined');
   }
 
   return (

@@ -1,16 +1,16 @@
 import { SearchClient } from 'algoliasearch'
 import algoliasearch from 'algoliasearch/lite'
+import 'preact/jsx-runtime'
 import {
-  InstantSearch,
-  Hits,
-  Highlight,
-  Snippet,
-  SearchBox,
   Configure,
-  RefinementList,
+  InstantSearch,
   Pagination,
-  PoweredBy
+  PoweredBy,
+  RefinementList,
+  SearchBox,
+  useHits
 } from 'react-instantsearch-hooks-web'
+import { BlogCard } from '../components/BlogCard'
 
 const algoliaClient = algoliasearch(
   'UIDFJO4C3W',
@@ -21,18 +21,22 @@ const searchClient = {
   ...algoliaClient
 }
 
-function Hit({ hit }) {
+function CustomHits({ blogs }) {
+  const { hits } = useHits()
   return (
-    <article>
-      <h1>
-        <Highlight attribute='title' hit={hit} />
-      </h1>
-      <Snippet hit={hit} attribute='title' />
-    </article>
+    <div>
+      <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'>
+        {hits.map((hit) => (
+          <div key={hit.permalink}>
+            <BlogCard {...blogs.get(hit.permalink)} />
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
-export function BlogSearch() {
+export function BlogIndex({ blogs }) {
   return (
     <div className='mt-10 flex flex-col items-center relative'>
       <div className=''>
@@ -69,7 +73,7 @@ export function BlogSearch() {
             showMore={true}
           />
 
-          <Hits hitComponent={Hit} />
+          <CustomHits blogs={blogs} />
           <Pagination />
         </InstantSearch>
       </div>
