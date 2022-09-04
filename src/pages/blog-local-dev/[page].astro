@@ -101,7 +101,7 @@ const blogBannerPicture = await getImage({
       >
         {blogs.length
           ? blogs.map((blog) => {
-              return <BlogCard {...blog} />
+              return <BlogCard client:only='preact' {...blog} />
             })
           : ''}
       </div>
