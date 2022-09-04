@@ -1,7 +1,7 @@
 ---
 author: 'lda'
 category: 'technology'
-layout: '../../Layouts/BlogPost.astro'
+layout: '../../layouts/BlogPost.astro'
 title: 'Test different blog'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
