@@ -12,10 +12,14 @@
   --inputCaretColor: theme(colors.gray.300);
 }
 
+.ais-SearchBox {
+  width: 100%;
+}
+
 .ais-SearchBox-form {
   background-color: transparent;
   height: 2.8rem;
-  width: theme(width.96);
+  max-width: 600px;
 }
 
 .ais-SearchBox-input {
