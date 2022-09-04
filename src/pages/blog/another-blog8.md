@@ -1,7 +1,7 @@
 ---
 author: 'hak'
 category: 'db'
-layout: '../../Layouts/BlogPost.astro'
+layout: '../../layouts/BlogPost.astro'
 title: 'blog 8'
 description: 'description 8'
 tags: []

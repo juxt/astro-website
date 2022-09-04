@@ -1,7 +1,7 @@
 ---
 author: 'kth'
 category: 'marketing'
-layout: '../../Layouts/BlogPost.astro'
+layout: '../../layouts/BlogPost.astro'
 title: 'blog 3'
 description: 'description 3'
 tags: []

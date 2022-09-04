@@ -1,7 +1,7 @@
 ---
 author: 'jon'
 category: 'marketing'
-layout: '../../Layouts/BlogPost.astro'
+layout: '../../layouts/BlogPost.astro'
 title: 'blog 6'
 description: 'description 6'
 tags: []

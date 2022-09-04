@@ -1,7 +1,7 @@
 ---
 author: 'mal'
 category: 'technology'
-layout: '../../Layouts/BlogPost.astro'
+layout: '../../layouts/BlogPost.astro'
 title: 'Speed up your ClojureScript Webapp'
 description: "Bring your markdown, we'll handle the rest. Space shuttle leaving curved trail in the sky."
 tags: [clojure, clojurescript, reagent, re-frame, performance, optimization]

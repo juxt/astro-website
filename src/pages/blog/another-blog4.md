@@ -1,7 +1,7 @@
 ---
 author: 'mal'
 category: 'new'
-layout: '../../Layouts/BlogPost.astro'
+layout: '../../layouts/BlogPost.astro'
 title: 'blog 4'
 description: 'description 4'
 tags: []
