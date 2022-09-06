@@ -5295,3 +5295,27 @@ cljs꞉index꞉> 
 cljs꞉index꞉> 
 "---\nauthor: 'jdt'\ncategory: 'technology'\ntitle: 'Code Snippets'\nlayout: '../../layouts/BlogPost.astro'\ndescription: 'Examples with different langauges'\npublishDate: '18 Jul 2022'\ntags: ['code', 'snippets']\ndraft: true\nfeatured:\n  weight: 2\nheroImage:\n  src: 'mock1.jpg'\n  alt: 'Space shuttle leaving curved trail in the sky'\n---\n\n# how to use code snippets\n\nCheck out `code-snippet-example.md` in `/pages/blog`\n\n```js\n// this is a comment\nconst a = 'a string'\nfunction $initHighlight(block, cls) {\n  try {\n    if (cls.search(/\\bno\\-highlight\\b/) != -1)\n      return process(block, true, 0x0F) +\n             ` class=\"${cls}\"`;\n  } catch (e) {\n    /* handle exception */\n  }\n  for (var i = 0 / 2; i < classes.length; i++) {\n    if (checkCondition(classes[i]) === undefined)\n    return \"foo\"\n  }\n\n  return (\n    <div>\n      <web-component>{block}</web-component>\n    </div>\n  )\n}\n\nexport  $initHighlight;\n```\n\n```json\n[\n  {\n    \"title\": \"apples\",\n    \"count\": [12000, 20000],\n    \"description\": { \"text\": \"...\", \"sensitive\": false }\n  },\n  {\n    \"title\": \"oranges\",\n    \"count\": [17500, null],\n    \"description\": { \"text\": \"...\", \"sensitive\": false }\n  }\n]\n```\n\n```kotlin\nimport kotlinx.serialization.Serializable\nimport kotlin.random.Random\n\ninterface Building\n\n@Serializable\nclass House(\n    private val rooms: Int? = 3,\n    val name: String = \"Palace\"\n) : Building {\n    var residents: Int = 4\n        get() {\n            println(\"Current residents: $field\")\n            return field\n        }\n\n    fun burn(evacuation: (people: Int) -> Boolean) {\n        rooms ?: return\n        if (evacuation((0..residents).random()))\n            residents = 0\n    }\n}\n\nfun main() {\n    val house = House(name = \"Skyscraper 1\")\n    house.burn {\n        Random.nextBoolean()\n    }\n}\n```\n\n```graphql\n# Graphql detection template\n\nmutation Hero($episode: Episode, $withFriends: Boolean!) {\n  hero(episode: $episode) {\n    name\n    friends @include(if: $withFriends) {\n      name\n      ... on Droid {\n        primaryFunction\n      }\n      ... on Human {\n        height\n      }\n    }\n  }\n}\n\nquery HeroNameAndFriends {\n  hero {\n    name\n    friends {\n      name\n    }\n  }\n}\n\nfragment comparisonFields on Character {\n  name\n  appearsIn\n  friends {\n    name\n  }\n}\n\ninput StoryLikeSubscribeInput {\n  storyId: string\n  clientSubscriptionId: string\n}\n```\n\n```clojure\n{:options\n :data [{:value 1}]\n :width 300\n :height 100\n :series [{:type \"column\"\n           :xKey \"type\"\n           :yKeys [\"value\"]}]\n :axes [{:type \"category\"}\n        {:type \"number\"}]}\n\n```\n\n```clj\n(reduce\n  (fn [col value]\n    (doto col (.push #js {:value value})))\n  #js []\n  (range 20))\n```\n"
 cljs꞉index꞉> 
+#<Promise[~]>
+cljs꞉index꞉> 
+; ENOENT: no such file or directory, open 'foo'
+cljs꞉index꞉> 
+; Cannot call #<Promise[~]> as a function.
+cljs꞉index꞉> 
+; Cannot call #<Promise[~]> as a function.
+cljs꞉index꞉> 
+; ENOENT: no such file or directory, open 'foo'
+cljs꞉index꞉> 
+; ENOENT: no such file or directory, open 'foo'
+cljs꞉index꞉> 
+#<Promise[~]>
+cljs꞉index꞉> 
+#'index/f
+cljs꞉index꞉> 
+3
+cljs꞉index꞉> 
+#'index/parse-md-file
+cljs꞉index꞉> 
+#'index/parse-md-file
+cljs꞉index꞉> 
+#'index/parse-md-file
+cljs꞉index꞉> 

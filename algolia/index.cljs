@@ -56,10 +56,12 @@
                             "permalink" permalink
                             "tags" tags}}))))
 
-(defn parse-md-file [file-name]
-  (try
-    (p/let [loaded-md (slurp file-name)
-            frontmatter-record (atom nil)
+(defn parse-md-file [file-name] 
+  (p/let [loaded-md  (-> (slurp file-name)
+                         (.then (fn [val] val))
+                         (.catch (fn [_])))]
+    (when loaded-md
+      (let [frontmatter-record (atom nil)
             permalink (file-name->permalink file-name)
             md-it (.use (markdown-it.)
                         md-frontmatter
@@ -83,12 +85,10 @@
                                                    "content" content
                                                    "permalink" permalink}))
                                      coll))) #js []))]
-      (when (> (count records) 0)
-        (doto records
-          (.push
-           (:record @frontmatter-record)))))
-    (catch :default e
-      (println "Error parsing file" e))))
+        (when (> (count records) 0)
+          (doto records
+            (.push
+             (:record @frontmatter-record))))))))
 
 (def blog-files-path "../src/pages/blog/{*.md,*.mdx}")
 
@@ -114,7 +114,7 @@
           {:keys [changed-files files-to-remove]}
           (changed-files (rest args))]
          (when partial-indexing?
-           (prn "Changed blog files:" changed-files))
+           (println "Blog articles to update:" changed-files))
     {:file-names (if partial-indexing? changed-files all-files)
      :files-to-remove (if partial-indexing? files-to-remove #{})}))
 
@@ -131,11 +131,13 @@
 (def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
 (def index (.initIndex client ALGOLIA_INDEX_NAME))
 
-(println "Parsing MD files...")
+(println "Parsing blog articles...")
 
 (def records (await (parse-md-files blog-files-path)))
 
-(println "MD files parsed")
+(println "Blog articles successfully parsed.")
+(println "Blog articles to remove:" (:files-to-remove records))
+(println "Blog articles to index:" (count (:filtered records)))
 
 (await (index.setSettings
         #js {"attributeForDistinct" "permalink"
@@ -179,11 +181,11 @@
 (defn clearChangedContent []
   (await (index.deleteObjects
           (clj->js objects-ids-to-be-deleted)))
-  (println "Deleted" (count objects-ids-to-be-deleted) "objects"))
+  (println "Deleted" (count objects-ids-to-be-deleted) "records from Algolia."))
 
 (defn clearFullIndexContent []
   (await (index.clearObjects))
-  (println "Cleared full index content"))
+  (println "Deleted full index content."))
 
 (if partial-indexing?
   (clearChangedContent)
@@ -192,7 +194,6 @@
 (def storedObjects (await (index.saveObjects
                            (:flattened records))))
 
-(println "Stored new objects successfully")
-(println "Algolia Task IDs:" (g/get storedObjects "taskIDs"))
-(println "Indexed Records:" (count (g/get storedObjects "objectIDs")))
-(println "Done")
+(println "Stored" (count (g/get storedObjects "objectIDs")) "new records successfully")
+(println "Task IDs:" (g/get storedObjects "taskIDs"))
+(println "Done!")
