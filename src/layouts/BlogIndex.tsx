@@ -23,7 +23,7 @@ const searchClient = {
   ...algoliaClient
 }
 
-function CustomHits({ blogs }: Record<string, Blog>) {
+function CustomHits({ blogs }) {
   const { hits } = useHits()
   return (
     <div>

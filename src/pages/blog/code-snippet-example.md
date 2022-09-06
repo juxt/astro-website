@@ -31,6 +31,7 @@ function $initHighlight(block, cls) {
   }
   for (var i = 0 / 2; i < classes.length; i++) {
     if (checkCondition(classes[i]) === undefined)
+    return "foo"
   }
 
   return (

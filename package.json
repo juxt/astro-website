@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "algolia-partial": "cd algolia && nbb index.cljs --partial `git diff --name-only`",
+    "algolia-full": "cd algolia && nbb index.cljs"
   },
   "devDependencies": {
     "@astrojs/image": "^0.3.6",
@@ -43,9 +45,11 @@
     "instantsearch.css": "^7.4.5",
     "markdown-it": "^13.0.1",
     "markdown-it-front-matter": "^0.2.3",
+    "nbb": "^0.7.132",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
     "react-instantsearch-hooks-web": "^6.32.0",
-    "yaml": "^2.1.1"
+    "yaml": "^2.1.1",
+    "zx": "^7.0.8"
   }
 }
