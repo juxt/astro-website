@@ -6,7 +6,6 @@ import {
   Configure,
   InstantSearch,
   Pagination,
-  PoweredBy,
   RefinementList,
   SearchBox,
   useHits
@@ -53,7 +52,6 @@ export function BlogIndex({ blogs }: Record<string, Blog>) {
             >
               Show Filters
             </button>
-            <PoweredBy />
           </div>
 
           <Transition
