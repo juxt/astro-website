@@ -1,1 +1,19 @@
-["^ ","~$a",["^ ","~:row",9,"~:col",1,"~:name","~$a","~:ns","~$algol","~:top-ns","^4"],"~:filename","/Users/lda/ghq/github.com/juxt/astro-website/algolia/md-parser.cljs"]
+[
+  "^ ",
+  "~$a",
+  [
+    "^ ",
+    "~:row",
+    9,
+    "~:col",
+    1,
+    "~:name",
+    "~$a",
+    "~:ns",
+    "~$algol",
+    "~:top-ns",
+    "^4"
+  ],
+  "~:filename",
+  "/Users/lda/ghq/github.com/juxt/astro-website/algolia/md-parser.cljs"
+]
