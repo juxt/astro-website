@@ -113,6 +113,8 @@
   (p/let [all-files (glob path)
           {:keys [changed-files files-to-remove]}
           (changed-files (rest args))]
+         (when partial-indexing?
+           (prn "Changed blog files:" changed-files))
     {:file-names (if partial-indexing? changed-files all-files)
      :files-to-remove (if partial-indexing? files-to-remove #{})}))
 
