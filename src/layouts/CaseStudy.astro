@@ -14,7 +14,7 @@ export type CaseStudyProps = {
 
 const { title, subtitle, outcome, tech, testimonial, image } =
   Astro.props as CaseStudyProps
-
+console.log(Astro.props.image)
 const caseStudyImageFilename = image.split('.').slice(0, -1)
 ---
 
