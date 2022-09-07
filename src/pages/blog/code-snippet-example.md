@@ -4,7 +4,7 @@ category: 'technology'
 title: 'Code Snippets'
 layout: '../../layouts/BlogPost.astro'
 description: 'Examples with different langauges'
-publishDate: '18 Jul 2022'
+publishDate: '9 Jul 2022'
 tags:
   - 'code'
   - 'snippets'

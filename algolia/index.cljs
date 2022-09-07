@@ -45,46 +45,51 @@
           title (g/get md-frontmatter "title")
           description (g/get md-frontmatter "description")
           tags (g/get md-frontmatter "tags")
-          draft (g/get md-frontmatter "draft")]
+          draft (g/get md-frontmatter "draft")
+          publishedDate (g/get md-frontmatter "publishDate")
+          timestamp (js/Math.floor (/ (.valueOf (js/Date. publishedDate)) 1000))]
       (reset! frontmatter-record
               {:draft? draft
                :record #js {"author" author
                             "category" category
                             "title" title
+                            "timestamp" timestamp
                             "objectID" (str-random-uuid)
                             "description" description
                             "permalink" permalink
                             "tags" tags}}))))
 
-(defn parse-md-file [file-name] 
+(defn parse-md-file [file-name]
   (p/let [loaded-md  (-> (slurp file-name)
                          (.then (fn [val] val))
                          (.catch (fn [_])))]
     (when loaded-md
-      (let [frontmatter-record (atom nil)
-            permalink (file-name->permalink file-name)
-            md-it (.use (markdown-it.)
-                        md-frontmatter
-                        (frontmatter-callback
-                         permalink frontmatter-record))
-            md-paragraphs (.parse md-it loaded-md)
-            draft? (:draft? @frontmatter-record)
-            records (when (not draft?)
-                      (.reduce md-paragraphs
-                               (fn [coll paragraph]
-                                 (let [type (g/get paragraph "type")
-                                       tag (g/get paragraph "tag")
-                                       content (g/get paragraph "content")]
-                                   (if (and
-                                        (not draft?)
-                                        (not= type "html_block")
-                                        (not= tag "code")
-                                        (not (string/blank? content)))
-                                     (doto coll
-                                       (.push #js {"objectID" (str-random-uuid)
-                                                   "content" content
-                                                   "permalink" permalink}))
-                                     coll))) #js []))]
+      (p/let [frontmatter-record (atom nil)
+              permalink (file-name->permalink file-name)
+              md-it (.use (markdown-it.)
+                          md-frontmatter
+                          (frontmatter-callback
+                           permalink frontmatter-record))
+              md-paragraphs (.parse md-it loaded-md)
+              draft? (:draft? @frontmatter-record)
+              timestamp (g/get (:record @frontmatter-record) "timestamp")
+              records (when (not draft?)
+                        (.reduce md-paragraphs
+                                 (fn [coll paragraph]
+                                   (let [type (g/get paragraph "type")
+                                         tag (g/get paragraph "tag")
+                                         content (g/get paragraph "content")]
+                                     (if (and
+                                          (not draft?)
+                                          (not= type "html_block")
+                                          (not= tag "code")
+                                          (not (string/blank? content)))
+                                       (doto coll
+                                         (.push #js {"objectID" (str-random-uuid)
+                                                     "content" content
+                                                     "timestamp" timestamp
+                                                     "permalink" permalink}))
+                                       coll))) #js []))]
         (when (> (count records) 0)
           (doto records
             (.push
@@ -113,8 +118,8 @@
   (p/let [all-files (glob path)
           {:keys [changed-files files-to-remove]}
           (changed-files (rest args))]
-         (when partial-indexing?
-           (println "Blog articles to update:" changed-files))
+    (when partial-indexing?
+      (println "Blog articles to update:" changed-files))
     {:file-names (if partial-indexing? changed-files all-files)
      :files-to-remove (if partial-indexing? files-to-remove #{})}))
 
@@ -149,7 +154,9 @@
                   "category"
                   "searchable(category)"
                   "permalink"
-                  "filterOnly(permalink)"]}))
+                  "filterOnly(permalink)"]
+             "replicas" #js ["blog_desc"]
+             "ranking" #js ["desc(timestamp)"]}))
 
 (defn retrieve-obj-ids-to-be-deleted
   [files-to-remove]
