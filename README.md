@@ -13,13 +13,11 @@ All commands are run from the root of the project, from a terminal:
 | `yarn run build`   | Build your production site to `./dist/`      |
 | `yarn run preview` | Preview your build locally, before deploying |
 
-## Components
+After reading the following section, you should be able to perform the most common updates to the site.
 
-After reading this section, you should be able to perform the most common updates to the site.
+## Navbar
 
-### Navbar
-
-The Navbar can be found in `components/Navbar.astro`. The links in the Navbar are driven by the `metadata` variable that is defined at the `page` level.
+The Navbar can be found in `src/components/Navbar.astro`. The links in the Navbar are driven by the `metadata` variable that is defined at the `page` level.
 For a page to appear in the Navbar, it needs a `navbar` key with optional `label` and `weight` attributes, the latter controls the position.
 An example follows:
 
@@ -32,7 +30,7 @@ export const metadata = { navbar: { weight: 1 } }
 Here, we are saying that we want the about page to be linked in the navbar (presence of navbar key) and that it has to be the first link (weight of 1).
 Note that without a `label` key the label will default to the name of the `*name*.astro` file, so in this example it will be `about`.
 
-### Footer
+## Footer
 
 The Footer works similarly to the Navbar. The links in the Footer under the `Sitemap` section are driven by the `metadata` variable that is defined at the `page` level. For example, if you want the about page to show up under `Sitemap`, your `about.astro` metadata variable should look like this:
 
@@ -63,9 +61,9 @@ export const metadata = {
 
 The other elements in the footer can be changed directly by editing the `Footer.astro` file in the `src/components` folder.
 
-### New Page
+## New Page
 
-All site pages are `*name*.astro` and `*name*.md` files defined in the `src/pages` folder. To reach an individual page in your browser you can simply walk the file system and construct the `url` accordingly.
+All site pages are `*name*.astro` and `*name*.md` files defined ay any level within the `src/pages` folder. To reach an individual page in your browser you can simply walk the file system and construct the `url` accordingly.
 
 Let's assume the following folder structure:
 
@@ -96,9 +94,9 @@ import Layout from '../layouts/Layout.astro'
 
 From here, the sky's the limit.
 
-### Articles
+## Articles
 
-To create a new article add a `*blogName*.md` file in `pages/blog`. You must include all the necessary metadata in the frontmatter of your article for the post to be displayed properly. An example follows:
+To create a new article add a `*blogName*.md` file in `src/pages/blog`. You must include all the necessary metadata in the frontmatter of your article for the post to be displayed properly. An example follows:
 
 ```md
 ---
@@ -108,6 +106,9 @@ layout: '../../layouts/BlogPost.astro'
 title: 'Hello world!'
 description: "Bring your markdown, we'll handle the rest"
 publishDate: '17 Jul 2022'
+tags:
+  - cloud
+  - devops
 heroImage:
   src: 'introducing-astro.jpg'
   alt: 'Space shuttle leaving curved trail in the sky'
@@ -118,7 +119,7 @@ When a post is ready to go live, you can remove the `draft` attribute and it wil
 
 The `heroImage` picture must be stored in the `src/assets/blog` folder and it must be of `.jpg` format.
 
-### Optimized Images
+## Optimized Images
 
 If your article body contains images, you want to use a `.mdx` file extension instead of `.md`. This is because you can import directly in your markdown an image optimizer module, which will make sure to keep your media content within a reasonable size. You can follow the example to see how it works:
 
@@ -138,26 +139,36 @@ import hero from '../../assets/blog/mock.jpg'
 <Image src={hero} />
 ```
 
-The pictures that you use in your article body must be stored in the `src/assets/blog/` directory. To know more about the props you can pass to the `Image` component, check out this [link](https://docs.astro.build/en/guides/integrations-guide/image/#usage).
+To know more about the props you can pass to the `Image` component, check out this [link](https://docs.astro.build/en/guides/integrations-guide/image/#usage).
 
-### Case Studies
+## Writing with hot-reload
 
-Case studies are defined in the `src/data/case-studies` folder. Their format is `json` and they are structured as follows:
+The blog page is completely driven by Algolia Instant Search. This means that while writing a draft, your article won't appear in the `BLOG` page. To see it, you can either visit the `BLOG DEV` link in the navbar or go directly to your article url, which is `/blog/*blogName*`. There, it will hot reload as you edit and save your changes.
 
-```json
-{
-  "title": "Electric eBike provider",
-  "subtitle": "Building the infrastructure for an electric powered bikes scheme",
-  "outcome": [
-    "JUXT built the backend infrastructure, dashboards, allocation logic and tracking for a bike-hire scheme in Spanish cities.",
+## Case Studies
 
-    "In addition, JUXT built the public kiosk software (using ClojureScript) for individuals to register and hire bikes."
-  ],
-  "tech": ["Clojure", "ClojureScript", "Postgres", "Datomic", "AWS"],
+Case studies are defined in the `src/data/case-studies` folder. Their format is `md` and they are structured as follows:
 
-  "image": "ebike-ui.jpg",
-  "pages": { "/case-studies": { "weight": 9 } }
-}
+```md
+---
+title: 'Electric eBike provider'
+subtitle: 'Building the infrastructure for an electric powered bikes scheme'
+outcome:
+  - 'JUXT built the backend infrastructure, dashboards, allocation logic and tracking for a bike-hire scheme in Spanish cities.'
+  - 'In addition, JUXT built the public kiosk software (using ClojureScript) for individuals to register and hire bikes.'
+tech:
+  - 'Clojure'
+  - 'ClojureScript'
+  - 'Postgres'
+  - 'Datomic'
+  - 'AWS'
+image: 'ebike-ui.jpg'
+testimonial:
+  quote: 'The web applications exceeded our expectations on functionality and time to market. JUXT led the development team through this period of incredible achievements.'
+  role: 'Technical Director'
+  by: 'Morgan Ross'
+pages: { '/case-studies': { 'weight': 9 } }
+---
 ```
 
 For this specific case study to appear in the site, you need to specify in the `pages` object where you want it to appear. In this case, we want it to appear in the `case-studies` page, so we add a `/case-studies` key with a `weight` attribute. The `weight` attribute controls the position of the case study in the list.
@@ -165,40 +176,117 @@ For this specific case study to appear in the site, you need to specify in the `
 For the case studies featured in the homepage, the process is the same. You can simply add an extra key value pair in the `pages` object as follows:
 
 ```json
-{
+---
  ...
   "pages": {
     "/case-studies": { "weight": 9 },
     "/": { "weight": 1 }
   }
-}
+---
 ```
+
+The testimonial attribute is optional and it will only appear if you add it to the frontmatter.
 
 Notice that the image for the case study must be a `*.jpg` file, stored in the `src/assets/case-studies/` directory.
 
-### People
+## People
 
-People are defined in the `src/data/people` folder. Their format is `json` and they are structured as follows:
+People are defined in the `src/data/people` folder. Their format is `md` and they are structured as follows:
 
-```json
-{
-  "code": "alx",
-  "name": "Alex",
-  "lastName": "Davis",
-  "jobTitle": "Senior Software Engineer",
-  "image": "alx.jpg",
-  "linkedin": "#",
-  "twitter": "#",
-  "github": "#"
-}
+```md
+---
+code: 'alx'
+name: 'Alex'
+lastName: 'Davis'
+jobTitle: 'Senior Software Engineer'
+image: 'alx.jpg'
+linkedin: '#'
+twitter: '#'
+github: '#'
+---
 ```
 
 A person's image must be a `*.jpg` file, stored in the `src/assets/people/` directory. Not all employees need to create an entry. Though, when they decide to write an article they will need to create one.
 
-### Experts
+### Featured People
 
-The experts are those featured employees for which there will be a dedicated page.
+For the employees who need a dedicated site page with info about their skills and achievements it's possible to add a set of extra keys in the frontmatter. The following example shows how to do it:
 
-### Job Profile
+```md
+---
+code: 'mal'
+name: 'Malcolm'
+lastName: 'Sparks'
+jobTitle: 'CTO'
+image: 'mal.jpg'
+linkedin: '#'
+twitter: '#'
+github: '#'
 
-### Leadership Team
+expert: true
+expertise:
+  - 'Web Servers'
+  - 'Data Driven Apps'
+  - 'Performance'
+---
+
+## Successes
+
+During the 80s he wrote a number of games...
+```
+
+The `expert` key is used to determine if the person needs a dedicated page. The `expertise` key is used to display a list of skills in the dedicated page.
+
+Moreover, the content of the dedicated page will be the markdown content that follows the frontmatter, so you can write as much as you want.
+
+Finally, an employee can appear in the about page by adding the following key in the frontmatter:
+
+```md
+---
+...
+
+featured:
+weight: 2
+...
+
+---
+```
+
+the `weight` attribute describes the order in which the employee will appear in the card list.
+
+### Careers
+
+`CAREERS` is a page that lists all the open positions in the company. To create a new opening, add a `*.md` file in the `src/data/careers` folder. The format is the following:
+
+```md
+---
+layout: '../../layouts/CareerPost.astro'
+location: 'London / Remote'
+department: 'Marketing'
+contract: 'Full Time'
+position: 'Head of Marketing'
+draft: true
+weight: 4
+googleJobs:
+  {
+    location: 'London',
+    position: 'Head of Marketing',
+    publishedDate: '11-03-2021'
+  }
+---
+
+## Job Description
+
+Want to ply a Clojure trade in the investment banking world working for JUXT? We build critical applications for our banking clients, using Clojure/ClojureScript along numerous tools and libraries in the ecosystem.
+...
+```
+
+The googleJobs attribute contains some metadata that will be picked up by Google to host the jobs in their platform. The `draft` attribute is used to hide the job from the list. The `weight` attribute is used to order the jobs in the list.
+
+To see a single job you can visit the `/careers/*jobName*` url.
+
+## Algolia Instant Search
+
+The Algolia indexing code is written in nbb. The script runs during pre-commit to make sure the index is always up to date with the latest changes. The script is located in `algolia/index.cljs`.
+
+To manually rebuild the full index, run `yarn run algolia-full`. There's also `yarn run algolia-partial` which will grep the blog files that are in your working branch through the git diff --name-only command and only index those.

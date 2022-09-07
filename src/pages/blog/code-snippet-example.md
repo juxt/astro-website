@@ -5,7 +5,9 @@ title: 'Code Snippets'
 layout: '../../layouts/BlogPost.astro'
 description: 'Examples with different langauges'
 publishDate: '18 Jul 2022'
-tags: ['code', 'snippets']
+tags:
+  - 'code'
+  - 'snippets'
 draft: true
 featured:
   weight: 2

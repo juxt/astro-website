@@ -8,7 +8,7 @@ linkedin: '#'
 twitter: '#'
 github: '#'
 featured:
-weight: 1
+  weight: 1
 
 expert: true
 expertDraft: true
