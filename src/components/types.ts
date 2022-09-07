@@ -17,7 +17,7 @@ export type Blog = {
   draft?: boolean
   title: string
   description: string
-  publishDate: string
+  publishedDate: string
   featured: { weight: number }
   author: string
   person: Person

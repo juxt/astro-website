@@ -6,7 +6,7 @@ title: 'blog 2'
 description: 'description 2'
 tags:
   - test
-publishDate: '16 Jul 2022'
+publishedDate: '16 Jul 2022'
 heroImage:
   src: 'mock4.jpg'
   alt: '2'

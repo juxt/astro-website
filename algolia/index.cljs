@@ -46,7 +46,7 @@
           description (g/get md-frontmatter "description")
           tags (g/get md-frontmatter "tags")
           draft (g/get md-frontmatter "draft")
-          publishedDate (g/get md-frontmatter "publishDate")
+          publishedDate (g/get md-frontmatter "publishedDate")
           timestamp (js/Math.floor (/ (.valueOf (js/Date. publishedDate)) 1000))]
       (reset! frontmatter-record
               {:draft? draft

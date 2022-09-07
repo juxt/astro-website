@@ -4,7 +4,7 @@ category: 'technology'
 layout: '../../layouts/BlogPost.astro'
 title: 'Test different blog'
 description: "Bring your markdown, we'll handle the rest"
-publishDate: '8 Jul 2022'
+publishedDate: '8 Jul 2022'
 tags:
   - 'test'
   - 'blog'

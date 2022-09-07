@@ -65,8 +65,8 @@ export async function getStaticPaths({ paginate }) {
   const blogs = unfilteredBlogs
     .filter(({ draft }) => isDev || !draft)
     .sort((a, b) => {
-      const aDate = new Date(a.publishDate)
-      const bDate = new Date(b.publishDate)
+      const aDate = new Date(a.publishedDate)
+      const bDate = new Date(b.publishedDate)
       return bDate.getTime() - aDate.getTime()
     })
 

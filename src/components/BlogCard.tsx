@@ -32,7 +32,7 @@ function BlogAuthor({ name, lastName, image, expert, jobTitle }: Person) {
 
 export function BlogCard({
   title,
-  publishDate,
+  publishedDate,
   description,
   category,
   href,
@@ -59,7 +59,7 @@ export function BlogCard({
             </div>
 
             <div className='text-zinc-600 dark:text-zinc-300 text-xs'>
-              {publishDate}
+              {publishedDate}
             </div>
           </div>
 

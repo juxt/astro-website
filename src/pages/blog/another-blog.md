@@ -11,7 +11,7 @@ tags:
   - re-frame
   - performance
   - optimization
-publishDate: '17 Jul 2022'
+publishedDate: '17 Jul 2022'
 heroImage:
   src: 'mock3.jpg'
   alt: 'Space shuttle leaving curved trail in the sky'
