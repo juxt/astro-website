@@ -12,10 +12,5 @@ yarn-error.log*
 pnpm-debug.log*
 .cache/
 
-
-# environment variables
-.env
-.env.production
-
 # macOS-specific files
 .DS_Store
