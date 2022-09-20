@@ -19,9 +19,6 @@ heroImage:
 
 From October 2020 until July 2021, I had the chance to work on an exciting greenfield project in the investment sector. The goal was to develop a data-intensive webapp able to handle hundreds of UI changes per second along with the resolution of thousands of formulas, taking as inputs live market data and user entered values.
 
-{section : "...",
-permalink: "another-blog"}
-
 As this has been the most performance-critical software I have built so far, I thought it might be useful to share the approaches and tools that were adopted to tackle slow performance, involving both scripting and rendering.
 
 The project stack includes:
