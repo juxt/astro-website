@@ -57,7 +57,9 @@ export async function getStaticPaths({ paginate }) {
               }
             })
           })
-          .catch(rej)
+          .catch((err) => {
+            console.error('DEV BLOG, [page].astro:', err)
+          })
       })
     })
   )

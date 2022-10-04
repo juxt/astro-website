@@ -21,7 +21,7 @@ const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
 
-const heroImageFilename = heroImage?.src.split('.').slice(0, -1)
+const heroImageFilename = heroImage.split('.').slice(0, -1)
 const personImageFilename = image.split('.').slice(0, -1)
 ---
 
@@ -66,17 +66,21 @@ const personImageFilename = image.split('.').slice(0, -1)
               </div>
             </div>
             <div class='flex flex-col gap-1 text-left'>
-              <div
-                class:list={[
-                  'text-lg font-bold dark:text-zinc-100 underline-offset-2',
-                  { 'group-hover:underline': expert }
-                ]}
-              >
-                <div>{`${name} ${lastName}`}</div>
-              </div>
-              <div class='text-zinc-700 leading-snug w-36 dark:text-zinc-300'>
-                {jobTitle}
-              </div>
+              {name && lastName && (
+                <div
+                  class:list={[
+                    'text-lg font-bold dark:text-zinc-100 underline-offset-2',
+                    { 'group-hover:underline': expert }
+                  ]}
+                >
+                  <div>{`${name} ${lastName}`}</div>
+                </div>
+              )}
+              {jobTitle && (
+                <div class='text-zinc-700 leading-snug w-36 dark:text-zinc-300'>
+                  {jobTitle}
+                </div>
+              )}
             </div>
           </a>
         </div>
@@ -122,7 +126,7 @@ const personImageFilename = image.split('.').slice(0, -1)
     </div>
 
     <article
-      class='px-4 pb-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert'
+      class='px-4 pb-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert dark:hover:prose-a:text-white'
     >
       <slot />
     </article>

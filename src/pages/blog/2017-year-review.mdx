@@ -1,0 +1,104 @@
+---
+author: 'jon'
+title: '2017 in review'
+description: 'Looking back on 2017 and towards 2018'
+tags:
+  - 'clojure'
+  - 'casestudies'
+category: 'analysis'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '02 Jan 2018'
+heroImage: 'mock4.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+// import training from '../../assets/blog/training-mk2.jpg'
+// import confs from '../../assets/blog/confs.jpg'
+// import beers from '../../assets/blog/beers.jpg'
+import hero from '../../assets/blog/mock1.jpg'
+
+Happy 2018 everyone!
+
+2017 was a busy year at JUXT. We've bedded down and focused on delivery
+for our core clients, but we've also moved office, attended and spoke at
+various conferences, continued work on our open source libraries,
+launched new training courses, and we've been hiring some amazing people
+and growing.
+
+{/* training */}
+
+<Image src={hero} />
+
+Over the past year we have invested in compliance for our cloud
+environments, ensuring that our systems meet various regulatory
+criteria. This will be an important area for us and the industry going
+forward, and we're very pleased to have made significant progress.
+
+The backbone of the work involves making all our cloud deployments
+_infrastructure as code_. We use Clojure to generate our cloud
+descriptions, and tools such as CloudFormation and Terraform to do the
+subsequent heavy lifting. I talked about the approach our team use here
+at
+[ClojureX](https://skillsmatter.com/conferences/8783-clojure-exchange-2017#program),
+and the libraries [Mach](https://github.com/juxt/mach) and
+[Roll](https://github.com/juxt/roll) which have been spawned out of the
+approach (Malcolm [spoke about Mach at Dutch Clojure
+Days](https://www.youtube.com/watch?v=RRoJaOs-K6U)).
+
+On a different tack we have used GraphQL on multiple projects and we
+have tackled the challenge of opening up _enterprise data_ for query, in
+one case using Datomic as an indexing tool on top of an existing data
+fabric in a large financial institution. Datomic is attractive in this
+regard for its ease of declaring additive schemas, graph query
+capability, and for speed of data retrieval via the Peers.
+
+GraphQL excites us for the ability to provide a centralised, enterprise
+level query capability, which is so often lacking, where data is usually
+spread about into various isolated data stores and made difficult to
+access. The approach of GraphQL is no silver bullet, and there will be
+subsequent challenges such as schema versioning and management, but we
+believe it's a major step forward. It can be a game changer to give
+humans intuitive tools for exploring data, built upon an
+industry-adopted data access standard.
+
+{/* confs */}
+
+<Image src={hero} />
+
+Aside from project work, it's been fun to objectively watch the Clojure
+community and tooling evolve. We've seen many new companies using
+Clojure, the industry adoption of Clojure feels mildly exponential.
+
+I met a lot of developers when I worked for ThoughtWorks a decade ago,
+and I still lurk on their alumni mailing lists. From this and many
+conversations I've had in general, it still feels like Clojure is a hot
+language that developers want to use and to recommend. The types debate
+will always divide (although for me Rich Hickey put the argument to the
+sword in his [recent Clojure conj keynote
+talk](https://www.youtube.com/watch?v=2V1FtfBDsLU)), but Clojure does
+have a rigorous philosophical underpinning of simplicity and
+immutability that intuitively feels _right_ to a lot of people.
+
+The tooling continues to improve, a hot of the presses example being a
+speed-up [release of
+CIDER](https://github.com/clojure-emacs/cider/releases/tag/v0.16.0), not
+to mention all the ClojureScript explosion of goodness we have seen
+recently. Clojure is 10 years old now, and whilst the extremely laggard
+organisations will always be conservative in language selection up until
+the last possible moment, the bulk of the industry - including
+[NASA](https://github.com/nasa/Common-Metadata-Repository) - is
+embracing the parens.
+
+To conclude, we're looking forward to another year of building software
+using the amazing tools that the community has served up in spectacular
+fashion. It's becoming clearer, that when the tools are available, you
+can build software faster and more honestly, giving the users what they
+want without getting bogged down in heavyweight processes and subsequent
+large scale team management issues. The good tech and the good people
+hang together, and we need both.
+
+Happy 2018!
+
+{/* beers */}
+
+<Image src={hero} />

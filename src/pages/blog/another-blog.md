@@ -12,9 +12,7 @@ tags:
   - performance
   - optimization
 publishedDate: '17 Jul 2022'
-heroImage:
-  src: 'mock3.jpg'
-  alt: 'Space shuttle leaving curved trail in the sky'
+heroImage: 'mock3.jpg'
 ---
 
 From October 2020 until July 2021, I had the chance to work on an exciting greenfield project in the investment sector. The goal was to develop a data-intensive webapp able to handle hundreds of UI changes per second along with the resolution of thousands of formulas, taking as inputs live market data and user entered values.

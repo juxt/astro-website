@@ -24,8 +24,5 @@ export type Blog = {
   category: string
   slug: string
   href: string
-  heroImage: {
-    src: string
-    alt: string
-  }
+  heroImage: string
 }

@@ -7,9 +7,7 @@ description: 'description 2'
 tags:
   - test
 publishedDate: '16 Jul 2022'
-heroImage:
-  src: 'mock4.jpg'
-  alt: '2'
+heroImage: 'mock4.jpg'
 ---
 
 blog 2 3

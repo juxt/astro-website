@@ -1,0 +1,210 @@
+---
+author: 'oly'
+title: 'Advanced Martian'
+description: 'Extraterrestrial intelligence'
+category: 'technology'
+layout: '../../layouts/BlogPost.astro'
+tags:
+  - 'tech'
+  - 'clojure'
+  - 'api'
+publishedDate: '08 Nov 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+// import hereBeDragons from '../../assets/blog/here-be-dragons.png'
+import hero from '../../assets/blog/mock1.jpg'
+
+My [introduction to Martian](martian.html) demonstrated its use in
+simplifying code used to talk to HTTP APIs. Before reading this article
+it is suggested you read that and/or [watch the ClojureX Bytes
+talk](https://skillsmatter.com/skillscasts/8843-clojure-bytes#video) for
+an overview. Here I will describe other benefits arising from
+self-describing APIs and decoupling interfaces from implementations - in
+other words, letting you describe the _what_ and letting the server and
+Martian take care of the _how_.
+
+[martian-test](https://github.com/oliyh/martian/tree/master/test) is a
+library which uses your Swagger definition to validate your calls and
+return realistic responses without requiring a real HTTP server. This
+lets you write tests with much higher coverage that will run faster and
+give you greater confidence. Let's consider a somewhat naive user lookup
+function:
+
+```clojure
+(defn find-user [m user-name]
+  (let [user (:body (martian/response-for m :load-user {:user-name user-name}))]
+    {:name (or (:name user) "Guest")
+     :write-access? (not (:read-only user))}))
+```
+
+The inclusion of the HTTP request makes it tricky to test - you don't
+want to have to write a stub HTTP server just for this. Of course, you
+could rewrite the function to compose it in a better way, and unit test
+the logic separately from the HTTP call. You might write some code that
+builds the sort of response that you can pass in to your function to
+test it, but then your response-building code starts to look like a stub
+HTTP server too! You also run the risk of any hardcoded stub response
+drifting away from the real response the server would return, making
+your tests irrelevant.
+
+Martian can use the production definition of the server's API to
+generate the response, requiring no stub code and providing responses
+that are always up to date. We can write the tests like this:
+
+```clojure
+(deftest find-user-test
+  (testing "happy path works"
+    (let [m (-> (martian/bootstrap-swagger "https://api.com" user-api-swagger-definition)
+                (martian-test/respond-with :success))]
+          user (find-user m "abc")]
+      (is (not= "Guest" (:name user)))
+
+      (is (instance? Boolean (:write-access? user)))))
+
+  (testing "guest access works"
+    (let [m (-> (martian/bootstrap-swagger "https://api.com" user-api-swagger-definition)
+                (martian-test/respond-with :error))]
+          user (find-user m "abc")]
+      (is (= "Guest" (:name user)))
+
+      (is (false? (:write-access? user))))))
+```
+
+As always, you can write your own interceptors with whatever behaviour
+you want, building on top of what Martian provides but always working at
+the interface level where you want to be.
+
+Furthermore you can use **martian-test**\'s response generators to write
+generative tests and explore all possible behaviour in the following
+way:
+
+```clojure
+(deftest find-user-generative-test
+  (let [m (martian/bootstrap-swagger "https://api.com" swagger-definition)
+        p (prop/for-all [response (martian-test/response-generator m :load-user)]
+
+                        (let [user (find-user (martian-test/constantly-respond m response))]
+                          (if (= 200 (:status response))
+
+                            (and (= (:name response) (:name user))
+
+                                 (= (not (:read-only response)) (:write-access? user)))
+
+
+                            (and (= "Guest" (:name user))
+
+                                 (false? (:write-access? user))))))]
+
+    (tct/assert-check (tc/quick-check 100 p))))
+```
+
+The inherent variability in the sort of responses you can get from
+remote HTTP calls makes it a perfect fit for generative testing, giving
+you confidence that your application will behave correctly no matter
+what response the remote API throws at it.
+
+{/* hereBeDragons */}
+
+<Image src={hero} />
+
+In the wonderful world of services written by you all APIs are
+self-described with Swagger and using Martian is a breeze. Towards the
+edges of the map though are areas labelled \"here be dragons\" where
+services written by other teams aren't quite so self-descriptive.
+Wouldn't it be great if you could write an API description for these and
+get all the same benefits?
+
+A Martian record is just data. The `bootstrap-swagger` function creates
+the record for you from a Swagger description but you can also create
+one directly, describing the interface as data, using `bootstrap`:
+
+```clojure
+(martian/bootstrap "https://api.org" [{:route-name :load-pet
+                                       :path "/pets/:id"
+                                       :method :get
+                                       :path-schema {:id s/Int}
+                                       :response-schemas [{:status (s/eq 200)
+                                                           :body {:name s/Str
+                                                                  :age s/Int}}
+                                                          {:status (s/eq 404)}]}
+
+                                      {:route-name :create-pet
+                                       :path "/pets/"
+                                       :method :post
+                                       :body-schema {:id s/Int
+                                                     :name s/Str}}])
+```
+
+This means once again that you have separated the interface from the
+implementation and tamed the dragon by describing it in one place,
+making changes easy and documenting it to help other developers
+understand it.
+
+The use of input and output schemas ensure you can use the definition
+with **martian-test** to write helpful tests for your production code.
+
+[re-frame](https://github.com/Day8/re-frame) is a library to help you
+write single page applications in Clojurescript in a way that scales.
+Data is read from the application state using subscriptions, events
+which reduce the old application state into a new state are fired and
+handled asynchronously and side effects like HTTP requests are described
+as data. Sounds good?
+
+In the [re-frame library for
+HTTP](https://github.com/Day8/re-frame-http-fx) you will see that
+although the HTTP call is described as data, it's actually quite
+complicated data and describes both the _what_ and the _how_:
+
+```clojure
+(reg-event-fx :handler-with-http
+  (fn [{:keys [db]} _]
+      {:db   (assoc db :show-twirly true)
+       :http-xhrio {:method          :get
+                    :uri             "https://api.github.com/orgs/day8"
+                    :timeout         8000
+                    :response-format (ajax/json-response-format {:keywords? true})
+                    :on-success      [:good-http-result]
+                    :on-failure      [:bad-http-result]}}))
+```
+
+Let's use Martian to clean this up. We can describe the HTTP call in the
+Martian way with just the _what_:
+
+```clojure
+(reg-event-fx :handler-with-http
+  (fn [{:keys [db]} _]
+    {:db (assoc db :show-twirly true)
+     :dispatch [:http/request :github/orgs {:org-name "day8"} :good-http-result :bad-http-result]}))
+```
+
+Much more readable and all the HTTP details have gone! The handlers to
+make this work are as simple as this:
+
+```clojure
+(reg-event-fx :http/request
+  (fn [{:keys [db]} [_ operation-id params on-success on-failure]]
+    {:martian/request [(:martian db) operation-id params on-success on-failure]}))
+
+(reg-fx :martian/request
+  (fn [[m operation-id params on-success on-failure]]
+    (go
+      (let [{:keys [status body]} (<! (martian/response-for m operation-id params))]
+        (if (unexceptional? status)
+          (dispatch [on-success body])
+          (dispatch [on-failure body]))))))
+```
+
+You can also use re-frame's db effects to achieve such goals as tracking
+all pending requests, ignoring duplicate requests while one is pending
+and so on - the possibilities are endless. The latest release of
+re-frame has also embraced the same interceptor model so Martian and
+re-frame sit nicely together, describing events and acting on them with
+interceptor chains.
+
+I hope these examples have shown more of the benefits of separating your
+interfaces from implementations and inspired you to try Martian.
+
+[Martian is on Github](https://github.com/oliyh/martian), feedback and
+contributions are very welcome.

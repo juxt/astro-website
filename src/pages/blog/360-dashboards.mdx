@@ -1,0 +1,64 @@
+---
+author: 'mal'
+title: 'From data to dashboards'
+description: 'A case study about Mastodon C'
+tags:
+  - 'clojure'
+  - 'casestudies'
+category: 'case study'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '27 Oct 2015'
+heroImage: 'mock4.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+// import p360 from '../../assets/blog/360.jpg'
+import hero from '../../assets/blog/mock1.jpg'
+
+JUXT have collaborated with Mastodon C a few times to help produce
+solutions for clients.
+
+Energy Saving Trust approached Mastodon C with a small problem but one
+that required custom development. They were collecting reviews from a
+number of sustainability experts, who each put their responses into an
+Excel spreadsheet template.
+
+The problem was to take these spreadsheets, and quickly derive a series
+of custom reports which could be accessed online by authorized parties.
+
+This is the kind of problem that a data integration and business
+intelligence (BI) tools excel at. Rather than build a system from
+scratch, it may be better to address problems with existing tools. But
+then how do you go about choosing from the large number available? And
+once you've chosen one, how can you be sure it can do everything you
+might need it to?
+
+This build-versus-buy dilemma is a common one for IT decision makers.
+Building software from scratch, using a low-level _general purpose_
+language, can be risky and expensive. On the other hand buying a
+solution is also risky because it might not do everything you need it
+to.
+
+Building a system using Clojure is often a good compromise. As a general
+purpose programming language, there aren't many problem domains that
+Clojure can't adapt to. But Clojure's dynamic language capabilities,
+with its built-in data manipulation functions, make it a powerful data
+integration and presentation tool in itself.
+
+{/* p360 */}
+
+<Image src={hero} />
+
+JUXT were able to demonstrate this by _delivering a complete usable
+system in 10 days of effort_. Without the time to code in the data
+structure, the system _automatically extracted the meaningful results_
+from the reviews by _statistical analysis_, presenting the data in
+custom-specified charts in a dashboard format, accessible via a _secured
+web application_. This allowed the Energy Saving Trust to quickly
+produce a report full of insights into the energy savings possible with
+modifications to existing homes.
+
+If you are looking to develop a custom system, but want the rapid
+development associated with an _off the shelf_ data integration tool,
+you should consider building on the Clojure language using developers
+who know how to wield it.

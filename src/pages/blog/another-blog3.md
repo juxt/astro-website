@@ -5,9 +5,7 @@ layout: '../../layouts/BlogPost.astro'
 title: 'blog 3'
 description: 'description 3'
 publishedDate: '15 Jul 2022'
-heroImage:
-  src: 'mock5.jpg'
-  alt: '2'
+heroImage: 'mock5.jpg'
 ---
 
 blog 3

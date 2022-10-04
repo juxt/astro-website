@@ -8,9 +8,7 @@ publishedDate: '8 Jul 2022'
 tags:
   - 'test'
   - 'blog'
-heroImage:
-  src: 'mock4.jpg'
-  alt: 'Space shuttle leaving curved trail in the sky'
+heroImage: 'mock4.jpg'
 ---
 
 # hello world

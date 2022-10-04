@@ -11,9 +11,7 @@ tags:
 draft: true
 featured:
   weight: 2
-heroImage:
-  src: 'mock1.jpg'
-  alt: 'Space shuttle leaving curved trail in the sky'
+heroImage: 'mock1.jpg'
 ---
 
 # how to use code snippets
