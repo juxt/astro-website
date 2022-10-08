@@ -1,9 +1,9 @@
 ---
 code: 'iva'
-name: 'Iva'
-lastName: 'Dunno'
+name: 'Ivan'
+lastName: 'Fedorov'
 jobTitle: 'Software Engineer'
-image: 'alx.jpg'
+image: 'iva.jpeg'
 linkedin: '#'
 twitter: '#'
 github: '#'

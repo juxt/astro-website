@@ -1,4 +1,4 @@
 ---
 code: 'juxt'
-image: 'alx.jpg'
+image: 'logo.jpg'
 ---
