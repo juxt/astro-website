@@ -1,9 +1,9 @@
 ---
 code: 'oly'
 name: 'Oliver'
-lastName: '---'
+lastName: 'Hine'
 jobTitle: 'Senior Software Engineer'
-image: 'alx.jpg'
+image: 'oly.jpg'
 linkedin: '#'
 twitter: '#'
 github: '#'

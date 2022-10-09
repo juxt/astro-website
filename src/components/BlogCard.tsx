@@ -53,7 +53,7 @@ export function BlogCard({
               <div className='flex items-center justify-center bg-orange-100 dark:bg-gray-800 rounded-full w-8 h-8'>
                 <PencilIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
               </div>
-              <div className='text-juxt dark:text-zinc-300 capitalize text-sm'>
+              <div className='text-juxt dark:text-zinc-300 font-medium uppercase text-sm'>
                 {category}
               </div>
             </div>

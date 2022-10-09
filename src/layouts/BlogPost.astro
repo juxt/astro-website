@@ -1,6 +1,11 @@
 ---
 import DraftBanner from '../components/DraftBanner'
-import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
+import {
+  LinkedInIcon,
+  PencilIcon,
+  RedditIcon,
+  TwitterIcon
+} from '../components/Icons'
 import { Blog, Person } from '../components/types'
 import Layout from './Layout.astro'
 import { Image } from '@astrojs/image/components'
@@ -33,10 +38,18 @@ const personImageFilename = image.split('.').slice(0, -1)
         <div
           class='flex text-center max-w-xl mx-auto lg:text-left lg:max-w-none lg:w-1/2 lg:mx-0 flex-col lg:justify-center items-center lg:items-start'
         >
-          <div
-            class='text-sm font-extrabold uppercase pb-1 text-zinc-500 dark:text-zinc-200'
-          >
-            {category}
+          <div class='flex gap-2 pb-1 items-center'>
+            <div
+              class='flex items-center justify-center bg-orange-100 dark:bg-gray-800 rounded-full w-8 h-8'
+            >
+              <PencilIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300'
+              />
+            </div>
+            <div
+              class='text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm'
+            >
+              {category}
+            </div>
           </div>
           <h1
             class='text-black text-4xl dark:text-white font-semibold leading-tight pb-4'
