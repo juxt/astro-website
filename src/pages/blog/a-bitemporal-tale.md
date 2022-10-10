@@ -15,16 +15,14 @@ in place, we're offering a short story writing experience through
 database transactions and queries.
 
 For an interactive no-install browser-based experience, see the
-[Nextjournal edition of the
-Tale](https://nextjournal.com/crux/a-bitemporal-tale). Otherwise, let's
+[Nextjournal edition of the Tale](https://nextjournal.com/crux/a-bitemporal-tale). Otherwise, let's
 begin...
 
 ## Setup
 
 Assuming you have some basic knowledge of Clojure and you own a REPL.
 All you need for this tale is to add [Crux](https://juxt.pro/crux) to
-your deps. For more configuration details [see
-here](https://xtdb.com/reference/configuration.html).
+your deps. For more configuration details [see here](https://xtdb.com/reference/configuration.html).
 
 ```clj
 ;; lein
@@ -601,8 +599,7 @@ tale.
 
 - Evict can be scoped
 
-Learn about these and other features on [our docs
-portal](https://juxt.pro/crux/docs/index.html).
+Learn about these and other features on [our docs portal](https://juxt.pro/crux/docs/index.html).
 
 If you have any suggestions on how to improve this tutorial or docs
 don't hesitate to contact us on

@@ -33,8 +33,7 @@ can't bear to leave a naked function untouched, without giving it the
 formalising treatment.
 
 What underlies this split in approach seems to revolve around whether
-you can or not - as [Paul Graham puts
-it](http://paulgraham.com/head.html) - hold a program in your head. If a
+you can or not - as [Paul Graham puts it](http://paulgraham.com/head.html) - hold a program in your head. If a
 developer can fit the code-base in their head, they have a less of a
 need to explicitly map out the inputs and outputs of an individual piece
 of the puzzle, because they can see the whole jigsaw from above. These

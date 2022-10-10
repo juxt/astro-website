@@ -72,8 +72,7 @@ humanity out of the individual.
 
 Developers are now increasingly seeking to work for companies with a
 _developer led_ culture, where developers are entrusted to lead software
-development projects, as [_Chief
-Programmers_](https://en.wikipedia.org/wiki/Chief_programmer_team), as
+development projects, as [_Chief Programmers_](https://en.wikipedia.org/wiki/Chief_programmer_team), as
 discussed in the _Mythical Man Month_ book. In this model, proposed by
 Harlan Mills, other roles such as project managers, analysts and testers
 are there to support developers, with developers given more
@@ -104,8 +103,7 @@ _chief programmer_ is still required. _Software is not a democracy_.
 >
 > --- poet David Whyte
 
-Mastery needs space. As Rich Hickey espouses in his [Hammock Driven
-Development](https://www.youtube.com/watch?v=f84n5oFoZBc) talk, we need
+Mastery needs space. As Rich Hickey espouses in his [Hammock Driven Development](https://www.youtube.com/watch?v=f84n5oFoZBc) talk, we need
 to be able to _step away from the computer_ and dedicate more time to
 undisturbed thinking. This allows us to go deeper into our mastery of
 the domain and the technical solution space, which will benefit the

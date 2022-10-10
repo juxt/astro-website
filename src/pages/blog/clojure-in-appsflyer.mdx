@@ -1,0 +1,348 @@
+---
+author: 'and'
+title: 'Clojure in Israel: AppsFlyer'
+description: 'Clojure in mobile attribution'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '01 Jul 2019'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+[AppsFlyer](https://www.appsflyer.com/) is one of the world's
+leading mobile attribution & marketing analytics platforms. We had the
+recent pleasure of chatting with [Nir Rubinstein](https://twitter.com/nirrubinstein), [Morri Feldman](https://twitter.com/morrifeldman)
+and [Ronen Cohen](https://twitter.com/nenorbot) about their work.
+
+## Company background
+
+**Andrew:** AppsFlyer was founded around 2011. Could you give me some
+background on the company?
+
+**Nir:** The company was started officially in 2012 by [Oren Kaniel,
+](https://twitter.com/okaniel) and
+[Reshef Mann](https://twitter.com/reshefm). They were playing
+around with a few ideas and identified an opportunity in the market for
+mobile attribution.
+
+I'll try and explain as simply and briefly as possible what mobile
+attribution actually is, because not everyone is familiar with this
+technology. Imagine you have the coolest app in the world which you want
+to promote. You push it to the app store and realise no one is going to
+see it unless you promote it, so you need to spend some money on ad
+networks to promote it. The networks come back to you a month later.
+Some of them have found you 100 users, others have found you 1,000 users
+and some say they've found you 10,000 users. You have to take these
+claims at face value and you have no idea if these 1,000 users from the
+one network are part of the 10,000 users that the other network
+reported. You have no notion of who the users actually are and what they
+are actually doing within your app.
+
+Web attribution was created a really long time ago. It's easy. You just
+put a pixel on your webpage and start tracking users. However, with
+mobile attribution, it's more complicated, since the context of
+displaying an ad is usually a mobile web context and the context once
+the app is already installed is an in-app context on two totally
+different disks. And these two completely separate worlds need to
+somehow be connected, and this is where real mobile attribution comes
+in.
+
+So, at the end of the month, AppsFlyer's platform tells you how many
+users network A, B and C truly brought you - and you pay network A, B
+and C for this user acquisition. However, on top of this, the platform
+will also tell you that network A brought you 1,000 users and network B
+brought to you 100 users, but the 100 users from network B spent on
+average \$10 in the app, whereas the users from network A spent 50
+cents. This will enable you to make more intelligent decisions about
+which ad network is better for your business.
+
+We started as a pure mobile attribution company and then we delved
+deeper and offered attributional analytics, and now we are the one-stop
+shop for mobile marketers in our ecosystem. I was AppsFlyer's first
+employee, joining Reshef and Oren in 2012. Reshef started writing all
+the code and I joined him. Seven years later the company has 600+
+employees and 14 offices around the world.
+
+**Andrew:** Is the dev team mostly based out of Israel?
+
+**Nir:** Yes, with the exception of Morri who lives in the US (although
+he started in Israel), our team in Kiev, as well as a few remotes out of
+Europe. When he moved, we decided we didn't want to lose him. Most of
+the developers are in Israel - nearly 200 engineers, around 30 more
+people in Kiev in the Ukraine and a handful of remotes.
+
+## Tech story
+
+**Andrew:** What is your tech stack like? Is it mostly Clojure?
+
+**Nir:** It depends on which area. It's a big development team and a big
+company and so we do a lot of different things. The backend services are
+predominantly Clojure. Our big data team is focused on Spark and is
+mostly Scala and a bit of Python for workflows.
+
+**Morri:** Yeah, Python and Scala are used in the areas that are more
+batch and offline in their nature.
+
+**Nir:** Yes and the frontend is not ClojureScript, but rather regular
+JavaScript - React / Redux - and built in a micro-frontend architecture.
+
+**Jon:** How many lines of Clojure code do you have?
+
+**Nir:** It's hard to say exactly (since this is a constantly moving
+target - code is added all the time and removed when we pay our
+technical debt). But we're definitely one of the largest Clojure shops
+in EMEA with 10's of thousands of lines of code in production.
+
+**Morri:** Maybe even upwards, we've got a lot of Clojure code. It's
+quite hard to tell because a lot of our code is spread out across many
+microservices.
+
+**Jon:** It's always a fun sort of a record. One day we'll get someone
+who says They've got 10 million.
+
+**Nir:** Haha! I don't know if that's the record we want to hold.
+
+**Andrew:** How do you find working with such a large Clojure code base?
+
+**Morri:** Maybe it helps to explain that our architecture is small
+services that mainly read to and write from Kafka. Within any of these
+small services, it actually feels pretty manageable. There you have
+maybe a few thousand lines of code with each service, that's usually
+managed by a small team of 5-10 people. As a whole, there's a lot of
+code, but we don't go into every project personally.
+
+## Tech history
+
+**Andrew:** Could you give us some history behind the tech stack?
+
+import appsflyer from '../../assets/blog/appsflyer-fp-choices.png'
+
+<Image src={appsflyer} />
+
+**Nir:** In the beginning, everything was in Python. Reshef started
+writing the code towards the end of 2011. I joined in June 2012 and it
+was all Python, and luckily for us, the business started growing. We
+were microservices oriented from the start, so we tried to avoid pushing
+everything into one big monolith. We worked hard to intelligently split
+everything into different services.
+
+Even conceptually, even if they ran on the same machine, they were still
+different services, where in the beginning everything was in Python. We
+continued to grow and then we came to a single service where Python
+simply couldn't cope with the load it generated. And this was the
+turning point, where we realised we needed to explore a new and
+different route. We started exploring the options, and realised we could
+probably write some low level C code and invoke it via Python, or we
+could try [PyPy ](https://pypy.org/), a different VM or even possibly
+think about migrating to a completely new programming language.
+
+All options explored, Reshef and I understood that, to achieve the scale
+we were looking for - by improving throughput, concurrency and
+multi-threading - we would need to introduce a new programming language.
+We knew that at the scale that we were growing, we would have difficulty
+scaling and growing with Python due to performance tradeoffs and other
+issues we had encountered, even though we still loved Python.
+
+One thing we both quickly understood is that we really wanted a
+functional language as we'd both worked with imperative languages in the
+past and knew that concurrent and parallel programmes in imperative
+languages were hard.
+
+Alongside the regular daily work, we took about two months to evaluate
+different functional languages. We tried [Erlang ](https://www.erlang.org/) and [Haskell,
+](https://www.haskell.org/) and
+[OCaml, ](http://ocaml.org/). We
+even tried [F# ](https://fsharp.org/) on [Mono ](https://www.mono-project.com/) back in the day. We
+tried [Scala ](https://www.scala-lang.org/) and we tried [Clojure,
+](https://clojure.org/). **Clojure
+won easily** because back in 2012 the ecosystem for everything was kind
+of small in terms of libraries and open-source projects, etc. Scala and
+Clojure both rely on the JVM, but the minute both of us saw Scala, we
+didn't really like it. It was like Java, an impediment, and we don't
+really like Java either, to be frank. It's very easy to write code in
+Scala that's very Java-like; that's OO and deals with entire concepts
+that we're used to working with in OO languages. When we saw Clojure,
+neither of us had done any Lisp before and we took a week or two to
+grasp the concepts and then we kind of fell in love with it. From then
+on (around 2013) every new service was written in Clojure.
+
+**Andrew:** That's really cool.
+
+**Morri:** It made a lot of sense in our case. I wasn't around back
+then, but AppsFlyer and most of its background is comprised of a
+pipeline of small microservices that do a task, read from Kafka and
+manipulate data in some way, and then eventually write it to a different
+topic in Kafka. This is where Clojure really excelled. It's great at
+treating data as a first class citizen, manipulating it and moving it
+back and forth, so it made a lot of sense.
+
+**Nir:** It made a lot of sense because, when you learn about
+programming languages, you watch a couple of lectures and then you watch
+a video by Rich Hickey and he's like: \"Let me tell you about the
+conveyor belt and core.async channels\". And we thought, \"Hey, that's
+what we are doing in Kafka and we can do it in code in microservices.
+Let's do it!\" The notions that Rich presented around Clojure really
+resonated with us with how we treat data at AppsFlyer. They sort of
+melted together and we took it and never looked back.
+
+**Andrew & Jon:** Cool
+
+## Open source Clojure libraries
+
+**Andrew:** So, in terms of Clojure libraries that you use, are there
+any that particularly stand out for you? Is there stuff that you feel
+that you use on a day-to-day basis that you feel is vitally important to
+how the system runs?
+
+**Morri:** [core.async ](https://github.com/clojure/core.async) - all over
+the place. core.async in some services we have that are still backend
+services, but that serve more data. There's a lot of compojure too.
+
+**Nir:** There's no new service without core.async inside because that's
+how we model stuff - around core.async. We're using most of what's out
+there in open-source community. For logging, we're using [Timbre](https://github.com/ptaoussanis/timbre), for Redis
+we're using [Carmine ](https://github.com/ptaoussanis/carmine) and for JSON
+we're using [Cheshire ](https://github.com/dakrone/cheshire). We use
+[core.match ](https://github.com/clojure/core.match) a lot. We use
+a bit of Zach Tellman's [Manifold ](https://github.com/ztellman/manifold) to pipeline
+async operations. We use [http-kit ](https://www.http-kit.org/) a lot. We have also
+written libraries like [aerospike-clj ](https://github.com/AppsFlyer/aerospike-clj) that
+provides a Clojure wrapper for Aerospike databases. So we are also
+working on contributing back to the community as well.
+
+**Morri:** On the data side, we use [clojure.java.jdbc](https://github.com/clojure/java.jdbc) and [Honey
+SQL ](https://github.com/jkk/honeysql) a lot.
+
+**Andrew:** And in terms of the database side of things, you mentioned
+Kafka a lot. Do you use anything else for the data stores?
+
+**Morri:** So, conceptually we divide our team into a real time team
+where the data is flowing in Kafka, and more of a batch-oriented team
+where we do batch processing and insert summary data into various
+databases to serve back to our clients for the dashboard. For the
+databases there, we're currently using a mixture of mainly [Druid,
+](http://druid.io/) and
+[ClickHouse ](https://clickhouse.yandex/), as well as a few
+postgres instances. As well as Aerospike that we previously mentioned.
+
+**Ronen:** We're also using [HBase ](https://hbase.apache.org/) for real-time stuff,
+mostly Aerospike.
+
+**Jon:** We've been working on our own database, [Crux](/crux/index.html). The idea is
+that Kafka is a transaction log for us and we build up materialised
+views on top of [RocksDB ](https://rocksdb.org/) which feed in from Kafka and
+then we put a datalog query engine on top of that. You should check it
+out.
+
+**Nir:** Yeah. We're using CQRS and event sourcing on top of Kafka for a
+lot of our stuff. We are creating our own materialised views on RocksDB
+and other databases so it sounds like something we could use.
+
+**Jon:** I don't want to derail this conversation though.
+
+## Team adoption
+
+**Andrew:** I have one other question about team adoption. How do you
+bring new people on? Do you only introduce people that are already doing
+Clojure? Is there a lot of Clojure development going on in Israel? Do
+you cross-train?
+
+**Morri:** We don't look for Clojure developers when we're hiring. We
+look for good engineers.
+
+**Nir:** The Clojure scene in Israel is not that big. We are the
+predominant company that uses it. There are 3 or 4 other companies that
+use it. They are really small companies - dozens of people - where the
+engineering organisation is pretty small. So, for us to recruit from
+that specific niche is a non-starter. We do our best to recruit the best
+people that we can, where Clojure is just a tool in the stack.
+
+I gave a talk in Israel about five years ago on Clojure and Morri came
+over to view it. He was doing his post-doctorate in Israel and was using
+Clojure to hack away at some stuff. He heard me talk about Clojure and
+how we use it and said \"It's kind of nice, maybe we can do something
+together\", and he's been working at AppsFlyer ever since.
+
+We're looking for good people who know how to learn on their own, and we
+provide the learning environment, as well as developing internal Clojure
+courses, and a comprehensive onboarding process that sets hires up for
+success from day one. The core ability of the people is paramount here.
+We're not looking for people with x amount of years experience in a
+language or framework A / B / C. We're looking for experienced people
+with production experience, preferably with experience in some
+interesting languages besides PHP or JavaScript. If you meet that bar,
+then you can start working with us and learn.
+
+**Ronen:** When people start here, they spend some time learning Clojure
+and getting more familiar with it and the system. We put a lot of effort
+into keeping them. We have a lot of internal classes where we teach
+Clojure, how to work with it, how to use it better, but it comes down to
+the people and how well they can learn. I think we've been very
+successful.
+
+**Morri:** But definitely something we have to work really hard at once
+we hire people is to train them. Currently we have a process where we're
+hiring people into R&D at large and then they do a rotation through
+several different teams doing training tasks in each team. Maintaining
+those tasks and evaluating the code that they write takes a lot of work.
+It's definitely worth it. After they've gone through that, they
+generally will choose a team where they feel like they interact the best
+with. And as they do those training tasks, they'll be writing Clojure
+code and getting review feedback on their code from each of the teams.
+
+**Nir:** Coming back to the question about hiring. It's easier now.
+We're a big company with 600+ people globally, and nearly 400 just in
+Israel. We have a good reputation, from both a technology and a business
+perspective, but that's after 7 years. It was a very different story
+when we were trying to recruit back in 2013 / 2014. The development team
+was 5 - 10 people then. New people would come along that already had
+many years of good experience in Java or C# and wonder why we were doing
+stuff in Clojure.
+
+What we found is that it's usually the people that can adapt, where a
+programming language is just a tool, that are the best to hire. We've
+only had a handful of people like this over the past few years, but
+they're the best people in the company and they're still the best people
+4 or 5 years later. They're the core people still in the company that
+know and can teach Clojure the best because they're the very best at
+learning it. Now that we're bigger, people want to join AppsFlyer in
+Israel because it's a good company. They accept Clojure like it's a
+known fact so the hurdle has become much smaller over the years.
+
+One of the first questions I ask when interviewing someone for an
+engineering role is to tell me something new they've learned in the past
+week or a cool video that they've watched, or even a blog post they've
+read that sounded interesting to them. What would they like to try out
+that they haven't had the chance to do? We don't care about the
+specifics. We want to find open minded people.
+
+## Rejuvenation
+
+**Morri:** One last thing I wanted to mention is around the size of the
+code base. We tend to revisit many of our microservices and we'll do a
+hard fork and rewrite it from scratch applying lessons that we've
+learned along the way. So even though the code base may appear large,
+the amount of code that's in production will be significantly smaller.
+
+**Nir:** We have no other option really because the scale that we're
+dealing with is doubling every 6 months. Whatever works for you when
+you're processing 2 billion events today doesn't necessarily work the
+same when you're processing 10 billion events a day or 15 billion. Now
+we're around 60 billion events per day so we have to keep reinventing
+the company as we grow.
+
+::: formalpara-title
+**Watch Morri's Clojure/North talk: \"Lessons in Building a System that
+Processes More than 70 Billion Events Daily\"**
+:::
+
+<iframe
+  width='560'
+  height='315'
+  src='https://www.youtube.com/embed/VBIlk3GMmNc'
+  title='YouTube video player'
+  frameborder='0'
+  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+  allowfullscreen
+></iframe>

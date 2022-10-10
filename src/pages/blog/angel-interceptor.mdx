@@ -31,8 +31,7 @@ in an \"all or nothing\" approach where all middleware is executed on
 every request - if you want something more specific, you either need a
 hand-rolled route matcher to test scope (potentially duplicating your
 routing logic) or you have to use something like Liberator which makes
-it somewhat easier but [comes with its own
-pitfalls](http://davidjameshumphreys.github.io/patterns-pitfalls-liberator).
+it somewhat easier but [comes with its own pitfalls](http://davidjameshumphreys.github.io/patterns-pitfalls-liberator).
 
 I've seen webserver middleware stacks take on frightening proportions,
 towering unsteadily over the handling code like a game of Jenga in the
@@ -89,8 +88,7 @@ leaf handler. This leads to a wonderful realisation:
 This allows you to write simpler interceptors that don't have to worry
 about their scope, know nothing about routing and can just deal with the
 \"happy path\", making code much more enjoyable to work with. I
-recommend [an excellent talk by Frankie
-Sardo](https://skillsmatter.com/skillscasts/6812-pedestal-new-wave) on
+recommend [an excellent talk by Frankie Sardo](https://skillsmatter.com/skillscasts/6812-pedestal-new-wave) on
 Pedestal if you're interested in learning more.
 
 # Rule driven
@@ -145,6 +143,5 @@ No more wondering which interceptors might rely on others - it's
 declared right there in the code, and allows you to specify both the
 scope and the relative ordering of any given interceptor.
 
-[Angel Interceptor is on
-Github](https://github.com/oliyh/angel-interceptor), feedback and
+[Angel Interceptor is on Github](https://github.com/oliyh/angel-interceptor), feedback and
 contributions are very welcome.

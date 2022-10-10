@@ -99,8 +99,7 @@ give it a WAR file or a Docker image, then it will create the EC2 nodes
 and corresponding infrastructure for you, including AutoScaling Groups,
 Elastic Load Balancers, and Security Groups. It also helps you with
 minimally provided config (such as key pairs), and can expose
-environmental vars to the app, thus jiving well with the [12
-factor](http://12factor.net) approach.
+environmental vars to the app, thus jiving well with the [12 factor](http://12factor.net) approach.
 
 Beanstalk has _Applications_, _Environments_ and _Application Versions_
 as onion layers: Application -\> Environment -\> Application Version. An
@@ -128,8 +127,7 @@ it's best to keep your deployment ambitions in check when using PaaS.
 
 # No Blue/Green
 
-[Blue/Green
-deployment](http://martinfowler.com/bliki/BlueGreenDeployment.html) is
+[Blue/Green deployment](http://martinfowler.com/bliki/BlueGreenDeployment.html) is
 the concept of running two application versions side by side in
 production, and once you're happy with the new _green_ release
 candidate, you can gracefully retire the existing _blue_ version.
@@ -142,8 +140,7 @@ during the deployment transition.
 
 You can however maintain two different environments, i.e. a prod1 and a
 prod2, and then do a DNS swap between them, to ensure _zero downtime_,
-as [covered
-here](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.CNAMESwap.html).
+as [covered here](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.CNAMESwap.html).
 There is though a big downside to using DNS swapping to achieve
 blue/green, as DNS entries are cached by clients hitting your service.
 This means you do not ultimately control the switch, and you can never
@@ -155,13 +152,10 @@ containing different application versions. You don't get this with
 Beanstalk.
 
 If you need zero downtime but want to avoid any DNS switching, then
-Beanstalk has another option. They have quietly introduced [_rolling
-application version
-updates_](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.rolling-version-deploy.html)
+Beanstalk has another option. They have quietly introduced [_rolling application version updates_](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.rolling-version-deploy.html)
 [late in
 2014](http://aws.amazon.com/about-aws/whats-new/2014/10/28/aws-elastic-beanstalk-supports-application-version-deployments/).
-This is subtly different to plain [old rolling environment config
-changes](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.rollingupdates.html),
+This is subtly different to plain [old rolling environment config changes](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.rollingupdates.html),
 which have been around for a while.
 
 So now if you have a few nodes running in a Beanstalk environment, you

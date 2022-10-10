@@ -17,8 +17,7 @@ import hereBeDragons from '../../assets/blog/here-be-dragons.png'
 
 My [introduction to Martian](martian.html) demonstrated its use in
 simplifying code used to talk to HTTP APIs. Before reading this article
-it is suggested you read that and/or [watch the ClojureX Bytes
-talk](https://skillsmatter.com/skillscasts/8843-clojure-bytes#video) for
+it is suggested you read that and/or [watch the ClojureX Bytes talk](https://skillsmatter.com/skillscasts/8843-clojure-bytes#video) for
 an overview. Here I will describe other benefits arising from
 self-describing APIs and decoupling interfaces from implementations - in
 other words, letting you describe the _what_ and letting the server and
@@ -149,8 +148,7 @@ which reduce the old application state into a new state are fired and
 handled asynchronously and side effects like HTTP requests are described
 as data. Sounds good?
 
-In the [re-frame library for
-HTTP](https://github.com/Day8/re-frame-http-fx) you will see that
+In the [re-frame library for HTTP](https://github.com/Day8/re-frame-http-fx) you will see that
 although the HTTP call is described as data, it's actually quite
 complicated data and describes both the _what_ and the _how_:
 

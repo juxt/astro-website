@@ -43,9 +43,7 @@ Sometimes, it's hard not to feel a little smug about the tech that we
 often take for granted in the Clojure community while the rest of the
 industry languishes under poor technology choices.
 
-In his article, [Using Pipelines to Manage Environments with
-Infrastructure as
-Code](https://medium.com/@kief/https-medium-com-kief-using-pipelines-to-manage-environments-with-infrastructure-as-code-b37285a1cbf5),
+In his article, [Using Pipelines to Manage Environments with Infrastructure as Code](https://medium.com/@kief/https-medium-com-kief-using-pipelines-to-manage-environments-with-infrastructure-as-code-b37285a1cbf5),
 Kief Morris presents a contemporary manifestation of a classic
 dichotomy: how to differentiate the same from the different.
 
