@@ -175,8 +175,7 @@ You need to build the ZIP file in advance, containing typically just the
 Dockerfile and the uberjar (you can use `lein-zip`). `lein-dockerstalk`
 may well get factored into `lein-beanstalk` in the future.
 
-There is also a [plugin for
-boot](https://github.com/adzerk-oss/boot-beanstalk) for deploying Docker
+There is also a [plugin for boot](https://github.com/adzerk-oss/boot-beanstalk) for deploying Docker
 images to Beanstalk.
 
 # Conclusion

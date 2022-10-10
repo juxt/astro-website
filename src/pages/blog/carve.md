@@ -1,11 +1,11 @@
 ---
-author: "anc"
-title: "Carve that Clojure codebase"
-description: "How to use carve to delete all the dead code from your projects"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "18 Jan 2021"
-heroImage: "mock3.jpg"
+author: 'anc'
+title: 'Carve that Clojure codebase'
+description: 'How to use carve to delete all the dead code from your projects'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '18 Jan 2021'
+heroImage: 'mock3.jpg'
 ---
 
 As anyone who has maintained a legacy software project will know, every
@@ -33,13 +33,11 @@ vars that are never referenced by anything else.
 
 I will outline here a process that worked well for us and allowed us to
 delete thousands of lines of code very easily. There are other ways to
-use `carve` as you can see that in detail in [the carve usage
-section](https://github.com/borkdude/carve#usage).
+use `carve` as you can see that in detail in [the carve usage section](https://github.com/borkdude/carve#usage).
 
 ## Install
 
-Install the carve binary following instructions from [the carve install
-documentation](https://github.com/borkdude/carve#installation).
+Install the carve binary following instructions from [the carve install documentation](https://github.com/borkdude/carve#installation).
 
 ## Configure
 

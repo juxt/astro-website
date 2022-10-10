@@ -134,7 +134,7 @@ simply couldn't cope with the load it generated. And this was the
 turning point, where we realised we needed to explore a new and
 different route. We started exploring the options, and realised we could
 probably write some low level C code and invoke it via Python, or we
-could try [PyPy ](https://pypy.org/), a different VM or even possibly
+could try [PyPy](https://pypy.org/), a different VM or even possibly
 think about migrating to a completely new programming language.
 
 All options explored, Reshef and I understood that, to achieve the scale
@@ -150,11 +150,11 @@ past and knew that concurrent and parallel programmes in imperative
 languages were hard.
 
 Alongside the regular daily work, we took about two months to evaluate
-different functional languages. We tried [Erlang ](https://www.erlang.org/) and [Haskell,
+different functional languages. We tried [Erlang](https://www.erlang.org/) and [Haskell,
 ](https://www.haskell.org/) and
-[OCaml, ](http://ocaml.org/). We
-even tried [F# ](https://fsharp.org/) on [Mono ](https://www.mono-project.com/) back in the day. We
-tried [Scala ](https://www.scala-lang.org/) and we tried [Clojure,
+[OCaml,](http://ocaml.org/). We
+even tried [F#](https://fsharp.org/) on [Mono](https://www.mono-project.com/) back in the day. We
+tried [Scala](https://www.scala-lang.org/) and we tried [Clojure,
 ](https://clojure.org/). **Clojure
 won easily** because back in 2012 the ecosystem for everything was kind
 of small in terms of libraries and open-source projects, etc. Scala and
@@ -195,24 +195,24 @@ any that particularly stand out for you? Is there stuff that you feel
 that you use on a day-to-day basis that you feel is vitally important to
 how the system runs?
 
-**Morri:** [core.async ](https://github.com/clojure/core.async) - all over
+**Morri:** [core.async](https://github.com/clojure/core.async) - all over
 the place. core.async in some services we have that are still backend
 services, but that serve more data. There's a lot of compojure too.
 
 **Nir:** There's no new service without core.async inside because that's
 how we model stuff - around core.async. We're using most of what's out
 there in open-source community. For logging, we're using [Timbre](https://github.com/ptaoussanis/timbre), for Redis
-we're using [Carmine ](https://github.com/ptaoussanis/carmine) and for JSON
-we're using [Cheshire ](https://github.com/dakrone/cheshire). We use
-[core.match ](https://github.com/clojure/core.match) a lot. We use
-a bit of Zach Tellman's [Manifold ](https://github.com/ztellman/manifold) to pipeline
-async operations. We use [http-kit ](https://www.http-kit.org/) a lot. We have also
-written libraries like [aerospike-clj ](https://github.com/AppsFlyer/aerospike-clj) that
+we're using [Carmine](https://github.com/ptaoussanis/carmine) and for JSON
+we're using [Cheshire](https://github.com/dakrone/cheshire). We use
+[core.match](https://github.com/clojure/core.match) a lot. We use
+a bit of Zach Tellman's [Manifold](https://github.com/ztellman/manifold) to pipeline
+async operations. We use [http-kit](https://www.http-kit.org/) a lot. We have also
+written libraries like [aerospike-clj](https://github.com/AppsFlyer/aerospike-clj) that
 provides a Clojure wrapper for Aerospike databases. So we are also
 working on contributing back to the community as well.
 
 **Morri:** On the data side, we use [clojure.java.jdbc](https://github.com/clojure/java.jdbc) and [Honey
-SQL ](https://github.com/jkk/honeysql) a lot.
+SQL](https://github.com/jkk/honeysql) a lot.
 
 **Andrew:** And in terms of the database side of things, you mentioned
 Kafka a lot. Do you use anything else for the data stores?
@@ -223,15 +223,15 @@ where we do batch processing and insert summary data into various
 databases to serve back to our clients for the dashboard. For the
 databases there, we're currently using a mixture of mainly [Druid,
 ](http://druid.io/) and
-[ClickHouse ](https://clickhouse.yandex/), as well as a few
+[ClickHouse](https://clickhouse.yandex/), as well as a few
 postgres instances. As well as Aerospike that we previously mentioned.
 
-**Ronen:** We're also using [HBase ](https://hbase.apache.org/) for real-time stuff,
+**Ronen:** We're also using [HBase](https://hbase.apache.org/) for real-time stuff,
 mostly Aerospike.
 
 **Jon:** We've been working on our own database, [Crux](/crux/index.html). The idea is
 that Kafka is a transaction log for us and we build up materialised
-views on top of [RocksDB ](https://rocksdb.org/) which feed in from Kafka and
+views on top of [RocksDB](https://rocksdb.org/) which feed in from Kafka and
 then we put a datalog query engine on top of that. You should check it
 out.
 

@@ -132,8 +132,7 @@ bitemporality you are still left managing `valid-time` by hand.
 
 ## Mustmayostardayonnaise
 
-[There's got to be a better
-way.](https://www.youtube.com/watch?v=mRntutn8udw) And indeed there is.
+[There's got to be a better way.](https://www.youtube.com/watch?v=mRntutn8udw) And indeed there is.
 Use a bitemporal database. XTDB is one such database (though it's not
 the only one).
 
@@ -163,8 +162,7 @@ apart on the freeway and you won't bite your own head off when you write
 time-traveling queries.
 
 Bitemporality matters beyond accounting systems. Håkan provides an
-overview of [bitemporal use
-cases](https://www.youtube.com/watch?v=YjAVsvYGbuU&t=1500s) your systems
+overview of [bitemporal use cases](https://www.youtube.com/watch?v=YjAVsvYGbuU&t=1500s) your systems
 might already have: corrections, new information, auditing, integration
 of systems with their own disparate timelines, backfill of large amounts
 of historical data, reordering of events, and _Immutability in the
@@ -183,8 +181,7 @@ directly to it, from a number of different angles. Bitemporal data makes
 most domains simpler --- and makes some previously impossible
 calculations possible. Doing bitemporality correctly means we can only
 permit additive changes, which means our system is only permitted
-immutable data. Martin hints at [Event
-Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) as one
+immutable data. Martin hints at [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) as one
 solution to the immutability problem, but acknowledges the complications
 it introduces: slow queries and the technical complexity of snapshots.
 Event streams on their own don't make good general purpose databases.
@@ -202,9 +199,7 @@ require `valid-time` and `tx-time` can access them --- optionally. By
 2050, all databases will behave this way but the effort must be at the
 database layer, even today.
 
-This work by [Steven Deobald](https://deobald.ca) for [JUXT
-Ltd.](https://juxt.pro) is licensed under [CC BY-SA
-4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+This work by [Steven Deobald](https://deobald.ca) for [JUXT Ltd.](https://juxt.pro) is licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
 
 ---
 
@@ -219,7 +214,6 @@ Ltd.](https://juxt.pro) is licensed under [CC BY-SA
     [exist](https://github.com/nearform/temporal_tables).
 
 [^3]:
-    Håkan's talk is [well worth a
-    watch](https://www.youtube.com/watch?v=YjAVsvYGbuU), even if you've
+    Håkan's talk is [well worth a watch](https://www.youtube.com/watch?v=YjAVsvYGbuU), even if you've
     seen it before. Note that due to the immutable nature of YouTube
     videos, the talk still refers to XTDB as Crux.

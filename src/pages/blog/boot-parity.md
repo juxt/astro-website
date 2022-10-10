@@ -217,8 +217,7 @@ before you can get hacking effectively.
 
 # The final files
 
-A fully working setup is [available on
-Github](https://github.com/davidjameshumphreys/converting-to-boot-example)
+A fully working setup is [available on Github](https://github.com/davidjameshumphreys/converting-to-boot-example)
 to experiment with.
 
 The `build.boot` file:
