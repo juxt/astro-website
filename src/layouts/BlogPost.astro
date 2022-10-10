@@ -18,9 +18,15 @@ const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 )
 
+const person = people.find((person) => person.frontmatter.code === author)
+
+if (!person) {
+  throw new Error(`Author ${author} not found`)
+}
+
 const {
   frontmatter: { name, lastName, jobTitle, image, expert }
-} = people.find((person) => person.frontmatter.code === author)
+} = person
 
 const blogHref = Astro.url.href
 const shareIconStyle =

@@ -1,0 +1,150 @@
+---
+author: 'oly'
+title: 'Rule-Driven Webserver Middleware'
+description: 'When scope and order collide'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '08 Dec 2015'
+heroImage: 'mock3.jpg'
+tags:
+  - 'pedestal'
+  - 'ring'
+---
+
+import { Image } from '@astrojs/image/components'
+import handlersRealisation from '../../assets/blog/handlers-realisation.jpg'
+
+Much of the code I write involves a webserver - whether delivering a UI,
+a public API, just some simple stats and health checks, or all three -
+which means that I often rely on middleware for a lot of non-functional
+requirements.
+
+Web server middleware, or interceptors in Pedestal nomenclature, are the
+bits of code that run before or after handling a request. One of the
+most simple but valuable implementations is the JSON coercer, which
+detects `Content-Type: application/json` on the request and decodes the
+JSON body into a Clojure data structure, and encodes a Clojure data
+structure response into JSON for `Accept: application/json`.
+
+With a standard Ring/Compojure stack you only get to specify middleware
+in an \"all or nothing\" approach where all middleware is executed on
+every request - if you want something more specific, you either need a
+hand-rolled route matcher to test scope (potentially duplicating your
+routing logic) or you have to use something like Liberator which makes
+it somewhat easier but [comes with its own
+pitfalls](http://davidjameshumphreys.github.io/patterns-pitfalls-liberator).
+
+I've seen webserver middleware stacks take on frightening proportions,
+towering unsteadily over the handling code like a game of Jenga in the
+final stages.
+
+```clojure
+(def app
+  (-> (var api)
+      (handler/api)
+      (wrap-reload '(my-ns.core))
+      ... 15 more ...
+      (ring-json/wrap-json-body {:keywords? true})
+      (ring-json/wrap-json-response)
+      ... even more ...))
+```
+
+Working with the code can feel like a game of Jenga, too - reorder some
+of the calls, or add a new one, and you may break the whole thing:
+something elsewhere in the call chain has had its assumptions about what
+the request or the response look like broken.
+
+Large middleware stacks also pollute every stacktrace. If we came across
+a call stack 30 levels deep in our own code, we'd probably refactor it.
+Why should middleware stacks be any different?
+
+# The Pedestal paradigm
+
+Pedestal allows you to specify interceptors that apply to just a subset
+of routes, as well as \"catch all\". They are declared inline with your
+routes so you don't have to repeat yourself.
+
+Imagine you are building an API for integration with multiple chat
+services. You can put `slack-auth` and `hipchat-auth` as interceptors on
+the appropriate route branches while `catch-all-interceptor` is declared
+as part of the service.
+
+```clojure
+(defroutes routes
+  ["/api"
+    ["/slack" ^:interceptors [slack-auth] ...]
+    ["/hipchat" ^:interceptors [hipchat-auth] ...]])
+
+(def service
+  {:io.pedestal.http/routes routes
+   :io.pedestal.http/interceptors [catch-all-interceptor ...]})
+```
+
+The interceptors are applied in order of declaration, starting from
+\"catch all\", out along the branches of your routes and finally at the
+leaf handler. This leads to a wonderful realisation:
+
+<Image width='300' src={handlersRealisation} />
+
+This allows you to write simpler interceptors that don't have to worry
+about their scope, know nothing about routing and can just deal with the
+\"happy path\", making code much more enjoyable to work with. I
+recommend [an excellent talk by Frankie
+Sardo](https://skillsmatter.com/skillscasts/6812-pedestal-new-wave) on
+Pedestal if you're interested in learning more.
+
+# Rule driven
+
+Unfortunately the scope of your interceptors is still not quite the
+whole story. The ordering of your interceptors can still be important,
+which is not necessarily a bad thing (it keeps each interceptor single
+purpose) but it does impose additional constraints.
+
+Considering the example above, imagine you want to limit the number of
+times each account can use your API, so you add an interceptor
+`rate-limiter` which applies to all routes in the API. It requires an
+`account-id` to see if the account has exceeded its limit and runs
+before the handler to avoid performing mutating or expensive operations.
+
+```clojure
+(defroutes routes
+  ["/api" ^:interceptors [rate-limiter]
+    ["/slack" ^:interceptors [slack-auth] ...]
+    ["/hipchat" ^:interceptors [hipchat-auth] ...]])
+```
+
+In Pedestal the `rate-limiter` interceptor will run _before_ the
+`slack-auth` or `hipchat-auth` interceptors, so the `account-id` will
+not be available. However, interceptors (and pretty much everything
+else) in Pedestal are defined in data structures, which means we can
+reorder them at compile time or even run time if we wish.
+
+**[Angel Interceptor](https://github.com/oliyh/angel-interceptor)** is a
+tiny library I wrote to solve this scenario. It allows you to express a
+_provides_ and _requires_ relation between interceptors:
+
+```clojure
+(defroutes routes
+  ["/api" ^:interceptors [(angel/requires rate-limiter :account)]
+    ["/slack" ^:interceptors [(angel/provides slack-auth :account)] ...]
+    ["/hipchat" ^:interceptors [(angel/provides hipchat-auth :account)] ...]])
+```
+
+Angel Interceptor will then reorder your interceptors such that
+`rate-limiter` will run immediately _after_ `slack-auth` or
+`hipchat-auth`. To do this, simply run `angel/satisfy` over the service
+map:
+
+```clojure
+(def service
+  (angel/satisfy
+    {:io.pedestal.http/routes routes}))
+```
+
+No more wondering which interceptors might rely on others - it's
+declared right there in the code, and allows you to specify both the
+scope and the relative ordering of any given interceptor.
+
+[Angel Interceptor is on
+Github](https://github.com/oliyh/angel-interceptor), feedback and
+contributions are very welcome.

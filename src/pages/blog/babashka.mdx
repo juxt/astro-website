@@ -1,0 +1,153 @@
+---
+author: 'mal'
+title: 'Babashka: A quick example'
+description: ''
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '21 Feb 2020'
+heroImage: 'babushkas.jpg'
+tags:
+  - 'babashka'
+---
+
+import { Image } from '@astrojs/image/components'
+import winking from '../../assets/blog/winking_babushka.jpg'
+
+At JUXT, we try to reduce the number of tools we use to the bare
+minimum.
+
+The fewer tools we need to learn to do our work, the more time we can
+devote to learning each tool well.
+
+Our standard operating system is GNU/Linux ([Arch
+Linux](https://www.archlinux.org/)), which we use on both developer
+laptops and servers. Our standard document format is AsciiDoc (of the
+[Asciidoctor](https://asciidoctor.org/) variety). All our documents
+(contracts, client reports, web pages, blog articles, policy documents,
+etc.) are stored in AsciiDoc and we generate HTML and/or PDF from these.
+Adding in git and [keybase](https://keybase.io), we've pieced together a
+capable company document production, approval and management system.
+
+# Building document PDFs with `make` and `asciidoctor-pdf`
+
+Sometimes, a document might require some custom build logic. For
+example, a report might contain a table of data extracted from a Crux
+database. Naturally we use [GNU
+Make](https://www.gnu.org/software/make/) and bash to knit together
+these customised builds, but whenever you try to do something complex,
+you can end up thrashing around in the long grass.
+
+For example, we have a document named `ETH001.adoc` which includes an
+image stored as `ETH001/boy-and-computer.jpg`. The PDF version of the
+document can be generated using a Make rule:
+
+```bash
+target/pdf/%.pdf: %.adoc brand/juxt-theme.yml
+   asciidoctor-pdf -r asciidoctor-diagram -o $@ $<
+```
+
+This means that a change to the original Asciidoc source file, or a
+change to the theme we use to build the PDFs, will result in the
+`asciidoctor-pdf` executable being run and the resulting PDF rebuilt.
+
+However, since the PDF also contains images, if those images change
+(sometimes we're in the process of enhancing images in Gimp), we want
+the PDF to be rebuilt. But how is it possible to let Make know about
+these dependencies?
+
+Well, we could go through the source file and look for any `image::`
+tags. Here's one:
+
+```bash
+image::ETH001/boy-and-computer.jpg[width=300pt]
+```
+
+Then we can add an additional dependency rule inside the Makefile:
+
+```bash
+target/pdf/ETH001.pdf: ETH001/boy-and-computer.jpg
+```
+
+Maintaining these rules might be a pain, and we'll quickly forget to do
+it. My `sed` and `awk` skills might be up to the tasks of grep'ing out
+the `include::` lines of each file, but ... I'd much rather be using
+Clojure. I'm always struck by the startling contrast between the
+consistency and elegance of the Unix line-by-line data processing model
+and the inconsistency and ugliness of the syntax of the individual
+tools. This is what makes Lisps such as Clojure all the more
+extraordinary - an easy-to-learn, consistent syntax which can scale up
+to the tackle the most ambitious of problems.
+
+Until now, I probably wouldn't bother writing a Clojure program for this
+task. Clojure is a little too slow to start up to be suitable for
+scripting.
+
+# Enter Babashka!
+
+[Babashka](https://github.com/borkdude/babashka) is a Clojure-like
+scripting language written by \@borkdude (Michiel Borkent), of
+`clj-kondo` fame. Babashka is [close
+enough](https://github.com/borkdude/babashka#differences-with-clojure)
+to Clojure so I can avoid having to clutter my memory with the myriad of
+different syntaxes of Unix tools (bash, sed, awk, grep). I can leverage
+my Clojure familiarity for the boring task of writing scripts.
+
+So let's write a script (`depend_images.clj`) that will go through our
+50 odd AsciiDoc files, extract out each line that brings in an image,
+and print a Make dependency rule between the document and that image:
+
+```clojure
+(doseq
+  [adoc (.listFiles (java.io.File. "."))
+   :when (.isFile adoc)
+   :let [[_ basename] (re-matches #"(.*).adoc" (.getName adoc))]
+   :when basename
+   line (line-seq (io/reader adoc))
+   :let [[_ match] (re-matches #"image::(.*)\[.*\]" line)]
+   :when match]
+  (println
+   (format "target/pdf/%s.pdf: %s" basename match)))
+```
+
+In our `Makefile` we can add a `depend` target that will run this
+script:
+
+```shell
+depend:
+        bb depend_images.clj > images.mk
+```
+
+We can run the target with `make`:
+
+```shell
+$ make depend
+```
+
+On my machine, that takes about 170ms. That's perfectly acceptable for
+my use-case.
+
+The resulting file (`images.mk`) can be included in the `Makefile` with
+the following:
+
+```bash
+include images.mk
+```
+
+That's it.
+
+<Image src={winking} />
+
+"Remember, learn Lisp and use it everywhere. Everything else is mind
+clutter."
+
+# Epilogue
+
+I'm looking forward to reaching for `babashka` at times where I'd
+normally reach for `bash` (or `awk`, or `sed`). Of course, there are
+plenty of alternative solutions to these simple problems. However, it's
+a tribute to the design of Clojure that the language feels so naturally
+consistent, and can achieve similar feats to a compendium of Unix tools,
+each with their own syntactic idiosyncrasies.
+
+For many many years, I've wished for a Clojure-like replacement for
+classic shell-scripting. This may just be it.

@@ -1,0 +1,235 @@
+---
+author: 'rkb'
+title: 'Artificial Intelligence (AI)'
+description: 'How Close are Humans to building a Terminator? Do we want to?'
+category: 'ai'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '12 Apr 2017'
+heroImage: 'mock3.jpg'
+tags:
+  - 'machine learning'
+  - 'deep learning'
+---
+
+import { Image } from '@astrojs/image/components'
+import plato from '../../assets/blog/plato-and-his-gang.jpg'
+import turingMachine from '../../assets/blog/turing-machine.png'
+import alanTuring from '../../assets/blog/alan-turing.jpg'
+import cyborg from '../../assets/blog/cyborg.jpg'
+
+Welcome to the first part of a series of articles based around
+Artificial Intelligence and Machine Learning. Together, we are going to
+embark on a journey surrounding the history of Artificial Intelligence
+and culminating in how it is shaping the very world we live in.
+
+Artificial Intelligence (AI) is the theory and development of computer
+systems able to perform tasks normally requiring human intelligence,
+such as visual perception, speech recognition, decision-making, and
+translation between languages.
+
+In a nutshell, it's breaking down human intelligence into exact terms so
+it can be mimicked by a machine. To do this AI uses approaches from many
+different fields including Mathematics, Computer Science and Psychology.
+
+# History
+
+The history of AI is intertwined with some of the greatest minds in
+human history, involved in setting up the foundations of thought and
+culture.
+
+<Image src={plato} />
+
+## Philosophy (428BC - Present)
+
+It makes sense to begin with [Plato](http://www.iep.utm.edu/plato/), his
+teacher [Socrates](http://www.iep.utm.edu/socrates/) and student
+[Aristotle](http://www.iep.utm.edu/aristotl/).
+
+> What is characteristic of piety which makes all actions pious... that
+> I may have it to turn to, and to use as a standard whereby to judge
+> your actions and those of other men.
+
+This provokes an interesting examination into which characteristics and
+actions make man, well, ... a man? Determining these could answer the
+question of mimicking man.
+
+## Mathematics (800 - Present)
+
+Logic, initially introduced by Aristotle, became a Mathematical subject
+due to [George
+Boole](https://www.britannica.com/biography/George-Boole). Algorithms
+follows as the connection between logical thinking and Mathematical
+problem solving. \"Algorithms is a process or set of rules to be
+followed in calculations or other problem-solving operations, especially
+by a computer\".
+
+In 1650AD French Mathematician and Philosopher [Rene
+Descartes](http://www.iep.utm.edu/descarte/) and [Wilhelm
+Leibniz](https://www.britannica.com/biography/Gottfried-Wilhelm-Leibniz)
+discussed dualism and materialism. This was the concept of the mind and
+soul outside nature versus logical conclusions that, in modern society,
+can be carried out on mechanical devices.
+
+Mathematics underpins AI. [Godels Incompleteness
+Theorem](http://math.stackexchange.com/questions/453503/can-someone-explain-g%C3%B6dels-incompleteness-theorems-in-layman-terms),
+which asks whether mathematics is complete, showed that in any language
+expressive enough to describe the properties of the natural numbers,
+there are true statements that are undecidable; their truth cannot be
+established by any algorithm.
+
+<Image src={turingMachine} />
+
+Without [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing), the
+father of modern computing, no article on AI is _complete_. Godel's
+idea's were picked up by Alan Turing, who wanted to characterise which
+functions are computable. In 1936, the Church-Turing thesis stated that
+\"the [Turing Machine](http://mathworld.wolfram.com/TuringMachine.html)
+can compute any computable functions\", (with no guarantees on runtime
+or memory). Turing also showed that there were some functions that no
+Turing machine can compute. For example, no machine can tell, in
+general, whether or not a given program will return an answer on a given
+input, or run forever.
+
+The third great contribution from Mathematics to AI (after logic and
+computation) is [Probability
+Theory](https://en.wikipedia.org/wiki/Probability_theory). In the 17th
+and 18th Century,
+[Fermat](https://www.britannica.com/biography/Pierre-de-Fermat),
+[Bernoulli](https://www.britannica.com/biography/Jakob-Bernoulli),
+[Pascal](https://www.britannica.com/biography/Blaise-Pascal),
+[Laplace](https://www.britannica.com/biography/Pierre-Simon-marquis-de-Laplace),
+amongst others, advanced probability. They did this from from describing
+the events of a gambling event, to become an integral part of
+quantitative science, in dealing with uncertain measurements and
+incomplete theories. [Bayes\'
+rule](https://www.khanacademy.org/math/ap-statistics/probability-ap/stats-conditional-probability/v/bayes-theorem-visualized),
+and the subsequent field of Bayesian analysis, form the basis of the
+modern approach to uncertain reasoning in AI systems.
+
+## Psychology (1879 - Present)
+
+For most of the early history of AI and [cognitive
+science](https://en.wikipedia.org/wiki/Cognitive_science), no
+significant distinction was drawn between the two fields, and it was
+common to see AI programs described as psychological results without any
+claim as to the exact human behavior they were modelling. In the last
+decade or so, however, the methodological distinctions have become
+clearer, and most work now falls into one field or the other.
+
+## Computer Engineering (1940 - Present)
+
+For artificial intelligence to succeed, we need two things: intelligence
+and an
+[artifact](http://softwareengineering.stackexchange.com/questions/106473/what-does-artifact-mean).
+Therefore as hardware in computers have improved, the possible
+capabilities for AI have improved alongside.
+
+AI also owes a debt to the software side of computer science, which has
+supplied the operating systems, programming languages, and tools needed
+to write modern programs. This is one area where the debt has been
+repaid. Work in AI has pioneered many ideas that have made their way
+back to \"mainstream\" computer science, including time sharing,
+interactive interpreters, the linked list data type and automatic
+storage management. Also, some of the key concepts of object-oriented
+programming and integrated program development environments with
+graphical user interfaces have been contributed to by AI.
+
+## Linguistics (1957 - Present)
+
+Modern linguistics and AI were \"born\" at about the same time, so
+linguistics does not play a large foundational role in the growth of AI.
+Instead, the two grew up together, intersecting in a hybrid field called
+[computational
+linguistics](https://en.wikipedia.org/wiki/Computational_linguistics) or
+[natural language
+processing](https://en.wikipedia.org/wiki/Natural_language_processing),
+which concentrates on the problem of language use.
+
+<Image src={alanTuring} />
+
+# How Can we classify if a machine has artificial Intelligence?
+
+In 1950, Alan Turing proposed the [Turing
+Test](http://psych.utoronto.ca/users/reingold/courses/ai/turing.html),
+to determine whether a machine can demonstrate human intelligence, the
+basis of AI. The outline of the test is, a \"judge\" converses with two
+unseen participants, a person and a computer program through text-chat,
+and then decides which is man and which is machine. If the judge is just
+as likely to pick the computer as it is human, then the computer has
+demonstrated human intelligence. Originally, Turing suggested that the
+machine should be able to convince a human 30% of the time after five
+minutes of conversation.
+
+The first machine to pass the Turing Test was a chatbot [Eugene
+Goostman](https://en.wikipedia.org/wiki/Eugene_Goostman), created by
+Kevin Warwick in 2014, passing with 33%.
+
+# Examples of Artificial Intelligence
+
+What is classed as AI changes as previous classifications become
+outdated. In the past a machine that could calculate basic functions or
+recognise text was said to have had artificial intelligence. However, we
+now take these functions as standard as part of a computers function.
+
+- Computers playing chess or Go (Google's AI
+  [AlphaGo](https://deepmind.com/research/alphago/) vs South Korean
+  Lee Sedol)
+
+- Self-Driving Cars
+
+- Amazon's [Alexa](https://en.wikipedia.org/wiki/Amazon_Alexa)
+
+- Virtual Personal Assistants - Siri, Google Now
+
+- Video Games
+
+- Online Customer Support
+
+- Security
+
+# Issues
+
+There has been many debates in the scientific community and in the
+general public about AI. A common idea, played out in many Hollywood
+movies is the idea that an AI machine will become so advanced that we,
+mere humans, cannot compete. A perhaps, more disconcerting idea is that
+they will start to advance at an exponential rate (think [I
+Robot](https://www.youtube.com/watch?v=rL6RRIOZyCM) or
+[Terminator](https://www.youtube.com/watch?v=k64P4l2Wmeg)).
+
+Another is how these AI machines, will be used. Could they be
+weaponized? Will they be used to hack people's private properties?
+(_cough_ NSA _cough_ ... Just a joke, don't arrest me please!)
+
+Finally, we get to the ethics surrounding AI. How do we measure
+intelligence or humanity? Should an AI machine should have the same
+rights as us? This is a very real problem, as of February 2017, Amazon
+are declaring that Alexa has the [First Amendment Right of Free
+Speech](http://fortune.com/2017/02/23/amazon-free-speech-alexa-murder/).
+
+<Image src={cyborg} />
+
+# Future
+
+AI are already so integral in human lives and that dependency we have on
+them is only going to increase.
+
+They keep us safe, keep us organised, keep us informed and in the future
+they could become part of us. We may be able to use AI to enhance
+ourselves, (like Cyborg from DC Comics, not the rigid Doctor Who
+[Cyberman](https://en.wikipedia.org/wiki/Cyberman)) AI could be used to
+enhance, not only our physical abilities, allowing us to run faster,
+jump higher, live longer, but potentially increase our metal
+capabilities, making us smarter, more creative etc (I'd recommend
+reading [Nexus](https://en.wikipedia.org/wiki/The_Nexus_Trilogy) by
+Ramez Naam where the world is able to take a drug that allows them to
+have an OS in their brains, connecting minds to minds. Ramez, my check's
+in the post ... right?)
+
+Other possibilities, include using AIs to solve world problems, climate
+change, wars, mis-management of resources ... mainly problems we've
+caused. No wonder in most movies the robots rise up against us.
+
+Continue the journey
+[here](https://juxt.pro/blog/posts/machine-learning.html), to Machine
+Learning.

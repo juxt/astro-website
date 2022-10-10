@@ -1,0 +1,429 @@
+---
+author: 'rro'
+title: 'Bridging the Blockchain / Database Divide'
+description: 'Do we want a blockchain, a database, or both?'
+category: 'db'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '30 Jul 2021'
+heroImage: 'mock3.jpg'
+tags:
+  - 'xtdb'
+  - 'blockchain'
+---
+
+import { Image } from '@astrojs/image/components'
+import cordaLedgerVenn from '../../assets/blog/corda-ledger-venn.png'
+import cordaVaultSimple from '../../assets/blog/corda-vault-simple.png'
+import cruxVsCorda from '../../assets/blog/crux-vs-corda.svg'
+import cruxCordaDiag from '../../assets/blog/crux-corda-diag.svg'
+
+## Crux is now XTDB
+
+September 2021 Update: Crux has recently been renamed XTDB.
+
+---
+
+Proponents of the blockchain argue it is a system of record unlike any
+other, in which trustless transactions written to a decentralized,
+immutable ledger render centralized orchestration obsolete. That is a
+mouthful --- but it is also an attractive collection of properties for
+certain industries; the centralization of data can lead to malfeasance
+and malfeasance leads to broken trust.
+
+However, blockchains often lack other properties we expect from our
+datastores: general-purpose storage and powerful query languages, in
+particular. A new generation of immutable databases provide some middle
+ground but they do not provide decentralized, trustless transactions.
+
+Strong leaders will eschew hype and look to solve the problems their
+business faces based on the merits of the technology. But if the
+problems of the business demand trustless transactions _and_
+sophisticated queries, they may feel like they have nowhere to turn.
+
+Immutable databases are general-purpose immutable ledgers with complete
+query languages. Blockchains are distributed ledgers. Any given system
+may benefit from queryable immutable ledgers, distributed ledgers, or
+both.
+
+# A Blockchain Primer
+
+To qualify as a \"blockchain\" in the sense the term is most often used,
+a ledger must exhibit specific behavioural properties across all the
+nodes, where a \"node\" is an actor in a distributed system tasked with
+maintaining an append-only, synchronized chain of transactions:
+
+1.  **Provenance** (immutable history) - users cannot make changes to
+    past transactions
+
+2.  **Decentralization** (distributed consensus) - mutually mistrusting
+    parties can participate in a transaction
+
+3.  **Security** (cryptographic trust) - every node verifies how new
+    information is added
+
+This is an extremely high-level overview, but in truth, blockchain
+systems are the simple combination of algorithms and datastructures
+which exhibit these behavioural properties. To go slightly deeper, we
+recommend 3Blue1Brown's [_But how does bitcoin actually
+work?_](https://www.youtube.com/watch?v=bBC-nXj3Ng4). Although it is
+ostensibly a visual bitcoin primer, the only bitcoin-specific concept
+discussed is \"Proof of Work\" (one of many possible consensus
+mechanisms). The first 18 minutes are broadly applicable and cover the
+necessary cryptography in an accessible way. After those 18 minutes, it
+should be clear why (and how) a blockchain is decentralized, why you can
+trust such a \"trustless\" system, and why cryptographic hash functions
+are essential to tie it all together.
+
+Many blockchains also permit the recording and execution of _code_ in
+addition to _data_. Known as Smart Contracts, this code can (and often
+must) be run by all nodes in the network, guaranteeing the same result
+given the same inputs. Smart Contracts are a means of implementing
+transaction logic. Results of their execution are then stored in the
+blockchain.
+
+## Terminology
+
+It is helpful to qualify common blockchain and database terminology for
+our purposes, since these terms are not universally agreed-upon.
+_Distributed systems_ will refer to computer processes which must
+transact over a network, regardless of the number of nodes.
+_Decentralized systems_ will refer to distributed systems in which there
+is no local or global central authorities; all nodes are peers.
+_Trustless_ will refer to the absence of trust in authorities but
+implies other forms of trust (specifically in the correctness of
+algorithms) _do exist_, as does trust in the immutable data produced by
+those algorithms. _Immutable records_ will refer to the default and
+majority state of records, leaving space for legal compliance tools like
+eviction. _Temporal systems_ will refer to any data store which tracks a
+Transaction Time (wall clock, vector, or otherwise) with each record.
+_Bitemporal systems_ will refer to data stores which track a \"Valid
+Time\" (sometimes known as \"effectivity\") in addition to the
+Transaction Time. Valid Time is usually represented with wall clock
+time.
+
+# Blockchain Shortcomings
+
+Smart Contracts, frequently mistaken as a recent development in
+blockchain technologies, conceptually date back to Nick Szabo's 1998
+paper, [\"Secure Property Titles with Owner
+Authority\"](https://www.fon.hum.uva.nl/rob/Courses/InformationInSpeech/CDROM/Literature/LOTwinterschool2006/szabo.best.vwh.net/securetitle.html).
+
+Thanks to his background in both law and cryptography, Szabo's original
+paper actually covers more ground than common Smart Contract
+implementations on the blockchain. Szabo proposed a \"Right to Adverse
+Possession\" (formalized squatting) and technical solutions to the
+problem of \"Correspondence to Ground\" (reconciling contracts with
+reality).
+
+As of this writing, Ethereum is the blockchain network most commonly
+associated with Smart Contracts, which makes it a helpful example.
+Ethereum Smart Contracts cannot engage the world outside of the
+blockchain directly. This makes sense: the fact a Smart Contract must
+return the same value wherever and whenever it runs implies that any
+dependency on information outside the chain must use a workaround.
+Proxies (such as
+[Oracles](https://ethereum.org/en/developers/docs/oracles/)) exist to
+work around this limitation by polling the dirty outside world of
+stateful data and recording it immutably into the Ethereum chain. But
+the problem is more fundamental than any technical solution can ever
+achieve. If a trustless system wants to speak to the Real World --- a
+world full of lies and trickery --- it is forced to trust _something_
+other than the computational correctness of an algorithm.
+
+Even more limiting than the boundaries of a trustless system are the
+trusted methods of querying that system. Blockchains as they exist today
+do not offer comprehensive queries --- much less bitemporal queries.
+Since a blockchain's distributed nature makes capturing wall clock time
+prohibitively difficult, bitemporal queries are effectively impossible.
+
+# Database Shortcomings
+
+Can we just use an immutable database? Perhaps. But there are reasons
+blockchains exist. If all the characteristics outlined in _A Blockchain
+Primer_ (Provenance, Decentralization, and Security) are essential to
+the behaviour of a system, a blockchain is a reasonable solution.
+
+While there is no such thing as a truly \"trustless\" system,
+blockchains are perhaps the closest humanity has come thus far. An
+immutable database provides _provenance_ insofar as users of the
+database trust the people who run it, the network's security, the
+hardware it runs on, and the database software itself.
+
+Newer databases such as XTDB (among
+[others](https://clojurelog.github.io/)) introduce even more powerful
+tools on top of immutable records. In XTDB, it is possible to match data
+within Datalog transactions and define transaction functions that attach
+behaviours to data, cancelling or even altering transactions in-flight.
+Every record in XTDB defines its own temporal validity. This could in
+fact be used to represent expiration as described in the \"Adverse
+Possession\" section of Szabo's whitepaper, but Valid Time affords the
+user much more: time-traveling bitemporal queries across every record in
+the system.
+
+While blockchain afficionados will see parallels in XTDB (immutable
+records to blocks, transaction functions to Smart Contracts, Valid Time
+to contract expiration, etc.) enhanced by a long list of advanced
+database features (graph queries, bitemporality, fault-tolerance,
+eviction, etc.), the fact remains: XTDB is not a blockchain.
+
+For any given use case, a blockchain may suffice if decentralization is
+paramount and querying is unimportant. Alternatively, XTDB will suffice
+if central, immutable records with graph query meets all the system's
+needs. However, if we want decentralized, immutable records _and_
+bitemporal graph queries, we need a new solution.
+
+# The Augmented Blockchain
+
+At JUXT, we imagined a way to combine the best of both worlds:
+blockchain's distributed and trustless nature combined with the power of
+Datalog's bitemporal graph queries.
+
+## Corda: Blockchain distributed apps
+
+[Corda](https://www.corda.net/) is an open source distributed
+applications system built on the blockchain. Unlike cryptocurrencies,
+the Corda blockchain targets existing business processes and is private
+by default. At the heart of Corda is a network of services called
+[notaries](https://docs.corda.net/docs/corda-os/4.7/key-concepts-notaries.html) --- which
+provide _uniqueness consensus_, _timestamping_, and *transaction
+validation* --- in addition to regular blockchain nodes running custom,
+distributed application code on the ledger. Data shared between these
+nodes consists of immutable entities subject to state transitions,
+recorded in their own chain of states.
+
+Corda offers a framework for developers to write logic with a
+combination of
+[Contracts](https://docs.corda.net/docs/corda-os/4.7/key-concepts-contracts.html)
+and
+[Flows](https://docs.corda.net/docs/corda-os/4.7/key-concepts-flows.html).
+Contracts in Corda are comparable to Smart Contracts in Ethereum, right
+down to the use of Oracles for accessing the outside world. Flows,
+however, are permitted access to the outside world. Flows describe the
+interaction between nodes in order to validate one or more entities\'
+state transitions. Crucially, not all nodes in the network must
+participate in such transactions --- only the ones identified within the
+context of a transaction's inputs. This implies not all nodes need to
+know about all the facts in the Corda network.
+
+<Image src={cordaLedgerVenn} />
+
+Consensus in Corda is dictated by notaries (for uniqueness) and Public
+Key Infrastructure (for identity). Nodes register with an identity
+service when entering the network and can either initiate or be
+triggered to participate in a transaction. All of the nodes
+participating in a transaction --- including a notary --- check and sign
+the transaction before it is committed to an individual node's internal
+storage, which Corda refers to as a _Vault_.
+
+Vaults contain _States_ and _Transactions_. A State is an object
+representation of a current or historical fact. A Transaction references
+input and output States, as well as one (or several) Contracts used to
+approve its execution:
+
+<Image src={cordaVaultSimple} />
+
+Corda is not a database, nor does it pretend to be. It extends the
+general definition of \"blockchain\" to include dissociated nodes,
+private data, and powerful distributed applications. But it remains
+difficult to use Corda alone for advanced queries:
+
+- Vaults provide a very simple query interface over States, with some
+  handy logical operators. But these queries are only capable of
+  rudimentary filtering.
+
+- States are dependent on a Schema. Unlike schema-less documents in
+  XTDB, we can't add new attributes to new versions of a fact over its
+  lifetime.
+
+- Corda does not have temporal querying capabilities.
+
+While Corda does perceive the difference between a consumed and
+non-consumed State (present and past versions of a fact), we cannot
+rewind the ledger to a particular point in time to contextualize
+queries:
+
+Queries in XTDB can place the observer at any arbitrary point in time.
+Corda's time model is quite different, capturing a fact's linear
+evolution rather than its validity.
+
+<img src={cruxVsCorda} />
+
+The following examples assume we have data about movies and people (cast
+members, directors, etc.), each modeled and inserted separately. We are
+trying to find the title of all movies where Sylvester Stallone was part
+of the cast.
+
+Here is a query with data modeled in Corda States:
+
+**Corda example query in Kotlin**
+
+```kotlin
+/* ... For brevity, schemas for Person and Movie are elided. ... */
+
+val stalloneExpression = builder { PersonSchemaV1.PersistentPersonState::name.equal("Sylvester Stallone") }
+val stalloneCriteria = VaultCustomQueryCriteria(stalloneExpression)
+val stalloneResults = vaultService.queryBy<Person.State>(stalloneCriteria)
+assertThat(stalloneResults.states).hasSize(1)
+val stalloneId = stalloneResults[0].getState().getData().linearId
+
+val movies = vaultService.queryBy<Movie.State>() //
+val result = movies.filter { movie ->
+    movie.getState().getData().cast.contains(stalloneId)
+}.forEach { movie ->
+    movie.getState().getData().title
+}
+assertThat(result).containsAll(listOf("First Blood", "Rambo III", "Rambo: First Blood Part II"))
+```
+
+- Vault queries cannot build criteria with filters based on a list's
+  contents (see: [Vault API: QueryCriteria
+  interface](https://docs.corda.net/docs/corda-os/4.8/api-vault-query.html#querycriteria-interface)).
+  Instead, we must pull all the movies and do the filtering ourselves.
+
+Here is the same query in XTDB:
+
+**XTDB example query in Datalog**
+
+```clojure
+(q '{:find [title]
+     :where [[p :person/name "Sylvester Stallone"]
+             [m :movie/cast p]
+             [m :movie/title title]]})
+;; #{["First Blood"], ["Rambo III"], ["Rambo: First Blood Part II"]}
+```
+
+## XTDB + Corda: Bridging the Divide
+
+Corda is primarily written in (and for) Java and Kotlin, which makes it
+very easy to integrate with XTDB. We can run XTDB alongside Corda nodes,
+and call upon XTDB functionality within the context of a transaction
+Flow.
+
+The [`xtdb-corda`](https://xtdb.com/reference/corda.html) library
+enables Corda State data to be piped into XTDB. By querying XTDB instead
+of the Corda node we can express temporal queries over historical and
+current States.
+
+<img src={cruxCordaDiag} />
+
+The simplest way to use the library is by specifying a mapping from
+Corda States to XTDB documents, which can be done automatically by
+implementing the `XtdbState` interface on our Corda State classes, as
+shown below. Users who want even more flexibility over their mapping can
+use
+[`withDocumentMapping`](https://github.com/xtdb/xtdb/blob/master/docs/storage/modules/ROOT/pages/corda.adoc#mapping-corda-documents-into-xtdb)
+for full control over what is written to the XTDB transaction log.
+
+With the `XtdbState` approach, we describe a Corda schema inside State
+classes as if we were modeling our data in a pure Corda application.
+Additionally, we encode the same data as a map of `String -> Any`. XTDB
+can consume and reason over this map contained in the `xtdbDoc` value,
+while keeping track of evolving versions of the State thanks to
+`xtdbId`:
+
+**XtdbState Interface**
+
+```kotlin
+package xtdb.corda.state
+
+interface XtdbState {
+    val xtdbId: Any
+    val xtdbDoc: Map<String, Any>
+}
+```
+
+**Example implementation of XtdbState**
+
+```kotlin
+data class IOUState(val value: Int,
+                    val lender: Party,
+                    val borrower: Party,
+                    override val linearId: UniqueIdentifier = UniqueIdentifier()) :
+    LinearState, QueryableState, XtdbState {
+
+    override val xtdbId = linearId.id
+
+    override val xtdbDoc: Map<String, Any> = mapOf(
+        "iou-state/value" to value,
+        "iou-state/lender" to lender.name.toString(),
+        "iou-state/borrower" to borrower.name.toString())
+}
+```
+
+The `xtdb-corda` library extends the XTDB node with a custom transaction
+log that subscribes to validated States derived from transactions. This
+allows the user to write a custom `@CordaService` to define how States
+are recorded in XTDB. Here is the simplest implementation:
+
+```kotlin
+@CordaService
+class XtdbService(private val serviceHub: AppServiceHub) : SingletonSerializeAsToken() {
+    val xtdb = serviceHub.startXtdbNode {
+        withCordaTxLog {
+            withDocumentMapping {
+                if (it is XtdbState) listOf(it)
+                else null
+            }
+        }
+    }
+}
+```
+
+Finally, we can issue queries simply by calling the `query` method on
+the `xtdb` instance:
+
+```kotlin
+val xtdb = cordaNode.services.cordaService(XtdbService::class.java).node
+
+assertEquals(
+    listOf(cordaNode.info.singleIdentity().name.toString(), 1L),
+    xtdb.db().query("""
+        {:find [?l ?v]
+         :where [[?iou :iou-state/lender ?l]
+                 [?iou :iou-state/borrower ?b]
+                 [?iou :iou-state/value ?v]]}""".trimIndent())
+        .first())
+```
+
+As one would expect, the flow of transactions from Corda to XTDB is a
+one-way street. XTDB must contain a perfect immutable record of the
+immutable records in Corda, so the library explicitly disallows
+submitting transactions directly to XTDB:
+
+```clojure
+(defrecord CordaTxLog [dialect ^AppServiceHub service-hub, document-mapper]
+  db/TxLog
+  ;; . . .
+  (submit-tx [this tx-events]
+    (throw (UnsupportedOperationException.
+            "CordaTxLog does not support submit-tx - submit transactions directly to Corda"))))
+```
+
+Using this approach, we are now able to automatically replicate the
+vault contents of any Corda node into XTDB. We can use XTDB Datalog
+queries to drive transaction logic accross multiple State types and
+harness the power of Valid Time temporal queries.
+
+# Conclusion
+
+Your constraints dictate which tools appropriately solve your company's
+unique problems. Blockchains solve very real trust, validation, and
+distributed storage problems. Immutable databases solve audit,
+compliance, safety, and query problems.
+
+Corda is a powerful, business-first blockchain. XTDB is the world's only
+open source, immutable, bitemporal graph database. Collectively, they
+create an open source solution for a new generation of businesses that
+require all these behavioural characteristics.
+
+Of course, Corda isn't the only blockchain. If your company is working
+with other blockchains capable of Byzantine Fault Tolerance or Smart
+Contracts, such as [Tendermint](https://tendermint.com/) or
+[Ethereum](https://ethereum.org), we would love to hear about what
+you're building: [,XTDB+Blockchain,I am
+building...](mailto:hello@xtdb.com)
+
+[Empress Elisabeth Chain Bridge in 1910, connected Tetschen (now Děčín)
+to the major railroad from Dresden to
+Prague.](https://commons.wikimedia.org/wiki/File:Empress_Elisabeth_Bridge_in_1910.jpg) -
+Brück & Sohn, CC0 1.0 Public Domain.
