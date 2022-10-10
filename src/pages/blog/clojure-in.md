@@ -1,11 +1,11 @@
 ---
-author: "jon"
-title: "Announcing our Clojure In series"
-description: "Surveying Real Clojure Projects"
-category: "clojure-in"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "22 Sep 2016"
-heroImage: "mock3.jpg"
+author: 'jon'
+title: 'Announcing our Clojure In series'
+description: 'Surveying Real Clojure Projects'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '22 Sep 2016'
+heroImage: 'mock3.jpg'
 ---
 
 At JUXT we want to understand how Clojure is being adopted across our
