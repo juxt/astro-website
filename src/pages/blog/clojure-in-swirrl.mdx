@@ -1,0 +1,180 @@
+---
+author: 'jon'
+title: 'Clojure in Manchester: Swirrl'
+description: 'Crunching with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '04 Nov 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Clojure is still perceived as new, but there's nothing we've tried to
+> do and found we couldn't.
+
+import im from '../../assets/blog/IMG_7358.jpg'
+
+<Image src={im} />
+
+# Introduction
+
+[Swirrl](http://www.swirrl.com/) is a Manchester based software
+development company that provides a Linked Data platform used by
+regional and national government organisations to publish their data.
+
+Data is uploaded onto Swirrl's
+[PublishMyData](http://www.swirrl.com/publishmydata) platform where it
+is stored as [five star open data](http://5stardata.info/en/), a highly
+connected format that allows every statistical observation to be linked
+and viewed in context. Once data is uploaded, users can browse the
+diverse data-sets available to them and create custom views such as
+time-series or maps, or they can make use of PublishMyData's extensive
+API to extract data, including the ability to submit graph based
+[SPARQL](https://en.wikipedia.org/wiki/SPARQL) queries.
+
+Examples of deployed instances of PublishMyData include the [Department
+for Communities and Local Government](http://opendatacommunities.org/)
+and [Scottish Government Statistics](http://statistics.gov.scot/).
+
+# Open Source
+
+Swirrl has created [Grafter](https://github.com/Swirrl/grafter), an open
+source ETL (Extract-Transform-Load) library for converting large tabular
+data-sets (usually supplied as CSV/Excel) into Linked Data whilst also
+providing interop with Linked Data systems.
+
+import sw from '../../assets/blog/swirrldemo.png'
+
+<Image src={sw} />
+
+Grafter is where the heavy crunching and transformation of data happens
+and this is where Clojure was first used in the company. They have also
+created a _git for Linked Data\`_\' service called Drafter, where
+incoming RDF queries and outgoing RDF triples are parsed and rewritten
+so that users can view unpublished _draft data_ ahead of committing and
+publishing.
+
+Malcolm Sparks and I travelled to Manchester to meet [Ric
+Roberts](https://twitter.com/RicRoberts) and [Rick
+Moynihan](https://twitter.com/RickMoynihan). Ric Roberts is the CTO
+having founded Swirrl in 2008 with his brother Bill. Rick Moynihan is a
+Clojure and functional programming practitioner who founded the
+[Manchester Lambda Lounge](http://www.lambdalounge.org.uk/).
+
+# The Beginning
+
+_Jon Pither:_ How did Swirrl get started?
+
+_Ric Roberts:_ My brother Bill and I founded Swirrl in 2008. We started
+with a semantic wiki, where every page has structured, linked data. We
+got over 10k users but few paying users. From this early experience we
+learned that the _sharing spreadsheets_ idea was the really useful bit;
+the openness and sharing of data. We had in essence re-invented RDF from
+base principles - the notion of triples etc. Eventually we moved on to
+real RDF.
+
+We then got a [S
+cottish Enterprise](https://www.scottish-enterprise.com)
+grant (Bill was living in Sterling, Scotland), to build a platform to
+publish energy usage data of Scottish parliament buildings. This was the
+first version of our data publishing platform that we produced in 2012.
+
+import sl from '../../assets/blog/swirrllogo.png'
+
+<Image src={sl} />
+
+# Clojure
+
+_Jon Pither:_ How did Swirrl get started with Clojure?
+
+_Ric Roberts:_ We started off with Ruby. Clojure came in when we hired
+Rick (Rick Moynihan).
+
+_Rick Moynihan:_ I've been using Clojure since 2008 and have been a bit
+selfish in doing so, as I enjoy coding with the language.
+
+I've always had a curiosity about Lisp. As a teenager I read the [GNU
+manifesto](https://www.gnu.org/gnu/manifesto.en.html), and I followed
+[Richard Stallman](https://stallman.org/) and was intrigued by how
+highly he always spoke of Lisp. After getting into Erlang, I then saw
+Rich Hickey talk, and it combined all the things I cherished, both
+theoretical and practical: Lisp, the JVM, and Functional Programming.
+Lisp has always been a hotbed of cool ideas.
+
+Clojure clicked for me and was a big multiplier on my abilities, as an
+otherwise average developer. I was soon building solutions to grapple
+with bigger problems in fewer lines of code than would have been
+possible with Java or Ruby. Clojure is also a good fit for rapidly
+prototyping solutions.
+
+import ll from '../../assets/blog/lambdalounge.jpg'
+
+<Image src={ll} />
+
+_Ric Roberts:_ The use case of our problem fits. ETL is inherently
+functional - chaining fns together, data in, data out.
+
+_Rick Moynihan:_ The JVM was also an attraction. Drafter and Grafter
+both use [Sesame](http://rdf4j.org/) (now RDF4J - Rick Moynihan is a
+committer) which coupled with
+[Jena](https://jena.apache.org/documentation/sdb/) (we also make use of)
+are probably the two most mature libraries in any language for working
+with Linked Data.
+
+A strong argument for Clojure is Java interop and the JVM is usually a
+safe option for any heavy lifting you need to do.
+
+_Jon Pither:_ How much Clojure do you do now?
+
+_Ric Roberts:_ We've got about 6-7 fulltime developers - of which 50% of
+are Clojure devs. We favour Clojure in our new work over Ruby.
+
+_Jon Pither:_ How have you found the on-boarding process?
+
+_Ric Roberts:_ We've had both an intern and a statistician learn Clojure
+as well as devs more familiar with JS, Ruby or C#. There's the odd
+teething issue around understanding lazy seqs, caching, and memory
+usage. We use code-review and pull requests to get through this. The
+intern picked Clojure up very quickly and absolutely loved it.
+
+import si from '../../assets/blog/swirrlinterview.jpg'
+
+<Image src={si} />
+
+_Jon Pither:_ What about hiring?
+
+_Ric Roberts:_ Rick (Moynihan) runs the [Manchester Lambda
+Lounge](http://www.lambdalounge.org.uk/) and we've picked a up couple of
+developers from there. One was a Haskell dev - Lee - and the other -
+Scott - was an experienced developer who was doing Clojure in his spare
+time.
+
+What's more important to us is that we look for people who can learn
+rather than people who know Clojure.
+
+# Clojure Manchester
+
+_Jon Pither:_ What's the Manchester Clojure scene like?
+
+_Rick Moynihan:_ Clojure does seem quite London centric although there
+was a large start-up doing Clojure here recently. In Manchester there's
+the Lambda Lounge, some Elm and Haskell. Scala is very popular.
+
+# State of Clojure
+
+_Ric Roberts:_ Clojure is still perceived as new, but there's nothing
+we've tried to do and found we couldn't. It feels mature and the Java
+interop is a big thing so you can always use Java libs.
+
+_Rick Moynihan:_ Clojure is still great and I've never had any problems
+with maturity - even with pre 1.0 Clojure. Even since the early days,
+the quality of language and the absence of bugs has been remarkable. The
+few bugs I've encountered in that time have always been fixed in the
+next release.
+
+The Clojure tools and environments these days are really good too.
+
+# Resources
+
+Check out the [Swirrl blog](http://medium.swirrl.com/).

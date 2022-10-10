@@ -1,0 +1,212 @@
+---
+author: 'jon'
+title: 'Clojure in Athens: Skroutz'
+description: 'Comparisons and Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '18 Nov 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> We don't want a Clojure version of Rails!
+
+import sk from '../../assets/blog/skroutz-team.jpg'
+
+<Image src={sk} />
+
+# Comparing Prices
+
+Skroutz is a Greek ecommerce website used to compare prices of products.
+It is the biggest Greek originated website attracting millions of unique
+visitors per month. There are now versions of Skroutz running in Turkey
+and in the UK [(scrooge.co.uk)](https://www.scrooge.co.uk/).
+
+Skroutz started ten years ago and now has 150 employees with 20 based in
+Istanbul. They are predominately a Ruby on Rails company but they have
+started using different technologies such as Clojure.
+
+I caught up with development team leads [Nikos
+Fertakis](https://twitter.com/nikosfertakis) and [Giorgos
+Tsiftsis](https://twitter.com/giorgostsiftsis) for a pleasant
+conversation.
+
+# Adopting Clojure
+
+_Jon:_ Could you tell me how Skroutz started using Clojure?
+
+_Giorgos:_ I don't remember exactly. I remember that I didn't want to
+use Ruby for a specific problem - I've had very bad experiences with
+processes and segfaults with Ruby.
+
+_Jon:_ But why pick a dynamic lisp language with origins dating back to
+1957?
+
+_Nikos:_ Giorgos was already a fan. We both liked Clojure and we were
+waiting for a chance to do something useful with it.
+
+_Giorgos:_ Ruby is good but it is not a good fit for everything. We've
+been adding new languages such as Python and Clojure along with some
+Java for wrapping [Elastic](https://www.elastic.co/) plugins.
+
+Clojure is used on one of the largest projects outside the Ruby
+monolith. We use it primarily to crunch user activity logs, a job that
+was done before using cron jobs and scripts writing to
+[MongoDB](https://www.mongodb.com/).
+
+_Nikos:_ Giorgos led an effort to store all log data into
+[Elastic](https://www.elastic.co/) cluster. We then wrote a Clojure
+service to crunch this data providing a layer of analysis on top of what
+the raw Elastic queries gave us. This allowed us to provide enhanced
+personalisaton functionality for our users such as recommending
+additional categories of products.
+
+_Giorgos:_ The same Clojure service also crunched stored user queries to
+power auto-complete and search suggestions.
+
+import sl from '../../assets/blog/skroutz-logo.jpg'
+
+<Image src={sl} />
+
+_Nikos:_ We wanted to experience Clojure and to use it on something
+real. We felt that Clojure fitted this problem of data crunching well.
+
+_Giorgos:_ It is very difficult to use a new language attached to a
+monolith. If you want to experiment you should find the right place, and
+for us this was a good opportunity; a Microservice.
+
+_Jon:_ How did it work out?
+
+_Nikos:_ Very well.
+
+_Giorgos:_ It's been running 18 months. It was initially a challenge - I
+had a team 4 juniors and no one knew Clojure, but the experiement went
+really went.
+
+_Nikos:_ We spent our Christmas vacation learning Clojure!
+
+_Giorgos:_ I thought it was impossible but then we did it.
+
+_Nikos:_ It was straightforward really - Giorgos came up with a skeleton
+and we started building functions on it - this went pretty well. The
+hardest part was what Giorgos did at the start; setting up a http server
+with [Liberator](http://clojure-liberator.github.io/liberator/) then
+managing the application lifecycle and deployment.
+
+_Giorgos:_ It was a standard stack of
+[Ring](https://github.com/ring-clojure),
+[Compojure](https://github.com/weavejester/compojure), and
+[Liberator](http://clojure-liberator.github.io/liberator/). We also used
+[Schema](https://github.com/plumatic/schema).
+
+We serve a lot of features from this microservice. We are very confident
+with it. This is the main thing we needed: confidence that nothing will
+break. It's easy to upgrade and predictable.
+
+# The future
+
+_Jon:_ What's the future of the Ruby monolith?
+
+_Nikos:_: There was a time when Giorgos wanted to rewrite the main
+search in Clojure.
+
+_Giorgos:_ We don't have the resources now to rewrite the monotlith in a
+big-bang approach. We will proceed step by step, looking for
+opportunities that present themselves, i.e. a new service, or a refactor
+of an existing one.
+
+import ra from '../../assets/blog/rails.png'
+
+<Image width={200} src={ra} />
+
+# Ruby Vs Clojure
+
+_Jon:_ Could you elaborate more on Ruby vs Clojure?
+
+_Nikos:_ The turning point was when I start could focusing on the real
+problem rather than managing stateful objects and relationships as you
+would in Ruby.
+
+_Giorgos:_ The focus is on functions rather than objects; the transition
+is good.
+
+_Jon:_ What about the ecosystem of Ruby compared with Clojure?
+
+_Nikos:_ We currently have a strong solution with Rails and a strong
+ecosystem around it.
+
+_Giorgos:_ We don't need a Rails clone, but we need a flagship to
+attract people to the language. This could be Datomic.
+
+import li from '../../assets/blog/webdevbook.jpg'
+
+<Image width={300} src={li} />
+
+_Nikos:_ I miss the ecosystem of Ruby. In Clojure it feels more
+fragmented with lots of library choices and no clear winner. Some are
+maintained by a single person and can simply stop being developed. This
+is where having a big umbrella project would help.
+
+_Giorgos:_ It can be complicated to make a library decision. A company
+or software house should not be depending on a single person which is
+often the case.
+
+_Jon:_ Maybe [Luminus](http://www.luminus.org.uk/) or the upcoming
+[Arachne](http://arachne-framework.org/) could help with this. But why
+not a Rails in Clojure?
+
+_Giorgos:_ No we don't want a Clojure version of Rails! I don't have
+time to answer this, but I would say we just need more flagship
+libraries.
+
+_Nikos:_ In general Ruby devs are switching to
+[Elixir](http://elixir-lang.org/) and some to Clojure.
+
+# Learning Clojure and Editors
+
+_Jon:_ What IDE do you use?
+
+_Nikos:_ We learnt Emacs for this project. We like it so much that we're
+now using it to edit our Ruby code too.
+
+_Jon:_ Would you recommend learning Clojure and Emacs at the same time?
+
+_Giorgos:_ To be honest, I wouldn't recommend learning both as it's very
+difficult. The advice I would give is to learn Clojure and then Emacs.
+
+import ko from '../../assets/blog/koans.png'
+
+<Image src={ko} />
+
+_Nikos:_ We have a developer learning Clojure now. We told him to learn
+Emacs first for his Ruby code, and then we recommended [Clojure
+Koans](http://clojurekoans.com/) and some books. Then we paired up with
+him to solve some selected issues and bugs. This was the easy part.
+
+# State of Clojure
+
+_Jon:_ What do you think is the current state of Clojure adoption?
+
+_Nikos:_ I want to see more big projects, more blogs and different
+people using it.
+
+_Jon:_ What is the state of Clojure in Athens?
+
+_Nikos:_ Giorgos was a founder of the Athens Clojure meetup (I help run
+it now too - as well as [Stathis
+Sideris](https://twitter.com/stathissideris) and one other) and we host
+dojos in our office. The last one went really well with 25-30 people
+turning up, which was over our expectations. Athens doesn't have a lot
+of active Clojure programmers.
+
+_Jon:_ What's your view on the current state of Clojure the language?
+
+_Nikos:_ We are very interested in Spec and we are experimenting. We use
+Schema. We are also experimenting with ClojureScript but nothing real
+yet.
+
+# Resources
+
+Check out the [Skroutz engineering
+blog](https://engineering.skroutz.gr/).

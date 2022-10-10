@@ -1,0 +1,292 @@
+---
+author: 'jon'
+title: 'Clojure in Sheffield: Sky Betting and Gaming'
+description: 'Betting on Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '16 Mar 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Ostensibly Clojure is a practical language
+
+# International Betting
+
+import sb from '../../assets/blog/skybetteam.jpg'
+
+<Image src={sb} />
+
+[Sky Betting and Gaming](https://www.skybet.com) is a gambling company
+that is entirely online. They run a UK operation from Leeds and an
+international operation from Sheffield, started as a greenfields project
+two years ago.
+
+They are ranked in the [Sunday Times top 100 best places to
+work](http://appointments.thesundaytimes.co.uk/article/best100companies/)
+in 2016 and again in 2017.
+
+I chatted with Principal Software Engineers [Ed
+Bowler](https://twitter.com/l0st3d) and [Paul
+Brabban](https://twitter.com/brabster) to understand this Clojure
+adoption story.
+
+# Background
+
+_Jon:_ Could you give me an overview of the project?
+
+_Ed_: Sky Betting and Gaming recently decided to expand from the UK into
+international markets. The international arm started in Sheffield so as
+to not distract from the incredibly successful UK operation, based in
+Leeds.
+
+_Paul_: We went live in Italy last year and we're seeing even better
+growth than we hoped. We're all really happy with an increasing share of
+the market there and our mobile app shot to the top bookmaker spot
+within weeks!
+
+_Ed:_ We have about 1,100 people now across all of Sky Betting and
+Gaming. There's around 50 of us in Sheffield for the International
+Tribe. The tech comprises mainly Clojure, Scala, Java, Node.js, and
+React.js on the front end.
+
+The Clojure aspect is our team. The teams here are divided up by
+function, for example we have a sportsbook team, a casino game team, an
+accounts team, and ours, a data team.
+
+It's a nice place to work because we have the freedom to choose the
+technology we use and we have autonomy within teams.
+
+import sep from '../../assets/blog/skybet-ed-paul.jpg'
+
+<Image src={sep} />
+
+# Clojure Journey
+
+_Jon:_ How did Clojure get started at Sky Betting and Gaming?
+
+_Ed_: When I started I was given the remit of working out how to
+generate financial reports and to do it in a serverless way. Having used
+Clojure in the past, I picked Clojure for building a proof of concept.
+We needed a low impact way of generating reports; integrating with 3rd
+parties such as CRM systems, marketing systems, and real time analytics.
+
+We picked [AWS Lambda](https://aws.amazon.com/lambda) to crunch the data
+and to output it to [Amazon RDS](https://aws.amazon.com/rds). We took an
+[Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
+approach; as we developed the platform we collected as much data as we
+could and figured out how to report on it later.
+
+_Jon:_ What was your journey to Clojure before Sky Betting and Gaming?
+
+_Ed_: My road to Lisp started in 2007 using Common Lisp. In 2009 I
+discovered Clojure and in 2010 I created a startup that actually used
+Clojure. We went for five years until we ran out of money.
+
+I joined Sky Betting and Gaming as a Principal Java developer, and I've
+since written just 5 lines of Java.
+
+_Jon:_ How has Clojure been received?
+
+_Ed_: 99% of people are interested and looking around. A good number of
+those are really interested and are picking it up and learning it. Some
+Microservices have been started outside the team.
+
+The people I've forced to use Clojure have picked it up incredibly well.
+
+import st from '../../assets/blog/skybetit.jpg'
+
+<Image src={st} />
+
+_Jon:_ Is it a matter of time before the whole ship becomes Clojure?
+
+_Ed:_ If I had my way!
+
+We started an FP guild following the [the spotify
+model](http://blog.crisp.se/2012/11/14/henrikkniberg/scaling-agile-at-spotify)
+of cross cutting _guilds_. Every fortnight there's an hour long guild
+meetup with cake (I've put on a stone). I started the guild to spread
+the idea and to get the good news out.
+
+We played with [4Clojure](https://www.4clojure.com/) and talked about
+concepts of the Clojure language.
+
+# IDES
+
+_Jon:_ What IDEs do you use?
+
+_Paul:_ Emacs.
+
+_Ed:_ I've been using Emacs since 1999. Even when I was using Java I was
+using Emacs.
+
+We have about a few Clojure developers. Two are using Emacs, one is
+using Cursive, and another is using [Proto-Repl with
+Atom](https://atom.io/packages/proto-repl).
+
+# Hiring
+
+_Jon:_ Do you worry about being able to hire in Sheffield?
+
+_Ed:_ You need people that are [smart and get things
+done](https://www.amazon.co.uk/Smart-Gets-Things-Done-Technical/dp/1590598385).
+
+All languages have pluses and minuses. With Clojure you need to get past
+the brackets, which should take about an hour. Any smart person can pick
+it up, especially if they are guided. Paul had a 2-3 month gap before
+joining; in his own time he picked up Emacs and Clojure in one go and
+became immediately productive. This was seriously impressive and it
+vindicated the whole approach. Pick up smart people up and they will
+learn this stuff.
+
+_Paul:_ I did Java for a few years. After that, I worked with a team to
+rewrite a Java monolith over to NodeJS microservices in a fairly
+functional style. When I interviewed here I'd had fun with a couple of
+functional languages and been through the [SICP
+book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html).
+The opportunity to try something completely different with a Lisp that
+was properly functional was too big an opportunity for me to miss.
+
+# Lambdas:
+
+_Jon:_ What is your stack?
+
+_Paul:_ AWS. The majority of our code runs on [AWS
+Lambda](https://aws.amazon.com/lambda/). We originally had a single
+large repository, but we've been breaking it down and extending it into
+lots of small code repos. The downside to Clojure is that each Lambda
+Function ships with several megabytes of the JVM Clojure runtime as well
+as the AWS SDK. That gives us quite slow cold startup times.
+
+_Jon:_ Have you looked at ClojureScript for Lambda?
+
+_Ed_: Not initially as I had more experience with the JVM and more
+confidence with it. However relatively large artifacts mean the startup
+and deployment times do have an impact. Recently we have started trying
+to use ClojureScript for a faster startup.
+
+Our Lambdas tend to stay running; polling and chewing through records.
+The startup times are much less of an issue than they might be in, say,
+an API endpoint.
+
+_Paul:_ We typically have [Kinesis](https://aws.amazon.com/kinesis)
+queues in front of the Lambdas, which is essentially a simplified,
+hosted [Kafka](https://en.wikipedia.org/wiki/Apache_Kafka).
+
+_Jon:_ How do you provision the Lambdas?
+
+_Paul_: We use [AWS
+CloudFormation](https://aws.amazon.com/cloudformation) - we build them
+with Clojure using [Crucible](https://github.com/brabster/crucible) and
+use Spec to validate. Our Continuous Delivery pipeline then provisions
+using the templates. We've made over 600 deployments since we started
+using [Travis](https://travis-ci.com/) last summer.
+
+# Tech shout out
+
+_Jon:_ What technologies / libraries do you use?
+
+_Ed:_ We use [Amazonica](https://github.com/mcohen01/amazonica) quite a
+bit; it makes it so fast to get up and running with the AWS tech.
+
+_Paul:_ The Amazonica maintainer, [Michael
+Cohen](https://github.com/mcohen01) is really responsive and super on
+the ball.
+
+_Ed:_ We use [Cheshire](https://github.com/dakrone/cheshire) for JSON
+fast parsing, [HTTP kit](http://www.http-kit.org/) the client library is
+useful for neat handling of async invocation and connection pooling.
+
+_Paul:_ [Leiningen](https://leiningen.org/) and a private Travis CI
+subscription for builds. We just introduced scheduled builds using
+Travis\' new feature to run dependency-related checks. The folks
+maintaining
+[lein-dependency-check](https://github.com/livingsocial/lein-dependency-check)
+took some PRs to bring it up to date, and of course
+[lein-ancient](https://github.com/xsc/lein-ancient).
+
+_Ed:_ - Clojure.test and
+[Timbre](https://github.com/ptaoussanis/timbre).
+
+[Spec](https://clojure.org/about/spec) is worth a mention. We've seen
+what Spec has to offer, but it will take a while before we know how to
+effectively use it.
+
+# Clojure
+
+_Jon:_ Is Clojure giving you actual business value, rather than just
+adding the cool factor?
+
+_Ed:_ Data processing is what it's all about. With Clojure we're already
+a level up. [Paul Graham talks about building the language and
+API](http://paulgraham.com/progbot.html) up to the business. At Sky
+Betting and Gaming we are getting there but we're not that far along;
+it's been an interesting journey to take.
+
+The benefits to the business are that we have a very small team being
+very productive. We have one of the best burn-down rates. You could
+maybe argue that the people are just superstars, but you could also
+point to the tech. It's a combination of good people and good tech.
+
+_Paul:_ There are three developers on the data tech side, and a testing
+specialist who's taking the chance to learn Clojure for test automation
+too. The team would have made it work whatever... it's a pros and cons
+thing. The choice to use Clojure makes us very attractive to other
+developers; we are getting a lot of interest from people with an
+interest in Functional Programming which is potentially useful.
+
+_Ed:_ Ostensibly Clojure is a practical language and is all about
+getting stuff done.
+
+_Paul_ It's very quick to get things up and moving, especially when I
+think back to what I was doing with Java.
+
+_Ed:_ The means to abstraction are more flexible in Clojure. You can
+keep the domain logic separate from the operational aspects such as
+handling errors etc. You get this separation far easier than in a
+language like Java where you have objects.
+
+_Paul:_ In Clojure I can get on with solving the business problem and
+then add the safety features in afterwards. Clojure is very tolerant of
+change compared with other languages that demand a strict contract. I
+was only discussing that with a colleague earlier this week!
+
+_Ed:_ This is exactly what Spec is designed for; qualifying only the
+data that we care about.
+
+_Paul:_ With Clojure on the JVM we have rock solid reliability and code
+that is easy to understand.
+
+# Training
+
+_Jon:_ How you found training?
+
+_Paul:_ There's a learning curve, especially for those just with a
+background in Java or JavaScript, for example. Once the necessary skills
+are learned though it does pay off nicely.
+
+_Ed:_ You get a lot with Clojure. You have a bag of solutions and it's
+your job to cross the gap of knowing how to apply those tools and to
+apply the learning.
+
+import skl from '../../assets/blog/skybetlogo.png'
+
+<Image src={skl} />
+
+# Last things
+
+_Jon:_ Any last words?
+
+_Ed:_ The company is always looking out for talent, [wanting to recruit
+good people](https://skybetcareers.com).
+
+_Paul:_ I've found the [Clojurians Slack](https://clojurians.slack.com)
+invaluable for helping me out and sharing the Clojure philosophy. Having
+easy access to people like [Alex
+Miller](http://puredanger.github.io/tech.puredanger.com/) is really
+helpful!
+
+_Ed:_ There is _[(def shef)](https://defshef.github.io/)_, a monthly
+Sheffield functional programming meetup. Clojure has featured a number
+of times.

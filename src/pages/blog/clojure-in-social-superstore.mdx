@@ -1,0 +1,294 @@
+---
+author: 'jon'
+title: 'Clojure in London: Social Superstore'
+description: 'Social Reselling with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '17 Feb 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Clojure has helped us to focus on delivering business value
+
+# Social Reselling
+
+[Social Superstore](https://socialsuperstore.com) allows people to setup
+their own _store_ to review and promote existing products to their
+social networks. Entrepreneurs are given a helping hand to resell
+without having to worry about managing stock, logistics and advertising.
+Celebrities also use it to make product recommendations to their
+following. The platform has worked well with fashion bloggers who can
+link subscribers to their own store of selected products.
+
+The tech stack is predominantly Clojure based. They have seven Clojure
+developers and four developers working on native applications.
+
+[James Henderson](https://github.com/jarohen) - an ever present London
+Clojurian and creator of a host of widely used Clojure open source
+libraries - grew the current Clojure team from ground up. [Dave
+Aitken](https://github.com/actionshrimp) is a developer using Clojure
+for the first time commercially having come from a background of C# and
+Javascript.
+
+Malcolm Sparks and I paid a visit to their office in Farringdon, London
+for a chat.
+
+import sst from '../../assets/blog/social-superstore-team.jpg'
+
+<Image src={sst} />
+
+# Migrating from Angular.js to ClojureScript
+
+_Jon:_ So what's the tech story here?
+
+_James:_ There has always been Clojure and AWS since a consultancy
+bootstrapped the MVP. It originally had a Clojure backend and an Angular
+front end. About 6 months in we started a ClojureScript prototype and we
+decommissioned the Angular app.
+
+_Jon:_ How long did it take you to move from Angular? What was the
+motivation?
+
+_James:_ It took about 2-3 months to decommission Angular. The code-base
+was getting harder to maintain; features coming in were taking longer to
+develop and the results were buggy. We also wanted the benefits of using
+ClojureScript; the state management you get with ClojureScript and
+React.js - with frameworks such as Om and Reagent. We were also a
+Clojure team.
+
+_Jon:_ You were able to go _\'full stack\'_?
+
+_James:_ Yes, all the devs can work on both the front and back end.
+
+_Dave_: One of the benefits is that we can put logic in `cljc` and share
+code across layers.
+
+_Jon:_ Looking back, do you think the mature ClojureScript solution is
+better than what you had with Angular?
+
+_James:_ Yes, with Angular there was lots of magic involved.
+ClojureScript very much suited our team, although the second generation
+of the front-end was always going to be better.
+
+# DevOps
+
+import ku from '../../assets/blog/kubernetes.png'
+
+<Image src={ku} />
+
+_Jon:_ What is your non-Clojure stack?
+
+_James:_ PostgreSQL, AWS, SQS, Kubernetes, and Docker.
+
+_Jon:_ How do you provision to AWS?
+
+_Dave:_ We use CloudFormation and Chef; they meet in the middle.
+
+_Jon:_ What's your opinion of Kubernetes?
+
+_Dave:_ Kubernetes is great. It was a bit fiddly initially but that's
+improved a lot. We get smooth, zero downtime deployment. You can throw
+containers at it, and it becomes super-easy to try out a new service.
+Upgrading versions of Kubernetes itself has been fine.
+
+_Jon:_ Have you looked at the AWS equvialent of [ECS (Elastic Container
+Services)](https://aws.amazon.com/ecs/)?
+
+_Dave:_ ECS, certainly at the time, wasn't as feature rich. Kubernetes
+also gives you a bit more cloud portability; you can port your
+applications to the Google Container Engine.
+
+# Clojure Stack
+
+_Jon:_ What's in your Clojure application stack?
+
+_James:_ We're fairly vanilla Clojure. We use Ring with a general set of
+custom middleware, [Bidi](https://github.com/juxt/bidi) for routing,
+[Medley](https://github.com/weavejester/medley) for a whole host of
+utility functions, [Nomad](https://github.com/jarohen/nomad) for
+configuration. We are using [Bounce](https://github.com/jarohen/bounce)
+for lifecycled components.
+
+_Jon:_ Bounce is what you wrote as an alternative to
+[Component](https://github.com/stuartsierra/component)? How does it
+differ?
+
+_James:_ Minor things - I wouldn't push Bounce heavily as it has _grown_
+into our application. I wanted to avoid having a partially started
+system in the REPL which is difficult to recover from. I also personally
+prefer using vanilla values and functions as opposed to protocols.
+[Mount](https://github.com/tolitius/mount) is more similar to Bounce but
+I'm not keen on the top-level state; Bounce pulls ideas from both
+Component and Mount.
+
+_Jon:_ What else are you using?
+
+_Dave:_ I like [Yesql](https://github.com/krisajenkins/yesql) for SQL
+usage; it has a good level of abstraction.
+
+_James:_ We don't have a traditional REST API; we've moved to a
+command/query API - taking inspiration from [Bobby Calderwood's talk at
+the Conj](https://www.youtube.com/watch?v=qDNPQo9UmJA). We compose API
+requests as Clojure data structures and the front-end requests just the
+data it needs as part of _pull_ model. We developed a library for this
+but it's currently in house, we stole ideas from
+[GraphQL](http://graphql.org/learn/).
+
+# ClojureScript
+
+_Jon:_ Have you used [Om Next](https://github.com/omcljs/om/wiki/)?
+
+_James:_ We tried it on some hack nights but we're very much tied to
+[Reagent](https://reagent-project.github.io/) right now.
+
+_Jon:_ How have you found Reagent?
+
+import el from '../../assets/blog/elmlogo.png'
+
+<Image src={el} />
+
+_James:_ Generally, it's very good. I would say that there are a few
+pitfalls that we've learned to avoid, for example where you can
+potentially close over the wrong variable leading to components
+remounting/rerendering too often, or not often enough. To get around
+this we've taken some inspiration from Elm; we keep state at the top in
+a separate tree and use stateless views with events firing out from
+those views.
+
+We have a giant multi-method that works off incoming events, which is a
+lot like Elm.
+
+_Dave:_ Elm is strong with types. Without types it can get confusing -
+the state tree, the view tree, and events flying about. Having some
+lightweight assistance on keeping track of the types is helpful;
+ensuring the trees and data types are correlated.
+
+import dv from '../../assets/blog/devcards.png'
+
+<Image src={dv} />
+
+_James:_ We've stolen a lot of ideas from Elm.
+
+_Dave:_ We also use Devcards, it's really good for prototyping.
+
+# The Types Debate
+
+_Jon:_ Where do you guys stand on the types debate?
+
+_James:_ Clojure has a lot of benefits of being dynamically typed; it's
+second to none for playing with data and prototyping.
+
+A challenge we have is handling data coming from a variety of disparate
+sources, where the data quality can be poor. Originally having a dynamic
+structure was useful, but now that the system has matured, we could
+benefit from more rigorous typing. We've gone for Schema, not so much
+Spec because it wasn't around.
+
+_Dave:_ By not having types you're taking on tech debt in a way, which
+is good when you're finding your feet. Once code solidifies you've then
+got work to add rigour to it.
+
+_James:_ - Our typing is particularly focused on system boundaries - our
+APIs and data coming from external sources.
+
+As a hobbyist Haskeller I miss
+[ADTs](http://blog.jenkster.com/2016/06/functional-mumbo-jumbo-adts.html)
+from Clojure.
+
+_Dave:_ Always the grass is greener.
+
+_James:_ Without a shadow of a doubt.
+
+# Hiring/Training
+
+_Jon:_ How have you found hiring?
+
+_Dave:_ Everyone on the team applied because it was a Clojure job.
+
+_James:_ We haven't had as many people to interview, but we've had a
+better hit rate of success. Overall Clojure has been very good.
+
+_Jon:_ How about training?
+
+_James:_ Learning the basics of Clojure is great - it's a really simple
+language. In my experience, though, people can find it quite difficult
+making the jump from a hobbyist to writing serious Clojure in
+production. In OOP, the larger architectural patterns are
+well-documented; in FP, it's quite a different mindset.
+
+One thing that helps is watching tech talks as a group and going to
+conferences.
+
+# Large Code-bases
+
+_Jon:_ What's the size of your Clojure code-base?
+
+_James:_ About 25K LOC Clojure, 30K ClojureScript.
+
+_Jon:_ Have you learnt any lessons about refactoring on a mature Clojure
+code-base?
+
+_James:_ The biggest thing is using schema on the system boundaries. In
+terms of refactoring, the REPL is very handy - we have lots of comment
+blocks with examples on how to use the code and example data structures.
+REPL driven development is a big win for Clojure; we iterate quite fast.
+
+import ki from '../../assets/blog/kibana-basics.jpg'
+
+<Image src={ki} />
+
+_Jon:_ Do you have much automated testing?
+
+_Dave:_ We do have smoke tests that catch quite a lot of things. We also
+have a lot of monitoring using Kibana and LogStash.
+
+_James:_ A principal we follow is to reduce magic where possible. When
+you make a change you want to be confident about the impact of that
+change. Here schemas help us to ensure that impact of changes are well
+known and small.
+
+We've also split out IO from non-IO code. Before, lots of code pulled
+out data from the DB and munged it etc. Now that we've split it out, the
+amount of IO code has become smaller; reducing the surface area for
+things to go wrong.
+
+# State of Clojure
+
+_Jon:_ Your view on the state of Clojure?
+
+_James:_ Clojure has been very stable since I came here in January 2015.
+We have a good handle on how to architect Clojure code; and for data
+transformations it's particularly well suited.
+
+ClojureScript, less so. Having a ClojureScript project a couple of years
+old you can now see the _lava layers_; the record of everything that was
+best practice at the time. It's still changing quickly.
+
+The decision to go on the JVM has benefited us hugely. The industry has
+20-30 years of knowing how to deploy Java applications.
+
+_Dave:_ Things like [New Relic](https://newrelic.com/) working straight
+away has been a plus.
+
+import ld from '../../assets/blog/ldnclj.jpg'
+
+<Image src={ld} />
+
+_Jon:_ What do you think the state of Clojure is in London?
+
+_James:_ London seems to be a hub for Clojure. There are lot of
+community events: dojos, Clojure Bridge, multiple conferences.
+
+Clojure itself has stablised, now coming up to 10 years old. It's not as
+_new_ as in the early days.
+
+# Wrap Up
+
+_Jon:_ Any last words?
+
+_Dave:_ Thank heavens we're not using Java.
+
+_James:_ Clojure has helped us to focus on delivering business value, to
+help us get to the core of our business requirements.

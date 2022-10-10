@@ -1,0 +1,328 @@
+---
+author: 'and'
+title: 'Clojure in Seattle: World Singles Networks'
+description: 'Clojure in the dating scene'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '10 Oct 2018'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Clojure is solid programming and engineering whilst still feeling fun
+
+## Connecting People
+
+import si from '../../assets/blog/world-singles-networks-we-make-love.png'
+
+<Image src={si} />
+
+[World Singles Networks](https://worldsinglesnetworks.com/) is a dating and
+singles community designed to help you make valuable connections with
+people from all over the world. World Singles Networks was launched in
+2001 and caters to numerous different ethnicities.
+
+I met up with [Sean Corfield](http://corfield.org/), Senior Software Architect, to
+chat about how they use Clojure at World Singles Networks and about his
+experiences within the Clojure open source community.
+
+**_Andrew: Could you give us a little background on World Singles
+Networks?_**
+
+**Sean:** The two founders had a vision to put together ethnic niche
+dating, and it's one of those little companies that got started in the
+traditional Silicon Valley way of two guys in their garage. One of the
+founders essentially taught himself programming to build the first
+version of the platform and it grew from there into lot of different
+brands, ending up with something close to 100 different dating sites.
+
+**_Andrew: How did you get started at World Singles Networks?_**
+
+**Sean:** The dating business is fairly competitive. In 2009 World
+Singles Networks decided to build the next generation version of the
+platform and move towards a modern maintainable codebase. They brought
+in a couple of my friends to rebuild the system and I got hired through
+that. We went through a greenfield rewrite of the entire system, looking
+at building the better next generation of dating sites. Now I have been
+there longer than I have worked anywhere else in my life... which is
+kind of fun.
+
+## Tech history
+
+**_Andrew: What's the tech story?_**
+
+import sc from '../../assets/blog/scala-logo.png'
+
+<Image src={sc} />
+
+**Sean:** When I got started, they were a ColdFusion shop and we picked
+up frameworks and modern OO / MVC / DI frameworks to rebuild the system
+as an extensible, customisable platform for that. In dating, you've got
+the search engine which is core to what you work on. We had a process
+that took changes in profiles - we have millions of members constantly
+updating their profiles - and turned it into data that the search engine
+could use. That needed to run 24/7.
+
+Scala had XML literals, which is what the search engine needed, it had a
+good concurrency story - or so I thought - and so I decided to build a
+version of this process in Scala. It was back in the 2.7 days and we
+went through the 2.8 migration, so there were binary compatibility
+issues with every milestone build, where the entire build tool chain had
+to be updated.
+
+It was lovely code when we got it up and running, nice and clear, with a
+good concurrency model. Memory leaks with the actor model meant that the
+process had to be restarted several times a week, but it gave us
+everything that we wanted.
+
+import ca from '../../assets/blog/clojure-in-action-2nd-edition-cover.png'
+
+<Image src={ca} />
+
+In 2010 I got interested in Clojure and Amit Rathore - the author of
+[Clojure in Action](https://www.manning.com/books/clojure-in-action-second-edition) -
+was running a Clojure workshop about 30 miles from me. I thought Clojure
+would be a very fun thing to go and learn. I went to the workshop and I
+was blown away that here was a modern LISP running on the JVM. I went
+back to work and rebuilt our Scala process in Clojure to see how it
+compared. I got the first version running very quickly in a lot less
+code. It didn't run as fast, but it didn't have any memory leaks and
+kept running 24/7 for months.
+
+**_Andrew: Would you say it had a better concurrency model than the
+Scala model?_**
+
+**Sean:** At the time, yes. I was using the actor model where you send
+the message and get the actor to do its thing. Clojure has immutable
+data structures and a very fluid set of primitives for that. For my
+first attempt, I put pmap into some code and was able to get it to run
+with so much concurrency that it took down the search engines. We were
+able to ramp up another process to send 3.5 million HTML emails a day
+from this system, as well as doing all the XML generation and the
+database action. The capacity was spectacular and we had to stand up
+dedicated instances of search engines to deal with the volume. Scala was
+very precise and capable, but it wasn't fun. Clojure is solid
+programming and engineering whilst still feeling fun.
+
+## Team Adoption \*\*\*Andrew: How did the rest of the team start using
+
+Clojure?\*\*\*
+
+**Sean:** My team mates were CFML (ColdFusion Markup Language)
+developers. I started to introduce Clojure to them and they thought it
+was pretty cool and were happy to learn it. We used it initially as a
+library language. As we needed to touch the code, we would rewrite it in
+Clojure. We had an i18n internationalisation library wrapped around a
+MySQL database that was all done in Clojure. We started to switch our
+email template generation over, initially using [Enlive](https://github.com/cgrand/enlive), and then [Selmer](https://github.com/yogthos/Selmer) where we had HTML
+style templates for emails.
+
+Gradually Clojure began to infiltrate our codebase. Our codebase kept
+growing in Clojure and gradually shrinking in CFML. In 2014/15, Clojure
+became our primary language for all new work. It's allowed us to
+streamline our deployment process and move to a microservice style
+architecture. The CFML servers\' footprints are pretty large, even with
+the free open source engine that we are using, compared to being able to
+roll out Clojure jar files that are 20MB or 30MB, so that's been very
+nice.
+
+**_Andrew: How would you say Clojure compares to CFML now that you've
+done the switch?_**
+
+**Sean:** With Clojure you get immutable data structures at the core. It
+is designed to be a simple, elegant language and everything else is
+built on it as libraries, whereas CFML is designed to be a sort of Swiss
+army knife of features and you don't get to pick and mix. Accordingly,
+what's happened is you don't get the huge open source ecosystem that
+Clojure gives you access to. So there isn't the concept of a standard
+library. Either functions are built into CFML or they're not. There
+hasn't been the drive to create an open source ecosystem around it,
+which I think is one of Clojure's huge strengths.
+
+## Tech Community
+
+**_Andrew: What are your thoughts on the Clojure community?_**
+
+**Sean:** The Clojure community is very helpful, very friendly for
+beginners, very encouraging and - for such a massive community - it
+manages to be generally very polite in tone, and that comes down from
+the core team themselves and Rich Hickey, who's made it very clear that [\"he wants respectful discussions\"](https://clojure.org/community/etiquette) - and
+trolls really aren't tolerated. I also think the Clojure community has a
+much more advanced level of thinking about problems.
+
+**_Andrew: Would you put that down to the nature of functional
+programming?_**
+
+**Sean:** I think it is. It's the nature of functional programming and
+also to some extent the nature of problems that people solve. People
+come to Clojure who have some very large scale, very complicated
+problems to solve. They're already dealing with some very advanced
+problem spaces. And you get people from all walks of life because it's
+not just a web language. People are doing massive data processing,
+numerical analysis, cryptocurrency, e-commerce, all sorts of things. Web
+development is still one of the number one things that Clojure is used
+for, but it's a much broader community and so the level of discourse
+tends to be much more advanced.
+
+## Current Tech Stack
+
+**_Andrew: Could you give us a brief breakdown of the technical stack
+within World Singles Networks?_**
+
+import re from '../../assets/blog/react-logo.png'
+
+<Image src={re} />
+
+**Sean:** For what is now the 3rd generation of the platform, which
+we've rolled out to about 40 of our sites so far, that is a JavaScript
+[React JS](https://reactjs.org/)
+single page app on the front with mostly [Compojure](https://github.com/weavejester/compojure) and [Ring](https://github.com/ring-clojure/ring) on the
+backend. We have one app that uses [Bidi](https://github.com/juxt/bidi) and Ring. We mostly
+talk to MySQL, we use [Percona](https://www.percona.com/) as the variant there, so a
+very heavy SQL based application. We have several apps that are very
+heavy users of core.async.
+
+import gr from '../../assets/blog/graphql.png'
+
+<Image src={gr} />
+
+We have been using [Lacinia](https://github.com/walmartlabs/lacinia) for
+[GraphQL](https://graphql.org/)
+in one of the new applications we're rolling out. But it's pretty stock
+technology. We don't have message hubs or streams or exotic databases.
+We use Redis for some stuff. We are currently using MongoDB and I've
+been the maintainer of CongoMongo for quite a while, but we are
+consolidating most of that onto MySQL. That's been my current work for
+the last few months, looking at where we were using MongoDB and figuring
+out how to get it pulled back into MySQL.
+
+**_Andrew: You mentioned React and JavaScript. Do you think you'll move
+to ClojureScript for any of that?_**
+
+import cljs from '../../assets/blog/cljs-logo-120b.png'
+
+<Image src={cljs} />
+
+**Sean:** We built some internal proof of concept apps with
+ClojureScript about 3 ½ years ago and we did like it, but the tooling
+was pretty rough at the time and it was changing very fast so we decided
+to stick with JavaScript. It's easier to hire JavaScript developers,
+easier to understand and optimise the JavaScript experience on the
+frontend and that evolved pretty fast on it's own. Just targeting that
+layer on its own has been pretty hard work and we've got some good guys
+working on that.
+
+Would we use ClojureScript in the future? There's certainly interest in
+it within the company and the tooling has advanced dramatically. The
+guys we've got doing React JS work have built things in a functional
+style using Immutable JS, Redux and various other things. They like it.
+One of them is active in his local Clojure group anyway and the other is
+quite fascinated by Clojure everywhere else within the company so it's a
+possibility in the future.
+
+## Open Source
+
+**_Andrew: Coming to open source. You've been an active supporter of
+open source projects and you've become a maintainer of quite a few
+projects over the years. Which open source projects would you say you
+are really actively involved in at the moment and are there any that
+hold a special place for you?_**
+
+import cl from '../../assets/blog/clojure.png'
+
+<Image width={200} src={cl} />
+
+**Sean:** The reason I tend to become a code maintainer on open source
+projects is because I want to use them in my day to day work and they
+either don't have an active maintainer or I want to get involved enough
+to become a code maintainer.
+
+The first Clojure library that I picked up was essentially
+[\"clojure.java.jdbc\"](https://github.com/clojure/java.jdbc). I picked it
+up in the 1.3 days because clojure.contrib.sql wasn't being actively
+maintained at the time and in the switch from 1.2 to 1.3, where contrib
+was broken up, they needed a new maintainer. I'd been jumping up and
+down on the mailing list saying I'd really like to use a modern
+equivalent of contrib SQL and was kind of shocked that no one seemed to
+be doing SQL database work in Clojure. They were all using the more
+exotic databases or just data processing. Finally the core team agreed
+to let me become the maintainer, it became clojure.java.jdbc and I've
+been maintaining that now for seven years. It was more of a wrapper
+around the Java layer and has since evolved into what I would like to
+think is a much more Clojure-y style API. It's pretty locked down now
+and solid, and I really do enjoy working on it, partly because it's
+taught me a lot about different databases. The differences between the
+databases is often very frustrating and to run on H2, HSQL, SQLite,
+MySQL, Postgres, Oracle and some other databases, some of which I'd
+never heard of, all of them with their own peculiarities around whether
+or not they deal with auto-generated keys when you're inserting data,
+how they return result sets, what you can do with those result sets,
+means that the library has to do a lot of low level tweaking and poking
+at all of this to make it work and that's always fun.
+
+Since then, I've also got involved with [\"CongoMongo\"](https://github.com/congomongo/congomongo),
+[\"clj-time\"](https://github.com/clj-time/clj-time),
+[\"core.cache\"](https://github.com/clojure/core.cache) and
+[\"core.memoize\"](https://github.com/clojure/core.memoize). The reason
+again for getting involved in each of these projects is because we use
+them very heavily at work and the maintainers had moved on so someone
+needed to step up and take on the issues in the backlog and get
+something done with those. I took over [\"tools.cli\"](https://github.com/clojure/tools.cli) for the same
+reason. We were using it fairly extensively in a lot of our background
+and cron job processes.
+
+import fu from '../../assets/blog/Fumiko-Hanreich-HoneySQL.png'
+
+<Image src={fu} />
+
+I've just taken over as the maintainer on HoneySQL because, again, we
+use it very heavily. In fact, my former colleague, [\"Fumiko Hanreich,
+gave a great talk at Clojure/West in 2015\"](https://www.youtube.com/watch?v=alkcjyhesjI&list=PLZdCLR02grLrKAOj8FJ1GGmNM5l7Okz0a)
+on the use of that. (Here is [\"Fumiko Hanreich's pre-conference
+interview\"](https://lispcast.com/pre-west-interview-fumiko-hanreich/)).
+So that's the latest one that I'm now in charge of. I like open source.
+I've been doing open source maintenance since the very early 90's. I
+worked on some of the early C++ libraries and pretty much every
+community I've been in I've tried to contribute to open source. I think
+it's a very important way to support and grow a community.
+
+## Hiring
+
+**_Andrew: What are your thoughts on hiring Clojure devs?_**
+
+**Sean:** Hiring good developers is always difficult. We're a fully
+remote company. Everyone works from home so our options for hiring have
+been much broader, but recently, it has been harder to find people.
+There are a lot of people who want to do Clojure and may have good
+skills in other tech, but we also need people who can come in on day one
+and just ramp up with how the system works without having to also learn
+the technology. There is a small group of fairly senior developers now
+in Clojure who have been around since the beginning days and they can be
+very picky about who they work for and what jobs they do, so it can be
+very difficult as a small company to hire those very, very senior
+people. So, as a small company, you have to be able to find people with
+aptitude and who are going to be able to pick up everything else about
+your environment very quickly.
+
+We did find that once we started advertising that we were looking for
+Clojure developers, we got a lot of applicants who were smart and had
+experience in a lot of tech and wanted to do Clojure. If you're a
+company that has the luxury of being able to offer training or mentoring
+so that people can come up to speed on Clojure within the company, then
+that really does work in your favour. Otherwise, hiring senior engineers
+is as hard for Clojure as it is for anything else.
+
+**_Andrew: That seems to be a recurring theme - having smart people that
+are really keen to learn Clojure, but also having the ability to allow
+them the time to up-skill._**
+
+**Sean:** Yeah, we've been really lucky. The people we've brought on
+have been just amazing people to have on the team. When we first cross
+trained from CFML, there was a lot of enthusiasm around that. Fumiko has
+gone on to work for another Clojure company and really enjoys the tech.
+We have Kevin Downey - hiredman as he's known on most things - and he
+came up to speed straight away and is building amazing systems for us.
+It's a very exciting, fast moving kind of environment and people seem
+very keen to come into Clojure and get involved with interesting
+problems to solve.

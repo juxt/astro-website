@@ -1,0 +1,262 @@
+---
+author: 'jon'
+title: 'Clojure in London: Signal Media'
+description: 'Obtaining knowledge with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '03 Feb 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Clojure is a pragmatic, real language, designed to be run in
+> production
+
+# Generating Understanding
+
+import si from '../../assets/blog/signal-team.jpg'
+
+<Image src={si} />
+
+[Signal
+Media](http://signalmedia.co/?utm_source=Referral&utm_campaign=Clojure_JUXT_blog&utm_medium=Backlink)
+is a machine learning company that extracts knowledge from unstructured
+textual content. The company currently processes between 2-3 million
+documents a day from different sources such as newspapers, magazines,
+broadcasts, and online publications.
+
+Each piece of content needs to be understood: what it is about? Who is
+being mentioned? Is it _apple_ the fruit or Apple the company? Is it the
+Trump company being mentioned or the Donald Trump presidency? To face up
+against these challenges Signal uses techniques such as natural language
+processing and machine learning.
+
+To learn more about this company and their use of Clojure, Malcolm
+Sparks and I ventured to their London offices to meet co-founder and
+head of research Dr Miguel Martinez, second employee and software
+engineer Tom Savage, and VP of engineering Luca Grulla.
+
+import sf from '../../assets/blog/signal-founders.jpg'
+
+<Image src={sf} />
+
+# Background
+
+_Jon:_ So when and how did Signal get started?
+
+_Miguel:_ We founded Signal over 4 years ago in a garage with the three
+of us (Wesley Hall, David Benigson and Miguel Martinez). Wes and I
+connected on Meetup.com, and then I ended up doing the last year of my
+PhD and a start-up at the same time. I experienced sleep deprivation for
+a year, but the gamble has paid off.
+
+_Jon:_ A garage? Sounds old school?
+
+_Miguel:_ Yes, at one stage we had 8-12 people in the garage with 14
+whiteboards and lots of coffee.
+
+The first goal was to provide meaningful information for executives. We
+first built an MVP/prototype in Java and it progressed quickly, going
+from processing 300K documents to 1 million. We then closed our first
+client and went to seek investment, hitting every VC in London.
+
+Now we have over 50 people, with half being developers.
+
+_Jon:_ Could you describe what the technology does?
+
+_Miguel:_ We have a data processing pipeline for incoming documents that
+has to be lightening quick due to the volume.
+
+The pipeline consists of a series of components, each adding their own
+complexity. For example we perform spam detection (filtering), language
+detection and translation (publications in 40 different languages from
+90 different countries), and we have components for anomaly detection
+and sentiment analysis. Some of the components are at the research
+stage.
+
+At the end of the pipeline we put all this data into different databases
+such as [Elasticsearch](https://www.elastic.co/). Then we can ask
+questions such as _give me all the articles (and tweets) about Clojure_.
+
+A venture capitalist can track companies and areas that they want to get
+into (i.e. AI, big data). Law firms can track clients and legislation to
+discover how they match up against financial and corporate
+responsibility commitments.
+
+import sg from '../../assets/blog/signal-generic.jpg'
+
+<Image src={sg} />
+
+# Clojure Journey
+
+_Jon:_ How did you decide to use Clojure?
+
+_Miguel:_ We started using Groovy to define how the components worked
+together.
+
+_Tom:_ Groovy was the _glue_.
+
+_Miguel:_ But it was clunky. I was not a fan of Groovy as a language -
+it was difficult to track state and it was complicated. The few bits we
+liked were the functional bits.
+
+We started thinking about other options. Wes went to a conference and
+saw [Ben
+Evans](https://skillsmatter.com/legacy_profile/ben-evans#skillscasts),
+he asked Ben which language would win out and Ben recommended Clojure.
+This was around 2014 at a time when it seemed lots of good devs were
+trying it out ahead of the companies.
+
+Wes tried it out for 2-4 weeks and then showed us. Then I took it for 2
+weeks. After this two weeks we decided to change the entire codebase to
+Clojure. We put in a queue system between components, so that we could
+focus on one component at a time. We got a gigantic code reduction and
+the speed was actually faster.
+
+_Jon:_ What did you see as the advantage of Clojure?
+
+_Tom:_ Our _research functions_ are essentially data transformation. The
+kinds of functions we write are pure functions, so Clojure lends itself
+very well to this.
+
+_Miguel:_ Clojure was way better for machine learning than Java, with
+independent functions that cater well for parallelism, simply taking
+data in and returning data out. Also, it was very important to us that
+Clojure is a pragmatic, real language designed to run in production.
+
+_Tom:_ The business domain is about transforming data, a great fit for
+functional programming. When you have high level functions - being able
+to pass functions as arguments - a lot of complexity in standard Object
+Oriented design patterns just falls away.
+
+Also, we needed to push for predictability. We don't like
+non-deterministic models; pure functions and immutability fit.
+
+_Miguel:_ Replicability and reproducibility are very important. Testing
+is critical around our models to ensure we don't have differences and
+side effects.
+
+import sl from '../../assets/blog/signal-logo.jpg'
+
+<Image src={sl} />
+
+# JVM and Library Support
+
+_Jon:_ Any challenges moving to Clojure?
+
+_Miguel:_ We spent a significant amount of time migrating our Java
+components to Clojure, but we realised that even though we love the
+language, the coverage and support for libraries is far from perfect.
+
+_Malcolm:_ The JVM has a weakness in your domain?
+
+_Miguel:_ In my opinion the JVM has a smaller number of libraries for
+machine learning than compared to Python. Each language has it's pros
+and cons. Python is generally slower and more verbose, not close to
+Clojure in terms of being idiomatic about being functional programming.
+
+_Luca:_ Python has a lot of traction in academia, in research. This has
+naturally produced an ecosystem in applied research such as textual
+analytics, natural language processing and AI.
+
+import scl from '../../assets/blog/scikitlearn.png'
+
+<Image src={scl} />
+
+_Miguel:_ One major example - [Scikit-learn](http://scikit-learn.org/)
+is the major machine learning toolset in Python. It has a huge community
+of supporters; the committers are both developers and researchers. There
+are extremely well documented examples of how to use the library. The
+JVM has libraries but many are experimental and less well supported.
+
+We've contributed to some JVM libraries around machine learning, but you
+need hundreds of people involved to make a success of it.
+
+_Malcolm:_ So Python and Clojure?
+
+_Luca:_ We are moving to an architecture where Clojure is the data
+processing pipeline backbone. Then we have services in Python or
+Clojure.
+
+_Miguel:_ We are polygot now, the researchers and developers know both
+Clojure and Python.
+
+_Jon:_ Any other frustrations?
+
+_Tom_: Error messages trip people up; common mistakes people make such
+as mistyping a variable can lead to large stacktraces. Also starting the
+REPL takes a while compared to other languages (i.e. Haskell).
+
+import cl from '../../assets/blog/4clojure.png'
+
+<Image src={cl} />
+
+# Training and Hiring
+
+_Jon:_ How have you gone about training?
+
+_Miguel_: We learned with [4Clojure](https://www.4clojure.com/) and we
+started doing exercises not stop. Our first pieces of code were not
+idiomatic but we got used to it, struggled and persevered. If you follow
+the top devs on 4Clojure, they can do in a line and a half what we could
+do in 6 lines.
+
+We then used 4clojure as a filter for incoming CVs - as a recruitment
+tool. We then check the profiles of candidates and test how quickly they
+can pick it up.
+
+We believe every data scientist is a developer - every one of our
+researchers will pass a 4Clojure test (for example do 20 exercises in 4
+days). Everyone from the research side has enjoyed learning a new
+language, Clojure is easy to learn.
+
+_Jon:_ How have you found hiring for Clojure developers?
+
+_Miguel_: If someone is interested in Clojure, chances are they are a
+good developer because it's not mainstream.
+
+_Tom_: If you're looking for people that know Clojure then it's obvious
+where to look, but its a small pool. If you look for people that can
+learn Clojure then it's a much wider pool.
+
+_Luca_: We get people very interested to learn Clojure. There's
+definitely a growing appetite of people wanting to learn. They've heard
+enough about Clojure and are ready to make the jump. They want the joy
+and beauty of it and are looking for an opportunity.
+
+_Tom_: I did Haskell at Uni so I was interested. Signal were looking for
+FP experts and found me.
+
+# IDE
+
+_Jon:_ What IDEs do you use here?
+
+_Miguel_: We started using [Light Table](http://lighttable.com/) in the
+garage. Then we went to Sublime and from there to Emacs.
+
+_Luca_: We have a current split between Emacs and Vim.
+
+_Miguel_: When we work with python we use
+[PyCharm](https://www.jetbrains.com/pycharm/) or Sublime. We also use
+[Jupyter Notebooks](http://jupyter.org/) extensively for prototyping.
+
+# Technologies
+
+_Jon:_ What technologies would you like to give a shout-out to?
+
+_Tom:_ We use Reagent/Reframe with ClojureScript. Reagent is really nice
+to work with.
+
+_Miguel:_ I'd like to mention [ClojureWerkz](http://clojurewerkz.org/);
+their libraries have really helped us a lot. It was good to see people
+developing libraries actively with good documentation.
+
+# State of Clojure?
+
+_Tom_: Adoption is increasing. The main issue is that the people who
+have discovered it were already in a sense looking for it.
+
+_Miguel:_ Python and Java are known in the universities whereas Clojure
+is still relatively obscure. Advertising Clojure at the universities
+might give it an extra push.
