@@ -1,14 +1,14 @@
 ---
-author: "mrk"
-title: "Clojure in Oxford: Crossref"
-description: "Improving scholarly communications"
-category: "clojure-in"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "01 Nov 2018"
-heroImage: "mock3.jpg"
+author: 'mrk'
+title: 'Clojure in Oxford: Crossref'
+description: 'Improving scholarly communications'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '01 Nov 2018'
+heroImage: 'mock3.jpg'
 tags:
-  - "clojure"
-  - "casestudies"
+  - 'clojure'
+  - 'casestudies'
 ---
 
 > When you have to come into work every day, sit down and write code,
