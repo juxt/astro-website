@@ -108,7 +108,7 @@ sprinkling your code with a pile of patterns, none of which have
 anything to do with your business: _Snapshots_, _Temporal Objects_,
 _Time Points_, _Temporal Properties_, and _Effectivities_. Not to
 mention your `valid_from`, `valid_to`, `tx_from`, and `tx_to` columns on
-every single table. [^1]
+every single table.
 
 These patterns are not just an extra domain you need to deal with. They
 are also a complicated domain. They are easy to get wrong. The
@@ -122,7 +122,7 @@ a waste of your time.
 Unfortunately, you are unlikely to get bitemporality right. If you are
 using an update-in-place RDBMS you will require `entity_history` tables
 for every `entity` table. You will probably require triggers to update
-these or a plugin to do that for you. [^2] You will need to manage all
+these or a plugin to do that for you. You will need to manage all
 the extra columns by hand, ensuring they are added to every table. You
 must take these explicit, user-managed timeplane columns into account in
 every join of every query. Postgres and Oracle do not know that these
@@ -137,7 +137,7 @@ Use a bitemporal database. XTDB is one such database (though it's not
 the only one).
 
 Håkan Råberg is the original software architect behind XTDB. Håkan's
-_Design and Implementation of a Bitemporal Database_ talk [^3] does a
+_Design and Implementation of a Bitemporal Database_ talk does a
 good job of explaining why it's a requirement of any system which
 incorporates temporality in its domain.
 
@@ -200,20 +200,3 @@ require `valid-time` and `tx-time` can access them --- optionally. By
 database layer, even today.
 
 This work by [Steven Deobald](https://deobald.ca) for [JUXT Ltd.](https://juxt.pro) is licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
-
----
-
-[^1]:
-    Although Martin has chosen the terminology of _Actual Time_ and
-    _Record Time_, the terms _Valid Time_ and _Transaction Time_ are the
-    [standard terms](https://www.cs.arizona.edu/sites/default/files/TR96-02.pdf) for those semantics.
-
-[^2]:
-    Such [plugins](https://github.com/xocolatl/periods)
-    [do](https://github.com/arkhipov/temporal_tables)
-    [exist](https://github.com/nearform/temporal_tables).
-
-[^3]:
-    Håkan's talk is [well worth a watch](https://www.youtube.com/watch?v=YjAVsvYGbuU), even if you've
-    seen it before. Note that due to the immutable nature of YouTube
-    videos, the talk still refers to XTDB as Crux.
