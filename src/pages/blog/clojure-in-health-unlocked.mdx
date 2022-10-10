@@ -1,0 +1,304 @@
+---
+author: 'jon'
+title: 'Clojure in London: HealthUnlocked'
+description: 'A health network powered by Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '06 Jul 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> As you write more, you like it more. And it's becoming better and
+> better over time.
+
+[HealthUnlocked](https://healthunlocked.com/) is a social network for
+people with healthcare conditions. It is a network built on communities,
+operated by partner groups such as charities and patient groups;
+HealthUnlocked provides the platform and technology for these
+organisations to manage their communities.
+
+Originally HealthUnlocked was built on top of .NET, but over the last
+few years they have migrated to a Microservice based architecture
+featuring Clojure.
+
+I caught up with Head of Technology Alex Trofymenko and Head of
+Engineering Russell Dunphy to learn more.
+
+import he from '../../assets/blog/healthunlocked-devices.png'
+
+<Image src={he} />
+
+# Background
+
+_Jon:_ How did HealthUnlocked get started?
+
+_Russell_ About seven years ago our Chief Medical Officer saw that there
+was a gap in provision and information for patients. As a doctor he was
+finding that patients would leave a consultation with little to no
+information. There was no place to go to ask questions or to find other
+people who were having a similar experience.
+
+Around this time social networks were getting popular, but there was
+nothing health focused; 70% per cent of people have never met someone
+with the same condition as themselves before joining HealthUnlocked. We
+have been able to bridge that gap, providing advice on coping and
+navigating your own health conditions.
+
+_Jon:_ What's an example of the functionality provided by HealthUnlocked
+to community managers?
+
+_Russell:_ It's not about prescriptions or diagnostics, rather it's
+about providing coping advice, helping individuals to understand what's
+happening. This includes management of posts and messages, topics and
+users\' communities.
+
+_Alex_: It's a peer support network, allowing for patients to share
+experiences with each other, to ask each other questions. It means that
+in addition to medical professionals, peers can also help each other.
+
+_Russell:_ We also use machine learning to understand what our users
+write. We can tailor the information and content we provide to people,
+making it relevant and life changing, to give people the information
+they need to better manage their own health.
+
+# Tech history
+
+import hea from '../../assets/blog/healthunlocked-russel-alex.jpg'
+
+<Image src={hea} />
+
+_Jon:_ What's the tech history of HealthUnlocked?
+
+_Alex:_ The company was originally built on
+[Bizspark](https://bizspark.microsoft.com/) using .NET. About four years
+ago we started rebuilding from the big monolith into a Microservice
+architecture, which allowed us to easily migrate from one language to
+another. The different parts of our applications talked to each other
+via REST or message queues.
+
+_Russell:_ I wonder if it's fair to use the term Microservices;
+sometimes when people use Microservices they take it to ridiculous
+extremes. Our services are _reasonably sized services_.
+
+_Alex:_ Yes, the big difference is we went from about 1 big application
+to 20 services. We looked at it recently, and we went from about 275K
+lines of C# code to about 70K lines of Clojure code for one project. The
+reduction of code was quite remarkable.
+
+_Jon:_ So where did Clojure come in?
+
+_Alex:_ It started off as a sort of an experiment. As we were rewriting
+the app, we wanted an MVC API. We tried using Node, but it didn't really
+work for us, so we chose Clojure. After building this - it took two
+days - we went from on there. It was a very incremental process of
+trying out different languages and seeing what we liked.
+
+_Jon:_ It just stuck?
+
+_Alex:_ As you write more, you like it more. And it's becoming better
+and better over time.
+
+_Russell:_ I still get blown away by how powerful it is. Just the other
+day I wrote a tool to parse an entire export of a colleague's emails -
+pull out the stats and to build a historical record. It was only 30
+lines to work with a complex file type I hadn't seen before; it's just
+really exciting to feel this kind of power.
+
+import heal from '../../assets/blog/healthunlocked-clocks.jpg'
+
+<Image src={heal} />
+
+_Jon:_ What's the team size?
+
+_Russell:_ We have eight full stack developers and two data scientists.
+
+_Alex:_ All the developers are familiar with Clojure. We use pull
+requests to help get functionality into production.
+
+# Tech stack
+
+_Jon:_ What's your tech stack?
+
+_Alex:_ We use MySQL as the primary relational store and
+[Elastic](https://www.elastic.co/) for searches and geospatial searches.
+Most services are written in Clojure, with the exception of a legacy C#
+one that is being rewritten. All the front end code is JavaScript with
+React.
+
+_Russell:_ We are just introducing some ClojureScript and Reframe.
+
+_Alex:_ We also use RabbitMQ for messaging, our websites use NGINX.
+We're then heavily reliant on AWS.
+
+_Rusell:_ We've got some lambdas.
+
+_Alex:_ Yeah we're experimenting with serverless architectures.
+
+# Tech Culture
+
+_Jon:_ It sounds like you've got a good experimental culture?
+
+_Alex:_ Yes, whilst we need to focus on speed of development as we're
+constantly under pressure to deliver new things, we do experiment, as
+learning is a primary driver for developers to feel more engaged and
+more interested. We don't compromise on operational stability.
+
+_Russell:_ At the same time, it is really useful to have a smallish set
+of technologies in the stack. I'm not going to purposefully choose
+radically new technologies... we're lucky that Clojure is such a good
+language.
+
+# Learnings
+
+_Jon:_ Have you got any learnings about using Clojure at the
+architectural level?
+
+import healt from '../../assets/blog/healthunlocked-office.jpg'
+
+<Image src={healt} />
+
+_Russell:_ So, controversially, I've come to prefer bigger applications
+with are composed of independent vertical slices of functionality. We
+enforce _in application_ segregation using different package structures
+as boundaries of the various sub-domains. This gives us the benefit of
+isolation without the pain of setting up the boilerplate of
+Microservices.
+
+_Alex:_ We're moving towards having a single GIT repo owning access to a
+data store with multiple apps inside of it. We will have a shared
+directory for schemas that cross application boundaries.
+
+_Russell_ I think it's important to explicitly define and test
+interactions between applications using shared schemas, testing both the
+consumers and producers against these schemas, to make guarantees.
+
+# Clojure Spec
+
+_Jon:_ Have you look at [Clojure.Spec](https://clojure.org/about/spec)?
+
+_Russell_ We've got so much Plumatic Schema. We're being a bit cautious
+about migrating.
+
+_Alex:_ One step at a time.
+
+_Russell:_ Spec has the really powerful idea that you don't have specs
+for Maps, but you have specs for the keys. In other words the data types
+of the fields inside the map are defined as individual specs at the key
+level, which makes the specs more reusable. This is similar to how the
+Datomic Schema is defined using schema attributes.
+
+_Jon:_ Not sure I'll be able to write that up!
+
+_Russell_ We've also started gently introducing generative testing for
+our integration tests that hit our databases. We've found a halfway
+house where effectively we're writing example-based tests; all of the
+fields that are not specified are generated using test.check generators
+and schema generators.
+
+_Jon:_ Don't you get random test failures that are a pain to find?
+
+_Russell:_ Yes, that's the power of it! It forces you to think through
+all your different assumptions.
+
+_Alex:_ It would be impossible to write a test case for every scenario
+that you would need to find every bug generative. With generative
+testing you will eventually get around to finding a bug, and when you
+find them, you fix them. They application then becomes more robust.
+
+_Jon:_ I suppose that test reporting is key?
+
+_Alex:_ Yes, test reports that show the expected output and what was
+generated.
+
+# Hiring
+
+_Jon:_ What's your hiring story?
+
+_Russell:_ It's tough hiring, tough finding people.
+
+_Alex:_ Clojure is still relatively niche. We are looking more for
+passionate, engaged developers; we try to get them to write tests in
+Clojure to see how they'll pick it up. It's about hiring smart people
+more than finding developers that have coded Clojure before.
+
+_Russell:_ It's super important to find someone who is going to be a
+positive addition to the team. When I first joined I had assumed hiring
+Clojure developers would be easy, but there are some challenges.
+
+A lot of Clojure developers are very interested in the technical side of
+development, but to work in HealthUnlocked you need an holistic
+viewpoint - to understand the whole aspect of the company. We need
+people who want to deliver good, working software rather than using the
+latest cool Clojure libraries.
+
+_Alex:_ Because it's LISP based, it's easy to get someone that's very
+academic but not a practical developer. This is probably true to an
+extent with all functional languages.
+
+_Russell:_ In Ruby I got so into hyper magical object oriented code,
+that I cringe now at this kind of complexity. Now I value simplicity.
+
+_Alex:_ Our culture here is very important, we do social activities as
+well as write code. Experience in Clojure is very useful, but if you
+don't have it then you can pick it up quickly.
+
+import sp from '../../assets/blog/spaceemacs.svg'
+
+<img width='200px' src={sp} />
+
+_Russell:_ We're good at hiring for diversity also. We strive for
+diversity and we see dividends from it. Diversity makes our company
+vastly better.
+
+_Alex:_ Because of the technologies used and our approach, we aim for a
+smaller number of people but of higher quality.
+
+_Russell:_ Clojure is so simple that people will pick it up quickly.
+
+# Editor Wars.
+
+_Jon:_ What editors do you use?
+
+_Alex:_ We use all of them. Vim, Emacs -
+[Spacemacs](http://spacemacs.org/), Sublime, Intellij. Our front devs
+use [VS Code](https://code.visualstudio.com/). Developers can use
+whatever they are used to.
+
+_RusselL_ I converted one person to Vim.
+
+_Alex:_ Yes, he's been coding very slowly ever since!
+
+# State of Clojure?
+
+_Jon:_ What do you think of the current state of Clojure in London?
+
+_Russell:_ There are lots of meetups and lots to do socially.
+[ClojureBridge](http://www.clojurebridge.org/) is great.
+
+We need more Clojure developers as the bigger companies have sucked up
+so many.
+
+_Jon:_ What do you think of Clojure's future?
+
+_Alex:_ It will be interesting to see how Clojure and data science come
+together. Clojure doesn't seem to be made for matrix machine learning
+and Python has a clear lead. I will be interested to see how this
+develops.
+
+_Russell:_ Same for NLP and sparse matrices.
+
+# Shoutout libs
+
+_Russell:_ We love
+[compojure-API](https://github.com/metosin/compojure-api),
+[Schema](https://github.com/plumatic/schema), Spec,
+[Cheshire](https://github.com/dakrone/cheshire).
+
+_Alex:_ [Midje](https://github.com/marick/Midje),
+[Timbre](https://github.com/ptaoussanis/timbre).
+
+# Last word?
+
+_Alex:_ We're always hiring.

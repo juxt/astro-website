@@ -1,0 +1,189 @@
+---
+author: 'jon'
+title: 'Clojure in Cambridge: Metail'
+description: 'Shaping up with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '28 Oct 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> People spend less time typing and more time thinking.
+
+import meh from '../../assets/blog/metailhackathon.jpg'
+
+<Image src={meh} />
+
+[Metail](http://metail.com/) is an innovative tech provider to the
+fashion industry.
+
+They develop online tools that allow customers - with just 5
+measurements - to see what clothes will look like on their own body
+shapes; to virtually _try-on_ clothes using accurate 3D avatars.
+
+Using machine learning and data science they can even make
+recommendations and give fashion advice, whilst being able to feed data
+back to the clothes producers as to improve cuts and sizing. Their
+software is delivered to online retailers across the globe, including
+India, Korea, Thailand and Europe.
+
+Metail uses Clojure for their RESTful API services and ClojureScript on
+the front-end. They maintain a [Metail tech
+blog](http://tech.metail.com/) and host a variety of meet-ups at their
+offices such as [Data Insights
+Cambridge](http://www.meetup.com/Data-Insights-Cambridge/), [Cambridge
+AWS User Group](http://www.meetup.com/Cambridge-AWS-User-Group/), and
+[Cambridge NonDysFunctional
+Programmers](http://www.meetup.com/Cambridge-NonDysFunctional-Programmers/).
+Metail also sponsored this year's
+[/dev/summer](http://devcycles.net/2016/summer/).
+
+Malcolm Sparks and I caught up with Jim Downing (CTO) and Andrew Dunn
+(Head of Engineering) on a day-trip to their Cambridge office.
+
+import me from '../../assets/blog/metail_interview.jpg'
+
+<Image src={me} />
+
+# Clojure, Getting Started
+
+_Jon Pither:_ How did you get started with Clojure?
+
+_Jim Downing (CTO):_ Prior to joining Metail I had used Clojure in the
+Chemistry department at the University of Cambridge in the field of
+[Chemoinformatics](http://www.c-inf.net/). I'm a language enthusiast and
+had looked at Erlang for processing vast amounts of data. I was looking
+for a functional language that utilised a multi-core system, and then I
+found Clojure. It was a language with Java interop so I could start
+using it with our existing chemistry libraries, and a language that was
+fun to code. I came for the functional and stayed for the Lisp.
+
+When I joined Metail I inherited a code-base of Java, Spring, and
+Hibernate with Flash and Flex on the front end. I began writing our
+first service in Clojure to offer size recommendations and fitting
+advice.
+
+_Andrew Dunn (Head of Engineering):_ We then hired [Ray
+Miller](https://github.com/ray1729) to build up Clojure in the middle
+tier. After he'd built a line of business tools he progressed onto
+writing ClojureScript based web interface tools.
+
+We've since had a rewrite of our front end with native mobile devices in
+mind, migrating from JavaScript/Coffeescript to ClojureScript. We wanted
+to avoid some of the concurrency bugs found in JS and we wanted a strong
+focus on React. We're using Om Next which is a Clojure take on React.
+
+import chap from '../../assets/blog/ClareCollegeAndKingsChapel.jpg'
+
+<Image src={chap} />
+
+_Jon:_ What are the advantages of Clojure?
+
+_Jim:_ Clojure picks the best stuff from everywhere else - cherry
+picking from 70s for libraries such as core.logic and core.async, and of
+course Lisp itself. It's a well thought out language.
+
+_Andrew:_ You shouldn't judge code on the lines of code count, but it
+does make a difference when you can understand the code on a single
+screen.
+
+_Jim:_ People spend less time typing and more time thinking.
+
+_Andrew:_ We should also mention the JVM and that the ease of getting it
+running on various platforms is also a benefit.
+
+_Jim:_ Developers here have to maintain their own systems in production
+and this results in a conservatism that helps to ensure that decisions
+are well qualified. Clojure is seen as a safe choice.
+
+import met from '../../assets/blog/metail-office.jpg'
+
+<Image src={met} />
+
+# Hiring
+
+_Jon:_ How has the hiring process been?
+
+_Jim:_ We've found that choosing an _unusual_ language nets out about
+the same as mainstream ones. With Clojure there are pros and cons; it's
+not massively taught in universities, but then there are people actively
+looking around wanting to do Clojure. We've had people approach us for
+jobs; we are seeing people come to Metail as a recruitment destination.
+
+We've had key hires with people who have wanted to code Clojure in their
+day jobs after using it on hobby side projects.
+
+_Andrew_ - We are very engaged with the local education scene here. We
+support the Cambridge Non-Dysfunctional Programmers meet-up and we've
+been able to hire from this group.
+
+_Jim:_ I'd say Clojure does have a better hit-rate for good engineers.
+That might change as it becomes more widely adopted. Currently Clojure
+developers tend to think about problems in a better way, coding
+solutions that are easier to understand and having more fun in the
+process.
+
+import metm from '../../assets/blog/metail_manakin.jpg'
+
+<Image src={metm} />
+
+_Jon:_ What's the ramp up like for developers new to Clojure?
+
+_Jim:_ We don't need people with Clojure experience as much as people
+with a strong track record on learning. We have one example of a junior
+developer who after learning Clojure for two months is now as adept as
+anyone.
+
+_Andrew:_ The frond-end migration to ClojureScript involved training up
+6-7 JavaScript developers (getting training from JUXT), and they took to
+it really well.
+
+_Jim:_ We've also hired a Haskell developer who now loves Clojure.
+
+_Andrew:_ In fact, it's almost a downside - that if you hire someone
+that's done Clojure then they probably won't want to shift. Therefore
+you're implicitly committing your organisation to a particular language,
+because it's such a fun language to code in.
+
+# Clojure in the UK
+
+_Jon:_ What you think the state of Clojure is in the UK?
+
+_Jim:_ - Subjectively I think it's growing. There are some examples of
+large media companies using it.
+
+_Andrew:_ At the Non-Dysfunctional Programmers meet-up the most popular
+evening is the _Learn to Program in Clojure_ event.
+
+# State of Clojure
+
+import hick from '../../assets/blog/103-clojure-spec-with-rich-hickey.jpg'
+
+<Image src={hick} />
+
+_Jim:_ I think we're at a point where the tool-stack is now so mature
+now that people will either commit to it or not; you can't use tooling
+as a reason not to.
+
+The core library is extremely solid. ClojureScript is also solid and it
+feels like it's going to _really_ happen at some point. Serious
+innovation takes place in the libraries.
+
+We are hugely excited by [Clojure spec](http://clojure.org/about/spec).
+We've used Schema and generative testing before and gave [Typed
+Clojure](http://typedclojure.org/) a try. Spec looks really high quality
+and will lead to higher quality programs.
+
+If spec and generative testing become mainstream this will really change
+things.
+
+_Andrew:_ AWS Lambda presents a challenge, particularly the JVM boot up
+time. For a rarely used service the JVM/Docker bootup time becomes
+prohibitive. We're looking at using ClojureScript on the server-side to
+address this.
+
+# Resources
+
+Read more on the [Metail tech blog](http://tech.metail.com/).

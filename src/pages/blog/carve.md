@@ -58,7 +58,7 @@ it's code that you should delete.
 
 The output will be something like:
 
-```console
+```bash
    src/core.clj:3:1 core/dead
 ```
 

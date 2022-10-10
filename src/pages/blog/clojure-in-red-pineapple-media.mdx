@@ -1,0 +1,287 @@
+---
+author: 'jon'
+title: 'Clojure in Berlin: Red Pineapple Media'
+description: 'A PHP shop adopts Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '13 Jan 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Love that you can use the same language for both the front and the
+> back end. This is the best decision this company has made.
+
+import red from '../../assets/blog/redpineapplemedia-startsite.jpg'
+
+<Image src={red} />
+
+# Targeted Video Advertising
+
+Red Pineapple Media is a Berlin based video advertising company. They
+supply a video player with advanced tracking and targeted advertising
+capabilities, providing services to clients such as newspaper websites
+and gaming companies.
+
+They have been going for 5 years and all of the original code was
+written using PHP. They started the switch to Clojure about two years
+ago and it's becoming their primary programming language of choice.
+
+To learn more about this Clojure adoption story I had a video chat
+facilitated by Head of Engineering Luis Soares, with full stack
+developer Damiano Rühl and recent hire Joaquim Torres.
+
+# Background
+
+_Jon:_ So what is the tech story of Red Pineapple Media?
+
+_Damiano:_ The original system was built using PHP, JavaScript and
+MySQL. Then we moved step by step to Clojure, still using MySQL. At some
+point we moved to Cassandra and now we are moving to
+[Elasticsearch](https://www.elastic.co/).
+
+import rpm from '../../assets/blog/rpm-luis-joaquim.jpg'
+
+<Image src={rpm} />
+
+_Jon:_ Why did you move away from PHP?
+
+_Damiano:_ The main reason was for performance; PHP has a model that
+doesn't fit well for lots of requests on the same server, with each
+request requiring its own process. We knew we had to switch tech. We
+thought about Node.js and we also investigated Clojure. We had big
+debates.
+
+Node.js was the obvious choice; everyone can do JavaScript so it was the
+safe decision.
+
+_Jon:_ And Clojure?
+
+_Damiano:_ A former colleague was advocating doing Clojure for the
+functional approach. We read a lot about it; we knew we wanted the Java
+ecosystem which we saw as a big benefit, but then no one wanted to do
+Java. In the end we decided to try Clojure, and if it didn't work then
+we would go with Node.js.
+
+_Jon:_ How did you introduce it?
+
+_Damiano:_ We wanted to do some mobile web advertising and we chose
+Clojure for this.
+
+import dam from '../../assets/blog/rpm-damiano.jpg'
+
+<Image src={dam} />
+
+After about two weeks with two of us, we were like: _yes this feels
+right - we definitely have to do this with Clojure_. It took us more
+time to understand the concepts and we made mistakes design wise such as
+how to structure code etc.
+
+But from the beginning we were more productive and the code was better
+quality - already much better than PHP.
+
+From there we re-implemented the whole of our tracking code and it
+looked much better. We then made the whole delivery of ads - the biggest
+part of the system - use Clojure.
+
+Now our code is much cleaner, nicer, and easier to change, as well as
+being more easily testable. We have much more trust in the code that
+everything is fine.
+
+We recently implemented a new way of delivering ads and it was really
+easy to add, especially when compared to the old OO approach in PHP.
+
+import la from '../../assets/blog/laravel.png'
+
+<Image width='200px' src={la} />
+
+# PHP/OO Diversion:
+
+_Jon:_ OO in PHP? I had no idea.
+
+_Damiano:_ Yeah. PHP became an OO language at some point. Started as a
+template language then became OO.
+
+_Joaquim:_ We were using [Laravel](https://laravel.com/) - the Rails of
+PHP. It has a hollistic approach like Rails
+
+# The JVM:
+
+_Jon:_ So you moved to the JVM. Did you have any concerns about it being
+too heavy?
+
+_Damiano:_ For me personally - yes. I was concerned about the JVM; I'd
+worked in a Java company before and I disliked Java.
+
+But actually we didn't feel the JVM so much. You have the project and
+Leiningen and the JVM; it all just worked. We didn't have to understand
+the JVM internals.
+
+The Java ecosystem is a big benefit. Whenever we have a big problem to
+solve - usually it's solved in Java in a performant way.
+
+I have a different feeling about the JavaScript ecosystem. I often find
+something I want to use but when I look into it I find it's broken. In
+Java maybe they do things a bit more professionally. We really like the
+possibility of using Java libraries where we can.
+
+_Jon:_ The JVM isn't too slow?
+
+_Damiano:_ Of course starting the REPL is slow. Then we read a [post
+from Stuart
+Sierra](http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded)
+on his REPL workflow - stopping and starting the app - so then we didn't
+have to restart the REPL all the time.
+
+# ClojureScript
+
+_Jon:_ Have you guys looked into ClojureScript?
+
+_Damiano:_ Next year we want to use ClojureScript for the front end. We
+use ClojureScript for one internal tool, using React native.
+
+_Jon:_ What ClojureScript framework will you choose next year?
+
+_Damiano:_ [Reagent](https://github.com/reagent-project/reagent) and
+[Re-frame](https://github.com/Day8/re-frame).
+[Om](https://github.com/omcljs/om) is a possibility, but we'll probably
+go for Reagent.
+
+import lg from '../../assets/blog/redpineapplelogo.png'
+
+<Image src={lg} />
+
+# Clojure
+
+_Jon:_ So overall has Clojure been good for you?
+
+_Damiano:_ A big part of Clojure is the advantage of FP over OO - a new
+thing for me and a rethink. It just feels right - it's fun to do
+Clojure.
+
+_Luis_: A common trait is that people say the language is very well
+balanced. Clojure has the nice strengths of FP, of dynamic languages, of
+Lisp, and now we've got spec. Put all of this on top of a super strong
+ecosystem - the JVM - it becomes very hard to beat. Clojure is such a
+well balanced language.
+
+_Damiano:_ I came from JavaScript. I never really liked Java - it's too
+strict. JavaScript was super dynamic and I got the same feeling from
+Clojure; something I really enjoy coding. The problem of a lack of a
+type system has been solved by the community (Schema, spec).
+
+I also love that you can use the same language for both the front and
+the back end. This is the best decision this company has made.
+
+# Hiring
+
+_Jon:_ How have you found hiring?
+
+_Damiano:_ It's much easier now than hiring PHP devs. With PHP you find
+a lot of devs but not many that are so experienced or passionate. Also
+they often had the wrong idea of how experienced they were - super
+genius developers that were actually relatively junior. The hiring
+process improved a lot moving to Clojure.
+
+_Luis:_ When we started hiring we removed the constraint that the person
+needed to know Clojure - but rather that they wanted to learn. Hire for
+the attitude, train for the skill.
+
+import lk from '../../assets/blog/joyofclojure.jpg'
+
+<Image width='200px' src={lk} />
+
+# Training
+
+_Jon:_ How about training?
+
+_Joaquim_: When I joined it was still the case that most developers
+didn't know Clojure. We paired developers that were proficient with
+developers that were less proficient. People really enjoyed learning and
+it surpassed every expectation we had.
+
+_Luis:_ We started a reading group meeting every week. A chapter at
+home, then we do exercises together. Right now we're going through the
+Joy of Clojure.
+
+We also participate in local Clojure meet ups and tech talks in
+companies. We go to conferences such as EuroClojure.
+
+import spc from '../../assets/blog/spaceemacs.svg'
+
+<img width='200px' src={spc} />
+
+# IDE wars
+
+_Jon:_ What IDE do you guys use?
+
+_Luis_: I'm using plain vanilla Emacs, two of us are using
+[Spacemacs](http://spacemacs.org/). One person is using Intellij and is
+slowly thinking of switching to Cursive.
+
+_Damiano:_ I just switched from [Light Table](http://lighttable.com/) to
+Spacemacs. Light Table was really good to start with; the REPL being _in
+there_ was really nice, but this feature got removed at some point. It
+wasn't super stable and was difficult to find documentation. Spacemacs
+added all these features so I knew I had to use it.
+
+import cl from '../../assets/blog/clojured.jpg'
+
+<Image src={cl} />
+
+# State of Clojure?
+
+_Jon:_ What's the state of Clojure in Berlin?
+
+_Damiano:_ It's a nice community but still quite small. When
+[Zalando](https://tech.zalando.com/) moved in it was a big thing. We
+have a small set of companies. [Fy](https://www.iamfy.co/about) is one
+company I know of that's been into Clojure from the beginning.
+
+It's small community but it's growing.
+
+_Joaquim_: We also have [clojureD](http://www.clojured.de/) that is
+really cool with good talks.
+
+# Frustration
+
+_Jon:_ Any frustrations with Clojure?
+
+_Damiano:_ Error messages and stacktraces. Also even with Component you
+have to restart the REPL occasionally, it's a bit annoying.
+
+_Jon:_ Is PHP better for error messages?
+
+_Damiano:_ Haha. Not good, but maybe better.
+
+# Technologies
+
+_Jon:_ What technologies would you like to give a shout-out to?
+
+_Damiano:_ One big learning that has helped us a lot is
+[Schema](https://github.com/plumatic/schema). It helps us to design the
+code from the beginning and makes implementation easier. I'd like to
+move to [spec](http://clojure.org/about/spec) but this is a big thing
+because we have a lot of code.
+
+_Luis_: There was a talk in the Berlin Clojure meeting (2 nights ago) by
+Jan Stepien on [Mutation Testing](https://github.com/jstepien/mutant).
+It's nice to see it's possible to rewrite the problems as they are
+running. This is complimentary to traditional code coverage tools. I
+find it a really interesting idea. Maybe for me there are some doubts
+about scaling it on a bigger codebase, but we will see.
+
+[Timbre](https://github.com/ptaoussanis/timbre) for logging is a nice
+library. I'm curious about
+[Onyx](https://github.com/onyx-platform/onyx). We did some experiments
+and liked it, it's a possibility for us.
+
+_Joaquim:_ We are rooting for Clojure 1.9 to be released so that we can
+start seeing and playing with Spec.
+
+# Technologies
+
+Check out the brand new [Red Pineapple Media engineering
+blog](http://engineering.redpineapplemedia.com/). Luis also maintains a
+[blog](https://decomputed.com/).

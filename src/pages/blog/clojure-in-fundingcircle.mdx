@@ -1,0 +1,259 @@
+---
+author: "jon"
+title: "Clojure in London: Funding Circle"
+description: "Lending some Clojure"
+category: "clojure-in"
+layout: "../../layouts/BlogPost.astro"
+publishedDate: "04 Oct 2016"
+heroImage: "mock3.jpg"
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Hiring good Clojure developers is not any harder than finding good
+> Ruby developers.
+
+# Peer to Peer
+
+import fc from '../../assets/blog/fclogo2.png'
+
+<Image src={fc} />
+
+[Funding Circle](https://www.fundingcircle.com) is a high profile
+peer-to-peer lending marketplace that allows investors to lend money
+directly to small and medium-sized businesses. It is built on a big
+idea: \*\*\"To revolutionise the outdated banking system and secure a
+better deal for everyone\"\*\*.
+
+The business is now global lending huge amounts of money in various
+countries. In order to carry doing this successfully and to grow
+further, they need their technology to be streamlined and efficient.
+
+They originally used Ruby throughout, but now they have over 40 Clojure
+developers spread across multiple countries including the US and the UK.
+
+Clojure is used extensively for the performance sensitive back-end
+services, for example making decisions on who to give loans to, the
+accounting system, and the handling of interactions with the upstream
+banks.
+
+import fc1 from '../../assets/blog/fcsuccess.jpg'
+
+<Image src={fc1} />
+
+I had a Q and A with Chief Architect Robert Crim who introduced Clojure
+to Funding Circle.
+
+# Clojure
+
+_Jon:_ What made you consider Clojure at Funding Circle?
+
+_Robert:_ I learnt functional programming at university where I wrote
+some OCaml. I talked about OCaml in the early days at Funding Circle but
+we had already committed to Ruby, so I left it on the shelf.
+
+Sometime later, I heard about Clojure and it interested me. I hadn't
+done much Lisp outside of Emacs, but I like the idea that in Lisp _[code
+is data](https://en.wikipedia.org/wiki/Homoiconicity)_, and that the
+emphasis is on data structures rather than just types for modelling
+purposes. I watched [Rich Hickey's Simple Made
+Easy](https://www.infoq.com/presentations/Simple-Made-Easy) talk and the
+simplicity of Clojure clicked.
+
+I figured the fact that Clojure is dynamic could help to bring our Ruby
+people across.
+
+There are also the pragmatic aspects of using the JVM; we're heavy
+[Kafka](http://kafka.apache.org/) users and there are native Java client
+libraries that we'd want to use.
+
+# Making the Change
+
+import fc2 from '../../assets/blog/fcteam.jpg'
+
+<Image src={fc2} />
+
+_Jon:_ What prompted you to consider such a big change in technologies?
+
+_Robert:_ Funding Circle has expanded into multiple countries - often
+through acquisition, which has led to us owning lots of different tech
+stacks and different versions of software.
+
+I was asking: how can we build something that we can run in different
+locations, a new global platform that is easier to maintain?
+
+It's about building for the future, the company now has a global
+development team and we needed an architecture with clear standards that
+fitted the nature of our business and team organization - we wanted an
+edge.
+
+_Jon:_ Why move away from Ruby?
+
+I wanted to get some cognitive dissonance between the old stack and new
+one. The old stack was monolithic and we had reams of impenetrable Ruby
+code, I wanted to make to a fresh start from that. Choosing Clojure gave
+us that little bit extra to make people put a new hat on and to make
+them really think about simple code.
+
+import fcb from '../../assets/blog/fcbar.jpg'
+
+<Image src={fcb} />
+
+# Making the Switch
+
+_Jon:_ Once you made the decision, how did the journey begin?
+
+_Robert:_ It started when Funding Circle entered the US and I started
+hiring our engineering team in San Francisco. I talked about a lot
+Clojure at the interview stage, and eventually people were asking \"can
+we do this in Clojure?\" when new projects came up.
+
+We launched an initial application to try Clojure out. It ran in
+production for almost a year without any problems and we felt like it
+was a success. Then we started to spin up teams to build the global
+platform.
+
+# Hiring
+
+_Jon:_ You built up a large Clojure team, how have you found the hiring
+process?
+
+_Robert:_ Hiring good Clojure developers is not any harder than finding
+good Ruby developers.
+
+Finding good developers is always hard but at least with Clojure it's a
+draw in its own right. People often learn it in their own time and they
+really want to do it.
+
+This can have a downside in that occasionally some developers are more
+interested in the tech and less interested in our business. The best
+developers we have tend to be product focused and incentivized by the
+domain they are working in. This was something we needed to be aware of
+when speaking with candidates.
+
+# Training
+
+_Jon:_ What's it been like on-boarding developers to Clojure?
+
+_Robert:_ You need enough of a seed of experienced developers that can
+teach others. You can't have 10 devs together not knowing the language,
+but with a good seeding it can be OK. The key is also to get a critical
+mass of excited people; people with a natural interest who want to
+evangelise.
+
+_Jon:_ Any challenges?
+
+_Robert:_ I have learnt not to take motivation and confidence for
+granted. I assumed early on that everyone would want to learn Clojure,
+but some people are really happy with their existing tech stack and not
+that keen to jump in. That's totally fine! It ultimately comes down to
+the fact that people have different interests and so it's important to
+listen to the team.
+
+Also, some people were worried about putting project delivery at risk by
+picking up a new language, and so were not as confident in taking things
+on, despite being interested in learning Clojure.
+
+_Jon:_ Any tips for dealing with this?
+
+_Robert:_ We did [4Clojure](https://www.4clojure.com/) exercises
+together in business hours and spent time getting people more
+comfortable. It's important not to project how you would tackle the
+problem of picking up learning something new. People have different
+levels of uncertainty at start of a project, and this is even more
+pronounced the larger the team is.
+
+Also, give time for people to experiment. Let them do spikes and example
+throwaway projects.
+
+Lastly we had a couple of training courses done in the UK and US (JUXT
+did the UK one).
+
+# Where are you now?
+
+_Robert:_ We have lots of Clojure in production and it's still growing.
+
+A lot of the platform that powers our marketplace is written in Clojure.
+We'll still use Ruby on the customer-facing pieces, but a significant
+part of the business is back-end. It's the nuts and bolts.
+
+import om from '../../assets/blog/omnextnolen.jpg'
+
+<Image src={om} />
+
+The approach we're taking is to _[turn the database inside
+out](http://www.erikgfesser.com/weblog/2014/10/strange-loop-conference-2014-turning-the-database-inside-out-with-apache-samza-martin-kleppmann.html)_-
+using event streams to drive business logic over Kafka. Clojure is a
+good fit for this; mapping functions over unbounded streams.
+
+We now have large teams working concurrently because of the
+contract-based approach of our asynchronous events streams. The
+bottleneck is more on the data model and not on the code. This is good
+because the data model is exactly where we should be focusing our
+efforts.
+
+# ClojureScript
+
+_Jon:_ Have you thought about adopting ClojureScript?
+
+We are in places. The Clojure team building back end services is also
+building back-end administrative tools using ClojureScript.
+
+We are trying to answer this question: can we have truely vertical
+teams, with Clojure developers doing both the front and back end?
+
+ClojureScript and Om.Next are still very Clojure like, and this reduces
+the need for separate front-end experts building all the CSS and
+JavaScript that can be difficult to maintain. Also having a parallel API
+for internal front-end purposes isn't great and Om.Next can cut down on
+this. We can then have our front-end team focused on building
+high-quality shared component libraries, rather than needing to write
+everything that touches a browser.
+
+# State of Clojure
+
+_Jon:_ How do you see Clojure adoption happening in the industry?
+
+_Robert:_ Clojure is definitely being adopted and I hope it continues to
+grow. I see a lot of smaller companies and consultancies using it and
+also some really big players. It just needs to continue to evolve and
+become more approachable.
+
+_Jon:_ What is your view on the current state of Clojure?
+
+_Robert:_ Clojure is not afraid of success. I'm interested to see what
+happens with ClojureScript vs Clojure on the JVM, do they get more
+compatible or begin to diverge? Which run-time will ultimately win out?
+It would be great to have an [LLVM](http://llvm.org/) compiled Clojure.
+
+Also does Clojure need a killer app? Om Next could be one. People assume
+there will eventually be a killer app of sorts, but this feels like the
+antithesis of Clojure, where it's more of \"here's the language, pick up
+the libraries you need and off you go\". So I'm not sure if there will
+ever be a huge draw to the language other than the language itself. But
+that should be enough!
+
+I'm also happy to see Spec. Ultimately, Cognitect are good stewards of
+the language - it's good tech moving at a good pace and I feel like
+everything we're building now will carry on working for years to come.
+
+## Final Thoughts
+
+_Jon:_ Are you glad you've chosen Clojure?
+
+_Robert:_ Clojure has held up its end and more. It's a fantastic
+language and the code is very maintainable.
+
+_Jon:_ Any other technologies you'd like to give a shout out to?
+
+We use [Riemann](http://riemann.io/) heavily; it's fantastic piece of
+technology for solving a lot the perennial monitoring and metrics
+gathering challenges that non-trivial systems face - it's great. I also
+really like Elm and would like to get the chance to use it more, but
+we're not going down that road anytime soon at Funding Circle!
+
+# References
+
+Check out the Funding Circle [engineering
+blog](https://engineering.fundingcircle.com/) and
+[careers](https://www.fundingcircle.com/uk/careers/).

@@ -1,0 +1,168 @@
+---
+author: 'jon'
+title: 'Clojure in London: Gower Street'
+description: 'Clojure in the movie business'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '15 Dec 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> As we've grown as a business we're now using Clojure for almost
+> everything...
+
+## Distributing Movies
+
+import go from '../../assets/blog/gower-st-web.png'
+
+<Image src={go} />
+
+[Gower Street Analytics](http://gower.st/) is an analytics company
+working in the film industry. Gower Street provides a platform for major
+distributors of films to manage release dates, helping them to decide
+exactly when a film should be released.
+
+They use complex algorithms built in Clojure to simulate the performance
+of box offices around the world, trying out various release dates for
+movies. These simulations take into account population demographics,
+release dates and the expected performance of other movies.
+
+I chatted with Gower Street co-founder Dimitrios Mitsinikos and his team
+to discuss their decision to use Clojure to power their business.
+
+**_Jon: What is the goal of Gower Street?_**
+
+**Dimitrios:** We want to build the analytics platform that we think is
+missing in the industry. There are many companies doing film analytics,
+but most are only doing _green light_ comparisons; looking at how well a
+film will do based on which actors are in it, for example.
+
+We instead look at what films are being released around the same time as
+others, alongside the likelihood of a film hitting its estimate based on
+a variety of data points. We also monitor the market closely, improving
+the accuracy of our predictions as we get closer to a film's release
+date.
+
+All the large studios are now using our software, and we are in the
+process adding more countries to the platform.
+
+**_Jon: How did Gower Street get started?_**
+
+**Dimitrios:** We have a lot of experience in the movie industry - for
+the last 15 years I've worked in analytics at Universal Studios. We
+started two years ago, spending a lot of time on research and
+development, processing data feeds to track how movies are performing
+across the world, and figuring out exactly what platform the industry
+might need.
+
+**_Jon: So if a studio wants to put out a film, then they can go to you
+to find out when would be the optimum time?_**
+
+**Dimitrios:** Yes, that's right. A studio can go online using our
+system and see what the film estimates are for the next 12-18 months.
+They can play with scenarios, for example: \"Let's swap Star Wars with
+Suicide Squad and see how much more or less each film might make.\"
+
+We create algorithms that accurately model the box office, so customers
+can see the impact of choosing different release dates and monitor what
+is happening in a very competitive environment. For example our models
+show that one film could have made an extra \$2.5m by releasing on the
+date that our system suggested.
+
+It's fascinating that even in a mature market like the UK, you can still
+significantly increase revenue by using analytics in this way.
+
+import gow from '../../assets/blog/gower-st.png'
+
+<Image src={gow} />
+
+## Technology choices
+
+**_Jon: Why did you choose Clojure to power the business?_**
+
+**Dimitrios:** The core of our business is the simulation of the global
+box office. It's all about processing complex and constantly changing
+data as fast as possible. When we first started our simulations could
+take five hours. It's now about a minute. We have found functional
+programming a great fit for our team, especially those with a scientific
+background.
+
+**Team:** Clojure might seem an unusual choice for performance-intensive
+simulation work; but it's working out well. It's a great fit for the
+problem, performant enough for our needs and it's extremely expressive
+and readable, allowing us to iterate quickly on complex simulation
+algorithms.
+
+**_Jon: How do you get it so fast?_**
+
+**Dimitrios:** Through lots of optimisation and the ability to easily
+deploy using Amazon AWS.
+
+**Team**: We've had to think outside the box, just throwing more
+machines at the problem might help, but then we'd have more problems
+with managing a distributed processing infrastructure e.g. a Hadoop
+cluster. To say more would be to enter a larger discussion of simulation
+and stochastic models that we probably don't have time for here!
+
+**_Jon: How did you go about adopting Clojure?_**
+
+**Dimitrios:** Initially we started with Racket. Racket was nice and
+functional, but it was lacking support in certain areas. The developers
+came up with the idea to move to Clojure.
+
+**Team:** Because the webapp for a previous iteration of our product was
+built in Racket, we were no strangers to parentheses. We tried Clojure
+for certain parts of the system at first, and it worked out very well.
+It has a larger ecosystem than Racket, so we've ended up adopting it
+across our stack. The usual reason of _it works well with our existing
+Java systems_ wasn't a factor for us.
+
+**Dimitrios:** As we've grown as a business we're now using Clojure for
+almost everything - plain Clojure for back-end services and
+ClojureScript on the front-end.
+
+**Team:** While we've gotten a lot from Clojure, we're not obsessive,
+and recognise that it isn't the best tool for every job. We've been
+experimenting with Serverless recently and this is one area where a
+lighter-weight solution may work better.
+
+**_Jon: What is your team size?_**
+
+**Dimitrios:** Our development team is currently five people and will be
+six shortly. We're a fully remote team, scattered across the UK.
+
+**Team:** You might think that remote would be an issue, but we've
+developed a way of collaboratively working together using
+[appear.in](https://appear.in) video conferencing, Slack and tmux - we
+pair-program remotely much of the time and although we're close to XP
+we'd prefer to refer to our team as agile with a small _a_.
+
+We get together for two days a month on-site in London as a team to
+work, eat and play - it helps us see each other as people rather than
+just co-workers. We have a flat-hierarchy and use a consensus-based
+decision-making model, so we're not exactly your normal corporate
+sweatshop in this regard; we very much agree with Dan Pink's ideas about
+[Autonomy, Mastery and
+Purpose](https://www.amazon.com/Drive-Surprising-Truth-About-Motivates/dp/1594484805/?tag=braipick-20).
+
+## Hiring
+
+**_Jon: Tell me about hiring?_**
+
+**Dimitrios:** The team has grown organically, and based on word of
+mouth we've hired people. From my experience, it's best for the
+development team to grow slowly, there's a risk with teams of growing
+big too quickly.
+
+**Team:** We're actively creating an environment which promotes employee
+well-being and we take intentional steps to reduce inherent bias and to
+promote diversity. We focus on people and robust discussions rather than
+processes or tools.
+
+We don't require people to know Clojure to join us; just to have
+valuable experience to contribute and a willingness to learn and be open
+to new things. We've found that Clojure is a big draw for us - it
+attracts the kind of people who are more likely to see things as a
+holistic system rather than a collection of classes.

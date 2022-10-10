@@ -1,0 +1,221 @@
+---
+author: 'jon'
+title: 'Clojure in Belfast: Puppet'
+description: 'A diverse global open source company orchestrates with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '11 Nov 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> With Clojure you naturally adhere to good design principles.
+
+import pu from '../../assets/blog/puppet-workflow.png'
+
+<Image src={pu} />
+
+# A distributed, diverse company
+
+[Puppet](https://puppet.com/company) make open-source software
+configuration and infrastructure automation software. They are a 475
+person strong company with people spread all over the world including
+the US, Canada, the Czech Republic, Sweden, the UK and Australia.
+Diversity is a key element of Puppet Lab's success, bringing together
+developers to form a community based on different backgrounds, ethnicity
+and gender.
+
+Originally Puppet was a Ruby development house. About 4-5 years they
+transitioned their remote service layer to Clojure, creating some
+high-profile and popular open-source products as a result, including
+[Trapperkeeper](https://github.com/puppetlabs/trapperkeeper) and more
+recently [Comidi](https://github.com/puppetlabs/comidi).
+
+I had a chat with Tech leads Scott Walker and Pieter Loubser about the
+Clojure journey at Puppet. Scott works out of the Belfast, UK office and
+Pieter works remotely from London.
+
+# The history of Clojure at Puppet
+
+_Jon Pither:_ How did Clojure get started at Puppet?
+
+_Scott Walker:_ About four years ago our CTO Deepak Giridharagopal
+introduced it. We wanted to transition to the JVM, and from there
+Clojure seemed like a better way of doing things rather than going with
+Java.
+
+_Pieter Loubser:_ [Puppet DB](https://github.com/puppetlabs/puppetdb)
+was our first big Clojure project, which is over 4 years old now.
+
+_Scott Walker:_ We then also migrated our Ruby based
+[Puppet-Master](https://docs.puppet.com/puppet/latest/reference/services_master_rack.html)
+tool to the JVM, the new incarnation being called [Puppet
+Server](https://github.com/puppetlabs/puppetserver). Puppet-Server makes
+extensive use of Clojure, using our familiar in-house stack based on
+Trapperkeeper.
+
+When we ported our Ruby app to the JVM we saw massive performance
+benefits. We got true concurrency; horizontal scaling on a single node
+using JVM threads.
+
+And of course once it was on the JVM, we were no longer tied to Ruby and
+could use Clojure.
+
+import pt from '../../assets/blog/puppet-team.jpg'
+
+<Image width='300px' src={pt} />
+
+# Open Source
+
+_Jon Pither:_ Let's jump in to what open source Clojure offerings Puppet
+has built. In particular, please tell me about
+[Trapperkeeper](https://github.com/puppetlabs/trapperkeeper).
+
+_Scott Walker:_ Trapperkeeper provides building blocks for Clojure
+applications - a service lifecycle framework. It provides configuration
+out of the box, everything a service needs such as monitoring and
+metrics gathering. It saves developers from having to write their own
+time-consuming boilerplate.
+
+There are components for Jetty, WebSockets, a scheduler and more.
+Trapperkeeper takes Java APIs such as the [Apache Http Asynchronous
+Client](https://hc.apache.org/httpcomponents-asyncclient-dev/) and makes
+them accessible.
+
+_Pieter Loubser_: It's like a filo-fax - a binder for Clojure production
+ready code. The idea of a binder is where [the name came
+from](https://en.wikipedia.org/wiki/Trapper_Keeper).
+
+_Scott Walker:_ Trapperkeeper has lots of users now and there's a
+community built around it, so it continues to evolve.
+
+_Jon Pither:_ Any other prominent open-source Clojure libraries?
+
+_Scott Walker:_ There is [Comidi](https://github.com/puppetlabs/comidi)
+allowing you to use a
+[Compojure](https://github.com/weavejester/compojure) styled syntax to
+integrate with the [Bidi](https://github.com/weavejester/compojure)
+routing library. It marries the strengths of both libraries - the
+expressive syntax-sugar of Compojure with the bidirectional simple
+data-structure approach of Bidi.
+
+_Pieter Loubser:_ We also have
+[clj-kitchensink](https://github.com/puppetlabs/clj-kitchensink) which
+is a library full of our commonly used utilities.
+
+import pf from '../../assets/blog/puppet-flow.jpg'
+
+<Image src={pf} />
+
+# Clojure
+
+_Jon Pither:_ Let's dig into Clojure at Puppet, what's it been like
+adopting Clojure?
+
+_Scott Walker:_ I come from a computer science background. I've done a
+lot of Java, but I found that the kind of Java code I was writing was
+evolving to become more functional - i.e. using less mutable state where
+possible. Then Clojure came along and it was a perfect fit for me. With
+Clojure you naturally adhere to good design principles, it leads you to
+a different and better way of thinking.
+
+It's a good experience to learn a new language every once in a while and
+go through that process of coding up _Hello World_. When you freshen up
+your skill-set and gain new experiences it helps you to write better
+code overall.
+
+_Pieter Loubser_: For me the Java interop of Clojure is a big deal. When
+I picked up Clojure I needed to spike something big, and being able to
+use existing Java libraries and tools helped with this.
+
+_Scott Walker:_ At Puppet we believe that with Clojure we can write
+better code in less time that is more expressive. Clojure has worked
+well from the get-go and people enjoy using it.
+
+import pl from '../../assets/blog/puppet-logo.jpg'
+
+<Image width='300px' src={pl} />
+
+# Hiring
+
+_Jon Pither:_ How have you found the hiring process?
+
+_Scott Walker:_ Clojure was one of the reasons I was attracted to
+Puppet. I think it was a real statement of intent by Puppet to adopt
+Clojure in the way they that have - especially around four years ago
+when it was still considered _new_. I was impressed and it summed the
+company up as being technically astute and forward looking.
+
+_Jon Pither:_ What about searching for Clojure developers?
+
+_Scott Walker:_ We don't hire specifically for Clojure developers,
+rather we look for great engineers. Most of the people we hire are
+typically a high calibre and excited about learning Clojure.
+
+# Training
+
+_Jon Pither:_ What has the up-skill process being like for getting other
+devs into Clojure?
+
+_Scott Walker:_ We have a strong emphasis on self learning, where
+developers take responsibility as engineers to up-skill themselves. We
+make sure developers have the resources they need, including being able
+to talk the most experienced people in one particular area. Our senior
+developers spend lots of time coaching and advising others.
+
+We use GitHub here and we are very tight on the code-base, ensuring that
+all commits have had more than a single pair of eyes on them.
+
+Also Puppet has been involved at all the major Clojure conferences.
+Going to conferences is fantastic for sparking creativity and creating
+seeds of enthusiasm.
+
+![Introduction to Clojure
+Spec](/img/lq/103-clojure-spec-with-rich-hickey.jpg)
+
+# State of Clojure
+
+_Jon Pither:_ What do you feel the state of Clojure is now?
+
+_Pieter Loubser_: Clojure was originally a bit hipster with people
+questioning why they should go off and learn a Lisp. This seems to have
+been reversed now with people being more open minded and this is
+healthy.
+
+_Jon Pither:_ How is Clojure doing in Belfast in particular?
+
+_Scott Walker:_ There's a functional meetup called [Functional
+Kats](http://www.meetup.com/Functional-Kats-Belfast/). They have these
+in Dublin and Belfast, with Clojure often being one of the languages
+people want to play with.
+
+I'd say there is a core of people using Clojure in Belfast and it's
+growing slowly. I think on the whole there's a generational shift
+happening. Middle management is seeing what the newer generation of
+programmers want to use and is adapting. Opinion is shifting.
+
+_Jon Pither:_ Any recently developments in the Clojuresphere that excite
+you?
+
+_Pieter Loubser_: [Spec](http://clojure.org/about/spec) looks cool, I'm
+sure everyone at the moment would answer this question with Spec.
+
+_Scott Walker:_ It's liberating to choose when to use tools like Spec,
+as oppose to with static types where you are forced down a certain road.
+
+import tk from '../../assets/blog/TrapperKeeper_Clojure.jpg'
+
+<Image width='300px' src={tk} />
+
+# Technologies
+
+_Jon Pither:_ Any technologies you'd like to give a shout out to?
+
+_Pieter Loubser_: Trapperkeeper! ([See a Clojure/West video Intro to
+Trapperkeeper video](https://www.youtube.com/watch?v=IniU7pF5-vs))
+
+_Scott Walker:_ I'd also say have a look at
+[PuppetDB](https://github.com/puppetlabs/puppetdb) as an example of a
+fairly long lived and mature Clojure project. There should be lots of
+idiomatic, well-composed Clojure code in there!
