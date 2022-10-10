@@ -1,0 +1,310 @@
+---
+author: 'jon'
+title: 'Clojure in Oslo: Telenor Digital'
+description: 'Communicating with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '09 Dec 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> The overall effect Clojure has had on me is that I've been rejuvenated
+
+# A communications giant
+
+import tt from '../../assets/blog/telenor-team.jpg'
+
+<Image src={tt} />
+
+[Telenor](https://www.telenor.com/) is a telecommunications company
+providing services in 13 different countries serving over 200 million
+customers worldwide. The company has over 35K employees and uses a
+wealth of different technologies including Clojure.
+
+To learn more I caught up with tech lead [Joel
+Wilsson](https://twitter.com/joelwilsson), software developer [Paul
+Salaberria](https://github.com/psalaberria002) and recent hire senior
+developer [Erik Assum](https://twitter.com/slipset).
+
+# Background
+
+_Jon:_ So what do you three do at Telenor?
+
+_Joel:_ We work for [Telenor Digital](http://www.telenordigital.com/)
+providing a global back-end and digital services for telcos in the
+Telenor Group. We have about 300 engineers and provide services such as
+CONNECT Payment and CONNECT ID - payment and login solutions.
+
+_Jon:_ What's it like to work at Telenor Digital?
+
+_Joel:_ It's a super international company; it's a Norwegian company but
+less than 50% of the employees are Norwegian.
+
+_Erik:_ It feels like a new angle on diversity. There are no
+_foreigners_ here, everyone speaks English. It's a really cool
+experience.
+
+_Joel:_ Our in-house development teams have a real start-up culture, for
+instance we sometimes start new services such as
+[appear.in](https://appear.in).
+
+import ai from '../../assets/blog/appearin.png'
+
+<Image src={ai} />
+
+_Jon:_ Cool, you guys built appear.in? (We were using appear.in to
+facilitate this interview).
+
+_Erik:_ Yes. [appear.in](https://appear.in) was invented here and not
+made to order. It was launched without asking for permission which
+showcases some of the spirit inside of Telenor digital.
+
+_Joel:_ In our team - the Data Insights team - we report on how all our
+various products are performing. Everything we build now uses Clojure
+and maybe ClojureScript.
+
+We're a team of 12 in Digital Global Services of Telenor Digital. The
+other teams here mostly use Java, but there are a few using different
+languages such as Go and Node.js. We're the only ones using Clojure.
+
+import tdl from '../../assets/blog/telenor-digital-logo.jpg'
+
+<Image src={tdl} />
+
+# The Clojure journey
+
+_Jon:_ How did the Clojure journey start at Telenor?
+
+_Joel:_ It started with some consultants here being interested in using
+Clojure and they got the go ahead. It started like how it does at so
+many other places; using it for small independent pieces; small
+utilities such as data import/processing jobs.
+
+It has increased since then; when new services or rewrites happen we use
+Clojure. By now our team has only one Java left service in production;
+everything else is written in Clojure.
+
+_Jon:_ When did you yourselves start using it?
+
+_Joel:_ I joined Telenor Digital because of Clojure. I did search for
+Clojure on [Stackoverflow jobs](http://stackoverflow.com/jobs) and I
+found this job.
+
+_Jon:_ What got you originally into Clojure?
+
+_Joel:_ I've been interested in programming languages for a long time
+having tried everything from Ruby, OCaml, Standard ML, Common Lisp, C
+and C++, Java, and eventually Clojure.
+
+I wanted to get back to Lisp but Common Lisp felt stagnant, with no
+leadership or clear path to improve the situation (for example, by
+standardizing on a single syntax for hash-maps), and there wasn't an
+awesome story on how to manage projects and dependencies, although this
+has improved since. I also wanted a language with a good story for
+multi-threading, which wasn't possible to do in a portable way across
+implementations and operating systems.
+
+Clojure gets that for free through the JVM, and the persistent data
+structures brought something new with just the right amount of
+additional syntax for my liking.
+
+import tdt from '../../assets/blog/telenordallteam.jpg'
+
+<Image src={tdt} />
+
+_Jon:_ How do other teams perceive your teams\' use of Clojure?
+
+_Erik:_ There is a big step from curiosity about Clojure to actually
+starting using it. If you're using JavaScript and you want to try React,
+then you just try it. But Clojure is a different ecosystem; a different
+editor for example. There is a lot of perceived difficultly in getting
+started.
+
+_Joel:_ Most of the teams in our division are 100% Java - they like Java
+and are a little bit sceptical of Clojure. Some are interested and some
+are curious - we are collaborating with another team and they are
+starting to make contributions. One person needed some help with the
+IDEs etc but he is making changes on his own.
+
+I hope to spread to Clojure within the company. We're doing lots of
+hiring and recruitment, inviting people if we have workshops and
+training and so on.
+
+# Why Clojure?
+
+_Jon:_ What are the actual advantages of Clojure that you see?
+
+import sl from '../../assets/blog/spark-logo.jpg'
+
+<Image src={sl} />
+
+_Joel:_ So much shorter time to write code. In our team - Data
+Insights - there is lots of data processing. It's very useful to have
+immutability baked in and being able to parallelise code very easily.
+
+The functional mindset is a requirement for the data processing
+frameworks we use such as [Spark](http://spark.apache.org/) and
+[Flink](https://flink.apache.org/) where you use functional operations
+frequently; map, reduce etc. There is also laziness; not executing
+computations until they are absolutely required. Developers need to be
+comfortable with laziness to use these frameworks.
+
+_Erik:_ The overall effect Clojure has had on me is that I've been
+rejuvenated. I look forward to work each day; looking forward to working
+on code - playing with it and making it beautiful which is not possible
+in Java the way it is in Clojure.
+
+# Upskilling
+
+import joy from '../../assets/blog/joyofclojure.jpg'
+
+<Image src={joy} />
+
+_Jon:_ How do you go about upskilling developers to learn Clojure?
+
+_Paul:_ I joined a year ago, before that I worked on the front end using
+JavaScript and Java. I hadn't heard of Clojure or Lisp.
+
+I read the [Joy of
+Clojure](https://www.manning.com/books/the-joy-of-clojure-second-edition)
+and found it really interesting. I was sceptical at first - all the
+parens and the syntax. The first week I felt like: _why should I use
+this thing?_ I wanted to continue using Angular.js, but Joel convinced
+me to use ClojureScript.
+
+_Joel:_ I thought I gave you the choice.
+
+_Paul:_ In a week or two weeks I was loving it; Clojure is a lot of fun
+to write. Namespaces make applications really modular, making the code
+really easy to maintain.
+
+_Joel:_ It helps that ClojureScript is structured as a real program.
+
+_Paul:_ Yes, with Clojure and ClojureScript it's like working on the
+same thing. It was crazy - in a couple of weeks I felt completely
+fluent, where as before I'd hated the parens.
+
+_Erik:_ When you onboard people you need to teach them to use the REPL
+fluently. They need to understand the way of working in the REPL to reap
+the benefits of code becoming easier to play with which ultimately leads
+to better code. This isn't immediately evident for people new to
+Clojure.
+
+# Hiring
+
+_Jon:_ How do you go about hiring?
+
+_Joel:_ We look for good developers, not necessarily Clojure developers.
+We look for people with experience of functional programming and an
+interest in learning languages, as opposed to people that just want to
+continue with the tools they know.
+
+_Erik:_ As Joel said: he joined this company because of Clojure.
+
+# IDE wars
+
+_Jon:_ What IDE do you use?
+
+_Joel:_ We have two Emacs lovers, one Emacs novice, and four developers
+using Cursive.
+
+_Paul:_ I tried Emacs but it was too much work to learn both Emacs and
+Clojure at same time. I switched to Intellij and Cursive and it was
+amazing. For people that don't want to learn Emacs, try Cursive - they
+will love it.
+
+_Erik:_ For each new person that joins we let them learn Clojure first.
+If they want to learn Emacs also then fine, but it's harsh to put them
+on Emacs and Clojure directly.
+
+I would recommend Emacs though. I've been using Emacs for 26 years and I
+love it; I started using it in 1990.
+
+# ClojureScript
+
+_Jon:_ What do you guys use for the front-end?
+
+_Joel:_ We use [Om](https://github.com/omcljs/om) for our front-end. If
+I could do over I'd look into Reagent. But Om is nice, it's worked well
+for us.
+
+# State of Clojure?
+
+_Jon:_ What's the state of Clojure in Norway?
+
+_Joel:_ - At the last EuroClojure I went to, I met a lot of people from
+Oslo. There's a stable community, although it's a bit non-visible.
+
+There's a [functional programming meetup in
+Oslo](http://www.meetup.com/Oslo-Socially-Functional/) and a lot of
+people are interested in Clojure.
+
+_Jon:_ What's your opinion on the overall state of Clojure?.
+
+_Joel:_ I appreciate the backwards compatibility of Clojure, especially
+when compared to Scala which breaks binary compatibility all the time.
+
+_Erik:_ I enjoy the work that [Alex
+Miller](https://twitter.com/puredanger) does - he's the face of Clojure
+for the community. He has a difficult job; there's a lot of people with
+strong opinions and he manages them really well.
+
+What really excites me about Clojure is that it is not very exciting.
+It's rock solid and let's you do your job.
+
+_Joel:_ I would said it is exciting but not surprising.
+
+_Jon:_ Any recent developments in the Clojure language or ecosystem that
+interest you? Please don't say Spec because everyone does!
+
+![Introduction to Clojure
+Spec](/img/lq/103-clojure-spec-with-rich-hickey.jpg)
+
+_Joel:_ What else can I say? Spec! I am also excited about
+[Lumo](https://github.com/anmonteiro/lumo) and
+[Planck](https://github.com/mfikes/planck), a proper way to potentially
+use ClojureScript for actual scripting.
+
+# Frustrations
+
+_Jon:_ Any frustrations with Clojure?
+
+_Joel:_ We could use better error messages. There is room for more
+batteries included pre-packaged frameworks, recommended libraries etc.
+
+I've noticed that what you read in books doesn't always match current
+best practices. For example what are the best practices for logging? We
+have things like [Chestnut](https://github.com/plexus/chestnut) and
+[Luminus](http://www.luminusweb.net/), but more official/central
+recommendations on best practices and endorsed libraries would be
+appreciated.
+
+# Technologies
+
+_Jon:_ What technologies would you like to give a shout-out to?
+
+_Joel:_ We've mentioned [Om](https://github.com/omcljs/om). We like
+[Kafka](https://kafka.apache.org/) and [Druid](http://druid.io/). In
+terms of Clojure, the standard stuff:
+[Compojure](https://github.com/weavejester/compojure),
+[Ring](https://github.com/ring-clojure),
+[Mount](https://github.com/tolitius/mount) which is quite nice.
+[HugSQL](https://github.com/layerware/hugsql).
+[Claypoole](https://github.com/TheClimateCorporation/claypoole) by the
+Climate Corporation, [Amazonica](https://github.com/mcohen01/amazonica).
+
+_Jon:_ What do you think of Mount? I haven't heard of it being used that
+often.
+
+_Joel:_ It so easy to get started with and just works. You don't need to
+deal with protocols etc. We're very happy with it; Mount feels more
+Clojure-ry than Component.
+
+# Resources
+
+Telenor Digital [has a website](http://www.telenordigital.com/) and
+[recently started a
+podcast](https://soundcloud.com/telenordigitalpodcast/). Joel also
+[maintains a blog](https://wjoel.com).

@@ -1,0 +1,2 @@
+- clojure-in.md fix link to juxt.pro/clojure-in page
+- replace /_/_ with \*\*

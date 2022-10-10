@@ -1,0 +1,377 @@
+---
+author: 'jon'
+title: 'Clojure in Toronto: University Health Network'
+description: 'Powering health with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: 06 Oct 2017"
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> The small number of constructs put together becomes very powerful.
+
+# Researching Health
+
+import uhn from '../../assets/blog/uhn.jpg'
+
+<Image src={uhn} />
+
+[University Health Network](http://www.uhn.ca/) is a collaboration
+between Downtown Hospitals and the [University of
+Toronto](https://www.utoronto.ca/), providing a platform for clinical
+treatments, and continuous research on improvement of patient care.
+
+Dmitri Sotnikov is the maintainer of the [Luminus Web
+Framework](http://www.luminusweb.net/) and author of the book [Web
+Development with
+Clojure](https://www.amazon.com/Web-Development-Clojure-Build-Bulletproof/dp/1680500821).
+He plays an active role in the local vibrant Toronto Clojure community,
+and is an enthusiastic evangelist for the language, going by the handle
+[`Yogthos`](https://en.wikipedia.org/wiki/Yog-Sothoth).
+
+I caught up with Dmitri for a Q&A, before meeting in person in Toronto.
+
+**_Jon: What functionality does the University Health Network
+provide?_**
+
+_Dmitri:_ We build applications for clinical use that capture
+information from across the whole of a patient's workflow, from initial
+consultation through to treatment. This information goes onto the
+patient's chart, along with information from their family doctor.
+
+The platform contains forms that people will fill out and is used
+hospital wide, catering for multiple users working on the same datasets
+simultaneously, like Google Docs. Doctors fill out the medical parts and
+pharmacists will complete medications. Medical professionals from a
+range of different disciplines collaborate, impacting the design.
+
+On a technical level, this involves pushing data changes out to various
+clients, working out which fields should be locked and so on, involving
+business logic. We also generate reports; I built and open sourced the
+[clj-pdf](https://github.com/yogthos/clj-pdf) library that we used for
+building PDFs.
+
+import uhn2 from '../../assets/blog/uhn_team.jpg'
+
+<Image src={uhn2} />
+
+# Clojure
+
+**_Jon: What was your journey to finding Clojure?_**
+
+_Dmitri:_ My prior experience was J2EE enterprise; I found this took a
+lot of boilerplate to get the application going and the business logic
+was lost in all of this. I found that when you write so much code, you
+become attached to it, and then you're really reluctant to change it
+unless you absolutely have to.
+
+Also the development process/cycle is slow. If it works minimally,
+functionally, it's good enough.
+
+Once I realised this, I looked at other technologies. I played around a
+bit with Haskell, and I became interested in the functional over the
+imperative. I enjoyed working with Haskell - I used it personally for a
+year - but it's not the kind of language that you can put in production
+like you can with the JVM. Everything is different; Haskell has its own
+runtime and deployment tools etc. But what Haskell did give me was an
+appreciation for the functional style, the quick iteration and local
+reasoning about code.
+
+import wd from '../../assets/blog/web-dev-with-clojure.jpg'
+
+<Image src={wd} />
+
+**_Jon: And then... Clojure?_**
+
+_Dmitri:_ I started to look at the FP languages on the JVM and the main
+two were Scala and Clojure. Scala was superficially closer to Java. It
+has functional structures - this is great - but then I wrote programs
+the same way I would in Java and found I wasn't really taking advantage
+of the functional aspects. The other problem is that the language is
+complex. I had difficulty reading my own Scala code.
+
+This led me to learn Clojure. Initially it was jarring - the language
+and syntax is so different - but then there is a lot of regularity to
+it. The small number of constructs put together then becomes very
+powerful.
+
+I wanted a simple way to solve problems without additional complexity. I
+wanted something to let me focus on the problem I was trying to solve.
+
+**_Jon: How did you introduce Clojure at work?_**
+
+_Dmitri:_ Initially by creating some internal tooling, something to
+check logs and databases. This was low risk and it let me try Clojure in
+production in a safe manner where it didn't affect the business.
+
+I started with three developers who used Clojure to start playing with
+ideas. Clojure got into production because the prototypes that we built
+worked, and we had people wanting to support them.
+
+If you are going to introduce Clojure into a workplace, then it's
+important to do it in a responsible way. We have had situations where
+people have introduced new technologies, and have done so successfully,
+but then they leave. We have to reduce the getting-hit-by-a-bus factor
+by making sure the technologies we choose are a good fit for the
+organisation and are able to be supported appropriately.
+
+**_Jon: How did you find up-skilling and training others?_**
+
+_Dmitri:_ You need to consider the human factor when introducing
+technology. It's getting better now, but there's a lack of Clojure
+documentation for beginners, which is a problem. There are lots of blog
+posts but they are outdated.
+
+I think it's so important to have central documentation and this why I
+built [Luminus](http://www.luminusweb.net/). I try to keep to Luminus up
+to date.
+
+[Clojure Docs](https://clojuredocs.org/) is the best resource for API
+documentation as it has examples.
+
+**_Jon: Yeah, Clojure Docs is cool._**
+
+_Dmitri:_ Another issue for newcomers is the development environment.
+Both Cursive and Emacs require investment to learn; there's no
+environment that people can start using quickly. I've seen people using
+Clojure in Atom/Sublime and struggle without parenthesis management, and
+they're like, \"How do people work with this? This is terrible!\"
+
+Or they develop without the REPL and they're not getting the live
+development workflow benefit, just getting the slow compilation times! I
+think this drives a lot of people away for the wrong reasons.
+
+I think this is where ClojureScript is helping a lot, because it's
+something people can try easily and quickly. I taught a workshop last
+year for JavaScript developers. We focused on
+[Reagent](https://reagent-project.github.io/) and allowed them to use
+their own favourite editor. Because of Figwheel they were getting live
+reloads in the browser, and without worrying about the REPL, they could
+already see the live workflow really quickly. This was a big success.
+
+import lum from '../../assets/blog/luminus.png'
+
+<Image width={200} src={lum} />
+
+**_Jon: Tell me about Luminus?_**
+
+_Dmitri:_ About six years ago in Clojure, a lot of the ecosystems didn't
+exist, so I created Luminus to allow us to build applications in a
+consistent way. Selmer was a familiar templating language for us
+initially. Now the backend is Hiccup, which integrates well with
+ClojureScript and Reagent.
+
+ClojureScript is helping people to try Clojure very quickly.
+[Luminus](http://www.luminusweb.net/) has a ClojureScript template with
+[Lein](https://leiningen.org/),
+[Figwheel](https://github.com/bhauman/lein-figwheel), and
+[Reagent](https://reagent-project.github.io/), that brings up a webapp
+with the live code reloading in the browser.
+
+**_Jon: Luminus uses templates and newer frameworks such as Duct and
+Arachne are using modules. What are your thoughts on modules vs
+templates?_**
+
+_Dmitri:_ [Duct](https://github.com/duct-framework/duct) is inspired a
+lot by [Arachne](http://arachne-framework.org/), the newer version using
+[Integrant](https://github.com/duct-framework/duct) is promising.
+
+There are pros and cons to both approaches. The difference is how you do
+your wiring in your application. Luminus gives you a template where the
+wiring is done directly in the application, but with the module approach
+you do the wiring outside as data.
+
+Everything you can do with modules you can ultimately do with libraries.
+It's rare to switch out your database so you don't need to optimise the
+wiring up of the database. The biggest job will be swapping out your SQL
+and changing syntax.
+
+I also find that it's easier to reason about the wiring I wrote myself.
+If there's indirection involved, then I have to understand how the
+indirection works, and keep that in my head.
+
+So that's why Luminus is sticking with the template approach. Once you
+generate your application from a template, and it works the way you need
+it to, then you can focus on the parts that you actually care about.
+
+**_Jon: But templates are a one-off, so once you've used the template
+for your application, that's it. Whereas with Arachne and Duct, they
+will be continuously updated. You keep upgrading and suddenly you'll get
+all the nice things._**
+
+_Dmitri:_ You might still have to make some changes in your code when
+you upgrade, so I don't see too much difference from updating library
+dependencies.
+
+**_Jon: I guess it's a bit like using Clojure wrapper libraries that
+wrap the Java ones, sometimes they can lag behind the main library, or
+that they expose a semantically different API. Now I just want to I go
+straight to the raw library wherever I can, I want to minimise the
+amount of wrappers._**
+
+_Dmitri:_ This is exactly what I found as well. Ultimately, in my
+experience, the most maintainable code is the code that's the most
+direct. So the less indirection I have, the easier it is to come back
+and relearn it. And this is why, even if there is a bit more friction
+updating libraries and so on, I ultimately have more confidence that the
+code is doing what I want it to be doing --- because I wrote it!
+
+Clojure has a good story for libraries keeping the API stable. This is
+partially because the libraries tend to be well focused, they tend to
+solve a single problem. Often you hear people worry that,
+\"`Oh this library hasn't been updated in two years.`\" But it works.
+
+**_Jon: Why do we keep libraries stable? Is it just because it's a
+simpler language and less code?_**
+
+_Dmitri:_ I think that plays a role, but a bigger part of it is the
+community mindset. Because the community is discouraged from making
+these big omnibus libraries from the start, so the libraries tend to be
+fairly short. When you look through most libraries, they have a few
+hundred lines of code in them. Often under a thousand.
+
+# Hiring
+
+**_Jon: How have you found the hiring process?_**
+
+_Dmitri:_ No problems. We've never hired a Clojure dev; the last one we
+hired had experience of C#, .NET, and PHP. We don't expect people to
+know functional programming when we interview them, but we do ask about
+algorithms, data-structures, and what projects they have been on.
+
+Ultimately I like to treat interviews as a pair-programming exercise.
+The last person applied because he wanted to do something different - he
+wanted to try Clojure and learn it. It took a couple of weeks for him to
+ramp up.
+
+I would say that it's easier to hire a junior Clojure developer than a
+senior one. People just out of school are still of that mindset that
+they're learning things, and they have fewer preconceptions about how
+you write applications and how you should structure code in the real
+world.
+
+# State of Clojure
+
+**_Jon: What's your view on Clojure: how could it be improved? Where is
+it going?_**
+
+_Dmitri:_ It's very exciting, ClojureScript has the potential to have a
+much bigger reach.
+
+People who work with JavaScript are more receptive than those working
+with Java because a) they're working with a dynamic language already and
+b) the way a lot of people use JavaScript now is fairly functional.
+
+A lot of Java developers don't really feel that Java is a bad language.
+Whereas a lot of JavaScript developers do agree that JavaScript is
+problematic. The concept of using hosted languages such as ClojureScript
+and TypeScript is very popular and has become accepted within the
+JavaScript community.
+
+The Clojure tooling is also better (Leiningen and live code reloading).
+With JavaScript there are usually three to four different tools that you
+have to juggle.
+
+import ym from '../../assets/blog/yogthos-malcolm-jon.jpg'
+
+<Image src={ym} />
+
+**_Jon: Do you see Clojure adoption growing?_**
+
+_Dmitri:_ It is growing, but it's important to have a grass-roots
+community of people trying it out on their own. This is what contributes
+to libraries, to people writing guides and documentation and telling
+their friends about it.
+
+It's important for those of us who are professional users to be
+sensitive towards the people starting out. Once you have internalised
+the development experience of working with Clojure, we can often forget
+what it was like to start out and to learn a new language with a new
+editor and a whole new paradigm.
+
+For example a lot of people in the community, when they see discussions
+like \"I don't see the problem with stacktraces and error messages\",
+they are not thinking of the new users.
+
+**_Jon: I'm guilty of that._**
+
+_Dmitri:_ The only reason I'm cognisant of this is because I work with
+beginners often. Day to day I end up checking myself: \"Wait! I thought
+this was obvious, but clearly it's not.\"
+
+The way for Clojure to grow is to reduce friction for beginners.
+
+**_Jon: What's the state of Clojure in Toronto?_**
+
+_Dmitri:_ It's growing significantly. When I started going to a meetup
+four years ago, everyone was doing Clojure as a hobby, but today pretty
+much everyone is doing it professionally. For a few years it wasn't
+obvious that it would be big here - but now it is.
+
+# Tech shout out
+
+**_Jon: What are your favourite technologies at the moment?_**
+
+_Dmitri:_ Definitely [Reagent](https://reagent-project.github.io/) and
+[re-frame](https://reagent-project.github.io/), the
+[Ring](https://reagent-project.github.io/) stack of
+[Ring](https://reagent-project.github.io/)/[Compojure](https://github.com/weavejester/compojure)/[Compojure-API](https://github.com/metosin/compojure-api)/[Sente](https://github.com/ptaoussanis/sente).
+
+Reagent introduces very few concepts, and once you have the concepts you
+can go and build largescale apps, which isn't the case for React itself.
+
+[Sente](https://github.com/ptaoussanis/sente) has been really great for
+us, because our application uses websockets. We started hand rolling our
+own originally, but we found there were a lot of problematic edge cases
+such as reconnects, Ajax, error handling and so on. Sente actually added
+a lot of value, so I have to give a little shout out to it!
+
+In future we may start using [GraphQL](http://graphql.org/), whatever we
+put into the Luminus template.
+
+I'm really enjoying [HugSQL](https://github.com/layerware/hugsql) for
+the database access. I really like the concept that you can write plain
+SQL.
+
+**_Jon: I'm quite a fan of HoneySQL._**
+
+_Dmitri:_ I think [HoneySQL](https://github.com/jkk/honeysql) is great -
+it's similar to [Hiccup](https://github.com/weavejester/hiccup) in being
+a data structure - it's just in our case we don't need to make
+composable queries and we often work with DBAs. It's very easy for us to
+grab something from DBAs and stick it in the file --- done!
+
+# Editors
+
+import cursive from '../../assets/blog/cursive.png'
+
+<Image src={cursive} />
+
+**_Jon: What editor do you use?_**
+
+_Dmitri:_ I'm using [Cursive](https://cursive-ide.com/). I started out
+using Eclipse for Java development and when I started using Clojure, I
+started using
+[Counterclockwise](http://doc.ccw-ide.org/documentation.html). When
+Cursive came out I was like, \"Oh, this is like what I'm used to --- but
+better!\"
+
+Familiarity is important. I don't think I would have started using
+Clojure if I wasn't able to use it from Eclipse originally. A new
+language in the same environment was low friction. If I had to use Emacs
+maybe I would have learned it, but maybe not, it's hard to say how it
+would have gone.
+
+I think it's really important to have editors that people already know.
+You want people to focus on Clojure as a language, and keep everything
+else the same.
+
+# Resources
+
+Checkout Dmitri's [twitter](https://twitter.com/yogthos), his
+[GitHub](https://github.com/yogthos), his
+[book](https://www.amazon.com/Web-Development-Clojure-Build-Bulletproof/dp/1680500821),
+his [blog](http://yogthos.net/), and the [University Health
+Network](http://www.uhn.ca/corporate/Careers/Pages/career_opportunities.aspx).
