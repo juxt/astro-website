@@ -1,11 +1,11 @@
 ---
-author: "djh"
-title: "Getting Leiningen feature-parity in Boot"
-description: "An introduction to the Boot build tool and how to get started on your Clojure project"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "19 Jan 2016"
-heroImage: "mock3.jpg"
+author: 'djh'
+title: 'Getting Leiningen feature-parity in Boot'
+description: 'An introduction to the Boot build tool and how to get started on your Clojure project'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '19 Jan 2016'
+heroImage: 'mock3.jpg'
 ---
 
 For a basic Clojure project it can be daunting to begin with Boot (even
