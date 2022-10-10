@@ -1,0 +1,238 @@
+---
+author: 'jon'
+title: 'Clojure in Europe: Akvo'
+description: 'Helping to deliver aid'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '27 Sep 2016'
+heroImage: 'mock3.jpg'
+---
+
+> It takes the right people with the right motivation and the right
+> tools to make a project succeed.
+
+# A Multi-National Delivering Aid
+
+import { Image } from '@astrojs/image/components'
+import akvoflow from '../../assets/blog/akvoflow.png'
+
+<Image src={akvoflow} />
+
+[Akvo](http://akvo.org/about-us/) is an international not-for-profit,
+not-for-loss organisation with headquarters in the Netherlands. They use
+government grants to develop and enhance tools that are used in 60+
+countries around the world to help the distribution and governance of
+aid. They open-source their software every step of the way.
+
+[Akvo flow](http://akvo.org/products/akvoflow/#overview) is a mobile
+application that helps users to quickly map out developing situations on
+the ground, for example to collate the locations of water pumps in
+relation to villages. Prior to more sophisticated tools the gathering of
+data was traditionally achieved using a pen, paper and camera. Now the
+job can be done using a smartphone that has GPS, an in-built camera, and
+reliable data synchronisation to a remote platform.
+
+All of this data is fed back into a centralised reporting system that
+allows overseers to make better decisions on where to co-ordinate aid,
+and to track the impact that existing aid is having.
+
+import akvopic from '../../assets/blog/akvopic.jpg'
+
+<Image src={akvopic} />
+
+I caught up with Iván Perdomo, a developer at Akvo who introduced
+Clojure. He resides in Pamplona Spain and our interview coincided with
+the city's annual bull festival. He was wisely staying off the streets.
+
+# The company
+
+_Jon:_ How many developers work at Akvo and how are they spread across
+Europe?
+
+_Iván:_ We have around 20 people living in Finland, Sweden, the UK, the
+Netherlands and Spain (Barcelona and Pamplona). We also have a Bangalore
+office running [Akvo Caddisfly](http://akvo.org/akvo-caddisfly/), a
+project to analyse photos of water in an attempt to diagnose what level
+of fluoride the water has.
+
+The organisation started off by being distributed. One co-founder is in
+the Netherlands (the Hague) and the other is in Sweden. The mantra of
+the company is that it doesn't matter where you live if you're the right
+person. We've got small clumps of people spread all over.
+
+import ivan from '../../assets/blog/ivan.png'
+
+<Image src={ivan} />
+
+# The history of Clojure at Akvo
+
+_Jon:_ When did you join and why?
+
+_Iván:_ Akvo is a non-profit organization that builds open source
+software, this is the first thing that attracted me. I joined in Autumn 2012.
+
+_Jon:_ How did Clojure get started at Akvo?
+
+_Iván:_ In May 2013 we decided that we needed to break up a Java based
+monolith that was running on Google App engine.
+
+We identified some Java code we could prise away into a different
+service and I wrapped this Java code in a HTTP layer built using
+Clojure. It was 2 weeks of budget, but now the service has been running
+ever since. This is [Akvo Flow
+Services](https://github.com/akvo/akvo-flow-services), our first Clojure
+experience.
+
+_Jon:_ Why Clojure in particular?
+
+import progclojure from '../../assets/blog/progclojure.jpg'
+
+<Image src={progclojure} alt='euroclojure' />
+
+_Iván:_ I started looking at Clojure in 2011 - I wanted to learn
+something different to Java and JavaScript. I bought the first book -
+[Programming clojure by Stuart
+Halloway](https://pragprog.com/book/shcloj/programming-clojure) and
+liked what I saw. I watched and re-watched [Rich's
+talks](https://www.infoq.com/presentations/Simple-Made-Easy).
+
+What impresses me about Clojure is the foundation of Immutability -
+never changing the values. We do not need to be concerned if we pass a
+data-structure around and it gets modified, this is something that has
+bit me often pre-Clojure.
+
+I've been to all the [EuroClojures](https://euroclojure.org) and now I'm
+trying now to setup a functional programming meet-up in the small city
+of Pamplona where I live.
+
+_Jon:_ How has Akvo progressed with Clojure?
+
+In 2014 we started to look at broadening our range of products and the
+underlying architecture. We decided that instead of building everything
+using loosely coupled APIs communicating with each other using HTTP, we
+would go down the [event
+sourced](http://martinfowler.com/eaaDev/EventSourcing.html) route
+instead.
+
+Now we have systems that publish events to a central place - a central
+store of events. The usual approach here is to use
+[Kafka](http://kafka.apache.org/), but for us as a small team we went
+for a slimmed down and lightweight PostgreSQL db version instead. We
+expose a HTTP layer on top so that any system can post events to a given
+_topic_. A consumer can then connect to the DB and read events.
+
+We have written our event consumers in Clojure. One consumer transforms
+the data and pushes it to a self-hosted [CartoDB](https://carto.com/)
+installation (a Geographical Information System), another takes the data
+and normalizes it for reporting purposes.
+
+import eclogo from '../../assets/blog/eclogo.jpg'
+
+<Image src={eclogo} alt='EuroClojure' />
+
+# Introducing Clojure
+
+_Jon:_ I think you're probably unique in introducing Clojure to a
+completely distributed organisation, what's that been like?
+
+_Iván:_ I tried to introduce CLJ to my last organisation and failed. My
+take now is that it takes a lot of effort to share your enthusiastic
+view, and it takes an extra effort to share the ideas behind Clojure and
+of the underlying mechanics. Why is Clojure better or different to Java?
+We have to focus on the advantages for this effort to be a success.
+
+Instead of focusing on low level details focus on the big ideas, focus
+on the _whys_ and not the _hows_.
+
+import akvocollage from '../../assets/blog/akvocollage.png'
+
+<Image src={akvocollage} alt='EuroClojure' />
+
+# Upskilling
+
+_Jon:_ How did you go about training people up?
+
+_Iván:_ On Fridays I ran some remote Clojure sessions - I opened up a
+REPL and shared my screen, explaining what the code did that powered our
+services. This got some traction. We now run more generic _learning
+sessions_ on Thursdays.
+
+For senior people it's more of a challenge to onboard people into
+Clojure. As a senior dev you may have to change your mindset, and even
+change your editor in some cases.
+
+To help with this I do lots of screen sharing - advising and helping
+developers to improve their code and to reduce verbosity (see this code
+here, let me explain what I did here that's similar using some core
+functions). I like to walk people through the code.
+
+_Jon:_ How many Clojure devs have you got now?
+
+_Iván:_ We have five Clojure devs working in total. After seeing the joy
+of working with Clojure there are now more people interested.
+
+# Hiring
+
+_Jon:_ Have you tried to hire for Clojure devs?
+
+_Iván:_ We've had developers seek out and join Akvo because of our open
+source work and Clojure. One example is
+[Jonas](https://github.com/jonase) the developer behind the [lint tool
+Eastwood](https://github.com/jonase/eastwood).
+
+# The Clojure future?
+
+import akvolumenlogo from '../../assets/blog/akvolumenlogo.jpg'
+
+<Image src={akvolumenlogo} />
+
+_Jon:_ What's the future for Clojure at Akvo?
+
+_Iván:_ Recently we've built a new data visualisation platform - [Akvo
+Lumen](https://github.com/akvo/akvo-lumen). It's got Clojure on the
+back-end and React.js on the front-end.
+
+With Lumen we will able to go faster and produce good quality software
+because of Clojure. This is a measure of the tech but also, a project
+succeeds or fail depending on people being happy. Projects are
+successful when developers enjoy what they do and put everything in to
+make it succeed.
+
+In less than 3 months we got a new MVP up and running - we made good
+architectural decisions but our users also saw visible progress. The
+founders are really interested and happy.
+
+It takes the right people with the right motivation and the right tools
+to make a project succeed.
+
+import rich from '../../assets/blog/103-clojure-spec-with-rich-hickey.jpg'
+
+<Image src={rich} />
+
+# State of Clojure
+
+_Jon:_ A standard question I always ask, what's the state of Clojure
+like in your area, in this case Pamplona in Spain?
+
+_Iván:_ In Spain it's still niche - although three weeks ago there was a
+software craftmanship event in Pamplona with a session in Clojure and
+Scala. In northern Europe Clojure is more accepted.
+
+_Jon:_ Anything that excites you in the development of Clojure itself?
+
+_Iván:_ I'm quite excited about
+[Clojure.spec](http://clojure.org/about/spec). I've written some spec
+like functions and will move to Spec when it's more readily available.
+
+# Technologies
+
+import keycloak from '../../assets/blog/keycloak.png'
+
+<Image src={keycloak} />
+
+_Jon:_ Any particular technologies you'd like to give a shout out to?
+
+_Iván:_ [OpenID Connect](http://openid.net/connect/) and
+[Keycloak](http://www.keycloak.org/) as an implementation of that. I
+have written an [example Ring web app served with Immutant secured with
+Keycloak](https://github.com/iperdomo/immutant-keycloak).

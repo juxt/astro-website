@@ -1,0 +1,176 @@
+---
+author: 'jon'
+title: 'Clojure and the Curve'
+description: 'Where is Clojure on the technology adoption curve?'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '10 Nov 2015'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+import tal from '../../assets/blog/Technology-Adoption-Lifecycle.png'
+
+<Image src={tal} />
+
+Has Clojure crossed the Chasm? Is the technology adoption curve even
+applicable to a general purpose programming language?
+
+The chasm is where many beautiful new technology products will waste
+away. We have many examples of new languages that have been picked up
+early on by innovators and propelled to some degree by early adopters,
+but only a small selection will penetrate into what we could consider to
+be mainstream usage.
+
+Many languages will simple fade away whilst a few will become _zombie
+languages_, forever propped up by a resolute group of benevolent
+benefactors. The chasm is difficult to cross and it isn't forgiving.
+
+In this post I'll take a tour through the curve, giving a subjective
+view of where I think Clojure is.
+
+# Not a level playing field
+
+First though, what allows some languages to get ahead on the curve ahead
+of others?
+
+Those of us entrenched in the industry would acknowledge that Clojure
+isn't as widely adopted as other languages created around the same time,
+an example being Scala which is a
+[Java.next](http://www.ibm.com/developerworks/library/j-jn16/index.html)
+sibling. Of course many would argue that this is testament to the
+superiority of Scala as a language, but others may wish to scratch a
+little deeper.
+
+Clojure, to a higher degree than some other languages, represents
+_Discontinuous Innovation_. In Clojure we can't carry our Object
+Oriented idioms across with us and instead we are required to relearn
+how to code, to change paradigm. To stare at a screen full of code and
+to admit we have trouble understanding how it works, requires an
+substantial degree of humility.
+
+We have to deal with the jarring break in aesthetics that S-expressions
+and all their parens will bring us. Writing code in S-expression trees
+feels almost childlike in its restrained building blocks approach,
+despite the obvious power of code becoming data.
+
+Scala is more of a seamless programming upgrade for practitioners of
+long established mainstream languages. Clojure, despite being a simpler
+and more concise programming language, will have a harder curve to
+climb.
+
+Let's look at the curve.
+
+# Innovators
+
+It's easy to see how Clojure originally got started on the curve. It's a
+Lisp on the JVM, and so a pent up wave of frustrated demand from Lispers
+was immediately unleashed, who could now enjoy their way of programming
+on a hugely adopted and battle hardened run-time environment.
+
+Clojure is also well thought out with its stance on immutability and
+persistent data collections, and so a wide range of technologists are
+going to be drawn in through curiosity, especially when they hear good
+things about it.
+
+We see this happening. Community run Dojos regularly attract a large
+amount of individuals who want to learn Clojure, and who practice it in
+their own time outside of work. The online forums are full of people
+helping each other to learn and get started, and to share information on
+established and emerging libraries.
+
+# Early Adopters
+
+Early adopters are the _visionaries_ who can see Clojure being used as a
+weapon to leapfrog the competition, where it can make an order of
+magnitude's worth of improvement. Again we have observed this, where
+individuals in positions of authority have driven Clojure adoption
+forward. Companies building products such as Prismatic, Riemann,
+CircleCI and service companies such as uSwitch in London are good
+examples of this.
+
+There are also early adopters where you might not expect them, for
+example with some of the largest investment banks. Against a backdrop of
+large-scale institutional inefficiency, technical visionaries are
+looking for an approach that will yield a major increase in productivity
+and systems quality. Inside large IT organisations there is the often
+the budget and space to operate, and a healthy range of potential pilot
+projects to choose from for trying something new.
+
+# Early Majority and beyond
+
+Then we hit the chasm, with the early majority being on the other side.
+
+The early majority are _pragmatists_ who have a keener sense of risk.
+They are motivated to adopt change because it's still early enough that
+some of the visionary gains can be made, and they are also conscious of
+the _flip-side_ risk of not moving with the times.
+
+The pragmatists aren't so much looking to hear from the visionaries and
+change agents, rather they want references from similar minded
+pragmatists who will have endured a technology with the longer term in
+mind. This is the Catch-22 situation and the rationale for the chasm;
+there needs to be a bubbling critical mass of self-referencing early
+adopters for a technical product to blast off and fly upwards the curve.
+
+The [Cognitect
+blog](http://blog.cognitect.com/blog/2015/9/21/2-myths-and-2-facts-about-clojure-that-change-everything)
+states _\'A quick scan of various job sites shows Clojure positions at
+companies like Walmart, Facebook, Staples, Consumer Reports, Salesforce,
+and Amazon. It doesn't get much more mainstream than that.\'_
+
+This reveals that there are many well known companies now using Clojure,
+but at the same time not all of them are shouting about it. For those
+that want Clojure to be more mainstream (i.e. developers working for
+large companies who would want to use Clojure), this aspect of low
+profile adoption will frustrate. Exposure and case-studies is the oxygen
+a new technology needs.
+
+# Late Adopters and Laggards
+
+Beyond the early majority we get the late majority, and then the
+laggards.
+
+As a rule of thumb as we progress through the curve the risk aversion of
+the groups increases.
+
+This isn't to say that Clojure doesn't have a relevant story to tell
+here. Running on the JVM where Java developers can reuse their JAR
+deployment, debugging and profiling skills, and with baked-in
+immutability making for more predictable software, Clojure could be
+considered a conservative option.
+
+# Where is Clojure?
+
+Doubtless there is a regional element to be considered, as Clojure
+adoption is moving at different speeds in the world.
+
+We could also break Clojure down and find that there are a group of
+sub-technologies making their own journey, each following a potentially
+different pathway. ClojureScript is one example that has the potential
+to overtake its parent language on the curve by being applicable to a
+wider variety of host environments.
+
+From my European perspective, I think that Clojure is in the process of
+currently crossing the chasm. We have our visionaries and large-scale
+_flagship_ case-studies that will placate and excite the early majority,
+but there is still some distance to travel before Clojure is commonplace
+and can no longer regarded as niche.
+
+It's an exciting time because innovators are still finding Clojure and
+visionaries are still becoming inspired by it, and we are getting an
+increasing number of high profile reference sites in the early majority.
+A growing consensus is that the climb will be more gradual rather than
+intensely short lived.
+
+This isn't a bad thing as the growth will still be exponential, and
+Clojure will have jumped the chasm.
+
+# References
+
+I've been reading the marketing classic _Crossing the Chasm_ by Geoffrey
+A Moore.
+
+Discuss below or [join the
+discussion](https://news.ycombinator.com/item?id=10539029) on Hacker
+News.
