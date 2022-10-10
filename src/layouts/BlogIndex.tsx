@@ -37,7 +37,7 @@ function CustomHits({ blogs }) {
   )
 }
 
-export function BlogIndex({ blogs }: Record<string, Blog>) {
+export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
   const [filtersVisible, setFiltersVisible] = useState(false)
   return (
     <div className='mt-10 flex flex-col items-center relative'>
