@@ -200,9 +200,9 @@ name: 'Alex'
 lastName: 'Davis'
 jobTitle: 'Senior Software Engineer'
 image: 'alx.jpg'
-linkedin: '#'
-twitter: '#'
-github: '#'
+linkedin: ''
+twitter: ''
+github: ''
 ---
 ```
 
@@ -219,9 +219,9 @@ name: 'Malcolm'
 lastName: 'Sparks'
 jobTitle: 'CTO'
 image: 'mal.jpg'
-linkedin: '#'
-twitter: '#'
-github: '#'
+linkedin: ''
+twitter: ''
+github: ''
 
 expert: true
 expertise:

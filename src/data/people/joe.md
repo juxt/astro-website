@@ -4,9 +4,9 @@ name: 'Joe'
 lastName: 'Littlejohn'
 jobTitle: 'Head of Delivery'
 image: 'joe.jpg'
-linkedin: '#'
-twitter: '#'
-github: '#'
+linkedin: ''
+twitter: ''
+github: ''
 featured:
   weight: 6
 ---

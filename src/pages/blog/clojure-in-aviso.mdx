@@ -1,0 +1,155 @@
+---
+author: 'jon'
+title: 'Clojure in Ireland: Aviso Novate'
+description: 'A Clojure heavyweight'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '22 Sep 2022'
+heroImage: 'mock3.jpg'
+---
+
+# A Clojure Power User
+
+import { Image } from '@astrojs/image/components'
+import aviso from '../../assets/blog/aviso.png'
+
+<Image src={aviso} />
+
+[Aviso Novate](https://github.com/AvisoNovate) started using Clojure in
+the summer of 2010 and have been ramping up ever since, having now one
+of the world's largest Clojure codebases that clocks in at over 150K
+lines of code (Clojure and ClojureScript). They are based in
+[Killorglin](https://en.wikipedia.org/wiki/Killorglin) - a beautiful
+part of Ireland - where they use a combination of on-site and remote
+developers.
+
+Aviso has got a really strong team and has contributed widely to the
+Clojure ecosystem, including substantial contributions to ClojureScript
+(by [Michał Marczyk](https://github.com/michalmarczyk)) and a production
+of [various libraries](https://github.com/AvisoNovate).
+
+I caught up with CTO Paudi Moriatry to discuss Aviso's Clojure journey.
+
+# Clojure, Getting Started
+
+_Jon Pither:_ How did you get started with Clojure?
+
+_Paudi Moriarty:_ We had a lot of in-house Java expertise and we wanted
+to carry on using the JVM platform and our Java libraries. Performance
+of the JVM is also very good, and it's robust in terms of memory
+management, therefore we knew we wanted to stay on the JVM. This would
+also allow us to continue offering our clients Java based applications.
+
+We were originally using the Tapestry 5 framework and at some stage the
+author [Howard Lewis Ship](http://howardlewisship.com/) introduced us to
+Clojure.
+
+_JP:_ What was it about Clojure you found attractive?
+
+_PM:_ Once you see what you can do with a Lisp on the JVM there's no
+going back. We found that with Java there's a lot of incidental
+complexity, where developers start off designing class hierarchies and
+how data should be stored, debating which fields should be private vs
+public etc. Should methods be static or not? It's all very complicated
+and adds an overhead. Then there's the issue of a lack of immutability
+in a multi-threaded environment which can be a real problem.
+
+Clojure brings simplicity and flexibility where we can simply focus on
+the functions processing data. A lot of what we do is low-level parsing
+of a variety of different data formats and data transformations, and
+Clojure is extremely effective for this.
+
+import paudi from '../../assets/blog/paudi.jpg'
+
+<Image src={paudi} />
+
+_JP:_ How was the early part of the journey?
+
+_PM:_ There were some initial challenges as developers had to leave
+known patterns, libraries and frameworks behind to learn new ones. We
+were early adopters of Clojure, and we had early code that changed
+substantially when additions to the language arrived such as protocols.
+We had also established our own state management approach, which was
+cleaned up when the Component framework came along. Components and
+protocols also improved the modularity of our code-base.
+
+Performance was also an initial issue. We were building a system that
+needed to match the benchmarks of a high performance C based
+counterpart. We had made extensive use of Clojure's sequence library for
+nearly everything, but in order to get the performance we needed we had
+to use byte-buffers in certain places and to use Netty as a completely
+async platform. We've learned a lot, and now our Clojure application is
+faster than the C competition.
+
+_JP:_ Any other technologies you'd like to mention?
+
+_PM:_ We worked with [Matthias Nehlsen](http://matthiasnehlsen.com/) and
+incorporated his [Systems
+Toolbox](https://github.com/matthiasn/systems-toolbox) as the basis for
+our Web interface. There's a [blog about
+it](http://matthiasnehlsen.com/blog/2015/04/09/Where-Are-The-Updates/).
+
+We've also worked with [Ryan Neufeld](http://www.rkn.io/) on adding
+simulation testing using [Simulant](https://github.com/Datomic/simulant)
+to our setup for multiple applications. See Ryan's [_Simulant in Anger_
+video](https://www.youtube.com/watch?v=RHf8ngqVKys).
+
+# Hiring
+
+_JP:_ How have you found hiring of Clojure devs?
+
+_PM:_ It was very difficult for us to find the right calibre of Java
+developer beforehand. When we moved to Clojure we found that we were
+attracting a different kind of developer, and it was almost difficult to
+talk to a developer that wasn't suitable. We started out by reaching out
+to various Clojure mailing lists, but after a while we found that top
+rate developers were starting to find us! People had seen that we were
+writing Clojure in production and they wanted to know more.
+
+With Clojure we're getting the creme of developers who have migrated
+their way through Java and Scala, and have emerged on the other side.
+
+_JP:_ What's your experience of developers making the jump to Clojure on
+your watch?
+
+_PM:_ When a developer learns Clojure, they never really want to go
+back. It becomes a _go-to_ tool for getting things done, and no one
+wants to move off using Clojure. We've had developers come in and want
+to try out various languages such as OCaml, Scala and Haskell, but
+Clojure seems to stick.
+
+We've had an interesting journey where one developer really liked
+Angular.js, but disliked JavaScript. So he built a web-app that used
+Angular, but that was primarily composed in ClojureScript. We're
+probably the only company in the world to have done that!
+
+# Clojure in Ireland and the UK
+
+_JP:_ What you think the state of Clojure is in Ireland and the UK
+
+_PM:_ Clojure is no longer in the sidelines. There are high profile
+case-studies of Clojure being used in the banks in the cities. We know
+that Clojure is being at Walmart in the US in a massive way, it's
+definitely on the up.
+
+I wouldn't say that Clojure is having a massive explosion, but it's
+growing steadily.
+
+import clojure from '../../assets/blog/103-clojure-spec-with-rich-hickey.jpg'
+
+<Image src={clojure} />
+
+# State of Clojure
+
+_JP:_ Last question, what do you think the state of Clojure is, anything
+that excites you?
+
+[spec](http://clojure.org/about/spec) excites us. We've had an issue
+where there's been lots of maps of data in our code-base and it can be
+difficult to understand the shape of the data. We've used Schema, but
+Spec seems to get the balance right, decoupling the validation of data
+and describing it, and looks like really elegant solution.
+
+Generally with Clojure we value a slow evolution. The core is stable and
+the scope is contained; it's the opposite of Scala where a lot gets
+thrown in.

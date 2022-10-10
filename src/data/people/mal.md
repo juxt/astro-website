@@ -4,9 +4,9 @@ name: 'Malcolm'
 lastName: 'Sparks'
 jobTitle: 'CTO'
 image: 'mal.jpg'
-linkedin: '#'
-twitter: '#'
-github: '#'
+linkedin: ''
+twitter: ''
+github: ''
 featured:
   weight: 2
 

@@ -1,0 +1,186 @@
+---
+author: 'jon'
+title: 'Clojure in Paris: BandSquare'
+description: 'Digital fanbases and Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '24 Feb 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> We needed a technical shift to change the dynamics.
+
+# Managing a Fanbase
+
+[BandSquare](https://www.bandsquare.com/) is a general purpose marketing
+platform helping artists and big organisations to manage and extract
+data from their audiences and fanbases. The platform uses campaigns,
+social network data, smaller tailored websites and polls to provide a
+audience platform that can pull and push data. An example use case is
+fanbases requesting that artists visit certain cities.
+
+Once data has been collected it is then amalgamated to provide a unified
+view of an audience.
+
+BandSquare has Clojure and [Datomic](http://www.datomic.com/) at the
+heart of the system. I caught up with [Val
+Waeselynck](https://twitter.com/val_waeselynck) to find out more.
+
+import bandsquare1 from '../../assets/blog/bandsquare1.png'
+
+<Image src={bandsquare1} />
+
+# Technology Story
+
+_Jon:_ What is the tech story here?
+
+_Val:_ We used to be an Angular.js SPA (Single Page Application) backed
+by Node.js and MongoDb.
+
+As the information model evolved and became more sophisticated, the
+complexity grew. MongoDB in particular became a big pain point as the
+querying power is very limited. We had lots of bugs and troubles
+evolving the platform.
+
+We wanted it to be a data platform and we were stuck. We wanted
+features, to go faster, and to have better quality. We could not add man
+power so we needed a technical shift to change the dynamics.
+
+import val from '../../assets/blog/val.jpg'
+
+<Image src={val} />
+
+_Jon:_ How did the Clojure journey begin?
+
+_Val:_ At the time I knew Clojure. I had very little experience with
+Datomic; I'd played with it a bit.
+
+The value proposition of Clojure is a good fit. I could use the
+interactive development story of the REPL to raise productivity and
+quality. Datomic was a good fit too that didn't have the problems of
+classic databases.
+
+Datomic is very good for querying for data in a very expressive way.
+It's also great for testing; we wanted a really good testing story to
+increase quality. We were migrating the whole back-end from Node.js and
+we wanted to test that everything still worked.
+
+_Jon:_ Any regrets?
+
+_Val:_ No. The migration to Clojure/Datomic made us so much more
+productive and we have less bugs.
+
+Mongo/Angular is not bad tech, just a not good fit for the level of
+sophistication we needed. We still use Angular on the front end.
+
+_Jon:_ What about using ClojureScript on the front end?
+
+_Val:_ I wish I could - an architecture based on React.js would be good
+as well - but not right now.
+
+## Datomic
+
+import datomic from '../../assets/blog/datomic.png'
+
+<Image src={datomic} />
+
+_Jon:_ Any challenges with Datomic?
+
+_Val:_ I wouldn't advise a team to use it if they don't have the
+architectural initiative to embrace a new paradigm. You have to figure
+out how to architect your system to get the most leverage, but this can
+be really rewarding.
+
+For example we rely on a lot on a special feature called _speculative
+writes_ (aka
+[`db.with()`](http://docs.datomic.com/clojure/#datomic.api/with)) where
+you can pretend that a write is made locally. This has enabled us to
+have an architecture where we can rewrite code and perform testing using
+this ability. We can fork databases and experiment with no runtime cost.
+
+You can also mock and clone connections to debug locally data that is in
+production; this gives amazing leverage and opportunities. This stuff is
+extremely powerful, but the challenge is you have to model your
+architecture to leverage it.
+
+## Tech Stack
+
+_Jon:_ What does your whole stack look like?
+
+_Val:_ We use AWS, EBS. PostgreSQL, S3, Redis for caching, Google
+Analytics, Datomic on DynamoDB, and [Netlify](https://www.netlify.com)
+which is good for hosting SPAs.
+
+_Jon:_ What Clojure libraries do you use?
+
+_Val:_ I'm a big fan of
+[Specter](https://github.com/nathanmarz/specter) - I don't use nearly as
+much of it as I would like.
+
+The data manipulation capabilities of Datomic are almost better than
+Specter; it's also a library that has a Datalog querying engine.
+
+We also use [DataScript](https://github.com/tonsky/datascript); we store
+a representation of the data model in DataScript, like an annotated UML
+diagram. We derive the Datomic schema from data in DataScript.
+
+_Jon:_ Wow, sounds like an interesting approach. What's the motivation?
+
+_Val:_ The domain model was duplicated in code in various places: in the
+Datomic schema, in the Plumatic Schema validation area, in data
+transformation code (Datomic to JSON). We decided to have one source of
+truth that removes the duplication; a single declarative place where the
+information model is described and that different representations of the
+data model can be derived from. Some people are opposed to this
+approach, but it's a different philosophy.
+
+_Jon:_ What else do you use?
+
+[Plumatic Plumbing](https://github.com/plumatic/plumbing), especially
+the [Graph
+API](https://github.com/plumatic/plumbing#graph-the-functional-swiss-army-knife),
+which lets you express complex computations as graphs of simple steps.
+Each computational step is small and depends on previous steps in the
+graph. It's very good for code reuse of the small, expressive steps.
+
+_Jon:_ How much code do you have?
+
+_Val:_ About 26K lines outside tests, 35K tests including. Our platform
+does a lot; information extraction, talking to other services and
+integrating data etc.
+
+import falcor from '../../assets/blog/falcor.png'
+
+<Image src={falcor} />
+
+_Jon:_ How do you feel about the state of your current codebase?
+
+_Val:_ The codebase is clean, it's just big because it has lots of
+functionality.
+
+One of the biggest changes we could do is to move to a GraphQL like
+architecture, such as using [Om Next](https://github.com/omcljs/) or
+[Falcor](http://netflix.github.io/falcor/). This would be a better way
+of exchanging data and removing the accidental complexity of lots of
+REST endpoints exchanging JSON in different formats.
+
+## Paris?
+
+_Jon:_ What's the state of Clojure adoption in Paris?
+
+_Val:_ A few companies are using it and beyond that there are many more
+people interested. You either find it in the departments of big
+companies, or the big startups.
+
+_Jon:_ Do you see it growing?
+
+_Val:_ Definitely; more and more people are interested. CTOs are
+reluctant right now to change, but the culture itself is shifting.
+
+## Resources
+
+See [Val's Blog](http://vvvvalvalval.github.io/), and in particular this
+post where [he discusses Datomic techniques such as speculative
+writes](http://vvvvalvalval.github.io/posts/2016-07-24-datomic-web-app-a-practical-guide.html).

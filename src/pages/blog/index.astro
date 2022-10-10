@@ -27,7 +27,7 @@ const unfilteredBlogs = await Promise.all(
   pages.map((page) => {
     const author = page.frontmatter.author
     const person = peopleByCode.get(author)
-    const expert = (isDev || !person.expertDraft) && person.expert
+    const expert = (isDev || !person?.expertDraft) && person?.expert
     if (!person)
       throw new Error(
         `No person found for author: '${author}' in '${page.url}'`

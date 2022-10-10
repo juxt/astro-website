@@ -1,0 +1,183 @@
+---
+author: 'jon'
+title: 'Clojure in Greece: Baresquare'
+description: 'Piping Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '21 Oct 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# Introduction
+
+[Baresquare](http://www.baresquare.com/) is a digital analytics company.
+They provide the full data analytics pipeline, collecting and converting
+raw metrics data into human digestible knowledge. They have large
+clients including the Co-op Bank and Dixons Carphone, and they have a
+strategic partnership with SONY Electronics for a few years now.
+
+Baresquare has been operating for 7-8 eight years and their diverse
+work-flows have included the use of R scripts and manual human
+processes. Two years ago they decided to fully automate their
+data-processing pipeline using Clojure.
+
+I caught up with Georgios Grigoriadis (CEO) and Stathis Sideris
+(Architect) to find out more.
+
+import baresquare from '../../assets/blog/baresquare-team.jpg'
+
+<Image src={baresquare} />
+
+# Background
+
+_Jon:_ Could you explain a bit more about what a digital analytics
+company does?
+
+_Georgios:_ We process collected raw data into useful information; we
+are in essence providing the data maturation pipeline _Data -\>
+Information -\> Knowledge_. We can take 1 million rows of metrics and
+process them into a single sentence that could be tweetable, to reveal
+what really happened in a day or a week of user behaviour.
+
+_Jon:_ What's involved in the processing?
+
+_Georgios:_ We've standardised the process of retrieving the data from
+sources such as Google Analytics, doing some massaging, and then
+performing a time series analysis looking for trends or exceptional
+cases. We carry out statistical analysis to probe the _why_ behind the
+incidents and trends, and once the full picture has been established we
+provide a human digestible report.
+
+# The Clojure Story
+
+_Jon:_ How did Baresquare get started with Clojure?
+
+_Georgios:_ We originally had an external vendor in and we discussed
+outsourcing the whole thing - the pipeline as well as a new front-end.
+They proposed to do everything in Rails and this was our intention for a
+couple of months.
+
+I then consulted Stathis and he advised to write the pipeline in
+Clojure. He was very strong with his view that the data processing
+requirements fit the specific characteristics of Clojure. Clojure is a
+functional and a Lisp language that is a good fit for data manipulation.
+
+So we split the system in two - we outsourced the front end in Ruby and
+we used Clojure for the backend.
+
+import baresquare1 from '../../assets/blog/baresquare1.jpg'
+
+<Image src={baresquare1} />
+
+_Stathis:_ This was an exploratory project in a sense. We didn't know
+what the configuration of the pipeline would look like when we started,
+we wanted to make a generic processing pipeline that could be heavily
+configured to fit the specific requirements of our customers operating
+in different countries.
+
+Clojure is good for iterating quickly. We needed to move fast, to make
+prototypes and to modify the pipeline accordingly. Flexibility is
+paramount.
+
+_Georgios:_ I didn't have the intention of doing Clojure, it was an
+adventure that came up!
+
+_Stathis:_ The front end was well defined and was more outsourceable.
+The data-processing pipeline needed to be kept closer to the company -
+we wanted space to explore; to explore how to move from a human centric
+workflow to an automated one.
+
+_Georgios:_ We chose initially to use R for the data algorithms.
+Baresquare already had R expertise in-house and talking between Clojure
+and R was not a problem.
+
+_Jon:_ Is Baresquare doing more Clojure now?
+
+_Georgios:_ We had a proof of concept last year that we managed to
+deliver within 2-3 weeks of coding. The developer involved - Kosta - who
+was originally a Java developer, said that it would have taken him
+around four months in Java.
+
+The proof of concept was successful - we put it straight into production
+and we haven't had any issues since. This is not a usual story that I
+hear!
+
+_Jon:_ That's great!
+
+_Georgios:_ Yes. It's worth mentioning that we are not a start-up who
+have secured funding to create our software. Everything we do is
+bootstrapped, we are pivoting from being a services company to being a
+software house. There is a limited amount of time/money to invest, and
+so we have hard deadlines that are make or break. It's critical to make
+the best use of our resources.
+
+import office from '../../assets/blog/baresquare-office.jpg'
+
+<Image src={office} />
+
+# Clojure Onboarding
+
+_Jon:_ How has the Clojure onboarding process been for other developers?
+
+_Georgios:_ Our first in-house developers (Kostas and Panos) were new to
+Clojure and have been mentored by Stathis.
+
+_Stathis:_ Both coming from a background of heavy Java, they have
+adapted easily. Since then I've interacted with 4 developers, all of
+them enthusiastic about Clojure and using it at work. One started using
+some advanced libraries such as core.match, another being very diligent
+about using automated tests and so on. I provided some mentoring, but it
+was far from full time - about 1-2 sessions a week.
+
+_Georgios:_ We now have 2 senior developers and 2 junior developers
+coding Clojure.
+
+# Hiring
+
+_Jon:_ How has it been hiring for Clojure devs?
+
+_Georgios:_ It was difficult for us to hire the junior devs, although
+one directly approached us looking for _Clojure in Greece_. He said I
+love the language, can I work for you?
+
+Otherwise I've found that the developers who are aware of Clojure or
+Scala are easier to convince that Clojure is worth the time.
+
+# Greece
+
+_Jon:_ What is the state of Clojure in Greece?
+
+_Stathis:_ There is an [Athens Clojure
+Meetup](http://www.meetup.com/Athens-Clojure-Meetup/), and there's
+another two companies we know of in Athens using Clojure. It's very
+early on in the Clojure journey here.
+
+_Georgios:_ I don't feel nervous. There are lots of large companies
+using Clojure outside of Greece and so adoption is happening and picking
+up. I have the trust. The resourcing makes me a little nervous, but then
+you get people reaching out because of Clojure which is a good thing.
+
+We are used to doing things our own way, and being a bit different.
+
+# Are you happy you chose Clojure?
+
+_Georgios:_ I feel we have made a really good investment into newer
+technologies and this helps us be agile and to adapt. I look at
+competitors that are going slower and I guess it's also because of their
+legacy of old tech.
+
+Also - I don't feel trapped. Clojure is built on the JVM and so it's
+well connected to other libraries and tools we might want to use, I like
+this very much. Clojure helps us attract good people, and we are
+thinking of using ClojureScript for a UI we need to build.
+
+_Stathis:_ There are some great platforms and tools we can potentially
+use in the Clojuresphere such as Onyx. The future is good.
+
+# Resources
+
+Baresquare are hiring, check out their [careers
+page](http://www.baresquare.com/careers/) and the company's [linked-in
+page](https://www.linkedin.com/company/bare-square).
