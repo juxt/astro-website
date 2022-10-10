@@ -1,0 +1,226 @@
+---
+author: 'jon'
+title: 'Clojure in London: Entrepreneur First'
+description: 'Boosting ideas with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '18 Jan 2018'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# Bringing outliers together.
+
+import ef from '../../assets/blog/ef-vr-demo-day.jpg'
+
+<Image width='400px' src={ef} />
+
+[Entrepreneur First](https://www.joinef.com/) is a London-based start-up
+accelerator which assists entrepreneurs to design and run their own
+start-ups. It differs from other accelerators such as [Y
+Combinator](http://www.ycombinator.com/) and
+[Wayra](https://wayra.co.uk/) in that it seeks out individuals before
+they have a concept or existing company.
+
+[Conan Cook](https://twitter.com/willypimpernel) is the Technical Lead
+at EF and is building a team using Clojure and ClojureScript to develop
+the platform. I caught up with Conan to learn more.
+
+**_Jon: How would you describe Entrepreneur First?_**
+
+**Conan:** In short, we help ambitious people create companies. Our
+founders Alice, and Matt, were working at a management consultancy and
+they realised that the traditional career paths for ambitious people
+were for instance working for large institutions such as banks. This
+didn't always utilise their potential and in general, large companies
+are not geared towards making entrepreneurs.
+
+What we aim to do is produce an environment to help people get into
+entrepreneurship. One of the highest value things we do is to help in
+finding co-founders. Even if someone has a great idea, they are often
+not able to follow it through alone. By analysing the data each person
+gives us, we can create teams of people who otherwise would not have
+found each other.
+
+**_Jon: So what sort of functionality does the platform provide?_**
+
+**Conan:** We have dashboards and databases for our internal teams, and
+we have another dashboard which is a bit like a social network for when
+people are finding co-founders, forming teams and developing products.
+This allows us to link people, to show progress of teams and to identify
+what they most need.
+
+Also Entrepreneur First invests in these companies, and our platform
+gives us data to make decisions. Crunching this data occupies the tech
+team.
+
+**_Jon: How many entrepreneurs do you have in the platform?_**
+
+_Conan_: [100 funded companies](https://www.joinef.com/companies) have
+been founded at Entrepreneur First. We aim to increase that number and
+have recently expanded to Berlin, alongside our existing locations in
+London and Singapore.
+
+import ef2 from '../../assets/blog/ef-logo-blue.png'
+
+<Image width='200px' src={ef2} />
+
+# Clojure?
+
+**_Jon: Why Clojure?_**
+
+**Conan:** As Rich Hickey said in his [10 Years of Clojure
+speech](https://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiLpLeJnZ3XAhWCxxoKHUqwC3QQtwIIJjAA&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D2V1FtfBDsLU&usg=AOvVaw0T1izvsr45J-ymo8FSU9Uc),
+most of the world's computer systems are based around data processing.
+Entrepreneur First is a good example of a company which transforms and
+moves data into various forms. [This makes Clojure
+ideal](https://medium.com/@conan.cook/clojure-at-ef-1d9f3b76601c).
+
+We are interested in a collection of data about the individual (what
+funding, what company, what investors etc.). Lots of data can be
+attached to one person, and it's so easy in Clojure to pick the bits you
+want to change around. It's very easy to build systems that represent
+the data as well as having exploratory tools.
+
+There's a reasonable quantity of exploratory work going on to come up
+with hypotheses, and we need to test these against the data. We are
+asking lots of new questions that we hadn't thought of when the data was
+first stored. Having dynamic simple data structures makes it easy to
+adjust.
+
+# Tech Stack
+
+**Jon:** What is your tech stack?
+
+**Conan:** In terms of Clojure APIs: Ring, Liberator and Compojure.
+[Liberator](http://clojure-liberator.github.io/liberator/) is a good
+tool; it's overkill in some places, but I still think it's a good tool.
+
+We also use ClojureScript, and we find that being able to write UIs in
+the same language as the back-end is a huge advantage. Our data flows
+very neatly from the back-end to the UI.
+
+Currently most of our data is in Postgres and we are in the process of
+moving to Datomic.
+
+**_Jon: Why move from PostgreSQL to Datomic?_**
+
+_Conan_: The problem with traditional SQL databases is that you have to
+say what you're going to store: they don't handle sparsity well.
+
+As individuals move through our system, we accumulate more data about
+them and the data-model starts to diverge. In Datomic we just add the
+data we need. In a SQL world you would end up with a large number of
+migrations.
+
+When you are modelling something fixed, without room for variation,
+Postgres is then a good fit.
+
+**_Jon: Any other reasons to choose Datomic?_**
+
+Well, it's easy to use, and is enjoyable to work with from an
+engineering perspective.
+
+We have also started using Clojure Spec, and the connection between the
+two - namespaced keywords running throughout the system - is so neat. I
+know what the shape of every piece of data is based on its keyword.
+
+**_Jon: You are a fan of Spec?_**
+
+**Conan:** The more I learn about it, the happier it makes me. There's a
+learning curve, for example with generators, and some of it is a little
+bit strange. I recently wrote a [blog
+post](http://conan.is/blogging/a-spec-for-urls-in-clojure.html) with a
+good example.
+
+Having generators in place to generate arbitrary data with a single line
+of code is fantastic. I write the description of the function next to
+the function. `fdef` is really nice.
+
+There are some very good talks out there on Spec.
+
+import ef3 from '../../assets/blog/ef-door-close.png'
+
+<Image src={ef3} />
+
+# Hiring
+
+**_Jon: How many devs are you?_**
+
+**Conan:** Just me at the moment! But we are in the process of hiring a
+team of four. We hope to be more than that eventually, but we have to
+prove the value of the team first - of the new hires we make.
+
+**_Jon: And how have you found the hiring process?_**
+
+**Conan:** Hard as Clojure developers are in demand. There are more
+developers than jobs and many are going freelance.
+
+Niche languages tend to attract people with experience, and there's a
+reasonably good pool of Clojure developers.
+
+We find the same diversity problem that you have in many places - we
+find it difficult to hire from a wide selection of backgrounds. But then
+you do find people in Clojure who haven't taken the usual career path.
+
+import ef4 from '../../assets/blog/ef-founders.jpg'
+
+<Image src={ef4} />
+
+**_Jon: Would you consider hiring remotely to attract more people?_**
+
+**Conan:** Maybe in the future. When the team is small, we find it more
+valuable to have people co-located. The company is built on face to face
+interactions.
+
+**_Jon: What level of developer are you looking for?_**
+
+**Conan:** Junior to mid-level. We are prepared to teach people, and we
+can cast the net widely. For mid-level I find people myself using
+GitHub, LinkedIn and Twitter. We've used agencies such as [Functional
+Works](https://functional.works-hub.com/).
+
+# Training
+
+**_Jon: How have you found the training process?_**
+
+**Conan:** I have done it in past and it's always been great. There's a
+learning curve for FP, but if you haven't done much OO, then it can be
+quicker to pick up. Clojure does have an issue with error messages, but
+then in the Clojure world there are very few surprises.
+
+**_Jon: What do you think of the current state of Clojure in London?_**
+
+**Conan:** I'm slightly disappointed that more organisations aren't
+using it. There have been a few additions - but it's not five or ten
+times the number of companies that it was five years ago.
+
+import ef5 from '../../assets/blog/clojurex.jpg'
+
+<Image src={ef5} />
+
+That said, it's positive that there are more people using it and more
+positions available.
+
+I enjoyed
+[ClojureX](https://skillsmatter.com/conferences/8783-clojure-exchange-2017) -
+I've always enjoyed it. There is a bigger variation of new people using
+it, and people pushing the boundaries.
+
+**_Jon: Any closing words?_**
+
+**Conan:** I'd really like to understand how to manage a very large
+Clojure base. I get the impression that the Clojure community hasn't
+thought much about this; that there isn't a history of building enormous
+systems, rather lots of smaller systems.
+
+This is something I'll be thinking about very carefully.
+
+**_Jon: At JUXT we use Emacs/Vim on Arch with Dell XPSs, what do you
+use?_**
+
+**Conan:** I use Windows, with the Windows subsystem for Linux - it has
+bindings for the kernel. I use this as my terminal to run tests etc and
+to do terminally things such as SSH. I run Intellj with
+[Cursive](https://cursive-ide.com/) natively in Windows.
