@@ -103,7 +103,7 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
 
         <CustomHits blogs={blogs} />
         <div className='my-20'>
-          <Pagination />
+          <Pagination padding={1} />
         </div>
       </InstantSearch>
     </div>
