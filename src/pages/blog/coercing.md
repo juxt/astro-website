@@ -1,11 +1,11 @@
 ---
-author: "jon"
-title: "Data at the Gates"
-description: "oerce to avoid data inconsistencies polluting your codebase"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "01 Feb 2016"
-heroImage: "mock3.jpg"
+author: 'jon'
+title: 'Data at the Gates'
+description: 'oerce to avoid data inconsistencies polluting your codebase'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '01 Feb 2016'
+heroImage: 'mock3.jpg'
 ---
 
 A saving architectural pattern is to marshal your data into some

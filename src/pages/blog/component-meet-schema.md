@@ -1,13 +1,13 @@
 ---
-author: "mal"
-title: "Component, meet Schema"
-description: "How to validate Clojure component systems"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "25 Jun 2015"
-heroImage: "mock3.jpg"
+author: 'mal'
+title: 'Component, meet Schema'
+description: 'How to validate Clojure component systems'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '25 Jun 2015'
+heroImage: 'mock3.jpg'
 tags:
-  - "macros"
+  - 'macros'
 ---
 
 At JUXT, most of our projects are structured using Stuart Sierra's
