@@ -1,0 +1,189 @@
+---
+author: 'mal'
+title: 'Building a chat system using core.async and server-sent-events'
+description: 'Notes from a training course'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '24 Apr 2015'
+heroImage: 'mock3.jpg'
+tags:
+  - 'training'
+---
+
+import { Image } from '@astrojs/image/components'
+
+Last week I spent an exhausting yet enjoyable two days Clojure training
+with some experienced Clojure pros.
+
+# Day 1: Building the chat-server
+
+The course started by introducing core.async and building up its
+concepts one at time, from buffers, channels, go-blocks and finally on
+to transducers.
+
+We came up with some ideas for what a transducer might do in the context
+of a chat system.
+
+- Censor profanity, using a filtering transducer
+
+- Auto-correct text, using a mapping transducer
+
+- Emoticons
+
+- Code formatting
+
+Compared to the channel operations they replace, the nice thing about
+transducers is that you can test them with ordinary sequences before
+applying them against a core.async channel.
+
+```clojure
+(sequence my-cool-transducer
+  ["Hello!" "How are you?" "What's the latest score?"])
+```
+
+In order to get started quickly with the REPL, we generated a project
+using the **sse** template at [modularity.org](http://modularity.org).
+This creates a project structure based on
+[component](https://github.com/stuartsierra/component), ideal for firing
+up a fast-feedback development workflow for writing servers. The **sse**
+template also adds dependencies on the stuff we needed. Less hacking
+around on setting up the environment means more fun with core.async.
+
+We had soon developed the code to put chat messages onto a channel and
+take them off. The template provided a simple webpage under `/events/`
+which allowed us to POST messages to the server, which in turn would put
+messages to a core.async channel.
+
+We then added a `go-loop` to take chat messages from the channel and
+publish them, first to the console, and then as server-sent events via
+http-kit.
+
+import tr from '../../assets/blog/training3.jpg'
+
+<Image src={tr} />
+
+All the code for this can be found in our
+[chatserver](https://github.com/juxt/chatserver) repository.
+
+# Day 2: Building the chat-client
+
+While a component-based setup works great for building servers, rapidly
+creating front-end user-interfaces calls for a different approach.
+
+We generated a project skeleton using [Martin
+Klepsch's](https://github.com/martinklepsch) excellent
+[tenzing](https://github.com/martinklepsch/tenzing) template. This
+provides a [boot](http://boot-clj.com/)-powered workflow with a
+fantastic feedback-cycle for seeing the results of your ClojureScript
+efforts immediately in the browser.
+
+    boot dev
+
+## A browser REPL
+
+The tenzing approach also includes a browser-REPL.
+
+From within the project directory :-
+
+    boot repl --client
+    (start-repl)
+    (js/alert "Look at me!")
+
+Helped greatly by our productive tooling, we plunged into ClojureScript
+and Om. Many of the team had no real experience with JavaScript or
+building front-end apps. But everyone got stuck in and we made steady
+progress, first with one Om component, then splitting it up into 3 with
+a core.async channel between the input box and the messages panel.
+
+## Putting it all together
+
+Separating the work for building the server API from the work required
+for the front-end feels like a good split. For example, when you're
+building a front-end, it would help to pair-up with a UX designer, but
+this isn't necessary for back-end work.
+
+But you still want to be able to integrate the two ends on your dev
+machine. Since both the front-end file server and back-end chat server
+were configured to listen on port 3000, we had to reconfigure the latter
+to use port 3001.
+
+However, running the modular and tenzing servers on different ports
+presented a more difficult problem. AJAX calls from the front-end to the
+server API fell foul of Cross Origin Resource Sharing (CORS) rules built
+into today's modern browsers (for very good reasons).
+
+import tr2 from '../../assets/blog/training2.jpg'
+
+<Image src={tr2} />
+
+Fortunately, I had anticipated this being an issue and had purposely
+speeded along the CORS support in our [yada](http://yada.juxt.pro)
+library. Of course, there are plenty of established options to implement
+CORS in Ring servers, but I also wanted to demonstrate how easy it was
+to turn a core.async channel into a fully compliant HTML5 server-sent
+event feed, thanks to the magic of the
+[manifold](https://github.com/ztellman/manifold) library that yada is
+built upon.
+
+Using this feature meant we had to replace http-kit with
+[aleph](https://github.com/ztellman/aleph), but thanks to the
+similarities between the respective
+[modular](https://github.com/juxt/modular) components meant that the
+code changes were minimal.
+
+The enclosing component had already established a core.async mult, used
+to distribute messages to multiple consumers. This was stored under the
+**:mult** entry of the component record. Therefore, the code to create
+the server-sent event implementation was straight-forward :-
+
+```clojure
+(yada
+  :allow-origin true
+  :events
+  (fn [_]
+    (let [ch (chan 256)]
+      (tap (:mult component) ch)
+      ;; Send a test message
+      (go (>! ch "It works!"))
+      ;; Return the core.async channel
+      ch)))
+```
+
+Not only was this code smaller and more readable that the http-kit
+equivalent, it also benefited from propagating back-pressure from a
+client connection. The result is back-pressure applied all the way back
+to the browsers sending the chat messages.
+
+Once the code was in, it was time to test it.
+
+    curl -i localhost:3001/events/events
+
+Having the REPL on the server meant we could easily add test messages to
+the channel, since the channel was part of the system map, and the
+system map was so easily accessible from the REPL :-
+
+```clojure
+(clojure.core.async/put! (-> system :sse-demo-events-events :channel) "Test message!")
+```
+
+(Note: it's very handy being able to turn common expressions like this
+into convenience functions in `dev.clj`.)
+
+Once the server output had been verified, we hooked up the chatclient
+and the CORS errors disappeared. By the end of the course, almost all of
+us had fully functional web-based chat systems. Not bad for a few hours
+effort and a lot of fun too.
+
+import tf from '../../assets/blog/training-fun.jpg'
+
+<Image src={tf} />
+
+Again, all the code for the ClojureScript chat client can be found in
+our [chatclient](https://github.com/juxt/chatclient) repository.
+
+# Can we help?
+
+If you'd like to receive this kind of training from JUXT, just let us
+know, we'd be happy to help. Whether you'd like a course for beginners,
+or something to challenge seasoned Clojure devs, don't hesitate to get
+in touch (info@juxt.pro).

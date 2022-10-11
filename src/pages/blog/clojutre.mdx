@@ -1,0 +1,180 @@
+---
+author: 'jon'
+title: 'ClojuTre Report'
+description: 'Attending the ClojuTre conference'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '18 Sep 2015'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+This was my first time at [ClojuTre](http://clojutre.org/2015/), a
+Clojure conference in Finland organised by
+[Metosin](http://www.metosin.fi). This conference is entirely free for
+attendees, and so immediately there's a feel good factor and positive
+vibe about it. Free maybe, but the event was still well polished and
+executed, so full credit to Metosin.
+
+import sp from '../../assets/blog/sponsors.jpg'
+
+<Image src={sp} />
+
+[JUXT](https://juxt.pro) sponsored the conference alongside other
+companies, and Malcolm Sparks from JUXT also gave a talk on
+[yada](https://github.com/juxt/yada). This meant myself and Malcolm
+traveled up to Finland beforehand where we got to experience beer
+drinking and Clojure discussions while sitting unclothed in a hot sauna
+room with other speakers and sponsors. Post-sauna we enjoyed a fantastic
+speakers\' dinner and the drinks continued to flow freely, gin in
+particular. Later on Sam Aaron got some tunes going.
+
+import la from '../../assets/blog/lakes.jpg'
+
+<Image src={la} />
+
+[Tampere](http://www.tampere.fi/english/tampereinfo.html) in Finland is
+a beautiful place, and flying in over the forests and lakes one can
+imagine holidaying here, doing some fishing, kicking back, perhaps
+engaging in a coding retreat. We were treated to some excellent weather
+and so it was a gorgeous few days, idyllic.
+
+[You can see all the talks
+here](https://www.youtube.com/playlist?list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj).
+The talks were 20 minutes in length, which I thought worked well. It's
+rare that people manage to hold their attention span for much longer,
+and it can quickly become grueling to sit through a sequence of 45+ min
+talks. Also, Metosin started the day in the afternoon, which
+complemented my post-gin-recovery temperament well.
+
+import mi from '../../assets/blog/micha.jpg'
+
+<Image src={mi} />
+
+To get started, [Micha Niskin gave us an overview of
+Hoplon](https://www.youtube.com/watch?v=UoZyyo2Bwr8&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj&index=1)
+that uses Javelin as opposed to the virtual DOM. There's lots going on
+here with using composable _cells_ as opposed to global atoms, and a
+literal HTML syntax. Hoplin seems fairly radical (not just another React
+implementation), and so is definitely worth checking out.
+
+import re from '../../assets/blog/renzo.jpg'
+
+<Image src={re} />
+
+[Renzo
+Borgatti](https://www.youtube.com/watch?v=QI9Fc5TT87A&index=2&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj)
+gave an entertaining and useful talk on pearls of the Clojure core API.
+These are functions you probably don't know about that are potentially
+useful (i.e. `destructure` and `clojure.reflect/reflect`). Good old
+`fnil` was in there also, a function that I know about and should use
+more.
+
+[Sebastian Bensusan talked us through a comparison of the various of
+forms of polymorphism found in Clojure code-bases in the
+large](https://www.youtube.com/watch?v=wjHTsaqwMIE&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj&index=3),
+and observations on striking the right balance between getting things
+done and keeping things tidy. He ended the talk with a nice demo of a
+graphical interface he's developed for viewing namespace graphs.
+
+[Jonas Enlund gave a
+talk](https://www.youtube.com/watch?v=hGWovJGbKJk&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj&index=4)
+on alternative data structures, in particular
+[`core.rrb-vector`](https://github.com/clojure/core.rrb-vector) giving
+us _logarithmic time concatenation and slicing_ and
+[`data.avl`](https://github.com/clojure/data.avl) for sorted sets and
+maps giving `rank` operations and logarithmic performance for certain
+operations. It's good to learn about these data structures when you need
+help with performance.
+
+import jo from '../../assets/blog/joseph.jpg'
+
+<Image src={jo} />
+
+[Joseph Wilk gave us a stunning
+demonstration](https://www.youtube.com/watch?v=_S5FZ2CcLlc&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj&index=5)
+of Clojure produced music and visuals, using Overtone and OpenGL
+Shaders. This was a welcome interlude to the technical talks, giving us
+a chance to reflect on the beauty of life, to have our minds temporarily
+lifted.
+
+import mt from '../../assets/blog/martin.jpg'
+
+<Image src={mt} />
+
+[Martin Klepsch's talk](https://www.youtube.com/watch?v=tBnu2JmK4p0) on
+\"Desktop Apps with ClojureScript\" was useful if you need to build a
+desktop app (to get the dock icon), and you also want to maintain
+writing the front-end in Clojurescript and React etc. He builds
+Clojurescript apps using [Electron](http://electron.atom.io).
+
+[Markus Hjort gave an experience
+report](https://www.youtube.com/watch?v=1ZOj6R9vOi0&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj&index=8)
+of the differences between writing microservices in Javascript, Scala
+and Clojure. Needless to say Clojure wins, and he had some amusing
+remarks such as \"You can tell when a colleague is working on a Scala
+service, because you can hear the CPU fan\".
+
+import ms from '../../assets/blog/malcolm-screen.jpg'
+
+<Image src={ms} />
+
+[Malcolm gave an _intro to yada_
+talk](https://www.youtube.com/watch?v=tKFrqsFC1XM&index=9&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj).
+[yada](https://github.com/juxt/yada) is a framework where we can specify
+our web resources in data, providing a simple way of serving resources
+using yada that totally nails the HTTP spec, gives you lots of async
+goodness, out-the-box Swagger support which is all the rage.
+
+[Tommi Reiman of Metosin talked
+about](https://www.youtube.com/watch?v=BIjVH4SAmiM&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj&index=10)
+a library he's building called _Kekkonen_ that helps to compose
+_commands and queries_ in your Clojure web application. I've felt the
+pain I believe Kekkonen will hopefully alleviate; i.e. you want to build
+APIs you can call from ClojureScript, but it can be over the top to
+build RESTful APIs for each command and query. That's a lot of
+boilerplate REST code, and lots of potential debates about constructing
+the perfect RESTful endpoint, when it's only internally consumed anyway.
+Kekkonen will provide a lightweight _registry_ where you plug your
+commands and queries into, and all the web routing plumbing is done for
+you. It will also help you with security and HTTP options around the
+commands and queries, using meta-data on the command/query API
+functions. Interesting stuff.
+
+import co from '../../assets/blog/coffee.jpg'
+
+<Image src={co} />
+
+[Ari-Pekka
+Viitanen](https://www.youtube.com/watch?v=rgtkDpcXjXU&index=7&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj)
+talked about building multi-tenant SaaS application, and how he
+approached data segregation between clients. He illustrated their use of
+dynamic scope, developing a `with-tenant` macro to switch between tenant
+contexts, while added a cautionary note of the dangers of dynamic scope
+in general.
+
+[Luke VanderHart gave an inspiring talk on _Simplicity in
+Practice_](https://www.youtube.com/watch?v=2YmmfS5YTQ0&index=11&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj).
+Luke is an engaging speaker, encouraging us to think about _wieldly_
+systems, bringing together the concepts of simplicity and ease, which
+are not mutually exclusive. This is basically a talk exploring how we
+can be better programmers.
+
+import rob from '../../assets/blog/robert.jpg'
+
+<Image src={rob} />
+
+[\"Wherefore art thou LFE?\" by Robert
+Virding](https://www.youtube.com/watch?v=BvCBTpnlqs8&index=12&list=PLetHPRQvX4a_tA9hGP935-OyLOYaRKpnj)
+was the last talk, basically a Lisp on the Erlang VM. If you're on that
+particular VM and you want a Lisp then check it out.
+
+All in all an enjoyable and relaxed conference. Sam Aaron and Joseph
+Wilks once again provided some tunes at the conference after party,
+where there was a mass of pizza and black sausage, and the beer also
+flowed.
+
+import dr from '../../assets/blog/drinks.jpg'
+
+<Image src={dr} />

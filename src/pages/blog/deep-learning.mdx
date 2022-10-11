@@ -1,0 +1,337 @@
+---
+author: 'rkb'
+title: 'Deep Learning (DL)'
+description: 'The Mariana Trench of Learning'
+category: 'AI'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '19 Apr 2017'
+heroImage: 'mock3.jpg'
+tags:
+  - 'machine-learning'
+  - 'deep-learning'
+---
+
+import { Image } from '@astrojs/image/components'
+
+Previously ... on Machine Learning
+[here](https://juxt.pro/blog/posts/machine-learning.html)
+
+From my blog on Artificial Intelligence
+([AI](https://juxt.pro/blog/posts/artificial-intelligence.html)), we
+know that when it comes to processing data and creating patterns for
+decision making, the aim is to imitate the workings of the human brain.
+Deep learning (DL) is a subset of Machine Learning
+([ML](https://juxt.pro/blog/posts/machine-learning.html)) and AI. It has
+neural networks which are capable of learning unsupervised from data
+that is unstructured or unlabeled.
+
+In the digital era, we are getting information from everywhere. [Big
+Data](https://en.wikipedia.org/wiki/Big_data) is found from sources such
+as social media, internet search engines, online platforms etc. Big Data
+is accessible and is shared through FinTech applications such as cloud
+computing. However, this data is
+[unstructured](https://en.wikipedia.org/wiki/Unstructured_data), and so
+huge that it would take you and me years to understand and get the
+relevant information from it. There is boundless potential in decoding
+Big Data, so companies are using AI techniques to do this.
+
+A common techniques to process Big Data is ML. ML uses self-adapting
+algorithms to get better at analysis and find patterns with experience
+or additional data. More information on ML can be found in my previous
+[blog article](https://juxt.pro/blog/posts/machine-learning.html).
+
+Deep learning, a subset of machine learning, utilizes a hierarchical
+level of Artificial Neural Networks (ANN) to carry out the process of
+machine learning. To understand how Deep Learning Works, we must first
+understand ANN.
+
+# Artificial Neural Networks (ANN)
+
+import ann from '../../assets/blog/ann.png'
+
+<Image src={ann} />
+
+In DL, the computing systems are designed to simulate how the human
+brain analyses and processes information. ANN has self-learning
+capabilities that allow it to produce positively correlated results with
+the amount of available information.
+
+## How does ANN work?
+
+Artificial neural networks are built like the human brain, with neuron
+nodes interconnected like a web. The human brain has hundreds of
+billions of cells called _neurons_. Each neuron is made up of a cell
+body that is responsible for processing information by carrying
+information towards (inputs) and away (outputs) from the brain. ANN has
+hundreds or thousands of artificial neurons called _processing units_
+which are interconnected by nodes.
+
+These processing units are made up of input and output units. The input
+units receive various forms and structures of information. The neural
+network attempts to learn about the information presented in order to
+produce one output report. Just like humans need rules and guidelines to
+come up with a result or output, ANNs also use a set of learning rules
+called _Backpropagation_ to perfect their output results.
+
+An ANN goes through a training phase where it learns to recognize
+patterns in data. During this supervised phase, the network compares its
+actual output produced with the desired output. The difference between
+both outcomes is adjusted using backpropagation. At this stage, the
+network works backwards, going from the output unit, through the hidden
+units to the input units in order to adjust the weight of its
+connections between the units. It iterates until the difference between
+the actual and desired outcome produces the lowest possible error.
+
+import fd from '../../assets/blog/fraud-detection.jpg'
+
+<Image src={fd} />
+
+During the training and supervisory stage, the ANN is taught what to
+look for and what its output should be, using Yes/No questions with
+binary numbers. For example, a bank that wants to detect credit card
+fraud on time may have four input units fed with these questions:
+
+1.  Is the transaction in a different country from the user's resident
+    country?
+
+2.  Is the website the card is being used at affiliated with companies
+    or countries on the bank's watch list?
+
+3.  Is the transaction amount larger than \$2000?
+
+4.  Is the name on the transaction bill the same as the name of the
+    cardholder?
+
+The bank wants the \"fraud detected\" responses to be Yes Yes Yes No
+which in binary format would be 1 1 1 0. If the network's actual output
+is 1 0 1 0, it adjusts its results until it delivers an output that
+coincides with 1 1 1 0. After training, the computer system can alert
+the bank of pending fraudulent transactions, saving the bank money.
+
+# ANN Application to Deep Learning
+
+While traditional programs build analysis with data in a linear way, the
+hierarchical function of deep learning systems enables machines to
+process data with a non-linear approach. A traditional approach to
+detecting fraud or money laundering might rely on the amount of
+transaction that ensues, while a deep learning non-linear technique to
+weeding out a fraudulent transaction would include time, geographic
+location, IP address, type of retailer, and any other feature that is
+likely to make up a fraudulent activity.
+
+The first layer of the neural network processes, is raw data input, such
+as the amount of the transaction. This is then passed on to the next
+layer as output. The second layer processes the previous layer's
+information by including additional information like the user's IP
+address and passes on its result. The next layer takes the second
+layer's information and includes raw data like geographic location and
+makes the machine's pattern even better. This continues across all
+levels of the neuron network until the best output is determined. This
+is an example of a _FeedForward Neural Network_.
+
+import wm from '../../assets/blog/warning-maths.jpg'
+
+<Image src={wm} />
+
+::: warning
+Little Bit of Maths on the Horizon! The next section is here purely for
+higher understanding of neural networks. If Maths is something you left
+in your dust at school, simply skip forward to Examples. (Click on the
+Equations for a GIF(t) to help you along!)
+:::
+
+# Sigmoid Neuron
+
+In ANN we mention weights of neurons. These weighted neurons are called
+_Sigmoid Neurons_. Some neural networks use perceptron outputs that have
+discrete values of 0 and 1. A sigmoid neuron outputs a smooth continuous
+range of values between 0 and 1. This is defined by the Sigmoid Function
+defined below,
+
+In ANN, values change very slowly with each iteration and input.
+Observing how a small change in the bias value or the weights
+(associated with the artificial neurons) affects the overall value of
+the output of the the neuron is very important. A
+[Perceptron](https://appliedgo.net/perceptron/) may have its outputs
+flipped suddenly with a small change in the input value. To observe the
+tiny changes in the output to arrive at the correct value of input, we
+need a function to be applied on the [dot
+product](https://www.mathsisfun.com/algebra/vectors-dot-product.html) of
+weights and bias value so that overall output is smooth. For now, the
+function could have been any function f() that is smooth in nature, such
+as quadratic functions or cubic functions. The reason the sigmoid
+function is chosen, is that, exponential functions generally are similar
+to handle mathematically and, since learning algorithms involve lots of
+differentiation, choosing a function that is computationally cheaper to
+handle is wise.
+
+The Sigmoid Neurons are organised into layers, similar to how they are
+in the human brain. Neurons on the bottom layer (inputs) receive signals
+from the inputs, where neurons in the top layers (outputs) have their
+outlets connected to the \"answer,\" Usually there are no connections
+between neurons in the same layer. This is an optional restriction, more
+complex connectivity's require more involved mathematical analysis. This
+is a feed-forward network so there are no connections that lead from a
+neuron in a higher layer to a neuron in a lower layer. Alternatively,
+there are Recursive Neural Networks
+[(RNN)](https://arxiv.org/pdf/0911.3298.pdf). Again, these are much more
+complicated to analyze and train.
+
+# BackPropagation
+
+A fundamental idea of DL and ANN is BackPropagation. We have briefly
+touched on backpropagation in previous blog articles but we will dive
+into the Algorithm into more detail.
+
+The idea behind backpropagation is that we don't know what the hidden
+units (the neurons between the input and output) should be doing, but we
+do know how fast the error between the iteration and actual result
+changes as we change the hidden activity. We want to find the steepest
+path from our starting results to the actual result.
+
+Each hidden unit can affect many different output units. We start by
+looking at the error
+[derivatives](https://www.mathsisfun.com/calculus/derivatives-introduction.html)
+for one layer of hidden units. Once we have the error derivatives for
+one layer of hidden units, we use them to compute the error derivatives
+for the activities of the layer below. Once we find the error
+derivatives for the activities of the hidden units, it's relatively easy
+to get the error derivatives for the weights leading into a hidden unit.
+
+The symbol \"y\" will refer to the activity of a neuron. The symbol
+\"z\" will refer to the logic of a neuron. We start by looking at the
+base case of the dynamic programming problem, the error function
+derivatives at the output layer:
+
+import dl from '../../assets/blog/dl-maths-1.png'
+
+<Image src={dl} />
+
+For the inductive step, let's presume we have the error derivatives for
+layer _j_. We now aim to calculate the error derivatives for the layer
+below it, layer _i_. To do so, we must accumulate information for how
+the output of a neuron in layer _i_ affects the logic of every neuron in
+layer _j_. The partial derivative of the logic, with respect to the
+incoming output data from the layer beneath, is merely the weight of the
+connection _wij_:
+
+import dl2 from '../../assets/blog/dl-maths-2.png'
+
+<Image src={dl2} />
+
+To complete the inductive step
+
+import dl3 from '../../assets/blog/dl-maths-3.png'
+
+<Image src={dl3} />
+
+Combining, we express the [partial
+derivatives](http://mathworld.wolfram.com/PartialDerivative.html) of
+layer _i_ in terms of the partial derivatives of layer _j_.
+
+import dl4 from '../../assets/blog/dl-maths-4.png'
+
+<Image src={dl4} />
+
+Next, we determine how the error changes with respect to the weights.
+This gives us how to modify the weights after each training example:
+
+import dl5 from '../../assets/blog/dl-maths-5.png'
+
+<Image src={dl5} />
+
+For backpropagation with training examples, we sum up the partial
+derivatives over all training examples. This gives us the following
+modification formula:
+
+import dl6 from '../../assets/blog/dl-maths-6.png'
+
+<Image src={dl6} />
+
+This is the Backpropagation Algorithm for Feed-Foward Neural Networks
+using Sigmoidal Neurons. In better news, this also the end of the Maths.
+You made it through, and I'm sure you're a stronger person for it!
+
+You can find a worked example of BackPropagation
+[here](https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/).
+
+# Examples Of Deep Learning:
+
+import bo from '../../assets/blog/chatbot.png'
+
+<Image src={bo} />
+
+1.  Email service providers use ANN to detect and delete spam from a
+    user's inbox
+
+2.  Asset managers use it to forecast the direction of a company's stock
+
+3.  Credit rating firms use it to improve their credit scoring methods
+
+4.  E-commerce platforms use it to personalize recommendations to their
+    audience
+
+5.  Chatbots are developed with ANN for natural language processing
+
+6.  Deep learning algorithms use ANN to predict the likelihood of an
+    event
+
+7.  [Colorization](https://www.google.co.uk/search?q=colorization+of+black+and+white+images&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjlstf5-qPTAhXrAcAKHWkOANYQsAQIIg&biw=784&bih=829)
+    of Black and White Images
+
+8.  Adding Sound to Silent Movies ([Charlie
+    Chaplain](https://en.wikipedia.org/wiki/Charlie_Chaplin) will never
+    be the same)
+
+9.  Automation of:
+
+    - Translation of Text
+
+    - Handwriting Generation
+
+    - Text Generation
+
+    - Image Captions
+
+# Future
+
+import ai from '../../assets/blog/ai-race.jpg'
+
+<Image src={ai} />
+
+The possibilities for the future of Deep Learning are endless. As
+algorithms and technology advances, we may see models that use less
+training cases to learn, maybe diving into unsupervised learning. This
+could kick start a race between global companies. Apple has recently
+been on a hiring mission, seeking 80-plus AI experts to help make
+[Siri](https://www.apple.com/ios/siri/) smarter than Google Now or
+Microsoft's
+[Cortana](https://support.microsoft.com/en-gb/help/17214/windows-10-what-is).
+Google paid \$400 million for [DeepMind](https://deepmind.com/) who
+specialised in Deep Learning, with Deep Learning experts commanding
+seven-figure salaries. They are the Premier League Footballers of the
+programming world.
+
+There's a simple reason why, when it comes to Deep Learning and AI,
+Google are one of, if not the, market leaders. Data! They have it coming
+out of their ears. We have seen that the more training cases you have
+for your model, the better it becomes at predictions. Apple, in this
+scenario, are hamstrung by their own privacy policies. As an iPhone
+encrypts and holds data on the device itself, Apple has little user data
+to exploit. A former Apple employee told Reuters that Siri retains user
+data for six months, but Apple Maps user data can be gone in as little
+as 15 minutes. This pales in comparison to the amount of data that
+Google aggregates from Android users around the globe. Potentially, this
+disparity may stifle Apple advances in AI-driven technology, and
+especially where big data is essential to refine and perfect the
+learning process.
+
+import nn from '../../assets/blog/nn-on-phone.jpg'
+
+<Image src={nn} />
+
+Eventually we may see Neural networks running on our mobile devices.
+Mobile device may have the ability to conduct machine learning tasks
+locally, opening up a wide range of opportunities for object
+recognition, speech, face detection, and other innovations for mobile
+platforms.

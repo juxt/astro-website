@@ -1,0 +1,477 @@
+---
+author: 'rkb'
+title: 'Deep Learning Conference'
+description: 'Deep Learning is infiltrating the world around us!'
+category: 'AI'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '16 Oct 2017'
+heroImage: 'mock3.jpg'
+tags:
+  - 'machine-learning'
+  - 'deep-learning'
+---
+
+import { Image } from '@astrojs/image/components'
+
+Recently I attended the two-day Deep Learning Summit in London, hosted
+by [Re-Work](https://www.re-work.co/). As someone who is still
+relatively new to the deep learning community, I felt a little
+apprehensive before attending, but these fears were quickly alleviated
+by the very high quality of the talks that were split into digestible
+chunks of 20 minutes. Each talk gave a good taster either on what the
+individual was researching or what their company did.
+
+There was a large variety of talks from established companies such as
+Google's Deep Mind, Facebook and Amazon, and from small start-ups, under
+a year old, such as [Echobox](https://www.echobox.com/) and
+[UIzard](https://uizard.io/), showcasing the interesting and diverse
+areas to which deep neural networks can be applied.
+
+The event was very well organised. Re-Work grouped related talks
+together, so each talk was able to build on talks before it, to allow
+engagement of one topic at a time. There were talks about research and
+application of neural networks; some went into detail, and others gave
+more of a general overview about the application of deep learning.
+
+I found Bayesian Neural Networks particularly interesting. This is where
+instead of having a single weight value, it is a distribution, allowing
+you to utilise the uncertainty around the value. I also found
+encoder/decoder neural networks fascinating.
+
+I would go again next year as deep learning is a rapidly-moving field.
+
+Here is a summary of the talks at the event:
+
+# Probability & Uncertainty in Deep Learning, [Andreas Damianou](https://twitter.com/adamianou), [Amazon](https://aws.amazon.com/amazon-ai/)
+
+This talk covered how Neural Network are
+[deterministic](https://www.quora.com/What-is-a-stochastic-neural-network-and-how-does-it-differ-from-a-deterministic-one).
+They are have generalisation, data generation and no predictive
+uncertainty. [Bayesian Neural
+Networks](http://edwardlib.org/tutorials/bayesian-neural-network) were
+introduced here, where instead of single values for weight, a
+distribution is used. By using a distribution, you can use all the
+available information instead of just mode (single value) for
+propagation. This is an example of a [Deep Gausian
+Processes](http://keyonvafa.com/deep-gaussian-processes/), however it is
+more challenging when the uncertainty has to be propagated
+
+import dl from '../../assets/blog/dl-conf1.jpg'
+
+<Image src={dl} />
+
+# Sequence to Sequence Networks for Speech & Language Translation, [Shubho Sengupta](https://twitter.com/search?q=facebook&src=tyah), [Facebook AI Research (FAIR)](https://research.fb.com/category/facebook-ai-research-fair/)
+
+Translation is the single biggest network for any company.
+[Siri](https://www.apple.com/uk/ios/siri/) and
+[Alexa](https://www.amazon.com/Amazon-Echo-And-Alexa-Devices/b?ie=UTF8&node=9818047011)
+are examples of code to speech. They are
+[supervised](https://en.wikipedia.org/wiki/Supervised_learning) trained
+neural networks and require lots of data, 20-50 million translations to
+get accurate speech. Five years ago this was improbable.
+
+The [Deep Neural
+Networks](https://deeplearning4j.org/neuralnet-overview) used are
+[encoder-decoder
+networks](https://www.quora.com/What-are-encoder-decoder-models-in-recurrent-neural-networks)
+to build something similar to
+[Babelfish](https://www.youtube.com/watch?v=iuumnjJWFO4) from
+Hitchhiker's Guide to the Galaxy. The encoder takes words over a time
+period. The decoder is a neural network to return the answer to the
+question or the translation.
+
+The questions to now answer are:
+
+1.  What weights are given to each word in sentence?
+
+2.  What weights are given to the most important words? These questions
+    are asking whether the the word in terms of context or the word in
+    terms of relaying an emotion should have a higher weight, and how is
+    this decided.
+
+import dl2 from '../../assets/blog/dl-conf2.jpg'
+
+<Image src={dl2} />
+
+Memory and [memory
+differentiation](https://deepmind.com/blog/differentiable-neural-computers/)
+can be used to remember the previous word and what comes next from the
+memory in the network. These deep neural networks are difficult owing to
+the number of parameters. Speech to text has 50 million parameters and
+language to text 40-100 million parameters. This requires
+high-performance GPU computing.
+
+# Considerations for Multi GPU Deep Learning Model Training, [Jonas Lööf](https://twitter.com/nvidia), [NVIDIA](http://www.nvidia.co.uk/page/home.html)
+
+Complex neural networks have more parameters. [Google
+translation](https://translate.google.co.uk/), for example, uses 8700
+million parameters and 100
+[ExaFlops](https://en.wikipedia.org/wiki/Exascale_computing) Therefore,
+they use multiple GPUs for training. The best practice for multiple GPUs
+is to optimise for 1 GPU first.
+
+Hardware: [NVLinks](https://en.wikipedia.org/wiki/NVLink) for fast
+communication, DJX1 for scaling and performance. Software: Frameworks
+([Tensorflow](https://www.tensorflow.org/) etc), Environments
+([NVIDIA](http://www.nvidia.co.uk/page/home.html))
+
+For Frameworks, [Caffe](http://caffe.berkeleyvision.org/) has built in
+multiple GPUs and is easy to configure, [PyTorch](http://pytorch.org/)
+has high-level interface for parallelisation across multiple GPUs but
+the most suitable framework for multiple GPUs is
+[MxNet](https://mxnet.incubator.apache.org/) which is as flexible as
+Tensorflow but still has parallelisation across multiple GPUs.
+
+import dl4 from '../../assets/blog/dl-conf4.jpg'
+
+<Image src={dl4} />
+
+# Representations for Deep Learning, [Marta Garnelo](https://twitter.com/deepmindai), [DeepMind](https://deepmind.com/)
+
+[Constrained
+Models](https://en.wikipedia.org/wiki/Constrained_conditional_model) are
+used to get good representations of the data. The most popular types of
+models are [Reinforcement
+Learning](https://deepmind.com/blog/deep-reinforcement-learning/) and
+[Object Oriented
+Learning](https://dl.acm.org/citation.cfm?id=544417&dl=ACM&coll=DL&CFID=990329573&CFTOKEN=56346616).
+Individually these are not very efficient, need a high level cognition,
+and neutral networks are in essence black boxes, so it is hard to know
+what is happening inside them.
+
+# Word Embeddings in Search, [Fabrizio Silvestri](https://twitter.com/fabreetseo) , [Facebook](https://research.fb.com/category/facebook-ai-research-fair/)
+
+Search uses [One-Hot
+encoding](https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f),
+translating the word to a vector that can be input into a deep neural
+network. In search sessions, we extract info and use them to build the
+representation
+
+import dl5 from '../../assets/blog/dl-conf5.jpg'
+
+<Image src={dl5} />
+
+# Towards Teaching Machines to Read and Reason, [Sebastian Riedel](https://twitter.com/riedelcastro), UCL / [Bloomsbury.ai](http://bloomsbury.ai/)
+
+The purpose of the neural network is to read a document and answer
+questions about the text. The same model can read both [structured
+models](http://www.webopedia.com/TERM/S/structured_data.html) and
+[semi-structured
+models](https://en.wikipedia.org/wiki/Semi-structured_model). It is also
+able to extract information from the paragraph to do simple maths and
+also follow links within the paragraph to find the right answer.
+
+The neural network has [end-to-end
+differentiation](https://www.ee.ucl.ac.uk/~gpavlou/Publications/Journal-papers/Boucad-07.pdf)
+readers and program interpreters. As the neural network only has
+downstream annotation, it is not expensive to run, the learnt models are
+interpretable and you can allow injection of prior knowledge into the
+neural network to make it that much more accurate.
+
+import dl6 from '../../assets/blog/dl-conf6.jpg'
+
+<Image src={dl6} />
+
+# Labelling Topics Using Neural Networks, [Nikolaos Aletras](https://twitter.com/nikaletras), [Amazon](https://aws.amazon.com/amazon-ai/)
+
+Topic models are used to label the training data set. A neural network
+can learn a set of topics. Document topic allocations have [multinomial
+distributions](https://en.wikipedia.org/wiki/Multinomial_distribution)
+with a probability of each occurring. The label types can be text or
+images. To evaluate, there is either an average rating that is
+human-assigned which the neural network has to try and replicate, or
+[Normalised Discounted Cumulative
+Gain](https://en.wikipedia.org/wiki/Discounted_cumulative_gain).
+
+# Opinion Mining Using Heterogeneous Online Data, [Elena Kochkina](https://twitter.com/elena_kochkina), [University of Warwick](https://www2.warwick.ac.uk/fac/sci/systemsbiology/research/researchareas/datascience/)
+
+In this talk they used a trained neural network on social media to see
+how rumours spread online quickly, through
+[Twitter](https://twitter.com/?lang=en). We can classify a user's stance
+on a rumour using a stance classifier. A user can either support, deny,
+question or comment on a rumour, and scepticism towards a rumour implies
+it is fake. There is a conservation structure in verification of the
+rumour: the output. The neural network can also do sentiment analysis,
+identifying the emotions of document which can be positive, negative or
+neutral. The neural network can discover the sentiment towards the
+target of a sentence. Heterogeneous data from mobile phones - such as
+social media, messages, mobile data and calls - can serve well-being.
+
+import dl7 from '../../assets/blog/dl-conf7.jpg'
+
+<Image src={dl7} />
+
+# Applications of DL: Anomaly Detection, Sentiment Classification, & Over-sampling, [Noura Al Moubayed](https://twitter.com/NouraAlMoubayed), [Durham University](https://www.dur.ac.uk/iarc/nvidiacuda/workshop/)
+
+A deep neural network can be used in anomaly detection for
+cybersecurity, the cloud and social media. Tokenisation and topic
+modelling is used for the unsupervised sorting of anomalies into topics.
+Data is not abundant but the neural network is easy to train and it is
+fast.
+
+Sentiment classification is included where the neural network is trained
+on positive statements only and then negative statements only.
+
+If more samples are needed, the feedforward network generates samples
+from prior samples and calculates new ones.
+[Backpropagation](https://en.wikipedia.org/wiki/Backpropagation) is used
+for optimisation.
+
+Application of this neural network are social robots to help autistic
+children deal with uncertainty.
+
+import dl8 from '../../assets/blog/dl-conf8.jpg'
+
+<Image src={dl8} />
+
+# One Perceptron to Rule Them All, [Xavier Giro-i-Nieto](https://twitter.com/DocXavi), [Universitat Politècnica de Catalunya](https://kemlg.upc.edu/en)
+
+When we build neural networks, each layer uses a
+[Perceptron](https://appliedgo.net/perceptron/).
+
+A Perceptron-based neural network is used in [Language
+translation](https://en.wikipedia.org/wiki/Google_Neural_Machine_Translation),
+[pix2pix](http://ml4a.github.io/guides/Pix2Pix/) (add colour, build
+images), [Adversarial
+Training](https://medium.com/intuitionmachine/deep-adversarial-learning-is-finally-ready-and-will-radically-change-the-game-f0cfda7b91d3),
+[Image-to-Word](http://cs.stanford.edu/people/karpathy/deepimagesent/),
+[Image-to-Caption](http://cs.stanford.edu/people/karpathy/deepimagesent/),
+[Visual Question Answering](https://arxiv.org/abs/1707.04968), [Lip
+reading](https://papers.nips.cc/paper/858-lipreading-by-neural-networks-visual-preprocessing-learning-and-sensory-integration.pdf),
+Cross Modal:
+[Image\\\<→Text](https://www.digitaltrends.com/cool-tech/ai-generates-images-based-on-text/)
+and
+[Pics2recipe](https://www.theverge.com/tldr/2017/7/20/16005826/mit-csail-recipes-ai-neural-network-algorithm).
+
+import dl9 from '../../assets/blog/dl-conf9.jpg'
+
+<Image src={dl9} />
+
+# Iterative Approach To Improving Sample Generation, [Antonia Creswell](https://twitter.com/ToniCreswell), [Imperial College London](http://www.imperial.ac.uk/machine-learning/)
+
+For small intial data sets, models can synthesise new data samples by
+augmenting the training data and imagining new concepts to better
+understand data. There are two possible methods: [generative
+autoencoding](http://eplex.cs.ucf.edu/papers/dambrosio_gecco08.pdf) and
+[generative adversials
+networks](https://en.wikipedia.org/wiki/Generative_adversarial_network)
+We need at least 100k training samples that don't need to be labelled.
+
+The neural network layout is the following: Image -\> Encoder -\>
+Regularisation/Deep Net -\> Decoder -\> Image Variation
+
+These types of neural networks are called [Generated Augmented
+Network](http://www.rricard.me/machine/learning/generative/adversarial/networks/2017/04/05/gans-part1.html),
+where a
+[discriminator](http://www.sciencedirect.com/science/article/pii/0165027094901554)
+can decide if the data has been generated or is real data.
+
+# Discovering & Synthesizing Novel Concepts With Minimal Supervision, [Zeynep Akata](https://twitter.com/UvA_Amsterdam), [University of Amsterdam](http://amlab.science.uva.nl/)
+
+A neural network that can produce [Side
+Information](https://link.springer.com/chapter/10.1007/978-3-540-39624-6_15)
+by adding attributes to class data, such as colour, size or key
+features, using [Zero shot
+learning](https://www.quora.com/What-is-zero-shot-learning).
+
+# Cooperative AI for Critical Application, [Fangde Liu](https://twitter.com/imperialcollege), [Imperial College London](http://www.imperial.ac.uk/machine-learning/)
+
+An AI has many applications in industries such as traffic, energy,
+finance and healthcare. However AI in healthcare, right now, is like a
+baby who needs to go to school. Autonomous surgery was shutdown by the
+FDA after just one day. Currently
+[TensorLab](https://www.tensorlab.net/) is doing AI vigilance.
+
+import dl11 from '../../assets/blog/dl-conf11.jpg'
+
+<Image src={dl11} />
+
+# Artificial Intelligence for Space-Based Technology, [Luca Perletta](https://twitter.com/DigitalGlobe), [DigitalGlobe](https://www.digitalglobe.com/)
+
+Satellites gather 70 terrabytes of data per day and put the data on the
+Cloud. Deep learning is then used to extract information at scale. We
+can understand global trends such as understanding where cars are parked
+to inform plans on where to put a new car park. Data such as how many
+cars are produced can be used by hedge funds to predict profits for car
+manufacturers, oil production, where ships or planes are, continental
+scale maps and flood-water classification.
+
+A [deep core framework](http://deepcore.io/) is applied to the satellite
+imagery.
+
+With all the data, could an AI predict wealth from space?
+
+[Digital Globe](https://www.digitalglobe.com/) is launching satellites
+so they can have images of anywhere in the world, every 20 minutes.
+
+import dl3 from '../../assets/blog/dl-conf3.jpg'
+
+<Image src={dl3} />
+
+# Towards Automatic Front-end Development With Deep Learning, [Tony Beltramelli](https://twitter.com/Tbeltramelli), [uizard.io](https://uizard.io/)
+
+[UIzard's](https://uizard.io/) deep neural network changes human designs
+to their own. They designed a domain-specific language which compiles to
+HTML/CSS or XML etc. A pre-trained neural network recognises any objects
+(cars, trees, shapes) in the design. A
+[Pix2Code](https://github.com/tonybeltramelli/pix2code) recurrent neural
+network is used as it has the property of being end-to-end
+differentiable, which has advantages with accuracy.
+
+import dl12 from '../../assets/blog/dl-conf12.jpg'
+
+<Image src={dl12} />
+
+The benefit of this model is that there is no manually-labelled data and
+a limitless amount of sample data by taking screenshots of online
+webpages
+
+# Bayesian DL for Accurate Characterisation of Uncertainties in Time Series Analysis, [Christopher Bonnett](https://twitter.com/cbonnett), [alpha-i](https://alpha-i.co/)
+
+Deep neural networks have limitations such as static information sets, a
+model that doesn't know what it doesn't know and needing a lot of human
+involvement to optimise.
+
+[Bayesian Deep
+Learning](https://medium.com/towards-data-science/building-a-bayesian-deep-learning-classifier-ece1845bc09)
+has uncertainty on each end, i.e. the result is uncertainty. Outside the
+range of training data, a Bayesian deep learning neural network gives
+uncertain results and effectively says \"I don't know. Get more data
+here\". This gives a very risk-averse neural network. However, it comes
+with more computational overhead.
+
+# Using Deep Learning to Understand the Meaning of Content, [Antoine Amann](https://twitter.com/AntoineAmann), [Echobox](https://www.echobox.com/)
+
+At [EchoBox](https://www.echobox.com/) they are using AI to
+auto-generate content (the image and relevant text) on social media, at
+the correct time. It is used by the Guardian and New Scientist to
+generate tweets or Facebook messages to promote their articles. Their
+deep learning neural networks also predict the virality of the articles.
+
+The neural network understands the meaning of content of the article and
+the audiences that read them. Therefore, each client has their own model
+based on the articles they write.
+
+They used data from who was reading what articles to predict elections.
+They correctly predicted French elections through both rounds,
+minute-by-minute, based on which articles people were looking at in
+France. They are currently doing the same with the [German
+election](http://www.echoboxbarometer.com/?de).
+
+# AI that can Compose Original Music, [Ed Newton-Rex](https://twitter.com/ednewtonrex) , [Jukedeck](https://www.jukedeck.com/)
+
+An AI that uses deep neural network over [rule-based
+systems](http://ieeexplore.ieee.org/document/6795599/), [markov
+chains](https://www.r-bloggers.com/is-deep-learning-a-markov-chain-in-disguise/),
+[evolutionary
+algorithms](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164),
+which are viable alternatives is
+[Midi](http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/),
+which trains on notes and chords to produce new music.
+
+You can try it [here](https://www.jukedeck.com/) to create your own
+piece of music with deep learning, (navigate to \"Make\" through the
+link).
+
+# End-to-End Deep Learning for Detection, Prevention, & Classification of Cyber Attacks, [Eli David](https://twitter.com/DrEliDavid), [Deep Instinct](https://www.deepinstinct.com/)
+
+Currently, most new malware is simply old malware that has been slightly
+altered to become undetectable. In this instance, cybersecurity is a
+reactive rather than a proactive industry.
+
+Raw data is converted into linear features and input in the supervised
+deep neural network as raw binary values. Conventional methods are not
+reliable due to large data sets and complex data.
+
+The neural network works on both mobiles and endpoints - computers. A
+trained neural network goes onto the device and scans new files. It is
+also connectionless and only has to be updated every three to four
+months as the deep neural network is trained on mutated malware. This
+means it knows how to handle malware that it has never seen before.
+
+You could argue that this neural network can be used to create new
+malware.
+
+import dl13 from '../../assets/blog/dl-conf13.jpg'
+
+<Image src={dl13} />
+
+# The Quest for Understanding Real World With Synthetic Data, [Ankur Handa](https://twitter.com/ankurhandos), [OpenAI](https://openai.com/)
+
+A 3D model is built through a connected camera. However, it cannot
+recognise the individual objects in the real work. What the neural
+network really wants is a labelled 3D scene. Geometric data, such as
+depth, height and the angle of gravity, and graphical data such as
+colour (RGB) is collected.
+
+Therefore, we have automatic interior design generation under
+constraints eg.. no table between sofa and TV.
+
+# Memory & Rapid Adaption in Generative Models, [Jörg Bornschein](https://twitter.com/DeepMindAI), [DeepMind](https://deepmind.com/)
+
+Supervised tasks have high-dimensional inputs but low-dimensional
+outputs
+
+There are three approaches for better outputs:
+
+1.  [Autoregressive](https://en.wikipedia.org/wiki/Autoregressive_model):
+    generate 1 pixel at a time
+
+2.  [Adversarial](https://en.wikipedia.org/wiki/Adversary_model): Noise
+    -\> generator neural network -\> discriminator (decides real or
+    fake) Want to fool discriminator. Discriminator trained to find real
+    image
+
+3.  [Direct Latent
+    Variable](http://pages.ucsd.edu/~aronatas/Latent%20Variable%20Analysis.pdf):
+    Decode random noise to observed data
+
+Additonally there is [Memory
+Augmentation](http://proceedings.mlr.press/v48/santoro16.pdf), where the
+memory contains examples from the training set.
+
+# What Would it Take to Train an Agent to Play with a Shape-Sorter?, [Feryal Behbahani](https://twitter.com/imperialcollege) , [Imperial College London](http://www.imperial.ac.uk/machine-learning/)
+
+To train, [Deep Reinforcement
+Learning](https://deepmind.com/blog/deep-reinforcement-learning/) is
+used. The observation is passed into the neural network to produce an
+output. The environment for the test is a simulator of an arm putting
+objects in the correct places. The agent is the deep neural network
+collecting observations from the simulator.
+
+The training is done by an [Asynchronous Advantage
+Actor-Critic](https://arxiv.org/pdf/1602.01783.pdf). The actor being the
+neural network which moves arm in the simulation. The critic sees the
+results and judges the value.
+
+Possible solutions to this problem are learning with auxiliary
+information (e.g. depth), separate learning vision from control or learn
+from demonstrations, which is supervised learning.
+
+# Artificial Intelligence Driving the Future of Connected Cars, [Maggie Mhanna](https://twitter.com/Groupe_Renault), [Renault Digital](http://www.autonews.com/article/20161018/OEM06/161019861/renault-nissan-creates-tech-division-to-accelerate-mobility-push)
+
+AI can be used in the prediction of battery performance in electric
+cars. AI can detect driving data such as mileage, charge, voltage and
+warranty. It could also predict future failure of the battery.
+
+# Balance, Bias & Size: Unlocking the Potential of Retrospective Clinical Data for Healthcare Applications, [Timor Kadir](https://twitter.com/Optellum1), [Optellum](http://www.optellum.com/)
+
+An AI can be used to look at pictures of lungs for lung cancer
+management. However, if there is a bias in the retrospective data sets
+then it affects the accuracy of the neural network.
+
+The machine learning system is trained on medical images. It takes the
+image, puts it through the machine learning network and applies
+regression with the output being a risk score.
+
+import dl14 from '../../assets/blog/dl-conf14.jpg'
+
+<Image src={dl14} />
+
+# Drug Discovery Disrupted: Quantum Physics Meets Machine Learning, [Noor Shaker](https://twitter.com/noorshak), [GTN](http://gtn.ai/)
+
+[Schrodinger's
+Equation](http://clean.energyscience.ca/publications/032.html) is used
+to apply machine learning systems on physical systems. In quantum
+mechanics, states relate to vectors which can then be input into the
+machine learning system.

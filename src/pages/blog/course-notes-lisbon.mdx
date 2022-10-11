@@ -1,0 +1,93 @@
+---
+author: 'jon'
+title: 'Delivering our full stack training course'
+description: 'Notes from a training course in Lisbon'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '27 Jul 2017'
+heroImage: 'mock3.jpg'
+tags:
+  - 'training'
+---
+
+import { Image } from '@astrojs/image/components'
+
+The two of us - Malcolm Sparks and Jon Pither - have just spent a
+thoroughly enjoyable week in Lisbon providing full stack Clojure
+training. It was a pleasure to see the start of a promising Clojure
+scene in Portugal's capital, one that we hope will flourish in the years
+to come.
+
+We eased into the course of eight attendees with a Clojure Kata -
+pulling back some interesting JSON from a public API and transforming it
+to answer some basic queries. This involved using the REPL and Clojure's
+sequence library to great effect.
+
+For the duration of the course, we built upon our
+[Edge](https://github.com/juxt/edge) project, which is a Clojure
+bootstrapped project containing the libraries we favour and a working
+web application example linked up to Datomic.
+
+import ll from '../../assets/blog/lisbon-lunch.jpg'
+
+<Image src={ll} />
+
+We had a range of different operating systems and IDEs to contend with.
+There were no users of Arch Linux on this course - which is what we use
+at JUXT - instead, we had some Macs and a Windows environment in play.
+We were able to get moving in Windows by installing Git Bash and from
+there [boot-clj](https://github.com/boot-clj/boot), which is the build
+system we use for Edge.
+
+Once everyone had their IDEs and REPLs in full swing and the Kata was
+completed, we then started to move through the full-stack syllabus.
+
+During the two days, we went through the following, using a mix of
+exercise-based learning and discovery via live coding.
+
+- Web routes with [Bidi](https://github.com/juxt/bidi)
+
+- Secure APIs with [Yada](https://github.com/juxt/yada)
+
+- An SPA (single page application) using
+  [Reagent](https://github.com/juxt/yada)
+
+- Updating the SPA data model using server-sent events produced by
+  Yada
+
+- [Core.Async](https://github.com/clojure/core.async)
+
+- [Spec](https://clojure.org/about/spec)
+
+- [Transducers](https://clojure.org/reference/transducers)
+
+- An introduction to [Datomic](http://www.datomic.com/)
+
+The participants were excellent and swiftly got up to speed with the
+course material. We regularly solicited and received feedback throughout
+the course to balance the mix of live coding and exercises to ensure
+that we maintained traction as we moved through the advanced topics.
+
+Whilst it was an intensive two days, we were able to take the
+participants through the syllabus so that hopefully, they should be able
+to start using the various technologies for their next Clojure project.
+
+Aside from training, we both had a lovely time in Lisbon. We were told
+by various people (a taxi driver, hotel manager, and course attendees)
+to visit the restaurant Ramiro for exemplary Portuguese sea food. We can
+report that the shellfish was mind-blowingly good.
+
+import lmj from '../../assets/blog/lisbon-malcjon.jpg'
+
+<Image width={300} src={lmj} />
+
+We wandered into the Old Town for a cocktail, and visited the Timeout
+market to try some more Portugese national dishes.
+
+Aside from the food - of which we hopefully did justice - Lisbon is a
+beautiful city. We spent hours walking around and enjoying the vibe, and
+we would love to return. If you're thinking of a trip to Lisbon - go
+there.
+
+We have training courses available to book, please [see our training
+page for details](/training.html).
