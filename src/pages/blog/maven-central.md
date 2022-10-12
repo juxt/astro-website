@@ -161,7 +161,7 @@ to share as much as possible between our various modules.
 
 Firstly, your project needs to contain a `:license`, `:url` and
 `:description` - it arguably should do anyway, but Maven Central insists
-on it. [^1] These are passed down from Leiningen into the Maven
+on it. These are passed down from Leiningen into the Maven
 `pom.xml` file, so adding them is straightforward:
 
 ```clojure
@@ -305,8 +305,3 @@ Reddit](https://www.reddit.com/r/Clojure/comments/olhjqt/howto_clojure_libraries
 Similarly, if you'd like any help or advice with migrating your
 libraries, please do get in touch with us on the [Clojurians\' Slack
 #juxt channel](https://clojurians.slack.com/archives/C0CFGN25D).
-
-[^1]:
-    If you're having trouble choosing a license, [this
-    blog](https://www.juxt.pro/blog/prefer-mit) from Steven Deobald may
-    be of interest!
