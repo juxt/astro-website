@@ -15,7 +15,7 @@ Here's a round-up from JUXT's open source over the past couple of weeks.
 # Crux
 
 We have released [Crux](https://juxt.pro/crux/) as a public alpha! Crux
-is an \"unbundled\" open source document database with bitemporal
+is an "unbundled" open source document database with bitemporal
 Datalog queries.
 
 - Crux was open-sourced live on stage during the keynote for
@@ -46,19 +46,19 @@ how you work with Edge. This currently is about updating Edge and what
 happens when you modify your Edge project.
 
 The nrepl version was bumped in the dev.nrepl setup. While I was working
-on that I noticed that I rather hastily chose the namespace \"nrepl\"
-for this functionality, which isn't appropriate. \"nrepl\" will probably
-be renamed to \"juxt.edge.nrepl-server\" in the future, it's an internal
+on that I noticed that I rather hastily chose the namespace "nrepl"
+for this functionality, which isn't appropriate. "nrepl" will probably
+be renamed to "juxt.edge.nrepl-server" in the future, it's an internal
 namespace so that's a non-breaking change.
 
-# [yada]{.yada}
+# yada
 
 [Malcolm](https://juxt.pro/people/mal.html) has been working hard on
-designing [[yada]{.yada}\'s new
+designing yada\'s new
 authentication](https://github.com/juxt/yada/wiki/Authentication-design)
 with some input from me.
 
-[yada]{.yada} 1.3-alpha introduced a new design for
+yada 1.3-alpha introduced a new design for
 authentication/authorization. We've started iterating on that again
 based on feedback from projects where we've tried it.
 
@@ -74,7 +74,7 @@ authentication. For example, if you have basic authentication on your
 resource, a `WWW-Authenticate` header is sent containing the option of
 \"Basic\", which your browser interprets to show you a prompt.
 
-There's lots more to consider for the [yada]{.yada} 1.3 auth, and we'll
+There's lots more to consider for the yada 1.3 auth, and we'll
 cover some of it in the next post.
 
 We also released a new 1.3-alpha with media-type suffix support. This
