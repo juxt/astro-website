@@ -1,0 +1,176 @@
+---
+author: 'fky'
+title: 'Writing ClojureScript native apps is easy'
+description: 'If you know how to do it'
+category: 'apps'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '20 Apr 2017'
+heroImage: 'mock3.jpg'
+tags:
+  - 'react-native'
+  - 'clojurescript'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# _What is wrong with native app development?_
+
+I've always enjoyed writing mobile apps (although I considered it being
+way harder than it should be). The combination of complex build tools,
+monster IDEs, proprietary software, slow feedback cycle and terrible API
+designs, seemed to conjure endless obstacles between me and the app I am
+developing.
+
+When React Native came out I hoped it would bring an end to this
+suffering, but it turned out to be yet one more layer of complexity on
+top of a broken ecosystem. After the announcement of [Create React
+Native
+Apps](https://facebook.github.io/react-native/blog/2017/03/13/introducing-create-react-native-app.html)
+and Facebook collaborating with Expo I can now say the entry barrier to
+native apps is as low as writing a web app.
+
+import rn from '../../assets/blog/react-native.jpg'
+
+<Image src={rn} />
+
+# _How does Expo fix it?_
+
+[Expo](https://docs.expo.io/) takes the bold stance of not allowing you
+to write any native code at all. Together with React Native, it exposes
+a JS-only SDK wrapping of most of the native API's, and then runs your
+app inside the Expo client. This means you cannot perform sophisticated
+hardware control (but most likely, you won't need to if you stick with
+basic audio/video/bluetooth controls). Then, you can write a pure JS app
+that gets rendered with native components.
+
+The experience has been crafted extremely well. You only need to learn a
+smaller, more coherent set of API's and you are able to write a more
+compact and easier to maintain code. More importantly, you can choose
+your own development tools, since you don't need to own a Macbook or
+install Android Studio to run it. Your app is dynamically fetched and
+updated on the fly, so there is no need to go through a complex release
+process and distributing it is as convenient as sharing a link.
+
+import fr from '../../assets/blog/framework.jpg'
+
+<Image src={fr} />
+
+In the past I have used [Cordova](https://cordova.apache.org/) and
+similar strategies to write apps in pure JS, but the result was never
+on-par with a native app. With Expo, you really get the best of both
+worlds.
+
+# _Just how easy it is to add ClojureScript to Expo?_
+
+Let's see. Start by creating a fresh expo project:
+
+    npm i -g exp
+    mkdir foo && cd foo && exp init -t blank
+    npm install
+
+Then add the following ClojureScript files
+
+In `foo/src/app/core.cljs`
+
+```clj
+(ns app.core)
+
+(def React (js/require "react"))
+(def ReactNative (js/require "react-native"))
+(def Expo (js/require "expo"))
+
+(def createFactory (aget React "createFactory"))
+(def createClass (aget React "createClass"))
+(def registerRootComponent (aget Expo "registerRootComponent"))
+
+(def Text (createFactory (aget ReactNative "Text")))
+
+(def style
+  #js {
+    :flex 1
+    :fontSize 18
+    :paddingTop 80
+    :textAlign "center"
+  })
+
+(def App (createClass #js {:render #(Text. #js {:style style} "Hello from Cljs")}))
+
+(registerRootComponent App)
+```
+
+In `foo/build.cljs`
+
+```clj
+(require '[lumo.build.api :as b])
+
+(b/build "src"
+  {:output-to "main.js"
+   :optimizations :advanced})
+```
+
+Compile your cljs files using
+[`lumo`](https://anmonteiro.com/2017/02/compiling-clojurescript-projects-without-the-jvm/)
+and serve the app:
+
+    npm i -g lumo-cljs
+    lumo -c src build.cljs
+    exp start
+
+Congrats! You now can run a ClojureScript app on iOS from a Linux laptop
+with just `node` installed!
+
+A good exercise is to try and convert some simple examples to
+ClojureScript, like those you find in the [Snack
+playground](https://blog.expo.io/sketch-a-playground-for-react-native-16b2401f44a2).
+If you're feeling lazy, you can simply clone this
+[repo](https://github.com/frankiesardo/lumo-expo) which also shows
+continuous deployment done via Travis CI.
+
+# _Where do you go from here?_
+
+Just like every other Clojure developer you're probably very spoiled
+because you came to rely on powerful tools:
+
+- Fast compilation times
+
+- Hot code reload
+
+- Device REPL
+
+In order to use this toolchain you need to bring in `leiningen` and/or
+`boot` and the setup is a bit more convoluted. Fortunately, the
+community already has developed a
+[template](https://github.com/tiensonqin/exponent-cljs-template) where
+all these problems have been solved for you. Obviously, it has many more
+moving parts compared to the simpler setup above, but it _just works_
+
+# _Is it production ready?_
+
+ClojureScript moves fast and there are already various apps in
+production built this way.
+
+- [lymchat](http://www.lymchat.com/) is authored by the same author of
+  the template and it's [open
+  source](https://github.com/tiensonqin/lymchat-exp).
+
+- [Centriq](https://www.centriqhome.com/) was recently presented in a
+  talk during [Clojure
+  West](https://www.youtube.com/watch?v=tHQAMrShHu8) and also
+  integrates with GraphQL.
+
+You will find plenty of resources on [cljsrn.org](http://cljsrn.org/) to
+help you writing ClojureScript apps with React Native. Everything from
+the newest [React Navigation](https://github.com/vikeri/re-navigate)
+library to a [Graphql](https://github.com/retro/graphql-builder) client
+can be easily adaptable to your needs. It's early days but I feel
+ClojureScript + Expo is one of the best options for building large,
+sophisticated apps on mobile.
+
+import m from '../../assets/blog/monks.jpg'
+
+<Image src={m} />
+
+**1** Big shout out to `tiensonqin` for putting this together and to
+every other person hanging around in the `#cljsrn` channel for this
+massive achievement. It's incredible how much has been done by the
+community with small, incremental contributions.

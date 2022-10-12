@@ -54,7 +54,7 @@ diagram can be created as follows:
 
 `doc/diagram/context.puml`
 
-```plantuml
+```
 @startuml
 
 !include ./C4/C4_Context.puml
@@ -95,7 +95,7 @@ In plain text, the container diagram can be created as follows:
 
 `doc/diagram/container.puml`
 
-```plantuml
+```
 @startuml
 
 !include ./C4/C4_Container.puml
@@ -154,7 +154,7 @@ In plain text, the sequence diagram can be created as follows:
 
 `doc/diagram/sequence/mobile-payment-request.puml`
 
-```plantuml
+```
 @startuml
 
 actor customer
@@ -316,7 +316,7 @@ committed to version control and evolve with our source code.
 As an added bonus, our diagrams and decision records are indexed, and
 searchable from within our IDE.
 
-```text
+```
 my-app/
 ├── doc/
 │   ├── decision/
@@ -421,7 +421,7 @@ sensitive information you'll want to configure the
 `plantuml-default-exec-mode` to render locally instead of remotely (via
 the online plantuml server):
 
-```elisp
+```lisp
 (setq plantuml-jar-path "/path/to/your/copy/of/plantuml.jar")
 (setq plantuml-default-exec-mode 'jar)
 ```
