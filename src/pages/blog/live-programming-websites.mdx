@@ -1,0 +1,283 @@
+---
+author: 'mal'
+title: "'Live' programming, server-side"
+description: 'Using instant feedback to develop server-driven websites'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '27 Jan 2017'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+For a number of years now I've been thinking about reflecting something
+Dick Gabriel remarked about Lisp [during an
+interview](http://www.se-radio.net/2008/01/episode-84-dick-gabriel-on-lisp/)
+on [Software Engineering Radio](http://www.se-radio.net). (5:36)
+
+> The Artificial Intelligence people were endeavouring to write programs
+> that no one knew how to write. The idea that you could sit down and
+> say: _Well, here is my problem, here are the requirements, let me come
+> up with a specification and now code that up_ (was) completely crazy
+> as far as the AI people were concerned\'
+
+The only way to write AI programs, then (as it still is now) was by
+taking an _exploratory approach_ to development.
+
+> The only way to do it was to experiment. _Let me try this, let me add
+> that. Let me try to add this fuzzy concept, let me try to add a
+> scheduler, let me add agendas, let me add resources, let me have
+> resource-limitations_ ... you're not constructing it like making a ton
+> of source code and compiling it periodically, you're constructing it
+> the way you construct a city: build some of it, it's _running all the
+> time, so it's kind of like a live programming language_.
+>
+> --- Dick Gabriel
+
+Today, the software we develop and maintain with are far more complex
+than those in the 80s. If we are to develop and maintain increasingly
+complex systems, we need interactive and exploratory tools to maintain
+our understanding of how they work. The best way of understanding the
+world is to interact with it, not as spectators but as active
+participants constantly poking and manipulating. This is what makes Lisp
+and other _live programming languages_ so relevant today.
+
+# Figwheel
+
+<iframe
+  width='100%'
+  height='415'
+  src='https://www.youtube.com/embed/KZjFVdU8VLI'
+  title='Interactive programming Flappy Bird in ClojureScript'
+  frameborder='0'
+  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+  allowfullscreen
+></iframe>
+
+One of the best examples of a _live programming language_ is
+ClojureScript with Bruce Hauman's
+[Figwheel](https://github.com/bhauman/lein-figwheel) environment.
+
+Bruce has done a great job at taking a concept and making it work for
+real-world development beyond the cute demo.
+
+# Learnable Programming
+
+Others will have been inspired by work like Brett Victor's [learnable
+programming](http://worrydream.com/#!/LearnableProgramming)
+
+> An essential aspect of a painter's canvas and a musical instrument is
+> the _immediacy_ with which the artist gets something there to react
+> to. A canvas or sketchbook serves as an \"external imagination\",
+> where an artist can grow an idea from birth to maturity by
+> continuously reacting to what's in front of him.
+>
+> --- Brett Victor
+
+Brett goes on to compare this artist's approach to that of the
+traditional programmer:
+
+> Programmers, by contrast, have traditionally worked in their heads,
+> first imagining the details of a program, then laboriously coding
+> them.
+
+Live programming environments capture the essence of Agile
+methodologies: instant and continuous feedback.
+
+Many examples of live programming environments are highly visual and
+interactive environments, such as games. These certainly have their own
+degree of complexity that exploratory programming can cut through. But
+live programming environments can help in any application where humans
+interact, websites for example. By making the development environment of
+a website _live_ we transform our perspective to that of our users,
+revealing new and relevant insights.
+
+# App state
+
+So let's take what we know about writing browser-based games and single
+page applications in ClojureScript, and apply it to the _back-end_
+(plain old websites).
+
+Something that we've found to work well in ClojureScript applications is
+keeping all the application's state in a single atom. This allows us to
+treat all state as a single immutable value (which has all kinds of
+benefits) but still allow mutation by allowing that value to be replaced
+with new values over time. That's essentially what a Clojure atom
+does --- it's a box holding a given value at a given time.
+
+```clojure
+// The app 'universe'
+(def app-state
+  (atom
+    {:drawer {:items [{:name "ear-plugs"}]}
+     :shopping
+      {:items
+        [{:name "Coffee" :quantity 2}
+         {:name "Milk" :quantity 2}
+         {:name "Bird seed" :quantity :lots}]}}))
+```
+
+Let's imagine what this state might be for a typical back-end generated
+website, for example, JUXT's juxt.pro website.
+
+```clojure
+// The website 'universe'
+(def app-state
+  (atom
+    {:data {:number-of-active-users 3
+            :posts [{:title "Menu today"
+                     :text "Fish and chips"
+                     :comments [{:user "Frank"
+                                 :text "Good, I like chips"}]}]}
+     :config {:web-port 8080}}))
+```
+
+A web request for content arrives to the webserver, that is
+[routed](https://github.com/juxt/bidi) to a handler.
+
+A custom interceptor is added to the usual chain of processing
+functions. This interceptor does something special: it calls `deref` on
+the app-state atom. In fact, here's the actual code:
+
+```clojure
+(fn inject-state [ctx]
+  (assoc ctx :state @app-state))
+```
+
+The current value of the app-state is captured and made accessible to
+other interceptors to work with, including the main response function
+that is responsible for generating the HTTP response. This is done by
+first transforming the state into a view-model, which is the provided to
+the [Selmer](https://github.com/yogthos/Selmer) templates we use on our
+site.
+
+# Keeping state up-to-date
+
+The app state in a browser application is confined to a single atom.
+That makes it quick to dereference.
+
+The app state that a website has to represent may span multiple sources,
+such as files, databases and other systems. Our approach is to model
+this distribution of state as a dependency tree.
+
+import ss from '../../assets/blog/skip-state.svg'
+
+<img src={ss} />
+
+How can we avoid the expense of refreshing our state affecting the
+performance off each request? The answer lies in the combination of two
+strategies:
+
+1.  We cache state aggressively, detecting novelty efficiently,
+    top-down.
+
+2.  We detect changes in state and proactively update the cache,
+    bottom-up.
+
+# Detecting novelty
+
+The first strategy relies on us determining when our state is stale, and
+doing so in an efficient manner. Here are some examples to explain the
+general approach to detecting _novelty_:
+
+- If part of the state is from a file, we can check the modification
+  time to know if it's been modified since the last time we cached it.
+
+- If part of our state is mastered in a git repository, we can
+  determine if there is a novelty by comparing the SHA1 of the HEAD
+  commit. If it is the same as our last reading, we know anything we
+  have cached from information in the repository must still be fresh.
+
+- If part of our state is an append-only log, we can detect change by
+  checking the last entry of the log matches the one we noted on our
+  last visit.
+
+- If part of our state is mastered in a relational database, we might
+  be able to query the SCN (system change number) or Datomic t-value.
+
+# Proactive updates
+
+The second strategy relies on us detecting change. These days most data
+stores provide change notifications which we can harness.
+
+- If part of our state is mastered on the file-system, use OS-level
+  file-system notifications. Java 7 has the
+  `java.nio.file.WatchService` service (we provide a Clojure wrapper
+  for this called [dirwatch](https://github.com/juxt/dirwatch)).
+
+- If we are using Datomic, subscribe to the transaction queue. Upon
+  change, freshen the relevant state (or at least mark it as dirty).
+
+- If we are using a relational database, use a database trigger to
+  alert us to change we're interested in.
+
+# Skip
+
+We've promoted some of the tech we use from our website into a library
+called [skip](https://github.com/juxt/skip). It's still a
+work-in-progress and there's still some kinks to smooth out.
+
+And over time we'll improve the library based on our ongoing experiments
+and optimisations.
+
+# Deploying to production
+
+While it's great to develop the website locally with a fast feedback
+loop, we also want to deploy fast. In particular, we want to be able to
+push new content, blog articles and fixes and have them live as soon as
+possible. Also, in these simple cases we want to avoid a rebuild,
+redeployment or restart (and consequent downtime) of the website.
+
+When we're ready to push new content we commit our changes to git and
+push them to our github repository. This makes sure our changes are
+integrated with those of other JUXT staffers. Then, if we're ready to
+deploy, we push to production with `git push`.
+
+The production website runs from a working tree which is automatically
+updated when we push. To enable this behaviour, we've configured the
+production git repository to update the file-system with the latest
+changes when we push.
+
+    git config receive.denyCurrentBranch updateInstead
+
+Any file-system changes are then picked up in the normal way and the
+changes are ready for the next web request.
+
+# Continuous Integration?
+
+In a world where received wisdom is to rebuild and redeploy systems on
+every change, no matter how small, the approach I've described here
+might seem alien.
+
+But from a different perspective, is it reasonable for us to waste
+trillions of CPU cycles for every iteration of our software systems, no
+matter how minor? Should we always build everything from _scratch_, and
+if so, what do we mean by _scratch_ anyway?.
+
+What is inherently wrong with building our code incrementally? Are there
+ways we can determine when our systems require complete rebuild and when
+they don't? And what does it mean to _build_ a software system? Can a
+software system build itself, fully or partially, from within?
+
+These are interesting questions to ponder. There seem to be no fixed
+lines here, just fuzzy ones. But in a hundred years, even the idea of
+_building software_ may seem like a very primitive stage in the
+evolution of programming. People may legimately ask the question: what
+was ever _continuous_ about continuous integration?
+
+# The Universe As A Value
+
+If you're interested in more, here's a short 20 minute talk from
+[ClojuTRE 2016](http://clojutre.org/2016/) where I present the ideas
+contained in this article, along with a fun interpretation of quantum
+mechanics and the perceived flow of time. Hope you enjoy it!
+
+<iframe
+  width='100%'
+  height='415'
+  src='https://www.youtube.com/embed/odPAkEO2uPQ'
+  title='The Universe as a Value - Malcolm Sparks'
+  frameborder='0'
+  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+  allowfullscreen
+></iframe>

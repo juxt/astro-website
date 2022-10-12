@@ -1,0 +1,119 @@
+---
+author: 'oly'
+title: 'Idiomatic integration'
+description: 'Talk pretty with external systems'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '25 Apr 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# Camels, snakes and kebabs
+
+Clojure's idiom of map keys being keywords where parts are separated by
+hyphens (so called \"kebab-case\", e.g. `:book-title` or `:author-name`)
+quickly starts to look normal even when coming from the wider world of
+camel casing (`bookTitle`) or snake casing (`book_title`) as used widely
+in other languages and data formats.
+
+In fact, to my eyes at least, anything that is _not_ kebab-cased starts
+to look a bit ugly. You'll see it with Java interop and you'll see it
+when consuming data from other systems via JSON data formats and the
+like.
+
+    (let [author-profile (:body (http/get "http://data.com/authorProfiles/1"
+                                          {:as :json}))]
+      {:author-name (:authorName some-data)
+       :book-title (->> some-data
+                        :listedPublications
+                        (filter #(= "scienceFiction" (:bookCategory %)))
+
+                        :bookTitle)})
+
+Not beautiful, is it? Sometimes for a tiny integration like that we
+won't be too offended, but when you interact with another system in many
+different ways and transfer much larger data structures than that, it
+will quickly bloat your code with nothing more than workarounds for your
+preferred code style, obscuring the intent.
+
+The [camel-snake-kebab](https://github.com/qerub/camel-snake-kebab)
+library is one of my favourites. It provides conversion functions from
+any style to any other style, returning keywords or strings as you
+prefer. I encourage you to have a look if you're not already familiar
+with it.
+
+import nc from '../../assets/blog/no-camels.png'
+
+<Image src={nc} />
+
+# Walk all the keys!
+
+One tempting way to convert your un-idiomatic data into lovely kebabs is
+by using `clojure.walk/keywordize-keys`, modified a bit to use
+camel-snake-kebab as follows:
+
+    (defn kebab-keys
+      "Recursively transforms all map keys into kebab-cased keywords."
+      [m]
+      (let [f (fn [[k v]] (if (string? k) [(->kebab-case-keyword k) v] [k v]))]
+        ;; only apply to maps
+        (postwalk (fn [x] (if (map? x) (into {} (map f x)) x)) m)))
+
+Call it like `(kebab-keys author-profile)`. Satisfyingly complicated,
+and does the job. Great!
+
+# Make it work, make it fast
+
+While this works, the performance is actually pretty bad. There are
+three reasons why this might be the case: firstly, `postwalk` is
+generally expensive as it will create a lot of interim data structures.
+Secondly `postwalk` is expensive because it is needless - our JSON
+parser has already walked the data structure while marshalling it, and
+now we're doing it again. Finally, if your data structure contains
+sequences of maps with the same keys then `+->kebab-case-keyword+` is
+performing the same expensive name/regex/format/keyword operations for
+the same keys over and over again.
+
+The widely-adopted [clj-http](https://github.com/dakrone/clj-http)
+library, or `clojure.jdbc` [as mentioned in a previous
+post](/blog/posts/coercing.html) allow you to provide coercing functions
+which are used within marshalling. This immediately eliminates the need
+for `postwalk`.
+
+Participating in \`\`clj-http\`\`\'s coercion multimethod is easy:
+
+    (defmethod clj-http.client/coerce-response-body :json-kebab-keys [req resp]
+      (clj-http.client/coerce-json-body req resp ->kebab-case-keyword false))
+
+And lets us rewrite the example above using kebab keys:
+
+    (let [author-profile (:body (http/get "http://data.com/authorProfiles/1"
+                                          {:as :json-kebab-keys}))]
+      {:author-name (:author-name some-data)
+       :book-title (->> some-data
+                        :listed-publications
+                        (filter #(= "scienceFiction" (:book-category %)))
+
+                        :book-title)})
+
+Finally, you can memoize the coercing function when you know a lot of
+the keys will be identical - in the example here, imagine the author has
+written hundreds of books, all of which have the same keys.
+
+    (defmethod clj-http.client/coerce-response-body :json-kebab-keys [req resp]
+      (clj-http.client/coerce-json-body req resp (memoize ->kebab-case-keyword) false))
+
+Job done. For large data structures, this will be much, much faster than
+the postwalk solution above.
+
+# Works both ways
+
+Need to talk back to this external system? Convert back at the last
+moment:
+
+    (http/post "http://data.com/authorProfiles"
+               {:body (json/encode new-author {:key-fn (memoize ->camelCaseString)})})
+
+You never even have to see camels or snakes again!

@@ -1,0 +1,149 @@
+---
+author: 'dmc'
+title: 'JUXT Journal 2019-06-14'
+description: ''
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '14 Jun 2019'
+heroImage: 'mock3.jpg'
+tags:
+  - 'journal'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# Crux
+
+- We've released a new version: \"19.06-1.1.0-alpha\", the changes are
+  listed below.
+
+- Malcolm and Jeremy were interviewed by Daniel Compton on episode #24
+  of [The REPL podcast](https://www.therepl.net/episodes/24/).
+
+- The Crux team will be giving a talk at the Strange Loop conference
+  in Missouri this September, \"Temporal Databases for Streaming
+  Architectures\".
+
+## Crux night in London
+
+Next Tuesday we are delivering a London Clojurians hands-on workshop for
+Crux (generously hosted by Funding Circle!), with free pizza and
+t-shirts featuring John McCarthy: [visit the meetup.com
+page](https://www.meetup.com/London-Clojurians/events/262005356/).
+Already 80 spaces are taken and tickets are available on a first come
+first serve basis, get yours before they run out.
+
+import hi from '../../assets/blog/highres_475768605.jpeg'
+
+<Image src={hi} />
+
+Here's the agenda:
+
+- Introductions
+
+- Lightning Talks
+
+  - Tick by Malcolm Sparks
+
+  - Bitemporality by Jon Pither
+
+  - Crux 101 by Jeremy Taylor
+
+- Q&A Panel
+
+- Hands-on Tour
+
+- Food & Drink
+
+You can see the [slides](/crux-workshop-v1.pdf) online now.
+
+The core development team will be giving a talk describing the
+architecture and features of Crux, followed by a code-along session
+giving you a chance to use Crux yourself. You will come away with an
+understanding of Crux's datalog, extension points, and the value of
+bitemporality in a database.
+
+## Crux changes
+
+CAS and Put now do not require a duplicated ID to be placed into both
+the document and the op, it's now only specified once in the op. This
+makes the API much friendlier, and reduces unnecessary user burden of
+duplication.
+
+There were a number of internal bug fixes which you can find the details
+of in the
+[changelog](https://github.com/juxt/crux/blob/b13a98ec8b7ec897d7e1c3738a812c10f88f6224/CHANGELOG.md).
+
+# Edge
+
+There was an investment into solving some of the UX issues that Emacs
+users experience when using `cider-jack-in-clj&cljs`. If you typed
+`(go)` into your Clojure REPL, you would end up getting a port conflict
+exception. Eventually it turned out to be a [race
+condition](https://github.com/bhauman/figwheel-main/issues/183) in
+figwheel-main as you would restart the server underneath it, and it
+would try to helpfully start one. Until that issue is resolved, Edge now
+has a workaround for this problem.
+
+[Lucio](https://juxt.pro/people/lda.html) updated the default Edge app
+template with a nicer set of default CSS.
+
+Edge got a new [site](https://juxt.pro/edge/) and a redesigned UI for
+the documentation set to go with it. As the templates for the Edge docs
+are now custom, the hope is that we can do more useful things with it.
+One things that's already implemented are convenient \"Suggest and
+edit\" links on every page. We also want to explore the idea of
+\"expanding snippets\" which will be more self contained in order to aid
+in creating tutorials.
+
+Speaking of Edge docs, several new articles were added:
+
+- [How Edge Works Under the
+  Hood](https://juxt.pro/edge/docs/under-the-hood.html) explaining how
+  Edge works to de-mystify it.
+
+- [Creating Your First
+  Component](https://juxt.pro/edge/docs/first-component.html), a short
+  tutorial on creating a simple component
+
+- [Dev logging](https://juxt.pro/edge/docs/dev-logging.html) setup
+  documentation
+
+- [Lifecycle](https://juxt.pro/edge/docs/lifecycle.html) was expanded
+  to include a section on how you can modify your Edge
+
+There were a few minor bug fixes too:
+
+- Fix for newer Clojure's which was broken in some setups by only
+  loading piggieback into ClojureScript projects (which would
+  otherwise bring in an ancient ClojureScript)
+
+- Remove the hard-coded \"edge\" from the test-all function
+
+- Prevent the dev-extras namespace from being unloaded when reloading
+  initially fails
+
+# Aero
+
+We did some major work on the internals of Aero. This restructure
+resolved all of the open bugs in Aero due to a new way of handling
+collections. We're still testing it on some client projects, but initial
+results look good. If you have a complicated config.edn, we'd be
+interested in hearing if this [pull
+request](https://github.com/juxt/aero/pull/77) works for you.
+
+The new approach enables a new kind of tagged literal in Aero config
+files, these behave more like macros. The built-in Aero conditionals
+like `#or` and `#profile` have been migrated to this new API. Due to the
+existence of this new API, deferreds can now be deprecated. Deferreds
+were a workaround for the lack of true conditionals in Aero, and they
+had severe limitations such as non-composability.
+
+There's an alpha namespace available, which will allow you to create
+custom macros, but the API may still see some revisions.
+
+With this work out of the way, it's now possible to start looking into
+namespacing the tagged literals in Aero. Namespacing will be an
+opportunity to avoid breaking changes while improving behavior. For
+example `#include` does not throw if the file being included does not
+exist, but `#aero/include` may do so.

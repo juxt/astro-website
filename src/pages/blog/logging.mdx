@@ -1,0 +1,470 @@
+---
+author: 'fky'
+title: 'Logging: change your mind'
+description: 'The ultimate guide on modern logging'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '16 Nov 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+Most people consider logging something nice to have; a supplement to the
+code that matters or something you add in order to debug a problem.
+
+Having worked for the past year in a distributed microservices
+architecture I finally discovered what logging truly is: it's Google
+Analytics for your code.
+
+Think about this: the business asks you to track interesting behaviour
+so it has the information it needs to make informed decisions. They want
+to know if a feature is driving in more customers, if a campaign is
+getting traction, if one solution is preferrable over another.
+
+Shouldn't you, as a professional, have the same understanding about the
+code you ship?
+
+Day to day we need to be able to answer these sort of questions:
+
+- Did we receive the transaction receipt for PRODUCT-XYZ last night?
+
+- How much has the stock level increased for PRODUCT-ABC since last
+  week?
+
+- At what time did we receive the unique number for SHIPMENT-123 from
+  our provider? Can you check what that is?
+
+_Disclaimer: we're mostly writing middleware that connects external
+services, so we don't store much data on our own. We're on one end of
+the logging spectrum: if we don't log an incoming request that request
+has not happened. On the other hand if we were storing data on something
+like Datomic (which records plenty of metatada around transactions) we
+would have different logging requirements. The point remains the same,
+just think about something that you don't store directly._
+
+Then again, from a more technical but still business relevant point of
+view, we'd like to answer:
+
+- Did adding FEATURE-XYZ slow down our response time? By how much?
+
+- Are some parts of the system memory bound or cpu bound? How much
+  buffer do we have before we hit the limits? Can we project what load
+  would force us to increase those limits?
+
+- Where there any noticeable effects during the ABC-OUTAGE? What parts
+  were effected? Can we trigger some alerts when we detect similar
+  behaviour before an outage occurs?
+
+The list could be longer, these are just a few ideas. The point is, if
+you have anything similar to a [Definition of
+done](https://manifesto.co.uk/definition-done) in your team, then you
+should definitely add \"Implemented relevant logging metrics\" to the
+checklist. Just like implementing automated tests for your code is
+important, adding appropriate logging delivers business value along with
+the code you ship.
+
+Below is a list of things I learned while refining the logging behaviour
+of our system. The two most important realisations for me were:
+
+- Make log event explicits (by giving them a name)
+
+- Make the act of logging explicit (by passing a log around).
+
+Both choices had a positive series of ramification that I will discuss
+in each section.
+
+# Tracking analytics means naming things
+
+The major improvement in our logging infrastructure happened when we
+decided to use [Riemann](http://riemann.io). On top of the many benefits
+Riemann has, it is very opinionated on the shape of the data it accepts.
+For example, it requires each entry to have a unique name (called a
+\"service\" in Riemann). That was a revolution for us. Much like Google
+Analytics, anything you want to track needs to have a name, so you can
+refer to it, observe it, query it, plot it, pinpoint it.
+
+## Leverage namespaced keywords
+
+Clojure makes it extremely easy to give the things you log unique,
+memorable names thanks to namespaced keywords. Yes, Rich Hickey is right
+[once
+again](http://clojure.org/about/spec#_global_namespaced_names_are_more_important).
+For example:
+
+```clj
+(log/warn logger ::customer.update {:reason "Not found"})
+```
+
+Assuming you're logging this in `(ns app.user)` the resulting name for
+this log entry would be `:app.user/customer.update` which makes it easy
+both to filter for things in the same namespace and to search for a
+memorable name.
+
+Don't rely on file line numbers for the things you want to log, name
+them. Line numbers change and have no context where as names are easy to
+search for, to remember, to graph and to reason about.
+
+## Use the same name with different states
+
+This is again something derived from Riemann. At the beginning we logged
+things like this:
+
+```clj
+(if (healthy? system)
+  (log/info logger ::system.health.good)
+  (log/error logger ::system.health.bad {:reason (describe system)}))
+```
+
+But after a while we changed this pattern to be
+
+```clj
+(if (healthy? system)
+  (log/info logger ::system.health)
+  (log/error logger ::system.health {:reason (describe system)}))
+```
+
+Both events name are the same, so we can easily trigger an alert when
+something transitions from a good state to a bad state (or vice-versa).
+We can also have more general rules while the first pattern forces you
+to have lots of custom rules. Name the same things the same way, only
+change the logging level if you need to.
+
+## Log data, not strings
+
+There's a bunch of useful things you are likely to log once you discard
+the limitation of a legacy logging framework that forces your log data
+to be a String.
+
+A complete log event should look something like:
+
+```clj
+{:service     :user.profile/update
+ :level       :warn
+ :time        #inst "2016-01-01"
+ :description {:before-trasact 'a
+               :after-transact 'b}
+ :metric      100
+ :tags        ['X-Request-Id 'goggles-enabled 'prerelease]
+ :host        "localhost"}
+```
+
+For example another good idea we got from Riemann is to attach a
+`:metric` key to as many events as possible.
+
+```clj
+(log/info ::api.request {:metric (time req)}
+(log/info ::parse.unsubscribers {:metric (count unsubscribers)}
+(log/warn ::job.timeout {:metric (count retries)}
+(log/warn ::heap.threshold {:metric (percentage-heap-used)}
+```
+
+But that's just one of the many examples. We've added extra fields like
+`:request-id` to track a single operation across many services,
+`:execution-id` to follow a code execution asynchronously, `:features`
+enabled on that deployment, `:customer-id` to group by actions made by a
+single user etc. etc.
+
+Once you realise it's all data the possibilites are endless.
+
+## Don't answer a question: show the answer
+
+This is not strictly about logging but it's related. We ship all our
+logs to both Riemann (for realtime monitoring) and to Elasticsearch (for
+storage and querying).
+
+import ki from '../../assets/blog/kibana.png'
+
+<Image src={ki} />
+
+Many of the questions asked at the beginning of the post require just a
+few searches on Elasticsearch to come up with a quick answer. But the
+obvious next step is to provide the business with graphs and plots that
+can answer their question without having to run a search manually.
+Kibana is very good at this and having events with a name (and a metric)
+makes it easy to show them graphically. You also start to choose the
+events you want to track, putting yourself in the shoes of your future
+self or the business and thinking about what you want to see displayed
+on a dashboard.
+
+## Keep visualisation code and logging code in sync
+
+A bonus feature we discovered: Kibana (and I'm sure many other tools)
+describes the visualisations as json and allows you to import them.
+
+If you describe those visualisation in a code project and add it as a
+dependency, then you can cross link the `:namespaced/keywords` you use
+in your logging code with the ones you reference in your visualisations.
+So when you decide to rename/refactor one of the events, you don't break
+existing dashboards.
+
+# Logging performs a side effect and that's nothing to be ashamed of
+
+We try to be disciplined about the way we structure effectful code. We
+discovered through trial and error than having global state causes more
+problems than it solves and sneaking side effects into a function might
+make your life easier now but it's inevitably going to harm you in the
+long run.
+
+Instead of relying on a global logger instance, pass a Logger explicitly
+to the functions that need to perform logging.
+
+## Learn from the Java lesson
+
+The situation that the Java ecosystem logging is in should make you
+think about what went wrong. Between the [inhumane number of
+standards](https://www.loggly.com/ultimate-guide/java-logging-basics)
+and the awkward [xml or .properties
+files](http://logback.qos.ch/manual/configuration.html) initialisation,
+using any of these tools requires hours (even days) of study and
+understanding all because of a fundamentally wrong choice at the bottom.
+
+Java Logging wanted to be a transparent tool, a static class initialised
+somehow that works out of the box. It's magic. And like all magic
+software sometimes it works but sometimes it doesn't. A hit-and-miss
+magic wand is not what you need to build something reliable.
+
+If you throw away all the assumptions about static initialisation and
+global singleton, all you're left with is a dead simple interface:
+
+```clj
+(defprotocol Logger
+ (log [this msg]))
+```
+
+Do you want a logger that prints to stdout?
+
+```clj
+(defrecord StdoutLogger [] Logger
+ (log [this msg] (println msg)))
+```
+
+Do you want a logger that sends log in json format to ElasticSearch?
+
+```clj
+(defrecord ElasticSearchLogger [] Logger
+ (log [this msg] (http/post "elastic.domain" (json/encode msg))))
+```
+
+Do you want it to be fully asyncronous using core.async?
+
+```clj
+(defrecord AsyncLogger [channel] Logger
+ (log [this msg] (async/>! channel msg)))
+```
+
+Done. No magic at all.
+
+Another problem you find in traditional logging frameworks happens when
+you want to carry some context between logging calls. The classic
+example is to attach a `user-id` value to all the methods invoked during
+a request performed by a certain user. This is extremely useful so that
+you don't have to pass around all the information that you want to log
+to all the subroutines that your main function invokes. It usually works
+like this:
+
+```clj
+(log-framework/set-context! {:user-id "abc"})
+;; much later, in a nested function
+(log-framework/perform-log {:foo :bar}) ;; this contains {:user-id "abc"}
+```
+
+If you pass around a logger explicitly this problem disappears. When you
+want to pass contextual information you simply create a new `Logger`
+that sets that information whenever you call it. It works just like
+`map` works:
+
+```clj
+(defn map* [f logger]
+  (reify Logger
+    (log [this msg] (log logger (f msg)))))
+
+(defn handle-user-request [logger user-id]
+ (let [logger* (map* #(assoc % :user-id user-id) logger)]
+  ...)) ;; whenever logger* is used the user-id is automatically added
+```
+
+What about eliding certain types of logs in production vs deployments?
+Do you want to do that passing some flags in your xml configurations or
+you prefer to do it yourself? I prefer to write:
+
+```clj
+(let [logs (get-logs-from logger)]
+  (filter logs (and (namespace= :app/user) (priority= :warn)))
+
+  ...)
+```
+
+No need to learn the ways of a logging framework. It's just data.
+
+## Test your logging
+
+When you start to have business critical information in your logs you
+really need to test them. If you log the invoice you receive from
+SERVICE-XYZ before manipulating them and sending them to SERVICE-ABC,
+then you want to log the fact that you received them, otherwise you have
+no way to answer business questions like \"Have we received any new
+invoices today?\".
+
+Since logging is explicit and each log has a name, you can simply pass a
+TestLogger in your function under test:
+
+```clj
+(defrecord TestLogger [logs] Logger
+ (log [this msg] (swap! logs conj msg)))
+
+(deftest logs-correct-data
+ (let [logger (TestLogger. (atom []))]
+  (fn-under-test logger {:invoice :data})
+  (is (= [expected-logs] (-> logger :logs deref)))))
+```
+
+Capturing logs in your test can also help you test code that is, by its
+nature, hard to test: code that does not return any data, code that
+calls external services that are hard to mock, or asynchronous code. You
+can check for the presence of certain logs with the correct data rather
+than having to pass complex mocks and stubs everywhere in the system.
+
+## Don't worry about your function signature
+
+I once read a discussion about logging in Haskell as I was curious to
+see what happens to the function signatures if you decide to be explicit
+with the side effect. Do you end up constantly refactoring your function
+parameters when you add logging? It turns out this is not the case.
+
+Pure functions should be pure. There's no interesting information to log
+there. If you want to debug them, you can unit test them at any point
+because they have no code dependency. Data in, data out. If you want to
+log something, log outside of these functions.
+
+Impure functions are impure already. They take some parameters like `db`
+or `connection` or `executor`. What I end up doing in Clojure is group
+them in a map called `deps`, dependencies, and pass it as the first
+parameter.
+
+```clj
+(defn transact-stuff [{:keys [conn logger executor] :as deps} stuff]..)
+```
+
+They can come from your
+[system](https://github.com/stuartsierra/component) map or other
+stateful parts of your program, but it's usually convenient to keep them
+grouped together. They tend to change a lot and it's not uncommon having
+to add yet another `db` parameter because you need to transact it in
+another storage or place it in a `queue` as well. If you squint hard
+enough this looks a lot like Haskell's equivalent solution, a [monad
+transformer
+stack](http://book.realworldhaskell.org/read/monad-transformers.html).
+
+Clojure has one more advantage that is baked in and enthusiastically
+encouraged in the language: make your functions return data. Lots of
+data. All the data you need. I'm finding more and more that I want to
+return exhaustive data representation of all the computation happening
+inside the function and it's the job of the consumer to pick out what
+it's interested in.
+
+Which one do you prefer?
+
+```clj
+(defn import-from-csv [..])
+;;>
+:ok
+
+(defn import-from-csv [..])
+;;>
+{:processed 23
+ :skipped 22
+ :took 3400
+ :reason [[...]]
+ :response [[...]]}
+```
+
+If you can describe with a data structure what happened inside the
+function the you don't need to pass a logger to that function at all.
+You can simply log in the parent function. Or in the parent's parent if
+you keep assembling a big data structure that bubbles up to the surface
+where the side effects are performed. This is a technique borrowed from
+working with
+[Datomic](http://www.rkn.io/2014/02/10/datomic-antipatterns-connnnn):
+rather than passing down the connection to each function, assemble the
+transaction's data structures bottom up, and finally perform the
+transaction in the top level function. That way you're closer to
+functions just take data and return data, making them easier to test and
+to reason about.
+
+# Full code reference
+
+```clj
+(ns example.log)
+
+(defprotocol Logger
+  (log [this msg]))
+
+(defn map* [f logger]
+  (reify Logger
+    (log [this msg] (log logger (f msg)))))
+
+
+;; Convenience fns. You probably want trace, debug and failure as well. And add :timestamp, :host etc.
+
+(defn info [logger service desc]
+  (log logger {:service service :level :info :description desc}))
+
+(defn warn [logger service desc]
+  (log logger {:service service :level :warn :description desc}))
+
+(defn error [logger service desc]
+  (log logger {:service service :level :error :description desc}))
+
+
+;; Examples
+
+(defn update-profile [logger user]
+  (if (some? user)
+    (info logger ::profile.update user)
+    (warn logger ::profile.update {:reason "Not found"})))
+
+
+(defn handle-user-request [logger user-id]
+  (let [logger* (map* #(assoc % :user-id user-id) logger)
+        user (comment (get-user-from-db))]
+    (update-profile logger* user)))
+
+
+;; Some loggers. Comment them if you don't have the appropriate dependencies
+
+(defrecord StdoutLogger [] Logger
+  (log [this msg] (println msg)))
+
+
+(require '[clj-http.client :as http]
+         '[cheshire.core :as json])
+
+(defrecord ElasticSearchLogger [] Logger
+  (log [this msg] (http/post "elastic.domain" (json/encode msg))))
+
+
+(require '[clojure.core.async :as async])
+
+(defrecord AsyncLogger [channel] Logger
+  (log [this msg] (async/go (async/>! channel msg))))
+
+(defn try-async []
+  (let [{:keys [channel] :as logger} (AsyncLogger. (async/chan))]
+   (info logger ::some.data "Hello async")
+   (async/go (println (async/<! channel)))
+   42))
+
+
+;; Test logs
+
+(require '[clojure.test :refer :all])
+
+(defrecord TestLogger [logs] Logger
+  (log [this msg] (swap! logs conj msg)))
+
+(deftest logs-correct-data
+  (let [{:keys [logs] :as logger} (TestLogger. (atom []))]
+    (handle-user-request logger 123)
+    (is (= [[::profile.update 123]] (map (juxt :service :user-id) @logs)))))
+```

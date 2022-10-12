@@ -1,0 +1,132 @@
+---
+author: 'hug'
+title: 'Load testing with Gatling and Clojure'
+description: 'DDOS for fun and profit'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '23 Oct 2018'
+heroImage: 'mock3.jpg'
+tags:
+  - 'AWS'
+---
+
+import { Image } from '@astrojs/image/components'
+
+> Yes, it works, but will it scale?
+
+I've gotten so used to the reliability of Amazon autoscaling groups and
+load balancers that, the one time I left their comfort zone, I didn't
+have a good tool to answer that question. Nor does there seem to be a
+simple, cheap, industry-standard solution.
+
+# The use case
+
+You have a website or web API. You want to see how it behaves when a few
+thousand users hit it with simultaneous HTTP requests - specifically,
+how many of these requests fail or are severely delayed. You want those
+results displayed as pretty graphs, both for your own convenience and to
+impress your clients.
+
+In addition, you don't want to run that test from your local machine.
+Your data would hopelessly confuse website performance issues with your
+office's faulty internet connection and the twelve tabs of YouTube
+videos you forgot you were streaming in the background. This is clearly
+a job for cloud computing.
+
+Finally, you don't want all these users to show up at the same time. AWS
+autoscaling groups are designed to handle a gradually increasing load,
+not a sudden 10,000 users spike. The same is true of the load balancer
+itself (which quietly autoscales under heavy load). Amazon
+[recommends](https://aws.amazon.com/articles/best-practices-in-evaluating-elastic-load-balancing/)
+that you increase the load \"at a rate of no more than 50 percent every
+five minutes\". (The entire article is well worth reading.) You might
+also be interested in ramping _down_, to test scale-down behaviour.
+
+# Existing options
+
+For this basic use case, [**RedLine13**](https://www.redline13.com/)\'s
+\"simple test\" proved almost sufficient.
+
+It's very easy to set up, and while the paid subscription is expensive,
+the free tier already provides most everything you need. It doesn't have
+ramp-down, but that can be achieved through its Gatling integration. I
+wasn't familiar with Gatling at the time though, so I looked elsewhere.
+
+Clojure runs through the soul of JUXT, so I experimented with
+[**clj-gatling**](https://github.com/mhjort/clj-gatling), a Clojure
+wrapper around Gatling.
+
+I quickly ran into its limitations. It is not a full wrapper; in fact it
+covers very few of Gatling's many functionalities. In particular,
+clj-gatling [currently](https://github.com/mhjort/clj-gatling/issues/25)
+does not support time-based ramp-up. The completion-based ramp-up it
+offers is a poor substitute and behaves unreliably. As for
+[clojider](https://github.com/mhjort/clojider), its AWS integration, I
+did not manage to get it to work at all.
+
+import gt from '../../assets/blog/gatling.png'
+
+<Image src={gt} />
+
+It ultimately convinced me to use [**Gatling**](https://gatling.io/)
+directly.
+
+Even with no knowledge of Scala, it isn't too hard to figure out how to
+write simple simulation scripts. It also comes with a tool that detects
+your browser activity and turns it into a simulation script - though
+this does not play nice with HTTPS.
+
+What it doesn't have is a convenient way to run it remotely on AWS.
+RedLine13 would work, but since I didn't realise that at the time, I
+ended up writing my own tool.
+
+# Introducing Ramp
+
+[Ramp](https://github.com/juxt/ramp) is an open-source shell script +
+AWS CloudFormation template to simplify remote load testing. In one
+command, it spins up an EC2 instance (or reuses the existing one if it
+hasn't been terminated), sets it up for Gatling use, runs the Gatling
+simulation script provided, and uploads the report to an S3 bucket.
+
+Since that report is a nicely formatted HTML file, and since S3 buckets
+can be used as static websites, you can see the report on your browser,
+with all its glorious multicoloured graphs. Or share it with a colleague
+or client.
+
+Ramp comes with a Scala simulation script that does a basic load test
+(spamming a URL with GET requests, with ramp-up and ramp-down). I have
+since used it to simulate more complex behaviours, including mass
+registration and log-in. Writing more sample scripts is on my to-do
+list, but Gatling has decent documentation on its own website.
+
+(I didn't realise before just how _easy_ it is to make a website
+unusable via DDOS attack. Poor caching, poor autoscaling, poor
+[ephemeral port
+management](https://making.pusher.com/ephemeral-port-exhaustion-and-how-to-avoid-it/),
+there are any number of potential weakest links. Implementing load
+testing in all JUXT projects as a matter of course is, well, a load off
+our minds.)
+
+# Future plans
+
+[Raffi Krikorian](https://twitter.com/raffi) (of Twitter and Uber fame)
+pointed out to us that it's quite hard to create a simulated user that's
+as, shall we say, _unpredictable_, as the real thing. Even if your
+simulation script is quite complex and makes full use of your website's
+various subsystems. Ultimately, it's still written by an engineer who's
+making assumptions about how the website is _supposed_ to be used.
+
+Real users click a button five times in a row because they think the
+page is too slow to load. Or go back a page right in the middle of
+execution. Or refresh a resource-intensive page every second as they
+impatiently wait for news.
+
+Gatling is a valuable tool to find out how your website handles _load_,
+but isn't enough to be certain it'll handle _users_. For that, you
+should ideally capture the behaviour of multiple real users, and replay
+_that_ thousands of times on your staging site.
+
+At JUXT, we've yet to tackle a project that has to scale as much as a
+Twitter or an Uber - but we're slowly moving in that direction and are
+starting to feel a need for this sort of testing. We don't have the
+tools for it but we're investigating options.

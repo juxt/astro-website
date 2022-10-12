@@ -23,16 +23,14 @@ unchanged:
 
 - The native code is run on your mobile device (or simulator/emulator)
 
-::: tip
-It's worth noting that there are other ways to write an app in
+**_It's worth noting that there are other ways to write an app in
 Clojure(Script) these days. You could use GraalVM with
 [SCI](https://github.com/phronmophobic/mobiletest),
 [Gluon](https://docs.gluonhq.com/#_introduction), or mix native
 ObjectiveC/Swift with ClojureScript with [this
 technique](https://github.com/mfikes/goby). However, I personally think
-that the React Native approach is by far the most _production ready_
-approach currently available.
-:::
+that the React Native approach is by far the most *production ready*
+approach currently available._**
 
 So what has changed in the last 4 years?
 

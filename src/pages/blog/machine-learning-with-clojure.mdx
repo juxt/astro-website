@@ -1,0 +1,372 @@
+---
+author: 'rkb'
+title: 'Machine Learning With Clojure'
+description: 'Hello Machine Learning World!'
+category: 'AI'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '27 Mar 2018'
+heroImage: 'mock3.jpg'
+tags:
+  - 'machine-learning'
+  - 'clojure'
+---
+
+import { Image } from '@astrojs/image/components'
+
+From the past 3 blog posts on Artificial Intelligence
+([AI](https://juxt.pro/blog/posts/artificial-intelligence.html)),
+Machine Learning
+([ML](https://juxt.pro/blog/posts/machine-learning.html)) and Deep
+Learning ([DL](https://juxt.pro/blog/posts/deep-learning.html)), you
+should by now, have an idea of the basics. I hope I have whet your
+appetite by the potential for ML, but the some of apprehensions that
+
+surround it too.
+
+The good news is that you are still interested! So the next natural step
+is to ask, \"How can I start Machine Learning myself, and build an AI
+that'll do all my coding for me?\" (Or ... is just my dream?) Luckily,
+there are many open sourced resources such as _TensorFlow_, by Google,
+_Amazon Lex_, _Polly_ and _Rekognition_, by Amazon and Microsoft's
+_Cortana_ (are you getting the idea?), to name but a few.
+
+import tf from '../../assets/blog/tensorflow.png'
+
+<Image src={tf} />
+
+# TensorFlow
+
+[TensorFlow](https://www.tensorflow.org/get_started/get_started),
+released in November 2015, is an open sourced library by the [Google
+Brain Team](https://research.google.com/teams/brain/). Originally called
+DisBelief, Google uses TensorFlow across a range of it's products and
+services. From the obvious, deep neural networks for search rankings, to
+the subtle, automatic generation of email responses and real time
+translations.
+
+The main language for Machine Learning, for much of it's history, is in
+Python, as it is built upon C/C++. Python also has a very well developed
+and powerful scientific computing library
+[NumPy](http://www.numpy.org/), allowing users to do very efficient and
+complex neural networks with relative ease. Due to the longevity of
+Machine Learning's relationship with Python, the community is strong and
+libraries are rich.
+
+But, \"what if I don't want to use the bad concurrency models in Python
+and use the sane concurrency model in Clojure?\" I hear you cry!
+Luckily, TensorFlow has just released it's [Java
+API](https://www.tensorflow.org/api_docs/java/reference/org/tensorflow/package-summary).
+Although it is still new and comes with a warning that it is
+experimental, you have the first in-roads to TensorFlow and Clojure.
+Along with the majority of Java libraries, TensorFlow has it's own Maven
+Repository so getting started with TensorFlow in Clojure is as easy as
+adding
+
+```clojure
+[org.tensorflow/tensorflow "1.1.0-rc1"]
+```
+
+to your project and then importing it into your namespace.
+
+```clojure
+(ns tensor-clj.core
+  (:import org.tensorflow.TensorFlow))
+
+(defn myfirsttensor []
+  (println (str "I'm using TensorFlow version: " (TensorFlow/version))))
+```
+
+Comparing the TensorFlow [Python
+API](https://www.tensorflow.org/api_docs/python/), to the TensorFlow
+Java API, you will immediately see a massive disparity in the libraries
+available, making operations that are relatively straightforward in
+Python, difficult in Java and hence Clojure.
+
+However, for computing matrices and other statistical operations, Java
+has a wealth of options such as [ND4J](http://nd4j.org/getstarted). If
+you'd rather use a Clojure Library, there is
+[Incanter](https://github.com/incanter/incanter/wiki),
+[Core.Matrix](https://github.com/mikera/core.matrix) or
+[Clatrix](https://github.com/tel/clatrix) that can have similar
+capabilities.
+
+An alternative option is to do your TensorFlow operations (or Machine
+Learning Operations) in Python and simply call you results in Clojure.
+The beauty of programming is that you are not penned into one language,
+you have the ability to choose based on your personal preferences.
+
+For an interesting article that goes into more depth about Clojure, Deep
+Learning and TensorFlow, follow
+[here](http://benkampha.us/2016-02-22.html).
+
+import aws from '../../assets/blog/aws.png'
+
+<Image src={aws} />
+
+# Amazon Services
+
+Amazon have recently released 3 different Deep Learning sources, _Lex_,
+_Polly_ and _Rekognition_.
+
+## Amazon Lex
+
+import lx from '../../assets/blog/lex.jpg'
+
+<Image src={lx} />
+
+[Amazon Lex](https://aws.amazon.com/lex/) is a service used for
+conversations by either voice or text. It comes with a ready-made
+environment allowing you to quicky make a natural language \"chatbot\".
+Amazon Lex comes with slack integration so you can build a chatbot in
+any case you desire (it can respond to any pesky chat messages on your
+behalf). The technology you'd be using with Lex is the same that is used
+by [Alexa](https://en.wikipedia.org/wiki/Amazon_Alexa). This means the
+text and voice chats are tried and tested, being used in a commercially
+viable product that can be bought by you and me.
+
+With Lex, the cost is \$0.004 per voice request and \$0.00075 per text
+request, so you are able to a large number of interactions with you
+chatbot for a low cost.
+
+import po from '../../assets/blog/polly.png'
+
+<Image src={po} />
+
+## Amazon Polly
+
+[Amazon Polly](https://aws.amazon.com/polly/) is a service that turns
+text into speech. Polly uses deep learning technology to turn text
+(words and numbers) into speech. It sounds like the human voice and can
+speak 24 languages. You are able to cache and save the speech audio to
+be able to be replayed it when you are offline, or if you want
+distribute it.
+
+For Polly, you pay per character converted from text to speech. As you
+have the ability to save and replay speech, for testing purposes the
+cost is low.
+
+import rk from '../../assets/blog/rekogniton.png'
+
+<Image src={rk} />
+
+## Amazon Rekognition
+
+[Amazon Rekognition](https://aws.amazon.com/rekognition/) is used for
+image analysis. The \"Hello World\" equivalent for deep learning is
+MNIST, classifying images of dags and cats. Rekognition gives you the
+ability to do just that, with the added benefit of visual search. The
+technology is actively used by Amazon to analyse billions of images each
+day for [Prime Photos](https://www.amazon.com/photos/home). A deep
+neural network is used to detect and label the details in your image,
+with more labels and facial recognition features continually being
+added.
+
+Testing with Rekogntion allows you to analyse 5000 images per month and
+store 1000 face data each month for 12 months.
+
+Coming from Amazon, Lex, Polly and Rekognition come ready with
+integration into your existing Amazon infrastructure, and are able to
+coexist with other Amazon WebServices such as S3 and Elastic BeanStalk.
+
+All 3 Amazon products are now available for you to test. All you need is
+an Amazon account and you are up and running.
+
+The products are out-of-the-box, meaning you can easily get them up and
+running, having a simple working product in a short amount of time.
+However, due to this ease of starting up, it means the learning gradient
+of customisation is steeper.
+
+import cr from '../../assets/blog/cortana.png'
+
+<Image src={cr} />
+
+# Cortana
+
+Microsoft's
+[Cortana](https://support.microsoft.com/en-gb/help/17214/windows-10-what-is),
+released in 2014 as a competitor to [Google
+Now](https://www.google.co.uk/landing/now/) and
+[Siri](https://www.apple.com/uk/ios/siri/) is a digital personal
+assistant for Windows 10, Windows 10 Mobile, Windows Phone 8.1 Microsoft
+Band, Xbox One, iOS and Android. Cortana provides many different
+services:
+
+- Reminders and Calander Updates
+
+- Track Packages, Flights
+
+- Send Emails and Texts
+
+- Access the internet
+
+Cortana uses [Microsoft's Cognitive
+Toolkit](https://github.com/Microsoft/CNTK) (CNTK), a Python based deep
+learning framework which allows a machine to recognize photos and videos
+or understanding human speech by mimicking the structure and functions
+of the human brain. Using CNTK, you have access to ready-made
+components, the ability to express your own neural networks. You are
+also able to train and host your models on Microsoft's alternative to
+Amazon Web Services, [Azure](https://azure.microsoft.com/en-gb/).
+
+import ct from '../../assets/blog/cortex.png'
+
+<Image src={ct} />
+
+# Cortex
+
+A Clojure library for neural networks is Cortex. An excellent article on
+the capabilities of cortex can be found
+[here](http://gigasquidsoftware.com/blog/2016/12/27/deep-learning-in-clojure-with-cortex/)
+
+As it is written in Clojure, Cortex has the obvious benefit of being
+easily integrable into your current application. However, it doesn't
+have the same backing of major companies nor the longevity of other
+frameworks. An advantage is that Cortex is being actively developed with
+improvements being made consistently. If you want a more tried and
+tested framework to begin your deep learning journey, Cortex may not be
+the right framework for you, rather something for you to come back to
+once you have a better understanding.
+
+# Other Machine Learning Systems
+
+There are many more ML and DL frameworks such as Caffe, Theano, and
+Torch. Caffe is targeted at mass markets, for people who want to use
+deep learning for applications. Torch and Theano are more tailored
+towards people who want to use it for research on DL itself.
+
+import cf from '../../assets/blog/caffe.png'
+
+<Image src={cf} />
+
+# Caffe
+
+[Caffe](http://caffe.berkeleyvision.org/) is a deep learning framework,
+created by Berkeley AI Research. It is Python based that gives
+Expressive Architecture, Extensible Code, Speed and already has an
+established community.
+
+## Advantages:
+
+1.  High Performance without GPUs
+
+2.  Easy to use - Many features come \"Out-of-the-Box\"
+
+3.  Fast
+
+## Disadvantages:
+
+1.  Outside Caffe's Comfort Zone, difficultly increases massively
+
+2.  Not well documented
+
+3.  Uses 3rd party packages so may lead to versions skewing
+
+import th from '../../assets/blog/theano.jpg'
+
+<Image src={th} />
+
+# Theano
+
+[Theano](http://deeplearning.net/software/theano/) is also a Python
+Library. Although not strictly a Deep Learning Framework, it allow you
+to efficiently evaluate mathematical expressions with multi-dimensional
+arrays. Theano, works along the same lines as TensorFlow, using
+multi-dimensional arrays as tensors. Theono uses automatic
+differentiation on a neural network, which is the bases of
+backpropagation.
+
+## Advantages
+
+1.  Lazy Evaluation
+
+2.  Graph Transformation
+
+3.  Supports Tensor and Linear Algebra Operations
+
+4.  Gives a Good Long term understanding
+
+5.  Developed and helpful community
+
+6.  Automatic Differentiation (When you look into the Mathematics behind
+    Neural Networks, you begin to realise how much time and effort this
+    saves!)
+
+## Disadvantages
+
+1.  Can get Stuck in the Nitty Gritty Details
+
+2.  Graph Optimizations increase the compilation time
+
+3.  Long Overheads due to Optimizations
+
+import tr from '../../assets/blog/torch.png'
+
+<Image src={tr} />
+
+# Torch
+
+[Torch](http://torch.ch/) is a Machine Learning Library, released in
+2002, based on [Lua](https://www.lua.org/). Torch also provides an
+N-Dimensional Array (Tensor) that has the basic operations for indexing,
+slicing, transposing, type-casting, resizing, sharing storage and
+cloning. Torch is maintained and used by a variety of companies,
+including [Facebook AI
+Research](https://research.fb.com/category/facebook-ai-research-fair/),
+Google's [Deep Mind](https://deepmind.com/) and
+[Twitter](https://cortex.twitter.com/).
+
+## Advantages
+
+1.  Flexibility and Speed
+
+2.  Torch Read Eval Print Loop ([TREPL](https://github.com/torch/trepl))
+    for debugging. If you are coming from a programming language that
+    already utilises the power of the REPL, then you can see the
+    immediate benefits.
+
+3.  Provides ports to MAC, Linux, Android and iOS
+
+4.  Written in [Luajit](http://luajit.org/) which is a
+    [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation)
+    language, so there is almost zero compilation overhead for the
+    computational graph. It is extremely easy to integrate Lua with an
+    existing C/C++/Fortran code.
+
+5.  Very easy to create a (deep) neural nets right out of the box
+    without additional libraries
+
+6.  Actively developed
+
+## Disadvantages
+
+1.  Written in Lua so not accessible to many people
+
+2.  Doesn't have complete automatic differentiation
+
+For a more comprehensive comparison across multiple deep learning
+software's, go
+[here](https://en.wikipedia.org/wiki/Comparison_of_deep_learning_software).
+
+# To Conclude ....
+
+import mh from '../../assets/blog/machine-human.jpg'
+
+<Image src={mh} />
+
+Although it's been around for a while, Machine Learning and Deep
+Learning have only come to the fore-front of the programming world in
+the past 5 years. People were just starting to test the waters at the
+beginning of the century and so much has happened in a small amount of
+time.
+
+Now we come to Clojure. Clojure is even younger, so the community doing
+both Clojure and Machine Learning is very small indeed. Luckily Clojure
+has Java and all it's resources to fall back on. As Machine Learning and
+Clojure separately become more popular the community using both
+technologies will grow alongside.
+
+The Deep Learning Libraries and Frameworks I have provided in this
+article are by no means an exhaustive list. They have their own subtle
+differences, enough for you to make your own personal choice. However,
+it is important to say that there are many other examples out there, but
+I feel these are some great choices to get you going.

@@ -1,0 +1,185 @@
+---
+author: 'fky'
+title: 'Explore UI states with clojure.spec and devcards'
+description: 'Leverage the power of generators'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '07 Sep 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# TL;DR
+
+_Annotating you render functions with clojure.spec lets you generate
+infinite valid states for your interface that you can visualize with
+devcards. Click
+[here](https://frankiesardo.github.io/speccards/#!/speccards.app) for a
+demo._
+
+# About frontend development
+
+Having used React and ClojureScript for a while you get used to think
+about your frontend code in these four broad categories:
+
+import usm from '../../assets/blog/ui-states-model.png'
+
+<Image src={usm} />
+
+**Data** and **Interface** are mostly explorative and declarative part
+of you codebase. You **define** a data model that suits your business
+needs. You **explore** what native calls you need to make in order to
+show the interface you want.
+
+**Action** refers to all the code you use to modify the state in
+response to an external event. As the application grows in complexity,
+take some time to keep this code clean and you'll see is going to look
+mostly functional and easy to test.
+
+My main source of pain, you've probably have guessed, is the **Render**
+code.
+
+# If your job is to eat a frog, eat it first thing in the morning
+
+The fact is, most of this code is virtually untestable. Unless you're
+developing a text-based interface there's no sane way of checking the
+output of your functions is correct. Even if your output is **data** a
+la `sablono`, are you confident you've rendered a button and a text with
+the right padding and no overlapping and the correct transparency and so
+on?
+
+Here's how we usually approach the problem: lots of manual testing. Lots
+of browsing the various screen and changing the app state to see if
+everything behaves at it should. There must be a better way.
+
+Using a dynamic language has many benefits, but if you can't easily test
+what you return as output at least be very strict about what you accept
+as input. Render functions are an excellent place to place your
+`prismatic/schema` or `clojure.spec` annotations: the more precise you
+can be about valid inputs, the more errors you can catch before
+rendering.
+
+Ideally your schema annotations compose as your rendering function
+compose. So if you've annotated layout **A** and **B** and now you use
+both of them inside layout **C**, the latter has a schema that depends
+both on **A** and **B**. This process can bubble up to the root of your
+application **R** so that its schema describes **all** valid inputs for
+your application.
+
+Here's an example:
+
+```clj
+(require '[sablono.core :as sab :include-macros true])
+(require '[cljs.spec :as s :include-macros true])
+
+(s/def :todo/title (s/and string? (complement str/blank?)))
+(s/def :todo/completed boolean?)
+(s/def :todos/item (s/keys :req [:todo/title :todo/completed]))
+(s/def :todos/list (s/coll-of :todos/item))
+(s/def :todos/showing #{:all :active :completed})
+(s/def :todos/view (s/keys :req [:todos/list :todos/showing]))
+
+(defn item [{:keys [todo/title todo/completed todo/editing]}]
+  (let [class (cond-> ""
+                      completed (str "completed ")
+                      editing (str "editing"))]
+    (sab/html
+      [:li {:className class}
+       [:div.view
+        [:input.toggle {:type     "checkbox"
+                        :checked  (and completed "checked")
+                        :onChange #(do %)}]
+        [:label title]
+        [:button.destroy]
+        [:input.edit {:ref "editField"}]]])))
+
+(defn todos [{:keys [todos/list todos/showing]}]
+  (let [active (count (remove :todo/completed list))
+        completed (- (count list) active)
+        checked? (every? :todo/completed list)]
+    (sab/html
+      [:div#content
+       [:div#todoapp
+        [:header#header
+         [:h1 "Todos"]
+         [:input {:ref         "newField"
+                  :id          "new-todo"
+                  :placeholder "What needs to be done?"
+                  :onKeyDown   #(do %)}]]
+        [:section#main {:style (hidden (empty? list))}
+         [:input#toggle-all {:type     "checkbox"
+                             :onChange #(do %)
+                             :checked  checked?}]
+         (into [:ul#todo-list]
+               (for [todo (filter (case showing
+                                    :completed :todo/completed
+                                    :active (complement :todo/completed)
+                                    :all identity) list)]
+                 (item todo)))]
+        [:footer#footer {:style (hidden (empty? list))}
+         [:span#todo-count
+          [:strong active] (str " " (pluralize active "item") " left")]
+         (into [:ul#filters {:className (name showing)}]
+               (for [[x y] [["" "All"] ["active" "Active"] ["completed" "Completed"]]]
+                 [:li [:a y]]))
+         [:button#clear-completed (str "Clear completed (" completed ")")]]]])))
+```
+
+If you use `clojure.spec` for your annotations like in the example you
+also get test data generation for free. This means you can generate many
+valid inputs for any rendering function (including the root of your
+application) and repeatedly check it doesn't break.
+
+```clj
+(deftest canary
+  (doseq [input (map first (s/exercise :todos/view))]
+    (todos input)))
+```
+
+This is already gives you some confidence, but ultimately you want to
+see your UI in action.
+
+# If your job is to eat two frogs, eat the big one first
+
+Sometimes a change in a shared render component can have disastrous
+effects on your entire application, messing up alignments, paddings and
+other visual properties. Sometimes these errors are quite hard to catch
+because they only happen under certain circumstances (e.g. in a list of
+more of 100 elements, or the customer name is less than 3 characters, or
+the header image is missing).
+
+That's why I think is vital for a project to embrace something like
+[devcards](https://github.com/bhauman/devcards) early on and give
+visibility to all these possible mistakes. For example if you are
+developing a component that renders a list of `todos`, why not keeping
+open a window that renders that component simultaneously with different
+states, say a list of 0, 1, 10, 100 and 1000 elements. As you change the
+code you should be able to quickly spot if you're introducing
+regressions on one of these states.
+
+import usd from '../../assets/blog/ui-states-devcards.png'
+
+<Image src={usd} />
+
+_Example from devcards_
+
+This is exactly how you would exercise your function in a unit test,
+using certain inputs to verify edge conditions, except in this this case
+is a visual test. Now, we all know generative testing is a great
+complement to your unit tests, so why not make use of both? If you can
+generate valid inputs from your `clojure.spec` annotations, then throw
+them to your application and see how it renders them.
+
+import uss from '../../assets/blog/ui-states-speccards.png'
+
+<Image src={uss} />
+
+_One of the many examples with generated data_
+
+Have a look
+[here](https://frankiesardo.github.io/speccards/#!/speccards.app) for
+the full list of generated states (and
+[here](https://github.com/frankiesardo/speccards/blob/master/src/speccards/app.cljs)
+is the source code). As you develop or change your renderer this is
+another useful tab to keep open to see the impact of you changes.

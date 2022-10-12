@@ -1,0 +1,55 @@
+---
+author: 'jon'
+title: 'Clojure and the MailOnline'
+description: 'Rewriting the MailOnline'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '25 Mar 2015'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+In 2013 the worlds busiest newspaper website was rewritten in Clojure.
+The incumbent CTO Clifton Cunningham had the technology vision of a
+replacement front-end system written using a functional programming
+language, that would yield the benefits of being much simpler and easier
+to maintain.
+
+The new system would have to **faster** be than the existing Java
+solution, and be **more robust** and **less error prone**. The business
+wanted a platform that could cater for providing different views of
+content to different devices, and so extensibility was crucial.
+
+import mo from '../../assets/blog/moppl.png'
+
+<Image src={mo} />
+
+Jon Pither of JUXT led a team to rewrite the newspaper website in
+Clojure from scratch against these requirements, using data primarily
+held in ElasticSearch. The team initially started with a handful of
+developers, flexing up to twelve over time, as a variety of satellite
+services and separate systems were incorporated into the redevelopment.
+JUXT ran a series of training courses to help developers make the
+transition to Clojure.
+
+After a short period of months, the new website ran alongside the legacy
+one. A custom built diagnostics and HTML comparison framework was also
+deployed into production to give vital guarantees about the content
+being rendered.
+
+import jr from '../../assets/blog/jonrewriteeverything.jpg'
+
+<Image src={jr} />
+
+The new codebase was conservatively an order of magnitude smaller than
+its Java / Object Oriented counterpart and made a seamless deployment
+into production. This contrasts against a previously attempted rewrite
+using a modern Java EE stack that was cut short.
+
+The developers working on the project were a happy bunch, and the
+project had a feel good factor about it. Whilst the Clojure project was
+going on a number of modern content authoring tools were built using
+Node.js, and the CTO describes the overall journey
+[here](https://www.youtube.com/watch?v=HGH66JhUkis), at a Node
+conference.

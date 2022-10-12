@@ -1,0 +1,202 @@
+---
+author: 'mal'
+title: 'Edge'
+description: 'A complete Clojure project you can leap from'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '05 Jul 2016'
+heroImage: 'mock3.jpg'
+tags:
+  - 'opensource'
+---
+
+import { Image } from '@astrojs/image/components'
+
+The best way to learn any programming language is to start a project to
+solve some problem. The problem drives you forward, getting you to think
+about how to apply your new-found knowledge, and you automatically learn
+the language along the way.
+
+One of the questions we hear a lot from people wanting to dive into
+Clojure is, \"How do I set up a Clojure project?\".
+
+Many beginners have to invest too much of their time learning the
+tooling rather than the language.
+
+That's why projects like [Luminus](http://www.luminusweb.net/) are so
+useful. You can get set-up with the minimum of fuss and focus on working
+on your problem (while learning the language).
+
+Another worthy mention is [Mastodon C's suite of Clojure
+projects](https://github.com/mastodonc), who open-source a lot of
+complete real-world projects.
+
+By their very nature these projects are full of opinions of what general
+problem to solve, which libraries to use and how to organise your code.
+That's why it helps if there are a selection to choose from.
+
+# Introducing Edge
+
+Edge is a project from JUXT that helps you get started with a simple
+website, API or micro-service. You can put it in the same mental box
+marked _frameworks_, along with Luminus, Hoplon, Chestnut and Arachne.
+
+Edge is not a template system, you don't generate the project with
+`lein` or `boot`. You just `git clone` it and type `boot dev` to run it.
+As things are moving fast (both in Edge and in the Clojure world as a
+whole), we think it's good to retain the ability to merge Edge updates
+to your own project.
+
+There's not much code in Edge, around 500 lines, but it's packed full of
+features and built on solid engineering principles like _loose
+coupling_\', _single responsibility_, _don't repeat yourself_ and
+_separation of concerns_.
+
+Some of our decisions need explaining, so here's goes.
+
+## Structure
+
+Edge uses Stuart Sierra's infamous
+[component](https://github.com/stuartsierra/component) library for
+structure.
+
+On balance, we prefer it to [mount](https://github.com/tolitius/mount),
+for many of the reasons [explained
+here](https://www.reddit.com/r/Clojure/comments/41p73n/contrasting_component_and_mount/).
+(We much prefer both _component_ and _mount_ to the traditional practice
+of sprinkling \`\`def\`s in random namespaces.)
+
+## Web libraries
+
+Edge uses [bidi](https://github.com/juxt/bidi) for URI routing and
+[yada](https://juxt.pro/blog/posts/yada-1.html) for handling web
+requests, both JUXT libraries.
+
+Good websites and APIs should make liberal use of hyperlinks, but you
+don't want those hyperlinks to get stale and break. While bidi _can_ be
+harder to learn and use than Compojure, it allows you to iterate your
+API design freely. Hardcoded URIs can be a form of implicit coupling, a
+short-cut to code-rot. As every true developer knows, every time you add
+an implicit coupling to your code-base a fairy dies --- so using bidi
+also helps to keep fairy populations healthy.
+
+import fa from '../../assets/blog/fairy.jpg'
+
+<Image src={fa} />
+
+Edge makes a great springboard for a micro-service. It contains a small
+RESTful phonebook app, and there's even a [Swagger
+UI](http://swagger.io/) included, so you can communicate your API design
+to your team. And because it's built with
+[yada](https://juxt.pro/blog/posts/yada-1.html), clients will think
+you're an HTTP protocol guru.
+
+## Configuration
+
+Real-world projects invariably need some application configuration
+mechanism to specify the details of the operating environments in which
+they run.
+
+Again, Edge uses our own [Aero](https://juxt.pro/blog/posts/aero.html)
+library - it's easy for small projects that just need a single
+configuration file, based on Clojure's own EDN format. Plus Aero throws
+in some features that allow it to scale as your project evolves. Maybe
+we're a little biased but we think this is the most ideal balance of
+trade-offs for configuration.
+
+## Network REPL
+
+Edge launches a network REPL, so you can remote debug your service while
+it's running. The service is bound to localhost only for security
+reasons, the idea is that you connect to it via [ssh
+forwarding](http://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html).
+
+import ps from '../../assets/blog/phonebook-swagger.png'
+
+<Image src={ps} />
+
+## Security
+
+Since Edge is built with [yada](https://juxt.pro/blog/posts/yada-1.html)
+you'll have good security defaults built-in: parameter validation, HSTS,
+flexible authentication, ABAC/RBAC authorization and access control
+options.
+
+## Tooling
+
+Edge has chosen to adopt [boot](http://boot-clj.com/), rather than
+Leiningen (although we wouldn't say no to a Pull Request!)
+
+Web projects are becoming more complex these days, with the need to
+support for ClojureScript and CSS compilation, flexible packaging and
+deployment, and other concerns. We find boot is somewhat harder to use
+but more flexible than lein, and allows you to run more within a single
+(expensive) JVM. While we are still in a phase of experimentation,
+_boot_ makes sense.
+
+## Database
+
+Edge is agnostic about databases. There are so many choices from
+traditional relational databases to graph and key-value stores. Since
+there are no stateful objects, there is no need for an ORM and no need
+for Edge to offer opinions as to how you go about persisting data.
+
+There is, however, a database component that works as a place-holder for
+whatever you want to use.
+
+## HTML templates
+
+Hiccup is great for generating HTML snippets, but for whole pages we
+prefer templating solutions. We've picked Selmer for Edge, but it is
+easy enough to unpick and go with an alternative such as enlive or
+Stencil (Mustache).
+
+Selmer is a Django-inspired template library. We like its rich library
+of built in functions and the ease of adding custom ones.
+
+## ClojureScript
+
+As you might expect, Edge has all the modern boot-powered ClojureScript
+tooling. You don't have to care how it works, you can just start launch
+a browser, hack the `.cljs` code and see your app take shape. Automatic
+browser reload, HUD and browser REPL are built-in too.
+
+## CSS
+
+import pf from '../../assets/blog/phonebook-form.png'
+
+<Image src={pf} />
+
+These days, all the cool kids are using CSS compilers like
+[Less](http://lesscss.org/) and [Sass](http://sass-lang.com/), and for
+Edge we've opted for Sass. The process is seamless: you edit the files
+in Edge's `sass` directory and voila, your changes are automatically
+reflected in the browser.
+
+# When to use Edge
+
+Edge is designed to help you get _up and running quickly_. For that
+reason it's ideal for _dojos_, _training courses_ and _hackathons_. It's
+great for knocking up a quick micro-service to impress your friends (or
+your boss!).
+
+The best thing is you'll have something up-and-running in minutes.
+
+# How to use Edge
+
+Here's how to get started:
+
+    git clone https://github.com/juxt/edge
+    cd edge
+    boot dev
+
+Wait until you see the message:
+
+    INFO  edge.server - Started web-server on port 3000
+
+Then browse to http://localhost:3000
+
+There's a [README](https://github.com/juxt/edge/blob/master/README.adoc)
+to explain how to launch Edge with CIDER or other IDE. If you're not
+using those, you can always connect a REPL to port 5600. Either way, you
+can type (reset) to get quick code refresh.
