@@ -1,0 +1,167 @@
+---
+author: 'oly'
+title: 'Introducing pedestal-api'
+description: 'A batteries-included Swagger API for Pedestal'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '12 Mar 2016'
+heroImage: 'mock3.jpg'
+tags:
+  - 'opensource'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# Swagger and Schema
+
+A couple of years ago I watched a [EuroClojure talk by Tommi
+Reiman](https://vimeo.com/100485830) about the excellent work
+[Metosin](https://github.com/metosin) had done on implementing the
+Swagger spec for Compojure, which at the time was the routing library
+_du jour_. I and many others have had a go at building a metadata-driven
+API over the years with varying levels of success, but none were as
+sophisticated as this. For the first time, it was starting to feel like
+a complete solution - the Swagger spec and its comprehensive UI, Schema
+and its excellent declaration, validation and coercion characteristics,
+and Compojure with its syntax.
+
+However, Compojure and Ring never felt like a natural fit for this task.
+After using [bidi](https://github.com/juxt/bidi) for bi-directional
+routing I never wanted to go back, and the [tower of
+middleware](/blog/posts/angel-interceptor.html) in Ring only grew with
+the sort of middleware needed by an API. Just knowing that, under the
+hood, Compojure macros were being \"peeled\" made me feel a bit uneasy
+about the whole thing.
+
+# Pedestal reborn
+
+After the split of Pedestal and Pedestal App the whole project started
+making a lot more sense. Fellow Juxter [Frankie
+Sardo](https://github.com/frankiesardo) saw the opportunity to use
+Pedestal's data-driven, composable approach to annotate and inspect the
+API structure in a much simpler manner, and thanks to
+[ring-swagger](https://github.com/metosin/ring-swagger) was able to
+easily implement the Swagger spec. The result was pedestal-swagger which
+has been used with great success in several projects.
+
+# Introducing pedestal-api
+
+Frankie has since been working on a Pedestal-inspired routing library
+for Clojurescript called
+[tripod](https://github.com/frankiesardo/tripod) which led him to change
+pedestal-swagger into a framework-agnostic
+[route-swagger](https://github.com/frankiesardo/route-swagger), usable
+by both. This meant my personal preference for a more \"batteries
+included\" library required a new project, so here it is:
+[pedestal-api](https://github.com/oliyh/pedestal-api).
+
+The aim of pedestal-api is to provide a collection of tools for building
+an API using Pedestal, based on route-swagger and providing interceptors
+which implement the parts of HTTP that apply best to APIs. This includes
+validation, coercion, deserialisation, content negotiation and more with
+the intention of allowing you to pick and choose what you want without
+feeling like you are using a framework.
+
+# What it looks like
+
+We will start with defining a schema of a pet and a Swagger endpoint to
+retrieve it, given its id. The id will be supplied as a
+`path-parameter`.
+
+```clj
+(ns pedestal-api-example.service
+      (:require [io.pedestal.interceptor :refer [interceptor]]
+                [pedestal-api
+                [core :as api]
+                [helpers :as helpers]
+                [schema.core :as s]))
+
+    (s/defschema Pet
+      {:name s/Str
+       :type s/Str
+       :age s/Int})
+
+    (def load-pet-by-id
+      (api/annotate
+       {:summary   "Load pet by id"
+        :parameters {:path-params {:id s/Int}}
+        :responses {200 {:body Pet}}}
+       (interceptor
+        {:name  ::load-pet-by-id
+         :enter (fn [ctx]
+                  (let [id (get-in ctx [:request :path-params :id])
+                        pet (load-from-db id)]
+                    (assoc ctx :response
+                           {:status 200
+                            :body pet})))})))
+```
+
+`load-pet-by-id` is an interceptor that declares a `path-parameter`
+called `id`, and will return a `Pet` in response. The `id` parameter
+will be placed in `path-params` inside the request, and coerced to an
+integer by the provided pedestal-api interceptors. Similarly, the pet
+that is returned will be validated against the `Pet` schema and
+serialised for the client.
+
+We then declare the server routes and interceptors, annotated with
+Swagger documentation and including pedestal-api's interceptors.
+
+    ```clj
+    (api/defroutes routes
+      {:info {:title       "Swagger Sample App"
+              :description "This is a sample Petstore server."
+              :version     "2.0"}
+       :tags [{:name         "pets"
+               :description  "Everything about your Pets"
+               :externalDocs {:description "Find out more"
+                              :url         "http://swagger.io"}}
+              {:name        "pets"
+               :description "Operations on pets"}]}
+      [[["/" ^:interceptors [api/error-responses
+                             (api/negotiate-response)
+                             (api/body-params)
+                             api/common-body
+                             (api/coerce-request)
+                             (api/validate-response)]
+         ["/pets/:id" ^:interceptors [(api/doc {:tags ["pets"]})]
+          {:get load-pet-by-id}]
+
+         ["/swagger.json" {:get api/swagger-json}]
+         ["/*resource" {:get api/swagger-ui}]]]])
+
+````
+
+That's it - this is enough to generate the following Swagger UI:
+
+import pa from '../../assets/blog/pedestal-api-swagger.png'
+
+<Image src={pa} />
+
+There are also some helpers that let you define interceptors more
+succinctly; we can rewrite the one above as follows using
+`helpers/handler`:
+
+    ```clj
+    (def load-pet-by-id
+      (helpers/handler ::load-pet-by-id
+       {:summary   "Load pet by id"
+        :parameters {:path-params {:id s/Int}}
+        :responses {200 {:body Pet}}}
+       (fn [request]
+         (let [id (get-in request [:path-params :id])
+               pet (load-from-db id)]
+           {:status 200
+            :body pet}))))
+````
+
+# Feedback welcome
+
+The [project on GitHub](https://github.com/oliyh/pedestal-api) contains
+a [complete CRUD
+example](https://github.com/oliyh/pedestal-api/tree/master/example)
+which you can try on [Heroku](https://pedestal-api.herokuapp.com/) and
+it's used in [real](https://github.com/oliyh/slacky)
+[life](https://github.com/oliyh/spa-skeleton) as well. If you are using
+pedestal-swagger it provides a good upgrade path, and if you're starting
+a new project it's worth considering. As always feedback, suggestions
+and pull requests are very welcome.

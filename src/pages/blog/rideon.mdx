@@ -1,0 +1,132 @@
+---
+author: 'juxt'
+title: 'Clojure and Electric Bikes'
+description: 'A case study of building the infrastructure for an electric powered bikes scheme'
+category: 'case studies'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '29 Oct 2015'
+heroImage: 'mock3.jpg'
+tags:
+  - 'clojure'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# Electric Bikes
+
+[Ride On](http://www.ride-on.es/en/) is a public bikes scheme with a
+difference. The advantage with Ride On bikes is that they are electric,
+meaning that the bike itself will help you pedal. This has positive
+implications for the environment because less trucks are needed to move
+the bikes from station to station, as people will cycle uphill as well
+as downhill.
+
+The evidence suggests that people use electric bikes more than standard
+non-powered bikes, and so this helps to reduce city traffic, whilst
+giving the rider a happier experience.
+
+It's a win-win and a hugely exciting project. At JUXT we're thrilled to
+be a part of it.
+
+# The Scope and Timescales
+
+Each docking station has a user facing touchscreen kiosk providing
+registration and ability to add credit to their NFC touch cards. When
+bikes are docked and undocked using a touch card, the station will
+validate and broadcast every event to a remote server.
+
+Working alongside the client, JUXT provided the initial software for the
+public facing docking stations, as well as the software for a central
+server platform. The Ride On team have a specialist set of engineers for
+building the hardware micro-controllers operating the physical docks. In
+parallel a separate development team would build a public facing
+web-application and mobile platforms, that would interact with the
+central server through REST calls.
+
+An MVP needed to be built in a matter of months, an extremely ambitious
+target.
+
+# Why Clojure?
+
+Immutability was a core requirement. Ride On didn't want to ever lose
+data, and so reports and dashboards should be materialised views on
+immutable events. Clojure was therefore seen as a good fit for its
+functional approach when it comes to working with data.
+
+Clojure was also chosen because development teams can go _at speed_ on
+greenfields software projects, and the resulting codebase will be
+simpler and leaner.
+
+There wasn't the time for building software in the mainstream style,
+with costly large object models to maintain and to dependency manage.
+Here the emphasis was on delivering business value pragmatically, and to
+production grade.
+
+# ClojureScript
+
+We used ClojureScript for the touch screen application. Although Kiosks
+have traditionally been built using specialist vendor based SDKs,
+ClojureScript in the browser has so far been an excellent choice. We
+could rapidly develop it using
+[Figwheel](https://github.com/bhauman/lein-figwheel), and because the
+Kiosk's server-side application is also written in Clojure, we get the
+benefits of both front-end and back-end development using the same
+stack. We could develop quickly, evolving our solution without the
+coordination overhead of involving separate teams. The library support
+was also essential, using APIs such as
+[Tower](https://github.com/ptaoussanis/tower) for internationalisation.
+
+import rc from '../../assets/blog/roc_juxt.jpg'
+
+<Image src={rc} />
+
+We also used ClojureScript for the central server, receiving data from
+all the docking stations. Using [Om](https://github.com/omcljs/om), we
+built a dashboard showing real-time events (propagated via HTTP Server
+Sent Events) and hardware status information, for example to show the
+battery charge of a bike connected to an individual dock.
+
+The use of ClojureScript allowed for rapid development, which has become
+a lot easier, owing to growing maturity of the tool set.
+
+# Interacting with Hardware
+
+We needed to write software inside the Kiosk to interact with physical
+card-dispensers, printers, and other devices. Here the [Component
+pattern](https://github.com/stuartsierra/component) was vital in
+life-cycle managing the various ports we needed to open. We used
+[Gloss](https://github.com/ztellman/gloss) to represent the binary
+messages being passed back and forth.
+
+We didn't automatically choose Gloss, but after a short amount of time
+it became clear that Gloss was an essential component of the stack. It
+would be a serious anti-pattern to have raw hex definitions spread
+across your codebase, as we quickly found. When you have a name-space of
+crisp and clear Gloss packet definitions, looking beautiful and easily
+understandable, then you know you've hit upon the simple-made-easy
+Clojure way.
+
+import rt from '../../assets/blog/rideonteam.png'
+
+<Image src={rt} />
+
+We used ZeroMQ to communicate with the docking hardware
+micro-controllers, each running specialist firmware.
+
+# Working with Data
+
+The production systems we use at JUXT typically rely on Prismatic's
+[Schema](https://github.com/Prismatic/schema) to some degree. We coerced
+incoming JSON payloads against our declared Schemas, reporting anomalies
+if we receive an event we cannot understand.
+
+We used [Compojure-api](https://github.com/metosin/compojure-api) to
+give us a Swagger endpoint describing our RESTful services. This gave us
+a self-documented API we could pass on to downstream consumers.
+
+# Conclusion
+
+The timescale was tight, and there were many moving parts that all had
+to land together. The project has been successful and is ready to power
+Ride On's electric bikes going forward. Look out for Ride On bikes in a
+city near you!

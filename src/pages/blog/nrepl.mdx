@@ -1,0 +1,251 @@
+---
+author: "dmc"
+title: "Overview of the nREPL"
+description: ""
+category: "clojure"
+layout: "../../layouts/BlogPost.astro"
+publishedDate: "20 Feb 2018"
+heroImage: "mock3.jpg"
+---
+
+import { Image } from '@astrojs/image/components'
+
+In this post I'm going to explain in a rough high level about how the
+nREPL you use every day actually works. This isn't intended to be 100%
+accurate, but close enough that you can build a mental model for
+understanding it when it goes wrong.
+
+# Client/Server
+
+A common confusion is that `lein repl` is not the same as nREPL. When
+you run `lein repl`, two things happen:
+
+1.  A server is started by running `tools.nrepl/start-server`.
+
+2.  REPL-y, a terminal nREPL client is launched
+
+The server aspect is the focus of this post. REPL-y is a terminal UI
+nREPL client, it allows you to evaluate code from the terminal. Another
+client is CIDER.el, which communicates via nREPL to enhance emacs with
+features. It also has an nREPL server extension, CIDER-nREPL, which is
+written in Clojure.
+
+# Transport Layer
+
+The nREPL has the notion of a transport. This is an abstract concept of
+communicating with the nREPL, for sending & receiving messages. The
+default transport (ergo most popular) is bencode over tcp. Bencode is a
+simple encoding format designed by Bittorrent for encoding torrent
+files.
+
+It can be described concisely:
+
+```clojure
+;; A number, i prefix, e marks the end
+i10e ;; 10
+
+;; A string, <length>: prefix. Length is bytes (for unicode)
+4:spam ;; "spam"
+6:poop💩 ;; "poop💩" the unicode symbol is 2 bytes
+
+;; A list, l prefix, e marks the end, elements nest
+li1ei2ei3ee ;; [1 2 3]
+l4:spami2ei3ee ;; ["spam" 2 3]
+
+;; An associative array (hash map)
+d3:foo3:bari1e4:spame ;; {"foo" "bar", 1 "spam"}
+```
+
+This provides a very simple format for reading data structures over the
+network. Other transports exist such as
+[drawbridge](https://github.com/cemerick/drawbridge), a HTTP transport;
+and
+[nrepl-hornetq](https://github.com/pallet/ritz/tree/develop/nrepl-hornetq)
+which provides a HornetQ transport for tools.nrepl server.
+
+Each client has to support the various transports natively within it.
+Some clients are open to extension, but the primary transport remains
+bencode over tcp. I don't doubt this is related to the high cost of
+rewriting multiple transports for each client.
+
+# Messages
+
+A message is simply a map; there are two kinds of message, a request and
+a response. There are common keys in a request message:
+
+- **id:** Is a unique id for the message, that should be included in
+  the request message. Responses relating to this request should also
+  include this same id.
+
+- **op:** Specifies what to do. In a way, it's specifying which
+  handler to run; `eval` is a common operation, as is `stdin`.
+
+- **session:** This specifies an id which relates to a set of thread
+  bindings. I'll cover this in more detail later.
+
+An unencoded request message to an nREPL server could look like this:
+
+```clojure
+{:op "eval" :code "(println (+ 1 2))" :id "some-unique-id"}
+```
+
+The nREPL server then handles this message however it pleases. I'll
+cover specifically how tools.nrepl handles this internally later in the
+post.
+
+Responses have a similar shape. A single request can elicit many
+responses. When the request has finished being processed, it should
+include `"done"` in the list of `:status` values. It's important that
+the response `:id` is the same request as the `:id`, this allows a
+client to track particular responses, this is due to the nrepl server
+being asyncronous in design. You can have multiple requests in flight at
+a time. For this reason, it's important that the `:id` is globally
+unique, I generally use a UUIDv4.
+
+For the example request above, I would expect 2 response maps like such:
+
+```clojure
+{:id "some-unique-id" :out "3"}
+{:id "some-unique-id" :value "nil" :status ["done"]}
+```
+
+# Sessions
+
+Sessions persist [dynamic vars](https://clojure.org/reference/vars)
+(collected by
+[`get-thread-bindings`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/get-thread-bindings))
+against a unique lookup. This is allows you to have a different value
+for
+[`*e`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/*e)
+from different REPL clients (e.g. two separate REPL-y instances). An
+existing session can be cloned to create a new one, which then can be
+modified. This allows for copying of existing preferences into new
+environments.
+
+Sessions become even more useful when different nREPL extensions start
+taking advantage of them.
+[debug-repl](https://github.com/gfredericks/debug-repl/) uses sessions
+to store information about the current breakpoint, allowing debugging of
+two things separately.
+[piggieback](https://github.com/cemerick/piggieback/) uses sessions to
+allow host a clojurescript repl alongside an existing clojure one.
+
+An easy mistake is to confuse a session with an id. The difference
+between a session and id, is that an id is for tracking a single
+message, and sessions are for tracking remote state. They're fundamental
+to allowing simultaneous activities in the same nREPL.
+
+# Internals of tools.nrepl Message Handling
+
+This section deals specifically with how tools.nrepl, the most popular
+implementation of nREPL, is implemented. Messages are handled via
+[middleware](https://github.com/ring-clojure/ring/wiki/Concepts#middleware).
+This will feel familiar if you have used Ring.
+
+import un from '../../assets/blog/unix-system-its-a-middleware-system-i-know-this.jpg'
+
+<Image src={un} />
+
+tools.nREPL middleware works slightly differently to how ring middleware
+works, because you can handle the message _and_ pass it on to the next
+handler. This is because responses are asyncronous.
+
+A `:transport` key is added to messages as they are handled. The value
+of this key is an implementation of a protocol representing the
+transport layer. By replacing the transport with a new one, middleware
+can control the responses of middleware after it. Usually the
+replacement delegates back to the original transport, after updating the
+message or doing something with it.
+
+```clojure
+;; Print out messages as they happen
+(fn [next-fn transport]
+  (next-fn (reify TransportProtocol
+             (send [_ msg]
+               (prn msg)
+               (send transport msg)))))
+
+;; Add pretty printed versions of values
+(fn [next-fn transport]
+  (next-fn (reify TransportProtocol
+             (send [_ msg]
+               (send transport
+                     (assoc msg :pprint-value (pprint (:value msg))))))))
+```
+
+The default functionality of the nREPL is implemented entirely using
+middleware. Even the fundamental parts like sessions and eval. Default
+functionality like eval is provided in order to be useful out of the
+box.
+
+## Middleware Descriptors
+
+A message handler can set a descriptor upon itself. This is metadata
+which tools.nrepl uses to order middleware automatically and generate
+documentation.
+
+`:requires` This specifies middleware which must be present _before_
+this middleware in the stack. Specifying a string indicates that
+anything which provides this op must be present, you can also also use
+vars here.
+
+`:expects` This specifies middleware which must be present _after_ this
+middleware in the stack. Again, use vars or strings here.
+
+`:handles` This is a documentation key. It includes text strings for
+human explanations of your returns, arguments, etc.
+
+Using the `:requires` and `:expects` key, tools.nrepl is able to
+automatically order the middleware and handlers automatically. This is
+why you do not have to manually order middleware like so in
+`.lein/profile.clj`:
+
+```clojure
+:nrepl-middleware (cider (pr-values (eval)))
+```
+
+# Practical Example: Piggieback
+
+Piggieback is an nREPL middleware by Chas Emerick. It underlies the
+ability to execute Clojurescript over the nREPL. It's used in figwheel
+and boot-cljs-\*
+
+To launch a Piggieback session you clone the current nREPL session, and
+update a dynamic var in Piggieback. The dynamic var stores a repl env,
+which is a clojurescript protocol for evaluation.
+
+Piggieback uses the nREPL middleware dependency system to specify that
+`eval` should be after it in the chain. This allows it to \"hijack\" an
+incoming `eval`. It will use it's dynamic vars to determine whether or
+not Clojurescript is activated.
+
+If it's dynamic var is set, it will use the clojurescript api to send
+code to the repl-env. Usually, it's a browser env, so it will be sent to
+your browser for evaluation, the result will be captured by the
+javascript & sent back. This communication is done via websockets, out
+of band.
+
+This setup allows you to evaluate Clojure and Clojurescript in the same
+nREPL, by changing the session you're using to control where the
+evaluation happens.
+
+# CIDER-nrepl's place in all this
+
+CIDER-nrepl provides a lot of functionality which works around the
+limitations imposed by bencode, providing additional semantic data not
+available when using `eval`. All `eval` responses get \`\`pr-str\`\`\'d
+in order to prevent issues with encoding.
+
+For example, it turns the classpath into a bencode list, as opposed to
+to the string `"(\"src/\" \"resources/\")"` that you'd get from using
+eval to do the same thing.
+
+It also bundles dependencies in a unique way, via [Mr.
+Anderson](https://github.com/benedekfazekas/mranderson), so that they
+don't conflict with your project. This means for example, that it brings
+tools.namespace in order to provide a refresh, without conflicting with
+the version already in your project.
+
+The open design of CIDER-nrepl has allowed unexpected clients such as
+vim-fireplace to have a number of additional features with only
+integration effort.

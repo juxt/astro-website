@@ -1,0 +1,125 @@
+---
+author: 'jam'
+title: 'The Big Acquisition'
+description: "What Nubank's Cognitect Acquisition Means for Clojure"
+category: 'analysis'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '09 Aug 2022'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+A technological revolution is going on in Brazil. In 2011, [only 56% of
+Brazilians had a bank
+account](https://www.statista.com/statistics/898974/population-bank-account-type-brazil/).
+Brazil was estimated to be the most capital-intensive country for
+banking in the world, and is thought to have (even now) a highly
+dysfunctional credit system, which is extremely congested particularly
+for small and medium sized companies.
+
+import nu from '../../assets/blog/nu2.png'
+
+<Image src={nu} />
+
+Today, those numbers are up substantially. Despite having [an inflation
+rate of over 11%](https://tradingeconomics.com/brazil/inflation-cpi),
+and serious political turmoil, something is changing. Brazil now has the
+one of the largest numbers of FinTech startups of any country in the
+world. A handful of superstar FinTech businesses are rocking the world,
+following in the footsteps of e-commerce giant MercadoLibre by creating
+supercharged financial ecosystems on a massive scale. Serial
+entrepeneurs are taking Brazil from a country that has historically been
+infamous for scams and massive wealth discrepancy, to one of the most
+interesting economies in the world (well, [in my
+opinion](https://www.youtube.com/watch?v=J_r-FJyGDXM)).
+
+One of the prime examples of this revolution is Nubank. For those who
+don't know, Nubank is a _Neobank_, which means it operates almost
+exclusively digitally, without physical branches. This asset-light model
+allows Nubank to drastically reduce operating expenses. Its primary
+founder, David Vélez, a young Colombian, began Nubank in 2013 after
+noticing a handful of banks controlled the majority of Brazil's markets
+and realising how horrible the experience was. The lack of competition,
+he felt, led to a lack of innovation, and this inspired him to start
+Nubank. Only a few years old, it now has over 48 million customers
+(growing exponentially) in Latin America, and has been an investment
+target of Warren Buffett since pre-IPO. Moreover, the average age of
+users is significantly below that of other banks.
+
+import nu1 from '../../assets/blog/nu1.png'
+
+<Image src={nu1} />
+
+What makes this even more impressive is that Nubank did all of this
+without expanding outside of Latin America, and with a policy of [zero
+marketing
+spend](https://thelowdown.momentum.asia/how-to-win-22-mil-customers-with-no-marketing-spend/) -
+relying entirely on word of mouth to grow. How? They focused entirely on
+improving their technology and offering. In their words, \"We are a
+technology company, it's in our DNA, not a bank.\"
+
+import nua from '../../assets/blog/nu-age.png'
+
+<Image src={nua} />
+
+As one of the first pioneers of the ongoing transformation of the
+Brazilian financial system, you might not be surprised that Clojure is
+Nubank's weapon of choice. Clojure and Nubank share a few similarities,
+after all. Both are very modern. Both are highly streamlined. Both are
+piloted by highly intelligent and contrarian leaders, and aimed at
+undermining stagnant legacy systems. Nubank's motto? \"Fight complexity
+to empower people\". Through looking at Nubank's previous open source
+work, it clearly excels at building horizontally scalable microservices,
+and claims that because services in the financial domain closely
+resemble mathematical functions, functional programming is a natural
+fit. They say that they've eschewed the boilerplate and verbosity of
+other languages, in favour of simple constructs. And they aim to keep
+their codebase understandable locally, and practically testable. It's
+clear from their numerous articles that at Nubank, engineers are just as
+passionate about software as every other Clojure engineer I have met
+(and as an old-fashioned Lisp programmer looking in, Clojure developers
+have something of a reputation for being, let's say, **pretty
+dedicated**).
+
+So as a finance dweeb, and a software engineer, I was very happy to find
+out that Nubank had [acquired
+Cognitect](https://building.nubank.com.br/welcoming-cognitect-nubank/)
+(and by proxy, Rich Hickey). I think this was a very smart decision on
+their part. If **I** was leading a large financial firm, I would also be
+acquiring high-level consultants who specialise in (and in this case
+created) the technology I use. I've joked to colleagues before that if
+they could, I'm sure Jane Street would acquire the entirety of French
+academia. One might be concerned that this could threaten Clojure's
+status as an open source licensed language, but that's not really
+something to be worried about. Nubank know very well about the
+importance of Clojure being open source. The main benefit of the
+acquisition, conversely, is to fund Clojure and Datomic's development,
+and receive continued support from Cognitect on architectural decisions.
+It's not wrong to be concerned about the ethics of a large company when
+it makes an acquisition, but Nubank has a history of continued open
+source library output and does not benefit at all from stifling
+Clojure's adoption. One can look at libraries such as the popular
+[workspaces](https://github.com/nubank/workspaces) for an example of the
+kinds of tooling a large company with access to bright minds can provide
+to a language's ecosystem.
+
+So why doesn't Nubank keep all its software to itself or create a fork
+of Clojure? Firstly, Clojure is owned by neither Cognitect nor Nubank.
+It is [open source, with Rich Hickey controlling its
+trajectory](https://building.nubank.com.br/welcoming-cognitect-nubank/)-
+so no need to be concerned as to the locus of Clojure's progression. On
+the other hand, perhaps people may be wondering about what Nubank may be
+able to do **for** Clojure. The fact is that [open source is good for
+tech companies](https://www.youtube.com/watch?v=WrQYZdzA4hg). It's no
+wonder that two of the best open source developer tools, GraphQL and
+React, both came out of Meta, which itself is actually a highly
+controversial company. The reasons are quite simple. Meta has never been
+afraid to hire outside of narrow pools, and it's never been afraid to
+invest in architecture that doesn't appear to have a direct use-case.
+Meta's competitive advantage is its willingness and ability to attract
+the best developers and to act outside the norm. Jane Street, mentioned
+earlier, [dominates the OCaml ecosystem](https://github.com/janestreet).
+A company the size of Nubank could do something similar for Clojure,
+especially given it is a fast-growing force that shows no signs of
+slowing. Who knows what in the future will be powered by Clojure?

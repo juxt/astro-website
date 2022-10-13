@@ -1,0 +1,761 @@
+---
+author: 'alx'
+title: 'Superlifter: A DataLoader for Clojure'
+description: 'Efficient fetching from decomplected code'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '26 Mar 2020'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+So far, so simple. That's because the resolvers are only given a single
+job to resolve one piece of data. They are decoupled and therefore
+reusable which is great when you have a graph where nodes can be reached
+from many edges.
+
+To get the names and kinds of all your pets you issue the following
+query:
+
+```graphql
+;; tag::query[]
+{
+  pets {
+    kind
+    name
+  }
+}
+;; end::query[]
+```
+
+You have _n_ pets (your pet store is very successful) but that means the
+query is taking quite a long time to resolve. You are making 1+n calls
+to PetDB and paying the overhead of a call 1+n times in serial.
+
+import ns from '../../assets/blog/naive-sequence.svg'
+
+<img src={ns} />
+
+If you queried for both kind and name of the pets you would make 1+2n
+calls and the performance would be twice as bad.
+
+# The incredible bulk
+
+You discover that PetDB has a bulk endpoint where you could fetch
+details for multiple pets in one call.
+
+- `/api/pets/:id0,:id1,:id2...`
+
+The problem is there's no straightforward way to take advantage of it.
+Your resolvers for the pet details are run in isolation from each other
+and the only hook you have is the top level pets resolver. What if you
+did all the work in there?
+
+```clj
+(ns superlifter
+  (:require [clj-http.client :as http]
+            [clojure.string :as str]))
+
+;; tag::vanilla-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (-> (http/get "https://petdb.com/api/pets/") :body :ids))
+
+(defn resolve-pet-kind [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :kind))
+
+(defn resolve-pet-name [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :name))
+;; end::vanilla-resolvers[]
+
+;; tag::hoisted-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (let [ids (->> (http/get "https://petdb.com/api/pets/") :body :ids)
+        details (->> (http/get (str "https://petdb.com/api/pets/" (str/join "," ids))) :body)]
+    (map (fn [id details]
+           (assoc details :id id))
+         ids details)))
+
+(defn resolve-pet-kind [context arguments parent]
+  parent)
+
+(defn resolve-pet-name [context arguments parent]
+  parent)
+;; end::hoisted-resolvers[]
+
+;; tag::graph[]
+(require '[com.walmartlabs.lacinia.schema :as schema])
+
+(defn compile-schema []
+  (schema/compile
+   {:objects {:Pet {:fields {:id {:type 'String}
+                             :kind {:type 'String
+                                    :resolve resolve-pet-kind}
+                             :name {:type 'String
+                                    :resolve resolve-pet-name}}}}
+    :queries {:pets
+              {:type '(list :Pet)
+               :resolve resolve-pets}}}))
+;; end::graph[]
+
+;; tag::superlifter-interceptor[]
+(require '[superlifter.api :as s])
+(require '[superlifter.lacinia :refer [inject-superlifter with-superlifter]])
+(require '[com.walmartlabs.lacinia.pedestal :as lacinia])
+
+(def lacinia-opts {:graphiql true})
+
+(def superlifter-args
+  {:buckets {:default {:triggers {:interval {:interval 10}}}}
+   :urania-opts {:env {:db {"abc-123" {:name "Lyra"
+                                       :age 11}
+                            "def-234" {:name "Pantalaimon"
+                                       :age 11}
+                            "ghi-345" {:name "Iorek"
+                                       :age 41}}}}})
+
+(def service (lacinia/service-map
+              (compile-schema)
+              (assoc lacinia-opts
+                     :interceptors (into [(inject-superlifter superlifter-args)]
+                                         (lacinia/default-interceptors (compile-schema) lacinia-opts)))))
+;; end::superlifter-interceptor[]
+
+;; tag::superlifter-fetchers[]
+;; def-fetcher - a convenience macro like defrecord for things which cannot be combined
+(s/def-fetcher FetchPets []
+  (fn [_this env]
+    (map (fn [id] {:id id}) (keys (:db env)))))
+
+;; def-superfetcher - a convenience macro like defrecord for combinable things
+(s/def-superfetcher FetchPet [id]
+  (fn [many env]
+    (log/info "Combining request for" (count many) "pets")
+    (map (:db env) (map :id many))))
+;; end::superlifter-fetchers[]
+
+;; tag::superlifter-resolvers-time[]
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (s/enqueue! (->FetchPets))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+;; end::superlifter-resolvers-time[]
+
+;; tag::superlifter-resolvers-size[]
+(def superlifter-args
+  {:buckets {:default {:triggers {:queue-size {:threshold 1}}}}})
+
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (-> (s/enqueue! (->FetchPets))
+        (s/add-bucket! :pet-details
+                       (fn [pet-ids]
+                         {:triggers {:queue-size {:threshold (count pet-ids)}
+                                     :interval {:interval 50}}})))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+
+;; end::superlifter-resolvers-size[]
+```
+
+This works, but you've complected your pets resolver with the work of
+the children. You can't reuse the child resolvers from another edge in
+the graph now without duplicating this work in all those other parent
+resolvers.
+
+# n wrongs make a right
+
+The DataLoader pattern has an answer, allowing you to keep your
+resolvers simple and reusable yet still take advantage of the bulk
+endpoint.
+
+> DataLoader allows you to decouple unrelated parts of your application
+> without sacrificing the performance of batch data-loading. While the
+> loader presents an API that loads individual values, all concurrent
+> requests will be coalesced and presented to your batch loading
+> function. This allows your application to safely distribute data
+> fetching requirements throughout your application and maintain minimal
+> outgoing data requests.
+
+The way it works is by providing a bucket into which you can throw all
+the fetches that your resolvers want to do, and returning a promise for
+each one. Then, usually after a given time interval, the fetches are
+coalesced (deduplicated and combined) and performed, delivering the
+individual results back to the promises.
+
+import sd from '../../assets/blog/dataloader-sequence.svg'
+
+<img src={sd} />
+
+# superlifter
+
+[superlifter](https://github.com/oliyh/superlifter) is a Clojure
+implementation of the DataLoader pattern. It has the following features:
+
+- Fast, simple implementation of DataLoader pattern
+
+- Bucketing by time or by queue size
+
+- Asynchronous fetching
+
+- Batching of fetches
+
+- Shared cache for all fetches in a session
+
+- Guarantees consistent results
+
+- Avoids duplicating work
+
+- Access to the cache allows longer-term persistence
+
+Here's how to set it up.
+
+## Start a superlifter per query
+
+A superlifter should live for the lifetime of a query, ensuring
+consistent results for duplicate reads and capturing and executing all
+fetches. In lacinia the queries are processed using interceptor chains,
+so superlifter provides an interceptor that starts a superlifter with
+your options:
+
+```clj
+(ns superlifter
+  (:require [clj-http.client :as http]
+            [clojure.string :as str]))
+
+;; tag::vanilla-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (-> (http/get "https://petdb.com/api/pets/") :body :ids))
+
+(defn resolve-pet-kind [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :kind))
+
+(defn resolve-pet-name [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :name))
+;; end::vanilla-resolvers[]
+
+;; tag::hoisted-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (let [ids (->> (http/get "https://petdb.com/api/pets/") :body :ids)
+        details (->> (http/get (str "https://petdb.com/api/pets/" (str/join "," ids))) :body)]
+    (map (fn [id details]
+           (assoc details :id id))
+         ids details)))
+
+(defn resolve-pet-kind [context arguments parent]
+  parent)
+
+(defn resolve-pet-name [context arguments parent]
+  parent)
+;; end::hoisted-resolvers[]
+
+;; tag::graph[]
+(require '[com.walmartlabs.lacinia.schema :as schema])
+
+(defn compile-schema []
+  (schema/compile
+   {:objects {:Pet {:fields {:id {:type 'String}
+                             :kind {:type 'String
+                                    :resolve resolve-pet-kind}
+                             :name {:type 'String
+                                    :resolve resolve-pet-name}}}}
+    :queries {:pets
+              {:type '(list :Pet)
+               :resolve resolve-pets}}}))
+;; end::graph[]
+
+;; tag::superlifter-interceptor[]
+(require '[superlifter.api :as s])
+(require '[superlifter.lacinia :refer [inject-superlifter with-superlifter]])
+(require '[com.walmartlabs.lacinia.pedestal :as lacinia])
+
+(def lacinia-opts {:graphiql true})
+
+(def superlifter-args
+  {:buckets {:default {:triggers {:interval {:interval 10}}}}
+   :urania-opts {:env {:db {"abc-123" {:name "Lyra"
+                                       :age 11}
+                            "def-234" {:name "Pantalaimon"
+                                       :age 11}
+                            "ghi-345" {:name "Iorek"
+                                       :age 41}}}}})
+
+(def service (lacinia/service-map
+              (compile-schema)
+              (assoc lacinia-opts
+                     :interceptors (into [(inject-superlifter superlifter-args)]
+                                         (lacinia/default-interceptors (compile-schema) lacinia-opts)))))
+;; end::superlifter-interceptor[]
+
+;; tag::superlifter-fetchers[]
+;; def-fetcher - a convenience macro like defrecord for things which cannot be combined
+(s/def-fetcher FetchPets []
+  (fn [_this env]
+    (map (fn [id] {:id id}) (keys (:db env)))))
+
+;; def-superfetcher - a convenience macro like defrecord for combinable things
+(s/def-superfetcher FetchPet [id]
+  (fn [many env]
+    (log/info "Combining request for" (count many) "pets")
+    (map (:db env) (map :id many))))
+;; end::superlifter-fetchers[]
+
+;; tag::superlifter-resolvers-time[]
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (s/enqueue! (->FetchPets))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+;; end::superlifter-resolvers-time[]
+
+;; tag::superlifter-resolvers-size[]
+(def superlifter-args
+  {:buckets {:default {:triggers {:queue-size {:threshold 1}}}}})
+
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (-> (s/enqueue! (->FetchPets))
+        (s/add-bucket! :pet-details
+                       (fn [pet-ids]
+                         {:triggers {:queue-size {:threshold (count pet-ids)}
+                                     :interval {:interval 50}}})))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+
+;; end::superlifter-resolvers-size[]
+```
+
+Note also that we are injecting data so you can see the data we are
+working with, but normally this would be a database connection or http
+library. Our default bucket performs a fetch every 10ms of everything
+that's in it at the time. You can add buckets later at runtime for
+specific purposes - I'll cover this later on.
+
+## Describe your fetches
+
+We now need a way to describe our fetches before we perform them, so
+that we have a chance of introspecting them in order to deduplicate and
+batch before executing. The [urania](https://github.com/funcool/urania)
+library is used for this, so you can implement those protocols if you
+want the full power of urania, but superlifter provides a abstraction
+over them with `def-fetcher` and `def-superfetcher` that gives a simpler
+API.
+
+```clj
+(ns superlifter
+  (:require [clj-http.client :as http]
+            [clojure.string :as str]))
+
+;; tag::vanilla-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (-> (http/get "https://petdb.com/api/pets/") :body :ids))
+
+(defn resolve-pet-kind [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :kind))
+
+(defn resolve-pet-name [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :name))
+;; end::vanilla-resolvers[]
+
+;; tag::hoisted-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (let [ids (->> (http/get "https://petdb.com/api/pets/") :body :ids)
+        details (->> (http/get (str "https://petdb.com/api/pets/" (str/join "," ids))) :body)]
+    (map (fn [id details]
+           (assoc details :id id))
+         ids details)))
+
+(defn resolve-pet-kind [context arguments parent]
+  parent)
+
+(defn resolve-pet-name [context arguments parent]
+  parent)
+;; end::hoisted-resolvers[]
+
+;; tag::graph[]
+(require '[com.walmartlabs.lacinia.schema :as schema])
+
+(defn compile-schema []
+  (schema/compile
+   {:objects {:Pet {:fields {:id {:type 'String}
+                             :kind {:type 'String
+                                    :resolve resolve-pet-kind}
+                             :name {:type 'String
+                                    :resolve resolve-pet-name}}}}
+    :queries {:pets
+              {:type '(list :Pet)
+               :resolve resolve-pets}}}))
+;; end::graph[]
+
+;; tag::superlifter-interceptor[]
+(require '[superlifter.api :as s])
+(require '[superlifter.lacinia :refer [inject-superlifter with-superlifter]])
+(require '[com.walmartlabs.lacinia.pedestal :as lacinia])
+
+(def lacinia-opts {:graphiql true})
+
+(def superlifter-args
+  {:buckets {:default {:triggers {:interval {:interval 10}}}}
+   :urania-opts {:env {:db {"abc-123" {:name "Lyra"
+                                       :age 11}
+                            "def-234" {:name "Pantalaimon"
+                                       :age 11}
+                            "ghi-345" {:name "Iorek"
+                                       :age 41}}}}})
+
+(def service (lacinia/service-map
+              (compile-schema)
+              (assoc lacinia-opts
+                     :interceptors (into [(inject-superlifter superlifter-args)]
+                                         (lacinia/default-interceptors (compile-schema) lacinia-opts)))))
+;; end::superlifter-interceptor[]
+
+;; tag::superlifter-fetchers[]
+;; def-fetcher - a convenience macro like defrecord for things which cannot be combined
+(s/def-fetcher FetchPets []
+  (fn [_this env]
+    (map (fn [id] {:id id}) (keys (:db env)))))
+
+;; def-superfetcher - a convenience macro like defrecord for combinable things
+(s/def-superfetcher FetchPet [id]
+  (fn [many env]
+    (log/info "Combining request for" (count many) "pets")
+    (map (:db env) (map :id many))))
+;; end::superlifter-fetchers[]
+
+;; tag::superlifter-resolvers-time[]
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (s/enqueue! (->FetchPets))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+;; end::superlifter-resolvers-time[]
+
+;; tag::superlifter-resolvers-size[]
+(def superlifter-args
+  {:buckets {:default {:triggers {:queue-size {:threshold 1}}}}})
+
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (-> (s/enqueue! (->FetchPets))
+        (s/add-bucket! :pet-details
+                       (fn [pet-ids]
+                         {:triggers {:queue-size {:threshold (count pet-ids)}
+                                     :interval {:interval 50}}})))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+
+;; end::superlifter-resolvers-size[]
+```
+
+See how the `def-superfetcher` implementation has the opportunity to
+combine multiple `FetchPet` requests into one. This is where we take
+advantage of any bulk APIs to speed things up!
+
+## Chuck \'em in the (time) bucket
+
+We can now write our resolvers to put our fetches into the superlifter
+bucket:
+
+```clj
+(ns superlifter
+  (:require [clj-http.client :as http]
+            [clojure.string :as str]))
+
+;; tag::vanilla-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (-> (http/get "https://petdb.com/api/pets/") :body :ids))
+
+(defn resolve-pet-kind [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :kind))
+
+(defn resolve-pet-name [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :name))
+;; end::vanilla-resolvers[]
+
+;; tag::hoisted-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (let [ids (->> (http/get "https://petdb.com/api/pets/") :body :ids)
+        details (->> (http/get (str "https://petdb.com/api/pets/" (str/join "," ids))) :body)]
+    (map (fn [id details]
+           (assoc details :id id))
+         ids details)))
+
+(defn resolve-pet-kind [context arguments parent]
+  parent)
+
+(defn resolve-pet-name [context arguments parent]
+  parent)
+;; end::hoisted-resolvers[]
+
+;; tag::graph[]
+(require '[com.walmartlabs.lacinia.schema :as schema])
+
+(defn compile-schema []
+  (schema/compile
+   {:objects {:Pet {:fields {:id {:type 'String}
+                             :kind {:type 'String
+                                    :resolve resolve-pet-kind}
+                             :name {:type 'String
+                                    :resolve resolve-pet-name}}}}
+    :queries {:pets
+              {:type '(list :Pet)
+               :resolve resolve-pets}}}))
+;; end::graph[]
+
+;; tag::superlifter-interceptor[]
+(require '[superlifter.api :as s])
+(require '[superlifter.lacinia :refer [inject-superlifter with-superlifter]])
+(require '[com.walmartlabs.lacinia.pedestal :as lacinia])
+
+(def lacinia-opts {:graphiql true})
+
+(def superlifter-args
+  {:buckets {:default {:triggers {:interval {:interval 10}}}}
+   :urania-opts {:env {:db {"abc-123" {:name "Lyra"
+                                       :age 11}
+                            "def-234" {:name "Pantalaimon"
+                                       :age 11}
+                            "ghi-345" {:name "Iorek"
+                                       :age 41}}}}})
+
+(def service (lacinia/service-map
+              (compile-schema)
+              (assoc lacinia-opts
+                     :interceptors (into [(inject-superlifter superlifter-args)]
+                                         (lacinia/default-interceptors (compile-schema) lacinia-opts)))))
+;; end::superlifter-interceptor[]
+
+;; tag::superlifter-fetchers[]
+;; def-fetcher - a convenience macro like defrecord for things which cannot be combined
+(s/def-fetcher FetchPets []
+  (fn [_this env]
+    (map (fn [id] {:id id}) (keys (:db env)))))
+
+;; def-superfetcher - a convenience macro like defrecord for combinable things
+(s/def-superfetcher FetchPet [id]
+  (fn [many env]
+    (log/info "Combining request for" (count many) "pets")
+    (map (:db env) (map :id many))))
+;; end::superlifter-fetchers[]
+
+;; tag::superlifter-resolvers-time[]
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (s/enqueue! (->FetchPets))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+;; end::superlifter-resolvers-time[]
+
+;; tag::superlifter-resolvers-size[]
+(def superlifter-args
+  {:buckets {:default {:triggers {:queue-size {:threshold 1}}}}})
+
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (-> (s/enqueue! (->FetchPets))
+        (s/add-bucket! :pet-details
+                       (fn [pet-ids]
+                         {:triggers {:queue-size {:threshold (count pet-ids)}
+                                     :interval {:interval 50}}})))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+
+;; end::superlifter-resolvers-size[]
+```
+
+The `resolve-pets` resolver puts a fetch into the bucket which will be
+performed within the next 10ms. It returns 3 pet ids, after which the
+`resolve-pet-details` resolver will run 3 times. Instead of performing 3
+separate fetches, those three fetches go into the bucket and are
+combined into one fetch which will be performed within the next 10ms.
+
+A time bucket of 10ms means you will add up to 10ms to each layer of the
+query. 10ms might be relatively small but will add up quickly if you
+query is many layers deep, but making it smaller may mean your fetches
+span multiple buckets and you lose some efficiency. One of the
+worst-case scenarios is shown below, with yellow indicating wasted time.
+
+import sb from '../../assets/blog/time-bucket.svg'
+
+<img src={sb} />
+
+## Size buckets
+
+In some cases (like when fetching our pet details) we already know how
+many fetches we are going to make because our parent has given us a
+list. You can create a new bucket in superlifter for this purpose with a
+particular size, rather than time window. The fetch is triggered when
+the number of items in the bucket meets the threshold, saving the cost
+of waiting for an interval to elapse:
+
+```clj
+(ns superlifter
+  (:require [clj-http.client :as http]
+            [clojure.string :as str]))
+
+;; tag::vanilla-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (-> (http/get "https://petdb.com/api/pets/") :body :ids))
+
+(defn resolve-pet-kind [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :kind))
+
+(defn resolve-pet-name [context arguments id]
+  (-> (http/get (str "https://petdb.com/pets/" id)) :body :name))
+;; end::vanilla-resolvers[]
+
+;; tag::hoisted-resolvers[]
+(defn resolve-pets [context arguments parent]
+  (let [ids (->> (http/get "https://petdb.com/api/pets/") :body :ids)
+        details (->> (http/get (str "https://petdb.com/api/pets/" (str/join "," ids))) :body)]
+    (map (fn [id details]
+           (assoc details :id id))
+         ids details)))
+
+(defn resolve-pet-kind [context arguments parent]
+  parent)
+
+(defn resolve-pet-name [context arguments parent]
+  parent)
+;; end::hoisted-resolvers[]
+
+;; tag::graph[]
+(require '[com.walmartlabs.lacinia.schema :as schema])
+
+(defn compile-schema []
+  (schema/compile
+   {:objects {:Pet {:fields {:id {:type 'String}
+                             :kind {:type 'String
+                                    :resolve resolve-pet-kind}
+                             :name {:type 'String
+                                    :resolve resolve-pet-name}}}}
+    :queries {:pets
+              {:type '(list :Pet)
+               :resolve resolve-pets}}}))
+;; end::graph[]
+
+;; tag::superlifter-interceptor[]
+(require '[superlifter.api :as s])
+(require '[superlifter.lacinia :refer [inject-superlifter with-superlifter]])
+(require '[com.walmartlabs.lacinia.pedestal :as lacinia])
+
+(def lacinia-opts {:graphiql true})
+
+(def superlifter-args
+  {:buckets {:default {:triggers {:interval {:interval 10}}}}
+   :urania-opts {:env {:db {"abc-123" {:name "Lyra"
+                                       :age 11}
+                            "def-234" {:name "Pantalaimon"
+                                       :age 11}
+                            "ghi-345" {:name "Iorek"
+                                       :age 41}}}}})
+
+(def service (lacinia/service-map
+              (compile-schema)
+              (assoc lacinia-opts
+                     :interceptors (into [(inject-superlifter superlifter-args)]
+                                         (lacinia/default-interceptors (compile-schema) lacinia-opts)))))
+;; end::superlifter-interceptor[]
+
+;; tag::superlifter-fetchers[]
+;; def-fetcher - a convenience macro like defrecord for things which cannot be combined
+(s/def-fetcher FetchPets []
+  (fn [_this env]
+    (map (fn [id] {:id id}) (keys (:db env)))))
+
+;; def-superfetcher - a convenience macro like defrecord for combinable things
+(s/def-superfetcher FetchPet [id]
+  (fn [many env]
+    (log/info "Combining request for" (count many) "pets")
+    (map (:db env) (map :id many))))
+;; end::superlifter-fetchers[]
+
+;; tag::superlifter-resolvers-time[]
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (s/enqueue! (->FetchPets))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+;; end::superlifter-resolvers-time[]
+
+;; tag::superlifter-resolvers-size[]
+(def superlifter-args
+  {:buckets {:default {:triggers {:queue-size {:threshold 1}}}}})
+
+(defn- resolve-pets [context _args _parent]
+  (with-superlifter context
+    (-> (s/enqueue! (->FetchPets))
+        (s/add-bucket! :pet-details
+                       (fn [pet-ids]
+                         {:triggers {:queue-size {:threshold (count pet-ids)}
+                                     :interval {:interval 50}}})))))
+
+(defn- resolve-pet-details [context _args {:keys [id]}]
+  (with-superlifter context
+    (s/enqueue! :pet-details (->FetchPet id))))
+
+;; end::superlifter-resolvers-size[]
+```
+
+The default bucket has a queue size of 1. The `resolve-pets` resolver
+puts its fetch in the default bucket, which will be performed
+immediately, and then adds a new bucket called `:pet-details` which has
+a size of 3, because we know we will fetch details for the 3 pets we
+have found.
+
+The `resolve-pet-details` resolver then puts all its fetches into the
+`:pet-details` bucket and as soon as the third resolver has run the
+combined fetch will be performed immediately. No time lost and maximum
+efficiency!
+
+import ssb from '../../assets/blog/size-bucket.svg'
+
+<img src={ssb} />
+
+# More features
+
+superlifter exposes the cache that is used for fetches, allowing you to
+prepopulate it from a long-term or shared store before execution and
+read the results of new fetches after execution to write them to the
+store. This gives you even finer grained control over how often you
+perform fetches.
+
+The existing triggers (interval and size) are implemented using
+multimethods. You can implement your own by participating in them! There
+is also a \"manual mode\" without any triggers, allowing you to let the
+bucket fill and perform the fetches on demand (for example in response
+to a user pressing a button). You can use any permutation of triggers at
+the same time - the fetch will be performed when any are satisfied.
+
+In addition, you can create as many buckets as you want, each with their
+own triggers, and put fetches into their most appropriate bucket. This
+lets you achieve the best performance and efficiency possible but still
+keep your resolvers decoupled.
+
+[superlifter](https://github.com/oliyh/superlifter) is on Github with
+the code for this post in the [example
+project](https://github.com/oliyh/superlifter/tree/master/example).
+Feedback is very welcome, along with any features you'd like to see or
+issues. I have future plans to support Clojurescript, add a \"debounced
+time\" bucket (which triggers after a fixed quiet period) and improve
+the API around creating buckets dynamically.

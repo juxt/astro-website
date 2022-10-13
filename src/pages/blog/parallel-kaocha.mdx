@@ -1,0 +1,177 @@
+---
+author: 'anc'
+title: 'Speed up your test builds'
+description: 'How to speed up your build using Kaocha and CircleCI'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '27 Jul 2021'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+Having a faster CI (Continuous Integration) feedback loop is always a
+good thing, and there are at least three ways to make your tests faster:
+
+1.  Split them in multiple jobs: This definitively makes sense when you
+    have some clear distinctions, like unit/integration/end-to-end tests
+    that also require different configuration or infrastructure to run.
+    It creates a nice distinction and it's generally a good idea to do
+    this, but it complicates the build pipeline and you can only have so
+    many jobs, so it doesn't help if one of these jobs takes a long time
+    to run.
+
+    1.  Use a parallel test runner: Another option is to use a test
+        runner that supports parallelism directly like
+        [Eftest](https://github.com/weavejester/eftest). The advantage
+        of this is that you can also use it locally, but the
+        disadvantage is that your tests might need to be adapted to be
+        run in parallel, which is sometimes tricky especially if you
+        have lots of side effects.
+
+    2.  Use the parallelism features provided by CircleCI: If one of the
+        jobs still takes too long, and you're running your tests on
+        CircleCI, you can also just use [CircleCI parallelism
+        features](https://circleci.com/docs/2.0/parallelism-faster-jobs/).
+        This accomplishes a similar result that you would achieve with
+        option 2. but it's easier and doesn't require lots of potential
+        work on the tests.
+
+# Kaocha and parallel tests
+
+I won't show examples of options `1` and `2` but dive directly into
+option `3`, showing how to accomplish CircleCI parallelism using
+[Kaocha](https://github.com/lambdaisland/kaocha) as test runner.
+
+To accomplish that you will need to:
+
+- Generate a test plan with `kaocha.repl/test-plan`
+
+- Use the `circleci` command (available automatically in CI) to split
+  the tests
+
+- Run the tests with `kaocha.repl/run`
+
+- Add the CircleCI configuration to specify the number of parallel
+  containers to run
+
+Let's look step-by-step at all the code and configuration you'll need.
+
+First create a namespace like `circleci-parallel`, which will be the
+entry point for your tests:
+
+```clojure
+(ns circleci-parallel
+  (:require [clojure.string :as s]
+            [clojure.java.shell :as sh]
+            [kaocha.repl :as kr]
+            [kaocha.testable :as kt])
+  (:gen-class))
+```
+
+Now we need to have a function that extracts all the test namespaces,
+like:
+
+```clojure
+(defn extract-namespaces []
+  (->>  (kaocha.repl/test-plan)
+        kt/test-seq
+        (filter #(= :kaocha.type/ns (:kaocha.testable/type %)))
+        (map :kaocha.testable/id)
+        sort))
+```
+
+What this does is to loop over all the tests, extract just the
+namespaces and return their id, so it would return something like.
+
+`(:project.bla-test :project.foo-test)`
+
+**_Pro tip: in any non-trivial project never print out or manually
+manipulate the `test-plan` yourself (it's a massive and nested data
+structure), but use the kaocha helper functions like
+`kaocha.testable/test-seq` and the helpers from the `kaocha.hierarcy`
+namespace._**
+
+Now that we have a list of all the namespaces we can use the CircleCI
+command (which will be automatically available) to split the tests by
+timing.
+
+To do that we just shell out to CircleCI passing the namespaces in the
+standard input, and it will return a different list of namespaces to
+each process automatically.
+
+```clojure
+(defn split-tests
+  []
+  (-> (sh/sh "circleci"
+             "tests"
+             "split"
+             "--split-by=timings"
+             :in (s/join "\n" (map name (extract-namespaces))))
+      :out
+      (s/split #"\n")))
+```
+
+Then we need the main function, where we just use `kaocha.repl/run` to
+execute the tests, and exit with a status code = 1 if any test failed.
+
+```clojure
+(defn -main
+ [& _args]
+ (let [result (apply kr/run
+                     (conj (vec (split-tests))
+                           {:plugins                             [:kaocha.plugin/junit-xml]
+                            :kaocha.plugin.junit-xml/target-file "test-results/kaocha/results.xml"}))]
+   (System/exit (if (or (pos? (:kaocha.result/error result))
+                        (pos? (:kaocha.result/fail result)))
+                  1
+                  0))))
+```
+
+A correct `System/exit` call is important otherwise test failures will
+not trigger a failed build in CircleCI. We also set the `junit-xml`
+plugin to be able to generate the test summary in case something goes
+wrong.
+
+Now, the last thing you need is the correct CircleCI configuration,
+setting the `parallelism` value to the number of parallel processes you
+want to run.
+
+```yaml
+run-tests:
+  parallelism: 4
+  docker:
+    - image: <your-image>
+  working_directory: ~/<your-project>
+  steps:
+    - checkout
+    - run: lein run -m your-project.ci-tests
+    - store_test_results:
+        path: test-results
+```
+
+And that's all. Your tests will now run in 4 separate processes (so 4
+times faster in the best possible scenario), while still generating a
+single report.
+
+I've put together a very trivial project to see how it all works in
+[this repository](https://github.com/AndreaCrotti/parallel_tests).
+
+As you can see from the [CircleCI
+steps](https://app.circleci.com/pipelines/github/AndreaCrotti/parallel_tests/5/workflows/4c24f937-92d9-4145-8db1-28c5de7622ae/jobs/5/steps)
+the tests were running in two containers in parallel, and each container
+had test failures, but the results were merged
+[here](https://app.circleci.com/pipelines/github/AndreaCrotti/parallel_tests/5/workflows/4c24f937-92d9-4145-8db1-28c5de7622ae/jobs/5/tests)
+so the report was still complete.
+
+import ci from '../../assets/blog/ci_steps.png'
+
+<Image src={ci} />
+
+import ci2 from '../../assets/blog/ci_steps2.png'
+
+<Image src={ci2} />
+
+import ci3 from '../../assets/blog/ci_test_results.png'
+
+<Image src={ci3} />

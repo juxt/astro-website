@@ -1,0 +1,341 @@
+---
+author: 'oly'
+title: 'Through the looking graph'
+description: 'Experiences adopting GraphQL on a Clojure/script project'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '02 Mar 2018'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+# The journey
+
+This is a short yet rambling tale of my experiences adopting GraphQL on
+a somewhat mature project: a Clojure server and Clojurescript front end,
+two years old with a current team of 5 developers. I discuss where we
+started, why we chose to adopt GraphQL, the libraries we used, the
+mistakes we made, how we feel about it now, and some advice on eating
+cake.
+
+# Where we came from
+
+The application in question is relatively straightforward: it is a UI
+for displaying, in a hopefully coherent and intuitive manner, large
+amounts of financial data which is calculated by other applications.
+
+The data can be logically described as a graph, albeit the special kind
+of graph known as a tree. It is fetched by the server from many other
+upstream applications and glued together into the tree that made most
+sense to our customer, users and developers - what will henceforth be
+referred to as the canonical form.
+
+The domain is quite complicated, so let's use an analogy and say that
+our tree represents a sport, comprising of divisions, teams and players.
+Here's how it looks:
+
+import tg from '../../assets/blog/the-graph.svg'
+
+<img src={tg} />
+
+The vast majority of data in the graph resides in the lower layers
+
+The graph is quite bottom heavy in terms of volume of data - there are
+only a handful of divisions and teams, but many players per team who
+play large numbers of games and generate a lot of statistical data per
+game.
+
+The industry-standard way to represent a large amount of financial data
+is to throw it all into a large table with all the numbers visible at
+once and make the poor user scan it constantly for the one or two bits
+of information they actually need to know.
+
+We wanted our application to be more valuable and helpful to our users.
+With an engaged product owner we designed screens which could
+meaningfully aggregate the fine-grained data and compare it to
+business-driven rules, resulting in a simple green-for-good or
+red-for-bad representation that directed the user's attention to the
+relevant places. Imagine a division summary showing the top 3 teams and
+5 most valuable players, or a team screen showing each player and their
+best and worst statistics for the most recent game. There's no need to
+drown the user in data! The relevant facts are a tiny fraction of the
+total:
+
+import thg from '../../assets/blog/the-highlighted-graph.svg'
+
+<img src={thg} />
+
+Highlighting the bits of data that
+are actually relevant to the user: a tiny fraction of the total
+
+We decided early on to keep things very simple and simply transfer the
+entire graph from the server to the client at the start of a new client
+session, and keep it up-to-date via delta payloads sent over an SSE
+channel. We then derive streams of data on the client for each view
+which select the appropriate slices (we use the excellent
+[re-frame](https://github.com/Day8/re-frame) for this). This gave us a
+number of benefits:
+
+- One mental model to work with on both the server and client -
+  developers can move seamlessly between them
+
+- Zero churn on the server/client API
+
+- Code written to work with the graph was reusable on server and
+  client
+
+We are lucky that browsers have come far enough that tens of megabytes
+of data can be consumed at a canter, making this approach possible. It
+allowed us to think of the application using this very simple model:
+
+import dt from '../../assets/blog/data-to-views.svg'
+
+<img src={dt} />
+
+All we had to think about on the server side was how to populate the
+graph, and on the client side what and how to render _that same graph_.
+We could forget that one side was a JVM process on some remote server
+and the other was running on a Javascript engine in the user's web
+browser and just think of the graph. Adding a new feature consisted of
+populating the new field in the graph and then adding the rendering
+code. This worked well for us - adding new screens to the app was simple
+and quick, delighting our customer.
+
+# Why we looked for something new
+
+import tc from '../../assets/blog/the-cake.jpg'
+
+<Image src={tc} />
+
+When you have a very tall cake it's easiest to
+eat it in thin slices
+
+Our graph of data was getting bigger and bigger as we covered more
+divisions, more teams per division, and more games were played
+generating more stats: the initial payload transferred to the client was
+reaching 120mb (gzipped transit) and SSE updates were increasingly
+frequent, putting load on the server and all the clients. Desktop users
+started complaining of slowness getting in to the app, and it was even
+slower for mobile users.
+
+It was obvious that most of the data being pulled down wasn't needed all
+at the same time. If you're looking at the home page you need to know
+the names of the divisions and the names of the top teams in each
+division. You don't need every player's statistics for every game
+they've ever played! For any given view, you need a particular slice of
+all your data - for high level overviews you need a wide but shallow
+slice, and for detailed views you need narrow but deep slices. There is
+no page on the app where we need all the data in the graph. The argument
+for displaying only the relevant data to the user became the argument
+for only fetching the data relevant to the display.
+
+We wanted a way to reduce the data requirements of the client without
+losing the benefits outlined above of having the canonical graph
+everywhere. The views should be able to declare the minimal set of data
+they need and we should be able to transfer just that while retaining
+the canonical structure.
+
+# Choices
+
+Fragmenting our API into lots of little endpoints that each served a
+specific page was an unappealing option; each would have a lot of
+overlap but at the same time would not be reuseable or interchangeable
+and would also mean churn across the server and client. Plus, it's
+2018 - there must be something better!
+
+Adding a server-side store like Datomic with pull requests sounded very
+heavyweight - our \"database\" was just an in-memory atom containing
+immutable data, and exposing the internal structure and relations of our
+store sounded like it would make refactoring difficult.
+
+GraphQL sounded good because as a specification rather than an
+implementation it keeps our internals hidden, has plenty of third party
+tooling and gives us a way to let the client decide what data it needs
+from the server so we can tailor it to the views. It has a (draft)
+subscriptions feature which we could use to push updates in the graph to
+our client and rather fortunately there existed a Clojure implementation
+called [lacinia](https://github.com/walmartlabs/lacinia) by Walmart Labs
+which was already battle-tested in their production environment.
+
+# First impressions
+
+Initially tools like GraphiQL were flashy and exciting. I played around
+with the [example GraphiQL](http://graphql.org/swapi-graphql/) and had
+the feeling of being a pioneering explorer, slowly uncovering new parts
+of the graph and enthusing about the possibilities of concise and
+perfectly tailored data. It's simple enough that non-technical users
+could use it to find their way around which could also be a great bonus
+for business analysts and others close to the development team.
+
+The next step was to spike our own little implementation into our
+existing webserver - enter
+[lacinia](https://github.com/walmartlabs/lacinia) and
+[lacinia-pedestal](https://github.com/walmartlabs/lacinia-pedestal).
+They are two excellent libraries that do all the heavy lifting for you,
+requiring you to describe your graph as pure Clojure data and allowing
+you to specify your resolvers as pure functions. It is implemented with
+`clojure.spec` meaning if you make a mistake you usually get a nice
+error message to help you fix it. We integrated it into our existing
+pedestal server with very little fuss - we just included their
+interceptors on the routes we wanted to serve the graph from, and it
+sits alongside our Swagger API allowing us to migrate gradually.
+
+lacinia does a great job of interpreting the query and dispatching to
+your resolver and streamer functions to deal with returning the data. It
+doesn't get in the way and is a great example of writing an extensible
+library. One really nice feature is that you may declare a resolver
+function for any node in the graph, giving you complete control over how
+to partition your fetching: if you have a node which is expensive to
+fetch, you only need to perform the fetch if the client explicitly
+requests that field.
+
+It was very exciting to make our first few queries, but almost my next
+thought was
+
+> do I really have to have camel or snake case for my keys?
+
+The idiom in Clojure is for kebab-cased keys but this is not supported
+in GraphQL because it wouldn't work for Javascript clients, which are
+presumably the primary use case. This was quite a disappointment: these
+keys pervade our UI code and would require a lot of rewriting just to
+make it work again. We would also have to write a lot of transforming
+code on the server to feed into lacinia!
+
+I spent a while researching this and contemplating submitting changes to
+lacinia but it was pointed out to me that tooling like GraphiQL, one of
+the main selling points, wouldn't work. In an effort to introduce
+GraphQL without having to rewrite all our UI code I came up with
+[locksmith](https://github.com/oliyh/locksmith) which takes a lacinia
+GraphQL schema and provides functions for efficiently transforming
+between idiomatic Clojure data and GraphQL data.
+
+I also searched, without luck, for a nice idiomatic Clojurescript
+client. The reference [Apollo client](https://www.apollographql.com/)
+was very Javascripty and could not be pushed into `cljsjs` due to the
+way it is packaged. To this end I wrote my own client called
+[re-graph](https://github.com/oliyh/re-graph) which handles queries,
+subscriptions and mutations over HTTP and WebSocket. This, combined with
+locksmith meant that the only changes really required in our client code
+were to add the queries each component needed.
+
+We initially used GraphiQL to write our queries to take advantage of the
+autocomplete and pretty printing before pasting the big query strings
+back into our client code. Formatting them with indentation quickly
+became an issue and we looked into
+[venia](https://github.com/Vincit/venia), but at the time it was missing
+a feature we needed to alias nested keys. That feature is now present,
+but our queries have not really changed since first writing them and the
+urge to de-stringify them has faded.
+
+# Mistakes we made
+
+We set up our subscription to fire whenever our data store changed, as
+this was the simplest thing to do. This re-runs the query and pushes the
+data down the websocket to the client, keeping them up-to-date with the
+latest state on the server. At busy times the subscription was firing
+many times a second but executing the query was taking one or more
+seconds resulting in a backlog building up and extremely high CPU. We
+managed to end up with 40,000 threads all trying to execute queries,
+unsurprisingly causing the application to grind to a halt. To protect
+ourselves the subscription is now debounced to fire no more than once
+every 2.5 seconds and I [proposed this change to
+lacinia](https://github.com/walmartlabs/lacinia-pedestal/pull/56) to
+stop unlimited threads being created and to drop superceded interim
+values. The hard lesson is lacinia doesn't protect you from your own
+performance issues - that part is up to you.
+
+It also turns out that lacinia does not deduplicate subscriptions with
+the same id, resulting, if you are not careful, in multiple threads
+doing identical work to return identical data on the client side. We
+have added deduplication inside our subscription streamer but I may also
+propose this is incorporated into lacinia-pedestal. Another hard lesson:
+lacinia doesn't protect you from bad clients.
+
+We took the opportunity to simplify our graph which felt good but
+increased the amount of work to do - it became a small rewrite rather
+than a drop in solution. We thought if we don't do it now, it will be
+harder later and we might never do it. In retrospect I wish we had
+dropped in GraphQL as-is to get the benefits and do the refactoring
+later, but we'll never know now which way was better.
+
+In addition to the simplification we were also tempted to further reduce
+the data transferred by shortcutting the graph and adding derived fields
+like \"bestPlayer\" at the team level. This saves on data - to calculate
+the best player you'd have to transfer data about all the players and
+sort them on the client side - but it breaks our adherence to the one
+canonical form.
+
+import dl from '../../assets/blog/data-vs-logic.svg'
+
+<img src={dl} />
+
+Hidden logic or verbosity? The GraphQLer's
+dilemma
+
+This is a philosophical trade-off which we haven't balanced
+satisfactorily yet. On the one hand it reduces the data requirements
+even further and simplifies the client but on the other it complects
+data and logic which seems to break the GraphQL paradigm of pure data
+and explicit behaviour. I'm not happy with these derived fields but they
+are a huge temptation when you own both the client and the server. I
+think a better way would be to request the list of players as before,
+but sorted by performance and limited to 1. The data structure remains
+unchanged, is minimised, and the implicit server logic in the name
+\"bestPlayer\" becomes explicit logic driven by the client.
+
+Our client side code has also become slightly harder to re-use across UI
+components because some functions rely on fields which we may have
+forgotten to include in all the queries that use it. It took some time
+to weed these out, but is an area where `clojure.spec` could help if we
+had functions that failed if they were missing input fields that we had
+missed from our queries.
+
+# Overall impressions
+
+lacinia and lacinia-pedestal made it very easy to get going with GraphQL
+and the way our client code was arranged allowed us to migrate just a
+couple of views, including the home page, as a spike. From spending 60+s
+to transfer 120mb we now take a small fraction of a second to load a few
+kilobytes. Our users are happy once again and we intend to migrate the
+rest of the application and retire the SSE channel.
+
+Performance is your responsibility and you need to think carefully about
+your implementation, including the size of your graph, typical payloads,
+frequency of subscription updates and number of concurrent users.
+
+Finally real-life queries can seem very verbose - you have to explicitly
+list every field you want back from the server, which is tiresome when
+you want them all, but the lack of a wildcard is by design: you won't
+get the benefits of GraphQL if you don't think about what fields you
+want and why.
+
+# What's next?
+
+Our server gathers data from many other applications and in every case
+each response returns more data than we want. This increases the load on
+both us and the services we are calling; if they all had a GraphQL
+endpoint we could drastically reduce the amount of data flying around.
+Pushing the GraphQL revolution upstream is already something we're
+looking into to help the next generation of applications and encourage
+small and lightweight UIs that can easily be put together.
+
+Performance is something we need to monitor carefully. The savings on
+the client are offset to some extent by greater demands on the server.
+I've put together a library called
+[lacinia-gen](https://github.com/oliyh/lacinia-gen) which takes a
+lacinia graph description and creates generators for the data with the
+intention of using it to find hotspots and improve the overall
+performance.
+
+Refactoring of our graph specification is also something I'd like to
+look into. It's hard to get it right and strike the right balance of
+being useful and remain as just pure data, but I think pure data is the
+way; time will tell.
+
+The libraries I wrote for our GraphQL journey -
+[re-graph](https://github.com/oliyh/re-graph),
+[locksmith](https://github.com/oliyh/locksmith) and
+[lacinia-gen](https://github.com/oliyh/lacinia-gen) - are all in active
+use on our project and have served us well. All are on GitHub, and as
+always feedback and contributions are very welcome.
