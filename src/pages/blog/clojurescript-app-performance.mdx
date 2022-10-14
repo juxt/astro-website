@@ -1,16 +1,16 @@
 ---
-author: "lda"
-title: "Speed up your ClojureScript Webapp"
-description: "Some useful tools and tips to improve your app performance"
-category: "clojurescript"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "21 Oct 2021"
-heroImage: "mock3.jpg"
+author: 'lda'
+title: 'Speed up your ClojureScript Webapp'
+description: 'Some useful tools and tips to improve your app performance'
+category: 'clojurescript'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '21 Oct 2021'
+heroImage: 'mock3.jpg'
 tags:
-  - "performance"
+  - 'performance'
 ---
 
-import { Image } from "@astrojs/image/components";
+import { Image } from '@astrojs/image/components'
 
 From October 2020 until July 2021, I had the chance to work on an
 exciting greenfield project in the investment sector. The goal was to
@@ -49,7 +49,7 @@ so you can learn how to make the most out of it.
 To illustrate the usefulness of this tool let's start by looking at the
 performance of a single task:
 
-import p from "../../assets/blog/performance1.png";
+import p from '../../assets/blog/performance1.png'
 
 <Image src={p} />
 
@@ -63,7 +63,7 @@ By hovering over the rectangle, you get the number of milliseconds the
 function in question took to execute. However, by clicking on it you can
 view a lot of extra information that helps better explore the code.
 
-import p2 from "../../assets/blog/performance2.png";
+import p2 from '../../assets/blog/performance2.png'
 
 <Image src={p2} />
 
@@ -73,7 +73,7 @@ Additionally, by clicking on any of the file name links located at the
 end of the rows, you can see the individual lines of source code that
 are likely to downgrade performance.
 
-import p3 from "../../assets/blog/performance3.png";
+import p3 from '../../assets/blog/performance3.png'
 
 <Image src={p3} />
 
@@ -97,7 +97,7 @@ The performance monitor can be found by hitting `ESC` from the devtools.
 If it's not among the available tabs, it needs to be added from the left
 three-dots menu. Here's a picture of what it looks like:
 
-import pm from "../../assets/blog/performance-monitor.png";
+import pm from '../../assets/blog/performance-monitor.png'
 
 <Image src={pm} />
 
