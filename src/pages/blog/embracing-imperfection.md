@@ -1,11 +1,11 @@
 ---
-author: "jon"
-title: "Embracing Imperfection"
+author: 'jon'
+title: 'Embracing Imperfection'
 description: "Jon Pither's past mistakes, and how to cope with real data in an imperfect world"
-category: "analysis"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "08 Sep 2022"
-heroImage: "mock3.jpg"
+category: 'analysis'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '08 Sep 2022'
+heroImage: 'mock3.jpg'
 ---
 
 I'm haunted by the mess I made earlier on in my career. I saw software

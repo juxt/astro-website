@@ -1,11 +1,11 @@
 ---
-author: "mtr"
-title: "Is Typed Clojure worth the trouble?"
-description: "Working with types in Clojure"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "22 Jun 2015"
-heroImage: "mock3.jpg"
+author: 'mtr'
+title: 'Is Typed Clojure worth the trouble?'
+description: 'Working with types in Clojure'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '22 Jun 2015'
+heroImage: 'mock3.jpg'
 ---
 
 In this post I present some thoughts on working with [Typed

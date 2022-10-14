@@ -1,17 +1,17 @@
 ---
-author: "jon"
-title: "Announcing our UK training Clojure courses"
-description: "We are running one-day training courses"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "06 Jan 2017"
-heroImage: "mock3.jpg"
+author: 'jon'
+title: 'Announcing our UK training Clojure courses'
+description: 'We are running one-day training courses'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '06 Jan 2017'
+heroImage: 'mock3.jpg'
 tags:
-  - "training"
+  - 'training'
 ---
 
 Are you thinking of taking your very first Clojure steps? Or are you
-looking to get familiar with a top to bottom *stack* that will help you
+looking to get familiar with a top to bottom _stack_ that will help you
 to achieve most of your goals?
 
 Come to the joyful epicentre of 1970s UK [architectural serenity that is
@@ -27,8 +27,8 @@ restaurants](http://www.thehub-miltonkeynes.com/) to choose from for
 luncheon.
 
 Please see our [training page](/training.html) for details. We are
-offering two different one-day courses. *Day 0* is for people wanting to
-use Clojure from the very beginning and *full stack* is about creating
+offering two different one-day courses. _Day 0_ is for people wanting to
+use Clojure from the very beginning and _full stack_ is about creating
 end to end applications using a selected set of complimentary
 components; what we at JUXT are using on a regular basis.
 

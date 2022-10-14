@@ -1,11 +1,11 @@
 ---
-author: "dmc"
-title: "Clojure and Vim: An overview"
+author: 'dmc'
+title: 'Clojure and Vim: An overview'
 description: "It's very possible"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "13 Dec 2016"
-heroImage: "mock3.jpg"
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '13 Dec 2016'
+heroImage: 'mock3.jpg'
 ---
 
 I want to encourage Vim users to continue using Vim as their primary

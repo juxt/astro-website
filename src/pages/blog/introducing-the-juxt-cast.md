@@ -1,13 +1,13 @@
 ---
-author: "alx"
-title: "Introducing the JUXT Cast"
-description: ""
-category: "podcast"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "18 Jul 2019"
-heroImage: "mock3.jpg"
+author: 'alx'
+title: 'Introducing the JUXT Cast'
+description: ''
+category: 'podcast'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '18 Jul 2019'
+heroImage: 'mock3.jpg'
 tags:
-  - "clojure"
+  - 'clojure'
 ---
 
 ## We're making a podcast!
@@ -91,4 +91,3 @@ procedure [here](https://www.youtube.com/watch?v=pHwYgTX9tNs). And don't
 forget to check out (and subscribe) to our podcast, its on all of the
 [major podcasting
 services](https://overcast.fm/itunes1471141263/juxt-cast).
-
