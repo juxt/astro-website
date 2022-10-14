@@ -1,0 +1,284 @@
+---
+author: 'lda'
+title: 'A ClojureScript form library for Reagent and Re-frame'
+description: '100% customizable, 0% boilerplate'
+category: 'clojurescript'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '22 Dec 2019'
+heroImage: 'mock3.jpg'
+tags:
+  - 'forms'
+---
+
+import { Image } from '@astrojs/image/components'
+import '../../assets/style/clojurescript-form-library.css'
+
+# Why did I build a new form tool?
+
+For the past year, I have been leading the frontend development of a
+couple of projects that make heavy use of forms. When trying some of the
+many ClojureScript form libraries out there, I often faced situations
+where I wished I had either more control over the style or more
+customization power around the input handlers.
+
+import logo from '../../assets/blog/fork-logo.jpg'
+
+<Image src={logo} width={100} />
+
+Long story short, I decided to build
+[**Fork**](https://github.com/luciodale/fork), a lightweight piece of
+software that aims at abstracting the form logic, while keeping the UI
+and validation completely decoupled.
+
+# Lessons learnt along the way
+
+To get this form library to its current state and design, I explored
+several approaches that will be summarized below.
+
+## Local state VS global state
+
+import fl from '../../assets/blog/form-local-global.jpg'
+
+<Image src={fl} />
+
+As Re-frame was already a project dependency, the first natural thought
+I had was to leverage the events and subscriptions to manage the form
+state. It did not work out well for two main reasons:
+
+- The form components needed clean up logic when unmounted, adding
+  unnecessary overhead
+
+- It did not feel right to use the global state to store values
+  strictly related to a single component
+
+As a consequence, I built the logic around a simple Reagent atom and
+included Re-frame only to manage global events such as form submissions
+and server errors.
+
+## Input abstraction VS handler abstraction
+
+import fd from '../../assets/blog/form-abstraction.jpg'
+
+<Image src={fd} />
+
+As I had already seen some libraries wrapping the input component and
+defining its behaviour through the props, I thought this approach
+deserved a shot. In my personal experience, it turned out to be a
+terrible idea because the code could not scale without sacrificing
+simplicity since:
+
+- More functionality meant constantly revisiting and refactoring the
+  core input function, rapidly becoming too complex and hard to
+  maintain
+
+- Custom UI styling was only partially achievable, as the API provided
+  too much abstraction
+
+For these reasons, I chose to simply abstract the input handlers and
+leave the rest to the developer, achieving a thin abstraction layer.
+
+Examples of both approaches are showed below:
+
+### Input Abstraction
+
+As you can see, the input component cannot be accessed directly. You
+might get around this problem by having an `:attrs` map that is then
+merged with the input attributes, yet the abstraction would start
+becoming meaningless at this point.
+
+```clojure
+(defn- input [props]
+  [:input
+   (merge
+    {:name (:name props)
+     :value (:value props)
+     :class (:class props)
+     :type (:type props)
+     :on-change (:on-change props)
+     ...}
+    (:attrs props))])
+
+(defn input-API [props]
+  [:div (:attrs-container props)
+   [:label (:label props)]
+   [input (merge
+           {:type "text"
+            ...}
+           props)]])
+
+(defn textarea-API [props]
+  [:div (:attrs-container props)
+   [:label (:label props)]
+   [input (merge
+           {:type "textarea"
+            ...}
+           props)]])
+```
+
+### Handler Abstraction
+
+With this approach, the API does not wrap any component. It only
+provides functions that perform all the boilerplate logic for you.
+
+```clojure
+(defn developer-code
+  [{:keys [handle-change values] :as api-utils}]
+  [:input
+   {:name "input"
+    :value (values "input")
+    :on-change handle-change
+    ...}])
+```
+
+## Built-in VS no validation
+
+import fv from '../../assets/blog/form-validation.jpg'
+
+<Image src={fv} />
+
+The first two releases of Fork included built-in validation. Besides
+being an optional feature, the validation logic was tightly coupled to
+the input handlers. As a consequence, I came to the conclusion that I
+had to rework it because:
+
+- Unwanted noise was being added to the input handlers, especially
+  when the built-in validation was not being used
+
+- Its side effects were increasing complexity in order to cover some
+  edge case scenarios
+
+The solution? To have the validation fully removed from the inner API.
+Now, Fork accepts a `:validation` option that calls any **pure**
+function on the form values and provides the returned data through the
+`:errors` key.
+
+# Let's have some fun!
+
+Now that you know Fork a bit better, it's time to look at some code and
+examples to leverage this library at its full.
+
+First, download the Fork dependency locally:
+
+<a href='https://clojars.org/fork'>
+  <img
+    src='https://clojars.org/fork/latest-version.svg'
+    style='margin-bottom: 1em;'
+  />
+</a>
+
+Then, require it in your namespace:
+
+```clojure
+(ns your.namespace
+  (:require
+   [fork.core :as fork]))
+```
+
+## Reading only
+
+Easy job! We have one input `"read"` that we initiate with the value
+`"Label"`.
+
+```clojure
+(defn my-form []
+  [fork/form {:initial-values
+              {"read" "Label"}}
+   (fn [{:keys [values
+                handle-change
+                handle-blur]}]
+     [:form
+      [:label (values "read")]
+      [:input
+       {:name "read"
+        :value (values "read")
+        :on-change handle-change
+        :on-blur handle-blur}]])])
+```
+
+<div class='section'>
+  <div id='read'></div>
+</div>
+
+## Submitting
+
+Let's add some logic to what we already have. We need a submit handler
+and a submit button.
+
+```clojure
+(defn my-form []
+  [fork/form {:initial-values
+              {"read" "Label"}
+              :prevent-default? true
+              :on-submit #(js/alert (:values %))}
+   (fn [{:keys [form-id
+                values
+                handle-change
+                handle-blur
+                handle-submit]}]
+     [:form {:id form-id
+             :on-submit handle-submit}
+      [:label (values "read")]
+      [:input
+       {:name "read"
+        :value (values "read")
+        :on-change handle-change
+        :on-blur handle-blur}]
+      [:button
+       {:type "submit"}
+       "Submit me!"]])])
+```
+
+Note that we also want to use a `form-id` option to let Fork know about
+the input elements. In this case we just take it from the props, as we
+don't care about what it really is.
+
+However, if we want to specifically set it, we only have to add a
+`:form-id` key to the first argument map.
+
+Additionally, we choose to prevent the submission default behaviour not
+to send a server request.
+
+<div class='section'>
+  <div id='submit'></div>
+</div>
+
+## More Examples
+
+As you can see, Fork does not constrain your code in that its modularity
+allows you to include more library functionality as you need.
+
+For example, you might want to combine a Fork form with some custom
+inputs that are completely managed by you. You can easily achieve this
+by swapping into the `:state` atom that is provided by Fork.
+
+```clojure
+(fn [{:keys [values
+             state
+             handle-change
+             handle-blur]}]
+  [:form
+   [:input
+    {:name "read"
+     :value (values "read")
+     :on-change handle-change
+     :on-blur handle-blur}]
+   [:input
+   ;; relevant code from here
+    {:value (values "custom")
+     :on-change
+     #(swap! state assoc-in [:values "custom"]
+             (-> % .-target .-value))}]
+   ...])
+```
+
+If you want to know more about the features of this ClojureScript form
+library and how to use it with Re-frame, you can check out its github
+repository [here](https://github.com/luciodale/fork).
+
+To conclude, I am going to show you a mock registration Fork form with
+validation, as well. Feel free to experiment and play with it.
+
+<div class='section'>
+  <div id='register'></div>
+</div>
+<script src='/scripts/clojurescript-form-library.js'></script>

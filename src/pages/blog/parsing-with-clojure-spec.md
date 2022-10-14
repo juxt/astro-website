@@ -27,7 +27,7 @@ which is a lot more intuitive than it sounds.
 iCalendar files are made up of a set of _content_ lines defined by the
 following rule:
 
-```bnf
+```
 contentline = name *(";" param ) ":" value CRLF
 ```
 
@@ -39,7 +39,7 @@ Of course, we now need to know precisely what names, parameters and
 values are. These are also defined for us (but for the purposes of this
 article I've simplified somewhat):
 
-```bnf
+```
 name = iana-token
 iana-token = 1*(ALPHA / DIGIT / "-")
 param = param-name "=" param-value

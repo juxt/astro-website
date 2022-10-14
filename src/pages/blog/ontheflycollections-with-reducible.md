@@ -193,7 +193,7 @@ created a problem, there is scope for turning this into a reducible too
 
 so
 
-```cl
+```clj
 (reduce + (iterator-reducible nil (.iterator (range 10))))
 
 ClassCastException dev$iterator_reducible$reify__54612 cannot be cast to clojure.lang.IReduce  clojure.core.protocols/fn--7831 (protocols.clj:75)
@@ -203,7 +203,7 @@ will throw you a ClassCastException
 
 but
 
-```cl
+```clj
 (transduce identity + (iterator-reducible nil (.iterator (range 10))))
 => 45
 ```

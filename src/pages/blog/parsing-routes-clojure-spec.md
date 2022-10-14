@@ -63,7 +63,7 @@ everything else with a `(throw (new Exception "Read the source code"))`.
 Let's see if using `clojure.spec` can help us. Let's start with
 documenting the simplest specs firsts.
 
-```cl
+```clj
 (s/def ::path string?)
 (s/def ::constraints (s/and map? (comp :constraints meta)))
 (s/def ::interceptors (s/and vector? (comp :interceptors meta)))
@@ -75,7 +75,7 @@ There isn't much going on here except for the `::route` spec at the end
 of the `children` definition. That indicates that our spec is recursive.
 Let's write `::route` down:
 
-```cl
+```clj
 (s/def ::route (s/cat :path ::path
                       :constraints (s/? ::constraints)
                       :interceptors (s/? ::interceptors)
@@ -94,7 +94,7 @@ paragraph _Sequences_ here <http://clojure.org/about/spec>.
 
 Now what about parsing?
 
-```cl
+```clj
 (defn expand-terse-routes [routes]
   (s/conform ::routes routes))
 
@@ -125,7 +125,7 @@ Done. All happens magically thanks spec conforming.
 It's time to check the error messages. What happens if we forget to
 specify the path string at the beginning of a route?
 
-```cl
+```clj
 ;; Note the #_ comments out the path string
 
 (expand-terse-routes
@@ -141,7 +141,7 @@ specify the path string at the beginning of a route?
 
 Ok we need to provide some more info. Let's use `s/explain`
 
-```cl
+```clj
 (defn expand-terse-routes [routes]
   (if (s/valid? ::routes routes)
     (s/conform ::routes routes)
@@ -160,7 +160,7 @@ Ok we need to provide some more info. Let's use `s/explain`
 
 Not too bad. What if this happens down in the nested routes?
 
-```cl
+```clj
 (expand-terse-routes
  [["/" ^:interceptors [:json-body]
    ["/pets" {:get  :retrieve-all-pets
@@ -182,7 +182,7 @@ should be relative to that vector alone.
 What if we mess up the order of the elements? (e.g. we put interceptors
 and constraints after the handlers?)
 
-```cl
+```clj
 (expand-terse-routes
  [["/" ^:interceptors [:json-body]
    ["/pets" {:get  :retrieve-all-pets
@@ -201,7 +201,7 @@ Totally unhelpful.
 What `clojure.spec` provides though is the very descriptive
 `s/explain-data`, which is a data representation of the problem
 
-```cl
+```clj
 (s/explain-data ::routes
  [["/" ^:interceptors [:json-body]
    ["/pets" {:get  :retrieve-all-pets
@@ -241,7 +241,7 @@ domain. Proof is left as an exercise for the reader.
 
 Full code example
 
-```cl
+```clj
 (require '[clojure.spec :as s])
 
 (s/def ::path string?)
