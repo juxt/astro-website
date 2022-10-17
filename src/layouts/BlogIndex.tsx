@@ -24,10 +24,13 @@ const searchClient = {
 
 function CustomHits({ blogs }) {
   const { hits } = useHits()
+  const filteredHits = hits.filter((hit) => {
+    return blogs.get(hit.permalink)
+  })
   return (
     <div>
       <div class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'>
-        {hits.map((hit) => (
+        {filteredHits.map((hit) => (
           <div key={hit.permalink}>
             <BlogCard {...blogs.get(hit.permalink)} />
           </div>
@@ -97,7 +100,7 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
                   showMore={true}
                 />
               </div>
-            </div>{' '}
+            </div>
           </Transition>
         </div>
 
