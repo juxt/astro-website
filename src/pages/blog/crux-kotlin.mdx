@@ -1,0 +1,680 @@
+---
+author: "aon"
+title: "Kotlin Adventures With XTDB"
+description: "Fluid interfaces for happy databases"
+category: "xtdb"
+layout: "../../layouts/BlogPost.astro"
+publishedDate: "02 Jul 2021"
+heroImage: "mock3.jpg"
+---
+
+import { Image } from "@astrojs/image/components";
+
+I recently had the opportunity to participate in a XTDB workshop run by
+Jeremy Taylor. This opened my eyes to the power and flexibility of XTDB.
+
+A database that allows you to query not only forward and backward in
+time, but orthogonally constrained on when data was known? That's
+awesome! If Nixon had used XTDB, then Howard Baker's [famous
+question](https://youtu.be/LnaEUCSFk38) would have been trivial.
+
+As a Kotlin engineer with my Clojure knowledge in its infancy, I set out
+to see how I would use XTDB within a purely Kotlin context. The Java API
+gave me great place to start, so I cloned the repo and began my journey
+of discovery. My goal was to create an idiomatic way for Kotlin devs to
+interact with XTDB which requires zero knowledge of Clojure
+datastructures.
+
+To get started, we need to learn a bit about Kotlin's extension
+functions. Once we have that foundation, we'll take a deep dive into
+creating XTDB DSLs with Kotlin.
+
+# Kotlin Extensions
+
+One of my favourite features of Kotlin is the ability to add functions
+to classes and interfaces without the requirement to wrap them in an
+additional class.
+
+For example, let's say we have a Java class from a third party that we
+can't modify:
+
+```java
+public class Person {
+    private String name;
+    private String lastName;
+
+    public Person(String name, String lastName) {
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+}
+```
+
+We might want to have a convenient function to get the full name of the
+person. This can be implemented in the following ways:
+
+```kotlin
+fun Person.getFullName(): String {
+    return "$name $lastName"
+}
+
+// Alternatively
+fun Person.getFullName() = "$name $lastName"
+
+// Or even
+val Person.fullName get() = "$name $lastName"
+
+// Usage
+val me = Person("Alistair", "O'Neill")
+println(me.getFullName())
+
+// Or
+println(me.fullName)
+```
+
+In Kotlin, we can use `.name` and `.lastName` rather than calling
+`.getName()` and `.getLastName()`. When interacting with Java classes,
+any fields which have a getter and setter can be used directly as if
+they are `var` (mutable reference). Any field with just a getter is
+treated as a `val` (immutable reference).
+
+Indeed, the name of the underlying field is irrelevant. The Java
+getter/setter could look like the following, and our Kotlin would be the
+same:
+
+```java
+public class Person {
+    private String foo;
+
+    // ... constructor elided ...
+
+    public String getName() {
+        return foo;
+    }
+
+    public void setName(String name) {
+        this.foo = name;
+    }
+
+    // ... other accessor methods elided ...
+}
+```
+
+Why is this useful, though? This allows us to add Kotlin functions to
+the Java API in xtdb-core without requiring any Kotlin code whatsoever
+in `xtdb-core`! All Kotlin code can live in a separate module entirely.
+
+# Idiomatic DSLs with Kotlin
+
+In [kotlin-dsl](https://github.com/xtdb/xtdb/tree/main/labs/kotlin-dsl)
+we have implemented extensions to `IXtdbSubmitClient` and
+`IXtdbDataSource` that allow us to write queries and transactions
+directly.
+
+For example, to find people with the same forename and surname, a query
+looks like this:
+
+```kotlin
+// Set up
+val node = XtdbKt.startNode { }
+val person = "person".sym
+val name = "name".sym
+val forenameKey = "forename".kw
+val surnameKey = "surname".kw
+
+node.db().q {
+    find {
+        +person
+        +name
+    }
+
+    where {
+        person has forenameKey eq name
+        person has surnameKey eq name
+    }
+}
+```
+
+This looks nice, but what is actually going on here?
+
+`IXtdbDataSource.q` is an extension function which takes any number of
+parameters and, finally, an argument of type `QueryContext.() -> Unit`.
+The type `QueryContext.() -> Unit` is a function which has
+`QueryContext` as a Receiver, doesn't take arguments, and doesn't return
+anything.
+
+When we say \"Receiver\" we mean that, within the function, a reference
+to `this` refers to an instance of `QueryContext`. Our scope has become
+`QueryContext`. Most of our DSL will operate within this scope, giving
+us a sandbox to build up queries using a syntax that's easy on the eyes.
+
+The sections ahead will explain our use of trailing lambdas (sometimes
+called \"lambda block syntax\" in other languages), scoped extensions,
+operator overloading, infix functions, and a bit of invocation mojo.
+Finally, we'll tie it all together to create an even more powerful DSL
+around [XTDB Query
+Rules](https://xtdb.com/reference/queries.html#rules).
+
+## 1. Using Lambdas
+
+In Kotlin, when calling a function where the last argument you supply is
+a lambda (denoted by curly braces), you are allowed to move the lambda
+outside the function call's parentheses.
+
+Thus, the above could equivalently have been called as follows (although
+your IDE will yell at you):
+
+```kotlin
+node.db().queryKt({
+    find {
+        +person
+        +name
+    }
+
+    where {
+        person has forenameKey eq name
+        person has surnameKey eq name
+    }
+})
+
+// Moved outside of the parentheses
+node.db().queryKt() {
+    find {
+        +person
+        +name
+    }
+
+    where {
+        person has forenameKey eq name
+        person has surnameKey eq name
+    }
+}
+```
+
+In fact, because our `IXtdbDatasource.q` can only take a single function
+argument (if you provide no parameters for the query), we can omit the
+`()` entirely from the function call to leave us with the original
+syntax. This results in more human-readable queries.
+
+So, within our curly braces, we are acting within the scope of an
+instance of `QueryContext`. This is why we are able to call functions
+like `find` which are defined in the
+[QueryContext](https://github.com/xtdb/xtdb/blob/main/labs/kotlin-dsl/src/main/kotlin/xtdb/api/query/context/QueryContext.kt)
+class.
+
+## 2. Extensions with Scopes
+
+Next, let's look at this curious usage of `+person`. As I've already
+mentioned, Kotlin allows you to add extension functions to extant types.
+For most purposes, this is done at the top level so that your extension
+is available everywhere. For example:
+
+```kotlin
+val String.sym: Symbol get() = Symbol.intern(this)
+```
+
+After adding this extension method, anywhere I want to create a symbol
+from a string, it is as convenient as `"foo".sym`.
+
+However, extensions don't need to be created at a global level. They can
+be declared within a class to restrict their usage to within the scope
+of that class. Returning to the Person example from earlier, we could
+have the following:
+
+```kotlin
+class Family(val father: Person, val mother: Person, val child: Person) { //
+    val Person.fullName get() = "$name $lastName"
+}
+
+fun main() {
+    val father = Person("Dan", "O'Neill")
+    val mother = Person("Joanne", "O'Neill")
+    val me = Person("Alistair", "O'Neill")
+
+    val family = Family(father, mother, me)
+
+    // This won't compile. Person.fullName is not defined in this scope.
+    println(father.fullName)
+
+    // This works because in the apply block, we have the scope of Family.
+    family.apply {
+        println(father.fullName)
+    }
+}
+```
+
+- This is the Person class defined above in Java
+
+So, how is this utilised in our Query syntax?
+
+In
+[FindContext](https://github.com/xtdb/xtdb/blob/main/labs/kotlin-dsl/src/main/kotlin/xtdb/api/query/context/FindContext.kt),
+we define
+
+```kotlin
+operator fun FindClause.unaryPlus() = add(this)
+
+operator fun Symbol.unaryPlus() = +FindClause.SimpleFind(this)
+```
+
+We have added the extension function `unaryPlus` to the `Symbol` class
+within the scope of `FindBuilder`.
+
+By restricting our extension of `Symbol` to within the scope of our
+BuilderContext, it means that the body of the extension can interact
+with (and mutate!) the instance of BuilderContext. Furthermore, it
+avoids conflicts where we might wish to have `+person` mean something
+else in another context.
+
+## 3. Operator Functions
+
+`unaryPlus` is a special type of function known as an `operator`
+function. In practice, this means that it is called using special
+syntax.
+
+Operator functions are usually used to define things like what `a + b`
+means. Let's have a look at a simple example.
+
+```kotlin
+data class Fraction(val n: Int, val d: Int) {
+    override fun toString() = "$n/$d"
+}
+
+fun main() {
+    val a = Fraction(1, 3)
+    val b = Fraction(1, 2)
+    println(a + b)
+}
+```
+
+This won't compile because our compiler doesn't know what it means to
+add two Fraction classes together. We can define this using the operator
+function `plus`. (I don't account for simplifying fractions, but that
+isn't important for the example.)
+
+```kotlin
+data class Fraction(val n: Int, val d: Int) {
+    override fun toString() = "$n/$d"
+    operator fun plus(other: Fraction) = Fraction(n * other.d + other.n * d, d * other.d)
+}
+
+// Or we could do it as an extension
+data class Fraction(val n: Int, val d: Int) {
+    override fun toString() = "$n/$d"
+}
+
+operator fun Fraction.plus(other: Fraction) = Fraction(n * other.d + other.n * d, d * other.d)
+```
+
+Both of these implementations convert `a + b` to `a.plus(b)` with our
+supplied definitions. The difference is that the first requires us to
+change the Fraction class, whereas the latter is as an extension so can
+be added elsewhere (or in a given special scope).
+
+In the XTDB query example, we have `+person` where `person` is an
+instance of `Symbol`. This line will call `person.unaryPlus()` which is
+defined in the scope of `FindContext` to add a `SimpleFind` clause to
+our list for the Find section of the query.
+
+## 4. Infix Functions
+
+One of the benefits of having a DSL is to allow complicated function
+calls or data structures to read more naturally.
+
+Let's take the example of adding a restriction to the `where` section of
+a query to check whether a person document has the key `:name`. Using
+normal Kotlin functions, this might look like:
+
+```kotlin
+fun hasKey(symbol: Symbol, key: Keyword) = TODO("Add to your list of clauses or w/e")
+
+// Used like:
+db.q {
+    where {
+        hasKey(person, name)
+    }
+}
+
+// Or we could define it as an extension function
+fun Symbol.hasKey(key: Keyword) = TODO("Do the thing")
+
+// Used like:
+db.q {
+    where {
+        person.hasKey(name)
+    }
+}
+```
+
+While the latter is certainly nicer than the former, it still doesn't
+give us the \"plain English\" feel of a fluid interface. We can do
+better by using an `infix` operation. Even if you have never
+specifically heard of infix operations, much less implemented one
+yourself, you have almost certainly used one.
+
+```kotlin
+val me = mapOf(
+    "name" to "Alistair",
+    "age" to 26,
+    "National Insurance" to "lol, fat chance"
+)
+```
+
+If we look at the signature of `mapOf`, we find:
+
+```kotlin
+public fun <K, V> mapOf(vararg pairs: Pair<K, V>): Map<K, V>
+```
+
+That's a little odd. When we were creating our map, we never explicitly
+created `Pair` objects. Come to think of it, the way we just have `to`
+between two values is rather strange.
+
+Fortunately, Kotlin is Open Source, so we can press Ctrl-B on it and
+have a look at the definition to see what's going on:
+
+```kotlin
+public infix fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
+```
+
+This is a function that acts \"on\" an object of type A with a single
+argument of type B. These are used as the `first` and `second` values of
+the returned `Pair`.
+
+The `infix` modifier is what allows us to call the function without
+needing a dot or parentheses. Note that you can call an infix function
+the \"normal\" way if you really want to:
+
+```kotlin
+// Using the infix
+"Alistair" to "O'Neill"
+
+// Calling normally
+"Alistair".to("O'Neill")
+```
+
+There are some restrictions on what can be made an infix function and
+what can't:
+
+- The function must take exactly one argument which cannot be a
+  `vararg`, nor can it have a default value.
+
+- The function must be a member of a class, or an extension function
+  (i.e. it must have a Receiver).
+
+With this in mind, let's consider how to implement syntax that modifies
+our `WhereContext` and uses more human looking syntax:
+
+```kotlin
+// Desired syntax:
+where {
+    person has name
+}
+
+// The definition within the WhereContext class
+infix fun Symbol.has(key: Keyword) = TODO("Mutate our context accordingly")
+```
+
+Happy days! We can now use `has` in between a `Symbol` and `Keyword` to
+do ...something. In our case, we might want to add a newly constructed
+clause to a list.
+
+Things start to get a little hairy when we want to chain together infix
+functions. We not only want to be able to say that `person` has a `name`
+key, but also want to be able to constrain what the value of this key
+is.
+
+```kotlin
+// Desired syntax:
+where {
+    person has name               // Checks for the existence of a name key
+    person has name eq "Alistair" // Checks that the person has a name key with value "Alistair"
+}
+```
+
+When infix functions are chained in such a way, the order of operations
+is from left to right. That is to say, the above code is equivalent to:
+
+```kotlin
+where {
+    (person has name) eq "Alistair"
+}
+```
+
+If we want our DSL to look like this in practice, it means that our `eq`
+function will need to be defined on whatever the result type of the
+`has` function is.
+
+Having `has` spit out a bespoke data class which is then extended with
+the `eq` function would be absolutely fine if we only wanted to support
+the five word statement. We would just have the code that mutates the
+Context act in the `eq` function.
+
+However, we want both of them to be valid. This means that we still need
+to mutate the Context as a side effect of `has` in case there isn't an
+`eq` function being called. In the case that there is an `eq` call, we
+don't want to add two clauses to our `where` section. In this specific
+instance, it would be fine to add both query results-wise as they are
+overlapping restrictions: a document can't have a key with a specific
+value if it doesn't have that key at all!
+
+I'm not happy with that, however. It would result in a `Query` object
+that doesn't strictly represent what a user has input, and that's just
+bad design (and probably has performance implications for the query
+engine). Instead, I implemented a buffer system where the most recent
+clause isn't added to the list for the section until either build time,
+or a new clause is started.
+
+In the case that the `eq` form of the statement is used, it replaces the
+buffered `HasKey` clause with a `HasKeyEqualTo` clause:
+
+```kotlin
+// Within WhereContext
+data class SymbolAndKey(val symbol: Symbol, val key: Keyword)
+
+infix fun Symbol.has(key: Keyword) =
+    SymbolAndKey(this, key).also {
+        add(HasKey(this, key))
+    }
+
+infix fun SymbolAndKey.eq(value: Any) = replace(HasKeyEqualTo(symbol, key, value))
+
+
+// The abstract class which sets up the buffer
+abstract class ComplexBuilderContext<CLAUSE, TYPE>(
+    private val constructor: (List<CLAUSE>) -> TYPE
+): BuilderContext<TYPE> {
+    private val clauses = mutableListOf<CLAUSE>()
+    private var hangingClause: CLAUSE? = null
+
+    protected fun add(clause: CLAUSE) {
+        lockIn()
+        hangingClause = clause
+    }
+
+    protected fun replace(clause: CLAUSE) {
+        hangingClause = clause
+    }
+
+    private fun lockIn() {
+        hangingClause?.run(clauses::add)
+        hangingClause = null
+    }
+
+    override fun build(): TYPE {
+        lockIn()
+        return constructor(clauses)
+    }
+}
+```
+
+## 5. Invoking Mojo
+
+What does the following do?
+
+```kotlin
+"hello"("world")
+```
+
+If your answer is \"That's a `String`, not a function. What do you think
+you are playing at?\", you have a valid point. As it stands, it is
+meaningless and won't compile.
+
+What if we **could** call a String as a function, though? In terms of
+natural looking, declarative input, it opens up a lovely design space.
+Well, this is Kotlin, and we can extend types as we please: including
+adding an `invoke` function.
+
+```kotlin
+operator fun String.invoke(other: String) {
+    println("$this $other")
+}
+```
+
+By adding the `invoke` operator function, we can now use a `String` as
+if it is a function which takes another `String`.
+
+This functionality, in conjunction with the fact that trailing lambdas
+can be lifted out of parenthesis enables our nested `XtdbKt`
+configuration to look especially pleasing:
+
+```kotlin
+XtdbKt.startNode {
+    "xtdb/tx-log" {
+        "kv-store" {
+            module = "xtdb.rocksdb/->kv-store"
+            "db-dir" to File("/tx")
+        }
+    }
+    "xtdb/document-store" {
+        "kv-store" {
+            module = "xtdb.rocksdb/->kv-store"
+            "db-dir" to File("/doc")
+        }
+    }
+    "xtdb/index-store" {
+        "kv-store" {
+            module = "xtdb.rocksdb/->kv-store"
+            "db-dir" to File("/index")
+        }
+    }
+}
+```
+
+> Code is data, data code, --- that is all
+>
+> Ye know on earth, and all ye need to know
+
+--- Keats (probably)
+
+This is achieved by adding the following `invoke` extension function to
+String within the `NodeConfigurationContext` and
+`ModuleConfigurationContext`:
+
+```kotlin
+operator fun String.invoke(block: ModuleConfigurationContext.() -> Unit) {
+    builder.with(this, build(block))
+}
+```
+
+It's amazing how a few little concepts can be combined to create
+convenient bespoke syntax.
+
+## 6. Tying it all together
+
+We now have all the pieces in place. As a final example --- and perhaps
+my favourite example of creating one's own syntax --- this is how you
+define [XTDB Query Rules](https://xtdb.com/reference/queries.html#rules)
+and use them from `kotlin-dsl`:
+
+```kotlin
+// Setup
+val node = XtdbKt.startNode()
+val db = node.db()
+
+val dwarf = "dwarf".sym
+val descendentOf = "descendentOf".sym
+val descendent = "descendent".sym
+val ancestor = "ancestor".sym
+val fatherKey = "father".kw
+val intermediate = "intermediate".sym
+
+db.q {
+    find {
+        +dwarf
+    }
+
+    where {
+        rule(descendentOf) (dwarf, "farin")
+    }
+
+    rules {
+        def(descendentOf) (descendent, ancestor) {
+            descendent has fatherKey eq ancestor
+        }
+
+        def(descendentOf) (descendent, ancestor) {
+            descendent has fatherKey eq intermediate
+            rule(descendentOf) (intermediate, ancestor)
+        }
+    }
+}
+```
+
+Here, we are declaring a Rule `descendentOf` that accepts two parameters
+and then providing the restrictions on those parameters using a
+`WhereContext.()->Unit`
+
+Being able to split out the parameters from the name of the Rule comes
+from the fact that the definition is created in two function calls.
+
+```kotlin
+data class RuleDeclaration(val name: Symbol)
+
+fun def(name: Symbol) = RuleDeclaration(name)
+
+operator fun RuleDeclaration.invoke(vararg params: Symbol, block: WhereContext.() -> Unit) =
+    +RuleDefinition(
+        name,
+        params.toList(),
+        WhereContext.build(block)
+    )
+```
+
+The first call of `def` takes the `name` of the Rule and creates a
+`RuleDeclaration`. This `declaration` then gets invoked with a variable
+number of parameters (which are in the parentheses) and a lambda.
+Because the lambda is the final argument, it is written outside the
+parentheses in curly braces.
+
+All of this comes together to form a very natural looking way of
+defining a Rule.
+
+# Conclusion
+
+Overall, I am incredibly excited to see where we can take `kotlin-dsl`.
+
+Our goal is to provide a seamless, strongly-typed utility layer which
+can lie on top of such a powerful and versatile database.
+
+Stay tuned!
+
+import k from "../../assets/blog/kotlin-crux-pacman2.png";
+
+<Image src={k} />
