@@ -1,14 +1,14 @@
 ---
-author: "ajk"
-title: "Abstract Clojure"
-description: "Depend on abstractions, not on concretions"
-category: "clojure"
-layout: "../../layouts/BlogPost.astro"
-publishedDate: "25 Nov 2021"
-heroImage: "mock3.jpg"
+author: 'ajk'
+title: 'Abstract Clojure'
+description: 'Depend on abstractions, not on concretions'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '25 Nov 2021'
+heroImage: 'mock3.jpg'
 ---
 
-import { Image } from "@astrojs/image/components";
+import { Image } from '@astrojs/image/components'
 
 A great deal can be achieved in the first few years of a software
 project, with a small team and the right tools we can quickly deliver
@@ -363,21 +363,21 @@ in turn makes the server and system namespaces unstable. The red arrows
 on the diagram show the components that are volatile due to their
 dependencies:
 
-import ac from "../../assets/blog/abstract-clojure-article-pre-abstraction.png";
+import ac from '../../assets/blog/abstract-clojure-article-pre-abstraction.png'
 
 <Image src={ac} />
 
 With the abstractions introduced, the `server` namespace no longer
 depends on the volatile dependency; it is now a stable component.
 
-import pst from "../../assets/blog/abstract-clojure-article-post-abstraction.png";
+import pst from '../../assets/blog/abstract-clojure-article-post-abstraction.png'
 
 <Image src={pst} />
 
 The alternate implementation with the `ArticleRepository` protocol has
 additional arrows shown in light green that point to the protocol:
 
-import p from "../../assets/blog/abstract-clojure-article-post-abstraction-protocol.png";
+import p from '../../assets/blog/abstract-clojure-article-post-abstraction-protocol.png'
 
 <Image src={p} />
 
@@ -388,7 +388,7 @@ so obvious, consider a more complicated example of a project management
 application where users can create projects and manage tickets within a
 project, with notifications sent when the ticket status changes:
 
-import pr from "../../assets/blog/abstract-clojure-project-management-app-high-level.png";
+import pr from '../../assets/blog/abstract-clojure-project-management-app-high-level.png'
 
 <Image src={pr} />
 
@@ -398,7 +398,7 @@ system where everything is volatile. Whilst some components within a
 system must be volatile it is not desirable for everything to be
 volatile.
 
-import pr2 from "../../assets/blog/abstract-clojure-project-management-pre-abstraction.png";
+import pr2 from '../../assets/blog/abstract-clojure-project-management-pre-abstraction.png'
 
 <Image src={pr2} />
 
@@ -412,7 +412,7 @@ all put high-level business logic at the core of the application and
 make use of layers to keep low-level details such as the database and
 transport protocols at the periphery.
 
-import l from "../../assets/blog/abstract-clojure-layered-architecture.png";
+import l from '../../assets/blog/abstract-clojure-layered-architecture.png'
 
 <Image src={l} />
 
@@ -423,7 +423,7 @@ external dependencies; notice that the arrows never point from the
 domain to the infrastructure layer. Abstractions are implemented in the
 `infrastructure` layer and wired together to form a system:
 
-import l2 from "../../assets/blog/abstract-clojure-project-management-post-abstraction.png";
+import l2 from '../../assets/blog/abstract-clojure-project-management-post-abstraction.png'
 
 <Image src={l2} />
 

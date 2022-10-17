@@ -1,0 +1,185 @@
+---
+author: 'deo'
+title: 'Prefer the MIT License'
+description: 'The EPL is not a Sensible Default'
+category: 'copensource'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '14 May 2021'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+<details>
+  <summary>Click for tl;dr.</summary>
+If you want to give anyone permission to use your code for any purpose,
+use the MIT License instead of the Eclipse Public License (EPL). The EPL
+has restrictions that make sense for Clojure Core but not for most
+libraries.
+
+If your library is licensed EPL and someone wants to use your code in a
+GPL or MIT codebase, they must first contact you and get your permission
+to use your code because the EPL is not GPL- or MIT-compatible.
+
+If your library is licensed EPL and you want to relicense your project
+in the future, you must request a copyright transfer from all external
+contributors or request their explicit permission to relicense the code
+they provided you.
+
+The MIT License does not have either of these constraints.
+
+</details>
+
+---
+
+It is common to see the following text at the bottom of READMEs in
+libraries from the Clojure ecosystem:
+
+> Distributed under the Eclipse Public License, the same as Clojure.
+
+There is an implication worthy of deconstruction embedded in such a
+sentence. When we declare \"we do X, the same as Clojure\" what we're
+really saying is \"we use X _because_ Clojure uses X.\" This sort of
+thinking makes sense if our constraints mirror Clojure's constraints.
+Unfortunately, it's very unlikely that they do.
+
+Declaring software to be _distributed under the Eclipse Public License,
+the same as Clojure uses_ would be, in most cases, as confusing as
+saying _distributed under the GNU General Public License, the same as
+Linux uses_ simply because that's the operating system the software is
+most likely to run on.
+
+Of course, if a project chooses a license based on agreement with
+similar choices made by the stewards of Clojure and Linux, that
+agreement suggests research and deep thought. But carefully considered
+actions and default actions share little intersection.
+
+## The EPL is a good choice for Clojure
+
+[Clojure](https://github.com/clojure/) can be thought of as a language,
+a runtime, base libraries, extension libraries, and toolkits. This
+collection of software uses the Eclipse Public License v1.0
+([EPL-1.0](https://github.com/clojure/clojure/blob/b1b88dd25373a86e41310a525a21b497799dbbf2/epl-v10.html)).
+The license choice was deliberate. The choice of EPL was not a
+coincidence or a default.
+
+Rather, among the available licenses, the EPL is the most appropriate
+_weakly copyleft_ license for software intended for use in both open
+source systems and closed-source (proprietary-commercial) systems.
+Thanks to weak copyleft conditions, module-level (as described in the
+EPL, under the [definition of
+\"Contribution\"](https://github.com/clojure/clojure/blob/b1b88dd25373a86e41310a525a21b497799dbbf2/epl-v10.html#L51))
+derivative works must also be licensed EPL-1.0. This has two important
+consequences. One, it makes it illegal for software behemoths like
+Amazon and Apple to fork Clojure and release a closed-source competitor
+based on the original code. Two, it ensures all derivative works can be
+folded back into Clojure Core.
+
+Weak copyleft licenses are prudent when these consequences are
+desirable. The first is desirable when someone considers their creation
+precious, for a non-derogatory definition of \"precious.\" The second is
+desirable when someone either holds a strong philosophical belief in
+copyleft or sees benefits to copyleft which outweigh the costs.
+
+## The EPL is a poor default
+
+Clojure Core is not the only precious software project. A database might
+be precious. If you fear that [Amazon will cannibalize your
+database](https://www.theregister.com/2019/01/10/amazon_documentdb/), by
+all means, think hard about what license you choose. Perhaps the EPL is
+a good choice. Perhaps you want something more restrictive and the
+AGPLv3 makes sense for you.
+
+New software has had no time to accrue value and a new software project,
+by definition, is not precious. Copyleft licenses, weak or strong, have
+costs. If the owner of a new project is not familiar with these costs,
+it makes sense to choose a license for its _flexibility_ rather than its
+_popularity_.
+
+The EPL is an inflexible license. It is not GPL-compatible. It is not
+MIT-compatible. Although the EPL is a popular license in the Java and
+Clojure ecosystems, it is sufficiently esoteric that it isn't even
+mentioned on the [choosealicense.com simplified
+list](https://choosealicense.com/licenses/). When choosing the EPL as a
+license, a project author would be wise to consider these costs. Thus,
+for project authors who invest little energy in their license choices,
+the EPL makes a very poor default choice.
+
+import le from '../../assets/blog/license-epl-gpl-compat.svg'
+
+<img src={le} />
+
+## The MIT License is a sensible default
+
+Code licensed under MIT can go just about anywhere. You can use it in an
+EPL codebase or GPL codebase without hesitation because it has only the
+bare minimum limitations, of liability and warranty, on its use.
+
+import lmc from '../../assets/blog/license-mit-compat.svg'
+
+<img src={lmc} />
+
+Code licensed under MIT also retains flexibility for its _author_. Most F/OSS projects
+do not ask external contributors to sign a Contributor Agreement. As a result, if
+the authors of an EPL-licensed project want to relicense the project's code, they
+must find and request permission from every contributor, who each hold copyright
+over their individual contribution. The authors of an MIT-licensed project can relicense
+the project's code without copyright assignment. Of course, other users and developers
+can relicense this code as well. In many cases this is precisely what we want.
+
+It is not uncommon to see developers treating EPL-licensed code as if it
+were MIT-licensed. _\"Oh, this is a handy namespace but I don't want
+this entire library and all its dependencies. I'll just grab these few
+functions.\"_ If the source of those functions is licensed EPL-1.0 and
+the destination is not, such behaviour is probably a violation of the
+license. If the source of those functions is licensed EPL-2.0 but the
+destination doesn't contain a per-file notice and accompanying copy of
+the EPL-2.0, it is a violation of the license. These kinds of license
+violations are very common -- but that doesn't make them right.
+
+Often, when someone asks a library author if code can be used verbatim
+in an MIT or GPL codebase, the author is shocked by the question. _\"Of
+course!\"_ they say. The ecosystem is full of friendly and generous
+folks, most of whom would happily see their code find new life in a
+foreign project. Unfortunately, the EPL does not permit that brand of
+generosity by default. The MIT License does.
+
+\"MIT is a sensible default\" is a generality. There are plenty of
+exceptions. MIT is a poor default for anyone who knows in advance they
+will definitely borrow or modify functions from existing EPL-licensed
+projects, like Clojure Core, babashka/sci, or Medley. MIT is a poor
+default for anyone with a cardinal philosophical belief in copyleft
+principles. MIT is a poor default for anyone who wants to make a
+political statement about patents, one way or the other. More often than
+not, however, those with strong feelings about copyleft, patents,
+trademarks, and so forth will also be the sort of people who heavily
+research the licenses available to them.
+
+Those who think to themselves, _\"I want anyone to use my code for any
+purpose but I also want to reserve the right to change my license in the
+future\"_ are best served by the MIT License.
+
+---
+
+## Errata
+
+As always, if this post contains errors or requires clarification,
+please [reach out](https://twitter.com/juxtpro) so we can make the
+appropriate corrections.
+
+Thank you to [Jacob O'Bryant](https://github.com/jacobobryant/) for
+suggesting this article. Thanks also to Sean Corfield, Michiel Borkent,
+Norbert Wójtowicz, and Dan Sutton for their feedback.
+
+[MIT campus aerial
+photo](https://commons.wikimedia.org/wiki/File:MIT_Main_Campus_Aerial.jpg)
+adapted from Wikimedia Commons under the terms of
+[CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/deed.en).
+
+import tr from '../../assets/blog/license-mit-epl-gpl-triangle.png'
+
+<Image src={tr} />
+
+This work by [Steven Deobald](https://deobald.ca) for [JUXT
+Ltd.](https://juxt.pro) is licensed under [CC BY-SA
+4.0](http://creativecommons.org/licenses/by-sa/4.0/).
