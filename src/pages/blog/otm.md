@@ -13,7 +13,7 @@ heroImage: 'mock3.jpg'
 > very quickly, but still have the benefit of a single on-site team. The
 > web applications exceeded our expectations on functionality and time
 > to market. JUXT led the development team through this period of
-> incredible achievements. --- Morgan Ross (Technical Director at
+> incredible achievements. -- Morgan Ross (Technical Director at
 > OnTheMarket plc)
 
 [OnTheMarket.com](https://www.onthemarket.com) is a major new online

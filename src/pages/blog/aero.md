@@ -57,7 +57,7 @@ structures:
 
 > \"Some things change, some stay the same.\"
 >
-> --- Hymn to Her The Pretenders
+> -- Hymn to Her The Pretenders
 
 Your application may need to run in different environments for different
 purposes. A common case is that you have one environment for your users

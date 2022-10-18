@@ -82,7 +82,7 @@ how to fund and manage them properly.
 > area to explore and that's what I will at least open the door to in my
 > talk.
 >
-> --- Alan Kay
+> -- Alan Kay
 
 # The extended cut!
 

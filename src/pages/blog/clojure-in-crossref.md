@@ -75,7 +75,7 @@ In one way or another 'immutability' plays a role in all layers of our
 stack. Obviously Clojure's an excellent choice for stateless functional
 programming. Docker containers provide a well-understood stateless
 abstraction. And the "immutable infrastructure" that Terraform brings
---- declarative specification of infrastructure deployment --- means
+-- declarative specification of infrastructure deployment -- means
 that we're able to check nearly everything into source control. That
 means we can take shared ownership, where everything is versioned and
 self-documenting. It also means that we could press a button and have

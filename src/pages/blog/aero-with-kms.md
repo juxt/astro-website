@@ -27,7 +27,7 @@ One of the suggestions in the article was to keep secrets in a separate
 file, which can be loaded into the final configuration via the
 `#include` tag. While that's a valid answer to the problem of avoiding
 the publication of secrets in version control, it's simply moving the
-problem elsewhere --- secrets still have to live somewhere, and the
+problem elsewhere -- secrets still have to live somewhere, and the
 problem still remains of how to distribute secret files and make them
 accessible to the application.
 

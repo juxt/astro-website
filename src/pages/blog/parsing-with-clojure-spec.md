@@ -144,8 +144,8 @@ Voila!
 
 # Conclusion
 
-The fact that clojure.spec---which was designed for a different
-purpose---seems so adept in the area of parsing is a surprise, but it's
+The fact that clojure.spec -- which was designed for a different
+purpose -- seems so adept in the area of parsing is a surprise, but it's
 a sign that there's a lot of power in this little library. More evidence
 that where many languages veer off into the minutia, Clojure _gets the
 job done_.

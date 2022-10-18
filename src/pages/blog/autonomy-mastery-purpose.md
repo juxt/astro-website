@@ -5,17 +5,17 @@ description: ''
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '12 May 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'autonomy.jpg'
 ---
 
 What makes a software project a good one to work on? Surely, it's those
-where we feel _motivated_. As professionals, we can --- although not
-always --- feel some shame to admit a lack of motivation about our
+where we feel _motivated_. As professionals, we can -- although not
+always -- feel some shame to admit a lack of motivation about our
 current work. To blame ourselves for a lack of motivation would imply
 that motivation comes intrinsically from within, no matter what the
 environment is we're working in.
 
-It would be great --- for highly motivated individuals --- if we could
+It would be great -- for highly motivated individuals -- if we could
 leverage the same amount of motivation in all situations, but it turns
 out the human condition is more complicated, and the context we're
 working in matters.
@@ -91,7 +91,7 @@ architecture starts to resemble a more chaotic and splintered software
 development organisation, leading to a Cambrian explosion of polyglot
 microservices.
 
-Autonomy means entrusting developers with greater responsibility --- but
+Autonomy means entrusting developers with greater responsibility -- but
 it doesn't imply a lack of hierarchy. Strong cohesive leadership by the
 _chief programmer_ is still required. _Software is not a democracy_.
 
@@ -101,7 +101,7 @@ _chief programmer_ is still required. _Software is not a democracy_.
 > process and then humbles, simplifies and enlightens us about the
 > hidden, core nature of the work that enticed us in the first place.
 >
-> --- poet David Whyte
+> -- poet David Whyte
 
 Mastery needs space. As Rich Hickey espouses in his [Hammock Driven Development](https://www.youtube.com/watch?v=f84n5oFoZBc) talk, we need
 to be able to _step away from the computer_ and dedicate more time to

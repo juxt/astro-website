@@ -54,7 +54,7 @@ For HTML parsing, I used Daniel Janus\'
 [clj-tagsoup](https://github.com/nathell/clj-tagsoup) which provides a
 robust way to parse messy HTML into a
 [hiccup](https://github.com/weavejester/hiccup)-like data structure (you
-may end up with extra \<body\> and \<head\> tags when using it --- not
+may end up with extra \<body\> and \<head\> tags when using it -- not
 sure why, but this is just an experiment).
 
 # Encoding the tree
@@ -118,7 +118,7 @@ Notice that free text elements are encoded as artificial `:text-node`
 tags. This transaction captures the basic information about tags and the
 structure of the tree. The naming of the `:child` key may seem odd in
 this context because it's singular, but it reads better like that in
-queries (`[?a :child ?b]` --- \"a has a child called b\").
+queries (`[?a :child ?b]` -- \"a has a child called b\").
 
 What's missing from this transaction is the order of siblings on the
 same level: if we stored it like that, there wouldn't be a way to figure
@@ -491,7 +491,7 @@ genres, duration and tech specs.
 
 I think using DataScript for querying the DOM worked out pretty well,
 and it looks promising for other types of trees. DataScript's
-documentation is still a bit sparse --- I found myself either reading
+documentation is still a bit sparse -- I found myself either reading
 its source or referring to Datomic's documentation and hoping that it
 applies to DataScript (in most cases it does, with the exception of
 custom functions). DataScript assumes some Datomic knowledge, and, to be

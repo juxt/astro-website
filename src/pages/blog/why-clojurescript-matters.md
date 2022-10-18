@@ -54,7 +54,7 @@ Software is subject to unpredictable events: Requirements change because
 the marketplace changes, competitors change, parts of the design are
 shown wrong by experience, people learn to use the software in ways not
 anticipated... Habitability makes a place livable, like home. And this
-is what we want in software --- that developers feel at home.\"
+is what we want in software -- that developers feel at home.\"
 
 When you have a such a leaky and coupled division in place between
 front-end and back-end, then aesthetics will be compromised on both

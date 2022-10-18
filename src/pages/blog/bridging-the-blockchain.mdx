@@ -26,7 +26,7 @@ September 2021 Update: Crux has recently been renamed XTDB.
 Proponents of the blockchain argue it is a system of record unlike any
 other, in which trustless transactions written to a decentralized,
 immutable ledger render centralized orchestration obsolete. That is a
-mouthful --- but it is also an attractive collection of properties for
+mouthful -- but it is also an attractive collection of properties for
 certain industries; the centralization of data can lead to malfeasance
 and malfeasance leads to broken trust.
 
@@ -124,13 +124,13 @@ Proxies (such as
 work around this limitation by polling the dirty outside world of
 stateful data and recording it immutably into the Ethereum chain. But
 the problem is more fundamental than any technical solution can ever
-achieve. If a trustless system wants to speak to the Real World --- a
-world full of lies and trickery --- it is forced to trust _something_
+achieve. If a trustless system wants to speak to the Real World -- a
+world full of lies and trickery -- it is forced to trust _something_
 other than the computational correctness of an algorithm.
 
 Even more limiting than the boundaries of a trustless system are the
 trusted methods of querying that system. Blockchains as they exist today
-do not offer comprehensive queries --- much less bitemporal queries.
+do not offer comprehensive queries -- much less bitemporal queries.
 Since a blockchain's distributed nature makes capturing wall clock time
 prohibitively difficult, bitemporal queries are effectively impossible.
 
@@ -182,9 +182,9 @@ Datalog's bitemporal graph queries.
 applications system built on the blockchain. Unlike cryptocurrencies,
 the Corda blockchain targets existing business processes and is private
 by default. At the heart of Corda is a network of services called
-[notaries](https://docs.corda.net/docs/corda-os/4.7/key-concepts-notaries.html) --- which
+[notaries](https://docs.corda.net/docs/corda-os/4.7/key-concepts-notaries.html) -- which
 provide _uniqueness consensus_, _timestamping_, and *transaction
-validation* --- in addition to regular blockchain nodes running custom,
+validation* -- in addition to regular blockchain nodes running custom,
 distributed application code on the ledger. Data shared between these
 nodes consists of immutable entities subject to state transitions,
 recorded in their own chain of states.
@@ -199,7 +199,7 @@ down to the use of Oracles for accessing the outside world. Flows,
 however, are permitted access to the outside world. Flows describe the
 interaction between nodes in order to validate one or more entities\'
 state transitions. Crucially, not all nodes in the network must
-participate in such transactions --- only the ones identified within the
+participate in such transactions -- only the ones identified within the
 context of a transaction's inputs. This implies not all nodes need to
 know about all the facts in the Corda network.
 
@@ -209,7 +209,7 @@ Consensus in Corda is dictated by notaries (for uniqueness) and Public
 Key Infrastructure (for identity). Nodes register with an identity
 service when entering the network and can either initiate or be
 triggered to participate in a transaction. All of the nodes
-participating in a transaction --- including a notary --- check and sign
+participating in a transaction -- including a notary -- check and sign
 the transaction before it is committed to an individual node's internal
 storage, which Corda refers to as a _Vault_.
 

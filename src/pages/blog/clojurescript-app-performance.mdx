@@ -333,7 +333,7 @@ which gets logged in the console every time the state changes.
 
 Upon clicking on any of the 100 elements, you will see the console
 printing 100 times because the hiccup vectors are fully recomputed over
-and over --- very inefficient. Ideally, we want to only re-compute the
+and over -- very inefficient. Ideally, we want to only re-compute the
 components that need to be re-rendered. How can we achieve this? By
 moving the body of the for comprehension into its own functional
 component, as shown in the following example.

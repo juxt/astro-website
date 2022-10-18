@@ -58,7 +58,7 @@ that is, we must first look at yet another tool: Expo.
 
 Writing a native mobile app is a lot more involved than writing for the
 web. Mobile apps have to be approved by the overlords at Google and
-Apple --- and APIs are far more consistent across the multitude of web
+Apple -- and APIs are far more consistent across the multitude of web
 platforms than those two mobile platforms.
 
 These issues become painfully apparent with raw React Native. Just
@@ -268,7 +268,7 @@ allow for a much more robust and easily testable UI development
 environment.
 
 This solution wasn't without its frustrations, however. I am a
-JavaScript novice --- having only ever used it on side-projects --- and
+JavaScript novice -- having only ever used it on side-projects -- and
 I found it quite painful sometimes. Reagent and friends do a reasonable
 job of hiding the JS nasties from you in the web world, but I found it
 to be a different story in React Native land. Overall, I definitely
@@ -309,7 +309,7 @@ So as mentioned above, there were a lot of good things about my setup:
 # The Bad
 
 It can't all be good news. There were a fair few painful moments on my
-journey --- though I admit that several are likely due to my
+journey -- though I admit that several are likely due to my
 inexperience/incompetence.
 
 There turned out to be several third-party libraries and native features
