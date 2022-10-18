@@ -5,7 +5,7 @@ description: "A guide for migrating Clojure libraries to Maven Central, followin
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '15 Jul 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'maven-central.jpg'
 ---
 
 **_Crux is now XTDB_**

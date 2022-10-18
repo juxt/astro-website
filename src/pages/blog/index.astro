@@ -23,7 +23,7 @@ const peopleByCode = new Map(
 
 const isDev = import.meta.env.DEV
 
-const unfilteredBlogs = await Promise.all(
+const unfilteredBlogs: Blog[] = await Promise.all(
   pages.map((page) => {
     const author = page.frontmatter.author
     const person = peopleByCode.get(author)
@@ -35,26 +35,36 @@ const unfilteredBlogs = await Promise.all(
     const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
     const parsedImage = person.image.split('.').slice(0, -1)
 
-    return new Promise<Blog>((res, rej) => {
-      getImage({
-        src: import(`../../assets/people/${parsedImage}.jpg`),
-        width: 200,
-        height: 200,
-        quality: 80
-      })
-        .then((image) => {
-          res({
-            ...page.frontmatter,
-            href: permalink,
-            person: {
-              ...person,
-              expert,
-              image: image.src
-            }
-          })
-        })
-        .catch(rej)
+    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+
+    const authorImage = getImage({
+      src: import(`../../assets/people/${parsedImage}.jpg`),
+      width: 200,
+      height: 200,
+      quality: 80
     })
+
+    const postImage = getImage({
+      src: import(`../../assets/blog/${parsedPostImage}.jpg`),
+      width: 450,
+      height: 300,
+      quality: 100
+    })
+
+    return Promise.all([authorImage, postImage]).then(
+      ([authorImage, postImage]) => {
+        return {
+          ...page.frontmatter,
+          href: permalink,
+          heroImage: postImage.src,
+          person: {
+            ...person,
+            expert,
+            image: authorImage.src
+          }
+        }
+      }
+    )
   })
 )
 

@@ -5,7 +5,7 @@ description: 'Choosing a JSON library for your Clojure application'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '01 Jun 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'json-ecosystem.jpg'
 tags:
   - 'json'
 ---

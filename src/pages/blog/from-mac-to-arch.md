@@ -5,7 +5,7 @@ description: 'First impressions'
 category: 'arch'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '05 Nov 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'macos-to-arch.jpg'
 tags:
   - 'juxt'
 ---

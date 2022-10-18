@@ -5,7 +5,7 @@ description: 'Faster, Simpler and more reliable'
 category: 'xtdb'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '04 May 2022'
-heroImage: 'mock3.jpg'
+heroImage: 'testing-with-xtdb.jpg'
 ---
 
 # Introduction

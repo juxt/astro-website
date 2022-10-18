@@ -5,7 +5,7 @@ description: 'Revisiting our Clojure Radar'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '20 Aug 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'radar-juxt.jpg'
 tags:
   - 'radar'
 ---

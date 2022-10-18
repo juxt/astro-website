@@ -5,7 +5,7 @@ description: "Still easy? Let's find out..."
 category: 'clojurescript'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '13 Aug 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'webapps-cljs.jpg'
 tags:
   - 'mobile'
 ---

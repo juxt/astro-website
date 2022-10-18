@@ -5,7 +5,7 @@ description: "'iteration' has been released in Clojure 1.11"
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '24 Jan 2022'
-heroImage: 'mock3.jpg'
+heroImage: 'clj-iteration-fn.jpg'
 ---
 
 UPDATE: the original article, based on an alpha release, has been
@@ -537,8 +537,3 @@ used as a drop-in replacement for your previous custom solution.
   [thread](https://clojurians-log.clojureverse.org/clojure/2022-03-31/1648763674.883299)
   on Clojurians Slack raised a bug present in the article when
   requesting the last page of the results.
-
-_\*Note\*: the opening picture is the helical staircase of the London
-City Hall building taken by the author in
-[2012](https://www.flickr.com/photos/reborg/9222072041) with a [Nikon
-D200](https://www.dpreview.com/reviews/nikond200)._

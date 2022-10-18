@@ -5,7 +5,7 @@ description: "Jon Pither's past mistakes, and how to cope with real data in an i
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '08 Sep 2022'
-heroImage: 'mock3.jpg'
+heroImage: 'embracing-imperfection.jpg'
 ---
 
 I'm haunted by the mess I made earlier on in my career. I saw software
