@@ -5,7 +5,7 @@ description: 'How to use carve to delete all the dead code from your projects'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '18 Jan 2021'
-heroImage: 'mock3.jpg'
+heroImage: 'carve.jpg'
 ---
 
 As anyone who has maintained a legacy software project will know, every

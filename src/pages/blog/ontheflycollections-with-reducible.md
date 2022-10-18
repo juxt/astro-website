@@ -5,7 +5,7 @@ description: 'Digest large datasets with ease'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Oct 2019'
-heroImage: 'mock3.jpg'
+heroImage: 'on-the-fly.jpg'
 ---
 
 # Lazy Sequences

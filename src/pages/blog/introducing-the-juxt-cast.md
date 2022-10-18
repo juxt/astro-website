@@ -5,7 +5,7 @@ description: ''
 category: 'podcast'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '18 Jul 2019'
-heroImage: 'mock3.jpg'
+heroImage: 'podcast.jpg'
 tags:
   - 'clojure'
 ---

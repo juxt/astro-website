@@ -5,7 +5,7 @@ description: 'Thoughts and perspectives'
 category: 'interview'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '26 Jun 2020'
-heroImage: 'mock3.jpg'
+heroImage: 'alank.jpg'
 ---
 
 This summer we were due to hold our XT20 conference, which was going to

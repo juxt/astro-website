@@ -7,7 +7,7 @@ layout: '../../layouts/BlogPost.astro'
 tags:
   - 'play'
 publishedDate: '19 Apr 2019'
-heroImage: 'mock3.jpg'
+heroImage: 'bitemp-tale.jpg'
 ---
 
 For those readers whose learning ability is better when affections are

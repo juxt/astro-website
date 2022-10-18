@@ -5,7 +5,7 @@ description: 'And some examples'
 category: 'clojurescript'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '07 Feb 2019'
-heroImage: 'mock3.jpg'
+heroImage: 'hook.jpg'
 tags:
   - 'hooks'
 ---

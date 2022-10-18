@@ -5,7 +5,7 @@ description: 'Part One'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Feb 2019'
-heroImage: 'mock3.jpg'
+heroImage: 'simulation.jpg'
 ---
 
 # Why?

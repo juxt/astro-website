@@ -5,7 +5,7 @@ description: ''
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '27 Nov 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'library.jpg'
 ---
 
 I've had a number of questions about uploading libraries to maven and

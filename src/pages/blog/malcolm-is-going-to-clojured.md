@@ -5,7 +5,7 @@ description: 'On the 29th February'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '12 Feb 2020'
-heroImage: 'mock3.jpg'
+heroImage: 'mal-clojure-d.jpg'
 ---
 
 This week Malcolm Sparks takes a break from [writing songs for

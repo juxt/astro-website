@@ -5,7 +5,7 @@ description: 'Parallelising transducers'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '12 Mar 2019'
-heroImage: 'mock3.jpg'
+heroImage: 'multi-threading.jpg'
 ---
 
 [pmap](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/pmap)
