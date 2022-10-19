@@ -109,15 +109,13 @@ publishedDate: '17 Jul 2022'
 tags:
   - cloud
   - devops
-heroImage:
-  src: 'introducing-astro.jpg'
-  alt: 'Space shuttle leaving curved trail in the sky'
+heroImage: 'introducing-astro.jpg'
 ---
 ```
 
 When a post is ready to go live, you can remove the `draft` attribute and it will be included in the build.
 
-The `heroImage` picture must be stored in the `src/assets/blog` folder and it must be of `.jpg` format.
+The `heroImage` picture must be stored in the `src/assets/blog` folder and it must be of `.jpg` format. The `tags` are optional.
 
 ## Optimized Images
 
