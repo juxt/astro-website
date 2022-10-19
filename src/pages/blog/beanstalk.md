@@ -5,7 +5,7 @@ description: 'The JUXT experience of deploying Docker containers through Beansta
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '26 May 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'aws-beanstalk-clojure.jpg'
 tags:
   - 'tech'
 ---

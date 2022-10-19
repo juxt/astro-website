@@ -5,7 +5,7 @@ description: 'The new JUXT blog'
 category: 'news'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '24 Mar 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'welcome.jpg'
 ---
 
 Welcome to the new JUXT blog.

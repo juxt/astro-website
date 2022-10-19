@@ -5,7 +5,7 @@ description: 'How JUXT helped OnTheMarket plc enter the property portal market'
 category: 'case studies'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '25 Mar 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'onthemarket.jpg'
 ---
 
 > JUXT, brought in a team of developers to work together with

@@ -5,7 +5,7 @@ description: 'I want it all'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '10 Jun 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'clojure-macros.jpg'
 tags:
   - 'macros'
 ---
