@@ -5,7 +5,7 @@ description: 'Techies, Devs, Boffins and Geeks'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '09 Nov 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'just-a-techie.jpg'
 ---
 
 As soon as I hear the word _techie_, I feel an emotion-cocktail of
