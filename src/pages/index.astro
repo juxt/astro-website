@@ -39,13 +39,6 @@ const threadsPicture = await getImage({
   quality: 80
 }).then((img) => img.src)
 
-const wavesPicture = await getImage({
-  src: import('../assets/site/waves.png'),
-  width: 1500,
-  height: 714,
-  quality: 80
-}).then((img) => img.src)
-
 const testimonials = [
   {
     name: 'MORGAN ROSS, TECHNICAL DIRECTOR, ONTHEMARKET PLC',
@@ -620,7 +613,6 @@ const featuredBlogs = unfilteredBlogs
     </Section>
 
     <Section
-      style={{ backgroundImage: `url(${wavesPicture})` }}
       className={'bg-zinc-900 bg-[length:0px_0px] bg-bottom lg:bg-cover bg-no-repeat py-20'}
     >
       <h2 class='text-4xl pb-20 text-white font-bold'>
