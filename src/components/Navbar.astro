@@ -28,7 +28,7 @@ const pagesInNavbar = pages
     url: page.metadata?.navbar?.url || page.url,
     weight: page.metadata?.navbar?.weight,
     label: page.metadata?.navbar?.label || removeLeadingSlash(page.url),
-    active: page.url === currentPage
+    active: (page.metadata?.navbar?.url || page.url) === currentPage
   }))
   .sort((a, b) => a.weight - b.weight)
 

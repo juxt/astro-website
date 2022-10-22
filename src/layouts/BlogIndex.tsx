@@ -29,7 +29,7 @@ function CustomHits({ blogs }) {
   })
   return (
     <div>
-      <div class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
+      <div className='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
         {filteredHits.map((hit) => (
           <div key={hit.permalink}>
             <BlogCard {...blogs.get(hit.permalink)} />

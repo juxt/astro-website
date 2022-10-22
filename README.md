@@ -134,7 +134,7 @@ import hero from '../../assets/blog/mock.jpg'
 
 # hello world
 
-<Image src={hero} />
+<Image alt='image' src={hero} />
 ```
 
 To know more about the props you can pass to the `Image` component, check out this [link](https://docs.astro.build/en/guides/integrations-guide/image/#usage).
