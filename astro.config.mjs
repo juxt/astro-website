@@ -6,7 +6,7 @@ import image from '@astrojs/image'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), preact(), image({ logLevel: 'debug' })],
+  integrations: [mdx(), tailwind(), preact(), image()],
   server: {
     port: 3000,
     host: '0.0.0.0'

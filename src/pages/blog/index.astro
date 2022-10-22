@@ -1,11 +1,8 @@
 ---
-export const metadata = {
-  navbar: { weight: 3, label: 'Blog' },
-  footer: { weight: 3, label: 'Blog' }
-}
+import { MarkdownInstance } from 'astro'
 
-const pages = await Astro.glob('./*.mdx')
-console.log('this shouldnndst take 7 seconds.')
+const pages = await Astro.glob('./{*.mdx,*.md}')
+console.log('y 7 seconds.', pages.length)
 ---
 
-<div>index fo rd blog</div>
+<div>index of blog</div>
