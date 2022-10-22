@@ -66,11 +66,11 @@
     (when loaded-md
       (p/let [frontmatter-record (atom nil)
               permalink (file-name->permalink file-name)
-              md-it (.use (markdown-it.)
+              md-it (.use (markdown-it.) 
                           md-frontmatter
                           (frontmatter-callback
                            permalink frontmatter-record))
-              md-paragraphs (.parse md-it loaded-md)
+              md-paragraphs (.parse md-it loaded-md #js {})
               draft? (:draft? @frontmatter-record)
               timestamp (g/get (:record @frontmatter-record) "timestamp")
               records (when (not draft?)
