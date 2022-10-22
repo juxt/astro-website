@@ -46,7 +46,7 @@ with it.
 
 import nc from '../../assets/blog/no-camels.png'
 
-<Image src={nc} />
+<Image alt="image" src={nc} />
 
 # Walk all the keys!
 

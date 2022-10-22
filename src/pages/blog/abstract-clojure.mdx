@@ -365,21 +365,21 @@ dependencies:
 
 import ac from '../../assets/blog/abstract-clojure-article-pre-abstraction.png'
 
-<Image src={ac} />
+<Image alt='image' src={ac} />
 
 With the abstractions introduced, the `server` namespace no longer
 depends on the volatile dependency; it is now a stable component.
 
 import pst from '../../assets/blog/abstract-clojure-article-post-abstraction.png'
 
-<Image src={pst} />
+<Image alt='image' src={pst} />
 
 The alternate implementation with the `ArticleRepository` protocol has
 additional arrows shown in light green that point to the protocol:
 
 import p from '../../assets/blog/abstract-clojure-article-post-abstraction-protocol.png'
 
-<Image src={p} />
+<Image alt='image' src={p} />
 
 ## Example: Project Management Application
 
@@ -390,7 +390,7 @@ project, with notifications sent when the ticket status changes:
 
 import pr from '../../assets/blog/abstract-clojure-project-management-app-high-level.png'
 
-<Image src={pr} />
+<Image alt='image' src={pr} />
 
 The managed services are volatile components, and implementations are
 required directly throughout the project, resulting in a tightly coupled
@@ -400,7 +400,7 @@ volatile.
 
 import pr2 from '../../assets/blog/abstract-clojure-project-management-pre-abstraction.png'
 
-<Image src={pr2} />
+<Image alt='image' src={pr2} />
 
 # Layered Architectures
 
@@ -414,7 +414,7 @@ transport protocols at the periphery.
 
 import l from '../../assets/blog/abstract-clojure-layered-architecture.png'
 
-<Image src={l} />
+<Image alt='image' src={l} />
 
 We can split the project management application into layers, separating
 the core domain from the implementation specifics. The result is a
@@ -425,7 +425,7 @@ domain to the infrastructure layer. Abstractions are implemented in the
 
 import l2 from '../../assets/blog/abstract-clojure-project-management-post-abstraction.png'
 
-<Image src={l2} />
+<Image alt='image' src={l2} />
 
 There are more nodes on the layered architecture and more edges where
 abstractions have been introduced, but the graph is not as deep and all

@@ -51,7 +51,7 @@ performance of a single task:
 
 import p from '../../assets/blog/performance1.png'
 
-<Image src={p} />
+<Image alt='image' src={p} />
 
 What you see above is a WebSocket message being received and processed.
 From the top, `channel.port1.onmessage` is the function that is invoked
@@ -65,7 +65,7 @@ view a lot of extra information that helps better explore the code.
 
 import p2 from '../../assets/blog/performance2.png'
 
-<Image src={p2} />
+<Image alt='image' src={p2} />
 
 Focusing on the `Bottom-Up` pane, a list of activities can be sorted by
 Self and Total time to immediately identify the slow running functions.
@@ -75,7 +75,7 @@ are likely to downgrade performance.
 
 import p3 from '../../assets/blog/performance3.png'
 
-<Image src={p3} />
+<Image alt='image' src={p3} />
 
 With only a 20 second investigation, we were able to spot that line
 `185` in the `calculations2.cljs` file might be taking too long to
@@ -99,7 +99,7 @@ three-dots menu. Here's a picture of what it looks like:
 
 import pm from '../../assets/blog/performance-monitor.png'
 
-<Image src={pm} />
+<Image alt='image' src={pm} />
 
 # Squeezing out performance
 

@@ -49,7 +49,7 @@ understand ANN.
 
 import ann from '../../assets/blog/ann.png'
 
-<Image src={ann} />
+<Image alt='image' src={ann} />
 
 In DL, the computing systems are designed to simulate how the human
 brain analyses and processes information. ANN has self-learning
@@ -84,7 +84,7 @@ the actual and desired outcome produces the lowest possible error.
 
 import fd from '../../assets/blog/fraud-detection.jpg'
 
-<Image src={fd} />
+<Image alt='image' src={fd} />
 
 During the training and supervisory stage, the ANN is taught what to
 look for and what its output should be, using Yes/No questions with
@@ -131,7 +131,7 @@ is an example of a _FeedForward Neural Network_.
 
 import wm from '../../assets/blog/warning-maths.jpg'
 
-<Image src={wm} />
+<Image alt='image' src={wm} />
 
 **_warning
 Little Bit of Maths on the Horizon! The next section is here purely for
@@ -204,7 +204,7 @@ derivatives at the output layer:
 
 import dl from '../../assets/blog/dl-maths-1.png'
 
-<Image src={dl} />
+<Image alt='image' src={dl} />
 
 For the inductive step, let's presume we have the error derivatives for
 layer _j_. We now aim to calculate the error derivatives for the layer
@@ -216,13 +216,13 @@ connection _wij_:
 
 import dl2 from '../../assets/blog/dl-maths-2.png'
 
-<Image src={dl2} />
+<Image alt='image' src={dl2} />
 
 To complete the inductive step
 
 import dl3 from '../../assets/blog/dl-maths-3.png'
 
-<Image src={dl3} />
+<Image alt='image' src={dl3} />
 
 Combining, we express the [partial
 derivatives](http://mathworld.wolfram.com/PartialDerivative.html) of
@@ -230,14 +230,14 @@ layer _i_ in terms of the partial derivatives of layer _j_.
 
 import dl4 from '../../assets/blog/dl-maths-4.png'
 
-<Image src={dl4} />
+<Image alt='image' src={dl4} />
 
 Next, we determine how the error changes with respect to the weights.
 This gives us how to modify the weights after each training example:
 
 import dl5 from '../../assets/blog/dl-maths-5.png'
 
-<Image src={dl5} />
+<Image alt='image' src={dl5} />
 
 For backpropagation with training examples, we sum up the partial
 derivatives over all training examples. This gives us the following
@@ -245,7 +245,7 @@ modification formula:
 
 import dl6 from '../../assets/blog/dl-maths-6.png'
 
-<Image src={dl6} />
+<Image alt='image' src={dl6} />
 
 This is the Backpropagation Algorithm for Feed-Foward Neural Networks
 using Sigmoidal Neurons. In better news, this also the end of the Maths.
@@ -258,7 +258,7 @@ You can find a worked example of BackPropagation
 
 import bo from '../../assets/blog/chatbot.png'
 
-<Image src={bo} />
+<Image alt='image' src={bo} />
 
 1.  Email service providers use ANN to detect and delete spam from a
     user's inbox
@@ -296,7 +296,7 @@ import bo from '../../assets/blog/chatbot.png'
 
 import ai from '../../assets/blog/ai-race.jpg'
 
-<Image src={ai} />
+<Image alt='image' src={ai} />
 
 The possibilities for the future of Deep Learning are endless. As
 algorithms and technology advances, we may see models that use less
@@ -327,7 +327,7 @@ learning process.
 
 import nn from '../../assets/blog/nn-on-phone.jpg'
 
-<Image src={nn} />
+<Image alt='image' src={nn} />
 
 Eventually we may see Neural networks running on our mobile devices.
 Mobile device may have the ability to conduct machine learning tasks

@@ -23,7 +23,7 @@ customization power around the input handlers.
 
 import logo from '../../assets/blog/fork-logo.jpg'
 
-<Image src={logo} width={100} />
+<Image alt='image' src={logo} width={100} />
 
 Long story short, I decided to build
 [**Fork**](https://github.com/luciodale/fork), a lightweight piece of
@@ -39,7 +39,7 @@ several approaches that will be summarized below.
 
 import fl from '../../assets/blog/form-local-global.jpg'
 
-<Image src={fl} />
+<Image alt='image' src={fl} />
 
 As Re-frame was already a project dependency, the first natural thought
 I had was to leverage the events and subscriptions to manage the form
@@ -59,7 +59,7 @@ and server errors.
 
 import fd from '../../assets/blog/form-abstraction.jpg'
 
-<Image src={fd} />
+<Image alt='image' src={fd} />
 
 As I had already seen some libraries wrapping the input component and
 defining its behaviour through the props, I thought this approach
@@ -134,7 +134,7 @@ provides functions that perform all the boilerplate logic for you.
 
 import fv from '../../assets/blog/form-validation.jpg'
 
-<Image src={fv} />
+<Image alt='image' src={fv} />
 
 The first two releases of Fork included built-in validation. Besides
 being an optional feature, the validation logic was tightly coupled to
