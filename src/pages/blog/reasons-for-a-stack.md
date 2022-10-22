@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Why have a stack?'
 description: 'Becoming opinionated'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '15 Jan 2018'
 heroImage: 'mock3.jpg'
 ---

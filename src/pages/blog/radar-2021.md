@@ -3,7 +3,7 @@ author: 'joe'
 title: 'The JUXT Clojure Radar 2021'
 description: 'Revisiting our Clojure Radar'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '20 Aug 2021'
 heroImage: 'radar-juxt.jpg'
 tags:
@@ -158,7 +158,7 @@ We're not experts, but some things we think will help:
   bring people together, not push them apart!
 
 - Don't skip the text. The blips on the radar can be useless without
-  context, so it's important that you try to articulate why the things
+  context, so it's
   on the radar sit where they do.
 
 Our radar graphic is produced by ClojureScript and is easily embeddable

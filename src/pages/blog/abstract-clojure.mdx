@@ -3,12 +3,10 @@ author: 'ajk'
 title: 'Abstract Clojure'
 description: 'Depend on abstractions, not on concretions'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '25 Nov 2021'
 heroImage: 'abstract-clojure.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 A great deal can be achieved in the first few years of a software
 project, with a small team and the right tools we can quickly deliver
@@ -363,23 +361,11 @@ in turn makes the server and system namespaces unstable. The red arrows
 on the diagram show the components that are volatile due to their
 dependencies:
 
-import ac from '../../assets/blog/abstract-clojure-article-pre-abstraction.png'
-
-<Image alt='image' src={ac} />
-
 With the abstractions introduced, the `server` namespace no longer
 depends on the volatile dependency; it is now a stable component.
 
-import pst from '../../assets/blog/abstract-clojure-article-post-abstraction.png'
-
-<Image alt='image' src={pst} />
-
 The alternate implementation with the `ArticleRepository` protocol has
 additional arrows shown in light green that point to the protocol:
-
-import p from '../../assets/blog/abstract-clojure-article-post-abstraction-protocol.png'
-
-<Image alt='image' src={p} />
 
 ## Example: Project Management Application
 
@@ -388,19 +374,11 @@ so obvious, consider a more complicated example of a project management
 application where users can create projects and manage tickets within a
 project, with notifications sent when the ticket status changes:
 
-import pr from '../../assets/blog/abstract-clojure-project-management-app-high-level.png'
-
-<Image alt='image' src={pr} />
-
 The managed services are volatile components, and implementations are
 required directly throughout the project, resulting in a tightly coupled
 system where everything is volatile. Whilst some components within a
 system must be volatile it is not desirable for everything to be
 volatile.
-
-import pr2 from '../../assets/blog/abstract-clojure-project-management-pre-abstraction.png'
-
-<Image alt='image' src={pr2} />
 
 # Layered Architectures
 
@@ -412,20 +390,12 @@ all put high-level business logic at the core of the application and
 make use of layers to keep low-level details such as the database and
 transport protocols at the periphery.
 
-import l from '../../assets/blog/abstract-clojure-layered-architecture.png'
-
-<Image alt='image' src={l} />
-
 We can split the project management application into layers, separating
 the core domain from the implementation specifics. The result is a
 `domain` layer that depends only on abstractions and has no knowledge of
 external dependencies; notice that the arrows never point from the
 domain to the infrastructure layer. Abstractions are implemented in the
 `infrastructure` layer and wired together to form a system:
-
-import l2 from '../../assets/blog/abstract-clojure-project-management-post-abstraction.png'
-
-<Image alt='image' src={l2} />
 
 There are more nodes on the layered architecture and more edges where
 abstractions have been introduced, but the graph is not as deep and all

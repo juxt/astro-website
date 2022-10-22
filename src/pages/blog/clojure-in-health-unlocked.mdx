@@ -3,12 +3,10 @@ author: 'jon'
 title: 'Clojure in London: HealthUnlocked'
 description: 'A health network powered by Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '06 Jul 2017'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 > As you write more, you like it more. And it's becoming better and
 > better over time.
@@ -25,10 +23,6 @@ featuring Clojure.
 
 I caught up with Head of Technology Alex Trofymenko and Head of
 Engineering Russell Dunphy to learn more.
-
-import he from '../../assets/blog/healthunlocked-devices.png'
-
-<Image alt='image' src={he} />
 
 # Background
 
@@ -64,10 +58,6 @@ making it relevant and life changing, to give people the information
 they need to better manage their own health.
 
 # Tech history
-
-import hea from '../../assets/blog/healthunlocked-russel-alex.jpg'
-
-<Image alt='image' src={hea} />
 
 _Jon:_ What's the tech history of HealthUnlocked?
 
@@ -105,10 +95,6 @@ day I wrote a tool to parse an entire export of a colleague's emails -
 pull out the stats and to build a historical record. It was only 30
 lines to work with a complex file type I hadn't seen before; it's just
 really exciting to feel this kind of power.
-
-import heal from '../../assets/blog/healthunlocked-clocks.jpg'
-
-<Image alt='image' src={heal} />
 
 _Jon:_ What's the team size?
 
@@ -155,10 +141,6 @@ language.
 _Jon:_ Have you got any learnings about using Clojure at the
 architectural level?
 
-import healt from '../../assets/blog/healthunlocked-office.jpg'
-
-<Image alt='image' src={healt} />
-
 _Russell:_ So, controversially, I've come to prefer bigger applications
 with are composed of independent vertical slices of functionality. We
 enforce _in application_ segregation using different package structures
@@ -170,7 +152,7 @@ _Alex:_ We're moving towards having a single GIT repo owning access to a
 data store with multiple apps inside of it. We will have a shared
 directory for schemas that cross application boundaries.
 
-_Russell_ I think it's important to explicitly define and test
+_Russell_ I think it's
 interactions between applications using shared schemas, testing both the
 consumers and producers against these schemas, to make guarantees.
 
@@ -223,7 +205,7 @@ passionate, engaged developers; we try to get them to write tests in
 Clojure to see how they'll pick it up. It's about hiring smart people
 more than finding developers that have coded Clojure before.
 
-_Russell:_ It's super important to find someone who is going to be a
+_Russell:_ It's super
 positive addition to the team. When I first joined I had assumed hiring
 Clojure developers would be easy, but there are some challenges.
 
@@ -240,13 +222,9 @@ extent with all functional languages.
 _Russell:_ In Ruby I got so into hyper magical object oriented code,
 that I cringe now at this kind of complexity. Now I value simplicity.
 
-_Alex:_ Our culture here is very important, we do social activities as
+_Alex:_ Our culture here is very
 well as write code. Experience in Clojure is very useful, but if you
 don't have it then you can pick it up quickly.
-
-import sp from '../../assets/blog/spaceemacs.svg'
-
-<img width={200} src={sp} />
 
 _Russell:_ We're good at hiring for diversity also. We strive for
 diversity and we see dividends from it. Diversity makes our company

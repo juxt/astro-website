@@ -3,7 +3,7 @@ author: 'ren'
 title: "The new Clojure 'iteration' function"
 description: "'iteration' has been released in Clojure 1.11"
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '24 Jan 2022'
 heroImage: 'clj-iteration-fn.jpg'
 ---

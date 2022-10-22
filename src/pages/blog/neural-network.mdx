@@ -3,14 +3,12 @@ author: 'rkb'
 title: 'Writing a Neural Network'
 description: 'A Neural Network writes a Neural Network - Netception'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '11 Aug 2017'
 heroImage: 'mock3.jpg'
 tags:
   - 'machine-learning'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 My previous blog covered the mathematics involved in the neural network
 that we are going to write. You can find it
@@ -128,10 +126,6 @@ variables.
 
 I have used the premise that a weight connects two neurons.
 
-import tw2 from '../../assets/blog/2-2-2-2.png'
-
-<Image alt='image' src={tw2} />
-
 As you can see, weight _w1_ connects neuron _i1_ to neuron _h11_. First
 we want to get vectors of these links.
 
@@ -150,10 +144,6 @@ we want to get vectors of these links.
 ```
 
 Going back to
-
-import tw from '../../assets/blog/2-2-2-2.png'
-
-<Image alt='image' src={tw} />
 
 The neuron values are in a vector
 

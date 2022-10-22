@@ -3,14 +3,12 @@ author: 'lda'
 title: 'Speed up your ClojureScript Webapp'
 description: 'Some useful tools and tips to improve your app performance'
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '21 Oct 2021'
 heroImage: 'speedup-cljs.jpg'
 tags:
   - 'performance'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 From October 2020 until July 2021, I had the chance to work on an
 exciting greenfield project in the investment sector. The goal was to
@@ -49,10 +47,6 @@ so you can learn how to make the most out of it.
 To illustrate the usefulness of this tool let's start by looking at the
 performance of a single task:
 
-import p from '../../assets/blog/performance1.png'
-
-<Image alt='image' src={p} />
-
 What you see above is a WebSocket message being received and processed.
 From the top, `channel.port1.onmessage` is the function that is invoked
 when the payload pings the client. Going down the stack, there are a
@@ -63,19 +57,11 @@ By hovering over the rectangle, you get the number of milliseconds the
 function in question took to execute. However, by clicking on it you can
 view a lot of extra information that helps better explore the code.
 
-import p2 from '../../assets/blog/performance2.png'
-
-<Image alt='image' src={p2} />
-
 Focusing on the `Bottom-Up` pane, a list of activities can be sorted by
 Self and Total time to immediately identify the slow running functions.
 Additionally, by clicking on any of the file name links located at the
 end of the rows, you can see the individual lines of source code that
 are likely to downgrade performance.
-
-import p3 from '../../assets/blog/performance3.png'
-
-<Image alt='image' src={p3} />
 
 With only a 20 second investigation, we were able to spot that line
 `185` in the `calculations2.cljs` file might be taking too long to
@@ -96,10 +82,6 @@ indicating its overall health.
 The performance monitor can be found by hitting `ESC` from the devtools.
 If it's not among the available tabs, it needs to be added from the left
 three-dots menu. Here's a picture of what it looks like:
-
-import pm from '../../assets/blog/performance-monitor.png'
-
-<Image alt='image' src={pm} />
 
 # Squeezing out performance
 
@@ -447,7 +429,7 @@ This method is particularly useful when the function's possible inputs
 are limited. This means that if a function takes an integer from 0 to n,
 the smaller the n the better. If n approaches a big number like 1000, we
 need to consider that there will be at worst a lookup map with 1000
-entries for the memoized function. Therefore, it's important to keep in
+entries for the memoized function. Therefore, it's
 mind that the lookup map might grow unbounded causing memory problems
 that are cleared only after a page refresh.
 
@@ -627,6 +609,6 @@ rendering process even further by eliminating these hiccup structures.
 This means creating React components without using Reagent, and instead
 either writing them in raw React through plain interop, using an
 alternative ClojureScript library like
-[Helix](https://github.com/lilactown/helix), or importing components
+[Helix](https://github.com/lilactown/helix), or
 from tsx/jsx files. We think libraries like Helix could allow us to take
 ClojureScript + React web applications to the next performance frontier.

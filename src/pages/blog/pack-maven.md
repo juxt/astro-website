@@ -3,7 +3,7 @@ author: 'dmc'
 title: 'Deploying libraries with deps.edn'
 description: ''
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Nov 2018'
 heroImage: 'library.jpg'
 ---

@@ -3,7 +3,7 @@ author: 'oly'
 title: 'Advanced Martian'
 description: 'Extraterrestrial intelligence'
 category: 'technology'
-layout: '../../layouts/BlogPost.astro'
+
 tags:
   - 'tech'
   - 'clojure'
@@ -11,9 +11,6 @@ tags:
 publishedDate: '08 Nov 2016'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
-import hereBeDragons from '../../assets/blog/here-be-dragons.png'
 
 My [introduction to Martian](martian.html) demonstrated its use in
 simplifying code used to talk to HTTP APIs. Before reading this article
@@ -102,8 +99,6 @@ The inherent variability in the sort of responses you can get from
 remote HTTP calls makes it a perfect fit for generative testing, giving
 you confidence that your application will behave correctly no matter
 what response the remote API throws at it.
-
-<Image alt='image' src={hereBeDragons} />
 
 In the wonderful world of services written by you all APIs are
 self-described with Swagger and using Martian is a breeze. Towards the

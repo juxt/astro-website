@@ -3,7 +3,7 @@ author: 'alx'
 title: 'Introducing the JUXT Cast'
 description: ''
 category: 'podcast'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '18 Jul 2019'
 heroImage: 'podcast.jpg'
 tags:
@@ -78,7 +78,7 @@ and creating a new podcast or video series. Software is literally our
 business, we all know how to do it and we do it well. Making a podcast
 however is a little out of our comfort zone, but we're sticking to our
 goal of producing it 100% independently so that we can maintain that
-feeling of authenticity and transparency which is important to us.
+feeling of authenticity and transparency which is
 
 We'll also be adding a lot more content to our [YouTube
 channel](https://www.youtube.com/channel/UC5G6p4wwKuDKZsgDrbp5j5A?view_as=subscriber).

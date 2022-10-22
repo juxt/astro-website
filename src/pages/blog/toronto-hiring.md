@@ -3,7 +3,7 @@ author: 'mal'
 title: 'JUXT are hiring in Toronto'
 description: ''
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Aug 2017'
 heroImage: 'mock3.jpg'
 ---
@@ -24,7 +24,7 @@ unique, with its own characteristics. You get to notice how crucial good
 foundations are - just like raising kids!
 
 When Jon and I started talking about forming JUXT, back in 2012, we
-attached a great deal of importance to choosing the best foundations on
+attached a great deal of
 which to build new systems. We felt the technology industry was somewhat
 ambivalent about good technology choices. In theory you can build
 anything in software with any tool, but in practice, we still felt good

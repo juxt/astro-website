@@ -3,12 +3,10 @@ author: 'fky'
 title: 'Logging: change your mind'
 description: 'The ultimate guide on modern logging'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '16 Nov 2016'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Most people consider logging something nice to have; a supplement to the
 code that matters or something you add in order to debug a problem.
@@ -61,11 +59,11 @@ you have anything similar to a [Definition of
 done](https://manifesto.co.uk/definition-done) in your team, then you
 should definitely add \"Implemented relevant logging metrics\" to the
 checklist. Just like implementing automated tests for your code is
-important, adding appropriate logging delivers business value along with
+
 the code you ship.
 
 Below is a list of things I learned while refining the logging behaviour
-of our system. The two most important realisations for me were:
+of our system. The two most
 
 - Make log event explicits (by giving them a name)
 
@@ -89,7 +87,7 @@ refer to it, observe it, query it, plot it, pinpoint it.
 Clojure makes it extremely easy to give the things you log unique,
 memorable names thanks to namespaced keywords. Yes, Rich Hickey is right
 [once
-again](http://clojure.org/about/spec#_global_namespaced_names_are_more_important).
+again](http://clojure.org/about/spec#_global_namespaced_names_are_more_
 For example:
 
 ```clj
@@ -173,10 +171,6 @@ This is not strictly about logging but it's related. We ship all our
 logs to both Riemann (for realtime monitoring) and to Elasticsearch (for
 storage and querying).
 
-import ki from '../../assets/blog/kibana.png'
-
-<Image alt='image' src={ki} />
-
 Many of the questions asked at the beginning of the post require just a
 few searches on Elasticsearch to come up with a quick answer. But the
 obvious next step is to provide the business with graphs and plots that
@@ -190,7 +184,7 @@ on a dashboard.
 ## Keep visualisation code and logging code in sync
 
 A bonus feature we discovered: Kibana (and I'm sure many other tools)
-describes the visualisations as json and allows you to import them.
+describes the visualisations as json and allows you to
 
 If you describe those visualisation in a code project and add it as a
 dependency, then you can cross link the `:namespaced/keywords` you use
@@ -366,11 +360,11 @@ it's interested in.
 Which one do you prefer?
 
 ```clj
-(defn import-from-csv [..])
+(defn
 ;;>
 :ok
 
-(defn import-from-csv [..])
+(defn
 ;;>
 {:processed 23
  :skipped 22

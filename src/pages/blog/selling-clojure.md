@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Selling Clojure to the Business'
 description: 'Our experiences of selling Clojure'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Mar 2018'
 heroImage: 'mock3.jpg'
 tags:
@@ -44,7 +44,7 @@ less; Clojure codebases tend to be an order of magnitude less in size
 than their mainstream counterparts.
 
 Yes, Clojure is a beautiful, elegant language to work with. More
-importantly for businesses though, it's extremely effective for building
+
 software against tight timescales.
 
 # Why is Clojure Lean?

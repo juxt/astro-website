@@ -3,12 +3,10 @@ author: 'oly'
 title: 'Visual testing'
 description: "When there's something strange and it don't look good"
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '02 May 2019'
 heroImage: 'visual-testing.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # A cautionary tale
 
@@ -74,22 +72,10 @@ ImageMagick to normalise and compare the actual and expected images. It
 runs assertions with `clojure.test` and can then build a report of all
 your targets that has a summary:
 
-import su from '../../assets/blog/summary.png'
-
-<Image alt='image' src={su} />
-
 i. a detailed report for each target ...
-
-import rc from '../../assets/blog/report-card.png'
-
-<Image alt='image' src={rc} />
 
 i. and a linked magnifier which helps you see exactly what the
 differences are:
-
-import ma from '../../assets/blog/magnifier.png'
-
-<Image alt='image' src={ma} />
 
 ## with devcards
 

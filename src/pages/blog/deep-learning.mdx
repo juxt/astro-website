@@ -3,15 +3,13 @@ author: 'rkb'
 title: 'Deep Learning (DL)'
 description: 'The Mariana Trench of Learning'
 category: 'AI'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '19 Apr 2017'
 heroImage: 'mock3.jpg'
 tags:
   - 'machine-learning'
   - 'deep-learning'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Previously ... on Machine Learning
 [here](https://juxt.pro/blog/posts/machine-learning.html)
@@ -47,10 +45,6 @@ understand ANN.
 
 # Artificial Neural Networks (ANN)
 
-import ann from '../../assets/blog/ann.png'
-
-<Image alt='image' src={ann} />
-
 In DL, the computing systems are designed to simulate how the human
 brain analyses and processes information. ANN has self-learning
 capabilities that allow it to produce positively correlated results with
@@ -81,10 +75,6 @@ network works backwards, going from the output unit, through the hidden
 units to the input units in order to adjust the weight of its
 connections between the units. It iterates until the difference between
 the actual and desired outcome produces the lowest possible error.
-
-import fd from '../../assets/blog/fraud-detection.jpg'
-
-<Image alt='image' src={fd} />
 
 During the training and supervisory stage, the ANN is taught what to
 look for and what its output should be, using Yes/No questions with
@@ -129,10 +119,6 @@ makes the machine's pattern even better. This continues across all
 levels of the neuron network until the best output is determined. This
 is an example of a _FeedForward Neural Network_.
 
-import wm from '../../assets/blog/warning-maths.jpg'
-
-<Image alt='image' src={wm} />
-
 **_warning
 Little Bit of Maths on the Horizon! The next section is here purely for
 higher understanding of neural networks. If Maths is something you left
@@ -150,7 +136,7 @@ defined below,
 In ANN, values change very slowly with each iteration and input.
 Observing how a small change in the bias value or the weights
 (associated with the artificial neurons) affects the overall value of
-the output of the the neuron is very important. A
+the output of the the neuron is very
 [Perceptron](https://appliedgo.net/perceptron/) may have its outputs
 flipped suddenly with a small change in the input value. To observe the
 tiny changes in the output to arrive at the correct value of input, we
@@ -202,10 +188,6 @@ The symbol \"y\" will refer to the activity of a neuron. The symbol
 base case of the dynamic programming problem, the error function
 derivatives at the output layer:
 
-import dl from '../../assets/blog/dl-maths-1.png'
-
-<Image alt='image' src={dl} />
-
 For the inductive step, let's presume we have the error derivatives for
 layer _j_. We now aim to calculate the error derivatives for the layer
 below it, layer _i_. To do so, we must accumulate information for how
@@ -214,38 +196,18 @@ layer _j_. The partial derivative of the logic, with respect to the
 incoming output data from the layer beneath, is merely the weight of the
 connection _wij_:
 
-import dl2 from '../../assets/blog/dl-maths-2.png'
-
-<Image alt='image' src={dl2} />
-
 To complete the inductive step
-
-import dl3 from '../../assets/blog/dl-maths-3.png'
-
-<Image alt='image' src={dl3} />
 
 Combining, we express the [partial
 derivatives](http://mathworld.wolfram.com/PartialDerivative.html) of
 layer _i_ in terms of the partial derivatives of layer _j_.
 
-import dl4 from '../../assets/blog/dl-maths-4.png'
-
-<Image alt='image' src={dl4} />
-
 Next, we determine how the error changes with respect to the weights.
 This gives us how to modify the weights after each training example:
-
-import dl5 from '../../assets/blog/dl-maths-5.png'
-
-<Image alt='image' src={dl5} />
 
 For backpropagation with training examples, we sum up the partial
 derivatives over all training examples. This gives us the following
 modification formula:
-
-import dl6 from '../../assets/blog/dl-maths-6.png'
-
-<Image alt='image' src={dl6} />
 
 This is the Backpropagation Algorithm for Feed-Foward Neural Networks
 using Sigmoidal Neurons. In better news, this also the end of the Maths.
@@ -255,10 +217,6 @@ You can find a worked example of BackPropagation
 [here](https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/).
 
 # Examples Of Deep Learning:
-
-import bo from '../../assets/blog/chatbot.png'
-
-<Image alt='image' src={bo} />
 
 1.  Email service providers use ANN to detect and delete spam from a
     user's inbox
@@ -294,10 +252,6 @@ import bo from '../../assets/blog/chatbot.png'
 
 # Future
 
-import ai from '../../assets/blog/ai-race.jpg'
-
-<Image alt='image' src={ai} />
-
 The possibilities for the future of Deep Learning are endless. As
 algorithms and technology advances, we may see models that use less
 training cases to learn, maybe diving into unsupervised learning. This
@@ -324,10 +278,6 @@ Google aggregates from Android users around the globe. Potentially, this
 disparity may stifle Apple advances in AI-driven technology, and
 especially where big data is essential to refine and perfect the
 learning process.
-
-import nn from '../../assets/blog/nn-on-phone.jpg'
-
-<Image alt='image' src={nn} />
 
 Eventually we may see Neural networks running on our mobile devices.
 Mobile device may have the ability to conduct machine learning tasks

@@ -3,20 +3,14 @@ author: 'jon'
 title: 'Clojure in Toronto: University Health Network'
 description: 'Powering health with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: 06 Oct 2017"
 heroImage: 'mock3.jpg'
 ---
 
-import { Image } from '@astrojs/image/components'
-
 > The small number of constructs put together becomes very powerful.
 
 # Researching Health
-
-import uhn from '../../assets/blog/uhn.jpg'
-
-<Image alt='image' src={uhn} />
 
 [University Health Network](http://www.uhn.ca/) is a collaboration
 between Downtown Hospitals and the [University of
@@ -53,10 +47,6 @@ business logic. We also generate reports; I built and open sourced the
 [clj-pdf](https://github.com/yogthos/clj-pdf) library that we used for
 building PDFs.
 
-import uhn2 from '../../assets/blog/uhn_team.jpg'
-
-<Image alt='image' src={uhn2} />
-
 # Clojure
 
 **_Jon: What was your journey to finding Clojure?_**
@@ -78,10 +68,6 @@ like you can with the JVM. Everything is different; Haskell has its own
 runtime and deployment tools etc. But what Haskell did give me was an
 appreciation for the functional style, the quick iteration and local
 reasoning about code.
-
-import wd from '../../assets/blog/web-dev-with-clojure.jpg'
-
-<Image alt='image' src={wd} />
 
 **_Jon: And then... Clojure?_**
 
@@ -111,7 +97,7 @@ ideas. Clojure got into production because the prototypes that we built
 worked, and we had people wanting to support them.
 
 If you are going to introduce Clojure into a workplace, then it's
-important to do it in a responsible way. We have had situations where
+
 people have introduced new technologies, and have done so successfully,
 but then they leave. We have to reduce the getting-hit-by-a-bus factor
 by making sure the technologies we choose are a good fit for the
@@ -124,7 +110,7 @@ technology. It's getting better now, but there's a lack of Clojure
 documentation for beginners, which is a problem. There are lots of blog
 posts but they are outdated.
 
-I think it's so important to have central documentation and this why I
+I think it's so
 built [Luminus](http://www.luminusweb.net/). I try to keep to Luminus up
 to date.
 
@@ -150,10 +136,6 @@ year for JavaScript developers. We focused on
 their own favourite editor. Because of Figwheel they were getting live
 reloads in the browser, and without worrying about the REPL, they could
 already see the live workflow really quickly. This was a big success.
-
-import lum from '../../assets/blog/luminus.png'
-
-<Image alt='image' width={200} src={lum} />
 
 **_Jon: Tell me about Luminus?_**
 
@@ -274,18 +256,14 @@ The Clojure tooling is also better (Leiningen and live code reloading).
 With JavaScript there are usually three to four different tools that you
 have to juggle.
 
-import ym from '../../assets/blog/yogthos-malcolm-jon.jpg'
-
-<Image alt='image' src={ym} />
-
 **_Jon: Do you see Clojure adoption growing?_**
 
-_Dmitri:_ It is growing, but it's important to have a grass-roots
+_Dmitri:_ It is growing, but it's
 community of people trying it out on their own. This is what contributes
 to libraries, to people writing guides and documentation and telling
 their friends about it.
 
-It's important for those of us who are professional users to be
+It's
 sensitive towards the people starting out. Once you have internalised
 the development experience of working with Clojure, we can often forget
 what it was like to start out and to learn a new language with a new
@@ -345,10 +323,6 @@ grab something from DBAs and stick it in the file -- done!
 
 # Editors
 
-import cursive from '../../assets/blog/cursive.png'
-
-<Image alt='image' src={cursive} />
-
 **_Jon: What editor do you use?_**
 
 _Dmitri:_ I'm using [Cursive](https://cursive-ide.com/). I started out
@@ -358,13 +332,13 @@ started using
 Cursive came out I was like, \"Oh, this is like what I'm used to -- but
 better!\"
 
-Familiarity is important. I don't think I would have started using
+Familiarity is
 Clojure if I wasn't able to use it from Eclipse originally. A new
 language in the same environment was low friction. If I had to use Emacs
 maybe I would have learned it, but maybe not, it's hard to say how it
 would have gone.
 
-I think it's really important to have editors that people already know.
+I think it's really
 You want people to focus on Clojure as a language, and keep everything
 else the same.
 

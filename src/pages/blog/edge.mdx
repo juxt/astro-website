@@ -3,14 +3,12 @@ author: 'mal'
 title: 'Edge'
 description: 'A complete Clojure project you can leap from'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '05 Jul 2016'
 heroImage: 'mock3.jpg'
 tags:
   - 'opensource'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 The best way to learn any programming language is to start a project to
 solve some problem. The problem drives you forward, getting you to think
@@ -80,10 +78,6 @@ short-cut to code-rot. As every true developer knows, every time you add
 an implicit coupling to your code-base a fairy dies -- so using bidi
 also helps to keep fairy populations healthy.
 
-import fa from '../../assets/blog/fairy.jpg'
-
-<Image alt='image' src={fa} />
-
 Edge makes a great springboard for a micro-service. It contains a small
 RESTful phonebook app, and there's even a [Swagger
 UI](http://swagger.io/) included, so you can communicate your API design
@@ -110,10 +104,6 @@ Edge launches a network REPL, so you can remote debug your service while
 it's running. The service is bound to localhost only for security
 reasons, the idea is that you connect to it via [ssh
 forwarding](http://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html).
-
-import ps from '../../assets/blog/phonebook-swagger.png'
-
-<Image alt='image' src={ps} />
 
 ## Security
 
@@ -162,10 +152,6 @@ a browser, hack the `.cljs` code and see your app take shape. Automatic
 browser reload, HUD and browser REPL are built-in too.
 
 ## CSS
-
-import pf from '../../assets/blog/phonebook-form.png'
-
-<Image alt='image' src={pf} />
 
 These days, all the cool kids are using CSS compilers like
 [Less](http://lesscss.org/) and [Sass](http://sass-lang.com/), and for

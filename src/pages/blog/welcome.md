@@ -3,7 +3,7 @@ author: 'juxt'
 title: 'Welcome'
 description: 'The new JUXT blog'
 category: 'news'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '24 Mar 2015'
 heroImage: 'welcome.jpg'
 ---

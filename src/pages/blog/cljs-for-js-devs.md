@@ -3,7 +3,7 @@ author: 'alx'
 title: 'ClojureScript for JavaScript Developers'
 description: 'How do they compare in 2022?'
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '03 Mar 2022'
 heroImage: 'cljs-for-js-devs.jpg'
 tags:
@@ -54,7 +54,6 @@ app](https://www.juxt.pro/blog/clojurescript-native-apps-2021) (inspired
 by
 [this](https://vouch.io/developing-mobile-digital-key-applications-with-clojurescript/))
 can give you the best of both worlds if hot code reloading speed is
-important.
 
 Clojure's ability to mix Clojure and ClojureScript code in the same file
 with .cljc, while keeping things as simple as possible, is a big

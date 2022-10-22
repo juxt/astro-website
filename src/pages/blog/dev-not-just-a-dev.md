@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Just a techie?'
 description: 'Techies, Devs, Boffins and Geeks'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '09 Nov 2018'
 heroImage: 'just-a-techie.jpg'
 ---

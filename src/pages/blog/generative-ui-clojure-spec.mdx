@@ -3,12 +3,10 @@ author: 'fky'
 title: 'Explore UI states with clojure.spec and devcards'
 description: 'Leverage the power of generators'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '07 Sep 2016'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # TL;DR
 
@@ -22,10 +20,6 @@ demo._
 
 Having used React and ClojureScript for a while you get used to think
 about your frontend code in these four broad categories:
-
-import usm from '../../assets/blog/ui-states-model.png'
-
-<Image alt='image' src={usm} />
 
 **Data** and **Interface** are mostly explorative and declarative part
 of you codebase. You **define** a data model that suits your business
@@ -158,10 +152,6 @@ states, say a list of 0, 1, 10, 100 and 1000 elements. As you change the
 code you should be able to quickly spot if you're introducing
 regressions on one of these states.
 
-import usd from '../../assets/blog/ui-states-devcards.png'
-
-<Image alt='image' src={usd} />
-
 _Example from devcards_
 
 This is exactly how you would exercise your function in a unit test,
@@ -170,10 +160,6 @@ is a visual test. Now, we all know generative testing is a great
 complement to your unit tests, so why not make use of both? If you can
 generate valid inputs from your `clojure.spec` annotations, then throw
 them to your application and see how it renders them.
-
-import uss from '../../assets/blog/ui-states-speccards.png'
-
-<Image alt='image' src={uss} />
 
 _One of the many examples with generated data_
 

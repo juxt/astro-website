@@ -3,12 +3,10 @@ author: 'jon'
 title: 'Clojure in London: Social Superstore'
 description: 'Social Reselling with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '17 Feb 2017'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 > Clojure has helped us to focus on delivering business value
 
@@ -34,10 +32,6 @@ Javascript.
 
 Malcolm Sparks and I paid a visit to their office in Farringdon, London
 for a chat.
-
-import sst from '../../assets/blog/social-superstore-team.jpg'
-
-<Image alt='image' src={sst} />
 
 # Migrating from Angular.js to ClojureScript
 
@@ -73,10 +67,6 @@ ClojureScript very much suited our team, although the second generation
 of the front-end was always going to be better.
 
 # DevOps
-
-import ku from '../../assets/blog/kubernetes.png'
-
-<Image alt='image' src={ku} />
 
 _Jon:_ What is your non-Clojure stack?
 
@@ -145,10 +135,6 @@ _James:_ We tried it on some hack nights but we're very much tied to
 
 _Jon:_ How have you found Reagent?
 
-import el from '../../assets/blog/elmlogo.png'
-
-<Image alt='image' src={el} />
-
 _James:_ Generally, it's very good. I would say that there are a few
 pitfalls that we've learned to avoid, for example where you can
 potentially close over the wrong variable leading to components
@@ -164,10 +150,6 @@ _Dave:_ Elm is strong with types. Without types it can get confusing -
 the state tree, the view tree, and events flying about. Having some
 lightweight assistance on keeping track of the types is helpful;
 ensuring the trees and data types are correlated.
-
-import dv from '../../assets/blog/devcards.png'
-
-<Image alt='image' src={dv} />
 
 _James:_ We've stolen a lot of ideas from Elm.
 
@@ -235,10 +217,6 @@ terms of refactoring, the REPL is very handy - we have lots of comment
 blocks with examples on how to use the code and example data structures.
 REPL driven development is a big win for Clojure; we iterate quite fast.
 
-import ki from '../../assets/blog/kibana-basics.jpg'
-
-<Image alt='image' src={ki} />
-
 _Jon:_ Do you have much automated testing?
 
 _Dave:_ We do have smoke tests that catch quite a lot of things. We also
@@ -271,10 +249,6 @@ The decision to go on the JVM has benefited us hugely. The industry has
 
 _Dave:_ Things like [New Relic](https://newrelic.com/) working straight
 away has been a plus.
-
-import ld from '../../assets/blog/ldnclj.jpg'
-
-<Image alt='image' src={ld} />
 
 _Jon:_ What do you think the state of Clojure is in London?
 

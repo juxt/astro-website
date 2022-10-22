@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Embracing Imperfection'
 description: "Jon Pither's past mistakes, and how to cope with real data in an imperfect world"
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '08 Sep 2022'
 heroImage: 'embracing-imperfection.jpg'
 ---

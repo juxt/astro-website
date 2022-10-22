@@ -3,7 +3,7 @@ author: 'mal'
 title: 'Processing documents with transducers'
 description: 'Using transducers to extract information from XML, JSON and other documents'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Mar 2018'
 heroImage: 'mock3.jpg'
 tags:

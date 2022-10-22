@@ -3,7 +3,7 @@ author: 'mtr'
 title: 'Is Typed Clojure worth the trouble?'
 description: 'Working with types in Clojure'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '22 Jun 2015'
 heroImage: 'mock3.jpg'
 ---
@@ -82,7 +82,7 @@ example-based unit tests, through [generative
 testing](https://github.com/clojure/test.check) and all the way to
 integration and [simulation
 testing](https://github.com/Datomic/simulant). Having good test coverage
-of Clojure code brings many benefits, with a particularly important one
+of Clojure code brings many benefits, with a particularly
 being that a good test suites enables aggressive refactoring without
 having to understand or remember all run-time impacts and subtle bugs
 that might be introduced.

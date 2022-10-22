@@ -3,14 +3,12 @@ author: 'juxt'
 title: 'Clojure and Electric Bikes'
 description: 'A case study of building the infrastructure for an electric powered bikes scheme'
 category: 'case studies'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '29 Oct 2015'
 heroImage: 'mock3.jpg'
 tags:
   - 'clojure'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # Electric Bikes
 
@@ -76,10 +74,6 @@ coordination overhead of involving separate teams. The library support
 was also essential, using APIs such as
 [Tower](https://github.com/ptaoussanis/tower) for internationalisation.
 
-import rc from '../../assets/blog/roc_juxt.jpg'
-
-<Image alt='image' src={rc} />
-
 We also used ClojureScript for the central server, receiving data from
 all the docking stations. Using [Om](https://github.com/omcljs/om), we
 built a dashboard showing real-time events (propagated via HTTP Server
@@ -105,10 +99,6 @@ across your codebase, as we quickly found. When you have a name-space of
 crisp and clear Gloss packet definitions, looking beautiful and easily
 understandable, then you know you've hit upon the simple-made-easy
 Clojure way.
-
-import rt from '../../assets/blog/rideonteam.png'
-
-<Image alt='image' src={rt} />
 
 We used ZeroMQ to communicate with the docking hardware
 micro-controllers, each running specialist firmware.

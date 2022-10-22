@@ -3,12 +3,10 @@ author: 'oly'
 title: 'Superlifter: A DataLoader for Clojure'
 description: 'Efficient fetching from decomplected code'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '26 Mar 2020'
 heroImage: 'superlifter.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 So far, so simple. That's because the resolvers are only given a single
 job to resolve one piece of data. They are decoupled and therefore
@@ -32,10 +30,6 @@ query:
 You have _n_ pets (your pet store is very successful) but that means the
 query is taking quite a long time to resolve. You are making 1+n calls
 to PetDB and paying the overhead of a call 1+n times in serial.
-
-import ns from '../../assets/blog/naive-sequence.svg'
-
-<img src={ns} />
 
 If you queried for both kind and name of the pets you would make 1+2n
 calls and the performance would be twice as bad.
@@ -187,10 +181,6 @@ the fetches that your resolvers want to do, and returning a promise for
 each one. Then, usually after a given time interval, the fetches are
 coalesced (deduplicated and combined) and performed, delivering the
 individual results back to the promises.
-
-import sd from '../../assets/blog/dataloader-sequence.svg'
-
-<img src={sd} />
 
 # superlifter
 
@@ -593,10 +583,6 @@ query is many layers deep, but making it smaller may mean your fetches
 span multiple buckets and you lose some efficiency. One of the
 worst-case scenarios is shown below, with yellow indicating wasted time.
 
-import sb from '../../assets/blog/time-bucket.svg'
-
-<img src={sb} />
-
 ## Size buckets
 
 In some cases (like when fetching our pet details) we already know how
@@ -727,10 +713,6 @@ The `resolve-pet-details` resolver then puts all its fetches into the
 `:pet-details` bucket and as soon as the third resolver has run the
 combined fetch will be performed immediately. No time lost and maximum
 efficiency!
-
-import ssb from '../../assets/blog/size-bucket.svg'
-
-<img src={ssb} />
 
 # More features
 

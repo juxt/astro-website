@@ -3,15 +3,13 @@ author: 'fky'
 title: 'Writing ClojureScript native apps is easy'
 description: 'If you know how to do it'
 category: 'apps'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '20 Apr 2017'
 heroImage: 'mock3.jpg'
 tags:
   - 'react-native'
   - 'clojurescript'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # _What is wrong with native app development?_
 
@@ -29,10 +27,6 @@ Apps](https://facebook.github.io/react-native/blog/2017/03/13/introducing-create
 and Facebook collaborating with Expo I can now say the entry barrier to
 native apps is as low as writing a web app.
 
-import rn from '../../assets/blog/react-native.jpg'
-
-<Image alt='image' src={rn} />
-
 # _How does Expo fix it?_
 
 [Expo](https://docs.expo.io/) takes the bold stance of not allowing you
@@ -45,15 +39,11 @@ that gets rendered with native components.
 
 The experience has been crafted extremely well. You only need to learn a
 smaller, more coherent set of API's and you are able to write a more
-compact and easier to maintain code. More importantly, you can choose
+compact and easier to maintain code. More
 your own development tools, since you don't need to own a Macbook or
 install Android Studio to run it. Your app is dynamically fetched and
 updated on the fly, so there is no need to go through a complex release
 process and distributing it is as convenient as sharing a link.
-
-import fr from '../../assets/blog/framework.jpg'
-
-<Image alt='image' src={fr} />
 
 In the past I have used [Cordova](https://cordova.apache.org/) and
 similar strategies to write apps in pure JS, but the result was never
@@ -165,10 +155,6 @@ library to a [Graphql](https://github.com/retro/graphql-builder) client
 can be easily adaptable to your needs. It's early days but I feel
 ClojureScript + Expo is one of the best options for building large,
 sophisticated apps on mobile.
-
-import m from '../../assets/blog/monks.jpg'
-
-<Image alt='image' src={m} />
 
 **1** Big shout out to `tiensonqin` for putting this together and to
 every other person hanging around in the `#cljsrn` channel for this

@@ -3,14 +3,12 @@ author: 'oly'
 title: 'Introducing pedestal-api'
 description: 'A batteries-included Swagger API for Pedestal'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '12 Mar 2016'
 heroImage: 'mock3.jpg'
 tags:
   - 'opensource'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # Swagger and Schema
 
@@ -133,9 +131,9 @@ Swagger documentation and including pedestal-api's interceptors.
 
 That's it - this is enough to generate the following Swagger UI:
 
-import pa from '../../assets/blog/pedestal-api-swagger.png'
 
-<Image alt="image" src={pa} />
+
+
 
 There are also some helpers that let you define interceptors more
 succinctly; we can rewrite the one above as follows using

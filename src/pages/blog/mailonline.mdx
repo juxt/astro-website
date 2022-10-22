@@ -3,12 +3,10 @@ author: 'jon'
 title: 'Clojure and the MailOnline'
 description: 'Rewriting the MailOnline'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '25 Mar 2015'
 heroImage: 'clojure-mailonline.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 In 2013 the worlds busiest newspaper website was rewritten in Clojure.
 The incumbent CTO Clifton Cunningham had the technology vision of a
@@ -20,10 +18,6 @@ The new system would have to **faster** be than the existing Java
 solution, and be **more robust** and **less error prone**. The business
 wanted a platform that could cater for providing different views of
 content to different devices, and so extensibility was crucial.
-
-import mo from '../../assets/blog/moppl.png'
-
-<Image alt='image' src={mo} />
 
 Jon Pither of JUXT led a team to rewrite the newspaper website in
 Clojure from scratch against these requirements, using data primarily
@@ -37,10 +31,6 @@ After a short period of months, the new website ran alongside the legacy
 one. A custom built diagnostics and HTML comparison framework was also
 deployed into production to give vital guarantees about the content
 being rendered.
-
-import jr from '../../assets/blog/jonrewriteeverything.jpg'
-
-<Image alt='image' src={jr} />
 
 The new codebase was conservatively an order of magnitude smaller than
 its Java / Object Oriented counterpart and made a seamless deployment

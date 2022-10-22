@@ -3,7 +3,7 @@ author: 'fky'
 title: 'Securing your clojurescript app'
 description: "Use buddy's json tokens to authenticate your single page application"
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '09 Jul 2015'
 heroImage: 'mock3.jpg'
 ---
@@ -128,7 +128,7 @@ oubviously works just as well with Ring).
         {:status 200 :body {:token token}}))))
 ```
 
-The important bit is the line `(jwe/encrypt claims secret encryption)`.
+The
 After we've successfully authenticated the user we create a `claims`
 map. The most relevant key is the expiration (set at three hours in the
 example above) otherwise the user will be forever authenticated. This

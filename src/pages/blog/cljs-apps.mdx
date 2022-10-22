@@ -3,15 +3,13 @@ author: 'oly'
 title: 'Testable Clojurescript apps'
 description: 'Using re-frame, devcards and convention to build web apps on solid ground'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '22 Nov 2018'
 heroImage: 'roots.jpg'
 tags:
   - 're-frame'
   - 'reagent'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # The world needs enlightenment
 
@@ -71,10 +69,6 @@ look broadly similar [people will already know how to use
 it](/blog/posts/re-learn.html) - a design principle called familiarity,
 if you're familiar with the term.
 
-import typeVision from '../../assets/blog/typeahead-vision.png'
-
-<Image alt='image' src={typeVision} />
-
 Before we get going, you'll need the following things:
 
 - A Clojurescript project with Reagent, re-frame and Figwheel so we
@@ -98,15 +92,7 @@ get 20% off.
 
 You might think of your application being used as follows:
 
-import user from '../../assets/blog/user.svg'
-
-<img src={user} />
-
 And you could test it like this:
-
-import bbt from '../../assets/blog/blackbox-testing.svg'
-
-<img src={bbt} />
 
 There are problems here:
 
@@ -138,10 +124,6 @@ data. Let's split the UI into two parts - the data model (mmmm, fresh!)
 and the view (full of the sticky goo found in eyeballs) which has only
 one job - _representing_ the data to the user.
 
-import splitting from '../../assets/blog/splitting-ui.svg'
-
-<img src={splitting} />
-
 # The spec
 
 The boundaries in our code are a good place to test - the model deals
@@ -150,10 +132,6 @@ purely with HTML and requires a different testing methodology. It
 therefore makes sense to introduce checks at the boundary between these
 two, where the output of the model is consumed by the view. I can define
 this as a spec:
-
-import uiSpec from '../../assets/blog/ui-spec.svg'
-
-<img src={uiSpec} />
 
 Which will look something like this:
 
@@ -174,10 +152,6 @@ that it consumes this data.
 
 # A model
 
-import zoo from '../../assets/blog/zoolander.png'
-
-<Image alt='image' src={zoo} />
-
 The [re-frame documentation](https://github.com/Day8/re-frame) has
 colourful descriptions on how data flows like the water cycle. Your
 state of the world is used to render your app. The user, seeing the app,
@@ -188,10 +162,6 @@ whole cycle goes on forever, consuming events and rendering updates,
 growing like a black hole engulfing the universe, destabilising entire
 galaxies with its infinite gravity well and spewing radiation until
 eventually your Chrome tab runs out of memory.
-
-import snap from '../../assets/blog/aww-snap.png'
-
-<Image alt='image' src={snap} />
 
 For our typeahead the water cycle / black hole of death will deal with
 all the parts of our UI that don't involve goo.
@@ -330,10 +300,6 @@ Tests don't need to run asynchronously with complicated locking or
 suffer from race conditions because with re-frame we've separated the
 what from the when. Now we have covered the following parts in testing:
 
-import modelTesting from '../../assets/blog/model-testing.svg'
-
-<img src={modelTesting} />
-
 # The goo
 
 The view is where our data meets a random load of HTML which will
@@ -417,10 +383,6 @@ that it will blow up if my test data drifts from the spec.
                               :values []}}]])
 ```
 
-import dCards from '../../assets/blog/devcards.png'
-
-<Image alt='image' src={dCards} />
-
 I can now go one step further and try to render randomly generated data
 using the spec:
 
@@ -440,19 +402,11 @@ same suggestion appeared multiple times. It also forced me to consider
 what to do if a suggestion was an empty string, because that looks
 really weird:
 
-import gCards from '../../assets/blog/generated-devcards.png'
-
-<Image alt='image' src={gCards} />
-
 With some fixes in place for that, I now know that
 
 - my model always outputs data conforming to my spec
 
 - my view can properly display any data that conforms to the spec
-
-import dCardsTesting from '../../assets/blog/devcards-testing.svg'
-
-<img src={dCardsTesting} />
 
 ## Automatic for the people
 
@@ -463,10 +417,6 @@ combination of chrome headless and imagemagick it's possible to capture
 screenshots and diff devcards against reference versions. I have written
 a library to do this called [kamera](https://github.com/oliyh/kamera),
 which I introduce in [my next post here](visual-testing.html).
-
-import modelView from '../../assets/blog/model-view-testing.svg'
-
-<img src={modelView} />
 
 # 998... 999...
 
@@ -495,10 +445,6 @@ We now know that
 The transitive property of our tests proves that we can render
 everything properly, our application works as expected and we can add
 \"full stack testing\" to our CV.
-
-import fStackTesting from '../../assets/blog/full-stack-testing.svg'
-
-<img src={fStackTesting} />
 
 As a bonus, we also know that:
 

@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Introducing XT20'
 description: ''
 category: 'conference'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Mar 2018'
 heroImage: 'mock3.jpg'
 tags:

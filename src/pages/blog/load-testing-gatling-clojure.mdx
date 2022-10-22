@@ -3,14 +3,12 @@ author: 'hug'
 title: 'Load testing with Gatling and Clojure'
 description: 'DDOS for fun and profit'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '23 Oct 2018'
 heroImage: 'mock3.jpg'
 tags:
   - 'AWS'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 > Yes, it works, but will it scale?
 
@@ -63,10 +61,6 @@ does not support time-based ramp-up. The completion-based ramp-up it
 offers is a poor substitute and behaves unreliably. As for
 [clojider](https://github.com/mhjort/clojider), its AWS integration, I
 did not manage to get it to work at all.
-
-import gt from '../../assets/blog/gatling.png'
-
-<Image alt='image' src={gt} />
 
 It ultimately convinced me to use [**Gatling**](https://gatling.io/)
 directly.

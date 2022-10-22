@@ -3,7 +3,7 @@ author: 'dmc'
 title: 'What React Hooks mean for ClojureScript'
 description: 'And some examples'
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '07 Feb 2019'
 heroImage: 'hook.jpg'
 tags:
@@ -20,7 +20,6 @@ generated, and this gap provides powerful leverage.
 I've often felt the ClojureScript community should seek to understand
 and exploit React better. Too many times, by trying to make React easier
 and more convenient, most ClojureScript libraries obscure many of its
-important features.
 
 For example, most ClojureScript-based React wrappers try very hard to
 avoid classes, replacing the many React lifecycle methods with a single

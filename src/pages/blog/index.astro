@@ -1,14 +1,11 @@
 ---
-import { MarkdownInstance } from 'astro'
-import { Blog } from '../../components/types'
-
 export const metadata = {
   navbar: { weight: 3, label: 'Blog' },
   footer: { weight: 3, label: 'Blog' }
 }
 
-const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
-console.log('hello')
+const pages = await Astro.glob('./*.mdx')
+console.log('this shouldnndst take 7 seconds.')
 ---
 
-<div>index ford blog</div>
+<div>index fo rd blog</div>

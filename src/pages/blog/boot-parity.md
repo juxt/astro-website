@@ -3,7 +3,7 @@ author: 'djh'
 title: 'Getting Leiningen feature-parity in Boot'
 description: 'An introduction to the Boot build tool and how to get started on your Clojure project'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '19 Jan 2016'
 heroImage: 'mock3.jpg'
 ---
@@ -31,7 +31,7 @@ show are:
 
 # REPL
 
-By far, the most important task is to launch a REPL to work effectively.
+By far, the most
 
 To get your work done, both `src` & `test` directories need to be
 available.

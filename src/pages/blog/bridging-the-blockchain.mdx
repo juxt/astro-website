@@ -3,19 +3,13 @@ author: 'rro'
 title: 'Bridging the Blockchain / Database Divide'
 description: 'Do we want a blockchain, a database, or both?'
 category: 'db'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '30 Jul 2021'
 heroImage: 'bridging-blockchain.jpg'
 tags:
   - 'xtdb'
   - 'blockchain'
 ---
-
-import { Image } from '@astrojs/image/components'
-import cordaLedgerVenn from '../../assets/blog/corda-ledger-venn.png'
-import cordaVaultSimple from '../../assets/blog/corda-vault-simple.png'
-import cruxVsCorda from '../../assets/blog/crux-vs-corda.svg'
-import cruxCordaDiag from '../../assets/blog/crux-corda-diag.svg'
 
 ## Crux is now XTDB
 
@@ -165,7 +159,7 @@ database features (graph queries, bitemporality, fault-tolerance,
 eviction, etc.), the fact remains: XTDB is not a blockchain.
 
 For any given use case, a blockchain may suffice if decentralization is
-paramount and querying is unimportant. Alternatively, XTDB will suffice
+paramount and querying is un
 if central, immutable records with graph query meets all the system's
 needs. However, if we want decentralized, immutable records _and_
 bitemporal graph queries, we need a new solution.
@@ -203,8 +197,6 @@ participate in such transactions -- only the ones identified within the
 context of a transaction's inputs. This implies not all nodes need to
 know about all the facts in the Corda network.
 
-<Image alt='image' src={cordaLedgerVenn} />
-
 Consensus in Corda is dictated by notaries (for uniqueness) and Public
 Key Infrastructure (for identity). Nodes register with an identity
 service when entering the network and can either initiate or be
@@ -217,8 +209,6 @@ Vaults contain _States_ and _Transactions_. A State is an object
 representation of a current or historical fact. A Transaction references
 input and output States, as well as one (or several) Contracts used to
 approve its execution:
-
-<Image alt='image' src={cordaVaultSimple} />
 
 Corda is not a database, nor does it pretend to be. It extends the
 general definition of \"blockchain\" to include dissociated nodes,
@@ -243,8 +233,6 @@ queries:
 Queries in XTDB can place the observer at any arbitrary point in time.
 Corda's time model is quite different, capturing a fact's linear
 evolution rather than its validity.
-
-<img src={cruxVsCorda} />
 
 The following examples assume we have data about movies and people (cast
 members, directors, etc.), each modeled and inserted separately. We are
@@ -300,8 +288,6 @@ The [`xtdb-corda`](https://xtdb.com/reference/corda.html) library
 enables Corda State data to be piped into XTDB. By querying XTDB instead
 of the Corda node we can express temporal queries over historical and
 current States.
-
-<img src={cruxCordaDiag} />
 
 The simplest way to use the library is by specifying a mapping from
 Corda States to XTDB documents, which can be done automatically by

@@ -3,7 +3,7 @@ author: 'jon'
 title: 'AWS Beanstalk, Docker and Clojure'
 description: 'The JUXT experience of deploying Docker containers through Beanstalk'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '26 May 2015'
 heroImage: 'aws-beanstalk-clojure.jpg'
 tags:

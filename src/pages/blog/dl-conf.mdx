@@ -3,15 +3,13 @@ author: 'rkb'
 title: 'Deep Learning Conference'
 description: 'Deep Learning is infiltrating the world around us!'
 category: 'AI'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '16 Oct 2017'
 heroImage: 'mock3.jpg'
 tags:
   - 'machine-learning'
   - 'deep-learning'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Recently I attended the two-day Deep Learning Summit in London, hosted
 by [Re-Work](https://www.re-work.co/). As someone who is still
@@ -56,10 +54,6 @@ propagation. This is an example of a [Deep Gausian
 Processes](http://keyonvafa.com/deep-gaussian-processes/), however it is
 more challenging when the uncertainty has to be propagated
 
-import dl from '../../assets/blog/dl-conf1.jpg'
-
-<Image alt='image' src={dl} />
-
 # Sequence to Sequence Networks for Speech & Language Translation, [Shubho Sengupta](https://twitter.com/search?q=facebook&src=tyah), [Facebook AI Research (FAIR)](https://research.fb.com/category/facebook-ai-research-fair/)
 
 Translation is the single biggest network for any company.
@@ -84,14 +78,10 @@ The questions to now answer are:
 
 1.  What weights are given to each word in sentence?
 
-2.  What weights are given to the most important words? These questions
+2.  What weights are given to the most
     are asking whether the the word in terms of context or the word in
     terms of relaying an emotion should have a higher weight, and how is
     this decided.
-
-import dl2 from '../../assets/blog/dl-conf2.jpg'
-
-<Image alt='image' src={dl2} />
 
 Memory and [memory
 differentiation](https://deepmind.com/blog/differentiable-neural-computers/)
@@ -122,10 +112,6 @@ the most suitable framework for multiple GPUs is
 [MxNet](https://mxnet.incubator.apache.org/) which is as flexible as
 Tensorflow but still has parallelisation across multiple GPUs.
 
-import dl4 from '../../assets/blog/dl-conf4.jpg'
-
-<Image alt='image' src={dl4} />
-
 # Representations for Deep Learning, [Marta Garnelo](https://twitter.com/deepmindai), [DeepMind](https://deepmind.com/)
 
 [Constrained
@@ -147,10 +133,6 @@ translating the word to a vector that can be input into a deep neural
 network. In search sessions, we extract info and use them to build the
 representation
 
-import dl5 from '../../assets/blog/dl-conf5.jpg'
-
-<Image alt='image' src={dl5} />
-
 # Towards Teaching Machines to Read and Reason, [Sebastian Riedel](https://twitter.com/riedelcastro), UCL / [Bloomsbury.ai](http://bloomsbury.ai/)
 
 The purpose of the neural network is to read a document and answer
@@ -167,10 +149,6 @@ readers and program interpreters. As the neural network only has
 downstream annotation, it is not expensive to run, the learnt models are
 interpretable and you can allow injection of prior knowledge into the
 neural network to make it that much more accurate.
-
-import dl6 from '../../assets/blog/dl-conf6.jpg'
-
-<Image alt='image' src={dl6} />
 
 # Labelling Topics Using Neural Networks, [Nikolaos Aletras](https://twitter.com/nikaletras), [Amazon](https://aws.amazon.com/amazon-ai/)
 
@@ -197,10 +175,6 @@ neutral. The neural network can discover the sentiment towards the
 target of a sentence. Heterogeneous data from mobile phones - such as
 social media, messages, mobile data and calls - can serve well-being.
 
-import dl7 from '../../assets/blog/dl-conf7.jpg'
-
-<Image alt='image' src={dl7} />
-
 # Applications of DL: Anomaly Detection, Sentiment Classification, & Over-sampling, [Noura Al Moubayed](https://twitter.com/NouraAlMoubayed), [Durham University](https://www.dur.ac.uk/iarc/nvidiacuda/workshop/)
 
 A deep neural network can be used in anomaly detection for
@@ -220,10 +194,6 @@ for optimisation.
 Application of this neural network are social robots to help autistic
 children deal with uncertainty.
 
-import dl8 from '../../assets/blog/dl-conf8.jpg'
-
-<Image alt='image' src={dl8} />
-
 # One Perceptron to Rule Them All, [Xavier Giro-i-Nieto](https://twitter.com/DocXavi), [Universitat Politècnica de Catalunya](https://kemlg.upc.edu/en)
 
 When we build neural networks, each layer uses a
@@ -242,10 +212,6 @@ Cross Modal:
 [Image\\\<→Text](https://www.digitaltrends.com/cool-tech/ai-generates-images-based-on-text/)
 and
 [Pics2recipe](https://www.theverge.com/tldr/2017/7/20/16005826/mit-csail-recipes-ai-neural-network-algorithm).
-
-import dl9 from '../../assets/blog/dl-conf9.jpg'
-
-<Image alt='image' src={dl9} />
 
 # Iterative Approach To Improving Sample Generation, [Antonia Creswell](https://twitter.com/ToniCreswell), [Imperial College London](http://www.imperial.ac.uk/machine-learning/)
 
@@ -282,10 +248,6 @@ baby who needs to go to school. Autonomous surgery was shutdown by the
 FDA after just one day. Currently
 [TensorLab](https://www.tensorlab.net/) is doing AI vigilance.
 
-import dl11 from '../../assets/blog/dl-conf11.jpg'
-
-<Image alt='image' src={dl11} />
-
 # Artificial Intelligence for Space-Based Technology, [Luca Perletta](https://twitter.com/DigitalGlobe), [DigitalGlobe](https://www.digitalglobe.com/)
 
 Satellites gather 70 terrabytes of data per day and put the data on the
@@ -304,10 +266,6 @@ With all the data, could an AI predict wealth from space?
 [Digital Globe](https://www.digitalglobe.com/) is launching satellites
 so they can have images of anywhere in the world, every 20 minutes.
 
-import dl3 from '../../assets/blog/dl-conf3.jpg'
-
-<Image alt='image' src={dl3} />
-
 # Towards Automatic Front-end Development With Deep Learning, [Tony Beltramelli](https://twitter.com/Tbeltramelli), [uizard.io](https://uizard.io/)
 
 [UIzard's](https://uizard.io/) deep neural network changes human designs
@@ -317,10 +275,6 @@ HTML/CSS or XML etc. A pre-trained neural network recognises any objects
 [Pix2Code](https://github.com/tonybeltramelli/pix2code) recurrent neural
 network is used as it has the property of being end-to-end
 differentiable, which has advantages with accuracy.
-
-import dl12 from '../../assets/blog/dl-conf12.jpg'
-
-<Image alt='image' src={dl12} />
 
 The benefit of this model is that there is no manually-labelled data and
 a limitless amount of sample data by taking screenshots of online
@@ -392,10 +346,6 @@ means it knows how to handle malware that it has never seen before.
 You could argue that this neural network can be used to create new
 malware.
 
-import dl13 from '../../assets/blog/dl-conf13.jpg'
-
-<Image alt='image' src={dl13} />
-
 # The Quest for Understanding Real World With Synthetic Data, [Ankur Handa](https://twitter.com/ankurhandos), [OpenAI](https://openai.com/)
 
 A 3D model is built through a connected camera. However, it cannot
@@ -463,10 +413,6 @@ then it affects the accuracy of the neural network.
 The machine learning system is trained on medical images. It takes the
 image, puts it through the machine learning network and applies
 regression with the output being a risk score.
-
-import dl14 from '../../assets/blog/dl-conf14.jpg'
-
-<Image alt='image' src={dl14} />
 
 # Drug Discovery Disrupted: Quantum Physics Meets Machine Learning, [Noor Shaker](https://twitter.com/noorshak), [GTN](http://gtn.ai/)
 

@@ -3,7 +3,7 @@ author: 'mrk'
 title: 'Clojure in Oxford: Crossref'
 description: 'Improving scholarly communications'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '01 Nov 2018'
 heroImage: 'mock3.jpg'
 ---
@@ -164,7 +164,7 @@ infrastructure.
 It's certainly the most domain-intensive developer job I've done, so
 when we're recruiting we look for more than just experience in a certain
 language. A history of multiple languages is beneficial, and it's more
-important to be able to learn on the job than to arrive with Clojure
+
 knowledge.
 
 Because we're looking for a particular profile of developer, recent

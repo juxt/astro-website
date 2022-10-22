@@ -3,12 +3,10 @@ author: 'dmc'
 title: 'Overview of the nREPL'
 description: ''
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '20 Feb 2018'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 In this post I'm going to explain in a rough high level about how the
 nREPL you use every day actually works. This isn't intended to be 100%
@@ -95,11 +93,11 @@ post.
 
 Responses have a similar shape. A single request can elicit many
 responses. When the request has finished being processed, it should
-include `"done"` in the list of `:status` values. It's important that
+include `"done"` in the list of `:status` values. It's
 the response `:id` is the same request as the `:id`, this allows a
 client to track particular responses, this is due to the nrepl server
 being asyncronous in design. You can have multiple requests in flight at
-a time. For this reason, it's important that the `:id` is globally
+a time. For this reason, it's
 unique, I generally use a UUIDv4.
 
 For the example request above, I would expect 2 response maps like such:
@@ -141,10 +139,6 @@ This section deals specifically with how tools.nrepl, the most popular
 implementation of nREPL, is implemented. Messages are handled via
 [middleware](https://github.com/ring-clojure/ring/wiki/Concepts#middleware).
 This will feel familiar if you have used Ring.
-
-import un from '../../assets/blog/unix-system-its-a-middleware-system-i-know-this.jpg'
-
-<Image alt='image' src={un} />
 
 tools.nREPL middleware works slightly differently to how ring middleware
 works, because you can handle the message _and_ pass it on to the next

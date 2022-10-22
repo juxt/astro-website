@@ -3,14 +3,12 @@ author: 'mal'
 title: 'Building a chat system using core.async and server-sent-events'
 description: 'Notes from a training course'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '24 Apr 2015'
 heroImage: 'chat-system.jpg'
 tags:
   - 'training'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Last January I taught ClojureScript and Om Next to a team of JavaScript
 engineers in the beautiful city of Cambridge (England). For me, it was
@@ -25,7 +23,7 @@ We started the first day with my usual gentle introduction to the
 language: a brief history of the 300+ years of computing history that
 preceded it. It felt particularly apt to explain the Turing Machine less
 than a mile away from where it was conceived. (Of course, Cambridge is
-important as the home for many other famous discoveries, such as
+
 calculus, the electron, the double-helix and the ZX81).
 
 We then delved into ClojureScript proper and began establishing
@@ -50,17 +48,13 @@ familiarity builds confidence.
 Moreover, the instant feedback of the figwheel-powered development
 environment makes ClojureScript a lot less daunting to the beginner.
 
-import cam from '../../assets/blog/cam.jpg'
-
-<Image alt='image' src={cam} />
-
 # Day 2 - Om Next fundamentals
 
 On the second day we started out with nothing more than an empty
 template but one with a working boot-powered build system.
 
 There's no strong reason to use boot over Leiningen/figwheel but boot
-has the potential to be the more flexible tool, an important
+has the potential to be the more flexible tool, an
 consideration when constructing the kinds of build pipelines that are
 becoming the norm in web front-end development.
 
@@ -199,10 +193,6 @@ is ready, a send function is called with 2 arguments:
 We continued the 2nd day by discussing the 1990s TV series Jeeves and
 Wooster.
 
-import jv from '../../assets/blog/jeeveswooster.jpg'
-
-<Image alt='image' src={jv} />
-
 In the series set in the 1920s, Bertie Wooster (played by Hugh Laurie,
 on the left) is a well-dressed aristocratic playboy ably assisted by his
 butler Jeeves (played by Stephen Fry, on the right). (btw. both these
@@ -222,10 +212,6 @@ leaving everything else to their butler.
 
 In Om Next, the role of Jeeves is filled by _The Reconciler_ (somewhat
 less P G Wodehouse, more _Judge Dredd_).
-
-import jr from '../../assets/blog/jeeves-reconciler.jpg'
-
-<Image alt='image' src={jr} />
 
 The Reconciler's responsibility is to do all the behind-the-scenes
 activities that make everything else go smoothly. The Reconciler
@@ -248,10 +234,6 @@ front-ends that is even more opinionated than Om. However, we can still
 do everything we used to do in the original Om, so flexibility is
 maintained. Opinionated management of state in Clojure has served us
 well so far, I think it could work out well for us in Om Next too.
-
-import cs from '../../assets/blog/camslide.jpg'
-
-<Image alt='image' src={cs} />
 
 # Day 3 - An Om Next application
 
@@ -301,10 +283,6 @@ you're in good shape. Chances are it isn't. Either way you'll need to
 build an intermediary service that can serve this data to your Om Next
 _clients_, securely and efficiently (i.e. not sending data to the client
 that isn't needed).
-
-import cas from '../../assets/blog/camside.jpg'
-
-<Image alt='image' src={cas} />
 
 ## Reading the property
 
@@ -361,10 +339,6 @@ same if you need to support older browsers.
 
 Also, I've named my endpoint `/props` to indicate that we're querying
 for properties, but feel free to change this.
-
-import cg from '../../assets/blog/camgroup.jpg'
-
-<Image alt='image' src={cg} />
 
 We're going to use the POST method because the request needs a body (our
 Om Next query), and browsers don't like sending request bodies for GET
@@ -428,10 +402,6 @@ protocol details can be ignored by users of this resource.
 yada an HTTP feature called _content negotiation_ which allows
 clients to dictate the specific Transit format they want to use. The
 query result will be encoded to the appropriate format, automatically.
-
-import cf from '../../assets/blog/camfocus.jpg'
-
-<Image alt='image' src={cf} />
 
 The result of the response function will be a Clojure map, the results
 of running the Om Next query expression provided in the request body
@@ -531,7 +501,7 @@ button.
 
 Of course, there are some core.async functions (those ending in a
 double-bang `!!`) that are only available in a truly multi-threaded
-environment. However, all the important core.async concepts can be
+environment. However, all the
 taught in a browser, for me the pros easily outweigh the cons.
 
 We played around with core.async features, introducing `timeout`,
@@ -591,7 +561,3 @@ you understand those, everything else is straight-forward but there's
 just a lot of new things to learn and it can feel overwhelming at first.
 Take your time, persevere, and you'll find Om Next is worth the
 investment.
-
-import st from '../../assets/blog/camstreet.jpg'
-
-<Image alt='image' src={st} />

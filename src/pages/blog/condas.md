@@ -3,7 +3,7 @@ author: 'oly'
 title: 'Combining Clojure macros: cond-> and as->'
 description: 'I want it all'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '10 Jun 2015'
 heroImage: 'clojure-macros.jpg'
 tags:

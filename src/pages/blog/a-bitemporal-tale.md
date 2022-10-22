@@ -3,7 +3,7 @@ author: 'iva'
 title: 'A Bitemporal tale'
 description: 'History. Of histories.'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 tags:
   - 'play'
 publishedDate: '19 Apr 2019'
@@ -584,7 +584,7 @@ use the tx-time of the first ownership response.
 
 ### What's Next?
 
-Crux has a few important features which we left out of scope of this
+Crux has a few
 tale.
 
 - Crux has first-class Java API, so you can use it from Kotlin, Java,

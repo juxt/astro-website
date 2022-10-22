@@ -3,7 +3,7 @@ author: 'deo'
 title: 'Bitemporality: More Than a Design Pattern'
 description: 'Bitemporality is the full solution'
 category: 'db'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '12 Apr 2021'
 heroImage: 'bitemporality.jpg'
 tags:
@@ -26,7 +26,7 @@ article is a concise introduction to the topic. Combined with his
 earlier writing on [Temporal
 Patterns](https://martinfowler.com/eaaDev/timeNarrative.html), we have a
 strong foundation to examining the (apparent) paradox of bitemporality:
-how can it simultaneously appear so important yet so difficult?
+how can it simultaneously appear so
 
 ## Bitemporality Matters
 
@@ -94,7 +94,7 @@ two timelines she must master.
 > -- Martin Fowler Temporal Patterns
 
 Martin's implementation advice signals an incongruity. One one hand,
-bitemporality is real and it is important that we record both timelines
+bitemporality is real and it is
 to keep ourselves sane. On the other hand, bitemporality is incredibly
 difficult to program correctly, so it's best avoided whenever possible.
 The two time dimensions impart their simplicity in direct proportion to

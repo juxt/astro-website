@@ -3,12 +3,10 @@ author: 'jon'
 title: 'Introducing Crux'
 description: 'Open Time Store'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '15 May 2019'
 heroImage: 'introducing-crux.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 **_Crux is now XTDB
 September 2021 Update: Crux has recently been renamed XTDB. The official home for XTDB is now https://xtdb.com._**
@@ -47,10 +45,6 @@ provide their own implementations that would either fully replace or
 decorate the existing ones.
 
 ## How Crux Works
-
-import cs from '../../assets/blog/crux-system2.png'
-
-<Image alt='image' src={cs} />
 
 Crux is schemaless, with transactions being submitted through the Crux
 API. The data is then sent to two event-log topics for storage: the
@@ -119,10 +113,6 @@ manifesting intermediary results in memory.
 
 ## Deployment
 
-import cd from '../../assets/blog/crux-deployment.png'
-
-<Image alt='image' src={cd} />
-
 Crux can be deployed as a JAR file within your application, or Crux has
 a HTTP server that you can use. You can use Crux in a _standalone_ mode
 without Kafka (substituting in a local disk-based event-log), or you can
@@ -146,7 +136,3 @@ us](mailto:hello@xtdb.com) or visit our
 Have a [play with XTDB](https://docs.xtdb.com/guides/quickstart/) - add
 the JAR to your project and scale up from there. Crux is Alpha. Please
 raise any issues on our [GitHub](https://github.com/juxt/crux).
-
-import cl from '../../assets/blog/crux-logo.svg'
-
-<img width={300} src={cl} />

@@ -3,7 +3,7 @@ author: 'anc'
 title: 'Carve that Clojure codebase'
 description: 'How to use carve to delete all the dead code from your projects'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '18 Jan 2021'
 heroImage: 'carve.jpg'
 ---
@@ -63,7 +63,7 @@ The output will be something like:
 ```
 
 Carve might give you some false positives especially if you are doing
-some more advanced lazy loading and similar tricks. So it's important to
+some more advanced lazy loading and similar tricks. So it's
 check manually (and by running your test suite) that you're not deleting
 something still required.
 
@@ -74,7 +74,7 @@ the different vars (other IDEs might have a similar feature).
 
 ## Automate
 
-This is maybe the most important step, and it's there to ensure that
+This is maybe the most
 no-one can add dead code to the project again. The specific steps will
 depend on your CI environment, but the idea is simply to make your build
 pipeline fail if carve detects any dead code.

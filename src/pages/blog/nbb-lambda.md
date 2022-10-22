@@ -3,7 +3,7 @@ author: 'rmc'
 title: 'AWS Lambda, now with first class parentheses'
 description: 'Deploying Clojure on AWS Lambda with no compromises'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '14 Jul 2022'
 heroImage: 'nbb-lambda.jpg'
 tags:
@@ -66,8 +66,6 @@ package.json: `json {"dependencies": {"nbb": "^0.6.129"}} `
 index.mjs:
 
 ```javascript
-import { loadFile, addClassPath } from 'nbb'
-
 addClassPath('.') // This is necessary when you require another .cljs file
 
 const { handler } = await loadFile('./example.cljs')
@@ -201,7 +199,7 @@ The design of nodejs was meant specifically to enable evented IO. See
 interview](https://www.infoq.com/interviews/node-ryan-dahl/) and
 transcript with Ryan Dahl from 2010.
 
-One of the most important aspects of nodejs that developers need to be
+One of the most
 careful of is hogging the CPU: that prevents the event loop from making
 progress which can create huge problems on the server.
 
@@ -225,8 +223,8 @@ like standard Clojure.
 ```clojure
 (defn- ->encrypted-response
  [{:keys [signing-key encryption-key signature signed-property request-data]}]
- (p/let [signing-key (import-signing-key signing-key)
-         encryption-key (import-crypto-key encryption-key)
+ (p/let [signing-key (
+         encryption-key (
          signed-data (get request-data signed-property)
          verified? (verify signing-key signature signed-data)
          encrypted-data (when verified? (obtain-pin encryption-key))]

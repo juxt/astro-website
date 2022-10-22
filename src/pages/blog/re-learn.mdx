@@ -3,14 +3,12 @@ author: 'oly'
 title: 'Evolving user interfaces'
 description: 'Educate users with re-learn'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '10 Jan 2017'
 heroImage: 'mock3.jpg'
 tags:
   - 'opensource'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 We've all said it while using a website, immediately realised we sound
 like our parents and recoiled slightly in horror as the full implication
@@ -71,10 +69,6 @@ described by a couple of words or maybe a self-explanatory icon. These
 relationships come from the physical world and are empirically intuitive
 to humans through hundreds of years of design.
 
-import md from '../../assets/blog/material-design.png'
-
-<Image alt='image' src={md} />
-
 This physical emulation was embraced by Google with their [Material
 Design philosphy](https://material.io/guidelines/). This is an
 interesting read for anyone involved with UI design even if you don't
@@ -105,10 +99,6 @@ excellent discussion](https://juxt.pro/blog/posts/logging.html) on that
 topic. When you have this data at your disposal you can have informed
 discussions about what features are popular, rarely or never used and
 how people access them.
-
-import ga from '../../assets/blog/google-analytics.png'
-
-<Image alt='image' src={ga} />
 
 When you want to add a button for a new feature you will know which
 other actions need to be visible and in primary positions versus those
@@ -160,10 +150,6 @@ see, a sign up button you might have to click twice, a mysterious final
 step and so on which could easily be broken by a simple change to the UI
 such as, for example, changing the button to read \"Create account\"
 instead of \"Sign up\".
-
-import fh from '../../assets/blog/facebook-help.png'
-
-<Image alt='image' src={fh} />
 
 The developer as well will struggle to keep guides up-to-date as it's
 hard to even know when you've invalidated them with your code changes.
@@ -217,10 +203,6 @@ keep it updated.
 
 The lesson will appear to the user like this:
 
-import rl2 from '../../assets/blog/re-learn-initial.png'
-
-<Image alt='image' src={rl2} />
-
 Because the lesson appears on the UI and points to what it refers to
 it's easier for the user to understand and provides much more context.
 When the user has \"learned\" the lesson it is stored in local storage
@@ -241,10 +223,6 @@ lesson:
 
 Users, old and new, will be shown the lesson so that they understand the
 new behaviour:
-
-import rl3 from '../../assets/blog/re-learn-updated.png'
-
-<Image alt='image' src={rl3} />
 
 For new users, the features of your product are displayed in simple
 steps as they start using it, allowing them to discover all the features

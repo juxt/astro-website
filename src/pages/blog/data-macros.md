@@ -3,7 +3,7 @@ author: 'mal'
 title: 'Data Macros'
 description: 'Expanding abbreviated data literals'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '05 Jan 2016'
 heroImage: 'mock3.jpg'
 ---

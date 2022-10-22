@@ -1,14 +1,14 @@
 ---
 author: 'jon'
 title: 'Technology and Fun, XT16'
-description: 'The importance of fun in our work'
+description: 'The 
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '15 Jun 2016'
 heroImage: 'mock3.jpg'
 ---
 
-One of the most important moments of my Clojure journey was when my
+One of the most
 colleague - Håkan Råberg - had the audacity to suggest that we should
 try Clojure because it might be enjoyable to do so. This earned him a
 reprimand from a colleague: \"We are not paid to enjoy ourselves\".

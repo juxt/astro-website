@@ -3,7 +3,7 @@ author: 'ren'
 title: 'From MacOS to Arch Linux'
 description: 'First impressions'
 category: 'arch'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '05 Nov 2021'
 heroImage: 'macos-to-arch.jpg'
 tags:

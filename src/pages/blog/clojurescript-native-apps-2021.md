@@ -3,7 +3,7 @@ author: 'alx'
 title: 'Writing Mobile apps in ClojureScript in 2021'
 description: "Still easy? Let's find out..."
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '13 Aug 2021'
 heroImage: 'webapps-cljs.jpg'
 tags:
@@ -162,7 +162,7 @@ I would aim for:
 - All React Native/Expo code would be written in JavaScript (or
   Typescript)
 
-Because React Native comes with its own bundler, I was able to import my
+Because React Native comes with its own bundler, I was able to
 `.tsx` components using `js/require` like so:
 
 ```clojure

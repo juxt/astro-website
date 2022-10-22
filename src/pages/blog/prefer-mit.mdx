@@ -3,12 +3,10 @@ author: 'deo'
 title: 'Prefer the MIT License'
 description: 'The EPL is not a Sensible Default'
 category: 'copensource'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '14 May 2021'
 heroImage: 'mit-license.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 <details>
   <summary>Click for tl;dr.</summary>
@@ -69,7 +67,7 @@ source systems and closed-source (proprietary-commercial) systems.
 Thanks to weak copyleft conditions, module-level (as described in the
 EPL, under the [definition of
 \"Contribution\"](https://github.com/clojure/clojure/blob/b1b88dd25373a86e41310a525a21b497799dbbf2/epl-v10.html#L51))
-derivative works must also be licensed EPL-1.0. This has two important
+derivative works must also be licensed EPL-1.0. This has two
 consequences. One, it makes it illegal for software behemoths like
 Amazon and Apple to fork Clojure and release a closed-source competitor
 based on the original code. Two, it ensures all derivative works can be
@@ -105,19 +103,11 @@ license, a project author would be wise to consider these costs. Thus,
 for project authors who invest little energy in their license choices,
 the EPL makes a very poor default choice.
 
-import le from '../../assets/blog/license-epl-gpl-compat.svg'
-
-<img src={le} />
-
 ## The MIT License is a sensible default
 
 Code licensed under MIT can go just about anywhere. You can use it in an
 EPL codebase or GPL codebase without hesitation because it has only the
 bare minimum limitations, of liability and warranty, on its use.
-
-import lmc from '../../assets/blog/license-mit-compat.svg'
-
-<img src={lmc} />
 
 Code licensed under MIT also retains flexibility for its _author_. Most F/OSS projects
 do not ask external contributors to sign a Contributor Agreement. As a result, if
@@ -175,10 +165,6 @@ Norbert Wójtowicz, and Dan Sutton for their feedback.
 photo](https://commons.wikimedia.org/wiki/File:MIT_Main_Campus_Aerial.jpg)
 adapted from Wikimedia Commons under the terms of
 [CC-BY-3.0](https://creativecommons.org/licenses/by/3.0/deed.en).
-
-import tr from '../../assets/blog/license-mit-epl-gpl-triangle.png'
-
-<Image alt='image' src={tr} />
 
 This work by [Steven Deobald](https://deobald.ca) for [JUXT
 Ltd.](https://juxt.pro) is licensed under [CC BY-SA

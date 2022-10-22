@@ -102,7 +102,7 @@ To create a new article add a `*blogName*.md` file in `src/pages/blog`. You must
 ---
 draft: true
 author: 'lda'
-layout: '../../layouts/BlogPost.astro'
+
 title: 'Hello world!'
 description: "Bring your markdown, we'll handle the rest"
 publishedDate: '17 Jul 2022'

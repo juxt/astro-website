@@ -3,16 +3,12 @@ author: 'jon'
 title: 'ThoughtWorks Meetup: Time Travel Databases'
 description: 'What if your database never forgets?'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 tags:
   - 'xtdb'
 publishedDate: '18 Dec 2020'
 heroImage: 'timetravel.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
-import twTmp from '../../assets/blog/crux-tw-tmp-dbs2.png'
-import cruxTwDoc from '../../assets/blog/crux-tw-doc-put2.jpg'
 
 We recently attended a virtual meetup on the subject of temporality in
 databases, titled _\"What if your databases never forgot\"_, presented
@@ -33,13 +29,9 @@ talked about temporal databases being an extension of the functional
 programming model, whereby our queries are essentially functions working
 against a log of accrued immutable facts.
 
-<Image alt='image' src={twTmp} />
-
 Crux was featured during the talk alongside other databases with
 first-class temporal features (e.g.
 [Datahike](https://github.com/replikativ/datahike)), and we were pleased
 to participate in a subsequent Q&A, which examined performance, data
 eviction, data migration, SQL 2011, schema(less) design and more. We
 hope you enjoy it!
-
-<Image alt='image' src={cruxTwDoc} />

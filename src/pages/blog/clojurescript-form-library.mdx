@@ -3,15 +3,12 @@ author: 'lda'
 title: 'A ClojureScript form library for Reagent and Re-frame'
 description: '100% customizable, 0% boilerplate'
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '22 Dec 2019'
 heroImage: 'forms.jpg'
 tags:
   - 'forms'
 ---
-
-import { Image } from '@astrojs/image/components'
-import '../../assets/style/clojurescript-form-library.css'
 
 # Why did I build a new form tool?
 
@@ -20,10 +17,6 @@ couple of projects that make heavy use of forms. When trying some of the
 many ClojureScript form libraries out there, I often faced situations
 where I wished I had either more control over the style or more
 customization power around the input handlers.
-
-import logo from '../../assets/blog/fork-logo.jpg'
-
-<Image alt='image' src={logo} width={100} />
 
 Long story short, I decided to build
 [**Fork**](https://github.com/luciodale/fork), a lightweight piece of
@@ -36,10 +29,6 @@ To get this form library to its current state and design, I explored
 several approaches that will be summarized below.
 
 ## Local state VS global state
-
-import fl from '../../assets/blog/form-local-global.jpg'
-
-<Image alt='image' src={fl} />
 
 As Re-frame was already a project dependency, the first natural thought
 I had was to leverage the events and subscriptions to manage the form
@@ -56,10 +45,6 @@ included Re-frame only to manage global events such as form submissions
 and server errors.
 
 ## Input abstraction VS handler abstraction
-
-import fd from '../../assets/blog/form-abstraction.jpg'
-
-<Image alt='image' src={fd} />
 
 As I had already seen some libraries wrapping the input component and
 defining its behaviour through the props, I thought this approach
@@ -132,10 +117,6 @@ provides functions that perform all the boilerplate logic for you.
 
 ## Built-in VS no validation
 
-import fv from '../../assets/blog/form-validation.jpg'
-
-<Image alt='image' src={fv} />
-
 The first two releases of Fork included built-in validation. Besides
 being an optional feature, the validation logic was tightly coupled to
 the input handlers. As a consequence, I came to the conclusion that I
@@ -160,9 +141,7 @@ examples to leverage this library at its full.
 First, download the Fork dependency locally:
 
 <a href='https://clojars.org/fork'>
-  <img
-    src='https://clojars.org/fork/latest-version.svg'
-    style='margin-bottom: 1em;'
+  src='https://clojars.org/fork/latest-version.svg' style='margin-bottom: 1em;'
   />
 </a>
 

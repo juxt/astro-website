@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Autonomy, Mastery, Purpose'
 description: ''
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '12 May 2021'
 heroImage: 'autonomy.jpg'
 ---

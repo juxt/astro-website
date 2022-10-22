@@ -3,7 +3,7 @@ author: 'dmc'
 title: 'Clojure and Vim: An overview'
 description: "It's very possible"
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '13 Dec 2016'
 heroImage: 'mock3.jpg'
 ---

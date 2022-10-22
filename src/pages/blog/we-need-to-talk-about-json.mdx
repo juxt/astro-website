@@ -3,12 +3,10 @@ author: 'mal'
 title: 'We need to talk about JSON'
 description: ''
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '15 Aug 2019'
 heroImage: 'json.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Like many in the Clojure community, I've considered JSON as a rather
 horrible syntax (compared to the obvious superiority of
@@ -73,10 +71,6 @@ It's almost as if, behind the scenes, there's been this _Grand Lisp
 Conspiracy_ to get everyone programming in Lisp, whether or not they
 realise it.
 
-import gs from '../../assets/blog/guy-steele.png'
-
-<Image alt='image' src={gs} />
-
 By disguising itself with some ornamental punctuation, JSON has infected
 the whole world with Lisp.
 
@@ -91,10 +85,6 @@ general way of specifying meta-data.
 
 When combined with meta-data, data takes on some magical super-powers.
 
-import rj from '../../assets/blog/react-jsonschema-form.png'
-
-<Image alt='image' src={rj} />
-
 One example is [Mozilla's React JSON Schema
 Form](https://mozilla-services.github.io/react-jsonschema-form/) which
 demonstrates a React component that can dynamically produce forms via
@@ -102,10 +92,6 @@ introspecting JSON data and its schema.
 
 I believe there will be plenty of other uses of JSON Schema in the
 future.
-
-import js from '../../assets/blog/json-schema.png'
-
-<Image alt='image' src={js} />
 
 One example I'm particularly interested in is the use of JSON Schema as
 a pull-syntax for our [Crux](https://juxt.pro/crux) database. JSON

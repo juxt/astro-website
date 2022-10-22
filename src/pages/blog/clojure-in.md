@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Announcing our Clojure In series'
 description: 'Surveying Real Clojure Projects'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '22 Sep 2016'
 heroImage: 'mock3.jpg'
 ---

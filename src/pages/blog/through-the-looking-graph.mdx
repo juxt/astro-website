@@ -3,12 +3,10 @@ author: 'oly'
 title: 'Through the looking graph'
 description: 'Experiences adopting GraphQL on a Clojure/script project'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '02 Mar 2018'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # The journey
 
@@ -35,10 +33,6 @@ The domain is quite complicated, so let's use an analogy and say that
 our tree represents a sport, comprising of divisions, teams and players.
 Here's how it looks:
 
-import tg from '../../assets/blog/the-graph.svg'
-
-<img src={tg} />
-
 The vast majority of data in the graph resides in the lower layers
 
 The graph is quite bottom heavy in terms of volume of data - there are
@@ -61,10 +55,6 @@ relevant places. Imagine a division summary showing the top 3 teams and
 best and worst statistics for the most recent game. There's no need to
 drown the user in data! The relevant facts are a tiny fraction of the
 total:
-
-import thg from '../../assets/blog/the-highlighted-graph.svg'
-
-<img src={thg} />
 
 Highlighting the bits of data that
 are actually relevant to the user: a tiny fraction of the total
@@ -89,10 +79,6 @@ We are lucky that browsers have come far enough that tens of megabytes
 of data can be consumed at a canter, making this approach possible. It
 allowed us to think of the application using this very simple model:
 
-import dt from '../../assets/blog/data-to-views.svg'
-
-<img src={dt} />
-
 All we had to think about on the server side was how to populate the
 graph, and on the client side what and how to render _that same graph_.
 We could forget that one side was a JVM process on some remote server
@@ -103,10 +89,6 @@ code. This worked well for us - adding new screens to the app was simple
 and quick, delighting our customer.
 
 # Why we looked for something new
-
-import tc from '../../assets/blog/the-cake.jpg'
-
-<Image alt='image' src={tc} />
 
 When you have a very tall cake it's easiest to
 eat it in thin slices
@@ -265,10 +247,6 @@ like \"bestPlayer\" at the team level. This saves on data - to calculate
 the best player you'd have to transfer data about all the players and
 sort them on the client side - but it breaks our adherence to the one
 canonical form.
-
-import dl from '../../assets/blog/data-vs-logic.svg'
-
-<img src={dl} />
 
 Hidden logic or verbosity? The GraphQLer's
 dilemma

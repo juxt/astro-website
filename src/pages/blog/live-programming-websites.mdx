@@ -3,12 +3,10 @@ author: 'mal'
 title: "'Live' programming, server-side"
 description: 'Using instant feedback to develop server-driven websites'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Jan 2017'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 For a number of years now I've been thinking about reflecting something
 Dick Gabriel remarked about Lisp [during an
@@ -159,10 +157,6 @@ That makes it quick to dereference.
 The app state that a website has to represent may span multiple sources,
 such as files, databases and other systems. Our approach is to model
 this distribution of state as a dependency tree.
-
-import ss from '../../assets/blog/skip-state.svg'
-
-<img src={ss} />
 
 How can we avoid the expense of refreshing our state affecting the
 performance off each request? The answer lies in the combination of two

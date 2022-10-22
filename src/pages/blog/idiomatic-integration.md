@@ -3,12 +3,10 @@ author: 'oly'
 title: 'Idiomatic integration'
 description: 'Talk pretty with external systems'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '25 Apr 2016'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # Camels, snakes and kebabs
 
@@ -43,10 +41,6 @@ library is one of my favourites. It provides conversion functions from
 any style to any other style, returning keywords or strings as you
 prefer. I encourage you to have a look if you're not already familiar
 with it.
-
-import nc from '../../assets/blog/no-camels.png'
-
-<Image alt="image" src={nc} />
 
 # Walk all the keys!
 

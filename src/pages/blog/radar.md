@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Clojure Technical Radar'
 description: 'Introducing the JUXT Clojure Technical Radar 2016'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '13 Jan 2016'
 heroImage: 'mock3.jpg'
 ---

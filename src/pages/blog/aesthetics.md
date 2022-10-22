@@ -3,7 +3,7 @@ author: 'jon'
 title: 'The aesthetics of code hardening'
 description: 'A gripe'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '20 Nov 2016'
 heroImage: 'mock3.jpg'
 tags:

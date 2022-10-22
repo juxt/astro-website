@@ -3,7 +3,7 @@ author: 'mal'
 title: 'Parsing text with clojure.spec'
 description: "The library that keeps on givin'"
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '17 Jan 2018'
 heroImage: 'mock3.jpg'
 ---

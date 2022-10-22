@@ -3,7 +3,7 @@ author: 'mal'
 title: 'Configuration: Make it obvious!'
 description: 'Avoid misleading application configuration schemes by being explicit'
 category: 'opensource'
-layout: '../../layouts/BlogPost.astro'
+
 tags:
   - 'clojure'
 publishedDate: '05 May 2016'
@@ -184,7 +184,7 @@ only be read by the application account user.
 Aero comes with some useful EDN tag literals that you can use to read a
 private configuration file.
 
-The first is `#include`, which lets us import some extra configuration
+The first is `#include`, which lets us
 from another file.
 
 ```clojure

@@ -3,20 +3,14 @@ author: 'and'
 title: 'Clojure in Seattle: World Singles Networks'
 description: 'Clojure in the dating scene'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '10 Oct 2018'
 heroImage: 'mock3.jpg'
 ---
 
-import { Image } from '@astrojs/image/components'
-
 > Clojure is solid programming and engineering whilst still feeling fun
 
 ## Connecting People
-
-import si from '../../assets/blog/world-singles-networks-we-make-love.png'
-
-<Image alt='image' src={si} />
 
 [World Singles Networks](https://worldsinglesnetworks.com/) is a dating and
 singles community designed to help you make valuable connections with
@@ -52,10 +46,6 @@ kind of fun.
 
 **_Andrew: What's the tech story?_**
 
-import sc from '../../assets/blog/scala-logo.png'
-
-<Image alt='image' src={sc} />
-
 **Sean:** When I got started, they were a ColdFusion shop and we picked
 up frameworks and modern OO / MVC / DI frameworks to rebuild the system
 as an extensible, customisable platform for that. In dating, you've got
@@ -75,10 +65,6 @@ It was lovely code when we got it up and running, nice and clear, with a
 good concurrency model. Memory leaks with the actor model meant that the
 process had to be restarted several times a week, but it gave us
 everything that we wanted.
-
-import ca from '../../assets/blog/clojure-in-action-2nd-edition-cover.png'
-
-<Image alt='image' src={ca} />
 
 In 2010 I got interested in Clojure and Amit Rathore - the author of
 [Clojure in Action](https://www.manning.com/books/clojure-in-action-second-edition) -
@@ -170,10 +156,6 @@ tends to be much more advanced.
 **_Andrew: Could you give us a brief breakdown of the technical stack
 within World Singles Networks?_**
 
-import re from '../../assets/blog/react-logo.png'
-
-<Image alt='image' src={re} />
-
 **Sean:** For what is now the 3rd generation of the platform, which
 we've rolled out to about 40 of our sites so far, that is a JavaScript
 [React JS](https://reactjs.org/)
@@ -182,10 +164,6 @@ backend. We have one app that uses [Bidi](https://github.com/juxt/bidi) and Ring
 talk to MySQL, we use [Percona](https://www.percona.com/) as the variant there, so a
 very heavy SQL based application. We have several apps that are very
 heavy users of core.async.
-
-import gr from '../../assets/blog/graphql.png'
-
-<Image alt='image' src={gr} />
 
 We have been using [Lacinia](https://github.com/walmartlabs/lacinia) for
 [GraphQL](https://graphql.org/)
@@ -199,10 +177,6 @@ out how to get it pulled back into MySQL.
 
 **_Andrew: You mentioned React and JavaScript. Do you think you'll move
 to ClojureScript for any of that?_**
-
-import cljs from '../../assets/blog/cljs-logo-120b.png'
-
-<Image alt='image' src={cljs} />
 
 **Sean:** We built some internal proof of concept apps with
 ClojureScript about 3 ½ years ago and we did like it, but the tooling
@@ -228,10 +202,6 @@ open source projects and you've become a maintainer of quite a few
 projects over the years. Which open source projects would you say you
 are really actively involved in at the moment and are there any that
 hold a special place for you?_**
-
-import cl from '../../assets/blog/clojure.png'
-
-<Image alt='image' width={200} src={cl} />
 
 **Sean:** The reason I tend to become a code maintainer on open source
 projects is because I want to use them in my day to day work and they
@@ -272,10 +242,6 @@ something done with those. I took over [\"tools.cli\"](https://github.com/clojur
 reason. We were using it fairly extensively in a lot of our background
 and cron job processes.
 
-import fu from '../../assets/blog/Fumiko-Hanreich-HoneySQL.png'
-
-<Image alt='image' src={fu} />
-
 I've just taken over as the maintainer on HoneySQL because, again, we
 use it very heavily. In fact, my former colleague, [\"Fumiko Hanreich,
 gave a great talk at Clojure/West in 2015\"](https://www.youtube.com/watch?v=alkcjyhesjI&list=PLZdCLR02grLrKAOj8FJ1GGmNM5l7Okz0a)
@@ -285,7 +251,7 @@ So that's the latest one that I'm now in charge of. I like open source.
 I've been doing open source maintenance since the very early 90's. I
 worked on some of the early C++ libraries and pretty much every
 community I've been in I've tried to contribute to open source. I think
-it's a very important way to support and grow a community.
+it's a very
 
 ## Hiring
 

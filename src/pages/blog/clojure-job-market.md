@@ -3,7 +3,7 @@ author: 'jon'
 title: 'The Clojure Job Market'
 description: 'Thoughts on the European Clojure Job Market'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '29 Jun 2017'
 heroImage: 'mock3.jpg'
 ---

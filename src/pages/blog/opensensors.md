@@ -3,7 +3,7 @@ author: 'juxt'
 title: 'JUXT and OpenSensors'
 description: 'A case study of building the technology that powers a major IoT platform'
 category: 'case studies'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '22 Oct 2015'
 heroImage: 'mock3.jpg'
 ---
@@ -22,7 +22,7 @@ devices are already heralding dramatic changes in industries from retail
 environment.
 
 The technology challenges in distributing and processing data on this
-scale are enormous. But opensensors.io has a more important vision, to
+scale are enormous. But opensensors.io has a more
 ensure that public data is shared with the greatest possible audience of
 innovators.
 

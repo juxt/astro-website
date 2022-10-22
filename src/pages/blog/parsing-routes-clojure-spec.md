@@ -3,7 +3,7 @@ author: 'fky'
 title: 'Parsing routes with clojure spec'
 description: 'Speccing out routes'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Jul 2016'
 heroImage: 'mock3.jpg'
 ---

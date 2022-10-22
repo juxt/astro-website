@@ -3,14 +3,12 @@ author: 'mal'
 title: 'Building a chat system using core.async and server-sent-events'
 description: 'Notes from a training course'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '24 Apr 2015'
 heroImage: 'chat-system.jpg'
 tags:
   - 'training'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Last week I spent an exhausting yet enjoyable two days Clojure training
 with some experienced Clojure pros.
@@ -57,10 +55,6 @@ messages to a core.async channel.
 We then added a `go-loop` to take chat messages from the channel and
 publish them, first to the console, and then as server-sent events via
 http-kit.
-
-import tr from '../../assets/blog/training3.jpg'
-
-<Image alt='image' src={tr} />
 
 All the code for this can be found in our
 [chatserver](https://github.com/juxt/chatserver) repository.
@@ -111,10 +105,6 @@ However, running the modular and tenzing servers on different ports
 presented a more difficult problem. AJAX calls from the front-end to the
 server API fell foul of Cross Origin Resource Sharing (CORS) rules built
 into today's modern browsers (for very good reasons).
-
-import tr2 from '../../assets/blog/training2.jpg'
-
-<Image alt='image' src={tr2} />
 
 Fortunately, I had anticipated this being an issue and had purposely
 speeded along the CORS support in our [yada](http://yada.juxt.pro)
@@ -173,10 +163,6 @@ Once the server output had been verified, we hooked up the chatclient
 and the CORS errors disappeared. By the end of the course, almost all of
 us had fully functional web-based chat systems. Not bad for a few hours
 effort and a lot of fun too.
-
-import tf from '../../assets/blog/training-fun.jpg'
-
-<Image alt='image' src={tf} />
 
 Again, all the code for the ClojureScript chat client can be found in
 our [chatclient](https://github.com/juxt/chatclient) repository.

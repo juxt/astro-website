@@ -3,12 +3,10 @@ author: 'wrk'
 title: 'Communicating Software'
 description: 'A lightweight approach for effective software communication'
 category: 'architecture'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '05 Jan 2022'
 heroImage: 'communicating-software.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 # Introduction
 
@@ -42,10 +40,6 @@ fits in with other systems in the wider world.
 
 We'll use a fictional Internet Banking System as an example, and show
 (at a high level) how the system fits in to the wider system landscape.
-
-import ib from '../../assets/blog/ib-context.png'
-
-<Image alt='image' src={ib} />
 
 The above diagram was created using PlantUML, a free and open source
 tool that allows diagrams of all kinds to be expressed in plain text and
@@ -86,10 +80,6 @@ Now let's zoom in to the system boundary of the Internet Banking System,
 showing the web server, mobile app, database, etc. A container _(not
 necessarily docker)_ is some kind of independently deployable unit /
 process that executes code or stores data.
-
-import ibc from '../../assets/blog/ib-container.png'
-
-<Image alt='image' src={ibc} />
 
 In plain text, the container diagram can be created as follows:
 
@@ -145,10 +135,6 @@ diagram represents a different scenario or use case.
 Now let's zoom in further, to a specific scenario: how a payment request
 from the mobile app gets processed, which systems it calls out to, and
 when.
-
-import ibs from '../../assets/blog/ib-sequence.png'
-
-<Image alt='image' src={ibs} />
 
 In plain text, the sequence diagram can be created as follows:
 

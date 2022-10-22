@@ -3,21 +3,15 @@ author: 'jon'
 title: 'Clojure in London: Funding Circle'
 description: 'Lending some Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '04 Oct 2016'
 heroImage: 'mock3.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 > Hiring good Clojure developers is not any harder than finding good
 > Ruby developers.
 
 # Peer to Peer
-
-import fc from '../../assets/blog/fclogo2.png'
-
-<Image alt='image' src={fc} />
 
 [Funding Circle](https://www.fundingcircle.com) is a high profile
 peer-to-peer lending marketplace that allows investors to lend money
@@ -36,10 +30,6 @@ Clojure is used extensively for the performance sensitive back-end
 services, for example making decisions on who to give loans to, the
 accounting system, and the handling of interactions with the upstream
 banks.
-
-import fc1 from '../../assets/blog/fcsuccess.jpg'
-
-<Image alt='image' src={fc1} />
 
 I had a Q and A with Chief Architect Robert Crim who introduced Clojure
 to Funding Circle.
@@ -69,10 +59,6 @@ libraries that we'd want to use.
 
 # Making the Change
 
-import fc2 from '../../assets/blog/fcteam.jpg'
-
-<Image alt='image' src={fc2} />
-
 _Jon:_ What prompted you to consider such a big change in technologies?
 
 _Robert:_ Funding Circle has expanded into multiple countries - often
@@ -94,10 +80,6 @@ one. The old stack was monolithic and we had reams of impenetrable Ruby
 code, I wanted to make to a fresh start from that. Choosing Clojure gave
 us that little bit extra to make people put a new hat on and to make
 them really think about simple code.
-
-import fcb from '../../assets/blog/fcbar.jpg'
-
-<Image alt='image' src={fcb} />
 
 # Making the Switch
 
@@ -147,7 +129,7 @@ _Robert:_ I have learnt not to take motivation and confidence for
 granted. I assumed early on that everyone would want to learn Clojure,
 but some people are really happy with their existing tech stack and not
 that keen to jump in. That's totally fine! It ultimately comes down to
-the fact that people have different interests and so it's important to
+the fact that people have different interests and so it's
 listen to the team.
 
 Also, some people were worried about putting project delivery at risk by
@@ -158,7 +140,7 @@ _Jon:_ Any tips for dealing with this?
 
 _Robert:_ We did [4Clojure](https://www.4clojure.com/) exercises
 together in business hours and spent time getting people more
-comfortable. It's important not to project how you would tackle the
+comfortable. It's
 problem of picking up learning something new. People have different
 levels of uncertainty at start of a project, and this is even more
 pronounced the larger the team is.
@@ -176,10 +158,6 @@ _Robert:_ We have lots of Clojure in production and it's still growing.
 A lot of the platform that powers our marketplace is written in Clojure.
 We'll still use Ruby on the customer-facing pieces, but a significant
 part of the business is back-end. It's the nuts and bolts.
-
-import om from '../../assets/blog/omnextnolen.jpg'
-
-<Image alt='image' src={om} />
 
 The approach we're taking is to _[turn the database inside
 out](http://www.erikgfesser.com/weblog/2014/10/strange-loop-conference-2014-turning-the-database-inside-out-with-apache-samza-martin-kleppmann.html)_-

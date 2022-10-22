@@ -3,12 +3,10 @@ author: 'anc'
 title: 'Speed up your test builds'
 description: 'How to speed up your build using Kaocha and CircleCI'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '27 Jul 2021'
 heroImage: 'speedup-test.jpg'
 ---
-
-import { Image } from '@astrojs/image/components'
 
 Having a faster CI (Continuous Integration) feedback loop is always a
 good thing, and there are at least three ways to make your tests faster:
@@ -128,7 +126,7 @@ execute the tests, and exit with a status code = 1 if any test failed.
                   0))))
 ```
 
-A correct `System/exit` call is important otherwise test failures will
+A correct `System/exit` call is
 not trigger a failed build in CircleCI. We also set the `junit-xml`
 plugin to be able to generate the test summary in case something goes
 wrong.
@@ -163,15 +161,3 @@ the tests were running in two containers in parallel, and each container
 had test failures, but the results were merged
 [here](https://app.circleci.com/pipelines/github/AndreaCrotti/parallel_tests/5/workflows/4c24f937-92d9-4145-8db1-28c5de7622ae/jobs/5/tests)
 so the report was still complete.
-
-import ci from '../../assets/blog/ci_steps.png'
-
-<Image alt='image' src={ci} />
-
-import ci2 from '../../assets/blog/ci_steps2.png'
-
-<Image alt='image' src={ci2} />
-
-import ci3 from '../../assets/blog/ci_test_results.png'
-
-<Image alt='image' src={ci3} />

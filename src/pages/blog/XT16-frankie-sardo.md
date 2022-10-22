@@ -3,7 +3,7 @@ author: 'mal'
 title: 'XT16 - Frankie Sardo'
 description: 'ClojureScript Without Boundaries (with live coding)'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '09 Feb 2017'
 heroImage: 'mock3.jpg'
 ---

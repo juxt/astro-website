@@ -3,7 +3,7 @@ author: 'bnh'
 title: 'Simulation Testing using Datomic simulant library'
 description: 'Part One'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '22 Feb 2019'
 heroImage: 'simulation.jpg'
 ---

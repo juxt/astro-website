@@ -3,7 +3,7 @@ author: 'mal'
 title: 'iota'
 description: 'Cheer up your testing with this small library'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
+
 publishedDate: '23 Sep 2015'
 heroImage: 'mock3.jpg'
 tags:
