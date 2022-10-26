@@ -40,14 +40,12 @@ const unfilteredBlogs: Blog[] = await Promise.all(
     const authorImage = getImage({
       src: import(`../../assets/people/${parsedImage}.jpg`),
       width: 200,
-      height: 200,
       quality: 80
     })
 
     const postImage = getImage({
       src: import(`../../assets/blog/${parsedPostImage}.jpg`),
       width: 450,
-      height: 300,
       quality: 100
     })
 
