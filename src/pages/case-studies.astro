@@ -6,11 +6,6 @@ import type { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import CaseStudy from '../layouts/CaseStudy.astro'
 import Layout from '../layouts/Layout.astro'
 
-export const metadata = {
-  navbar: { weight: 4, label: 'Case Studies' },
-  footer: { weight: 4, label: 'Case Studies' }
-}
-
 const caseStudies = await Astro.glob<CaseStudyProps>(
   '../data/case-studies/*.md'
 )
@@ -27,9 +22,8 @@ const caseStudiesParsed = caseStudies
 
 const caseStudiesPicture = await getImage({
   src: import('../assets/site/case-studies-banner.jpeg'),
-  width: 1300,
-  height: 800,
-  quality: 80
+  width: 1700,
+  quality: 90
 }).then((img) => img.src)
 ---
 

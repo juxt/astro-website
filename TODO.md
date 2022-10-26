@@ -1,4 +1,2 @@
 - clojure-in.md fix link to juxt.pro/clojure-in page
-- replace /_/_ with \*\*
-- remove blog_dev in prod from footer and routes
-- cljs web apps article
+- training page? (training.html)

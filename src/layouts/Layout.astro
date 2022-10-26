@@ -51,6 +51,11 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
         root.classList.remove('dark')
       }
     </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
   </head>
   <body
     class:list={[

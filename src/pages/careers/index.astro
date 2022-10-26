@@ -25,23 +25,20 @@ const jobPostsParsed = jobPosts
 
 const careersBannerPicture = await getImage({
   src: import('../../assets/site/work-with-us-banner.jpeg'),
-  width: 1500,
-  height: 1000,
-  quality: 80
+  width: 1700,
+  quality: 90
 }).then((img) => img.src)
 
 const whyJuxtPicture = await getImage({
   src: import('../../assets/site/careers-why-juxt.jpeg'),
-  width: 1500,
-  height: 1000,
-  quality: 80
+  width: 1700,
+  quality: 90
 }).then((img) => img.src)
 
 const benefitsPicture = await getImage({
   src: import('../../assets/site/career-benefits.jpeg'),
-  width: 1500,
-  height: 1000,
-  quality: 80
+  width: 1700,
+  quality: 90
 }).then((img) => img.src)
 ---
 
@@ -233,7 +230,9 @@ const benefitsPicture = await getImage({
       <div
         class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'
       >
-        {jobPostsParsed.map((jobPost) => <JobCard {...jobPost.frontmatter} />)}
+        {jobPostsParsed.map((jobPost) => (
+          <JobCard {...jobPost.frontmatter} url={jobPost.url} />
+        ))}
       </div>
     </div>
   </Section>
