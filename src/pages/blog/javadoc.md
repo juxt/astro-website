@@ -5,7 +5,7 @@ description: 'How to launch javadoc in your REPL'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '06 Oct 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'javadoc-repl.jpg'
 ---
 
 One of the [pearls presented by Renzo Borgatti at this year's

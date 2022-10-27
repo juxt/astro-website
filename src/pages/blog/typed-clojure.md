@@ -5,7 +5,7 @@ description: 'Working with types in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Jun 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'types.jpg'
 ---
 
 In this post I present some thoughts on working with [Typed

@@ -5,7 +5,7 @@ description: 'The case for adding ClojureScript to your project'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '29 Jun 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'cljs-matters.jpg'
 ---
 
 I find ClojureScript can be a harder sell than straight up Clojure. We

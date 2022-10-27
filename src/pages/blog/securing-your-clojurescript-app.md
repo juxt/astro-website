@@ -5,7 +5,7 @@ description: "Use buddy's json tokens to authenticate your single page applicati
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '09 Jul 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'securing-app.jpg'
 ---
 
 The [Web After Tomorrow](http://tonsky.me/blog/the-web-after-tomorrow/)

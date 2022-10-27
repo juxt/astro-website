@@ -5,7 +5,7 @@ description: 'How to use Datalog in Clojure to match and extract information fro
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '20 Oct 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'datalog-for-trees.jpg'
 tags:
   - 'clojurescript'
 ---

@@ -5,7 +5,7 @@ description: 'How to validate Clojure component systems'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '25 Jun 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'schema-meets.jpg'
 tags:
   - 'macros'
 ---
