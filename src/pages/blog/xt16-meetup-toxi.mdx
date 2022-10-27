@@ -1,0 +1,154 @@
+---
+author: 'mal'
+title: 'Meet up with Karsten Schmidt'
+description: 'If you go down to the woods today...'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '21 Jul 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+The Clojure language draws together a diverse set of talents that makes
+for a great community full of inspiring developers.
+
+A good example is Karsten Schmidt. Karsten has been a big influence on
+me and others Clojure devs I know. He combines a passion for creative
+programming with extraordinary accomplishment, demonstrating that there
+are few limits to where you can go and what you can do as a programmer.
+
+I first met Karsten in London when he was busy preparing for an [art
+installation](http://postspectacular.com/) at the Barbican Gallery in 2014. I later visited the exhibition and saw his work first-hand.
+
+import de from '../../assets/blog/toxi-devart.jpg'
+
+<Image src={de} />
+
+import pr from '../../assets/blog/toxi-print.jpg'
+
+<Image src={pr} />
+
+The installation centered on a 3D printer protected by a 3-story high
+enclosure. Pedestals surrounded the enclosure, each holding an iPad
+running a software application for creating 3-dimensional objects. The
+software was written in ClojureScript, with a beautiful [user
+interface](http://devartcodefactory.com/) (which itself could be
+considered a work of art).
+
+Visitors to the exhibition, many of whom were children, created 3D
+objects using the software and submitted them to the 3D printer. The
+best creations were showcased in a display cabinet against the wall. I
+took a picture of one of these (these top two images seem computer
+generated, but they are actual photos).
+
+import en from '../../assets/blog/toxi-enclosure.jpg'
+
+<Image src={en} />
+
+It's almost impossible to see from the photograph, but on the left-hand
+wall is a small door leading to a small dark room where Karsten spent
+many days setting up the exhibit, working conditions that were hardly
+better than Michelangelo's when he was working on the (2D) ceiling of
+the Sistine chapel.
+
+# Building blocks
+
+In his 2001 essay, [The Roots of
+Lisp](http://www.paulgraham.com/rootsoflisp.html), Paul Graham describes
+the _discovery_ of Lisp as _a landmark in the history of computers_.
+
+> \"John McCarthy ... did for programming what Euclid did for geometry.
+> He showed how, given a handful of simple operators and a notation for
+> functions, you can build a whole programming language.\"
+
+Alan Kay once described Lisp as the \"Maxwell's equations of software\".
+
+As Clojure developers, we believe this approach to building complex
+systems is more relevant today than ever. You reduce things down to
+atomic building blocks, which you can then compose together to form
+incredibly complex structures, such as computer systems or biological
+organisms.
+
+As Graham's point suggests, there is a deep symmetry between geometry
+and Lisp which Karsten demonstrates in his work, both _visually_ and, by
+choosing to work in a Lisp, in the code itself.
+
+# Literate Programming
+
+import br from '../../assets/blog/toxi-branch.jpg'
+
+<Image src={br} />
+
+Karsten has a rare, if not unique, programming style. He writes all his
+libraries using Knuth's Literate Programming style, where the code is
+written in snippets interwoven with the documentation. From this
+documentation (written using Emacs's _org-mode_ format), Karsten
+generates both Clojure and ClojureScript sources which are then
+compiled. So not only is his source _open_, but _accessible_ too.
+
+The best example is his [geom](https://github.com/thi-ng/geom) library,
+which starts by defining points and lines, gradually forming rectangles,
+bezier curves and
+[quaternions](https://en.wikipedia.org/wiki/Quaternion), meshes, matrix
+transformations, and just keeps going. If Euclid was alive today, I bet
+he'd be a Lisp programmer (and maybe a ClojureScript one!)
+
+As Paul Graham also remarks in the same essay:
+
+> \"It seems to me that there have been two really clean, consistent
+> models of programming so far: the C model and the Lisp model. These
+> two seem points of high ground, with swampy lowlands between them.\"
+
+There are many other 3D libraries (arguably derived from the _C model_
+that can produce similar results to _geom_, but what makes _geom_ stand
+out is its Lisp foundations which enable playful creativity, discovery
+and experimentation in a world of 3D. This is a reoccuring theme that we
+are exploring at XT16, more on that later!
+
+import sj from '../../assets/blog/toxi-sjo.png'
+
+<Image src={sj} />
+
+Ever since I discovered _geom_ and Karsten's other libraries I've wanted
+to spend some time learning the basics, and perhaps one day to
+experience the power of wielding _geom_ on real-world projects. So
+earlier this year I booked myself on one of Karsten's [unique
+courses](http://thi.ng/). The particular course I chose was on WebGl in
+the browser with ClojureScript, since I'm interested in combining WebGL
+in my applications and see the browser as the catalyst to a new wave of
+consolidation between 3D-graphics and business user-interfaces.
+
+The course was excellent and hugely fun, yet challenging too and I took
+away an enormous amount of practical knowledge. I could explain more
+about the course here, but Karsten's already published a [great write up
+of
+it](https://medium.com/@thi.ng/workshop-report-hi-perf-clojurescript-with-webgl-asm-js-and-emscripten-a545cca083bc#.ps9y4gui1).
+I loved experimenting with the code and trying out things: \"what
+happens if I change this value to X\" and the browser reload kicking in
+and showing me. But watching Karsten's wizard-like prowess with these
+libraries was something to behold. (If you want details on Karsten's
+future courses, see [here](http://workshop.thi.ng/)).
+
+# Meet Karsten at XT16
+
+Jon Pither and I caught up with Karsten recently in his home borough of
+Highgate, North London to talk about Karsten's work, philosophy, current
+projects and his upcoming talk and live-coding at XT16. We entered the
+woods (what Karsten calls his _office_) and had some fun building a
+makeshift tripod for the camera. You can eaily tell that Karsten's
+appreciation of Nature influences and inspires his programming work.
+video::gxwy9XNrXRc\[youtube\]
+
+We're very excited that Karsten is coming to our [XT16
+event](https://juxt.pro/XT16.html) in the Autumn and giving a talk with
+some live-coding. Due to the intimate nature of the conference there'll
+be plenty of opportunity to meet and socialise with Karsten (and
+everyone else!) both during and afterwards.
+
+If you haven't got your ticket yet, then visit our
+(ClojureScript-powered!) [XT16
+ticketbooth](https://juxt.pro/XT16.html#xt16-ticketbooth). Sadly it
+doesn't yet use Karsten's _geom_ library, but who knows, coming to the
+conference might be the first step in your own ClojureScript 3D
+adventures!

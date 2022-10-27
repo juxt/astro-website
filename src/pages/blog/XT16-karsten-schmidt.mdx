@@ -1,0 +1,77 @@
+---
+author: 'mal'
+title: 'XT16 - Karsten Schmidt'
+description: 'Low fat computing'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '22 Dec 2016'
+heroImage: 'mock3.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+
+For the past 28 years, Karsten Schmit
+([\@toxi](https://twitter.com/toxi)) has been at the forefront of
+computer-generated design. We were very pleased he took time out to
+speak at our XT16 conference. Below is the video of his talk.
+video::mCAozt4BkMM\[youtube\]
+
+# Design as a verb, not a noun
+
+Karsten characterises design as a process, not an end product.
+
+> My work is often on the boundary of commercial and art, and everything
+> is pretty-much research-driven. I develop things that then inform
+> other projects.
+
+Karsten has been a _strong open-source proponent_ since 1989, (_the
+beginning_), understanding the benefit of sharing his discoveries and
+work with others.
+
+> You can debug things by making small steps, a kind of _test-driven
+> philosophy_.
+
+Karsten shows a demo he created on a very limited Atari home computer,
+the first time he did computer graphics at reasonable frame rates.
+
+# Bottom up design
+
+Karsten explains the idea of bottom-up design, which has strong
+parallels with Lisp programming, an idea that Karsten says has been with
+him from the start of his programming journey.
+
+> The idea from going from nothing to big things
+
+He goes on to show an example of starting with randomness, and then
+adding constraints to create structure, and then even towards
+typography.
+
+Karsten built his own Java-based building blocks, called toxiclibs,
+which he employed on numerous projects, demonstrating the breadth of
+applicability of his approach, including a 144 metre LED wall.
+
+He then further demonstrates this concept of bottom-up design by
+explaining a visual programming language he created that uses just 8
+different operators.
+
+import ks from '../../assets/blog/XT16-karsten-schmidt-8-operators.png'
+
+<Image src={ks} />
+
+Starting with a simple seed and applying these 8 operators, complex
+structures can be created. This language was used to build his art
+installation at the Barbican in London.
+
+# Forth
+
+Karsten finishes his talk by demonstrating a browser-based Forth
+development environment he has created, called Charlie. In common with
+Lisp,
+
+Forth has virtually no syntax and exploits bottom-up design principles
+to gradually increase complexity.
+
+> In Forth, we always have data first. Not actions first, _data_ first.
+> Then processes which operate on data.
+
+If you have any feedback on this talk, feel free to comment below.
