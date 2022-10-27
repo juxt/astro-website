@@ -18,7 +18,9 @@ const url = new URL(Astro.request.url)
 const currentPageName = currentPage(url.pathname)
 
 const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
-const isBlog = Astro.url.pathname.includes('/blog')
+const isBlog =
+  Astro.url.pathname.includes('/blog') ||
+  Astro.url.pathname.includes('/clojure-in')
 
 const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
 ---

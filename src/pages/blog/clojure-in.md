@@ -5,7 +5,7 @@ description: 'Surveying Real Clojure Projects'
 category: 'clojure-in'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Sep 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'mock.jpg'
 ---
 
 At JUXT we want to understand how Clojure is being adopted across our
@@ -35,4 +35,4 @@ Ireland](/blog/posts/clojure-in-aviso.html) and [uSwitch in London,
 UK](/blog/posts/clojure-in-uswitch.html). Be sure to stay tuned for
 more.
 
-[Visit our Clojure In page](https://juxt.pro/clojure-in.html).
+[Visit our Clojure In page](/clojure-in).

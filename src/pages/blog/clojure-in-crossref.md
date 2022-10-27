@@ -5,7 +5,8 @@ description: 'Improving scholarly communications'
 category: 'clojure-in'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '01 Nov 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'mock.jpg'
+clojureIn: { region: 'UK' }
 ---
 
 > When you have to come into work every day, sit down and write code,

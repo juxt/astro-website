@@ -32,7 +32,9 @@ const pagesInNavbar = pages
   }))
   .sort((a, b) => a.weight - b.weight)
 
-const isBlog = Astro.url.pathname.includes('/blog')
+const isBlog =
+  Astro.url.pathname.includes('/blog') ||
+  Astro.url.pathname.includes('/clojure-in')
 ---
 
 <Navbar

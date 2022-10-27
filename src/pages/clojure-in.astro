@@ -1,0 +1,121 @@
+---
+import { getImage } from '@astrojs/image'
+import { MarkdownInstance } from 'astro'
+import Banner from '../components/Banner.astro'
+import Section from '../components/Section.astro'
+import { Blog } from '../components/types'
+import Layout from '../layouts/Layout.astro'
+
+export const metadata = {
+  navbar: { weight: 3, label: 'Clojure In' },
+  footer: { weight: 3, label: 'Clojure In' }
+}
+
+const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
+  './blog/{clojure-in*.mdx, clojure-in*.md}'
+)
+
+const parsedBlogs: Blog[] = await Promise.all(
+  clojureInBlogs.map(async (blog) => {
+    const permalink = blog.file.split('/').slice(-1)[0].split('.')[0]
+
+    const parsedPostImage = blog.frontmatter.heroImage.split('.').slice(0, -1)
+
+    const postImage = await getImage({
+      src: import(`../assets/blog/${parsedPostImage}.jpg`),
+      width: 450,
+      quality: 100
+    })
+
+    return {
+      ...blog.frontmatter,
+      href: permalink,
+      heroImage: postImage.src
+    }
+  })
+)
+
+const regionOrder = ['London', 'UK', 'Europe', 'International']
+
+const groupedBlogs: Record<string, { regionTitle: string; blogs: Blog[] }> =
+  parsedBlogs.reduce((coll, blog) => {
+    const region = blog.clojureIn.region
+    const currentRegionBlogs = coll[region]?.blogs || []
+
+    return {
+      ...coll,
+      [region]: { regionTitle: region, blogs: [...currentRegionBlogs, blog] }
+    }
+  }, {})
+
+const sortedBlogs = regionOrder.map((region) => groupedBlogs[region])
+
+const clojureInPicture = await getImage({
+  src: import('../assets/site/Clojure-logo-colours-01.png'),
+  width: 1700,
+  quality: 90
+}).then((img) => img.src)
+---
+
+<Layout navbar title='Clojure In'>
+  <main>
+    <Banner
+      text='Clojure In'
+      textColor='dark:text-white text-black'
+      style={{
+        backgroundImage: `url(${clojureInPicture})`
+      }}
+    />
+
+    <Section className='bg-orange-300 dark:bg-sky-900 py-28'>
+      <div class='flex flex-col gap-10 dark:text-white text-black'>
+        <h1 class='text-4xl font-medium'>
+          Case-studies on where Clojure is being used across Europe
+        </h1>
+        <h2 class='text-2xl font-light'>
+          "Clojure In" is a collection of stories about companies who have
+          adopted Clojure. In these articles we interview key individuals
+          involved and chat about the challenges, issues, benefits and
+          trade-offs in their decision to go with Clojure.
+        </h2>
+      </div>
+    </Section>
+
+    <Section className='py-28'>
+      <div class='flex flex-col gap-28'>
+        {sortedBlogs.map(({ regionTitle, blogs }) => {
+          return (
+            <div>
+              <h3 class='text-4xl font-semibold uppercase dark:text-white text-black text-center pb-16'>
+                {regionTitle}
+              </h3>
+
+              <div class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
+                {blogs.map((blog) => {
+                  return (
+                    <a
+                      href={`/blog/${blog.href}`}
+                      class='h-full group cursor-pointer justify-between flex flex-col w-96 mx-auto bg-lime-500 dark:bg-sky-900 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
+                    >
+                      <div>
+                        <img alt='blog' src={blog.heroImage} />
+                        <h3 class='p-4 text-2xl font-semibold dark:text-white text-sky-900'>
+                          {blog.title}
+                        </h3>
+                      </div>
+                      <div class='p-4'>
+                        <p class='text-lg font-light dark:text-white text-sky-900'>
+                          {blog.publishedDate}
+                        </p>
+                      </div>
+                    </a>
+                  )
+                })}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </Section>
+  </main>
+</Layout>
