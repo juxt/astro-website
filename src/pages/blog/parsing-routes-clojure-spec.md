@@ -5,7 +5,7 @@ description: 'Speccing out routes'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '27 Jul 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'parsing-routes.jpg'
 ---
 
 One of the jobs of routing libraries like

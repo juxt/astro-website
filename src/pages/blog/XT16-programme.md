@@ -5,7 +5,7 @@ description: 'The XT16 Programme has Landed'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '26 Aug 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'xt-16-programme.jpg'
 ---
 
 Sometimes you just want to sip a coffee, strum a Ukulele and throw an

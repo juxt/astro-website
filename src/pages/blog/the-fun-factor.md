@@ -5,7 +5,7 @@ description: 'The importance of fun in our work'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '15 Jun 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'tech-fun.jpg'
 ---
 
 One of the most important moments of my Clojure journey was when my

@@ -7,7 +7,7 @@ layout: '../../layouts/BlogPost.astro'
 tags:
   - 'clojure'
 publishedDate: '05 May 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'config.jpg'
 ---
 
 n:subtitle: Avoid misleading application configuration schemes by being
