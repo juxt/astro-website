@@ -15,51 +15,9 @@ All commands are run from the root of the project, from a terminal:
 
 After reading the following section, you should be able to perform the most common updates to the site.
 
-## Navbar
+## Navbar & Footer links
 
-The Navbar can be found in `src/components/Navbar.astro`. The links in the Navbar are driven by the `metadata` variable that is defined at the `page` level.
-For a page to appear in the Navbar, it needs a `navbar` key with optional `label` and `weight` attributes, the latter controls the position.
-An example follows:
-
-```js
-// somewhere in the frontmatter of about.astro page
-
-export const metadata = { navbar: { weight: 1 } }
-```
-
-Here, we are saying that we want the about page to be linked in the navbar (presence of navbar key) and that it has to be the first link (weight of 1).
-Note that without a `label` key the label will default to the name of the `*name*.astro` file, so in this example it will be `about`.
-
-## Footer
-
-The Footer works similarly to the Navbar. The links in the Footer under the `Sitemap` section are driven by the `metadata` variable that is defined at the `page` level. For example, if you want the about page to show up under `Sitemap`, your `about.astro` metadata variable should look like this:
-
-```js
-export const metadata = {
-  navbar: { weight: 1 },
-  footer: { weight: 1 }
-}
-```
-
-You can also add a `label` key to the `footer` object to change the label of the link. i.e.:
-
-```js
-export const metadata = {
-  navbar: { weight: 1 },
-  footer: { weight: 1, label: 'About Us' }
-}
-```
-
-It's also possible to add a flag next to the link to drive more attention. For example, if you want to add a `New` flag next to the about page, your `about.astro` metadata variable should look like this:
-
-```js
-export const metadata = {
-  navbar: { weight: 1 },
-  footer: { weight: 1, label: 'About Us', flag: 'New' }
-}
-```
-
-The other elements in the footer can be changed directly by editing the `Footer.astro` file in the `src/components` folder.
+The Navbar and Footer links are driven by the `navigation.json` file that is defined in the `src/data` folder.
 
 ## New Page
 

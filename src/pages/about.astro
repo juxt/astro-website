@@ -8,11 +8,6 @@ import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 import { Person } from '../components/types'
 
-export const metadata = {
-  navbar: { weight: 1 },
-  footer: { weight: 1 }
-}
-
 const bannerPicture = await getImage({
   src: import('../assets/site/about-us-banner.jpeg'),
   width: 1700,

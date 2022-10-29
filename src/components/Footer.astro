@@ -1,5 +1,4 @@
 ---
-import { removeLeadingSlash } from '../utils'
 import {
   GithubIcon,
   LinkedInIcon,
@@ -7,23 +6,16 @@ import {
   UserIcon,
   ZulipIcon
 } from './Icons'
-import type { PageProps } from './Navbar.astro'
 
-export interface Props {
-  pages: PageProps[]
-}
+type Navigation = { label: string; href: string; flag?: boolean }
 
-const { pages } = Astro.props as Props
+const navigation = await Astro.glob<{ footer: Navigation[] }>(
+  '../data/navigation.json'
+)
 
-const pagesInFooter = pages
-  .filter((page) => page?.metadata?.footer)
-  .map((page) => ({
-    url: page.metadata?.footer?.url || page.url,
-    label: page.metadata?.footer?.label || removeLeadingSlash(page.url),
-    flag: page.metadata?.footer?.flag,
-    weight: page.metadata?.footer?.weight
-  }))
-  .sort((a, b) => a.weight - b.weight)
+const [{ footer }] = navigation
+
+const pagesInFooter = footer
 ---
 
 <div class='w-full text-white bg-black py-20'>
@@ -61,7 +53,7 @@ const pagesInFooter = pages
         {pagesInFooter.map((page) => (
           <a
             class='flex gap-1 items-center text-zinc-100 capitalize text-xs hover:text-juxt transition-colors'
-            href={page.url}
+            href={page.href}
           >
             {page.label}
             {page.flag && (

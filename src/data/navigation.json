@@ -1,0 +1,15 @@
+{
+  "navbar": [
+    { "label": "About", "href": "/about" },
+    { "label": "Financial", "href": "/financial" },
+    { "label": "Careers", "href": "/careers" },
+    { "label": "Blog", "href": "/blog" }
+  ],
+  "footer": [
+    { "label": "About", "href": "/about" },
+    { "label": "Financial", "href": "/financial" },
+    { "label": "Careers", "href": "/careers", "flag": "hiring" },
+    { "label": "Clojure In", "href": "/clojure-in" },
+    { "label": "Blog", "href": "/blog" }
+  ]
+}

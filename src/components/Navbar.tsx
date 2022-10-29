@@ -25,7 +25,7 @@ function NavLink({ label, href, active }: NavLinkProp) {
   )
 }
 
-export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
+export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const ref = useOutsideClick(() => setIsMenuOpen(false))
   const linkClasses = 'items-center gap-8 uppercase tracking-widest text-xs'
@@ -83,9 +83,9 @@ export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
         {/* desktop */}
         <div className={classNames('hidden md:flex', linkClasses)}>
           {navLinks.map((page) => (
-            <NavLink href={page.url} label={page.label} active={page.active} />
+            <NavLink href={page.href} label={page.label} active={page.active} />
           ))}
-          {isBlog && <DarkModeSwitch />}
+          {enableDarkMode && <DarkModeSwitch />}
         </div>
 
         {/* mobile */}
@@ -103,9 +103,9 @@ export default function Navbar({ navLinks, isBlog, navbarNoBg }) {
           )}
         >
           {navLinks.map((page) => (
-            <NavLink href={page.url} label={page.label} active={page.active} />
+            <NavLink href={page.href} label={page.label} active={page.active} />
           ))}
-          {isBlog && <DarkModeSwitch />}
+          {enableDarkMode && <DarkModeSwitch />}
         </div>
       </div>
     </nav>

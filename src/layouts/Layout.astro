@@ -1,12 +1,11 @@
 ---
 import Footer from '../components/Footer.astro'
 import Navbar from '../components/Navbar.astro'
-import type { PageProps } from '../components/Navbar.astro'
 import { capitalizeFirstLetter, currentPage } from '../utils'
 
-import '../shiki-theme.css'
 import 'instantsearch.css/themes/satellite.css'
 import '../algolia.css'
+import '../shiki-theme.css'
 
 type LayoutProps = {
   title?: string
@@ -17,8 +16,7 @@ type LayoutProps = {
 const url = new URL(Astro.request.url)
 const currentPageName = currentPage(url.pathname)
 
-const pages = await Astro.glob<PageProps>('../pages/**/*.astro')
-const isBlog =
+const enableDarkMode =
   Astro.url.pathname.includes('/blog') ||
   Astro.url.pathname.includes('/clojure-in')
 
@@ -36,6 +34,7 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     <link href='/images/favicon.png' rel='shortcut icon' type='image/x-icon' />
     <link href='/images/favicon-apple.svg' rel='apple-touch-icon' />
     <link rel='stylesheet' href='/styles/inter.css' />
+    <link rel='stylesheet' href='/styles/global.css' />
 
     <title>{title || capitalizeFirstLetter(currentPageName)}</title>
     <!-- This is intentionally inlined to avoid FOUC -->
@@ -62,13 +61,13 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
   <body
     class:list={[
       'bg-gray-50 transition-colors',
-      { 'dark:bg-gray-900': isBlog }
+      { 'dark:bg-gray-900': enableDarkMode }
     ]}
   >
-    {navbar && <Navbar pages={pages} navbarNoBg={navbarNoBg} />}
+    {navbar && <Navbar navbarNoBg={navbarNoBg} />}
     <div class:list={[{ 'pt-14': !navbarNoBg }]}>
       <slot />
-      <Footer pages={pages} />
+      <Footer />
     </div>
   </body>
 </html>

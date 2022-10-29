@@ -9,11 +9,6 @@ import Section from '../../components/Section.astro'
 import { CareerPostProps } from '../../layouts/CareerPost.astro'
 import Layout from '../../layouts/Layout.astro'
 
-export const metadata = {
-  navbar: { weight: 5 },
-  footer: { weight: 5, flag: 'hiring' }
-}
-
 const isDev = import.meta.env.DEV
 const jobPosts = await Astro.glob<MarkdownInstance<CareerPostProps>>(
   './{*.mdx,*.md}'

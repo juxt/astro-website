@@ -6,11 +6,6 @@ import Section from '../components/Section.astro'
 import { Blog } from '../components/types'
 import Layout from '../layouts/Layout.astro'
 
-export const metadata = {
-  navbar: { weight: 3, label: 'Clojure In' },
-  footer: { weight: 3, label: 'Clojure In' }
-}
-
 const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
   './blog/{clojure-in*.mdx, clojure-in*.md}'
 )

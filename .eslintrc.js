@@ -1,4 +1,10 @@
 module.exports = {
+  env: {
+    node: true,
+    browser: true,
+    commonjs: true,
+    amd: true
+  },
   plugins: ['jsx-a11y', 'validate-jsx-nesting'],
   parserOptions: {
     ecmaVersion: 'latest',

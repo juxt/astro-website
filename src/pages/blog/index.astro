@@ -6,11 +6,6 @@ import { getImage } from '@astrojs/image'
 import Layout from '../../layouts/Layout.astro'
 import Banner from '../../components/Banner.astro'
 
-export const metadata = {
-  navbar: { weight: 3, label: 'Blog' },
-  footer: { weight: 3, label: 'Blog' }
-}
-
 const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
 
 const people = await Astro.glob<MarkdownInstance<Person>>(
