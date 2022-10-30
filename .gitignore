@@ -17,4 +17,4 @@ pnpm-debug.log*
 
 .calva/
 .nrepl-port
-./public/styles/global.css
+/public/styles/global.css
