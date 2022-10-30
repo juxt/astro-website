@@ -1,6 +1,5 @@
 import DraftBanner from './DraftBanner'
 import { PencilIcon } from './Icons'
-import classNames from 'classnames'
 import { Blog, Person } from './types'
 
 function BlogAuthor({ name, lastName, image, expert, jobTitle }: Person) {
@@ -12,15 +11,7 @@ function BlogAuthor({ name, lastName, image, expert, jobTitle }: Person) {
         </div>
       </div>
       <div className='flex flex-col gap-1'>
-        <div
-          className={classNames(
-            'text-sm dark:text-zinc-100 underline-offset-2',
-            {
-              'group-hover:underline': expert,
-              'underline sm:no-underline': expert
-            }
-          )}
-        >
+        <div className='text-sm dark:text-zinc-100 underline-offset-2'>
           <div>{name}</div>
           <div>{lastName}</div>
         </div>
@@ -41,10 +32,8 @@ export function BlogCard({
   person
 }: Blog) {
   return (
-    <div
-      onClick={() => {
-        window.location.href = `/blog/${href}`
-      }}
+    <a
+      href={`/blog/${href}`}
       className='h-full group cursor-pointer flex justify-between flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
     >
       <div className='text-black py-4 w-full h-full relative flex flex-col justify-between'>
@@ -64,7 +53,7 @@ export function BlogCard({
             </div>
           </div>
 
-          <a href={`/blog/${href}`} className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-4'>
             <img
               src={heroImage}
               className='w-full h-52 object-cover group-hover:brightness-110'
@@ -73,22 +62,13 @@ export function BlogCard({
               {title}
             </h2>
             <h3 className='px-4 dark:text-zinc-50 font-light'>{description}</h3>
-          </a>
-        </div>
-        {person.expert ? (
-          <a
-            href={`/people/${person.code}`}
-            className='px-4 group flex gap-4 w-fit'
-          >
-            <BlogAuthor {...person} />
-          </a>
-        ) : (
-          <div className='px-4 group flex gap-4 w-fit'>
-            <BlogAuthor {...person} />
           </div>
-        )}
+        </div>
+        <div className='px-4 group flex gap-4 w-fit'>
+          <BlogAuthor {...person} />
+        </div>
       </div>
       <DraftBanner draft={draft} pageName='Blog' />
-    </div>
+    </a>
   )
 }

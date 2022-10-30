@@ -25,8 +25,12 @@ if (!person) {
 }
 
 const {
-  frontmatter: { name, lastName, jobTitle, image, expert }
+  frontmatter: { name, lastName, jobTitle, image, expert, expertDraft }
 } = person
+
+const isDev = import.meta.env.DEV
+
+const isExpert = (expert && !expertDraft) || isDev
 
 const blogHref = Astro.url.href
 const shareIconStyle =
@@ -67,10 +71,10 @@ const personImageFilename = image.split('.').slice(0, -1)
           </h2>
 
           <a
-            href={expert ? `/people/${author}` : '#'}
+            href={isExpert ? `/people/${author}` : '#'}
             class:list={[
               'group flex gap-4 w-fit items-center pt-12',
-              { 'cursor-default': !expert }
+              { 'cursor-default': !isExpert }
             ]}
           >
             <div class='flex-shrink-0 flex flex-col gap-3'>
@@ -89,7 +93,7 @@ const personImageFilename = image.split('.').slice(0, -1)
                 <div
                   class:list={[
                     'text-lg font-bold dark:text-zinc-100 underline-offset-2',
-                    { 'group-hover:underline': expert }
+                    { 'group-hover:underline': isExpert }
                   ]}
                 >
                   <div>{`${name} ${lastName}`}</div>
