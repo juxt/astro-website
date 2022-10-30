@@ -17,7 +17,7 @@ After reading the following section, you should be able to perform the most comm
 
 ## Navbar & Footer links
 
-The Navbar and Footer links are driven by the `navigation.json` file that is defined in the `src/data` folder.
+The Navbar and Footer links are driven by the `metadata.json` file that is defined in the `src/data` folder.
 
 ## New Page
 
@@ -99,7 +99,7 @@ To know more about the props you can pass to the `Image` component, check out th
 
 ## Writing with hot-reload
 
-The blog page is completely driven by Algolia Instant Search. This means that while writing a draft, your article won't appear in the `BLOG` page. To see it, you can either visit the `BLOG DEV` link in the navbar or go directly to your article url, which is `/blog/*blogName*`. There, it will hot reload as you edit and save your changes.
+The blog page is completely driven by Algolia Instant Search. This means that while writing a draft, your article won't appear in the `blog` page. To see it, you can go directly to your article url, which is `/blog/*blogName*`. There, it will hot reload as you edit and save your changes.
 
 ## Case Studies
 
@@ -212,7 +212,7 @@ the `weight` attribute describes the order in which the employee will appear in 
 
 ### Careers
 
-`CAREERS` is a page that lists all the open positions in the company. To create a new opening, add a `*.md` file in the `src/data/careers` folder. The format is the following:
+`careers` is a page that lists all the open positions in the company. To create a new opening, add a `*.md` file in the `src/data/careers` folder. The format is the following:
 
 ```md
 ---

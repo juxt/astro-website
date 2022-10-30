@@ -2,7 +2,7 @@ import DraftBanner from './DraftBanner'
 import { PencilIcon } from './Icons'
 import { Blog, Person } from './types'
 
-function BlogAuthor({ name, lastName, image, expert, jobTitle }: Person) {
+function BlogAuthor({ name, lastName, image, jobTitle }: Person) {
   return (
     <>
       <div className='flex-shrink-0 flex flex-col gap-3'>
