@@ -1,4 +1,12 @@
 {
+  "homepage": {
+    "featuredBlogs": [
+      "embracing-imperfection",
+      "communicating-software",
+      "cljs-for-js-devs",
+      "bridging-the-blockchain"
+    ]
+  },
   "navbar": [
     { "label": "About", "href": "/about" },
     { "label": "Financial", "href": "/financial" },

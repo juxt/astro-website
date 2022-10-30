@@ -1,27 +1,27 @@
 :root,
 :root.light {
-  --astro-code-color-text: theme(colors.slate.400);
-  --astro-code-color-background: theme(colors.teal.100);
-  --astro-code-token-constant: theme(colors.gray.600);
-  --astro-code-token-parameter: theme(colors.yellow.600);
-  --astro-code-token-string: theme(colors.gray.600);
-  --astro-code-token-comment: theme(colors.gray.600);
-  --astro-code-token-keyword: theme(colors.red.900);
-  --astro-code-token-function: theme(colors.amber.600);
-  --astro-code-token-string-expression: theme(colors.cyan.500);
-  --astro-code-token-punctuation: theme(colors.gray.500);
-  --astro-code-token-link: theme(colors.red.500);
+  --astro-code-color-text: #94a3b8;
+  --astro-code-color-background: #ccfbf1;
+  --astro-code-token-constant: #4b5563;
+  --astro-code-token-parameter: #ca8a04;
+  --astro-code-token-string: #4b5563;
+  --astro-code-token-comment: #4b5563;
+  --astro-code-token-keyword: #7f1d1d;
+  --astro-code-token-function: #d97706;
+  --astro-code-token-string-expression: #06b6d4;
+  --astro-code-token-punctuation: #6b7280;
+  --astro-code-token-link: #ef4444;
 }
 :root.dark {
-  --astro-code-color-text: theme(colors.sky.100);
-  --astro-code-color-background: theme(colors.moonlight);
-  --astro-code-token-constant: theme(colors.gray.300);
-  --astro-code-token-parameter: theme(colors.gray.50);
-  --astro-code-token-string: theme(colors.gray.200);
-  --astro-code-token-comment: theme(colors.gray.600);
-  --astro-code-token-keyword: theme(colors.juxt);
-  --astro-code-token-function: theme(colors.amber.400);
-  --astro-code-token-string-expression: theme(colors.amber.200);
-  --astro-code-token-punctuation: theme(colors.gray.400);
-  --astro-code-token-link: theme(colors.red.200);
+  --astro-code-color-text: #e0f2fe;
+  --astro-code-color-background: #0b0e14;
+  --astro-code-token-constant: #d1d5db;
+  --astro-code-token-parameter: #f9fafb;
+  --astro-code-token-string: #e5e7eb;
+  --astro-code-token-comment: #4b5563;
+  --astro-code-token-keyword: #f4901d;
+  --astro-code-token-function: #fbbf24;
+  --astro-code-token-string-expression: #fde68a;
+  --astro-code-token-punctuation: #9ca3af;
+  --astro-code-token-link: #fecaca;
 }

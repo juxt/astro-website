@@ -8,7 +8,7 @@ export interface Props {
 type Navigation = { label: string; href: string }
 
 const navigation = await Astro.glob<{ navbar: Navigation[] }>(
-  '../data/navigation.json'
+  '../data/metadata.json'
 )
 
 const [{ navbar }] = navigation

@@ -34,6 +34,7 @@ export function BlogCard({
   return (
     <a
       href={`/blog/${href}`}
+      target='_blank'
       className='h-full group cursor-pointer flex justify-between flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
     >
       <div className='text-black py-4 w-full h-full relative flex flex-col justify-between'>

@@ -1,0 +1,58 @@
+---
+import Section from './Section.astro'
+---
+
+<Section className='py-20 text-white bg-black'>
+  <div>
+    <header class='py-16 sm:text-center'>
+      <h1 class='mb-4 text-4xl font-bold tracking-tight dark:text-slate-200'>
+        Stay in touch
+      </h1>
+      <p class='lg:w-1/2 mx-auto text-lg text-slate-400'>
+        We'll keep you updated with the latest in JUXT news.
+      </p>
+      <section class='mt-3 max-w-sm sm:mx-auto sm:px-4'>
+        <h2 class='sr-only'>Sign up for our newsletter</h2>
+        <form
+          target='_blank'
+          action='https://JUXT.us13.list-manage.com/subscribe/post?u=b72ef384b5199134185cbeed8&id=a5edacb9c2'
+          method='post'
+          class='flex gap-2 flex-wrap -mx-2'
+        >
+          <div class='grow-[9999] basis-64 mt-3'>
+            <div class='group relative'>
+              <svg
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                aria-hidden='true'
+                class='w-6 h-full absolute inset-y-0 left-3 text-slate-400 pointer-events-none group-focus-within:text-slate-400'
+              >
+                <path
+                  d='M5 7.92C5 6.86 5.865 6 6.931 6h10.138C18.135 6 19 6.86 19 7.92v8.16c0 1.06-.865 1.92-1.931 1.92H6.931A1.926 1.926 0 0 1 5 16.08V7.92Z'
+                ></path>
+                <path d='m6 7 6 5 6-5'></path>
+              </svg>
+              <input
+                type='email'
+                id='EMAIL-2'
+                name='EMAIL-2'
+                aria-label='Email address'
+                class='appearance-none shadow ring-1 leading-5 sm:text-sm border border-transparent py-2 placeholder:text-slate-400 pl-12 pr-3 block w-full focus:outline-none focus:ring-2 bg-white bg-slate-700/20 ring-slate-200/30 focus:ring-slate-500 text-white'
+                placeholder='Subscribe via email'
+              />
+            </div>
+          </div>
+          <div
+            class='grow flex mt-3 border ring-1 ring-juxt border-juxt px-4 py-1.5 w-fit hover:bg-juxt transition-colors cursor-pointer hover:text-white visited:text-white active:text-white font-normal text-sm'
+          >
+            <button type='submit'>Subscribe</button>
+          </div>
+        </form>
+      </section>
+    </header>
+  </div>
+</Section>

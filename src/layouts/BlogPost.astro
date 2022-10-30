@@ -30,7 +30,7 @@ const {
 
 const isDev = import.meta.env.DEV
 
-const isExpert = (expert && !expertDraft) || isDev
+const isExpert = (expert && !expertDraft) || (isDev && expert)
 
 const blogHref = Astro.url.href
 const shareIconStyle =
@@ -69,7 +69,6 @@ const personImageFilename = image.split('.').slice(0, -1)
           <h2 class='text-lg text-zinc-600 dark:text-zinc-300'>
             {description}
           </h2>
-
           <a
             href={isExpert ? `/people/${author}` : '#'}
             class:list={[

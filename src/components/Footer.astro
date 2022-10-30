@@ -10,7 +10,7 @@ import {
 type Navigation = { label: string; href: string; flag?: boolean }
 
 const navigation = await Astro.glob<{ footer: Navigation[] }>(
-  '../data/navigation.json'
+  '../data/metadata.json'
 )
 
 const [{ footer }] = navigation
