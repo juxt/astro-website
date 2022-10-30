@@ -1,15 +1,15 @@
 :root,
 :root.light {
-  --inputBackground: theme(colors.white);
-  --inputBorderColor: theme(colors.gray.300);
-  --inputColor: theme(colors.gray.800);
-  --inputCaretColor: theme(colors.gray.800);
+  --inputBackground: #fff;
+  --inputBorderColor: #d1d5db;
+  --inputColor: #1f2937;
+  --inputCaretColor: #1f2937;
 }
 :root.dark {
-  --inputBackground: theme(colors.gray.800);
-  --inputBorderColor: theme(colors.gray.700);
-  --inputColor: theme(colors.gray.200);
-  --inputCaretColor: theme(colors.gray.300);
+  --inputBackground: #1f2937;
+  --inputBorderColor: #374151;
+  --inputColor: #e5e7eb;
+  --inputCaretColor: #d1d5db;
 }
 
 .ais-SearchBox {
@@ -25,17 +25,17 @@
 .ais-SearchBox-input {
   background-color: var(--inputBackground);
   border: 1px solid var(--inputBorderColor);
-  border-radius: theme(borderRadius.md);
+  border-radius: 0.375rem;
   box-shadow: none;
   color: var(--inputColor);
   caret-color: var(--inputCaretColor);
 }
 
 .ais-Hits {
-  margin-top: theme(margin.2);
-  border-radius: theme(borderRadius.md);
+  margin-top: 0.5rem;
+  border-radius: 0.375rem;
   border: 1px solid var(--inputBorderColor);
-  width: theme(width.96);
+  width: 24rem;
 }
 .ais-Hits--empty {
   display: none;
