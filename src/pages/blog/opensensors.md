@@ -5,7 +5,7 @@ description: 'A case study of building the technology that powers a major IoT pl
 category: 'case studies'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Oct 2015'
-heroImage: 'mock3.jpg'
+heroImage: 'opensensor.jpg'
 ---
 
 [OpenSensors](https://opensensors.io) is an exciting open data platform

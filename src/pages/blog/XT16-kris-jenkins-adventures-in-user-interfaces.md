@@ -5,7 +5,7 @@ description: 'JavaScript is falling down'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '20 Jan 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'user-interface-adv.jpg'
 ---
 
 _\'JavaScript is falling down\'_. This is the Ukuele tune that [Kris

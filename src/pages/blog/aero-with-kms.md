@@ -8,7 +8,7 @@ tags:
   - 'devops'
   - 'cloud'
 publishedDate: '22 Oct 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'secrets.jpg'
 ---
 
 Last May, we [wrote](/blog/aero) about our

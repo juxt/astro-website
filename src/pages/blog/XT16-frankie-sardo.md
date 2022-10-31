@@ -5,7 +5,7 @@ description: 'ClojureScript Without Boundaries (with live coding)'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '09 Feb 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'boundaries.jpg'
 ---
 
 Frankie is our resident mobile expert, having written many commercial

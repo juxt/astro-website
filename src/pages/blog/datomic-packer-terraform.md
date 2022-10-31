@@ -1,11 +1,11 @@
 ---
 author: 'jon'
 title: 'Provisioning Datomic using Packer and Terraform'
-description: 'eploying Datomic'
+description: 'Deploying Datomic'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '06 Feb 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'deploying-datomic.jpg'
 ---
 
 At JUXT we are fans of Datomic having used it for several of our

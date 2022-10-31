@@ -5,7 +5,7 @@ description: 'Videos are coming, meanwhile relive the experience'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '09 Dec 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'x16-videos.jpg'
 ---
 
 Hello, we have been toiling away at post-producing our videos of the

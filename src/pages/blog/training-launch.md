@@ -5,7 +5,7 @@ description: 'We are running one-day training courses'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '06 Jan 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'training.jpg'
 tags:
   - 'training'
 ---

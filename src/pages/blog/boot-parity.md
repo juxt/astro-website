@@ -5,7 +5,7 @@ description: 'An introduction to the Boot build tool and how to get started on y
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '19 Jan 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'feature-parity.jpg'
 ---
 
 For a basic Clojure project it can be daunting to begin with Boot (even

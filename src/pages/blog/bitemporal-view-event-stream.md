@@ -4,7 +4,7 @@ title: 'Building a Bitemporal View on top of an Event-Stream'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '27 Mar 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'bitemporal-view.jpg'
 ---
 
 The use of event streams has marched on from being used primarily as an

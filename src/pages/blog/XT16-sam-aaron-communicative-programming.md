@@ -5,7 +5,7 @@ description: 'Lowering the cognitive load'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Feb 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'communicative.jpg'
 ---
 
 At JUXT we are big fans of [Sam Aaron](http://sam.aaron.name/). I recall

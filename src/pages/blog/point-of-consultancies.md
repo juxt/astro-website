@@ -5,7 +5,7 @@ description: 'Software is a difficult business'
 category: 'anaysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '25 Jul 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'software-consultancies.jpg'
 ---
 
 A highly desirable software development team is one that is in-house,

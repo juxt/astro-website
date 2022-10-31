@@ -5,7 +5,7 @@ description: 'A gripe'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '20 Nov 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'aesthetics.jpg'
 tags:
   - 'xt16'
 ---

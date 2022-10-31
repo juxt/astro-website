@@ -5,7 +5,7 @@ description: 'Expanding abbreviated data literals'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '05 Jan 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'data-macros.jpg'
 ---
 
 This article is about yet another development pattern that falls out of

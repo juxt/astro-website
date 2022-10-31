@@ -5,7 +5,7 @@ description: 'Building a Scheme in x86-64 Assembly'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '04 Jan 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'search.jpg'
 ---
 
 At XT16 [Håkan Råberg](https://github.com/hraberg) took us on a personal

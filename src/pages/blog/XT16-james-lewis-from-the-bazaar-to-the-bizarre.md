@@ -5,7 +5,7 @@ description: 'A journey of open source development'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '14 Dec 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'open-source.jpg'
 ---
 
 James Lewis is a thinker and a coder, a speaker and an educator, and is

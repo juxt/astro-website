@@ -5,7 +5,7 @@ description: 'Reflections on bringing developers up to speed in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Jan 2016'
-heroImage: 'mock3.jpg'
+heroImage: 'clojure-training.jpg'
 tags:
   - 'training'
 ---
