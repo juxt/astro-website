@@ -18,9 +18,9 @@ export async function getStaticPaths() {
       ({ frontmatter: { expertDraft, expert } }) =>
         (isDev || !expertDraft) && expert
     )
-    .map(({ frontmatter, compiledContent }) => ({
+    .map(({ frontmatter, Content }) => ({
       params: { code: frontmatter.code },
-      props: { ...frontmatter, content: compiledContent() }
+      props: { ...frontmatter, Content: Content }
     }))
 }
 
@@ -34,7 +34,7 @@ const {
   twitter,
   expertDraft,
   expertise,
-  content
+  Content
 } = Astro.props
 
 const imageFilename = image.split('.').slice(0, -1)
@@ -109,12 +109,10 @@ const shareIconStyle = 'fill-zinc-100 hover:fill-juxt transition-colors'
         </div>
       </div>
     </div>
-
     <article
-      {/* eslint-disable-next-line */}
-      set:html={content}
       class='px-4 py-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors'
     >
+      <Content />
     </article>
   </main>
 </Layout>
