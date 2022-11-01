@@ -59,6 +59,7 @@ To create a new article add a `*blogName*.md` file in `src/pages/blog`. You must
 ```md
 ---
 draft: true
+token: '1234'
 author: 'lda'
 layout: '../../layouts/BlogPost.astro'
 title: 'Hello world!'
@@ -71,7 +72,9 @@ heroImage: 'introducing-astro.jpg'
 ---
 ```
 
-When a post is ready to go live, you can remove the `draft` attribute and it will be included in the build.
+When a post is ready to go live, you can remove the `draft` attribute, so it can be indexed by algolia.
+
+Notice that drafts go live under `/blog/drafts/*blogName*`. If you want you can provide a `token` attribute in the frontmatter to serve your article under `/blog/drafts/*blogName*/*token*`. The `token` is not a mandatory field.
 
 The `heroImage` picture must be stored in the `src/assets/blog` folder and it must be of `.jpg` format. The `tags` are optional.
 

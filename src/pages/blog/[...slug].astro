@@ -15,7 +15,7 @@ export async function getStaticPaths() {
     }))
 
   const blogs = onlyDrafts.map(({ slug, token, ...rest }) => ({
-    params: { slug: `${slug}/${token}` },
+    params: { slug: `drafts/${slug}` + (token ? `/${token}` : '') },
     props: { ...rest }
   }))
 
