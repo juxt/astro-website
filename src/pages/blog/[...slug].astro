@@ -1,0 +1,28 @@
+---
+import { MarkdownInstance } from 'astro'
+import { AstroComponentFactory } from 'astro/dist/runtime/server'
+import { Blog } from '../../components/types'
+
+export async function getStaticPaths() {
+  const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
+
+  const onlyDrafts = pages
+    .filter((page) => page.frontmatter.draft)
+    .map((page) => ({
+      ...page.frontmatter,
+      Content: page.Content,
+      slug: page.url.split('/').pop()
+    }))
+
+  const blogs = onlyDrafts.map(({ slug, token, ...rest }) => ({
+    params: { slug: `${slug}/${token}` },
+    props: { ...rest }
+  }))
+
+  return blogs
+}
+
+const { Content } = Astro.props as Blog & { Content: AstroComponentFactory }
+---
+
+<Content />

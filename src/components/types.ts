@@ -1,3 +1,5 @@
+import { AstroComponentFactory } from 'astro/dist/runtime/server'
+
 export type Person = {
   code: string
   name: string
@@ -15,6 +17,7 @@ export type Person = {
 
 export type Blog = {
   draft?: boolean
+  token?: string
   title: string
   description: string
   publishedDate: string

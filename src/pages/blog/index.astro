@@ -48,6 +48,7 @@ const unfilteredBlogs: Blog[] = await Promise.all(
       ([authorImage, postImage]) => {
         return {
           ...page.frontmatter,
+          slug: page.url.split('/').pop(),
           href: permalink,
           heroImage: postImage.src,
           person: {
