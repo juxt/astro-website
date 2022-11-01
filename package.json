@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "astro dev ",
-    "start": "concurrently \"yarn run dev\" \"yarn run tailwind\"",
+    "start": "concurrently \"astro dev\" \"yarn run tailwind\"",
     "tailwind": "tailwindcss --config tailwind.config.cjs -i ./public/styles/tailwind.css -o ./public/styles/global.css --watch",
     "build:css": "NODE_ENV=production tailwindcss --config tailwind.config.cjs -i ./public/styles/tailwind.css -o ./dist/styles/global.css -m",
     "build": "astro build && yarn run build:css",
