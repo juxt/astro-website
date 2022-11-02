@@ -19,7 +19,7 @@ building custom data structures.
 
 ## Bags as a primitive example
 
-For the purpose of this post we are going to look at https://en.wikipedia.org/wiki/Multiset[bags]
+For the purpose of this post we are going to look at [bags](https://en.wikipedia.org/wiki/Multiset)
 (also known as multisets). A bag extends the concept of a set to a set with a multiplicity
 for each item. So whenever we for an item in a bag, the result will be the number of times
 the item was added to the bag. `nil` if it is not present. The natural way to
@@ -149,7 +149,7 @@ select a subset of some common interfaces. Some examples are
 - `clojure.lang.IObj` - for metadata support
 - `clojure.lang.Counted` - so that `count` works for the type
 - `clojure.lang.Associative` - if the type fits an associative interface
-- `clojure.lang.Seqable` - if the type implements https://clojure.org/reference/sequences[the Seq interface]
+- `clojure.lang.Seqable` - if the type implements [the Seq interface](https://clojure.org/reference/sequences)
 
 In certain cases an interface extends a more primitive interface. For example maps implement `clojure.lang.Associative`.
 
