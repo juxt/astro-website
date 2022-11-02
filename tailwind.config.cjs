@@ -14,6 +14,13 @@ module.exports = {
       colors: {
         juxt: '#f4901d',
         moonlight: '#0b0e14'
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '80ch'
+          }
+        }
       }
     }
   },
