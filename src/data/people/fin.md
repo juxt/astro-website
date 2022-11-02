@@ -1,5 +1,5 @@
 ---
-code: fin'
+code: 'fin'
 name: 'Finn'
 lastName: 'Völkel'
 jobTitle: 'Software Engineer'

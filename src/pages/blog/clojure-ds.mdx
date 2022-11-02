@@ -7,7 +7,7 @@ description: 'How to build your custom data structures in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '01 Dec 2022'
-heroImage: 'juxt-logo-minecraft.jpg'
+heroImage: 'repl-driven-minecraft.jpg'
 tags:
   - 'clojure'
 ---
@@ -68,7 +68,7 @@ Checking for an item in a bag
   (get-in bag [:content ele]))
 
 (defn size [bag] (:size bag))
-```clojure
+```
 
 `contains?'` and `count'` are quoted so that we are not overriding Clojure's core functions.
 
@@ -216,7 +216,7 @@ the standard core data structures, but it’s still worth reiterating.
 
 We hope this post has been useful to you and that you will be hacking on your own data structures soon.
 
-=== References
+### References
 
 * https://www.brainonfire.net/files/seqs-and-colls/main.html
 * https://clojure.org/reference/sequences
