@@ -6,7 +6,7 @@ title: "Building persistent data structures in Clojure"
 description: 'How to build your custom data structures in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '01 Dec 2022
+publishedDate: '01 Dec 2022'
 heroImage: 'juxt-logo-minecraft.jpg'
 tags:
   - 'clojure'
