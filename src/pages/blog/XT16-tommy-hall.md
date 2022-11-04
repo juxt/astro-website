@@ -5,7 +5,7 @@ description: 'Unlimited Register Machines'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '08 Mar 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'register-machines.jpg'
 ---
 
 Tom Hall is a good friend of JUXT and active member of London's Clojure

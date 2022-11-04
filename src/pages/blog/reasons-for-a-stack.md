@@ -5,7 +5,7 @@ description: 'Becoming opinionated'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '15 Jan 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'stack.jpg'
 ---
 
 How do you decide what tech stack to choose? As software developers we

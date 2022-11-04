@@ -5,7 +5,7 @@ description: ''
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '27 Aug 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'toronto.jpg'
 ---
 
 JUXT has seen steady growth over the last five years, and we are in the

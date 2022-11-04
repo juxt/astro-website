@@ -5,7 +5,7 @@ description: ''
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '27 Mar 2018'
-heroImage: 'mock3.jpg'
+heroImage: 'introducing-xt.jpg'
 tags:
   - 'clojure'
 ---

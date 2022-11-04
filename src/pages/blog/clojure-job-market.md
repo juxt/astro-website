@@ -5,7 +5,7 @@ description: 'Thoughts on the European Clojure Job Market'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '29 Jun 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'job-market.jpg'
 ---
 
 At JUXT we predominantly write software for our clients using Clojure.

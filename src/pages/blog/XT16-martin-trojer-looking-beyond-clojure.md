@@ -5,7 +5,7 @@ description: 'A Clojure developer takes a look at languages with typesk'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '26 Apr 2017'
-heroImage: 'mock3.jpg'
+heroImage: 'beyond-clj.jpg'
 ---
 
 At JUXT we are a huge fans of Clojure, but we like to always keep an
