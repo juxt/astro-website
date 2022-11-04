@@ -5,7 +5,7 @@ description: 'Surveying Real Clojure Projects'
 category: 'clojure-in'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '22 Sep 2016'
-heroImage: 'mock.jpg'
+heroImage: 'clojure-in-bg.jpg'
 ---
 
 At JUXT we want to understand how Clojure is being adopted across our
