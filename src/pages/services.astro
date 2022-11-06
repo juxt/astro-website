@@ -1,7 +1,48 @@
 ---
+import { getImage } from '@astrojs/image'
+import Banner from '../components/Banner.astro'
+import Clickable from '../components/Clickable.astro'
+import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
+
+const servicesBannerPicture = await getImage({
+  src: import('../assets/site/services-banner.jpg'),
+  width: 1700,
+  quality: 90
+}).then((img) => img.src)
+
+const services = ['discovery', 'pre-delivery', 'delivery', 'support']
 ---
 
 <Layout title='Services' navbar>
-  <main>technolgoy page here</main>
+  <main>
+    <Banner
+      navbarNoBg
+      text='Services'
+      style={{
+        backgroundPosition: 'center',
+        backgroundImage: `url(${servicesBannerPicture})`
+      }}
+    />
+    <Section className='bg-gray-900 py-28 text-white'>
+      <h2 class='text-xl md:text-2xl font-extralight'>
+        When we approach a new project, whether it’s joining an existing
+        software team to get a project over the line, or designing and building
+        an ambitious new system from scratch, we work with our clients through
+        the following stages:
+      </h2>
+      <div class='pt-16 flex gap-6 justify-center'>
+        {services.map((service) => (
+          <Clickable>
+            <a
+              href={`#${service}`}
+              class='capitalize block py-1.5 px-1.5 text-2xl'
+            >
+              {service}
+            </a>
+          </Clickable>
+        ))}
+      </div>
+    </Section>
+  </main>
 </Layout>
