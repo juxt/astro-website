@@ -31,7 +31,11 @@ module.exports = {
         'astro/no-set-html-directive': 'error',
         'validate-jsx-nesting/no-invalid-jsx-nesting': 'error',
         'astro/jsx-a11y/click-events-have-key-events': 'off',
-        'astro/jsx-a11y/no-static-element-interactions': 'off'
+        'astro/jsx-a11y/no-static-element-interactions': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' }
+        ]
       }
     },
     {

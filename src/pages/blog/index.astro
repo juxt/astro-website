@@ -1,10 +1,10 @@
 ---
+import { getImage } from '@astrojs/image'
 import { MarkdownInstance } from 'astro'
+import Banner from '../../components/Banner.astro'
 import { Blog, Person } from '../../components/types'
 import { BlogIndex } from '../../layouts/BlogIndex'
-import { getImage } from '@astrojs/image'
 import Layout from '../../layouts/Layout.astro'
-import Banner from '../../components/Banner.astro'
 
 const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
 

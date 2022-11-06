@@ -1,35 +1,10 @@
 ---
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
-import { MarkdownInstance } from 'astro'
-import Banner from '../components/Banner.astro'
-import { BlogCard } from '../components/BlogCard'
 import Clickable from '../components/Clickable.astro'
-import { ChevronRightIcon, QuoteIcon, TickIcon } from '../components/Icons'
+import { ChevronRightIcon, TickIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
-import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import Layout from '../layouts/Layout.astro'
-import { Person, Blog } from '../components/types'
-
-const url = Astro.url
-
-const caseStudies = await Astro.glob<CaseStudyProps>(
-  '../data/case-studies/*.md'
-)
-
-const caseStudiesParsed = caseStudies
-  .filter(({ frontmatter }) => frontmatter.pages[url.pathname])
-  .sort(
-    (a, b) =>
-      a.frontmatter.pages[url.pathname].weight -
-      b.frontmatter.pages[url.pathname].weight
-  )
-
-const homepageBannerPicture = await getImage({
-  src: import('../assets/site/homepage-banner.jpeg'),
-  width: 1700,
-  quality: 90
-}).then((img) => img.src)
 
 const threadsPicture = await getImage({
   src: import('../assets/site/threads.png'),
@@ -37,108 +12,6 @@ const threadsPicture = await getImage({
   height: 1366,
   quality: 80
 }).then((img) => img.src)
-
-const testimonials = [
-  {
-    name: 'MORGAN ROSS, TECHNICAL DIRECTOR, ONTHEMARKET PLC',
-    quote:
-      'JUXT led the development team through this period of incredible achievements.',
-    bg: 'bg-red-600'
-  },
-  {
-    name: 'MANAGING DIRECTOR, T1 INVESTMENT BANK',
-    quote:
-      'The JUXT team are tremendously technically capable – delivering elegant solutions to complex problems.',
-    bg: 'bg-green-800'
-  },
-  {
-    name: 'ANDY DWELLEY',
-    quote: 'XTDB has been an absolute dream to use.',
-    bg: 'bg-slate-800'
-  },
-  {
-    name: 'PATRICK GALVIN',
-    quote: 'XTDB has been working great for me. It is a lovely lovely project.',
-    bg: 'bg-blue-800'
-  },
-  {
-    name: 'JULIAN GAMBLE',
-    quote:
-      'JUXT have made a huge contribution to the Open Source and Clojure community',
-    bg: 'bg-pink-800'
-  },
-  {
-    name: 'NIC FERRIER',
-    quote:
-      'They are programmers employing programmers to do work with the best tools in the most interesting ways.',
-    bg: 'bg-violet-800'
-  },
-  {
-    name: "JACOB O'BRYANT",
-    quote:
-      'I really appreciate the straightforward simplicity of schemaless persistence. With XTDB it was just so easy.',
-    bg: 'bg-gray-800'
-  }
-]
-
-const clientLogos = [
-  'credit-suisse.svg',
-  'citi.svg',
-  'vodafone.svg',
-  'on-the-market.svg',
-  'mail-online.svg',
-  'bbc.svg'
-]
-
-const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
-
-const isDev = import.meta.env.DEV
-
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-)
-
-const peopleByCode = new Map(
-  people.map((person) => [person.frontmatter.code, person.frontmatter])
-)
-
-const unfilteredBlogs = await Promise.all(
-  blogs.map((page) => {
-    const author = page.frontmatter.author
-    const person = peopleByCode.get(author)
-    const expert = (isDev || !person?.expertDraft) && person?.expert
-    if (!person)
-      throw new Error(
-        `No person found for author: '${author}' in '${page.url}'`
-      )
-    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
-    const parsedImage = person.image.split('.').slice(0, -1)
-
-    return new Promise<Blog>((res, rej) => {
-      getImage({
-        src: import(`../assets/people/${parsedImage}.jpg`),
-        width: 200,
-        height: 200,
-        quality: 80
-      })
-        .then((image) => {
-          res({
-            ...page.frontmatter,
-            href: permalink,
-            person: {
-              ...person,
-              expert,
-              image: image.src
-            }
-          })
-        })
-        .catch(rej)
-    })
-  })
-)
-const featuredBlogs = unfilteredBlogs
-  .filter(({ featured, draft }) => featured && (isDev || !draft))
-  .sort((a, b) => b.featured.weight - a.featured.weight)
 ---
 
 <Layout title='JUXT' navbar>

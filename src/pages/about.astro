@@ -5,8 +5,8 @@ import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
 import { LinkIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
-import Layout from '../layouts/Layout.astro'
 import { Person } from '../components/types'
+import Layout from '../layouts/Layout.astro'
 
 const bannerPicture = await getImage({
   src: import('../assets/site/about-us-banner.jpeg'),
@@ -55,10 +55,6 @@ const values = [
 
 const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
-)
-
-const experts = await people.filter(
-  ({ frontmatter }) => !frontmatter?.expertDraft && frontmatter?.expert
 )
 
 const featuredPeople = people

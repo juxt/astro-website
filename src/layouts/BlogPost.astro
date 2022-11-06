@@ -1,4 +1,6 @@
 ---
+import { Image } from '@astrojs/image/components'
+import { MarkdownInstance } from 'astro'
 import DraftBanner from '../components/DraftBanner'
 import {
   LinkedInIcon,
@@ -8,8 +10,6 @@ import {
 } from '../components/Icons'
 import { Blog, Person } from '../components/types'
 import Layout from './Layout.astro'
-import { Image } from '@astrojs/image/components'
-import { MarkdownInstance } from 'astro'
 
 const { title, description, heroImage, category, author, draft } = Astro.props
   .content as Blog

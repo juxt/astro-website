@@ -5,12 +5,12 @@ import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
 import { BlogCard } from '../components/BlogCard'
 import Clickable from '../components/Clickable.astro'
-import { ChevronRightIcon, QuoteIcon, TickIcon } from '../components/Icons'
+import { QuoteIcon } from '../components/Icons'
+import Newsletter from '../components/Newsletter.astro'
 import Section from '../components/Section.astro'
+import { Blog, Person } from '../components/types'
 import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import Layout from '../layouts/Layout.astro'
-import { Person, Blog } from '../components/types'
-import Newsletter from '../components/Newsletter.astro'
 
 const url = Astro.url
 
@@ -30,13 +30,6 @@ const homepageBannerPicture = await getImage({
   src: import('../assets/site/homepage-banner.jpeg'),
   width: 1700,
   quality: 90
-}).then((img) => img.src)
-
-const threadsPicture = await getImage({
-  src: import('../assets/site/threads.png'),
-  width: 600,
-  height: 1366,
-  quality: 80
 }).then((img) => img.src)
 
 const testimonials = [
