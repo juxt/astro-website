@@ -1,17 +1,33 @@
 ---
 import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
 import Banner from '../components/Banner.astro'
 import Clickable from '../components/Clickable.astro'
 import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
+
+type ServicesProps = {
+  title: string
+  image: string
+  direction?: 'left' | 'right' | 'center'
+  weight: number
+  content: string
+}
+
+const services = await Astro.glob<ServicesProps>('../data/services/*.md')
+
+const servicesParsed = services
+  .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
+  .map((services) => ({
+    ...services.frontmatter,
+    content: services.compiledContent()
+  }))
 
 const servicesBannerPicture = await getImage({
   src: import('../assets/site/services-banner.jpg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)
-
-const services = ['discovery', 'pre-delivery', 'delivery', 'support']
 ---
 
 <Layout title='Services' navbar>
@@ -31,18 +47,60 @@ const services = ['discovery', 'pre-delivery', 'delivery', 'support']
         an ambitious new system from scratch, we work with our clients through
         the following stages:
       </h2>
-      <div class='pt-16 flex gap-6 '>
-        {services.map((service) => (
+      <div class='pt-16 flex gap-6'>
+        {servicesParsed.map((service, idx) => (
           <Clickable>
-            <a
-              href={`#${service}`}
-              class='capitalize block py-1.5 px-1.5 text-2xl'
-            >
-              {service}
+            <a href={`#${idx}`} class='capitalize block py-1.5 px-1.5 text-2xl'>
+              {service.title}
             </a>
           </Clickable>
         ))}
       </div>
     </Section>
+    <div class='flex flex-col text-black'>
+      {servicesParsed.map((service, idx) => {
+        const isDark = idx % 2 !== 0
+        const isLeft = service.direction === 'left' || !service.direction
+        const isCenter = service.direction === 'center'
+
+        const sectionStyle = isLeft
+          ? 'flex-col-reverse xl:flex-row-reverse'
+          : isCenter
+          ? 'flex-col flex-col-reverse'
+          : 'flex-col-reverse xl:flex-row'
+
+        const bannerNoExtension = service.image.split('.')[0]
+
+        return (
+          <Section
+            id={`${idx}`}
+            className={`${isDark ? 'bg-black text-white' : ''} py-28`}
+          >
+            <div
+              class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+            >
+              <Image
+                width={1300}
+                quality={100}
+                class={`${
+                  isCenter ? 'place-self-center' : ' xl:w-1/2'
+                } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
+                alt='award'
+                src={import(`../assets/services/${bannerNoExtension}.jpg`)}
+              />
+              <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
+                <h2 class='text-5xl font-light pb-8'>{service.title}</h2>
+                <div class='flex flex-col gap-8'>
+                  <div
+                    class='flex [&_li]:list-disc flex-col gap-6 text-lg font-extralight'
+                    set:html={service.content}
+                  />
+                </div>
+              </div>
+            </div>
+          </Section>
+        )
+      })}
+    </div>
   </main>
 </Layout>

@@ -46,7 +46,8 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': [
           'error',
           { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' }
-        ]
+        ],
+        'astro/no-set-html-directive': 'warning'
       }
     }
   ]

@@ -52,7 +52,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
       })}
       ref={ref}
     >
-      <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-6xl flex flex-wrap items-center justify-between h-full'>
+      <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>
         <a href='/' class='flex items-center w-20 z-10'>
           <img src={logo} width='w-full' alt='Juxt Logo' />
         </a>
