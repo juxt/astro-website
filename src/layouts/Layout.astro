@@ -16,6 +16,10 @@ type LayoutProps = {
 const url = new URL(Astro.request.url)
 const currentPageName = currentPage(url.pathname)
 
+const [{ metaDescription }] = await Astro.glob('../data/metadata.json')
+
+const currentDescription = metaDescription[currentPageName]
+
 const enableDarkMode =
   Astro.url.pathname.includes('/blog') ||
   Astro.url.pathname.includes('/clojure-in')
@@ -30,6 +34,9 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     <meta name='robots' content='noindex' />
 
     <meta charset='UTF-8' />
+    {currentDescription && (
+      <meta name='description' content={currentDescription} />
+    )}
     <meta name='viewport' content='width=device-width' />
     <link href='/images/favicon.png' rel='shortcut icon' type='image/x-icon' />
     <link href='/images/favicon-apple.svg' rel='apple-touch-icon' />
