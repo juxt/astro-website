@@ -4,6 +4,7 @@ import { Image } from '@astrojs/image/components'
 import Banner from '../components/Banner.astro'
 import Clickable from '../components/Clickable.astro'
 import Section from '../components/Section.astro'
+import TalkToUs from '../components/TalkToUs.astro'
 import Layout from '../layouts/Layout.astro'
 
 type ServicesProps = {
@@ -47,7 +48,9 @@ const servicesBannerPicture = await getImage({
         an ambitious new system from scratch, we work with our clients through
         the following stages:
       </h2>
-      <div class='pt-16 flex gap-6'>
+      <div
+        class='pt-16 flex flex-col items-center sm:items-start sm:flex-row flex-wrap gap-6'
+      >
         {servicesParsed.map((service, idx) => (
           <Clickable>
             <a href={`#${idx}`} class='capitalize block py-1.5 px-1.5 text-2xl'>
@@ -93,6 +96,7 @@ const servicesBannerPicture = await getImage({
                 <div class='flex flex-col gap-8'>
                   <div
                     class='flex [&_li]:list-disc flex-col gap-6 text-lg font-extralight'
+                   {/* eslint-disable-next-line */}
                     set:html={service.content}
                   />
                 </div>
@@ -102,5 +106,6 @@ const servicesBannerPicture = await getImage({
         )
       })}
     </div>
+    <TalkToUs />
   </main>
 </Layout>

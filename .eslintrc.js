@@ -47,7 +47,7 @@ module.exports = {
           'error',
           { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' }
         ],
-        'astro/no-set-html-directive': 'warning'
+        'astro/no-set-html-directive': 0
       }
     }
   ]

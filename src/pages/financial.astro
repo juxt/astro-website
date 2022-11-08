@@ -3,6 +3,7 @@ import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import Banner from '../components/Banner.astro'
 import Section from '../components/Section.astro'
+import TalkToUs from '../components/TalkToUs.astro'
 import Layout from '../layouts/Layout.astro'
 
 type FinancialServicesProps = {
@@ -138,5 +139,6 @@ const financialPicture = await getImage({
         )
       })}
     </div>
+    <TalkToUs />
   </main>
 </Layout>

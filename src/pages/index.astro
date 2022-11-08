@@ -1,6 +1,5 @@
 ---
 import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
 import { BlogCard } from '../components/BlogCard'
@@ -8,6 +7,7 @@ import Clickable from '../components/Clickable.astro'
 import { QuoteIcon } from '../components/Icons'
 import Newsletter from '../components/Newsletter.astro'
 import Section from '../components/Section.astro'
+import TalkToUs from '../components/TalkToUs.astro'
 import { Blog, Person } from '../components/types'
 import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import Layout from '../layouts/Layout.astro'
@@ -367,26 +367,7 @@ const featuredBlogs = await Promise.all(
         ))}
       </div>
     </Section>
-    <Section className='text-black py-20 md:py-40'>
-      <div
-        class='flex flex-col-reverse items-center md:flex-row justify-center gap-10 md:gap-16'
-      >
-        <div class='flex flex-col gap-4 text-center md:text-left'>
-          <div class='text-5xl md:text-6xl font-bold'>Talk to us</div>
-          <div class='text-2xl md:text-3xl font-light'>info@juxt.pro</div>
-          <div class='text-2xl md:text-3xl font-light'>
-            +44 (0) 333 93 98 309
-          </div>
-        </div>
-        <Image
-          alt='image'
-          width={400}
-          quality={80}
-          class='w-40 md:w-60'
-          src={import('../assets/site/airplane.png')}
-        />
-      </div>
-    </Section>
+    <TalkToUs />
     <Section
       className='py-20 dark:bg-gray-900 bg-zinc-100 text-black dark:text-white'
     >
