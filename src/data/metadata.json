@@ -10,12 +10,14 @@
   "navbar": [
     { "label": "About", "href": "/about" },
     { "label": "Financial", "href": "/financial" },
+    { "label": "Services", "href": "/services" },
     { "label": "Careers", "href": "/careers" },
     { "label": "Blog", "href": "/blog" }
   ],
   "footer": [
     { "label": "About", "href": "/about" },
     { "label": "Financial", "href": "/financial" },
+    { "label": "Services", "href": "/services" },
     { "label": "Careers", "href": "/careers", "flag": "hiring" },
     { "label": "Clojure In", "href": "/clojure-in" },
     { "label": "Blog", "href": "/blog" }
