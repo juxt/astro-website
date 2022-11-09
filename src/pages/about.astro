@@ -57,10 +57,17 @@ const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 )
 
+const isDev = import.meta.env.DEV
+
 const featuredPeople = people
   .filter(({ frontmatter: { featured } }) => featured)
   .sort((a, b) => a.frontmatter.featured.weight - b.frontmatter.featured.weight)
-  .map(({ frontmatter }) => ({ ...frontmatter }))
+  .map(({ frontmatter }) => ({
+    ...frontmatter,
+    expert:
+      (isDev && frontmatter.expert) ||
+      (frontmatter.expert && !frontmatter.expertDraft)
+  }))
 
 function imageToFilename(image: string) {
   return image.split('.').slice(0, -1)
