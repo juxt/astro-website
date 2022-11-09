@@ -2,7 +2,7 @@
 title: 'Support'
 image: 'services-support.jpg'
 weight: 4
-direction: 'right'
+direction: 'left'
 ---
 
 Many of our projects continue to evolve through repeated phases of delivery, but when live systems aren’t under active development we will often look to create a Support & Maintenance agreement.
