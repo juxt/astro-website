@@ -9,29 +9,24 @@ googleJobs:
   {
     location: 'London',
     position: 'Junior Kotlin Engineer',
-    publishedDate: '11-03-2021'
+    publishedDate: '05-11-2022'
   }
 ---
 
 ## Job Description
 
-Want to ply a Clojure trade in the investment banking world working for JUXT? We build critical applications for our banking clients, using Clojure/ClojureScript along numerous tools and libraries in the ecosystem.
+Join a new transformational programme at a leading investment bank, developing a
+new set of post-trade and risk management systems.
 
-Clojure experience isn't essential as you can learn it from us. We are looking for amazing engineers who have a rigorous engineering discipline, able to understand and analyse complex requirements, in order to make things that work and to deliver business value!
+While much of the existing systems are Java-based, this new programme is
+aggressively adopting Kotlin and modern software techniques to overhaul, refresh
+and modernize the existing set of systems and applications.
 
 ## Requirements
 
-- You want to do functional programming and Clojure
-- You have 2+ years JVM experience (Java/Kotlin/Clojure)
-- You are familiar with TDD/Agile best engineering practices
-- You want to learn a complex domain
-- You want to be part of a developer-led culture
-- You are open to visiting Canary Wharf offices to meet the team
+- Java
+- Kotlin (beneficial, but training can be given)
+- TDD
+- DevOps/Cloud (OpenShift, Kubernetes)
 
-## Benefits
-
-- Private healthcare
-- Matching 10% pension contributions
-- 25 days holiday
-- Company events (when possible due to COVID restrictions)
-- Mentoring and Training
+Permanent
