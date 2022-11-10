@@ -1,5 +1,5 @@
 import DraftBanner from './DraftBanner'
-import { PencilIcon } from './Icons'
+import { TagIcon } from './Icons'
 import { Blog, Person } from './types'
 
 function BlogAuthor({ name, lastName, image, jobTitle }: Person) {
@@ -40,10 +40,8 @@ export function BlogCard({
       <div className='text-black py-4 w-full h-full relative flex flex-col justify-between'>
         <div className='flex flex-col pb-10 gap-4'>
           <div className='flex justify-between px-4 items-center font-mono'>
-            <div className='flex gap-2 items-center'>
-              <div className='flex items-center justify-center bg-orange-100 dark:bg-gray-800 rounded-full w-8 h-8'>
-                <PencilIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
-              </div>
+            <div className='flex gap-1 items-center'>
+              <TagIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
               <div className='text-juxt dark:text-zinc-300 font-medium uppercase text-sm'>
                 {category}
               </div>

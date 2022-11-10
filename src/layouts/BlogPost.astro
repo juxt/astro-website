@@ -4,8 +4,8 @@ import { MarkdownInstance } from 'astro'
 import DraftBanner from '../components/DraftBanner'
 import {
   LinkedInIcon,
-  PencilIcon,
   RedditIcon,
+  TagIcon,
   TwitterIcon
 } from '../components/Icons'
 import { Blog, Person } from '../components/types'
@@ -48,13 +48,8 @@ const personImageFilename = image.split('.').slice(0, -1)
         <div
           class='flex text-center max-w-xl mx-auto lg:text-left lg:max-w-none lg:w-1/2 lg:mx-0 flex-col lg:justify-center items-center lg:items-start'
         >
-          <div class='flex gap-2 pb-1 items-center'>
-            <div
-              class='flex items-center justify-center bg-orange-100 dark:bg-gray-800 rounded-full w-8 h-8'
-            >
-              <PencilIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300'
-              />
-            </div>
+          <div class='flex gap-1 pb-1 items-center'>
+            <TagIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
             <div
               class='text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm'
             >
