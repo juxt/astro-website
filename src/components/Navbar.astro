@@ -24,9 +24,9 @@ const pagesInNavbar = navbar.map((page) => ({
   active: page.href === currentPage
 }))
 
+const firstPathInUrl = Astro.url.pathname.split('/')[1]
 const enableDarkMode =
-  Astro.url.pathname.includes('/blog') ||
-  Astro.url.pathname.includes('/clojure-in')
+  firstPathInUrl === 'blog' || firstPathInUrl === 'clojure-in'
 ---
 
 <Navbar
