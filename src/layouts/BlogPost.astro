@@ -10,6 +10,7 @@ import {
 } from '../components/Icons'
 import { Blog, Person } from '../components/types'
 import Layout from './Layout.astro'
+import '../blog.css'
 
 const { title, description, heroImage, category, author, draft } = Astro.props
   .content as Blog
@@ -48,7 +49,7 @@ const personImageFilename = image.split('.').slice(0, -1)
         <div
           class='flex text-center max-w-xl mx-auto lg:text-left lg:max-w-none lg:w-1/2 lg:mx-0 flex-col lg:justify-center items-center lg:items-start'
         >
-          <div class='flex gap-1 pb-1 items-center'>
+          <div class='flex gap-1 pb-1 items-center foo'>
             <TagIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
             <div
               class='text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm'
