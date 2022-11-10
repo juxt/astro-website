@@ -46,3 +46,33 @@
   box-shadow: none;
   background-color: var(--inputBackground);
 }
+
+.dark .ais-Pagination-link {
+  background: var(--inputBackground);
+  color: var(--inputColor);
+  border-color: #6b7280;
+}
+
+.dark .ais-Pagination-item--disabled .ais-Pagination-link {
+  background: #374151;
+  border-color: #6b7280;
+}
+
+.dark .ais-Pagination-item--selected .ais-Pagination-link {
+  background: #374151;
+  border-color: #6b7280;
+  box-shadow: rgb(0 0 0 / 66%) 0 1px 7px 0 inset,
+    rgb(0 0 0 / 40%) 0 1px 1px 0 inset, rgb(0 0 0 / 5%) 0 1px 0 0;
+}
+
+.dark .ais-Pagination-link:active {
+  box-shadow: rgb(0 0 0 / 66%) 0 1px 7px 0 inset,
+    rgb(0 0 0 / 40%) 0 1px 1px 0 inset, rgb(0 0 0 / 5%) 0 1px 0 0;
+}
+
+.dark
+  .ais-Pagination-item:not(.ais-Pagination-item--selected):not(.ais-Pagination-item--disabled)
+  .ais-Pagination-link:hover {
+  background: #374151;
+  border-color: #6b7280;
+}
