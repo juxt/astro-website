@@ -13,7 +13,7 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0'
   },
-  site: 'https://juxt-site-v3-main.vercel.app',
+  site: 'https://juxt-website.pages.dev/',
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
