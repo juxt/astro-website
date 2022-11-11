@@ -55,6 +55,8 @@
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
     "react-instantsearch-hooks-web": "^6.32.0",
+    "rehype-katex": "^6.0.2",
+    "remark-math": "^5.1.1",
     "yaml": "^2.1.1",
     "zx": "^7.0.8"
   }
