@@ -13,3 +13,7 @@
     @apply scroll-mt-20;
   }
 }
+
+.dark .slug-svg path {
+  fill: white;
+}
