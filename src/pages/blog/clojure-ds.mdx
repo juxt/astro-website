@@ -194,24 +194,20 @@ you get history for free. This is also true for
 the standard core data structures, but it’s still worth reiterating.
 
 ```clojure
-(defrecord WrappedDS [current history])
+(def bag-with-history (let [b (bag)] {:current b :history [b]}))
 
-(defn apply-op [{:keys [current] :as wrapped-ds} fn & args]
-  (let [new-ds (apply fn current args)]
-    (-> wrapped-ds
+(defn conj-history [{:keys [current] :as ds} v]
+  (let [new-ds (conj current v)]
+    (-> ds
         (update :history conj new-ds)
         (assoc :current new-ds))))
 
-(defn wrap [ds]
-  (->WrappedDS ds [ds]))
-
-(-> (wrap (bag))
-    (apply-op conj "foo")
-    (apply-op conj "foo")
-    (apply-op disj "foo")
-    (apply-op conj "bar")
+(-> bag-with-history
+    (conj-history "foo")
+    (conj-history "foo")
+    (conj-history "bar")
     :history)
-;; => [#{} #{["foo" 1]} #{["foo" 2]} #{["foo" 1]} #{["foo" 1] ["bar" 1]}]
+;; => [#Bag{} #Bag{["foo" 1]} #Bag{["foo" 2]} #Bag{["foo" 2]["bar" 1]}]
 ```
 
 We hope this post has been useful to you and that you will be hacking on your own data structures soon.
