@@ -200,6 +200,7 @@ Then call the function inside `profile` and observe the results.
  (p :img2world (img2world "juxt-logo.png" {:x 0 :y 150 :z 0} 200)))
 ```
 
+```
     pId             nCalls        Min        Max       Mean      Clock  Total
 
     :img2world           1    34.15s     34.15s     34.15s     34.15s    100%
@@ -212,6 +213,7 @@ Then call the function inside `profile` and observe the results.
 
     Accounted                                                   1.70m    299%
     Clock                                                      34.15s    100%
+```
 
 The results show that 98% of the time spent in the function is spent in
 `nearest-material`. As we know that there is a small and constrained
@@ -232,6 +234,7 @@ range of different colours.
 +++
 ```
 
+```
     pId             nCalls        Min        Max       Mean      Clock  Total
 
     :img2world           1   322.64ms   322.64ms   322.64ms   322.64ms   100%
@@ -244,6 +247,7 @@ range of different colours.
 
     Accounted                                                 825.10ms   256%
     Clock                                                     322.76ms   100%
+```
 
 We can now generate the image in under a third of a second, down from 34
 seconds, which is a 100x improvement. Of course, on subsequent calls the
