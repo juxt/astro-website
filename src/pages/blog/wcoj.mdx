@@ -1,0 +1,104 @@
+---
+draft: true
+token: '2323'
+author: 'fin'
+title: 'Worst-cast optimal join in Clojure'
+description: 'Exploring new join algorithms for datalog'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '01 Dec 2022'
+heroImage: 'river_lake.jpg'
+tags:
+  - 'clojure'
+---
+
+import { Image } from '@astrojs/image/components'
+import jointrees from '../../assets/blog/wcoj/join-trees.jpg'
+
+### Joins
+
+Let's talk about joins. Imagine three relations (think tables in SQL and tuples in datalog)
+$R$, $S$, $T$ and that we want to compute the join $R \Join S \Join T$. A common approach
+in databases these days (and what for example Postgres does) is to join in a relation at a time.
+This leads to the natural definition of a join tree.
+
+<Image alt='image' width='500' src={jointrees} />
+
+The problem with join trees is that you might do more work then you need to in an intermediate join.
+For example for the join tree on the left we are creating a 1000 rows/tuples although we are
+only needing 100 at the end. The join tree on the right does much better in that regard as it
+only realizes 10 intermediate results. So the difficulty when doing binary joins of relations is
+finding a good tree.
+
+### Triangle query
+
+The three relations don't need to be different relations they could all be the same. Imagine a
+relation $G(a,b)$ (a graph) and the join $G(a,c) \Join G(a,b) \Join G(b,c)$. If you think of the
+data in $G$ as edges, then join computes the triangles in a graph. For completeness the
+corresponding queries in SQL and datalog.
+
+
+```SQL
+SELECT
+    g1.f AS a, g1.t AS b, g2.t AS c
+FROM
+    g AS g1, g AS g2, g AS g3
+WHERE
+    g1.t = g2.f AND g2.t = g3.t AND g1.f = g3.f;
+```
+
+```clojure
+'{:find [?a ?b ?c]
+  :where [[?a :g/to ?b]
+          [?a :g/to ?c]
+          [?b :g/to ?c]]}
+```
+
+The triangle query is ominpresent when looking at the Worst-case optimal join (WCOJ henceforth)
+literature and at the heart of the *WCOJ goldrush*. We are going to use it to illustrate what WCOJ is
+all about. The important part is that no graph can have more then $O(N^{3/2})$ triangles
+(some hard math behind this) where
+$N$ is the number of edges in the graph $G$ (or rows in the relation $G$). There are however
+graphs where no matter how you choose to join the first two graphs
+(essentially calculating 2-paths) you will end up with $O(N^2)$ intermediate rows. What
+that means for our binary join strategy above is that no matter what binary join tree you
+choose you will have more intermediate output tuples then your final result. WCOJ is about
+avoiding this unnessary work. A WCOJ algorithm calculates the above joins in $O(N^{3/2})$.
+So if you fix some schema for you database and you fix some query over that schema then
+there is exists some "Worst Case" output size $O(N^{3/2})$ for the graph above
+but more complicated for the general case as your relations might have different sizes)
+for some instantiation of your database.
+WCOJ guarantees you that you will do no more work then that worst-case output size.
+Let's also mention what WCOJ is not. WCOJ does not give you any guarantees on
+the runtime in the general case. So imagine a graph with a single triangle. A WCOJ algorithm
+does not run in constant time, the only guarantee is a runtime of $O(N^{3/2})$ (although
+in practice this preforms very likely better).
+
+In the following sections we try to gradually build up all the necessary knowledge for
+building a WCOJ algorithm in Clojure.
+
+### Iterators
+
+### A simple datalog engine
+
+### Abstracting more
+
+### A (simplified) proof
+
+### Final remarks
+
+You can find some of the ideas explained above implemented (although rather poorly tested)
+at the [following](https://github.com/FiV0/hooray) repository.
+
+### References
+
+- The [slides](https://slides.com/fiv0/deck) of a talk I gave at the local Berlin Clojure meetup
+- AGM bound [https://arxiv.org/pdf/1711.03860.pdf](https://arxiv.org/pdf/1711.03860.pdf)
+- Skew strikes back [https://arxiv.org/abs/1310.3314](https://arxiv.org/abs/1310.3314)
+- Leapfrog Triejoin [https://arxiv.org/abs/1210.0481](https://arxiv.org/abs/1210.0481)
+- Radix Triejoin [https://arxiv.org/abs/1912.12747](https://arxiv.org/abs/1912.12747)
+- WCOJ review [https://arxiv.org/abs/1803.09930](https://arxiv.org/abs/1803.09930)
+- Simpli-Squared [https://arxiv.org/abs/2111.00163](https://arxiv.org/abs/2111.00163)
+- [https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/](https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/)
+- [http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html](http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html)
+- Lake/Mountain picture at the top from [Luca Bravo](https://unsplash.com/@lucabravo)
