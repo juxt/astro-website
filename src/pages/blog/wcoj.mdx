@@ -3,7 +3,7 @@ draft: true
 token: '2323'
 author: 'fin'
 title: 'Worst-cast optimal join in Clojure'
-description: 'Exploring new join algorithms for datalog'
+description: 'Exploring new join algorithms for Datalog'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '01 Dec 2022'
@@ -56,16 +56,19 @@ WHERE
 
 The triangle query is ominpresent when looking at the Worst-case optimal join (WCOJ henceforth)
 literature and at the heart of the *WCOJ goldrush*. We are going to use it to illustrate what WCOJ is
-all about. The important part is that no graph can have more then $O(N^{3/2})$ triangles
+all about.
+
+The important part is that no graph can have more then $O(N^{3/2})$ triangles
 (some hard math behind this) where
 $N$ is the number of edges in the graph $G$ (or rows in the relation $G$). There are however
 graphs where no matter how you choose to join the first two graphs
-(essentially calculating 2-paths) you will end up with $O(N^2)$ intermediate rows. What
-that means for our binary join strategy above is that no matter what binary join tree you
+(essentially calculating 2-paths) you will end up with $O(N^2)$ intermediate rows.
+In this case our binary join strategy above is essentially doomed. No matter what binary join tree you
 choose you will have more intermediate output tuples then your final result. WCOJ is about
 avoiding this unnessary work. A WCOJ algorithm calculates the above joins in $O(N^{3/2})$.
-So if you fix some schema for you database and you fix some query over that schema then
-there is exists some "Worst Case" output size $O(N^{3/2})$ for the graph above
+
+More generally if you fix some schema for you database and you fix some query over that schema then
+there is exists some "Worst Case" output size ($O(N^{3/2})$ for the graph above
 but more complicated for the general case as your relations might have different sizes)
 for some instantiation of your database.
 WCOJ guarantees you that you will do no more work then that worst-case output size.
