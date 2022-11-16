@@ -6,14 +6,14 @@
 :root,
 :root.light {
   --astro-code-color-text: theme(colors.stone.500);
-  --astro-code-color-background: theme(colors.zinc.100);
+  --astro-code-color-background: theme(colors.white);
   --astro-code-token-constant: theme(colors.gray.600);
   --astro-code-token-parameter: theme(colors.yellow.600);
   --astro-code-token-string: theme(colors.gray.600);
-  --astro-code-token-comment: theme(colors.gray.600);
+  --astro-code-token-comment: theme(colors.gray.400);
   --astro-code-token-keyword: theme(colors.red.900);
   --astro-code-token-function: theme(colors.amber.600);
-  --astro-code-token-string-expression: theme(colors.cyan.500);
+  --astro-code-token-string-expression: theme(colors.juxt);
   --astro-code-token-punctuation: theme(colors.gray.500);
   --astro-code-token-link: theme(colors.red.500);
 }
@@ -23,7 +23,7 @@
   --astro-code-token-constant: theme(colors.gray.300);
   --astro-code-token-parameter: theme(colors.gray.50);
   --astro-code-token-string: theme(colors.gray.200);
-  --astro-code-token-comment: theme(colors.gray.600);
+  --astro-code-token-comment: theme(colors.gray.500);
   --astro-code-token-keyword: theme(colors.juxt);
   --astro-code-token-function: theme(colors.amber.400);
   --astro-code-token-string-expression: theme(colors.amber.200);
