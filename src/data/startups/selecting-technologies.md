@@ -1,6 +1,6 @@
 ---
 title: 'Selecting Technologies'
-image: 'strategic-risk-platform.jpg'
+image: 'selecting-technologies.jpg'
 weight: 4
 direction: 'right'
 ---

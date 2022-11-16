@@ -5,7 +5,7 @@ tech:
   - 'ClojureScript'
   - 'Postgres'
   - 'AWS'
-image: 'post-trade-management.jpg'
+image: 'ebike-ui.jpg'
 weight: 3
 direction: 'left'
 ---

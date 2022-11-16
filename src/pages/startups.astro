@@ -17,9 +17,7 @@ type StartUpsProps = {
   weight: number
 }
 
-const startUps = await Astro.glob<StartUpsProps>(
-  '../data/startups/*.md'
-)
+const startUps = await Astro.glob<StartUpsProps>('../data/startups/*.md')
 
 const financialServicesParsed = startUps
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
@@ -29,7 +27,7 @@ const financialServicesParsed = startUps
   }))
 
 const financialPicture = await getImage({
-  src: import('../assets/site/case-studies-banner.jpeg'),
+  src: import('../assets/startups/startup-bg.jpg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)
@@ -40,16 +38,24 @@ const financialPicture = await getImage({
     <Banner
       text='Startups'
       style={{
-        backgroundImage: `url(${financialPicture})`
+        backgroundImage: `url(${financialPicture})`,
+        backgroundPosition: 'top'
       }}
     />
 
-    <Section className='bg-zinc-400'>
-    <div class='text-black text-2xl py-12 leading-loose'> 
-      JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP. 
-      <br/> Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.
-    </div>
-  </Section>
+    <Section className='bg-black py-20'>
+      <div class='flex flex-col gap-10'>
+        <h2 class='text-3xl font-normal text-white'>
+          JUXT engineers have helped launch start-ups across finance, property,
+          health, green-tech, and law.
+        </h2>
+        <div class='text-white text-xl font-extralight leading-normal'>
+          We work closely with start-up founders to understand the mission deeply
+          and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience
+          and judgement to the early, critical stages of your start-up journey.
+        </div>
+      </div>
+    </Section>
 
     <Section className='bg-zinc-100 py-28 text-white'>
       <div class='text-black flex flex-col gap-6'>
@@ -90,7 +96,7 @@ const financialPicture = await getImage({
                   isCenter ? 'place-self-center' : ' xl:w-1/2'
                 } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
                 alt='award'
-                src={import(`../assets/financial/${bannerNoExtension}.jpg`)}
+                src={import(`../assets/startups/${bannerNoExtension}.jpg`)}
               />
               <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
                 <h2 class='text-5xl font-light pb-8'>{financial.title}</h2>
@@ -110,37 +116,19 @@ const financialPicture = await getImage({
                       </div>
                     </div>
                   )}
-                  {financial.tech && 
+                  {financial.tech && (
                     <div class='flex flex-col gap-6'>
-                    <h3 class='text-3xl'> Technologies</h3>
-                    <div class='flex gap-2 flex-wrap'>
-                      {financial.tech.map((tech) => (
-                        <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
-                          {tech}
-                        </div>
-                      ))}
-                    </div>
-                  </div>}
-                  {financial.awards && (
-                    <div class='flex flex-col gap-6'>
-                      <h3 class='text-3xl'> Awards</h3>
-                      <div class='flex gap-6 items-center flex-wrap'>
-                        {financial.awards.map(async (award) => {
-                          const awardNoExtension = award.split('.')[0]
-                          return (
-                            <Image
-                              width={150}
-                              quality={100}
-                              alt='award'
-                              src={import(
-                                `../assets/financial/${awardNoExtension}.png`
-                              )}
-                            />
-                          )
-                        })}
+                      <h3 class='text-3xl'> Technologies</h3>
+                      <div class='flex gap-2 flex-wrap'>
+                        {financial.tech.map((tech) => (
+                          <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
+                            {tech}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
+              
                 </div>
               </div>
             </div>

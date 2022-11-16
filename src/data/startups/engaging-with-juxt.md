@@ -1,6 +1,6 @@
 ---
 title: 'Engaging with JUXT'
-image: 'structured-products.jpg'
+image: 'engaging-with-juxt.jpg'
 weight: 5
 direction: 'left'
 ---

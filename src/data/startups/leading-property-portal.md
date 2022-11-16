@@ -4,7 +4,7 @@ tech:
   - 'Clojure'
   - 'AWS'
   - 'Elasticsearch'
-image: 'cloud-migration-blueprints.jpg'
+image: 'onthemarket.jpg'
 weight: 1
 direction: 'right'
 testimonial:
