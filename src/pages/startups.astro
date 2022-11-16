@@ -1,0 +1,153 @@
+---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
+import Banner from '../components/Banner.astro'
+import Section from '../components/Section.astro'
+import Layout from '../layouts/Layout.astro'
+import TalkToUs from '../components/TalkToUs.astro'
+
+type StartUpsProps = {
+  title: string
+  tech?: string[]
+  image: string
+  testimonial?: { by?: string; quote?: string }
+  awards?: string[]
+  direction?: 'left' | 'right' | 'center'
+  content: string
+  weight: number
+}
+
+const startUps = await Astro.glob<StartUpsProps>(
+  '../data/startups/*.md'
+)
+
+const financialServicesParsed = startUps
+  .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
+  .map((financial) => ({
+    ...financial.frontmatter,
+    content: financial.compiledContent()
+  }))
+
+const financialPicture = await getImage({
+  src: import('../assets/site/case-studies-banner.jpeg'),
+  width: 1700,
+  quality: 90
+}).then((img) => img.src)
+---
+
+<Layout navbar title='Startups'>
+  <main>
+    <Banner
+      text='Startups'
+      style={{
+        backgroundImage: `url(${financialPicture})`
+      }}
+    />
+
+    <Section className='bg-zinc-400'>
+    <div class='text-black text-2xl py-12 leading-loose'> 
+      JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP. 
+      <br/> Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.
+    </div>
+  </Section>
+
+    <Section className='bg-zinc-100 py-28 text-white'>
+      <div class='text-black flex flex-col gap-6'>
+        {financialServicesParsed.map((financial, idx) => (
+          <a href={`#${idx}`} class='flex gap-3 items-center'>
+            <div class='w-5 h-5 rounded-full bg-zinc-400' />
+            <h2 class='text-2xl font-light uppercase'>{financial.title}</h2>
+          </a>
+        ))}
+      </div>
+    </Section>
+    <div class='flex flex-col text-black'>
+      {financialServicesParsed.map((financial, idx) => {
+        const isDark = idx % 2 !== 0
+        const isLeft = financial.direction === 'left' || !financial.direction
+        const isCenter = financial.direction === 'center'
+
+        const sectionStyle = isLeft
+          ? 'flex-col-reverse xl:flex-row-reverse'
+          : isCenter
+          ? 'flex-col flex-col-reverse'
+          : 'flex-col-reverse xl:flex-row'
+
+        const bannerNoExtension = financial.image.split('.')[0]
+
+        return (
+          <Section
+            id={`${idx}`}
+            className={`${isDark ? 'bg-black text-white' : ''} py-28`}
+          >
+            <div
+              class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+            >
+              <Image
+                width={1300}
+                quality={100}
+                class={`${
+                  isCenter ? 'place-self-center' : ' xl:w-1/2'
+                } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
+                alt='award'
+                src={import(`../assets/financial/${bannerNoExtension}.jpg`)}
+              />
+              <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
+                <h2 class='text-5xl font-light pb-8'>{financial.title}</h2>
+                <div class='flex flex-col gap-8'>
+                  <div
+                    class='flex flex-col gap-6 text-lg font-extralight'
+                    {/* eslint-disable-next-line */}
+                    set:html={financial.content}
+                  />
+                  {financial.testimonial && (
+                    <div class='flex flex-col gap-2'>
+                      <div class='text-lg italic'>
+                        {`"${financial.testimonial.quote}"`}
+                      </div>
+                      <div class='font-light italic'>
+                        {financial.testimonial.by}
+                      </div>
+                    </div>
+                  )}
+                  {financial.tech && 
+                    <div class='flex flex-col gap-6'>
+                    <h3 class='text-3xl'> Technologies</h3>
+                    <div class='flex gap-2 flex-wrap'>
+                      {financial.tech.map((tech) => (
+                        <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
+                          {tech}
+                        </div>
+                      ))}
+                    </div>
+                  </div>}
+                  {financial.awards && (
+                    <div class='flex flex-col gap-6'>
+                      <h3 class='text-3xl'> Awards</h3>
+                      <div class='flex gap-6 items-center flex-wrap'>
+                        {financial.awards.map(async (award) => {
+                          const awardNoExtension = award.split('.')[0]
+                          return (
+                            <Image
+                              width={150}
+                              quality={100}
+                              alt='award'
+                              src={import(
+                                `../assets/financial/${awardNoExtension}.png`
+                              )}
+                            />
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Section>
+        )
+      })}
+    </div>
+    <TalkToUs />
+  </main>
+</Layout>

@@ -1,0 +1,68 @@
+---
+import { getImage } from '@astrojs/image'
+import Banner from '../components/Banner.astro'
+import Section from '../components/Section.astro'
+import Layout from '../layouts/Layout.astro'
+
+export const metadata = {
+  navbar: { weight: 1 },
+  footer: { weight: 1 }
+}
+
+const labsImage = await getImage({
+  src: import('../assets/site/labs-background.jpg'),
+  width: 1700,
+  quality: 90
+}).then((img) => img.src)
+
+const labProjects = [
+  {
+    image: '../assets/site/xtdb-pixil-logo.png',
+    title: 'XTDB',
+    paragraph: '',
+    href: ''
+  },
+  {
+    image: '../assets/site/spiral-site.png',
+    title: 'Site',
+    paragraph: '',
+    href: ''
+  },
+  {
+    image: '../assets/site/github-black.svg',
+    title: 'Github',
+    paragraph: '',
+    href: ''
+  }
+]
+---
+
+<Layout navbar title='Labs'>
+  <main>
+    <Banner
+      text='Labs'
+      style={{
+        backgroundImage: `url(${labsImage})`
+      }}
+    />
+    <Section className='bg-zinc-200 py-28 text-black'>
+      <h2 class='pb-4 text-3xl md:text-4xl text-center'>Current Projects</h2>
+      <p class='text-xl md:text-2xl font-extralight text-center'>
+        To unlock the potential of software tof expand human horizons.
+      </p>
+      <div
+        class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10 py-24'
+      >
+        {labProjects.map((project) => {
+          return (
+            <div class='h-full group cursor-pointer flex justify-between flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'>
+              {project.title}
+            </div>
+            <div class>
+              </div>
+          )
+        })}
+      </div>
+    </Section>
+  </main>
+</Layout>
