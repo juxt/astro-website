@@ -8,13 +8,14 @@
             ["markdown-it-front-matter$default" :as md-frontmatter]
             [promesa.core :as p]
             [goog.object :as g]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [markdown-it-front-matter$default :as md-frontmatter]))
 
 (.config dotenv)
 
-(def ALGOLIA_APP_ID (-> js/process .-env .-ALGOLIA_APP_ID))
-(def ALGOLIA_API_KEY (-> js/process .-env .-ALGOLIA_API_KEY))
-(def ALGOLIA_INDEX_NAME (-> js/process .-env .-ALGOLIA_INDEX_NAME))
+(def ALGOLIA_APP_ID "ds" #_(-> js/process .-env .-ALGOLIA_APP_ID))
+(def ALGOLIA_API_KEY "s" #_(-> js/process .-env .-ALGOLIA_API_KEY))
+(def ALGOLIA_INDEX_NAME "s" #_(-> js/process .-env .-ALGOLIA_INDEX_NAME))
 
 (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY)
 
@@ -66,11 +67,12 @@
     (when loaded-md
       (p/let [frontmatter-record (atom nil)
               permalink (file-name->permalink file-name)
-              md-it (.use (markdown-it.) 
+              md-it (.use (markdown-it.)
                           md-frontmatter
                           (frontmatter-callback
                            permalink frontmatter-record))
               md-paragraphs (.parse md-it loaded-md #js {})
+              _ (def md-paragraphs md-paragraphs)
               draft? (:draft? @frontmatter-record)
               timestamp (g/get (:record @frontmatter-record) "timestamp")
               records (when (not draft?)
@@ -94,6 +96,41 @@
           (doto records
             (.push
              (:record @frontmatter-record))))))))
+
+(def a (await (parse-md-file "src/pages/blog/coercing.md")))
+(count a)
+
+(count md-paragraphs)
+
+(def f (.filter md-paragraphs
+                (fn [paragraph]
+                  (let [type (g/get paragraph "type")
+                        tag (g/get paragraph "tag")
+                        content (g/get paragraph "content")]
+                    (and
+                     (not= type "html_block")
+                     (not= tag "code")
+                     (not (string/blank? content)))))))
+
+(def d (partition-all 2 f))
+
+
+(def r (.reduce md-paragraphs
+                (fn [coll blocks]
+                  (let [block1 (nth blocks 0)
+                        block2 (nth blocks 1)
+                        content1 (g/get block1 "content")
+                        content2  (when-not (= block2 -1)
+                                    (g/get block2 "content"))]
+                    (doto coll
+                      (.push #js {"objectID" (str-random-uuid)
+                                  "content" content1
+                                  "timestamp" "timestamp"
+                                  "permalink" "permalink"})))) #js []))
+
+(count r)
+
+(.indexOf #js[1 2 3] 10)
 
 (def blog-files-path "../src/pages/blog/{*.md,*.mdx}")
 
@@ -134,29 +171,29 @@
      :files-to-remove files-to-remove}))
 
 (def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
-(def index (.initIndex client ALGOLIA_INDEX_NAME))
+;; (def index (.initIndex client ALGOLIA_INDEX_NAME))
 
-(println "Parsing blog articles...")
+;; (println "Parsing blog articles...")
 
-(def records (await (parse-md-files blog-files-path)))
+;; (def records (await (parse-md-files blog-files-path)))
 
-(println "Blog articles successfully parsed.")
-(println "Blog articles to remove:" (:files-to-remove records))
-(println "Blog articles to index:" (count (:filtered records)))
+;; (println "Blog articles successfully parsed.")
+;; (println "Blog articles to remove:" (:files-to-remove records))
+;; (println "Blog articles to index:" (count (:filtered records)))
 
-(await (index.setSettings
-        #js {"attributeForDistinct" "permalink"
-             "attributesForFaceting"
-             #js ["tags"
-                  "searchable(tags)"
-                  "author"
-                  "searchable(author)"
-                  "category"
-                  "searchable(category)"
-                  "permalink"
-                  "filterOnly(permalink)"]
-             "replicas" #js ["blog_desc"]
-             "ranking" #js ["desc(timestamp)"]}))
+;; (await (index.setSettings
+;;         #js {"attributeForDistinct" "permalink"
+;;              "attributesForFaceting"
+;;              #js ["tags"
+;;                   "searchable(tags)"
+;;                   "author"
+;;                   "searchable(author)"
+;;                   "category"
+;;                   "searchable(category)"
+;;                   "permalink"
+;;                   "filterOnly(permalink)"]
+;;              "replicas" #js ["blog_desc"]
+;;              "ranking" #js ["desc(timestamp)"]}))
 
 (defn retrieve-obj-ids-to-be-deleted
   [files-to-remove]
@@ -181,26 +218,26 @@
      #{}
      search-results)))
 
-(def objects-ids-to-be-deleted (await (retrieve-obj-ids-to-be-deleted
-                                       (:files-to-remove records))))
+;; (def objects-ids-to-be-deleted (await (retrieve-obj-ids-to-be-deleted
+;;                                        (:files-to-remove records))))
 
 
-(defn clearChangedContent []
-  (await (index.deleteObjects
-          (clj->js objects-ids-to-be-deleted)))
-  (println "Deleted" (count objects-ids-to-be-deleted) "records from Algolia."))
+;; (defn clearChangedContent []
+;;   (await (index.deleteObjects
+;;           (clj->js objects-ids-to-be-deleted)))
+;;   (println "Deleted" (count objects-ids-to-be-deleted) "records from Algolia."))
 
-(defn clearFullIndexContent []
-  (await (index.clearObjects))
-  (println "Deleted full index content."))
+;; (defn clearFullIndexContent []
+;;   (await (index.clearObjects))
+;;   (println "Deleted full index content."))
 
-(if partial-indexing?
-  (clearChangedContent)
-  (clearFullIndexContent))
+;; (if partial-indexing?
+;;   (clearChangedContent)
+;;   (clearFullIndexContent))
 
-(def storedObjects (await (index.saveObjects
-                           (:flattened records))))
+;; (def storedObjects (await (index.saveObjects
+;;                            (:flattened records))))
 
-(println "Stored" (count (g/get storedObjects "objectIDs")) "new records successfully")
-(println "Task IDs:" (g/get storedObjects "taskIDs"))
-(println "Done!")
+;; (println "Stored" (count (g/get storedObjects "objectIDs")) "new records successfully")
+;; (println "Task IDs:" (g/get storedObjects "taskIDs"))
+;; (println "Done!")

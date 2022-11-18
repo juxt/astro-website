@@ -24,5 +24,8 @@
     "astro", // Enable .astro
     "typescript", // Enable .ts
     "typescriptreact" // Enable .tsx
-  ]
+  ],
+  "[clojure]": {
+    "editor.defaultFormatter": "betterthantomorrow.calva"
+  }
 }
