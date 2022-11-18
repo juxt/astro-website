@@ -1,6 +1,6 @@
 ---
 title: 'Support'
-image: 'services-support.jpg'
+image: 'services-support-2.jpg'
 weight: 4
 direction: 'left'
 ---
