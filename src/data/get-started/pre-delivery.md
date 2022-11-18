@@ -1,5 +1,5 @@
 ---
-title: 'Pre Delivery'
+title: 'Pre-Delivery'
 image: 'services-pre-delivery.jpg'
 weight: 2
 direction: 'center'
