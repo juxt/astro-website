@@ -1,7 +1,7 @@
 ---
 title: 'Selecting Technologies'
 image: 'selecting-technologies.jpg'
-weight: 4
+weight: 1
 direction: 'right'
 ---
 

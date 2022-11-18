@@ -5,7 +5,7 @@ tech:
   - 'AWS'
   - 'Elasticsearch'
 image: 'onthemarket.jpg'
-weight: 1
+weight: 3
 direction: 'right'
 testimonial:
   {

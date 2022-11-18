@@ -6,7 +6,7 @@ tech:
   - 'Postgres'
   - 'AWS'
 image: 'ebike-ui.jpg'
-weight: 3
+weight: 5
 direction: 'left'
 ---
 

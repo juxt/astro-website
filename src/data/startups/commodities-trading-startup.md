@@ -8,7 +8,7 @@ tech:
   - 'Hasura'
   - 'PostgreSQL'
 image: 'commodity-trading.jpg'
-weight: 2
+weight: 4
 direction: 'center'
 ---
 

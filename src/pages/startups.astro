@@ -57,16 +57,7 @@ const financialPicture = await getImage({
       </div>
     </Section>
 
-    <Section className='bg-zinc-100 py-28 text-white'>
-      <div class='text-black flex flex-col gap-6'>
-        {financialServicesParsed.map((financial, idx) => (
-          <a href={`#${idx}`} class='flex gap-3 items-center'>
-            <div class='w-5 h-5 rounded-full bg-zinc-400' />
-            <h2 class='text-2xl font-light uppercase'>{financial.title}</h2>
-          </a>
-        ))}
-      </div>
-    </Section>
+  
     <div class='flex flex-col text-black'>
       {financialServicesParsed.map((financial, idx) => {
         const isDark = idx % 2 !== 0

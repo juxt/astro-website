@@ -1,7 +1,7 @@
 ---
 title: 'Engaging with JUXT'
 image: 'engaging-with-juxt.jpg'
-weight: 5
+weight: 2
 direction: 'left'
 ---
 
