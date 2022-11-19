@@ -8,8 +8,7 @@
             ["markdown-it-front-matter$default" :as md-frontmatter]
             [promesa.core :as p]
             [goog.object :as g]
-            [clojure.string :as string]
-            [markdown-it-front-matter$default :as md-frontmatter]))
+            [clojure.string :as string]))
 
 (.config dotenv)
 
@@ -72,65 +71,39 @@
                           (frontmatter-callback
                            permalink frontmatter-record))
               md-paragraphs (.parse md-it loaded-md #js {})
-              _ (def md-paragraphs md-paragraphs)
               draft? (:draft? @frontmatter-record)
+              filtered-md-paragraphs (when (not draft?)
+                                       (.filter md-paragraphs
+                                                (fn [paragraph]
+                                                  (let [type (g/get paragraph "type")
+                                                        tag (g/get paragraph "tag")
+                                                        content (g/get paragraph "content")]
+                                                    (and
+                                                     (not= type "html_block")
+                                                     (not= tag "code")
+                                                     (not (string/blank? content)))))))
+              partitioned-md-paragraphs (partition-all 2 filtered-md-paragraphs)
               timestamp (g/get (:record @frontmatter-record) "timestamp")
-              records (when (not draft?)
-                        (.reduce md-paragraphs
-                                 (fn [coll paragraph]
-                                   (let [type (g/get paragraph "type")
-                                         tag (g/get paragraph "tag")
-                                         content (g/get paragraph "content")]
-                                     (if (and
-                                          (not draft?)
-                                          (not= type "html_block")
-                                          (not= tag "code")
-                                          (not (string/blank? content)))
-                                       (doto coll
-                                         (.push #js {"objectID" (str-random-uuid)
-                                                     "content" content
-                                                     "timestamp" timestamp
-                                                     "permalink" permalink}))
-                                       coll))) #js []))]
+              records (reduce
+                       (fn [coll blocks]
+                         (let [blockCount (count blocks)
+                               content (if (= blockCount 1)
+                                         (g/get (first blocks) "content")
+                                         (->> blocks
+                                              (map (fn [block]
+                                                     (g/get block "content")))
+                                              (string/join " ")))]
+                           (doto coll
+                             (.push #js {"objectID" (str-random-uuid)
+                                         "content" content
+                                         "timestamp" timestamp
+                                         "permalink" permalink}))))
+                       #js []
+                       partitioned-md-paragraphs)]
         (when (> (count records) 0)
           (doto records
             (.push
              (:record @frontmatter-record))))))))
-
-(def a (await (parse-md-file "src/pages/blog/coercing.md")))
-(count a)
-
-(count md-paragraphs)
-
-(def f (.filter md-paragraphs
-                (fn [paragraph]
-                  (let [type (g/get paragraph "type")
-                        tag (g/get paragraph "tag")
-                        content (g/get paragraph "content")]
-                    (and
-                     (not= type "html_block")
-                     (not= tag "code")
-                     (not (string/blank? content)))))))
-
-(def d (partition-all 2 f))
-
-
-(def r (.reduce md-paragraphs
-                (fn [coll blocks]
-                  (let [block1 (nth blocks 0)
-                        block2 (nth blocks 1)
-                        content1 (g/get block1 "content")
-                        content2  (when-not (= block2 -1)
-                                    (g/get block2 "content"))]
-                    (doto coll
-                      (.push #js {"objectID" (str-random-uuid)
-                                  "content" content1
-                                  "timestamp" "timestamp"
-                                  "permalink" "permalink"})))) #js []))
-
-(count r)
-
-(.indexOf #js[1 2 3] 10)
 
 (def blog-files-path "../src/pages/blog/{*.md,*.mdx}")
 
@@ -170,7 +143,7 @@
      :filtered filtered
      :files-to-remove files-to-remove}))
 
-(def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
+;; (def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
 ;; (def index (.initIndex client ALGOLIA_INDEX_NAME))
 
 ;; (println "Parsing blog articles...")
@@ -195,28 +168,28 @@
 ;;              "replicas" #js ["blog_desc"]
 ;;              "ranking" #js ["desc(timestamp)"]}))
 
-(defn retrieve-obj-ids-to-be-deleted
-  [files-to-remove]
-  (p/let [search-results
-          (p/all (map
-                  (fn [permalink]
-                    (index.search
-                     permalink
-                     #js {"filters"
-                          (str "permalink:" permalink)}))
-                  files-to-remove))]
-    (reduce
-     (fn [coll search-result]
-       (let [hits (g/get search-result "hits")]
-         (if (seq hits)
-           (apply conj coll
-                  (map
-                   (fn [hit]
-                     (g/get hit "objectID"))
-                   hits))
-           coll)))
-     #{}
-     search-results)))
+;; (defn retrieve-obj-ids-to-be-deleted
+;;   [files-to-remove]
+;;   (p/let [search-results
+;;           (p/all (map
+;;                   (fn [permalink]
+;;                     (index.search
+;;                      permalink
+;;                      #js {"filters"
+;;                           (str "permalink:" permalink)}))
+;;                   files-to-remove))]
+;;     (reduce
+;;      (fn [coll search-result]
+;;        (let [hits (g/get search-result "hits")]
+;;          (if (seq hits)
+;;            (apply conj coll
+;;                   (map
+;;                    (fn [hit]
+;;                      (g/get hit "objectID"))
+;;                    hits))
+;;            coll)))
+;;      #{}
+;;      search-results)))
 
 ;; (def objects-ids-to-be-deleted (await (retrieve-obj-ids-to-be-deleted
 ;;                                        (:files-to-remove records))))
