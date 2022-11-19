@@ -12,9 +12,9 @@
 
 (.config dotenv)
 
-(def ALGOLIA_APP_ID "ds" #_(-> js/process .-env .-ALGOLIA_APP_ID))
-(def ALGOLIA_API_KEY "s" #_(-> js/process .-env .-ALGOLIA_API_KEY))
-(def ALGOLIA_INDEX_NAME "s" #_(-> js/process .-env .-ALGOLIA_INDEX_NAME))
+(def ALGOLIA_APP_ID (-> js/process .-env .-ALGOLIA_APP_ID))
+(def ALGOLIA_API_KEY (-> js/process .-env .-ALGOLIA_API_KEY))
+(def ALGOLIA_INDEX_NAME (-> js/process .-env .-ALGOLIA_INDEX_NAME))
 
 (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY)
 
@@ -86,6 +86,8 @@
               timestamp (g/get (:record @frontmatter-record) "timestamp")
               records (reduce
                        (fn [coll blocks]
+                         ;; group blocks into the same record to avoid hitting 
+                         ;; the Algolia API rate limit
                          (let [blockCount (count blocks)
                                content (if (= blockCount 1)
                                          (g/get (first blocks) "content")
@@ -143,74 +145,74 @@
      :filtered filtered
      :files-to-remove files-to-remove}))
 
-;; (def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
-;; (def index (.initIndex client ALGOLIA_INDEX_NAME))
+(def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
+(def index (.initIndex client ALGOLIA_INDEX_NAME))
 
-;; (println "Parsing blog articles...")
+(println "Parsing blog articles...")
 
-;; (def records (await (parse-md-files blog-files-path)))
+(def records (await (parse-md-files blog-files-path)))
 
-;; (println "Blog articles successfully parsed.")
-;; (println "Blog articles to remove:" (:files-to-remove records))
-;; (println "Blog articles to index:" (count (:filtered records)))
+(println "Blog articles successfully parsed.")
+(println "Blog articles to remove:" (:files-to-remove records))
+(println "Blog articles to index:" (count (:filtered records)))
 
-;; (await (index.setSettings
-;;         #js {"attributeForDistinct" "permalink"
-;;              "attributesForFaceting"
-;;              #js ["tags"
-;;                   "searchable(tags)"
-;;                   "author"
-;;                   "searchable(author)"
-;;                   "category"
-;;                   "searchable(category)"
-;;                   "permalink"
-;;                   "filterOnly(permalink)"]
-;;              "replicas" #js ["blog_desc"]
-;;              "ranking" #js ["desc(timestamp)"]}))
+(await (index.setSettings
+        #js {"attributeForDistinct" "permalink"
+             "attributesForFaceting"
+             #js ["tags"
+                  "searchable(tags)"
+                  "author"
+                  "searchable(author)"
+                  "category"
+                  "searchable(category)"
+                  "permalink"
+                  "filterOnly(permalink)"]
+             "replicas" #js ["blog_desc"]
+             "ranking" #js ["desc(timestamp)"]}))
 
-;; (defn retrieve-obj-ids-to-be-deleted
-;;   [files-to-remove]
-;;   (p/let [search-results
-;;           (p/all (map
-;;                   (fn [permalink]
-;;                     (index.search
-;;                      permalink
-;;                      #js {"filters"
-;;                           (str "permalink:" permalink)}))
-;;                   files-to-remove))]
-;;     (reduce
-;;      (fn [coll search-result]
-;;        (let [hits (g/get search-result "hits")]
-;;          (if (seq hits)
-;;            (apply conj coll
-;;                   (map
-;;                    (fn [hit]
-;;                      (g/get hit "objectID"))
-;;                    hits))
-;;            coll)))
-;;      #{}
-;;      search-results)))
+(defn retrieve-obj-ids-to-be-deleted
+  [files-to-remove]
+  (p/let [search-results
+          (p/all (map
+                  (fn [permalink]
+                    (index.search
+                     permalink
+                     #js {"filters"
+                          (str "permalink:" permalink)}))
+                  files-to-remove))]
+    (reduce
+     (fn [coll search-result]
+       (let [hits (g/get search-result "hits")]
+         (if (seq hits)
+           (apply conj coll
+                  (map
+                   (fn [hit]
+                     (g/get hit "objectID"))
+                   hits))
+           coll)))
+     #{}
+     search-results)))
 
-;; (def objects-ids-to-be-deleted (await (retrieve-obj-ids-to-be-deleted
-;;                                        (:files-to-remove records))))
+(def objects-ids-to-be-deleted (await (retrieve-obj-ids-to-be-deleted
+                                       (:files-to-remove records))))
 
 
-;; (defn clearChangedContent []
-;;   (await (index.deleteObjects
-;;           (clj->js objects-ids-to-be-deleted)))
-;;   (println "Deleted" (count objects-ids-to-be-deleted) "records from Algolia."))
+(defn clearChangedContent []
+  (await (index.deleteObjects
+          (clj->js objects-ids-to-be-deleted)))
+  (println "Deleted" (count objects-ids-to-be-deleted) "records from Algolia."))
 
-;; (defn clearFullIndexContent []
-;;   (await (index.clearObjects))
-;;   (println "Deleted full index content."))
+(defn clearFullIndexContent []
+  (await (index.clearObjects))
+  (println "Deleted full index content."))
 
-;; (if partial-indexing?
-;;   (clearChangedContent)
-;;   (clearFullIndexContent))
+(if partial-indexing?
+  (clearChangedContent)
+  (clearFullIndexContent))
 
-;; (def storedObjects (await (index.saveObjects
-;;                            (:flattened records))))
+(def storedObjects (await (index.saveObjects
+                           (:flattened records))))
 
-;; (println "Stored" (count (g/get storedObjects "objectIDs")) "new records successfully")
-;; (println "Task IDs:" (g/get storedObjects "taskIDs"))
-;; (println "Done!")
+(println "Stored" (count (g/get storedObjects "objectIDs")) "new records successfully")
+(println "Task IDs:" (g/get storedObjects "taskIDs"))
+(println "Done!")
