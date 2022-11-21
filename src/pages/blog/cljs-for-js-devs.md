@@ -79,4 +79,4 @@ My talk at the React Native conference is
 are coming from the JavaScript world but are interested in
 ClojureScript.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mNq5RUc0sF4?start=1972" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/mNq5RUc0sF4?start=1972" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

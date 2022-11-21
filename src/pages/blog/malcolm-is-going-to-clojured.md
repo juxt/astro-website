@@ -21,4 +21,4 @@ looking talks, check out the [schedule](https://clojured.de/schedule/).
 In this short video Malcolm tells us what he is going to be talking
 about at the conference.
 
-<iframe width="100%" height="415" src="https://www.youtube.com/embed/yBSb2VC5bjw" title="Malcolm is going to ClojureD!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/yBSb2VC5bjw" title="Malcolm is going to ClojureD!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

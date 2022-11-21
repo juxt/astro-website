@@ -99,7 +99,7 @@ predictably, I spent around double that on it in the end).
 Below is a demo video showing the app and its features, and [here is the
 source code.](https://github.com/armincerf/kalm-mobile)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/m60ylWDxDHs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/m60ylWDxDHs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # A brief recount of my holiday (I go into more detail [here](https://www.armincerf.com/2021/07/making-a-mobile-app-with-clojurescript-in-2021))
 
@@ -113,7 +113,7 @@ my Emacs into a working app running on my iPhone (via Expo Go). The
 below video is the \~45min live stream of my first day working on the
 project:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3HvhP2NImOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/3HvhP2NImOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 After a few days, however, I grew frustrated with writing these render
 functions in ClojureScript. Doing the business logic was great; Clojure
@@ -284,7 +284,7 @@ don't let the name fool you; they are very different beasts.
 I made a \~10-minute rapid walkthrough of the (more or less) final
 codebase which goes into a little more detail:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ib63-HCm-ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/ib63-HCm-ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # The Good
 
@@ -348,7 +348,7 @@ To give you a clearer picture of what the hot code reloading situation
 looked like (and why it wasn't such a big deal) take a look at this
 short video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bSi7GpcSsYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/bSi7GpcSsYU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 After all these troubles with overly complex build tools, and now that I
 am no longer constrained by my arbitrary deadline, I will be exploring

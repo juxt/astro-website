@@ -35,4 +35,4 @@ applications](/blog/posts/XT16-frankie-sardo.html), [user
 interfaces](/blog/posts/XT16-kris-jenkins-adventures-in-user-interfaces.html)
 and [music](/blog/posts/XT16-sam-aaron-communicative-programming.html).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/92W3AzRs0GM" title="XT16 - Tommy Hall" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/92W3AzRs0GM" title="XT16 - Tommy Hall" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

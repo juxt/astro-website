@@ -31,4 +31,4 @@ As he says:
 
 **_Enjoy his entertaining and philosophical discussion._**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CdL4tyicXT4" title="XT16 - Sam Aaron - Communicative Programming" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/CdL4tyicXT4" title="XT16 - Sam Aaron - Communicative Programming" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

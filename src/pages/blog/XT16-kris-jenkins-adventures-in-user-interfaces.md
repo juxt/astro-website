@@ -23,6 +23,6 @@ he highlights how joyful it can be to have a simple yet elegant type
 system on hand to deliver great validation of code and data as well as
 error messages.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yF1tX60sRQk" title="XT16 - Kris Jenkins - Adventures in User Interfaces" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/yF1tX60sRQk" title="XT16 - Kris Jenkins - Adventures in User Interfaces" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Enjoy.

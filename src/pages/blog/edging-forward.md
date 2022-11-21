@@ -111,7 +111,7 @@ Datomic, time-processing, cloud deployments and much more.
 Here's a quick 3½ minute demo that should give you a good impression of
 where we are with Edge and how you can get started with it today.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ULQuBpRsvfA" title="Edge Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/ULQuBpRsvfA" title="Edge Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # More to come
 

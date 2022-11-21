@@ -24,7 +24,7 @@ the horizon that are fast bearing down on us.
 At one stage he introduces us to the _NPM Drinking Game_ - call out a
 noun and if you can NPM install that noun - you get a drink!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/n0dtHv6qSQk" title="XT16 - Jamer Lewis- From the Bazaar to the Bizarre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/n0dtHv6qSQk" title="XT16 - Jamer Lewis- From the Bazaar to the Bizarre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 I hope you enjoy this first talk as much as I did. Do feel free to add
 your comments below.

@@ -46,7 +46,7 @@ playing; using our imagination to solve problems. When we're in _flow
 mode_ and our career is working, then programming is one of the best
 jobs in the world.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pNzn6CIubKc" title="XT16 - Unleashing the Play Brain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/pNzn6CIubKc" title="XT16 - Unleashing the Play Brain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Looking at our conference it's all about having fun with technology.
 

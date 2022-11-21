@@ -18,6 +18,6 @@ that:
 
 ***Martin will try to convince us that the *time spent typing types* pays immense dividends.***
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TrqGpEz1g5s" title="XT16 - Martin Trojer - Looking Beyond Clojure" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/TrqGpEz1g5s" title="XT16 - Martin Trojer - Looking Beyond Clojure" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Enjoy.

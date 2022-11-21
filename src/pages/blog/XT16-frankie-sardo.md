@@ -45,4 +45,4 @@ get you set up.
 So if you worried about developing mobile apps for all mobile platforms,
 Frankie says relax!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CS7_Rt66NNs" title="XT16 - Frankie Sardo - ClojureScript Without Boundaries" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/CS7_Rt66NNs" title="XT16 - Frankie Sardo - ClojureScript Without Boundaries" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

@@ -31,7 +31,7 @@ ground-breaking ideas that are yet to be found. To find those ideas, we
 need to seek out the brightest among us, and then we have to figure out
 how to fund and manage them properly.
 
-<iframe width="100%" height="415" src="https://www.youtube.com/embed/Q6Ly4gSfAoo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/Q6Ly4gSfAoo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > I got asked to give a talk at XT20 because I was one of the
 > researchers and a leader of a research group in the ARPA and Xerox
@@ -89,4 +89,4 @@ how to fund and manage them properly.
 We continued the discussion, and here is the _long-form_ of Alan's
 thoughts on invention, climate change, Covid-19, education and more.
 
-<iframe width="100%" height="415" src="https://www.youtube.com/embed/JZ48kogYdUA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="aspect-video w-full" src="https://www.youtube.com/embed/JZ48kogYdUA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
