@@ -9,7 +9,7 @@ export type CaseStudyProps = {
   tech: string[]
   image: string
   testimonial?: { by?: string; quote?: string; role?: string }
-  pages: { [key: string]: { weight: number } }
+  weight?: number
 }
 
 const { title, subtitle, outcome, tech, testimonial, image } =

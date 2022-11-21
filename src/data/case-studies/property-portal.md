@@ -12,5 +12,5 @@ testimonial:
   role: 'Technical Director'
   by: 'Morgan Ross'
 image: 'on-the-market-ui.jpg'
-pages: { '/case-studies': { 'weight': 5 } }
+weight: 5
 ---

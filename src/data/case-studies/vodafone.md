@@ -12,5 +12,5 @@ testimonial:
   quote: 'We worked with JUXT in a close partnership for a number of years. JUXT were instrumental to deliver a solution with great quality and time to market.'
   by: 'Mattia Piccinini'
   role: 'Senior Director'
-pages: { '/': { 'weight': 3 }, '/case-studies': { 'weight': 3 } }
+weight: 3
 ---

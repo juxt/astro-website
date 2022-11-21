@@ -5,6 +5,12 @@
       "communicating-software",
       "cljs-for-js-devs",
       "bridging-the-blockchain"
+    ],
+    "featuredCaseStudies": [
+      "financial-provider",
+      "mental-wellbeing",
+      "vodafone",
+      "european-investment-bank"
     ]
   },
   "navbar": [

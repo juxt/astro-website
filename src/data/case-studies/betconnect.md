@@ -12,5 +12,5 @@ tech:
   - 'Rum'
   - 'React Native'
 image: 'bet-connect-ui.jpg'
-pages: { '/case-studies': { 'weight': 8 } }
+weight: 8
 ---

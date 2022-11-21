@@ -12,19 +12,7 @@ import { Blog, Person } from '../components/types'
 import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import Layout from '../layouts/Layout.astro'
 
-const url = Astro.url
-
-const caseStudies = await Astro.glob<CaseStudyProps>(
-  '../data/case-studies/*.md'
-)
-
-const caseStudiesParsed = caseStudies
-  .filter(({ frontmatter }) => frontmatter.pages[url.pathname])
-  .sort(
-    (a, b) =>
-      a.frontmatter.pages[url.pathname].weight -
-      b.frontmatter.pages[url.pathname].weight
-  )
+const siteMetadata = await Astro.glob('../data/metadata.json')
 
 const homepageBannerPicture = await getImage({
   src: import('../assets/site/homepage-banner.jpeg'),
@@ -88,6 +76,18 @@ const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
 
 const isDev = import.meta.env.DEV
 
+const caseStudies = await Astro.glob<CaseStudyProps>(
+  '../data/case-studies/*.md'
+)
+
+const featuredCaseStudiesMetadata = siteMetadata[0].homepage.featuredCaseStudies
+
+const featuredCaseStudies = featuredCaseStudiesMetadata.map((slug) => {
+  return caseStudies.find(
+    (caseStudy) => caseStudy.file.split('/').pop().split('.')[0] === slug
+  )
+})
+
 const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 )
@@ -96,7 +96,6 @@ const peopleByCode = new Map(
   people.map((person) => [person.frontmatter.code, person.frontmatter])
 )
 
-const siteMetadata = await Astro.glob('../data/metadata.json')
 const featuredBlogsMetadata = siteMetadata[0].homepage.featuredBlogs
 
 const filteredBlogs = featuredBlogsMetadata.map((slug) => {
@@ -296,7 +295,7 @@ const featuredBlogs = await Promise.all(
       </div>
 
       <div class='flex flex-col gap-36 py-28'>
-        {caseStudiesParsed.map((caseStudy) => (
+        {featuredCaseStudies.map((caseStudy) => (
           <CaseStudy {...caseStudy.frontmatter} />
         ))}
       </div>

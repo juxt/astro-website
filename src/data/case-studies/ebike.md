@@ -11,5 +11,5 @@ tech:
   - 'Datomic'
   - 'AWS'
 image: 'ebike-ui.jpg'
-pages: { '/case-studies': { 'weight': 9 } }
+weight: 9
 ---

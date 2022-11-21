@@ -10,15 +10,9 @@ const caseStudies = await Astro.glob<CaseStudyProps>(
   '../data/case-studies/*.md'
 )
 
-const { pathname } = Astro.url
-
-const caseStudiesParsed = caseStudies
-  .filter(({ frontmatter }) => frontmatter.pages[pathname])
-  .sort(
-    (a, b) =>
-      a.frontmatter.pages[pathname].weight -
-      b.frontmatter.pages[pathname].weight
-  )
+const caseStudiesParsed = caseStudies.sort(
+  (a, b) => a.frontmatter.weight - b.frontmatter.weight
+)
 
 const caseStudiesPicture = await getImage({
   src: import('../assets/site/case-studies-banner.jpeg'),

@@ -15,5 +15,5 @@ testimonial:
   by: 'Colin Reid'
   role: 'Development Manager'
 image: 'financial-services-software.jpg'
-pages: { '/': { 'weight': 1 }, '/case-studies': { 'weight': 1 } }
+weight: 1
 ---

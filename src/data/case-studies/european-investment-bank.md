@@ -10,5 +10,5 @@ testimonial:
   quote: 'The JUXT team are tremendously technically capable, delivering elegant solutions to complex problems.'
   role: 'Managing Director'
 image: 'european-investment-bank.jpg'
-pages: { '/': { 'weight': 4 }, '/case-studies': { 'weight': 4 } }
+weight: 4
 ---

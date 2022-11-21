@@ -9,5 +9,5 @@ tech:
   - 'GraphQL'
   - 'RocksDB'
 image: 'citi-bank.jpg'
-pages: { '/case-studies': { 'weight': 6 } }
+weight: 6
 ---

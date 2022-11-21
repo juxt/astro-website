@@ -11,5 +11,5 @@ tech:
   - 'Reagent'
   - 'Re-frame'
 image: 'cervest-ui.jpg'
-pages: { '/case-studies': { 'weight': 7 } }
+weight: 7
 ---

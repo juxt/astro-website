@@ -9,5 +9,5 @@ tech:
   - 'Kafka Streams'
   - 'Data Mesh'
 image: 'mental-wellbeing.jpg'
-pages: { '/': { 'weight': 2 }, '/case-studies': { 'weight': 2 } }
+weight: 2
 ---
