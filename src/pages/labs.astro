@@ -4,11 +4,6 @@ import Banner from '../components/Banner.astro'
 import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 
-export const metadata = {
-  navbar: { weight: 1 },
-  footer: { weight: 1 }
-}
-
 const labsImage = await getImage({
   src: import('../assets/site/labs-background.jpg'),
   width: 1700,
@@ -58,8 +53,6 @@ const labProjects = [
             <div class='h-full group cursor-pointer flex justify-between flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'>
               {project.title}
             </div>
-            <div class>
-              </div>
           )
         })}
       </div>
