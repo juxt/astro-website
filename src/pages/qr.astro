@@ -1,0 +1,103 @@
+---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
+import Banner from '../components/Banner.astro'
+import Section from '../components/Section.astro'
+import Layout from '../layouts/Layout.astro'
+
+const bannerPicture = await getImage({
+  src: import('../assets/site/about-us-banner.jpeg'),
+  width: 1700,
+  quality: 90
+}).then((img) => img.src)
+
+const boxStructure = [
+  {
+    title: 'Discover our work with financial companies',
+    href: '/financial',
+    src: import('../assets/site/case-studies-banner.jpeg')
+  },
+  {
+    title: 'Find out how we work with startups',
+    href: '/startups',
+    src: import('../assets/startups/startup-bg.jpg')
+  },
+  {
+    title: 'Read our latest blogs and articles',
+    href: '/blog',
+    src: import('../assets/site/blog-banner.jpeg')
+  },
+  {
+    title: 'Get started with JUXT',
+    href: '/get-started',
+    src: import('../assets/site/services-banner.jpg')
+  }
+]
+---
+
+<Layout navbar title='Info'>
+  <main>
+    <Banner
+      text='Info'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+    <Section className='bg-zinc-900 py-28 text-white'>
+      <h2 class='pb-4 text-3xl md:text-4xl'>Hi, welcome to JUXT!</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        In this page, we've listed some useful links that can walk you through
+        our approach and culture. Have fun playing with XTDB Core 1 and Core 2
+        and testing our Resource Server Site for adding Form to Data. Do you
+        have further questions? Send us an email at info@juxt.pro. If you want
+        to say hello, we'd love to. <br />
+        <br /> The JUXT team
+      </p>
+    </Section>
+    <Section>
+      <a
+        href='d'
+        class='h-full group cursor-pointer flex justify-between flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
+      >
+        <div class='text-white p-4 text-2xl'>
+          Read our latest blogs and articles
+        </div>
+        <div>
+          <Image
+            alt='image'
+            width={800}
+            quality={80}
+            class='w-full'
+            src={import('../assets/site/blog-banner.jpeg')}
+          />
+        </div>
+      </a>
+    </Section>
+
+    <Section>
+      <div
+        class='text-black flex flex-wrap justify-center lg:flex-nowrap gap-14 py-28 lg:justify-between'
+      >
+        <div class='flex flex-col gap-4 text-center'>
+          <div class='text-3xl font-light'>Email</div>
+          <div class='font-light'>
+            For all general enquiries, please email
+            <span class='font-medium'>info@juxt.pro</span>
+          </div>
+        </div>
+        <div class='flex flex-col gap-4 text-center'>
+          <div class='text-3xl font-light'>UK Office</div>
+          <div class='flex flex-col gap-2 font-light'>
+            <div>Norfolk House, Silbury Blvd. ‍Milton Keynes, MK9 2AH</div>
+          </div>
+        </div>
+        <div class='flex flex-col gap-4 text-center'>
+          <div class='text-3xl font-light'>Phone</div>
+          <div class='font-light'>
+            Call us during UK business hours: +44 (0) 333 93 98 309
+          </div>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>
