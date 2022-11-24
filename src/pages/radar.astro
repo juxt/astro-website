@@ -1,0 +1,455 @@
+---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
+import Banner from '../components/Banner.astro'
+import Section from '../components/Section.astro'
+import Layout from '../layouts/Layout.astro'
+
+const bannerPicture = await getImage({
+  src: import('../assets/site/radar-banner.jpg'),
+  width: 1700,
+  quality: 90
+}).then((img) => img.src)
+---
+
+<Layout navbar title='Radar'>
+  <main>
+    <Banner
+      text='Radar'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+
+    <div>in here boo</div>
+    <div id='radar'>Loading...</div>
+
+    <script is:inline src='/scripts/radar-2021.js'>
+
+    </script>
+
+    <Section className='bg-sky-900 py-16 text-white'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>
+        Welcome to The JUXT Clojure Radar, 2021.
+      </h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        This is an opinionated and subjective view, based on our collective
+        experience of building projects with Clojure. There will be many
+        libraries that should be on here but aren’t, and this is partly down to
+        the awesome Clojure ecosystem and how we take some of it for granted.
+        <br />
+        <br />Whilst we have direct experience of the majority of items on the
+        radar, we may include some that we haven’t used. We will explicitly
+        mention this where appropriate. <br />
+        <br />No radar can ever be perfect, but we hope that this radar will be
+        useful for those deploying Clojure in real-world projects, and we
+        welcome your feedback and suggestions. We produced a similar radar five
+        years ago, and it has been interesting to see how the Clojure ecosystem
+        has shifted since then.
+      </p>
+    </Section>
+
+    <Section className='bg-zinc-200 py-16 text-black'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Rings</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        Our radar is derived from the well-known ThoughtWorks Technology Radar
+        and we use the familiar four rings defined there: <span class='italic'>
+          Assess,
+        </span>
+        <span class='italic'> Trial,</span>
+        <span class='italic'> Adopt,</span>
+        and <span class='italic'> Hold</span>. Our working definitions are a
+        little different to the ones ThoughtWorks use.
+      </p>
+      <h4 class='pt-10 text-2xl md:text-2xl italic'>Assess</h4>
+      <p class=' py-5 text-xl md:text-2xl font-extralight'>
+        We’re interested in this library or tool. We think it could have great
+        potential but we have not yet formed a strong opinion. This may be a
+        library we have not yet used, or one that we have only begun to explore.
+      </p>
+      <h4 class='pt-10 text-2xl md:text-2xl italic'>Trial</h4>
+      <p class=' py-5 text-xl md:text-2xl font-extralight'>
+        We have some experience with this library or tool and we like the
+        results. We’re not yet certain about how widely applicable it will be,
+        but we plan to continue to use it on projects where the risk is low.
+      </p>
+      <h4 class='pt-10 text-2xl md:text-2xl italic'>Adopt</h4>
+      <p class=' py-5 text-xl md:text-2xl font-extralight'>
+        We’ve used this library or tool extensively. We like it, and prefer it
+        to alternatives. We think it brings great benefit to our projects and
+        we’ll use it without hesitation.
+      </p><h4 class='pt-10 text-2xl md:text-2xl italic'>Hold</h4>
+      <p class=' py-5 text-xl md:text-2xl font-extralight'>
+        We have experience with this tool or library on past projects and we
+        feel that we may not opt to use it again in future, or at least think
+        very carefully when we do. This may be because we have a growing concern
+        about its impact, or we simply prefer an alternative.
+      </p>
+    </Section>
+    <Section className='bg-sky-900 py-16 text-white'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Quadrants</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        We’ve divided the radar into four quadrants. <span class='italic'>
+          ClojureScript
+        </span> and <span class='italic'> Tools</span>
+        should be self-explanatory. <span class='italic'> Infrastructure</span>
+        refers to a group of libraries that have a high architectural footprint or
+        influence on your application. The smaller libraries, we’ve simply put into
+        <span class='italic'> Libraries</span>.
+      </p>
+    </Section>
+    <Section className='bg-zinc-200 py-16 text-black'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>ClojureScript</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        <a href='https://github.com/reagent-project/reagent' class='text-juxt'
+          >Reagent
+        </a> is one of the few libraries that appeared on our radar in 2016 that
+        we still want to shout about 5 years on, and is a firm <span
+          class='italic'
+          >Adopt
+        </span>. It has brought huge value to ClojureScript and made delivering
+        simple React applications easier in ClojureScript than any other
+        language. We’ve also found <a
+          href='http://day8.github.io/re-frame/re-frame/'
+          class='text-juxt'
+          >re-frame
+        </a> to be one of the best ways to keep complexity under control and maintain
+        a consistent and logical structure as ClojureScript applications grow. <br
+        />
+        <br />We’ve begun using <a
+          href='https://github.com/day8/re-frame-10x'
+          class='text-juxt'
+        >
+          re-frame-10x
+        </a> to bring greater productivity to working with re-frame, and we have
+        also had good early success using <a
+          href='https://github.com/ingesolvoll/kee-frame'
+          class='text-juxt'
+          >kee-frame
+        </a> to build re-frame-style applications more easily. Both are in
+        <span class='italic'>Trial</span>. <br /><br />
+        <a href='https://github.com/metasoarous/oz' class='text-juxt'>Oz</a> brings
+        the power of Vega and Vega-Lite's declarative visualisation grammar seamlessly
+        to ClojureScript. ClojureScript's interactive, data-driven programming approach
+        is a great match for Vega, and Oz brings these worlds together with some
+        additional features for composing visualisations, building dashboards and
+        reports, and sharing visualisations instantly via GitHub gists and the <a
+          href='https://vega.github.io/editor/#/'
+          class='text-juxt'
+          >Vega Editor.
+        </a>
+        <br /><br />Building ClojureScript applications seems to get easier
+        every year, and here we <span class='italic'>adopt</span>
+        <a href='https://github.com/thheller/shadow-cljs' class='text-juxt'
+          >shadow-cljs
+        </a> and <a
+          href='https://github.com/bhauman/figwheel-main'
+          class='text-juxt'
+          >Figwheel Main
+        </a> to do so with great success (we see no reason to continue using <a
+          href='https://github.com/bhauman/lein-figwheel'
+          class='text-juxt'
+          >lein-figwheel,
+        </a> figwheel’s older incarnation). At JUXT we lean towards shadow-cljs.
+        As the ClojureScript compiler becomes more capable we’ve seen a trend towards
+        simpler ClojureScript project build tools like
+        <a href='https://github.com/vouch-opensource/krell' class='text-juxt'
+          >krell,
+        </a> which provides a minimal path to building React Native apps (although
+        we have not yet tried this route, we would like to <span class='italic'>
+          assess
+        </span>).<br /><br />
+        <a href='https://github.com/bhauman/devcards' class='text-juxt'
+          >Devcards
+        </a> is an excellent tool to interactively test and iterate quickly on ClojureScript
+        UI components. For full, in-browser automation, we’ve found <a
+          href='https://github.com/cypress-io/cypress'
+          class='text-juxt'
+          >Cypress
+        </a> makes creating and running tests a breeze compared to older tools (and
+        we like it so much we’ve included it in our radar at <span
+          class='italic'
+        >
+          Trial
+        </span>, despite it not being a ClojureScript tool). <br /><br /> At JUXT
+        we’re interested in pushing the limits of ClojureScript performance as part
+        of building demanding applications where render speed counts. We’re <span
+          class='italic'
+          >assessing
+        </span>
+        new libraries like <a
+          href='https://github.com/lilactown/helix'
+          class='text-juxt'
+          >Helix
+        </a> that have potential to improve on the best we can achieve today with
+        hiccup.<br /><br /> ‍<a
+          href='https://github.com/fulcrologic/fulcro'
+          class='text-juxt'
+          >Fulcro
+        </a> has piqued our interest, as we think there is great potential for a
+        graph-centric, data-driven approach for queries and mutations at all layers
+        of the application. However we’re also concerned about how whole-application
+        frameworks like Fulcro affect our ability to understand and debug the systems
+        we build. We’ve yet to <span class='italic'> assess</span> Fulcro in a real-world
+        application.
+      </p>
+    </Section>
+    <Section className='bg-sky-900 py-16 text-white'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Infrastructure</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        There’s been healthy competition amongst libraries that offer to wire up
+        your application and manage the stateful parts. We’ve used Component in
+        the past, but we feel that <a
+          href='https://github.com/weavejester/integrant'
+          class='text-juxt'
+          >Integrant
+        </a> has brought greater flexibility to this space and we have <span
+          class='italic'
+          >adopted
+        </span> it as our first choice. We’ve found that <a
+          href='https://github.com/tolitius/mount'
+          class='text-juxt'
+          >Mount
+        </a> encourages more code that depends on global state, and we prefer how
+        the alternatives approach this problem, so at JUXT we have placed it on <span
+          class='italic'
+          >hold.
+        </span>
+        <br />
+        <br /> ‍<a href='https://github.com/ring-clojure' class='text-juxt'
+          >Ring
+        </a> remains the dominant HTTP abstraction for Clojure, with the ring family
+        providing an out-of-the-box HTTP server, middleware and more. Ring has been
+        battletested on many large projects and we continue to feel confident using
+        it. We are struck by the power and value the Ring specification has brought
+        to Clojure. In this area we have also decided to move one of our own libraries,
+        <a href='https://github.com/juxt/yada' class='text-juxt'>yada,</a> to <span
+          class='italic'
+          >Hold,
+        </span> and we’ve <a
+          href='https://github.com/juxt/apex#rationale'
+          class='text-juxt'
+          >written on the rationale
+        </a> as part of launching a newer JUXT library <a
+          href='https://github.com/juxt/apex'
+          class='text-juxt'
+          >apex.
+        </a> Apex continues to allow modelling web resources with data, to build
+        compliant web resource servers, but builds on a more widely used and accessible
+        data model in OpenAPI and JSON Schema.<br /><br />
+        After some debate, we’ve decided to move <a
+          href='https://github.com/clojure/core.async'
+          class='text-juxt'
+          >core.async
+        </a> to <span class='italic'>Hold.</span> We recognise that this may be controversial,
+        but through experience of working with systems that build heavily on core.async
+        we’ve grown concerned that the results are often fragile due to incorrect
+        error handling, hard to understand, and hard to debug. core.async and similar
+        solutions are often used where a simple thread pool and blocking techniques
+        would suffice. We recommend thinking carefully before creating applications
+        that have an architecture driven by core.async, and we wanted to highlight
+        this as part of the radar. Tim Baldridge has <a
+          href='https://www.youtube.com/watch?v=096pIlA3GDo'
+          class='text-juxt'
+          >spoken in the past
+        </a> about some of the trade-offs to consider and pitfalls to avoid. Let's
+        be clear, core.async is a powerful tool and a great asset to Clojure, and
+        may now be on the <a
+          href='https://www.gartner.com/en/research/methodologies/gartner-hype-cycle'
+          class='text-juxt'
+          >slope of enlightement
+        </a> as Clojure’s essential asynchronous glue. However, if we can borrow
+        the ThoughtWorks definition of <span class='italic'>Hold</span> for a moment,
+        <span class='italic'>proceed with caution.</span>
+        <br /><br />
+        <a href='https://github.com/clojure/core.typed' class='text-juxt'
+          >core.typed
+        </a> we have placed on <span class='italic'>hold</span> for our own projects,
+        since we've found clojure.spec hitting a sweet spot with gradual, <span
+          class='italic'
+          >runtime
+        </span>
+        verification and we have noted <a
+          href='https://circleci.com/blog/why-were-no-longer-using-core-typed/'
+          class='text-juxt'
+          >concerns in the industry as projects grow.
+        </a>
+        We had success assessing typed Clojure <a
+          href='https://www.juxt.pro/blog/typed-clojure/'
+          class='text-juxt'
+          >in the past,
+        </a> and we recognise a great many improvements that have been made in recent
+        years, now in the <a
+          href='https://github.com/typedclojure/typedclojure'
+          class='text-juxt'
+          >Typed Clojure
+        </a> project. We hope to revisit Typed Clojure with Clojure 1.11.<br
+        /><br />
+        ‍ We placed <a href='https://www.xtdb.com/' class='text-juxt'>XTDB</a> (formerly
+        Crux) in <span class='italic'>Adopt,</span> as we believe it brings unique
+        and enduring value to our projects. <span class='italic'
+          >Disclaimer: We wrote XTDB. Expect a bias.
+        </span>
+        We have also introduced <a
+          href='https://github.com/juxt/site'
+          class='text-juxt'
+          >Site,
+        </a> a compliant HTTP Resource Server built on top of XTDB, and after <span
+          class='italic'
+          >trialling
+        </span>
+        Site on JUXT projects we think it is showing great potential to accelerate
+        delivery.<br /><br /> We’re keen to see Clojure pushed to new frontiers,
+        and we think <a
+          href='https://github.com/FieryCod/holy-lambda'
+          class='text-juxt'
+          >holy-lambda
+        </a> could give us an improved implementation technique for Clojure lambdas
+        on AWS with fewer compromises. We’re keeping holy-lambda at <span
+          class='italic'
+          >Assess,
+        </span> and in the meantime, we’ll continue to use lambada and cljs-lambda.<br
+        /><br />
+        <a href='https://github.com/polyfy/polylith' class='text-juxt'
+          >Polylith
+        </a> has made waves in the community with a fresh take on maintaining and
+        building modular applications from monolithic repositories. We have yet to
+        try this approach but we’re keen to assess.
+      </p>
+    </Section>
+    <Section className='bg-zinc-200 py-16 text-black'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Tools</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        We’ve included <a
+          href='https://www.emacswiki.org/emacs/ParEdit'
+          class='text-juxt'
+          >ParEdit
+        </a> on our radar, but it’s structural editing that’s the star to <span
+          class='italic'
+          >adopt
+        </span> here, no matter what tool or plugin you use to achieve it. Despite
+        structural editing commands being used with Lisps for <a
+          href='https://github.com/shaunlebron/history-of-lisp-parens/blob/master/editors.md#zmacs'
+          class='text-juxt'
+          >at least 40 years,
+        </a>
+        the state of the art is still being progressed with tools like <a
+          href='https://shaunlebron.github.io/parinfer/'
+          class='text-juxt'
+          >ParInfer.
+        </a>
+        In our editors <a
+          href='https://github.com/clj-kondo/clj-kondo'
+          class='text-juxt'
+          >clj-kondo
+        </a> has become indispensable and a firm <span class='italic'
+          >Adopt,
+        </span> instantly helping to improve code quality and highlight those pesky
+        errors before they waste our time. Most at JUXT are long-time users of Emacs
+        and CIDER, so we’re excited by efforts like <a
+          href='https://github.com/clojure-lsp/clojure-lsp'
+          class='text-juxt'
+          >Clojure-lsp,
+        </a> and the new ways in which our Clojure editing environment is being enriched.
+        Some at JUXT are <span class='italic'>trialling</span> Clojure-lsp via <a
+          href='https://calva.io/'
+          class='text-juxt'
+          >Calva
+        </a>
+        in VS Code.
+        <br /><br />We’ve loved following tools produced by the indefatigable
+        <a href='https://twitter.com/borkdude' class='text-juxt'>borkdude</a>,
+        and we think babashka is a truly transformative tool that’s ready to
+        adopt. It has quickly replaced bash wherever scripts are useful, and
+        further cemented Clojure as a universal language for teams. babashka
+        'tasks' are a powerful but relatively recent addition that appear to
+        have great potential to replace make-like tools with more Clojure. We
+        plan to assess futher. We’ve explored this space ourselves with mach,
+        and we were pleased to see babashka tasks able to encompass the same
+        use-cases. <br /><br />We have many older Clojure projects that use
+        Leiningen, and a small number that use Boot (now on hold), but in recent
+        years we’ve switched to deps.edn and clj. We like that builds are simple
+        and fast, and since tools around deps.edn have accumulated rapidly we
+        now use it confidently on all new projects, so we’re placing deps.edn in
+        Adopt. We’re also increasingly using kaocha to run our tests, and after
+        a boost of support from Clojurists Together in 2018 we think it has
+        become a good, all-encompassing solution in a way that no previous
+        efforts have.<br /><br /> ‍Ragtime has stood the test of time as a flexible
+        database migration tool so we’re happy to place it in Adopt. <br /><br
+        />In the performance analysis space jmh-clojure has become a go-to tool,
+        now in Adopt, and the comprehensive results it produces from a simple
+        configuration are impressive. Of course criterium is a long-standing
+        favourite and the Clojure goes fast! blog an excellent resource.
+      </p>
+    </Section>
+    <Section className='bg-sky-900 py-16 text-white'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Libraries</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        Metosin has been working to create a new family of Clojure web API
+        libraries delivering excellent performance. We’ve found reitit to be a
+        highly effective routing library, so much so that it has unseated our
+        own router bidi to enter Adopt at JUXT. We’re keen to continue trialling
+        Muuntaja (a very fast HTTP middleware stack and alternative to
+        ring-middleware-format) and Jsonista (Clojure’s fastest JSON library),
+        and we’re pleased with results so far. For client-side HTTP, we've been
+        trialling Hato, a library in the style of clj-http, but built on Java
+        11's new HttpClient and with fewer dependencies as a result. <br /><br
+        /> We’re often interacting with AWS and find Cognitect’s aws-api to be an
+        excellent choice for doing so. Its minimal dependencies help keep our projects
+        small and sane, and we have begun to prefer it over amazonica unless we need
+        functionality that’s unique to the AWS Java SDK(s) (upon which amazonica
+        is based). Babashka also offers an aws-api pod, creating great opportunities
+        for AWS scripting.<br /><br /> We’ve moved our own Aero configuration library
+        into Adopt as we’ve used it widely on JUXT projects for many years. Aero
+        favours a data-driven, explicit approach to configuration, with support for
+        externalisation of secrets.<br /><br /> ‍next-jdbc is a complete, modernised
+        replacement for clojure.java.jdbc. We’ve used it both on JUXT projects and
+        in XTDB.<br /><br /> Buddy (in the form of buddy-auth and buddy-sign) has
+        proven a successful choice for JUXT projects. As a piece of critical security
+        implementation we preferred in 2016 to give it more time in the field before
+        moving it to Adopt. Since Buddy has had another 5 years of widespread use
+        and maturation, we’re deeming it a good choice, however the project is looking
+        for new maintainers.<br /><br /> We’ve placed Schema on hold, as we have
+        found that clojure.spec not only offers more powerful sequence validation
+        via regular expressions, but also has a healthy community of actively maintained
+        tools supporting and extending it such as Orchestra, expound and spec-tools.
+        We’re interested in assessing malli and of course, in the future, spec2.<br
+        /><br />
+        For logging, our preference is to maximise performance and compatibility.
+        We’ve found the best and most enduring way to do this on the JVM is a combination
+        of tools.logging and Logback, and so we’ve moved timbre to Hold. Although
+        Logback configuration — especially getting the right selection of bridges
+        and exclusions in place — can be a little fiddly.<br /><br /> ‍tick is proving
+        to be an effective clj-time replacement on JUXT projects, in particular since
+        it builds on cljc.java-time to support both Clojure and ClojureScript and
+        this allows us to share time-related functions across client and server.<br
+        /><br />
+        GraphQL has been a powerful, simplifying model for some of the most complex
+        web applications we’ve built at JUXT, and although the Clojure ecosystem
+        around this technology is relatively small, we’ve found the data-driven approach
+        of Lacinia to be highly effective and the library itself is mature with good
+        coverage of the GraphQL specification. Users of GraphQL should also check
+        out re-graph by JUXTer Oliver Hine.
+      </p>
+    </Section>
+    <Section className='bg-zinc-200 py-16 text-black'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Honourable Mentions</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        The radar isn’t exhaustive, and where we’re pushed for space we tend to
+        prioritise those libraries that are on the way up or on the way down.
+        This leaves some of our regular favourites out, including clj-http,
+        HoneySQL, weavejester’s crypto libraries (1, 2, 3), and Jackdaw, a
+        comprehensive Kafka Producer, Consumer and Streams API client. Nippy is
+        one of the best serialisation libraries available, for all manner of
+        uses in Clojure and beyond.
+      </p>
+    </Section>
+    <Section className='bg-sky-900 py-16 text-white'>
+      <h2 class='pb-10 text-3xl md:text-4xl'>Contributors/Reviewers</h2>
+      <p class='text-xl md:text-2xl font-extralight'>
+        Our thanks to all at JUXT, and the wider JUXT network, who have given
+        opinions and suggestions for this radar.
+      </p>
+    </Section>
+  </main>
+</Layout>
