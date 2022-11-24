@@ -6,7 +6,7 @@ import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 
 const bannerPicture = await getImage({
-  src: import('../assets/site/about-us-banner.jpeg'),
+  src: import('../assets/site/work-with-us-banner.jpeg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)
@@ -28,9 +28,19 @@ const boxStructure = [
     src: import('../assets/site/blog-banner.jpeg')
   },
   {
-    title: 'Get started with JUXT',
+    title: 'Check how you can get started with JUXT',
     href: '/get-started',
     src: import('../assets/site/services-banner.jpg')
+  },
+  {
+    title: 'Play with XTDB Core 1 and Core 2',
+    href: 'https://xtdb.com/',
+    src: import('../assets/blog/xtdb-intro.jpg')
+  },
+  {
+    title: 'Test JUXT Site to add Form to Data',
+    href: 'https://frontend-example--juxtsite.netlify.app/',
+    src: import('../assets/blog/stack.jpg')
   }
 ]
 ---
@@ -47,10 +57,9 @@ const boxStructure = [
       <h2 class='pb-4 text-3xl md:text-4xl'>Hi, welcome to JUXT!</h2>
       <p class='text-xl md:text-2xl font-extralight'>
         In this page, we've listed some useful links that can walk you through
-        our approach and culture. Have fun playing with XTDB Core 1 and Core 2
-        and testing our Resource Server Site for adding Form to Data. Do you
-        have further questions? Send us an email at info@juxt.pro. If you want
-        to say hello, we'd love to. <br />
+        our approach, methodology and culture. Do you have further questions?
+        Send us an email at info@juxt.pro. If you want to say hello, we'd love
+        to. <br />
         <br /> The JUXT team
       </p>
     </Section>
