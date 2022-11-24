@@ -21,7 +21,7 @@ building custom data structures.
 
 For the purpose of this post we are going to look at [bags](https://en.wikipedia.org/wiki/Multiset)
 (also known as multisets). A bag extends the concept of a set to a set with a multiplicity
-for each item. So whenever we for an item in a bag, the result will be the number of times
+for each item. So whenever we check for an item in a bag, the result will be the number of times
 the item was added to the bag. `nil` if it is not present. The natural way to
 represent a bag in Clojure is via a map.
 
@@ -78,7 +78,7 @@ Using what we have just defined.
 (-> (bag) (add "foo") (add "foo") (rmv "foo") (add "bar"))
 ;; => {:size 2, :content {"foo" 1, "bar" 1}}
 (contains?' *1 "foo")
-;; => false
+;; => true
 (count' *2 "foo")
 ;; => 1
 ```
