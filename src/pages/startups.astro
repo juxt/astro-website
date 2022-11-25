@@ -33,6 +33,10 @@ const financialPicture = await getImage({
 }).then((img) => img.src)
 ---
 
+<meta property='og:title' content='startups'/>
+<meta property='og:image' content={financialPicture}/>
+<meta property='og:description' content='We work closely with start-up founders to understand the mission deeply and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.'/>
+
 <Layout navbar title='Startups'>
   <main>
     <Banner
