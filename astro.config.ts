@@ -15,7 +15,7 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0'
   },
-  site: 'https://juxt-website.pages.dev/',
+  site: 'https://juxt.pro',
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
