@@ -359,77 +359,199 @@ const bannerPicture = await getImage({
         in VS Code.
         <br /><br />We’ve loved following tools produced by the indefatigable
         <a href='https://twitter.com/borkdude' class='text-juxt'>borkdude</a>,
-        and we think babashka is a truly transformative tool that’s ready to
-        adopt. It has quickly replaced bash wherever scripts are useful, and
-        further cemented Clojure as a universal language for teams. babashka
-        'tasks' are a powerful but relatively recent addition that appear to
-        have great potential to replace make-like tools with more Clojure. We
-        plan to assess futher. We’ve explored this space ourselves with mach,
-        and we were pleased to see babashka tasks able to encompass the same
-        use-cases. <br /><br />We have many older Clojure projects that use
-        Leiningen, and a small number that use Boot (now on hold), but in recent
-        years we’ve switched to deps.edn and clj. We like that builds are simple
-        and fast, and since tools around deps.edn have accumulated rapidly we
-        now use it confidently on all new projects, so we’re placing deps.edn in
-        Adopt. We’re also increasingly using kaocha to run our tests, and after
-        a boost of support from Clojurists Together in 2018 we think it has
-        become a good, all-encompassing solution in a way that no previous
-        efforts have.<br /><br /> ‍Ragtime has stood the test of time as a flexible
-        database migration tool so we’re happy to place it in Adopt. <br /><br
-        />In the performance analysis space jmh-clojure has become a go-to tool,
-        now in Adopt, and the comprehensive results it produces from a simple
-        configuration are impressive. Of course criterium is a long-standing
-        favourite and the Clojure goes fast! blog an excellent resource.
+        and we think <a
+          href='https://github.com/babashka/babashka'
+          class='text-juxt'
+          >babashka
+        </a> is a truly transformative tool that’s ready to <span class='italic'
+          >adopt.
+        </span> It has quickly replaced bash wherever scripts are useful, and further
+        cemented Clojure as a universal language for teams. <a
+          href='https://book.babashka.org/#tasks'
+          class='text-juxt'
+          >babashka 'tasks'
+        </a> are a powerful but relatively recent addition that appear to have great
+        potential to replace make-like tools with more Clojure. We plan to <span
+          class='italic'
+          >assess
+        </span>
+        futher. We’ve explored this space ourselves with <a
+          href='https://github.com/juxt/mach'
+          class='text-juxt'
+          >mach,
+        </a> and we were pleased to see babashka tasks <a
+          href='https://twitter.com/borkdude/status/1379832747640958987'
+          class='text-juxt'
+          >able to encompass the same use-cases.
+        </a>
+        <br /><br />We have many older Clojure projects that use Leiningen, and
+        a small number that use <a
+          href='https://github.com/boot-clj/boot'
+          class='text-juxt'
+          >Boot
+        </a> (now on <span class='italic'>hold</span>), but in recent years
+        we’ve switched to <a
+          href='https://clojure.org/guides/deps_and_cli'
+          class='text-juxt'
+          >deps.edn
+        </a> and clj. We like that builds are simple and fast, and since tools around
+        deps.edn have accumulated rapidly we now use it confidently on all new projects,
+        so we’re placing deps.edn in <span class='italic'>Adopt.</span> We’re also
+        increasingly using <a
+          href='https://github.com/lambdaisland/kaocha'
+          class='text-juxt'
+          >kaocha
+        </a> to run our tests, and after a boost of support from Clojurists Together
+        in 2018 we think it has become a good, all-encompassing solution in a way
+        that no previous efforts have.<br /><br />
+        <a href='https://github.com/weavejester/ragtime' class='text-juxt'
+          >Ragtime
+        </a> has stood the test of time as a flexible database migration tool so
+        we’re happy to place it in <span class='italic'>Adopt.</span> Adopt.
+        <br /><br />In the performance analysis space <a
+          href='https://github.com/jgpc42/jmh-clojure'
+          class='text-juxt'
+          >jmh-clojure
+        </a> has become a go-to tool, now in <span class='italic'>Adopt,</span> and
+        the comprehensive results it produces from a simple configuration are impressive.
+        Of course <a
+          href='https://github.com/hugoduncan/criterium'
+          class='text-juxt'
+          >criterium
+        </a> is a long-standing favourite and the <a
+          href='http://clojure-goes-fast.com/blog/'
+          class='text-juxt'
+          >Clojure goes fast!
+        </a> blog an excellent resource.
       </p>
     </Section>
     <Section className='bg-sky-900 py-16 text-white'>
       <h2 class='pb-10 text-3xl md:text-4xl'>Libraries</h2>
       <p class='text-xl md:text-2xl font-extralight'>
         Metosin has been working to create a new family of Clojure web API
-        libraries delivering excellent performance. We’ve found reitit to be a
-        highly effective routing library, so much so that it has unseated our
-        own router bidi to enter Adopt at JUXT. We’re keen to continue trialling
-        Muuntaja (a very fast HTTP middleware stack and alternative to
-        ring-middleware-format) and Jsonista (Clojure’s fastest JSON library),
-        and we’re pleased with results so far. For client-side HTTP, we've been
-        trialling Hato, a library in the style of clj-http, but built on Java
-        11's new HttpClient and with fewer dependencies as a result. <br /><br
-        /> We’re often interacting with AWS and find Cognitect’s aws-api to be an
-        excellent choice for doing so. Its minimal dependencies help keep our projects
-        small and sane, and we have begun to prefer it over amazonica unless we need
-        functionality that’s unique to the AWS Java SDK(s) (upon which amazonica
-        is based). Babashka also offers an aws-api pod, creating great opportunities
-        for AWS scripting.<br /><br /> We’ve moved our own Aero configuration library
-        into Adopt as we’ve used it widely on JUXT projects for many years. Aero
-        favours a data-driven, explicit approach to configuration, with support for
-        externalisation of secrets.<br /><br /> ‍next-jdbc is a complete, modernised
-        replacement for clojure.java.jdbc. We’ve used it both on JUXT projects and
-        in XTDB.<br /><br /> Buddy (in the form of buddy-auth and buddy-sign) has
-        proven a successful choice for JUXT projects. As a piece of critical security
-        implementation we preferred in 2016 to give it more time in the field before
-        moving it to Adopt. Since Buddy has had another 5 years of widespread use
-        and maturation, we’re deeming it a good choice, however the project is looking
-        for new maintainers.<br /><br /> We’ve placed Schema on hold, as we have
-        found that clojure.spec not only offers more powerful sequence validation
-        via regular expressions, but also has a healthy community of actively maintained
-        tools supporting and extending it such as Orchestra, expound and spec-tools.
-        We’re interested in assessing malli and of course, in the future, spec2.<br
+        libraries delivering <a
+          href='https://www.youtube.com/watch?v=3SSHjKT3ZmA'
+          class='text-juxt'
+          >excellent performance.
+        </a> We’ve found <a
+          href='https://github.com/metosin/reitit'
+          class='text-juxt'
+          >reitit
+        </a> to be a highly effective routing library, so much so that it has unseated
+        our own router <a href='https://github.com/juxt/bidi' class='text-juxt'
+          >bidi
+        </a> to enter <span class='italic'>Adopt</span> at JUXT. We’re keen to continue
+        <span class='italic'>trialling</span>
+        <a href='https://github.com/metosin/muuntaja' class='text-juxt'
+          >Muuntaja
+        </a> (a very fast HTTP middleware stack and alternative to ring-middleware-format)
+        and <a href='https://github.com/metosin/jsonista' class='text-juxt'
+          >Jsonista
+        </a> (Clojure’s fastest JSON library), and we’re pleased with results so
+        far. For client-side HTTP, we've been <span class='italic'
+          >trialling
+        </span>
+        <a href='https://github.com/gnarroway/hato' class='text-juxt'>Hato,</a> a
+        library in the style of <a
+          href='https://github.com/dakrone/clj-http'
+          class='text-juxt'
+          >clj-http,
+        </a> but built on Java 11's new HttpClient and with fewer dependencies as
+        a result. <br /><br /> We’re often interacting with AWS and find Cognitect’s
+        <a href='https://github.com/cognitect-labs/aws-api' class='text-juxt'
+          >aws-api
+        </a> to be an excellent choice for doing so. Its minimal dependencies help
+        keep our projects small and sane, and we have begun to prefer it over <a
+          href='https://github.com/mcohen01/amazonica'
+          class='text-juxt'
+          >amazonica
+        </a>
+        unless we need functionality that’s unique to the AWS Java SDK(s) (upon which
+        amazonica is based). Babashka also offers <a
+          href='https://github.com/babashka/pod-babashka-aws'
+          class='text-juxt'
+          >an aws-api pod,
+        </a> creating great opportunities for AWS scripting.<br /><br />
+        We’ve moved our own <a
+          href='https://github.com/juxt/aero'
+          class='text-juxt'
+          >Aero
+        </a> configuration library into <span class='italic'>Adopt</span> as we’ve
+        used it widely on JUXT projects for many years. Aero favours a data-driven,
+        explicit approach to configuration, with support for externalisation of secrets.<br
         /><br />
+        <a href='https://github.com/seancorfield/next-jdbc' class='text-juxt'
+          >next-jdbc
+        </a> is a complete, modernised replacement for <a
+          href='https://github.com/clojure/java.jdbc'
+          class='text-juxt'
+          >clojure.java.jdbc.
+        </a> We’ve used it both on JUXT projects and in XTDB.<br /><br /> Buddy (in
+        the form of <a
+          href='https://github.com/funcool/buddy-auth'
+          class='text-juxt'
+          >buddy-auth
+        </a> and <a
+          href='https://github.com/funcool/buddy-sign'
+          class='text-juxt'
+          >buddy-sign
+        </a>) has proven a successful choice for JUXT projects. As a piece of
+        critical security implementation we preferred in 2016 to give it more
+        time in the field before moving it to <span class='italic'>Adopt.</span>
+        Since Buddy has had another 5 years of widespread use and maturation, we’re
+        deeming it a good choice, however the project is looking for new maintainers.<br
+        /><br /> We’ve placed <a
+          href='https://github.com/plumatic/schema'
+          class='text-juxt'
+          >Schema
+        </a> on <span class='italic'>hold,</span> as we have found that clojure.spec
+        not only offers more powerful sequence validation via regular expressions,
+        but also has a healthy community of actively maintained tools supporting
+        and extending it such as <a
+          href='https://github.com/jeaye/orchestra'
+          class='text-juxt'
+          >Orchestra,
+        </a>
+        <a href='https://github.com/bhb/expound' class='text-juxt'>expound</a> and
+        <a href='https://github.com/metosin/spec-tools' class='text-juxt'
+          >spec-tools.
+        </a> We’re interested in <span class='italic'>assessing</span>
+        <a href='https://github.com/metosin/malli' class='text-juxt'>malli</a> and
+        of course, in the future, spec2.<br /><br />
         For logging, our preference is to maximise performance and compatibility.
         We’ve found the best and most enduring way to do this on the JVM is a combination
-        of tools.logging and Logback, and so we’ve moved timbre to Hold. Although
-        Logback configuration — especially getting the right selection of bridges
-        and exclusions in place — can be a little fiddly.<br /><br /> ‍tick is proving
+        of <a href='https://github.com/clojure/tools.logging' class='text-juxt'
+          >tools.logging
+        </a> and <a href='https://logback.qos.ch/' class='text-juxt'
+          >Logback,
+        </a> and so we’ve moved <a
+          href='https://github.com/ptaoussanis/timbre'
+          class='text-juxt'
+          >timbre
+        </a> to <span class='italic'>Hold.</span> Although Logback configuration — especially
+        getting the right selection of bridges and exclusions in place — can be a
+        little fiddly.<br /><br />
+        <a href='https://github.com/juxt/tick' class='text-juxt'>tick</a> is proving
         to be an effective clj-time replacement on JUXT projects, in particular since
-        it builds on cljc.java-time to support both Clojure and ClojureScript and
-        this allows us to share time-related functions across client and server.<br
-        /><br />
+        it builds on <a
+          href='https://github.com/henryw374/cljc.java-time'
+          class='text-juxt'
+          >cljc.java-time
+        </a> to support both Clojure and ClojureScript and this allows us to share
+        time-related functions across client and server.<br /><br />
         GraphQL has been a powerful, simplifying model for some of the most complex
         web applications we’ve built at JUXT, and although the Clojure ecosystem
         around this technology is relatively small, we’ve found the data-driven approach
-        of Lacinia to be highly effective and the library itself is mature with good
-        coverage of the GraphQL specification. Users of GraphQL should also check
-        out re-graph by JUXTer Oliver Hine.
+        of <a href='https://github.com/walmartlabs/lacinia' class='text-juxt'
+          >Lacinia
+        </a> to be highly effective and the library itself is mature with good coverage
+        of the GraphQL specification. Users of GraphQL should also check out <a
+          href='https://github.com/oliyh/re-graph'
+          class='text-juxt'
+          >re-graph
+        </a> by JUXTer <a href='https://github.com/oliyh' class='text-juxt'
+          >Oliver Hine.
+        </a>
       </p>
     </Section>
     <Section className='bg-zinc-200 py-16 text-black'>
@@ -437,11 +559,37 @@ const bannerPicture = await getImage({
       <p class='text-xl md:text-2xl font-extralight'>
         The radar isn’t exhaustive, and where we’re pushed for space we tend to
         prioritise those libraries that are on the way up or on the way down.
-        This leaves some of our regular favourites out, including clj-http,
-        HoneySQL, weavejester’s crypto libraries (1, 2, 3), and Jackdaw, a
-        comprehensive Kafka Producer, Consumer and Streams API client. Nippy is
-        one of the best serialisation libraries available, for all manner of
-        uses in Clojure and beyond.
+        This leaves some of our regular favourites out, including <a
+          href='https://github.com/dakrone/clj-http'
+          class='text-juxt'
+          >clj-http,
+        </a>
+        <a href='https://github.com/seancorfield/honeysql' class='text-juxt'
+          >HoneySQL,
+        </a> weavejester’s crypto libraries (<a
+          href='https://github.com/weavejester/crypto-random'
+          class='text-juxt'
+          >1
+        </a>,
+        <a
+          href='https://github.com/weavejester/crypto-password'
+          class='text-juxt'
+          >2
+        </a>,
+        <a
+          href='https://github.com/weavejester/crypto-equality'
+          class='text-juxt'
+          >3
+        </a>), and <a
+          href='https://github.com/FundingCircle/jackdaw'
+          class='text-juxt'
+          >Jackdaw,
+        </a> a comprehensive Kafka Producer, Consumer and Streams API client. <a
+          href='https://github.com/ptaoussanis/nippy'
+          class='text-juxt'
+          >Nippy
+        </a> is one of the best serialisation libraries available, for all manner
+        of uses in Clojure and beyond.
       </p>
     </Section>
     <Section className='bg-sky-900 py-16 text-white'>
