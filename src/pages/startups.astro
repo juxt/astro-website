@@ -31,12 +31,21 @@ const financialPicture = await getImage({
   width: 1700,
   quality: 90
 }).then((img) => img.src)
+
+const {href, origin} = Astro.url
+console.log(origin
+);
+
 ---
-
-<meta property='og:title' content='startups'/>
-<meta property='og:image' content={financialPicture}/>
-<meta property='og:description' content='We work closely with start-up founders to understand the mission deeply and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.'/>
-
+<head>
+<!-- Facebook Meta Tags -->
+  <meta property="og:url" content={href}>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="startups">
+  <meta property="og:description" content="We work closely with start-up founders to understand the mission deeply and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.">
+  <meta property="og:image" content={`${origin}${financialPicture}`}>
+</head>
+  
 <Layout navbar title='Startups'>
   <main>
     <Banner
