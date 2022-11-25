@@ -14,11 +14,12 @@ tags:
 
 import { Image } from '@astrojs/image/components'
 import jointrees from '../../assets/blog/wcoj/join-trees.jpg'
+import unaryjoin from '../../assets/blog/wcoj/unary-relation-join.png'
 
 ### Joins
 
-Let's talk about joins. Imagine three relations (think tables in SQL and tuples in datalog)
-$R$, $S$, $T$ and that we want to compute the join $R \Join S \Join T$. A common approach
+Let's talk about joins. Imagine three relations (think tables in SQL and tuples in Datalog)
+$R(a,b)$, $S(a,c)$, $T(b,c)$ and that we want to compute the join $R \Join S \Join T$. A common approach
 in databases these days (and what for example Postgres does) is to join in a relation at a time.
 This leads to the natural definition of a join tree.
 
@@ -34,8 +35,8 @@ finding a good tree.
 
 The three relations don't need to be different relations they could all be the same. Imagine a
 relation $G(a,b)$ (a graph) and the join $G(a,c) \Join G(a,b) \Join G(b,c)$. If you think of the
-data in $G$ as edges, then join computes the triangles in a graph. For completeness the
-corresponding queries in SQL and datalog.
+data in $G$ as edges, then the join computes the triangles in a graph. For completeness the
+corresponding queries in SQL and Datalog.
 
 
 ```SQL
@@ -71,14 +72,54 @@ More generally if you fix some schema for you database and you fix some query ov
 there is exists some "Worst Case" output size ($O(N^{3/2})$ for the graph above
 but more complicated for the general case as your relations might have different sizes)
 for some instantiation of your database.
-WCOJ guarantees you that you will do no more work then that worst-case output size.
+WCOJ guarantees you that you will do no more work then this worst-case output size.
 Let's also mention what WCOJ is not. WCOJ does not give you any guarantees on
 the runtime in the general case. So imagine a graph with a single triangle. A WCOJ algorithm
 does not run in constant time, the only guarantee is a runtime of $O(N^{3/2})$ (although
 in practice this preforms very likely better).
 
-In the following sections we try to gradually build up all the necessary knowledge for
-building a WCOJ algorithm in Clojure.
+In the following sections we try to gradually build up all the necessary knowledge/manchinary for
+building a WCOJ algorithm for a simple Datalog engine in Clojure.
+
+### Set intersections
+
+We are starting with a well known fact which is used extensively in Databases. The intersection
+of two sets can be done efficiently in the size of the smaller set. By efficiently we mean $O(N)$ or
+$O(N \log N)$ where $N$ is the size of the smaller set. You walk the items of the smaller set and
+check if they exist in the larger set. You can even see this kind of algorithm at work in the `clojure.set`
+[namespace](https://github.com/clojure/clojure/blob/5ffe3833508495ca7c635d47ad7a1c8b820eab76/src/clj/clojure/set.clj#L33-L47).
+
+In databases data is often not stored in hash structures but rather B-trees which stores data sorted and
+allow efficient seeking to some specific key. This seek operation is what brings in the extra $O(\log N)$ factor.
+Let's take as an example a simple datalog query with a single variable.
+```clj
+'{:find [?x]
+  :where [[?x :person/hometown "Berlin"]
+          [?x :person/firstname "Bob"]
+          [?x :person/eats "Spaghetti"]]}
+```
+Assuming for now that we have access to some sort of iterator interface where each iterator satisfies the contstraints the
+specific `where` clause and where the data is sorted while we iterate over it.
+```clj
+(defprotocol Iterator
+  (first [this])
+  (next [this])
+  (seek [this k]))
+```
+The first two operations are just the ones we know from the Clojure Sequence abstraction. `seek` is the one we have
+described above. If a key is not present in an iterator the seek operation seeks to the next element that is larger than
+the given key. The joining of multiple iterators can then be done by keeping track of the head with largest element seen so
+far and trying to bring the iterator with the smallest element at the head to be equal to the one with the largest element.
+If the largest and the smallest are equal we have found a match.
+
+<Image alt='image' width='1000' src={unaryjoin} />
+
+Describe the picture above better.
+
+The clojure core standard `sorted-set` and `sorted-map` implementations do not provide any efficient
+`seek` operation, but
+[other](https://github.com/clojure/data.avl/commit/11f905b9b45d1873a2782066352126dd91f40af4)
+[implementations](https://github.com/tonsky/persistent-sorted-set/pull/9/files) can be extended to support this.
 
 ### Iterators
 
@@ -95,13 +136,17 @@ at the [following](https://github.com/FiV0/hooray) repository.
 
 ### References
 
-- The [slides](https://slides.com/fiv0/deck) of a talk I gave at the local Berlin Clojure meetup
-- AGM bound [https://arxiv.org/pdf/1711.03860.pdf](https://arxiv.org/pdf/1711.03860.pdf)
-- Skew strikes back [https://arxiv.org/abs/1310.3314](https://arxiv.org/abs/1310.3314)
+- The [slides](https://slides.com/fiv0/deck) of a talk about WCOJ I gave at the local Berlin Clojure meetup.
+- AGM bound [https://arxiv.org/pdf/1711.03860.pdf](https://arxiv.org/pdf/1711.03860.pdf). The paper is not itself about
+WCOJ but contains the result about graphs that the triggered this whole research area.
+
+The following are roughly in order of (my subjective) comprehensibility:
+- [https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/](https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/)
+- [http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html](http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html)
 - Leapfrog Triejoin [https://arxiv.org/abs/1210.0481](https://arxiv.org/abs/1210.0481)
+- Skew strikes back [https://arxiv.org/abs/1310.3314](https://arxiv.org/abs/1310.3314)
 - Radix Triejoin [https://arxiv.org/abs/1912.12747](https://arxiv.org/abs/1912.12747)
 - WCOJ review [https://arxiv.org/abs/1803.09930](https://arxiv.org/abs/1803.09930)
 - Simpli-Squared [https://arxiv.org/abs/2111.00163](https://arxiv.org/abs/2111.00163)
-- [https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/](https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/)
-- [http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html](http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html)
+
 - Lake/Mountain picture at the top from [Luca Bravo](https://unsplash.com/@lucabravo)
