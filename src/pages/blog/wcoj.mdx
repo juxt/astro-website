@@ -10,6 +10,7 @@ publishedDate: '01 Dec 2022'
 heroImage: 'river_lake.jpg'
 tags:
   - 'clojure'
+  - 'datalog'
 ---
 
 import { Image } from '@astrojs/image/components'
@@ -25,11 +26,11 @@ This leads to the natural definition of a join tree.
 
 <Image alt='image' width='500' src={jointrees} />
 
-The problem with join trees is that you might do more work then you need to in an intermediate join.
+The problem with join trees is that you might do more work then needed in an intermediate join.
 For example for the join tree on the left we are creating a 1000 rows/tuples although we are
 only needing 100 at the end. The join tree on the right does much better in that regard as it
 only realizes 10 intermediate results. So the difficulty when doing binary joins of relations is
-finding a good tree.
+finding a good join tree.
 
 ### Triangle query
 
@@ -98,8 +99,9 @@ Let's take as an example a simple datalog query with a single variable.
           [?x :person/firstname "Bob"]
           [?x :person/eats "Spaghetti"]]}
 ```
-Assuming for now that we have access to some sort of iterator interface where each iterator satisfies the contstraints the
-specific `where` clause and where the data is sorted while we iterate over it.
+So we are looking for a person living in Berlin, whose name is Bob and who eats Spaghetti. Assuming
+for now that we have access to some iterator where each iterator satisfies the contstraints of the
+specific `where` clause (people living in Berlin for the first one) and where the data is sorted while we iterate over it.
 ```clj
 (defprotocol Iterator
   (first [this])
@@ -108,13 +110,15 @@ specific `where` clause and where the data is sorted while we iterate over it.
 ```
 The first two operations are just the ones we know from the Clojure Sequence abstraction. `seek` is the one we have
 described above. If a key is not present in an iterator the seek operation seeks to the next element that is larger than
-the given key. The joining of multiple iterators can then be done by keeping track of the head with largest element seen so
-far and trying to bring the iterator with the smallest element at the head to be equal to the one with the largest element.
-If the largest and the smallest are equal we have found a match.
+the given key. The joining of multiple iterators can then be done by keeping track of the largest head element (sorting by `first`)
+of the iterators and trying to bring the iterator with the smallest head element to be at least as large as the largest (`seek`).
+If the largest and the smallest head element of any iterator are equal we have found a match.
 
 <Image alt='image' width='1000' src={unaryjoin} />
 
-Describe the picture above better.
+So imagine that we have three iterators $A$, $B$ and $C$ for our three `where` clauses above. The data of
+these iterators is just integers (you can think of this as the hash of the actual values) so we can compare
+elements. In on disk implementations you can also think of this as byte arrays of the actual data.
 
 The clojure core standard `sorted-set` and `sorted-map` implementations do not provide any efficient
 `seek` operation, but
@@ -127,12 +131,26 @@ The clojure core standard `sorted-set` and `sorted-map` implementations do not p
 
 ### Abstracting more
 
+Once you start implementing the algorithm outlined above you realize that it
+quickly becomes very gnarly as there is the need for a lot of bookkeeping.
+Whery am I currently for which operator
+
+### Variable variable ordering
+
+Why I like about the approach just outlined in the paragraph above.
+
+
 ### A (simplified) proof
+
+So far I mainly talked about implementation details and but have not given you any "proof"
+that what we have built so far actually works in the desired runtime.
 
 ### Final remarks
 
 You can find some of the ideas explained above implemented (although rather poorly tested)
 at the [following](https://github.com/FiV0/hooray) repository.
+
+### Appendix (general Formula)
 
 ### References
 
@@ -140,7 +158,7 @@ at the [following](https://github.com/FiV0/hooray) repository.
 - AGM bound [https://arxiv.org/pdf/1711.03860.pdf](https://arxiv.org/pdf/1711.03860.pdf). The paper is not itself about
 WCOJ but contains the result about graphs that the triggered this whole research area.
 
-The following are roughly in order of (my subjective) comprehensibility:
+The following are roughly in order of comprehensibility (modulo my subjectivity):
 - [https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/](https://justinjaffray.com/a-gentle-ish-introduction-to-worst-case-optimal-joins/)
 - [http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html](http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html)
 - Leapfrog Triejoin [https://arxiv.org/abs/1210.0481](https://arxiv.org/abs/1210.0481)
