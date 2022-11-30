@@ -19,7 +19,7 @@ const jobPostsParsed = jobPosts
   .filter((jobPost) => isDev || !jobPost.frontmatter.draft)
 
 const careersBannerPicture = await getImage({
-  src: import('../../assets/site/work-with-us-banner.jpeg'),
+  src: import('../../assets/site/work-with-us-banner.jpg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)

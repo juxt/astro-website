@@ -27,12 +27,10 @@ const financialServicesParsed = startUps
   }))
 
 const financialPicture = await getImage({
-  src: import('../assets/startups/startup-bg.jpg'),
+  src: import('../assets/site/startup-bg.jpg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)
-
-const {href, origin} = Astro.url
 ---
  
 <Layout navbar title='Startups'>

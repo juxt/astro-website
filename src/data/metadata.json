@@ -32,20 +32,28 @@
     { "label": "Radar", "href": "/radar" }
   ],
   "metadata": {
+    "home": {
+      "description": "We are a unique software engineering firm, with a track record of rapidly delivering high-quality IT systems to meet challenging business objectives.",
+      "image": "homepage-banner.jpg"
+    },
     "about": {
       "description": "Teamwork is at the heart of our culture, our internal knowledge sharing and collaborative culture are what allow us to deliver as efficiently as we do."
     },
     "financial": {
-      "description": "JUXT is a software consultancy with many successful stories in the financial sector."
+      "description": "JUXT is a software consultancy with many successful stories in the financial sector.",
+      "image": "case-studies-banner.jpg"
     },
     "startups": {
-      "description": "JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP."
+      "description": "JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP.",
+      "image": "startup-bg.jpg"
     },
     "get-started": {
-      "description": "When we approach a new project, whether it’s joining an existing software team to get a project over the line, or designing and building an ambitious new system from scratch, we work with our clients through the four main stages"
+      "description": "When we approach a new project, whether it’s joining an existing software team to get a project over the line, or designing and building an ambitious new system from scratch, we work with our clients through the four main stages",
+      "image": "services-banner.jpg"
     },
     "careers": {
-      "description": "We have a developer-led culture. Our developers are at the heart of our consulting and product development."
+      "description": "We have a developer-led culture. Our developers are at the heart of our consulting and product development.",
+      "image": "work-with-us-banner.jpg"
     },
     "clojure-in": {
       "description": "'Clojure In' is a collection of stories about companies who have adopted Clojure. In these articles we interview key individuals involved and chat about the challenges, issues, benefits and trade-offs in their decision to go with Clojure."

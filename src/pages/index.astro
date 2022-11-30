@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro'
 const siteMetadata = await Astro.glob('../data/metadata.json')
 
 const homepageBannerPicture = await getImage({
-  src: import('../assets/site/homepage-banner.jpeg'),
+  src: import('../assets/site/homepage-banner.jpg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)
