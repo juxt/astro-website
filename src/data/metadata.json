@@ -31,14 +31,30 @@
     { "label": "Blog", "href": "/blog" },
     { "label": "Radar", "href": "/radar" }
   ],
-  "metaDescription": {
-    "about": "Teamwork is at the heart of our culture, our internal knowledge sharing and collaborative culture are what allow us to deliver as efficiently as we do.",
-    "financial": "JUXT is a software consultancy with many successful stories in the financial sector.",
-    "startups": "JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP.",
-    "get-started": "When we approach a new project, whether it’s joining an existing software team to get a project over the line, or designing and building an ambitious new system from scratch, we work with our clients through the four main stages",
-    "careers": "We have a developer-led culture. Our developers are at the heart of our consulting and product development.",
-    "clojure-in": "'Clojure In' is a collection of stories about companies who have adopted Clojure. In these articles we interview key individuals involved and chat about the challenges, issues, benefits and trade-offs in their decision to go with Clojure.",
-    "blog": "A list of articles where our engineers share their knowledge and experience with the community.",
-    "radar": "An opinionated and subjective view, based on our collective experience of building projects with Clojure."
+  "metadata": {
+    "about": {
+      "description": "Teamwork is at the heart of our culture, our internal knowledge sharing and collaborative culture are what allow us to deliver as efficiently as we do."
+    },
+    "financial": {
+      "description": "JUXT is a software consultancy with many successful stories in the financial sector."
+    },
+    "startups": {
+      "description": "JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP."
+    },
+    "get-started": {
+      "description": "When we approach a new project, whether it’s joining an existing software team to get a project over the line, or designing and building an ambitious new system from scratch, we work with our clients through the four main stages"
+    },
+    "careers": {
+      "description": "We have a developer-led culture. Our developers are at the heart of our consulting and product development."
+    },
+    "clojure-in": {
+      "description": "'Clojure In' is a collection of stories about companies who have adopted Clojure. In these articles we interview key individuals involved and chat about the challenges, issues, benefits and trade-offs in their decision to go with Clojure."
+    },
+    "blog": {
+      "description": "A list of articles where our engineers share their knowledge and experience with the community."
+    },
+    "radar": {
+      "description": "An opinionated and subjective view, based on our collective experience of building projects with Clojure."
+    }
   }
 }

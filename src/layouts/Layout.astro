@@ -15,9 +15,14 @@ type LayoutProps = {
 const url = new URL(Astro.request.url)
 const currentPageName = currentPage(url.pathname)
 
-const [{ metaDescription }] = await Astro.glob('../data/metadata.json')
+const [{ metadata }] = await Astro.glob('../data/metadata.json')
 
-const currentDescription = metaDescription[currentPageName]
+if (!metadata[currentPageName]) {
+  console.warn('The page: ' + currentPageName + " doesn't have metadata.")
+}
+
+const currentDescription =
+  metadata[currentPageName] && metadata[currentPageName].description
 
 const enableDarkMode =
   Astro.url.pathname.includes('/blog') ||
@@ -33,45 +38,7 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     {currentDescription && (
       <meta name='description' content={currentDescription} />
     )}
-    <!-- Facebook Meta Tags -->
-    <meta
-      property='og:url'
-      content='https://deploy-preview-3--juxt-website.netlify.app/startups/'
-    />
-    <meta property='og:type' content='website' />
-    <meta property='og:title' content='startups' />
-    <meta
-      property='og:description'
-      content='We work closely with start-up founders to understand the mission deeply and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.'
-    />
-    <meta
-      property='og:image'
-      content='https://deploy-preview-3--juxt-website.netlify.app/assets/startup-bg.a74107f2_Z1plJJL.jpg'
-    />
-    <meta
-      property='og:image:secure_url'
-      content='https://deploy-preview-3--juxt-website.netlify.app/assets/startup-bg.a74107f2_Z1plJJL.jpg'
-    />
 
-    <!-- Twitter Meta Tags -->
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta
-      property='twitter:domain'
-      content='deploy-preview-3--juxt-website.netlify.app'
-    />
-    <meta
-      property='twitter:url'
-      content='https://deploy-preview-3--juxt-website.netlify.app/startups/'
-    />
-    <meta name='twitter:title' content='startups' />
-    <meta
-      name='twitter:description'
-      content='We work closely with start-up founders to understand the mission deeply and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience and judgement to the early, critical stages of your start-up journey.'
-    />
-    <meta
-      name='twitter:image'
-      content='https://deploy-preview-3--juxt-website.netlify.app/assets/startup-bg.a74107f2_Z1plJJL.jpg'
-    />
     <meta name='viewport' content='width=device-width' />
     <link href='/images/favicon.png' rel='shortcut icon' type='image/x-icon' />
     <link href='/images/favicon-apple.svg' rel='apple-touch-icon' />
