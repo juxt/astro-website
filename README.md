@@ -246,6 +246,6 @@ To see a single job you can visit the `/careers/*jobName*` url.
 
 ## Algolia Instant Search
 
-The Algolia indexing code is written in nbb. The script runs during pre-commit to make sure the index is always up to date with the latest changes. The script is located in `algolia/index.cljs`.
+The Algolia indexing code is written in nbb. The script runs in netlify to make sure the index is always up to date with the latest changes. The script is located in `algolia/index.cljs`.
 
 To manually rebuild the full index, run `yarn run algolia-full`. There's also `yarn run algolia-partial` which will grep the blog files that are in your working branch through the git diff --name-only command and only index those.
