@@ -6,7 +6,7 @@ import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 
 const bannerPicture = await getImage({
-  src: import('../assets/site/work-with-us-banner.jpeg'),
+  src: import('../assets/site/work-with-us-banner.jpg'),
   width: 1700,
   quality: 90
 }).then((img) => img.src)
@@ -15,12 +15,12 @@ const boxStructure = [
   {
     title: 'Discover our work with financial companies',
     href: '/financial',
-    src: import('../assets/site/case-studies-banner.jpeg')
+    src: import('../assets/site/case-studies-banner.jpg')
   },
   {
     title: 'Find out how we work with startups',
     href: '/startups',
-    src: import('../assets/startups/startup-bg.jpg')
+    src: import('../assets/site/startup-bg.jpg')
   },
   {
     title: 'Read our latest blogs and articles',
