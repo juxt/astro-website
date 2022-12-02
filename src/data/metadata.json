@@ -31,7 +31,7 @@
     { "label": "Blog", "href": "/blog" },
     { "label": "Radar", "href": "/radar" }
   ],
-  "metadata": {
+  "seo": {
     "home": {
       "description": "We are a unique software engineering firm, with a track record of rapidly delivering high-quality IT systems to meet challenging business objectives.",
       "image": "homepage-banner.jpg"

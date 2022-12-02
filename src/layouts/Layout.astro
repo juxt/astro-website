@@ -16,22 +16,29 @@ const url = new URL(Astro.request.url)
 const currentPageName =
   currentPage(url.pathname) || (url.pathname === '/' && 'home')
 
-const [{ metadata }] = await Astro.glob('../data/metadata.json')
+type Metadata = {
+  homepage: {
+    featuredBlogs: string[]
+    featuredCaseStudies: string[]
+  }
+  navbar: { label: string; href: string }[]
+  footer: { label: string; href: string; flag?: string }[]
+  seo: Record<string, { description: string; image?: string }>
+}
 
-if (!metadata[currentPageName]) {
+const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
+
+if (!seo[currentPageName]) {
   console.warn('The page: ' + currentPageName + " doesn't have metadata.")
 }
 
 const currentDescription =
-  metadata[currentPageName] && metadata[currentPageName].description
+  seo[currentPageName] && seo[currentPageName].description
 
 // image attributes must be all jpgs and located in src/assets/site/ dir
 let imageForShare
-if (metadata[currentPageName] && metadata[currentPageName].image) {
-  const imgNoExt = metadata[currentPageName].image
-    .split('.')
-    .slice(0, -1)
-    .join('.')
+if (seo[currentPageName] && seo[currentPageName].image) {
+  const imgNoExt = seo[currentPageName].image.split('.').slice(0, -1).join('.')
   let importedPic = await import(`../assets/site/${imgNoExt}.jpg`)
   imageForShare = `${url.origin}${importedPic.default.src}`
 }
@@ -54,7 +61,9 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     <meta property='og:url' content={url.href} />
     <meta property='og:type' content='website' />
     <meta property='og:title' content={currentPageName} />
-    <meta property='og:description' content={currentDescription} />
+    {currentDescription && (
+      <meta property='og:description' content={currentDescription} />
+    )}
     {imageForShare && <meta property='og:image' content={imageForShare} />}
     {imageForShare && (
       <meta property='og:image:secure_url' content={imageForShare} />
@@ -65,7 +74,9 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     <meta property='twitter:domain' content={url.hostname} />
     <meta property='twitter:url' content={url.href} />
     <meta name='twitter:title' content={currentPageName} />
-    <meta name='twitter:description' content={currentDescription} />
+    {currentDescription && (
+      <meta name='twitter:description' content={currentDescription} />
+    )}
     {imageForShare && <meta name='twitter:image' content={imageForShare} />}
 
     <meta name='viewport' content='width=device-width' />
