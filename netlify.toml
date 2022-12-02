@@ -3,3 +3,39 @@
   to = "/blog/:splat"
   status = 301
   force = false
+
+[[redirects]]
+  from = "/yada/*"
+  to = "https://www.juxt.land/yada/:splat"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/yada"
+  to = "https://www.juxt.land/yada/manual/index.html" 
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/tick/*"
+  to = "https://www.juxt.land/tick/:splat"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/edge"
+  to = "https://juxt.land/edge" 
+  status = 301
+  force = false 
+
+[[redirects]]
+  from = "/crux"
+  to = "https://opencrux.com" 
+  status = 301
+  force = false 
+
+  [[redirects]]
+  from = "/crux/*"
+  to = "https://opencrux.com" 
+  status = 301
+  force = false 
