@@ -34,7 +34,7 @@
   status = 301
   force = false 
 
-  [[redirects]]
+[[redirects]]
   from = "/crux/*"
   to = "https://opencrux.com" 
   status = 301
