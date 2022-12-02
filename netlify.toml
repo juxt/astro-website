@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/blog/posts/*"
-  to = "/blog/:name"
+  to = "/blog/:splat"
   status = 301
   force = false
