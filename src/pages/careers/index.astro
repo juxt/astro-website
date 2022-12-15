@@ -3,6 +3,7 @@ import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import Banner from '../../components/Banner.astro'
+import BannerText from '../../components/BannerText.astro'
 import Clickable from '../../components/Clickable.astro'
 import JobCard from '../../components/JobCard.astro'
 import Section from '../../components/Section.astro'
@@ -42,15 +43,17 @@ const benefitsPicture = await getImage({
     text='Careers'
     style={{ backgroundImage: `url(${careersBannerPicture})` }}
   />
-  <Section className='bg-zinc-900 py-28 text-white'>
-    <p class='text-xl md:text-2xl font-extralight'>
-      JUXT a developer-first company, founded and run by developers
-    </p>
-  </Section>
+  <BannerText
+    title='Join JUXT!'
+    subtitle='We are a developer-first company, founded and run by developers.'
+  />
 
   <Section
     className='bg-cover relative before:absolute before:w-full before:h-full before:bg-black/70'
-    style={{ backgroundImage: `url(${whyJuxtPicture})` }}
+    style={{
+      backgroundPosition: 'top',
+      backgroundImage: `url(${whyJuxtPicture})`
+    }}
   >
     <div class='relative py-20'>
       <h2 class='text-4xl pb-20 text-white font-medium flex justify-center'>

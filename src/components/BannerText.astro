@@ -1,0 +1,21 @@
+---
+import Section from './Section.astro'
+
+export type BannerTextProps = {
+  title: string
+  subtitle: boolean
+}
+
+const { title, subtitle } = Astro.props as BannerTextProps
+---
+
+<Section className='bg-zinc-900 h-[25vh]'>
+  <div class='flex items-center h-[25vh] text-white'>
+    <div>
+      <h2 class='pb-4 text-2xl md:text-2xl'>{title}</h2>
+      <p class='text-xl md:text-xl font-extralight'>
+        {subtitle}
+      </p>
+    </div>
+  </div>
+</Section>

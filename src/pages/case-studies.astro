@@ -1,6 +1,7 @@
 ---
 import { getImage } from '@astrojs/image'
 import Banner from '../components/Banner.astro'
+import BannerText from '../components/BannerText.astro'
 import Section from '../components/Section.astro'
 import type { CaseStudyProps } from '../layouts/CaseStudy.astro'
 import CaseStudy from '../layouts/CaseStudy.astro'
@@ -29,12 +30,12 @@ const caseStudiesPicture = await getImage({
         backgroundImage: `url(${caseStudiesPicture})`
       }}
     />
-    <Section className='bg-zinc-900 py-28 text-white'>
-      <p class='text-xl md:text-2xl font-extralight'>
-        IT projects are full of risk — make sure you choose a vendor that can
-        deliver — here are some of our favourite success stories.
-      </p>
-    </Section>
+
+    <BannerText
+      title='IT projects are full of risk'
+      subtitle='Make sure you choose a vendor that can deliver — here are some of our favourite success stories.'
+    />
+
     <Section>
       <div class='flex flex-col gap-36 py-28'>
         {caseStudiesParsed.map((caseStudy) => (

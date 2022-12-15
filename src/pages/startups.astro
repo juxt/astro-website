@@ -5,6 +5,7 @@ import Banner from '../components/Banner.astro'
 import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 import TalkToUs from '../components/TalkToUs.astro'
+import BannerText from '../components/BannerText.astro'
 
 type StartUpsProps = {
   title: string
@@ -42,20 +43,9 @@ const financialPicture = await getImage({
         backgroundPosition: 'top'
       }}
     />
-
-    <Section className='bg-black py-20'>
-      <div class='flex flex-col gap-10'>
-        <h2 class='text-3xl font-normal text-white'>
-          JUXT engineers have helped launch startups across finance, property,
-          health, green-tech, and law.
-        </h2>
-        <div class='text-white text-xl font-extralight leading-normal'>
-          We work closely with startup founders to understand the mission deeply
-          and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience
-          and judgment to the early, critical stages of your startup journey.
-        </div>
-      </div>
-    </Section>
+    <BannerText
+    title='JUXT highly-skilled engineers have helped launch startups across finance, property, health, green-tech, and law.'
+    subtitle='We work closely with startup founders to understand the mission deeply and launch an MVP.'/>
 
   
     <div class='flex flex-col text-black'>

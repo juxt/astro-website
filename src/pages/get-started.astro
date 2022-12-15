@@ -2,6 +2,7 @@
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import Banner from '../components/Banner.astro'
+import BannerText from '../components/BannerText.astro'
 import Clickable from '../components/Clickable.astro'
 import Section from '../components/Section.astro'
 import TalkToUs from '../components/TalkToUs.astro'
@@ -36,10 +37,14 @@ const servicesBannerPicture = await getImage({
     <Banner
       text='Get Started'
       style={{
-        backgroundPosition: 'center',
+        backgroundPosition: 'bottom',
         backgroundImage: `url(${servicesBannerPicture})`
       }}
     />
+    <BannerText
+    title='Get started with JUXT'
+    subtitle='Learn the stages we go through when working with our clients.'
+  />
     <Section className='bg-gray-900 py-28 text-white'>
       <h2 class='text-xl md:text-2xl font-extralight'>
         When we approach a new project, whether it’s joining an existing

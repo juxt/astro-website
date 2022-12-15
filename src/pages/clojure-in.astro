@@ -2,6 +2,7 @@
 import { getImage } from '@astrojs/image'
 import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
+import BannerText from '../components/BannerText.astro'
 import Section from '../components/Section.astro'
 import { Blog } from '../components/types'
 import Layout from '../layouts/Layout.astro'
@@ -62,19 +63,10 @@ const clojureInPicture = await getImage({
       }}
     />
 
-    <Section className='bg-orange-300 dark:bg-sky-900 py-28'>
-      <div class='flex flex-col gap-10 dark:text-white text-black'>
-        <h1 class='text-4xl font-medium'>
-          Case-studies on where Clojure is being used across Europe
-        </h1>
-        <h2 class='text-2xl font-light'>
-          "Clojure In" is a collection of stories about companies who have
-          adopted Clojure. In these articles we interview key individuals
-          involved and chat about the challenges, issues, benefits and
-          trade-offs in their decision to go with Clojure.
-        </h2>
-      </div>
-    </Section>
+    <BannerText
+      title='Case-studies on where Clojure is being used across Europe'
+      subtitle=' "Clojure In" is a collection of stories about companies that we interviewed who have adopted Clojure.'
+    />
 
     <Section className='py-28'>
       <div class='flex flex-col gap-28'>

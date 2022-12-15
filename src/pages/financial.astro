@@ -2,6 +2,7 @@
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import Banner from '../components/Banner.astro'
+import BannerText from '../components/BannerText.astro'
 import Section from '../components/Section.astro'
 import TalkToUs from '../components/TalkToUs.astro'
 import Layout from '../layouts/Layout.astro'
@@ -42,6 +43,11 @@ const financialPicture = await getImage({
       style={{
         backgroundImage: `url(${financialPicture})`
       }}
+    />
+
+    <BannerText
+      title='JUXT work with leading global financial organizations'
+      subtitle='We modernize their software assets and help them to exploit agility and cost-savings from Cloud technologies.'
     />
     <Section className='bg-zinc-100 py-28 text-white'>
       <div class='text-black flex flex-col gap-6'>

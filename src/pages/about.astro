@@ -3,6 +3,7 @@ import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
+import BannerText from '../components/BannerText.astro'
 import { LinkIcon } from '../components/Icons'
 import Section from '../components/Section.astro'
 import { Person } from '../components/types'
@@ -82,12 +83,11 @@ function imageToFilename(image: string) {
         backgroundImage: `url(${bannerPicture})`
       }}
     />
-    <Section className='bg-zinc-900 py-28 text-white'>
-      <h2 class='pb-4 text-3xl md:text-4xl'>Our Mission</h2>
-      <p class='text-xl md:text-2xl font-extralight'>
-        To unlock the potential of software to expand human horizons.
-      </p>
-    </Section>
+    <BannerText
+      title='Our Mission'
+      subtitle='To unlock the potential of software to expand human horizons.'
+    />
+
     <Section
       className='sm:bg-fixed relative py-60 bg-cover bg-top bg-no-repeat before:absolute before:w-full before:top-0 before:left-0 before:h-full before:bg-black/60'
       style={{
