@@ -43,7 +43,15 @@ const groupedBlogs: Record<string, { regionTitle: string; blogs: Blog[] }> =
     }
   }, {})
 
-const sortedBlogs = regionOrder.map((region) => groupedBlogs[region])
+const sortedBlogs = regionOrder.map((region) => {
+  const { regionTitle, blogs } = groupedBlogs[region]
+  const sortedByDate = blogs.sort((a, b) => {
+    return (
+      new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+    )
+  })
+  return { regionTitle, blogs: sortedByDate }
+})
 
 const clojureInPicture = await getImage({
   src: import('../assets/site/Clojure-logo-colours-01.png'),
