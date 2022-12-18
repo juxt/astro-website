@@ -19,3 +19,7 @@
 .prose :where(code):not(:where([class~='not-prose'] *))::after {
   content: '';
 }
+
+.prose a {
+  word-break: break-all;
+}
