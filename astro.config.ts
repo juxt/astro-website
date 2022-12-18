@@ -7,6 +7,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
+import remarkGfm from 'remark-gfm'
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +21,7 @@ export default defineConfig({
     shikiConfig: {
       theme: 'css-variables'
     },
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkGfm],
     rehypePlugins: [
       rehypeSlug,
       rehypeKatex,
