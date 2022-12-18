@@ -57,18 +57,29 @@ It is defined in
 <https://github.com/clojure/clojure/tree/master/src/jvm/clojure/lang/IReduceInit.java#L13-L15>
 as
 
-\`\`\` public interface IReduceInit{ Object reduce(IFn f, Object start)
-; } \`\`\`
+```java
+ public interface IReduceInit {
+  Object reduce(IFn f, Object start);
+ }
+```
 
 this `reduce` method will get called by `clojure.core/reduce` function.
 A general implementation might look like
 
-\`\`\` (defn iterator-reducible \"expresses an iterator through the
-medium of IReduceInit if first-val is nil it will be ignored\"
-\[first-val \^java.util.Iterator it\] (reify IReduceInit (reduce \[this
-f init\] (loop \[acc (if first-val (f init first-val) init)\] (if (or
-(reduced? acc) (not (.hasNext it))) (unreduced acc) (recur (f acc (.next
-it)))))))) \`\`\` . It's a plain old `loop/recur` . We invoke the
+```clojure
+(defn iterator-reducible
+  "expresses an iterator through the medium of IReduceInit if first-val is nil it will be ignored"
+  [first-val ^java.util.Iterator it]
+    (reify IReduceInit
+      (reduce [this f init ]
+        (loop [acc (if first-val (f init first-val) init) ]
+         (if (or (reduced? acc)
+                 (not (.hasNext it)))
+           (unreduced acc)
+           (recur (f acc (.next it))))))))
+```
+
+It's a plain old `loop/recur` . We invoke the
 reducing function `f` to handle a value . We always check the
 accumulator for the `reduced` short circuit. This supports
 early-termination constructs like `(take 2` The iterator may go on for
