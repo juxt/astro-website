@@ -13,6 +13,6 @@ This is where we bring our skills and experience to bear, to build exceptional t
 
 Working iteratively means deploying features early and often, and seeking feedback to validate our path. With each iteration we will:
 
-- Break down the next high-level feature into detailed engineering tasks.
+- Break down the next high-level features into detailed engineering tasks.
 - Work with regular stand-up meetings that project stakeholders are welcome to join.
-- Conclude our iteration with a demonstration session, or Show & Tell, to explain recently delivered features and system components.
+- Use demo sessions (Show & Tell) to explain recently delivered features and system components.
