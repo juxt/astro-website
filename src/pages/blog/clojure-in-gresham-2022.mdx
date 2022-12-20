@@ -7,7 +7,7 @@ description: ''
 category: 'clojure-in'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '19 Dec 2022'
-heroImage: 'gresham-office.jpg'
+heroImage: 'clojurein-uk-2.jpg'
 clojureIn: { region: 'UK' }
 ---
 
@@ -34,6 +34,10 @@ Another major offering is our new banking platform, CCM. Existing banks will typ
 **Joe: You have quite a few different product streams. What tech stacks are being used?**
 
 **Colin:** Traditionally it has been Java, Spring. We use Gigaspaces for smart, distributed caching. We also have some products on .Net/Microsoft stack that have come from acquisition, but we’re definitely aligning towards the JVM. We use a lot of Kafka, and we’re also seeing most of our products gradually aligning on Kafka. We use a lot of AWS for our own cloud services. Many banking clients are still not ready to put their data into the public cloud, so we’ll support them running our systems on their own on-premise Kubernetes clusters.
+
+import gro from '../../assets/blog/gresham-office.jpg'
+
+<Image alt='image' width={500} src={gro} />
 
 ## Clojure
 
@@ -79,7 +83,7 @@ import grs from '../../assets/blog/gresham-staff.jpg'
 
 **Mark:** With finance systems you need to understand how you got to the position that you’re currently in. With Kafka you can save all events, so you have an audit history to the beginning of time if you want it. So Kafka lends itself well to finance. With a topic you’re saying, “These are the facts that have happened”, and if your program code is ever wrong you can correct it and re-consume those facts to make up a different ‘model’ or ‘current view’ of what the world should look like.
 
-This event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to prove where you have actually put money. We may have one account, but when the customer looks at it they might want to see that account as many different buckets. We need to prove where the money has gone and what has happened. We have this power from the events.
+The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to prove where you have actually put money. We may have one account, but when the customer looks at it they might want to see that account as many different buckets. We need to prove where the money has gone and what has happened. We have this power from the events.
 
 **Joe: So provenance - being able to trace back exactly how any value, like a balance, was arrived at - is very important for you.**
 
@@ -179,11 +183,11 @@ We have a daily stand-up as well, so we can use that to check that people are on
 
 **Joe: If new starters are new to Clojure, they will need to get more comfortable with the language itself and the core APIs. Is there anything you commonly use there?**
 
-**Colin:** We tend to give a couple of books to each new starter. Clojure for the Brave and True and Clojure Applied. It depends what our current favourites are. We also find 4Clojure exercises are useful. We buddy people up, so someone would do an exercise and then discuss with their buddy. The buddy might say, “Well, actually you could do it this way, or this way” and exploring this different approaches and alternatives is very useful.
+**Colin:** We tend to give a couple of books to each new starter. Clojure for the Brave and True and Clojure Applied. It depends what our current favourites are. We also find 4Clojure exercises are useful. We buddy people up, so someone would do an exercise and then discuss with their buddy. The buddy might say, “Well, actually you could do it this way, or this way” and exploring these different approaches and alternatives is very useful.
 
 We also have a lot of special-interest channels in Slack, not just for Clojure actually. People will post interesting articles there. We have channels for Kafka, Kubernetes, Clojure. There’s not a lot of traffic, but occasionally somebody will find a good article, or watch an interesting talk, or find a good reference. The Kafka one is pretty noisy.
 
-Pre-pandemic we did use to have weekly open learning sessions where we’d pick an interesting presentation from the last month or two and play it in our stand-up room, then chat about it afterwards.
+Pre-pandemic we used to have weekly open learning sessions where we’d pick an interesting presentation from the last month or two and play it in our stand-up room, then chat about it afterwards.
 
 **Mark:** In the past we’ve also had regular knowledge sharing sessions. It depends on where people are, so when you have lots of new starters you regularly have people saying, “I don’t understand that”. In our team right now we have a new starter so we’re starting to run these sessions again.
 
