@@ -1,0 +1,205 @@
+---
+author: 'jon'
+title: 'Clojure In London: uSwitch'
+description: 'An early adopter targets big data'
+category: 'clojure-in'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '22 Sep 2016'
+heroImage: 'uswitch-tech-office.jpg'
+clojureIn: { region: 'London' }
+---
+
+import { Image } from '@astrojs/image/components'
+
+import us from '../../assets/blog/uswitch-logo.png'
+
+<Image alt='image' width={300} src={us} />
+
+## Using Clojure from the Beginning
+
+[uSwitch](https://www.uswitch.com) is a major supporter of the [London Clojurian Community](http://www.londonclojurians.org/) having used Clojure since it's
+early 1.0 days. They run regular [coding dojos](http://www.londonclojurians.org/coding-dojos/) at their offices for
+newcomers to the language, and sponsor various community events and conferences
+(such as [EuroClojure](http://euroclojure.org/), [ClojureBridge](http://www.clojurebridge.org/), and the [Clojure Exchange](https://skillsmatter.com/conferences/6861-clojure-exchange-2015)).
+They frequently commit to open-source Clojure libraries and have also participated in the annual [Clojure Cup](https://twitter.com/clojurecup). The revolution at uSwitch began in 2010 after the company was acquired by [Forward Internet Group](http://forward.co.uk/). uSwitch's .NET monolithic systems were
+[strangled](http://www.martinfowler.com/bliki/StranglerApplication.html) and
+subsequently replaced with a system of microservices, written in Clojure, Ruby,
+Go and more. ​As with the changes to technology, the organisation also
+transformed from being [functionally structured](https://en.wikipedia.org/wiki/Organizational_structure#Functional_structure)
+to product-oriented; decoupling the business to make it more resilient and easier to scale.
+
+import doj from '../../assets/blog/uswitchdojo.jpg'
+
+<Image alt='image' width={500} src={doj} />​ I caught up with [Mike
+Jones](https://twitter.com/michael_jones), [Paul
+Ingles](https://twitter.com/pingles), [Ragnar Dahlen](https://twitter.com/ragge)
+and [Jon Neale](https://twitter.com/jon_neale) for a spot of Q & A.
+
+## Microservices, the Monolith and Clojure
+
+​
+**Jon Pither:** What was the relationship between Clojure and
+Microservices at the beginning?
+
+​
+**Mike Jones:** Having small, independently replaceable services helped us
+to explore new ways of doing things and to experiment. Another big
+benefit was rewriting pieces would force us to understand the problem
+better. The new service would be closer to what the business wanted. We
+also found many cases of errors being present in the old system that
+nobody knew about.
+​
+Clojure was a great fit for lots our services: the functional style of
+transforming immutable data, functions that could do one thing and do it
+well.
+​
+
+**Ragnar Dahlen:** Clojure's philosophy has been really influential for us
+too. We really feel we've benefited not just from the language but the
+community and philosophy around it.
+​
+
+**Paul Ingles:** We began taking the philosophy of clojure in the small,
+at the code level, and applying it to our architecture. People in the
+Clojure community were talking about immutability and composability, it
+gave us a point of reference to describe what we were doing intuitively
+at the system-level with Microservices.
+​
+
+## The Clojure Journey
+
+​
+**JP:** What was it like when the organisation took on Clojure and
+developers had to learn it?
+​
+
+**Paul Ingles:** At Forward we used to get together to go through
+[SICP](http://web.mit.edu/alexmv/6.037/sicp.pdf) or work through Project
+Euler. By the time we'd moved over to uSwitch we'd already been inviting
+more people to get stuck in. Pretty soon conferences and user groups
+started to appear so we tried to support as best we could with
+sponsoring, attending and ultimately, speaking.
+​
+
+**JP:** You've had Clojure expertise for a while now. How is the Clojure
+code faring on some of the more mature systems?
+​
+
+**Jon Neale:** Where we have big systems they are usually sustained by the
+various pieces being rewritten often. The conciseness of our Clojure
+codebases helps with this, typically being around 2k lines or less.
+​
+Conversely we've had some code around for 4 years that hasn't changed
+and is just solid.
+​
+
+**Paul Ingles:** We try to keep the individual pieces small enough that
+you can reason about them in isolation. Fortunately a lot of the things
+I work on these days are relatively short-lived or experimental: they
+generally end up small, and with simple enough data, that we could
+replace if it we ever had to.
+​
+Sometimes we look to replace things as we experiment with new ways of
+solving the problem, shipping logs from containers is a recent example.
+We've been through about 3 incarnations in as many months. Other times
+stuff just works and solves the problem and we're in no rush to just go
+back and replace for the sake of it.
+​
+
+## Hiring
+
+​
+**JP:** How has uSwitch found the hiring process for Clojure developers?
+​
+
+**JN:** We find that the quality of people coming through the door for
+interview is generally higher. We generally get high calibre developers
+interested in more than just programming, thinking beyond just their
+code.
+​
+
+**MJ:** The company must then be ready to take in developers of this
+mindset, to adapt to the individuals coming in who will want to make a
+difference. If you don't it's just a bait-and-switch.
+​
+
+**PI:** There's no guarantees of course but the quality is generally high.
+Clojure seems to be self-selecting in terms of talent, for now at least.
+Every community of developers has its quirks but we're pretty happy with
+the ones in the Clojure world.
+​
+
+**MJ:** We haven't had a problem finding candidates and there are some
+good agencies that specialise in finding functional programmers.
+Developers have also seen us at conferences and read our blogs, so we
+get a few candidates approaching us wanting to do Clojure.
+​
+
+**JN:** It was different to when we first started 6 years ago. Now we find
+that 70/80% of people applying have got Clojure on the CV. For us
+wanting to attract top people Clojure acts as a good differentiator and
+attractor.
+​
+
+## Clojure in the UK
+
+​
+**JP:** How do you think Clojure is doing in the UK?
+​
+
+**PI:** It feels like there's quite a lot of experience in London now.
+Perhaps there's fewer companies shouting about working with Clojure,
+although they are, just because its a bit less new now.
+​
+
+**JN:** It's definitely not just organisations used to being more
+cutting-edge nowadays, more banks are using it so it feels more
+mainstream.
+​
+
+**PI:** At conferences there's always a few companies I've not heard of
+and definitely not just ones in London so I guess it spreading. For us
+it's been brilliant and we're not likely to stop using it anytime soon.
+​
+The tooling and libraries have reached a level of safety where you're no
+longer looking over the edge of the precipice.
+​
+
+## State of Clojure
+
+​
+**JP:** What is the feeling as to what the state of Clojure is, and what
+recent or upcoming advances interest you?
+​
+
+**PI:** Clojure and the community have become so stable; the tooling and
+libraries have reached a level of safety where you're no longer looking
+over the edge of the precipice when you setup someone or something new.
+There's all kinds of training materials, lots of books, online
+exercises, and multiple conferences throughout the world.
+​
+
+**JN:** Getting a working setup is no longer an issue. Tools like [Emacs Live](https://github.com/overtone/emacs-live) and
+[Cursive](https://cursive-ide.com/) lower the barrier to entry and the
+more heavier class of tools have tremendous refactoring support.
+​
+Clojure is stable. The refactoring tools still being developed are
+interesting, and we'd like to try [boot](http://boot-clj.com/) and
+[spec](https://clojure.org/about/spec). Maybe a big web framework is
+imminent
+([Arachne](https://www.kickstarter.com/projects/1346708779/arachne-rapid-web-development-for-clojure)
+is upcoming).
+​
+
+**PI:** We probably err on the side of safer and simpler code. We're
+definitely not using all language features all the time, and definitely
+don't automatically adopt new tools without trying them out first.
+​
+In fact, when Mike Jones and I flew to Clojure-conj just as
+[protocols](http://clojure.org/reference/protocols) were being added to
+the language we rewrote part of the energy pricing system to use them.
+By the time we'd landed we'd reverted everything back. Protocols weren't
+intended to solve that problem and we realised it once we tried.
+​
+We really value pragmatism: solve our problems and move on. We can get a
+lot done which helps the business to move faster.
