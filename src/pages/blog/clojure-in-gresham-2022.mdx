@@ -35,7 +35,7 @@ Another major offering is our new banking platform, CCM. Existing banks will typ
 
 import gro from '../../assets/blog/gresham-office.jpg'
 
-<Image alt='Gresham office' width={600} src={gro} class="mx-auto"/>
+<Image alt='Gresham office' width={600} src={gro} class='mx-auto' />
 
 ## Clojure
 
@@ -51,9 +51,28 @@ We’ve also started using Babashka to replace Bash in the CCM team for any scri
 
 **Colin:** That’s a long time ago now! Our lead architect. Both him and I had quite a strong background in functional programming. We’d done some functional programming during our degrees many years earlier but never really had a chance to adopt it. We worked up slowly, watched a lot of Rich Hickey’s videos.
 
-We’d reached a general point of dissatisfaction with how large and clumsy Spring was becoming. Everything was annotation-based, and just trying to navigate a codebase was becoming really quite painful. The amount of code we had to have for the amount of functionality we needed just seemed out of proportion.
+<div class='text-xl italic font-semibold text-gray-900 dark:text-white'>
+  <svg
+    aria-hidden='true'
+    class='w-10 h-10 text-gray-400 dark:text-gray-600 p-15'
+  >
+    <path
+      d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z'
+      fill='currentColor'
+    />
+  </svg>
+  <p>
+    "We’d reached a general point of dissatisfaction with how large and clumsy
+    Spring was becoming. Everything was annotation-based, and just trying to
+    navigate a codebase was becoming really quite painful."
+  </p>
+</div>
 
-We spent a couple of years just watching, listening, and seeing what was happening in that space, before we really bit the bullet and decided, “Yeah, we should go for it. It is viable, we could approach this next project using Clojure”.
+    Spring was becoming. Everything was annotation-based, and just trying to
+    navigate a codebase was becoming really quite painful."
+
+The amount of code we had to have for the amount of functionality we
+needed just seemed out of proportion. We spent a couple of years just watching, listening, and seeing what was happening in that space, before we really bit the bullet and decided, “Yeah, we should go for it. It is viable, we could approach this next project using Clojure”.
 
 The other thing we did was speak with existing developers about how we should staff the project, and who would be curious enough that they wanted to get involved. This was great as we had a good take-up from people who were keen to adopt and try something different. There was quite a lot of risk analysis up front actually - How are we going to staff it? What are the risks?
 
@@ -65,15 +84,23 @@ We had quite a few conversations with JUXT at this stage too, we ran some initia
 
 **Colin:** Actually, yes. Firstly, the fact that everything is immutable. We wanted to know that once we had made a decision on some data, that it was ‘truthful’, then we weren’t going to have other parts of the system changing it randomly. Consistency was really important. We were also attracted to something that was simple, we were keen on small, composable functions that were really testable.
 
-Being able to rationalise on something, because when using Clojure the amount of code you end up with is less. That’s something I’m really quite pleased about. If you compare the amount of code we had a few years ago with what I saw when I looked a few weeks ago, I think we’ve got the same amount of code now as we did then! We’ve got much more functionality, but I don’t think the net amount of code has actually changed. We got to around 50,000 lines of Clojure.
+Being able to rationalise on something, because
+
+> when using Clojure the amount of code you end up with is less. That’s something I’m really quite pleased about.
+
+If you compare the amount of code we had a few years ago with what I saw when I looked a few weeks ago, I think we’ve got the same amount of code now as we did then! We’ve got much more functionality, but I don’t think the net amount of code has actually changed. We got to around 50,000 lines of Clojure.
 
 **Joe: It just gets distilled and refined!**
 
-**Colin:** Yes, which I think is fantastic. Also, I think we have around three times the amount of test code as we do actual business logic, which I think is a good ratio. Most of our code is test code. This has tuned out well.
+**Colin:** Yes, which I think is fantastic. Also, I think
+
+> we have around three times the amount of test code as we do actual business logic, which I think is a good ratio.
+
+Most of our code is test code. This has tuned out well.
 
 import grs from '../../assets/blog/gresham-staff.jpg'
 
-<Image alt='Gresham staff' width={600} src={grs} class="mx-auto" />
+<Image alt='Gresham staff' width={600} src={grs} class='mx-auto' />
 
 ## Event-driven Banking
 
@@ -81,7 +108,24 @@ import grs from '../../assets/blog/gresham-staff.jpg'
 
 **Mark:** With finance systems you need to understand how you got to the position that you’re currently in. With Kafka you can save all events, so you have an audit history to the beginning of time if you want it. So Kafka lends itself well to finance. With a topic you’re saying, “These are the facts that have happened”, and if your program code is ever wrong you can correct it and re-consume those facts to make up a different ‘model’ or ‘current view’ of what the world should look like.
 
-The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to prove where you have actually put money. We may have one account, but when the customer looks at it they might want to see that account as many different buckets. We need to prove where the money has gone and what has happened. We have this power from the events.
+<div class='text-xl italic font-semibold text-gray-900 dark:text-white'>
+  <svg
+    aria-hidden='true'
+    class='w-10 h-10 text-gray-400 dark:text-gray-600 p-15'
+  >
+    <path
+      d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z'
+      fill='currentColor'
+    />
+  </svg>
+  <p>
+    "The event-sourcing model with Kafka gives you audibility, and this feeds in
+    really well to things like reconciliation. Being able to prove where you
+    have actually put money."
+  </p>
+</div>
+
+We may have one account, but when the customer looks at it they might want to see that account as many different buckets. We need to prove where the money has gone and what has happened. We have this power from the events.
 
 **Joe: So provenance - being able to trace back exactly how any value, like a balance, was arrived at - is very important for you.**
 
@@ -99,7 +143,22 @@ We moved away from Java logging frameworks to [Timbre](https://github.com/ptaous
 
 We used to use Spec to validate all our events, but we’ve now switched to Avro and we’re using the Kafka Schema Registry. It makes it a lot easier for us to share schemas with the Java team that we integrate with, and they can consume Avro without having to learn about EDN or Nippy, which they don’t understand. Avro gives us a schema in one place for documentation. Spec is also quite loose (for instance, you can send a map that has extra keys, and someone might become dependent on it. There are some libraries that can work around this, but Avro lets us say “No, these topics matter” and everyone can guarantee that the data on them will be exactly as expected. We generate our Avro schemas using [abracad](https://github.com/ovotech/abracad), and the team that we integrate with can then consume the schemas directly as they need to generate POJOs.
 
-All of our services use Integrant and Aero. This has been there since the beginning and it makes it very easy for us to create a test config and set up the whole service locally.
+<div class='text-xl italic font-semibold text-gray-900 dark:text-white'>
+  <svg
+    aria-hidden='true'
+    class='w-10 h-10 text-gray-400 dark:text-gray-600 p-15'
+  >
+    <path
+      d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z'
+      fill='currentColor'
+    />
+  </svg>
+  <p>
+    "All of our services use Integrant and Aero. This has been there since the
+    beginning and it makes it very easy for us to create a test config and set
+    up the whole service locally."
+  </p>
+</div>
 
 We use Ring and compojure-api for REST APIs. We also use Lacinia for our GraphQL API.
 
@@ -127,7 +186,7 @@ Obviously there’s a trade-off between these two types of test, and it depends 
 
 import grr from '../../assets/blog/gresham-coffee-room.jpg'
 
-<Image alt='Gresham coffee area' width={600} src={grr} class="mx-auto" />
+<Image alt='Gresham coffee area' width={600} src={grr} class='mx-auto' />
 
 ## Challenges
 
@@ -167,7 +226,26 @@ _[Check out [clj-kondo](https://github.com/clj-kondo/clj-kondo), [kibit](https:/
 
 **Mark:** If it’s graduates, they’re going to need help on a lot of things. There’s Clojure, but also Kafka, and the world of distributed computing, which is really complicated. So even some of the Clojure developers we’ve hired, if someone doesn’t have experience with Kafka it’s going to take them a while to understand those things.
 
-Each individual is different really, we haven’t got a set programme for exactly how we’ll train people. Some like to work with someone and some like to work more on their own. This is fine, and we try to start people on smaller tasks. This can be hard as you quickly run out of small tasks. I really try to make sure that I’m not just talking at people all day, as this is really exhausting for them. You can see it in their eyes, when they’re starting to glaze over! I really like to get people to take a project and just play with it, try to make things fail, come back to me when things don’t make sense.
+Each individual is different really, we haven’t got a set programme for exactly how we’ll train people. Some like to work with someone and some like to work more on their own. This is fine, and we try to start people on smaller tasks. This can be hard as you quickly run out of small tasks.
+
+<div class='text-xl italic font-semibold text-gray-900 dark:text-white'>
+  <svg
+    aria-hidden='true'
+    class='w-10 h-10 text-gray-400 dark:text-gray-600 p-15'
+  >
+    <path
+      d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z'
+      fill='currentColor'
+    />
+  </svg>
+  <p>
+    "I really try to make sure that I’m not just talking at people all day, as
+    this is really exhausting for them. You can see it in their eyes, when
+    they’re starting to glaze over!"
+  </p>
+</div>
+
+I really like to get people to take a project and just play with it, try to make things fail, come back to me when things don’t make sense.
 
 One of our engineers, Dan Stevens, has done amazing work on our READMEs. He’s laid out exactly how to get started on your first day working with the system, how the code is laid out, how you can set up your machine, how you can get minikube working, if you want to. It can be a lot of work but really useful when we get a few graduates in at one time.
 
@@ -175,7 +253,25 @@ One of our engineers, Dan Stevens, has done amazing work on our READMEs. He’s 
 
 We’ll usually have a task in mind for new joiners. They’ll be working in the team, but we’ll have a task carved out for them, fairly standalone, that gives them exposure to a narrow part of the system. The actual change might be really simple, even just a one-line change, but going through the process of setting everything up and getting a working local environment is the really useful. It gives people confidence in the first week.
 
-**Mark:** I always try to say to any developer joining, “Get a PR up fast”. Quick feedback is the key thing. PRs are helping me understand what you understand - we’re sharing this idea. I want to see how you approach things and discuss. Rather than wait a week and then think, “Well, we could have iterated on this a bit”. It’s always good to get things out fast and get feedback fast.
+**Mark:**
+
+<div class='text-xl italic font-semibold text-gray-900 dark:text-white'>
+  <svg
+    aria-hidden='true'
+    class='w-10 h-10 text-gray-400 dark:text-gray-600 p-15'
+  >
+    <path
+      d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z'
+      fill='currentColor'
+    />
+  </svg>
+  <p>
+    "I always try to say to any developer joining, “Get a PR up fast”. Quick
+    feedback is the key thing."
+  </p>
+</div>
+
+PRs are helping me understand what you understand - we’re sharing this idea. I want to see how you approach things and discuss. Rather than wait a week and then think, “Well, we could have iterated on this a bit”. It’s always good to get things out fast and get feedback fast.
 
 We have a daily stand-up as well, so we can use that to check that people are on track.
 
@@ -191,7 +287,7 @@ Pre-pandemic we used to have weekly open learning sessions where we’d pick an 
 
 import grw from '../../assets/blog/gresham-welcome.jpg'
 
-<Image alt='Gresham welcome seating' width={600} src={grw} class="mx-auto" />
+<Image alt='Gresham welcome seating' width={600} src={grw} class='mx-auto' />
 
 ## Future
 
@@ -207,7 +303,11 @@ Things like Babashka are helping a lot. Previously there would be one or two peo
 
 **Colin:** It would be great to have more developers available, so wider adoption and popularity would always help. It’s always hard to apply a new language to an existing product, but for a new greenfield project I’d be keen to use Clojure. It also does depend on the available developers in our team, as a lot of developers are quite passionate about the one language they love.
 
-**Mark:** We’ve had engineers across into the Clojure team, who had no previous experience but had an appetite to learn. More cross-pollination between different teams would be a good way for us to drive adoption.
+**Mark:**
+
+> We’ve had engineers across into the Clojure team, who had no previous experience but had an appetite to learn.
+
+More cross-pollination between different teams would be a good way for us to drive adoption.
 
 ## Editors
 
@@ -217,7 +317,21 @@ Things like Babashka are helping a lot. Previously there would be one or two peo
 
 **Colin:** Yes, quite a few using Cursive, and then we have some using VS Code with Calva. I don’t write any code but that’s my preferred choice.
 
-It’s funny because you think the editor thing is really a solved problem, then VS Code has come along and is huge. It’s just a good product.
+<div class='text-xl italic font-semibold text-gray-900 dark:text-white'>
+  <svg
+    aria-hidden='true'
+    class='w-10 h-10 text-gray-400 dark:text-gray-600 p-15'
+  >
+    <path
+      d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z'
+      fill='currentColor'
+    />
+  </svg>
+  <p>
+    "It’s funny because you think the editor thing is really a solved problem,
+    then VS Code has come along and is huge. It’s just a good product."
+  </p>
+</div>
 
 **Mark:** If you’ve customised your key bindings it can get hard to pair with others or use their machine, you realise that you’re stuck without your own setup. What’s changed now though is that people are remote, so you can do the ping-ping pairing thing and say, “Okay you drive for a while” and there’s no need to use someone else’s setup. Sometimes you’ll write a test and push it to a branch, and the other person can pull and make it pass.
 
@@ -235,10 +349,12 @@ I tend to write a test first, but still, with the REPL you’re working out the 
 
 **Mark:** Yes, definitely. We’ve had those things in the past, where there have been some fixtures or tests setup that must always be executed in a certain way. When we see that we always tend to break it apart, make a comment block up if you need to with parts you can run easily in the REPL.
 
-If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off, bring Kafka up and down.
+> If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off,
+
+bring Kafka up and down.
 
 **Colin:** Yes, that whole thing of having to keep on top of it is true. We had a PR just recently where there was a need to always run this two step process to exercise the code. After some feedback, we got this back to just a good REPL experience.
 
 import grc from '../../assets/blog/gresham-mark-colin.jpg'
 
-<Image alt='Mark and Colin' width={600} src={grc} class="mx-auto" />
+<Image alt='Mark and Colin' width={600} src={grc} class='mx-auto' />
