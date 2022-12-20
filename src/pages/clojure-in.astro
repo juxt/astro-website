@@ -10,8 +10,10 @@ const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
   './blog/{clojure-in*.mdx, clojure-in*.md}'
 )
 
+const filteredBlogs = clojureInBlogs.filter((blog) => !blog.frontmatter?.draft)
+
 const parsedBlogs: Blog[] = await Promise.all(
-  clojureInBlogs.map(async (blog) => {
+  filteredBlogs.map(async (blog) => {
     const permalink = blog.file.split('/').slice(-1)[0].split('.')[0]
 
     const parsedPostImage = blog.frontmatter.heroImage.split('.').slice(0, -1)
