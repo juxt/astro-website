@@ -15,7 +15,7 @@ import { Image } from '@astrojs/image/components'
 
 [Gresham](https://www.greshamtech.com/) is a financial technology business, with headquarters in London and offices across the UK, North America and Asia. In 2019, Gresham [announced a partnership with ANZ](https://www.greshamtech.com/press-releases/gresham-and-anz-partnership-progresses-innovative-cash-management-solution) to deliver a new dynamic cash management and banking platform.
 
-We caught up with Colin Reid (Development Manager) and Mark Tinsley (Principal Engineer) at Gresham, in their delightful office in Bristol’s Brew House, to discuss why Clojure, Kafka, and event-sourcing, were key ingredients of their new product.
+We caught up with Colin Reid (Development Manager) and Mark Tinsley (Principal Engineer) at Gresham, in their delightful office in Bristol’s Brew House, to discuss why Clojure, Kafka, and event-sourcing are key ingredients of their new product.
 
 import gr from '../../assets/blog/gresham-logo.png'
 
@@ -109,7 +109,7 @@ We use Ring and compojure-api for REST APIs. We also use Lacinia for our GraphQL
 
 We solved some interesting problems with our project build because we don’t want to send the whole monorepo to the Docker daemon. We ended up creating a Docker build where we add all the dependencies, then use that as our base image when building the individual service.
 
-[Check out [lein-metajar](https://github.com/orb/lein-metajar) - Ed]
+_[Check out [lein-metajar](https://github.com/orb/lein-metajar) - Ed]_
 
 ## Side-effects
 
@@ -153,9 +153,9 @@ Each of our microservices is its own uberjar, and we can have many Kafka Streams
 
 **Mark:** There’s also tooling around Java for things like static analysis. It just isn’t quite there for Clojure yet.
 
-**Colin:** It’s the nature of finance and the industry we’re in that we need to take security very seriously. The nature of Clojure means there’s not a lot of static analysis tooling out there, for instance. So we look to close this gap in other ways, with some other mitigations. We’re using IAST [interactive application security testing] tooling instead, so this is interaction analysis using a tool called Seeker. It doesn’t understand the Clojure but we get stack traces and it shows us the flow of data through the system. We also do the normal NVD checks. With these analysis tools you’re often looking for something that does Java, and so may be useful for Clojure even if it doesn’t give you the same insight.
+**Colin:** It’s the nature of finance and the industry we’re in that we need to take security very seriously. The nature of Clojure means there’s not a lot of static analysis tooling out there, for instance. So we look to close this gap in other ways, with some other mitigations. We’re using IAST _[interactive application security testing]_ tooling instead, so this is interaction analysis using a tool called Seeker. It doesn’t understand the Clojure but we get stack traces and it shows us the flow of data through the system. We also do the normal NVD checks. With these analysis tools you’re often looking for something that does Java, and so may be useful for Clojure even if it doesn’t give you the same insight.
 
-[Check out [clj-kondo](https://github.com/clj-kondo/clj-kondo), [kibit](https://github.com/jonase/kibit), [eastwood](https://github.com/jonase/eastwood), [carve](https://github.com/borkdude/carve/), [yagni](https://github.com/venantius/yagni), [bikeshed](https://github.com/dakrone/lein-bikeshed), [clj-holmes](https://github.com/clj-holmes/clj-holmes), [clj-watson](https://github.com/clj-holmes/clj-watson), [nvd-clojure](https://github.com/rm-hull/nvd-clojure) - Ed]
+_[Check out [clj-kondo](https://github.com/clj-kondo/clj-kondo), [kibit](https://github.com/jonase/kibit), [eastwood](https://github.com/jonase/eastwood), [carve](https://github.com/borkdude/carve/), [yagni](https://github.com/venantius/yagni), [bikeshed](https://github.com/dakrone/lein-bikeshed), [clj-holmes](https://github.com/clj-holmes/clj-holmes), [clj-watson](https://github.com/clj-holmes/clj-watson), [nvd-clojure](https://github.com/rm-hull/nvd-clojure) - Ed]_
 
 **Joe: Yes, sometimes it’s not enough to explain why certain kinds of vulnerabilities are not possible. For compliance reasons you need to produce a report that’s the result of a scan.**
 
