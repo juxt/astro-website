@@ -32,28 +32,35 @@ const parsedBlogs: Blog[] = await Promise.all(
   })
 )
 
-const regionOrder = ['London', 'UK', 'Europe', 'International']
+const seasonOrder = [
+  { value: 'one', label: 'Season One' },
+  { value: 'two', label: 'Season Two' }
+]
 
-const groupedBlogs: Record<string, { regionTitle: string; blogs: Blog[] }> =
+const groupedBlogs: Record<string, { season: string; blogs: Blog[] }> =
   parsedBlogs.reduce((coll, blog) => {
-    const region = blog.clojureIn.region
-    const currentRegionBlogs = coll[region]?.blogs || []
+    const season = blog.clojureIn.season
+    const currentSeasonBlogs = coll[season]?.blogs || []
 
     return {
       ...coll,
-      [region]: { regionTitle: region, blogs: [...currentRegionBlogs, blog] }
+      [season]: { season: season, blogs: [...currentSeasonBlogs, blog] }
     }
   }, {})
 
-const sortedBlogs = regionOrder.map((region) => {
-  const { regionTitle, blogs } = groupedBlogs[region]
-  const sortedByDate = blogs.sort((a, b) => {
-    return (
-      new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-    )
+const sortedBlogs = seasonOrder
+  .map((season) => {
+    const grouped = groupedBlogs[season.value]
+
+    const sortedByDate = grouped?.blogs.sort((a, b) => {
+      return (
+        new Date(b.publishedDate).getTime() -
+        new Date(a.publishedDate).getTime()
+      )
+    })
+    return { season: grouped?.season && season.label, blogs: sortedByDate }
   })
-  return { regionTitle, blogs: sortedByDate }
-})
+  .filter((blogs) => blogs.season)
 
 const clojureInPicture = await getImage({
   src: import('../assets/site/Clojure-logo-colours-01.png'),
@@ -88,11 +95,11 @@ const clojureInPicture = await getImage({
 
     <Section className='py-28'>
       <div class='flex flex-col gap-28'>
-        {sortedBlogs.map(({ regionTitle, blogs }) => {
+        {sortedBlogs.map(({ season, blogs }) => {
           return (
-            <div>
+            <div class='flex flex-col items-center'>
               <h3 class='text-4xl font-semibold uppercase dark:text-white text-black text-center pb-16'>
-                {regionTitle}
+                {season}
               </h3>
 
               <div class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
