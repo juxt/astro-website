@@ -37,10 +37,10 @@ const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
 
-const heroImageFilename = heroImage.split('.').slice(0, -1)
+const heroImageFilename = `../assets/blog/${heroImage
+  .split('.')
+  .slice(0, -1)}.jpg`
 const personImageFilename = image.split('.').slice(0, -1)
-
-const heroImagePath = `../assets/blog/${heroImageFilename}.jpg`
 ---
 
 <Layout
@@ -48,7 +48,7 @@ const heroImagePath = `../assets/blog/${heroImageFilename}.jpg`
   title={title}
   ogTitle={`JUXT Blog: ${title}`}
   ogDescription={description}
-  ogImage={heroImagePath}
+  ogImage={heroImageFilename}
 >
   <DraftBanner draft={draft} pageName='Blog' />
   <main class='transition-colors'>
@@ -113,9 +113,10 @@ const heroImagePath = `../assets/blog/${heroImageFilename}.jpg`
         <Image
           alt='image'
           width={800}
+          aspectRatio={1}
           quality={80}
           class='w-full max-w-3xl lg:max-w-none lg:w-1/2 aspect-square object-cover'
-          src={import(heroImagePath)}
+          src={new URL(heroImageFilename, import.meta.url).href}
         />
       </div>
 

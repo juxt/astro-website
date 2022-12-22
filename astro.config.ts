@@ -11,7 +11,13 @@ import remarkGfm from 'remark-gfm'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), preact(), image()],
+  integrations: [
+    mdx(),
+    preact(),
+    image({
+      serviceEntryPoint: '@astrojs/image/sharp'
+    })
+  ],
   server: {
     port: 3000,
     host: '0.0.0.0'
@@ -30,7 +36,11 @@ export default defineConfig({
         rehypeAutolinkHeadings,
         {
           behavior: 'prepend',
-          properties: { ariaHidden: true, tabIndex: -1, class: 'slug-a' },
+          properties: {
+            ariaHidden: true,
+            tabIndex: -1,
+            class: 'slug-a'
+          },
           // Add svg for heading links
           content: () => [
             h(

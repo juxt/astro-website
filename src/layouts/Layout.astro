@@ -5,6 +5,7 @@ import { capitalizeFirstLetter, currentPage } from '../utils'
 
 import 'instantsearch.css/themes/satellite.css'
 import '../algolia.css'
+import { getImage } from '@astrojs/image'
 
 type LayoutProps = {
   title?: string
@@ -52,8 +53,13 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   let importedPic = await import(`../assets/site/${imgNoExt}.jpg`)
   imageForShare = `${url.origin}${importedPic.default.src}`
 } else if (ogImage) {
-  const importedPic = await import(ogImage)
-  imageForShare = `${url.origin}${importedPic.default.src}`
+  const { src } = await getImage({
+    src: new URL(ogImage, import.meta.url).href,
+    alt: ogTitle ?? currentPageName,
+    width: 1200,
+    height: 630
+  })
+  imageForShare = `${url.origin}${src}`
 }
 ---
 
