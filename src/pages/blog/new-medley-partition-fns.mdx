@@ -1,0 +1,188 @@
+---
+author: 'tom'
+title: "Two new medley partition functions"
+description: 'Introducing partition-after & partition-before'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '01 Jan 2023'
+heroImage: 'green-and-brown-train-rail.jpg'
+tags:
+  - 'clojure'
+---
+
+## Two new ways to partition collections
+
+Clojure's core library has provided `partition`, `partition-all` and `partition-by` since the early days, and recently added more performant functions `partitionv` and `partitionv-all`. However, partitioning every `n` items, or partitioning when a predicate's truthiness flips can be limiting. In this article, we look at two new functions in [medley](https://github.com/weavejester/medley) – `partition-after` and `partition-before` – which address an aspect of these limitations.
+
+Often, we encounter a sequence where some of the elements act as partition markers. They may represent the end of one partition, or the beginning of another. As a simple example, take the following collection:
+
+```clojure
+[1 2 3 :end 4 :end 5 6 :end]
+```
+
+A reasonable first attempt to partition would be to use `partition-by`:
+
+```clojure
+(partition-by #{:end} [1 2 3 :end 4 :end 5 6 :end])
+;; => ((1 2 3) (:end) (4) (:end) (5 6) (:end))
+```
+
+This gets us some of the way there. If we want to include the end marker, we can use `partition-all` and `concat`:
+
+```clojure
+(->> [1 2 3 :end 4 :end 5 6 :end]
+     (partition-by #{:end})
+     (partition-all 2)
+     (map #(apply concat %)))
+;; => ((1 2 3 :end) (4 :end) (5 6 :end))
+```
+
+If we don't want to include the end marker, we can just add a `(take-nth 2)` step instead:
+
+```clojure
+(->> [1 2 3 :end 4 :end 5 6 :end]
+     (partition-by #{:end})
+     (take-nth 2))
+;; => ((1 2 3) (4) (5 6))
+```
+
+To exclude beginning markers, we need a further step:
+
+```clojure
+(->> [:start 1 2 3 :start 4 :start 5 6]
+     (partition-by #{:start})
+     rest
+     (take-nth 2))
+;; => ((1 2 3) (4) (5 6))
+```
+
+These solutions vary in verbosity, and the clarity of our _intent_ varies inversely. Let's look at how medley's new `partition-after` and `partition-before` functions can make our intent clearer:
+
+```clojure
+(m/partition-after #{:end} [1 2 3 :end 4 :end 5 6 :end])
+;; => ((1 2 3 :end) (4 :end) (5 6 :end))
+
+(m/partition-before #{:start} [:start 1 2 3 :start 4 :start 5 6])
+;; => ((:start 1 2 3) (:start 4) (:start 5 6))
+```
+
+For the case where we don't want to include the markers, we can add a `(map butlast ...)` or `(map rest ...)` step:
+
+```clojure
+(->> [1 2 3 :end 4 :end 5 6 :end]
+     (m/partition-after #{:end})
+     (map butlast))
+;; => ((1 2 3) (4) (5 6))
+
+(->> [:start 1 2 3 :start 4 :start 5 6]
+     (m/partition-before #{:start})
+     (map rest))
+;; => ((1 2 3) (4) (5 6))
+```
+
+These aren't much terser, but are arguably clearer to read. However, the `partition-by` solutions rely on a few assumptions. Let's walk through some scenarios which can break these assumptions:
+
+### Partition markers may be consecutive
+Clojure's `partition-by` groups consecutive elements for which `f` has the same return value, so consecutive markers are not split. Here we want to partition `test-vec` into sentences:
+
+```clojure
+(defn find-ending-dot [s] (re-find #"\.$" s))
+(defn find-starting-capital [s] (re-find #"^\p{Lu}" s))
+(def test-vec ["Foo" "qux." "Bar." "Baz."])
+
+(partition-by find-ending-dot test-vec)
+;; => (("Foo") ("qux." "Bar." "Baz.")) ; not what we want
+
+(partition-by find-starting-capital test-vec)
+;; => (("Foo") ("qux.") ("Bar." "Baz.")) ; not what we want
+
+(m/partition-after find-ending-dot test-vec)
+;; => (("Foo" "qux.") ("Bar.") ("Baz."))
+
+(m/partition-before find-starting-capital test-vec)
+;; => (("Foo" "qux.") ("Bar.") ("Baz."))
+```
+
+### Partition markers may occur in unexpected order
+Previous examples using `partition-by` with `partition-all 2` rely on a specific order of markers and non-markers; namely that the first starting marker occurs before the first non-starting marker, and that the first ending marker occurs after the first non-ending marker. If this is starting to feel overly detailed, then the point has been made: building this capability manually can uncover unexpected behaviours before too long. Let's take a look at a few examples:
+
+```clojure
+(->> (partition-by #{:start} [7 8 :start])
+     (partition-all 2)
+     (map #(apply concat %)))
+;; => ((7 8 :start)) ; not what we want
+
+(m/partition-before #{:start} [7 8 :start])
+;; => ((7 8) (:start))
+
+(->> (partition-by #{:end} [:end 7 8])
+     (partition-all 2)
+     (map #(apply concat %)))
+;; => ((:end 7 8)) ; not what we want
+
+(m/partition-after #{:end} [:end 7 8])
+;; => ((:end) (7 8))
+
+```
+
+A common alternative approach, which solves many of these edge-case problems, is to close over some mutable state in order to help out `partition-by`:
+
+```clojure
+(let [split (atom 0)
+      part (fn [x]
+             (let [old-split-val @split]
+               (when (= :end x)
+                 (swap! split inc))
+               old-split-val))]
+  (partition-by part [:end 7 8]))
+;; => ((:end) (7 8))
+```
+
+Indeed, the stateful transducer arity of `partition-after` uses a similar approach. However, we usually try to avoid explicitly handling mutable state with otherwise-lazy code, and for good reason. This example is the least declarative, and therefore least readable of all the examples so far. Our two new medley functions are just as durable, but much more performant and readable.
+
+Now we've covered the "what?" of these new functions, let's move onto the "how?"
+
+## The process of getting these functions into medley
+The PR which brought these new functions into medley was my first on this project. What follows is a brief account of the process, given with the hope it can inspire others to contribute to such helpful open-source Clojure libraries.
+
+### Initial commit
+I spotted a need for these functions over several months, noticing a pattern of questions on the clojurians Slack with routinely stateful or edge-case-sensitive solutions. The initial commit was just for `partition-after`, which I named `partition-upto` owing to its lazy-arity's reliance on medley's `take-upto`.
+
+It was a great learning experience, as I rarely use `lazy-seq` in JUXT projects or personal projects, and I've never written a transducer before. My method was to try to copy as much code from clojure.core and medley.core as possible, only straying from their example when necessary.
+
+The lazy-arity was quick to write, as it's basically a copy of `partition-by`, but simplified, and using `take-upto` rather than `take-while`.
+
+The transducer-arity was much slower to write, but again, mostly copied from `partition-by`. One part of transducers that had never crossed my mind before was the requirement to handle `reduced` collections, allowing for early termination. Functions which I rarely ever use like `reduced?` and `unreduced` came in very handy. I also used `volatile!` vectors to enable cross-platform compatibility, but later in the process I was encouraged to take the more verbose, more performant route.
+
+The total process took only a couple of hours, and I was pleased to get a positive response from James Reeves (Weavejester) himself the same day. He agreed `partition-after` was a better name, and also asked for some specific use cases.
+
+### Feedback
+James Reeves runs a tight ship on all of his projects, and this PR was no exception. I was asked to justify quite a few lines of code, but fortunately I had acceptable answers for most. My most common response was "because that's what's done in clojure.core" - and luckily appeal to authority is sufficient when that authority is the Clojure core team.
+
+As an example, I was asked why `drop` is wrapped in `lazy-seq` here:
+
+```clojure
+(cons run (part (lazy-seq (drop (count run) s))))
+```
+
+The function `drop` explicitly returns a lazy-seq, so it wasn't immediately obvious to me. I'm not sure it was to Weavejester either, but we decided to keep it. My colleague Oli Solomons later pointed out it's likely to be there to delay realization of `run`, which the eager `count` would otherwise force.
+
+The main bit of feedback in terms of time-consumption was changing from cross-platform volatile vectors to platform-specific mutable data structures, wrapped in reader-conditionals. I followed Clojure's lead of using `java.util.ArrayList`s for work-in-progress partitions, and I used JavaScript arrays for ClojureScript code. At the time, I didn't think to copy the cljs code for `partition-by`, which uses `array-list` and would have made the code much neater. I think I may add this as a PR at some point.
+
+Rather than giving any more detailed an account of building transducers, I'll defer to my colleague Rhishikesh Joshi's excellent guide: https://rhishikesh.com/posts/how_i_think_about_transducers/
+
+### Use-case example
+I think the most important part of the PR process was Weavejester's request for use-cases. Part of what makes medley such a nice library is that pretty much every function feels like it's there for a reason. A quick browse through medley's unmerged closed PRs shows as much. Interestingly, to find examples, I only had to search through the clojurians slack for the term `partition-by`. Almost all references to it are requests for `partition-after` and `partition-before` behaviour. The clojuredocs page also has a note almost character-for-character giving the lazy-arity code for `partition-before` (named `partition-at`). A lot of the examples I used in the `Two ways to partition collections` section are heavily inspired by such requests.
+
+### Performance (premature) optimization
+The one thing which surprised me the most in this PR was that inlining functions can be _slower_ than not inlining them. One of my commits added `:inline` metadata for the JVM-clojure versions of some abstracted code to handle mutable code for the transducers. It was my first time inlining functions, which essentially just provide a macro which inlines the body of the function where it is called. Weavejester encouraged me to benchmark it using [criterium](https://github.com/hugoduncan/criterium) and I was really surprised to see the inlined versions were slower, or at the very least, no faster than their non-inlined forms. Apparently inlining can sometimes prevent the JIT compiler from optimizing certain code paths. It was a really helpful reminder that performance "optimizations" should always be benchmarked, not just assumed to work.
+
+### All done!
+I added `{:added ...}` metadata, squashed my commits and waited. A couple of weeks later, my changes were merged to master, and a new version – `1.5.0` – was cut.
+
+Hopefully you have found this interesting, and hopefully you will find some use-cases of your own for `partition-after` and `partition-before`. My colleague Neale Swinnerton informed me we deployed `partition-before` to production in a JUXT project the week it was released! I'm sure there is plenty more handy functionality that could be added to libraries such as medley, so I hope this account can inspire you to take a look.
+
+
+### References
+* The PR: https://github.com/weavejester/medley/pull/67
+* Railway picture at the top from [Eugene Zh](https://unsplash.com/@eugene_zh)
