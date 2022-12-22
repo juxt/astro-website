@@ -37,9 +37,7 @@ const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
 
-const heroImageFilename = `../assets/blog/${heroImage
-  .split('.')
-  .slice(0, -1)}.jpg`
+const heroImageFilename = `${heroImage.split('.').slice(0, -1)}`
 const personImageFilename = image.split('.').slice(0, -1)
 ---
 
@@ -113,10 +111,9 @@ const personImageFilename = image.split('.').slice(0, -1)
         <Image
           alt='image'
           width={800}
-          aspectRatio={1}
           quality={80}
           class='w-full max-w-3xl lg:max-w-none lg:w-1/2 aspect-square object-cover'
-          src={new URL(heroImageFilename, import.meta.url).href}
+          src={import(`../assets/blog/${heroImageFilename}.jpg`)}
         />
       </div>
 

@@ -53,13 +53,12 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   let importedPic = await import(`../assets/site/${imgNoExt}.jpg`)
   imageForShare = `${url.origin}${importedPic.default.src}`
 } else if (ogImage) {
-  const { src } = await getImage({
-    src: new URL(ogImage, import.meta.url).href,
-    alt: ogTitle ?? currentPageName,
-    width: 1200,
-    height: 630
-  })
-  imageForShare = `${url.origin}${src}`
+  // would be nice not to hardcode blog here, but then vite can't do the dynamic import...
+  // this whole dynamic import thing is nasty anyway, probably its better to
+  // have a seperate step for images outside astro, though the astro people say
+  // they're going to fix this soon so 🤷‍♂️
+  const img = await import(`../assets/blog/${ogImage}.jpg`)
+  imageForShare = `${url.origin}${img.default.src}`
 }
 ---
 
