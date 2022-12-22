@@ -58,7 +58,13 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   // have a seperate step for images outside astro, though the astro people say
   // they're going to fix this soon so 🤷‍♂️
   const img = await import(`../assets/blog/${ogImage}.jpg`)
-  imageForShare = `${url.origin}${img.default.src}`
+  const { src } = await getImage({
+    src: img.default.src,
+    alt: ogTitle ?? currentPageName,
+    width: 1200,
+    height: 630
+  })
+  imageForShare = `${url.origin}${src}`
 }
 ---
 
