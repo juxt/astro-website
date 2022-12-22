@@ -37,11 +37,17 @@ const blogHref = Astro.url.href
 const shareIconStyle =
   'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
 
-const heroImageFilename = heroImage.split('.').slice(0, -1)
+const heroImageFilename = `${heroImage.split('.').slice(0, -1)}`
 const personImageFilename = image.split('.').slice(0, -1)
 ---
 
-<Layout navbar title={title}>
+<Layout
+  navbar
+  title={title}
+  ogTitle={`JUXT Blog: ${title}`}
+  ogDescription={description}
+  ogImage={heroImageFilename}
+>
   <DraftBanner draft={draft} pageName='Blog' />
   <main class='transition-colors'>
     <div class='px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>

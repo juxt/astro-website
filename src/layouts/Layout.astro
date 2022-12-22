@@ -5,11 +5,15 @@ import { capitalizeFirstLetter, currentPage } from '../utils'
 
 import 'instantsearch.css/themes/satellite.css'
 import '../algolia.css'
+import { getImage } from '@astrojs/image'
 
 type LayoutProps = {
   title?: string
   navbar?: boolean
   navbarNoBg?: boolean
+  ogImage?: string
+  ogTitle?: string
+  ogDescription?: string
 }
 
 const url = new URL(Astro.request.url)
@@ -26,6 +30,9 @@ type Metadata = {
   seo: Record<string, { description: string; image?: string }>
 }
 
+const { title, navbar, navbarNoBg, ogImage, ogTitle, ogDescription } =
+  Astro.props as LayoutProps
+
 const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
 
 if (!seo[currentPageName]) {
@@ -33,7 +40,11 @@ if (!seo[currentPageName]) {
 }
 
 const currentDescription =
-  seo[currentPageName] && seo[currentPageName].description
+  ogDescription ?? (seo[currentPageName] && seo[currentPageName].description)
+
+const enableDarkMode =
+  Astro.url.pathname.includes('/blog') ||
+  Astro.url.pathname.includes('/clojure-in')
 
 // image attributes must be all jpgs and located in src/assets/site/ dir
 let imageForShare
@@ -41,13 +52,20 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   const imgNoExt = seo[currentPageName].image.split('.').slice(0, -1).join('.')
   let importedPic = await import(`../assets/site/${imgNoExt}.jpg`)
   imageForShare = `${url.origin}${importedPic.default.src}`
+} else if (ogImage) {
+  // would be nice not to hardcode blog here, but then vite can't do the dynamic import...
+  // this whole dynamic import thing is nasty anyway, probably its better to
+  // have a seperate step for images outside astro, though the astro people say
+  // they're going to fix this soon so 🤷‍♂️
+  const img = await import(`../assets/blog/${ogImage}.jpg`)
+  const { src } = await getImage({
+    src: img.default.src,
+    alt: ogTitle ?? currentPageName,
+    width: 1200,
+    height: 630
+  })
+  imageForShare = `${url.origin}${src}`
 }
-
-const enableDarkMode =
-  Astro.url.pathname.includes('/blog') ||
-  Astro.url.pathname.includes('/clojure-in')
-
-const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
 ---
 
 <!DOCTYPE html>
@@ -60,7 +78,7 @@ const { title, navbar, navbarNoBg } = Astro.props as LayoutProps
     <!-- Meta Tags -->
     <meta property='og:url' content={url.href} />
     <meta property='og:type' content='website' />
-    <meta property='og:title' content={currentPageName} />
+    <meta property='og:title' content={ogTitle ?? currentPageName} />
     {currentDescription && (
       <meta property='og:description' content={currentDescription} />
     )}
