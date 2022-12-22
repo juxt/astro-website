@@ -39,9 +39,17 @@ const shareIconStyle =
 
 const heroImageFilename = heroImage.split('.').slice(0, -1)
 const personImageFilename = image.split('.').slice(0, -1)
+
+const heroImagePath = `../assets/blog/${heroImageFilename}.jpg`
 ---
 
-<Layout navbar title={title}>
+<Layout
+  navbar
+  title={title}
+  ogTitle={`JUXT Blog: ${title}`}
+  ogDescription={description}
+  ogImage={heroImagePath}
+>
   <DraftBanner draft={draft} pageName='Blog' />
   <main class='transition-colors'>
     <div class='px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>
@@ -107,7 +115,7 @@ const personImageFilename = image.split('.').slice(0, -1)
           width={800}
           quality={80}
           class='w-full max-w-3xl lg:max-w-none lg:w-1/2 aspect-square object-cover'
-          src={import(`../assets/blog/${heroImageFilename}.jpg`)}
+          src={import(heroImagePath)}
         />
       </div>
 
