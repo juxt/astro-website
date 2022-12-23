@@ -50,8 +50,12 @@ const enableDarkMode =
 let imageForShare
 if (seo[currentPageName] && seo[currentPageName].image) {
   const imgNoExt = seo[currentPageName].image.split('.').slice(0, -1).join('.')
-  let importedPic = await import(`../assets/site/${imgNoExt}.jpg`)
-  imageForShare = `${url.origin}${importedPic.default.src}`
+  let importedPic = await getImage({
+    src: import(`../assets/site/${imgNoExt}.jpg`),
+    width: 1700,
+    quality: 90
+  }).then((img) => img.src)
+  imageForShare = `${url.origin}${importedPic}`
 } else if (ogImage) {
   // would be nice not to hardcode blog here, but then vite can't do the dynamic import...
   // this whole dynamic import thing is nasty anyway, probably its better to
