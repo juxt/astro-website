@@ -1,0 +1,250 @@
+---
+author: 'lkn'
+title: 'Using Clerk for Advent of Code'
+description: 'Notebooks <3 Clojure'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '23 Dec 2022'
+heroImage: 'clerk.jpg'
+tags:
+  - 'clerk'
+  - 'aoc'
+  - 'clojure'
+---
+
+import { Image } from '@astrojs/image/components'
+import demo from '../../assets/blog/clerk_aoc_demo.png'
+import problem from '../../assets/blog/clerk_aoc_problem.png'
+import css from '../../assets/blog/clerk_aoc_problem_css.png'
+import bad from '../../assets/blog/clerk_aoc_viewer_bad.png'
+import good from '../../assets/blog/clerk_aoc_viewer_good.png'
+
+## Intro
+
+_Just a heads-up, this will contain spoilers for Day 1 of Advent of Code 2022._
+
+_My solutions can be found [here](https://elken.github.io/aoc/)_
+
+Last year's Advent of Code has finished now, but that doesn't mean we can't still have fun with it!
+
+Time to grab a hot new language that's gonna be huge in a few years, and try to solve a large array of complex programming challenges. Or maybe reach for something familiar?
+
+Clojure has a nice workflow for these kinds of problem-solving exercises, with the REPL you can evaluate expressions on the fly and have everything shown inline with a succinct language and a rich ecosystem. But there must be an even better way...
+
+Enter [clerk](https://github.com/nextjournal/clerk)!
+
+## What is Clerk?
+
+Put simply, Clerk converts a Clojure namespace into a fully-fledged HTML notebook with forms as code blocks and comments rendered as markdown. Using [tailwind](https://tailwindcss.com/) for the styling and a basic light/dark setup already included, you can easily extend it to create your own custom viewers/components.
+
+Given a simple notebook that looks like:
+
+```clojure
+^{:nextjournal.clerk/visibility :hide-ns}
+(ns solutions.2022.day01
+  (:require
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [nextjournal.clerk :as clerk]
+   [util :as u]))
+
+(def input (->> (slurp (io/resource "inputs/2022/day01.txt")) ;; Load the resource
+                (str/split-lines)                             ;; Split into lines
+                (partition-by str/blank?)                     ;; Partition by blank spaces (to give our groups)
+                (remove #(str/blank? (first %)))              ;; Remove the blank spaces
+                (map #(transduce (map parse-long) + 0 %))     ;; Map a transducer over the list of numbers (more info below)
+                (sort >)))                                    ;; Sort by size
+
+{:nextjournal.clerk/visibility {:result :hide}}
+(defn part-1
+  [input]
+  (first input))
+
+{:nextjournal.clerk/visibility {:code :hide :result :show}}
+(part-1 input)
+
+{:nextjournal.clerk/visibility {:code :show :result :hide}}
+(defn part-2
+  [input]
+  (transduce (take 3) + 0 input))
+
+{:nextjournal.clerk/visibility {:code :hide :result :show}}
+(part-2 input)
+```
+
+Produces the following
+
+<Image alt='image' src={demo} />
+
+Nice! The whole thing is evaluated inline and the results are printed underneath each code block. If desired, we can use metadata to hide/show either the code for a block, the results or both! Meaning we don't have to worry about `defn` polluting the results; instead replacing it with a useful demo underneath.
+
+## Improving our workflow
+
+Okay, so we have a good workflow here; we write our code, save it and see the results in a nice page. _But_, we still have to flick back and forth to the problem definition as we're writing it.
+
+_Wouldn't it be nice to have the problem definition in the solution?_
+
+### Including the problem in our output
+
+Well, Clerk can also render arbitrary HTML. So, with some magic we can write a function thus:
+
+```clojure
+(defn load-problem [day year]
+  (let [day (str (parse-long day))
+        file-name (format "day%s.html" day)
+        path (fs/path (fs/temp-dir) file-name)]
+    (when-not (fs/exists? path)
+      (let [resp (->> {:headers {"Cookie" (str "session=" (System/getenv "AOC_TOKEN"))
+                                 "User-Agent" (System/getenv "AOC_USER_AGENT")}}
+                      (client/get (format "https://adventofcode.com/%s/day/%s" year day)))]
+        (when (= 200 (:status resp))
+          (spit (str path) (:body resp)))))
+
+    (let [doc (h/as-hickory (h/parse (slurp (str path))))
+          parts (map #(hr/hickory-to-html %) (s/select (s/child (s/tag :article)) doc))]
+      (apply str (mapcat str parts)))))
+```
+
+To use [clj-http](https://github.com/dakrone/clj-http) and [hickory](https://github.com/clj-commons/hickory) to pull the problem definition from AOC (cached of course, we don't want to hammer them) and show it in the buffer. No longer do we have to awkwardly copy the text in and convert it all by hand (not that I ever did...)
+
+Now with just a couple of extra lines at the top
+
+```clojure
+...
+{:nextjournal.clerk/visibility {:code :hide :result :show}}
+(clerk/html (u/load-problem "01" "2022"))
+{:nextjournal.clerk/visibility {:code :show :result :show}}
+...
+```
+
+We get the following:
+
+<Image alt='image' src={problem} />
+
+For more complex needs, there will be a neater way to provide some global css; but for our simple purposes we just need
+```clojure
+(defn css []
+  [:style "em{font-style: normal;}
+html:not(.dark) pre{background-color: #f1f5f9 !important;color: #7aaac4 !important;}
+.dark em{color: #fff;text-shadow: 0 0 5px #fff;}
+.dark pre {background-color: rgb(31 41 55 / var(--tw-bg-opacity)) !important;}
+html:not(.dark) em{color: #000; text-shadow: 0 0 2px #000;}
+.viewer-result:first-child{display: none;}"])
+```
+
+Which can be used like
+
+```clojure
+...
+^{::clerk/viewer :html ::clerk/visibility :hide}
+(u/css)
+...
+```
+
+To give us
+
+<Image alt='image' src={css} />
+
+Looks great! This is coming together nicely.
+
+### Custom viewers
+
+So we can easily create a solution file and have it pull the problem in, and we can evaluate everything on save. This works great when the problem translates to a simple number or a string, but there's _always_ that day that requires you to draw a word out of hashes and produce those results. Which looks... not good.
+
+<Image alt='image' src={bad} />
+
+It's _readable_ at a push, if you really relax your eyes. But we can do better.
+
+Clerk also lets you easily define custom "viewers" for data, which just return hiccup markup. So with a viewer defined as:
+
+```clojure
+(clerk/with-viewer
+  '(fn [result]
+     [:div.grid {:style {:grid-template-columns "repeat(40, 1fr)" :grid-template-rows "repeat(6, 1fr)"}}
+      (map-indexed (fn [idx val]
+                     (when-not (str/blank? val)
+                       [:div.inline-block {:id idx
+                                           :style {:width 16 :height 16}
+                                           :class (if (= "#" val) "bg-black dark:bg-white" "bg-white dark:bg-black")}]))
+                   (str/join "\n" (map :nextjournal/value result)))])
+  (part-2 input))
+```
+
+We can now view our nice output as
+
+<Image alt='image' src={good} />
+
+## Deployment
+
+This is all well and good, but what if we want to share these notebooks? Does someone have to clone my repo and run things locally?
+
+No! Since these are just HTML pages, we can use any static site host we wish; including github pages.
+
+By navigating to "Pages" in "Settings" (or using a URL like this https://github.com/USERNAME/REPO/settings/pages), enable github pages and set the source to "Deploy from a branch" (that branch being `gh-pages`).
+
+Using a file like:
+
+```yaml
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 🔧 Install java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11.0.7'
+
+      - name: 🔧 Install clojure
+        uses: DeLaGuardo/setup-clojure@master
+        with:
+          cli: '1.10.3.943'
+
+      - name: 🗝 maven cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.m2
+            ~/.gitlibs
+          key: ${{ runner.os }}-maven-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: 🗝 Clerk Cache
+        uses: actions/cache@v2
+        with:
+          path: .cache
+          key: ${{ runner.os }}-clerk
+
+      - name: 🏗 Clerk Build
+        env:
+          AOC_TOKEN: ${{ secrets.AOC_TOKEN }}            # Token for pulling solutions into the notebook
+          AOC_USER_AGENT: ${{ secrets.AOC_USER_AGENT }}  # Required by the creator
+        run: clojure -M:build
+
+      - name: 🚀 Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.6
+        with:
+          branch: gh-pages
+          folder: public/build
+```
+
+Whenever we push our code, pipelines will trigger and deploy the notebooks.
+
+## Outro
+
+We can even go further, and you're encouraged to do so. Give Clerk a try and write your own custom visualizers for some of the data.
+
+What about having having Day 5 with an interactive step-through slider of the boxes moving? Or Day 11 with monkeys throwing the items around to each other?
+
+The possibilities are endless, and Clerk can do much more than I've listed here. If your appetite has been whetted, I encourage you to explore their [demo repo](https://github.clerk.garden/nextjournal/clerk-demo/commit/47e95fdc38dd5321632f73bb50a049da4055e041/) further.
+
+Happy hacking!
