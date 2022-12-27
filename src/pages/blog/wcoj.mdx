@@ -65,17 +65,18 @@ The important part is that no graph can have more then $O(N^{3/2})$ triangles
 $N$ is the number of edges in the graph $G$ (or rows in the relation $G$). There are however
 graphs where no matter how you choose to join the first two graphs
 (essentially calculating 2-paths) you will end up with $O(N^2)$ intermediate rows.
-In this case our binary join strategy above is essentially doomed. No matter what binary join tree you
+In this case the binary join strategy above is doomed. No matter what binary join tree you
 choose you will have more intermediate output tuples then your final result. WCOJ is about
 avoiding this unnessary work. A WCOJ algorithm calculates the above joins in $O(N^{3/2})$.
 
-More generally if you fix some schema for you database and you fix some query over that schema then
+More generally if you fix some schema for you database (in the above `[integer :g/to integer]`) and you
+fix some query over that schema (the triangle query) then
 there is exists some "Worst Case" output size ($O(N^{3/2})$ for the graph above
 but more complicated for the general case as your relations might have different sizes)
 for some instantiation of your database.
 WCOJ guarantees you that you will do no more work then this worst-case output size.
 Let's also mention what WCOJ is not. WCOJ does not give you any guarantees on
-the runtime in the general case. So imagine a graph with a single triangle. A WCOJ algorithm
+the runtime based on the output size. So imagine a graph with a single triangle. A WCOJ algorithm
 does not run in constant time, the only guarantee is a runtime of $O(N^{3/2})$ (although
 in practice this preforms very likely better).
 
@@ -84,7 +85,7 @@ building a WCOJ algorithm for a simple Datalog engine in Clojure.
 
 ### Set intersections
 
-We are starting with a well known fact which is used extensively in Databases. The intersection
+A well known fact which is used extensively in Databases is that the intersection
 of two sets can be done efficiently in the size of the smaller set. By efficiently we mean $O(N)$ or
 $O(N \log N)$ where $N$ is the size of the smaller set. You walk the items of the smaller set and
 check if they exist in the larger set. You can even see this kind of algorithm at work in the `clojure.set`
@@ -118,12 +119,67 @@ If the largest and the smallest head element of any iterator are equal we have f
 
 So imagine that we have three iterators $A$, $B$ and $C$ for our three `where` clauses above. The data of
 these iterators is just integers (you can think of this as the hash of the actual values) so we can compare
-elements. In on disk implementations you can also think of this as byte arrays of the actual data.
+elements. In an on disk implementations you can also think of this as byte arrays of the actual data.
 
 The clojure core standard `sorted-set` and `sorted-map` implementations do not provide any efficient
 `seek` operation, but
 [other](https://github.com/clojure/data.avl/commit/11f905b9b45d1873a2782066352126dd91f40af4)
 [implementations](https://github.com/tonsky/persistent-sorted-set/pull/9/files) can be extended to support this.
+
+### Storage
+
+Let's next look at how we are going to store our data. We are going split things into indices and a document-store.
+The indices are permutations of `e`,`a` and `v` (standing for entity, attribute and value) and they are only
+storing some hash of the entity, attribute, value which is all we need for joining the data. Later, once we
+know which hashes we are actually interested in, we are going to fetch the actual values from the
+`:doc-store` which is a mapping from hash to actual value. So the indices are going to be nested maps bottoming
+out at a set.
+
+You might be wondering why we are storing the hashes in the indices and not just the actual values.
+The reason is twofold. As we want to use an implementaiton of a sorted-set the values need to be comparable
+which hashes are. One could have ofcourse added the actual values to these sorted sets and used a hash comparator
+underneath. The second reason is that if later on we might want to try a remote key/value store for our
+indices it is nice to delay the fetching of the actual needed data as long as possible as network requests
+will be expensive. In that case it makes sense to only fetch the hashes of the objects for the joins and
+query for the data only if really needed.
+
+All of this is way better illustrated by an example. Let's say we want to add the following triple to our engine:
+```clj
+[:db/add "Bob" :person/eats "Spaghetti"]
+```
+and for simplicity let's assume that the hashes for `"Bob"`,`:person/eats` and `"Spaghetti"` are 1,2 and 3 respectively. Then
+having added the above fact to an empty database our indices would look as follows:
+```clj
+;; eav index
+{1 {2 #{3}}}
+;; aev index
+{2 {1 #{3}}}
+;;...
+;; doc-store
+{1 "Bob" 2 :person/eats 3 "Spaghetti"}
+```
+the type of the maps/sets would depend on the algorithm we want to use. For hash join standard Clojure hashmaps and -sets
+would be sufficient. For a WCOJ algorithm we need something that supports `seek` (see the mentions above).
+A simplified transaction function could then look something along the lines of
+```clj
+(defrecord MemoryGraph [eav eva ave aev vea vae doc-store opts]
+  ...
+  )
+
+(defn index-triple-add [graph [e a v :as triple]]
+  (let [[he ha hv] (map hash triple)]
+    (-> graph
+        (update-in [:eav he ha] (fnil conj #{}) hv)
+        (update-in [:eva he hv] (fnil conj #{}) ha)
+        (update-in [:ave ha hv] (fnil conj #{}) he)
+        (update-in [:aev ha he] (fnil conj #{}) hv)
+        (update-in [:vea hv he] (fnil conj #{}) ha)
+        (update-in [:vae hv ha] (fnil conj #{}) he)
+        (update :doc-store into [[he e] [ha a] [hv v]]))))
+```
+I am saying "simplified" because you might want to use a more robust `hash` fn, make sure that
+your `update-in` also creates non-standard intermediate maps (if non-existant) and maybe
+switch out the bottom `#{}` for a more specific implementation.
 
 ### Iterators
 
@@ -135,15 +191,13 @@ Once you start implementing the algorithm outlined above you realize that it
 quickly becomes very gnarly as there is the need for a lot of bookkeeping.
 Whery am I currently for which operator
 
-### Variable variable ordering
-
-Why I like about the approach just outlined in the paragraph above.
-
 
 ### A (simplified) proof
 
 So far I mainly talked about implementation details and but have not given you any "proof"
 that what we have built so far actually works in the desired runtime.
+
+### Comparing different join algorithms
 
 ### Final remarks
 
