@@ -16,12 +16,13 @@ tags:
 import { Image } from '@astrojs/image/components'
 import jointrees from '../../assets/blog/wcoj/join-trees.jpg'
 import unaryjoin from '../../assets/blog/wcoj/unary-relation-join.png'
+import binarytrie from '../../assets/blog/wcoj/binary-trie-named-with-ops.png'
 
 ### Joins
 
 Let's talk about joins. Imagine three relations (think tables in SQL and tuples in Datalog)
 $R(a,b)$, $S(a,c)$, $T(b,c)$ and that we want to compute the join $R \Join S \Join T$. A common approach
-in databases these days (and what for example Postgres does) is to join in a relation at a time.
+in databases these days (and what for example Postgres does) is to join a relation at a time.
 This leads to the natural definition of a join tree.
 
 <Image alt='image' width='500' src={jointrees} />
@@ -133,7 +134,7 @@ The indices are permutations of `e`,`a` and `v` (standing for entity, attribute 
 storing some hash of the entity, attribute, value which is all we need for joining the data. Later, once we
 know which hashes we are actually interested in, we are going to fetch the actual values from the
 `:doc-store` which is a mapping from hash to actual value. So the indices are going to be nested maps bottoming
-out at a set.
+out at a set and the `:doc-store` a standard hash-map.
 
 You might be wondering why we are storing the hashes in the indices and not just the actual values.
 The reason is twofold. As we want to use an implementaiton of a sorted-set the values need to be comparable
@@ -148,7 +149,7 @@ All of this is way better illustrated by an example. Let's say we want to add th
 [:db/add "Bob" :person/eats "Spaghetti"]
 ```
 and for simplicity let's assume that the hashes for `"Bob"`,`:person/eats` and `"Spaghetti"` are 1,2 and 3 respectively. Then
-having added the above fact to an empty database our indices would look as follows:
+having added the above fact to an empty database the indices and document store would look as follows:
 ```clj
 ;; eav index
 {1 {2 #{3}}}
@@ -181,16 +182,37 @@ I am saying "simplified" because you might want to use a more robust `hash` fn, 
 your `update-in` also creates non-standard intermediate maps (if non-existant) and maybe
 switch out the bottom `#{}` for a more specific implementation.
 
-### Iterators
+### Iterators / a simple a datalog engine
 
-### A simple datalog engine
+Let's look at how we retrieve and iterate over our data for a where clause of the form
+```clj
+[?person :person/eats ?food]
+```
+one thing we have to decide is in which order to iterate over the variables. Let's for now fix
+the order in which they first appear in the query (also what the engine is going to use). The
+iteration for the above clause is best illustrated by the following diagram
 
-### Abstracting more
+<Image alt='image' width='500' src={binarytrie} />
+
+Now that we know how things are stored we can think about how to retrieve them. Let us introduce
+a tuple (TODO change name, also for subfields)
+```clj
+{:triple '[?e :person/eats ?v]
+  :triple-order '[:e :a :v]}
+```
+A tuple contains the data of a where clause and the order of in which things should be returned
+(it also tells us which index we have to look at).
+
+In the beginning we were also exploring the option of using one iterator for different levels
+(thereby needing a second protocol for moving up and down in the hiarachy).
+One would move up and down the levels of the trie and could iterate at each level. This option
+turned out to need a lot more bookkeeping. So we went for creating a new iterator each time
+
+### More abstraction
 
 Once you start implementing the algorithm outlined above you realize that it
 quickly becomes very gnarly as there is the need for a lot of bookkeeping.
-Whery am I currently for which operator
-
+Whery am I currently for which operator?
 
 ### A (simplified) proof
 
