@@ -1,0 +1,125 @@
+---
+author: 'joe'
+title: 'Cutting software waste'
+description: 'Where are the most impactful wastes in the software business, and how can we eliminate them?'
+category: 'analysis'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2023-12-11'
+heroImage: 'overflow-plughole.jpg'
+---
+
+import { Image } from 'astro:assets'
+
+Software projects are tough. They have a habit of teaching hard lessons. Move too fast, without solid foundations and care, and the results can be [messy](https://www.bbc.com/news/business-64036529). Move too slowly, without urgency, ruthless prioritisation and pragmatism, and you'll be amazed at how much can be spent to achieve very little.
+
+There's a phenomenon that lurks across all parts of the industry. It kills the motivation of individuals, and costs business dearly in money spent and missed opportunity. That phenomenon is _waste_.
+
+With engineering organisations being challenged increasingly to do more with less, how can we significantly eliminate waste, and where do the most impactful and insidious sources of waste lie?
+
+## Optimising execution
+
+Engineers often look locally at how time is wasted. They devise local workflows to optimise the way they write code and tests. They look for creative ways to avoid procrastination by dividing time into short bursts of hyper-productivity. These local optimisations are a great boon to personal progress, but this isn't where the real waste lies.
+
+Lean Software Development, the highly influential application of Lean manufacturing principles to the development of IT systems, has a lot to say about waste. After all, Lean is fundamentally an attempt to find ways to identify and root out waste, maximising efficiency and therefore delivery of value. Lean defines three categories of waste, _mura_ (unevenness, non-uniformity, irregularity), _muri_ (overburden, overstress, unreasonableness, unrealistic expectations), and _muda_ (processes that don't add value). In Lean Software Development, muda is divided into The Seven Wastes of Software Development:
+
+1. **Partially done work.** The inventory of effort spent to analyse and develop features that have not yet shipped.
+2. **Extra processes** Process, sometimes long-entrenched, that is beyond what's needed to deliver.
+3. **Extra features.** Features (analysed, developed, deployed) that are simply surplus to requirements and add no value to the customer. These have a nasty tendency to become obsolete before being used.
+4. **Task switching.** Including interruptions, lack of focus on one goal, and delays to delivery caused by making small amounts of progress on a large number of tasks, rather than a large amount of progress on a single task.
+5. **Waiting.** Delays caused by waiting for things to happen, or required resources to be available. Most problematic when working in a fast-changing environment since waiting can ultimately lead to work in progress becoming obsolete.
+6. **Motion.** Originally referring to unnecessary movements made during production, caused by poor layout or poor allocation of parts, _Motion_ as applied to Lean Software Development is all the travel an engineer and our software artifacts undergo. How far does an engineer need to travel to answer a question? How many systems must artifacts pass through to get to production? How much unnecessary busy work or friction applies during development? How far must engineers roam around a code base, or between repositories, or between teams, to make a change? Complexity increases motion.
+7. **Defects.** Bugs, and the time it takes to detect being a multiplier to their cost. At worst, defects lead to repeated attempts to solve the same problem and teams locked in [Failure Demand](https://beyondcommandandcontrol.com/failure-demand/).
+
+The Toyota Production System, from which Lean manufacturing principles (and ultimately Lean Software Development) were derived, was born of the need to produce low-cost vehicles for post-war Japan. Consumers had modest incomes, so the final product had to be affordable. The market was also relatively small, so economies of scale could not be relied upon to keep costs under control. One thing was clear, however, Toyota wanted to produce cars. When the goal was certain, these methods helped to maximise efficiency (and minimise waste) in pursuit of that goal.
+
+Lean and Agile practitioners will recognise the Seven Wastes, informally at least. We've come to naturally consider building up a large inventory of highly detailed analysis, but little-to-no working software, as potential waste. <span class='pullquote' text-content="Waste caused by poor strategy can quickly eclipse all other wastes. That is, under bad direction, all effort is waste."></span> But the prevalence of Lean thinking in the software industry has given us a false sense of security with respect to waste, because a methodology for efficient manufacturing doesn't capture or address other, more severe wastes that apply to software development. Engineers and teams that work hard to be efficient can be undermined if they are working under poor strategic direction, and the waste caused by poor strategy can quickly eclipse all other wastes. That is, _under bad direction, all effort is waste_.
+
+## Design to minimise waste
+
+In his book [Software Wasteland](https://www.amazon.co.uk/Software-Wasteland-Application-Centric-Hobbling-Enterprises/dp/1634623169), Dave McComb identifies complexity as one of the key drivers of IT cost and ultimately waste. The key to minimising long-term cost-to-change then, is to build systems in ways that prioritise simplicity.
+
+So much is written about software design, and at JUXT we're certainly keen on choosing technology and a design approach that treats complexity as something to be systematically avoided. Again, however, when we eliminate complexity through careful design, we're optimising execution. It's all too easy for the design skills of expert software architects and engineers to be applied to the wrong problem.
+
+## Overfitting
+
+Before we get too carried away on our quest to root out waste, let's think about the kind of positive work we don't want to eliminate from our organisations.
+
+Research is an investment that allows us to solve future problems more effectively, create fewer defects, reduce rework, and find new ways to eliminate motion by reducing complexity and improving the structure of our systems and platforms. Research has the potential to unlock entirely new markets, or make step-changes in efficiency that go beyond what can be achieved incrementally.
+
+We might think of research as inventory - partially complete work that has not yet delivered customer value. However, there are two problems with this way of thinking. The first being that it implies organisations should work hard to minimise research. The second being that this view of research risks characterising negative results as pure failure.
+
+<span class='pullquote left' text-content="[W]e should view the value of research as learning, realised once we have improved our organisational knowledge."></span>
+
+Rather, we should view the _value_ of research as learning, realised once we have improved our organisational knowledge. This way, we might use Lean principles to limit our inventory of incomplete research, but not to avoid the practice altogether.
+
+Another scenario in which we should be careful about misascribing work as 'waste' is when operating conditions undergo a radical, unpredictable change. We might consider entire streams of work to be waste _in hindsight_, but there is risk here since this can encourage a misguided effort to avoid abandoning delivered product in spite of new conditions. A desperate attempt to avoid a view of sunk costs as waste.
+
+## Marginal gains
+
+We've all seen the graph showing how the cost to fix defects grows exponentially the later those defects are found, and hey, [it's probably true](https://www.theregister.com/2021/07/22/bugs_expense_bs/).
+
+import cd1 from '../../assets/blog/cost-of-defects-1.svg'
+
+<Image alt='Graph showing the cost to fix defects rises exponentially over time.' width={500} src={cd1} class='mx-auto' />
+
+Modern software engineering, though, has flattened this curve considerably. Agile planning and engineering practices, cloud computing and SaaS, Continuous Delivery - these have pushed down the cost to release and the cost of change. Of course fundamental flaws in the early understanding of a system can be costly to fix later, but as an industry we've brought down the cost to fix defects drastically since the first research on which this graph is based was published by IEEE nearly 5 decades ago. Let's conclude then, that getting definitive specifications right early is far less important now than it once was.
+
+I'd like to propose a similar graph as we look at the impact of waste from strategy through to execution.
+
+import cd2 from '../../assets/blog/cost-of-defects-2.svg'
+
+<Image alt='Graph showing the cost of waste, and hence opportunity for optimisation, reduces as we move from strategy to execution.' width={500} src={cd2} class='mx-auto'/>
+
+Modern software engineering has _steepened_ this curve. Version control, continuous integration, automated testing, automated deployment, cloud computing, have all eliminated waste in our execution and many of these practices are not just commonplace but ubiquitous.
+
+Of course the shape of this graph is not universal, but recent decades have seen our industry adopt highly efficient methods of delivering software. Chances are high that you're in a team that should now be thinking about waste in this way, with a greater focus on your strategic direction and the metrics you can use to validate it.
+
+## Macro waste
+
+Ask seasoned software engineers about what proportion of their careers have been spent locked in a cycle of waste. The answers are usually painful to hear. The problem is rarely limited to inefficient execution. The big wastes, those that claim entire teams or departments for months and sometimes years, relate to strategy.
+
+Too often we see engineering leaders trying to add person-power to their teams, or build entirely new teams, whilst failing to set an effective strategic direction that minimises waste and uses existing talent effectively.
+
+**Bad direction**, which tasks individuals, teams, or even entire departments, with building the wrong thing, is our first major contributor to epic waste. This may be through technical initiatives with vague or unrealistic goals, too far removed from the day-to-day work of engineers. This may be through projects or applications that are planned without engagement and validation by either the product management side of the organisation or an engaged customer. This may be through product-making teams building long roadmaps of features without looking for opportunities for feedback or establishing metrics for success.
+
+A common cause of poor strategic direction is a failed relationship between product experts (including customers) and engineers. If product experts shrink away from the technical details, or fail to take a key role in major streams of work because they are deemed too technical, this can set a bad precedent that sees engineering and product functions grow distant over time.
+
+**Lack of direction**, which kills momentum and ensures that no team or individual can make decisive progress towards a well-understood goal, can be an equally devastating source of waste. Lack of direction can be particularly toxic where engineers work remotely, since for remote workers, the ability to make decisive, independent progress towards a well understood goal is essential.
+
+It's common to find engineers being hired whilst elsewhere in the group, teams of talented engineers are struggling to fill their time.
+
+## Eliminating waste
+
+We can use Lean methods to find and eliminate waste in execution, but what techniques can eliminate the macro wastes that have a far greater impact on the business?
+
+This is the point at which this article turns into a listicle, and we offer a pithy list of surefire steps to success. Unfortunately, forming a strategy is never that easy and we can't apply hard and fast rules. There are, however, some common strategies that we see work well, and some common pitfalls that are often the culprit of an awful lot of engineering waste. So, here's a few of those lessons summarised:
+
+**1. Remember the bottom line.** The most effective teams have a clear view of how their work contributes to the success of the business. Make sure that value to your customer (and reward for your business) are at the forefront of your mind when assessing big-ticket work.
+
+Initiatives that involve large amounts of engineering time but are deemed 'too technical' to be steered by the voice of the customer or the value they return, should be viewed with suspicion. When working in a software business, those steering the product should have sufficient technical understanding to engage with technical challenges and justify time spent against the bottom line.
+
+**2. Prioritise ruthlessly.** No matter how large and financially secure the organisation becomes, teams should always look to prioritise, often ruthlessly, to focus on the most important features first. This means discussing priorities every day to validate the path and to react when circumstances change.
+
+**3. Work iteratively.** Eliminating waste caused by bad direction means validating direction. Finding ways to deliver incrementally and seek continuous feedback is the best way to do this. Too often, teams become locked in long, wasteful tracks of work with no feedback or chance to change course.
+
+**4. Stay small.** Smaller teams benefit from lower communication overhead, clearer focus, higher alignment, and greater accountability. We see empirically that the most effective teams we build are small. The characteristics of small teams are key to creating surprising productivity.
+
+**5. Seek clear ownership.** Teams should be associated clearly with a domain area or supporting function they can own. This means minimal dependence on other teams, and a mandate to undertake the 'mission' that relates to their domain however they see fit. If a team can't execute decisively on their own plans, you'll see lack of direction (and associated waste) set in.
+
+People often expect that the problems arise here when there are too many dependencies between systems or teams. In fact, teams can often collaborate harmoniously if the culture allows it. A more serious problem (where waste is concerned) is having multiple teams fighting for ownership of the same mission.
+
+**6. Champion existing systems.** Too often, existing systems are undervalued, and grand plans to resolve frustrations with the architecture form too easily. Complex software systems remain difficult to change. Avoid underestimating the cost of change and make sure that strategic technical improvement works are undertaken with clear business benefits in mind.
+
+Choose carefully when to take on architectural improvement work. If you're still hunting for product-market fit then avoid embarking on long periods of system refactoring. Above all, make sure there is consensus across key engineers about how to change your systems, and steer clear of vague programmes of improvement work with an unclear payoff.
+
+**7. Maintain engineering consensus.** Whether you have a dedicated architecture team, a group of principal engineers that steer the platform, or a small team of visionary technical executives, or a more distributed approach, maintaining a common technical culture and consensus on engineering approach is essential. When this is lost, influential contributors begin pulling engineering strategy in different directions.
+
+A common way to lose consensus is to fail to retain key technical staff - those that have high kudos in the organisation, high trust and respect across engineering teams, high ideological alignment with current approaches, and have demonstrated an expert hand in steering the architecture. If you've failed to retain key engineers in the past, it's never too late to reverse the trend.
+
+**8. Always find a metric.** Major engineering works (e,g, to replace existing systems or significantly evolve an architecture) are expensive, and can be far harder than expected once work gets started. Adding major new capabilities to an application can also be a long journey with lots more work discovered along the way. Make sure that early on you think hard about the expected pay-off, and find ways to measure whether you are moving in the right direction. If you don't see the needle moving on those metrics, consider changing course.
+
+## Strategy first
+
+When it comes to waste, it's easy to focus on execution, and work hard to optimise the ways we work to eliminate inefficiencies. However, if we're dedicated to truly doing more with less, and cutting out the biggest wastes, we need to start by examining the strategy.
+
+Too often, teams are drawn into long discussions about whether the WIP limit for a column on their kanban board should change, rather than examining whether the last 6 months of work delivered by the team has brought real value. If the latter question is hard to answer, solve this problem first. Only once all teams are working towards a credible and high-priority goal, and validating their path against the bottom line, can we find impactful wastes elsewhere.
