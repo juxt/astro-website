@@ -18,3 +18,9 @@ pnpm-debug.log*
 .calva/
 .nrepl-port
 /public/styles/global.css
+
+# Emacs files
+*~
+\#*\#
+auto-save-list
+.\#*
