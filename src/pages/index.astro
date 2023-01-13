@@ -17,7 +17,8 @@ const siteMetadata = await Astro.glob('../data/metadata.json')
 const homepageBannerPicture = await getImage({
   src: import('../assets/site/homepage-banner.jpg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'homepage banner'
 }).then((img) => img.src)
 
 const testimonials = [
@@ -118,13 +119,15 @@ const featuredBlogs = await Promise.all(
     const authorImage = getImage({
       src: import(`../assets/people/${parsedImage}.jpg`),
       width: 200,
-      quality: 80
+      quality: 80,
+      alt: 'person'
     })
 
     const postImage = getImage({
       src: import(`../assets/blog/${parsedPostImage}.jpg`),
       width: 450,
-      quality: 100
+      quality: 100,
+      alt: 'post'
     })
 
     return Promise.all([authorImage, postImage]).then(

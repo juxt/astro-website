@@ -21,7 +21,8 @@ const parsedBlogs: Blog[] = await Promise.all(
     const postImage = await getImage({
       src: import(`../assets/blog/${parsedPostImage}.jpg`),
       width: 450,
-      quality: 100
+      quality: 100,
+      alt: 'clojure in blog post image'
     })
 
     return {
@@ -65,7 +66,8 @@ const sortedBlogs = seasonOrder
 const clojureInPicture = await getImage({
   src: import('../assets/site/Clojure-logo-colours-01.png'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'clojure in logo'
 }).then((img) => img.src)
 ---
 

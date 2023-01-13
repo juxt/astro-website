@@ -8,7 +8,8 @@ import Layout from '../layouts/Layout.astro'
 const bannerPicture = await getImage({
   src: import('../assets/site/work-with-us-banner.jpg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'work with us'
 }).then((img) => img.src)
 
 const boxStructure = [

@@ -7,18 +7,19 @@ import Layout from '../layouts/Layout.astro'
 const bannerPicture = await getImage({
   src: import('../assets/site/radar-banner.jpg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'radar'
 }).then((img) => img.src)
 ---
 
 <style>
-div#radar {
-  width: 80%;
-  margin: auto;
-}
-a {
-  scroll-margin-top: 4em;
-}
+  div#radar {
+    width: 80%;
+    margin: auto;
+  }
+  a {
+    scroll-margin-top: 4em;
+  }
 </style>
 <Layout navbar title='Radar'>
   <main>
@@ -109,7 +110,10 @@ a {
     <Section className='bg-zinc-200 py-16 text-black'>
       <h2 class='pb-10 text-3xl md:text-4xl'>ClojureScript</h2>
       <p class='text-xl md:text-2xl font-extralight'>
-        <a href='https://github.com/reagent-project/reagent' class='text-juxt' name='reagent'
+        <a
+          href='https://github.com/reagent-project/reagent'
+          class='text-juxt'
+          name='reagent'
           >Reagent
         </a> is one of the few libraries that appeared on our radar in 2016 that
         we still want to shout about 5 years on, and is a firm <span
@@ -139,20 +143,22 @@ a {
           >kee-frame
         </a> to build re-frame-style applications more easily. Both are in
         <span class='italic'>Trial</span>. <br /><br />
-        <a href='https://github.com/metasoarous/oz' class='text-juxt' name='oz'>Oz</a> brings
-        the power of Vega and Vega-Lite's declarative visualisation grammar seamlessly
-        to ClojureScript. ClojureScript's interactive, data-driven programming approach
-        is a great match for Vega, and Oz brings these worlds together with some
-        additional features for composing visualisations, building dashboards and
-        reports, and sharing visualisations instantly via GitHub gists and the <a
-          href='https://vega.github.io/editor/#/'
-          class='text-juxt'
-          name='vega'
+        <a href='https://github.com/metasoarous/oz' class='text-juxt' name='oz'
+          >Oz
+        </a> brings the power of Vega and Vega-Lite's declarative visualisation grammar
+        seamlessly to ClojureScript. ClojureScript's interactive, data-driven programming
+        approach is a great match for Vega, and Oz brings these worlds together with
+        some additional features for composing visualisations, building dashboards
+        and reports, and sharing visualisations instantly via GitHub gists and the
+        <a href='https://vega.github.io/editor/#/' class='text-juxt' name='vega'
           >Vega Editor.
         </a>
         <br /><br />Building ClojureScript applications seems to get easier
         every year, and here we <span class='italic'>adopt</span>
-        <a href='https://github.com/thheller/shadow-cljs' class='text-juxt' name='shadow-cljs'
+        <a
+          href='https://github.com/thheller/shadow-cljs'
+          class='text-juxt'
+          name='shadow-cljs'
           >shadow-cljs
         </a> and <a
           href='https://github.com/bhauman/figwheel-main'
@@ -167,13 +173,19 @@ a {
         </a> figwheel’s older incarnation). At JUXT we lean towards shadow-cljs.
         As the ClojureScript compiler becomes more capable we’ve seen a trend towards
         simpler ClojureScript project build tools like
-        <a href='https://github.com/vouch-opensource/krell' class='text-juxt' name='krell'
+        <a
+          href='https://github.com/vouch-opensource/krell'
+          class='text-juxt'
+          name='krell'
           >krell,
         </a> which provides a minimal path to building React Native apps (although
         we have not yet tried this route, we would like to <span class='italic'>
           assess
         </span>).<br /><br />
-        <a href='https://github.com/bhauman/devcards' class='text-juxt' name='devcards'
+        <a
+          href='https://github.com/bhauman/devcards'
+          class='text-juxt'
+          name='devcards'
           >Devcards
         </a> is an excellent tool to interactively test and iterate quickly on ClojureScript
         UI components. For full, in-browser automation, we’ve found <a
@@ -235,17 +247,19 @@ a {
           >hold.
         </span>
         <br />
-        <br /> ‍<a href='https://github.com/ring-clojure' class='text-juxt' name='ring'
+        <br /> ‍<a
+          href='https://github.com/ring-clojure'
+          class='text-juxt'
+          name='ring'
           >Ring
         </a> remains the dominant HTTP abstraction for Clojure, with the ring family
         providing an out-of-the-box HTTP server, middleware and more. Ring has been
         battletested on many large projects and we continue to feel confident using
         it. We are struck by the power and value the Ring specification has brought
         to Clojure. In this area we have also decided to move one of our own libraries,
-        <a href='https://github.com/juxt/yada' class='text-juxt' name='yada'>yada,</a> to <span
-          class='italic'
-          >Hold,
-        </span> and we’ve <a
+        <a href='https://github.com/juxt/yada' class='text-juxt' name='yada'
+          >yada,
+        </a> to <span class='italic'>Hold,</span> and we’ve <a
           href='https://github.com/juxt/apex#rationale'
           class='text-juxt'
           >written on the rationale
@@ -283,7 +297,10 @@ a {
         the ThoughtWorks definition of <span class='italic'>Hold</span> for a moment,
         <span class='italic'>proceed with caution.</span>
         <br /><br />
-        <a href='https://github.com/clojure/core.typed' class='text-juxt' name='core-typed'
+        <a
+          href='https://github.com/clojure/core.typed'
+          class='text-juxt'
+          name='core-typed'
           >core.typed
         </a> we have placed on <span class='italic'>hold</span> for our own projects,
         since we've found clojure.spec hitting a sweet spot with gradual, <span
@@ -307,9 +324,14 @@ a {
           >Typed Clojure
         </a> project. We hope to revisit Typed Clojure with Clojure 1.11.<br
         /><br />
-        ‍ We placed <a href='https://www.xtdb.com/' class='text-juxt' name='xtdb'>XTDB</a> (formerly
-        Crux) in <span class='italic'>Adopt,</span> as we believe it brings unique
-        and enduring value to our projects. <span class='italic'
+        ‍ We placed <a
+          href='https://www.xtdb.com/'
+          class='text-juxt'
+          name='xtdb'
+          >XTDB
+        </a> (formerly Crux) in <span class='italic'>Adopt,</span> as we believe
+        it brings unique and enduring value to our projects. <span
+          class='italic'
           >Disclaimer: We wrote XTDB. Expect a bias.
         </span>
         We have also introduced <a
@@ -334,7 +356,10 @@ a {
           >Assess,
         </span> and in the meantime, we’ll continue to use lambada and cljs-lambda.<br
         /><br />
-        <a href='https://github.com/polyfy/polylith' class='text-juxt' name='polylith'
+        <a
+          href='https://github.com/polyfy/polylith'
+          class='text-juxt'
+          name='polylith'
           >Polylith
         </a> has made waves in the community with a fresh take on maintaining and
         building modular applications from monolithic repositories. We have yet to
@@ -439,7 +464,10 @@ a {
         </a> to run our tests, and after a boost of support from Clojurists Together
         in 2018 we think it has become a good, all-encompassing solution in a way
         that no previous efforts have.<br /><br />
-        <a href='https://github.com/weavejester/ragtime' class='text-juxt' name='ragtime'
+        <a
+          href='https://github.com/weavejester/ragtime'
+          class='text-juxt'
+          name='ragtime'
           >Ragtime
         </a> has stood the test of time as a flexible database migration tool so
         we’re happy to place it in <span class='italic'>Adopt.</span> Adopt.
@@ -448,9 +476,9 @@ a {
           class='text-juxt'
           name='jmh-clojure'
           >jmh-clojure
-        </a> has become a go-to tool, now in <span class='italic'>Adopt</span>, and
-        the comprehensive results it produces from a simple configuration are impressive.
-        Of course <a
+        </a> has become a go-to tool, now in <span class='italic'>Adopt</span>,
+        and the comprehensive results it produces from a simple configuration
+        are impressive. Of course <a
           href='https://github.com/hugoduncan/criterium'
           class='text-juxt'
           name='criterium'
@@ -476,28 +504,44 @@ a {
           name='reitit'
           >reitit
         </a> to be a highly effective routing library, so much so that it has unseated
-        our own router <a href='https://github.com/juxt/bidi' class='text-juxt' name='bidi'
+        our own router <a
+          href='https://github.com/juxt/bidi'
+          class='text-juxt'
+          name='bidi'
           >bidi
         </a> to enter <span class='italic'>Adopt</span> at JUXT. We’re keen to continue
         <span class='italic'>trialling</span>
-        <a href='https://github.com/metosin/muuntaja' class='text-juxt' name='muuntaja'
+        <a
+          href='https://github.com/metosin/muuntaja'
+          class='text-juxt'
+          name='muuntaja'
           >Muuntaja
         </a> (a very fast HTTP middleware stack and alternative to ring-middleware-format)
-        and <a href='https://github.com/metosin/jsonista' class='text-juxt' name='jsonista'
+        and <a
+          href='https://github.com/metosin/jsonista'
+          class='text-juxt'
+          name='jsonista'
           >Jsonista
         </a> (Clojure’s fastest JSON library), and we’re pleased with results so
         far. For client-side HTTP, we've been <span class='italic'
           >trialling
         </span>
-        <a href='https://github.com/gnarroway/hato' class='text-juxt' name='hato'>Hato,</a> a
-        library in the style of <a
+        <a
+          href='https://github.com/gnarroway/hato'
+          class='text-juxt'
+          name='hato'
+          >Hato,
+        </a> a library in the style of <a
           href='https://github.com/dakrone/clj-http'
           class='text-juxt'
           name='clj-http'
           >clj-http,
         </a> but built on Java 11's new HttpClient and with fewer dependencies as
         a result. <br /><br /> We’re often interacting with AWS and find Cognitect’s
-        <a href='https://github.com/cognitect-labs/aws-api' class='text-juxt' name='aws-api'
+        <a
+          href='https://github.com/cognitect-labs/aws-api'
+          class='text-juxt'
+          name='aws-api'
           >aws-api
         </a> to be an excellent choice for doing so. Its minimal dependencies help
         keep our projects small and sane, and we have begun to prefer it over <a
@@ -522,7 +566,10 @@ a {
         used it widely on JUXT projects for many years. Aero favours a data-driven,
         explicit approach to configuration, with support for externalisation of secrets.<br
         /><br />
-        <a href='https://github.com/seancorfield/next-jdbc' class='text-juxt' name='next-jdbc'
+        <a
+          href='https://github.com/seancorfield/next-jdbc'
+          class='text-juxt'
+          name='next-jdbc'
           >next-jdbc
         </a> is a complete, modernised replacement for <a
           href='https://github.com/clojure/java.jdbc'
@@ -559,17 +606,35 @@ a {
           name='orchestra'
           >Orchestra,
         </a>
-        <a href='https://github.com/bhb/expound' class='text-juxt' name='expound'>expound</a> and
-        <a href='https://github.com/metosin/spec-tools' class='text-juxt' name='spec-tools'
+        <a
+          href='https://github.com/bhb/expound'
+          class='text-juxt'
+          name='expound'
+          >expound
+        </a> and
+        <a
+          href='https://github.com/metosin/spec-tools'
+          class='text-juxt'
+          name='spec-tools'
           >spec-tools.
         </a> We’re interested in <span class='italic'>assessing</span>
-        <a href='https://github.com/metosin/malli' class='text-juxt' name='malli'>malli</a> and
-        of course, in the future, spec2.<br /><br />
+        <a
+          href='https://github.com/metosin/malli'
+          class='text-juxt'
+          name='malli'
+          >malli
+        </a> and of course, in the future, spec2.<br /><br />
         For logging, our preference is to maximise performance and compatibility.
         We’ve found the best and most enduring way to do this on the JVM is a combination
-        of <a href='https://github.com/clojure/tools.logging' class='text-juxt' name='tools-logging'
+        of <a
+          href='https://github.com/clojure/tools.logging'
+          class='text-juxt'
+          name='tools-logging'
           >tools.logging
-        </a> and <a href='https://logback.qos.ch/' class='text-juxt' name='logback'
+        </a> and <a
+          href='https://logback.qos.ch/'
+          class='text-juxt'
+          name='logback'
           >Logback,
         </a> and so we’ve moved <a
           href='https://github.com/ptaoussanis/timbre'
@@ -579,9 +644,10 @@ a {
         </a> to <span class='italic'>Hold.</span> Although Logback configuration — especially
         getting the right selection of bridges and exclusions in place — can be a
         little fiddly.<br /><br />
-        <a href='https://github.com/juxt/tick' class='text-juxt' name='tick'>tick</a> is proving
-        to be an effective clj-time replacement on JUXT projects, in particular since
-        it builds on <a
+        <a href='https://github.com/juxt/tick' class='text-juxt' name='tick'
+          >tick
+        </a> is proving to be an effective clj-time replacement on JUXT projects,
+        in particular since it builds on <a
           href='https://github.com/henryw374/cljc.java-time'
           class='text-juxt'
           name='cljc-java-time'
@@ -591,7 +657,10 @@ a {
         GraphQL has been a powerful, simplifying model for some of the most complex
         web applications we’ve built at JUXT, and although the Clojure ecosystem
         around this technology is relatively small, we’ve found the data-driven approach
-        of <a href='https://github.com/walmartlabs/lacinia' class='text-juxt' name='lacinia'
+        of <a
+          href='https://github.com/walmartlabs/lacinia'
+          class='text-juxt'
+          name='lacinia'
           >Lacinia
         </a> to be highly effective and the library itself is mature with good coverage
         of the GraphQL specification. Users of GraphQL should also check out <a

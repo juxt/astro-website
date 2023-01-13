@@ -19,17 +19,18 @@ type StartUpsProps = {
 
 const startUps = await Astro.glob<StartUpsProps>('../data/startups/*.md')
 
-const financialServicesParsed = startUps
+const startUpsParsed = startUps
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
   .map((financial) => ({
     ...financial.frontmatter,
     content: financial.compiledContent()
   }))
 
-const financialPicture = await getImage({
+const startupPicture = await getImage({
   src: import('../assets/site/startup-bg.jpg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'start up'
 }).then((img) => img.src)
 ---
  
@@ -38,7 +39,7 @@ const financialPicture = await getImage({
     <Banner
       text='Startups'
       style={{
-        backgroundImage: `url(${financialPicture})`,
+        backgroundImage: `url(${startupPicture})`,
         backgroundPosition: 'top'
       }}
     />
@@ -59,10 +60,10 @@ const financialPicture = await getImage({
 
   
     <div class='flex flex-col text-black'>
-      {financialServicesParsed.map((financial, idx) => {
+      {startUpsParsed.map((startup, idx) => {
         const isDark = idx % 2 !== 0
-        const isLeft = financial.direction === 'left' || !financial.direction
-        const isCenter = financial.direction === 'center'
+        const isLeft = startup.direction === 'left' || !startup.direction
+        const isCenter = startup.direction === 'center'
 
         const sectionStyle = isLeft
           ? 'flex-col-reverse xl:flex-row-reverse'
@@ -70,7 +71,7 @@ const financialPicture = await getImage({
           ? 'flex-col flex-col-reverse'
           : 'flex-col-reverse xl:flex-row'
 
-        const bannerNoExtension = financial.image.split('.')[0]
+        const bannerNoExtension = startup.image.split('.')[0]
 
         return (
           <Section
@@ -90,28 +91,28 @@ const financialPicture = await getImage({
                 src={import(`../assets/startups/${bannerNoExtension}.jpg`)}
               />
               <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
-                <h2 class='text-5xl font-light pb-8'>{financial.title}</h2>
+                <h2 class='text-5xl font-light pb-8'>{startup.title}</h2>
                 <div class='flex flex-col gap-8'>
                   <div
                     class='flex flex-col gap-6 text-lg font-extralight'
                     {/* eslint-disable-next-line */}
-                    set:html={financial.content}
+                    set:html={startup.content}
                   />
-                  {financial.testimonial && (
+                  {startup.testimonial && (
                     <div class='flex flex-col gap-2'>
                       <div class='text-lg italic'>
-                        {`"${financial.testimonial.quote}"`}
+                        {`"${startup.testimonial.quote}"`}
                       </div>
                       <div class='font-light italic'>
-                        {financial.testimonial.by}
+                        {startup.testimonial.by}
                       </div>
                     </div>
                   )}
-                  {financial.tech && (
+                  {startup.tech && (
                     <div class='flex flex-col gap-6'>
                       <h3 class='text-3xl'> Technologies</h3>
                       <div class='flex gap-2 flex-wrap'>
-                        {financial.tech.map((tech) => (
+                        {startup.tech.map((tech) => (
                           <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
                             {tech}
                           </div>

@@ -31,7 +31,8 @@ const financialServicesParsed = financialServices
 const financialPicture = await getImage({
   src: import('../assets/site/case-studies-banner.jpg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'case studies banner'
 }).then((img) => img.src)
 ---
 

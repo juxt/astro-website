@@ -11,7 +11,8 @@ import Layout from '../layouts/Layout.astro'
 const picture404 = await getImage({
   src: import('../assets/site/404.jpg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: '404'
 }).then((img) => img.src)
 ---
 

@@ -26,7 +26,8 @@ const { location, department, contract, position, draft, googleJobs } = Astro
 const bannerPicture = await getImage({
   src: import('../assets/site/job-profile-banner.jpeg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'JUXT office'
 }).then((img) => img.src)
 
 const slug = Astro.props.frontmatter.url.split('/').pop()

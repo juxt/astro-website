@@ -11,13 +11,15 @@ import Layout from '../layouts/Layout.astro'
 const bannerPicture = await getImage({
   src: import('../assets/site/about-us-banner.jpeg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'about us banner'
 }).then((img) => img.src)
 
 const pplPicture = await getImage({
   src: import('../assets/site/about-us-ppl.jpeg'),
   width: 1700,
-  quality: 90
+  quality: 90,
+  alt: 'about us people'
 }).then((img) => img.src)
 
 const values = [
