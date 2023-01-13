@@ -35,10 +35,6 @@ const { title, navbar, navbarNoBg, ogImage, ogTitle, ogDescription } =
 
 const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
 
-if (!seo[currentPageName]) {
-  console.warn('The page: ' + currentPageName + " doesn't have metadata.")
-}
-
 const currentDescription =
   ogDescription ?? (seo[currentPageName] && seo[currentPageName].description)
 
