@@ -17,11 +17,28 @@ Site is a project we've been working on since 2020.
 
 As with all our [open-source projects](https://github.com/juxt), Site was conceived out experiences in our project work with our JUXT clients.
 
-Here are some of the common observations we've seen on these projects:
+Here are some of observations common to multiple projects:
 
-- Almost every project involves building one or more stateful API services, either choosing REST of GraphQL.
-- The inability to quickly iterate on APIs harms the agility of front end development.
+- Almost every project we work on involves building one or more stateful API services, either choosing REST of GraphQL. Most teams have adopted OpenAPI to design/document/communicate their APIs, and we have seen more teams move to a 'design-first' approach.
+- The inability to quickly iterate on APIs harms the agility of front end development. Sometimes, backend teams need weeks or months of development time to deliver initial versions of APIs into a staging or test environment.
 - Authentication takes too long to build, even if this merely requires integration with a pre-built authentication service.
-- Access control is always a business requirement, yet often implemented _ad-hoc_ and late in the development process.
+- Access control is always a business requirement, yet often implemented _ad-hoc_, late in the development process.
+
+To address these problems, we wanted to build a 'generic' service that could be deployed to support a number of typical use-cases, ones that we found we had to develop over and over again on projects. This became Site.
+
+We definitely wanted to support a _design-first_ API development process.
+This is where teams iterate together on an API document, in a format such as OpenAPI, that describes the agreed API.
+
+Iterating on a document is faster than developing code.
+Also, we didn't want to generate any part of the API, since conventions differ from project to project, from organization to organization.
+
+The first version of Site allowed teams to provision APIs by uploading API descriptions, in OpenAPI format, together with some declarations as to how each API endpoint should be implemented and secured.
+
+A later version of Site, in 2021, added support for GraphQL in addition to OpenAPI. This was used on a number of additional client projects in order to provision secure API backends rapidly and with greater agility.
+
+At the end of 2021, after listening to the experiences of a number of successful Site deployments, I personally began to consider the question of access control.
+Unsurprising, this became a year-long process of research and experiments, some successful and some not.
+
+This is the background to the talk I gave at the beginning of this year, where I wanted to share with the company what I had been up to, and the progress made. We've since edited the video for public distribution. I hope you enjoy the presentation, and if you have any questions or feedback, please feel free to write to me at mal@juxt.pro. I'm always pleased to receive emails about Site.
 
 <iframe class="aspect-video w-full" src="https://www.youtube.com/embed/v3UzJelTge0" title="Site Safari" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
