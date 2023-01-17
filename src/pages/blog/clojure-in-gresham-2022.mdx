@@ -23,15 +23,15 @@ import gr from '../../assets/blog/gresham-logo.png'
 
 **Joe: So what does Gresham do?**
 
-**Colin:** We help financial firms manage risk, essentially. That's the core business. We help them be compliant with regulations by implementing things like the reconciliation process across many different systems, and the regulatory reporting processes. We give these institutions control over their data.
+**Colin:** We help financial firms overcome common data, reconciliation, connectivity, and reporting challenges. That's the core business. We help them be compliant with regulations by implementing things like the reconciliation process across many different systems, and the regulatory reporting processes. We give these institutions control over their data.
 
 In banks there’s often a sprawl of different systems with different messaging formats, and none of it is cross-referenced. Reconciliation is really important here. Originally it was all on-premise, but we have cloud services now too.
 
-Another major offering is our new banking platform, CCM. Existing banks will typically have some slow, legacy core banking systems. The banks can keep all core banking logic and accounts in those existing systems, but quickly create new virtual accounts in our platform. We’re building this in conjunction with ANZ, Australia’s second largest bank. We do lots to aggregate and disaggregate large numbers of payments, and manage different funds within an account. The complexity comes from the business accounts, not so much the personal banking side.
+Another major offering is our new cash management solution. Existing banks will typically have some slow, legacy core banking systems. The banks can keep all core banking logic and accounts in those existing systems, but quickly create new virtual accounts in our platform. We do lots to aggregate and disaggregate large numbers of payments, and manage different funds within an account. The complexity comes from the business accounts, not so much the personal banking side.
 
 **Joe: You have quite a few different product streams. What tech stacks are being used?**
 
-**Colin:** Traditionally it has been Java, Spring. We use Gigaspaces for smart, distributed caching. We also have some products on .Net/Microsoft stack that have come from acquisition, but we’re definitely aligning towards the JVM. We use a lot of Kafka, and we’re also seeing most of our products gradually aligning on Kafka. We use a lot of AWS for our own cloud services. Many banking clients are still not ready to put their data into the public cloud, so we’ll support them running our systems on their own on-premise Kubernetes clusters.
+**Colin:** Traditionally it has been Java, Spring. We have used Gigaspaces in the past for smart, distributed caching. We also have some products on the .Net/Microsoft stack that came from an acquisition, but we’re definitely aligning towards the JVM. We use a lot of Kafka, and we’re also seeing most of our products gradually aligning on Kafka. We use a lot of AWS for our own cloud services. Many banking clients are still not ready to put their data into the public cloud, so we’ll support them running our systems on their own on-premise or private cloud environments.
 
 import gro from '../../assets/blog/gresham-office.jpg'
 
@@ -39,9 +39,9 @@ import gro from '../../assets/blog/gresham-office.jpg'
 
 ## Clojure
 
-**Mark:** CCM runs on GCP and this is where we use Clojure. All our backend services for CCM are written in Clojure. The frontend is TypeScript and Javascript. We have a team in Sydney using Java and Spring Integration to talk directly to the bank’s services, and when their services talk to us they use Kafka.
+**Mark:** Our cash management solution runs on GCP and this is where we use Clojure. All our backend services for the cash management solution are written in Clojure. The frontend is TypeScript and Javascript. We have a team in Sydney using Java and Spring Integration to talk directly to the bank’s services, and when their services talk to us they use Kafka.
 
-We’ve also started using Babashka to replace Bash in the CCM team for any scripts we need. It’s really nice, as work can be shared much more easily around the team.
+We’ve also started using Babashka to replace Bash for any scripts we need. It’s really nice, as work can be shared much more easily around the team.
 
 **Joe: Yes, having a team that can use a single language for everything can be really powerful. You mentioned you’re using Clojure on the backend, what form does this take?**
 
@@ -73,7 +73,7 @@ If you compare the amount of code we had a few years ago with what I saw when I 
 
 **Colin:** Yes, which I think is fantastic. Also, I think we have around three times the amount of test code as we do actual business logic, which I think is a good ratio.
 
-Most of our code is test code. This has tuned out well.
+Most of our code is test code. This has turned out well.
 
 import grs from '../../assets/blog/gresham-staff.jpg'
 
@@ -81,11 +81,13 @@ import grs from '../../assets/blog/gresham-staff.jpg'
 
 ## Event-driven Banking
 
-**Joe: So one of the other key characteristics of CCM is that it’s a fully event-driven system, and event-sourcing is a key pattern of the architecture. Why did you adopt that approach?**
+**Joe: So one of the other key characteristics of the cash management solution is that it’s a fully event-driven system, and event-sourcing is a key pattern of the architecture. Why did you adopt that approach?**
 
 **Mark:** With finance systems you need to understand how you got to the position that you’re currently in. With Kafka you can save all events, so you have an audit history to the beginning of time if you want it. So Kafka lends itself well to finance. With a topic you’re saying, “These are the facts that have happened”, and if your program code is ever wrong you can correct it and re-consume those facts to make up a different ‘model’ or ‘current view’ of what the world should look like.
 
 <span class='pullquote left' text-content="The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to prove where you have actually put money.">The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to _prove_ where you have actually put money</span>. We may have one account, but when the customer looks at it they might want to see that account as many different ledgers. We need to prove where the money has gone and what has happened. We have this power from the events.
+
+Each message represents a fact about something that has happened. Re-reading these facts allows you to rebuild your internal model. This means that you can re-consume all the messages (facts) about the system and generate a new internal model. This is very different to how SQL databases operate, in SQL you mutate the current system state to the new state, in the process you lose the previous state (say you drop a column) and are limited to what the new system state can be, as this might involve complex logic over and above SQL update operations.
 
 **Joe: So provenance - being able to trace back exactly how any value, like a balance, was arrived at - is very important for you.**
 
@@ -97,7 +99,7 @@ import grs from '../../assets/blog/gresham-staff.jpg'
 
 **Joe: Which parts of the Clojure ecosystem are you using?**
 
-**Mark:** We’re using [Jackdaw](https://github.com/FundingCircle/jackdaw) for our Kafka Streams topologies. We actually maintain our own fork internally because we’ve had to extend some things. Jackdaw hasn’t had a lot of updates recently, although now there are some updates starting to come through and PRs are getting merged. We’ve introduced our own concepts that don’t exist natively in Kafka Streams, such as the eventual join, and we’ve added these to our own internal Jackdaw. We’re debating now whether to remove Jackdaw entirely and interact more directly with the Streams API, and get greater control over upgrades. For now though, Jackdaw remains our primary way of defining these topologies.
+**Mark:** We’re using [Jackdaw](https://github.com/FundingCircle/jackdaw) for our Kafka Streams topologies. We actually maintain our own wrapper for Jackdaw internally because we’ve had to extend some things. Jackdaw hasn’t had a lot of updates recently, although now there are some updates starting to come through and PRs are getting merged. We’ve introduced our own concepts that don’t exist natively in Kafka Streams, such as the eventual join, and we’ve added these to our own internal Jackdaw. We’re debating now whether to remove Jackdaw entirely and interact more directly with the Streams API, and get greater control over upgrades. For now though, Jackdaw remains our primary way of defining these topologies.
 
 We moved away from Java logging frameworks to [Timbre](https://github.com/ptaoussanis/timbre) logging. We’ve extended our logging quite a bit to improve exception handling - we walk through the chain of exception and gather exception-info and the associated data. You get a single, consolidated map that you can understand - one log that has all the information you need. JSON logs work well with the cloud providers.
 
@@ -123,7 +125,7 @@ _[Check out [lein-metajar](https://github.com/orb/lein-metajar) - Ed]_
 
 That’s how I like a Clojure project to be. That’s not to say ours is like that, but I prefer that approach.
 
-On CCM it’s slightly different. Each of the things that Integrant controls wraps around a Kafka Streams topology. So that’s our unit of test, the topology.
+On the cash management solution it’s slightly different. Each of the things that Integrant controls wraps around a Kafka Streams topology. So that’s our unit of test, the topology.
 
 In some areas we can pull out enough parts to usefully test something in isolation. The problem with this kind of test is that when events change, or schemas change, the test won’t break because you have fixed whatever data you are passing in. For this reason the value of this kind of test is reduced. That’s why we need those overall tests, that test the topology, and if the schema changes then these will break. I know that if something about the schema changes, those tests will break, and those are the tests that really matter.
 
@@ -137,7 +139,7 @@ import grr from '../../assets/blog/gresham-coffee-room.jpg'
 
 **Joe: So the majority of the backend system is implemented as Kafka Streams topologies. What are some of the challenges you face?**
 
-**Mark:** Streams is a framework and you have to fit in with it. The powers of testing that you currently have are not great. The standard tools don’t deal with all the scenarios that we care about. We want to be able to test more extensively how Streams is working with internal topics, if there are multiple partitions then have tests where things are consumed out of order. We’ve had to extend the TopologyTestDriver and we’ve spoken a lot with Confluent about this.
+**Mark:** Streams is a framework and you have to fit in with it. The powers of testing that you currently have are not great. The standard tools don’t deal with all the scenarios that we care about. We want to be able to test more extensively how Streams is working with internal topics, if there are multiple partitions then have tests where things are consumed out of order. One of our engineers has done a lot of work to extend the TopologyTestDriver, and we’ve spoken a lot with Confluent about this (see [DanielStephens/ktest](https://github.com/DanielStephens/ktest)).
 
 With Streams when you work with the TopologyTestDriver it’s a very different way of testing. You say, “I’ve consumed these messages, so what do I get out” but with Clojure we always like to execute a pure function and what is the result? It’s similar, but the volume of quite complex code you’re going through is large. You have to pass in specific Java types, like a KStream, which needs to be set up. Your event has to be well structured, as we’re using Avro. All this can mean the test becomes quite large. Ideally we’d like to be able to test our business logic and ignore the framework, but there’s no good support for this right now.
 
@@ -147,11 +149,11 @@ With Streams when you work with the TopologyTestDriver it’s a very different w
 
 **Joe: How do you package and deploy your Clojure applications?**
 
-**Mark:** So we deploy as Docker images, to Kubernetes. We can actually deploy the whole of the CCM platform locally using minikube. We use CircleCI and as part of our release we build jars, create Docker images, update YAML files using Kustomize and then produce a final, versioned YAML file. We then use a Babashka script to deploy this to an environment.
+**Mark:** So we deploy as Docker images, to Kubernetes. We can actually deploy the whole of the cash management platform locally using minikube. We use CircleCI and as part of our release we build jars, create Docker images, update YAML files using Kustomize and then produce a final, versioned YAML file. We then use a Babashka script to deploy this to an environment.
 
 Each of our microservices is its own uberjar, and we can have many Kafka Streams topologies started by a single microservice. We find this helps us to reduce the resources that we use. There’s nothing shared between the topologies though, they have their own separate stores, and they only communicate via Kafka topics.
 
-**Joe: What challenges have you had in using Clojure for CCM?**
+**Joe: What challenges have you had in using Clojure for the cash management platform?**
 
 **Colin:** I think getting developers is quite interesting. It can be hard to find developers, but I don’t know if this is the language or whether it’s just that finding good developers is hard. You might advertise for a Clojure Developer, but are you going to find that person? We’ve had to be quite flexible on that. We really look for attitude and aptitude, curiosity and passion.
 
@@ -159,15 +161,13 @@ Each of our microservices is its own uberjar, and we can have many Kafka Streams
 
 **Colin:** It’s the nature of finance and the industry we’re in that we need to take security very seriously. The nature of Clojure means there’s not a lot of static analysis tooling out there, for instance. So we look to close this gap in other ways, with some other mitigations. We’re using IAST _[interactive application security testing]_ tooling instead, so this is interaction analysis using a tool called Seeker. It doesn’t understand the Clojure but we get stack traces and it shows us the flow of data through the system. We also do the normal NVD checks. With these analysis tools you’re often looking for something that does Java, and so may be useful for Clojure even if it doesn’t give you the same insight.
 
-_[Check out [clj-kondo](https://github.com/clj-kondo/clj-kondo), [kibit](https://github.com/jonase/kibit), [eastwood](https://github.com/jonase/eastwood), [carve](https://github.com/borkdude/carve/), [yagni](https://github.com/venantius/yagni), [bikeshed](https://github.com/dakrone/lein-bikeshed), [clj-holmes](https://github.com/clj-holmes/clj-holmes), [clj-watson](https://github.com/clj-holmes/clj-watson), [nvd-clojure](https://github.com/rm-hull/nvd-clojure) - Ed]_
+_[Agree. Useful tools in this space include [clj-kondo](https://github.com/clj-kondo/clj-kondo), [kibit](https://github.com/jonase/kibit), [eastwood](https://github.com/jonase/eastwood), [carve](https://github.com/borkdude/carve/), [yagni](https://github.com/venantius/yagni), [bikeshed](https://github.com/dakrone/lein-bikeshed), [clj-holmes](https://github.com/clj-holmes/clj-holmes), [clj-watson](https://github.com/clj-holmes/clj-watson), [nvd-clojure](https://github.com/rm-hull/nvd-clojure) - Ed]_
 
 **Joe: Yes, sometimes it’s not enough to explain why certain kinds of vulnerabilities are not possible. For compliance reasons you need to produce a report that’s the result of a scan.**
 
 ## Onboarding
 
 **Joe: You mentioned hiring for attitude and aptitude. How do you bring engineers that don’t have Clojure experience into the project?**
-
-**Colin:** We’ve done this mostly at the graduate level. It’s mostly in-house training.
 
 **Mark:** If it’s graduates, they’re going to need help on a lot of things. There’s Clojure, but also Kafka, and the world of distributed computing, which is really complicated. So even some of the Clojure developers we’ve hired, if someone doesn’t have experience with Kafka it’s going to take them a while to understand those things.
 
@@ -177,7 +177,7 @@ One of our engineers, Dan Stephens, has done amazing work on our READMEs. He’s
 
 **Colin:** Every new person will go through that and they’ll fix issues for you. If things have moved forward or been pulled out as a library and we’ve not updated the README, they will catch that. There’s always something that’s moved on.
 
-We’ll usually have a task in mind for new joiners. They’ll be working in the team, but we’ll have a task carved out for them, fairly standalone, that gives them exposure to a narrow part of the system. The actual change might be really simple, even just a one-line change, but going through the process of setting everything up and getting a working local environment is the really useful. It gives people confidence in the first week.
+We’ll usually have a task in mind for new joiners. They’ll be working in the team, but we’ll have a task carved out for them, fairly standalone, that gives them exposure to a narrow part of the system. The actual change might be really simple, even just a one-line change, but going through the process of setting everything up and getting a working local environment is really useful. It gives people confidence in the first week.
 
 **Mark:** <span class='pullquote' text-content="I always try to say to any developer joining, “Get a PR up fast”. Quick feedback is the key thing.">I always try to say to any developer joining, “Get a PR up fast”. Quick feedback is the key thing.</span> PRs are helping me understand what you understand - we’re sharing this idea. I want to see how you approach things and discuss. Rather than wait a week and then think, “Well, we could have iterated on this a bit”. It’s always good to get things out fast and get feedback fast.
 
