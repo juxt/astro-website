@@ -122,6 +122,7 @@ We get the following:
 <Image alt='image' src={problem} />
 
 For more complex needs, there will be a neater way to provide some global css; but for our simple purposes we just need
+
 ```clojure
 (defn css []
   [:style "em{font-style: normal;}
@@ -226,8 +227,8 @@ jobs:
 
       - name: 🏗 Clerk Build
         env:
-          AOC_TOKEN: ${{ secrets.AOC_TOKEN }}            # Token for pulling solutions into the notebook
-          AOC_USER_AGENT: ${{ secrets.AOC_USER_AGENT }}  # Required by the creator
+          AOC_TOKEN: ${{ secrets.AOC_TOKEN }} # Token for pulling solutions into the notebook
+          AOC_USER_AGENT: ${{ secrets.AOC_USER_AGENT }} # Required by the creator
         run: clojure -M:build
 
       - name: 🚀 Deploy
@@ -243,7 +244,7 @@ Whenever we push our code, pipelines will trigger and deploy the notebooks.
 
 We can even go further, and you're encouraged to do so. Give Clerk a try and write your own custom visualizers for some of the data.
 
-What about having having Day 5 with an interactive step-through slider of the boxes moving? Or Day 11 with monkeys throwing the items around to each other?
+What about having Day 5 with an interactive step-through slider of the boxes moving? Or Day 11 with monkeys throwing the items around to each other?
 
 The possibilities are endless, and Clerk can do much more than I've listed here. If your appetite has been whetted, I encourage you to explore their [demo repo](https://github.clerk.garden/nextjournal/clerk-demo/commit/47e95fdc38dd5321632f73bb50a049da4055e041/) further.
 
