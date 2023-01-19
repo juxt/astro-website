@@ -54,8 +54,6 @@ up to Scala from Java and evolve slightly what you're doing. Jumping
 into a LISP requires a shift in mindset, and a safe environment for
 trial and error.
 
-\\include-partial \_training_cta.html
-
 Developers will then require full immersion into a project before level 2) is attained, when they can start flexing their growing skills. This
 is a challenging part of the journey because _advanced beginners_ don't
 know what they don't know, yet they have seen an appealing future and
