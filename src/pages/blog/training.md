@@ -16,8 +16,7 @@ given a hand-wavey answer of 4-6 weeks and vaguely meant it, but now I
 want to flesh it out some.
 
 First, what does _getting up to speed_ mean? Years ago I encountered the
-[_Dreyfus Levels_ of skills
-acquisition](https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition)
+[_Dreyfus Levels_ of skills acquisition] (https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition)
 and it's stuck with me. It's very simple and consists of five
 stages - 1) Beginner, 2) Advanced Beginner, 3) Competent, 4) Proficient, 5) Expert.
 
@@ -54,8 +53,7 @@ up to Scala from Java and evolve slightly what you're doing. Jumping
 into a LISP requires a shift in mindset, and a safe environment for
 trial and error.
 
-Developers will then require full immersion into a project before level 2) is attained, when they can start flexing their growing skills. This
-is a challenging part of the journey because _advanced beginners_ don't
+Developers will then require full immersion into a project before level 2) is attained, when they can start flexing their growing skills. This is a challenging part of the journey because _advanced beginners_ don't
 know what they don't know, yet they have seen an appealing future and
 are in a rush to get going. Those of us with oversight have a
 responsibility to keep them growing with confidence, i.e. lets get them
