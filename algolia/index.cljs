@@ -12,6 +12,7 @@
 
 (.config dotenv)
 
+;; evn vars are stored in netlify
 (def ALGOLIA_APP_ID (-> js/process .-env .-ALGOLIA_APP_ID))
 (def ALGOLIA_API_KEY (-> js/process .-env .-ALGOLIA_API_KEY))
 (def ALGOLIA_INDEX_NAME (-> js/process .-env .-ALGOLIA_INDEX_NAME))
