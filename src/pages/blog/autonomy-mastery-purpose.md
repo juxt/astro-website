@@ -81,14 +81,14 @@ responsibility and leadership roles.
 This model appeals, where developers are highly valued and selected
 accordingly, rather than being seen as an exchangeable commodity.
 Software engineers crave the autonomy this gives as it allows them to
-exercise creative control and to optimise their path through the work,
+exercise creative control and to optimize their path through the work,
 bringing efficiencies to a project.
 
 As with anything however, we can take this too far. _Programmer Anarchy_
 is about empowering complete freedom and autonomy to all developers. The
 downside here is Conway's Law coming back to bite, where the software
 architecture starts to resemble a more chaotic and splintered software
-development organisation, leading to a Cambrian explosion of polyglot
+development organization, leading to a Cambrian explosion of polyglot
 microservices.
 
 Autonomy means entrusting developers with greater responsibility -- but
@@ -122,7 +122,7 @@ are capable of attaining.
 This is true also of software consultancies, where the present-day
 clients will be the ancestors of success for future clients. On the face
 of it, this is a tough message for the clients, but it cuts both ways:
-the clients of today will be richly rewarded by the learned
+the clients of today will be richly rewarded by the learnt
 experiences - both successes and failures - of previous clients.
 
 # Conclusion

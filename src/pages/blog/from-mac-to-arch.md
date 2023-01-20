@@ -145,7 +145,7 @@ the two setups without altering my finger memory. The keyboard I found
 is a wired [Perixx](https://www.amazon.co.uk/dp/B08C5LX743) that you can
 find for a few bucks on Amazon. I didn't have to do anything special to
 use the keyboard after connecting it to the USB port, same goes for my
-USB camera and external microphone that were correctly recognised and
+USB camera and external microphone that were correctly recognized and
 working out of the box. Way to go Linux!
 
 There are still many things I need to set up on the new laptop, for

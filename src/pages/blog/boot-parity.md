@@ -274,7 +274,7 @@ The `build.boot` file:
  repl {:init-ns 'user
        :skip-init true})
 
-;; We want to change the behaviour of the repl task to include our own
+;; We want to change the behavior of the repl task to include our own
 ;; namespace.
 (replace-task!
  [r repl] (fn [& xs]

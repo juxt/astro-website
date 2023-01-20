@@ -15,4 +15,4 @@ JUXT are building a post-trade capture and management platform for equity deriva
 
 Our engineers are delivering an event-driven architecture, using Apache Kafka for log-based messaging between distributed systems.
 
-This project has a strong test-driven design, ensuring consistency of behaviour with existing platforms.
+This project has a strong test-driven design, ensuring consistency of behavior with existing platforms.

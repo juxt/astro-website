@@ -14,7 +14,7 @@ tags:
 Last year I [spent some
 time](https://www.juxt.pro/blog/clojurescript-native-apps-2021) building
 a cross-platform mobile app using React Native and ClojureScript. This
-led to the organisers of the React Native London conference asking me to
+led to the organizers of the React Native London conference asking me to
 give a talk about ClojureScript and its use in React Native
 applications, and I took that as an opportunity to do some further
 research into the ecosystem and how things have changed over the last 9

@@ -18,7 +18,7 @@ gathered to hear him talk about Communicative Programming.
 
 In this day and age of raging debates about type systems, and frequent
 puzzlements about what Monads are, it's refreshing to hear Sam
-prioritise the lowering of cognitive load when it comes to accessing
+prioritize the lowering of cognitive load when it comes to accessing
 programming languages and our environments.
 
 Code should be accessible to a five year old. Sam, who makes music by

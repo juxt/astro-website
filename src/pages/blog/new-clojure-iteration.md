@@ -26,7 +26,7 @@ Downey (aka \"hiredman\" on [Clojurians
 Slack](https://clojurians.slack.com/) and other places). The original
 thread was posing the problem of dealing with batched API calls, those
 requiring the consumer a \"token\" from the previous invocation to be
-able to proceed to the next. This behaviour is very popular in API
+able to proceed to the next. This behavior is very popular in API
 interfaces such as [AWS
 S3](https://docs.aws.amazon.com/cli/latest/reference/s3api/list-objects-v2.html),
 where the API needs to protect against the case of a client requesting

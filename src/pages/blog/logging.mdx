@@ -17,7 +17,7 @@ Having worked for the past year in a distributed microservices
 architecture I finally discovered what logging truly is: it's Google
 Analytics for your code.
 
-Think about this: the business asks you to track interesting behaviour
+Think about this: the business asks you to track interesting behavior
 so it has the information it needs to make informed decisions. They want
 to know if a feature is driving in more customers, if a campaign is
 getting traction, if one solution is preferrable over another.
@@ -54,7 +54,7 @@ view, we'd like to answer:
 
 - Where there any noticeable effects during the ABC-OUTAGE? What parts
   were effected? Can we trigger some alerts when we detect similar
-  behaviour before an outage occurs?
+  behavior before an outage occurs?
 
 The list could be longer, these are just a few ideas. The point is, if
 you have anything similar to a [Definition of
@@ -64,8 +64,8 @@ checklist. Just like implementing automated tests for your code is
 important, adding appropriate logging delivers business value along with
 the code you ship.
 
-Below is a list of things I learned while refining the logging behaviour
-of our system. The two most important realisations for me were:
+Below is a list of things I learnt while refining the logging behavior
+of our system. The two most important realizations for me were:
 
 - Make log event explicits (by giving them a name)
 
@@ -165,7 +165,7 @@ But that's just one of the many examples. We've added extra fields like
 enabled on that deployment, `:customer-id` to group by actions made by a
 single user etc. etc.
 
-Once you realise it's all data the possibilites are endless.
+Once you realize it's all data the possibilites are endless.
 
 ## Don't answer a question: show the answer
 
@@ -187,14 +187,14 @@ events you want to track, putting yourself in the shoes of your future
 self or the business and thinking about what you want to see displayed
 on a dashboard.
 
-## Keep visualisation code and logging code in sync
+## Keep visualization code and logging code in sync
 
 A bonus feature we discovered: Kibana (and I'm sure many other tools)
-describes the visualisations as json and allows you to import them.
+describes the visualizations as json and allows you to import them.
 
-If you describe those visualisation in a code project and add it as a
+If you describe those visualization in a code project and add it as a
 dependency, then you can cross link the `:namespaced/keywords` you use
-in your logging code with the ones you reference in your visualisations.
+in your logging code with the ones you reference in your visualizations.
 So when you decide to rename/refactor one of the events, you don't break
 existing dashboards.
 

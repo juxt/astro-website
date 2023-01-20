@@ -54,7 +54,7 @@ This provides
 - **Long Term Testing** You can keep tests and sim reports for long
   periods of time. This means that you can rerun the same test script
   on new versions of your code and discover what is newly broken, and
-  how you have affected performance. You can analyse these reports
+  how you have affected performance. You can analyze these reports
   over time to show how the project is progressing
 
 It **does** mean that you will need a reasonable understanding of
@@ -140,7 +140,7 @@ lifecycle For example
 SimClock
 
 : describes how the atTime attribute is to be used to dispatch
-actions. Default behaviour is to use atTime as a millisecond offset
+actions. Default behavior is to use atTime as a millisecond offset
 from the start time, sped up by a constant amount
 
 # How?

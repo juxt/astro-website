@@ -13,7 +13,7 @@ import { Image } from '@astrojs/image/components'
 A great deal can be achieved in the first few years of a software
 project, with a small team and the right tools we can quickly deliver
 features to appease both businesses and their clients. In the early
-stages of a project, delivery is often prioritised over architecture,
+stages of a project, delivery is often prioritized over architecture,
 but the architecture needs to evolve if the software is to be developed
 and maintained in the longer term. Any project that lives for longer
 than a few years will experience change, business requirements will
@@ -190,7 +190,7 @@ of abstraction we can use to decouple modules, the approach is more
 object-oriented than functional, but protocols can be useful where we
 desire a more formal abstraction, or where it makes sense to form a
 [cohesive](<https://en.wikipedia.org/wiki/Cohesion_(computer_science)>)
-collection of behaviours. In the previous example, we used a single
+collection of behaviors. In the previous example, we used a single
 function for the abstraction to retrieve an article, alternatively, we
 could use the [Repository
 Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)
@@ -239,7 +239,7 @@ refer to the abstraction, not the concretion of the protocol defined in
 
 It is more verbose, but it may be preferable to pass around instances of
 protocols than to pass around lots of functions, particularly where many
-behaviours are needed that are closely related; ultimately, it comes
+behaviors are needed that are closely related; ultimately, it comes
 down to a matter of style. One of the advantages of protocols over
 functions is that it is clearer to the reader what a function depends
 on; we `require` the namespace and our code points to where the protocol

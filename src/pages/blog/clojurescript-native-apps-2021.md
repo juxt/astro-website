@@ -361,7 +361,7 @@ really is greener there.
 
 # Conclusions
 
-In conclusion, I would say I have learned the following things in my
+In conclusion, I would say I have learnt the following things in my
 brief adventure into ClojureScript mobile app development:
 
 - It is indeed possible to build a somewhat useable app and deploy it

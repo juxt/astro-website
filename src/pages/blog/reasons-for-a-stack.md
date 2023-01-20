@@ -36,7 +36,7 @@ There will always be a risk of exploits being uncovered in the libraries
 we use, but if for each project we choose the technologies completely
 anew, then the Russian roulette gun gets loaded each time. Today might
 be a JavaScript library exploit, but tomorrow could be the vulnerability
-in the popular Java library Struts in conjunction with the serialisation
+in the popular Java library Struts in conjunction with the serialization
 library XStream, that resulted in the [Equifax
 breach](https://cynation.com/the-equifax-data-breach/).
 

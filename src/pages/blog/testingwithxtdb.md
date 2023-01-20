@@ -59,13 +59,13 @@ However, there are databases that don't have these limitations. Our
 database, [XTDB](https://xtdb.com/), allows you to avoid these
 complexities and also provides some interesting _time travel_ abilities.
 
-We'll talk about how XTDB provides consistent behaviour with swappable
+We'll talk about how XTDB provides consistent behavior with swappable
 backends (including in-memory storage), time-travelling tests, the
 ability to reproduce bugs by trivially testing against specific database
 snapshots, bisecting our data's history, and efficiently executing tests
 with many assertions without writing the results to disk.
 
-## Consistent behaviour with Different Storage Backends
+## Consistent behavior with Different Storage Backends
 
 The [architecture](https://docs.xtdb.com/concepts/what-is-xtdb/) of XTDB
 allows for seamless swapping of storage backends with no change to the
@@ -90,7 +90,7 @@ in-memory node:
 ; => #:xtdb.api{:tx-time #inst"2022-03-09T10:00:42.245-00:00", :tx-id 0}
 ```
 
-## Testing behaviour across time
+## Testing behavior across time
 
 Tests may need to make assertions on a system at different dates and
 times. As XTDB is a
@@ -181,7 +181,7 @@ test across the previous versions of a codebase to find the failure
 point.
 
 XTDB allows you to programmatically switch to any previous state of the
-database. Therefore, it is possible to replicate the behaviour of
+database. Therefore, it is possible to replicate the behavior of
 `git bisect` but bisecting the state of the data rather than the code.
 
 In this example, the boolean `:true-equals-false?` is just a placeholder

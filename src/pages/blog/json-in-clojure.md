@@ -21,7 +21,7 @@ As with most choices that relate to building software systems, there are
 trade-offs involved, so the choice will likely be driven by the context
 in which you're working, including the demands on your application, your
 existing library choices, and the processes and principles of your
-organisation.
+organization.
 
 # Clojure's data API
 
@@ -70,7 +70,7 @@ project.
 
 Cheshire, like many JSON libraries running on the JVM, relies on
 [Jackson](https://github.com/FasterXML/jackson) to encode and parse JSON
-and, since Jackson is a mature and highly-optimised JSON library, this
+and, since Jackson is a mature and highly-optimized JSON library, this
 puts Cheshire in good stead. Cheshire is something of a swiss-army
 knife, with support for custom encoders and decoders, pretty printing
 options, additional binary formats like Smile and CBOR, and support for
@@ -145,7 +145,7 @@ writes -- it adds no other dependencies to your project. This makes
 data.json great for environments where additional dependencies are
 strictly controlled. The cost of this approach is that as payloads grow
 beyond 10s of bytes, data.json cannot match the speed and efficiency of
-libraries that build on the JVM's fastest and most highly-optimised
+libraries that build on the JVM's fastest and most highly-optimized
 library, Jackson. The no-dependency approach results in a reduced
 surface area for vulnerabilities, reduced deployment size, and reduced
 scope for dependency conflicts (for which Jackson [has something of a
@@ -179,7 +179,7 @@ is part of an ecosystem of libraries supporting web API development
 created by Finnish software consultancy Metosin.
 
 jsonista takes Cheshire as its performance low-water mark, but utilises
-Jackson databind's object mapper directly to maximise performance. The
+Jackson databind's object mapper directly to maximize performance. The
 results are striking and detailed benchmarks published with the project
 show jsonista outperforming the competition significantly for both
 encoding and decoding at all payload sizes. As you might expect for a
@@ -234,7 +234,7 @@ list, the _raison d'etre_ of pjson is maximising performance.
 Like jsonista, pjson moves much of its implementation into Java to
 eliminate sources of micro-inefficiency in performance-critical areas.
 pjson takes the further, somewhat dangerous step of eliminating any
-guarantees around JSON _validation_ during parsing, in favour of
+guarantees around JSON _validation_ during parsing, in favor of
 producing results _fast_. You can feed pjson badly-formed JSON and
 receive what appears to be a successfully parsed (but very odd) result.
 For most use-cases, this alone will discount pjson. To further
@@ -322,7 +322,7 @@ though our very-large-map.json contains gigabytes of data:
 
 Although it is unlikely to completely replace a general purpose JSON
 parsing library like Cheshire or jsonista, clj-lazy-json is one of the
-few Clojure libraries that offers true streaming behaviour. As a result,
+few Clojure libraries that offers true streaming behavior. As a result,
 it's a great addition to your Clojure JSON toolbox.
 
 Summarising clj-lazy-json:

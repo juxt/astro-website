@@ -218,7 +218,7 @@ Some of my current ideas for future posts:
 - A detailed beginner setup guide for all these tools
 
 - Some information on how I have built out my environment, and my
-  favourite mappings
+  favorite mappings
 
 # Me
 

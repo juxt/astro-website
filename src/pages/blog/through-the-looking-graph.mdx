@@ -277,11 +277,11 @@ This is a philosophical trade-off which we haven't balanced
 satisfactorily yet. On the one hand it reduces the data requirements
 even further and simplifies the client but on the other it complects
 data and logic which seems to break the GraphQL paradigm of pure data
-and explicit behaviour. I'm not happy with these derived fields but they
+and explicit behavior. I'm not happy with these derived fields but they
 are a huge temptation when you own both the client and the server. I
 think a better way would be to request the list of players as before,
 but sorted by performance and limited to 1. The data structure remains
-unchanged, is minimised, and the implicit server logic in the name
+unchanged, is minimized, and the implicit server logic in the name
 \"bestPlayer\" becomes explicit logic driven by the client.
 
 Our client side code has also become slightly harder to re-use across UI

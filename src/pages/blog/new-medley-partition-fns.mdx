@@ -1,6 +1,6 @@
 ---
 author: 'tom'
-title: "Two new medley partition functions"
+title: 'Two new medley partition functions'
 description: 'Introducing partition-after & partition-before to the Clojure medley library'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
@@ -83,6 +83,7 @@ For the case where we don't want to include the markers, we can add a `(map butl
 These aren't much terser, but are arguably clearer to read. However, the `partition-by` solutions rely on a few assumptions. Let's walk through some scenarios which can break these assumptions:
 
 ### Partition markers may be consecutive
+
 Clojure's `partition-by` groups consecutive elements for which `f` has the same return value, so consecutive markers are not split. Here we want to partition `test-vec` into sentences:
 
 ```clojure
@@ -104,7 +105,8 @@ Clojure's `partition-by` groups consecutive elements for which `f` has the same 
 ```
 
 ### Partition markers may occur in unexpected order
-Previous examples using `partition-by` with `partition-all 2` rely on a specific order of markers and non-markers; namely that the first starting marker occurs before the first non-starting marker, and that the first ending marker occurs after the first non-ending marker. If this is starting to feel overly detailed, then the point has been made: building this capability manually can uncover unexpected behaviours before too long. Let's take a look at a few examples:
+
+Previous examples using `partition-by` with `partition-all 2` rely on a specific order of markers and non-markers; namely that the first starting marker occurs before the first non-starting marker, and that the first ending marker occurs after the first non-ending marker. If this is starting to feel overly detailed, then the point has been made: building this capability manually can uncover unexpected behaviors before too long. Let's take a look at a few examples:
 
 ```clojure
 (->> (partition-by #{:start} [7 8 :start])
@@ -143,9 +145,11 @@ Indeed, the stateful transducer arity of `partition-after` uses a similar approa
 Now we've covered the "what?" of these new functions, let's move onto the "how?"
 
 ## The process of getting these functions into medley
+
 The PR which brought these new functions into medley was my first on this project. What follows is a brief account of the process, given with the hope it can inspire others to contribute to such helpful open-source Clojure libraries.
 
 ### Initial commit
+
 I spotted a need for these functions over several months, noticing a pattern of questions on the clojurians Slack with routinely stateful or edge-case-sensitive solutions. The initial commit was just for `partition-after`, which I named `partition-upto` owing to its lazy-arity's reliance on medley's `take-upto`.
 
 It was a great learning experience, as I rarely use `lazy-seq` in JUXT projects or personal projects, and I've never written a transducer before. My method was to try to copy as much code from clojure.core and medley.core as possible, only straying from their example when necessary.
@@ -157,6 +161,7 @@ The transducer-arity was much slower to write, but again, mostly copied from `pa
 The total process took only a couple of hours, and I was pleased to get a positive response from James Reeves (Weavejester) himself the same day. He agreed `partition-after` was a better name, and also asked for some specific use cases.
 
 ### Feedback
+
 James Reeves runs a tight ship on all of his projects, and this PR was no exception. I was asked to justify quite a few lines of code, but fortunately I had acceptable answers for most. My most common response was "because that's what's done in clojure.core" - and luckily appeal to authority is sufficient when that authority is the Clojure core team.
 
 As an example, I was asked why `drop` is wrapped in `lazy-seq` here:
@@ -172,17 +177,20 @@ The main bit of feedback in terms of time-consumption was changing from cross-pl
 Rather than giving any more detailed an account of building transducers, I'll defer to my colleague Rhishikesh Joshi's excellent guide: https://rhishikesh.com/posts/how_i_think_about_transducers/
 
 ### Use-case example
-I think the most important part of the PR process was Weavejester's request for use-cases. Part of what makes medley such a nice library is that pretty much every function feels like it's there for a reason. A quick browse through medley's unmerged closed PRs shows as much. Interestingly, to find examples, I only had to search through the clojurians slack for the term `partition-by`. Almost all references to it are requests for `partition-after` and `partition-before` behaviour. The clojuredocs page also has a note almost character-for-character giving the lazy-arity code for `partition-before` (named `partition-at`). A lot of the examples I used in the `Two ways to partition collections` section are heavily inspired by such requests.
+
+I think the most important part of the PR process was Weavejester's request for use-cases. Part of what makes medley such a nice library is that pretty much every function feels like it's there for a reason. A quick browse through medley's unmerged closed PRs shows as much. Interestingly, to find examples, I only had to search through the clojurians slack for the term `partition-by`. Almost all references to it are requests for `partition-after` and `partition-before` behavior. The clojuredocs page also has a note almost character-for-character giving the lazy-arity code for `partition-before` (named `partition-at`). A lot of the examples I used in the `Two ways to partition collections` section are heavily inspired by such requests.
 
 ### Performance (premature) optimization
+
 The one thing which surprised me the most in this PR was that inlining functions can be _slower_ than not inlining them. One of my commits added `:inline` metadata for the JVM-clojure versions of some abstracted code to handle mutable code for the transducers. It was my first time inlining functions, which essentially just provide a macro which inlines the body of the function where it is called. Weavejester encouraged me to benchmark it using [criterium](https://github.com/hugoduncan/criterium) and I was really surprised to see the inlined versions were slower, or at the very least, no faster than their non-inlined forms. Apparently inlining can sometimes prevent the JIT compiler from optimizing certain code paths. It was a really helpful reminder that performance "optimizations" should always be benchmarked, not just assumed to work.
 
 ### All done!
+
 I added `{:added ...}` metadata, squashed my commits and waited. A couple of weeks later, my changes were merged to master, and a new version – `1.5.0` – was cut.
 
 Hopefully you have found this interesting, and hopefully you will find some use-cases of your own for `partition-after` and `partition-before`. My colleague Neale Swinnerton informed me we deployed `partition-before` to production in a JUXT project the week it was released! I'm sure there is plenty more handy functionality that could be added to libraries such as medley, so I hope this account can inspire you to take a look.
 
-
 ### References
-* The PR: https://github.com/weavejester/medley/pull/67
-* Railway picture at the top from [Eugene Zh](https://unsplash.com/@eugene_zh)
+
+- The PR: https://github.com/weavejester/medley/pull/67
+- Railway picture at the top from [Eugene Zh](https://unsplash.com/@eugene_zh)

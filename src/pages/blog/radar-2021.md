@@ -53,7 +53,7 @@ JUXT's latest thinking on the tools _we_ use and like.
 
 # Our recipe
 
-We try, as far as possible, to stick with the widely recognised radar
+We try, as far as possible, to stick with the widely recognized radar
 formula, so we use _Assess_, _Trial_, _Adopt_, and _Hold_ as our radar
 rings. We struggled at times to reconcile the way these terms are used
 by ThoughtWorks with our own plans to create a Clojure-specific radar,
@@ -113,7 +113,7 @@ wanted to call out:
   _Adopt_ to _Hold_.
 
 - [Timbre](https://github.com/ptaoussanis/timbre), from
-  _Trial_ to _Hold_. For logging, our preference is to maximise
+  _Trial_ to _Hold_. For logging, our preference is to maximize
   performance and compatibility. We've found the best and most
   enduring way to do this is a combination of tools.logging and
   Logback configuration.

@@ -212,7 +212,7 @@ a follow up read.
           :where
           ; datalog's where is quite different though
           ; datalog's where block combines binding of fields you want with filtering expressions
-          ; where-expressions are organised in triplets / quadruplets
+          ; where-expressions are organized in triplets / quadruplets
 
           [?entity-id    ; first  : usually an entity-id
            :person/name  ; second : attribute-id by which we filter OR which we want to pull out in 'find'

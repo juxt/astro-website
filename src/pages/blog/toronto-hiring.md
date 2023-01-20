@@ -19,7 +19,7 @@ industry means you get to meet a lot of people with different
 experiences, but many come to embrace similar values: simple,
 uncluttered, open, evident.
 
-Working on large software systems, you realise that every system is
+Working on large software systems, you realize that every system is
 unique, with its own characteristics. You get to notice how crucial good
 foundations are - just like raising kids!
 

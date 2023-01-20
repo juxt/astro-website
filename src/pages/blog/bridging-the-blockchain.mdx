@@ -48,7 +48,7 @@ both.
 # A Blockchain Primer
 
 To qualify as a \"blockchain\" in the sense the term is most often used,
-a ledger must exhibit specific behavioural properties across all the
+a ledger must exhibit specific behavioral properties across all the
 nodes, where a \"node\" is an actor in a distributed system tasked with
 maintaining an append-only, synchronized chain of transactions:
 
@@ -63,7 +63,7 @@ maintaining an append-only, synchronized chain of transactions:
 
 This is an extremely high-level overview, but in truth, blockchain
 systems are the simple combination of algorithms and datastructures
-which exhibit these behavioural properties. To go slightly deeper, we
+which exhibit these behavioral properties. To go slightly deeper, we
 recommend 3Blue1Brown's [_But how does bitcoin actually work?_](https://www.youtube.com/watch?v=bBC-nXj3Ng4). Although it is
 ostensibly a visual bitcoin primer, the only bitcoin-specific concept
 discussed is \"Proof of Work\" (one of many possible consensus
@@ -139,7 +139,7 @@ prohibitively difficult, bitemporal queries are effectively impossible.
 Can we just use an immutable database? Perhaps. But there are reasons
 blockchains exist. If all the characteristics outlined in _A Blockchain
 Primer_ (Provenance, Decentralization, and Security) are essential to
-the behaviour of a system, a blockchain is a reasonable solution.
+the behavior of a system, a blockchain is a reasonable solution.
 
 While there is no such thing as a truly \"trustless\" system,
 blockchains are perhaps the closest humanity has come thus far. An
@@ -151,7 +151,7 @@ Newer databases such as XTDB (among
 [others](https://clojurelog.github.io/)) introduce even more powerful
 tools on top of immutable records. In XTDB, it is possible to match data
 within Datalog transactions and define transaction functions that attach
-behaviours to data, cancelling or even altering transactions in-flight.
+behaviors to data, cancelling or even altering transactions in-flight.
 Every record in XTDB defines its own temporal validity. This could in
 fact be used to represent expiration as described in the \"Adverse
 Possession\" section of Szabo's whitepaper, but Valid Time affords the
@@ -411,7 +411,7 @@ compliance, safety, and query problems.
 Corda is a powerful, business-first blockchain. XTDB is the world's only
 open source, immutable, bitemporal graph database. Collectively, they
 create an open source solution for a new generation of businesses that
-require all these behavioural characteristics.
+require all these behavioral characteristics.
 
 Of course, Corda isn't the only blockchain. If your company is working
 with other blockchains capable of Byzantine Fault Tolerance or Smart

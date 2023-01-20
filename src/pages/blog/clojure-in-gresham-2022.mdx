@@ -51,7 +51,16 @@ We’ve also started using Babashka to replace Bash for any scripts we need. It�
 
 **Colin:** That’s a long time ago now! Our lead architect. Both him and I had quite a strong background in functional programming. We’d done some functional programming during our degrees many years earlier but never really had a chance to adopt it. We worked up slowly, watched a lot of Rich Hickey’s videos.
 
-<span class='pullquote left' text-content="We’d reached a general point of dissatisfaction with how large and clumsy Spring was becoming. Everything was annotation-based, and just trying to navigate a codebase was becoming really quite painful.">We’d reached a general point of dissatisfaction with how large and clumsy Spring was becoming. Everything was annotation-based, and just trying to navigate a codebase was becoming really quite painful</span>. The amount of code we had to have for the amount of functionality we needed just seemed out of proportion.
+<span
+  class='pullquote left'
+  text-content='We’d reached a general point of dissatisfaction with how large and clumsy Spring was becoming. Everything was annotation-based, and just trying to navigate a codebase was becoming really quite painful.'
+>
+  We’d reached a general point of dissatisfaction with how large and clumsy
+  Spring was becoming. Everything was annotation-based, and just trying to
+  navigate a codebase was becoming really quite painful
+</span>
+. The amount of code we had to have for the amount of functionality we needed just
+seemed out of proportion.
 
 We spent a couple of years just watching, listening, and seeing what was happening in that space, before we really bit the bullet and decided, “Yeah, we should go for it. It _is_ viable, we could approach this next project using Clojure”.
 
@@ -85,7 +94,17 @@ import grs from '../../assets/blog/gresham-staff.jpg'
 
 **Mark:** With finance systems you need to understand how you got to the position that you’re currently in. With Kafka you can save all events, so you have an audit history to the beginning of time if you want it. So Kafka lends itself well to finance. With a topic you’re saying, “These are the facts that have happened”, and if your program code is ever wrong you can correct it and re-consume those facts to make up a different ‘model’ or ‘current view’ of what the world should look like.
 
-<span class='pullquote left' text-content="The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to prove where you have actually put money.">The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to _prove_ where you have actually put money</span>. We may have one account, but when the customer looks at it they might want to see that account as many different ledgers. We need to prove where the money has gone and what has happened. We have this power from the events.
+<span
+  class='pullquote left'
+  text-content='The event-sourcing model with Kafka gives you audibility, and this feeds in really well to things like reconciliation. Being able to prove where you have actually put money.'
+>
+  The event-sourcing model with Kafka gives you audibility, and this feeds in
+  really well to things like reconciliation. Being able to _prove_ where you
+  have actually put money
+</span>
+. We may have one account, but when the customer looks at it they might want to see
+that account as many different ledgers. We need to prove where the money has gone
+and what has happened. We have this power from the events.
 
 Each message represents a fact about something that has happened. Re-reading these facts allows you to rebuild your internal model. This means that you can re-consume all the messages (facts) about the system and generate a new internal model. This is very different to how SQL databases operate, in SQL you mutate the current system state to the new state, in the process you lose the previous state (say you drop a column) and are limited to what the new system state can be, as this might involve complex logic over and above SQL update operations.
 
@@ -105,7 +124,15 @@ We moved away from Java logging frameworks to [Timbre](https://github.com/ptaous
 
 We used to use Spec to validate all our events, but we’ve now switched to Avro and we’re using the Kafka Schema Registry. It makes it a lot easier for us to share schemas with the Java team that we integrate with, and they can consume Avro without having to learn about EDN or Nippy. Avro gives us a schema in one place for documentation. Spec is also quite loose (for instance, you can send a map that has extra keys, and someone might become dependent on it. There are some libraries that can work around this, but Avro lets us say “No, these topics matter” and everyone can guarantee that the data on them will be exactly as expected. We generate our Avro schemas using [abracad](https://github.com/ovotech/abracad), and the team that we integrate with can then consume the schemas directly as they need to generate POJOs.
 
-<span class='pullquote' text-content="All of our services use Integrant and Aero. This has been there since the beginning and it makes it very easy for us to create a test config and set up the whole service locally.">All of our services use Integrant and Aero. This has been there since the beginning and it makes it very easy for us to create a test config and set up the whole service locally</span>.
+<span
+  class='pullquote'
+  text-content='All of our services use Integrant and Aero. This has been there since the beginning and it makes it very easy for us to create a test config and set up the whole service locally.'
+>
+  All of our services use Integrant and Aero. This has been there since the
+  beginning and it makes it very easy for us to create a test config and set up
+  the whole service locally
+</span>
+.
 
 We use Ring and compojure-api for REST APIs. We also use Lacinia for our GraphQL API.
 
@@ -185,7 +212,7 @@ We have a daily stand-up as well, so we can use that to check that people are on
 
 **Joe: If new starters are new to Clojure, they will need to get more comfortable with the language itself and the core APIs. Is there anything you commonly use there?**
 
-**Colin:** We tend to give a couple of books to each new starter. Clojure for the Brave and True and Clojure Applied. It depends what our current favourites are. We also find 4Clojure exercises are useful. We buddy people up, so someone would do an exercise and then discuss with their buddy. The buddy might say, “Well, actually you could do it this way, or this way” and exploring these different approaches and alternatives is very useful.
+**Colin:** We tend to give a couple of books to each new starter. Clojure for the Brave and True and Clojure Applied. It depends what our current favorites are. We also find 4Clojure exercises are useful. We buddy people up, so someone would do an exercise and then discuss with their buddy. The buddy might say, “Well, actually you could do it this way, or this way” and exploring these different approaches and alternatives is very useful.
 
 We also have a lot of special-interest channels in Slack, not just for Clojure actually. People will post interesting articles there. We have channels for Kafka, Kubernetes, Clojure. There’s not a lot of traffic, but occasionally somebody will find a good article, or watch an interesting talk, or find a good reference. The Kafka one is pretty noisy.
 
@@ -223,7 +250,7 @@ Things like Babashka are helping a lot. Previously there would be one or two peo
 
 It’s funny because you think the editor thing is really a solved problem, then VS Code has come along and is huge. It’s just a good product.
 
-**Mark:** If you’ve customised your key bindings it can get hard to pair with others or use their machine, you realise that you’re stuck without your own setup. What’s changed now though is that people are remote, so you can do the ping-ping pairing thing and say, “Okay you drive for a while” and there’s no need to use someone else’s setup. Sometimes you’ll write a test and push it to a branch, and the other person can pull and make it pass.
+**Mark:** If you’ve customised your key bindings it can get hard to pair with others or use their machine, you realize that you’re stuck without your own setup. What’s changed now though is that people are remote, so you can do the ping-ping pairing thing and say, “Okay you drive for a while” and there’s no need to use someone else’s setup. Sometimes you’ll write a test and push it to a branch, and the other person can pull and make it pass.
 
 ## REPL-Driven Development
 
@@ -239,7 +266,15 @@ I tend to write a test first, but still, with the REPL you’re working out the 
 
 **Mark:** Yes, definitely. We’ve had those things in the past, where there have been some fixtures or tests setup that must always be executed in a certain way. When we see that we always tend to break it apart, make a comment block up if you need to with parts you can run easily in the REPL.
 
-<span class='pullquote' text-content="If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off.">If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off</span>, bring Kafka up and down.
+<span
+  class='pullquote'
+  text-content='If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off.'
+>
+  If you break functions up so that they just do one very small thing, you can
+  run that directly in the REPL. Make sure you have ways to switch things on and
+  off
+</span>
+, bring Kafka up and down.
 
 **Colin:** Yes, that whole thing of having to keep on top of it is true. We had a PR just recently where there was a need to always run this two step process to exercise the code. After some feedback, we got this back to just a good REPL experience.
 

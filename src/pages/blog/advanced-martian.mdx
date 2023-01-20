@@ -70,12 +70,12 @@ that are always up to date. We can write the tests like this:
       (is (false? (:write-access? user))))))
 ```
 
-As always, you can write your own interceptors with whatever behaviour
+As always, you can write your own interceptors with whatever behavior
 you want, building on top of what Martian provides but always working at
 the interface level where you want to be.
 
 Furthermore you can use **martian-test**\'s response generators to write
-generative tests and explore all possible behaviour in the following
+generative tests and explore all possible behavior in the following
 way:
 
 ```clojure

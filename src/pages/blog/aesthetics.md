@@ -76,7 +76,7 @@ YeSQL vs HoneySQL... the source of debates is endless.
 
 We all have our subjective views on aesthetics and we're human; being
 exposed to someone else's code will regularly evoke a squirmish. The
-best developers I have met and hugely admire are those that recognise
+best developers I have met and hugely admire are those that recognize
 that there are no absolutes and that aesthetics are subjective. To truly
 change a code-base we have to first understand it and to appreciate the
 original theory. This takes an enormous amount of patience and a

@@ -40,7 +40,7 @@ itself (which quietly autoscales under heavy load). Amazon
 [recommends](https://aws.amazon.com/articles/best-practices-in-evaluating-elastic-load-balancing/)
 that you increase the load \"at a rate of no more than 50 percent every
 five minutes\". (The entire article is well worth reading.) You might
-also be interested in ramping _down_, to test scale-down behaviour.
+also be interested in ramping _down_, to test scale-down behavior.
 
 # Existing options
 
@@ -77,7 +77,7 @@ your browser activity and turns it into a simulation script - though
 this does not play nice with HTTPS.
 
 What it doesn't have is a convenient way to run it remotely on AWS.
-RedLine13 would work, but since I didn't realise that at the time, I
+RedLine13 would work, but since I didn't realize that at the time, I
 ended up writing my own tool.
 
 # Introducing Ramp
@@ -90,16 +90,16 @@ simulation script provided, and uploads the report to an S3 bucket.
 
 Since that report is a nicely formatted HTML file, and since S3 buckets
 can be used as static websites, you can see the report on your browser,
-with all its glorious multicoloured graphs. Or share it with a colleague
+with all its glorious multicolored graphs. Or share it with a colleague
 or client.
 
 Ramp comes with a Scala simulation script that does a basic load test
 (spamming a URL with GET requests, with ramp-up and ramp-down). I have
-since used it to simulate more complex behaviours, including mass
+since used it to simulate more complex behaviors, including mass
 registration and log-in. Writing more sample scripts is on my to-do
 list, but Gatling has decent documentation on its own website.
 
-(I didn't realise before just how _easy_ it is to make a website
+(I didn't realize before just how _easy_ it is to make a website
 unusable via DDOS attack. Poor caching, poor autoscaling, poor
 [ephemeral port
 management](https://making.pusher.com/ephemeral-port-exhaustion-and-how-to-avoid-it/),
@@ -123,7 +123,7 @@ impatiently wait for news.
 
 Gatling is a valuable tool to find out how your website handles _load_,
 but isn't enough to be certain it'll handle _users_. For that, you
-should ideally capture the behaviour of multiple real users, and replay
+should ideally capture the behavior of multiple real users, and replay
 _that_ thousands of times on your staging site.
 
 At JUXT, we've yet to tackle a project that has to scale as much as a

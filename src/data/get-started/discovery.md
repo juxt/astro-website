@@ -5,7 +5,7 @@ weight: 1
 direction: 'left'
 ---
 
-We talk with stakeholders from across your organisation and run deep-dive sessions to discuss the systems and features we'll build. We run face-to-face meetings and white-boarding sessions, we consume the documentation and design artefacts you have already, and we take copious notes. Discovery might happen over a half-day, or many days for larger projects.
+We talk with stakeholders from across your organization and run deep-dive sessions to discuss the systems and features we'll build. We run face-to-face meetings and white-boarding sessions, we consume the documentation and design artefacts you have already, and we take copious notes. Discovery might happen over a half-day, or many days for larger projects.
 
 Our goals during discovery are:
 

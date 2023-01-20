@@ -38,7 +38,7 @@ itself.
 
 # The balance
 
-Employers are the first to recognise that there is no silver bullet when
+Employers are the first to recognize that there is no silver bullet when
 it comes to hiring, but that even so, Clojure is seen as a win by the
 majority of them.
 
@@ -124,7 +124,7 @@ roles. Often they come with a checklist comprising certain attributes
 such as remote and part-time working, single-page tech stacks and
 immutable architectures.
 
-Such developers will often recognise the supply versus demand balance of
+Such developers will often recognize the supply versus demand balance of
 market forces in play. For example, there are fewer companies using
 innovative and attractive technologies than there are using conservative
 mainstream ones. The more attractive the role, the more applicants, and

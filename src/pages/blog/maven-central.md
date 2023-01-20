@@ -56,7 +56,7 @@ started.
 
 What we know as _Maven Central_ is in fact a network of repositories,
 all sync'd into one entry point at <https://repo1.maven.org/maven2>.
-Larger organisations often have their own public repositories that are
+Larger organizations often have their own public repositories that are
 mirrored here - we'll be deploying to the [_Open Source Software
 Repository Hosting_](https://central.sonatype.org/publish/) (OSSRH)
 service.
@@ -282,7 +282,7 @@ notes](https://github.com/juxt/crux/releases/1.17.1).
 
 # Clojars dependencies
 
-Naturally, while we do minimise dependencies in Crux, we do depend on a
+Naturally, while we do minimize dependencies in Crux, we do depend on a
 few libraries that are released on Clojars (Clojure itself, and other
 `org.clojure` libraries, are already on Central). Because the addition
 of extra repositories doesn't automatically propagate from a library to

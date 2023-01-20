@@ -72,7 +72,7 @@ possess a laser focus on delivery. Some are better at communicating,
 whilst some just want to think deeply about the problem and to ponder
 every edge case.
 
-If developers are recognised as individuals and emboldened with trust
+If developers are recognized as individuals and emboldened with trust
 and freedom, then they will play to their strengths to give an overall
 multiplying effect. We can embrace individualism rather than chasing it
 away, by celebrating and raising up the role of the software developer.

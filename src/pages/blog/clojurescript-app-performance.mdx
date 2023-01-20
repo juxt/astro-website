@@ -269,7 +269,7 @@ re-defined at each state change. For this reason, it's a good idea to
 use named functions in those components whose props or state are likely
 to update frequently.
 
-You can test this behaviour yourself with some simple code:
+You can test this behavior yourself with some simple code:
 
 ```clojure
 (def callbacks (atom #{}))
@@ -613,7 +613,7 @@ serve your app more efficiently.
 # Going Further
 
 With the techniques described above, we produced a webapp application
-with exceptional performance that compares highly favourably to
+with exceptional performance that compares highly favorably to
 competitors in the market. However, if requirements change and we need
 to push rendering performance even further, where do we go from here?
 
@@ -622,7 +622,7 @@ this project. Reagent components can be expensive to render frequently
 because hiccup uses Clojure vectors, which are immutable data structures
 that carry a relatively high garbage collection cost.
 
-When dealing with frequently-rendered components, we can optimise the
+When dealing with frequently-rendered components, we can optimize the
 rendering process even further by eliminating these hiccup structures.
 This means creating React components without using Reagent, and instead
 either writing them in raw React through plain interop, using an

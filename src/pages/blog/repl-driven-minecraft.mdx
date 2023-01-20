@@ -1,7 +1,7 @@
 ---
 author: 'fwc'
 title: 'REPL Driven Minecraft'
-description: 'A tale of optimisation during the ClojureD Minecraft workshop'
+description: 'A tale of optimization during the ClojureD Minecraft workshop'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '30 Aug 2022'
@@ -18,7 +18,7 @@ Code' workshop run by [Arne Brasseur](https://github.com/plexus), [Ariel
 Alexi](https://github.com/ArielA147), and [Felipe
 Barros](https://github.com/barrosfelipe). This post shows how we used
 what we learnt in the workshop to generate images in the game and
-optimised the code using [Tufte](https://github.com/ptaoussanis/tufte).
+optimized the code using [Tufte](https://github.com/ptaoussanis/tufte).
 
 The 'Change the (Minecraft) World with Code' workshop at ClojureD 2022
 (Gallery https://clojured.de/media/gallery/gallery-2022/nggallery/page/5)
@@ -47,13 +47,13 @@ Witchcraft to orchestrate the server and Minecraft world.
 
 One of the more interesting functions provided by Witchcraft is
 `nearest-material` which finds the Minecraft material which most closely
-matches a given RGB colour. Witchcraft provides a file of mappings
-between materials and the two most prominent colours in their textures.
+matches a given RGB color. Witchcraft provides a file of mappings
+between materials and the two most prominent colors in their textures.
 
 To determine the most appropriate material to represent a given RGB
-value the `nearest-material` function calculates the colour distance to
-every prominent colour, and selects the material for which this value is
-lowest, and is therefore closest to in colour space.
+value the `nearest-material` function calculates the color distance to
+every prominent color, and selects the material for which this value is
+lowest, and is therefore closest to in color space.
 
 import nmd from '../../assets/blog/nearest-material-diag.svg'
 
@@ -219,9 +219,9 @@ The results show that 98% of the time spent in the function is spent in
 `nearest-material`. As we know that there is a small and constrained
 range of possible values for the inputs and outputs of this function,
 `memoize` can be used to effectively cache the results, mitigating the
-need to perform the same calculations repeatedly. This optimisation is
+need to perform the same calculations repeatedly. This optimization is
 particularly performant in this case as the image contains only a small
-range of different colours.
+range of different colors.
 
 ```clojure
 ---
@@ -251,7 +251,7 @@ range of different colours.
 
 We can now generate the image in under a third of a second, down from 34
 seconds, which is a 100x improvement. Of course, on subsequent calls the
-image is generated even faster as the colour-to-material mappings are
+image is generated even faster as the color-to-material mappings are
 already cached. `wc/set-blocks` is now the bottleneck, so we will leave
 it there.
 
@@ -265,5 +265,5 @@ videos](https://www.youtube.com/playlist?list=PLhYmIiHOMWoGyYsWmcQN0sG40BRjnNGM3
 to help you get inspired.
 
 Thank you to Arne, Ariel, and Felipe for the brilliant workshop, to the
-organisers of ClojureD for running such a great conference, and to JUXT
+organizers of ClojureD for running such a great conference, and to JUXT
 for taking us to the event.

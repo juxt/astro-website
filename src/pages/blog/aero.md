@@ -115,7 +115,7 @@ the database being used was \"datomic:dev://localhost:4334/my-db\". You
 access that database and rummage around trying to find the problem, only
 to discover (hours later perhaps) that the actual database in use was
 \"datomic:dev://localhost:4334/my-prod-db2\". After much
-head-scratching, you realise there was a clever hidden configuration
+head-scratching, you realize there was a clever hidden configuration
 overridden built into the application code that pulled in an override
 file. The criticality of these situations tends to be amplified by the
 fact that configuration issues usually happen in production, simply

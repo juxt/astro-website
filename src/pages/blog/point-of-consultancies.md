@@ -34,7 +34,7 @@ developer community to attract new hires and be able to scale.
 Dysfunctional development teams are easy to find - be it bloated costly
 projects dependent on cycling in freelancers, or tightly micro-managed
 hierarchies that follow process dogma. It is still commonplace to find
-organisations where talented developers are referred to as the
+organizations where talented developers are referred to as the
 _techies_, to be pushed down below the architects and scrum masters.
 
 Software development is an expensive and difficult business to get
@@ -50,6 +50,6 @@ team dynamics and making it through the storming phase. Consultancies
 are brought in to hit the ground running.
 
 Once the boat has been put safely out to sail, with the choice of
-technologies bedded in, then honourable consultancies can help the
+technologies bedded in, then honorable consultancies can help the
 client to grow their own long-term team, paving the way for the best of
 all worlds.

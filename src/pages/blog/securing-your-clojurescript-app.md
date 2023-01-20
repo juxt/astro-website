@@ -15,7 +15,7 @@ we're now demanding from the web: we want interfaces that provide
 instant feedback, are always up to date and gracefully degrade when
 offline (just to name a few).
 
-Just like a mobile app is concerned about visualisation, user
+Just like a mobile app is concerned about visualization, user
 interaction, caching and syncing so will be the next generation of JS
 apps. \"Web\" is just another platform to target along with iOS and
 Android, with its own apis, quirks and strengths, but with no special

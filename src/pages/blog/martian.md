@@ -26,7 +26,7 @@ interface and the application layer. The interface consists of the
 operations, parameters and data that gets returned, and is what makes
 your API unique and useful. The application layer is how two processes
 talk to each other, HTTP for example, which has its own nomenclature,
-idioms and behaviours which are abstract and generic. Layers in
+idioms and behaviors which are abstract and generic. Layers in
 networking - physical, transport etc - should be opaque to each other.
 Your interface in turn should be opaque to HTTP, but too often we fall
 at the final hurdle and complect the definition of our interface with
@@ -97,7 +97,7 @@ Nice and simple, looks like the interface we described on the server
 side, and bootstrapping at runtime even allows the underlying HTTP
 implementation to be refactored without your code needing to change.
 Martian maps the parameters to the right place and chooses the most
-efficient serialisation the API supports without any of it leaking into
+efficient serialization the API supports without any of it leaking into
 your code. This is the separation of interface and application layer
 that we've been aiming for.
 
@@ -129,7 +129,7 @@ writing your client code:
 
 What about those cross-cutting, non-functional aspects like
 authentication or metrics? Martian uses `interceptors`, just like
-Pedestal, to allow you to customise behaviour of the call either before
+Pedestal, to allow you to customise behavior of the call either before
 the request is made, after the response is received, or both. Let's add
 some timing to our requests:
 

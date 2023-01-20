@@ -39,7 +39,7 @@ actual UUID. We also have the what-should-a-date-be conundrum; `Joda`,
 
 # The Approach
 
-I've learned my lesson: always get the data sorted out at the boundaries
+I've learnt my lesson: always get the data sorted out at the boundaries
 of the application. In the Postgresql/Sqlite example, whenever rows are
 returned as Clojure maps, I typically run them through the excellent
 little [camel-snake-kebab](https://github.com/qerub/camel-snake-kebab)

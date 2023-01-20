@@ -15,7 +15,7 @@ tags:
 As part of our work with Clojure at Funding Circle I've been considering
 how best to approach creating AWS Lambdas. AWS Lambda has proven itself
 to be very useful for expediting small, discrete tasks. Lambdas can be
-used to process streaming events, to process storage events, to fulfil
+used to process streaming events, to process storage events, to fulfill
 API responses, and a plethora of other use-cases, all without the need
 to manage any server or networking infrastructure. I don't believe
 they'll take over the backend world, but they're here to stay, so we

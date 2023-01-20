@@ -12,7 +12,7 @@ One of the jobs of routing libraries like
 [pedestal](https://github.com/pedestal/pedestal),
 [bidi](https://github.com/juxt/bidi) or
 [tripod](https://github.com/frankiesardo/tripod) is to compile human
-readable routes to a format optimised for computation.
+readable routes to a format optimized for computation.
 
 For example tripod wants to convert this terse syntax
 

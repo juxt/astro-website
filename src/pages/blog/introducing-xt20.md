@@ -17,7 +17,7 @@ the stars, to solve climate change and disease and to eliminate cruelty
 across the board?
 
 Or do we go the other way and \"work to live\"? To live for the weekends
-and the evenings, to fastidiously optimise that slice of time that is
+and the evenings, to fastidiously optimize that slice of time that is
 truly ours, after work has consumed its lions share.
 
 We live in times of remote-working, of being able to commute to offices
@@ -44,7 +44,7 @@ respectfully and to bring people with us on our journey. We need to win
 the race we face now, between education and catastrophe.
 
 Work matters, work is the key. It also helps us grow, to lead a
-well-rounded and fulfilled life, where we can derive value from all
+well-rounded and fulfillled life, where we can derive value from all
 areas.
 
 See you at XT20, July 10, 2020.

@@ -30,7 +30,7 @@ If you call `source pmap` you will see that it:
     (but see next item)
 
 4.  Note that it is subject to **chunking**. The first 32 futures will
-    automatically be realised, which could result in wasted computation.
+    automatically be realized, which could result in wasted computation.
 
 # What if I just put futures into my transducer?
 

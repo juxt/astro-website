@@ -90,7 +90,7 @@ We'll start with a very basic React wrapper:
 - Finally, there's a little setup to enable live reloading.
 
 This serves to show what's under the hood of `r/render` in your
-favourite React wrapper: not much!
+favorite React wrapper: not much!
 
 # State hook
 

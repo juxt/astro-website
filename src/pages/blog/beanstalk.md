@@ -122,7 +122,7 @@ out of the dev ops workload during the early days of development. I got
 stuck by AWS Beanstalk/Docker expecting just a _single application
 port_, and fell foul of how Beanstalk ties its Docker service to the
 Elastic Load Balancer using some reverse proxying, where the
-`docker run` command is essentially locked down. I've since learned that
+`docker run` command is essentially locked down. I've since learnt that
 it's best to keep your deployment ambitions in check when using PaaS.
 
 # No Blue/Green

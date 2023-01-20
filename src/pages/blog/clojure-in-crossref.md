@@ -31,7 +31,7 @@ published by any number of different publishers. Up to the point that
 Crossref was founded, they made individual agreements between themselves
 about how to identify and link articles, and how to link into to each
 others' websites. This kind of thing doesn't scale, so they created
-Crossref, a non-profit organisation, that provides shared infrastructure
+Crossref, a non-profit organization, that provides shared infrastructure
 and technology for the scholarly community.
 
 We allow our members to register content and assign DOIs, [Digital
