@@ -1,2 +1,0 @@
-- clojure-in.md fix link to juxt.pro/clojure-in page
-- training page? (training.html)
