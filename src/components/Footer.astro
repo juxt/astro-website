@@ -4,6 +4,8 @@ import {
   LinkedInIcon,
   TwitterIcon,
   UserIcon,
+  YoutubeIcon,
+  SpotifyIcon,
   ZulipIcon
 } from './Icons'
 
@@ -23,7 +25,7 @@ const pagesInFooter = footer
     class='mx-auto max-w-7xl px-4 sm:px-12 2xl:px-0 gap-16 grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap justify-between'
   >
     <div class='flex flex-col gap-6 text-sm'>
-      <a class='w-20' href='/'>
+      <a target='_blank' class='w-20' href='/'>
         <img class='w-full' src='/images/logo.svg' alt='' />
       </a>
 
@@ -70,6 +72,7 @@ const pagesInFooter = footer
       <div class='text-zinc-400 text-sm'>Follow Us</div>
       <div class='flex flex-col gap-4 font-light'>
         <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://github.com/juxt'
         >
@@ -81,6 +84,7 @@ const pagesInFooter = footer
           <p>Github</p>
         </a>
         <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://www.linkedin.com/company/juxt-juxt-pro-/mycompany/'
         >
@@ -92,6 +96,31 @@ const pagesInFooter = footer
           <p>LinkedIn</p>
         </a>
         <a
+          target='_blank'
+          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
+          href='https://www.youtube.com/@juxt4112'
+        >
+          <div class='w-4'>
+            <YoutubeIcon
+              className='fill-white group-hover:fill-juxt transition-all'
+            />
+          </div>
+          <p>YouTube</p>
+        </a>
+        <a
+          target='_blank'
+          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
+          href='https://open.spotify.com/show/2sQiB5T3x1rL3nwyLef6kg'
+        >
+          <div class='w-4'>
+            <SpotifyIcon
+              className='fill-white group-hover:fill-juxt transition-all'
+            />
+          </div>
+          <p>JUXT Cast</p>
+        </a>
+        <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://twitter.com/juxtpro'
         >
@@ -107,6 +136,7 @@ const pagesInFooter = footer
       <div class='text-zinc-400 text-sm'>Members</div>
       <div class='flex flex-col gap-4 font-light'>
         <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://juxt.land/login'
         >
@@ -124,6 +154,7 @@ const pagesInFooter = footer
       <div class='text-zinc-400 text-sm'>XTDB</div>
       <div class='flex flex-col gap-4 font-light'>
         <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://xtdb.com/'
         >
@@ -132,6 +163,7 @@ const pagesInFooter = footer
           </div>
         </a>
         <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://github.com/xtdb/xtdb'
         >
@@ -143,6 +175,7 @@ const pagesInFooter = footer
           <p>Github</p>
         </a>
         <a
+          target='_blank'
           class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
           href='https://juxt-oss.zulipchat.com/#narrow/stream/194466-xtdb'
         >
