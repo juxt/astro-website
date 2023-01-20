@@ -49,6 +49,7 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   let importedPic = await getImage({
     src: import(`../assets/site/${imgNoExt}.jpg`),
     width: 1700,
+    alt: 'background',
     quality: 90
   }).then((img) => img.src)
   imageForShare = `${url.origin}${importedPic}`
@@ -61,6 +62,7 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   const { src } = await getImage({
     src: img.default.src,
     width: 1200,
+    alt: 'blog background',
     height: 630
   })
   imageForShare = `${url.origin}${src}`
