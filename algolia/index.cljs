@@ -48,8 +48,8 @@
   (p/let [all-files (glob path)]
     (js/Promise.all (.map all-files extract-person))))
 
+;; when working from repl, change both paths to "./src/.."
 (def blog-files-path "../src/pages/blog/{*.md,*.mdx}")
-
 (def people-path "../src/data/people/{*.md,*.mdx}")
 
 (await (parse-people people-path))
