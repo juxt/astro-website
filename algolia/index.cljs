@@ -25,6 +25,35 @@
   `(-> ~expr (.then (fn [val]
                       (def ~binding val)))))
 
+(defn load-md [file-name]
+  (-> (slurp file-name)
+      (.then (fn [val] val))
+      (.catch (fn [_]))))
+
+(def people (atom {}))
+
+(defn extract-person [path]
+  (p/let [loaded-md (load-md path)
+          md-it (.use (markdown-it.)
+                      md-frontmatter
+                      (fn [fm]
+                        (p/let [md-frontmatter (.parse YAML fm)
+                                code (g/get md-frontmatter "code")
+                                name (g/get md-frontmatter "name")
+                                lastName (g/get md-frontmatter "lastName")]
+                          (swap! people assoc code {:firstName name :lastName lastName}))))]
+    (.parse md-it loaded-md #js {})))
+
+(defn parse-people [path]
+  (p/let [all-files (glob path)]
+    (js/Promise.all (.map all-files extract-person))))
+
+(def blog-files-path "../src/pages/blog/{*.md,*.mdx}")
+
+(def people-path "../src/data/people/{*.md,*.mdx}")
+
+(await (parse-people people-path))
+
 (defn file-name->permalink
   [file-name]
   (-> (string/split file-name "/")
@@ -32,15 +61,12 @@
       (string/split #"\.")
       (first)))
 
-(def args (not-empty (js->clj (.slice js/process.argv 3))))
-
-(def partial-indexing? (= "--partial" (first args)))
-
 (defn frontmatter-callback
   [permalink frontmatter-record]
   (fn [fm]
     (let [md-frontmatter (.parse YAML fm)
           author (g/get md-frontmatter "author")
+          {:keys [firstName lastName]} (get @people author)
           category (g/get md-frontmatter "category")
           title (g/get md-frontmatter "title")
           description (g/get md-frontmatter "description")
@@ -50,7 +76,9 @@
           timestamp (js/Math.floor (/ (.valueOf (js/Date. publishedDate)) 1000))]
       (reset! frontmatter-record
               {:draft? draft
-               :record #js {"author" author
+               :record #js {"author" (if (= author "juxt")
+                                       "juxt"
+                                       (str firstName " " lastName))
                             "category" category
                             "title" title
                             "timestamp" timestamp
@@ -60,9 +88,7 @@
                             "tags" tags}}))))
 
 (defn parse-md-file [file-name]
-  (p/let [loaded-md  (-> (slurp file-name)
-                         (.then (fn [val] val))
-                         (.catch (fn [_])))]
+  (p/let [loaded-md (load-md file-name)]
     (when loaded-md
       (p/let [frontmatter-record (atom nil)
               permalink (file-name->permalink file-name)
@@ -107,43 +133,18 @@
             (.push
              (:record @frontmatter-record))))))))
 
-(def blog-files-path "../src/pages/blog/{*.md,*.mdx}")
-
-(defn is-blog [file-str]
-  (re-find #"blog/.*\.md" file-str))
-
-(defn changed-files [files-coll]
-  (->> files-coll
-       (reduce
-        (fn [coll file-name]
-          (if (is-blog file-name)
-            (-> coll
-                (update :changed-files
-                        #(doto % (.push (str "../" file-name))))
-                (update :files-to-remove conj
-                        (file-name->permalink file-name)))
-            coll))
-        {:changed-files #js []
-         :files-to-remove #{}})))
-
 (defn retrieve-file-names [path]
-  (p/let [all-files (glob path)
-          {:keys [changed-files files-to-remove]}
-          (changed-files (rest args))]
-    (when partial-indexing?
-      (println "Blog articles to update:" changed-files))
-    {:file-names (if partial-indexing? changed-files all-files)
-     :files-to-remove (if partial-indexing? files-to-remove #{})}))
+  (p/let [all-files (glob path)]
+    {:file-names all-files}))
 
 (defn parse-md-files [path]
-  (p/let [{:keys [file-names files-to-remove]} (retrieve-file-names path)
+  (p/let [{:keys [file-names]} (retrieve-file-names path)
           ;; draft blogs are excluded!!
           records (js/Promise.all (.map file-names parse-md-file))
           filtered (.filter records #(some? %))
           flattened (.flat filtered)]
     {:flattened flattened
-     :filtered filtered
-     :files-to-remove files-to-remove}))
+     :filtered filtered}))
 
 (def client (algoliasearch ALGOLIA_APP_ID ALGOLIA_API_KEY))
 (def index (.initIndex client ALGOLIA_INDEX_NAME))
@@ -153,7 +154,6 @@
 (def records (await (parse-md-files blog-files-path)))
 
 (println "Blog articles successfully parsed.")
-(println "Blog articles to remove:" (:files-to-remove records))
 (println "Blog articles to index:" (count (:filtered records)))
 
 (await (index.setSettings
@@ -170,45 +170,11 @@
              "replicas" #js ["blog_desc"]
              "ranking" #js ["desc(timestamp)"]}))
 
-(defn retrieve-obj-ids-to-be-deleted
-  [files-to-remove]
-  (p/let [search-results
-          (p/all (map
-                  (fn [permalink]
-                    (index.search
-                     permalink
-                     #js {"filters"
-                          (str "permalink:" permalink)}))
-                  files-to-remove))]
-    (reduce
-     (fn [coll search-result]
-       (let [hits (g/get search-result "hits")]
-         (if (seq hits)
-           (apply conj coll
-                  (map
-                   (fn [hit]
-                     (g/get hit "objectID"))
-                   hits))
-           coll)))
-     #{}
-     search-results)))
-
-(def objects-ids-to-be-deleted (await (retrieve-obj-ids-to-be-deleted
-                                       (:files-to-remove records))))
-
-
-(defn clearChangedContent []
-  (await (index.deleteObjects
-          (clj->js objects-ids-to-be-deleted)))
-  (println "Deleted" (count objects-ids-to-be-deleted) "records from Algolia."))
-
 (defn clearFullIndexContent []
   (await (index.clearObjects))
   (println "Deleted full index content."))
 
-(if partial-indexing?
-  (clearChangedContent)
-  (clearFullIndexContent))
+(clearFullIndexContent)
 
 (def storedObjects (await (index.saveObjects
                            (:flattened records))))

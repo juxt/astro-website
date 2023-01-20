@@ -9,8 +9,7 @@
     "build": "astro build && yarn run build:css",
     "preview": "astro preview",
     "prepare": "husky install",
-    "algolia-partial": "cd algolia && nbb index.cljs --partial `git diff --name-only`",
-    "algolia-full": "cd algolia && nbb index.cljs"
+    "algolia": "cd algolia && nbb index.cljs"
   },
   "devDependencies": {
     "@astrojs/image": "^0.12.1",
