@@ -21,16 +21,18 @@ _Jon:_ If you can give us a bit of background into who you are and who Vouch is?
 
 _Tony:_ I'm the founder and CEO of Vouch. I've worked in Chief Technology/Chief Architect roles for many large global companies, from UK to Belgium and now in the US.
 
-Eventually we decided that we would do something for ourselves and so a lot of the Vouch team came along with me on that journey. They'd all moved from company to company, continent to continent.
-We all had some really awesome ideas and we found a great idea in Vouch so we decided to start that.
-
-The co-founder of the company is my partner Sid. I actually met him, through an acquaintance here in Atlanta and he was looking to do something bit unique and get away from his normal line of business. We were introduced and I was Chief Architect at the time and I thought 'hey I really like this guy, he likes me , let's pull a team together and go solve a problem'.
-
 The team at Vouch have come up with an incredible idea, which is essentially, to have a way to identify any interconnectivity, and verify that interconnectivity from a security point of view, linking it to identities and essentially being able to verify anything in a chain and do that all offline.
 
 This enables people to authenticate. Vouch can link your identity to a device, a card or anything, but I can also verify that you're part of an organisation or hold a certain role in terms of authority. And I can do that for just about any use case that you can possibly imagine in any industry. Vouch have focused this idea for things like digital keys for cars or hotels. And the reason we did that is these are use cases that people understand. Everyone understands what a key fob is in a car and how it can essentially, whoever holds the key fob owns the car. There's no way for the car to know who you are, and there's no way for the car to be able to say that, you know, you are Jon, you have authority to do this with the car. You can start it, you can open the trunk. There's no way to infer that from you just holding a key fob. But with Vouch you can, you can infer all of that and the car can actually verify itself. Actually, the key fob can verify that as well.
 
 And we can link your identity to our phone, and the phone can connect to the car as well. So really that's why we started there and the other reason why we picked automotive to start it all, if I can put this in production cars and go through with companies like Toyota, who are our biggest customer, no one is going to doubt the blockchain in our technology is ready for production. We've had to go through every possible security or quality test you can think of to get to production vehicles. And now we're going into many industries, but we don't get the 'production ready' questions that some smaller companies might get or 'does this scale?'. For example We've been in production Lexus vehicles since December 2021 and we've had zero bugs in production and zero out.
+
+
+Eventually we decided that we would do something for ourselves and so a lot of the Vouch team came along with me on that journey. They'd all moved from company to company, continent to continent.
+We all had some really awesome ideas and we found a great idea in Vouch so we decided to start that.
+
+The co-founder of the company is my partner Sid. I actually met him, through an acquaintance here in Atlanta and he was looking to do something bit unique and get away from his normal line of business. We were introduced and I was Chief Architect at the time and I thought 'hey I really like this guy, he likes me , let's pull a team together and go solve a problem'.
+
 
 Jon
 That's cool so there's cars out there right now, Lexus and Toyota's that are using Vouch technology to verify the users?
@@ -165,28 +167,21 @@ Obviously we're fans of the language in general . But, but I do see, I do see mo
 
 I've been on the other side of it, trying to convince companies as an architect to use Clojure, it's hard and it's your reputation that gets it over the line. There's nowhere to point people to. There needs to be something for people trying to figure out how to do that and, and companies to feel okay about that.
 
-Jon
+_Jon_: Why did you pick Clojure?
 
-So it was you yourself that actually introduced Clojure to your own company?
+My history with Clojure goes way back to when I was working with Ray McDermott in Belgium and were really frustrated with Java at the time, we were both in architect roles and it just didn't fit a lot of things that we were trying to do.
 
-Tony
+At the time there wasn't a language out there that really worked. We tried Scala but that didn't click. Then Ray introduced me to what Rich was putting out at the time and it really clicked with me, we tried Clojure and it solved a lot of different use cases.
 
-Yes my history with Clojure goes way back to when I was working with Ray McDermot in Belgium and were really frustrated with Java at the time, we were both in architect roles and it just didn't fit a lot of things that we were trying to do.
+Datomic was also another major breakthrough, having this time-based database really changed the way we thought about things. This combined with Clojure and then ClojureScript was really the silver bullet for me. That was the thing that enabled me as an architect and as a CTO at that time to really adopt it.
 
-And, at the time there wasn't a language out there that really worked. We tried Scala but that didn't click. Then Ray introduced me to what Rich was putting out at the time and it really clicked with me, we tried Clojure and it solved a lot of different use cases.
+We could put it anywhere. We could start writing on mobile apps, enabling us to build mobile strategies on the back using Clojure as the core.
 
-Datomic was also another major breakthrough, having this time-based database really changed the way we thought about things, combine that with Clojure and then Closure Script was really the silver bullet for me. That was the thing that enabled me as an architect and as a CTO at that time to really adopt it.
+When we started Vouch there really was only one option.
 
-Then we could put it anywhere, we could start writing on mobile apps. That enabled people like me to build mobile strategies on the back of what they were doing using Clojure as the core. So when we started Vouch there really was only one option.
+_Jon_: What's the story as to why Clojure?
 
-Jon
-
-What was it that you were looking for, you mentioned the use cases that Clojure satisfied.
-
-
-Tony
-
-I've always been a lisp guy. Small talk, IBM was everywhere and I loved it as a language but it wasn't a driving force. A functional programming language was important to me. We were looking for a language that people enjoyed writing and we could move fast with, that we could use in many different ways
+_Tony:_ I've always been a Lisp guy. Small talk, IBM was everywhere and I loved it as a language but it wasn't a driving force. A functional programming language was important to me. We were looking for a language that people enjoyed writing and we could move fast with, that we could use in many different ways
 
 , right?
 
