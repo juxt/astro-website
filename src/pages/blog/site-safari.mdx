@@ -1,6 +1,6 @@
 ---
 author: 'mal'
-title: 'Site Safari'
+title: 'API development, quickly and securely'
 description: 'A review of the current status of our Site'
 category: 'site'
 layout: '../../layouts/BlogPost.astro'
@@ -11,34 +11,61 @@ tags:
   - 'site'
 ---
 
-# Site Safari
+Many of our projects at JUXT require the development of REST and GraphQL APIs.
+Clients want these delivered _quickly_, so separate front-end teams (whether from JUXT or not) can start iterating, and an integrated end-to-end system can take shape.
+But clients also want APIs in production to be secure, and there are some established standards today that can make this faster and easier too.
 
-Site is a project we've been working on since 2020.
+## Introducing Site
 
-As with all our [open-source projects](https://github.com/juxt), Site was conceived out experiences in our project work with our JUXT clients.
+Site is an amalgamation of technologies and libraries, from JUXT and elsewhere, that allows us to develop APIs quickly and securely.
+As with all our [open-source projects](https://github.com/juxt), Site was conceived from valuable observations from our project teams working with our JUXT clients:
 
-Here are some of observations common to multiple projects:
-
-- Almost every project we work on involves building one or more stateful API services, either choosing REST of GraphQL. Most teams have adopted OpenAPI to design/document/communicate their APIs, and we have seen more teams move to a 'design-first' approach.
+- Many projects require the development of one or more stateful API services, either choosing REST of GraphQL. Most teams have adopted OpenAPI to design/document/communicate their APIs, and we have seen more teams move to a 'design-first' approach.
 - The inability to quickly iterate on APIs harms the agility of front end development. Sometimes, backend teams need weeks or months of development time to deliver initial versions of APIs into a staging or test environment.
 - Authentication takes too long to build, even if this merely requires integration with a pre-built authentication service.
-- Access control is always a business requirement, yet often implemented _ad-hoc_, late in the development process.
+- Access control is invariably a business requirement, yet often retro-fitted, late in the development process.
 
-To address these problems, we wanted to build a 'generic' service that could be deployed to support a number of typical use-cases, ones that we found we had to develop over and over again on projects. This became Site.
+## Design first
 
-We definitely wanted to support a _design-first_ API development process.
-This is where teams iterate together on an API document, in a format such as OpenAPI, that describes the agreed API.
+An API forms the contract between two parties, the *client* and the *server*.
 
-Iterating on a document is faster than developing code.
-Also, we didn't want to generate any part of the API, since conventions differ from project to project, from organization to organization.
+Some teams generate an API from hints in the server code, or the API is merely the projection of internal data-structures within the server (such as a set of database tables).
+Rather, a good API should be designed _specifically_ to meet the precise needs of the client.
+If the API provides too little, it might not meet the client's requirements.
+If the API provides too much, it will be more difficult and expensive to support that additional functionality over the long-term.
 
-The first version of Site allowed teams to provision APIs by uploading API descriptions, in OpenAPI format, together with some declarations as to how each API endpoint should be implemented and secured.
+It is also critical that an API does not break compatibility with client code.
+If the API is designed 'by hand' (rather than generated from a server model), care can be taken to avoid introducing breaking changes to the API that would cause clients to stop working.
+This might not be necessary if the same development team are responsible for the code for both the client and server, but this is rarely the case.
+More often, the reason you publish an API in the first place is because you want to expose data and functionality to separate teams in your organisation, or beyond.
 
-A later version of Site, in 2021, added support for GraphQL in addition to OpenAPI. This was used on a number of additional client projects in order to provision secure API backends rapidly and with greater agility.
+By far the most popular format for API design is [OpenAPI](https://swagger.io/specification/).
+Site allows us to upload API definitions in OpenAPI format and will implement the API dynamically, as if the backend code had been generated directly from the API specification.
 
-At the end of 2021, after listening to the experiences of a number of successful Site deployments, I personally began to consider the question of access control.
-Unsurprising, this became a year-long process of research and experiments, some successful and some not.
+## Deliver, then reflect
 
-This is the background to the talk I gave at the beginning of this year, where I wanted to share with the company what I had been up to, and the progress made. We've since edited the video for public distribution. I hope you enjoy the presentation, and if you have any questions or feedback, please feel free to write to me at mal@juxt.pro. I'm always pleased to receive emails about Site.
+During 2020 and 2021, we used Site successfully on a number of projects, making the necessary tweaks as needed.
+We also added support for GraphQL, alongside OpenAPI, by integrating our [**grab**](https://github.com/juxt/grab) GraphQL library.
+
+At the end of 2021, after listening to the experiences of a number of successful Site deployments, I began to consider the question of access control.
+From the first release of Site, we'd had the ability to secure individual endpoints.
+However, we wanted something more fine-grained, especially for securing individual parts of a GraphQL data graph.
+For me, this became a year-long process of research and experiments 'in the lab'.
+I focussed on Site's design as a fully-featured [OAuth2](https://oauth.net/2/) Resource Server and Authorization Server.
+
+Technically, this means that client applications can be registered with Site.
+The registration process creates a client-id (and, in some cases, a client-secret).
+The client can then use these to acquire access-tokens, and these provide access to protected resources.
+
+There are huge benefits to restricting access to APIs to authorized parties.
+It allows organisations to provide real-time access to data across teams without compromising on rules around who has access to what data.
+This is all-the-more critical for organisations that comply with [SOC2](https://www.aicpa.org/topic/audit-assurance/audit-and-assurance-greater-than-soc-2), [GDPR](https://gdpr.eu/), [CPA](https://www.oag.ca.gov/privacy/ccpa) and more.
+
+## Find out more
+
+Earlier this month, I gave an internal talk and demo to some JUXT employees about my work on improving access-control in Site.
+If you're interested in API development and want to learn more, give it a watch. And if you have any questions or feedback, please feel free to write to me at mal@juxt.pro.
 
 <iframe class="aspect-video w-full" src="https://www.youtube.com/embed/v3UzJelTge0" title="Site Safari" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Finally, if you're embarking on a new system development and APIs are important to your project, do get in touch. We'd be very happy to help.
