@@ -20,9 +20,9 @@ But clients also want APIs in production to be secure, and there are some establ
 Site is an amalgamation of technologies and libraries, from JUXT and elsewhere, that allows us to develop APIs quickly and securely.
 As with all our [open-source projects](https://github.com/juxt), Site was conceived from valuable observations from our project teams working with our JUXT clients:
 
-- Many projects require the development of one or more stateful API services, either choosing REST of GraphQL. Most teams have adopted OpenAPI to design/document/communicate their APIs, and we have seen more teams move to a 'design-first' approach.
-- The inability to quickly iterate on APIs harms the agility of front end development. Sometimes, backend teams need weeks or months of development time to deliver initial versions of APIs into a staging or test environment.
-- Authentication takes too long to build, even if this merely requires integration with a pre-built authentication service.
+- Many projects require the development of one or more stateful API services, either choosing REST or GraphQL. Most teams have adopted OpenAPI to design/document/communicate their APIs, and we have seen more teams move to a 'design-first' approach.
+- The inability to quickly iterate on APIs harms the agility of front-end development. Sometimes, backend teams need weeks or months of development time to deliver initial versions of APIs into a staging or test environment.
+- Authentication takes too long to build, even if this merely requires integration with a off-the-shelf authentication service.
 - Access control is invariably a business requirement, yet often retro-fitted, late in the development process.
 
 ## Design first
@@ -30,8 +30,8 @@ As with all our [open-source projects](https://github.com/juxt), Site was concei
 An API forms the contract between two parties, the *client* and the *server*.
 
 Some teams generate an API from hints in the server code, or the API is merely the projection of internal data-structures within the server (such as a set of database tables).
-Rather, a good API should be designed _specifically_ to meet the precise needs of the client.
-If the API provides too little, it might not meet the client's requirements.
+Rather, a good API should be designed carefully to meet the needs of clients.
+If the API provides too little, it might not meet the requirements of consumers.
 If the API provides too much, it will be more difficult and expensive to support that additional functionality over the long-term.
 
 It is also critical that an API does not break compatibility with client code.
