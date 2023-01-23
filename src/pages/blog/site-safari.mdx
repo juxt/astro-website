@@ -39,8 +39,9 @@ If the API is designed 'by hand' (rather than generated from a server model), ca
 This might not be necessary if the same development team are responsible for the code for both the client and server, but this is rarely the case.
 More often, the reason you publish an API in the first place is because you want to expose data and functionality to separate teams in your organisation, or beyond.
 
-By far the most popular format for API design is [OpenAPI](https://swagger.io/specification/).
+By far the most popular format for API design today is [OpenAPI](https://swagger.io/specification/).
 Site allows us to upload API definitions in OpenAPI format and will implement the API dynamically, as if the backend code had been generated directly from the API specification.
+Finally, if we choose to replace Site with a custom-engineered service later on, we can do so without changing the API that clients may be using.
 
 ## Deliver, then reflect
 
@@ -48,10 +49,10 @@ During 2020 and 2021, we used Site successfully on a number of projects, making 
 We also added support for GraphQL, alongside OpenAPI, by integrating our [**grab**](https://github.com/juxt/grab) GraphQL library.
 
 At the end of 2021, after listening to the experiences of a number of successful Site deployments, I began to consider the question of access control.
-From the first release of Site, we'd had the ability to secure individual endpoints.
-However, we wanted something more fine-grained, especially for securing individual parts of a GraphQL data graph.
+From the first release of Site, we'd had the ability to secure individual end-points.
+However, we wanted something more fine-grained, especially for securing individual parts of the result of a GraphQL query.
 For me, this became a year-long process of research and experiments 'in the lab'.
-I focussed on Site's design as a fully-featured [OAuth2](https://oauth.net/2/) Resource Server and Authorization Server.
+I focused on Site's design as a fully-featured [OAuth2](https://oauth.net/2/) Resource Server and Authorization Server.
 
 Technically, this means that client applications can be registered with Site.
 The registration process creates a client-id (and, in some cases, a client-secret).
