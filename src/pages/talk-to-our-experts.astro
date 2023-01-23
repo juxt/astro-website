@@ -1,0 +1,14 @@
+---
+import { Image } from '@astrojs/image/components'
+import Section from '../components/Section.astro'
+import Layout from '../layouts/Layout.astro'
+import ContactUs from '../components/ContactUs'
+---
+
+<Layout navbar title='Talk to our Experts'>
+  <main>
+    <Section className='bg-zinc-100 py-28 text-black'>
+      <ContactUs client:only />
+    </Section>
+  </main>
+</Layout>
