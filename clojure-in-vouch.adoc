@@ -63,43 +63,23 @@ We're doing some cool things with next generation NFC cards just now, and that's
 
 _Jon:_ Wow, a JVM on a NFC card.
 
-_Tony:_ We're always looking for new ways to extend, detect, to open up different use cases. But it always starts with Clojure. And the fact we've got that core in Clojure means we can render it out into Clojure Script or go straight JVM.
+_Tony:_ Y. We're always looking for new ways to extend, detect, to open up different use cases. But it always starts with Clojure. And the fact we've got that core in Clojure means we can render it out into ClojureScript or go straight to the JVM.
 
-Jon
+_Jon:_ What is your tech stack like? What sort of frameworks, tools, libraries do you use?
 
-How long have you guys been going for?
+_Tony:_ There's a whole mix of stuff going on there, hardware and software.
 
-Tony
+We've used a number of different texts, Tenderment is one of the enabling technologies that we use. Beyond that, really there's a whole bunch of libraries that we're using from hosting infrastructure point of view, https://github.com/linuxkit/linuxkit[LinuxKit] has been revolutionary for us.
 
-We began the journey in 2018 but didn't formally incorporate Vouch until 2019. We were working under the guise of what was then 'Ledger'. I think maybe six months after having the first prototype I realised that it had nothing to do with blockchain and it was the use cases that we could drive and evolve.
+_Jon:_ Could you describe LinuxKit?
 
-And the name Vouch, I can speak to that, every single interaction can be verified, I can give you authority and VOUCH for you. That's where the name comes from.
+_Tony:_ It allows us to rapidly deploy infrastructure configurations to our servers. We use it both on the cloud but also at the bare-metal level, without the need for Docker.
 
-Jon
-So a bit more on the tech side, what is your tech stack like? What sort of frameworks, tools, libraries do you use?
+From an orchestration point of view, depending on who our customers are, we can plug our Linuxkit config into their orchestration. It's been game changing.
 
-Tony
+React Native has been instrumental. We've sweated many hours getting the UI and UX flow just right, using React Native and ClojureScript, and Storybook.
 
-There's a whole mix of stuff going on there, hardware and software.
-
-
-We've used a number of different texts, Tenderment is one of the enabling technologies that we use. Beyond that, really there's a whole bunch of libraries that we're using from hosting infrastructure point of view, Linux Kit has been revolutionary for us.
-
-Jon
-What is Linux Kit
-
-Tony
-It allow you to configure the infrastructure in bare-metal. Allowing us to rapidly deploy configurations to servers. We can use it on the cloud as well but more at bare-metal we don't need Docker to realise our servers.
-
-And then from an orchestration point of view, depending on who our customers are we can plug our Linux kit config into their orchestration. It's been game changing.
-
-Tony
-
-Software library based we've got a number of things we use but React Native has been instrumental. cool. And then, you know, software library based. There's just a whole bunch of stuff that we use for different things. But, you know, react Natives been. instrumental to everything we do. Storybook for UI along with our own libraries that we use. We've sweated many hours getting the UI and UX flow just right, using React Native and Clojure Script to make sure it's working just right.
-
-Jon
-
-How many developers do Vouch have?
+_Jon:_ How many developers do Vouch have?
 
 Tony
 It's probably about 30 developers but a lot of those will be client facing as well. But in terms of core developers there are probably 5 assigned to product development.
