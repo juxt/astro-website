@@ -37,40 +37,33 @@ _Jon:_ Are you in production?
 
 Toyota, is currently our biggest customer. We've had to go through every possible security or quality test you can think of to get to production vehicles.  We've been in production with Lexus vehicles since December 2021 and we've had zero bugs in production and zero outage.
 
-_Jon:_ That's so cool that there's cars out there right now, Lexus and Toyota, that are using Vouch technology to verify the users?
+_Jon:_ That's so cool that there's cars out there right now, Lexus and Toyota, that are using Vouch.io technology to verify the users?
 
-_Tony:_
-
-Yeah. What, what we actually do right now with those cars is that we allow you to share authority to other people.
+_Tony:_ Yeah. What, what we actually do right now with those cars is that we allow you to share authority to other people.
 
 So I can say, you're coming into town this weekend. I'm going to share authority for you to use my vehicle. We've got your identity and the car can verify it. It doesn't need to be online at the time to do so.
 
 _Jon:_ You've mentioned blockchain to me, is that part of the secret sauce for making this all tick?
 
-_Tony:_
-
-It's a combination. Having a blockchain and using the proof technology, but the layer on top to remove friction is designing what we call '_a graph of trust_'. For each industry or company, each use case, there are identities for people, organisations whether they be employees, customers or friends. And of course there are objects that we can interactive with such as cars or hotel doors.
+_Tony:_ It's a combination. Having a blockchain and using the proof technology, but the layer on top to remove friction is designing what we call '_a graph of trust_'. For each industry or company, each use case, there are identities for people, organisations whether they be employees, customers or friends. And of course there are objects that we can interactive with such as cars or hotel doors.
 
 We've then got things like GDPR, compliance, privacy, protocols like Ultra Wideband, Bluetooth and NFC. We can create a graph of trust across all of that using our blockchain backend and the proof technology. Our logic builds on this to allow the graph of trust to be able to share and verify. So it's a combination of all of this that makes Vouch kind of special.
 
-_Jon:_
+_Jon:_ That's really awesome. Tell me a bit about the tech journey.
 
-That's really awesome. Tell me a bit about the tech journey.
+_Tony:_ It all started with Clojure really. One of the https://vouch.io/betting-the-company-on-clojurescript/[first blog posts I ever wrote for Vouch was around betting the company on ClojureScript].
 
-_Tony:_
+Essentially the whole team are 'Clojurists'. We've bought into the benefits and the capabilities, so why use anything else? ClojureScript is really important because we want one source to write the logic. ClojureScript enables that.
 
-It all started with Clojure really. One of the https://vouch.io/betting-the-company-on-clojurescript/[first blog posts I ever wrote for Vouch was around betting the company on ClojureScript].
+At a conference, about a year after David Nolen joined us, he said that he couldn't believe that so few people had got so far in so little time, and I actually believe that's all down to Clojure. It enabled us to move quickly as a small team and it's gone from there.
 
-Essentially the whole team are 'Clojurists'. We've bought into the benefits and the capabilities, so why use anything else? But from a usage point of view, Clojure Script was really important for us because we wanted one source to write that logic. We saw Clojure Script as the way to enable that.
+We have clients using our libraries, that have migrated onto hardware and is now all written in C. But that journey still starts in Clojure. If we have to diversify we will, where we know we can't use Clojure and it's firmware based. From an R&D perspective everything begins in Clojure
 
-At a conference, about a year after David joined us, he said that he couldn't believe that so few people had got so far in so little time and I actually believe that's all down to Clojure. It enabled us to move quickly as a small team and it's kind of gone from there.
+We're doing some cool things with next generation NFC cards just now, and that's got a JVM on it, and we're using Clojure. Inside that JVM we've got our proof technology running in Clojure.
 
-Clojure is a super important thing for us, it's diversified as we have diversified. We have clients on libraries that we've developed, that go onto hardware which is all written in C. But that journey still starts in Clojure. If we have to diversify we will, where we know we can't use Clojure and it's firmware based, we'll do R&D or prototypes but from an R&D perspective everything begins in Clojure
+_Jon:_ Wow, a JVM on a NFC card.
 
-We're doing some cool things with next generation NFC cards just now, and that's got a JVM on it, and we're using Clojure. Inside that JVM we've got our proof technology running in Clojure
-
-We're always looking for new ways to extend, detect, to open up different use cases. But it always starts with Clojure. And the fact we've got that core in Clojure means we can render it out into Clojure Script or go straight JVM.
-
+_Tony:_ We're always looking for new ways to extend, detect, to open up different use cases. But it always starts with Clojure. And the fact we've got that core in Clojure means we can render it out into Clojure Script or go straight JVM.
 
 Jon
 
