@@ -39,6 +39,9 @@ const shareIconStyle =
 
 const heroImageFilename = `${heroImage.split('.').slice(0, -1)}`
 const personImageFilename = image.split('.').slice(0, -1)
+const categoryHref = `/blog?${encodeURI(
+  `blog[refinementList][category][0]=${category}`
+)}`
 ---
 
 <Layout
@@ -57,11 +60,12 @@ const personImageFilename = image.split('.').slice(0, -1)
         >
           <div class='flex gap-1 pb-1 items-center foo'>
             <TagIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
-            <div
-              class='text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm'
+            <a
+              href={categoryHref}
+              class='text-juxt hover:underline font-medium font-mono dark:text-zinc-300 uppercase text-sm'
             >
               {category}
-            </div>
+            </a>
           </div>
           <h1
             class='text-black text-4xl dark:text-white font-semibold leading-tight pb-4'
