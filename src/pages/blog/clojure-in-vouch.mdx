@@ -33,13 +33,13 @@ Vouch.io enables you to authenticate yourself, by linking your identity to a dev
 
 Vouch.io provides a way to identify any inter-connectivity, and verify that inter-connectivity from a security point of view, linking it to identities. All of this can be done offline.
 
-We have initially focused on digital keys for hotels or cars. Everyone understands what a car key fob is and how that whoever holds the fob essentially owns the car. There's no way for the car to verify who you are and if you have authority to use it, for example to start the engine, or to open the trunk. With Vouch.io the car can make the necessary verification.
+We have initially focused on digital keys for hotels or cars. Everyone understands what a car key fob is and that whoever holds the fob essentially owns the car. There's no way for the car to verify who you are and if you have authority to use it, for example to start the engine, or to open the trunk. With Vouch.io the car can make the necessary verification.
 
 We can link your identity to your phone, and the phone can connect to the car as well.
 
 _Jon:_ Are you in production?
 
-Toyota, is currently our biggest customer. We've had to go through every possible security or quality test you can think of to get to production vehicles.  We've been in production with Lexus vehicles since December 2021 and we've had zero bugs in production and zero outage.
+Toyota is currently our biggest customer. We've had to go through every possible security or quality test you can think of to get into production vehicles. We've been in production with Lexus vehicles since December 2021 and we've had zero bugs in production and zero outage.
 
 _Jon:_ That's so cool that there's cars out there right now, Lexus and Toyota, that are using Vouch.io technology to verify the users?
 
@@ -51,23 +51,23 @@ _Jon:_ You've mentioned blockchain to me, is that part of the secret sauce for m
 
 _Anthony:_ It's a combination. Having a blockchain and using the proof technology, but the layer on top to remove friction is designing what we call '_a graph of trust_'. For each industry or company, each use case, there are identities for people, organizations whether they be employees, customers or friends. And of course there are objects that we can interactive with such as cars or hotel doors.
 
-We've then got things like GDPR, compliance, privacy, protocols like Ultra Wideband, Bluetooth and NFC. We can create a graph of trust across all of that using our blockchain backend and the proof technology. Our logic builds on this to allow the graph of trust to be able to share and verify. So it's a combination of all of this that makes Vouch.io kind of special.
+We've then got things like GDPR, compliance, privacy, protocols like Ultra Wideband, Bluetooth and NFC. We can create a graph of trust across all of that using our blockchain backend and the proof technology. Our logic builds on this to allow the graph of trust to be shared and verified. So it's a combination of all of this that makes Vouch.io special.
 
 ## Tech Journey
 
-_Jon:_ That's really awesome. Tell me a bit about the tech journey.
+_Jon:_ That's awesome. Tell me a bit about the tech journey.
 
-_Anthony:_ It all started with Clojure really. One of the [first](https://vouch.io/betting-the-company-on-clojurescript/) blog posts I ever wrote for Vouch.io was around betting the company on ClojureScript].
+_Anthony:_ It all started with Clojure. One of the [first](https://vouch.io/betting-the-company-on-clojurescript/) blog posts I ever wrote for Vouch.io was around betting the company on Clojure and ClojureScript.
 
 Essentially the whole team are 'Clojurists'. We've bought into the benefits and the capabilities, so why use anything else? ClojureScript is really important because we want one source to write the logic. ClojureScript enables that.
 
-At a conference, about a year after David Nolen joined us, he said that he couldn't believe that so few people had got so far in so little time, and I actually believe that's all down to Clojure. It enabled us to move quickly as a small team and it's gone from there.
+At a conference, about a year after David Nolen joined us, he said that he couldn't believe that so few people had got so far in so little time, and I do believe that's all down to Clojure. It has enabled us to move quickly as a small team and it's gone from there.
 
-We have clients using our libraries, that have migrated onto hardware and is now all written in C. But that journey still starts in Clojure. If we have to diversify we will, where we know we can't use Clojure and it's firmware based. From an R&D perspective everything begins in Clojure
+We have clients using libraries we've built, that have migrated onto firmware and are now all written in C. But that journey still starts in Clojure.
 
-We're doing some cool things with next generation NFC cards just now, and that's got a JVM on it, and we're using Clojure. Inside that JVM we've got our proof technology running in Clojure.
+We're doing some cool things with next generation NFC cards just now, that's have a JVM on them. Inside that JVM we've got our proof technology running in Clojure.
 
-_Jon:_ Wow, a JVM on a NFC card.
+_Jon:_ Wow, a JVM on a NFC card!
 
 _Anthony:_ Y. We're always looking for new ways to extend, detect, to open up different use cases. But it always starts with Clojure. And the fact we've got that core in Clojure means we can render it out into ClojureScript or go straight to the JVM.
 
@@ -75,43 +75,41 @@ _Anthony:_ Y. We're always looking for new ways to extend, detect, to open up di
 
 _Jon:_ What is your tech stack like? What sort of frameworks, tools, libraries do you use?
 
-_Anthony:_ There's a whole mix of stuff going on there, hardware and software.
-
-We've used a number of different texts, Tenderment is one of the enabling technologies that we use. Beyond that, really there's a whole bunch of libraries that we're using from hosting infrastructure point of view, https://github.com/linuxkit/linuxkit[LinuxKit] has been revolutionary for us.
+_Anthony:_ [Tenderment](https://tendermint.com/) is one of the enabling technologies that we use. [LinuxKit](https://github.com/linuxkit/linuxkit) has been revolutionary for us.
 
 _Jon:_ Could you describe LinuxKit?
 
 _Anthony:_ It allows us to rapidly deploy infrastructure configurations to our servers. We use it both on the cloud but also at the bare-metal level, without the need for Docker.
 
-From an orchestration point of view, depending on who our customers are, we can plug our Linuxkit config into their orchestration. It's been game changing.
+From an orchestration point of view, depending on who our customers are, we can plug our Linuxkit config into their orchestration and it's been game changing.
 
-React Native has been instrumental. We've sweated many hours getting the UI and UX flow just right, using React Native and ClojureScript, and Storybook.
+(React Native)[https://reactnative.dev/] has been instrumental. We've sweated many hours getting the UI and UX flow just right, using React Native and ClojureScript, and [Storybook](https://storybook.js.org/).
 
 ## People
 
 _Jon:_ How many developers do Vouch.io have?
 
-_Anthony:_  About 30 developers. A lot of those are working on client facing integrations, in terms of core developers there are 5 assigned to product development.
+_Anthony:_  About 30 developers. A lot of those are working on client facing integrations, and in terms of core developers there are 5 assigned to product development.
 
 _Jon:_ What would you say is the experience level of those developers?
 
-_Anthony:_ Initially we started with a team of seriously experienced developers to build the core product team, which enabled us to move really quickly from a core logic and SQL point of view.
+_Anthony:_ Initially we started with a team of seriously experienced developers to build the core product logic, which enabled us to move quickly.
 
-We've then got firmware teams who are all experienced as well. As we grow the future it will change, and now have a group of junior developers who are already quite skilled but growing all the time.
+We've then got firmware teams who are all experienced as well. As we grow it will change; we now have a group of junior developers who are already quite skilled but growing all the time.
 
 _Jon:_ How do you manage strong leadership personalities working together?
 
-_Anthony:_ We don't have type A personalities, rather just people wanting to work on a great product. The senior people will have strong opinions about direction but they also know the antipatterns that don't work and slow you down. They were all looking for a place like Vouch.io where they could work with a great team.
+_Anthony:_ We don't have type A personalities, rather just people wanting to work on a great product. The senior people will have strong opinions about direction but they also know the antipatterns that don't work and what can slow you down.
 
-The engineers say that their favorite thing about Vouch.io, is working on a team that is so experienced, it allows  each person to focus and get stuff done.
+Our engineers say that their favorite thing about Vouch.io, is working on a team that is so experienced, allowing each person to focus and to be productive.
 
 ## Testing
 
 _Jon:_ Obviously you have a lot of integrations, what's your approach to automated testing?
 
-_Anthony:_ Scenario based testing is something that David's done a whole load of work on, it's something that's a real passion for him.
+_Anthony:_ Scenario based testing is something that [David's done a whole load of work on, it's something that's a real passion for him](https://www.youtube.com/watch?v=qDGTxyIrKJY).
 
-It's our secret weapon for quality. Every single scenario or possible outcome is tested and verified.
+This is our secret weapon for quality. Every single scenario or possible outcome is tested and verified.
 
 We also all personally test. This will get harder as we grow but for now it works. We see the bugs before anyone else sees them from a human usage point of view. Everyone from the core and firmware engineers, hardware people to my assistant, test the product all the time. This combined with the scenario testing is extremely powerful.
 
@@ -119,21 +117,21 @@ We also all personally test. This will get harder as we grow but for now it work
 
 _Jon:_ What's your view on the current state of Clojure?
 
-_Anthony:_ It's interesting, things have gone quiet and it's not like it was 10 years ago. Every year there was some incredible new thing coming out with new ideas but that has slowed down.
+_Anthony:_ It's interesting, things have gone quiet and it's not like it was 10 years ago. Every year there was some incredible new thing coming out with new ideas and that has slowed down.
 
-But I think that that's correct. It should slow down as it matures. There's still a lot of 'Clojurists' that come to us for roles and the numbers are getting bigger and bigger every time. So it's a language that still attracts people that I think the ecosystem is maturing tremendously.
+But I think that's correct. It should slow down as the ecosystem matures. There's still a lot of 'Clojurists' that come to us for roles and the numbers are getting larger all the time.
 
-Obviously we're fans of the language in general, but I do see more opportunity for it going forward. From a marketing point of view I feel it's lacking. There's so many benefits to organizations out there and it could be pitched in such a different way. There's a missing narrative, so that enterprises can see the benefits.
+Obviously we're fans of the language in general, but I do see more opportunity for it going forward. From a marketing point of view I feel it's lacking. There's so many benefits to organizations out there and it could be pitched in a different way. There's a missing narrative, such that enterprises can see the benefits.
 
-I've been on the other side of it, trying to convince companies as an architect to use Clojure, it's hard and it's your reputation that gets it over the line. There's a lack of places to point people to.
+I've been on the other side of it, trying to convince companies as an architect to use Clojure. It's hard and it's your reputation that gets it over the line. There's a lack of resources to point people to, to make the argument.
 
 _Jon_: Why did you pick Clojure?
 
-My history with Clojure goes way back to when I was working with Ray McDermott in Belgium and we were frustrated with Java at the time, we were both in architect roles and it just didn't fit a lot of things that we were trying to do.
+My history with Clojure goes way back to when I was working with Ray McDermott in Belgium and we were frustrated with Java at the time. We were both in architect roles and Java just didn't fit a lot of things that we were trying to do.
 
-At the time there wasn't a language out there that really worked. We tried Scala but that didn't click. Then Ray introduced me to what Rich was putting out at the time and it really clicked with me, we tried Clojure and it solved a lot of different use cases.
+At the time there wasn't a language out there that really worked. We tried Scala but that didn't click. Then Ray introduced me to what [Rich was putting out at the time](https://www.infoq.com/presentations/Simple-Made-Easy/) and it really clicked with me. We tried Clojure and it solved a lot of different use cases.
 
-Datomic was also another major breakthrough, having this time-based database really changed the way we thought about things. This combined with Clojure and then ClojureScript was really the silver bullet for me. That was the thing that enabled me as an architect and as a CTO at that time to adopt it.
+[Datomic](datomic.com) was also another major breakthrough. Having this time-based database changed the way we thought about things. This combined with Clojure and then ClojureScript was really the silver bullet for me. That was the thing that enabled me as an architect and as a CTO at that time to adopt it.
 
 When we started Vouch.io there really was only one option.
 
@@ -143,8 +141,8 @@ _Jon:_ Anything else that you'd like to add?
 
 _Anthony:_ We take Clojure as a community seriously and it's a huge part of who we are.
 
-We're always looking for opportunities to find a way to educate and enable those that aren't able to do it themselves. We want to be part of that as a company, to find those people who aren't programmers so we can grow that knowledge, promoting our company as someone who cares.
+We're always looking for opportunities to find a way to educate and enable those that aren't able to do it themselves. We want to be part of that as a company, to find those people who aren't programmers so we can grow that knowledge, promoting our company as one that cares.
 
-Open source will alsobe a huge thing for Vouch.io at the right time and will continue to grow as we do. All with the view of enabling others.
+Open source will also huge for Vouch.io. We will be sharing more at the right time, all with the view of enabling others.
 
-_Jon:_ Brilliant. Thank you so much for your time Anthony, looking forward to seeing you at Clojure Conj in April!
+_Jon:_ Brilliant. Thank you so much for your time Anthony, looking forward to seeing you at the next Clojure Conj!
