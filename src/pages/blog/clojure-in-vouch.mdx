@@ -13,23 +13,27 @@ tags:
   - 'agile'
 ---
 
-Vouch.io is a platform to provide verifiable trust for people and their devices. Their engineers include some of the most profilic contributors to the Clojure ecosystem to date. I caught up with the CEO Anthony Maley, to get an insight into what's going on aat Vouch.io.
+[Vouch.io](vouch.io) is a platform providing verifiable trust for people and their devices. Their engineers include some of the most prolific contributors to the Clojure ecosystem to date. I caught up with the CEO Anthony Maley to learn about the technical journey.
+
+import ra from '../../assets/blog/tonyvouch.jpg'
+
+<Image alt='image' src={ra} />
 
 ## The Business
 
-_Jon:_ First off, tell me about your background
+_Jon:_ Let's get started. Who are you?
 
-_Anthony:_ I'm the founder and CEO of Vouch. I've worked in Chief Technology/Chief Architect roles for many large global companies, from UK to Belgium and now in the US.
+_Anthony:_ I'm Anthony Maley, the founder and CEO of Vouch.io. I've worked in Chief Technology/Chief Architect roles for many large global companies, from the UK to Belgium and now in the US.
 
-The co-founder of the company is my partner Sid. I actually met him, through an acquaintance here in Atlanta and he was looking to do something bit unique and get away from his normal line of business. We were introduced and I was Chief Architect at the time and I thought 'hey I really like this guy, he likes me, let's pull a team together and go solve a problem!'
+The co-founder of the company is my partner Sid. I met him through an acquaintance here in Atlanta and he was looking to do something unique, to get away from his normal line of business. We were introduced and I thought 'hey I really like this guy, he likes me, let's pull a team together and go solve a problem!'
 
-_Jon:_ What's Vouch.io?
+_Jon:_ What is Vouch.io?
 
-Vouch enables you to authenticate yourself, by linking your identity to a device. It can also verify that you're part of an organisation or if you hold a certain role in terms of authority.
+Vouch.io enables you to authenticate yourself, by linking your identity to a device. It can also verify that you're part of an organization or if you hold a certain role in terms of authority.
 
-Vouch provides a way to identify any interconnectivity, and verify that interconnectivity from a security point of view, linking it to identities. All of this can be done offline.
+Vouch.io provides a way to identify any inter-connectivity, and verify that inter-connectivity from a security point of view, linking it to identities. All of this can be done offline.
 
-We have initially focused on digital keys for hotels or cars. Everyone understands what a car key fob is and how that whoever holds the key fob essentially owns the car. There's no way for the car to know who you are, and there's no way for the car to verify who you are, and if you have authority to use the car, to start it, or to open the trunk. With Vouch the car can make the necessary verifications.
+We have initially focused on digital keys for hotels or cars. Everyone understands what a car key fob is and how that whoever holds the fob essentially owns the car. There's no way for the car to verify who you are and if you have authority to use it, for example to start the engine, or to open the trunk. With Vouch.io the car can make the necessary verification.
 
 We can link your identity to your phone, and the phone can connect to the car as well.
 
@@ -45,15 +49,15 @@ So I can say, you're coming into town this weekend. I'm going to share authority
 
 _Jon:_ You've mentioned blockchain to me, is that part of the secret sauce for making this all tick?
 
-_Anthony:_ It's a combination. Having a blockchain and using the proof technology, but the layer on top to remove friction is designing what we call '_a graph of trust_'. For each industry or company, each use case, there are identities for people, organisations whether they be employees, customers or friends. And of course there are objects that we can interactive with such as cars or hotel doors.
+_Anthony:_ It's a combination. Having a blockchain and using the proof technology, but the layer on top to remove friction is designing what we call '_a graph of trust_'. For each industry or company, each use case, there are identities for people, organizations whether they be employees, customers or friends. And of course there are objects that we can interactive with such as cars or hotel doors.
 
-We've then got things like GDPR, compliance, privacy, protocols like Ultra Wideband, Bluetooth and NFC. We can create a graph of trust across all of that using our blockchain backend and the proof technology. Our logic builds on this to allow the graph of trust to be able to share and verify. So it's a combination of all of this that makes Vouch kind of special.
+We've then got things like GDPR, compliance, privacy, protocols like Ultra Wideband, Bluetooth and NFC. We can create a graph of trust across all of that using our blockchain backend and the proof technology. Our logic builds on this to allow the graph of trust to be able to share and verify. So it's a combination of all of this that makes Vouch.io kind of special.
 
 ## Tech Journey
 
 _Jon:_ That's really awesome. Tell me a bit about the tech journey.
 
-_Anthony:_ It all started with Clojure really. One of the https://vouch.io/betting-the-company-on-clojurescript/[first blog posts I ever wrote for Vouch was around betting the company on ClojureScript].
+_Anthony:_ It all started with Clojure really. One of the [first](https://vouch.io/betting-the-company-on-clojurescript/) blog posts I ever wrote for Vouch.io was around betting the company on ClojureScript].
 
 Essentially the whole team are 'Clojurists'. We've bought into the benefits and the capabilities, so why use anything else? ClojureScript is really important because we want one source to write the logic. ClojureScript enables that.
 
@@ -85,7 +89,7 @@ React Native has been instrumental. We've sweated many hours getting the UI and 
 
 ## People
 
-_Jon:_ How many developers do Vouch have?
+_Jon:_ How many developers do Vouch.io have?
 
 _Anthony:_  About 30 developers. A lot of those are working on client facing integrations, in terms of core developers there are 5 assigned to product development.
 
@@ -109,7 +113,7 @@ _Anthony:_ Scenario based testing is something that David's done a whole load of
 
 It's our secret weapon for quality. Every single scenario or possible outcome is tested and verified.
 
-We also all personally test. This will get harder as we grow but for now it works. We see the bugs before anyone else sees them from a human usage point of view. Everyone from the core and firmware engineeers, hardware people to my assistant, test the product all the time. This combined with the scenario testing is extremely powerful.
+We also all personally test. This will get harder as we grow but for now it works. We see the bugs before anyone else sees them from a human usage point of view. Everyone from the core and firmware engineers, hardware people to my assistant, test the product all the time. This combined with the scenario testing is extremely powerful.
 
 ## State of Clojure
 
@@ -119,7 +123,7 @@ _Anthony:_ It's interesting, things have gone quiet and it's not like it was 10 
 
 But I think that that's correct. It should slow down as it matures. There's still a lot of 'Clojurists' that come to us for roles and the numbers are getting bigger and bigger every time. So it's a language that still attracts people that I think the ecosystem is maturing tremendously.
 
-Obviously we're fans of the language in general, but I do see more opportunity for it going forward. From a marketing point of view I feel it's lacking. There's so many benefits to organisations out there and it could be pitched in such a different way. There's a missing narrative, so that enterprises can see the benefits.
+Obviously we're fans of the language in general, but I do see more opportunity for it going forward. From a marketing point of view I feel it's lacking. There's so many benefits to organizations out there and it could be pitched in such a different way. There's a missing narrative, so that enterprises can see the benefits.
 
 I've been on the other side of it, trying to convince companies as an architect to use Clojure, it's hard and it's your reputation that gets it over the line. There's a lack of places to point people to.
 
@@ -131,7 +135,7 @@ At the time there wasn't a language out there that really worked. We tried Scala
 
 Datomic was also another major breakthrough, having this time-based database really changed the way we thought about things. This combined with Clojure and then ClojureScript was really the silver bullet for me. That was the thing that enabled me as an architect and as a CTO at that time to adopt it.
 
-When we started Vouch there really was only one option.
+When we started Vouch.io there really was only one option.
 
 ## Lastly
 
