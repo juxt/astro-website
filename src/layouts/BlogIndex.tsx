@@ -1,5 +1,4 @@
 import algoliasearch from 'algoliasearch/lite'
-import * as classNames from 'classnames'
 import { useState } from 'preact/hooks'
 import 'preact/jsx-runtime'
 import {
@@ -62,10 +61,8 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
           </div>
 
           <div
-            className={classNames(
-              'transition-all text-black dark:text-white flex flex-wrap justify-between pt-4 overflow-hidden',
-              filtersVisible ? 'h-full opacity-100' : 'h-0 opacity-0'
-            )}
+            className={`transition-all text-black dark:text-white flex flex-wrap justify-between pt-4 overflow-hidden
+              ${filtersVisible ? 'h-full opacity-100' : 'h-0 opacity-0'}`}
           >
             <div className='flex flex-col gap-2'>
               <div className='text-sm font-bold'>Tags</div>
