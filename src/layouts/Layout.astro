@@ -14,6 +14,7 @@ type LayoutProps = {
   ogImage?: string
   ogTitle?: string
   ogDescription?: string
+  noFooter?: boolean
 }
 
 const url = new URL(Astro.request.url)
@@ -30,7 +31,7 @@ type Metadata = {
   seo: Record<string, { description: string; image?: string }>
 }
 
-const { title, navbar, navbarNoBg, ogImage, ogTitle, ogDescription } =
+const { title, navbar, navbarNoBg, ogImage, ogTitle, ogDescription, noFooter } =
   Astro.props as LayoutProps
 
 const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
@@ -155,9 +156,9 @@ const metaTitle = ogTitle ?? currentPageName
     ]}
   >
     {navbar && <Navbar navbarNoBg={navbarNoBg} />}
-    <div class:list={[{ 'pt-14': !navbarNoBg }]}>
+    <div class:list={[{ 'pt-14': !navbarNoBg && navbar }]}>
       <slot />
-      <Footer />
+      {!noFooter && <Footer />}
     </div>
   </body>
 </html>
