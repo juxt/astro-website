@@ -23,7 +23,7 @@ function Input({
       <input
         type={type}
         id='first_name'
-        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-1/2 py-3 px-2.5 '
+        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-3 px-2.5 '
         placeholder={placeholder}
         required
       />
@@ -42,56 +42,86 @@ function TickBox({ text }: { text: string }) {
   )
 }
 
+const clientLogos = [
+  'credit-suisse.svg',
+  'citi.svg',
+  'vodafone.svg',
+  'on-the-market.svg',
+  'mail-online.svg',
+  'bbc.svg'
+]
+
 export default function ContactUs() {
   const [state, setState] = useState()
 
   return (
     <>
       <div className='flex flex-col xl:flex-row text-left'>
-        <div className='bg-zinc-100 p-8 w-1/2 py-20 px-16'>
+        <div className='bg-zinc-100 p-8 py-14 px-16'>
           <a href='/' className='block pb-8'>
             <img width='100' src='/images/logo-on-white.svg' alt='Juxt Logo' />
           </a>
-          <div className='text-2xl md:text-4xl font-bold leading-snug mb-6 text-center'>
+          <div className='text-2xl md:text-6xl font-bold leading-snug mb-12 text-center'>
             Better Call Joe
           </div>
-          <div className='justify-center'>
-            <div className='flex flex-col gap-6'>
-              <Input label='First Name*' />
-              <Input label='Last Name*' />
+          <div className='flex flex-col items-center'>
+            <div className='flex flex-col gap-8'>
+              <div className='flex flex-row gap-10'>
+                <Input label='First Name*' />
+                <Input label='Last Name*' />
+              </div>
               <Input label='Work Email*' type='email' />
-              <Input label='Job Title*' type='job title' />
-              <Input label='Company Name*' type='company name' />
-              <Input label='Phone' type='phone' />
-              <Input label='Country*' type='country' />
+              <div className='flex flex-row gap-10'>
+                <Input label='Job Title*' type='job title' />
+                <Input label='Company Name*' type='company name' />
+              </div>
+              <div className='flex flex-row gap-10'>
+                <Input label='Phone' type='phone' />
+                <Input label='Country*' type='country' />
+              </div>
               <div className='flex flex-col mt-3 text-xs italic items-center'>
                 By submitting your details you agree to JUXT’s Privacy Policy
               </div>
             </div>
-            <button className=' bg-gray-900 px-4 py-3 w-full text-white hover:text-juxt font-bold hover:shadow-lg visited:text-white active:text-white text-base text-md mt-8 rounded-sm'>
+            <button className=' bg-gray-900 px-4 py-3 w-1/2 text-white hover:text-juxt font-bold hover:shadow-lg visited:text-white active:text-white text-base text-md mt-8 rounded-sm'>
               Send this form to Joe
             </button>
           </div>
-          <div className='flex flex-col gap-4 mt-8 text-sm leading-snug'>
-            <div>
-              What happens after you hit “send”? Usually within 48 hours, Joe
-              will be in touch to secure 30 minutes with you.
+          <div className='flex flex-row gap-6'>
+            <div className='flex gap-8 mt-8 items-center p-6 bg-zinc-200 bg-opacity-90 shadow-xl'>
+              <img src={joe.src} alt='Joe' width='100' />
+              <div className='text-lg font-light'>
+                Joe Littlejohn, <br /> JUXT Head of Delivery
+              </div>
             </div>
-            <div>
-              Don’t want to wait? Book your 30-minutes with Joe via his Calendly
-              link here.
+            <div className='flex flex-col gap-4 mt-8 text-sm leading-snug w-1/2'>
+              <div>
+                What happens after you hit “send”? Usually within 48 hours, Joe
+                will be in touch to secure 30 minutes with you.
+              </div>
+              <div>
+                Don’t want to wait? Book your 30-minutes with Joe via his
+                Calendly link here.
+              </div>
+              <div>Or you can always call us: (UK/ US #)</div>
             </div>
-            <div>Or you can always call us: (UK/ US #)</div>
           </div>
-          <div className='flex flex-row gap-5 mt-8 items-center p-6 bg-zinc-200 bg-opacity-90 shadow-xl'>
-            <img src={joe.src} alt='Joe' width='100' />
-            <div className='text-lg font-light'>
-              Joe Littlejohn, JUXT Head of Delivery
-            </div>
+          <div className='text-base md-text3xl font-semibold text-center leading-snug mb6 mt-14'>
+            For over a decade, JUXT has been a trusted partner of the world’s
+            biggest brands:
+          </div>
+          <div class='flex flex-wrap py-6 justify-center bg-black shad mt-6'>
+            {clientLogos.map((logo) => (
+              <img
+                src={`/images/client-logos/${logo}`}
+                alt=''
+                class='w-1/2 h-10 md:w-1/2 md:h-14'
+              />
+            ))}
           </div>
         </div>
 
-        <div className='flex flex-col gap-4 text-left w-1/2 bg-juxt py-20 px-16'>
+        <div className='flex flex-col gap-4 text-left w-1/2 bg-juxt py-14 px-16'>
           <div className='text-3xl md:text-3xl font-medium leading-snug mb-6 mt-8'>
             Secure your{' '}
             <span className='font-bold'> free 30-minute consultation </span>{' '}
