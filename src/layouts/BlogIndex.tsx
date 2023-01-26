@@ -1,5 +1,5 @@
-import { Transition } from '@tailwindui/react'
 import algoliasearch from 'algoliasearch/lite'
+import * as classNames from 'classnames'
 import { useState } from 'preact/hooks'
 import 'preact/jsx-runtime'
 import {
@@ -44,7 +44,11 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
   const [filtersVisible, setFiltersVisible] = useState(false)
   return (
     <div className='mt-10 flex flex-col items-center relative'>
-      <InstantSearch indexName='blog' searchClient={searchClient}>
+      <InstantSearch
+        indexName='blog'
+        searchClient={searchClient}
+        routing={true}
+      >
         <Configure hitsPerPage={9} distinct={true} />
         <div className='flex flex-col gap-2 pb-20 w-10/12 md:w-[600px]'>
           <SearchBox />
@@ -57,51 +61,46 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
             </button>
           </div>
 
-          <Transition
-            show={filtersVisible}
-            enter='transition-opacity duration-75'
-            enterFrom='opacity-0'
-            enterTo='opacity-100'
-            leave='transition-opacity duration-150'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
+          <div
+            className={classNames(
+              'transition-all text-black dark:text-white flex flex-wrap justify-between pt-4 overflow-hidden',
+              filtersVisible ? 'h-full opacity-100' : 'h-0 opacity-0'
+            )}
           >
-            <div className='text-black dark:text-white flex flex-wrap justify-between pt-4'>
-              <div className='flex flex-col gap-2'>
-                <div className='text-sm font-bold'>Tags</div>
-                <RefinementList
-                  attribute='tags'
-                  searchable={true}
-                  operator='and'
-                  limit={5}
-                  sortBy={['name:asc']}
-                  showMore={true}
-                />
-              </div>
-              <div className='flex flex-col gap-2'>
-                <div className='text-sm font-bold'>Category</div>
-                <RefinementList
-                  attribute='category'
-                  searchable={true}
-                  operator='and'
-                  limit={5}
-                  sortBy={['name:asc']}
-                  showMore={true}
-                />
-              </div>
-              <div className='flex flex-col gap-2'>
-                <div className='text-sm font-bold'>Author</div>
-                <RefinementList
-                  attribute='author'
-                  searchable={true}
-                  operator='and'
-                  limit={5}
-                  sortBy={['name:asc']}
-                  showMore={true}
-                />
-              </div>
+            <div className='flex flex-col gap-2'>
+              <div className='text-sm font-bold'>Tags</div>
+              <RefinementList
+                attribute='tags'
+                searchable={true}
+                operator='and'
+                limit={5}
+                sortBy={['name:asc']}
+                showMore={true}
+              />
             </div>
-          </Transition>
+            <div className='flex flex-col gap-2'>
+              <div className='text-sm font-bold'>Category</div>
+              <RefinementList
+                attribute='category'
+                searchable={true}
+                operator='and'
+                limit={5}
+                sortBy={['name:asc']}
+                showMore={true}
+              />
+            </div>
+            <div className='flex flex-col gap-2'>
+              <div className='text-sm font-bold'>Author</div>
+              <RefinementList
+                attribute='author'
+                searchable={true}
+                operator='and'
+                limit={5}
+                sortBy={['name:asc']}
+                showMore={true}
+              />
+            </div>
+          </div>
         </div>
 
         <CustomHits blogs={blogs} />
