@@ -12,16 +12,16 @@ tags:
 ---
 
 Many of our projects at JUXT require the development of REST and GraphQL APIs.
-Clients want these delivered _quickly_, so separate front-end teams (whether from JUXT or not) can start iterating, and an integrated end-to-end system can take shape.
-But clients also want APIs in production to be secure, and there are some established standards today that can make this faster and easier too.
+Customers want these delivered _quickly_, so separate front-end teams (whether from JUXT or not) can start iterating, and an integrated end-to-end system can take shape.
+But customers also want APIs in production to be secure, and there are some established standards today that can make this faster, and easier too.
 
 ## Introducing Site
 
-Site is an amalgamation of technologies and libraries, from JUXT and elsewhere, that allows us to develop APIs quickly and securely.
-As with all our [open-source projects](https://github.com/juxt), Site was conceived from valuable observations from our project teams working with our JUXT clients:
+[https://github.com/juxt-site/site](Site) is a project, which includes a number of libraries from JUXT and elsewhere, that allows us to develop APIs quickly and securely.
+As with all our [open source projects](https://github.com/juxt), Site was conceived from valuable observations made by our project teams working with JUXT customers:
 
 - Many projects require the development of one or more stateful API services, either choosing REST or GraphQL. Most teams have adopted OpenAPI to design/document/communicate their APIs, and we have seen more teams move to a 'design-first' approach.
-- The inability to quickly iterate on APIs harms the agility of front-end development. Sometimes, backend teams need weeks or months of development time to deliver initial versions of APIs into a staging or test environment.
+- The inability to quickly iterate on APIs harms the agility of front-end development.
 - Authentication takes too long to build, even if this merely requires integration with a off-the-shelf authentication service.
 - Access control is invariably a business requirement, yet often retro-fitted, late in the development process.
 
@@ -34,18 +34,18 @@ Rather, a good API should be designed carefully to meet the needs of client appl
 If the API provides too little, it might not meet the requirements of all consumers.
 If the API provides too much, it will be more difficult and expensive to support that additional functionality over the long-term.
 
-It is also critical that an API does not break compatibility with client code.
+It is also critical that an API does not break compatibility with client-code written to consume the API service.
 If the API is designed 'by hand' (rather than generated from a server model), care can be taken to avoid introducing breaking changes to the API that would cause clients to stop working.
 This might not be necessary if the same development team are responsible for the code for both the client and server, but this is rarely the case.
 More often, the reason you publish an API in the first place is because you want to expose data and functionality to separate teams in your organisation, or beyond.
 
 By far the most popular format for API design today is [OpenAPI](https://swagger.io/specification/).
-Site allows us to upload API definitions in OpenAPI format and will implement the API dynamically, as if the backend code had been generated directly from the API specification.
+Site allows us to upload API definitions in OpenAPI format and will implement the API dynamically, as if the back-end code had been generated directly from the API specification.
 Finally, if we choose to replace Site with a custom-engineered service later on, we can do so without changing the API that clients may be using.
 
 ## Deliver, then reflect
 
-During 2020 and 2021, we used Site successfully on a number of projects, making the necessary tweaks as needed.
+During 2020 and 2021, we used Site successfully on a number of projects, making the necessary customizations as needed.
 We also added support for [GraphQL](https://graphql.org/), alongside OpenAPI, by integrating our [**grab**](https://github.com/juxt/grab) GraphQL library.
 
 At the end of 2021, after listening to the experiences of a number of successful Site deployments, I began to consider the question of access control.
@@ -69,4 +69,4 @@ If you're interested in API development and want to learn more, give it a watch.
 
 <iframe class="aspect-video w-full" src="https://www.youtube.com/embed/v3UzJelTge0" title="Site Safari" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Finally, if you're embarking on a new system development and APIs are important to your project, do get in touch. We'd be very happy to help.
+Finally, if you're embarking on a new system development and APIs are important to your project, do get in touch. We'd be very happy to advise and help.
