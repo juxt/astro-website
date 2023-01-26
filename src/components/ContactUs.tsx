@@ -57,7 +57,7 @@ export default function ContactUs() {
   return (
     <>
       <div className='flex flex-col xl:flex-row text-left'>
-        <div className='bg-zinc-100 p-8 py-14 px-16'>
+        <div className='bg-zinc-100 p-8 py-14 px-16 w-1/2'>
           <a href='/' className='block pb-8'>
             <img width='100' src='/images/logo-on-white.svg' alt='Juxt Logo' />
           </a>
@@ -115,7 +115,7 @@ export default function ContactUs() {
               <img
                 src={`/images/client-logos/${logo}`}
                 alt=''
-                class='w-1/2 h-10 md:w-1/2 md:h-14'
+                class=' h-10  md:h-14'
               />
             ))}
           </div>
