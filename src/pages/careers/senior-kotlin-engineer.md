@@ -9,7 +9,7 @@ googleJobs:
   {
     location: 'London',
     position: 'Senior Kotlin Engineer',
-    publishedDate: '12-10-2022'
+    publishedDate: '2022-10-12'
   }
 ---
 

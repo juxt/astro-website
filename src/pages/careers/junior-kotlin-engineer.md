@@ -9,7 +9,7 @@ googleJobs:
   {
     location: 'London',
     position: 'Junior Kotlin Engineer',
-    publishedDate: '05-11-2022'
+    publishedDate: '2022-11-05'
   }
 ---
 

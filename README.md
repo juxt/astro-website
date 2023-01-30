@@ -64,7 +64,7 @@ author: 'lda'
 layout: '../../layouts/BlogPost.astro'
 title: 'Hello world!'
 description: "Bring your markdown, we'll handle the rest"
-publishedDate: '17 Jul 2022'
+publishedDate: '2022-07-23'
 tags:
   - cloud
   - devops
@@ -230,7 +230,7 @@ googleJobs:
   {
     location: 'London',
     position: 'Head of Marketing',
-    publishedDate: '11-03-2021'
+    publishedDate: '2021-03-11'
   }
 ---
 
