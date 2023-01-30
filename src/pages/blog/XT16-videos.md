@@ -4,7 +4,7 @@ title: 'XT16 videos coming soon'
 description: 'Videos are coming, meanwhile relive the experience'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '09 Dec 2016'
+publishedDate: '2016-12-09'
 heroImage: 'x16-videos.jpg'
 ---
 

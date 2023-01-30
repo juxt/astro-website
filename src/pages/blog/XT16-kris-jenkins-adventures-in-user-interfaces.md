@@ -4,7 +4,7 @@ title: 'XT16 - Kris Jenkins: Adventures in User Interfaces'
 description: 'JavaScript is falling down'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '20 Jan 2017'
+publishedDate: '2017-01-20'
 heroImage: 'user-interface-adv.jpg'
 ---
 

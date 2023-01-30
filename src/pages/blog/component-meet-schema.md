@@ -4,7 +4,7 @@ title: 'Component, meet Schema'
 description: 'How to validate Clojure component systems'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '25 Jun 2015'
+publishedDate: '2015-06-25'
 heroImage: 'schema-meets.jpg'
 tags:
   - 'macros'

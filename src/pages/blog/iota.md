@@ -4,7 +4,7 @@ title: 'iota'
 description: 'Cheer up your testing with this small library'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '23 Sep 2015'
+publishedDate: '2015-09-23'
 heroImage: 'iota.jpg'
 tags:
   - 'opensource'

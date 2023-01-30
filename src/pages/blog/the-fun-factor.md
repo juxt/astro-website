@@ -4,7 +4,7 @@ title: 'Technology and Fun, XT16'
 description: 'The importance of fun in our work'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '15 Jun 2016'
+publishedDate: '2016-06-15'
 heroImage: 'tech-fun.jpg'
 ---
 

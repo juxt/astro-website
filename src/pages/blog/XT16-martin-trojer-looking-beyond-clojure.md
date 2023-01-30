@@ -4,7 +4,7 @@ title: 'XT16 - Looking beyond Clojure'
 description: 'A Clojure developer takes a look at languages with typesk'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '26 Apr 2017'
+publishedDate: '2017-04-26'
 heroImage: 'beyond-clj.jpg'
 ---
 

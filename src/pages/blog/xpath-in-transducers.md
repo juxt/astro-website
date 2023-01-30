@@ -4,7 +4,7 @@ title: 'Processing documents with transducers'
 description: 'Using transducers to extract information from XML, JSON and other documents'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '27 Mar 2018'
+publishedDate: '2018-03-27'
 heroImage: 'processing.jpg'
 tags:
   - 'transducers'

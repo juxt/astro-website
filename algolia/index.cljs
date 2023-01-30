@@ -74,7 +74,7 @@
           tags (g/get md-frontmatter "tags")
           draft (g/get md-frontmatter "draft")
           publishedDate (g/get md-frontmatter "publishedDate")
-          timestamp (js/Math.floor (/ (.valueOf (js/Date. publishedDate)) 1000))]
+          timestamp (js/Math.floor (/ (.getTime (js/Date. publishedDate)) 1000))]
       (reset! frontmatter-record
               {:draft? draft
                :record #js {"author" (if (= author "juxt")

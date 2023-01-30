@@ -6,7 +6,7 @@ category: 'opensource'
 layout: '../../layouts/BlogPost.astro'
 tags:
   - 'clojure'
-publishedDate: '05 May 2016'
+publishedDate: '2016-05-05'
 heroImage: 'config.jpg'
 ---
 

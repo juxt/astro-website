@@ -4,7 +4,7 @@ title: 'Martian'
 description: 'How to contact aliens'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '29 Sep 2016'
+publishedDate: '2016-09-29'
 heroImage: 'martian.jpg'
 tags:
   - 'opensource'

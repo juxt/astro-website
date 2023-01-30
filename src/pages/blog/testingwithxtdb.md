@@ -4,7 +4,7 @@ title: 'Testing Against XTDB'
 description: 'Faster, Simpler and more reliable'
 category: 'xtdb'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '04 May 2022'
+publishedDate: '2022-05-04'
 heroImage: 'testing-with-xtdb.jpg'
 ---
 
