@@ -4,7 +4,7 @@ title: 'Getting Leiningen feature-parity in Boot'
 description: 'An introduction to the Boot build tool and how to get started on your Clojure project'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '19 Jan 2016'
+publishedDate: '2016-01-19'
 heroImage: 'feature-parity.jpg'
 ---
 

@@ -4,7 +4,7 @@ title: 'Malcolm is Going to ClojureD'
 description: 'On the 29th February'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '12 Feb 2020'
+publishedDate: '2020-02-12'
 heroImage: 'mal-clojure-d.jpg'
 ---
 

@@ -4,7 +4,7 @@ title: 'The JUXT Clojure Radar 2021'
 description: 'Revisiting our Clojure Radar'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '20 Aug 2021'
+publishedDate: '2021-08-20'
 heroImage: 'radar-juxt.jpg'
 tags:
   - 'radar'

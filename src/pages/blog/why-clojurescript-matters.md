@@ -4,7 +4,7 @@ title: 'Why ClojureScript Matters'
 description: 'The case for adding ClojureScript to your project'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '29 Jun 2015'
+publishedDate: '2015-06-29'
 heroImage: 'cljs-matters.jpg'
 ---
 

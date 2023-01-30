@@ -4,7 +4,7 @@ title: 'Edging forward'
 description: 'An update about our Edge projectk'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '12 Dec 2018'
+publishedDate: '2018-12-12'
 heroImage: 'edge.jpg'
 tags:
   - 'opensource'

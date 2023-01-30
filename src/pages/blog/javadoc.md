@@ -4,7 +4,7 @@ title: 'javadoc from the repl'
 description: 'How to launch javadoc in your REPL'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '06 Oct 2015'
+publishedDate: '2015-10-06'
 heroImage: 'javadoc-repl.jpg'
 ---
 

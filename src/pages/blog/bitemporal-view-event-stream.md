@@ -3,7 +3,7 @@ author: 'jon'
 title: 'Building a Bitemporal View on top of an Event-Stream'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '27 Mar 2018'
+publishedDate: '2018-03-27'
 heroImage: 'bitemporal-view.jpg'
 ---
 

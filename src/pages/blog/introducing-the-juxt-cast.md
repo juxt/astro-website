@@ -4,7 +4,7 @@ title: 'Introducing the JUXT Cast'
 description: ''
 category: 'podcast'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '18 Jul 2019'
+publishedDate: '2019-07-18'
 heroImage: 'podcast.jpg'
 tags:
   - 'clojure'

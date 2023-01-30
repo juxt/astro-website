@@ -4,7 +4,7 @@ title: 'Simulation Testing using Datomic simulant library'
 description: 'Part One'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '22 Feb 2019'
+publishedDate: '2019-02-22'
 heroImage: 'simulation.jpg'
 ---
 

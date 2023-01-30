@@ -4,7 +4,7 @@ title: 'AWS Lambda, now with first class parentheses'
 description: 'Deploying Clojure on AWS Lambda with no compromises'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '14 Jul 2022'
+publishedDate: '2022-07-14'
 heroImage: 'nbb-lambda.jpg'
 tags:
   - 'clojurescript'

@@ -4,7 +4,7 @@ title: 'Writing Mobile apps in ClojureScript in 2021'
 description: "Still easy? Let's find out..."
 category: 'clojurescript'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '13 Aug 2021'
+publishedDate: '2021-08-13'
 heroImage: 'webapps-cljs.jpg'
 tags:
   - 'mobile'

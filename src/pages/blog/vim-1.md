@@ -4,7 +4,7 @@ title: 'Clojure and Vim: An overview'
 description: "It's very possible"
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '13 Dec 2016'
+publishedDate: '2016-12-13'
 heroImage: 'clojure-vim.jpg'
 ---
 

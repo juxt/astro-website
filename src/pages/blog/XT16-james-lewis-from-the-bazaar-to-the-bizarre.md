@@ -4,7 +4,7 @@ title: 'XT16 James Lewis: From the Bazaar to the Bizarre'
 description: 'A journey of open source development'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '14 Dec 2016'
+publishedDate: '2016-12-14'
 heroImage: 'open-source.jpg'
 ---
 

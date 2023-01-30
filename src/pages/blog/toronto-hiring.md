@@ -4,7 +4,7 @@ title: 'JUXT are hiring in Toronto'
 description: ''
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '27 Aug 2017'
+publishedDate: '2017-08-27'
 heroImage: 'toronto.jpg'
 ---
 

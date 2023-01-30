@@ -4,7 +4,7 @@ title: 'Thoughts on Clojure Training'
 description: 'Reflections on bringing developers up to speed in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '22 Jan 2016'
+publishedDate: '2016-01-22'
 heroImage: 'clojure-training.jpg'
 tags:
   - 'training'

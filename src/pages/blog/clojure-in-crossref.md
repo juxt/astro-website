@@ -4,7 +4,7 @@ title: 'Clojure in Oxford: Crossref'
 description: 'Improving scholarly communications'
 category: 'clojure-in'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '01 Nov 2018'
+publishedDate: '2018-11-01'
 heroImage: 'clojurein-uk-2.jpg'
 clojureIn: { season: 'one' }
 ---

@@ -4,7 +4,7 @@ title: 'XT20: Alan Kay'
 description: 'Thoughts and perspectives'
 category: 'interview'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '26 Jun 2020'
+publishedDate: '2020-06-26'
 heroImage: 'alank.jpg'
 ---
 

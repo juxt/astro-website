@@ -4,7 +4,7 @@ title: 'XT16 - Frankie Sardo'
 description: 'ClojureScript Without Boundaries (with live coding)'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '09 Feb 2017'
+publishedDate: '2017-02-09'
 heroImage: 'boundaries.jpg'
 ---
 

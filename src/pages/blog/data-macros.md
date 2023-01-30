@@ -4,7 +4,7 @@ title: 'Data Macros'
 description: 'Expanding abbreviated data literals'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '05 Jan 2016'
+publishedDate: '2016-01-05'
 heroImage: 'data-macros.jpg'
 ---
 

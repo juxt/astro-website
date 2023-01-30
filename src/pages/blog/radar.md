@@ -4,7 +4,7 @@ title: 'Clojure Technical Radar'
 description: 'Introducing the JUXT Clojure Technical Radar 2016'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '13 Jan 2016'
+publishedDate: '2016-01-13'
 heroImage: 'tech-radar.jpg'
 ---
 

@@ -4,7 +4,7 @@ title: 'XT16 Hakan Raberg: The Search for Simplicity'
 description: 'Building a Scheme in x86-64 Assembly'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '04 Jan 2017'
+publishedDate: '2017-01-04'
 heroImage: 'search.jpg'
 ---
 

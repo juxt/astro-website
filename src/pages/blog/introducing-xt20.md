@@ -4,7 +4,7 @@ title: 'Introducing XT20'
 description: ''
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '27 Mar 2018'
+publishedDate: '2018-03-27'
 heroImage: 'introducing-xt.jpg'
 tags:
   - 'clojure'

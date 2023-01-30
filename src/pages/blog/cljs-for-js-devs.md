@@ -4,7 +4,7 @@ title: 'ClojureScript for JavaScript Developers'
 description: 'How do they compare in 2022?'
 category: 'clojurescript'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '03 Mar 2022'
+publishedDate: '2022-03-03'
 heroImage: 'cljs-for-js-devs.jpg'
 tags:
   - 'clojurescript'

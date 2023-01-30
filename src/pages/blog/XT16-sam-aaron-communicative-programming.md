@@ -4,7 +4,7 @@ title: 'XT16 - Sam Aaron: Communicative Programming'
 description: 'Lowering the cognitive load'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '22 Feb 2017'
+publishedDate: '2017-02-22'
 heroImage: 'communicative.jpg'
 ---
 
