@@ -4,7 +4,7 @@ title: 'Securing your clojurescript app'
 description: "Use buddy's json tokens to authenticate your single page application"
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '09 Jul 2015'
+publishedDate: '2015-07-09'
 heroImage: 'securing-app.jpg'
 ---
 

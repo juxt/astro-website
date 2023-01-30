@@ -4,7 +4,7 @@ title: 'Deploying libraries with deps.edn'
 description: ''
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '27 Nov 2018'
+publishedDate: '2018-11-27'
 heroImage: 'library.jpg'
 ---
 

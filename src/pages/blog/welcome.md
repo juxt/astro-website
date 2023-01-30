@@ -4,7 +4,7 @@ title: 'Welcome'
 description: 'The new JUXT blog'
 category: 'news'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '24 Mar 2015'
+publishedDate: '2015-03-24'
 heroImage: 'welcome.jpg'
 ---
 

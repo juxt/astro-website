@@ -4,7 +4,7 @@ title: 'Provisioning Datomic using Packer and Terraform'
 description: 'Deploying Datomic'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '06 Feb 2017'
+publishedDate: '2017-02-06'
 heroImage: 'deploying-datomic.jpg'
 ---
 

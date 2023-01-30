@@ -4,7 +4,7 @@ title: "Clojure's JSON ecosystem"
 description: 'Choosing a JSON library for your Clojure application'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '01 Jun 2021'
+publishedDate: '2021-06-01'
 heroImage: 'json-ecosystem.jpg'
 tags:
   - 'json'

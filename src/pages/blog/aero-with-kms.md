@@ -7,7 +7,7 @@ layout: '../../layouts/BlogPost.astro'
 tags:
   - 'devops'
   - 'cloud'
-publishedDate: '22 Oct 2016'
+publishedDate: '2016-10-22'
 heroImage: 'secrets.jpg'
 ---
 

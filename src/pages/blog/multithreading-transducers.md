@@ -4,7 +4,7 @@ title: 'Multithreading within a transducer'
 description: 'Parallelising transducers'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '12 Mar 2019'
+publishedDate: '2019-03-12'
 heroImage: 'multi-threading.jpg'
 ---
 

@@ -4,7 +4,7 @@ title: 'Data at the Gates'
 description: 'Coerce to avoid data inconsistencies polluting your codebase'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '01 Feb 2016'
+publishedDate: '2016-02-01'
 heroImage: 'data-gates.jpg'
 ---
 

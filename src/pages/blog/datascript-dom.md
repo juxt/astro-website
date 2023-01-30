@@ -4,7 +4,7 @@ title: 'Datalog for trees in Clojure'
 description: 'How to use Datalog in Clojure to match and extract information from trees'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '20 Oct 2015'
+publishedDate: '2015-10-20'
 heroImage: 'datalog-for-trees.jpg'
 tags:
   - 'clojurescript'

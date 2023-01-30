@@ -4,7 +4,7 @@ title: 'The Clojure Job Market'
 description: 'Thoughts on the European Clojure Job Market'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '29 Jun 2017'
+publishedDate: '2017-06-29'
 heroImage: 'job-market.jpg'
 ---
 

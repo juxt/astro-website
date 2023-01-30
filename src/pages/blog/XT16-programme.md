@@ -4,7 +4,7 @@ title: 'XT16: The Programme'
 description: 'The XT16 Programme has Landed'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '26 Aug 2016'
+publishedDate: '2016-08-26'
 heroImage: 'xt-16-programme.jpg'
 ---
 

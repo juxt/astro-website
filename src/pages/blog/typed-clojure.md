@@ -4,7 +4,7 @@ title: 'Is Typed Clojure worth the trouble?'
 description: 'Working with types in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '22 Jun 2015'
+publishedDate: '2015-06-22'
 heroImage: 'types.jpg'
 ---
 

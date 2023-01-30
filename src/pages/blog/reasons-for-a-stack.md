@@ -4,7 +4,7 @@ title: 'Why have a stack?'
 description: 'Becoming opinionated'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '15 Jan 2018'
+publishedDate: '2018-01-15'
 heroImage: 'stack.jpg'
 ---
 

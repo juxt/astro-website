@@ -4,7 +4,7 @@ title: 'On-the-fly collections with Reducibles'
 description: 'Digest large datasets with ease'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '22 Oct 2019'
+publishedDate: '2019-10-22'
 heroImage: 'on-the-fly.jpg'
 ---
 

@@ -4,7 +4,7 @@ title: 'Bitemporality: More Than a Design Pattern'
 description: 'Bitemporality is the full solution'
 category: 'db'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '12 Apr 2021'
+publishedDate: '2021-04-12'
 heroImage: 'bitemporality.jpg'
 tags:
   - 'xtdb'

@@ -4,7 +4,7 @@ title: 'JUXT and OpenSensors'
 description: 'A case study of building the technology that powers a major IoT platform'
 category: 'case studies'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '22 Oct 2015'
+publishedDate: '2015-10-22'
 heroImage: 'opensensor.jpg'
 ---
 

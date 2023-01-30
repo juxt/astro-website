@@ -4,7 +4,7 @@ title: 'How-to: Clojure libraries on Maven Central'
 description: "A guide for migrating Clojure libraries to Maven Central, following Crux's recent migration"
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '15 Jul 2021'
+publishedDate: '2021-07-15'
 heroImage: 'maven-central.jpg'
 ---
 

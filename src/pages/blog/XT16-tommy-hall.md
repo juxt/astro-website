@@ -4,7 +4,7 @@ title: 'XT16 - Tommy Hall'
 description: 'Unlimited Register Machines'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '08 Mar 2017'
+publishedDate: '2017-03-08'
 heroImage: 'register-machines.jpg'
 ---
 

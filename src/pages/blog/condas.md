@@ -4,7 +4,7 @@ title: 'Combining Clojure macros: cond-> and as->'
 description: 'I want it all'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '10 Jun 2015'
+publishedDate: '2015-06-10'
 heroImage: 'clojure-macros.jpg'
 tags:
   - 'macros'

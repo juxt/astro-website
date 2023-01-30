@@ -6,7 +6,7 @@ category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 tags:
   - 'play'
-publishedDate: '19 Apr 2019'
+publishedDate: '2019-04-19'
 heroImage: 'bitemp-tale.jpg'
 ---
 

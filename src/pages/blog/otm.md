@@ -4,7 +4,7 @@ title: 'OnTheMarket.com and JUXT'
 description: 'How JUXT helped OnTheMarket plc enter the property portal market'
 category: 'case studies'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '25 Mar 2015'
+publishedDate: '2015-03-25'
 heroImage: 'onthemarket.jpg'
 ---
 

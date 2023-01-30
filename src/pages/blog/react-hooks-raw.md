@@ -4,7 +4,7 @@ title: 'What React Hooks mean for ClojureScript'
 description: 'And some examples'
 category: 'clojurescript'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '07 Feb 2019'
+publishedDate: '2019-02-07'
 heroImage: 'hook.jpg'
 tags:
   - 'hooks'

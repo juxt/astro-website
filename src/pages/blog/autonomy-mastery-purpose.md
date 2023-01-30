@@ -4,7 +4,7 @@ title: 'Autonomy, Mastery, Purpose'
 description: ''
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '12 May 2021'
+publishedDate: '2021-05-12'
 heroImage: 'autonomy.jpg'
 ---
 

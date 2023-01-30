@@ -4,7 +4,7 @@ title: 'Parsing routes with clojure spec'
 description: 'Speccing out routes'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '27 Jul 2016'
+publishedDate: '2016-07-27'
 heroImage: 'parsing-routes.jpg'
 ---
 

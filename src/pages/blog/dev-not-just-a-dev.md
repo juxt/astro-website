@@ -4,7 +4,7 @@ title: 'Just a techie?'
 description: 'Techies, Devs, Boffins and Geeks'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '09 Nov 2018'
+publishedDate: '2018-11-09'
 heroImage: 'just-a-techie.jpg'
 ---
 
