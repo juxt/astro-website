@@ -2,7 +2,7 @@
 author: 'jon'
 title: 'The point of software consultancies'
 description: 'Software is a difficult business'
-category: 'anaysis'
+category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-07-25'
 heroImage: 'software-consultancies.jpg'
