@@ -2,7 +2,7 @@
 author: 'mal'
 title: 'Storing secrets with Aero and KMS'
 description: ' Aero flexes its muscles'
-category: 'opensource'
+category: 'open source'
 layout: '../../layouts/BlogPost.astro'
 tags:
   - 'devops'

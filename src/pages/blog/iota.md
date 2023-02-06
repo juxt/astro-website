@@ -7,7 +7,7 @@ layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-09-23'
 heroImage: 'iota.jpg'
 tags:
-  - 'opensource'
+  - 'open source'
 ---
 
 [iota](https://github.com/juxt/iota) is a little library from JUXT that
