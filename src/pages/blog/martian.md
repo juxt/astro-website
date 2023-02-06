@@ -7,7 +7,7 @@ layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-09-29'
 heroImage: 'martian.jpg'
 tags:
-  - 'opensource'
+  - 'open source'
 ---
 
 I've worked quite a lot with APIs and HTTP in particular, and I've come

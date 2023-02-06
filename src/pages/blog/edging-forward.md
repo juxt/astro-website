@@ -7,7 +7,7 @@ layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-12-12'
 heroImage: 'edge.jpg'
 tags:
-  - 'opensource'
+  - 'open source'
 ---
 
 Clojure is a great language for building systems. One of the reasons

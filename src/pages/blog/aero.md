@@ -2,7 +2,7 @@
 author: 'mal'
 title: 'Configuration: Make it obvious!'
 description: 'Avoid misleading application configuration schemes by being explicit'
-category: 'opensource'
+category: 'open source'
 layout: '../../layouts/BlogPost.astro'
 tags:
   - 'clojure'
