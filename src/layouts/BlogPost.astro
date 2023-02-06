@@ -11,12 +11,132 @@ import {
 import { Blog, Person } from '../components/types'
 import Layout from './Layout.astro'
 import '../blog.css'
+import { BlogCard } from '../components/BlogCard'
+import { getImage } from '@astrojs/image'
 
 const { title, description, heroImage, category, author, draft } = Astro.props
   .content as Blog
 
 const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
+)
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+  '../pages/blog/{*.mdx,*.md}'
+)
+
+const blogsWithoutCurrent = blogs.filter(
+  (blog) => blog.frontmatter.title !== title
+)
+
+type GroupedBlogs = {
+  authorCategory: MarkdownInstance<Blog>[]
+  category: MarkdownInstance<Blog>[]
+  author: MarkdownInstance<Blog>[]
+}
+
+// To index the blogs that share author && catagory or just one with the current blog
+const groupedBlogs: GroupedBlogs = blogs.reduce(
+  (coll, blog) => {
+    if (blog.frontmatter.title === title) {
+      return coll
+    } else if (
+      blog.frontmatter.author === author &&
+      blog.frontmatter.category === category
+    ) {
+      return {
+        ...coll,
+        authorCategory: [blog, ...coll.authorCategory]
+      }
+    } else if (blog.frontmatter.category === category) {
+      return { ...coll, category: [blog, ...coll.category] }
+    } else if (blog.frontmatter.author === author) {
+      return { ...coll, author: [blog, ...coll.author] }
+    } else {
+      return coll
+    }
+  },
+  { authorCategory: [], category: [], author: [] }
+)
+
+function sortBlogsFn(coll): MarkdownInstance<Blog>[] {
+  return coll.sort((a, b) => {
+    return (
+      new Date(b.frontmatter.publishedDate).getTime() -
+      new Date(a.frontmatter.publishedDate).getTime()
+    )
+  })
+}
+
+const sortedBlogs = [
+  ...sortBlogsFn(groupedBlogs.authorCategory),
+  ...sortBlogsFn(groupedBlogs.category),
+  ...sortBlogsFn(groupedBlogs.author)
+]
+
+// To take only the 3 top matches
+const slicedBlogs = sortedBlogs.slice(0, 3)
+
+const allSortedBlogs = sortBlogsFn(blogsWithoutCurrent).slice(0, 3)
+
+const uniqueBlogs: MarkdownInstance<Blog>[] = allSortedBlogs.reduce(
+  (coll, blog) => {
+    const currentTitle = blog.frontmatter.title
+    const isDuplicate = slicedBlogs.find(
+      (blog) => blog.frontmatter.title === currentTitle
+    )
+    if (isDuplicate) return coll
+    else return [...coll, blog]
+  },
+  []
+)
+
+const finalBlogs = [...slicedBlogs, ...uniqueBlogs].slice(0, 3)
+
+const finalResources = await Promise.all(
+  finalBlogs.map((page) => {
+    const author = page.frontmatter.author
+    const person = people.find(
+      (person) => person.frontmatter.code === page.frontmatter.author
+    )
+    if (!person)
+      throw new Error(
+        `No person found for author: '${author}' in '${page.url}'`
+      )
+    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+    const parsedImage = person.frontmatter.image.split('.').slice(0, -1)
+
+    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+
+    const authorImage = getImage({
+      src: import(`../assets/people/${parsedImage}.jpg`),
+      width: 200,
+      quality: 80,
+      alt: 'person'
+    })
+
+    const postImage = getImage({
+      src: import(`../assets/blog/${parsedPostImage}.jpg`),
+      width: 450,
+      quality: 100,
+      alt: 'post'
+    })
+
+    return Promise.all([authorImage, postImage]).then(
+      ([authorImage, postImage]) => {
+        return {
+          ...page.frontmatter,
+          slug: page.url.split('/').pop(),
+          href: permalink,
+          heroImage: postImage.src,
+          person: {
+            ...person.frontmatter,
+            image: authorImage.src
+          }
+        }
+      }
+    )
+  })
 )
 
 const person = people.find((person) => person.frontmatter.code === author)
@@ -159,5 +279,19 @@ const categoryHref = `/blog?${encodeURI(
     >
       <slot />
     </article>
+    <div
+      class='text-4xl text-zinc-600 dark:text-zinc-300 text-center font-bold pb-14'
+    >
+      Recommended Resources
+    </div>
+    <div
+      class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10 pb-24'
+    >
+      {finalResources.map((blog) => (
+        <div>
+          <BlogCard {...blog} />
+        </div>
+      ))}
+    </div>
   </main>
 </Layout>
