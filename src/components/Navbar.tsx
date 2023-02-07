@@ -8,12 +8,16 @@ import DarkModeSwitch from './DarkModeSwitch'
 type NavLinkProp = {
   href: string
   label: string
+  target?: string
   active?: boolean
 }
 
-function NavLink({ label, href, active }: NavLinkProp) {
+function NavLink({ label, href, target, active }: NavLinkProp) {
+  const targetProp = target ? { target } : {}
+
   return (
     <a
+      {...targetProp}
       className={classNames(
         'hover:text-juxt transition-colors first-of-type:pt-4 md:first-of-type:pt-0',
         active ? 'text-juxt' : 'text-white'
@@ -83,7 +87,12 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
         {/* desktop */}
         <div className={classNames('hidden md:flex', linkClasses)}>
           {navLinks.map((page) => (
-            <NavLink href={page.href} label={page.label} active={page.active} />
+            <NavLink
+              href={page.href}
+              label={page.label}
+              target={page.target}
+              active={page.active}
+            />
           ))}
           {enableDarkMode && <DarkModeSwitch />}
         </div>
@@ -103,7 +112,12 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
           )}
         >
           {navLinks.map((page) => (
-            <NavLink href={page.href} label={page.label} active={page.active} />
+            <NavLink
+              href={page.href}
+              label={page.label}
+              target={page.target}
+              active={page.active}
+            />
           ))}
           {enableDarkMode && <DarkModeSwitch />}
         </div>

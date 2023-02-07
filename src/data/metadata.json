@@ -19,7 +19,8 @@
     { "label": "Startups", "href": "/startups" },
     { "label": "Get Started", "href": "/get-started" },
     { "label": "Careers", "href": "/careers" },
-    { "label": "Blog", "href": "/blog" }
+    { "label": "Blog", "href": "/blog" },
+    { "label": "XTDB", "href": "https://xtdb.com/", "target": "_blank" }
   ],
   "footer": [
     { "label": "About", "href": "/about" },

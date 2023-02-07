@@ -5,7 +5,7 @@ export interface Props {
   navbarNoBg: boolean
 }
 
-type Navigation = { label: string; href: string }
+type Navigation = { label: string; href: string; target?: string }
 
 const navigation = await Astro.glob<{ navbar: Navigation[] }>(
   '../data/metadata.json'
@@ -21,6 +21,7 @@ const currentPage = url.pathname
 const pagesInNavbar = navbar.map((page) => ({
   label: page.label,
   href: page.href,
+  target: page.target,
   active: page.href === currentPage
 }))
 
