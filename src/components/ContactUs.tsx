@@ -83,7 +83,7 @@ export default function ContactUs() {
                 By submitting your details you agree to JUXT’s Privacy Policy
               </div>
             </div>
-            <button className=' bg-gray-900 px-4 py-3 w-1/2 text-white hover:text-juxt font-bold hover:shadow-lg visited:text-white active:text-white text-base text-md mt-8 rounded-sm'>
+            <button className=' bg-juxt px-4 py-3 w-1/2 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-base text-md mt-8 rounded-sm'>
               Send this form to Joe
             </button>
           </div>
@@ -121,25 +121,25 @@ export default function ContactUs() {
           </div>
         </div>
 
-        <div className='flex flex-col gap-4 text-left w-1/2 bg-juxt py-14 px-16'>
-          <div className='text-3xl md:text-3xl font-medium leading-snug mb-6 mt-8'>
+        <div className='flex flex-col gap-4 text-left w-1/2 bg-zinc-800 py-14 px-16'>
+          <div className='text-3xl text-white md:text-3xl font-medium leading-snug mb-6 mt-8'>
             Secure your{' '}
             <span className='font-bold'> free 30-minute consultation </span>{' '}
             with a seasoned delivery executive, and discover how to bring your
             vision to market, on time and on budget:
           </div>
           <hr className='border-black' />
-          <div className='text-lg md-text3xl font-light leading-snug mb6 mt-8'>
+          <div className='text-lg text-white md-text3xl font-light leading-snug mb6 mt-8'>
             Our Head of Delivery, Joe Littlejohn, has over a decade of senior
             software development and technical advisory roles under his belt,
             successfully shipping large-scale software projects for companies
             ranging from global banks to early-stage startups.
           </div>
-          <div className='text-lg md-text3xl font-light leading-snug mb6 mt-4'>
+          <div className='text-lg text-white md-text3xl font-light leading-snug mb6 mt-4'>
             30-minute call with Joe will allow you to benefit from his vast
             experience:
           </div>
-          <div className='flex flex-col gap-10 mt-6'>
+          <div className='flex flex-col gap-10 mt-6 text-white'>
             <TickBox text='Discover little-known challenges in the development process — and discuss potential suitable solutions' />
             <TickBox text='Formulate initial project requirements, timeline, and budgets ' />
             <TickBox text='Assess your overall fit with JUXT’s methodology and processes ' />
