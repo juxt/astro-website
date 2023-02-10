@@ -53,7 +53,9 @@ const clientLogos = [
 
 export default function ContactUs() {
   const [state, setState] = useState()
-  async function submitContactForm() {
+
+  async function submitContactForm(e) {
+    e.preventDefault()
     const form = document.getElementById('contact-form') as HTMLFormElement
     function extractValue(idx: number): string {
       return (form.elements[idx] as HTMLInputElement).value
@@ -79,6 +81,7 @@ export default function ContactUs() {
     const data = await response.json()
     console.log(data)
   }
+
   return (
     <>
       <div className='bg-zinc-800 p-8 py-8 px-8 lg:py-14 lg:px-16'>
@@ -128,7 +131,11 @@ export default function ContactUs() {
               <div className='text-black text-2xl md:text-3xl font-bold'>
                 Book your free consultation
               </div>
-              <form id='contact-form' className='flex flex-col gap-6'>
+              <form
+                onSubmit={submitContactForm}
+                id='contact-form'
+                className='flex flex-col gap-6'
+              >
                 <div className='flex flex-col md:flex-row gap-6'>
                   <Input label='First Name*' />
                   <Input label='Last Name*' />
@@ -145,10 +152,7 @@ export default function ContactUs() {
                 <div className='text-xs text-center'>
                   By submitting your details you agree to JUXT’s Privacy Policy
                 </div>
-                <button
-                  onClick={submitContactForm}
-                  className='bg-juxt px-4 py-2.5 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
-                >
+                <button className='bg-juxt px-4 py-2.5 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'>
                   Send This Form to Joe
                 </button>
 
