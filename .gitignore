@@ -24,3 +24,5 @@ pnpm-debug.log*
 \#*\#
 auto-save-list
 .\#*
+# Local Netlify folder
+.netlify
