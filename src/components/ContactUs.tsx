@@ -4,10 +4,12 @@ import joe from '../assets/people/joe.jpg'
 import europeanInvestment from '../assets/case-studies/european-investment-bank.jpg'
 
 function Input({
+  name,
   label,
   type = 'text',
   placeholder
 }: {
+  name: string
   label: string
   type?: string
   placeholder?: string
@@ -15,14 +17,14 @@ function Input({
   return (
     <div>
       <label
-        for='first_name'
+        for={name}
         className='block mb-2 text-sm font-medium text-gray-900'
       >
         {label}
       </label>
       <input
         type={type}
-        id='first_name'
+        name={name}
         className='bg-gray-50 border border-juxt text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-2.5'
         placeholder={placeholder}
         required
@@ -52,34 +54,45 @@ const clientLogos = [
 ]
 
 export default function ContactUs() {
-  const [state, setState] = useState()
+  const [isSubmitting, setIsSubmitting] = useState<boolean>()
+
+  const [isSubmitted, setIsSubmitted] = useState<string>()
 
   async function submitContactForm(e) {
     e.preventDefault()
-    const form = document.getElementById('contact-form') as HTMLFormElement
-    function extractValue(idx: number): string {
-      return (form.elements[idx] as HTMLInputElement).value
-    }
-    const response = await fetch(
-      '/.netlify/functions/send-contact-form-to-email',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          first_name: extractValue(0),
-          last_name: extractValue(1),
-          email: extractValue(2),
-          job_title: extractValue(3),
-          company_name: extractValue(4),
-          phone: extractValue(5),
-          country: extractValue(6)
-        })
-      }
-    )
-    const data = await response.json()
-    console.log(data)
+
+    const form = document.getElementById('form') as HTMLFormElement
+    const formData = new FormData(form)
+
+    const object = Object.fromEntries(formData)
+    const json = JSON.stringify(object)
+
+    setIsSubmitting(true)
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: json
+    })
+      .then(async (response) => {
+        if (response.status == 200) {
+          setIsSubmitted(
+            "Thanks for your submission! We'll be in touch shortly."
+          )
+        } else {
+          setIsSubmitted('Something went wrong! Contact us at demo@juxt.pro')
+        }
+
+        setIsSubmitting(false)
+      })
+      .catch((error) => {
+        console.log(error)
+        setIsSubmitted('Something went wrong! Contact us at demo@juxt.pro')
+        setIsSubmitting(false)
+      })
   }
 
   return (
@@ -131,42 +144,70 @@ export default function ContactUs() {
               <div className='text-black text-2xl md:text-3xl font-bold'>
                 Book your free consultation
               </div>
-              <form
-                onSubmit={submitContactForm}
-                id='contact-form'
-                className='flex flex-col gap-6'
-              >
-                <div className='flex flex-col md:flex-row gap-6'>
-                  <Input label='First Name*' />
-                  <Input label='Last Name*' />
+              {isSubmitting ? (
+                <div className='text-black text-2xl md:text-3xl font-bold'>
+                  Submitting your form...
                 </div>
-                <Input label='Work Email*' type='email' />
-                <div className='flex flex-col md:flex-row gap-6'>
-                  <Input label='Job Title*' type='job title' />
-                  <Input label='Company Name*' type='company name' />
-                </div>
-                <div className='flex flex-col md:flex-row gap-6'>
-                  <Input label='Phone' type='phone' />
-                  <Input label='Country*' type='country' />
-                </div>
-                <div className='text-xs text-center'>
-                  By submitting your details you agree to JUXT’s Privacy Policy
-                </div>
-                <button className='bg-juxt px-4 py-2.5 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'>
-                  Send This Form to Joe
-                </button>
-
-                <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
-                  <div className='flex flex-col gap-2 leading-snug'>
-                    <div>What happens after you hit “send”?</div>
-                    <div className='leading-snug '>
-                      Usually within{' '}
-                      <span className='text-juxt'> 48 hours, </span> Joe will be
-                      in touch to secure 30 minutes with you.
+              ) : !isSubmitted ? (
+                <form
+                  onSubmit={submitContactForm}
+                  id='form'
+                  className='flex flex-col gap-6'
+                >
+                  <input
+                    type='hidden'
+                    name='subject'
+                    value='New Submission from Web3Forms'
+                  />
+                  <input
+                    type='hidden'
+                    name='access_key'
+                    value='169fc9ba-e24d-4d97-bd06-4db8f1b94f56'
+                  />
+                  <div className='flex flex-col md:flex-row gap-6'>
+                    <Input label='First Name*' name='first_name' />
+                    <Input label='Last Name*' name='last_name' />
+                  </div>
+                  <Input label='Work Email*' type='email' name='email' />
+                  <div className='flex flex-col md:flex-row gap-6'>
+                    <Input
+                      label='Job Title*'
+                      type='job title'
+                      name='job_title'
+                    />
+                    <Input
+                      label='Company Name*'
+                      type='company name'
+                      name='company_name'
+                    />
+                  </div>
+                  <div className='flex flex-col md:flex-row gap-6'>
+                    <Input label='Phone' type='phone' name='phone' />
+                    <Input label='Country*' type='country' name='country' />
+                  </div>
+                  <div className='text-xs text-center'>
+                    By submitting your details you agree to JUXT’s Privacy
+                    Policy
+                  </div>
+                  <button className='bg-juxt px-4 py-2.5 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'>
+                    Send This Form to Joe
+                  </button>
+                  <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
+                    <div className='flex flex-col gap-2 leading-snug'>
+                      <div>What happens after you hit “send”?</div>
+                      <div className='leading-snug '>
+                        Usually within{' '}
+                        <span className='text-juxt'> 48 hours, </span> Joe will
+                        be in touch to secure 30 minutes with you.
+                      </div>
                     </div>
                   </div>
+                </form>
+              ) : (
+                <div className='px-8 text-center text-2xl text-juxt font-bold'>
+                  {isSubmitted}
                 </div>
-              </form>
+              )}
             </div>
           </div>
         </div>
