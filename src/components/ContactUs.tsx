@@ -16,7 +16,7 @@ function TickBox({ text }: { text: string }) {
       <div className='bg-juxt w-8 h-8 shrink-0 border border-white hover:shadow-lg'>
         <TickIcon className={'fill-white'} />
       </div>
-      <p className='text-md md:text-xl font-medium'>{text}</p>
+      <p className='md:text-xl font-light'>{text}</p>
     </div>
   )
 }
@@ -204,14 +204,14 @@ export default function ContactUs() {
           </div>
         </div>
         <div className='flex flex-col-reverse lg:flex-row bg-zinc-800 gap-16'>
-          <div className='flex flex-col gap-12 text-left lg:w-1/2'>
-            <div className='text-lg text-white md-text3xl font-light leading-snug'>
+          <div className='flex flex-col gap-10 text-left lg:w-1/2'>
+            <div className='text-lg text-white md-text-3xl font-light leading-snug'>
               Our Head of Delivery, Joe Littlejohn, has over a decade of senior
               software development and technical advisory roles under his belt,
               successfully shipping large-scale software projects for companies
               ranging from global banks to early-stage startups.
             </div>
-            <div className='text-lg text-white md-text3xl font-light leading-snug'>
+            <div className='text-lg text-white md-text-3xl font-light leading-snug'>
               30-minute call with Joe will allow you to benefit from his vast
               experience:
             </div>
@@ -230,7 +230,7 @@ export default function ContactUs() {
             </div>
           </div>
         </div>
-        <div className='text-xl text-center text-white leading-snug py-10'>
+        <div className='text-xl text-center text-white leading-snug py-16'>
           For over a decade, JUXT has been a trusted partner of the world’s
           biggest brands:
         </div>
