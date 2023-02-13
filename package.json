@@ -53,6 +53,7 @@
     "nbb": "^0.7.132",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
+    "react-hook-form": "^7.43.1",
     "react-instantsearch-hooks-web": "^6.32.0",
     "rehype-katex": "^6.0.2",
     "remark-gfm": "^3.0.1",

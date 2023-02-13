@@ -4920,6 +4920,11 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-hook-form@^7.43.1:
+  version "7.43.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.43.1.tgz#0d0d7822f3f7fc05ffc41d5f012b49b90fcfa0f0"
+  integrity sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg==
+
 react-instantsearch-hooks-web@^6.32.0:
   version "6.38.0"
   resolved "https://registry.npmjs.org/react-instantsearch-hooks-web/-/react-instantsearch-hooks-web-6.38.0.tgz"
