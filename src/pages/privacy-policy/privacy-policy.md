@@ -1,5 +1,6 @@
 ---
 title: 'Privacy Policy'
+layout: '../../layouts/PolicyTerms.astro'
 ---
 
 # Privacy Policy
@@ -125,7 +126,7 @@ United Kingdom
 
 Cookies are text files placed on your computer to collect standard Internet log information and visitor behaviour information. When you visit our websites, we may collect information from you automatically through cookies or similar technology.
 
-For further information, visit allaboutcookies.org.
+For further information, visit <a href='https://allaboutcookies.org' target='_blank'> allaboutcookies.org. </a>
 
 ## **How do we use cookies?**
 
@@ -170,4 +171,4 @@ United Kingdom
 
 ## **How to contact the appropriate authority**
 
-Should you wish to report a complaint or if you feel that JUXT has not addressed your concern in a satisfactory manner, you may contact the Information Commissioner’s Office. Visit https://ico.org.uk/ for more information.
+Should you wish to report a complaint or if you feel that JUXT has not addressed your concern in a satisfactory manner, you may contact the Information Commissioner’s Office. Visit <a href='https://ico.org.uk/' target='_blank'> ico.org.uk/ </a> for more information.

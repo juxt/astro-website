@@ -1,0 +1,17 @@
+---
+import Layout from './Layout.astro'
+import Section from '../components/Section.astro'
+
+type TermsPolicyProps = { title: string }
+const { title } = Astro.props.content as TermsPolicyProps
+---
+
+<Layout navbar title={title}>
+  <main
+    class='py-12 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert dark:hover:prose-a:text-white'
+  >
+    <Section>
+      <slot />
+    </Section>
+  </main>
+</Layout>

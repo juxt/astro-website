@@ -1,5 +1,6 @@
 ---
 title: 'Terms of Use'
+layout: '../../layouts/PolicyTerms.astro'
 ---
 
 # **Terms of Use**
