@@ -190,7 +190,7 @@ export default function ContactUs() {
                   free 30-minute consultation call{' '}
                 </span>
               </div>
-              <span> with a seasoned delivery executive, and</span>
+              <span> with a seasoned delivery executive, and </span>
               <span>discover how to bring your vision to market, </span>
               <span> on time and on budget.</span>
             </div>
