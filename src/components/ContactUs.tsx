@@ -1,36 +1,13 @@
 import { useState } from 'preact/hooks'
-import { TickIcon } from '../components/Icons'
-import joe from '../assets/people/joe.jpg'
+import { useForm } from 'react-hook-form'
 import europeanInvestment from '../assets/case-studies/european-investment-bank.jpg'
+import joe from '../assets/people/joe.jpg'
+import { TickIcon } from '../components/Icons'
 
-function Input({
-  name,
-  label,
-  type = 'text',
-  placeholder
-}: {
-  name: string
-  label: string
-  type?: string
-  placeholder?: string
-}) {
-  return (
-    <div>
-      <label
-        for={name}
-        className='block mb-2 text-sm font-medium text-gray-900'
-      >
-        {label}
-      </label>
-      <input
-        type={type}
-        name={name}
-        className='bg-gray-50 border border-juxt text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-2.5'
-        placeholder={placeholder}
-        required
-      />
-    </div>
-  )
+const inputProps = {
+  type: 'text',
+  className:
+    'flex-grow-1 bg-gray-50 border border-juxt text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-2.5'
 }
 
 function TickBox({ text }: { text: string }) {
@@ -53,56 +30,158 @@ const clientLogos = [
   'bbc.svg'
 ]
 
-export default function ContactUs() {
-  const [isSubmitting, setIsSubmitting] = useState<boolean>()
+function Form() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitSuccessful }
+  } = useForm()
 
-  const [isSubmitted, setIsSubmitted] = useState<string>()
+  const [isSubmitError, setIsSubmitError] = useState<boolean>(false)
 
-  async function submitContactForm(e) {
-    e.preventDefault()
+  function submitContactForm(data) {
+    const json = JSON.stringify(data)
 
-    const form = document.getElementById('form') as HTMLFormElement
-    const formData = new FormData(form)
-
-    const object = Object.fromEntries(formData)
-    const json = JSON.stringify(object)
-
-    setIsSubmitting(true)
-
-    fetch('https://api.web3forms.com/submit', {
+    return fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
       body: json
+    }).catch((error) => {
+      console.error(error)
+      setIsSubmitError(true)
     })
-      .then(async (response) => {
-        if (response.status == 200) {
-          setIsSubmitted(
-            "Thanks for your submission! We'll be in touch shortly."
-          )
-        } else {
-          setIsSubmitted('Something went wrong! Contact us at demo@juxt.pro')
-        }
-
-        setIsSubmitting(false)
-      })
-      .catch((error) => {
-        console.log(error)
-        setIsSubmitted('Something went wrong! Contact us at demo@juxt.pro')
-        setIsSubmitting(false)
-      })
   }
 
+  const hasErrors = Object.keys(errors).length > 0
+
+  const isSubmittingComponent = (
+    <div className='md:px-8 text-black text-xl md:text-2xl'>
+      Submitting your form...
+    </div>
+  )
+
+  const isSubmitSuccessfulComponent = (
+    <div className='md:px-8 text-center text-xl md:text-2xl text-juxt'>
+      Thanks for your submission! We'll be in touch shortly.
+    </div>
+  )
+
+  const isSubmitErrorComponent = (
+    <div className='md:px-8 text-xl md:text-2xl text-red-600'>
+      Mmm.. It seems there's a problem.. Anyways, you can directly reach out to
+      Joe at <strong>joe@juxt.pro </strong>
+    </div>
+  )
+
+  return (
+    <>
+      {isSubmitting ? (
+        isSubmittingComponent
+      ) : isSubmitError ? (
+        isSubmitErrorComponent
+      ) : isSubmitSuccessful ? (
+        isSubmitSuccessfulComponent
+      ) : (
+        <form
+          onSubmit={handleSubmit(submitContactForm)}
+          id='form'
+          className='flex flex-col gap-4'
+        >
+          <input
+            type='hidden'
+            {...register('subject')}
+            value='New Submission from Better Call Joe'
+          />
+          <input
+            type='hidden'
+            {...register('access_key')}
+            value='169fc9ba-e24d-4d97-bd06-4db8f1b94f56'
+          />
+          <div className='flex flex-col md:flex-row gap-4'>
+            <input
+              {...inputProps}
+              {...register('firstName', { required: true })}
+              placeholder='First Name'
+            />
+            <input
+              {...inputProps}
+              {...register('lastName', { required: true })}
+              placeholder='Last Name'
+            />
+          </div>
+          <input
+            {...inputProps}
+            {...register('email', { required: true })}
+            placeholder='Work Email'
+            type='email'
+          />
+          <div className='flex flex-col md:flex-row gap-4'>
+            <input
+              {...inputProps}
+              {...register('jobTitle', { required: true })}
+              placeholder='Job Title'
+            />
+            <input
+              {...inputProps}
+              {...register('companyName', { required: true })}
+              placeholder='Company Name'
+            />
+          </div>
+          <div className='flex flex-col md:flex-row gap-4'>
+            <input
+              {...inputProps}
+              {...register('phone')}
+              placeholder='Phone (Optional)'
+            />
+            <input
+              {...inputProps}
+              {...register('country', { required: true })}
+              placeholder='Country'
+            />
+          </div>
+          <div className='text-xs'>
+            By submitting your details you agree to JUXT’s Privacy Policy
+          </div>
+
+          {hasErrors && (
+            <div className='text-red-500'>
+              All fields but 'Phone' are required
+            </div>
+          )}
+
+          <button
+            type='submit'
+            className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
+          >
+            Send This Form to Joe
+          </button>
+          <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
+            <div className='flex flex-col gap-2 leading-snug'>
+              <div>What happens after you hit “send”?</div>
+              <div className='leading-snug '>
+                Usually within <span className='text-juxt'> 48 hours, </span>{' '}
+                Joe will be in touch to secure 30 minutes with you.
+              </div>
+            </div>
+          </div>
+        </form>
+      )}
+    </>
+  )
+}
+
+export default function ContactUs() {
   return (
     <>
       <div className='bg-zinc-800 p-8 py-8 px-8 lg:py-14 lg:px-16'>
         <a href='/' className='block pb-8'>
           <img width='100' src='/images/logo-on-dark.svg' alt='Juxt Logo' />
         </a>
-        <div className='flex flex-col lg:flex-row gap-8'>
-          <div className='flex flex-col lg:w-2/3 gap-4 mb-6'>
+        <div className='flex flex-col lg:flex-row gap-8 pb-14'>
+          <div className='flex flex-col lg:w-2/3 gap-4'>
             <div className='text-4xl md:text-6xl font-bold leading-snug py-8 text-left text-white uppercase'>
               Better Call Joe
             </div>
@@ -114,15 +193,15 @@ export default function ContactUs() {
             </div>
           </div>
 
-          <div className='flex items-center lg:items-stretch flex-col gap-4 mb-6'>
+          <div className='flex items-center lg:items-stretch flex-col gap-4'>
             <img src={joe.src} alt='Joe' width='250' />
             <div className='text-xl text-left font-light text-juxt'>
               Joe Littlejohn, <br /> JUXT Head of Delivery
             </div>
           </div>
         </div>
-        <div className='flex flex-col lg:flex-row bg-zinc-800 gap-16'>
-          <div className='flex flex-col gap-12 justify-center text-left lg:w-1/2'>
+        <div className='flex flex-col-reverse lg:flex-row bg-zinc-800 gap-16'>
+          <div className='flex flex-col gap-12 text-left lg:w-1/2'>
             <div className='text-lg text-white md-text3xl font-light leading-snug'>
               Our Head of Delivery, Joe Littlejohn, has over a decade of senior
               software development and technical advisory roles under his belt,
@@ -135,8 +214,8 @@ export default function ContactUs() {
             </div>
             <div className='flex flex-col gap-10 text-white'>
               <TickBox text='Discover little-known challenges in the development process — and discuss potential suitable solutions' />
-              <TickBox text='Formulate initial project requirements, timeline, and budgets ' />
-              <TickBox text='Assess your overall fit with JUXT’s methodology and processes ' />
+              <TickBox text='Formulate initial project requirements, timeline, and budgets' />
+              <TickBox text='Assess your overall fit with JUXT’s methodology and processes' />
             </div>
           </div>
           <div className='flex flex-col lg:w-1/2 bg-white py-6 px-2 md:px-0'>
@@ -144,70 +223,7 @@ export default function ContactUs() {
               <div className='text-black text-2xl md:text-3xl font-bold'>
                 Book your free consultation
               </div>
-              {isSubmitting ? (
-                <div className='text-black text-2xl md:text-3xl font-bold'>
-                  Submitting your form...
-                </div>
-              ) : !isSubmitted ? (
-                <form
-                  onSubmit={submitContactForm}
-                  id='form'
-                  className='flex flex-col gap-6'
-                >
-                  <input
-                    type='hidden'
-                    name='subject'
-                    value='New Submission from Web3Forms'
-                  />
-                  <input
-                    type='hidden'
-                    name='access_key'
-                    value='169fc9ba-e24d-4d97-bd06-4db8f1b94f56'
-                  />
-                  <div className='flex flex-col md:flex-row gap-6'>
-                    <Input label='First Name*' name='first_name' />
-                    <Input label='Last Name*' name='last_name' />
-                  </div>
-                  <Input label='Work Email*' type='email' name='email' />
-                  <div className='flex flex-col md:flex-row gap-6'>
-                    <Input
-                      label='Job Title*'
-                      type='job title'
-                      name='job_title'
-                    />
-                    <Input
-                      label='Company Name*'
-                      type='company name'
-                      name='company_name'
-                    />
-                  </div>
-                  <div className='flex flex-col md:flex-row gap-6'>
-                    <Input label='Phone' type='phone' name='phone' />
-                    <Input label='Country*' type='country' name='country' />
-                  </div>
-                  <div className='text-xs text-center'>
-                    By submitting your details you agree to JUXT’s Privacy
-                    Policy
-                  </div>
-                  <button className='bg-juxt px-4 py-2.5 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'>
-                    Send This Form to Joe
-                  </button>
-                  <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
-                    <div className='flex flex-col gap-2 leading-snug'>
-                      <div>What happens after you hit “send”?</div>
-                      <div className='leading-snug '>
-                        Usually within{' '}
-                        <span className='text-juxt'> 48 hours, </span> Joe will
-                        be in touch to secure 30 minutes with you.
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              ) : (
-                <div className='px-8 text-center text-2xl text-juxt font-bold'>
-                  {isSubmitted}
-                </div>
-              )}
+              <Form />
             </div>
           </div>
         </div>
