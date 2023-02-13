@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks'
 import { useForm } from 'react-hook-form'
-import europeanInvestment from '../assets/case-studies/european-investment-bank.jpg'
+import morganRoss from '../assets/site/morgan-ross-onthemarket.jpeg'
 import joe from '../assets/people/joe.jpg'
 import { TickIcon } from '../components/Icons'
 
@@ -160,11 +160,8 @@ function Form() {
           </button>
           <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
             <div className='flex flex-col gap-2 leading-snug'>
-              <div>What happens after you hit “send”?</div>
-              <div className='leading-snug '>
-                Usually within <span className='text-juxt'> 48 hours, </span>{' '}
-                Joe will be in touch to secure 30 minutes with you.
-              </div>
+              What happens after you hit “send”? Usually, Joe will be in touch
+              with you to secure a call within 48 hours.
             </div>
           </div>
         </form>
@@ -175,27 +172,33 @@ function Form() {
 
 export default function ContactUs() {
   return (
-    <>
-      <div className='bg-zinc-800 p-8 py-8 px-8 lg:py-14 lg:px-16'>
+    <div className='min-h-screen flex justify-center bg-zinc-800'>
+      <div className='p-8 py-8 px-8 lg:py-14 lg:px-16 max-w-7xl'>
         <a href='/' className='block pb-8'>
           <img width='100' src='/images/logo-on-dark.svg' alt='Juxt Logo' />
         </a>
-        <div className='flex flex-col lg:flex-row gap-8 pb-14'>
-          <div className='flex flex-col lg:w-2/3 gap-4'>
-            <div className='text-4xl md:text-6xl font-bold leading-snug py-8 text-left text-white uppercase'>
+        <div className='flex flex-col lg:justify-between lg:flex-row gap-8 pb-14'>
+          <div className='flex flex-col lg:justify-between lg:gap-0 lg:w-2/3 gap-8'>
+            <div className='text-3xl md:text-4xl font-bold leading-snug text-left text-white uppercase'>
               Better Call Joe
             </div>
-            <div className='text-2xl md:text-3xl text-white leading-snug'>
-              Secure your
-              <span className='text-juxt'> free 30-minute </span>
-              consultation with a seasoned delivery executive, and discover how
-              to bring your vision to market, on time and on budget.
+            <div className='text-medium md:text-2xl md:flex md:flex-col text-white leading-snug'>
+              <div>
+                Secure your
+                <span className='text-juxt'>
+                  {' '}
+                  free 30-minute consultation call{' '}
+                </span>
+              </div>
+              <span> with a seasoned delivery executive, and</span>
+              <span>discover how to bring your vision to market, </span>
+              <span> on time and on budget.</span>
             </div>
           </div>
 
           <div className='flex items-center lg:items-stretch flex-col gap-4'>
-            <img src={joe.src} alt='Joe' width='250' />
-            <div className='text-xl text-left font-light text-juxt'>
+            <img src={joe.src} alt='Joe' width='150' />
+            <div className='text-xs text-left font-light text-juxt'>
               Joe Littlejohn, <br /> JUXT Head of Delivery
             </div>
           </div>
@@ -227,7 +230,7 @@ export default function ContactUs() {
             </div>
           </div>
         </div>
-        <div className='text-2xl text-center text-white leading-snug py-10'>
+        <div className='text-xl text-center text-white leading-snug py-10'>
           For over a decade, JUXT has been a trusted partner of the world’s
           biggest brands:
         </div>
@@ -242,18 +245,18 @@ export default function ContactUs() {
             ))}
           </div>
           <div className='flex flex-col md:flex-row gap-6 md:items-center p-6 bg-juxt bg-opacity-90 shadow-xl lg:w-1/2'>
-            <img src={europeanInvestment.src} alt='bank' width='200' />
+            <img src={morganRoss.src} alt='testimonial' width='150' />
             <div className='font-extralight'>
-              "The JUXT team are tremendously technically capable - delivering
-              elegant solutions to complex problems" <br />
+              "JUXT led the development team through this period of incredible
+              achievements" <br />
               <br />
-              <span className='uppercase'>
-                Managing Director, T1 Investment Bank
-              </span>
+              Morgan Ross <br />
+              Product & Technology Director <br />
+              OnTheMarket
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
