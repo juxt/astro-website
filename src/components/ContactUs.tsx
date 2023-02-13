@@ -234,7 +234,7 @@ export default function ContactUs() {
           For over a decade, JUXT has been a trusted partner of the world’s
           biggest brands:
         </div>
-        <div className='flex flex-col-reverse lg:flex-row py-6 gap-6'>
+        <div className='flex flex-col lg:flex-row py-6 gap-6'>
           <div className='flex flex-wrap justify-center lg:w-1/2'>
             {clientLogos.map((logo) => (
               <img
