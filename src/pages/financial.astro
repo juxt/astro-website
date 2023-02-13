@@ -44,7 +44,7 @@ const financialPicture = await getImage({
         backgroundImage: `url(${financialPicture})`
       }}
     />
-    <Section className='bg-zinc-100 py-28 text-white'>
+    <Section className='bg-zinc-100 py-12 text-white'>
       <div class='text-black flex flex-col gap-6'>
         {financialServicesParsed.map((financial, idx) => (
           <a href={`#${idx}`} class='flex gap-3 items-center'>
