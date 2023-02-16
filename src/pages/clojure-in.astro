@@ -1,9 +1,11 @@
 ---
 import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import Banner from '../components/Banner.astro'
+import { BlogCard } from '../components/BlogCard'
 import Section from '../components/Section.astro'
-import { Blog } from '../components/types'
+import { Blog, Person } from '../components/types'
 import Layout from '../layouts/Layout.astro'
 import { formatDate } from '../utils'
 
@@ -65,34 +67,130 @@ const sortedBlogs = seasonOrder
   .filter((blogs) => blogs.season)
 
 const clojureInPicture = await getImage({
-  src: import('../assets/site/Clojure-logo-colours-01.png'),
+  src: import('../assets/site/hero-image-clojurein.jpeg'),
   width: 1700,
   quality: 90,
   alt: 'clojure in logo'
 }).then((img) => img.src)
+
+type Podcast = { title: string; href: string }
+
+const podcasts: Podcast[] = [
+  {
+    title: 'S4E2 - Strange Loop Edition: A Chat with Uncle Bob',
+    href: 'https://pnc.st/s/juxt-cast/ecd73f05/strange-loop-edition-a-chat-with-uncle-bob'
+  },
+  {
+    title: 'S3E3 - User Empowerment',
+    href: 'https://pnc.st/s/juxt-cast/a775f47f/user-empowerment-s3e2'
+  },
+  {
+    title: 'S2E16 - re:Clojure interview 16 - Eric Normand',
+    href: 'https://pnc.st/s/juxt-cast/8caf4b5d/re-clojure-interviews-16-eric-normand'
+  },
+  {
+    title: 'S1E8 - ClojureTre, XTDB, and XT20 News',
+    href: 'https://pnc.st/s/juxt-cast/3a7bd843fff4467d/episode-8-clojuretre-crux-and-xt20-news'
+  }
+]
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+  '../pages/blog/{*.mdx,*.md}'
+)
+
+const filteredRecommendedBlogs = blogs.filter(
+  (blog) => blog.frontmatter.category === 'clojure'
+)
+
+const recommendededBlogs = filteredRecommendedBlogs
+  .sort((a, b) => {
+    return (
+      new Date(b.frontmatter.publishedDate).getTime() -
+      new Date(a.frontmatter.publishedDate).getTime()
+    )
+  })
+  .slice(0, 4)
+
+const finalResources = await Promise.all(
+  recommendededBlogs.map((page) => {
+    const author = page.frontmatter.author
+    const person = people.find(
+      (person) => person.frontmatter.code === page.frontmatter.author
+    )
+    if (!person)
+      throw new Error(
+        `No person found for author: '${author}' in '${page.url}'`
+      )
+    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+    const parsedImage = person.frontmatter.image.split('.').slice(0, -1)
+
+    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+
+    const authorImage = getImage({
+      src: import(`../assets/people/${parsedImage}.jpg`),
+      width: 200,
+      quality: 80,
+      alt: 'person'
+    })
+
+    const postImage = getImage({
+      src: import(`../assets/blog/${parsedPostImage}.jpg`),
+      width: 450,
+      quality: 100,
+      alt: 'post'
+    })
+
+    return Promise.all([authorImage, postImage]).then(
+      ([authorImage, postImage]) => {
+        return {
+          ...page.frontmatter,
+          slug: page.url.split('/').pop(),
+          href: permalink,
+          heroImage: postImage.src,
+          person: {
+            ...person.frontmatter,
+            image: authorImage.src
+          }
+        }
+      }
+    )
+  })
+)
 ---
 
 <Layout navbar title='Clojure In'>
-  <main>
+  <main class='bg-gradient-to-t from-zinc-700 to-zinc-900'>
     <Banner
       text='Clojure In'
-      textColor='dark:text-white text-black'
+      textColor='text-white'
       style={{
         backgroundImage: `url(${clojureInPicture})`
       }}
     />
 
-    <Section className='bg-orange-300 dark:bg-sky-900 py-12'>
-      <div class='flex flex-col gap-10 dark:text-white text-black'>
-        <h1 class='text-4xl font-medium'>
+    <Section className='py-12'>
+      <div class='flex flex-col gap-10 text-white w-2/3'>
+        <h1 class='text-4xl font-extralight'>
           Case-studies on where Clojure is being used across Europe
         </h1>
-        <h2 class='text-2xl font-light'>
-          "Clojure In" is a collection of stories about companies who have
-          adopted Clojure. In these articles, we interview key individuals
-          involved and chat about the challenges, issues, benefits and
-          trade-offs in their decision to go with Clojure.
-        </h2>
+        <div>
+          <div class='text-xl font-extralight'>
+            "Clojure In" is a collection of stories about companies who have
+            adopted Clojure. In these articles we interview key individuals
+            involved and chat about the challenges, issues, benefits and
+            trade-offs in their decision to go with Clojure. <br />
+            <br />
+            Note that this is a subset of the wider Clojure adoption stories that
+            are out there. Please see
+            <a href='https://clojure.org/'>clojure.org</a> for an extensive list
+            of companies using Clojure and also a list that Cognitect maintain. We
+            also have a list of JUXT delivered case-studies.
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -101,22 +199,18 @@ const clojureInPicture = await getImage({
         {sortedBlogs.map(({ season, blogs }) => {
           return (
             <div class='flex flex-col items-center'>
-              <h3 class='text-4xl font-semibold uppercase dark:text-white text-black text-center pb-16'>
-                {season}
-              </h3>
-
               <div class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
                 {blogs.map((blog) => {
                   return (
                     <a
                       href={`/blog/${blog.href}`}
-                      class='h-full group cursor-pointer justify-between flex flex-col w-96 mx-auto bg-lime-500 dark:bg-sky-900 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
+                      class='h-full group cursor-pointer justify-between flex flex-col w-96 mx-auto min-h-[24rem] gap-4 py-10'
                     >
-                      <div>
-                        <img alt='blog' src={blog.heroImage} />
-                        <h3 class='p-4 text-2xl font-semibold dark:text-white text-sky-900'>
-                          {blog.title}
-                        </h3>
+                      <div class='text-white flex flex-col justify-between h-24 '>
+                        <h3 class='text-2xl font-semibold'>{blog.title}</h3>
+                        <h5 class='text-lg font-extralight'>
+                          {blog.description}
+                        </h5>
                       </div>
                       <div class='p-4'>
                         <p class='text-lg font-light dark:text-white text-sky-900'>
@@ -130,6 +224,45 @@ const clojureInPicture = await getImage({
             </div>
           )
         })}
+      </div>
+    </Section>
+    <Section>
+      <h2 class='font-medium text-4xl text-white py-8'>
+        Additional Resources:
+      </h2>
+      <div class='flex flex-col gap-10'>
+        <h5 class='font-extralight text-lg text-white'>Podcast</h5>
+        <div class='flex flex-wrap justify-between gap-2'>
+          {podcasts.map((podcast) => {
+            return (
+              <div class='flex flex-col w-60 gap-3'>
+                <div class='text-sm'> {podcast.title}</div>
+                <Image
+                  alt='image'
+                  width={600}
+                  quality={80}
+                  href={podcast.href}
+                  class='w-56 aspect-square object-cover'
+                  src={podcastImage}
+                />
+              </div>
+            )
+          })}
+        </div>
+        <h5 class='font-extralight text-lg text-white'>Blog Posts</h5>
+        <div
+          class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'
+        >
+          {finalResources.map((blog) => {
+            return (
+              <div>
+                jsjbds
+                <div>{blog.title}</div>
+                <img src={blog.person.image} alt='' />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </Section>
   </main>
