@@ -89,30 +89,27 @@ Clojure helps us avoiding making premature abstractions that become cemented in.
 
 **Derek:** [shadow cljs](https://github.com/thheller/shadow-cljs) allows us to use NPM directly, so we can move quickly through the front end.
 
-We still use [Leiningen](https://leiningen.org/) for the nuts and bolts of project stuff, and (clj-Kondo)[https://github.com/clj-kondo/clj-kondo] for code cleanliness. We did rely on [Integrant](https://github.com/weavejester/integrant) for a long  time. We've replaced it with our own framework that allows us to make mutable changes, which is quite interesting. We may open source this in the future.
+We still use [Leiningen](https://leiningen.org/) for the nuts and bolts of project stuff, and (clj-Kondo)[https://github.com/clj-kondo/clj-kondo] for code cleanliness. We did rely on [Integrant](https://github.com/weavejester/integrant) for a long time. We've replaced it with our own framework that allows us to make mutable changes, which is quite interesting, that we may open source in the future.
 
-We've just opened sourced [Slipway](https://github.com/factorhouse/slipway) which is a wrap-around for Jetty that allows you to use Jetty 9,10 and 11.
+We've just open-sourced [Slipway](https://github.com/factorhouse/slipway) which is a wrap-around for Jetty that allows you to use Jetty 9,10 and 11.
 
-[re-frame](https://github.com/day8/re-frame) is the biggest state management library that we use in the front end. [Instaparse](https://github.com/Engelberg/instaparse) is fundamental to our product because we've implemented [jq](https://stedolan.github.io/jq/) in Clojure and Kpow uses it to filter data coming off kafka topics. Instaparse allows you to implement one language in another language which is phenomenal.
+[re-frame](https://github.com/day8/re-frame) is the biggest state management library that we use in the front end. [Instaparse](https://github.com/Engelberg/instaparse) is fundamental to our product because we've implemented [jq](https://stedolan.github.io/jq/) in Clojure and Kpow uses it to filter data coming off Kafka topics. Instaparse allows you to implement one language in another language which is phenomenal.
 
 Besides the libraries mentioned, we've don't much need beyond Clojure's core.
 
 **Jon: It sounds like you've deliberately kept the footprint small?**
 
-**Derek:** I used to be a contributor to Netty back in the day and we had a 0 dependencies mantra, which is really hard with less experienced developers. We have no dependencies that add any ideas to the functional way of doing things in Clojure. We don’t use Fungal Cats or anything like that. Kpow is simply Java based libraries with Interop because it's too hard to stay relevant. You're relying on someone to maintain their library, which moves along at their own pace creating dependencies. Java Interop is idiomatic Clojure. It's absolutely fine. But then that's my familiarity with the JVM.
+**Derek:** I used to be a contributor to Netty back in the day and we had a zero dependencies mantra, which is really hard with less experienced developers. Kpow tends to use Java based libraries with Clojure/Java interop.
 
-**Jon: it's more beautiful to write Java in Clojure than Java in Java.**
-
-**Derek:** Absolutely agree. We really value those things like Condo. A large part of it is reducing those dependencies because we run NVD scans on everything and if our build breaks if we've got any CVE's that are unmanaged we manage to that degree. When you push a commit, it checks out all of your dependencies from the pom and it scans for CVE's so that you can track them. We get audited and PEN tested regularly this allows us to publish a security report stating we have no known CVE’s at this point in time.
+We run NVD (National Vulnerability Database) scans on everything and our build breaks if we've got any CVE's (Common Vulnerabilities and Exposures). We get audited and pen-tested regularly, so this approach allows us to publish a security report stating we have no known CVEss at this point in time.
 
 **Jon: What's your view on the state of things currently with Clojure?**
 
-**Derek:** It's really interesting to me that there always seems to be this expectation within the Clojure Developer Community that more things are going to be given to them constantly.
-I think there’s a lot of pressure on the team at Cognitec, they do a great job of stewarding which is beyond the capabilities of most people.
+**Derek:** It's really interesting to me that there seems to be this expectation within the Clojure Developer Community that more things are going to be given to them constantly. There’s a lot of pressure on the Core Clojure team. They do a great job of stewarding the language which is beyond the capabilities of most people.
 
-We don’t have a lot of gaps at the moment in terms of what we need. What I would like to understand is more the road map for how Clojure anticipates keeping up with the changes in JVM.
+We don’t have a lot of gaps at the moment in terms of what we need. What I would like to understand is more the road-map for how Clojure anticipates keeping up with the changes in the JVM.
 
-But in terms of the state of Clojure I believe it gives us the tooling we need to deliver think
+But in terms of the state of Clojure, I believe it gives us the tooling we need to deliver.
 
 **Jon: Is there anything that you feel we haven’t covered, anything you’d like to add?**
 
