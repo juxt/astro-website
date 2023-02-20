@@ -15,68 +15,67 @@ import { Image } from '@astrojs/image/components'
 
 **Jon: Could you tell us who you are and what Kpow is?**
 
-**Derek:** So I'm Derek and I'm the CEO and one of the Co-Founders of [Factor House](https://factorhouse.io/). We’re an independent software house based in Melbourne, Australia.
+**Derek:** So I'm Derek and I'm the CEO and co-founder of [Factor House](https://factorhouse.io/). We’re an independent software house based in Melbourne, Australia.
 
-[Kpow](https://kpow.io/) is a toolkit for engineers using [Apache Kafka](https://kafka.apache.org/). It provides a way for engineers to control, monitor, to search for data in Kafka. Searching is the number one use-case.
+[Kpow](https://kpow.io/) is a toolkit for engineers using [Apache Kafka](https://kafka.apache.org/). It provides a way for engineers to control, monitor, and to search for data in Kafka. Searching is the number one use-case.
 
-We have a range of users, from teams starting with Kafka and looking for a control-console to make sense of things, and then we've got experienced teams developing complex platforms in the streaming compute space. They use the full range of what Kpow offers including live monitoring of Kafka streams applications, topology and metrics visualizations. We also have platform teams, running fleets of Kafka clusters who want to access and change configuration.
+We have a range of users, from teams starting with Kafka and looking for a control-console to make sense of things, and then we've got experienced teams developing complex platforms in the streaming compute space. They use the full range of what Kpow offers, including live monitoring of [Kafka Streams](https://docs.confluent.io/platform/current/streams/index.html) applications, topology and metrics visualizations. We also have platform teams running fleets of Kafka clusters who want to access and change configurations.
 
-We provide an enterprise grade web application, with security integrations such as SAML, LDAP, OAuth and KeyCloak. It's not a Sass application, rather something that you install on your network in close proximity to your Kafka cluster with zero dependencies. It's a single docker container and uses Kafka as a data store. Since we're not a SaaS product we don't have any access to user data whatsoever.
+We provide an enterprise grade web application, with security integrations such as SAML, LDAP, OAuth and [Keycloak](https://www.keycloak.org/). It's not a Sass application, rather something that you install on your network in close proximity to your Kafka cluster with zero dependencies. It's a single docker container and uses Kafka as its data store. Since we're not a SaaS product we don't have any access to user data whatsoever.
 
-Basically Kpow is like a toolbox. Apache Kafka is phenomenal, probably the number one project in the Apache Software Foundation by contributions and activity.
+Kpow is like a toolbox. Apache Kafka is phenomenal, probably the number one project in the Apache Software Foundation by contributions and activity.
 
 **Jon: How many users?**
 
-**Derek:** We've got 10,000 active users spread over 100 countries. We're deployed in every way you can imagine, in every cloud, inside of Kubernetes, Fargate, and in ECS. We're running in a box inside of a cupboard somewhere, where they're not using Docker but using the Java 8 jar.
+**Derek:** We've got 10,000 active users spread over 100 countries. We're deployed in every way you can imagine, in every cloud, inside of Kubernetes, Fargate, and in ECS. We're running in a box inside of a cupboard somewhere, where they're not using Docker but using the Java 8 jar!
 
 ## The team
 
 **Jon: Could you give us a bit of an overview of your developer team?**
 
-**Derek:** So the actual hands-on developers are myself and Tom, the whole company is four people, Tom and I built the entire system ourselves.
+**Derek:** So the actual hands-on developers are myself and Tom. The whole company is four people. Tom and I built the entire system ourselves.
 
-I'm the ‘Thorny Old JVM nerd’ and Tom is 10 years younger, where his natural habitat is the browser, and so we compliment each other. Tom leads the front end and he knows where to go. He pushed us into Shadow CLJS and he's extremely talented.
+I'm the ‘Thorny Old JVM nerd’ and Tom is 10 years younger where his natural habitat is the browser, and so we compliment each other well.
 
-We prefer to work in small teams, where our philosophy is active, ubiquitous conversation about the things that we're building, and ownership.
+We prefer to work in small teams, where our philosophy is active, ubiquitous conversation about the things that we're building.
 
-I'm a firm believer that that good software comes from small teams who are empowered. I am a big fan of Dijkstra and the faxes and memos he used to post. One was ["why is software so expensive?"]
-(https://www.cs.utexas.edu/users/EWD/transcriptions/EWD06xx/EWD648.html) and it has two or three of my favorite stories in it.
+I'm a firm believer that that good software comes from small teams who are empowered. I am a big fan of Dijkstra and the faxes and memos he used to post. One was ["why is software so expensive?"](https://www.cs.utexas.edu/users/EWD/transcriptions/EWD06xx/EWD648.html) and it has two or three of my favorite stories in it.
 
-One time he's there solving a problem to do with memory pages and he's just in a room talking to his colleague. Over a period of months they slowly form this ubiquitous language, by talking and mulling over ideas.
+One time he's there solving a problem to do with memory pages and he's just in a room talking to his colleague. Over a period of months they slowly form this ubiquitous language, by talking every day and mulling over ideas.
 
-Dijkstra says that if someone walked into the room, after six months and ask what have you been doing? It wouldn’t look like they’d done anything! But they have been solving the problem and building up a language.
+Dijkstra says that if someone walked into the room, after six months and asked what have you been doing? It wouldn’t look like they’d be doing anything! But they have been solving the problem and building up a language.
 
-At the point where Kpow now is at, four years in, we've become experts in this problem space. I knew the least about it when we started and back then we were most capable of making the greatest mistakes.
+At the point where Kpow now is at, four years in, we've become experts in the problem space. I knew the least about it when we started and back then we were capable of making the greatest mistakes.
 
-And it's not that we just sat around talking for six months, we started shipping very, quickly.
+To be fair, we didn't sit around talking for six months, we started shipping very quickly!
 
 ## Background
 
 **Jon: How did you get into Clojure, what's your background?**
 
-**Derek:** I've been programming since I was six, starting on Spectrum 48K.
+**Derek:** I've been programming since I was six, starting on the Spectrum 48K.
 
-I first bulletin boards in New Zealand and then I came out of University about 2000, initially learning Turbo Pascal, but switched to Java, following the one true path of Object Oriented design.
+I first ran bulletin boards in New Zealand and then I came out of University about 2000, initially learning Turbo Pascal, but switched to Java, following the one true path of Object Oriented design.
 
-I had this professor, he was a Canadian Olympic speed skater, and he was like, ‘look, we're doing all of this but I've just gotta tell you, when you go out there and get a job, the only thing you're gonna do is work with lists of data and maps of data and you're going to be moving it around from one place to another and everything else is just rubbish’. And he was absolutely correct.
+I had this professor, he was a Canadian Olympic speed skater, and he was like, ‘look, we're doing all of this but I've just gotta tell you, when you go out there and get a job, the only thing you'll do is work with lists and maps of data and you'll be moving it around from one place to another and everything else is just rubbish’. And he was absolutely correct.
 
 I've operated in the JVM space forever, which helps me with Clojure.
 
 **Jon: And Clojure?:**
 
-**Derek:** We had a mutual colleague, who after he chatted to you, chatted to me, about Clojure. I was like ‘I’m not sure that’s a great idea’. I didn’t know anything about it and I was comfortable, being in the Enterprise space in London where everything was Java and every job was Java.
+**Derek:** You and I had a mutual colleague, who after he chatted to you, chatted to me, about Clojure. I was like "I’m not sure that’s a great idea!". I didn’t know anything about it and I was comfortable, being in the Enterprisey space in London where everything was Java and every job was Java.
 
-My wife and I moved to Melbourne which is a small market and I decided to work with Clojure and distributed systems, building a suite of systems processing email for a company, over the course of three to four years. I built about 13/14 systems, all in Clojure from scratch, also using Casandra, Storm, and Kafka.
+My wife and I moved to Melbourne which is a small market and I decided to work with Clojure and distributed systems, building a suite of systems processing email for a company, over the course of three to four years. I built about 13/14 systems, all in Clojure from scratch, also using Cassandra, Storm, and Kafka.
 
 We went through several iterations of writing really bad Clojure, giving me time to learn, and to relearn what I'd done previously in my career.
 
-In 2019 I decided to stop working on consulting and to build the product, we could see from our clients and customers that they wanted.
+In 2019 I decided to stop working on consulting and to build the product, that we could see our clients and customers wanted.
 
-Kpow is all written in Clojure, both front and back end. We have a series of systems that run in AWS Lambdas that provision licenses, that are all written in Clojure too.
+Kpow is all written in Clojure, both the front and back end. We have a series of systems that run in AWS Lambdas that provision licenses, that are all written in Clojure too.
 
 **Jon: Cool. What value has Clojure brought?**
 
-**Derek:** I think Rich (Hickey) got it right when he speaks about the difference between information systems and abstract systems.
+**Derek:** I think Rich (Hickey) [got it right](https://www.youtube.com/watch?v=ROor6_NGIWU) when he speaks about the difference between information systems and abstract systems.
 
 This was something I didn't understand at all as a young developer. The tools we learned, in the Java way of doing things, are the tools for building abstract systems, whereas all I've ever built are information systems.
 
@@ -84,15 +83,15 @@ Jetty is a great example of an abstract system that solves the HTTP server probl
 
 The problem is that as a young developer, you can look at these things and think: "that's how I've got to build my trading platform. It's got to have concretions all the way through it because that's all I see everywhere". And this is also naively what you're told to do. We pile on abstractions on top of abstractions.
 
-Clojure helps us avoiding making premature abstractions that become cemented in. It is most powerful way I have of building information systems that are commercially viable because they're on the JVM. We can leverage all of the abstract systems and not mimic them. We've retained this flexibility all the way through our delivery which is easier to do because we're a small team who've been working together for three years now.
+Clojure helps us avoiding making premature abstractions that become cemented in. It is most powerful way I have of building information systems that are commercially viable because they're on top of the JVM. We can leverage all of the abstract systems and not mimic them. We've retained this flexibility all the way through our delivery.
 
 **Jon: Are there any sort of tools and libraries that you would give a shout out to?**
 
-**Derek:** [https://github.com/thheller/shadow-cljs](shadow cljs) allows us to use NPM directly, so we can move quickly through the front end.
+**Derek:** [shadow cljs](https://github.com/thheller/shadow-cljs) allows us to use NPM directly, so we can move quickly through the front end.
 
-We still use [Leiningen](https://leiningen.org/) for the nuts and bolts of project stuff, and (https://github.com/clj-kondo/clj-kondo)[clj-Kondo] for code cleanliness. We did rely on [https://github.com/weavejester/integrant](Integrant) for a long  time. We've replaced it with our own framework that allows us to make mutable changes, which is quite interesting. We may open source this in the future.
+We still use [Leiningen](https://leiningen.org/) for the nuts and bolts of project stuff, and (clj-Kondo)[https://github.com/clj-kondo/clj-kondo] for code cleanliness. We did rely on [Integrant](https://github.com/weavejester/integrant) for a long  time. We've replaced it with our own framework that allows us to make mutable changes, which is quite interesting. We may open source this in the future.
 
-We've just opened sourced (https://github.com/factorhouse/slipway)[Slipway} which is a wrap-around for Jetty that allows you to use Jetty 9,10 and 11.
+We've just opened sourced [Slipway](https://github.com/factorhouse/slipway) which is a wrap-around for Jetty that allows you to use Jetty 9,10 and 11.
 
 [re-frame](https://github.com/day8/re-frame) is the biggest state management library that we use in the front end. [Instaparse](https://github.com/Engelberg/instaparse) is fundamental to our product because we've implemented [jq](https://stedolan.github.io/jq/) in Clojure and Kpow uses it to filter data coming off kafka topics. Instaparse allows you to implement one language in another language which is phenomenal.
 
