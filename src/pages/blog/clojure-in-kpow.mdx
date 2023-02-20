@@ -48,7 +48,7 @@ Dijkstra says that if someone walked into the room, after six months and ask wha
 
 At the point where Kpow now is at, four years in, we've become experts in this problem space. I knew the least about it when we started and back then we were most capable of making the greatest mistakes.
 
-And it's not that we just sat around talking for six months, we started shipping very, quickly. Clojure gives us that fluidity to not make dreadful mistakes earlier that become cemented in.
+And it's not that we just sat around talking for six months, we started shipping very, quickly.
 
 ## Background
 
@@ -70,21 +70,21 @@ My wife and I moved to Melbourne which is a small market and I decided to work w
 
 We went through several iterations of writing really bad Clojure, giving me time to learn, and to relearn what I'd done previously in my career.
 
-**Jon: How did KPow start?:**
+In 2019 I decided to stop working on consulting and to build the product, we could see from our clients and customers that they wanted.
 
-Kylie and I decided in 2019 to stop working on consulting and to build the product, we could see from our clients and customers that they wanted.
+Kpow is all written in Clojure, both front and back end. We have a series of systems that run in AWS Lambdas that provision licenses, that are all written in Clojure too.
 
-## Harder stuff:
+**Jon: Cool. What value has Clojure brought?**
 
-**Jon: What are you working on now?**
+**Derek:** I think Rich (Hickey) got it right when he speaks about the difference between information systems and abstract systems.
 
-**Derek:** We're shipping dark mode for our web applicaiton in the next couple of days. We might then integrate with Flink.
+This was something I didn't understand at all as a young developer. The tools we learned, in the Java way of doing things, are the tools for building abstract systems, whereas all I've ever built are information systems.
 
-But now we have more than enough feedback and direction from the market, engineers who are really passionate about our product, who work with it daily.
+Jetty is a great example of an abstract system that solves the HTTP server problem. It is extremely formal and correctly so, which is necessary to meet the various HTTP RFCs and agreements. Kafka is another good example.
 
-There’s no need to introduce concretions later on. We're only communicating within our team, right? We don't have to set out in code. Formalisations that would allow you or other computer programmers to understand the internals of what we do. I think Rich (Hickey) really got it right when he speaks about the difference between information systems and abstract systems, that was something I didn't understand at all as a young developer. And l I actually, funnily enough, I tried talking about it at the Conj, but I was talking about products versus frameworks, which is the same idea but much less elegantly put. And you know, it's true that the only thing I've ever built is information systems. But the tools that we're taught to think about and execute programming as developers, particularly at that time in the Java way of doing things, are the tools for building abstract systems, they're, you know, jetty is a great example of this. Abstract system that solves a problem supposedly of HTTP servers which has RFC's, it has agreements and it's got like it's extremely formal and correctly so. And so the systems that we work in. Building, they immediately have these abstract systems within them. Kafka is another one. And so as a young developer, I think you can look at these things and think, well, that's how I've got to build my trading platform. It's got to have concretions all the way through it because that's alI I see everywhere. And that's also naively what you're told to do. And I think Clojure is the most powerful way I have of building information systems that are commercially viable because they're on the JVM. They can be packaged up as a jar. They’re a known quantifiable thing that can run somewhere and we get to leverage all of the abstract systems and not mimic them. We've retained this flexibility all the way through our delivery which is easier to do because we’re a really small team who've been working together for three years now.
+The problem is that as a young developer, you can look at these things and think: "that's how I've got to build my trading platform. It's got to have concretions all the way through it because that's all I see everywhere". And this is also naively what you're told to do. We pile on abstractions on top of abstractions.
 
-In terms of code base we’re nearing 10,000 commits. Kpow is all written in Clojure, both front and back end. We have a series of systems that run in AWS Lambda that do license provisioning which is all written in Clojure too.
+Clojure helps us avoiding making premature abstractions that become cemented in. It is most powerful way I have of building information systems that are commercially viable because they're on the JVM. We can leverage all of the abstract systems and not mimic them. We've retained this flexibility all the way through our delivery which is easier to do because we're a small team who've been working together for three years now.
 
 **Jon: Are there any sort of tools and libraries that you would give a shout out to?**
 
@@ -117,4 +117,4 @@ But in terms of the state of Clojure I believe it gives us the tooling we need t
 
 **Jon: Is there anything that you feel we haven’t covered, anything you’d like to add?**
 
-**Derek:** No, I think we’ve covered everything, thanks for taking the time to listen and I really appreciate what you’re doing with pushing Clojure onwards and upwards.
+**Derek:** No, I think we’ve covered everything, thanks for taking the time to listen!
