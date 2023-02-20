@@ -39,7 +39,8 @@ I'm the ‘Thorny Old JVM nerd’ and Tom is 10 years younger, where his natural
 
 We prefer to work in small teams, where our philosophy is active, ubiquitous conversation about the things that we're building, and ownership.
 
-I'm a firm believer that that good software comes from small teams who are empowered. I am a big fan of Dijkstra and the faxes and memos he used to post. One was ("why is software so expensive?")[https://www.cs.utexas.edu/users/EWD/transcriptions/EWD06xx/EWD648.html] and it has two or three of my favorite stories in it.
+I'm a firm believer that that good software comes from small teams who are empowered. I am a big fan of Dijkstra and the faxes and memos he used to post. One was ["why is software so expensive?"]
+(https://www.cs.utexas.edu/users/EWD/transcriptions/EWD06xx/EWD648.html) and it has two or three of my favorite stories in it.
 
 One time he's there solving a problem to do with memory pages and he's just in a room talking to his colleague. Over a period of months they slowly form this ubiquitous language, by talking and mulling over ideas.
 
@@ -87,13 +88,15 @@ In terms of code base we’re nearing 10,000 commits. Kpow is all written in Clo
 
 **Jon: Are there any sort of tools and libraries that you would give a shout out to?**
 
-**Derek:** Mostly around code cleanliness and the nuts and bolts of project stuff; so Shadow CLJS is something that we adopted, we still use Lanigan.We moved to Shadow which allows us to use NPM directly. This allows us to move quickly through the front end and freshen up a lot of stuff and has had a large impact on the quality of the front end of our products.
+**Derek:** [https://github.com/thheller/shadow-cljs](shadow cljs) allows us to use NPM directly, so we can move quickly through the front end.
 
-And then there's a bunch of stuff that we use like Condo, we did rely on Integrant for a long  time. We've actually replaced it with our own framework that allows us to do mutable stuff, which is quite interesting, we might open source it in the future.
+We still use [Leiningen](https://leiningen.org/) for the nuts and bolts of project stuff, and (https://github.com/clj-kondo/clj-kondo)[clj-Kondo] for code cleanliness. We did rely on [https://github.com/weavejester/integrant](Integrant) for a long  time. We've replaced it with our own framework that allows us to make mutable changes, which is quite interesting. We may open source this in the future.
 
-We've just opened sourced something called Slipway which is a wrap-around Jetty that allows you to use Jetty 9,10 and 11. I think it's one of the things with Clojure it attracts a lot of enthusiasts as well as people who are trying to build real-world systems, and sometimes it can be hard to determine which libraries are a flight of fancy and which have real concrete value.
+We've just opened sourced (https://github.com/factorhouse/slipway)[Slipway} which is a wrap-around for Jetty that allows you to use Jetty 9,10 and 11.
 
-But to be honest, we've never really had a need for much outside core Clojure core data structures. And the webbing that allows us to build the project and work in the front end as well, such as Clojure script.  Reframes is probably the biggest state management one that we use in the front end and are quite reliant on and Instapass is one of the best things I've ever worked with. It's fundamental to our product because we've implemented JQ In Clojure and you can use it inside Kpow to filter data coming off kafka topics so we've implemented one language in another language and Instapass allows you to do that which is phenomenal.
+[re-frame](https://github.com/day8/re-frame) is the biggest state management library that we use in the front end. [Instaparse](https://github.com/Engelberg/instaparse) is fundamental to our product because we've implemented [jq](https://stedolan.github.io/jq/) in Clojure and Kpow uses it to filter data coming off kafka topics. Instaparse allows you to implement one language in another language which is phenomenal.
+
+Besides the libraries mentioned, we've don't much need beyond Clojure's core.
 
 **Jon: It sounds like you've deliberately kept the footprint small?**
 
