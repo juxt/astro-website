@@ -4,6 +4,7 @@ import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import podcastImage from '../assets/site/podcast-clojure-in.jpg'
 import Banner from '../components/Banner.astro'
+import { ClojureInBlogs } from '../components/ClojureInBlogs'
 import Section from '../components/Section.astro'
 import { Blog, Person } from '../components/types'
 import Layout from '../layouts/Layout.astro'
@@ -12,6 +13,16 @@ import { formatDate } from '../utils'
 const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
   './blog/{clojure-in*.mdx, clojure-in*.md}'
 )
+
+const industries = clojureInBlogs.map(
+  (blog) => blog.frontmatter.clojureIn.industry
+)
+const uniqueIndustries = new Set(['all', ...industries])
+
+const industryValues = [...uniqueIndustries].map((industry) => ({
+  label: industry,
+  value: industry
+}))
 
 const filteredBlogs = clojureInBlogs.filter((blog) => !blog.frontmatter?.draft)
 
@@ -36,35 +47,11 @@ const parsedBlogs: Blog[] = await Promise.all(
   })
 )
 
-const seasonOrder = [
-  { value: 'one', label: 'Season One' },
-  { value: 'two', label: 'Season Two' }
-]
-
-const groupedBlogs: Record<string, { season: string; blogs: Blog[] }> =
-  parsedBlogs.reduce((coll, blog) => {
-    const season = blog.clojureIn.season
-    const currentSeasonBlogs = coll[season]?.blogs || []
-
-    return {
-      ...coll,
-      [season]: { season: season, blogs: [...currentSeasonBlogs, blog] }
-    }
-  }, {})
-
-const sortedBlogs = seasonOrder
-  .map((season) => {
-    const grouped = groupedBlogs[season.value]
-
-    const sortedByDate = grouped?.blogs.sort((a, b) => {
-      return (
-        new Date(b.publishedDate).getTime() -
-        new Date(a.publishedDate).getTime()
-      )
-    })
-    return { season: grouped?.season && season.label, blogs: sortedByDate }
-  })
-  .filter((blogs) => blogs.season)
+const sortedBlogs = parsedBlogs.sort((a, b) => {
+  return (
+    new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+  )
+})
 
 const clojureInPicture = await getImage({
   src: import('../assets/site/hero-image-clojurein.jpeg'),
@@ -168,7 +155,8 @@ const finalResources = await Promise.all(
       text='Clojure In'
       textColor='text-white'
       style={{
-        backgroundImage: `url(${clojureInPicture})`
+        backgroundImage: `url(${clojureInPicture})`,
+        backgroundAttachment: 'inherit'
       }}
     />
 
@@ -194,37 +182,12 @@ const finalResources = await Promise.all(
       </div>
     </Section>
 
-    <Section className='py-2'>
-      <div class='flex flex-col gap-28'>
-        {sortedBlogs.map(({ season, blogs }) => {
-          return (
-            <div class='flex flex-col items-center'>
-              <div class='grid md:grid-cols-[repeat(2,_1fr)] xl:grid-cols-[repeat(3,_1fr)] justify-center gap-6 py-12'>
-                {blogs.map((blog) => {
-                  return (
-                    <a
-                      href={`/blog/${blog.href}`}
-                      class='group cursor-pointer justify-between flex flex-col w-96 mx-auto gap-6'
-                    >
-                      <div class='text-white flex flex-col justify-between'>
-                        <h3 class='text-2xl font-semibold'>{blog.title}</h3>
-                        <h5 class='text-lg font-extralight'>
-                          {blog.description}
-                        </h5>
-                      </div>
-                      <div class='p-4'>
-                        <p class='text-lg font-light dark:text-white text-sky-900'>
-                          {formatDate(blog.publishedDate)}
-                        </p>
-                      </div>
-                    </a>
-                  )
-                })}
-              </div>
-            </div>
-          )
-        })}
-      </div>
+    <Section className='py-4'>
+      <ClojureInBlogs
+        client:only
+        sortedBlogs={sortedBlogs}
+        industries={industryValues}
+      />
     </Section>
     <Section>
       <h2 class='font-medium text-4xl text-white py-8'>
@@ -254,6 +217,26 @@ const finalResources = await Promise.all(
             )
           })}
         </div>
+        <a
+          href='https://pod.link/juxtcast'
+          target='_blank'
+          class='text-white text-lg hover:underline flex justify-end items-center gap-2 pb-10'
+        >
+          To all JUXT Cast episodes
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke-width='1.5'
+            stroke='currentColor'
+            class='w-6 h-6'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'></path>
+          </svg>
+        </a>
         <h5 class='font-extralight text-2xl text-white'>Blog Posts</h5>
         <div
           class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(4,_1fr)] justify-center gap-6 pb-10'
@@ -286,6 +269,26 @@ const finalResources = await Promise.all(
             )
           })}
         </div>
+
+        <a
+          href='/blog/?blog%5BrefinementList%5D%5Bcategory%5D%5B0%5D=clojure'
+          class='text-white text-lg hover:underline flex justify-end items-center gap-2 pb-10'
+        >
+          To all Clojure blog posts
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke-width='1.5'
+            stroke='currentColor'
+            class='w-6 h-6'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'></path>
+          </svg>
+        </a>
       </div>
     </Section>
   </main>
