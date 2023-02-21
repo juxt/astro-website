@@ -6,7 +6,7 @@ category: 'clojure-in'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-11-01'
 heroImage: 'clojurein-uk-2.jpg'
-clojureIn: { season: 'one' }
+clojureIn: { season: 'one', industry: '' }
 ---
 
 > When you have to come into work every day, sit down and write code,
