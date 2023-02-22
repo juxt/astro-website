@@ -1,4 +1,4 @@
-import * as classNames from 'classnames'
+import classNames from 'classnames'
 import { useState } from 'preact/hooks'
 import { Blog } from './types'
 
@@ -21,7 +21,7 @@ export function ClojureInBlogs({
     <>
       <div className='text-lg pb-6'>Filter by industry</div>
       <div className='flex flex-row flex-wrap items-start gap-4 pb-4'>
-        {industries.map(({ label, value }) => {
+        {industries?.map(({ label, value }) => {
           return (
             <div
               onClick={() => setSelectedIndustry(value)}
@@ -39,7 +39,7 @@ export function ClojureInBlogs({
       <div className='flex flex-col gap-28'>
         <div className='flex flex-col items-center'>
           <div className='grid lg:grid-cols-[repeat(2,_1fr)] xl:grid-cols-[repeat(3,_1fr)] justify-center gap-x-6 gap-y-20 py-12'>
-            {blogs.map((blog) => {
+            {blogs?.map((blog) => {
               return (
                 <a
                   href={`/blog/${blog.href}`}
