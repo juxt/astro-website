@@ -13,7 +13,7 @@ clojureIn: { season: 'two' }
 
 import { Image } from '@astrojs/image/components'
 
-[Gresham](https://www.greshamtech.com/) is a financial technology business, with headquarters in London and offices across the UK, North America and Asia. In 2019, Gresham [announced a partnership with ANZ](https://www.greshamtech.com/press-releases/gresham-and-anz-partnership-progresses-innovative-cash-management-solution) to deliver a new dynamic cash management solution and banking platform.
+[Gresham](https://www.greshamtech.com/) is a financial technology business, with headquarters in London and offices across the UK, North America and Asia. In 2019, Gresham announced a partnership with a major bank to deliver a new dynamic cash management solution and banking platform.
 
 We caught up with Colin Reid (Development Manager) and Mark Tinsley (Principal Engineer) at Gresham, in their delightful office in Bristol’s Brew House, to discuss why Clojure, Kafka, and event-sourcing are key ingredients of their new product.
 
@@ -27,7 +27,7 @@ import gr from '../../assets/blog/gresham-logo.png'
 
 In banks there’s often a sprawl of different systems with different messaging formats, and none of it is cross-referenced. Reconciliation is really important here. Originally it was all on-premise, but we have cloud services now too.
 
-Another major offering is our new cash management solution. Existing banks will typically have some slow, legacy core banking systems. The banks can keep all core banking logic and accounts in those existing systems, but quickly create new virtual accounts in our platform. We do lots to aggregate and disaggregate large numbers of payments, and manage different funds within an account. The complexity comes from the business accounts, not so much the personal banking side.
+Another major offering is our new cash management solution. Existing banks will typically have some slow, legacy core banking systems and in corporate banking particularly banks have been slow to re-new and upgrade – largely because of the complexity of existing platforms and their customer requirements. With our solution banks can keep core banking logic and accounts in those existing systems while quickly building a faster, flexible and frictionless corporate banking platform. The solution is cloud-ready, composable and extensible enabling our customers to deliver account management solutions across cash and digital currencies, embedded bank accounts, escrow and regulated monies, in-house banking, term deposits and more without the major risk of decommissioning their legacy core systems until they are ready.
 
 **Joe: You have quite a few different product streams. What tech stacks are being used?**
 
@@ -118,7 +118,7 @@ Each message represents a fact about something that has happened. Re-reading the
 
 **Joe: Which parts of the Clojure ecosystem are you using?**
 
-**Mark:** We’re using [Jackdaw](https://github.com/FundingCircle/jackdaw) for our Kafka Streams topologies. We actually maintain our own wrapper for Jackdaw internally because we’ve had to extend some things. Jackdaw hasn’t had a lot of updates recently, although now there are some updates starting to come through and PRs are getting merged. We’ve introduced our own concepts that don’t exist natively in Kafka Streams, such as the eventual join, and we’ve added these to our own internal Jackdaw. We’re debating now whether to remove Jackdaw entirely and interact more directly with the Streams API, and get greater control over upgrades. For now though, Jackdaw remains our primary way of defining these topologies.
+**Mark:** We’re using [Jackdaw](https://github.com/FundingCircle/jackdaw) for our Kafka Streams topologies. We actually maintain our own wrapper for Jackdaw internally because we’ve had to extend some things. Jackdaw hasn’t had a lot of updates recently, although now there are some updates starting to come through and PRs are getting merged. We’ve introduced our own concepts that don’t exist natively in Kafka Streams, such as the eventual join, and we’ve added these to our own internal wrapper. We’re debating now whether to remove Jackdaw entirely and interact more directly with the Streams API, and get greater control over upgrades. For now though, Jackdaw remains our primary way of defining these topologies.
 
 We moved away from Java logging frameworks to [Timbre](https://github.com/ptaoussanis/timbre) logging. We’ve extended our logging quite a bit to improve exception handling - we walk through the chain of exception and gather exception-info and the associated data. You get a single, consolidated map that you can understand - one log that has all the information you need. JSON logs work well with the cloud providers.
 
