@@ -19,8 +19,8 @@ export function ClojureInBlogs({
 
   return (
     <>
-      <div className='text-lg pb-6'>Filter by industry</div>
-      <div className='flex flex-row flex-wrap items-start gap-4 pb-4'>
+      <div className='text-lg pb-6 text-white'>Filter by industry</div>
+      <div className='flex flex-row flex-wrap items-start gap-4 pb-4 text-white'>
         {industries?.map(({ label, value }) => {
           return (
             <div
