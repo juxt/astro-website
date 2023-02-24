@@ -1,0 +1,251 @@
+---
+import { Image } from '@astrojs/image/components'
+import { MarkdownInstance } from 'astro'
+import DraftBanner from '../components/DraftBanner'
+import {
+  LinkedInIcon,
+  RedditIcon,
+  TagIcon,
+  TwitterIcon
+} from '../components/Icons'
+import { Blog, Person } from '../components/types'
+import Layout from './Layout.astro'
+import '../blog.css'
+import { BlogCard } from '../components/BlogCard'
+import { getImage } from '@astrojs/image'
+import { ClojureInBlogs } from '../components/ClojureInBlogs'
+
+const { title, description, heroImage, category, author, draft } = Astro.props
+  .content as Blog
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+  '../pages/blog/{*.mdx,*.md}'
+)
+
+const blogsWithoutCurrent = blogs.filter(
+  (blog) => blog.frontmatter.title !== title
+)
+
+type GroupedBlogs = {
+  authorCategory: MarkdownInstance<Blog>[]
+  category: MarkdownInstance<Blog>[]
+  author: MarkdownInstance<Blog>[]
+}
+
+// To index the blogs that share author && catagory or just one with the current blog
+const groupedBlogs: GroupedBlogs = blogs.reduce(
+  (coll, blog) => {
+    if (blog.frontmatter.title === title) {
+      return coll
+    } else if (
+      blog.frontmatter.author === author &&
+      blog.frontmatter.category === category
+    ) {
+      return {
+        ...coll,
+        authorCategory: [blog, ...coll.authorCategory]
+      }
+    } else if (blog.frontmatter.category === category) {
+      return { ...coll, category: [blog, ...coll.category] }
+    } else if (blog.frontmatter.author === author) {
+      return { ...coll, author: [blog, ...coll.author] }
+    } else {
+      return coll
+    }
+  },
+  { authorCategory: [], category: [], author: [] }
+)
+
+function sortBlogsFn(coll): MarkdownInstance<Blog>[] {
+  return coll.sort((a, b) => {
+    return (
+      new Date(b.frontmatter.publishedDate).getTime() -
+      new Date(a.frontmatter.publishedDate).getTime()
+    )
+  })
+}
+
+const sortedBlogs = [
+  ...sortBlogsFn(groupedBlogs.authorCategory),
+  ...sortBlogsFn(groupedBlogs.category),
+  ...sortBlogsFn(groupedBlogs.author)
+]
+
+// To take only the 3 top matches
+const slicedBlogs = sortedBlogs.slice(0, 3)
+
+const allSortedBlogs = sortBlogsFn(blogsWithoutCurrent).slice(0, 3)
+
+const uniqueBlogs: MarkdownInstance<Blog>[] = allSortedBlogs.reduce(
+  (coll, blog) => {
+    const currentTitle = blog.frontmatter.title
+    const isDuplicate = slicedBlogs.find(
+      (blog) => blog.frontmatter.title === currentTitle
+    )
+    if (isDuplicate) return coll
+    else return [...coll, blog]
+  },
+  []
+)
+
+const finalBlogs = [...slicedBlogs, ...uniqueBlogs].slice(0, 2)
+
+const person = people.find((person) => person.frontmatter.code === author)
+
+if (!person) {
+  throw new Error(`Author ${author} not found`)
+}
+
+const {
+  frontmatter: { name, lastName, jobTitle, image, expert, expertDraft }
+} = person
+
+const isDev = import.meta.env.DEV
+
+const isExpert = (expert && !expertDraft) || (isDev && expert)
+
+const blogHref = Astro.url.href
+const shareIconStyle =
+  'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
+
+const heroImageFilename = `${heroImage.split('.').slice(0, -1)}`
+const personImageFilename = image.split('.').slice(0, -1)
+const categoryHref = `/blog?${encodeURI(
+  `blog[refinementList][category][0]=${category}`
+)}`
+
+const clojureInPicture = await getImage({
+  src: import('../assets/site/hero-image-clojurein.jpeg'),
+  width: 1700,
+  quality: 90,
+  alt: 'clojure in logo'
+}).then((img) => img.src)
+---
+
+<Layout
+  navbar
+  title={title}
+  ogTitle={`JUXT Blog: ${title}`}
+  ogDescription={description}
+  ogImage={heroImageFilename}
+>
+  <div
+    class='flex items-end w-full h-[50vh] bg-cover bg-center'
+    style={{ backgroundImage: `url(${clojureInPicture})` }}
+  >
+    <div class='flex flex-col gap-8 ml-64'>
+      <h1
+        class='text-white font-extrabold drop-shadow-lg shadow-black tracking-widest font-sans text-4xl md:text-5xl lg:text-6xl'
+      >
+        {title}
+      </h1>
+      <h2
+        class='text-white drop-shadow-lg shadow-black tracking-widest font-sans text-2xl md:text-3xl lg:text-4xl'
+      >
+        {description}
+      </h2>
+      <div class='px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>
+        <div class='pb-20 pt-6 flex gap-4'>
+          <div class='flex justify-around text-sm items-center'>
+            <a
+              class='w-6 h-6'
+              target='_blank'
+              href={`https://twitter.com/intent/tweet?url=${blogHref}&title=${title}`}
+            >
+              {(<TwitterIcon className={shareIconStyle} />)}
+            </a>
+          </div>
+          <div class='flex justify-around text-sm items-center'>
+            <a
+              class='w-6 h-6'
+              target='_blank'
+              href={`https://www.reddit.com/submit?url=${blogHref}&title=${title}`}
+            >
+              {(<RedditIcon className={shareIconStyle} />)}
+            </a>
+          </div>
+          <div class='flex justify-around text-sm items-center'>
+            <a
+              class='w-6 h-6'
+              target='_blank'
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${blogHref}&title=${title}`}
+            >
+              {(<LinkedInIcon className={shareIconStyle} />)}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='bg-gradient-to-b from-black to-blue-300 h-28 w-full'></div>
+
+  <DraftBanner draft={draft} pageName='Blog' />
+  <main class='transition-colors'>
+    <article
+      class='px-4 py-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert dark:hover:prose-a:text-white'
+    >
+      <slot />
+    </article>
+    <div class='flex flex-col items-center bg-slate-800 w-full gap-4 py-10'>
+      <div class='text-3xl text-white text-center font-bold'>
+        Inspired by this Blog?
+      </div>
+      <div class='text-3xl text-white text-center font-bold pb-4'>
+        Share your own Clojure Story with us!
+      </div>
+      <a
+        href='/clojure-in'
+        class='bg-white py-3 px-28 text-slate-800 font-semibold'
+      >
+        Contact Us
+      </a>
+    </div>
+
+    <div class='bg-gradient-to-b from-black to-slate-900 py-10'>
+      <div class='mx-auto flex flex-col gap-10' style='max-width: 80ch;'>
+        <div class='text-5xl text-white font-bold'>Further Reading</div>
+        <div class='text-xl text-white font-light pb-4'>
+          If you enjoyed this Blog, why don't you take a look at these two?
+        </div>
+        <div class='flex gap-10 justify-between py-10 text-lg'>
+          {finalBlogs.map((blog) => (
+            <div class='flex flex-col gap-4'>
+              <div class='text-white font-light'>
+                {blog.frontmatter.publishedDate}
+              </div>
+              <div class='text-white font-semibold'>
+                {blog.frontmatter.title}
+              </div>
+              <div class='text-white font-light'>
+                {blog.frontmatter.description}
+              </div>
+              <div class='flex gap-2'>
+                <a href='/blog' class='text-white font-semibold pt-8'>
+                  Read more
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke-width='1.5'
+                    stroke='currentColor'
+                    class='w-6 h-6'
+                  >
+                    <path
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
