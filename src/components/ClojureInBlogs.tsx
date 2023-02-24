@@ -4,10 +4,12 @@ import { Blog } from './types'
 
 export function ClojureInBlogs({
   sortedBlogs,
-  industries
+  industries,
+  quote
 }: {
   sortedBlogs: Blog[]
   industries: { label: string; value: string }[]
+  quote: { label: string; value: string }[]
 }) {
   const [selectedIndustry, setSelectedIndustry] = useState<string>('all')
   const blogs =
