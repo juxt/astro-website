@@ -26,5 +26,5 @@ export type Blog = {
   slug: string
   href: string
   heroImage: string
-  clojureIn?: { season: string; industry: string }
+  clojureIn?: { season: string; industry: string; quote: string }
 }
