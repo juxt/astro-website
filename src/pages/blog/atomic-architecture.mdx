@@ -1,0 +1,75 @@
+---
+author: 'mal'
+title: 'Atomic Architecture'
+description: 'Seven principles for building better data systems'
+category: 'site'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2023-03-01'
+heroImage: 'tesla-sphere-inverted.png'
+tags:
+  - 'site'
+  - 'atomic architecture'
+---
+
+import { Image } from '@astrojs/image/components'
+import diagram from '../../assets/blog/atomic-architecture.jpg'
+
+As part of our drive to building better data systems for our customers, we've been identifying the architectural principles we believe are keys tools in the defence against creeping complexity in software.
+
+These principles are brought together in a concept we're calling 'Atomic Architecture'.
+
+As theorists, we've begun to discuss Atomic Architecture with like-minded software architects, many of whom have been influenced, as we have, by the significant benefits of functional programming languages.
+
+As practitioners, we're building a software stack that can greatly help with the implementation of systems that adopt the principles of Atomic Architecture.
+
+But what are these principles? That's what this blog article is about.
+
+<Image src={diagram}/>
+
+## 1. Shared State
+
+Management of state is a huge source of complexity.
+
+Model state as a single value at a certain time (like the #clojurescript #reagent folks do).
+
+If you want micro-services, keep them stateless. Get them to read/write state from a central domain store.
+
+## 2. Domain Operations
+
+Define domain operations, with business names, that operate on the shared state. Insist that all access to shared state, read and write, is made via an operation.
+
+Each operation encapsulates the knowledge of why and how to access state.
+
+## 3. Contractual Interfaces
+
+Allow applications to call operations remotely via APIs:  REST-like, GraphQL, gRPC - whatever makes sense for application clients.
+
+Keep APIs stable, preserve compatibility as you evolve them.
+
+## 4. Data Consistency
+
+Only apply domain operations against the very latest version of the shared state. Apply operations, one after another.
+
+Use a single thread if necessary. Don't trade consistency for performance or scaleability. There are other techniques available to you.
+
+## 5. Access Control
+
+Apply each domain operation on behalf of a particular subject, and only apply it if access has been granted.
+
+Insist that every API request is accompanied by an access token.
+
+## 6. Record Events
+
+Each application of a domain operation should be recorded as an event.
+
+These events can be distributed to downstream consumers for notification, analytics, audit, materialized views and other purposes.
+
+## 7. Historic Versions
+
+For each event, it is a desirable to have the capability to recreate the entire state on which the operation was applied.
+
+If an operation contains logic/code, consider storing the program alongside the operation in the database.
+
+## Over to you
+
+Write to me at mal@juxt.pro!
