@@ -42,7 +42,8 @@ const currentDescription =
 const enableDarkMode =
   Astro.url.pathname.includes('/blog') ||
   Astro.url.pathname.includes('/clojure-in') ||
-  Astro.url.pathname.includes('/privacy-policy')
+  Astro.url.pathname.includes('/privacy-policy') ||
+  Astro.url.pathname.includes('/terms-of-use')
 
 // image attributes must be all jpgs and located in src/assets/site/ dir
 let imageForShare
@@ -129,7 +130,14 @@ const metaTitle = ogTitle ?? currentPageName
         scroll-behavior: smooth;
       }
     </style>
-    <script async defer data-website-id="4a088aa2-1e6f-4f97-9e95-9619983468de" src="https://bunseki.juxt.pro/t.js"></script>
+    <script
+      async
+      defer
+      data-website-id='4a088aa2-1e6f-4f97-9e95-9619983468de'
+      src='https://bunseki.juxt.pro/t.js'
+    >
+
+    </script>
   </head>
   <body
     class:list={[

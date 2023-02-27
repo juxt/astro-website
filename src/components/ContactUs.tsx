@@ -144,11 +144,7 @@ function Form() {
           </div>
           <div className='text-xs'>
             By submitting your details you agree to JUXT’s{' '}
-            <a
-              href='/privacy-policy/privacy-policy'
-              target='_blank'
-              className='underline'
-            >
+            <a href='/privacy-policy' target='_blank' className='underline'>
               Privacy Policy
             </a>
           </div>

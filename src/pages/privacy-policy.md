@@ -1,12 +1,12 @@
 ---
 title: 'Privacy Policy'
-layout: '../../layouts/PolicyTerms.astro'
+layout: '../layouts/PolicyTerms.astro'
 ---
 
 # Privacy Policy
 
 This privacy policy will explain how our organization uses the personal data we collect from you when you use our websites.
-By using this website you consent to the collection and use of your information in accordance with this privacy policy. The privacy policy is incorporated into and subject to the [Terms of Use](/privacy-policy/terms-of-use).
+By using this website you consent to the collection and use of your information in accordance with this privacy policy. The privacy policy is incorporated into and subject to the [Terms of Use](/terms-of-use).
 
 ## **Topics:**
 
