@@ -187,19 +187,12 @@ export default function ContactUs() {
         <div className='flex flex-col lg:justify-between lg:flex-row gap-8 pb-14'>
           <div className='flex flex-col lg:justify-between lg:gap-0 lg:w-2/3 gap-8'>
             <div className='text-3xl md:text-4xl font-bold leading-snug text-left text-white uppercase'>
-              Better Call Joe
+              Get started{' '}
             </div>
-            <div className='text-medium md:text-2xl md:flex md:flex-col text-white leading-snug'>
-              <div>
-                Secure your
-                <span className='text-juxt'>
-                  {' '}
-                  free 30-minute consultation call{' '}
-                </span>
-              </div>
-              <span> with a seasoned delivery executive, and </span>
-              <span>discover how to bring your vision to market, </span>
-              <span> on time and on budget.</span>
+            <div className='text-medium md:text-2xl text-white leading-snug'>
+              Book a<span className='text-juxt'> 30-minute consultation </span>
+              with our Head of Delivery, and discover how JUXT can help bring
+              your vision to market, on time and on budget.
             </div>
           </div>
 
@@ -213,19 +206,19 @@ export default function ContactUs() {
         <div className='flex flex-col-reverse lg:flex-row bg-zinc-800 gap-16'>
           <div className='flex flex-col gap-10 text-left lg:w-1/2'>
             <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-              Our Head of Delivery, Joe Littlejohn, has over a decade of senior
-              software development and technical advisory roles under his belt,
-              successfully shipping large-scale software projects for companies
-              ranging from global banks to early-stage startups.
+              Our Head of Delivery, Joe Littlejohn, has worked in software
+              development and technical advisory roles for two decades, shipping
+              systems at scale for companies ranging from global banks to
+              early-stage startups.
             </div>
             <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-              30-minute call with Joe will allow you to benefit from his vast
-              experience:
+              A 30-minute conversation with Joe will allow you to benefit from
+              his experience:
             </div>
             <div className='flex flex-col gap-10 text-white'>
-              <TickBox text='Discover little-known challenges in the development process — and discuss potential suitable solutions' />
-              <TickBox text='Formulate initial project requirements, timeline, and budgets' />
-              <TickBox text='Assess your overall fit with JUXT’s methodology and processes' />
+              <TickBox text='Discuss challenges to your project, and learn about solutions that come from experience in the field' />
+              <TickBox text='Review your key milestones, and find opportunities to de-risk' />
+              <TickBox text='Learn about how JUXT uses technical and delivery expertise to ensure success' />
             </div>
           </div>
           <div className='flex flex-col lg:w-1/2 bg-white py-6 px-2 md:px-0'>
@@ -253,9 +246,10 @@ export default function ContactUs() {
           </div>
           <div className='flex flex-col md:flex-row gap-6 md:items-center p-6 bg-juxt bg-opacity-90 shadow-xl lg:w-1/2'>
             <img src={morganRoss.src} alt='testimonial' width='150' />
-            <div className='font-extralight'>
-              "JUXT led the development team through this period of incredible
-              achievements" <br />
+            <div className='font-extralight text-sm'>
+              "The web applications exceeded our expectations on functionality
+              and time to market. JUXT led the development team through this
+              period of incredible achievements." <br />
               <br />
               Morgan Ross <br />
               Product & Technology Director <br />
