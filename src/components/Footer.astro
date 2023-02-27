@@ -9,7 +9,12 @@ import {
   ZulipIcon
 } from './Icons'
 
-type Navigation = { label: string; href: string; flag?: boolean }
+type Navigation = {
+  label: string
+  href: string
+  flag?: boolean
+  className?: string
+}
 
 const navigation = await Astro.glob<{ footer: Navigation[] }>(
   '../data/metadata.json'
@@ -66,7 +71,10 @@ const pagesInFooter = footer
       <div class='flex flex-col gap-4 font-light'>
         {pagesInFooter.map((page) => (
           <a
-            class='flex gap-1 items-center text-zinc-100 capitalize text-xs hover:text-juxt transition-colors'
+            class:list={[
+              'flex gap-1 items-center text-zinc-100 capitalize text-xs hover:text-juxt transition-colors',
+              page.className
+            ]}
             href={page.href}
           >
             {page.label}
