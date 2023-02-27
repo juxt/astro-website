@@ -10,17 +10,19 @@ type NavLinkProp = {
   label: string
   target?: string
   active?: boolean
+  className?: string
 }
 
-function NavLink({ label, href, target, active }: NavLinkProp) {
+function NavLink({ label, href, target, active, className }: NavLinkProp) {
   const targetProp = target ? { target } : {}
 
   return (
     <a
       {...targetProp}
       className={classNames(
-        'hover:text-juxt transition-colors first-of-type:pt-4 md:first-of-type:pt-0',
-        active ? 'text-juxt' : 'text-white'
+        'hover:text-juxt transition-colors first-of-type:pt-4 xl:first-of-type:pt-0',
+        active ? 'text-juxt' : 'text-white',
+        className
       )}
       href={href}
     >
@@ -51,19 +53,19 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
 
   return (
     <nav
-      className={classNames('w-full fixed transition-all z-50 md:py-4 h-14', {
+      className={classNames('w-full fixed transition-all z-50 xl:py-4 h-14', {
         'bg-black': !navbarNoBg
       })}
       ref={ref}
     >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>
         <a href='/' class='flex items-center w-20 z-10'>
-          <img src={logo} width='w-full' alt='Juxt Logo' />
+          <img src={logo} alt='Juxt Logo' />
         </a>
         <button
           data-collapse-toggle='navbar-default'
           type='button'
-          className='z-10 inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600'
+          className='z-10 inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg xl:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600'
           aria-controls='navbar-default'
           aria-expanded='false'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -85,13 +87,14 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
           </svg>
         </button>
         {/* desktop */}
-        <div className={classNames('hidden md:flex', linkClasses)}>
+        <div className={classNames('hidden xl:flex', linkClasses)}>
           {navLinks.map((page) => (
             <NavLink
               href={page.href}
               label={page.label}
               target={page.target}
               active={page.active}
+              className={page.className}
             />
           ))}
           {enableDarkMode && <DarkModeSwitch />}
@@ -100,7 +103,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
         {/* mobile */}
         <div
           className={classNames(
-            'absolute left-0 flex bg-black w-full flex-col md:hidden overflow-hidden transition-all',
+            'absolute left-0 flex bg-black w-full flex-col xl:hidden overflow-hidden transition-all',
             linkClasses,
             {
               'top-0': navbarNoBg,
@@ -117,6 +120,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
               label={page.label}
               target={page.target}
               active={page.active}
+              className={page.className}
             />
           ))}
           {enableDarkMode && <DarkModeSwitch />}
