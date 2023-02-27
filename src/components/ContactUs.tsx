@@ -16,7 +16,7 @@ function TickBox({ text }: { text: string }) {
       <div className='bg-juxt w-8 h-8 shrink-0 border border-white hover:shadow-lg'>
         <TickIcon className={'fill-white'} />
       </div>
-      <p className='md:text-xl font-light'>{text}</p>
+      <p className='text-lg'>{text}</p>
     </div>
   )
 }
@@ -167,8 +167,8 @@ function Form() {
           </button>
           <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
             <div className='flex flex-col gap-2 leading-snug'>
-              What happens after you hit “send”? Usually, Joe will be in touch
-              with you to secure a call within 48 hours.
+              What happens after you hit “send”? Joe will be in touch with you
+              to secure a call within 48 hours.
             </div>
           </div>
         </form>
