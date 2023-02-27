@@ -190,7 +190,8 @@ export default function ContactUs() {
               Get started{' '}
             </div>
             <div className='text-medium md:text-2xl text-white leading-snug'>
-              Book a<span className='text-juxt'> 30-minute consultation </span>
+              Book a
+              <span className='text-juxt'> 30-minute free consultation </span>
               with our Head of Delivery, and discover how JUXT can help bring
               your vision to market, on time and on budget.
             </div>
@@ -198,8 +199,8 @@ export default function ContactUs() {
 
           <div className='flex items-center lg:items-stretch flex-col gap-4'>
             <img src={joe.src} alt='Joe' width='150' />
-            <div className='text-xs text-left font-light text-juxt'>
-              Joe Littlejohn, <br /> JUXT Head of Delivery
+            <div className='text-sm text-left font-light text-juxt'>
+              Joe Littlejohn <br /> JUXT Head of Delivery
             </div>
           </div>
         </div>
