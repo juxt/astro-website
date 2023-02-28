@@ -4,8 +4,8 @@ title: 'Clojure in Oxford: Crossref'
 description: 'Improving scholarly communications'
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'publishedDate: '2018-11-01'
-heroImage: 'clojurein-uk-2.jpg'
-clojureIn: { season: 'one', industry: '' }
+heroImage: 'crossref-logo-clojurein.jpg'
+clojureIn: { season: 'one', industry: 'media & telecommunications' }
 ---
 
 > When you have to come into work every day, sit down and write code,

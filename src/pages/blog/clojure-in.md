@@ -4,7 +4,7 @@ title: 'Announcing our Clojure In series'
 description: 'Surveying Real Clojure Projects'
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'publishedDate: '2016-09-22'
-heroImage: 'clojurein-international.jpg'
+heroImage: 'clojurein-logo-clojurein.jpg'
 ---
 
 At JUXT we want to understand how Clojure is being adopted across our
