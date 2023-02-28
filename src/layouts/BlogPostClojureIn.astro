@@ -240,28 +240,27 @@ const clojureInPicture = await getImage({
                       <h5 class='font-extralight'>{blog.description}</h5>
                     </div>
                     <img class='' alt='blog' src={blog.heroImage} />
-                  </a>
-                  <a
-                    href={blog.url}
-                    target='_blank'
-                    class='text-white font-semibold pt-8 flex gap-2 items-center '
-                  >
-                    Read more
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke-width='1.5'
-                      stroke='currentColor'
-                      class='w-6 h-6'
-                      display='flex'
+                    <div
+                      target='_blank'
+                      class='text-white font-semibold flex gap-2 items-center '
                     >
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'
-                      />
-                    </svg>
+                      Read more
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke-width='1.5'
+                        stroke='currentColor'
+                        class='w-6 h-6'
+                        display='flex'
+                      >
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'
+                        />
+                      </svg>
+                    </div>
                   </a>
                 </div>
               )

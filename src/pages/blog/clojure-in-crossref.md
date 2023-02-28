@@ -3,8 +3,7 @@ author: 'mrk'
 title: 'Clojure in Oxford: Crossref'
 description: 'Improving scholarly communications'
 category: 'clojure-in'
-layout: '../../layouts/BlogPost.astro'
-publishedDate: '2018-11-01'
+layout: '../../layouts/BlogPostClojureIn.astro'publishedDate: '2018-11-01'
 heroImage: 'clojurein-uk-2.jpg'
 clojureIn: { season: 'one', industry: '' }
 ---
