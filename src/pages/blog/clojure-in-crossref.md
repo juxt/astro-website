@@ -5,11 +5,8 @@ description: 'Improving scholarly communications'
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'publishedDate: '2018-11-01'
 heroImage: 'crossref-logo-clojurein.jpg'
-clojureIn: { season: 'one', industry: 'media & telecommunications' }
+clojureIn: { season: 'one', industry: 'media & telecommunications', quote: '"When you have to come into work every day, sit down and write code, doing it in a language you love is great."' }
 ---
-
-> When you have to come into work every day, sit down and write code,
-> doing it in a language you love is great.
 
 # Love metadata, love technology
 
