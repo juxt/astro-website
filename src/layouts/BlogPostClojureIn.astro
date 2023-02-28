@@ -23,7 +23,7 @@ const blogs = await Astro.glob<MarkdownInstance<Blog>>(
 )
 
 const blogsWithoutCurrent = blogs.filter(
-  (blog) => blog.frontmatter.title !== title
+  (blog) => blog.frontmatter.title !== title && !blog.frontmatter.draft
 )
 
 type GroupedBlogs = {
@@ -33,7 +33,7 @@ type GroupedBlogs = {
 }
 
 // To index the blogs that share author && catagory or just one with the current blog
-const groupedBlogs: GroupedBlogs = blogs.reduce(
+const groupedBlogs: GroupedBlogs = blogsWithoutCurrent.reduce(
   (coll, blog) => {
     if (blog.frontmatter.title === title) {
       return coll
@@ -240,10 +240,7 @@ const clojureInPicture = await getImage({
                       <h5 class='font-extralight'>{blog.description}</h5>
                     </div>
                     <img class='' alt='blog' src={blog.heroImage} />
-                    <div
-                      target='_blank'
-                      class='text-white font-semibold flex gap-2 items-center '
-                    >
+                    <div class='text-white font-semibold flex gap-2 items-center '>
                       Read more
                       <svg
                         xmlns='http://www.w3.org/2000/svg'

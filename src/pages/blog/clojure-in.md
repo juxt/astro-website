@@ -3,8 +3,10 @@ author: 'jon'
 title: 'Announcing our Clojure In series'
 description: 'Surveying Real Clojure Projects'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'publishedDate: '2016-09-22'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '2016-09-22'
 heroImage: 'clojurein-logo-clojurein.jpg'
+clojureIn: { season: 'one', industry: 'all' }
 ---
 
 At JUXT we want to understand how Clojure is being adopted across our

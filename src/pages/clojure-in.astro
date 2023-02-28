@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro'
 import { formatDate } from '../utils'
 
 const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
-  './blog/{clojure-in*.mdx, clojure-in*.md}'
+  './blog/clojure-in*.{md,mdx}'
 )
 
 const industries = clojureInBlogs.map(
