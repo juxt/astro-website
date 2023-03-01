@@ -11,6 +11,7 @@ import Section from '../components/Section.astro'
 const {
   title,
   description,
+  publishedDate,
   heroImage,
   category,
   author,
@@ -147,6 +148,11 @@ const clojureInPicture = await getImage({
         >
           {description}
         </h2>
+        <div
+          class='text-white drop-shadow-lg shadow-black tracking-widest font-sans md:text-base lg:text-lg'
+        >
+          {publishedDate}
+        </div>
       </div>
     </div>
   </div>
