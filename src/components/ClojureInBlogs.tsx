@@ -54,6 +54,7 @@ export function ClojureInBlogs({
                     <h5 className='font-extralight'>{blog.description}</h5>
                   </div>
                   <img className='' alt='blog' src={blog.heroImage} />
+                  <div className='font-thin'>{blog.publishedDate}</div>
                 </a>
               )
             })}
