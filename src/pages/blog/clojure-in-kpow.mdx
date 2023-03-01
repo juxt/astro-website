@@ -13,6 +13,10 @@ import { Image } from '@astrojs/image/components'
 
 ## Kpow
 
+import si from '../../assets/blog/factor-team.jpeg'
+
+<Image alt='image' src={si} />
+
 **Jon: So, could you tell us who you are and what Kpow is?**
 
 **Derek:** I'm Derek and I'm the CEO and co-founder of [Factor House](https://factorhouse.io/). We’re an independent software house based in Melbourne, Australia.
@@ -21,7 +25,7 @@ import { Image } from '@astrojs/image/components'
 
 We have a range of users, from teams starting with Kafka and looking for a control-console to make sense of things, and then we've got experienced teams developing complex platforms in the streaming compute space. They use the full range of what Kpow offers, including live monitoring of [Kafka Streams](https://docs.confluent.io/platform/current/streams/index.html) applications, topology and metrics visualizations. We also have platform teams running fleets of Kafka clusters who want to access and change configurations.
 
-We provide an enterprise grade web application, with security integrations such as SAML, LDAP, OAuth and [Keycloak](https://www.keycloak.org/). It's not a Sass application, rather something that you install on your network in close proximity to your Kafka cluster with zero dependencies. It's a single docker container and uses Kafka as its data store. Since we're not a SaaS product we don't have any access to user data whatsoever.
+We provide an enterprise grade web application, with security integrations such as SAML, LDAP, OAuth and [Keycloak](https://www.keycloak.org/). It's not a SaaS application, rather something that you install on your network in close proximity to your Kafka cluster with zero dependencies. It's a single docker container and uses Kafka as its data store. Since we're not a SaaS product we don't have any access to user data whatsoever.
 
 Kpow is like a toolbox. Apache Kafka is phenomenal, probably the number one project in the Apache Software Foundation by contributions and activity.
 
