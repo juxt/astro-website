@@ -1,0 +1,198 @@
+---
+import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
+import { MarkdownInstance } from 'astro'
+import Banner from '../components/Banner.astro'
+import Section from '../components/Section.astro'
+import { Blog, Person } from '../components/types'
+import Layout from '../layouts/Layout.astro'
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+  '../pages/blog/{*.mdx,*.md}'
+)
+
+const filteredRecommendedBlogs = blogs.filter(
+  (blog) => blog.frontmatter.category === 'clojure'
+)
+
+const bannerPicture = await getImage({
+  src: import('../assets/site/clojure-conj-heroimage.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'clojure-conj banner'
+}).then((img) => img.src)
+
+const juxtPicture = await getImage({
+  src: import('../assets/site/about-us-banner-v2.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'about us banner'
+}).then((img) => img.src)
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
+
+const recommendededBlogs = filteredRecommendedBlogs
+  .sort((a, b) => {
+    return (
+      new Date(b.frontmatter.publishedDate).getTime() -
+      new Date(a.frontmatter.publishedDate).getTime()
+    )
+  })
+  .slice(0, 4)
+
+const finalResources = await Promise.all(
+  recommendededBlogs.map((page) => {
+    const author = page.frontmatter.author
+    const person = people.find(
+      (person) => person.frontmatter.code === page.frontmatter.author
+    )
+    if (!person)
+      throw new Error(
+        `No person found for author: '${author}' in '${page.url}'`
+      )
+
+    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+    const parsedImage = person.frontmatter.image.split('.').slice(0, -1)
+
+    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+
+    const authorImage = getImage({
+      src: import(`../assets/people/${parsedImage}.jpg`),
+      width: 200,
+      quality: 80,
+      alt: 'person'
+    })
+
+    const postImage = getImage({
+      src: import(`../assets/blog/${parsedPostImage}.jpg`),
+      width: 450,
+      quality: 100,
+      alt: 'post'
+    })
+
+    return Promise.all([authorImage, postImage]).then(
+      ([authorImage, postImage]) => {
+        return {
+          ...page.frontmatter,
+          slug: page.url.split('/').pop(),
+          href: permalink,
+          heroImage: postImage.src,
+          person: {
+            ...person.frontmatter,
+            image: authorImage.src
+          }
+        }
+      }
+    )
+  })
+)
+---
+
+<Layout>
+  <main>
+    <Banner
+      text=''
+      class='h-[80vh] bg-cover bg-center'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+    <Section className='bg-white py-8 text-gray-600'>
+      <h2 class='pb-4 text-2xl md:text-3xl'>Meet the JUXT team!</h2>
+      <p class='text-lg md:text-xl font-extralight'>
+        Contact us if you would like to secure an onsite meeting with our
+        co-founders. <br />
+        Alternatively, stop by our sponsor table in the exhibition area to get your
+        swag and say hello.
+      </p>
+    </Section>
+    <Section
+      className='sm:bg-fixed relative py-20 bg-cover bg-top bg-no-repeat before:absolute before:w-full before:top-0 before:left-0 before:h-full before:bg-white/70'
+      style={{
+        backgroundImage: `url(${juxtPicture})`
+      }}
+    >
+      <div class='relative flex flex-col gap-6 w-2/3'>
+        <div class='gap-2'>
+          <h2 class=' text-gray-600 text-2xl md:text-3xl font-bold'>
+            "State of XTDB"
+          </h2>
+          <h3 class=' text-gray-600 text-xl md:text-2xl'>
+            JUXT CEO and Co-founder will be speaking at Clojure/Conj 2023
+          </h3>
+        </div>
+        <p class=' text-gray-600 text-lg md:text-xl font-light'>
+          XTDB is an immutable database implemented in Clojure. Launched almost
+          5 years ago, it's bitemporal and document-based, built with the
+          'database inside-out' mantra of exposing internal compoennts as
+          swappable parts. <br /><br />
+          Clojure has been a true super-weapon, allowing us to iterate quickly and
+          prototype new approaches with ease. It made the epic task of building somethign
+          as complex as a database actually possible. <br /><br />
+          XTDB is evolving. We've been proving cwith a new query engine, new storage
+          mode, and more powerful temporal functionality. <br /><br />
+          In the talk, I'll reflect on what we've learned so far building XTDB, and
+          where we're taking XTDB next.
+        </p>
+      </div>
+    </Section>
+    <Section className='bg-orange-100 text-black py-12'>
+      <h2 class=' text-gray-600 text-2xl md:text-3xl font-medium py-6'>
+        Clojure Blog Posts by JUXT
+      </h2>
+      <div
+        class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(4,_1fr)] justify-center gap-6 pb-10'
+      >
+        {finalResources.map((blog) => {
+          return (
+            <a
+              href={`/blog/${blog.href}`}
+              target='_blank'
+              class='bg-white p-4 flex flex-col gap-2 justify-between text-black'
+            >
+              <div class='text-xl'>{blog.title}</div>
+              <div class='font-light'>{blog.description}</div>
+              <div class='font-extralight'>{blog.publishedDate}</div>
+              <div class='flex gap-4 items-end'>
+                <img
+                  class='w-20 h-20 object-cover'
+                  src={blog.person.image}
+                  alt=''
+                />
+                <div class='flex flex-col gap-1 text-sm'>
+                  <div class='text-black font-medium underline-offset-2'>
+                    <div>
+                      {blog.person.name} {blog.person.lastName}
+                    </div>
+                  </div>
+                  <div>{blog.person.jobTitle}</div>
+                </div>
+              </div>
+            </a>
+          )
+        })}
+      </div>
+      <a
+        href='/blog/?blog%5BrefinementList%5D%5Bcategory%5D%5B0%5D=clojure'
+        class='text-gray-600 text-lg hover:underline flex justify-end items-center gap-2 pb-10'
+      >
+        To all Clojure blog posts
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke-width='1.5'
+          stroke='currentColor'
+          class='w-6 h-6'
+        >
+          <path
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'></path>
+        </svg>
+      </a>
+    </Section>
+  </main>
+</Layout>
