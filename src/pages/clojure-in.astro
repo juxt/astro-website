@@ -5,6 +5,7 @@ import Banner from '../components/Banner.astro'
 import Section from '../components/Section.astro'
 import { Blog } from '../components/types'
 import Layout from '../layouts/Layout.astro'
+import { formatDate } from '../utils'
 
 const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
   './blog/{clojure-in*.mdx, clojure-in*.md}'
@@ -119,7 +120,7 @@ const clojureInPicture = await getImage({
                       </div>
                       <div class='p-4'>
                         <p class='text-lg font-light dark:text-white text-sky-900'>
-                          {blog.publishedDate}
+                          {formatDate(blog.publishedDate)}
                         </p>
                       </div>
                     </a>

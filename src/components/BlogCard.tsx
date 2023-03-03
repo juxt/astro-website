@@ -1,3 +1,4 @@
+import { formatDate } from '../utils'
 import DraftBanner from './DraftBanner'
 import { TagIcon } from './Icons'
 import { Blog, Person } from './types'
@@ -47,7 +48,7 @@ export function BlogCard({
             </div>
 
             <div className='text-zinc-600 dark:text-zinc-300 text-xs'>
-              {publishedDate}
+              {formatDate(publishedDate)}
             </div>
           </div>
 

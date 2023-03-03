@@ -98,3 +98,12 @@ export function cloudImage(image: string, url: URL) {
 export function currentPage(pathname: string) {
   return removeTrailingSlash(removeLeadingSlash(pathname))
 }
+
+export function formatDate(ISO8601String: string) {
+  const date = new Date(ISO8601String)
+  return new Intl.DateTimeFormat([], {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  }).format(date)
+}
