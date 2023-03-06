@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useState } from 'preact/hooks'
+import { formatDate } from '../utils'
 import { Blog } from './types'
 
 export function ClojureInBlogs({
@@ -44,9 +45,9 @@ export function ClojureInBlogs({
               return (
                 <a
                   href={`/blog/${blog.href}`}
-                  className='group cursor-pointer justify-end flex flex-col w-80 mx-auto gap-4'
+                  className='text-white group cursor-pointer justify-end flex flex-col w-80 mx-auto gap-4'
                 >
-                  <div className='text-white flex flex-col justify-between'>
+                  <div className='flex flex-col justify-between'>
                     <h3 className='text-lg font-semibold'>
                       {location}: <br />
                       {title}
@@ -54,7 +55,9 @@ export function ClojureInBlogs({
                     <h5 className='font-extralight'>{blog.description}</h5>
                   </div>
                   <img className='' alt='blog' src={blog.heroImage} />
-                  <div className='font-thin'>{blog.publishedDate}</div>
+                  <div className='font-thin'>
+                    {formatDate(blog.publishedDate)}
+                  </div>
                 </a>
               )
             })}
