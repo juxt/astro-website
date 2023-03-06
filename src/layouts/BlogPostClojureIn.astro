@@ -7,6 +7,7 @@ import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
 import { Blog } from '../components/types'
 import Layout from './Layout.astro'
 import Section from '../components/Section.astro'
+import { formatDate } from '../utils'
 
 const {
   title,
@@ -148,10 +149,8 @@ const clojureInPicture = await getImage({
         >
           {description}
         </h2>
-        <div
-          class='text-white drop-shadow-lg shadow-black tracking-widest font-sans md:text-base lg:text-lg'
-        >
-          {publishedDate}
+        <div class=' text-white font-thin'>
+          {formatDate(publishedDate)}
         </div>
       </div>
     </div>
