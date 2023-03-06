@@ -1,5 +1,3 @@
-import { AstroComponentFactory } from 'astro/dist/runtime/server'
-
 export type Person = {
   code: string
   name: string
@@ -28,5 +26,5 @@ export type Blog = {
   slug: string
   href: string
   heroImage: string
-  clojureIn?: { season: string }
+  clojureIn?: { season: string; industry: string; quote: string }
 }

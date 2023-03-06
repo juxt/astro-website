@@ -1,15 +1,27 @@
 ---
 import { getImage } from '@astrojs/image'
+import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
-import Banner from '../components/Banner.astro'
+import podcastImage from '../assets/site/podcast-clojure-in.jpg'
+import { ClojureInBlogs } from '../components/ClojureInBlogs'
 import Section from '../components/Section.astro'
-import { Blog } from '../components/types'
+import { Blog, Person } from '../components/types'
 import Layout from '../layouts/Layout.astro'
 import { formatDate } from '../utils'
 
 const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
-  './blog/{clojure-in*.mdx, clojure-in*.md}'
+  './blog/clojure-in*.{md,mdx}'
 )
+
+const industries = clojureInBlogs.map(
+  (blog) => blog.frontmatter.clojureIn.industry
+)
+const uniqueIndustries = new Set(['all', ...industries])
+
+const industryValues = [...uniqueIndustries].map((industry) => ({
+  label: industry,
+  value: industry
+}))
 
 const filteredBlogs = clojureInBlogs.filter((blog) => !blog.frontmatter?.draft)
 
@@ -34,102 +46,257 @@ const parsedBlogs: Blog[] = await Promise.all(
   })
 )
 
-const seasonOrder = [
-  { value: 'one', label: 'Season One' },
-  { value: 'two', label: 'Season Two' }
-]
-
-const groupedBlogs: Record<string, { season: string; blogs: Blog[] }> =
-  parsedBlogs.reduce((coll, blog) => {
-    const season = blog.clojureIn.season
-    const currentSeasonBlogs = coll[season]?.blogs || []
-
-    return {
-      ...coll,
-      [season]: { season: season, blogs: [...currentSeasonBlogs, blog] }
-    }
-  }, {})
-
-const sortedBlogs = seasonOrder
-  .map((season) => {
-    const grouped = groupedBlogs[season.value]
-
-    const sortedByDate = grouped?.blogs.sort((a, b) => {
-      return (
-        new Date(b.publishedDate).getTime() -
-        new Date(a.publishedDate).getTime()
-      )
-    })
-    return { season: grouped?.season && season.label, blogs: sortedByDate }
-  })
-  .filter((blogs) => blogs.season)
+const sortedBlogs = parsedBlogs.sort((a, b) => {
+  return (
+    new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+  )
+})
 
 const clojureInPicture = await getImage({
-  src: import('../assets/site/Clojure-logo-colours-01.png'),
+  src: import('../assets/site/hero-image-clojurein.jpeg'),
   width: 1700,
   quality: 90,
   alt: 'clojure in logo'
 }).then((img) => img.src)
+
+type Podcast = { title: string; href: string }
+
+const podcasts: Podcast[] = [
+  {
+    title: 'S4E2 - Strange Loop Edition: A Chat with Uncle Bob',
+    href: 'https://pnc.st/s/juxt-cast/ecd73f05/strange-loop-edition-a-chat-with-uncle-bob'
+  },
+  {
+    title: 'S3E3 - User Empowerment',
+    href: 'https://pnc.st/s/juxt-cast/a775f47f/user-empowerment-s3e2'
+  },
+  {
+    title: 'S2E16 - re:Clojure interview 16 - Eric Normand',
+    href: 'https://pnc.st/s/juxt-cast/8caf4b5d/re-clojure-interviews-16-eric-normand'
+  },
+  {
+    title: 'S1E8 - ClojureTre, XTDB, and XT20 News',
+    href: 'https://pnc.st/s/juxt-cast/3a7bd843fff4467d/episode-8-clojuretre-crux-and-xt20-news'
+  }
+]
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+  '../pages/blog/{*.mdx,*.md}'
+)
+
+const filteredRecommendedBlogs = blogs.filter(
+  (blog) => blog.frontmatter.category === 'clojure'
+)
+
+const recommendededBlogs = filteredRecommendedBlogs
+  .sort((a, b) => {
+    return (
+      new Date(b.frontmatter.publishedDate).getTime() -
+      new Date(a.frontmatter.publishedDate).getTime()
+    )
+  })
+  .slice(0, 4)
+
+const finalResources = await Promise.all(
+  recommendededBlogs.map((page) => {
+    const author = page.frontmatter.author
+    const person = people.find(
+      (person) => person.frontmatter.code === page.frontmatter.author
+    )
+    if (!person)
+      throw new Error(
+        `No person found for author: '${author}' in '${page.url}'`
+      )
+    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
+    const parsedImage = person.frontmatter.image.split('.').slice(0, -1)
+
+    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+
+    const authorImage = getImage({
+      src: import(`../assets/people/${parsedImage}.jpg`),
+      width: 200,
+      quality: 80,
+      alt: 'person'
+    })
+
+    const postImage = getImage({
+      src: import(`../assets/blog/${parsedPostImage}.jpg`),
+      width: 450,
+      quality: 100,
+      alt: 'post'
+    })
+
+    return Promise.all([authorImage, postImage]).then(
+      ([authorImage, postImage]) => {
+        return {
+          ...page.frontmatter,
+          slug: page.url.split('/').pop(),
+          href: permalink,
+          heroImage: postImage.src,
+          person: {
+            ...person.frontmatter,
+            image: authorImage.src
+          }
+        }
+      }
+    )
+  })
+)
 ---
 
 <Layout navbar title='Clojure In'>
-  <main>
-    <Banner
-      text='Clojure In'
-      textColor='dark:text-white text-black'
-      style={{
-        backgroundImage: `url(${clojureInPicture})`
-      }}
-    />
-
-    <Section className='bg-orange-300 dark:bg-sky-900 py-12'>
-      <div class='flex flex-col gap-10 dark:text-white text-black'>
-        <h1 class='text-4xl font-medium'>
-          Case-studies on where Clojure is being used across Europe
+  <main class='bg-gradient-to-b from-black to-[#012d30]'>
+    <div
+      class='w-full h-[30vh] bg-cover bg-center'
+      style={{ backgroundImage: `url(${clojureInPicture})` }}
+    >
+      <div
+        class='flex justify-center md:justify-start text-center md:text-left items-end md:items-end h-full mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl pb-10'
+      >
+        <h1
+          class='text-white drop-shadow-lg shadow-black tracking-widest leading-snug font-sans text-4xl md:text-6xl lg:text-8xl'
+        >
+          Clojure In
         </h1>
-        <h2 class='text-2xl font-light'>
-          "Clojure In" is a collection of stories about companies who have
-          adopted Clojure. In these articles, we interview key individuals
-          involved and chat about the challenges, issues, benefits and
-          trade-offs in their decision to go with Clojure.
-        </h2>
+      </div>
+    </div>
+
+    <Section className='py-4'>
+      <div class='flex flex-col gap-10 text-white lg:w-2/3'>
+        <h1 class='text-lg font-semibold'>
+          Innovative companies across the world - from global enterprises to
+          disruptive startups - are using Clojure for two separate, but equally
+          important, reasons: to elegantly design products, and to ship them
+          faster. These are their stories.
+        </h1>
+        <div>
+          <div class='text-lg font-extralight'>
+            In these interviews, CTOs and Tech Leads give us a unique
+            inside-view into development processes in a wide range of
+            industries. as they share the challenges, issues, benefits and
+            trade-offs in their decision to go with Clojure.
+            <br />
+            <br />
+            For those unfamiliar with Clojure, it's a dynamic, general-purpose programming
+            language, combining the approachability and interactive development of
+            a scripting language with an efficient and robust infrastructure for
+            multithreaded programming.
+          </div>
+        </div>
       </div>
     </Section>
 
-    <Section className='py-28'>
-      <div class='flex flex-col gap-28'>
-        {sortedBlogs.map(({ season, blogs }) => {
-          return (
-            <div class='flex flex-col items-center'>
-              <h3 class='text-4xl font-semibold uppercase dark:text-white text-black text-center pb-16'>
-                {season}
-              </h3>
-
-              <div class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
-                {blogs.map((blog) => {
-                  return (
-                    <a
-                      href={`/blog/${blog.href}`}
-                      class='h-full group cursor-pointer justify-between flex flex-col w-96 mx-auto bg-lime-500 dark:bg-sky-900 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
-                    >
+    <Section className='py-4'>
+      <ClojureInBlogs
+        client:only
+        sortedBlogs={sortedBlogs}
+        industries={industryValues}
+      />
+    </Section>
+    <Section>
+      <h2 class='font-medium text-3xl text-white py-8'>
+        Additional Resources:
+      </h2>
+      <div class='flex flex-col gap-10'>
+        <h5 class='font-extralight text-2xl text-white'>Podcast</h5>
+        <div
+          class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(4,_1fr)] justify-center gap-6 pb-10 text-white'
+        >
+          {podcasts.map((podcast) => {
+            return (
+              <a
+                href={podcast.href}
+                target='_blank'
+                class='flex flex-col justify-between gap-3 hover:underline'
+              >
+                <div class='text-lg'> {podcast.title}</div>
+                <Image
+                  alt='image'
+                  width={600}
+                  quality={80}
+                  class='aspect-square object-cover'
+                  src={podcastImage}
+                />
+              </a>
+            )
+          })}
+        </div>
+        <a
+          href='https://pod.link/juxtcast'
+          target='_blank'
+          class='text-white text-lg hover:underline flex justify-end items-center gap-2 pb-10'
+        >
+          To all JUXT Cast episodes
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke-width='1.5'
+            stroke='currentColor'
+            class='w-6 h-6'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'></path>
+          </svg>
+        </a>
+        <h5 class='font-extralight text-2xl text-white'>Blog Posts</h5>
+        <div
+          class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(4,_1fr)] justify-center gap-6 pb-10'
+        >
+          {finalResources.map((blog) => {
+            return (
+              <a
+                href={`/blog/${blog.href}`}
+                target='_blank'
+                class='bg-white p-4 flex flex-col gap-4 justify-between text-black'
+              >
+                <div class='text-xl'>{blog.title}</div>
+                <div class='font-light'>{blog.description}</div>
+                <div class='flex gap-4 items-end'>
+                  <img
+                    class='w-20 h-20 object-cover'
+                    src={blog.person.image}
+                    alt=''
+                  />
+                  <div class='flex flex-col gap-1 text-sm'>
+                    <div class='text-black font-medium underline-offset-2'>
                       <div>
-                        <img alt='blog' src={blog.heroImage} />
-                        <h3 class='p-4 text-2xl font-semibold dark:text-white text-sky-900'>
-                          {blog.title}
-                        </h3>
+                        {blog.person.name} {blog.person.lastName}
                       </div>
-                      <div class='p-4'>
-                        <p class='text-lg font-light dark:text-white text-sky-900'>
-                          {formatDate(blog.publishedDate)}
-                        </p>
-                      </div>
-                    </a>
-                  )
-                })}
-              </div>
-            </div>
-          )
-        })}
+                    </div>
+                    <div>{blog.person.jobTitle}</div>
+                  </div>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+
+        <a
+          href='/blog/?blog%5BrefinementList%5D%5Bcategory%5D%5B0%5D=clojure'
+          class='text-white text-lg hover:underline flex justify-end items-center gap-2 pb-10'
+        >
+          To all Clojure blog posts
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke-width='1.5'
+            stroke='currentColor'
+            class='w-6 h-6'
+          >
+            <path
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'></path>
+          </svg>
+        </a>
       </div>
     </Section>
   </main>
