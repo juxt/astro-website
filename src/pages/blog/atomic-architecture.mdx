@@ -149,9 +149,16 @@ We don't prescribe how this is done, but recommend that access control policies 
 
 ## 6. Record Events
 
-Each application of a domain operation should be recorded as an event.
+Our system has established the order of operations that have been successfully applied to the domain's state.
+It is important to publish this 'operation log' downstream to consumers.
+Since each entry in the log indicates that a particualr operation has been applied at a certain time, we call this a log of _events_, or simply, an _event log_.
 
-These events can be distributed to downstream consumers for notification, analytics, audit, materialized views and other purposes.
+Consumers of these events may be looking for notification that a particular operation has occured.
+For example, an emailer may be triggered to send an email based on a send-email operation.
+This emailer may report the success or failure of the email via the remote API, yielding a further change to the domain's state and yielding another event, for instance, 'successfully-sent-email'.
+
+Another consumer might be keeping a view up to date, for real-time analytics.
+Yet another might be training a machine-learning model.
 
 ## 7. Historic Versions
 
