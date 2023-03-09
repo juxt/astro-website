@@ -28,35 +28,124 @@ But what are these principles? That's what this blog article is about.
 
 ## 1. Shared State
 
-Management of state is a huge source of complexity.
+In recent years we have seen a strong trend of autonomous development teams building micro-service based architectures.
 
-Model state as a single value at a certain time (like the #clojurescript #reagent folks do).
+While we recognise the reasoning and benefits behind this approach, there are some significant downsides.
+Firstly, there are obvious issues around the need for careful orchestration between services to meet business goals.
+But in addition, when business state is scattered across a number of services, it is more difficult to locate information and make ad-hoc queries across multiple services as you can with a single database.
 
-If you want micro-services, keep them stateless. Get them to read/write state from a central domain store.
+Last but not least, if every service is responsible for storing its own state, every service must be kept secure to ensure its data cannot be accessed and written to from unauthorized parties.
+If state is kept in a single service, more resources can be dedicated on securing that service.
+This is the same reasoning for why you might store valuables in a bank vault.
+
+Rather than return to monolith-based architectures, we argue that much of the benefit of microservices can be enjoyed by separating functionality from state.
+We encourage the development of a diverse set of custom _stateless_ micro-services, which focus on user journeys and goals.
+But we propose a policy that all such services, within a given domain, source and store their state in a _single centralised service_.
+
+<aside>
+Programmers might note there are strong parallels here with the programming paradigms of object-orientation (where each object manages its own state) and functional programming, especially functional reactive programming (FRP).
+In Object-Oriented (OO) programming, each object manages its own state.
+In Functional Reactive Programming, 'pure' functions are applied in succession to a single data structure. We say that the state, at any given time, is the result of the _reduction_ of all the functions that have been applied up to that time.
+The benefit of this approach is that it is possible to reason about the state of a system, at any given point in time.
+This greatly helps with the debugging, maintenance and auditability of a system, properties that are very valuable in certain contexts.
+</aside>
 
 ## 2. Domain Operations
 
-Define domain operations, with business names, that operate on the shared state. Insist that all access to shared state, read and write, is made via an operation.
+Having separated out the state, we can now focus on the functionality of the system.
 
-Each operation encapsulates the knowledge of why and how to access state.
+We break up the functionality into discreet atomic business-domain **operations**.
+
+Each operation is given an name, unique within the domain.
+The name should indicate what the operation does.
+
+For example:
+
+- new-customer
+- create-customer-account
+- order-product
+- invoice-customer
+- refund-customer
+
+For each operation, answers are sought to a series of questions, capturing the _what?_, _how?_ and _who can?_ of the operation.
+
+Let's take refund-customer as an example:
+
+- What does it mean to refund a customer?
+- What changes to the overall state of the system happen when a customer is refunded? For example, should a customer's account balance be credited?
+- What other effects happen when a customer is refunded, for example, should an email be sent to the customer?
+- Who is authorized to initiate a customer refund?
+
+Once answers to these questions are determined, we can implement these operations in code.
 
 ## 3. Contractual Interfaces
 
-Allow applications to call operations remotely via APIs:  REST-like, GraphQL, gRPC - whatever makes sense for application clients.
+Having defined the business operations of the domain, now we focus on how these operations are invoked.
 
-Keep APIs stable, preserve compatibility as you evolve them.
+Our users will be interacting with applications, so we need to allow these applications to invoke these operations on their behalf.
+We can do this by building Application Programming Interfaces (APIs).
+
+We see architectures where services are essentially state-less, sharing a central database for state.
+Services may well be managed by a container-based orchestration platform such as Kubernetes, and stateless services are easier to scale horizontally to respond to changes in demand.
+
+However, if a database is accessible directly by services, the result is that services become tightly coupled to the database schema.
+As the number of services increase, the difficulty of rolling out changes to the database schema increases.
+
+Inserting an interface or interfaces between services and the database can provide the necessary decoupling, allowing a greater freedom of independent evolution.
+Interfaces can provide to consumers a reliable and stable surface under which the database model may be evolving.
+So the database model can focus on the overall domain while interfaces can focus on providing the most appropriate data services to client applications.
+In some cases, a single interface might suffice.
+In other cases, there may be a need to provide a different interface to different classes of application.
+
+By far the most dominant type of interface implementation is HTTP-based 'REST' interface consisting of individual endpoints which client applications can call with HTTP methods such as GET and POST.
+Other interface implementations might include GraphQL or gRPC, where appropriate.
+The type of implementation doesn't matter so much.
+
+What does matter is that all operations that may modify the data held in a database are made indirectly via requests to these interfaces rather than directly against the database.
 
 ## 4. Data Consistency
 
-Only apply domain operations against the very latest version of the shared state. Apply operations, one after another.
+Consistent systems don't allow two people to book the same hospital appointment, or sell you a product that is actually out-of-stock, or exhibit other similar anomalous behavior.
 
-Use a single thread if necessary. Don't trade consistency for performance or scaleability. There are other techniques available to you.
+In short, consistent systems are systems that users can trust. They handle data with care, accuracy and precision.
+
+When systems aren't consistent, the inevitable mistakes and anomolies that occur must be handled manually, or worse, by layers and layers of additional code and workarounds, hugely adding to the system's complexity, contributing to yet more anomolies.
+
+Systems that aren't consistent are also systems that are intractable.
+So mistakes end up being are brushed aside and complaining users are fobbed off.
+
+Consistency should be a minimum standard that users can expect of their data systems.
+Yet all too often, consistency is negotiated away with dubious arguments about system performance or developer productivity.
+
+The state of a domain is constantly changing. Yet, anytime that state is copied, it is potentially already stale. Any time a decision is made based on stale data, there's a risk of making the wrong decision.
+
+Yet, so many IT processes rely on copying data from one place to another.
+
+In Atomic Architecture, we recognise that data needs to be made available to multiple systems.
+However, we carefully segregate the changeable data of the present (that a domain's operations act upon) with the immutable data of the past (that can be safely shared with downstream consumers).
+This is the key to preserving consistency and re-esablishing trustworthiness as a guarenteed property of the systems we deliver to our users.
+
+Technically, we want our operations to be applied to the domain's state in a linear ordered sequence.
+For a given domain, there is only one official order of operations, and one 'truth' about how the state of the domain's universe has occured.
+This is in stark contrast to architectures where multiple services all have their own 'version' of the facts.
+
+For many implementations, processing a queue of operations using a single thread, provides sufficient performance.
+For implementations at the extreme end of the spectrum, more sophisticated algorithms are required to process operations in parallel and yet still preserve the property of [linearizability](https://en.wikipedia.org/wiki/Linearizability).
 
 ## 5. Access Control
 
-Apply each domain operation on behalf of a particular subject, and only apply it if access has been granted.
+When we elect to share a single set of mutable state between all the applications of a domain, we run a greater risk that data might be accessed by unauthorized parties.
 
-Insist that every API request is accompanied by an access token.
+Therefore, we must ensure that every access to every item of data is subject to access control.
+This implies that we cannot rely on _ad-hoc_ code to protect data, nor should we rely on retrofitting access control logic later in the development process.
+
+For this reason, we state that, by default, every request by an application to an API should be accompanied by an [access-token](https://www.rfc-editor.org/rfc/rfc6749#section-1.4) to identify the user the request is made on behalf of.
+
+Of course, there are exceptions and some APIs offer public access to data.
+But, for the majority of the kinds of systems that we build within organisations, knowing who is making the request is an essential first step in determining whether and how to respond to the request.
+
+In addition, it should be possible to easily inspect and manage which users have access to which resources.
+We don't prescribe how this is done, but recommend that access control policies are determined for each and every domain operation.
 
 ## 6. Record Events
 
@@ -70,6 +159,11 @@ For each event, it is a desirable to have the capability to recreate the entire 
 
 If an operation contains logic/code, consider storing the program alongside the operation in the database.
 
+
 ## Over to you
 
 Write to me at mal@juxt.pro!
+
+## Notes
+
+"Keeping your app-state in one place" -- https://news.ycombinator.com/item?id=34951014
