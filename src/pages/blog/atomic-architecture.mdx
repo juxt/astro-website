@@ -14,7 +14,9 @@ tags:
 import { Image } from '@astrojs/image/components'
 import diagram from '../../assets/blog/atomic-architecture.jpg'
 
-As part of our drive to building better data systems for our customers, we've been identifying the architectural principles we believe are keys tools in the defence against creeping complexity in software.
+Software is an ever-increasing part of our lives, and yet it is difficult and expensive to build systems that work accurately, reliably, and securely.
+
+As part of our drive to building better data systems for our customers, we've identified a number of architectural principles we believe can yield better software systems.
 
 These principles are brought together in a concept we're calling 'Atomic Architecture'.
 
@@ -162,7 +164,17 @@ Yet another might be training a machine-learning model.
 
 ## 7. Historic Versions
 
-For each event, it is a desirable to have the capability to recreate the entire state on which the operation was applied.
+This is the last and perhaps most ambitious principle.
+In order to support our users well, we need to be able to understand our data systems.
+Subject to the necessary privileges, authorized parties should be able to gather as much accurate data about the system as possible, where necessary.
+
+Ideally, this should include the ability to ask questions about the history of interactions with a system, not just the current state. We often need to understand how the current state occured.
+
+Fortunately, there are an increasing number of enabling technologies to make this possible.
+The first is logs with infinite retention, like [Kafka](https://kafka.apache.org/).
+There are also databases, such as [Datomic](https://www.datomic.com/), [XTDB](https://xtdb.com) (and others) that support _time-travel_, allowing you to analyse state in the past.
+
+Combined with a single order of events, a domain can create and make full use of an accurate record of its history.
 
 If an operation contains logic/code, consider storing the program alongside the operation in the database.
 
