@@ -1,0 +1,42 @@
+---
+author: 'jon'
+title: 'XTDB and Apache Arrow'
+description: 'On Separate of Storage and Compute, and Apache Arrow'
+category: 'xtdb
+layout: '../../layouts/BlogPost.astro'
+heroImage: 'fjord.jpg'
+---
+
+A big change in XTDB 2.0 is that we are using Apache Arrow as our data-format. Why have we done this?
+
+## Speed
+
+In XTDB 1.0, we store the data for each node in a local RocksDB instance. RocksDB is a fantastic embeddable Key/Value database, providing fast inserts and seeks.
+
+We have worked hard on tuning our usage of the underlying key/value stores in XTDB, one example being to minimize the amount of ByteBuffers we use to navigate the indexes, and attemping to reuse ByteBuffers where possible. But this memory management of buffers is complex, and then there is also the inherent cost of serialisating and deserialising between the internal data-format of the underlying KV store and the query engine.
+
+Apache Arrow is lower level than an embedded Key/Value database. It sits just above the data itself, allowing you to fetch your data, traverse and sort it, in a highly optimised way, without any need to copy or deserialise. The data itself is store within memory-mapped files, and the design of Arrow is focused on _speed_, having mechanical sympathy with attention to SIMD and vectorization.
+
+We also benefit in XTDB 2.0, whereby we fetch chunks of columnar data at a time, given that Arrow is columnar. When you need to perform analytical queries (sorting, aggregation), this approach means less dipping in and out of the underlying storage, as you are retrieving batches of data at every time. For many use cases we benefit from data locality, whereby the atoms of data we're interested in, live side-by-side in the same column file. This locality means less dipping in and out, but it also allows for compression, meaning the fetching of the data is faster still.
+
+## Access
+
+In XTDB 1.0, we seralize data into storage using a Clojure library called Nippy. Nippy is a great tool, but it's not a cross-language solution. For example, developers using Python, wanting to retrieve data from the XTDB underlying stores, will have a more difficult time.
+
+In XTDB, there is also a lack of information about the types and schemas of data held within those stores, and of course, not being columnar, the data is all lumped together into a single S3 folder, or into a small number of K/V indexes held by the local node.
+
+We've always wanted XTDB to be open. It is open source, but it's not currently open in the sense that you can get your data back out easily.
+
+By using Apache Arrow for XTDB 2.0, you can now use any of the languages and tooling that has support for Arrow, which itself is open source and has a published data-format specification.
+
+The columnar chunks that we store are also inspectable, whereby you can discover the min and max ranges of the data, the schema and types used within, and more. XTDB 2.0 is built such that you can access the data and make use of it, without the need to go through an actual XTDB node.
+
+## Columnar
+
+One of the biggest trade-offs we made with XTDB 1.0, is that every node need to have a local full copy of all the data. This was necessary because the query engine at the time was 'chatty' with the indexes, in particularly needing the bitemporal indexes close at hand.
+
+By going columnar, the query engine pulls in just the column chunk it needs to satisfy a query, utilising light-weight metadata fields about each chunk, giving min/max range data, and bloom filters to determine if a chunk contains a particular value or not. We are also adding 'light and adaptive' indexes, to prevent the need to fetch the chunks, unless absolutely necessary. Once a chunk is fetched, it is then intelligently cached.
+
+The columnar approach has benefits in that the data is _split_ up. For example, if a certain column of data, for example belonging to a particular field/attribute, is rarely accessed, then we could set suitable policies for the management of that data on disk. Since column files can be stored within Amazon's S3, we could use AWS glacier to move the rarely access files onto a cheaper level of storage.
+
+The main win, from separation of the compute (querying) from the storage (columnar data), is scalability. By not having all the data on every node, a node takes less time to start-up. By not having to have all the data on each node, the node is more light-weight and has less local storage demands. Since all the data is held in an object store such as S3, the storage demands of the entire system is cheaper, and the potential for scaling up for large data-sets is huge.
