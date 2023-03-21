@@ -21,6 +21,13 @@ const bannerPicture = await getImage({
   alt: 'clojure-conj banner'
 }).then((img) => img.src)
 
+const bannerLogo = await getImage({
+  src: import('../assets/site/sponsoring-logo.png'),
+  width: 1000,
+  quality: 90,
+  alt: 'sponsoring logo'
+}).then((img) => img.src)
+
 const juxtPicture = await getImage({
   src: import('../assets/site/about-us-banner-v2.jpg'),
   width: 1700,
@@ -97,8 +104,12 @@ const finalResources = await Promise.all(
     class='w-full h-[65vh] bg-cover bg-center'
   >
     <div
-      class='flex justify-center md:justify-start text-center md:text-left items-end md:items-end h-full mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl pb-28 sm:pb-10'
+      class='flex flex-col gap-6 sm:flex-row sm:gap-0 items-center h-full justify-center sm:justify-between'
     >
+      <img src={bannerLogo} alt='' class='w-96' />
+      <h2 class='text-2xl md:text-3xl text-white px-10'>
+        April 27-28 <br /> Durham, NC <br /> USA
+      </h2>
     </div>
   </div>
 
