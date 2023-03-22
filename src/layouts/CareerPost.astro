@@ -1,9 +1,10 @@
 ---
 import { getImage } from '@astrojs/image'
-import Banner from '../components/Banner.astro'
-import Clickable from '../components/Clickable.astro'
-import DraftBanner from '../components/DraftBanner'
-import Section from '../components/Section.astro'
+import { slugifyPath } from '@utils/common'
+import Banner from '@components/Banner.astro'
+import Clickable from '@components/Clickable.astro'
+import DraftBanner from '@components/DraftBanner'
+import Section from '@components/Section.astro'
 import Layout from './Layout.astro'
 
 export type CareerPostProps = {
@@ -30,7 +31,7 @@ const bannerPicture = await getImage({
   alt: 'JUXT office'
 }).then((img) => img.src)
 
-const slug = Astro.props.frontmatter.url.split('/').pop()
+const slug = slugifyPath(Astro.props.frontmatter.url)
 
 const schema = JSON.stringify({
   context: 'https://schema.org/',

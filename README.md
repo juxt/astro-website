@@ -42,7 +42,7 @@ All you need to create a new page is a `*name*.astro` file with the following co
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '@layouts/Layout.astro'
 ---
 
 <Layout navbar>

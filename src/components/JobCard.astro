@@ -1,13 +1,14 @@
 ---
-import { CareerPostProps } from '../layouts/CareerPost.astro'
+import { CareerPostProps } from '@layouts/CareerPost.astro'
 import Clickable from './Clickable.astro'
 import DraftBanner from './DraftBanner'
 import { ClockIcon, LocationIcon, StarIcon } from './Icons'
+import { slugifyPath } from '@utils/common'
 
 const { location, department, contract, position, url, draft } =
   Astro.props as CareerPostProps & { url: string }
 
-const slug = url.split('/').pop()
+const slug = slugifyPath(url)
 
 const careerJobLink = `/careers/${slug}`
 ---

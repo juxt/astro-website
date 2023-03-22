@@ -2,7 +2,7 @@ import 'preact/jsx-runtime'
 import classNames from 'classnames'
 import { useEffect, useState } from 'preact/hooks'
 import logo from '/images/logo.svg'
-import { useOutsideClick } from '../utils'
+import { useOutsideClick } from '@utils/preactUtils'
 import DarkModeSwitch from './DarkModeSwitch'
 
 type NavLinkProp = {

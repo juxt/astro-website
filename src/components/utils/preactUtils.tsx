@@ -1,21 +1,6 @@
 import 'preact/jsx-runtime'
 import { useRef, useEffect, useState } from 'preact/hooks'
 
-/** Remove \ and / from beginning of string */
-export function removeLeadingSlash(path: string) {
-  return path.replace(/^[/\\]+/, '')
-}
-
-/** Remove \ and / from end of string */
-export function removeTrailingSlash(path: string) {
-  return path.replace(/[/\\]+$/, '')
-}
-
-// capitalize first letter of string
-export function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
 export function useOutsideClick(callback) {
   const ref = useRef(null)
 
@@ -80,30 +65,4 @@ export const usePagination = ({
     nextPageExists,
     currentPage
   }
-}
-
-// !! Should use Image or getImage instead of this. !!
-// usage:
-// cloudImage('/images/site/homepage-banner.jpeg?width=1500', url)
-// where url is Astro.url
-
-export function cloudImage(image: string, url: URL) {
-  const domain =
-    url.hostname !== 'localhost'
-      ? `https://ampyikzikq.cloudimg.io/${url.host}`
-      : ''
-  return `${domain}${image}`
-}
-
-export function currentPage(pathname: string) {
-  return removeTrailingSlash(removeLeadingSlash(pathname))
-}
-
-export function formatDate(ISO8601String: string) {
-  const date = new Date(ISO8601String)
-  return new Intl.DateTimeFormat([], {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  }).format(date)
 }

@@ -1,17 +1,18 @@
 ---
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
-import DraftBanner from '../components/DraftBanner'
+import '../blog.css'
+import { BlogCard } from '@components/BlogCard'
+import DraftBanner from '@components/DraftBanner'
 import {
   LinkedInIcon,
   RedditIcon,
   TagIcon,
   TwitterIcon
-} from '../components/Icons'
-import { Blog, Person } from '../components/types'
+} from '@components/Icons'
+import { Blog, Person } from '@utils/types'
+import { parseBlogs } from '@utils/common'
 import Layout from './Layout.astro'
-import '../blog.css'
-import { BlogCard } from '../components/BlogCard'
 import { getImage } from '@astrojs/image'
 
 const { title, description, heroImage, category, author, draft } = Astro.props
@@ -32,7 +33,7 @@ const blogsWithoutCurrent = blogs.filter(
 type GroupedBlogs = {
   authorCategory: MarkdownInstance<Blog>[]
   category: MarkdownInstance<Blog>[]
-  author: MarkdownInstance<Blog>[]
+  author: MarkdownInstance<Person>[]
 }
 
 // To index the blogs that share author && catagory or just one with the current blog
@@ -93,51 +94,21 @@ const uniqueBlogs: MarkdownInstance<Blog>[] = allSortedBlogs.reduce(
 
 const finalBlogs = [...slicedBlogs, ...uniqueBlogs].slice(0, 3)
 
-const finalResources = await Promise.all(
-  finalBlogs.map((page) => {
-    const author = page.frontmatter.author
-    const person = people.find(
-      (person) => person.frontmatter.code === page.frontmatter.author
-    )
-    if (!person)
-      throw new Error(
-        `No person found for author: '${author}' in '${page.url}'`
-      )
-    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
-    const parsedImage = person.frontmatter.image.split('.').slice(0, -1)
+const isDev = import.meta.env.DEV
 
-    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+const heroAuthorImports = {
+  heroImageImport: (heroImage) => import(`../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) =>
+    import(`../assets/people/${authorImage}.jpg`)
+}
 
-    const authorImage = getImage({
-      src: import(`../assets/people/${parsedImage}.jpg`),
-      width: 200,
-      quality: 80,
-      alt: 'person'
-    })
-
-    const postImage = getImage({
-      src: import(`../assets/blog/${parsedPostImage}.jpg`),
-      width: 450,
-      quality: 100,
-      alt: 'post'
-    })
-
-    return Promise.all([authorImage, postImage]).then(
-      ([authorImage, postImage]) => {
-        return {
-          ...page.frontmatter,
-          slug: page.url.split('/').pop(),
-          href: permalink,
-          heroImage: postImage.src,
-          person: {
-            ...person.frontmatter,
-            image: authorImage.src
-          }
-        }
-      }
-    )
-  })
-)
+const finalResources = await parseBlogs({
+  rawBlogs: finalBlogs,
+  rawPeople: people,
+  getImage,
+  isDev: isDev,
+  ...heroAuthorImports
+})
 
 const person = people.find((person) => person.frontmatter.code === author)
 
@@ -148,8 +119,6 @@ if (!person) {
 const {
   frontmatter: { name, lastName, jobTitle, image, expert, expertDraft }
 } = person
-
-const isDev = import.meta.env.DEV
 
 const isExpert = (expert && !expertDraft) || (isDev && expert)
 

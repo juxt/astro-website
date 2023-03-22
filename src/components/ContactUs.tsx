@@ -1,8 +1,8 @@
 import { useState } from 'preact/hooks'
 import { useForm } from 'react-hook-form'
-import morganRoss from '../assets/site/morgan-ross-onthemarket.jpeg'
-import joe from '../assets/people/joe.jpg'
-import { TickIcon } from '../components/Icons'
+import morganRoss from '@assets/site/morgan-ross-onthemarket.jpeg'
+import joe from '@assets/people/joe.jpg'
+import { TickIcon } from '@components/Icons'
 
 const inputProps = {
   type: 'text',

@@ -1,8 +1,8 @@
 ---
 import { getImage } from '@astrojs/image'
-import Banner from '../components/Banner.astro'
-import Section from '../components/Section.astro'
-import Layout from '../layouts/Layout.astro'
+import Banner from '@components/Banner.astro'
+import Section from '@components/Section.astro'
+import Layout from '@layouts/Layout.astro'
 
 const bannerPicture = await getImage({
   src: import('../assets/site/radar-banner.jpg'),

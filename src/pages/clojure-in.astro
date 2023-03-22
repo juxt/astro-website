@@ -3,14 +3,22 @@ import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
 import podcastImage from '../assets/site/podcast-clojure-in.jpg'
-import { ClojureInBlogs } from '../components/ClojureInBlogs'
-import Section from '../components/Section.astro'
-import { Blog, Person } from '../components/types'
-import Layout from '../layouts/Layout.astro'
-import { formatDate } from '../utils'
+import { ClojureInBlogs } from '@components/ClojureInBlogs'
+import Section from '@components/Section.astro'
+import { Blog, Person } from '@utils/types'
+import { parseBlogs } from '@utils/common'
+import Layout from '@layouts/Layout.astro'
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+  '../pages/blog/{*.mdx,*.md}'
+)
 
 const clojureInBlogs = await Astro.glob<MarkdownInstance<Blog>>(
   './blog/clojure-in*.{md,mdx}'
+)
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
 )
 
 const industries = clojureInBlogs.map(
@@ -25,26 +33,19 @@ const industryValues = [...uniqueIndustries].map((industry) => ({
 
 const filteredBlogs = clojureInBlogs.filter((blog) => !blog.frontmatter?.draft)
 
-const parsedBlogs: Blog[] = await Promise.all(
-  filteredBlogs.map(async (blog) => {
-    const permalink = blog.file.split('/').slice(-1)[0].split('.')[0]
+const heroAuthorImports = {
+  heroImageImport: (heroImage) => import(`../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) =>
+    import(`../assets/people/${authorImage}.jpg`)
+}
 
-    const parsedPostImage = blog.frontmatter.heroImage.split('.').slice(0, -1)
-
-    const postImage = await getImage({
-      src: import(`../assets/blog/${parsedPostImage}.jpg`),
-      width: 450,
-      quality: 100,
-      alt: 'clojure in blog post image'
-    })
-
-    return {
-      ...blog.frontmatter,
-      href: permalink,
-      heroImage: postImage.src
-    }
-  })
-)
+const parsedBlogs = await parseBlogs({
+  rawBlogs: filteredBlogs,
+  rawPeople: people,
+  isDev: import.meta.env.DEV,
+  getImage,
+  ...heroAuthorImports
+})
 
 const sortedBlogs = parsedBlogs.sort((a, b) => {
   return (
@@ -80,14 +81,6 @@ const podcasts: Podcast[] = [
   }
 ]
 
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-)
-
-const blogs = await Astro.glob<MarkdownInstance<Blog>>(
-  '../pages/blog/{*.mdx,*.md}'
-)
-
 const filteredRecommendedBlogs = blogs.filter(
   (blog) => blog.frontmatter.category === 'clojure'
 )
@@ -101,51 +94,13 @@ const recommendededBlogs = filteredRecommendedBlogs
   })
   .slice(0, 4)
 
-const finalResources = await Promise.all(
-  recommendededBlogs.map((page) => {
-    const author = page.frontmatter.author
-    const person = people.find(
-      (person) => person.frontmatter.code === page.frontmatter.author
-    )
-    if (!person)
-      throw new Error(
-        `No person found for author: '${author}' in '${page.url}'`
-      )
-    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
-    const parsedImage = person.frontmatter.image.split('.').slice(0, -1)
-
-    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
-
-    const authorImage = getImage({
-      src: import(`../assets/people/${parsedImage}.jpg`),
-      width: 200,
-      quality: 80,
-      alt: 'person'
-    })
-
-    const postImage = getImage({
-      src: import(`../assets/blog/${parsedPostImage}.jpg`),
-      width: 450,
-      quality: 100,
-      alt: 'post'
-    })
-
-    return Promise.all([authorImage, postImage]).then(
-      ([authorImage, postImage]) => {
-        return {
-          ...page.frontmatter,
-          slug: page.url.split('/').pop(),
-          href: permalink,
-          heroImage: postImage.src,
-          person: {
-            ...person.frontmatter,
-            image: authorImage.src
-          }
-        }
-      }
-    )
-  })
-)
+const finalResources = await parseBlogs({
+  rawBlogs: recommendededBlogs,
+  rawPeople: people,
+  isDev: import.meta.env.DEV,
+  getImage,
+  ...heroAuthorImports
+})
 ---
 
 <Layout navbar title='Clojure In'>

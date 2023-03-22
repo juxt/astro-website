@@ -9,8 +9,8 @@ import {
   SearchBox,
   useHits
 } from 'react-instantsearch-hooks-web'
-import { BlogCard } from '../components/BlogCard'
-import { Blog } from '../components/types'
+import { BlogCard } from '@components/BlogCard'
+import { Blog } from '@components/utils/types'
 
 const algoliaClient = algoliasearch(
   'UIDFJO4C3W',

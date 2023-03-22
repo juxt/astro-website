@@ -1,7 +1,7 @@
-import { formatDate } from '../utils'
+import { formatDate } from '@utils/common'
 import DraftBanner from './DraftBanner'
 import { TagIcon } from './Icons'
-import { Blog, Person } from './types'
+import { Blog, Person } from '@utils/types'
 
 function BlogAuthor({ name, lastName, image, jobTitle }: Person) {
   return (

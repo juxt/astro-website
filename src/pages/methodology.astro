@@ -1,10 +1,10 @@
 ---
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
-import Clickable from '../components/Clickable.astro'
-import { ChevronRightIcon, TickIcon } from '../components/Icons'
-import Section from '../components/Section.astro'
-import Layout from '../layouts/Layout.astro'
+import Clickable from '@components/Clickable.astro'
+import { ChevronRightIcon, TickIcon } from '@components/Icons'
+import Section from '@components/Section.astro'
+import Layout from '@layouts/Layout.astro'
 
 const threadsPicture = await getImage({
   src: import('../assets/site/threads.png'),

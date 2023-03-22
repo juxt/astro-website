@@ -26,7 +26,7 @@ As practitioners, we're building a software stack that can greatly help with the
 
 But what are these principles? That's what this blog article is about.
 
-<Image src={diagram}/>
+<Image alt='diagram' src={diagram} />
 
 ## 1. Shared State
 
@@ -45,11 +45,17 @@ We encourage the development of a diverse set of custom _stateless_ micro-servic
 But we propose a policy that all such services, within a given domain, source and store their state in a _single centralised service_.
 
 <aside>
-Programmers might note there are strong parallels here with the programming paradigms of object-orientation (where each object manages its own state) and functional programming, especially functional reactive programming (FRP).
-In Object-Oriented (OO) programming, each object manages its own state.
-In Functional Reactive Programming, 'pure' functions are applied in succession to a single data structure. We say that the state, at any given time, is the result of the _reduction_ of all the functions that have been applied up to that time.
-The benefit of this approach is that it is possible to reason about the state of a system, at any given point in time.
-This greatly helps with the debugging, maintenance and auditability of a system, properties that are very valuable in certain contexts.
+  Programmers might note there are strong parallels here with the programming
+  paradigms of object-orientation (where each object manages its own state) and
+  functional programming, especially functional reactive programming (FRP). In
+  Object-Oriented (OO) programming, each object manages its own state. In
+  Functional Reactive Programming, 'pure' functions are applied in succession to
+  a single data structure. We say that the state, at any given time, is the
+  result of the _reduction_ of all the functions that have been applied up to
+  that time. The benefit of this approach is that it is possible to reason about
+  the state of a system, at any given point in time. This greatly helps with the
+  debugging, maintenance and auditability of a system, properties that are very
+  valuable in certain contexts.
 </aside>
 
 ## 2. Domain Operations
@@ -177,7 +183,6 @@ There are also databases, such as [Datomic](https://www.datomic.com/), [XTDB](ht
 Combined with a single order of events, a domain can create and make full use of an accurate record of its history.
 
 If an operation contains logic/code, consider storing the program alongside the operation in the database.
-
 
 ## Over to you
 

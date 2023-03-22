@@ -1,16 +1,17 @@
 ---
 import { getImage } from '@astrojs/image'
 import { MarkdownInstance } from 'astro'
-import Banner from '../components/Banner.astro'
-import { BlogCard } from '../components/BlogCard'
-import Clickable from '../components/Clickable.astro'
-import { QuoteIcon } from '../components/Icons'
-import Newsletter from '../components/Newsletter.astro'
-import Section from '../components/Section.astro'
-import TalkToUs from '../components/TalkToUs.astro'
-import { Blog, Person } from '../components/types'
-import CaseStudy, { CaseStudyProps } from '../layouts/CaseStudy.astro'
-import Layout from '../layouts/Layout.astro'
+import { parseBlogs, slugifyPath } from '@utils/common'
+import Banner from '@components/Banner.astro'
+import { BlogCard } from '@components/BlogCard'
+import Clickable from '@components/Clickable.astro'
+import { QuoteIcon } from '@components/Icons'
+import Newsletter from '@components/Newsletter.astro'
+import Section from '@components/Section.astro'
+import TalkToUs from '@components/TalkToUs.astro'
+import { Blog, Person } from '@utils/types'
+import CaseStudy, { CaseStudyProps } from '@layouts/CaseStudy.astro'
+import Layout from '@layouts/Layout.astro'
 
 const siteMetadata = await Astro.glob('../data/metadata.json')
 
@@ -84,9 +85,7 @@ const caseStudies = await Astro.glob<CaseStudyProps>(
 const featuredCaseStudiesMetadata = siteMetadata[0].homepage.featuredCaseStudies
 
 const featuredCaseStudies = featuredCaseStudiesMetadata.map((slug) => {
-  return caseStudies.find(
-    (caseStudy) => caseStudy.file.split('/').pop().split('.')[0] === slug
-  )
+  return caseStudies.find((caseStudy) => slugifyPath(caseStudy.file) === slug)
 })
 
 const people = await Astro.glob<MarkdownInstance<Person>>(
@@ -100,52 +99,22 @@ const peopleByCode = new Map(
 const featuredBlogsMetadata = siteMetadata[0].homepage.featuredBlogs
 
 const filteredBlogs = featuredBlogsMetadata.map((slug) => {
-  return blogs.find((blog) => blog.url.split('/').pop() === slug)
+  return blogs.find((blog) => slugifyPath(blog.url) === slug)
 })
 
-const featuredBlogs = await Promise.all(
-  filteredBlogs.map((page) => {
-    const author = page.frontmatter.author
-    const person = peopleByCode.get(author)
-    const expert = (isDev || !person?.expertDraft) && person?.expert
-    if (!person)
-      throw new Error(
-        `No person found for author: '${author}' in '${page.url}'`
-      )
-    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
-    const parsedImage = person.image.split('.').slice(0, -1)
-    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
+const heroAuthorImports = {
+  heroImageImport: (heroImage) => import(`../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) =>
+    import(`../assets/people/${authorImage}.jpg`)
+}
 
-    const authorImage = getImage({
-      src: import(`../assets/people/${parsedImage}.jpg`),
-      width: 200,
-      quality: 80,
-      alt: 'person'
-    })
-
-    const postImage = getImage({
-      src: import(`../assets/blog/${parsedPostImage}.jpg`),
-      width: 450,
-      quality: 100,
-      alt: 'post'
-    })
-
-    return Promise.all([authorImage, postImage]).then(
-      ([authorImage, postImage]) => {
-        return {
-          ...page.frontmatter,
-          href: permalink,
-          heroImage: postImage.src,
-          person: {
-            ...person,
-            expert,
-            image: authorImage.src
-          }
-        }
-      }
-    )
-  })
-)
+const featuredBlogs = await parseBlogs({
+  rawBlogs: filteredBlogs,
+  rawPeople: people,
+  isDev: isDev,
+  getImage,
+  ...heroAuthorImports
+})
 ---
 
 <Layout title='JUXT' navbar navbarNoBg>

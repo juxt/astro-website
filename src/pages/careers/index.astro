@@ -2,12 +2,12 @@
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
-import Banner from '../../components/Banner.astro'
-import Clickable from '../../components/Clickable.astro'
-import JobCard from '../../components/JobCard.astro'
-import Section from '../../components/Section.astro'
-import { CareerPostProps } from '../../layouts/CareerPost.astro'
-import Layout from '../../layouts/Layout.astro'
+import Banner from '@components/Banner.astro'
+import Clickable from '@components/Clickable.astro'
+import JobCard from '@components/JobCard.astro'
+import Section from '@components/Section.astro'
+import { CareerPostProps } from '@layouts/CareerPost.astro'
+import Layout from '@layouts/Layout.astro'
 
 const isDev = import.meta.env.DEV
 const jobPosts = await Astro.glob<MarkdownInstance<CareerPostProps>>(

@@ -1,10 +1,10 @@
 ---
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
-import DraftBanner from '../../components/DraftBanner'
-import { GithubIcon, LinkedInIcon, TwitterIcon } from '../../components/Icons'
-import { Person } from '../../components/types'
-import Layout from '../../layouts/Layout.astro'
+import DraftBanner from '@components/DraftBanner'
+import { GithubIcon, LinkedInIcon, TwitterIcon } from '@components/Icons'
+import { Person } from '@utils/types'
+import Layout from '@layouts/Layout.astro'
 
 export async function getStaticPaths() {
   const people = await Astro.glob<MarkdownInstance<Person>>(

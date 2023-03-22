@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useState } from 'preact/hooks'
-import { formatDate } from '../utils'
-import { Blog } from './types'
+import { formatDate } from '@utils/common'
+import { Blog } from './utils/types'
 
 export function ClojureInBlogs({
   sortedBlogs,

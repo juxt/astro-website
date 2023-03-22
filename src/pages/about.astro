@@ -2,11 +2,11 @@
 import { getImage } from '@astrojs/image'
 import { Image } from '@astrojs/image/components'
 import { MarkdownInstance } from 'astro'
-import Banner from '../components/Banner.astro'
-import { LinkIcon } from '../components/Icons'
-import Section from '../components/Section.astro'
-import { Person } from '../components/types'
-import Layout from '../layouts/Layout.astro'
+import Banner from '@components/Banner.astro'
+import { LinkIcon } from '@components/Icons'
+import Section from '@components/Section.astro'
+import { Person } from '@utils/types'
+import Layout from '@layouts/Layout.astro'
 
 const bannerPicture = await getImage({
   src: import('../assets/site/about-us-banner-v2.jpg'),

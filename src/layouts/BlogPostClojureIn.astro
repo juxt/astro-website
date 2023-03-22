@@ -2,12 +2,12 @@
 import { getImage } from '@astrojs/image'
 import { MarkdownInstance } from 'astro'
 import '../blog.css'
-import DraftBanner from '../components/DraftBanner'
-import { LinkedInIcon, RedditIcon, TwitterIcon } from '../components/Icons'
-import { Blog } from '../components/types'
+import DraftBanner from '@components/DraftBanner'
+import { LinkedInIcon, RedditIcon, TwitterIcon } from '@components/Icons'
+import { Blog, Person } from '@utils/types'
 import Layout from './Layout.astro'
-import Section from '../components/Section.astro'
-import { formatDate } from '../utils'
+import Section from '@components/Section.astro'
+import { parseBlogs, formatDate } from '@utils/common'
 
 const {
   title,
@@ -22,6 +22,10 @@ const {
 
 const blogs = await Astro.glob<MarkdownInstance<Blog>>(
   '../pages/blog/{*.mdx,*.md}'
+)
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
 )
 
 const blogsWithoutCurrent = blogs.filter(
@@ -92,26 +96,19 @@ const uniqueBlogs: MarkdownInstance<Blog>[] = allSortedBlogs.reduce(
 
 const finalBlogs = [...slicedBlogs, ...uniqueBlogs].slice(0, 2)
 
-const enrichedFinalBlogs: Blog[] = await Promise.all(
-  finalBlogs.map(async (blog) => {
-    const permalink = blog.file.split('/').slice(-1)[0].split('.')[0]
+const authorHeroImports = {
+  heroImageImport: (heroImage) => import(`../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) =>
+    import(`../assets/people/${authorImage}.jpg`)
+}
 
-    const parsedPostImage = blog.frontmatter.heroImage.split('.').slice(0, -1)
-
-    const postImage = await getImage({
-      src: import(`../assets/blog/${parsedPostImage}.jpg`),
-      width: 450,
-      quality: 100,
-      alt: 'clojure in blog post image'
-    })
-
-    return {
-      ...blog.frontmatter,
-      href: permalink,
-      heroImage: postImage.src
-    }
-  })
-)
+const enrichedFinalBlogs = await parseBlogs({
+  rawBlogs: finalBlogs,
+  rawPeople: people,
+  isDev: import.meta.env.DEV,
+  getImage,
+  ...authorHeroImports
+})
 
 const blogHref = Astro.url.href
 const shareIconStyle = 'fill-white hover:fill-juxt transition-colors'

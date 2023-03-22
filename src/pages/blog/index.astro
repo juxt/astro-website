@@ -1,10 +1,11 @@
 ---
 import { getImage } from '@astrojs/image'
 import { MarkdownInstance } from 'astro'
-import Banner from '../../components/Banner.astro'
-import { Blog, Person } from '../../components/types'
-import { BlogIndex } from '../../layouts/BlogIndex'
-import Layout from '../../layouts/Layout.astro'
+import { parseBlogs } from '@utils/common'
+import Banner from '@components/Banner.astro'
+import { Blog, Person } from '@utils/types'
+import { BlogIndex } from '@layouts/BlogIndex'
+import Layout from '@layouts/Layout.astro'
 
 const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
 
@@ -18,51 +19,19 @@ const peopleByCode = new Map(
 
 const isDev = import.meta.env.DEV
 
-const unfilteredBlogs: Blog[] = await Promise.all(
-  pages.map((page) => {
-    const author = page.frontmatter.author
-    const person = peopleByCode.get(author)
-    const expert = (isDev || !person?.expertDraft) && person?.expert
-    if (!person)
-      throw new Error(
-        `No person found for author: '${author}' in '${page.url}'`
-      )
-    const permalink = page.file.split('/').slice(-1)[0].split('.')[0]
-    const parsedImage = person.image.split('.').slice(0, -1)
+const authorImageImport = {
+  heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) =>
+    import(`../../assets/people/${authorImage}.jpg`)
+}
 
-    const parsedPostImage = page.frontmatter.heroImage.split('.').slice(0, -1)
-
-    const authorImage = getImage({
-      src: import(`../../assets/people/${parsedImage}.jpg`),
-      width: 200,
-      quality: 80,
-      alt: 'person'
-    })
-
-    const postImage = getImage({
-      src: import(`../../assets/blog/${parsedPostImage}.jpg`),
-      width: 450,
-      quality: 100,
-      alt: 'post'
-    })
-
-    return Promise.all([authorImage, postImage]).then(
-      ([authorImage, postImage]) => {
-        return {
-          ...page.frontmatter,
-          slug: page.url.split('/').pop(),
-          href: permalink,
-          heroImage: postImage.src,
-          person: {
-            ...person,
-            expert,
-            image: authorImage.src
-          }
-        }
-      }
-    )
-  })
-)
+const unfilteredBlogs = await parseBlogs({
+  rawBlogs: pages,
+  rawPeople: people,
+  isDev: isDev,
+  getImage,
+  ...authorImageImport
+})
 
 const blogs = unfilteredBlogs.filter(({ draft }) => isDev || !draft)
 
