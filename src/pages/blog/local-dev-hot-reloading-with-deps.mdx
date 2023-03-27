@@ -1,0 +1,109 @@
+---
+author: 'lda'
+title: 'Building and Deploying Typescript Libraries with Hot Reloading Using Yarn'
+description: 'A Comprehensive Guide for Building and Deploying Typescript Libraries with Local Development in Mind'
+category: 'typescript'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2023-03-28'
+heroImage: 'clojutre.jpg'
+---
+
+If you are a developer who has worked on large projects, you know how important it is to have reusable code.
+A great way to achieve this is by building and deploying libraries.
+While there are many tutorials on how to create a library, not many discuss how to hot reload local dependencies for seamless local development.
+In this article, we will explore the steps to build and deploy a Typescript library with hot reloading using Yarn.
+
+### Prerequisites:
+
+Before getting started, make sure you have Yarn version `1.22.19` or higher and Node version `18.10.0` or higher installed.
+
+## Part 1: Setting Up a Local Project
+
+Preconstruct is a tool that can help you set up a library project with ease.
+To add Preconstruct to your project, use the following command:
+
+```sh
+yarn add @preconstruct/cli
+```
+
+Specify the main and module in the package.json file:
+
+```json
+{
+  "name": "@org/libname",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js"
+}
+```
+
+It is important to commit the `dist` folder in git, so make sure it's not in your `.gitignore` file.
+Don't forget to add Babel if you are using Typescript.
+To add Babel, use the following command:
+
+```sh
+yarn add --dev @babel/preset-typescript
+```
+
+Add the following Babel config in a `babel.config.json` file in your project root:
+
+```json
+{
+  "presets": ["@babel/preset-typescript"]
+}
+```
+
+When publishing your library on the npm registry, consider publishing it under an organization.
+To do this, make sure you have an account and follow one of the many step by step guides available online.
+
+## Part 2: Deploying the Library
+
+To build and publish the library, you can use the following script in your package.json file:
+
+```json
+{
+  "scripts": {
+    "release": "preconstruct build && yarn publish --access public"
+  }
+}
+```
+
+Note that this script will ask you to enter your npm credentials, so make sure you have an account.
+
+## Part 3: Setting Up Hot Reloading
+
+Hot reloading can help you test your library changes seamlessly. Here's how to set it up:
+
+In your library project, run `yarn link`.
+
+In your test project, add the library as a local dependency using the following command:
+
+```sh
+yarn add @org/libname@link:../../path/to/lib.folder
+```
+
+Replace `@org/libname` with your library name, and `../../path/to/lib.folder` with the relative path to your library folder.
+
+Add Chokidar as a dev dependency to your library project:
+
+```sh
+yarn add --dev chokidar
+```
+
+Add a watch script to your library project using the following command:
+
+```json
+{
+  "scripts": {
+    "watch": "chokidar 'src/**/*' -c 'yarn build'"
+  }
+}
+```
+
+This script will rebuild the `dist` folder each time you save in your library project.
+
+Conclusion
+In this article, we explored the steps to build and deploy a Typescript library with hot reloading using Yarn.
+We demonstrated how to set up a local project, deploy the library, and set up hot reloading.
+These tools and techniques can help you develop reusable code that can be deployed with ease.
+As new tools or techniques become available, we will keep this article updated. Happy coding!
