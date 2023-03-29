@@ -68,7 +68,8 @@
       "image": "work-with-us-banner.jpg"
     },
     "clojure-in": {
-      "description": "'Clojure In' is a collection of stories about companies who have adopted Clojure. In these articles we interview key individuals involved and chat about the challenges, issues, benefits and trade-offs in their decision to go with Clojure."
+      "description": "'Clojure In' is a collection of stories about companies who have adopted Clojure. In these articles we interview key individuals involved and chat about the challenges, issues, benefits and trade-offs in their decision to go with Clojure.",
+      "image": "hero-image-clojurein.jpg"
     },
     "blog": {
       "description": "A list of articles where our engineers share their knowledge and experience with the community."
