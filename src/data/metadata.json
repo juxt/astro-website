@@ -80,6 +80,10 @@
     "consultation": {
       "description": "Book a 30-minute free consultation with JUXT Head of Delivery to discover how JUXT can help bring your vision to market, on time and budget.",
       "image": "joe.jpg"
+    },
+    "clojure-conj": {
+      "description": "JUXT is a proud gold sponsor of Clojure/Conj 2023. Stop by our sponsor table to meet our co-founders and get your limited-edition Conj tee!",
+      "image": "clojure-conj-banner.jpg"
     }
   }
 }
