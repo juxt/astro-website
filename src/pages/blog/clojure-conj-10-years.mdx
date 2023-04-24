@@ -1,0 +1,68 @@
+---
+draft: true
+author: 'joe'
+title: 'Clojure/conj 10 years on, 2013 and 2023'
+description: 'Reflecting on the 2013 Conj and looking forward to the 2023 event.'
+category: 'conference'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2023-04-24'
+heroImage: 'conj-10-years.jpg'
+tags:
+  - 'clojure'
+---
+
+import { Image } from '@astrojs/image/components'
+import conj_2013_tee from '../../assets/blog/conj-2013-tee.jpg'
+import juxt_conj_2023_tee from '../../assets/blog/juxt-conj-2023-tee.jpg'
+
+10 years ago I attended Clojure/conj with colleagues from MixRadio. The conference was far from home, but we knew 'The Conj' was the centre of gravity for the Clojure community and the most prestigious Clojure event in the calendar. The single-track conference took place during a chilly November, in the imposing [George Washington Masonic National Memorial](https://en.wikipedia.org/wiki/George_Washington_Masonic_National_Memorial) in Virginia, a fantastic, atmospheric venue, towering above the boutiques and cafes of Alexandria's delightful old town.
+
+JUXT are Gold Sponsors of Clojure/conj in 2023, which means that I have the privilege of returning to the conference 10 years on. Taking place in Durham, North Carolina this year (the home of Cognitect and host city to many previous Conj events) this is a special one since it's the first Clojure/conj after a long pandemic-related hiatus.
+
+On the eve of the event, I've been thinking back to my last Conj visit, a decade ago.
+
+## Themes
+
+In June of 2013, Rich had announced [core.async](https://clojure.org/news/2013/06/28/clojure-clore-async-channels) and the Clojure community was adopting with gusto. Tim Baldrige (creator of Clojure's `go` macro) delivered a thorough, often cautionary talk from the REPL, introducing core.async and describing both patterns and anti-patterns.
+
+An interesting theme of the conference was specification and validation, of both data and syntax. Clojure's dynamic nature left gaps here, and at the Conj in 2013 the Prismatic team introduced `schema` for describing the shape of data structures, and Chris Houser and Jonathan Claggett introduce [seqex](https://github.com/jclaggett/seqex), and demonstrated how familiar operators from regular expressions could be applied to validate macro syntax for better error messages. Clojure's [spec](https://clojure.org/news/2016/05/23/introducing-clojure-spec) would not appear for another 3 years, but early ideas about generalising the task of data specification and using sequence expressions to validate syntax itself (in the same way that spec was applied to Clojure's core) were already forming.
+
+Conference themes emerge during the course of the sessions. They can't be predicted ahead of time. They're solidified through the impromptu asides of speakers, and a successful conference has speakers drawing out their own new and serendipitous connections, day 2 influenced a little by day 1.
+
+I'm struck by the variety of the schedule for 2023's Conj, and as usual I'll wait until the flight home to reflect on themes. Looking at the schedule alone, high performance Clojure may be a strong contender. I'm looking forward to **Chris Nuernberger's** talk on this topic, as his work on libraries such as [tech.ml.dataset](https://github.com/techascent/tech.ml.dataset), [dtype-next](https://github.com/cnuernber/dtype-next) and [charred](https://github.com/cnuernber/charred) have set an incredible new high bar for fast Clojure. I'm hoping to pick up some interesting insights and ideas about performance from **Gaining Constant-time Lookup over Unorganized Data with Jeb Beich and Ghadi Shayban**, and **Vector Symbolic Architectures In Clojure with Carin Meier**.
+
+## To the moon!
+
+The best software conferences will inform _and_ inspire. Attending a conference is sometimes less about finding a specific library or tool to apply when you return home, and more about reinvigorating your passion for the craft. The Conj in 2013 did not disappoint on this front, with two exceptional talks that inspired the community. The first, Tim Ewald's [Clojure: Programming with Hand Tools](https://www.youtube.com/watch?v=ShEez0JkOFw&list=PLZdCLR02grLpFFB54kq3FU5A0_C94l2WF&index=19) framed Clojure as an elegant and simple hand tool, perfect for building with care and precision and allowing us to maintain a direct connection to our work. The closing keynote, Russ Olsen's [To the moon!](https://www.youtube.com/watch?v=4Sso4HtvJsw&list=PLZdCLR02grLpFFB54kq3FU5A0_C94l2WF&index=3) was an unexpected talk, but a real gem and fantastic experience. It celebrated the Apollo project, a triumph of American engineering excellence and a reminder of how engineers working together can achieve the seemingly impossible.
+
+In 2023, I haven't found any talks in the schedule that come so far out of left field, however I'm looking forward to getting inspired by seeing Clojure applied in fascinating areas of scientific research such as atomic physics (**(Real) @toms with Clojure! with Thomas Clark and Daniel Slutsky**) and molecular biology (**Comparing protein structures with Clojure with Blaine Mooers**).
+
+## The Hickey Factor
+
+One trait that's almost universal amongst Clojure practitioners is an unreasonable expectation that Rich Hickey can turn out a never-ending stream of seminal software talks. In 2013 Rich's Conj talk was not tackling grand abstract ideas about the software craft, but instead introduced the community to a personal passion project: using Clojure and overtone to build an additive synth called [harmonikit](https://github.com/richhickey/harmonikit).
+
+Of course it was unlikely that Rich's talk on Harmonikit would become an instant classic, given its niche, but Rich's 2023 closing keynote **Design in Practice** has that potential, and I'm excited to be in the room to hear his thoughts on software design.
+
+## Hallway track
+
+The Hallway track, the conversation and discussion outside the scheduled talks, has great potential at the Conj, in particular since many great and influential folks from the Clojure community will often attend.
+
+JUXT is a sponsor of the conference this year, and I find as a sponsor you can get the best of the hallway track because you're dedicated to meeting new people and you have a conference stand to help break the ice. If you're at the Conj this year, come by and see us at the JUXT stand for a chat!
+
+In 2013, two informal evening Q&A sessions that were not pre-planned talks (and never made it to YouTube) were very memorable. During the first, Rich Hickey fielded questions on the newly launched core.async, and during another, Zach Tellman spoke about Clojure performance (how to think about costs) and allowed the room full of Clojure programmers to fire questions at him. These sessions were a great reminder about the value of 'being there' and they're the reason I think that the conference format still endures.
+
+## Swag
+
+My Clojure/conj 2013 t-shirt has been worn to death, and has taken on that special look of an authentically-aged tee. I also picked up a Cognitect shirt there, which at the time was a novelty since only a few months before the Conj in 2013, Relevance Inc. had joined forces with Metadata Partners (makers of Datomic) to become Cognitect.
+
+<Image alt='Clojure/conj 2013 T-shirt' src={conj_2013_tee} />
+
+This year, we've designed a unique JUXT t-shirt for the Conj. It's an homage to the event and the Clojure community and is full of easter eggs. We're hoping that the JUXT tee is this year's must-have swag.
+
+<Image alt='JUXT Clojure/conj 2023 T-shirt' src={juxt_conj_2023_tee} />
+
+If you're at the Conj this year, then come and see us in Durham and pick one up! Hopefully you'll be looking back on the event (and the t-shirt!) with fondness a decade from now.
+
+<p style="text-align: center;">
+<sub>*Image of Durham, North Carolina, by Discover Durham, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)*</sub>
+</p>
