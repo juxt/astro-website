@@ -29,7 +29,7 @@ const startUpsParsed = startUps
 const startupPicture = await getImage({
   src: import('../assets/site/startup-bg.jpg'),
   width: 1700,
-  quality: 90,
+  quality: 70,
   alt: 'start up'
 }).then((img) => img.src)
 ---
@@ -86,7 +86,7 @@ const startupPicture = await getImage({
                 quality={80}
                 class={`${
                   isCenter ? 'place-self-center' : ' xl:w-1/2'
-                } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
+                } flex-shrink-0 object-cover md:w-2/3 h-[350px] sm:h-auto`}
                 alt='award'
                 src={import(`../assets/startups/${bannerNoExtension}.jpg`)}
               />

@@ -4,15 +4,17 @@ export type BannerProps = {
   navbarNoBg: boolean
   style?: any
   textColor?: string
+  classes?: string
 }
 
-const { text, style, textColor, navbarNoBg } = Astro.props as BannerProps
+const { text, style, textColor, navbarNoBg, classes } = Astro.props as BannerProps
 ---
 
 <div
   style={style}
   class:list={[
-    'w-full h-[50vh] bg-cover bg-center md:bg-fixed',
+    'w-full h-[50vh] bg-cover',
+    classes,
     { '-mt-14': !navbarNoBg }
   ]}
 >
@@ -22,7 +24,7 @@ const { text, style, textColor, navbarNoBg } = Astro.props as BannerProps
     <h1
       class={`${
         textColor ? textColor : 'text-white'
-      } drop-shadow-lg shadow-black text-5xl uppercase tracking-widest leading-snug font-sans w-96`}
+      } drop-shadow-lg bg-black/50 pl-3 shadow-black text-5xl uppercase tracking-widest leading-snug font-sans w-96`}
     >
       {text}
     </h1>
