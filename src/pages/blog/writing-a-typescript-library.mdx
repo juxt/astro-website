@@ -4,25 +4,29 @@ title: 'My experience in building an oauth2 client library in Typescript'
 description: 'A collection of steps to build and deploy a Typescript library starting from scratch'
 category: 'typescript'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2023-03-28'
-heroImage: 'clojutre.jpg'
+publishedDate: '2023-04-19'
+heroImage: 'building-blocks.jpg'
 ---
 
 After spending a few months working mainly with Typescript, I finally had the opportunity to build a library using this language.
+
 In fact, I was involved by our CTO in one of our internal projects, and I was asked to build a library that would help us interact with our OAuth2 server.
 I had never built a Typescript library before, so I decided to document my experience in this article.
 
-Coming from a Clojure background, I was looking for a seemless dev experience, where I could quickly iterate on my changes and test them quickly.
+Coming from a Clojure background, I was looking for a seemless dev experience, where I could quickly iterate on my changes to test them.
 I also wanted to be able to publish the library on the npm registry, so that other developers could use easily find it and use it.
 
 ### Prerequisites:
 
-The tools I've used in this article are the following:
+At the time of writing, I've used the following yarn and node versions:
 
 ```sh
 yarn version 1.22.19
 node version 18.10.0
 ```
+
+Notice that if you don't wanna start from scratch there is a github repo I setup, which you could download and use as a template.
+The link is [here](https://github.com/luciodale/writing-a-typescript-library)
 
 ## Part 1: Setting Up a Local Project
 
@@ -35,11 +39,35 @@ yarn init
 
 This command will ask you a few questions about your project, and it will generate a `package.json` file.
 
+Get typescript for a typed project:
+
+```sh
+yarn add --dev typescript
+```
+
+and then create a `tsconfig.json` file in your project root with the following content:
+
+```json
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "module": "es2020",
+    "target": "es2020",
+    "declaration": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+```
+
 After a bit of googling, I found out about `preconstruct`, which is a tool that can help you set up a library project with ease.
 To add preconstruct to your project, you can use the following command:
 
 ```sh
-yarn add @preconstruct/cli
+yarn add --dev @preconstruct/cli
 ```
 
 As we're building a library, it's important to specify the entry point via the `main` and `module` fields in the `package.json` file.
@@ -49,11 +77,13 @@ At this stage, the `dist` folder doesn't exist yet, so you can just go ahead and
 ```json
 {
   "name": "@org/libname",
-  "version": "0.0.1",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js"
+  "version": "1.0.0",
+  "main": "dist/org-libname.cjs.js",
+  "module": "dist/org-libname.esm.js"
 }
 ```
+
+Make sure that the main and module values match the name of your library.
 
 An error that I initially made was to ignore the `dist` folder via the `.gitignore` file. Make sure you always commit it along with your code changes.
 Also, for full typescript support, we need to add a babel preset to our project.
@@ -71,14 +101,14 @@ Then, add the following Babel config in a `babel.config.json` file in your proje
 }
 ```
 
+## Part 2: Deploying the Library
+
 When publishing your library on the npm registry, consider using scopes.
 Scoped packages are those that start with an `@` symbol, and they can be used to group related packages together i.e. `@org/my-lib`.
 I think it's a good practice to always use scopes, as it helps you organize your packages and avoid name collisions.
 To learn more about this, you can follow the official npm documentation [here](https://docs.npmjs.com/cli/v9/using-npm/scope#description).
 
-## Part 2: Deploying the Library
-
-To build and publish the library, you can use the following script in your `package.json` file:
+To build and publish the library, you can use the following scripts in your `package.json` file:
 
 ```json
 {
@@ -97,10 +127,10 @@ Hot reloading can help you test your library changes seamlessly. Here's how to s
 1. In the project you want to test your library from, add the library as a local dependency using the following command:
 
 ```sh
-yarn add @org/libname@link:../../path/to/lib/folder
+yarn add @org/libname@link:../lib
 ```
 
-Replace `@org/libname` with your library name, and `../../path/to/lib/folder` with the relative path to your library folder.
+Replace `@org/libname` with your library name, and `../lib` with the relative path to your library folder.
 
 2. Then, in your library project, run `yarn link`. This command tells yarn to use your local library folder instead of the one on the npm registry.
 
@@ -161,4 +191,17 @@ console.log(args)
 ...
 ```
 
-Of course you can create as many commands as you want and bind them to different files.
+Of course you can create as many commands as you want and bind them to different files. You can store these files anywhere under the root folder of your project
+as long as you specify the correct path in the `bin` section.
+
+if you want to test your commands locally, you can run them directly via node:
+
+```sh
+node ./init.js
+```
+
+if you want to test them from the test project, you can retrieve them from the `node_modules` folder:
+
+```sh
+node ./node_modules/@org/libname/init.js
+```
