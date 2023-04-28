@@ -39,23 +39,19 @@ type GroupedBlogs = {
 // To index the blogs that share author && catagory or just one with the current blog
 const groupedBlogs: GroupedBlogs = blogs.reduce(
   (coll, blog) => {
-    if (blog.frontmatter.title === title) {
-      return coll
-    } else if (
-      blog.frontmatter.author === author &&
-      blog.frontmatter.category === category
-    ) {
-      return {
-        ...coll,
-        authorCategory: [blog, ...coll.authorCategory]
+    if (blog.frontmatter.title !== title) {
+      if (
+        blog.frontmatter.author === author &&
+        blog.frontmatter.category === category
+      ) {
+        coll.authorCategory.push(blog)
+      } else if (blog.frontmatter.category === category) {
+        coll.category.push(blog)
+      } else if (blog.frontmatter.author === author) {
+        coll.author.push(blog)
       }
-    } else if (blog.frontmatter.category === category) {
-      return { ...coll, category: [blog, ...coll.category] }
-    } else if (blog.frontmatter.author === author) {
-      return { ...coll, author: [blog, ...coll.author] }
-    } else {
-      return coll
     }
+    return coll
   },
   { authorCategory: [], category: [], author: [] }
 )
@@ -87,7 +83,10 @@ const uniqueBlogs: MarkdownInstance<Blog>[] = allSortedBlogs.reduce(
       (blog) => blog.frontmatter.title === currentTitle
     )
     if (isDuplicate) return coll
-    else return [...coll, blog]
+    else {
+      coll.push(blog)
+      return coll
+    }
   },
   []
 )
