@@ -10,11 +10,11 @@ heroImage: 'building-blocks.jpg'
 
 After spending a few months working mainly with Typescript, I finally had the opportunity to build a library using this language.
 
-In fact, I was involved by our CTO in one of our internal projects, and I was asked to build a library that would help us interact with our OAuth2 server.
+In fact, I was involved by our CTO in one of our internal projects, and I was asked to build a library that would help us interact with our OAuth2 server. I'm talking [pass](https://github.com/juxt-site/pass).
 I had never built a Typescript library before, so I decided to document my experience in this article.
 
 Coming from a Clojure background, I was looking for a seemless dev experience, where I could quickly iterate on my changes to test them.
-I also wanted to be able to publish the library on the npm registry, so that other developers could use easily find it and use it.
+I also wanted to be able to publish the library on the npm registry, so that other developers could easily find it and use it.
 
 ### Prerequisites:
 
@@ -25,7 +25,7 @@ yarn version 1.22.19
 node version 18.10.0
 ```
 
-Notice that if you don't wanna start from scratch there is a github repo I setup, which you could download and use as a template.
+Notice that if you don't want to start from scratch there is a github repo I setup, which you could download and use as a template.
 The link is [here](https://github.com/luciodale/writing-a-typescript-library)
 
 ## Part 1: Setting Up a Local Project
@@ -39,7 +39,7 @@ yarn init
 
 This command will ask you a few questions about your project, and it will generate a `package.json` file.
 
-Get typescript for a typed project:
+Get typescript if you want to build a library with types, which is strongly recommended these days:
 
 ```sh
 yarn add --dev typescript
@@ -63,7 +63,7 @@ and then create a `tsconfig.json` file in your project root with the following c
 }
 ```
 
-After a bit of googling, I found out about `preconstruct`, which is a tool that can help you set up a library project with ease.
+After a bit of googling, I found out about `preconstruct`, which is a tool that encapsulates a lot of logic for the management of your library. I definitely recommend it.
 To add preconstruct to your project, you can use the following command:
 
 ```sh
@@ -72,7 +72,6 @@ yarn add --dev @preconstruct/cli
 
 As we're building a library, it's important to specify the entry point via the `main` and `module` fields in the `package.json` file.
 Usually, you want to point to the `dist` folder, where the compiled code will be stored.
-At this stage, the `dist` folder doesn't exist yet, so you can just go ahead and copy from the following example:
 
 ```json
 {
@@ -83,11 +82,11 @@ At this stage, the `dist` folder doesn't exist yet, so you can just go ahead and
 }
 ```
 
-Make sure that the main and module values match the name of your library.
+Make sure that the main and module values match the name of your library. For scoped libraries notice how the `@` gets dropped and `/` becomes a `-`. In fact, `@org/libname` becomes `org-libname`.
 
 An error that I initially made was to ignore the `dist` folder via the `.gitignore` file. Make sure you always commit it along with your code changes.
 Also, for full typescript support, we need to add a babel preset to our project.
-You can isntall it like this:
+You can install it like this:
 
 ```sh
 yarn add --dev @babel/preset-typescript
@@ -163,7 +162,19 @@ Remember to export the functions you want to call from your test project otherwi
 While writing my library, I quickly realized that I needed a one-off script to be run right after the library was installed.
 This script would help me copy some files from the library to the project that was using it.
 
-To do this, I leveraged the `bin` field in the `package.json` file. Here's an example:
+Particularly, my goal was to mainly copy a service worker file under the `public` folder of the main project.
+
+Why a service worker file? Because that's where I would store sensitive data like the session and refresh tokens for the user.
+
+On a side note, if you checked the `pass` repo you might haven noticed that I'm using regular javascript for the service worker file.
+The reason is that TS support is not great just yet. Some big open issues:
+
+- [Issue #14877](https://github.com/microsoft/TypeScript/issues/14877): definition of `self` is not nicely resolved
+- [Issue #20595](https://github.com/Microsoft/TypeScript/issues/20595): type conflicts
+
+Anyways, back to the main topic. How do we run custom scripts after the library is installed?
+
+I leveraged the `bin` field in the `package.json` file. Here's an example:
 
 ```json
 {
@@ -205,3 +216,8 @@ if you want to test them from the test project, you can retrieve them from the `
 ```sh
 node ./node_modules/@org/libname/init.js
 ```
+
+## Conclusion
+
+These are the most crucial steps I wish I could find in a single place when I started writing the library.
+That's why I decided to write this article, so that others in the same situation as me can save time and easily find the resources they need.
