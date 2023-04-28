@@ -37,7 +37,7 @@ export async function parseBlogs({
     rawPeople.map((person) => [person.frontmatter.code, person.frontmatter])
   )
 
-  return await Promise.all<Blog>(
+  const blogs = await Promise.all<Blog>(
     rawBlogs.map((page) => {
       const author = page.frontmatter.author
       const person = peopleByCode.get(author)
@@ -81,6 +81,8 @@ export async function parseBlogs({
       )
     })
   )
+
+  return blogs.filter((blog) => !blog.draft)
 }
 
 /** Remove \ and / from beginning of string */
