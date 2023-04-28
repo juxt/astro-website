@@ -121,7 +121,12 @@ Note that this script will ask you to enter your npm credentials, so make sure y
 
 ## Part 3: Setting Up Hot Reloading
 
-Hot reloading can help you test your library changes seamlessly. Here's how to set it up:
+Figuring this one out took me a while, but it was so worth it.
+If you don't know what hot reloading is, it basically allows you to test your library changes in real time.
+
+I didn't simply want to work on the library in isolation, but I wanted to test it from another project and have the hot reloading feature enabled.
+
+Here's how to set it up:
 
 1. In the project you want to test your library from, add the library as a local dependency using the following command:
 
@@ -144,6 +149,9 @@ Finally, add a watch script to your library project using the following command:
 ```
 
 This script will rebuild the `dist` folder each time your library files change.
+
+I can't stress enough how useful this feature is. It allows you to quickly iterate on your changes and test them in real time.
+It gets close to the Clojure REPL experience, and makes me miss it a little less :)
 
 ## Part 4: Adding some code
 
