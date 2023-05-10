@@ -1,0 +1,334 @@
+---
+draft: true
+author: 'joe'
+title: 'Clojure in Security: Docker'
+description: 'Securing the software supply chain with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '20 Mar 2022'
+heroImage: 'clojurein-uk-2.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'security',
+    quote: '"We''re all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."'
+  }
+---
+
+import { Image } from '@astrojs/image/components'
+
+Founded in 2010 as part of the Y Combinator Summer startup incubator that year, Docker revolutionised application packaging and deployment by popularising the use of lightweight containers. Docker now offers a wide range of services to help engineering teams build, share, and run their applications quickly and securely.
+
+In June 2022, [Docker acquired Atomist](https://www.docker.com/blog/docker-acquires-atomist/), a container security and automation platform implemented in Clojure.
+
+We caught up with James Carnegie, Ben Griffiths, Neil Prosser and Danny Smith, Staff and Principal Engineers working on the Atomist platform at Docker, to discuss how they're using Clojure to secure the software supply chain.
+
+import gr from '../../assets/blog/docker-logo.png'
+
+<Image alt='Docker' width={300} src={gr} class='not-prose'/>
+
+**Joe: So what does your team do at Docker?**
+
+**Danny:** There's two ways to look at the Atomist platform. One is the automation engine, and the other is the product we built with the engine. A security-related product looking at the security of Docker containers images.
+
+People would use our product primarily as a website, to get an overview of where vulnerabilities exist in their container images and be able to mitigate those and remove them. But behind that, there is an automation engine. It drives the indexing of container contents, but you can extend the model by adding data. You can extend this platform by adding data not just about security, but any data relating to code and delivery.
+
+The engine itself is very much powered by Datomic.
+
+**Joe: So what kinds of vulnerabilities are you identifying in containers?**
+
+**Danny:** The kinds of vulnerabilities that are associated with OS and application-level packages, and published by the likes of Ubuntu, GitHub, and others. There are many providers of vulnerability data.
+
+There are multiple players in this space and they all, at some level, use open source scanners. And so do we, although we go further, to not just aggregating them but including other approaches to identifying vulnerabilities. Ultimately though, it's vulnerabilities associated with packages that exist inside the container images that are being published.
+
+## Platform architecture
+
+**Joe: How would you describe the architecture of the Atomist platform?**
+
+**James:** It's cloud-based microservices. In the automation platform we've got a continuous query system built on Datomic. It's a pluggable platform that we build the security product on top of.
+
+<span class='pullquote right' text-content="Almost everything can go through queues, and therefore everything should go through queues. Once you're asynchronous, you may as well be that way throughout your platform."/>
+
+You have subscriptions in the form of datalog queries, and when those datalog queries unify, we perform actions. Those actions are functions, largely, but they can be any kind of workload. So we have lots of Datomic, and microservices that are surrounding it and plugging into various other systems.
+
+**Ben:** We have queues everywhere. It's largely an asynchronous platform by the nature of the data and workloads that we're dealing with. Almost everything _can_ go through queues, and therefore everything _should_ go through queues. Once you're asynchronous, you may as well be that way throughout your platform.
+
+**Joe: And what kind of queues do you use?**
+
+**Ben:** All of them :)
+
+We're spread across two clouds, Google's Cloud and Amazon's Cloud. Each of the queue solutions has different, unique properties and they break down in different ways, so we use them in different areas. So it might seem stupid to use all these different queues, but they are different, have different characteristics, and sometimes we need to use one for a specific task.
+
+Neil is the master of queues!
+
+**Neil:** We use Kafka for multi-subscriber messaging where subscribers come and go but it's terrible for retry because if you grab a batch of messages and one fails you need to be careful about moving the offset forwards or ignoring messages next time. Also, the horizontal scalability is dictated by the number partitions and a lot of the time we want to partition by higher cardinality than that whilst maintaining order. SQS has problems if your process backs-up too many things. Get to 20K in-flight messages on FIFO queue things go wrong. Google's Pub/Sub is good for those things.
+
+**James:** Datomic is in Amazon, because it has to be. But we use other Amazon services like DynamoDB.
+
+**Neil:** We run our microservices on GKE, and Google's offering here is very good, but we still call out to Amazon for DynamoDB, SQS, and other services. All these data centres are linked by big fibre cables anyway, so it's very fast [to call Amazon's services from GKE].
+
+Our microservice apps run on GKE. But the data beneath them is anywhere and everywhere. We also use Aiven for Elasticsearch and Kafka. We've been using those since before Amazon and Google had their own managed offerings.
+
+## Clojure, data, and plumbing
+
+**Joe: So what was the origin of the decision to use Clojure for this platform?**
+
+**James:** That's an interesting question. We all come from that background. We'd seen Clojure work well in the past, so we all knew it was a good choice. It wasn't always like this and in the early days there was pressure to use other languages, and some were using Scala, and Go.
+
+In the end we had to come together though. A lot changed on the platform backend, but some of the first things to be created, and only things that survived, were the Clojure services. All the lower platform stuff. And, well, I think it was the better parts.
+
+**Danny:** Yes, as I understand the history, people were building things in different languages, primarily Clojure and Scala. As the direction of the company evolved, the technology that needed to stay was the stuff written in Clojure.
+
+**Ben:** Ultimately the background of one of the founders was Clojure. He hired amongst people that he knew, and our background was Clojure, and as we hired more people we continued to grow like that.
+
+**James:** There are good reasons for it being Clojure. There are important, meaningful qualities of the language and it's not just 'tabs versus spaces'.
+
+**Danny:** At that stage the choice of Clojure wasn't because of Datomic. That wasn't part of the picture early on. It was because of Clojure's properties writing backend, microservices, or rather, the comfort level that people had and the enthusiasm people had for writing backend microservices in Clojure.
+
+<span class="pullquote left" text-content="We're all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."/>
+
+**Ben:** It all does come down to productivity, doesn't it? Ultimately. We just felt it was the language that we're the most productive in, and that's why we chose it, and that's why we were already Clojure programmers, because we felt it was a really productive thing to be.
+
+**Neil:** Productive with the JVM thrown in. You get the benefit of falling back to interop with the Java host and ecosystem when you have to. When you need to do it, it's easy.
+
+**James:** We're all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure.
+
+**Joe: So why do you think Clojure is so good for plumbing?**
+
+**James:** I think it's being functional really helps. Being dynamically typed really helps.
+
+**Danny:** Putting data so front and foremost.
+
+**Neil:** Never worrying about mutability. You don't concern yourself with that, it just magics itself away.
+
+**James:** When you compare that to building a similar microservice in Go, there's so much less code with Clojure, it's concise as well.
+
+<span class="pullquote right" text-content="[W]orking without a REPL is just horrible. Ultimately, the REPL is just such a pleasurable thing to use."/>
+
+**Ben:** And working without a REPL is just horrible. Ultimately, the REPL is just such a pleasurable thing to use.
+
+**James:** Yes, like a step backwards. To anyone who doesn't have that available, it's really, well, it's pretty rough.
+
+**Neil:** We do write tests as well. It's not all just playing in the REPL!
+
+**Ben:** Really as you work you want to experiment and understand and look at data, pull bits of data in to work with. You can pull data into your REPL, play with it, and figure out what your solution is, then start to codify it and to write your tests. Building things up from there. And yeah, I think often our work has been quite experimental, so that's been a real pattern.
+
+**Neil:** Yeah. You can do that with Java, say, you could create a test that fakes some things, but it's not as easy as using the REPL and defining functions and data as you go.
+
+**James:** You bring EDN into it as well and that's just a much nicer data format to be passing around. Working with Datomic of course Clojure is a natural choice.
+
+**Neil:** Your queries being a data structure is brilliant. It's just an EDN data structure and you're passing around trees.
+
+**Ben:** The problem with EDN of course is it's a bit annoying for teams using other languages, languages that don't have that dynamic nature.
+
+**Neil:** We're building a platform where in theory anyone can call it with anything, so enforcing that everyone (often using different languages) should use EDN, would be a bit mean. TypeScript, Node, they're set up really well for JSON. EDN is really nice, and we get it natively in Clojure, but for other people JSON is a lot easier.
+
+**Joe: With most languages there's some additional ceremony in trying to work with JSON. It's kind of annoying, and there's extra layers of frustration over just working with JSON itself. Working with JSON in Clojure's is actually nicer than working with JSON in JSON (!).**
+
+**Danny:** Yeah, Clojure's representation is so close to it. If you compare it with what you would do, for example, in Golang. Because we've seen colleagues using Golang for microservices. What you end up doing to a JSON payload in Golang takes it much further away (it feels) from the source.
+
+And then you have to manipulate it, and then map it back again. So you feel like you're spending a lot of time doing things that aren't focused on your business problem, and instead they're focused on just changing data. With Clojure that step of getting data to your code just goes away.
+
+**Neil:** With TypeScript it feels closer. With JSON, TypeScript is closer to that Clojure level of ease with JSON.
+
+**Ben:** Although surprisingly one of our colleagues, Christian, says that working with EDN is more annoying in TypeScript than in Go. He's got a good library that he really likes now, whereas in TypeScript it's a little bit more painful.
+
+**Neil:** He should just go back to writing Clojure!
+
+**Danny:** Good EDN support would be the thing that would help Clojure play nicely with other languages, I think.
+
+## Other languages
+
+**Joe: Do you have any areas of your platform that are not implemented in Clojure?**
+
+**James:** We have bits of ClojureScript, we have bits of Babashka.
+
+**Danny:** We've got a website that uses ClojureScript. We (primarily as backend Clojure engineers) decided to take on the task of building the website ourselves. We thought we'd be most productive using ClojureScript.
+
+**James:** We also have Node and TypeScript in our extensions, but these are written by others. We spoke about running functions as workloads on the platform earlier, and we can create extensions to the platform in this way. These are like plugins, and you can write these in any language. People are now writing them in Node, TypeScript, ClojureScript on Node, and Go too. It's often just the choice of whoever writes the extension.
+
+**Danny:** It's any workload really. Just a lambda function that participates in the system. But generally, we, as Clojure developers, have used Clojure for everything, by default. And haven't really needed to use any other language really, which again helps productivity.
+
+**James:** The choice of ClojureScript on Node for these extensions was driven by our functions platform at the time wanting Node. Java was slower to start. But this is changing now, we're exploring using GraalVM, and Babashka, running these as Docker containers.
+
+ClojureScript on Node I think has gotten really frustrating. It's just not as polished as everything else. There's always some little bit that's not quite working and so it's hard to get your environment working.
+
+**Neil:** I think the only time I'd consider not using Clojure is in places that we really can't take the startup cost. Where we auto-scale pods in a cluster for processing messages (Pub/Sub subscribers). In the case where you have some messages outstanding you want to spin something up, monitor it quickly, and shut down again.
+
+Graal is an option, but I always look at Graal and think, "Am I gonna be allowed to use, say, Google's Pub/Sub library?"
+
+<span class="pullquote left" text-content="When we first looked at GraalVM years ago, it didn't really work, and nothing was supported, but now it really does. Oracle have invested a lot, they're selling it now so they need it to work well."/>
+
+**James:** This is really now possible with Graal. When we first looked at it years ago, it didn't really work, and nothing was supported, but now it really does. Oracle have invested a lot, they're selling it now so they need it to work well.
+
+**Neil:** So that would be the only time I'd consider switching. For any long running stuff, just take a startup penalty, it's fine, you know? Yeah. It's fast once it's up and running.
+
+**Ben:** Well that, and all the cool kids are using Rust these days, so there's a little bit of pressure there!
+
+**Neil:** The thing with Rust is when you come from Clojure, there are many things you have moved on from thinking about. I don't want to have to type everything, I don't want to have to give you the explicit size of everything, and then hear about the borrow checker and mutability in passing values. You just don't think about that with Clojure. Rich did that for me. I don't worry about that.
+
+**Joe: What about the Babashka, where are you using that?**
+
+**James:** Mostly around builds and scripting, utilities and experiments, test tools. I've experimented doing some long-running Babashka apps now. It's nice, it's faster than any other way of using Clojure when it comes to the development cycle.
+
+**Ben:** Yeah, it's amazing really. What a cool bit of tech.
+
+**Neil:** Borkdude, that guy is relentlessly prolific.
+
+**James:** We use a lot of his bits and bobs, like Jet, Kondo.
+
+<span class="pullquote right" text-content="For someone like me, Kondo is brilliant. I despise unordered namespaces, that kinda thing. So having Kondo catch that stuff is great."/>
+
+**Neil:** [Kondo](https://github.com/clj-kondo/clj-kondo) is great. For someone like me, Kondo is brilliant. I despise unordered namespaces, that kinda thing. So having Kondo catch that stuff is great. Lots of tests in our Datomic stuff where we've got `get-in` with just one key, Kondo is not happy about that. When I see these things it makes me bristle every time, so it's nice having Kondo complain too.
+
+**Ben:** It may have been two keys at some point, to be fair to me!
+
+**Neil:**  But Kondo is just so fast, and for beginners it even helps you with some of the basics of Clojure. Catching problems like this, like Findbugs or PMD used to do for our Java codebases. We like this stuff.
+
+**James:** Also, LSP has brought our worlds together a lot. Because every one of us is using a different development environment. It's remarkable actually. We have Spacemacs, Cursive, Calva, Emacs.
+
+**Ben:** ...but in Vim mode! Let's get that down, for the record.
+
+## Datomic
+
+**Joe: So where does Datomic fit in to the platform?**
+
+**James:** Our platform is 'pluggable'. We have these plugins that bring their own schema and then there's a core Datomic schema. So you can extend the platform by creating these plugins and that schema is put into your own database.
+
+The schema and data is very much driven by the tools that we integrate with, like git or Docker registries. For all of the events that flow through the system that represent changes in these systems, Datomic knows about the result of all of it.
+
+**Ben:** I look at Datomic as the system we use when we want to join bits of data together. The 'graph' part. It's not necessarily the source of truth, but it's the thing that tells you how to get to the source of truth, and has enough information in it that you can navigate this graph.
+
+So that's where I would draw the line on what I would typically want to put into Datomic. It's data we need to join and navigate via the graph.
+
+**Joe: And most of your microservices are consuming from, and writing to, queues to interact with other parts of the platform?**
+
+**Ben:** Yes, that's typically true. We have some direct calls in places where it's more appropriate. But queues are the crux of almost everything.
+
+**Neil:** Handling HTTP requests from the front-end, and GraphQL. We do a bit of GraphQL within the platforms. Some legacy stuff on Apollo and our more current GraphQL services are using [Lacinia](https://github.com/walmartlabs/lacinia). There's some ancient stuff tucked away using alumbra.
+
+## Libraries, frameworks, and _Specter!_
+
+**Joe: What parts of the Clojure ecosystem do you use to build your services?**
+
+**Danny:** What we've ended up doing - the pattern we've taken on - is using a single Clojure dependency on most services. That then has all the other dependencies. So it's a big list, but this is a very convenient way for us to write new services easily and keep some consistency.
+
+**Neil:** [http-kit](https://www.http-kit.org/) (server), [Cheshire](https://github.com/dakrone/cheshire) for JSON, [compojure-api](https://github.com/metosin/compojure-api), [clj-http](https://github.com/dakrone/clj-http) for HTTP requests, [timbre](https://github.com/ptaoussanis/timbre) for logging, [Faraday](https://github.com/mcohen01/faraday) for DynamoDB, [reitit](https://github.com/metosin/reitit). [Amazonica](https://github.com/mcohen01/amazonica) for other AWS things, although I quite like the data-driven approach of the Cognitect [aws-api](https://github.com/cognitect-labs/aws-api). We work with Postgres too, so [HugSQL](https://www.hugsql.org/).
+
+Also [Specter](https://github.com/redplanetlabs/specter). I love Specter. Once I'd gotten my head around it, that was it. Specter is _everywhere_.
+
+**Ben:** [Mount](https://github.com/tolitius/mount) is used quite a lot. It's there at the core of a lot of things. Originally when we started using Mount, it got in your way and it was really in your face a lot. Whereas these days, I don't know what we've done, but it just sort of, it just sort of sits there in the background and does it for you and you don't have to think about it.
+
+**Danny:** Yes, and that's the effect of putting in this single library, that's an investment we've made and it gives us a common set of libraries that we rarely have to think about.
+
+**Neil:** When I joined the team I was building lots of little libraries, but we realized it was such a pain to update that one, and then update the other one that brings it in. So we decided to just wedge them all into one common library.
+
+<span class="pullquote left" text-content="[W]e are now building services which are going to be shipped onto machines, written in Clojure, compiled using Graal."/>
+
+Now there's no remembering to put it in a certain dependency, it's all very close at hand.
+
+**James:** So we are now building services which are going to be shipped onto machines, written in Clojure, compiled using Graal. So we're picking this common dependency apart and just taking the bits we need.
+
+**Danny:** In the ClojureScript-land, that's a smaller set of things. Our UI is a [re-frame](https://github.com/day8/re-frame) app with reitit.
+
+**Joe: Tell me more about Specter, why have you been so taken with it? What does it do for you?.**
+
+**James:** Often there just aren't the tools you need in the core to do what you can do with Specter.
+
+**Neil:** Diving into a nested map, updating and transforming all the things that match a given key.
+
+You know, in a sub-map of a sub-map, or other big nested structure. You can do it with just one line of code. I mean, it's a bit inscrutable at first. You've gotta learn a whole new language really. Then you get to recursive paths, which get bonkers.
+
+Without Specter you're writing really big functions, that need their own tests. You're also paying a penalty because sometimes you're going through your structure more than once to put a complex update together. Specter is very fast - faster often than the solution you could program yourself.
+
+**Danny:** It's learning another language, isn't it? The learning curve I can imagine puts a lot of people off, and obviously when you read the Specter code to start with, when you're reading someone else's code, there's a penalty. I've gotta come in and look at it and go, "What's this?"
+
+**James:** It could be possible to do more in Clojure's core, but a lot of things could be added to core I suppose. It's difficult updating deeply-nested data structures, it's so common as well. Often our services just take something off a queue, update or transform it, and stick it back on.
+
+**Danny:** It depends how big your data structures are. When you start to have bigger, more complex, nested structures, it hits you and it's worth paying the cost to learn Specter. If you're dealing with very small maps, and some people end up only dealing with small maps and vectors, you'll get by with a bit of `update-in`, `assoc-in`, etc.
+
+**James:** I always have to use [the reference material](https://github.com/redplanetlabs/specter/wiki/Cheat-Sheet), all day!
+
+**Danny:** The alternative, of writing it using Clojure core, like as you said, it can blow up easily to 10 lines that aren't very readable. You can't look at that 10 lines and doing, "I know what that's doing. I know what that's updating." Even without much knowledge of Specter, you're more likely to go, "Oh yeah, I see what it's doing there."
+
+**Neil:** We don't go that far into it though. select, ALL, NONE, MAP-KEYS, MAP-VALS. That kind of thing, you know, it's basic. We're not using all of Specter. There's some really bonkers stuff in there.
+
+So it's very, very useful. And it does feel like a missing piece in Clojure's core. But, to be fair, I do like that Clojure's core developers don't just add every solution, on every whim, into the core.
+
+What's funny is that we still discover things in core that we didn't realise were there. You find something that has been there since 1.0 and you didn't know it was there, even though I have gone up and down that list of functions so many times.
+
+**Ben:** It does move slowly though, the Clojure core, and sometimes you think, "Maybe we could have had that a few years earlier."
+
+**Danny:** One thing we've not made a lot of investment in is spec. It has just not worked out for us. We still use bits of Prismatic schema on functions. It's kind of documentation more than enforcement. The schemas are checked during testing but off in production.
+
+**Ben:** I feel like it [spec] died a bit. It was huge, and we went to a Clojure Conj about eight years ago, every second talk was about spec. Everyone was talking about it and then a few years later, no one was anymore. And it just sort of faded a bit. And it felt like it got abandoned. And it's difficult to want to plug a bunch of stuff like that into your code.
+
+**Neil:** It's called Spec 'alpha', right? Yeah. I'm not comfortable with that investment. Given that it's alpha. I don't know whether that's the intention, to stop people using it yet, but it puts me off.
+
+**Danny:** I don't think it [spec] solved enough of the usability problems early on. It was too difficult for too little gain. The error messages when things were wrong weren't great.
+
+**James:** Looking at something, and immediately knowing what it's structure is, is hard with spec (compared to Prismatic Schema).
+
+**Ben:** We must have a bunch of code from that time period that is full of spec though.
+
+**Danny:** Jim [Clark], still uses a bit of spec. He's quite fluent with it, which of course helps. There's an initial barrier and a steep learning curve. A bit like Specter. Once you're there you can express what you want easily.  Jim uses the `conform` features to conform complex inputs, which you can't easily get from elsewhere.
+
+## Tooling and testing
+
+**Joe: Is there anywhere you would like to see Clojure go next? Problems that you'd like to see solved? New directions that you'd like to see Clojure take?**
+
+<span class="pullquote right" text-content="[T]he deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine."/>
+
+**James:** I think, "No". It's great, and let's just stop :) But in all seriousness, the deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine. It's Maven-y and a bit annoying, but it really was fine. 9 times out of 10 my build is so boring, and I just don't care about it. Your build should be boring. People are putting less and less in there, and more in your multi-stage Docker build, maybe more in your delivery pipeline. You really just need `lein run`, `lein test`, it's all you need.
+
+**Joe: So do you use [Leiningen](https://leiningen.org/) across most of your projects still?**
+
+**Neil:** Yes, all new ones would be.
+
+**Ben:** I prefer lein still. I get annoyed when I open a project and it's not lein, because so many things wont work. I made a new service today, and that's lein.
+
+**Neil:** We do have deps because of the Datomic link.
+
+**James:** It's just such a pain. Thinking, "Oh, which test runner am I gonna use, how do I configure this part."
+
+**Danny:** Yeah, now that's the area I'd like to see improved. I'm unhappy with the state of Clojure testing. So many other languages have really nice systems for running tests, subsets of tests, getting nice output on the command line, or in an IDE. You're writing your matching logic a lot.
+
+**Joe: Do you use Kaocha?**
+
+**Danny:** Yeah, I do. I don't think anyone else uses it, and I know others don't like it, but I do use it a lot (privately!). It does suffer from a lot of the problems of the general Clojure test ecosystem, but what I love about it is (when I can get it to work), I can change of line of code, save, and it runs the tests, and when your tests fail, and you save, it will run just the ones that failed. And I *love* that kind of feedback loop. It's great when you've got fast tests, it's an incredible experience.
+
+I want that to be even better. I think the ideal development experience is: I'm editing, I'm changing characters, I get instant feedback in my IDE of exactly all my syntactic errors and test failures, all related to that change. That's what everyone's looking for, right? You want instant feedback. Every time I press the button and, um, it's still not there in Clojure.
+
+**Ben:** I feel like [Midje](https://github.com/marick/Midje) may have been the high point in some ways! I mean, it was the wrong direction. Clearly it was. But in terms of actual niceness of writing tests, it really might been the high point.
+
+**Neil:** I really like Midje. But it wasn't the Clojure way, a DSL, too many macros.
+
+**Joe: Yes, it was hard to compose and reuse bits of setup code, for instance, but it did have a great auto-test/test-refresh mode that worked well.**
+
+**Ben:** Yeah, but if things went wrong with Midje, you were in so much trouble.
+
+## Clojure's Strengths
+
+**Joe: So it sounds like all new work that you're doing is implemented in Clojure?**
+
+**Ben:** Across the Atomist platform, yes. We don't represent the entirety of Docker, of course! But our team of Clojure engineers is growing, we're expanding and investing more in Clojure.
+
+**James:** At Docker there's certainly a lot of TypeScript and Go, but there's also a lot of trust in everyone to make the right decisions about tech.
+
+**Danny:** There's always a tension in any company, isn't there? There's a size [of team] where you want standards, to some degree. That makes it much easier in lots of ways. But if you make it too homogeneous, you lose out on innovation.
+
+**James:** If you're writing a microservice in a language like Clojure, it's very effective because it has the high-level abstractions you need. You really want to avoid low-level programming languages for the kind of work we do because the higher-level abstractions we need are just not there, and this really does affect productivity. Often the discussion about programming languages become religious though, and it's about what language you know.
+
+**Neil:** I would love to try and write a microservice in Rust, and just see what the experience is like and how it performs. At some point, though, I'm gonna have to ingest some JSON, or some EDN, and you have to define so much up front. I'm not used to being restricted in that way, because these values may not always have that very specific shape.
+
+**Joe: Earlier you mentioned plumbing. Many microservices you could describe as plumbing, and when you're putting together pipes and connectors, you don't want to have to codify exactly what kind of fluid can go through. You certainly only want to codify the parts that are relevant.**
+
+**James:** Yeah. I only care about certain parts of that data, which is why the _idea_ behind spec is such a good one. It's also a strong argument for not using programming languages like Go or Rust for building microservices, particularly when they're often just passing messages between different systems.
+
+## Expanding the team
+
+**Joe: You guys work in Bristol (in the UK). Is the team growing? And where else do you have engineers?**
+
+**Ben**: We've hired more engineers into our team since the acquisition and we've had engineers from elsewhere in Docker join us. Mainly based across Europe, with some East Coast US.
+
+**James:** Some of the original Atomist team has split up, but we've got a lot more people working on Atomist now (and not just engineering roles). [We're hiring!](https://www.docker.com/career-openings/)
