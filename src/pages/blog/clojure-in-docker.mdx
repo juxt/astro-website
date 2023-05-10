@@ -6,12 +6,12 @@ description: 'Securing the software supply chain with Clojure'
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '10 May 2023'
-heroImage: 'clojurein-uk-2.jpg'
+heroImage: 'docker-logo-clojurein.jpg'
 clojureIn:
   {
     season: 'two',
     industry: 'security',
-    quote: '"We''re all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."'
+    quote: '"We're all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."'
   }
 ---
 
@@ -25,7 +25,7 @@ We caught up with James Carnegie, Ben Griffiths, Neil Prosser and Danny Smith, S
 
 import gr from '../../assets/blog/docker-logo.png'
 
-<Image alt='Docker' width={300} src={gr} class='not-prose'/>
+<Image alt='Docker' width={300} src={gr} class='not-prose' />
 
 **Joe: So what does your team do at Docker?**
 
@@ -47,7 +47,10 @@ There are multiple players in this space and they all, at some level, use open s
 
 **James:** It's cloud-based microservices. In the automation platform we've got a continuous query system built on Datomic. It's a pluggable platform that we build the security product on top of.
 
-<span class='pullquote right' text-content="Almost everything can go through queues, and therefore everything should go through queues. Once you're asynchronous, you may as well be that way throughout your platform."/>
+<span
+  class='pullquote right'
+  text-content="Almost everything can go through queues, and therefore everything should go through queues. Once you're asynchronous, you may as well be that way throughout your platform."
+/>
 
 You have subscriptions in the form of datalog queries, and when those datalog queries unify, we perform actions. Those actions are functions, largely, but they can be any kind of workload. So we have lots of Datomic, and microservices that are surrounding it and plugging into various other systems.
 
@@ -85,7 +88,10 @@ In the end we had to come together though. A lot changed on the platform backend
 
 **Danny:** At that stage the choice of Clojure wasn't because of Datomic. That wasn't part of the picture early on. It was because of Clojure's properties writing backend, microservices, or rather, the comfort level that people had and the enthusiasm people had for writing backend microservices in Clojure.
 
-<span class="pullquote left" text-content="We're all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."/>
+<span
+  class='pullquote left'
+  text-content="We're all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."
+/>
 
 **Ben:** It all does come down to productivity, doesn't it? Ultimately. We just felt it was the language that we're the most productive in, and that's why we chose it, and that's why we were already Clojure programmers, because we felt it was a really productive thing to be.
 
@@ -103,7 +109,10 @@ In the end we had to come together though. A lot changed on the platform backend
 
 **James:** When you compare that to building a similar microservice in Go, there's so much less code with Clojure, it's concise as well.
 
-<span class="pullquote right" text-content="[W]orking without a REPL is just horrible. Ultimately, the REPL is just such a pleasurable thing to use."/>
+<span
+  class='pullquote right'
+  text-content='[W]orking without a REPL is just horrible. Ultimately, the REPL is just such a pleasurable thing to use.'
+/>
 
 **Ben:** And working without a REPL is just horrible. Ultimately, the REPL is just such a pleasurable thing to use.
 
@@ -157,7 +166,10 @@ ClojureScript on Node I think has gotten really frustrating. It's just not as po
 
 Graal is an option, but I always look at Graal and think, "Am I gonna be allowed to use, say, Google's Pub/Sub library?"
 
-<span class="pullquote left" text-content="When we first looked at GraalVM years ago, it didn't really work, and nothing was supported, but now it really does. Oracle have invested a lot, they're selling it now so they need it to work well."/>
+<span
+  class='pullquote left'
+  text-content="When we first looked at GraalVM years ago, it didn't really work, and nothing was supported, but now it really does. Oracle have invested a lot, they're selling it now so they need it to work well."
+/>
 
 **James:** This is really now possible with Graal. When we first looked at it years ago, it didn't really work, and nothing was supported, but now it really does. Oracle have invested a lot, they're selling it now so they need it to work well.
 
@@ -177,13 +189,16 @@ Graal is an option, but I always look at Graal and think, "Am I gonna be allowed
 
 **James:** We use a lot of his bits and bobs, like Jet, Kondo.
 
-<span class="pullquote right" text-content="For someone like me, Kondo is brilliant. I despise unordered namespaces, that kinda thing. So having Kondo catch that stuff is great."/>
+<span
+  class='pullquote right'
+  text-content='For someone like me, Kondo is brilliant. I despise unordered namespaces, that kinda thing. So having Kondo catch that stuff is great.'
+/>
 
 **Neil:** [Kondo](https://github.com/clj-kondo/clj-kondo) is great. For someone like me, Kondo is brilliant. I despise unordered namespaces, that kinda thing. So having Kondo catch that stuff is great. Lots of tests in our Datomic stuff where we've got `get-in` with just one key, Kondo is not happy about that. When I see these things it makes me bristle every time, so it's nice having Kondo complain too.
 
 **Ben:** It may have been two keys at some point, to be fair to me!
 
-**Neil:**  But Kondo is just so fast, and for beginners it even helps you with some of the basics of Clojure. Catching problems like this, like Findbugs or PMD used to do for our Java codebases. We like this stuff.
+**Neil:** But Kondo is just so fast, and for beginners it even helps you with some of the basics of Clojure. Catching problems like this, like Findbugs or PMD used to do for our Java codebases. We like this stuff.
 
 **James:** Also, LSP has brought our worlds together a lot. Because every one of us is using a different development environment. It's remarkable actually. We have Spacemacs, Cursive, Calva, Emacs.
 
@@ -223,7 +238,10 @@ Also [Specter](https://github.com/redplanetlabs/specter). I love Specter. Once I
 
 **Neil:** When I joined the team I was building lots of little libraries, but we realized it was such a pain to update that one, and then update the other one that brings it in. So we decided to just wedge them all into one common library.
 
-<span class="pullquote left" text-content="[W]e are now building services which are going to be shipped onto machines, written in Clojure, compiled using Graal."/>
+<span
+  class='pullquote left'
+  text-content='[W]e are now building services which are going to be shipped onto machines, written in Clojure, compiled using Graal.'
+/>
 
 Now there's no remembering to put it in a certain dependency, it's all very close at hand.
 
@@ -271,13 +289,16 @@ What's funny is that we still discover things in core that we didn't realise wer
 
 **Ben:** We must have a bunch of code from that time period that is full of spec though.
 
-**Danny:** Jim [Clark], still uses a bit of spec. He's quite fluent with it, which of course helps. There's an initial barrier and a steep learning curve. A bit like Specter. Once you're there you can express what you want easily.  Jim uses the `conform` features to conform complex inputs, which you can't easily get from elsewhere.
+**Danny:** Jim [Clark], still uses a bit of spec. He's quite fluent with it, which of course helps. There's an initial barrier and a steep learning curve. A bit like Specter. Once you're there you can express what you want easily. Jim uses the `conform` features to conform complex inputs, which you can't easily get from elsewhere.
 
 ## Tooling and testing
 
 **Joe: Is there anywhere you would like to see Clojure go next? Problems that you'd like to see solved? New directions that you'd like to see Clojure take?**
 
-<span class="pullquote right" text-content="[T]he deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine."/>
+<span
+  class='pullquote right'
+  text-content="[T]he deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine."
+/>
 
 **James:** I think, "No". It's great, and let's just stop :) But in all seriousness, the deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine. It's Maven-y and a bit annoying, but it really was fine. 9 times out of 10 my build is so boring, and I just don't care about it. Your build should be boring. People are putting less and less in there, and more in your multi-stage Docker build, maybe more in your delivery pipeline. You really just need `lein run`, `lein test`, it's all you need.
 
@@ -295,7 +316,7 @@ What's funny is that we still discover things in core that we didn't realise wer
 
 **Joe: Do you use Kaocha?**
 
-**Danny:** Yeah, I do. I don't think anyone else uses it, and I know others don't like it, but I do use it a lot (privately!). It does suffer from a lot of the problems of the general Clojure test ecosystem, but what I love about it is (when I can get it to work), I can change of line of code, save, and it runs the tests, and when your tests fail, and you save, it will run just the ones that failed. And I *love* that kind of feedback loop. It's great when you've got fast tests, it's an incredible experience.
+**Danny:** Yeah, I do. I don't think anyone else uses it, and I know others don't like it, but I do use it a lot (privately!). It does suffer from a lot of the problems of the general Clojure test ecosystem, but what I love about it is (when I can get it to work), I can change of line of code, save, and it runs the tests, and when your tests fail, and you save, it will run just the ones that failed. And I _love_ that kind of feedback loop. It's great when you've got fast tests, it's an incredible experience.
 
 I want that to be even better. I think the ideal development experience is: I'm editing, I'm changing characters, I get instant feedback in my IDE of exactly all my syntactic errors and test failures, all related to that change. That's what everyone's looking for, right? You want instant feedback. Every time I press the button and, um, it's still not there in Clojure.
 
