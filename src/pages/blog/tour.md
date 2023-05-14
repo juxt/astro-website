@@ -19,12 +19,12 @@ heroImage: 'nrepl.jpg'
 
 I'm currently writing some blog posts about Event Driven Architecture.  As part of this series, I recreate some of the key concepts/features in Clojure without using external services.
 
-Serendipitously, in the latest Juxt Safari 🐘 session (our internal tech talks),  Hak and Jeremy presented Trip: the just released library providing datalog in a name-space.
+Serendipitously, in the latest Juxt Safari 🐘 session (our internal tech talks),  Hak and Jeremy presented Trip: the just-released library providing datalog in a name-space.
 
 For my demo code, I needed:
 
  - an easy local way to store events for a data sourcing example i.e an event-store,
- - a way to store records for a topic on a message bus i.e a log-store (using Kafka's terminology for the storage abstraction).
+ - a way to store records for a topic on a message bus i.e. a log-store (using Kafka's terminology for the storage abstraction).
  
  A perfect opportunity to have a play with Trip as the underlying, but local, back-end 🙂.
 
@@ -192,9 +192,9 @@ and
 
 Pretty neat all thanks to Trip 😎
 
-Note that we use a transaction function in to call append - the reason being thread safety.  By default Trip implements its connection as an atom.   The append function itself uses the database to discover the latest offsets - if we dereference the connection to get the value and the overall transact retries, then the value may have changed in a competing thread.
+Note that we use a transaction function to call append - the reason being thread safety.  By default Trip implements its connection as an atom.   The append function itself uses the database to discover the latest offsets - if we dereference the connection to get the value and the overall transact retries, then the value may have changed in a competing thread.
 
-It's pretty great we can do this as we explore easily some of the issues seen with partitioning of topics in Kafka.  The below test shows different client threads saving to the event-store.  Thanks to Clojure atom's isolation properties we will always have a consistent state file.  However, we won't actually know which thread wins out and the overall final ordering of the saved documents (we do know a partitions total order).  Precisely the problems encountered when working with Kafka partitions.
+It's pretty great we can do this as we explore easily some of the issues seen with the partitioning of topics in Kafka.  The below test shows different client threads saving to the event-store.  Thanks to Clojure atom's isolation properties we will always have a consistent state file.  However, we won't actually know which thread wins out and the overall final ordering of the saved documents.  Precisely the problems encountered when working with Kafka partitions.
 
 ```clojure
 (deftest eventstore-isolation-negative-test
@@ -214,7 +214,7 @@ It's pretty great we can do this as we explore easily some of the issues seen wi
 
 ## Retrieval 
 
-Getting the data back out requires some Datalog to pull the documents and some post sorting in Clojure.
+Getting the data back out requires some Datalog to pull the documents and some post-sorting in Clojure.
 
 ```clojure
 (->> (trip/q '{:find [(pull ?e [*])]
@@ -230,7 +230,7 @@ Getting the data back out requires some Datalog to pull the documents and some p
       (mapv #(dissoc % :db/id :offset)))
 ```
 
-Tour's `gen-datalog` macro and a helper function aids in the construction of the queries based off of the components of the composite key.  The macro generates the Datalog query and the helper function does a post query transform to tidy things up.
+Tour's `gen-datalog` macro and a helper function aid in the construction of the queries based on the components of the composite key.  The macro generates the Datalog query and the helper function does a post-query transform to tidy things up.
 
 ```clojure
 (defmacro gen-datalog
@@ -256,7 +256,7 @@ Tour's `gen-datalog` macro and a helper function aids in the construction of the
                                nil))))))
 ```
 
-The macro is passed an `offset-type` which is a keyword representing its namesake Clojure operation e.g. `:nthrest` provides all documents after an offset, `:take` before.
+The macro is passed an `offset-type` which is a keyword representing its namesake Clojure operation e.g.`:nthrest` provides all documents after an offset, `:take` before.
 
 And the post-query transform is simply
 
@@ -273,7 +273,7 @@ And the post-query transform is simply
 
 ## Trivial Read Functions
 
-For the example blog code we can now write our respective read functions as easily as the write functions.
+For the example blog code, we can now write our respective read functions as easily as the write functions.
 
 For the event-store we need to return in order all events for a particular aggregate and remove the offset.
 
@@ -285,7 +285,7 @@ For the event-store we need to return in order all events for a particular aggre
        (mapv #(dissoc % :offset))))
 ```
 
-And for our message bus requirements we can mimic a poll which fetches a message at an offset and all after it (nthrest).
+And for our message bus requirements, we can mimic a poll that fetches a message at an offset and all after it.
 
 ```clojure
 (defn poll 
@@ -296,9 +296,9 @@ And for our message bus requirements we can mimic a poll which fetches a message
 	
 ## Trip's Protocol's To the Rescue
 
-In DDD we might want our event-store to both save the events it receives and to publish those events to message bus in the same "transaction".  This way we are assured that subscribers to the published events will be eventually consistent.
+In DDD we might want our event-store to both save the events it receives and publish those events to a message bus in the same "transaction".  This way we are assured that subscribers to the published events will be eventually consistent.
 
-Thankfully Trip supports changing out the underlying operations for a connection.  The intention here is to allow people to extend Trip in new and interesting ways.  Tour uses it to pivot to `refs` instead of `atoms` to manage connections.  This way we can get transactional behaviour for free.
+Thankfully Trip supports changing out the underlying operations for a connection.  The intention here is to allow people to extend Trip in new and interesting ways.  Tour uses it to pivot to `refs` instead of `atoms` to manage connections.  This way, via Clojure's native support for transactions, we have transactional behaviour for free.
 
 ```clojure
 (defn create-conn [] (ref (trip/empty-db)))
@@ -391,4 +391,4 @@ The following test exercises our implementation - saving event-a's to partition 
          (logstore/poll (trip/db conn) "event-topic" 2 0))))
 ```
 
-One thing to note here is that we use a single document database to serve both our stores - echos of the ideas in Atomic Architecture.
+One thing to note here is that we use a single Trip database to serve both our stores - in line with the [shared state](https://www.juxt.pro/blog/atomic-architecture/) idea from Atomic Architecture.
