@@ -19,7 +19,7 @@ heroImage: 'nrepl.jpg'
 
 I'm currently writing some blog posts about Event Driven Architecture.  As part of this series, I recreate some of the key concepts/features in Clojure without using external services.
 
-Serendipitously, in the latest Juxt Safari 🐘 session (our internal tech talks),  Hak and Jeremy presented Trip: the just-released library providing datalog in a name-space.
+Serendipitously, in the latest JUXT Safari 🐘 session (our internal tech talks),  Hak and Jeremy presented Trip: the just-released library providing Datalog (DB) as a name-space.
 
 For my demo code, I needed:
 
@@ -56,7 +56,7 @@ Tour is a tiny library on top of Trip that adds ordering to Trip in a simple [na
 
 Trip works by augmenting the addition of documents with order state.  Anytime we use Trip's `transact` to add an event to the DB we also:
 
-- insert into the event a `:db/id` with an uuid value and an `:offset` with an integer value.  The `:db/id`is required and ensures every event gets added, even if it's a duplicate. The `:offset` is calculated via its position in the sequence of events with the same `:aggregate-id` currently being added plus the latest available offset for that `:aggregate-id`.
+- insert into the event a `:db/id` with a UUID value and an `:offset` with an integer value.  The `:db/id`is required and ensures every event gets added, even if it's a duplicate. The `:offset` is calculated via its position in the sequence of events with the same `:aggregate-id` currently being added plus the latest available offset for that `:aggregate-id`.
 - we use the Trip DB itself to store a state document that keeps track of the latest available offset for each `:aggregate-id`
 
 For events example above, the state document would look like this.
@@ -146,7 +146,7 @@ Tour's append function is a general implementation of the above.  First, a helpe
        keyword))
 ```
 
-And then the append function itself is responsible for creating the transaction data for trip.
+And then the append function itself is responsible for creating the transaction data for Trip.
 
 ```clojure
 (defn append [db documents & ks]
@@ -315,7 +315,7 @@ Thankfully Trip supports changing out the underlying operations for a connection
       @result)))
 ```
 
-We can simply implement this now
+The implementation is simple
 
 ```clojure
 (def conn (tour/create-conn))
@@ -338,7 +338,7 @@ We can simply implement this now
 
 Tour's `create-conn` function uses the ref based connection protocol.  A simple function `event-to-record`, demonstrates a conversion of events into message bus records.
 
-The following test exercises our implementation - saving event-a's to partition 1 and event-b's to partition 2 of the "event-topic".
+The following test exercises our implementation - recording everything in the event-store and saving event-a's to partition 1 and event-b's to partition 2 of the "event-topic".
 
 ```clojure
 ;; Sample events
