@@ -2,7 +2,7 @@
 draft: false
 author: 'mtf'
 layout: '../../layouts/BlogPost.astro'
-title: 'Tour: Building data stores with Trip'
+title: 'Tour: Building Data Stores with Trip'
 description: ""
 publishedDate: '2023-05-12'
 tags:
@@ -12,7 +12,7 @@ tags:
   - datalog
   - trip
   - kafka
-heroImage: 'nrepl.jpg'
+heroImage: 'tour.jpg'
 ---
 
 ## Serendipity
@@ -197,8 +197,7 @@ Note that we use a transaction function to call append - the reason being thread
 It's pretty great we can do this as we explore easily some of the issues seen with the partitioning of topics in Kafka.  The below test shows different client threads saving to the event-store.  Thanks to Clojure atom's isolation properties we will always have a consistent state file.  However, we won't actually know which thread wins out and the overall final ordering of the saved documents.  Precisely the problems encountered when working with Kafka partitions.
 
 ```clojure
-(deftest eventstore-isolation-negative-test
-  "This test results in an incorrect state file"
+(deftest eventstore-isolation-test
   (future (eventstore/save-events! conn [event-a1 event-b1]))
   (future (eventstore/save-events! conn [event-b2 event-a2 event-a1]))
   (Thread/sleep 500)
@@ -392,3 +391,5 @@ The following test exercises our implementation - recording everything in the ev
 ```
 
 One thing to note here is that we use a single Trip database to serve both our stores - in line with the [shared state](https://www.juxt.pro/blog/atomic-architecture/) idea from Atomic Architecture.
+
+Image by <a href="https://www.freepik.com/free-vector/vintage-world-map-with-planet_5742769.htm#query=vintage%20world%20map&position=44&from_view=keyword&track=ais">Freepik</a>
