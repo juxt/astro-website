@@ -1,0 +1,73 @@
+---
+draft: false
+author: 'mtf'
+layout: '../../layouts/BlogPost.astro'
+title: 'A Quick Survey of Event Driven Architecture'
+description: ""
+publishedDate: '2023-05-13'
+tags:
+  - event-driven-architecture
+  - EDA
+  - architecture
+  - kafka
+heroImage: 'observer-in-special-relativity.png'
+---
+
+import { Image } from '@astrojs/image/components'
+import eda from '../../assets/blog/event-driven-architecture.jpg'
+
+# Understanding an Organisation's Event Driven Architecture
+
+During the discovery or design of an EDA it's important to understand what EDA means to those involved. In the [introduction](../eventing) we alluded to the large scope of EDA being a scion-technical problem to overcome.
+
+The issues start almost at the highest level of concepts.  EDA is to Architects as Transducers are to Clojure, in that a lot of people have written a lot about how to think about each 😃.
+
+# Towards an Informal Taxonomy 
+
+We will use the below diagram to explore the foundations of EDA.  Ideally, you will be able to place your own organisation's location on the map.  Hopefully,  it will reveal the trade-offs about other locations.
+
+<Image alt='Event Driven Architecture' src={eda} />
+
+
+# The Layers
+
+## Building Blocks
+
+### 1 Message Oriented Middleware
+
+### 2 Event-stores
+
+## Design
+
+### 3 Event Driven Architecture
+
+### A DDD Design
+
+### B Domain Events
+
+## Top Level
+
+### 4 Event Streaming
+
+### 5 Event Sourcing
+
+
+
+
+# References
+
+- [Domain Events vs Event Sourcing](https://www.innoq.com/en/blog/domain-events-versus-event-sourcing/)
+- [Event Driven Architectures vs Event Sourcing Patterns](https://pablo-iorio.medium.com/event-driven-architectures-vs-event-sourcing-patterns-23d328289bf9)
+- [Reactive Manifesto](https://www.reactivemanifesto.org)
+- [Event Sourcing vs Change Data Capture](https://debezium.io/blog/2020/02/10/event-sourcing-vs-cdc/)
+- [Event Streaming vs Event Sourcing](https://thenewstack.io/event-streaming-and-event-sourcing-the-key-differences/)
+- [Event Sourcing vs Event Streaming](https://developer.confluent.io/learn-kafka/event-sourcing/event-sourcing-vs-event-streaming/)
+- [Event Sourcing is Hard](https://chriskiehl.com/article/event-sourcing-is-hard)
+- [Event Streaming is NOT Event Sourcing](https://event-driven.io/en/event_streaming_is_not_event_soucing/)
+- [This is NOT Event Sourcing](https://github.com/oskardudycz/EventSourcing.NetCore#1219-this-is-not-event-sourcing-but-event-streaming)
+- [The Many Meanings of Event Driven Architecture](https://www.youtube.com/watch?v=STKCRSUsyP0)
+- [Domain Events in Event Sourcing](https://codeopinion.com/domain-events-in-event-sourcing-not-exactly/)
+- [Event Sourcing Explained](https://itnext.io/event-sourcing-explained-b19ccaa93ae4)
+- [What is Event Sourcing](https://www.eventstore.com/blog/what-is-event-sourcing)
+- [Kafka Not Suitable as an Event Store](https://itnext.io/event-sourcing-why-kafka-is-not-suitable-as-an-event-store-796e5d9ab63c)
+- [Domain Events](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implemetation)
