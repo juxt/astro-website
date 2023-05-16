@@ -18,7 +18,7 @@ import eda from '../../assets/blog/event-driven-architecture.jpg'
 
 # Understanding an Organisation's Event Driven Architecture
 
-During the discovery or design of an EDA it's important to understand what EDA means to those involved. In the [introduction](../eventing) we alluded to the large scope of EDA being a scion-technical problem to overcome.
+During the discovery or design of an EDA it's important to understand what EDA means to those involved. In the [introduction](../eventing), we alluded to the large scope of EDA being a socio-technical problem to overcome.
 
 The issues start almost at the highest level of concepts.  EDA is to Architects as Transducers are to Clojure, in that a lot of people have written a lot about how to think about each 😃.
 
@@ -33,13 +33,39 @@ We will use the below diagram to explore the foundations of EDA.  Ideally, you w
 
 ## Building Blocks
 
-### 1 Message Oriented Middleware
+### Message Oriented Middleware (1)
 
-### 2 Event-stores
+Whilst it is not technically necessary to use a message bus when building an EDA (3a), in practice the majority of projects seem to (3b).
+
+A message bus (1) decouples systems in both time and location: producers of messages need not know which and when a consumer processes a message.
+
+Common technologies in this space include Kafka, SQS, Kinesis, and  Pub/Sub.  They provide other desirable features such as scalability, delivery semantics, and ordering guarantees.
+
+If an EDA is centred around transferring events between systems it should come as no surprise a Message Oriented Middleware is often reached for.
+
+### Event-store Infrastructure (2)
+
+Event-stores (2) can be used both independently and in conjunction with Message Oriented Middleware.  Oftentimes an event-store stack will provide event-routing for you.
+
+When using event-sourcing as a state persistence pattern for a DDD aggregate, an event-store is the repository to which these events are stored (6c, 6d).   However, some projects will not have evolved from a DDD foundation and the thinking is not in terms of aggregates but event streams (5c, 5d).
+
+Common technologies in this space include EventStoreDB, Axon, and MartenDB.  They tend to include desirable features like strong consistency on append, optimistic concurrency, and global ordering.  When Event-store Infrastructure is not used for Event Sourcing (6b, 5b) then these features are often replicated by developers themselves using the features of the Message Oriented Middleware (1).
 
 ## Design
 
-### 3 Event Driven Architecture
+### Event Driven Architecture (3)
+
+The common denominator throughout Event Driven Architecture is the "event".  From Wikipedia's entry on EDA:
+
+  "An event can be defined as 'a significant change in state'"
+  
+and
+
+  "Events do not travel, they just occur. However, the term event is often used metonymically to denote the notification message itself, which may lead to some confusion."
+  
+For the taxonomy (3) we will say "An event is, at the least, a notification of something that has happened in the past".  The "at the least" allows the event to move beyond simple notification and perhaps carry some pertinent state (event-carried-state-transfer).  On inherited software projects, unfortunately, we don't get to declare what an event is.  Fowler notes the trap of using events passive-aggressively as commands.  And this trap is prevalent - expect many cerebral contortions to justify a project's thinking e.g. "action events" or "the issuance of command is itself an event".  There are many articles on Commands vs Events.
+
+Whilst Message Driven Architectures (3b) and Event-stores (3b) it is possible to combine these stacks (5c, 6c) or not use them at all (3a). There is a lot to implement if one goes down this route (3a).
 
 ### A DDD Design
 
@@ -52,6 +78,8 @@ We will use the below diagram to explore the foundations of EDA.  Ideally, you w
 ### 5 Event Sourcing
 
 
+4d 3d?
+
 
 
 # References
@@ -63,7 +91,7 @@ We will use the below diagram to explore the foundations of EDA.  Ideally, you w
 - [Event Streaming vs Event Sourcing](https://thenewstack.io/event-streaming-and-event-sourcing-the-key-differences/)
 - [Event Sourcing vs Event Streaming](https://developer.confluent.io/learn-kafka/event-sourcing/event-sourcing-vs-event-streaming/)
 - [Event Sourcing is Hard](https://chriskiehl.com/article/event-sourcing-is-hard)
-- [Event Streaming is NOT Event Sourcing](https://event-driven.io/en/event_streaming_is_not_event_soucing/)
+- [Event Streaming is NOT Event Sourcing](https://event-driven.io/en/event_streaming_is_not_event_sourcing/)
 - [This is NOT Event Sourcing](https://github.com/oskardudycz/EventSourcing.NetCore#1219-this-is-not-event-sourcing-but-event-streaming)
 - [The Many Meanings of Event Driven Architecture](https://www.youtube.com/watch?v=STKCRSUsyP0)
 - [Domain Events in Event Sourcing](https://codeopinion.com/domain-events-in-event-sourcing-not-exactly/)
@@ -71,3 +99,6 @@ We will use the below diagram to explore the foundations of EDA.  Ideally, you w
 - [What is Event Sourcing](https://www.eventstore.com/blog/what-is-event-sourcing)
 - [Kafka Not Suitable as an Event Store](https://itnext.io/event-sourcing-why-kafka-is-not-suitable-as-an-event-store-796e5d9ab63c)
 - [Domain Events](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implemetation)
+- [Event Driven Architecture](https://en.wikipedia.org/wiki/Event-driven_architecture)
+- [What do you mean by Event Driven](https://martinfowler.com/articles/201701-event-driven.html)
+- []
