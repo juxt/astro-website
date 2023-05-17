@@ -31,15 +31,15 @@ We will use the below diagram to explore the foundations of EDA.  Ideally, you w
 
 # Foundations #
 
-## Message Driven Architecture (1) ##
+## Message-Driven Architecture (1) ##
 
 Whilst it is not technically necessary to use a message-driven architecture when building an EDA (3a), in practice the majority of projects do (3b).
 
-A message driven architecture (1) decouples systems in both time and location: producers of messages need not know when and where a consumer processes a message.
+A message-driven architecture (1) decouples systems in both time and location: producers of messages need not know when and where a consumer processes a message.
 
 Common technologies in this space include Kafka, SQS, Kinesis, and  Pub/Sub.  They provide other desirable features such as scalability, delivery semantics, and ordering guarantees.
 
-If an EDA is centred around transferring events between systems it should come as no surprise a Message Oriented Middleware is often reached for.
+If an EDA is centered around transferring events between systems it should come as no surprise a message-driven architecture is often reached for.
 
 ## Event-store Infrastructure (2)
 
@@ -63,7 +63,7 @@ and
   
 For the taxonomy (3) we will say 
 
->An event is, at the least, a notification of something that has happened in the past"
+>An event is, at the least, a notification of something that has happened in the past
 
 The *"at the least"* allows the event to move beyond simple notification and incorporate event-carried-state-transfer if desired.
 
@@ -71,11 +71,37 @@ Unfortunately, on inherited software projects, we don't get to declare what an e
 
 Message Driven Architectures (3b) and Event-stores (3b) are used to implement EDA.  It is possible to combine these stacks (5c, 6c) or not use them at all (3a,3d). The next blog post will explore Event Driven Architecture and Domain Driven Design without using an event-store or a message-bus (3d).
 
-There is an impression that at certain points in EDA's history rolling your solutions was an acceptable and even encouraged thing to do - take care here, it may be appropriate but more likely isn't.
+There is an impression that at certain points in EDA's history rolling your own solution was an acceptable and even encouraged thing to do - take care here, it may be appropriate but more likely isn't.
+
+Pragmatically, any system using events can be labeled an EDA.
 
 ## DDD Design (A)
 
+DDD (A) is built around programming a Domain Model - wherein business logic and data are placed together in objects encapsulating the rules and processes of a (business) domain.
+
+In DDD, a catalog of software patterns helps the programmer and business in both building and working with complex domain models.
+
+The key concept of an *aggregate* is introduced (the next blog post will explore this in more depth).  An aggregate is a collection of entities and values.  An entity is something identified by a name and has a life-cycle e.g. a loan application, a robot, or an order. Crucially an aggregate defines a transaction boundary - changes to the entities and values within can only be done via the aggregate. This constraint allows the programmer to implement the business logic required e.g. an order can not have more than one hundred line items or a robot can not shoot its owner.
+
+Aggregates need to be persisted and this can be done in a few ways: perhaps directly to a database (A), via an ORM layer (A), or using domain events and event-sourcing (B and 6's).
+
 ## Domain Events (B)
+
+In DDD a Domain Event is
+
+> something happened that domain experts care about
+
+We can contrast this to the definition of an Event we used in talking about 3.
+
+>An event is, at the least, a notification of something that has happened in the past
+
+Typically aggregates are responsible for generating domain events. 
+
+In a project is the set of Domain Events equal to all Events(3)?  This can be a grey area and having a shared understanding of a project here is helpful.  It boils down to the scope of a "domain expert".  Let's imagine that domain experts don't include the programmers of the system.  Let's say a programmer changes an aggregate to include some metadata (say cache retention) that a domain expert doesn't care about.  If we are using the event-sourcing pattern to persist an aggregates state we need to use an event to capture the cache retention change.  The event-stream is a mixture of domain-events and events.
+
+It is arguably easier to work on a project in which domain-events fully describe the complete event stream of an aggregate - there is no conceptual context switching required.  This may come at the expense of the "purity" of the domain model.  It may also blur the boundaries between what may be published downstream - the event stream may be too fine-grained to publish in full so filtering is required.  This introduces the idea of integration events, we either selectively publish select Domain Events or create entirely new events from event combinations in the event-stream.
+
+Again what's important here is realising what is meant for the particular project in hand.
 
 # Top Level
 
@@ -103,5 +129,6 @@ There is an impression that at certain points in EDA's history rolling your solu
 - [Domain Events](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implemetation)
 - [Event Driven Architecture](https://en.wikipedia.org/wiki/Event-driven_architecture)
 - [What do you mean by Event Driven](https://martinfowler.com/articles/201701-event-driven.html)
+- [Domain Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
 
 - TODO Add Command vs Event References
