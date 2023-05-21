@@ -66,9 +66,9 @@ and
   
 For the taxonomy (3) we will say 
 
-> An event is, at the least, a notification of something that has happened in the past
+> An event is a notification of something that has happened in the past
 
-The *"at the least"* allows the event to move beyond simple notification and incorporate event-carried-state-transfer if desired.
+The amount of context that is included in the notification can vary.  It is rare to use the notification to prompt for the discovery of the actual change. Typically, some form of event-carried-state-transfer is used.
 
 Unfortunately, on inherited software projects, we don't get to declare what an event is.  Fowler notes the trap of using events passive-aggressively as commands.  And this trap is not uncommon - expect cerebral contortions to justify a project's ingrained thinking e.g. "action events" or "the issuance of command is itself an event".  There are many articles on Commands vs Events.  It is a judgement call to either, bend to a project's culture, or try to formally separate the concepts.
 
@@ -96,7 +96,7 @@ In DDD a domain-event is
 
 We can contrast this to the definition of an Event we used in talking about 3.
 
-> An event is, at the least, a notification of something that has happened in the past
+> An event is a notification of something that has happened in the past
 
 Typically aggregates are responsible for generating domain events. 
 
