@@ -19,9 +19,11 @@ import plo from '../../assets/blog/pattern-language-overview.png'
 
 # Context
 
-In this [previous](../event-driven-architecture) blog post, we attempted to map out aspects of Event Driven Architecture.  This post is exploring Domain Driven Design (A) on the EDA map.  Whilst Domain Events (B) is an important part of modern EDA having a grounding in the concepts of DDD before Domain Events are introduced is beneficial to all aspects of EDA.
+In this [previous](../event-driven-architecture) blog post, we attempted to map out aspects of Event Driven Architecture.
 
 <Image alt='Event Driven Architecture' src={eda} />
+
+This post is exploring Domain Driven Design (light pink).  Whilst Domain Events (light purple) are an important part of modern EDA having a grounding in the concepts of DDD before Domain Events are introduced is beneficial to all aspects of EDA.
 
 # Pattern Language Overview
 
@@ -35,7 +37,7 @@ This slightly edited version of the diagram is split into two parts: strategic a
 
 As you might expect from the name, tactical DDD deals with the patterns used by Engineers to codify the business model.  The core concept is the aggregate. An aggregate is an object made from entities, value objects, business logic. It is persisted via a repository.  At the start of DDD movement, domain events were not part of the lexicon and were introduced later.  We will start our example without domain events to make the other concepts clearer and introduce them as we go.
 
-The definitions below are all taken from [1].
+The definitions below are all taken from [[1]].
 
 ## Entities
 
@@ -76,7 +78,7 @@ The goal of an aggregate is help maintain a consistent state.  If an aggregate i
 
 This property of an aggregate means it is a natural place to enforce the business properties and invariants established in conjunction with domain experts.
 
-Within an aggregate, consistency rules are applied synchronously and across boundaries (multiple aggregates) updates are asynchronous (eventually consistent).
+Within an aggregate, consistency rules are applied synchronously and across boundaries updates are asynchronous.
 
 An example, a robot when created is assigned a unique identity, it is built from an upper and lower section.  The company making the robot prides itself on uniqueness and will never build two identical robots.  Here we have a single entity aggregate, the robot itself and two value objects the upper and lower configurations.  We have an invariant upon creation to guarantee that no two robots are identical.
 
@@ -153,13 +155,13 @@ Next, a constructor-like function and a setter function for creating and updatin
       bot)))
 ```
 
-The `create-bot` function uses a function `select-keys-from-repo` that talks to a repository of aggregates to fetch all the robot bodies thus far created.  Then `equal-body` is run over this collection to see if we can create a new aggregate.  The return value of `create-bot` is the aggregate data as a map. 
+The `create-bot` function uses a function `select-keys-from-repo` that talks to a repository of aggregates to fetch all the robot bodies thus far created.  Then `equal-body` is run over this collection to see if we can create a new aggregate.  The return value of `create-bot` is the aggregate data as a map.
 
-## Repostiories
+## Repositories
 
 A repository is another DDD concept.  As its namesake, it's a place of safety for aggregates stored within (i.e. provides some persistence).
 
-Evan's has quite a bit more to say on the matter:
+Evans has quite a bit more to say on the matter:
 
 >For each type of aggregate that needs global access, create a service that can provide the illusion of an in-memory collection of all objects of that aggregate’s root type. Set up access through a well-known global interface. Provide methods to add and remove objects, which will encapsulate the actual insertion or removal of data in the data store. Provide methods that select objects based on criteria meaningful to domain experts. Return fully instantiated objects or collections of objects whose attribute values meet the criteria, thereby encapsulating the actual storage and query technology, or return proxies that give the illusion of fully instantiated aggregates in a lazy way. Provide repositories only for aggregate roots that actually need direct access. Keep application logic focused on the model, delegating all object storage and access to the repositories.
 
@@ -448,7 +450,7 @@ this time around we also simulate saving bot2 first despite it being created sec
 
 We have created a tactical DDD example using the core concepts of entities, value objects, aggregates with business logic (invariants), and repositories. 
 
-This puts us at (Loc A) in the EDA taxonomy of the [previous](../event-driven-architecture) post. From this simple domain model foundation, we can explore the addition of domain-events, command sourcing, and event sourcing.  We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
+From this simple domain model foundation, we can explore the rest of the EDA map at the start of this post.  Including the addition of domain-events, command sourcing, and event sourcing.  We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
 
 # References
 
