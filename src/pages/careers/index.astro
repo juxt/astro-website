@@ -220,20 +220,6 @@ const benefitsPicture = await getImage({
       </div>
     </div>
   </Section>
-  <Section className='text-black py-20'>
-    <h2 id='job-openings' class='text-4xl font-medium flex justify-center'>
-      Open Positions
-    </h2>
-    <div class='mx-auto max-w-7xl pt-20'>
-      <div
-        class='grid md:grid-cols-[repeat(2,_18rem)] xl:grid-cols-[repeat(3,_18rem)] justify-center gap-10'
-      >
-        {jobPostsParsed.map((jobPost) => (
-          <JobCard {...jobPost.frontmatter} url={jobPost.url} />
-        ))}
-      </div>
-    </div>
-  </Section>
 
   <Section>
     <div class='pt-20 pb-40 text-black flex justify-center'>
@@ -241,7 +227,7 @@ const benefitsPicture = await getImage({
         class='w-fit flex flex-col gap-8 justify-center items-center p-10 bg-stone-100 rounded-lg shadow-lg'
       >
         <h2 class='sm:text-3xl text-2xl text-center'>
-          Can't find a position for your skills?
+          We don't have any open positions
         </h2>
 
         <Clickable>
