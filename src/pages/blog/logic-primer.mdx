@@ -106,7 +106,6 @@ Reduce brings us onto tail recursion. During a reduction in functional style, we
 We can do something similar in Prolog. 
 ```
 Reduce(Predicate, [], Result, Result).
-
 Reduce(Predicate, [X|Xs], Acc, Result) :- Call(P, Acc, X, Acc2), Reduce(P, Xs, Acc2, Result).
 ```
 We define an intermediate value: the result when the predicate is true when called against X and the last intermediate value.
