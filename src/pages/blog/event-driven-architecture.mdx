@@ -31,7 +31,7 @@ We will use the below diagram to explore the various meanings of EDA.  Ideally, 
 
 # Underpinnings
 
-## Message-Driven Architecture (light orange)
+## Message-Driven Architecture
 
 Whilst it is not technically necessary to use a message-driven architecture when building an EDA, in practice the majority of projects do.
 
@@ -41,7 +41,7 @@ Common technologies in this space include Kafka, SQS, Kinesis, and  Pub/Sub.  Th
 
 If an EDA is centered around transferring events between systems it should come as no surprise a message-driven architecture is often reached for.
 
-## Event-stores (yellow)
+## Event-stores
 
 Event Stores refer to dedicated event-store implementations/frameworks that could exist independently from a particular project. Event-store Infrastructure can be used both independently and in conjunction with Message Driven Architecture.  Oftentimes an event-store stack will also provide event-routing.
 
@@ -51,7 +51,7 @@ Common technologies in this space include EventStoreDB, Axon, and MartenDB.  The
 
 # Design
 
-## Event Driven Architecture (light green)
+## Event Driven Architecture
 
 The common denominator throughout Event Driven Architecture is the "event".  From Wikipedia's entry on EDA <sup>[[16]]</sup><sup>[[17]]</sup><sup>[[18]]</sup>:
 
@@ -75,7 +75,7 @@ There is an impression that at certain points in EDA's history rolling your own 
 
 Pragmatically, any system using events can be labelled an EDA.
 
-## Domain Driven Design (light pink)
+## Domain Driven Design
 
 DDD is built around programming a Domain Model - wherein business logic and data are placed together in objects encapsulating the rules and processes of a (business) domain <sup>[[18]]</sup>.
 
@@ -85,7 +85,7 @@ The key concept of an *aggregate* is introduced (the next blog post will explore
 
 Aggregates need to be persisted and this can be done in a few ways: perhaps directly to a database, via an ORM layer, or using domain events and event-sourcing.
 
-## Domain Events (light purple)
+## Domain Events
 
 In DDD a domain-event is
 
@@ -105,7 +105,7 @@ Again, what's important here is realising what is meant for the particular proje
 
 # Top Level
 
-## Event Streaming (darker blue)
+## Event Streaming
 
 > With event streaming, there’s a continuous stream of data flowing between systems, with the data representing a new state of events.
 
@@ -121,7 +121,7 @@ Another view is that Event Streaming deals with "data in motion" and that Event 
 
 Finally, in some DDD articles, the domain-events saved out to an event-store are referred to as an event-stream.  And within the event-store infrastructure frame-work an aggregate may be referred to as an event-stream.
 
-## Event Sourcing (lighter blue)
+## Event Sourcing
 
 > Event Sourcing ensures that all changes to application state are stored as a sequence of events.  We guarantee that all changes to the domain are initiated by the events themselves. <sup>[[19]]</sup>
 
