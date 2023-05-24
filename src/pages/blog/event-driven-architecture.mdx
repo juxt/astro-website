@@ -15,6 +15,7 @@ heroImage: 'taxonomy.jpg'
 
 import { Image } from '@astrojs/image/components'
 import eda from '../../assets/blog/event-driven-architecture.jpg'
+import eda-kafka from '../../assets/blog/eda-kafka.jpg'
 
 # Understanding an Organisation's Event Driven Architecture
 
@@ -28,33 +29,29 @@ We will use the below diagram to explore the various meanings of EDA.  Ideally, 
 
 <Image alt='Event Driven Architecture' src={eda} />
 
-Map locations will be referred to like so (5c) through-out the post.
-
 # Underpinnings
 
-## Message-Driven Architecture (1)
+## Message-Driven Architecture (light orange)
 
-Whilst it is not technically necessary to use a message-driven architecture when building an EDA (3a), in practice the majority of projects do (3b).
+Whilst it is not technically necessary to use a message-driven architecture when building an EDA, in practice the majority of projects do.
 
-A message-driven architecture (1) decouples systems in both time and location: producers of messages need not know when and where a consumer processes a message <sup>[[3]]</sup>.
+A message-driven architecture decouples systems in both time and location: producers of messages need not know when and where a consumer processes a message <sup>[[3]]</sup>.
 
 Common technologies in this space include Kafka, SQS, Kinesis, and  Pub/Sub.  They provide other desirable features such as scalability, delivery semantics, and ordering guarantees.
 
 If an EDA is centered around transferring events between systems it should come as no surprise a message-driven architecture is often reached for.
 
-## Event-store Infrastructure (2)
+## Event-stores (yellow)
 
-Event Store infrastructure refers to dedicated event-store implementations/frameworks that could exist independently from a particular project. Event-store Infrastructure (2) can be used both independently and in conjunction with Message Driven Architecture.  Oftentimes an event-store stack will also provide event-routing.
+Event Stores refer to dedicated event-store implementations/frameworks that could exist independently from a particular project. Event-store Infrastructure can be used both independently and in conjunction with Message Driven Architecture.  Oftentimes an event-store stack will also provide event-routing.
 
-When using event-sourcing as a state persistence pattern for a DDD aggregate, an event-store is the repository to which these events are stored (6c, 6d).   However, some projects will not have evolved from a DDD foundation and the thinking is not in terms of aggregates but event streams (5c, 5d).
+When using event-sourcing as a state persistence pattern for a DDD aggregate, an event-store is the repository to which these events are stored.   However, some projects will not have evolved from a DDD foundation and the thinking is not in terms of aggregates but event streams.
 
-Common technologies in this space include EventStoreDB, Axon, and MartenDB.  They tend to include desirable features like strong consistency on append, optimistic concurrency, and global ordering.  When Event-store Infrastructure is not used for Event Sourcing (6b, 5b) then these features are often replicated by developers themselves using bespoke code and the features of Message Driven Architecture implementation (1) <sup>[[14]]</sup>.
-
-Bespoke event-stores e.g. based on Postgres that could be abstracted from a project would place in 5e.  A Kafka Kstream-based event store would place in 6b or 5b as Kafka is fundamentally a message-driven architecture. It is for debate as to whether Kafka's Kstream State Stores qualify them for sections 6c or 5c.
+Common technologies in this space include EventStoreDB, Axon, and MartenDB.  They tend to include desirable features like strong consistency on append, optimistic concurrency, and global ordering.  When Event-store Infrastructure is not used for Event Sourcing then these features are often replicated by developers themselves using bespoke code and the features of Message Driven Architecture implementation<sup>[[14]]</sup>.
 
 # Design
 
-## Event Driven Architecture (3)
+## Event Driven Architecture (light green)
 
 The common denominator throughout Event Driven Architecture is the "event".  From Wikipedia's entry on EDA <sup>[[16]]</sup><sup>[[17]]</sup><sup>[[18]]</sup>:
 
@@ -64,37 +61,37 @@ and
 
 > Events do not travel, they just occur. However, the term event is often used metonymically to denote the notification message itself, which may lead to some confusion.
   
-For the taxonomy (3) we will say 
+For the taxonomy we will say 
 
 > An event is a notification of something that has happened in the past
 
-The amount of context that is included in the notification can vary.  It is rare to use the notification to prompt for the discovery of the actual change. Typically, some form of event-carried-state-transfer is used.
+The amount of context that is included in the notification can vary.  It is rare to use the notification to prompt the discovery of the actual change. Typically, some form of event-carried-state-transfer is used.
 
-Unfortunately, on inherited software projects, we don't get to declare what an event is.  Fowler notes the trap of using events passive-aggressively as commands.  And this trap is not uncommon - expect cerebral contortions to justify a project's ingrained thinking e.g. "action events" or "the issuance of command is itself an event".  There are many articles on Commands vs Events <sup>[[20]]</sup><sup>[[21]]</sup>.  It is a judgement call to either, bend to a project's culture, or try to formally separate the concepts.
+Unfortunately, on inherited software projects, we don't get to declare what an event is.  Fowler notes the trap of using events passive-aggressively as commands.  And this trap is not uncommon - expect cerebral contortions to justify a project's ingrained thinking e.g. "action events" or "the issuance of command is itself an event".  There are many articles on Commands vs Events <sup>[[20]]</sup><sup>[[21]]</sup>.  It is a judgment call to either, bend to a project's culture, or try to formally separate the concepts.
 
-Message Driven Architectures (3b) and Event-stores (3b) are used to implement EDA.  It is possible to combine these stacks (5c, 6c) or not use them at all (3a,3d). The next blog post will explore Event Driven Architecture and Domain Driven Design without using an event-store or a message-bus (3d).
+Message Driven Architectures and Event-stores are used to implement EDA.  It is possible to combine these stacks (see the overlapping centre) or not use them at all. The next blog post will explore Event Driven Architecture and Domain Driven Design without using an event-store or a message-bus.
 
 There is an impression that at certain points in EDA's history rolling your own solution was an acceptable and even encouraged thing to do - take care here, it may be appropriate but more likely isn't.
 
 Pragmatically, any system using events can be labelled an EDA.
 
-## Domain Driven Design (A)
+## Domain Driven Design (light pink)
 
-DDD (A) is built around programming a Domain Model - wherein business logic and data are placed together in objects encapsulating the rules and processes of a (business) domain <sup>[[18]]</sup>.
+DDD is built around programming a Domain Model - wherein business logic and data are placed together in objects encapsulating the rules and processes of a (business) domain <sup>[[18]]</sup>.
 
 In DDD, a catalogue of software patterns helps the programmer and business in both building and working with complex domain models.
 
 The key concept of an *aggregate* is introduced (the next blog post will explore this in more depth).  An aggregate is a collection of entities and values.  An entity is something identified by a name and has a life-cycle e.g. a loan application, a robot, or an order. Crucially an aggregate defines a transaction boundary - changes to the entities and values within can only be done via the aggregate. This constraint allows the programmer to implement the business logic required e.g. an order can not have more than one hundred line items or a robot can not shoot its owner.
 
-Aggregates need to be persisted and this can be done in a few ways: perhaps directly to a database (A), via an ORM layer (A), or using domain events and event-sourcing (B and 6's).
+Aggregates need to be persisted and this can be done in a few ways: perhaps directly to a database, via an ORM layer, or using domain events and event-sourcing.
 
-## Domain Events (B)
+## Domain Events (light purple)
 
 In DDD a domain-event is
 
 > something happened that domain experts care about
 
-We can contrast this to the definition of an Event we used in talking about 3.
+We can contrast this to the definition of an Event we used in the EDA section.
 
 > An event is a notification of something that has happened in the past
 
@@ -102,21 +99,19 @@ Typically aggregates are responsible for generating domain events.
 
 In a project is the set of domain-events equal to all events?  This can be a grey area and having a shared understanding of a project here is helpful.  It boils down to the scope of a "domain expert".  Let's imagine that domain experts don't include the programmers of the system.  Let's say a programmer changes an aggregate to include some metadata (say cache retention) that a domain expert doesn't care about.  If we are using the event-sourcing pattern to persist an aggregates state we need to use an event to capture the cache retention change.  The event-stream is a mixture of domain-events and events.
 
-It is arguably easier to work on a project in which domain-events fully describe the complete event stream of an aggregate (6b,c,d) - there is no conceptual context switching required.  This may come at the expense of the "purity" of the domain model. Domain-events typically high-valued semantics may be lowered <sup>[[1]]</sup>.  It may also blur the boundaries between what may be published downstream - the event stream may be too fine-grained to publish in full so filtering is required.  This introduces the idea of integration events, we either selectively publish domain-events or create entirely new events from event combinations in the event-stream.
+It is arguably easier to work on a project in which domain-events fully describe the complete event stream of an aggregate - there is no conceptual context switching required.  This may come at the expense of the "purity" of the domain model. Domain-event's typically high-valued semantics may be lowered <sup>[[1]]</sup>.  It may also blur the boundaries between what may be published downstream - the event stream may be too fine-grained to publish in full so filtering is required.  This introduces the idea of integration events, we either selectively publish domain-events or create entirely new events from event combinations in the event-stream.
 
-Again what's important here is realising what is meant for the particular project in hand <sup>[[15]]</sup> <sup>[[18]]</sup>.
+Again, what's important here is realising what is meant for the particular project in hand <sup>[[15]]</sup> <sup>[[18]]</sup>.
 
 # Top Level
 
-<Image alt='Event Driven Architecture' src={eda} />
-
-## Event Streaming (4)
+## Event Streaming (darker blue)
 
 > With event streaming, there’s a continuous stream of data flowing between systems, with the data representing a new state of events.
 
 Continuous is an important word in this definition.  There is no request/response semantic.  Systems that process event streams have to be capable of continually updating and responding to a potentially never-ending source of data.
 
-Naturally, a message-driven architecture is an ideal mechanism for streaming event data (4a).  Event-store infrastructure may be a source of an event stream (4c).  One need not use either of these mechanisms (4b) but cases of this on EDA projects tend to be rare.
+Naturally, a message-driven architecture is an ideal mechanism for streaming event data.  Event-store infrastructure may be a source of an event stream.  One need not use either of these mechanisms but cases of this on EDA projects tend to be rare.
 
 Crucially, event streaming says nothing about the persistence, durability and retention of data.  An event-stream can be viewed as a pipe responsible for accepting and delivering transient event data.  These properties tend to be configurable within a message-driven architecture technology stack.
 
@@ -124,13 +119,13 @@ To some <sup>[[2]]</sup> <sup>[[5]]</sup> <sup>[[8]]</sup> <sup>[[9]]</sup>, the
 
 Another view is that Event Streaming deals with "data in motion" and that Event Sourcing is a subset of Event Streaming as it is "data at rest" <sup>[[6]]</sup>.  Event Streaming is said to add connectivity to Event Sourcing - this is an alternate way of saying "publish events".  Personally, the subset claim seems weak, there are properties of Event Sourcing that don't naturally belong in Event Streaming.  It is a complementary relationship rather than a subsuming one.  On the ground, this specific contention makes little pragmatic difference to an engineer's day-to-day.
 
-Finally, in some DDD articles, the domain-events saved out to an event-store are referred to as an event-stream.  And within the event-store infrastructure frame-work an aggregate may be referred to as an event-stream (4c, 4d).
+Finally, in some DDD articles, the domain-events saved out to an event-store are referred to as an event-stream.  And within the event-store infrastructure frame-work an aggregate may be referred to as an event-stream.
 
-## Event Sourcing (5)
+## Event Sourcing (lighter blue)
 
 > Event Sourcing ensures that all changes to application state are stored as a sequence of events.  We guarantee that all changes to the domain are initiated by the events themselves. <sup>[[19]]</sup>
 
-Sometimes a project can use it to mean an append-only audit-log. And often a project will implement the audit-log on an event-stream supplied in a message-driven architecture (5b) - lamented by some as these systems are not foremost event-stores.  Thus require the bolting on of consistency code or edge case configurations to achieve the goals of event-sourcing.
+Sometimes a project can use it to mean an append-only audit-log. And often a project will implement the audit-log on an event-stream supplied in a message-driven architecture - lamented by some as these systems are not foremost event-stores.  Thus require the bolting on of consistency code or edge case configurations to achieve the goals of event-sourcing.
 
 See the Domain Events section for a discussion on the mixing of domain-events and event-sourcing <sup>[[1]]</sup> <sup>[[2]]</sup><sup>[[4]]</sup>
 
@@ -138,7 +133,11 @@ See the Event Streaming section for a discussion on the positions of Event Strea
 
 # JUXT's Experience
 
-Kafka is very prevalent in today's enterprise.  Recent projects are situated in 5b - typically using Kafka Kstream apps.  There are ideas from 6b but often projects we encounter are not bootstrapped off of DDD concepts. Projections of aggregates are often in bespoke DB's, 5e.
+Kafka is very prevalent in today's enterprise.  The below diagram highlights where Kafka Kstream apps sit.
+
+<Image alt='Kstreams location' src={eda-kafka} />
+
+There are ideas from DDD but often projects we encounter are not bootstrapped off of DDD concepts. Projections of aggregates are often in bespoke DB's.
 
 As you can see from our experience the classification is not perfect but hopefully, you can frame your projects in terms of one or more locations - and this is some help in getting everyone on the same page.
 
