@@ -82,7 +82,7 @@ Within an aggregate, consistency rules are applied synchronously and across boun
 
 An example, a robot when created is assigned a unique identity, it is built from an upper and lower section.  The company making the robot prides itself on uniqueness and will never build two identical robots.  Here we have a single entity aggregate, the robot itself and two value objects the upper and lower configurations.  We have an invariant upon creation to guarantee that no two robots are identical.
 
-When working with message-driven architectures and EDA (intersection of 1 and 3b in the EDA map) it seems too easy to think of the aggregate as data only i.e., the events and state.  It is important to realise that business logic is an essential part of the aggregate.
+When working with message-driven architectures and EDA it seems too easy to think of the aggregate as data only i.e., the events and state.  It is important to realise that business logic is an essential part of the aggregate.
 
 # The Robot Example In Clojure
 
@@ -460,6 +460,12 @@ From this simple domain model foundation, we can explore the rest of the EDA map
 [4]: https://www.amazon.co.uk/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577
 [5]: https://github.com/juxt/eventing-examples
 [6]: https://commons.wikimedia.org/wiki/File:Honda_P1_Fan_Fun_Lab.jpg
+[7]: https://web.archive.org/web/20120111165641/http://bjarte.com/post/224749430/set-based-validation-in-the-cqrs-architecture
+[8]: https://softwareengineering.stackexchange.com/questions/330428/ddd-repositories-in-application-or-domain-service
+[9]: https://thinkbeforecoding.com/post/2009/10/28/Uniqueness-validation-in-CQRS-Architecture
+[10]: https://softwareengineering.stackexchange.com/questions/429985/uniqueness-in-aggregate-root-ddd
+[11]: https://stackoverflow.com/questions/5694241/ddd-the-rule-that-entities-cant-access-repositories-directly
+[12]: https://www.infoq.com/presentations/ddd-eric-evans/
 
 1. [Domain Driven Design Reference][1] - Eric Evans
 2. [Domain Driven Design Entities and Value Objects][2] - Jannik Wempe
@@ -467,3 +473,9 @@ From this simple domain model foundation, we can explore the rest of the EDA map
 4. [Implementing Domain Driven Design][4] - Vaughn Vernon
 5. [Robot Example Code][5]
 6. [Honda P1 Image][6] - Morio
+7. [Set based validation in the CQRS Architecture][7]
+8. [DDD repositories in application or domain service][8]
+9. [Uniqueness validation in CQRS Architecture][9]
+10. [Uniqueness in aggregate root][10]
+11. [DDD - the rule that Entities can't access Repositories][11]
+12. [What I've learned about DDD since the book][12] - Eric Evans
