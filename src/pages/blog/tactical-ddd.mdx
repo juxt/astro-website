@@ -80,7 +80,7 @@ This property of an aggregate means it is a natural place to enforce the busines
 
 Within an aggregate, consistency rules are applied synchronously and across boundaries updates are asynchronous.
 
-An example, a robot when created is assigned a unique identity, it is built from an upper and lower section.  The company making the robot prides itself on uniqueness and will never build two identical robots.  Here we have a single entity aggregate, the robot itself and two value objects the upper and lower configurations.  We have an invariant upon creation to guarantee that no two robots are identical.
+An example, government legislation prevents companies from building robots with human likeness.  Here we have a single entity aggregate, the robot itself and two value objects the upper and lower configurations.  We have an invariant upon creation to guarantee that no robot looks like a human.
 
 When working with message-driven architectures and EDA it seems too easy to think of the aggregate as data only i.e., the events and state.  It is important to realise that business logic is an essential part of the aggregate.
 
@@ -95,9 +95,10 @@ Let's expand upon the robot example used in the entity, value object and aggrega
   - the lower body can be wheels, tracks or legs.
 - A robot can be assigned any nick-name (value object)
 - Robot equality is by UUID
-- A business rule states that JUXT will not build two identical robots.
+- A business rule states that JUXT will not build a robot that looks human e.g. arms and legs.
 - Another business rule says the nickname of a robot can be changed at any time.
-- The robot aggregate is a single robot entity (also the root) and the upper, lower, and nick-name value objects *AND* the logic to enforce the business rules.
+
+The robot aggregate is a single robot entity (also the root) and the upper, lower, and nick-name value objects *AND* the logic to enforce the business rules.
 
 The full example code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/src/juxty/ddd/domain.clj).
 
@@ -111,41 +112,38 @@ We can use spec to model the data
 (s/def :bot/lower #{:wheels :tracks :legs})
 (s/def :bot/nickname string?)
 (s/def :bot/version number?)
-(s/def :bot/created-at-repo-version number?)
 (s/def :bot/aggregate
   (s/keys :req-un [:bot/id :bot/upper :bot/lower
                    :bot/version :bot/created-at-repo-version]
           :opt-un [:bot/nickname]))
 ```
 
-There are two additional fields `version` and `created-at-repo-version` that help deal with consistency.
+The additional field `version` helps deal with consistency.
 
 ## Modelling the Business Logic
 
-Standard Clojure functions model the business logic.  Firstly we define an equality function based on a robot's body - we need this for the uniqueness invariant.
+Standard Clojure functions model the business logic.  Firstly we define a human-likeness function
 
 ```clojure
-(defn- equal-body? [b1 b2]
-  (and (= (:lower b1) (:lower b2))
-       (= (:upper b1) (:upper b2))))
+(defn human-likeness [b]
+  (and (= :arms (:upper b))
+       (= :legs (:lower b))))
 ```
 
 Next, a constructor-like function and a setter function for creating and updating a robot respectively.
 
 ```clojure
 (defn create-bot
-  "Constructor"
   [upper lower]
-  (let [[bodies version] (select-keys-from-repo [:upper :lower])
-        bot (s/conform :bot/aggregate {:id (random-uuid)
+  (let [bot (s/conform :bot/aggregate {:id (random-uuid)
                                        :upper upper
                                        :lower lower
-                                       :created-at-repo-version version
                                        :version 0})]
     (when (and (not (s/invalid? bot))
-               (not-any? (partial equal-body? bot) bodies))
+               (not (human-likeness bot))) 
       bot)))
-	  
+
+
 (defn set-nickname
   [bot nickname] ;; bot = this
   (let [bot (s/conform :bot/aggregate (some-> bot
@@ -155,7 +153,7 @@ Next, a constructor-like function and a setter function for creating and updatin
       bot)))
 ```
 
-The `create-bot` function uses a function `select-keys-from-repo` that talks to a repository of aggregates to fetch all the robot bodies thus far created.  Then `equal-body` is run over this collection to see if we can create a new aggregate.  The return value of `create-bot` is the aggregate data as a map.
+The `create-bot` function uses spec to ensure the values are within the requirements and the `human-likeness` function to enforce the aggregate business invariant.  The return value of `create-bot` is the aggregate data as a map.
 
 ## Repositories
 
@@ -173,11 +171,9 @@ Basic take-homes are:
 For our robot example, we will simply use a Clojure atom
 
 ```clojure
-(def repo (atom {:version 0
-                 :aggregates {}}))
+(def repo (atom {:aggregates {}
+                 :version 0}))
 ```
-
-We have a version of the repository and a map of aggregate data as defined above.
 
 We save to our repo atomically using 
 
@@ -187,13 +183,11 @@ We save to our repo atomically using
          (fn [repo]
            (let [id (:id aggregate)
                  aggregates (:aggregates repo)
-                 repo-version (:version repo)
                  aggregate-version (:version aggregate)]
              (cond
                ;; create
                (and (some? aggregate)
-                    (not (contains? aggregates id))
-                    (== repo-version (:created-at-repo-version aggregate)))
+                    (not (contains? aggregates id)))
                (-> repo
                    (assoc-in [:aggregates id] aggregate)
                    (assoc :version (inc (:version repo))))
@@ -208,32 +202,15 @@ We save to our repo atomically using
 
 This function, and the example as a whole, omits dealing with errors.  Essentially if the aggregate has not been seen before and is not null save it.  If the aggregate has been seen before over-write it with the new value.  Elsewise return the repository as it was.
 
-We have some query functions
+We have a simple query function
 
 ```clojure
 (defn get-by-id
   [id]
   (get (:aggregates @repo) id))
-
-(defn select-keys-from-repo
-  "Returns in the first position the sequence of selected value objects/entities 
-  across all aggregates, and in the second position the version of the repo at the
-  time of retrieval."
-  [keys]
-  (let [repo @repo]
-    [(for [val (vals (:aggregates repo))] (select-keys val keys))
-     (:version repo)]))
 ```
 
-And we would use the latter like so: 
-
-```clojure
-  (select-keys-from-repo [:upper :lower])
-```
-
-to get all aggregate robot bodies - as we did in the create-bot logic.
-
-All the components are now present to build our service using DDD.  Let's take it for a test.
+We now have enough of a domain model to be able to test the domain.
 
 # Testing the Robot Example
 
@@ -276,13 +253,13 @@ Here's our first example of what aggregate data looks like for a valid robot.
   (is (= {:id (nth uuids 0)
           :upper :arms
           :lower :wheels
-          :version 0
-          :created-at-repo-version 0}
+          :version 0}
          (sut/create-bot :arms :wheels)))
   (is (nil? (sut/create-bot :legs :wheels)))
   (is (nil? (sut/create-bot :legs :legs)))
   (is (nil? (sut/create-bot :foo :bar))))
 ```
+
 The test also shows that we can't create robots with invalid body configurations.
 
 ## Simple Repository Saving
@@ -291,31 +268,28 @@ Here's our first example of what the repository data looks like when we save thr
 
 ```clojure
 (deftest saving-valid-bots-to-repo-test
-  (sut/save-to-repo (sut/create-bot :arms :legs))           ;; 0
+  (sut/save-to-repo (sut/create-bot :arms :tracks))         ;; 0
   (sut/save-to-repo (sut/create-bot :tentacles :tracks))    ;; 1
   (sut/save-to-repo (sut/create-bot :manipulators :wheels)) ;; 2
   (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
                                       :upper :arms
-                                      :lower :legs
-                                      :created-at-repo-version 0
+                                      :lower :tracks
                                       :version 0}
                        (nth uuids 1) {:id (nth uuids 1)
                                       :upper :tentacles
                                       :lower :tracks
-                                      :created-at-repo-version 1
                                       :version 0}
                        (nth uuids 2) {:id (nth uuids 2)
                                       :upper :manipulators
                                       :lower :wheels
-                                      :created-at-repo-version 2
                                       :version 0}}
           :version 3}
          @sut/repo)))
 ```
 
-## Checking The Unique Body Invariant Holds
+## Checking the Human Likeness Body Invariant Holds
 
-We try to create and save two robots with the same body. The second creation returns nil and short-circuits the save.
+We try to create a robot with a human likeness
 
 ```clojure
 (deftest checking-body-invariant-holds-test
@@ -326,71 +300,14 @@ We try to create and save two robots with the same body. The second creation ret
   (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
                                       :upper :arms
                                       :lower :legs
-                                      :created-at-repo-version 0
                                       :version 0}}
           :version 1}
          @sut/repo)))
 ```
 
-## Consistency
+## Update Consistency
 
-Finally, we get to look and how we enforce consistency within the domain model. There are two levels of checks, at the repo level and at the aggregate level.
-
-### Creation Consistency
-
-Within our model code, we can happily create body-identical robots so long as we've not saved one to the repository.  This easily happens if creation is distributed across threads.
-
-When we do come to save the second robot it should not save as the business rules were run against an out-of-date repository value i.e. doesn't include our previous save.  The repo-level check is used to ensure this.  When we create our aggregate map we include the field `:created-at-repo-version` which is pulled from the repo with the `select-keys-from-repo` function.
-
-```clojure
-(defn create-bot
-  [upper lower]
-  (let [[bodies version] (select-keys-from-repo [:upper :lower])
-        bot (s/conform :bot/aggregate {:id (random-uuid)
-                                       :upper upper
-                                       :lower lower
-                                       :created-at-repo-version version
-                                       :version 0})]
-  ...
-```
-
-Then in the call to save the aggregate data we have the condition that checks this
-
-```clojure
-(defn save-to-repo [aggregate]
-  (swap! repo
-         (fn [repo]
-           (let [id (:id aggregate)
-                 aggregates (:aggregates repo)
-                 repo-version (:version repo)
-                 aggregate-version (:version aggregate)]
-             (cond
-               (and (some? aggregate)
-                    (not (contains? aggregates id))
-                    (== repo-version (:created-at-repo-version aggregate)))
-	           ...
-```
-
-All this means that the following test passes, the repository only includes the first version of the robot.
-
-```clojure
-(deftest creation-consistency-test
-  (let [bot1 (sut/create-bot :arms :legs) ;; different ids same body
-        bot2 (sut/create-bot :arms :legs)]
-    (sut/save-to-repo bot1)
-    (sut/save-to-repo bot2) ;; doesn't get saved
-    (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
-                                        :upper :arms
-                                        :lower :legs
-                                        :created-at-repo-version 0
-                                        :version 0}}
-            :version 1}
-           @sut/repo))))
-```
-
-### Update Consistency
-
-Unlike for creation we don't need to lock the entire repository when updating a robot. The consistency check is at the aggregate level. 
+The consistency check is at the aggregate level. 
 
 When updating a robot's nickname we increment the aggregates version number.
 
@@ -412,10 +329,9 @@ And when saving to the repository we check that the aggregate version within the
          (fn [repo]
            (let [id (:id aggregate)
                  aggregates (:aggregates repo)
-                 repo-version (:version repo)
                  aggregate-version (:version aggregate)]
              (cond
-			   ...
+               ...
                ;; update
                (and (contains? aggregates id)
                     (== (get-in aggregates [id :version]) (dec aggregate-version)))
@@ -428,7 +344,7 @@ The test to check aggregate level consistency looks like this
 
 ```clojure
 (deftest updating-consistency-test
-  (let [bot0 (sut/create-bot :arms :legs)
+  (let [bot0 (sut/create-bot :arms :tracks)
         bot1 (sut/set-nickname bot0 "Juxty")
         bot2 (sut/set-nickname bot0 "XTDBY")]
     (sut/save-to-repo bot0)
@@ -436,9 +352,8 @@ The test to check aggregate level consistency looks like this
     (sut/save-to-repo bot1) ;; does nothing
     (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
                                         :upper :arms
-                                        :lower :legs
+                                        :lower :tracks
                                         :nickname "XTDBY"
-                                        :created-at-repo-version 0
                                         :version 1}}
             :version 1}
            @sut/repo))))
