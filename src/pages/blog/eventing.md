@@ -3,7 +3,7 @@ author: 'mtf'
 layout: '../../layouts/BlogPost.astro'
 title: 'Day-to-Day Event Driven Architecture'
 description: ''
-category: 'clojure'
+category: 'architecture'
 publishedDate: '2023-06-06'
 tags:
   - event-driven-architecture
