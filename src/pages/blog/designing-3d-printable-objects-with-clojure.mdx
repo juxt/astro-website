@@ -1,6 +1,6 @@
 ---
 draft: true
-author: 'lda'
+author: 'daj'
 layout: '../../layouts/BlogPost.astro'
 title: 'Unleashing Creativity: Designing 3D Printable Objects with Clojure and OpenSCAD'
 description: "Empowering Clojurians with the Power of 3D printing"
@@ -207,7 +207,7 @@ import jl8 from '../../assets/blog/bodytail.png'
 
 <Image alt='image' src={jl8} />
 
-By shifting the tail towards the left (along the x-axis) and upward (along the z-axis), 
+By shifting the tail towards the right (along the x-axis) and upward (along the z-axis), 
 the tail is an integrated part of the body and is clearly visible.
 
 ```clojure
@@ -221,7 +221,7 @@ import jl11 from '../../assets/blog/lemon.png'
 <Image alt='image' src={jl11} />
 
 However, at the moment, it doesn't resemble the body of a duck at all. Instead, I would say it appears more like a peculiar lemon shape.
-To change this, we can achieve a more accurate representation by rotating the tail along the x-axis.
+To change this, we can achieve a more accurate representation by rotating the tail along the y-axis.
 
 *`os/rotate` function is used to rotate a shape in three-dimensional space*
 
