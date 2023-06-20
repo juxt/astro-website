@@ -1,0 +1,195 @@
+---
+author: 'joe'
+title: 'Clojure in Revisited: Signal
+description: ''
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '2023-06-20'
+heroImage: 'gresham-logo-clojurein-new.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'finance',
+    quote: '"Having Clojure running in every possible environment helps so much."'
+  }
+---
+
+import { Image } from '@astrojs/image/components'
+
+Signal is an AI company that extracts knowledge from unstructured textual content and processes near to 5 million documents a day from various data sources, providing insights to it's subscribers.
+
+JUXT visited Signal for a Clojure In [five years ago](https://www.juxt.pro/blog/clojure-in-signal/). I wanted to revisit to understand if Clojure has stood the test of time, and how they feel about it now.
+
+## Tech Stack
+
+Jon - So, what's the state of play at Signal?
+
+Luca -  Historically, we've built everything using three ecosystems, JVM with Clojure, Node with JavaScript, and Python.
+
+We use JavaScript for the front-end and some APIs, and Python for machine learning and data science.
+
+Joachim -  Yeah, Clojure is then our go-to language for APIs and data manipulation. It also shines if you need to do anything fast in a multi-threaded way.
+
+
+
+*Intro's*
+
+Jon Pither - CEO at JUXT
+
+Joachim Draeger - Data Platform Team - Senior Software Engineer - learnt Clojure in role alongside Python - we like to use Clojure as it's easy to paralyze and to operate.
+
+Charlie Briggs - Senior Software Engineer - part of the Data Platform Team for past 3.5 yrs, no Clojure experience before this role.
+
+Alan Wright - VP of Engineering, bought onboard by Luca, like many of us at Signal and I don't know closure very well. I'm here purely from a curiosity point of view. My background is platform.
+
+Richard Lewis Jones - Search Team - with Signal and prior to that USwitch who are also Clojure users, done a little bit but still learning - working alongside Rahul on the Babashka product project
+
+Jeremy Taylor - XTDB JUXT
+
+Rahul Dé- Site Reliability Engineer (SRE) - Infrastructure - fun and unorthodox ways of using Clojure helps in tracing things - automating and providing decisions.
+
+Luca Grulla - CTO - part of the original blog post, great to collaborate on Clojure, been with the Clojure Community from the early days and helped organise the first Euro Clojure and it's always a pleasure to be involved in the Clojure Community.
+
+
+##### Dead Sea:
+
+*Who are Signal AI*
+
+Luca -WWe are a growing business and over the years have refined our vision and what we're delivering, it's not too dissimilar from the last time we spoke but an extension to what we're trying to build now is an external intelligence platform that will allow people to make better decisions based on Signal's ability to understand what happens in the world based on external intelligence.
+We map out and connect all these entities and topics in a graph which then provides insights on what is relevant to your company, so you can identify what are the most relevant topics connected to your company. This allows you to make better decisions based on analysis from this vast amount of data.
+
+
+*Clojure use*
+
+Charlie - So I was introduced to Clojure on my first day at Signal.
+
+Joachim - There is still a lot of Data Science that is happening on Python but we like to  use Clojure because it's easy to paralyze and to operate. So we have like stuff that works on there and it's basically our go-to language.
+
+Rahul - Clojure helps out a lot in tracing things and making decisions and a lot of free form text, the kind of things that don't have too much structure, but we could use them in the context of infrastructure in automating, in providing some decisions on unstructured. So that's my role here.
+
+Richard - We find uses for Babashka in various places. In the search context we're using Clojure to build an abstract interface on top of elastic search. And the idea is we're trying to improve the performance of search, behind the scenes, but our first job is to build this thing that the rest of the business can talk to. It's the search API. So that's what we're currently doing.
+
+
+
+
+
+
+
+Luca -  Clojure has been part of Signal from the very early days, after a couple of iterations and other JVM languages, we tried Clojure and it just clicked.
+
+
+
+
+are you still using Clojure
+
+
+Charlie - I think we've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous interview, Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that that's usable for us in production.
+
+Jon - So, why not just use the same language for everything?
+
+Charlie -  The most powerful feature I find with Clojure is how easy it is to do multi-threading and parallelism and get good performance out of the box. Unless you're doing it very specifically for a machine learning case and it's one of these frameworks like Pietarch?? where it's built for this and it's all dropping down to someone's code they've written in C it's very hard to use Python because of global interpreter lock and similar issues. Whenever we've tried to tackle it, it's always been a bit of a pain.
+
+Joachim - It takes a lot more effort on Python to get all the dependencies straight and to get it to work properly in Docker. I think JVM is a lot more mature in that sense. It's easier to run Clojure services in production, to scale and to monitor them than it is for for Python. I would also say like, the Data science, you can't really compare the data science ecosystem there at all to what's actually happening. It's all happening in the Python space. I mean, we use Clojure if you can't implement specific algorithms ourselves or in duplication use case where we have implemented an algorithm, it is really great for any kind of data manipulation. Python is our preferred language for functional programming concepts. Our machine learning pipeline and API's are all using a mix of Python/Clojure.
+
+Jon - It's quite inspiring, you've got those three different languages for the each area and choose which one work works best. It's great to hear that Clojure is holding it's own as well.
+
+Charlie - It's nice to see that if you go back to a project that was written five years ago and it's basically more or less still doing the same thing with more or less the same licras??? It seems there's definitely less fatigue in terms of progression in the style than we've seen in Python or JavaScript.
+
+Rahul - We've historically used Python a lot in the infrastructure space, automation around the infrastructure side. More and more we've been moving toward the inbuilt stuff and drop code altogether. Where we're dealing with a lot of unstructured data and especially query analysis of elastic certs we will use a mix of languages which is much better compared to Python or even Golang. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure and especially Babushka is also eating up in to the Python space.
+
+Jon - How do you process unstructured dynamic data in Clojure? .
+
+Rahul - The primary use case that we have is to run this massive search cluster and our function as the SRE, is to monitor this cluster at all times. We need to protect it against large queries that could overwhelm or load the cluster. Clojure allows us to walk the tree with it's standard library and preemptively measure the severity of a query and therefore reduce the impact.
+
+Luca - Going back to what Charlie said earlier about revisiting historical projects and not seeing much change. This to me is the strength of Clojure. The design of the core library is perfect, it's such high quality that there's no major changes, not because there's no innovation but because it achieves such a level of instruction. Unlike other languages where the framework is constantly being revisited, you can do a lot with the core library, it stands the testament of time.
+
+
+*Team*
+
+Jon - Can you tell us a bit more about your developers and how many lines of Clojure you potentially have
+
+Alan - At the last count it was about 50 or 60 developers and I couldn't hazard a guess at how many lines of script. In terms of split I'd say it's 50:50 Clojure:Python.
+
+Luca - It's a bit of a distribution curve. There are teams that are 90% Clojure and 10% Python and then a few teams that are 80% Javascript, Note and React and maybe 10% Clojure, supporting systems in the domain. We always encourage teams to try Clojure.
+
+Jon - How have you found it in terms of hiring and training for Clojure
+
+Charlie - I joined because I wanted to learn Clojure
+
+Richard - We've had two joiners recently who hadn't used Clojure previously but do now. One comes from Lisp and various others, like C#, the other candidate was Python. But they're both aware of the functional language concepts and they were quick to pick it up. We did run a Clojure club, so people who aren't familiar with it can get up to speed quickly with the support of people who do. I don't consider there a problem picking up Clojure. It's an attractive thing for people in the know.
+
+Rahul - The club was born from two people who were learning it and they've built a framework and wiki which is available to the team, which shows them how to go about the learning.
+
+Charlie - I think it's great we have this now as when I joined it wasn't so in-depth, there were reading suggestions but you got straight into production.
+
+Jon - It's great, you've got a full range of people from juniors that are learning the technology, people joining for the technology and then people you've pulled across from adjacent technologies like the Pythonista's and common Lisp. Have you had any challenges from the team with your decision to adopt Clojure.
+
+Richard - Not really, it's nice to play around with new technologies but I think our heart is in Clojure.
+
+Jon - In terms of the static versus dynamic debate, do you think that has moved at all?
+
+Richard - On a personal level I'm attracted to the elegance of some of the newer languages out there on the frontend such as Elm and Reason. Personally, I can't be doing with things like type scripts because it's a halfway house, it's not inferred, so you just end up with horrible types you've got to deal with. Languages that are properly typed first, they're nice, but as I say, it's not necessarily suitable for a lot of what we're doing, so Clojure wins.
+
+Charlie - I think we've had some pain with things not being typed for maintenance, such as API's. I feel the solution for that is not necessarily adding types to the language but definitely adding more schemers?? and structure to the data you consume and produce, we maybe would have benefitted from doing that earlier. Recently we added some schema to message producers, consumers, by data platform. In this case we chose JSON schema, there's a nice solution for this in Clojure, but quite often they only support Clojure. We might use Mali as a nice tool to do that but then you can't use it in Python services, so the inthrop??? can get quite difficult when taking that approach.
+
+Joachim - I would agree that I didn't really particularly like the experience with Clojure Spec.
+
+Charlie - Yes, we tried to use it in our first attempt at making impowerful boundaries a bit more strict. We tried to use Clojure Spec in one of our core user APIs and we just found it very hard to work with, now we turn to Mali for this and it just seems more sensible. We never really got to grips with how to structure your specs and actually use them in the right context, like development vs. production. You seemed to need to do a lot of tooling to make t actually fit for human consumption, that was my experience anyway.
+
+Richard  - Yeah, we've had the same experience on the Search Team. It seems to be a nice thing to use and in the past I've tried playing with Spec but I just couldn't get my head around it. It just didn't seem particularly user-friendly so we use Mali and other tools from Meticine/Metosin??? for routing.
+
+
+*Tooling and Eco-system*
+
+Jon - What tools and libraries do you use that you enjoy using and help with productivity?
+
+Richard - In the Search team we've gone a bit around the houses really with the ideal set up in terms of tooling but we're aiming for simplicity at all costs. For lifecycle we're with Mount and configuration we're using CPROP and I think that's a fairly simple and easy way of configuring your projects. Rather uniquely we're using Clojure TI Tools, Cheshire for adjacent
+
+Charlie - I think that's kind of the case with most projects here, like the teams pick the tools they want and then it's not necessarily very unified across teams.
+
+Jon - It's good to have a fraction of R&D though, isn't it? Just to try different things, keep an eye out.
+
+Joachim - I think one of the things I saw as a big improvement was the advent of Visual studio code together with Kava to bring a more standardised way of doing things. I did struggle a little bit with Space-maker, email and Fireplace and VIM and how you set all of that up for Cider. Even though it's a really great tool it is a lot more involved in the initial set up where I prefer things which work right out of the box. I've used a bit of Cursive on Intelli-J before, but that just felt a bit wrong to kind of use that and I think now probably most people use Visio Studio code for for Python, JavaScript, but Kava now has very good Clojure support. Obviously everyone's able to choose their own editor but I think it's great that this kind of support is available and can provide people a good out of the box experience to get people started.
+
+Charlie - I think the default now is like if you're a new joiner and you don't already use Vim or E Macs, you probably end up using VS code and Kava. And if you do, then you just keep using what you're using. I haven't seen that many people jump onto starting using one of the other ones while learning Clojure.
+
+Richard - One of the new starters that we mentioned earlier who was learning Clojure and is a Lisper hadn't used Emacs before but did take on both Emacs and Clojure at the same time. His mindset helped, but he seems to have taken to it very well. The other new starter is using VS code and so I think mostly VS Code at least 50%.
+
+Joachim - I think my take on Emacs and Vim is that if you give it an honest try and are still struggling after 6 months to find the right key codes then it's probably not for you. I was basically one of those guys. I think some people use it really well but other people do struggle.
+
+Rahul - I think with my background I'm firmly on the VIM camp. On the library side because we deal with large sets of data that are fast flowing, I prefer to use Chard which handles JSON and CSV more efficiently and is how we're able to process 70 megabytes in milliseconds. There's a different thought process in the Clojure libraries used in Infrastructure vs. Application.
+
+
+Jon - You mentioned Babashka, can you tell us more about that?
+
+Rahul - I'm one of the parents of this project, contributing and maintaining it for a couple of years now along with Bob Duke. Primarily from my use case, it's in these glue code or automation things that we have a set of scripts that goes around and babysits this bunch of clusters of machines. Our world primarily revolves around the literal raw machines with the rest of the people in the core  built on top of. So there's a bunch of scripts says things such as 'this machine could be recycled better', 'there's a reason that these machines need a bit of help'. These things tend to be in Python or Babashka or Go. More and more we're going towards Babashka or not even any code,  but now they're more and more going towards Babashka or, or not even any code. Some of the more fun use cases are partial recovery for unstructured data and Babashka setups through a large set of discs and figures our what needs to be done and we also have an onboarding script for new people; the script writes an email, sets up with VPN and their AWS account, that's all done in Babashka.
+
+Richard - If I can add a bit to that from my personal opinion, Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure anyway, you get the benefits of Clojure, plus you get the speed and immediacy of Python. I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to sniff??, which just attaches to an SNS topic, create a temporary queue, and just read off that queue. So it's like tailing an SNS topic basically. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies built in. I think we could probably use it more and maybe even replace Make with it because, it's got tasks, I think there's lots of potential in various places. So, I'd like to see everybody use more of it.
+
+Jon -  What do you think of the general state of Clojure?
+
+Richard - I think it's stability is a great thing, which is sometimes mistaken for stagnation by people who don't understand that it's stability is important. The language itself, as Luke said, is not growing, but I don't think it should, it's perfectly good as it is. But what is growing is the community around it. Things like Babashka in the ecosystem. I think the Clojure world is quite exciting and hopefully my colleagues share that excitement. So, uh, I think. There's plenty of, plenty of liveliness in, in the closure eco ecosystem. Um, yeah, that's, that's my opinion.
+
+Rahul - I think the data science aspect of it, there's been a fair amount of chat in the Clojure code team, from Alex Miller. We are doing something around the data science stuff and so I'm fairly pumped to hopefully see a lot of data science libraries coming out. And London Clojurians have this whole site load which is pumping towards more and more, those directions, looking at the higher quality native integration between JVM etc. I'm pumped about those aspects of Clojure which hopefully means we can do some data science.
+
+Jon - Is there anything else you want to add
+
+Jeremy - When I spoke to Luca last year with Steve as well we discussed the desire to move everything to service. Are you still working towards that direction. Is Amazon, AWS still a key linchpin of that strategy or do you find writing your own wrappers works well? Is Clojure aiding that move to everything as service? Obviously there's a lot of ways you can run things in the cloud, maybe using Lambda, maybe you're thinking of running Babashka or Native Clojure in Lambda, is Clojure forming an integral part of your move or desire to run things as a service?
+
+Luca - I would say yes. Our cloud partner is here to stay. It's not one of those things you're going to change on a monthly basis and it's our love. Clojure is here to stay so these are two, although in completely different parts of the technology world are our two key components on our strategy. I think the one thing that we have in our ethos is not just trying to do everything in a single language. I think if we find the right support in Clojure and the right solution for a problem we're going to for that within the AWS ecosystem.
+
+Jeremy - As an example with AWS, there's lots configuration out there in YAML. Do you have a lot of YAML in your stack or are you doing a lot of that kind of stuff in Clojure as well?
+
+Richard - I think we've got a fair amount of YAML, haven't we Never got around with some YAML, right. Xml, it's, it's major paraform. To be honest, we don't,
+
+Charlie I don't think we really use, except for tying, gluing things, stuff together. Closure for infrastructure is more like for scripting, scripting language in Babashka to tie together different process around Terraform.
+
+Rahul - Yeah, something like Terraform has been like our go-to thing for infrastructures there's like a fair amount of expertise around it as well. Clojure is more the brains needed between these two pieces of infrastructure
+
+Charlie - Specifically to your mention of Amazonica, which is quite a good example of something I think that Clojure may suffer from is, uh, it's, I think we still mainly reach for Amazonica when interacting with services, but it is a concern that it's maintained by one guy who doesn't work on Clojure anymore and it's built in SDK, which is essentially dead and might get dropped by Amazon at some point. This is one of the things where it can sometimes be a bit painful in Clojure where the community has to build something and to serve something that would otherwise be provided by your cloud provider or a big corporation.
+
+Rahul -  the AWS API from Cognitect, I mean, as, as good as it is, like, but then like we have problems. Like we can't do single sign on. With that, and , we can't raise any pool requests there and like it's kind built on its own and there's no Clear indication if they want to support us as well. Because it's like a big thing in our, the way we run our things and we can't do it with the current library??. So like Charlie is like this one person, other maintainer for Amazonica, literally apart from the other . So we kind of hack around these things as well. So there's like a bit of a friction between like the way certain libraries are blocks. I guess especially from the, the  side. Yeah.
+
+Charlie - You, you definitely tend to like closure, find like a library maintained by one guy as opposed to in other ecosystems you'd have a much richer pool of maintainers who are much more willing to Yeah.Make changes or have much more time to make changes. Cause there's more people of course. Not everyone's a force of nature, like Bock Dude
+
+Jon - Okay well I just want to say thank you for your time, it's really appreciated.
