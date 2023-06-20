@@ -70,11 +70,11 @@ It generates a sphere with the provided radius. Once the namespace is compiled, 
   (os/sphere {:radius radius
               :resolution resolution}))
 
-(def render (core/write duck))
+(core/write (my-design 1))
 
 ```
 
-The [open-scad.clj](https://github.com/herichovadajana/squiggle/blob/main/src/squiggle/open_scad.clj) namespace contains all the shapes available for examination.
+The [open-scad.clj](https://github.com/herichovadajana/squiggle/blob/main/src/squiggle/open_scad.clj) namespace contains all the basic open-scad shapes and functions.
 
 import jl2 from '../../assets/blog/sphere.png'
 
@@ -94,8 +94,7 @@ To create the body of the duck, we will use this sphere. As an initial step, let
 ```
 
 Let's now experiment with this shape to create a more duck-like form. We can achieve this by scaling it
-along the x-axis with a factor of 1.5 and setting the radius to 10. Additionally, we need to update the
-rendering definition to use the `body` definition instead of `my-design` function.
+along the x-axis with a factor of 1.5 and setting the radius to 10. Additionally, we need to render the `body` definition instead of `my-design` function call result.
 
 * *`os/scale` function function is used to resize or scale a shape in three-dimensional space*
 
@@ -106,7 +105,7 @@ rendering definition to use the `body` definition instead of `my-design` functio
             (os/sphere {:radius 10
                         :resolution resolution})))
 
-(def render (core/write body))
+(core/write body)
 ```
 
 import jl3 from '../../assets/blog/egg.png'
@@ -116,12 +115,12 @@ import jl3 from '../../assets/blog/egg.png'
 To ensure that our duck can sit on a flat surface, we need to remove the bottom part of the spheroid.
 For this purpose, we will utilize the `os/difference` function. However, before performing the subtraction,
 let's create the shape that will be "cut" from the duck body. It will be a cuboid with dimensions 100, 100, and 10. When creating a cuboid,
-we provide a vector of dimensions "a", "b", and "c" as an argument. If we want the cuboid to be centered, we can also include the additional argument :center true.
+we provide a vector of dimensions "a", "b", and "c" as an argument.
 
 * *`os/difference` function is used to subtract one or more shapes from another shape*
 
 ``` clojure
-(def render (core/write (os/cube [100 100 10] :center true)))
+(core/write (os/cube [100 100 10]))
 ```
 
 import jl4 from '../../assets/blog/cut.png'
@@ -137,7 +136,7 @@ placement, the shape will not align correctly.
   (os/difference (os/scale {:x 1.5}
                            (os/sphere {:radius 10
                                        :resolution resolution}))
-                 (os/cube [100 100 10] :center true)))
+                 (os/cube [100 100 10])))
 
 (core/write body)
 
@@ -159,7 +158,7 @@ as the first argument and the object we wish to move as the second argument. Thi
                            (os/sphere {:radius 10
                                        :resolution resolution}))
                  (os/translate {:z -17 :x -50 :y -50}
-                               (os/cube [100 100 10] :center true))))
+                               (os/cube [100 100 10]))))
 ```			       
 import jl6 from '../../assets/blog/flatbottom.png'
 
@@ -175,7 +174,7 @@ covers the outer boundary of all the input shapes. The resulting shape forms a c
 To design the tail more effectively and have better overview of our progress, we will create a separate definition for it.
 
 As a foundation for the tail, we will generate a scaled sphere with a radius of 2. However, this time we will scale it
-along both the :x and :y axes. (Don't forget to update the render to display the tail instead of the body.)
+along both the :x and :y axes. 
 
 
 ```clojure
@@ -183,7 +182,7 @@ along both the :x and :y axes. (Don't forget to update the render to display the
   (os/scale {:x 2 :y -0.1} (os/sphere {:radius 2})))
 
 
-(def render (core/write tail))
+(core/write tail)
 ```
 
 import jl7 from '../../assets/blog/tail1.png'
@@ -198,10 +197,10 @@ If we apply `os/hull` to the body shape and tail, we won't observe any changes b
                                     (os/sphere {:radius 10
                                                 :resolution resolution}))
                           (os/translate {:z -17 :x -50 :y -50}
-                                        (os/cube [100 100 10] :center true)))
+                                        (os/cube [100 100 10])))
            tail))
 
-(def render (core/write body))
+(core/write body)
 ```
 
 import jl8 from '../../assets/blog/bodytail.png'
@@ -245,7 +244,7 @@ This will help us create a duck body that looks, at the very least, appealing.
                   (os/scale {:x 3 :y 2}
                     (os/sphere {:radius 5})))))
 
-(def render (core/write tail-cut))
+(core/write tail-cut)
 
 ```
 import jl10 from '../../assets/blog/tailcut.png'
@@ -262,12 +261,12 @@ from the body function, leaving the function to exclusively handle the body. Ins
                            (os/sphere {:radius 10
                                        :resolution resolution}))
                  (os/translate {:z -17 :x -50 :y -50}
-                               (os/cube [100 100 10] :center true))))
+                               (os/cube [100 100 10]))))
 
 (def duck
   (os/hull body tail))
 
-(def render (core/write duck))
+(core/write duck)
 ```
 <Image alt='image' src={jl9} />
 
@@ -313,7 +312,7 @@ To begin, we will start with the feather component, which involves scaling, tran
 We can visualize the feather by rendering it. And by experimenting with different feather sizes, we can determine the ideal size we need for our duck.
 
 ```clojure
-(def render (core/write (feather 0 0 2 0)))
+(core/write (feather 0 0 2 0))
 ```
 import jl14 from '../../assets/blog/feather.png'
 
@@ -325,6 +324,8 @@ while for the inner feathers it is 1.5.
 With this information in mind, we can proceed to create a row of feathers. This function will
 accept translation coordinates "x" and "y" as arguments to determine the position of the feather row. Additionally, it will take the
 feather size and rotate-y coordinate to appropriately rotate the feathers, ensuring they point in the desired direction.
+
+If you're new to Clojure and wondering what is the purpose of the map function, you can learn more about it by reading [this](https://clojuredocs.org/clojure.core/map) resource.
 
 ``` clojure
 (defn row-of-feathers [translate-x translate-y feather-size feathers-count]
@@ -339,7 +340,7 @@ We can calculate the angle for each feather using the expression `(range 30 -11 
 To see whether it matches our expectations, we can render the feather row.
 
 ```clojure
-(def render (core/write (apply os/union (row-of-feathers 5 0 1 4))))
+(core/write (apply os/union (row-of-feathers 5 0 1 4)))
 ```
 To combine all the individual feathers into a single wing, we use the `(apply (os/union ...)` function. In this particular case,
 we apply it onlly for rendering purposes to see if the row of wings aligns with our intended design. Additionally, we have provided a translation of
@@ -348,7 +349,7 @@ we apply it onlly for rendering purposes to see if the row of wings aligns with 
 When we rotate the shape around its center point:
 
 ```clojure
-(def render (core/write (apply os/union (row-of-feathers 0 0 1 4))))
+(core/write (apply os/union (row-of-feathers 0 0 1 4)))
 ```
 
 import jl15 from '../../assets/blog/centerrotation.png'
@@ -358,7 +359,7 @@ import jl15 from '../../assets/blog/centerrotation.png'
 And when we translate it along the x-axis:
 
 ```clojure
-(def render (core/write (apply os/union (row-of-feathers 5 0 1 4))))
+(core/write (apply os/union (row-of-feathers 5 0 1 4)))
 ```
 
 import jl16 from '../../assets/blog/rowoffeathers.png'
@@ -375,10 +376,10 @@ Now let's combine the large and small feathers.
                 (row-of-feathers 5 0 outer-feather-size outer-feathers-count)
                 (row-of-feathers 3.5 -1.1 inner-feather-size inner-feathers-count))))
 
-(def render (core/write (create-wing {:outer-feathers-count 3
-                                      :outer-feather-size 2
-                                      :inner-feathers-count 4
-                                      :inner-feather-size 1.5})))
+(core/write (create-wing {:outer-feathers-count 3
+                          :outer-feather-size 2
+                          :inner-feathers-count 4
+                          :inner-feather-size 1.5}))
 ```
 import jl17 from '../../assets/blog/wing.png'
 
@@ -398,7 +399,7 @@ We can then place it on the duck's body, making use of rotation and translation 
                                                          :inner-feather-size 1.5})))]
     (os/union body left-wing (os/difference (os/hull body tail) tail-cut))))
 
-(def render (core/write duck))
+(core/write duck)
 ```
 import jl18 from '../../assets/blog/duckwithwing.png'
 
@@ -510,7 +511,7 @@ accepts an angle parameter to specify the desired rotation angle.*
                                      :resolution resolution}))
    (os/translate {:x 10} (os/circle {:radius 4
                                      :resolution resolution}))))
-(def render (core/write bill))
+(core/write bill)
 ```
 
 import jl22 from '../../assets/blog/2d.png'
@@ -584,7 +585,7 @@ Position it onto the duck's body.
               head
               (os/difference (os/hull body tail) tail-cut))))
 
-(def render (core/write duck))
+(core/write duck)
 ```
 
 import jl25 from '../../assets/blog/duck.png'
@@ -605,7 +606,7 @@ To add a touch of elegance to our duck, we will give it a hat using shapes like 
    (os/rotate-extrude {:resolution resolution}
                       (os/translate {:x 8} (os/circle {:radius 1})))))
 
-(def render (core/write hat))
+(core/write hat)
 ```
 
 import jl26 from '../../assets/blog/hat.png'
@@ -614,7 +615,7 @@ import jl26 from '../../assets/blog/hat.png'
 
 If you want to personalize your duck further, you can also add text using os/text. We will position it on top of the hat.
 Since the text is a 2D object and we are working with 3D shapes, we will use the `os/linear-extrude` function.
-This function transforms the 2D shape into a 3D object by extruding it in a specified direction.
+This function transforms the 2D shape into a 3D object by extruding it in z-axis.
 The height parameter determines the extent of the extrusion along the Z-axis.
 
 *`os/linear-extrude` function is used to create a 3D object by extruding a 2D shape in a specified direction. It takes a
@@ -626,7 +627,7 @@ The height parameter determines the extent of the extrusion along the Z-axis.
                      (os/text {:text "JUXT"
                                :size 2})))
 
-(def render (core/write text))
+(core/write text)
 ```
 
 import jl27 from '../../assets/blog/text.png'
@@ -651,7 +652,7 @@ We will incorporate the text into the hat by utilizing the os/difference functio
                                 :y -1}
                                text)))
 
-(def render (core/write hat))
+(core/write hat)
 ```
 
 import jl28 from '../../assets/blog/hattext.png'
@@ -700,7 +701,7 @@ Let's position the hat on top of the duck's head.
 
 
 
-(def render (core/write duck))
+(core/write duck)
 ```
 import jl29 from '../../assets/blog/duckfinal.png'
 
