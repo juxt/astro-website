@@ -80,6 +80,13 @@ To help with this, for a time we ran a Clojure club, so people who aren't famili
 
 **Richard:** Not really, it's nice to play around with new technologies but our heart is in Clojure.
 
+**Jon: What do you think of the general state of Clojure?**
+
+**Richard:** Stability is a great thing, which is sometimes mistaken for stagnation by people who don't understand that it's stability is important. The language itself, as Luke said, is not growing, but I don't think it should, it's perfectly good as it is. But what is growing is the community around it. Things like Babashka in the ecosystem. I think the Clojure world is quite exciting and hopefully my colleagues share that excitement. So, uh, I think. There's plenty of, plenty of liveliness in, in the closure eco ecosystem. Um, yeah, that's, that's my opinion.
+
+Rahul - I think the data science aspect of it, there's been a fair amount of chat in the Clojure code team, from Alex Miller. We are doing something around the data science stuff and so I'm fairly pumped to hopefully see a lot of data science libraries coming out. And London Clojurians have this whole site load which is pumping towards more and more, those directions, looking at the higher quality native integration between JVM etc. I'm pumped about those aspects of Clojure which hopefully means we can do some data science.
+
+
 ## Working with dynamic data
 
 **Jon: It feels you're aligned to dynamic languages. Do you feel the static versus dynamic debate has moved on at all?**
@@ -96,13 +103,11 @@ We tried to use Clojure spec to make our boundaries more strict. We found found 
 
 **Jon: What tools and libraries do you use?**
 
-Richard - In the Search team we've gone a bit around the houses really with the ideal set up in terms of tooling but we're aiming for simplicity at all costs. For lifecycle we're with Mount and configuration we're using CPROP and I think that's a fairly simple and easy way of configuring your projects. Rather uniquely we're using Clojure TI Tools, Cheshire for adjacent
+;; TODO REVIEW watch vid:
 
-Charlie - I think that's kind of the case with most projects here, like the teams pick the tools they want and then it's not necessarily very unified across teams.
+**Richard:** - In the Search team we're aiming for simplicity at all costs. For lifecycle we're with Mount and configuration we're using CPROP and I think that's a fairly simple and easy way of configuring your projects. Rather uniquely we're using Clojure TI Tools, Cheshire for JSON.
 
-Jon - It's good to have a fraction of R&D though, isn't it? Just to try different things, keep an eye out.
-
-Joachim - I think one of the things I saw as a big improvement was the advent of Visual studio code together with Kava to bring a more standardised way of doing things. I did struggle a little bit with Space-maker, email and Fireplace and VIM and how you set all of that up for Cider. Even though it's a really great tool it is a lot more involved in the initial set up where I prefer things which work right out of the box. I've used a bit of Cursive on Intelli-J before, but that just felt a bit wrong to kind of use that and I think now probably most people use Visio Studio code for for Python, JavaScript, but Kava now has very good Clojure support. Obviously everyone's able to choose their own editor but I think it's great that this kind of support is available and can provide people a good out of the box experience to get people started.
+**Joachim:** One of the things I saw as a big improvement was the advent of Visual studio code together with Kava to bring a more standardised way of doing things. I did struggle a little bit with Space-maker, email and Fireplace and VIM and how you set all of that up for Cider. Even though it's a really great tool it is a lot more involved in the initial set up where I prefer things which work right out of the box. I've used a bit of Cursive on Intelli-J before, but that just felt a bit wrong to kind of use that and I think now probably most people use Visio Studio code for for Python, JavaScript, but Kava now has very good Clojure support. Obviously everyone's able to choose their own editor but I think it's great that this kind of support is available and can provide people a good out of the box experience to get people started.
 
 Charlie - I think the default now is like if you're a new joiner and you don't already use Vim or E Macs, you probably end up using VS code and Kava. And if you do, then you just keep using what you're using. I haven't seen that many people jump onto starting using one of the other ones while learning Clojure.
 
@@ -121,11 +126,6 @@ Rahul - I'm one of the parents of this project, contributing and maintaining it 
 
 Richard - If I can add a bit to that from my personal opinion, Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure anyway, you get the benefits of Clojure, plus you get the speed and immediacy of Python. I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to sniff??, which just attaches to an SNS topic, create a temporary queue, and just read off that queue. So it's like tailing an SNS topic basically. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies built in. I think we could probably use it more and maybe even replace Make with it because, it's got tasks, I think there's lots of potential in various places. So, I'd like to see everybody use more of it.
 
-Jon -  What do you think of the general state of Clojure?
-
-Richard - I think it's stability is a great thing, which is sometimes mistaken for stagnation by people who don't understand that it's stability is important. The language itself, as Luke said, is not growing, but I don't think it should, it's perfectly good as it is. But what is growing is the community around it. Things like Babashka in the ecosystem. I think the Clojure world is quite exciting and hopefully my colleagues share that excitement. So, uh, I think. There's plenty of, plenty of liveliness in, in the closure eco ecosystem. Um, yeah, that's, that's my opinion.
-
-Rahul - I think the data science aspect of it, there's been a fair amount of chat in the Clojure code team, from Alex Miller. We are doing something around the data science stuff and so I'm fairly pumped to hopefully see a lot of data science libraries coming out. And London Clojurians have this whole site load which is pumping towards more and more, those directions, looking at the higher quality native integration between JVM etc. I'm pumped about those aspects of Clojure which hopefully means we can do some data science.
 
 Jon - Is there anything else you want to add
 
