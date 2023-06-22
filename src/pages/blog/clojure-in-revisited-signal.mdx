@@ -90,6 +90,8 @@ To help with this, for a time we ran a Clojure club, so people who aren't famili
 
 The community is growing around it with new ecosystem technologies like Babashka. I think the Clojure world is quite exciting and hopefully my colleagues share that excitement.
 
+**Charlie:** One concern worth mentioning is libraries being maintained by individuals, who may have moved on. A good example is Amazonica. We still mainly reach for Amazonica when interacting with services, but it is a concern that it's maintained by one person who doesn't work on Clojure anymore and it's built in SDK, which may get dropped by Amazon at some point.
+
 ## Working with dynamic data
 
 **Jon: It feels you're aligned to dynamic languages. Do you feel the static versus dynamic debate has moved on at all?**
@@ -135,25 +137,5 @@ Other Babashka use cases are partial recovery for unstructured data and even an 
 **Richard:** Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure to begin with, you get the benefits of Clojure, plus you get the same speed and immediacy that Python gives.
 
 I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to tail SNS topics, which just attaches to an SNS topic, create a temporary queue, and just read off that queue. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies specified.
-
-**Wrapping up:**
-
-**Jon:** Is there anything else you want to add?
-
-Jeremy - When I spoke to Luca last year with Steve as well we discussed the desire to move everything to serverless. Are you still working towards that direction. Is Amazon, AWS still a key linchpin of that strategy or do you find writing your own wrappers works well? Is Clojure aiding that move to everything as service? Obviously there's a lot of ways you can run things in the cloud, maybe using Lambda, maybe you're thinking of running Babashka or Native Clojure in Lambda, is Clojure forming an integral part of your move or desire to run things as a service?
-
-Luca - I would say yes. Our cloud partner is here to stay. It's not one of those things you're going to change on a monthly basis and it's our love. Clojure is here to stay so these are two, although in completely different parts of the technology world are our two key components on our strategy. I think the one thing that we have in our ethos is not just trying to do everything in a single language. I think if we find the right support in Clojure and the right solution for a problem we're going to for that within the AWS ecosystem.
-
-Jeremy - As an example with AWS, there's lots configuration out there in YAML. Do you have a lot of YAML in your stack or are you doing a lot of that kind of stuff in Clojure as well?
-
-Richard - I think we've got a fair amount of YAML, haven't we Never got around with some YAML, right. Xml, it's, it's major paraform. To be honest, we don't,
-
-Charlie I don't think we really use, except for tying, gluing things, stuff together. Closure for infrastructure is more like for scripting, scripting language in Babashka to tie together different process around Terraform.
-
-Rahul - Yeah, something like Terraform has been like our go-to thing for infrastructures there's like a fair amount of expertise around it as well. Clojure is more the brains needed between these two pieces of infrastructure
-
-Charlie - Specifically to your mention of Amazonica, which is quite a good example of something I think that Clojure may suffer from. We still mainly reach for Amazonica when interacting with services, but it is a concern that it's maintained by one person who doesn't work on Clojure anymore and it's built in SDK, which is essentially dead and might get dropped by Amazon at some point.
-
-With Clojure you definitely tend to see libraries being maintained by one person as opposed to in other ecosystems where you'd have a much richer pool of maintainers. Not everyone's a force of nature, like Borkdude.
 
 **Jon: Okay well I just want to say thank you for your time, it's really appreciated.**
