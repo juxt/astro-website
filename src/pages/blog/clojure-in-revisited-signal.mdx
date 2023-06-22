@@ -48,7 +48,11 @@ We use JavaScript for the front-end and some APIs, and Python for machine learni
 
 Clojure is also great for any kind of data manipulation. Our machine learning pipelines and APIs are all using a mix of Python/Clojure.
 
-**Rahul:** We've historically used Python for infrastructure automation. Where we're dealing with a lot of unstructured data and especially query analysis for Elastic, we will use a mix of languages including Clojure. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure. We're using Babashka more and it's eating up our Python.
+**Rahul:** We've historically used Python for infrastructure automation. Where we're dealing with a lot of unstructured data and especially query analysis for Elastic, we will use a mix of languages including Clojure. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure.
+
+**Jon: Could you expand more on what you do with unstructured dynamic data?**
+
+**Rahul:** The primary use case that we have is to run this massive search cluster and we monitor this cluster at all times. We need to protect it against large queries that could overwhelm or load the cluster. Clojure allows us to walk the tree with it's standard library and preemptively measure the severity of a query and therefore reduce the impact.
 
 ## Clojure
 
@@ -77,21 +81,6 @@ To help with this, for a time we ran a Clojure club, so people who aren't famili
 **Richard:** Not really, it's nice to play around with new technologies but our heart is in Clojure.
 
 ##### Dead Sea:
-
-*Clojure use*
-
-Jon - How do you process unstructured dynamic data in Clojure? .
-
-Rahul - The primary use case that we have is to run this massive search cluster and our function as the SRE, is to monitor this cluster at all times. We need to protect it against large queries that could overwhelm or load the cluster. Clojure allows us to walk the tree with it's standard library and preemptively measure the severity of a query and therefore reduce the impact.
-
-
-*Team*
-
-Jon - Can you tell us a bit more about your developers and how many lines of Clojure you potentially have
-
-Alan - At the last count it was about 50 or 60 developers and I couldn't hazard a guess at how many lines of script. In terms of split I'd say it's 50:50 Clojure:Python.
-
-Luca - It's a bit of a distribution curve. There are teams that are 90% Clojure and 10% Python and then a few teams that are 80% Javascript, Note and React and maybe 10% Clojure, supporting systems in the domain. We always encourage teams to try Clojure.
 
 Jon - In terms of the static versus dynamic debate, do you think that has moved at all?
 
@@ -126,6 +115,8 @@ Joachim - I think my take on Emacs and Vim is that if you give it an honest try 
 
 Rahul - I think with my background I'm firmly on the VIM camp. On the library side because we deal with large sets of data that are fast flowing, I prefer to use Chard which handles JSON and CSV more efficiently and is how we're able to process 70 megabytes in milliseconds. There's a different thought process in the Clojure libraries used in Infrastructure vs. Application.
 
+
+We're using Babashka more and it's eating up our Python.
 
 Jon - You mentioned Babashka, can you tell us more about that?
 
