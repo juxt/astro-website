@@ -14,6 +14,10 @@ clojureIn:
   }
 ---
 
+////
+;; TODO REVIEW watch vid, correct tooling and lib names:
+////
+
 import { Image } from '@astrojs/image/components'
 
 Signal is an AI company that extracts knowledge from unstructured textual content and processes near to 5 million documents a day from various data sources, providing insights to it's subscribers.
@@ -82,10 +86,9 @@ To help with this, for a time we ran a Clojure club, so people who aren't famili
 
 **Jon: What do you think of the general state of Clojure?**
 
-**Richard:** Stability is a great thing, which is sometimes mistaken for stagnation by people who don't understand that it's stability is important. The language itself, as Luke said, is not growing, but I don't think it should, it's perfectly good as it is. But what is growing is the community around it. Things like Babashka in the ecosystem. I think the Clojure world is quite exciting and hopefully my colleagues share that excitement. So, uh, I think. There's plenty of, plenty of liveliness in, in the closure eco ecosystem. Um, yeah, that's, that's my opinion.
+**Richard:** Stability is a great thing, which is sometimes mistaken for stagnation by people who don't understand that stability is important. The language itself, as Luke said, is not growing, but I don't think it should; it's perfectly good as it is.
 
-Rahul - I think the data science aspect of it, there's been a fair amount of chat in the Clojure code team, from Alex Miller. We are doing something around the data science stuff and so I'm fairly pumped to hopefully see a lot of data science libraries coming out. And London Clojurians have this whole site load which is pumping towards more and more, those directions, looking at the higher quality native integration between JVM etc. I'm pumped about those aspects of Clojure which hopefully means we can do some data science.
-
+The community is growing around it with new ecosystem technologies like Babashka. I think the Clojure world is quite exciting and hopefully my colleagues share that excitement.
 
 ## Working with dynamic data
 
@@ -117,19 +120,25 @@ We tried to use Clojure spec to make our boundaries more strict. We found found 
 
 **Jon: What tools and libraries do you use?**
 
-;; TODO REVIEW watch vid:
-
 **Richard:** In the Search team we're aiming for simplicity at all costs. For lifecycle we're with Mount and configuration we're using CPROP and I think that's a fairly simple and easy way of configuring your projects. Rather uniquely we're using Clojure TI Tools, Cheshire for JSON.
 
 For dealing with large sets of data that are fast flowing, I prefer to use Chard? which handles JSON and CSV more efficiently and is how we're able to process 70 megabytes in milliseconds. used in Infrastructure vs. Application.
 
 **Jon: You mentioned Babashka, can you tell us more?**
 
-**Rahul:** I'm one of the parents of this project, contributing and maintaining it for a couple of years now along with Bork Dude. Primarily from my use case, it's in these glue code or automation things that we have a set of scripts that goes around and babysits this bunch of clusters of machines. Our world primarily revolves around the literal raw machines with the rest of the people in the core  built on top of. So there's a bunch of scripts says things such as 'this machine could be recycled better', 'there's a reason that these machines need a bit of help'. These things tend to be in Python or Babashka or Go. More and more we're going towards Babashka or not even any code,  but now they're more and more going towards Babashka or, or not even any code. Some of the more fun use cases are partial recovery for unstructured data and Babashka setups through a large set of discs and figures our what needs to be done and we also have an onboarding script for new people; the script writes an email, sets up with VPN and their AWS account, that's all done in Babashka.
+**Rahul:** I'm one of the parents of this project, contributing and maintaining it for a couple of years now along with Bork Dude. We use it for monitoring clusters of machines. I.e. our scripts tell us: 'this machine could be recycled better', or 'here's why these machines need a bit of help'.
 
-**Richard:** Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure anyway, you get the benefits of Clojure, plus you get the speed and immediacy of Python. I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to sniff??, which just attaches to an SNS topic, create a temporary queue, and just read off that queue. So it's like tailing an SNS topic basically. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies built in. I think we could probably use it more and maybe even replace Make with it because, it's got tasks, I think there's lots of potential in various places. So, I'd like to see everybody use more of it.
+Other Babashka use cases are partial recovery for unstructured data and even an onboarding script for new people; the script writes an email, sets up with VPN and their AWS account, that's all done in Babashka.
 
-Jon - Is there anything else you want to add
+**Jon:** Cool!
+
+**Richard:** Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure to begin with, you get the benefits of Clojure, plus you get the same speed and immediacy that Python gives.
+
+I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to tail SNS topics, which just attaches to an SNS topic, create a temporary queue, and just read off that queue. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies specified.
+
+**Wrapping up:**
+
+**Jon:** Is there anything else you want to add?
 
 Jeremy - When I spoke to Luca last year with Steve as well we discussed the desire to move everything to serverless. Are you still working towards that direction. Is Amazon, AWS still a key linchpin of that strategy or do you find writing your own wrappers works well? Is Clojure aiding that move to everything as service? Obviously there's a lot of ways you can run things in the cloud, maybe using Lambda, maybe you're thinking of running Babashka or Native Clojure in Lambda, is Clojure forming an integral part of your move or desire to run things as a service?
 
