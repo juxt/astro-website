@@ -48,13 +48,15 @@ We use JavaScript for the front-end and some APIs, and Python for machine learni
 
 Clojure is also great for any kind of data manipulation. Our machine learning pipelines and APIs are all using a mix of Python/Clojure.
 
+**Rahul:** We've historically used Python for infrastructure automation. Where we're dealing with a lot of unstructured data and especially query analysis for Elastic, we will use a mix of languages including Clojure. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure. We're using Babashka more and it's eating up our Python.
+
 ## Clojure
 
 **Jon:** It's quite inspiring, you've got those three different languages for each relevant area and you choose which one works best. It's great to hear that Clojure is holding it's own.
 
 **Charlie:** It's nice to see that if you go back to a project that was written five years ago and it's basically more or less still doing the same thing and holds up well. It seems there's definitely less fatigue in terms of progression in the style than we've seen in Python or JavaScript.
 
-**Rahul:** We've historically used Python for infrastructure automation. Where we're dealing with a lot of unstructured data and especially query analysis for Elastic, we will use a mix of languages including Clojure. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure. We're using Babashka more and it's eating up our Python.
+**Luca:** This to me is the strength of Clojure. The design of the core library is of such high quality that there's no major changes, not because there's no innovation but because it achieves such a level of instruction. Unlike other languages where the framework is constantly being revisited, you can do a lot with the core library, it stands the testament of time.
 
 **Jon:** How have you found it in terms of hiring and training for Clojure?
 
@@ -78,15 +80,9 @@ To help with this, for a time we ran a Clojure club, so people who aren't famili
 
 *Clojure use*
 
-Charlie - So I was introduced to Clojure on my first day at Signal.
-
-Luca -  Clojure has been part of Signal from the very early days, after a couple of iterations and other JVM languages, we tried Clojure and it just clicked.
-
 Jon - How do you process unstructured dynamic data in Clojure? .
 
 Rahul - The primary use case that we have is to run this massive search cluster and our function as the SRE, is to monitor this cluster at all times. We need to protect it against large queries that could overwhelm or load the cluster. Clojure allows us to walk the tree with it's standard library and preemptively measure the severity of a query and therefore reduce the impact.
-
-Luca - Going back to what Charlie said earlier about revisiting historical projects and not seeing much change. This to me is the strength of Clojure. The design of the core library is perfect, it's such high quality that there's no major changes, not because there's no innovation but because it achieves such a level of instruction. Unlike other languages where the framework is constantly being revisited, you can do a lot with the core library, it stands the testament of time.
 
 
 *Team*
