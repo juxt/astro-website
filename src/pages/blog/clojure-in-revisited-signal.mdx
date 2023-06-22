@@ -1,5 +1,5 @@
 ---
-author: 'joe'
+author: 'jon'
 title: 'Clojure in Revisited: Signal
 description: ''
 category: 'clojure-in'
@@ -10,7 +10,7 @@ clojureIn:
   {
     season: 'two',
     industry: 'finance',
-    quote: '"Having Clojure running in every possible environment helps so much."'
+    quote: '"Our heart is in Clojure."'
   }
 ---
 
@@ -22,9 +22,9 @@ JUXT visited Signal for a Clojure In [five years ago](https://www.juxt.pro/blog/
 
 I met with VP of engineering Alan Wright, Senior Software Engineers Joachim Draeger and Charlie Briggs, Richard Lewis Jones on the Search Team, Rahul Dé (Site Reliability Engineer), and CTO Luca Grulla.
 
-## Tech Stack
+## Languages
 
-**Jon: Broadly, what's your tech stack?**
+**Jon: What languages do you use now?**
 
 **Luca:** Historically, we've built everything using three ecosystems, JVM with Clojure, Node with JavaScript, and Python.
 
@@ -33,7 +33,6 @@ We use JavaScript for the front-end and some APIs, and Python for machine learni
 **Joachim:** Yeah, Clojure is then our go-to language for APIs and data manipulation. It also shines if you need to do anything fast in a multi-threaded way.
 
 **Richard:** We're also using Clojure to build an abstract interface on top of Elastic Search.
-
 
 **Jon: Have you looked at Clojure for the Data Science part, rather than Python?**
 
@@ -57,6 +56,24 @@ Clojure is also great for any kind of data manipulation. Our machine learning pi
 
 **Rahul:** We've historically used Python for infrastructure automation. Where we're dealing with a lot of unstructured data and especially query analysis for Elastic, we will use a mix of languages including Clojure. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure. We're using Babashka more and it's eating up our Python.
 
+**Jon:** How have you found it in terms of hiring and training for Clojure?
+
+**Charlie:** I joined because I wanted to learn Clojure.
+
+**Richard:** I don't consider there a problem picking up Clojure. It's an attractive thing for people who have discovered it.
+
+For example we've had two recent joiners who hadn't used Clojure before. One has Lisp/C# experience and the other had Python. They were both aware of functional language concepts and they were quick to pick it up.
+
+To help with this, for a time we ran a Clojure club, so people who aren't familiar can get support from people with experience.
+
+**Rahul:** The club was born from people who were learning it and they've built a framework and wiki which is available to the team, which shows them how to go about the learning.
+
+**Charlie:** I think it's great we have this now as when I joined it wasn't so in-depth, there were reading suggestions but now it's more comprehensive.
+
+**Jon: It's great, you've got a full range of people: from juniors learning the technology, people joining for the technology, and then people you've pulled across from adjacent technologies like Python and Common Lisp. Have you had any challenges from the team with your decision to adopt Clojure?**
+
+**Richard:** Not really, it's nice to play around with new technologies but our heart is in Clojure.
+
 ##### Dead Sea:
 
 *Clojure use*
@@ -79,20 +96,6 @@ Jon - Can you tell us a bit more about your developers and how many lines of Clo
 Alan - At the last count it was about 50 or 60 developers and I couldn't hazard a guess at how many lines of script. In terms of split I'd say it's 50:50 Clojure:Python.
 
 Luca - It's a bit of a distribution curve. There are teams that are 90% Clojure and 10% Python and then a few teams that are 80% Javascript, Note and React and maybe 10% Clojure, supporting systems in the domain. We always encourage teams to try Clojure.
-
-Jon - How have you found it in terms of hiring and training for Clojure
-
-Charlie - I joined because I wanted to learn Clojure
-
-Richard - We've had two joiners recently who hadn't used Clojure previously but do now. One comes from Lisp and various others, like C#, the other candidate was Python. But they're both aware of the functional language concepts and they were quick to pick it up. We did run a Clojure club, so people who aren't familiar with it can get up to speed quickly with the support of people who do. I don't consider there a problem picking up Clojure. It's an attractive thing for people in the know.
-
-Rahul - The club was born from two people who were learning it and they've built a framework and wiki which is available to the team, which shows them how to go about the learning.
-
-Charlie - I think it's great we have this now as when I joined it wasn't so in-depth, there were reading suggestions but you got straight into production.
-
-Jon - It's great, you've got a full range of people from juniors that are learning the technology, people joining for the technology and then people you've pulled across from adjacent technologies like the Pythonista's and common Lisp. Have you had any challenges from the team with your decision to adopt Clojure.
-
-Richard - Not really, it's nice to play around with new technologies but I think our heart is in Clojure.
 
 Jon - In terms of the static versus dynamic debate, do you think that has moved at all?
 
