@@ -20,80 +20,50 @@ Signal is an AI company that extracts knowledge from unstructured textual conten
 
 JUXT visited Signal for a Clojure In [five years ago](https://www.juxt.pro/blog/clojure-in-signal/). I wanted to revisit to understand if Clojure has stood the test of time, and how they feel about it now.
 
+I met with VP of engineering Alan Wright, Senior Software Engineers Joachim Draeger and Charlie Briggs, Richard Lewis Jones on the Search Team, Rahul Dé (Site Reliability Engineer), and CTO Luca Grulla.
+
 ## Tech Stack
 
-**Jon: So, what's the state of play at Signal?**
+**Jon: Broadly, what's your tech stack?**
 
-**Luca:**  Historically, we've built everything using three ecosystems, JVM with Clojure, Node with JavaScript, and Python.
+**Luca:** Historically, we've built everything using three ecosystems, JVM with Clojure, Node with JavaScript, and Python.
 
 We use JavaScript for the front-end and some APIs, and Python for machine learning and data science.
 
 **Joachim:** Yeah, Clojure is then our go-to language for APIs and data manipulation. It also shines if you need to do anything fast in a multi-threaded way.
 
-*Intro's*
+**Richard:** We're also using Clojure to build an abstract interface on top of Elastic Search.
 
-Jon Pither - CEO at JUXT
 
-Joachim Draeger - Data Platform Team - Senior Software Engineer - learnt Clojure in role alongside Python - we like to use Clojure as it's easy to paralyze and to operate.
+**Jon: Have you looked at Clojure for the Data Science part, rather than Python?**
 
-Charlie Briggs - Senior Software Engineer - part of the Data Platform Team for past 3.5 yrs, no Clojure experience before this role.
+**Charlie:** - We've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous Clojure In interview, Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that that's usable for us in production.
 
-Alan Wright - VP of Engineering, bought onboard by Luca, like many of us at Signal and I don't know closure very well. I'm here purely from a curiosity point of view. My background is platform.
+**Joachim:** You can't really compare the data science ecosystem between Clojure and Python, it's all happening in the Python space.
 
-Richard Lewis Jones - Search Team - with Signal and prior to that USwitch who are also Clojure users, done a little bit but still learning - working alongside Rahul on the Babashka product project
+**Jon: So why not use Python throughout?**
 
-Jeremy Taylor - XTDB JUXT
+**Charlie:** The most powerful feature I find with Clojure is how easy it is to do multi-threading and parallelism and get good performance out of the box. It's very hard to use Python because of global interpreter lock and similar issues. Whenever we've tried to tackle it, it's always been a bit of a pain.
 
-Rahul Dé- Site Reliability Engineer (SRE) - Infrastructure - fun and unorthodox ways of using Clojure helps in tracing things - automating and providing decisions.
+**Joachim:** It takes a lot more effort with Python to get all the dependencies straight and to get it to work properly in Docker. The JVM is a lot more mature in that sense. It's easier to run Clojure services in production, to scale and to monitor them than it is for for Python.
 
-Luca Grulla - CTO - part of the original blog post, great to collaborate on Clojure, been with the Clojure Community from the early days and helped organise the first Euro Clojure and it's always a pleasure to be involved in the Clojure Community.
+Clojure is also great for any kind of data manipulation. Our machine learning pipelines and APIs are all using a mix of Python/Clojure.
 
+## Clojure
+
+**Jon:** It's quite inspiring, you've got those three different languages for each relevant area and you choose which one works best. It's great to hear that Clojure is holding it's own.
+
+**Charlie:** It's nice to see that if you go back to a project that was written five years ago and it's basically more or less still doing the same thing and holds up well. It seems there's definitely less fatigue in terms of progression in the style than we've seen in Python or JavaScript.
+
+**Rahul:** We've historically used Python for infrastructure automation. Where we're dealing with a lot of unstructured data and especially query analysis for Elastic, we will use a mix of languages including Clojure. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure. We're using Babashka more and it's eating up our Python.
 
 ##### Dead Sea:
-
-*Who are Signal AI*
-
-Luca -WWe are a growing business and over the years have refined our vision and what we're delivering, it's not too dissimilar from the last time we spoke but an extension to what we're trying to build now is an external intelligence platform that will allow people to make better decisions based on Signal's ability to understand what happens in the world based on external intelligence.
-We map out and connect all these entities and topics in a graph which then provides insights on what is relevant to your company, so you can identify what are the most relevant topics connected to your company. This allows you to make better decisions based on analysis from this vast amount of data.
-
 
 *Clojure use*
 
 Charlie - So I was introduced to Clojure on my first day at Signal.
 
-Joachim - There is still a lot of Data Science that is happening on Python but we like to  use Clojure because it's easy to paralyze and to operate. So we have like stuff that works on there and it's basically our go-to language.
-
-Rahul - Clojure helps out a lot in tracing things and making decisions and a lot of free form text, the kind of things that don't have too much structure, but we could use them in the context of infrastructure in automating, in providing some decisions on unstructured. So that's my role here.
-
-Richard - We find uses for Babashka in various places. In the search context we're using Clojure to build an abstract interface on top of elastic search. And the idea is we're trying to improve the performance of search, behind the scenes, but our first job is to build this thing that the rest of the business can talk to. It's the search API. So that's what we're currently doing.
-
-
-
-
-
-
-
 Luca -  Clojure has been part of Signal from the very early days, after a couple of iterations and other JVM languages, we tried Clojure and it just clicked.
-
-
-
-
-are you still using Clojure
-
-
-Charlie - I think we've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous interview, Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that that's usable for us in production.
-
-Jon - So, why not just use the same language for everything?
-
-Charlie -  The most powerful feature I find with Clojure is how easy it is to do multi-threading and parallelism and get good performance out of the box. Unless you're doing it very specifically for a machine learning case and it's one of these frameworks like Pietarch?? where it's built for this and it's all dropping down to someone's code they've written in C it's very hard to use Python because of global interpreter lock and similar issues. Whenever we've tried to tackle it, it's always been a bit of a pain.
-
-Joachim - It takes a lot more effort on Python to get all the dependencies straight and to get it to work properly in Docker. I think JVM is a lot more mature in that sense. It's easier to run Clojure services in production, to scale and to monitor them than it is for for Python. I would also say like, the Data science, you can't really compare the data science ecosystem there at all to what's actually happening. It's all happening in the Python space. I mean, we use Clojure if you can't implement specific algorithms ourselves or in duplication use case where we have implemented an algorithm, it is really great for any kind of data manipulation. Python is our preferred language for functional programming concepts. Our machine learning pipeline and API's are all using a mix of Python/Clojure.
-
-Jon - It's quite inspiring, you've got those three different languages for the each area and choose which one work works best. It's great to hear that Clojure is holding it's own as well.
-
-Charlie - It's nice to see that if you go back to a project that was written five years ago and it's basically more or less still doing the same thing with more or less the same licras??? It seems there's definitely less fatigue in terms of progression in the style than we've seen in Python or JavaScript.
-
-Rahul - We've historically used Python a lot in the infrastructure space, automation around the infrastructure side. More and more we've been moving toward the inbuilt stuff and drop code altogether. Where we're dealing with a lot of unstructured data and especially query analysis of elastic certs we will use a mix of languages which is much better compared to Python or even Golang. If you compare Golang and Clojure in terms of handling unstructured dynamic data, that's a big plus point for Clojure and especially Babushka is also eating up in to the Python space.
 
 Jon - How do you process unstructured dynamic data in Clojure? .
 
@@ -191,3 +161,22 @@ Rahul -  the AWS API from Cognitect, I mean, as, as good as it is, like, but the
 Charlie - You, you definitely tend to like closure, find like a library maintained by one guy as opposed to in other ecosystems you'd have a much richer pool of maintainers who are much more willing to Yeah.Make changes or have much more time to make changes. Cause there's more people of course. Not everyone's a force of nature, like Bock Dude
 
 Jon - Okay well I just want to say thank you for your time, it's really appreciated.
+
+
+*Intro's*
+
+Jon Pither - CEO at JUXT
+
+Joachim Draeger  - learnt Clojure in role alongside Python - we like to use Clojure as it's easy to paralyze and to operate.
+
+Charlie Briggs - Senior Software Engineer - part of the Data Platform Team for past 3.5 yrs, no Clojure experience before this role.
+
+Alan Wright - VP of Engineering, bought onboard by Luca, like many of us at Signal and I don't know closure very well. I'm here purely from a curiosity point of view. My background is platform.
+
+Richard Lewis Jones - Search Team - with Signal and prior to that USwitch who are also Clojure users, done a little bit but still learning - working alongside Rahul on the Babashka product project
+
+Jeremy Taylor - XTDB JUXT
+
+Rahul Dé- Site Reliability Engineer (SRE) - Infrastructure - fun and unorthodox ways of using Clojure helps in tracing things - automating and providing decisions.
+
+Luca Grulla - CTO - part of the original blog post, great to collaborate on Clojure, been with the Clojure Community from the early days and helped organise the first Euro Clojure and it's always a pleasure to be involved in the Clojure Community.
