@@ -80,20 +80,17 @@ To help with this, for a time we ran a Clojure club, so people who aren't famili
 
 **Richard:** Not really, it's nice to play around with new technologies but our heart is in Clojure.
 
-##### Dead Sea:
+## Working with dynamic data
 
-Jon - In terms of the static versus dynamic debate, do you think that has moved at all?
+**Jon: It feels you're aligned to dynamic languages. Do you feel the static versus dynamic debate has moved on at all?**
 
-Richard - On a personal level I'm attracted to the elegance of some of the newer languages out there on the frontend such as Elm and Reason. Personally, I can't be doing with things like type scripts because it's a halfway house, it's not inferred, so you just end up with horrible types you've got to deal with. Languages that are properly typed first, they're nice, but as I say, it's not necessarily suitable for a lot of what we're doing, so Clojure wins.
+**Richard:** I'm attracted to the elegance of some of the newer languages out there on the frontend such as Elm and Reason. I'm not a fan of TypeScripts because it's a halfway house, it's not inferred, so you just end up with horrible types you've got to deal with. Languages that are properly typed first, they're nice, but it's not necessarily suitable for a lot of what we're doing, so Clojure wins.
 
-Charlie - I think we've had some pain with things not being typed for maintenance, such as API's. I feel the solution for that is not necessarily adding types to the language but definitely adding more schemers?? and structure to the data you consume and produce, we maybe would have benefitted from doing that earlier. Recently we added some schema to message producers, consumers, by data platform. In this case we chose JSON schema, there's a nice solution for this in Clojure, but quite often they only support Clojure. We might use Mali as a nice tool to do that but then you can't use it in Python services, so the inthrop??? can get quite difficult when taking that approach.
+**Charlie:** We've had some pain with things not being typed for maintenance, such as APIs. I feel the solution for that is not necessarily adding types to the language but definitely adding more schemas, and structure to the data you consume and produce.
 
-Joachim - I would agree that I didn't really particularly like the experience with Clojure Spec.
+We tried to use Clojure spec to make our boundaries more strict. We found found it hard to work with, and now we use Mali and it just seems more intuitive. We never really got to grips with how to structure our specs and actually to use them in the right context, like development Vs production. You seem to need to do a lot of work to make actually fit for human consumption.
 
-Charlie - Yes, we tried to use it in our first attempt at making impowerful boundaries a bit more strict. We tried to use Clojure Spec in one of our core user APIs and we just found it very hard to work with, now we turn to Mali for this and it just seems more sensible. We never really got to grips with how to structure your specs and actually use them in the right context, like development vs. production. You seemed to need to do a lot of tooling to make t actually fit for human consumption, that was my experience anyway.
-
-Richard  - Yeah, we've had the same experience on the Search Team. It seems to be a nice thing to use and in the past I've tried playing with Spec but I just couldn't get my head around it. It just didn't seem particularly user-friendly so we use Mali and other tools from Meticine/Metosin??? for routing.
-
+**Richard:** On my team we also use Mali and other tools from Metosin for routing.
 
 ## Tooling
 
