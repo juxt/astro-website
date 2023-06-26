@@ -12,14 +12,14 @@
     "algolia": "cd algolia && nbb index.cljs"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.12.1",
-    "@astrojs/mdx": "^0.13.0",
-    "@astrojs/preact": "^1.2.0",
+    "@astrojs/image": "^0.17.1",
+    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/preact": "^2.2.1",
     "@tailwindcss/typography": "^0.5.4",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "algoliasearch": "^4.14.2",
-    "astro": "^1.7.2",
+    "astro": "^2.7.0",
     "classnames": "^2.3.1",
     "concurrently": "^7.5.0",
     "dotenv": "^16.0.1",
