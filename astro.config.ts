@@ -18,11 +18,7 @@ export default defineConfig({
       serviceEntryPoint: '@astrojs/image/sharp'
     })
   ],
-  server: {
-    port: 3000,
-    host: '0.0.0.0'
-  },
-  site: 'https://juxt.pro',
+  site: 'https://juxt.pro/',
   markdown: {
     shikiConfig: {
       theme: 'css-variables'

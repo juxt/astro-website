@@ -2,6 +2,7 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "preact",
+    "allowSyntheticDefaultImports": true,
     // Enable top-level await, and other modern ESM features.
     "target": "ESNext",
     "module": "ESNext",

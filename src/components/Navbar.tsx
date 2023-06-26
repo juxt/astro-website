@@ -1,7 +1,6 @@
 import 'preact/jsx-runtime'
 import classNames from 'classnames'
 import { useEffect, useState } from 'preact/hooks'
-import logo from '/images/logo.svg'
 import { useOutsideClick } from '@utils/preactUtils'
 import DarkModeSwitch from './DarkModeSwitch'
 
@@ -60,7 +59,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
     >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>
         <a href='/' class='flex items-center w-20 z-10'>
-          <img src={logo} alt='Juxt Logo' />
+          <img src='/images/logo.svg' alt='Juxt Logo' />
         </a>
         <button
           data-collapse-toggle='navbar-default'
