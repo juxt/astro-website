@@ -7,5 +7,5 @@ image: 'kth.jpg'
 linkedin: ''
 twitter: ''
 featured:
-  weight: 4
+  weight: 3
 ---

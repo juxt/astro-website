@@ -2,11 +2,9 @@
 code: 'hak'
 name: 'Håkan'
 lastName: 'Råberg'
-jobTitle: 'Head of Research'
+jobTitle: 'Advisor'
 image: 'hak.jpg'
 linkedin: ''
 twitter: ''
 github: ''
-featured:
-  weight: 3
 ---

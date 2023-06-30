@@ -8,5 +8,5 @@ linkedin: ''
 twitter: ''
 github: ''
 featured:
-  weight: 5
+  weight: 6
 ---
