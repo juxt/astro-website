@@ -140,7 +140,7 @@ Next, a constructor-like function and a setter function for creating and updatin
                                        :lower lower
                                        :version 0})]
     (when (and (not (s/invalid? bot))
-               (not (human-likeness bot))) 
+               (not (human-likeness bot)))
       bot)))
 
 
@@ -149,7 +149,7 @@ Next, a constructor-like function and a setter function for creating and updatin
   (let [bot (s/conform :bot/aggregate (some-> bot
                                               (assoc :nickname nickname)
                                               (update :version inc)))]
-    (when (not (s/invalid? bot)) 
+    (when (not (s/invalid? bot))
       bot)))
 ```
 
@@ -175,7 +175,7 @@ For our robot example, we will simply use a Clojure atom
                  :version 0}))
 ```
 
-We save to our repo atomically using 
+We save to our repo atomically using
 
 ```clojure
 (defn save-to-repo [aggregate]
@@ -307,7 +307,7 @@ We try to create a robot with a human likeness
 
 ## Update Consistency
 
-The consistency check is at the aggregate level. 
+The consistency check is at the aggregate level.
 
 When updating a robot's nickname we increment the aggregates version number.
 
@@ -363,7 +363,7 @@ this time around we also simulate saving bot2 first despite it being created sec
 
 # Summary
 
-We have created a tactical DDD example using the core concepts of entities, value objects, aggregates with business logic (invariants), and repositories. 
+We have created a tactical DDD example using the core concepts of entities, value objects, aggregates with business logic (invariants), and repositories.
 
 From this simple domain model foundation, we can explore the rest of the EDA map at the start of this post.  Including the addition of domain-events, command sourcing, and event sourcing.  We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
 
