@@ -21,7 +21,8 @@ In the [previous](../event-driven-architecture) blog post, we attempted to map o
 
 <Image alt='Event Driven Architecture' src={eda} />
 
-This post is exploring Domain Driven Design.  While Domain Events are an important part of modern EDA having a grounding in the concepts of DDD before Domain Events are introduced is beneficial to all aspects of EDA.
+This post is exploring Domain Driven Design (DDD).
+While Domain Events are an important part of modern EDA, having a grounding in the concepts of DDD before Domain Events are introduced is beneficial to all aspects of EDA.
 
 # Pattern Language Overview
 
@@ -29,11 +30,18 @@ From Eric Evans', Domain-Driven Design Reference <sup>[[1]]</sup> we have the cl
 
 <Image alt='Pattern Language Overview' src={plo} />
 
-This slightly edited version of the diagram is split into two parts: strategic and tactical.  The key concepts this post will look at are coloured.
+This slightly-edited version of the diagram is split into two parts: strategic and tactical.
+The key concepts this post will discuss at are highlighted.
 
 # Tactical DDD
 
-As you might expect from the name, tactical DDD deals with the patterns used by Engineers to codify the business model.  The core concept is the aggregate. An aggregate is an object made from entities, value objects, business logic. It is persisted via a repository.  At the start of DDD movement, domain events were not part of the lexicon and were introduced later.  We will start our example without domain events to make the other concepts clearer and introduce them as we go.
+As you might expect from the name, tactical DDD deals with the patterns used by software engineers to codify the business model.
+
+The core concept is the *aggregate*.
+An aggregate is an object made from *entities*, *value objects* and *business logic*.
+It is persisted via a repository.
+At the start of the DDD movement, domain events were not part of the lexicon and were introduced later.
+We will start our example without domain events to make the other concepts clearer and introduce them as we go.
 
 The definitions below are all taken from [[1]].
 
@@ -41,68 +49,79 @@ The definitions below are all taken from [[1]].
 
 >Many objects represent a thread of continuity and identity, going through a lifecycle, though their attributes may change. An object primarily defined by its identity is called an Entity.  Importantly equality is defined by the identity (name).
 
-An example, a robot is created and then eventually destroyed.  Over time it may have many different characteristics but its equality is defined by its identity, serial number say, not its attributes.
+As an example, a robot is created and then eventually destroyed.
+Over time it may have many different characteristics but its equality is defined by its identity, say the serial number, rather than its attributes.
 
 More typical business examples include an order raised, a bank account, a loan application etc.
 
-*note: Entities are also known as Reference Objects*
+*Note: Entities are also known as Reference Objects*
 
 ## Value Objects
 
 >Many objects have no conceptual identity. These objects describe some characteristics of a thing.  An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object. Value Objects are instantiated to represent elements of the design that we care about only for what they are, not who or what they are.
 
-For example, the address at which our Robot was manufactured.  The address is an immutable complex type. However, it's simpler than an Entity as there's no life-cycle.   The address (Value Object) can be shared amongst multiple robots.
+For example, the address at which our robot was manufactured.
+The address is an immutable complex type.
+However, it's simpler than an Entity as there's no life-cycle.
+The address (Value Object) can be shared amongst multiple robots.
 
-More typical business examples include products, line items in an order, customer addresses.
+More typical business examples include products, line items in an order, and customer addresses.
 
-What is a value object and an entity is fluid and based on the context e.g. a product on a raised order may be considered a value object, but other systems in an organisation responsible for designing products may well treat them as entities as they research and develop them.
-
+What makes a Value Object or an Entity is fluid and context-sensitive.
+For example, a product on a raised order may be considered a Value Object, but other systems in an organisation responsible for designing products may well treat them as entities as they research and develop them.
 
 ## Summary Table
 
 |                  | Entities            | Value Objects           |
 |------------------|---------------------|-------------------------|
-| Type of Equality | identifier equality | structural equality     |
-| Mutability       | mutable             | immutable               |
-| Lifespan         | has a lifespan      | doesn't have a lifespan |
+| Type of equality | Identifier equality | Structural equality     |
+| Mutability       | Mutable             | Immutable               |
+| Lifespan         | Has a lifespan      | Doesn't have a lifespan |
 
 ## Aggregates
 
-> It is difficult to guarantee the consistency of changes to objects in a model with complex associations. Objects are supposed to maintain their own internal consistent state, but they can be blindsided by changes in other objects that are conceptually constituent parts.
+> It is difficult to guarantee the consistency of changes to objects in a model with complex associations.
+> Objects are supposed to maintain their own internal consistent state, but they can be blindsided by changes in other objects that are conceptually constituent parts.
 
-The goal of an aggregate is help maintain a consistent state.  If an aggregate is used in the modelling then consistency issues can be mitigated helping with database locking, distributing objects or asynchronous transactions.
+The goal of an aggregate is help maintain a consistent state.
+If an aggregate is used in the modelling then consistency issues can be mitigated, helped by database locking, distributing objects or asynchronous transactions.
 
-> An aggregate is a *cluster of entities and value objects with a defined boundary*.  One entity is chosen as the *root* of the aggregate and all interactions with the aggregate entities and value objects must be made through it.
+> An aggregate is a *cluster of entities and value objects with a defined boundary*.
+> One entity is chosen as the *root* of the aggregate and all interactions with the aggregate entities and value objects must be made through it.
 
-This property of an aggregate means it is a natural place to enforce the business properties and invariants established in conjunction with domain experts.
+This property of an Aggregate means it's a natural place to enforce the business properties and invariants established in conjunction with domain experts.
 
-Within an aggregate, consistency rules are applied synchronously and across boundaries updates are asynchronous.
+Within an Aggregate, consistency rules are applied synchronously.
+Across Aggregate boundaries updates are asynchronous.
 
-An example, government legislation prevents companies from building robots with human likeness.  Here we have a single entity aggregate, the robot itself and two value objects the upper and lower configurations.  We have an invariant upon creation to guarantee that no robot looks like a human.
+For example, government legislation prevents companies from building robots with human likeness.
+Here we have a single entity Aggregate, the robot itself and two value objects represent the upper and lower configurations.
+We have an invariant upon creation to guarantee that no robot looks like a human.
 
-When working with message-driven architectures and EDA it seems too easy to think of the aggregate as data only i.e., the events and state.  It is important to realise that business logic is an essential part of the aggregate.
+When working with message-driven architectures and EDA it's easy to think of the Aggregate as data only i.e., the events and state.
+However, it's important to realise that business logic is an essential part of the Aggregate.
 
-# The Robot Example In Clojure
+# The Robot Example in Clojure
 
-Let's expand upon the robot example used in the entity, value object and aggregate definitions.
+Let's expand upon the robot example used in the Entity, Value Object and Aggregate definitions.
 
-- Our robot-building company JUXT creates bespoke robots.
+- Our robot-building company, Juxtbots Inc, creates bespoke robots.
 - Each robot has a lifespan and its own identity, UUID (entity)
 - A robot consists of upper and lower body configurations (value objects)
   - the upper body can be either arms, tentacles or manipulators
   - the lower body can be wheels, tracks or legs.
 - A robot can be assigned any nick-name (value object)
 - Robot equality is by UUID
-- A business rule states that JUXT will not build a robot that looks human e.g. arms and legs.
+- A business rule states that Juxtbots will not build a robot that looks human e.g. arms and legs.
 - Another business rule says the nickname of a robot can be changed at any time.
 
-The robot aggregate is a single robot entity (also the root) and the upper, lower, and nick-name value objects *AND* the logic to enforce the business rules.
+The robot's Aggregate is a single robot Entity (also the Root) and the upper, lower, and nick-name value objects *and* the logic to enforce the business rules.
 
 The full example code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/src/juxty/ddd/domain.clj).
 
 ## Modelling the Data
 
-We can use spec to model the data
+We can use spec to model the data:
 
 ```clojure
 (s/def :bot/id uuid?)
@@ -120,7 +139,8 @@ The additional field `version` helps deal with consistency.
 
 ## Modelling the Business Logic
 
-Standard Clojure functions model the business logic.  Firstly we define a human-likeness function
+Standard Clojure functions model the business logic.
+First, we define a human-likeness function:
 
 ```clojure
 (defn human-likeness [b]
@@ -155,7 +175,8 @@ The `create-bot` function uses spec to ensure the values are within the requirem
 
 ## Repositories
 
-A repository is another DDD concept.  As its namesake, it's a place of safety for aggregates stored within (i.e. provides some persistence).
+A Repository is another DDD concept.
+It represents a place of safety for aggregates to be stored (i.e. providing persistence).
 
 Evans has quite a bit more to say on the matter:
 
@@ -338,7 +359,7 @@ And when saving to the repository we check that the aggregate version within the
                ...
 ```
 
-The test to check aggregate level consistency looks like this
+The test to check aggregate level consistency looks like this:
 
 ```clojure
 (deftest updating-consistency-test
@@ -357,13 +378,14 @@ The test to check aggregate level consistency looks like this
            @sut/repo))))
 ```
 
-this time around we also simulate saving bot2 first despite it being created second.
+This time around we also simulate saving `bot2` first despite it being created second.
 
 # Summary
 
 We have created a tactical DDD example using the core concepts of entities, value objects, aggregates with business logic (invariants), and repositories.
 
-From this simple domain model foundation, we can explore the rest of the EDA map at the start of this post.  Including the addition of domain-events, command sourcing, and event sourcing.  We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
+From this simple domain model foundation, we can explore the rest of the EDA map at the start of this post, including the addition of Domain-Events, Command Sourcing, and Event Sourcing.
+We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
 
 # References
 
