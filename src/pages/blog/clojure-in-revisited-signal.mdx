@@ -20,7 +20,7 @@ import { Image } from '@astrojs/image/components'
 
 import si from '../../assets/blog/signal-team.jpg'
 
-Signal is an AI company that extracts knowledge from unstructured textual content and processes near to 5 million documents a day from various data sources, providing insights to it's subscribers.
+Signal is an AI company that extracts knowledge from unstructured textual content and processes near to 5 million documents a day from various data sources, providing insights to its subscribers.
 
 JUXT visited Signal for a Clojure In [five years ago](https://www.juxt.pro/blog/clojure-in-signal/). I wanted to revisit to understand if Clojure has stood the test of time, and how they feel about it now.
 
@@ -42,7 +42,7 @@ We use JavaScript for the front-end and some APIs, and Python for machine learni
 
 **Jon: Have you looked at Clojure for the Data Science part, rather than Python?**
 
-**Charlie:** - We've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous [Clojure In interview](https://www.juxt.pro/blog/clojure-in-signal/), Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that that's usable for us in production.
+**Charlie:** - We've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous [Clojure In interview](https://www.juxt.pro/blog/clojure-in-signal/), Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that's usable for us in production.
 
 **Joachim:** You can't really compare the data science ecosystem between Clojure and Python, it's all happening in the Python space.
 
@@ -50,7 +50,7 @@ We use JavaScript for the front-end and some APIs, and Python for machine learni
 
 **Charlie:** The most powerful feature I find with Clojure is how easy it is to do multi-threading and parallelism and get good performance out of the box. It's very hard to use Python because of global interpreter lock and similar issues. Whenever we've tried to tackle it, it's always been a bit of a pain.
 
-**Joachim:** It takes a lot more effort with Python to get all the dependencies straight and to get it to work properly in Docker. The JVM is a lot more mature in that sense. It's easier to run Clojure services in production, to scale and to monitor them than it is for for Python.
+**Joachim:** It takes a lot more effort with Python to get all the dependencies straight and to get it to work properly in Docker. The JVM is a lot more mature in that sense. It's easier to run Clojure services in production, to scale and to monitor them than it is for Python.
 
 Clojure is also great for any kind of data manipulation. Our machine learning pipelines and APIs are all using a mix of Python/Clojure.
 
@@ -58,11 +58,11 @@ Clojure is also great for any kind of data manipulation. Our machine learning pi
 
 **Jon: Could you expand more on what you do with unstructured dynamic data?**
 
-**Rahul:** The primary use case that we have is to run this massive search cluster and we monitor this cluster at all times. We need to protect it against large queries that could overwhelm or load the cluster. Clojure allows us to walk the tree with it's standard library and to preemptively measure the impact of a query and, so we can therefore plan and adjust.
+**Rahul:** The primary use case that we have is to run this massive search cluster and we monitor this cluster at all times. We need to protect it against large queries that could overwhelm or load the cluster. Clojure allows us to walk the tree with its standard library and to preemptively measure the impact of a query and, so we can therefore plan and adjust.
 
 ## Clojure
 
-**Jon:** It's quite inspiring, you've got those three different languages for each relevant area and you choose which one works best. It's great to hear that Clojure is holding it's own.
+**Jon:** It's quite inspiring, you've got those three different languages for each relevant area and you choose which one works best. It's great to hear that Clojure is holding its own.
 
 **Charlie:** It's nice to see that if you go back to a project that was written five years ago and it's basically more or less still doing the same thing and holds up well. It seems there's definitely less fatigue in terms of progression in the style than we've seen in Python or JavaScript.
 
@@ -72,7 +72,7 @@ Clojure is also great for any kind of data manipulation. Our machine learning pi
 
 **Charlie:** I joined because I wanted to learn Clojure.
 
-**Richard:** I don't consider there a problem picking up Clojure. It's an attractive thing for people who have discovered it.
+**Richard:** I don't consider there's a problem picking up Clojure. It's an attractive thing for people who have discovered it.
 
 For example we've had two recent joiners who hadn't used Clojure before. One has Lisp/C# experience and the other had Python. They were both aware of functional language concepts and they were quick to pick it up.
 
@@ -100,7 +100,7 @@ The community is growing around it with new ecosystem technologies like Babashka
 
 **Charlie:** We've had some pain with things not being typed for maintenance, such as APIs. I feel the solution for that is not necessarily adding types to the language but definitely adding more schemas, and structure to the data you consume and produce.
 
-We tried to use Clojure spec to make our boundaries more strict. We found found it hard to work with, and now we use [Malli](https://github.com/metosin/malli) and it just seems more intuitive. We never really got to grips with how to structure our specs and actually to use them in the right context, like development Vs production. You seem to need to do a lot of work to make actually fit for human consumption.
+We tried to use Clojure spec to make our boundaries more strict. We found it hard to work with, and now we use [Malli](https://github.com/metosin/malli) and it just seems more intuitive. We never really got to grips with how to structure our specs and actually to use them in the right context, like development Vs production. You seem to need to do a lot of work to make it actually fit for human consumption.
 
 **Richard:** On my team we also use Malli and other tools from Metosin for routing.
 
@@ -136,6 +136,6 @@ Other Babashka use cases are partial recovery for unstructured data and even an 
 
 **Richard:** Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure to begin with, you get the benefits of Clojure, plus you get the same speed and immediacy that Python gives.
 
-I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to tail SNS topics, which just attaches to an SNS topic, create a temporary queue, and just read off that queue. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies specified.
+I like the fact that you can play your dependencies in the same script. Recently I wrote a quick command line tool to tail SNS topics, which just attaches to an SNS topic, creates a temporary queue, and just read off that queue. That's a few lines of Babashka and it's a very nice looking online tool and it's just one script with all the dependencies specified.
 
 **Jon: Thanks for your time!**
