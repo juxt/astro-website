@@ -38,7 +38,7 @@ We use JavaScript for the front-end and some APIs, and Python for machine learni
 
 **Jon: Have you looked at Clojure for the Data Science part, rather than Python?**
 
-**Charlie:** - We've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous [Clojure In interview](https://www.juxt.pro/blog/clojure-in-signal/), Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that's usable for us in production.
+**Charlie:** We've realized that if you need to do any data science, just start with Python. We haven't tried to shoehorn Clojure into that ecosystem. In the previous [Clojure In interview](https://www.juxt.pro/blog/clojure-in-signal/), Miguel talked about the improvements of data science on Clojure and it doesn't seem to have come to fruition in any way that's usable for us in production.
 
 **Joachim:** You can't really compare the data science ecosystem between Clojure and Python, it's all happening in the Python space.
 
@@ -58,13 +58,13 @@ Clojure is also great for any kind of data manipulation. Our machine learning pi
 
 ## Clojure
 
-**Jon:** It's quite inspiring, you've got those three different languages for each relevant area and you choose which one works best. It's great to hear that Clojure is holding its own.
+**Jon: It's quite inspiring, you've got those three different languages for each relevant area and you choose which one works best. It's great to hear that Clojure is holding its own.**
 
 **Charlie:** It's nice to see that if you go back to a project that was written five years ago and it's basically more or less still doing the same thing and holds up well. It seems there's definitely less fatigue in terms of progression in the style than we've seen in Python or JavaScript.
 
 **Luca:** This to me is the strength of Clojure. The design of the core library is of such high quality that there's no major changes, not because there's no innovation but because it achieves such a level of instruction. Unlike other languages where the framework is constantly being revisited, you can do a lot with the core library, it stands the testament of time.
 
-**Jon:** How have you found it in terms of hiring and training for Clojure?
+**Jon: How have you found it in terms of hiring and training for Clojure?**
 
 **Charlie:** I joined because I wanted to learn Clojure.
 
@@ -92,7 +92,7 @@ The community is growing around it with new ecosystem technologies like Babashka
 
 **Jon: It feels you're aligned to dynamic languages. Do you feel the static versus dynamic debate has moved on at all?**
 
-**Richard:** I'm attracted to the elegance of some of the newer languages out there on the frontend such as Elm and Reason. I'm not a fan of TypeScripts because it's a halfway house, it's not inferred, so you just end up with horrible types you've got to deal with. Languages that are properly typed first, they're nice, but it's not necessarily suitable for a lot of what we're doing, so Clojure wins.
+**Richard:** I'm attracted to the elegance of some of the newer languages out there on the frontend such as Elm and Reason. I'm not a fan of TypeScript because it's a halfway house, it's not inferred, so you just end up with horrible types you've got to deal with. Languages that are properly typed first, they're nice, but it's not necessarily suitable for a lot of what we're doing, so Clojure wins.
 
 **Charlie:** We've had some pain with things not being typed for maintenance, such as APIs. I feel the solution for that is not necessarily adding types to the language but definitely adding more schemas, and structure to the data you consume and produce.
 
@@ -112,7 +112,7 @@ We tried to use Clojure spec to make our boundaries more strict. We found it har
 
 **Joachim:** My take on Emacs and Vim is that if you give it an honest try and are still struggling after 6 months, then it's probably not for you. I was basically one of those people. I think some people use it really well but other people do struggle.
 
-**Rahul:** I'm firmly in the VIM camp.
+**Rahul:** I'm firmly in the Vim camp.
 
 ## Tooling
 
@@ -124,11 +124,11 @@ We tried to use Clojure spec to make our boundaries more strict. We found it har
 
 **Jon: You mentioned [Babashka](https://github.com/babashka/babashka), can you tell us more?**
 
-**Rahul:** I'm one of the parents of this [project](https://github.com/babashka/babashka), contributing and maintaining it for a couple of years now along with [borkdude](https://twitter.com/borkdude). We use it for monitoring clusters of machines. I.e. our scripts tell us: 'this machine could be recycled better', or 'here's why these machines need a bit of help'.
+**Rahul:** I'm one of the parents of this [project](https://github.com/babashka/babashka), contributing and maintaining it for a couple of years now along with [borkdude](https://twitter.com/borkdude). We use it for monitoring clusters of machines, i.e. our scripts tell us: "this machine could be recycled better", or "here's why these machines need a bit of help".
 
-Other Babashka use cases are partial recovery for unstructured data and even an onboarding script for new people; the script writes an email, sets up with VPN and their AWS account, that's all done in Babashka.
+Other Babashka use cases are partial recovery for unstructured data and even an onboarding script for new people; the script writes an email, sets them up with VPN and their AWS account, and that's all done in Babashka.
 
-**Jon:** Cool!
+**Jon: Cool!**
 
 **Richard:** Babaskha can be seen as a better Python for certain scenarios. I've done plenty of Python in the past and it has been my go-to language for getting stuff done quickly. But if you're programming in Clojure to begin with, you get the benefits of Clojure, plus you get the same speed and immediacy that Python gives.
 
