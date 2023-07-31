@@ -1,10 +1,10 @@
 ---
-draft: false
 author: 'mtf'
 layout: '../../layouts/BlogPost.astro'
 title: 'Simple, Tactical Domain Driven Design in Clojure'
-description: "An introduction to Aggregates and Repositories"
-publishedDate: '2023-05-13'
+description: 'An Introduction to Aggregates and Repositories'
+publishedDate: '2023-08-01'
+category: 'architecture'
 tags:
   - event-driven-architecture
   - ddd
@@ -37,8 +37,8 @@ The key concepts this post will discuss at are highlighted.
 
 As you might expect from the name, tactical DDD deals with the patterns used by software engineers to codify the business model.
 
-The core concept is the *aggregate*.
-An aggregate is an object made from *entities*, *value objects* and *business logic*.
+The core concept is the _aggregate_.
+An aggregate is an object made from _entities_, _value objects_ and _business logic_.
 It is persisted via a repository.
 At the start of the DDD movement, domain events were not part of the lexicon and were introduced later.
 We will start our example without domain events to make the other concepts clearer and introduce them as we go.
@@ -47,18 +47,18 @@ The definitions below are all taken from [[1]].
 
 ## Entities
 
->Many objects represent a thread of continuity and identity, going through a lifecycle, though their attributes may change. An object primarily defined by its identity is called an Entity.  Importantly equality is defined by the identity (name).
+> Many objects represent a thread of continuity and identity, going through a lifecycle, though their attributes may change. An object primarily defined by its identity is called an Entity. Importantly equality is defined by the identity (name).
 
 As an example, a robot is created and then eventually destroyed.
 Over time it may have many different characteristics but its equality is defined by its identity, say the serial number, rather than its attributes.
 
 More typical business examples include an order raised, a bank account, a loan application etc.
 
-*Note: Entities are also known as Reference Objects*
+_Note: Entities are also known as Reference Objects_
 
 ## Value Objects
 
->Many objects have no conceptual identity. These objects describe some characteristics of a thing.  An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object. Value Objects are instantiated to represent elements of the design that we care about only for what they are, not who or what they are.
+> Many objects have no conceptual identity. These objects describe some characteristics of a thing. An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object. Value Objects are instantiated to represent elements of the design that we care about only for what they are, not who or what they are.
 
 For example, the address at which our robot was manufactured.
 The address is an immutable complex type.
@@ -73,7 +73,7 @@ For example, a product on a raised order may be considered a Value Object, but o
 ## Summary Table
 
 |                  | Entities            | Value Objects           |
-|------------------|---------------------|-------------------------|
+| ---------------- | ------------------- | ----------------------- |
 | Type of equality | Identifier equality | Structural equality     |
 | Mutability       | Mutable             | Immutable               |
 | Lifespan         | Has a lifespan      | Doesn't have a lifespan |
@@ -86,8 +86,8 @@ For example, a product on a raised order may be considered a Value Object, but o
 The goal of an aggregate is help maintain a consistent state.
 If an aggregate is used in the modelling then consistency issues can be mitigated, helped by database locking, distributing objects or asynchronous transactions.
 
-> An aggregate is a *cluster of entities and value objects with a defined boundary*.
-> One entity is chosen as the *root* of the aggregate and all interactions with the aggregate entities and value objects must be made through it.
+> An aggregate is a _cluster of entities and value objects with a defined boundary_.
+> One entity is chosen as the _root_ of the aggregate and all interactions with the aggregate entities and value objects must be made through it.
 
 This property of an Aggregate means it's a natural place to enforce the business properties and invariants established in conjunction with domain experts.
 
@@ -115,7 +115,7 @@ Let's expand upon the robot example used in the Entity, Value Object and Aggrega
 - A business rule states that Juxtbots will not build a robot that looks human e.g. arms and legs.
 - Another business rule says the nickname of a robot can be changed at any time.
 
-The robot's Aggregate is a single robot Entity (also the Root) and the upper, lower, and nick-name value objects *and* the logic to enforce the business rules.
+The robot's Aggregate is a single robot Entity (also the Root) and the upper, lower, and nick-name value objects _and_ the logic to enforce the business rules.
 
 The full example code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/src/juxty/ddd/domain.clj).
 
@@ -171,7 +171,7 @@ Next, a constructor-like function and a setter function for creating and updatin
       bot)))
 ```
 
-The `create-bot` function uses spec to ensure the values are within the requirements and the `human-likeness` function to enforce the aggregate business invariant.  The return value of `create-bot` is the aggregate data as a map.
+The `create-bot` function uses spec to ensure the values are within the requirements and the `human-likeness` function to enforce the aggregate business invariant. The return value of `create-bot` is the aggregate data as a map.
 
 ## Repositories
 
@@ -180,7 +180,7 @@ It represents a place of safety for aggregates to be stored (i.e. providing pers
 
 Evans has quite a bit more to say on the matter:
 
->For each type of aggregate that needs global access, create a service that can provide the illusion of an in-memory collection of all objects of that aggregate’s root type. Set up access through a well-known global interface. Provide methods to add and remove objects, which will encapsulate the actual insertion or removal of data in the data store. Provide methods that select objects based on criteria meaningful to domain experts. Return fully instantiated objects or collections of objects whose attribute values meet the criteria, thereby encapsulating the actual storage and query technology, or return proxies that give the illusion of fully instantiated aggregates in a lazy way. Provide repositories only for aggregate roots that actually need direct access. Keep application logic focused on the model, delegating all object storage and access to the repositories.
+> For each type of aggregate that needs global access, create a service that can provide the illusion of an in-memory collection of all objects of that aggregate’s root type. Set up access through a well-known global interface. Provide methods to add and remove objects, which will encapsulate the actual insertion or removal of data in the data store. Provide methods that select objects based on criteria meaningful to domain experts. Return fully instantiated objects or collections of objects whose attribute values meet the criteria, thereby encapsulating the actual storage and query technology, or return proxies that give the illusion of fully instantiated aggregates in a lazy way. Provide repositories only for aggregate roots that actually need direct access. Keep application logic focused on the model, delegating all object storage and access to the repositories.
 
 Basic take-homes are:
 
@@ -219,7 +219,7 @@ We save to our repo atomically using
                repo)))))
 ```
 
-This function, and the example as a whole, omits dealing with errors.  Essentially if the aggregate has not been seen before and is not null save it.  If the aggregate has been seen before over-write it with the new value.  Elsewise return the repository as it was.
+This function, and the example as a whole, omits dealing with errors. Essentially if the aggregate has not been seen before and is not null save it. If the aggregate has been seen before over-write it with the new value. Elsewise return the repository as it was.
 
 We have a simple query function
 
@@ -237,7 +237,7 @@ The full test code can be found [here](https://github.com/juxt/eventing-examples
 
 ## A Side Note about Testing EDA and DDD
 
-When dealing with events, messages, and data models, there are often fields that are populated at run-time or by nature random (UUIDs).  These can be awkward in testing.  Anything you can do to make your testing framework generate predictable values will help.
+When dealing with events, messages, and data models, there are often fields that are populated at run-time or by nature random (UUIDs). These can be awkward in testing. Anything you can do to make your testing framework generate predictable values will help.
 
 For the robot example, we boot-strap our testing like so, to ensure we know what UUIDs will be assigned.
 
