@@ -1,0 +1,416 @@
+---
+draft: false
+author: 'mtf'
+layout: '../../layouts/BlogPost.astro'
+title: 'Simple, Tactical Domain Driven Design in Clojure'
+description: "An introduction to Aggregates and Repositories"
+publishedDate: '2023-05-13'
+tags:
+  - event-driven-architecture
+  - ddd
+  - architecture
+  - clojure
+heroImage: 'honda-p1.jpg'
+---
+
+import { Image } from '@astrojs/image/components'
+import eda from '../../assets/blog/event-driven-architecture.jpg'
+import plo from '../../assets/blog/pattern-language-overview.png'
+
+In the [previous](../event-driven-architecture) blog post, we attempted to map out aspects of Event Driven Architecture (EDA).
+
+<Image alt='Event Driven Architecture' src={eda} />
+
+This post is exploring Domain Driven Design (DDD).
+While Domain Events are an important part of modern EDA, having a grounding in the concepts of DDD before Domain Events are introduced is beneficial to all aspects of EDA.
+
+# Pattern Language Overview
+
+From Eric Evans', Domain-Driven Design Reference <sup>[[1]]</sup> we have the classic Pattern Language Overview.
+
+<Image alt='Pattern Language Overview' src={plo} />
+
+This slightly-edited version of the diagram is split into two parts: strategic and tactical.
+The key concepts this post will discuss at are highlighted.
+
+# Tactical DDD
+
+As you might expect from the name, tactical DDD deals with the patterns used by software engineers to codify the business model.
+
+The core concept is the *aggregate*.
+An aggregate is an object made from *entities*, *value objects* and *business logic*.
+It is persisted via a repository.
+At the start of the DDD movement, domain events were not part of the lexicon and were introduced later.
+We will start our example without domain events to make the other concepts clearer and introduce them as we go.
+
+The definitions below are all taken from [[1]].
+
+## Entities
+
+>Many objects represent a thread of continuity and identity, going through a lifecycle, though their attributes may change. An object primarily defined by its identity is called an Entity.  Importantly equality is defined by the identity (name).
+
+As an example, a robot is created and then eventually destroyed.
+Over time it may have many different characteristics but its equality is defined by its identity, say the serial number, rather than its attributes.
+
+More typical business examples include an order raised, a bank account, a loan application etc.
+
+*Note: Entities are also known as Reference Objects*
+
+## Value Objects
+
+>Many objects have no conceptual identity. These objects describe some characteristics of a thing.  An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object. Value Objects are instantiated to represent elements of the design that we care about only for what they are, not who or what they are.
+
+For example, the address at which our robot was manufactured.
+The address is an immutable complex type.
+However, it's simpler than an Entity as there's no life-cycle.
+The address (Value Object) can be shared amongst multiple robots.
+
+More typical business examples include products, line items in an order, and customer addresses.
+
+What makes a Value Object or an Entity is fluid and context-sensitive.
+For example, a product on a raised order may be considered a Value Object, but other systems in an organisation responsible for designing products may well treat them as entities as they research and develop them.
+
+## Summary Table
+
+|                  | Entities            | Value Objects           |
+|------------------|---------------------|-------------------------|
+| Type of equality | Identifier equality | Structural equality     |
+| Mutability       | Mutable             | Immutable               |
+| Lifespan         | Has a lifespan      | Doesn't have a lifespan |
+
+## Aggregates
+
+> It is difficult to guarantee the consistency of changes to objects in a model with complex associations.
+> Objects are supposed to maintain their own internal consistent state, but they can be blindsided by changes in other objects that are conceptually constituent parts.
+
+The goal of an aggregate is help maintain a consistent state.
+If an aggregate is used in the modelling then consistency issues can be mitigated, helped by database locking, distributing objects or asynchronous transactions.
+
+> An aggregate is a *cluster of entities and value objects with a defined boundary*.
+> One entity is chosen as the *root* of the aggregate and all interactions with the aggregate entities and value objects must be made through it.
+
+This property of an Aggregate means it's a natural place to enforce the business properties and invariants established in conjunction with domain experts.
+
+Within an Aggregate, consistency rules are applied synchronously.
+Across Aggregate boundaries updates are asynchronous.
+
+For example, government legislation prevents companies from building robots with human likeness.
+Here we have a single entity Aggregate, the robot itself and two value objects represent the upper and lower configurations.
+We have an invariant upon creation to guarantee that no robot looks like a human.
+
+When working with message-driven architectures and EDA it's easy to think of the Aggregate as data only i.e., the events and state.
+However, it's important to realise that business logic is an essential part of the Aggregate.
+
+# The Robot Example in Clojure
+
+Let's expand upon the robot example used in the Entity, Value Object and Aggregate definitions.
+
+- Our robot-building company, Juxtbots Inc, creates bespoke robots.
+- Each robot has a lifespan and its own identity, UUID (entity)
+- A robot consists of upper and lower body configurations (value objects)
+  - the upper body can be either arms, tentacles or manipulators
+  - the lower body can be wheels, tracks or legs.
+- A robot can be assigned any nick-name (value object)
+- Robot equality is by UUID
+- A business rule states that Juxtbots will not build a robot that looks human e.g. arms and legs.
+- Another business rule says the nickname of a robot can be changed at any time.
+
+The robot's Aggregate is a single robot Entity (also the Root) and the upper, lower, and nick-name value objects *and* the logic to enforce the business rules.
+
+The full example code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/src/juxty/ddd/domain.clj).
+
+## Modelling the Data
+
+We can use spec to model the data:
+
+```clojure
+(s/def :bot/id uuid?)
+(s/def :bot/upper #{:arms :tentacles :manipulators})
+(s/def :bot/lower #{:wheels :tracks :legs})
+(s/def :bot/nickname string?)
+(s/def :bot/version number?)
+(s/def :bot/aggregate
+  (s/keys :req-un [:bot/id :bot/upper :bot/lower
+                   :bot/version :bot/created-at-repo-version]
+          :opt-un [:bot/nickname]))
+```
+
+The additional field `version` helps deal with consistency.
+
+## Modelling the Business Logic
+
+Standard Clojure functions model the business logic.
+First, we define a human-likeness function:
+
+```clojure
+(defn human-likeness [b]
+  (and (= :arms (:upper b))
+       (= :legs (:lower b))))
+```
+
+Next, a constructor-like function and a setter function for creating and updating a robot respectively.
+
+```clojure
+(defn create-bot
+  [upper lower]
+  (let [bot (s/conform :bot/aggregate {:id (random-uuid)
+                                       :upper upper
+                                       :lower lower
+                                       :version 0})]
+    (when (and (not (s/invalid? bot))
+               (not (human-likeness bot)))
+      bot)))
+
+
+(defn set-nickname
+  [bot nickname] ;; bot = this
+  (let [bot (s/conform :bot/aggregate (some-> bot
+                                              (assoc :nickname nickname)
+                                              (update :version inc)))]
+    (when (not (s/invalid? bot))
+      bot)))
+```
+
+The `create-bot` function uses spec to ensure the values are within the requirements and the `human-likeness` function to enforce the aggregate business invariant.  The return value of `create-bot` is the aggregate data as a map.
+
+## Repositories
+
+A Repository is another DDD concept.
+It represents a place of safety for aggregates to be stored (i.e. providing persistence).
+
+Evans has quite a bit more to say on the matter:
+
+>For each type of aggregate that needs global access, create a service that can provide the illusion of an in-memory collection of all objects of that aggregate’s root type. Set up access through a well-known global interface. Provide methods to add and remove objects, which will encapsulate the actual insertion or removal of data in the data store. Provide methods that select objects based on criteria meaningful to domain experts. Return fully instantiated objects or collections of objects whose attribute values meet the criteria, thereby encapsulating the actual storage and query technology, or return proxies that give the illusion of fully instantiated aggregates in a lazy way. Provide repositories only for aggregate roots that actually need direct access. Keep application logic focused on the model, delegating all object storage and access to the repositories.
+
+Basic take-homes are:
+
+- aggregates are the primitives
+- the actual storage mechanism is encapsulated away
+
+For our robot example, we will simply use a Clojure atom
+
+```clojure
+(def repo (atom {:aggregates {}
+                 :version 0}))
+```
+
+We save to our repo atomically using
+
+```clojure
+(defn save-to-repo [aggregate]
+  (swap! repo
+         (fn [repo]
+           (let [id (:id aggregate)
+                 aggregates (:aggregates repo)
+                 aggregate-version (:version aggregate)]
+             (cond
+               ;; create
+               (and (some? aggregate)
+                    (not (contains? aggregates id)))
+               (-> repo
+                   (assoc-in [:aggregates id] aggregate)
+                   (assoc :version (inc (:version repo))))
+               ;; update
+               (and (contains? aggregates id)
+                    (== (get-in aggregates [id :version]) (dec aggregate-version)))
+               (-> repo
+                   (assoc-in [:aggregates id] aggregate))
+               :else
+               repo)))))
+```
+
+This function, and the example as a whole, omits dealing with errors.  Essentially if the aggregate has not been seen before and is not null save it.  If the aggregate has been seen before over-write it with the new value.  Elsewise return the repository as it was.
+
+We have a simple query function
+
+```clojure
+(defn get-by-id
+  [id]
+  (get (:aggregates @repo) id))
+```
+
+We now have enough of a domain model to be able to test the domain.
+
+# Testing the Robot Example
+
+The full test code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/test/juxty/ddd/domain_test.clj).
+
+## A Side Note about Testing EDA and DDD
+
+When dealing with events, messages, and data models, there are often fields that are populated at run-time or by nature random (UUIDs).  These can be awkward in testing.  Anything you can do to make your testing framework generate predictable values will help.
+
+For the robot example, we boot-strap our testing like so, to ensure we know what UUIDs will be assigned.
+
+```clojure
+(defn _uuids [] (lazy-seq (cons (random-uuid) (_uuids))))
+(def uuids (doall (take 100 (_uuids))))
+
+(defn next-uuid [offset]
+  (let [n (atom offset)]
+    (fn []
+      (let [uuid (nth uuids @n)]
+        (swap! n inc)
+        uuid))))
+
+(defn uuid-fixture [body]
+  (with-redefs [random-uuid (next-uuid 0)]
+    (body)))
+
+(defn repo-fixture [body]
+  (sut/reset-repo!)
+  (body))
+
+(use-fixtures :each uuid-fixture repo-fixture)
+```
+
+## Simple Robot Creation
+
+Here's our first example of what aggregate data looks like for a valid robot.
+
+```clojure
+(deftest create-bot-test
+  (is (= {:id (nth uuids 0)
+          :upper :arms
+          :lower :wheels
+          :version 0}
+         (sut/create-bot :arms :wheels)))
+  (is (nil? (sut/create-bot :legs :wheels)))
+  (is (nil? (sut/create-bot :legs :legs)))
+  (is (nil? (sut/create-bot :foo :bar))))
+```
+
+The test also shows that we can't create robots with invalid body configurations.
+
+## Simple Repository Saving
+
+Here's our first example of what the repository data looks like when we save three unique robots.
+
+```clojure
+(deftest saving-valid-bots-to-repo-test
+  (sut/save-to-repo (sut/create-bot :arms :tracks))         ;; 0
+  (sut/save-to-repo (sut/create-bot :tentacles :tracks))    ;; 1
+  (sut/save-to-repo (sut/create-bot :manipulators :wheels)) ;; 2
+  (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
+                                      :upper :arms
+                                      :lower :tracks
+                                      :version 0}
+                       (nth uuids 1) {:id (nth uuids 1)
+                                      :upper :tentacles
+                                      :lower :tracks
+                                      :version 0}
+                       (nth uuids 2) {:id (nth uuids 2)
+                                      :upper :manipulators
+                                      :lower :wheels
+                                      :version 0}}
+          :version 3}
+         @sut/repo)))
+```
+
+## Checking the Human Likeness Body Invariant Holds
+
+We try to create a robot with a human likeness
+
+```clojure
+(deftest checking-body-invariant-holds-test
+  (some-> (sut/create-bot :arms :legs)
+          sut/save-to-repo)
+  (is (nil? (some-> (sut/create-bot :arms :legs)
+                    sut/save-to-repo)))
+  (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
+                                      :upper :arms
+                                      :lower :legs
+                                      :version 0}}
+          :version 1}
+         @sut/repo)))
+```
+
+## Update Consistency
+
+The consistency check is at the aggregate level.
+
+When updating a robot's nickname we increment the aggregates version number.
+
+```clojure
+(defn set-nickname
+  "Method"
+  [bot nickname] ;; bot = this
+  (let [bot (s/conform :bot/aggregate (some-> bot
+                                              (assoc :nickname nickname)
+                                              (update :version inc)))]
+  ...
+```
+
+And when saving to the repository we check that the aggregate version within the repo is one less than the new version.
+
+```clojure
+(defn save-to-repo [aggregate]
+  (swap! repo
+         (fn [repo]
+           (let [id (:id aggregate)
+                 aggregates (:aggregates repo)
+                 aggregate-version (:version aggregate)]
+             (cond
+               ...
+               ;; update
+               (and (contains? aggregates id)
+                    (== (get-in aggregates [id :version]) (dec aggregate-version)))
+               (-> repo
+                   (assoc-in [:aggregates id] aggregate))
+               ...
+```
+
+The test to check aggregate level consistency looks like this:
+
+```clojure
+(deftest updating-consistency-test
+  (let [bot0 (sut/create-bot :arms :tracks)
+        bot1 (sut/set-nickname bot0 "Juxty")
+        bot2 (sut/set-nickname bot0 "XTDBY")]
+    (sut/save-to-repo bot0)
+    (sut/save-to-repo bot2)
+    (sut/save-to-repo bot1) ;; does nothing
+    (is (= {:aggregates {(nth uuids 0) {:id (nth uuids 0)
+                                        :upper :arms
+                                        :lower :tracks
+                                        :nickname "XTDBY"
+                                        :version 1}}
+            :version 1}
+           @sut/repo))))
+```
+
+This time around we also simulate saving `bot2` first despite it being created second.
+
+# Summary
+
+We have created a tactical DDD example using the core concepts of entities, value objects, aggregates with business logic (invariants), and repositories.
+
+From this simple domain model foundation, we can explore the rest of the EDA map at the start of this post, including the addition of Domain-Events, Command Sourcing, and Event Sourcing.
+We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
+
+# References
+
+[1]: https://www.domainlanguage.com/ddd/reference/
+[2]: https://blog.jannikwempe.com/domain-driven-design-entities-value-objects
+[3]: https://www.amazon.co.uk/Domain-Driven-Design-Distilled-Vaughn-Vernon/dp/0134434420
+[4]: https://www.amazon.co.uk/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577
+[5]: https://github.com/juxt/eventing-examples
+[6]: https://commons.wikimedia.org/wiki/File:Honda_P1_Fan_Fun_Lab.jpg
+[7]: https://web.archive.org/web/20120111165641/http://bjarte.com/post/224749430/set-based-validation-in-the-cqrs-architecture
+[8]: https://softwareengineering.stackexchange.com/questions/330428/ddd-repositories-in-application-or-domain-service
+[9]: https://thinkbeforecoding.com/post/2009/10/28/Uniqueness-validation-in-CQRS-Architecture
+[10]: https://softwareengineering.stackexchange.com/questions/429985/uniqueness-in-aggregate-root-ddd
+[11]: https://stackoverflow.com/questions/5694241/ddd-the-rule-that-entities-cant-access-repositories-directly
+[12]: https://www.infoq.com/presentations/ddd-eric-evans/
+
+1. [Domain Driven Design Reference][1] - Eric Evans
+2. [Domain Driven Design Entities and Value Objects][2] - Jannik Wempe
+3. [Domain Driven Design Distilled][3] - Vaughn Vernon
+4. [Implementing Domain Driven Design][4] - Vaughn Vernon
+5. [Robot Example Code][5]
+6. [Honda P1 Image][6] - Morio
+7. [Set based validation in the CQRS Architecture][7]
+8. [DDD repositories in application or domain service][8]
+9. [Uniqueness validation in CQRS Architecture][9]
+10. [Uniqueness in aggregate root][10]
+11. [DDD - the rule that Entities can't access Repositories][11]
+12. [What I've learned about DDD since the book][12] - Eric Evans
