@@ -1,0 +1,209 @@
+---
+author: 'joe'
+title: 'Clojure in Banking: Griffin'
+description: 'A fully-regulated, API-driven bank, with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '2023-08-29'
+heroImage: 'griffin-logo-clojurein-new.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'finance',
+    quote: '"In a startup, you should be using the most powerful language you can, and that is Clojure."'
+  }
+---
+
+import { Image } from '@astrojs/image/components'
+
+[Griffin](https://griffin.com/) is a banking-as-a-service platform and part of the new wave of API-driven banking. Their services allow Fintech businesses to integrate banking features quickly and securely. In March 2023, Griffin was granted their UK banking license by the Financial Conduct Authority, making them a fully-regulated UK bank.
+
+We caught up with Allen Rohner, Griffin Co-founder and CTO (also Co-founder of CircleCI), to discuss how they’ve built a bank, from the ground up, using Clojure.
+
+import griflight from '../../assets/blog/griffin-logo-on-light.png'
+
+import grifdark from '../../assets/blog/griffin-logo-on-dark.png'
+
+<Image class='not-prose dark:hidden' alt='Griffin' width={300} src={griflight} />
+
+<Image class='not-prose hidden dark:block' alt='Griffin' width={300} src={grifdark} />
+
+**Joe: So what does Griffin do?**
+
+**Allen:** We are a fully regulated UK bank. We call it _“the bank you can build on”_. That means we’re like AWS for banking. So there’s an API to onboard a customer, an API to create a bank account, an API to make a payment.
+
+By law, fintechs must work with a bank to do these things, and right now that means a legacy high street bank with mainframes. Griffin is the bank *plus* technology platform that all future fintechs would build on.
+
+We got our license in March and we’re still in what’s called ‘mobilization’, which is basically like training wheels. The training wheels come off when we complete an audit, raise some more money, and finish writing the code. That should be Q3 or Q4 this year.
+
+**Joe: So presumably, the mission of Griffin would be to disrupt the market, have a more modern set of technologies, a better, faster delivery capability than some of the existing banks?**
+
+**Allen:** Yeah, exactly. We kind of joke that we’re a tech company that happens to have a banking license.
+
+**Joe: How did Clojure end up becoming the language of choice for the platform?**
+
+**Allen:** I mean, the flippant answer is: because I liked it. The serious answer is: Clojure is the right choice because it’s immutable, it’s powerful; it’s a good fit for financial services and anything that needs an audit log.
+
+<span class='pullquote left' text-content="Clojure is the right choice because it’s immutable, it’s powerful; it’s a good fit for financial services and anything that needs an audit log."/>
+
+There is a longer story about how I arrived at Clojure. I graduated from college (you UK folks would say ‘university’) in 2005, and I got a boring enterprise software job and, uh, was pretty unhappy with it. Then I started reading Paul Graham, and he was writing about how you should both start a startup and work in Lisp. And so I said, Hey, let’s do both of those. At the time he was saying, don’t use Common Lisp because it’s old, fragmented, and there wasn’t a good implementation that did everything. There was like one implementation that was good at threads and another implementation that was good at, let’s say, graphics. And if you wanted to do graphics and threads, you were outta luck. He was saying, _“Wait, wait, I’m gonna work on this”_.
+
+The problem with Common Lisp is that it needed a BDFL like Python, and there wasn’t one yet. And so PG was saying, well, _“I’ll start Arc”_, but he’d been talking about that for multiple years. So then I started writing my own Lisp, got about halfway into it, and then I saw that Rich released Clojure. That was probably 2007 - one of his first announcements.
+
+I looked at Clojure and I said, _“Well, that’s way better than what I would’ve written”_. So then I did a startup that didn’t go anywhere, and then I founded CircleCI in 2011. This is also getting into the history of Griffin as well. I hired David [Jarvis], my co-founder at Griffin, as engineer number nine or so at CircleCI.
+
+import grifounders from '../../assets/blog/griffin-founders.jpg'
+
+<Image alt='Griffin Founders, Allen Rohner and David Jarvis' width={600} src={grifounders} class='mx-auto' />
+
+David later went on to work at Standard Treasury, which was a YC company that was trying to sell modern APIs to US banks. That ended up not working out. Too late in Standard Treasury’s runway, they said, _“Instead of trying to sell the banks, let’s *become* a bank”_. They figured that out too late. David always liked the idea and he saw Monzo get authorized in 2017. He said, _“Well, if Monzo can get authorized for this retail bank, then we can get authorized for this tech infrastructure bank”_.
+
+So, by this point, I’d been using Clojure for a decade and it worked great at CircleCI and it was a very good fit for financial services.
+
+**Joe: So you were coming to Clojure from a Lisp background. Had you worked with JVM languages before that?**
+
+**Allen:** Not really. I had, maybe, three months of Java before using Clojure. Before that my prior experience was C and C++, Python, and Ruby.
+
+**Joe: So did you see the JVM as a benefit or a drawback? People talk about the ‘JVM tax’ (on resources like memory). Were you thinking that way?**
+
+**Allen:** I did at first, but my perspective has changed. For the first couple of years I didn’t appreciate it [the JVM]. But now I’ve seen other niche startup languages try to grow, and they run into the library problems and run into problems making the compiler and the runtime fast. It’s become obvious to me that the JVM is a huge benefit.
+
+<span class='pullquote right' text-content="[N]ow I've seen other niche startup languages try to grow, ... it's become obvious to me that the JVM is a huge benefit."/>
+
+**Joe: When you were working on CircleCI and also when you were starting Griffin, were you mindful that this choice of language and technology would have an impact? Did you feel that using Clojure said something about the business?**
+
+**Allen:** Yeah, I think it definitely says something about the company, something I thought was good.
+
+If we had picked Python, it’s very boring and reliable, and the same could be said of Java. But you’re picking the lowest common denominator. I would say high performers, and the best programmers are often people that will only work in niche languages.
+
+The problem is, there are good Java programmers, but there are also thousands of terrible Java programmers. If you pick the right niche, it’s easier to find the high-end talent. I think Paul Graham also made a very strong case that in a startup, you should be using the most powerful language you can, and that is Clojure.
+
+## FoundationDB
+
+**Joe: How would you describe the architecture of the Griffin platform?**
+
+**Allen:** We’re running Clojure on Kubernetes, on AWS, and we are almost entirely event sourcing.
+
+The database is [FoundationDB](https://www.foundationdb.org/), and this additional proprietary thing that I really need to open source (I ported Datascript to FoundationDB). It’s a Datomic-like layer that writes directly to Foundation. I should talk about Foundation, cause it’s awesome.
+
+FoundationDB is a strict-serializable key value store that supports transactions. It was originally a Silicon Valley startup and then got acquired by Apple in 2015. It kind of disappeared, and then Apple re-open-sourced it around 2018.
+
+Apple uses it in production for iCloud. They’ve benchmarked it running like a million transactions a second. It’s strict serializable, which means that it's at the [highest correctness level for databases](https://jepsen.io/consistency).
+
+So Foundation is a very good database. It’s very fast, and it’s intentionally built to be built upon. The normal API is just ‘get a key’, ‘set a key’. It’s not SQL. I ported Datascript to that. So now we have atomic queries, reading and writing on this strict serializable data store with transactions.
+
+The database supports concurrent writes (not a single writer), and we need to go over a thousand transactions per second, so we’re very happy with that.
+
+import gridev from '../../assets/blog/griffin-dev.jpg'
+
+<Image alt='Griffin teamwork' width={600} src={gridev} class='mx-auto' />
+
+## Event-sourcing
+
+**Allen:** We also have an event sourcing model. Every input to the system is an event. So like every API request, every webhook from a third party, it turns into an event. Those go into a message log. For us an event is just a Clojure map with a type field and some keys, values, and specs.
+
+The entire system is just reactions to events. We have these small log processors, or ‘procs’ for short. The proc declares _“I listen for message type A, and then in response to that, I will emit either B or C”_. And each one has its own little private state.
+
+You can build up a graph of how the messages flow through the system. Events will flow until you reach a terminal node in the graph. For example, a web server says, _“I will receive http events and write them. Please make a payment and I will listen for either payment created event or a payment rejected event. When I see one of those, I will respond back to the client”_. That’s a Netty asynchronous http handler, so an asynchronous payment response back to the client.
+
+**Joe: So you have many independent procs all receiving and acting on those events, and producing their own. Yeah. How are those events conveyed?**
+
+**Allen:** They’re all written to Foundation, so they go into the log there and each little log processor has its own private data, like its own namespace in the database, where they emit messages. The procs are watching in Foundation for a certain type of event to be written, and they are writing their own events back to Foundation. Foundation has a feature for watching when DB keys change, so it’s efficient to build a reactive system on top of that.
+
+If you had a database and some separate messaging like ZeroMQ, Rabbit, Kafka, you’re going to get race conditions. There’s always going to be a potential race where you have two messages - one is going to the disk and one is going to the network. If someone else is listening and sees both of them, they could potentially get them in either order. So it’s much, much simpler to just have one path. Foundation is really fast, so it works great.
+
+**Joe: Do you have log processors as independent services, or are things more monolithic?**
+
+**Allen:** It’s a monorepo. And right now many log processes run in the same JVM for efficiency. They are independent, so they could be run each one in its own JVM process, but right now we’re running low hundreds of them in a single JVM.
+
+One architectural choice that we made that I highly, highly recommend is: Keep your business logic as dumb and clean as possible. For these individual log processors, if you look at the namespace, it’s almost entirely pure Clojure. No third-party libraries, and very few side effects.
+
+<span class='pullquote left' text-content="One architectural choice that we made that I highly, highly recommend is: Keep your business logic as dumb and clean as possible... We have a function that takes a Clojure map in and I write a Clojure map out."/>
+
+A log processor is function that takes a Clojure map in and returns one or more Clojure maps out. There’s a protocol for proc state, but it’s a protocol so you don’t know what’s on the other side of that. So yeah, keep the business logic as clean as possible, with as few dependencies as possible, and then interact with the outside world via protocols.
+
+So for example, for the proc state protocol, it could either write to an in-memory database, or it can write to Foundation. It’s great because you can change out your implementation at test time.
+
+**Joe: I see. I guess there are two patterns that people often use, aren’t there?**
+
+**One is keeping all interactions with the outside world at the outer edges (e.g. functional core, imperative shell). Another is more like dependency injection, where we interact with the outside world from anywhere, but put in some abstractions, so that we can swap out the implementation.**
+
+**So you’re doing the latter? You _do_ allow those interactions to happen within the business logic, but you make sure to always have a protocol in front of those interactions so that you can swap out the implementation.**
+
+**Allen:** Exactly. Also, the interface to the outside world is as small as possible.
+
+For the vast majority of procs, the only thing they can do is write to their own internal state and emit messages. That’s it. They can’t make network calls. They can’t call AWS. They don’t do anything else. So when we do wanna talk to the outside world, there’s a special kind of proc that has a dispatch handler that is dedicated to talk to that external system. So, this one talks to AWS, this one talks to our clearing bank, this one talks to some other API.
+
+That separation is very useful.
+
+## Libraries
+
+**Joe: What’s the typical selection of libraries and things from the Clojure ecosystem that you’re using?**
+
+**Allen:** So in the business logic itself, very little. Outside of that, for instance in the API web server or the service gateway (where we talk to the outside world), it’s ring, netty, reitit. We’re using Clojure spec extensively. For AWS we’re using the Cognitect aws-api library.
+
+**Joe: And do you use any library for managing the parts that interact with the outside world? Dependency injection or wiring up the application?**
+
+**Allen:** The thing we use is based on a blog post called [closeable](https://medium.com/@maciekszajna/reloaded-workflow-out-of-the-box-be6b5f38ea98). It’s great.
+
+Five years ago, this guy wrote a blog post. His argument was that you don’t need Component or Integrant, or any of that. All you need is `with-open`. You get lexical scope, you get the right-hand side of declaring your bindings to construct things. And then because of how the introduction of bindings works, it forces you to declare your things in order.
+
+<span class='pullquote right' text-content="[Y]ou don't need Component or Integrant, or any of that. All you need is with-open."/>
+
+There’s a couple of little helpers. One of them is for things that have state but don’t implement `Closeable`, or for things that are stateless, so you can declare them in the `with-open` block.
+
+And so that’s it. You’re done. It’s very simple, and very clean.
+
+## Hiring
+
+**Joe: You spoke earlier about how, often, the best programmers work in niche languages and it means that using marks your business out. How do you find hiring and finding good engineers? Do you have any issues?**
+
+**Allen:** I’m really happy with it. I joke about it sometimes, but it’s not a joke, it’s real: if we said we were hiring for Java programmers, we’d get like a thousand CVs and you’d have 10 good ones. If we’re hiring for Clojure, we’ll get 13 CVs and 10 good ones. You’re going to find high quality people and you’re gonna do less work for it.
+
+We’re also remote, which I think is important because when you’re dealing with a smaller hiring pool, and you also constrain to geography, that’s hard. If you’re a remote company, then your hiring pool is, either everyone on earth or everyone within three time zones, or everyone in Europe, whatever. You’re at a good sized pool.
+
+**Joe: Yes, and it’s very rare that a company needs to hire, say, a hundred engineers in a short space of time.**
+
+**Allen:** Yeah, I think that’s an anti-pattern.
+
+**Joe: What’s the size of your team at the moment? And what is that geographical split?**
+
+**Allen:** There are maybe 70 in the company, and 22-24 or so in Engineering.
+
+In engineering, it’s maybe two thirds in the UK and then a third in the EU. We’ve got, say, four in Germany, four in Sweden, one in Ireland. And then people over most of the UK. Our headquarters are in London, but most of the developers are in the UK _outside_ of London.
+
+import griteam from '../../assets/blog/griffin-team.jpg'
+
+<Image alt='The Griffin Team' width={600} src={griteam} class='mx-auto' />
+
+## Testing for correctness
+
+**Joe: How do you feel about the direction of Clojure at the moment? Are there things that you would like to see happen in the Clojure space? (either in the core or in the ecosystem). Is there anything that you feel is missing, or any new direction you are interested to go in?**
+
+**Allen:** So a thing I’ve been banging around for a while, but haven’t really made any progress on yet is around testing of systems. The FoundationDB team have a great video on how they do testing, but the problem is that this approach is hard to do as a library.
+
+Foundation is a distributed system and almost every system that any of us work with on the internet today is a distributed system. Cause, you know, even if you have one process talking to AWS, then congratulations, you’re now a networked system!
+
+So there are two big problems that we have to deal with. One of them is race conditions, and the other is system errors. As a bank we have to be what is called ‘operationally resilient’, which really just means no downtime. But we’re dealing with people’s money, so we have to actually prove it. So, don’t go down, and when there is a problem, how do you prove that you’re not losing people’s money?
+
+What the Foundation team did was build a simulator of the database. They have something like 20 different process types, so 20 different ‘roles’ within the Foundation cluster, and they wrote them as single-threaded C++ apps. Then they built an actor-model concurrency compiler on top of C++. Every single system call or network call that they make goes through a protocol, so they can inject errors. All of their multi-threading also happens through this actor model with the sending of messages.
+
+With all this in place, they can then say, _“Oh, what happens if I send message A and then send message B, but then on the other end it arrives B and then A?”_. Or _“What happens if, in the middle of processing this message, I try to write to disk and I get an error?”_. They can inject errors anywhere in the system, deterministically.
+
+You can think of it as kind of like test.check generative testing, where you have all non-determinism in the system seeded from a single random number that you control. You can control disk errors, network errors, and reordering of messages. I’m really interested in having something like that.
+
+The problem right now is that there’s no way to control the behavior of the underlying Java threading libraries, nio, and writing to disk.
+
+**Joe: Similar to Jepsen, in a way, where you can enumerate all of the possible error scenarios for a complex, distributed system, but rather than just controlling the environment to disconnect the network or stop writes to the disk, you also have total control over things like thread scheduling to enumerate all the possible internal outcomes too?**
+
+**Allen:** Yeah. It is very much in the same spirit as Jepsen. In Jepsen you set up like five VMs and say, _“Oh, well maybe I’ll kill this process”_, and maybe that turns up a bug and maybe it doesn’t. Jepsen is very ‘brute force’, and it’s hard to know when you’re done because you can’t inspect the database’s state, so you don’t know how much coverage you’re getting. How many times do you have to do it before you’re confident that you don’t have any bugs there?
+
+The difference, if you have this environment where you have total control, is that you can enumerate system calls, or say, for all possible interleavings of messages, make sure this thing happens. And because it’s in memory, it’s extremely fast.
+
+**Joe: Have you seen this going on successfully outside of Clojure and the JVM?**
+
+**Allen:** No. I don’t know if anyone is doing it aside from the FoundationDB team. They started and built that on day one. I think in the video they said they had that built before they were even writing database tables to disk. This is the kind of thing that gives us a lot of confidence in FoundationDB.
+
+**Joe: Thanks a lot for speaking with us Allen. Finally, are you hiring?**
+
+**Allen**: We tend to go into a bit of a lull on interviewing during the summer due to holiday, but yes we’re hiring. Check out the [Griffin careers page](https://griffin.com/careers) for info.
