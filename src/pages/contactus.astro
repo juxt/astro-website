@@ -1,0 +1,11 @@
+---
+import Layout from '@layouts/Layout.astro'
+import ContactUsAd from '@components/ContactUsAd'
+---
+
+<Layout title='Free Consultation' noFooter />
+<main>
+  <div class='bg-zinc-100 text-black'>
+    <ContactUsAd client:only />
+  </div>
+</main>
