@@ -33,7 +33,7 @@ const startupPicture = await getImage({
   alt: 'start up'
 }).then((img) => img.src)
 ---
- 
+
 <Layout navbar title='Startups'>
   <main>
     <Banner
@@ -58,7 +58,7 @@ const startupPicture = await getImage({
       </div>
     </Section>
 
-  
+
     <div class='flex flex-col text-black'>
       {startUpsParsed.map((startup, idx) => {
         const isDark = idx % 2 !== 0
@@ -110,7 +110,7 @@ const startupPicture = await getImage({
                   )}
                   {startup.tech && (
                     <div class='flex flex-col gap-6'>
-                      <h3 class='text-3xl'> Technologies</h3>
+                      <h3 class='text-3xl'> Supported By</h3>
                       <div class='flex gap-2 flex-wrap'>
                         {startup.tech.map((tech) => (
                           <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
@@ -120,7 +120,7 @@ const startupPicture = await getImage({
                       </div>
                     </div>
                   )}
-              
+
                 </div>
               </div>
             </div>

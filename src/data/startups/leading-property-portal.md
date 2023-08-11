@@ -1,9 +1,10 @@
 ---
 title: 'Leading Property Portal'
 tech:
-  - 'Clojure'
-  - 'AWS'
-  - 'Elasticsearch'
+  - 'Functional Programming'
+  - 'Data Immutability'
+  - 'Cloud Native Deployments'
+  - 'Reactive UIs'
 image: 'onthemarket.jpg'
 weight: 3
 direction: 'right'

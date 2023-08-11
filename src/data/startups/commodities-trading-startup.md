@@ -1,12 +1,10 @@
 ---
 title: 'Commodities Trading Startup'
 tech:
-  - 'ClojureScript'
+  - 'High Performant UI'
   - 'GraphQL'
-  - 'React'
-  - 'AWS'
-  - 'Hasura'
-  - 'PostgreSQL'
+  - 'Realtime Graph Data'
+  - 'Cloud First'
 image: 'commodity-trading.jpg'
 weight: 4
 direction: 'center'
