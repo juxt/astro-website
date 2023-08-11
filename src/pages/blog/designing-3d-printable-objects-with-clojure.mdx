@@ -3,8 +3,8 @@ draft: true
 token: '1234'
 author: 'daj'
 layout: '../../layouts/BlogPost.astro'
-title: 'Unleashing Creativity: Designing 3D Printable Objects with Clojure and OpenSCAD'
-description: "Empowering Clojurians with the Power of 3D printing"
+title: 'Designing 3D Printable Objects with Clojure and OpenSCAD'
+description: "Combine creativity with algorithmic generation to create beautiful and precise physical objects"
 publishedDate: '2023-06-19'
 category: 'clojure'
 heroImage: 'ducks.jpg'
@@ -12,55 +12,40 @@ heroImage: 'ducks.jpg'
 
 import { Image } from '@astrojs/image/components'
 
-Discover the exciting world of 3D printing and harness the versatility of Clojure, a
-powerful programming language, to design and create your very own 3D printable objects.
-In this blog post, we dive into the fusion of art, technology, and coding, exploring the
-endless possibilities and efficiency of using Clojure for 3D design.
-Whether you're a seasoned programmer or an aspiring maker, get ready to unleash your creativity and bring your
-imaginative ideas to life through the magic of 3D printing and Clojure.
+In this blog post, we dive into the fusion of art, technology, and code, exploring the endless possibilities and efficiency of using Clojure for 3D design. Through 3D printing with code, we can bring complex geometries into the real world with intricate precision.
 
-## The Intersection of Art and Engineering: An Introduction to 3D Printing Design:
+So let's dive in to the world of 3D modeling together, and create our first 3D object with Clojure.
 
-The intersection of art and engineering in the realm of 3D printing design is a fascinating and dynamic field that merges creativity and
-technical expertise. It allows artists and designers to push the boundaries of traditional art by harnessing the power of 3D printing technology.
-Through 3D printing, artists can bring their imaginative visions to life with intricate precision, incorporating complex geometries and
-structures that were once unimaginable. This collaboration between art and engineering not only opens up new space for artistic expression,
-but also revolutionizes industries such as architecture, product design, and even medical
-advancements, as the possibilities of 3D printing continue to expand.
+## Setting Up Your Environment, with Clojure and OpenSCAD
 
-So let's uncover the world of 3D modeling together.
+We'll start by installing the software we need:
 
-## Setting Up Your Environment for 3D Design with Clojure and OpenSCAD:
-
-* Install OpenSCAD (to visualize and render model in real-time): Visit the official [OpenSCAD website](https://openscad.org) and download the
+* Install OpenSCAD (to visualize and render models in real-time). Visit the official [OpenSCAD website](https://openscad.org) and download the
 appropriate version for your operating system. Follow the installation instructions provided by the software.
 * [Set up a Clojure environment](https://clojure.org/guides/getting_started)
-* Clone github project [squiggle](https://github.com/herichovadajana/squiggle). When the project is cloned, execute command "clj -X:new"
+* Clone the GitHub project [squiggle](https://github.com/herichovadajana/squiggle). When the project is cloned, execute the command `clj -X:new`
 to download dependencies and generate the squiggle.scad file.
-* Open squiggle.scad file in OpenSCAD by running `openscad CAD/squiggle.scad` from the command line in the project directory.
+* Open the squiggle.scad file in OpenSCAD by running `openscad CAD/squiggle.scad` from the command line in the project directory.
 * At this point you should see an OpenSCAD screen with coordinates.
 
 import jl1 from '../../assets/blog/openscad.png'
 
 <Image alt='image' src={jl1} />
 
-* To run the project in Emacs, you can run it by invoking `M-x` and `cider-jack-in`. If you are using different IDE,
+* To run the project in Emacs, you can run it by invoking `M-x` and `cider-jack-in`. If you're using a different IDE,
 I recommend looking at the official [Clojure getting started guide](https://clojure.org/guides/editors) for detailed instructions tailored
 to your specific environment.
-* Open playground.clj namespace. This namespace already contains everything we need to start with our design.
+* Open the playground.clj namespace. This namespace already contains everything we need to start with our design.
 
-## From Idea to Reality: Step-by-Step Guide to Designing 3D Printable Objects:
+## From Idea to Reality: Designing 3D Printable Objects
 
-In this blog post we will start with designing a very simple object using basic shapes. But don't worry, this can lead to stunnig creations
-that are both funny and interesting. By combining spheres, cuboids, cylinders, and other elementary shapes, we can craft imaginative characters,
-playful sculptures, or quirky inventions. The simplicity of the design elements adds a charm of its own. These seemingly basic shapes can be
-transformed into interesting complex creations.
+We'll start by designing an object using basic shapes. Don't worry, this approach can lead to creations
+that are both funny and interesting. We can combine spheres, cuboids, cylinders, and other elementary shapes, to craft imaginative characters,
+playful sculptures, or quirky inventions. The simplicity of the design elements adds it's own charm.
 
-And when you're a programmer, the ideal first design choice is undoubtedly the debugging duck – an invaluable companion for troubleshooting :)
+And when you're a programmer, the ideal first design choice is undoubtedly [the debugging duck](https://en.wikipedia.org/wiki/Rubber_duck_debugging) – an invaluable companion for troubleshooting :)
 
-Are you ready? Let's design our first shape.
-
-Within the playground.clj namespace, you can find the `my-design` function, which takes a radius as an argument.
+Within the `playground.clj` namespace, you can find the `my-design` function, which takes a radius as an argument.
 It generates a sphere with the provided radius. Once the namespace is compiled, the rendered sphere will be visible in OpenSCAD.
 
 ```clojure
@@ -97,7 +82,9 @@ To create the body of the duck, we will use this sphere. As an initial step, let
 Let's now experiment with this shape to create a more duck-like form. We can achieve this by scaling it
 along the x-axis with a factor of 1.5 and setting the radius to 10. Additionally, we need to render the `body` definition instead of `my-design` function call result.
 
-* *`os/scale` function function is used to resize or scale a shape in three-dimensional space*
+
+ℹ️ _**`os/scale` is used to resize or scale a shape in three-dimensional space**_
+
 
 ```clojure
 
@@ -114,11 +101,11 @@ import jl3 from '../../assets/blog/egg.png'
 <Image alt='image' src={jl3} />
 
 To ensure that our duck can sit on a flat surface, we need to remove the bottom part of the spheroid.
-For this purpose, we will utilize the `os/difference` function. However, before performing the subtraction,
+For this purpose, we'll use the `os/difference` function. However, before performing the subtraction,
 let's create the shape that will be "cut" from the duck body. It will be a cuboid with dimensions 100, 100, and 10. When creating a cuboid,
 we provide a vector of dimensions "a", "b", and "c" as an argument.
 
-* *`os/difference` function is used to subtract one or more shapes from another shape*
+ℹ️ _**`os/difference` is used to subtract one or more shapes from another shape**_
 
 ``` clojure
 (core/write (os/cube [100 100 10]))
@@ -148,10 +135,10 @@ import jl5 from '../../assets/blog/wrongshape.png'
 <Image alt='image' src={jl5} />
 
 
-To position it correctly, we will use the os/translate function. It accepts a map of positioning coordinates
+To position it correctly, we'll use the os/translate function. It accepts a map of positioning coordinates
 as the first argument and the object we wish to move as the second argument. This way, we can precisely move the object to the desired location.
 
-* *`os/translate` function is used to move or translate a shape in three-dimensional space.*
+ℹ️ _**`os/translate` is used to move or translate a shape in three-dimensional space.**_
 
 ``` clojure
 (def body
@@ -160,22 +147,22 @@ as the first argument and the object we wish to move as the second argument. Thi
                                        :resolution resolution}))
                  (os/translate {:z -17 :x -50 :y -50}
                                (os/cube [100 100 10]))))
-```			       
+```
 import jl6 from '../../assets/blog/flatbottom.png'
 
 <Image alt='image' src={jl6} />
 
-Now it's time to incorporate the tail. We will introduce two new functions for this purpose. Firstly, the `os/rotate` function, which accepts
-a map of axes and angles as arguments, allowing us to rotate an object around a specific axis. Secondly, the `os/hull` function will be used.
+Now it's time to incorporate the tail. We'll introduce two new functions for this purpose. First, the `os/rotate` function, which accepts
+a map of axes and angles as arguments, allowing us to rotate an object around a specific axis. Second, the `os/hull` function will be used.
 
-* *`os/hull` function is used to create a new shape that encompasses multiple input shapes. It takes multiple shapes as arguments and generates a new shape that
-covers the outer boundary of all the input shapes. The resulting shape forms a convex hull that encloses the combined geometry of the input shapes.*
+ℹ️ _**`os/rotate` is used to rotate a shape in three-dimensional space**_
 
+ℹ️ _**`os/hull` is used to create a new shape that encompasses multiple input shapes. It takes multiple shapes as arguments and generates a new shape that covers the outer boundary of all the input shapes. The resulting shape forms a convex hull that encloses the combined geometry of the input shapes.**_
 
-To design the tail more effectively and have better overview of our progress, we will create a separate definition for it.
+To design the tail more effectively and have a better overview of our progress, we will create a separate definition for it.
 
 As a foundation for the tail, we will generate a scaled sphere with a radius of 2. However, this time we will scale it
-along both the :x and :y axes. 
+along both the :x and :y axes.
 
 
 ```clojure
@@ -208,7 +195,7 @@ import jl8 from '../../assets/blog/bodytail.png'
 
 <Image alt='image' src={jl8} />
 
-By shifting the tail towards the right (along the x-axis) and upward (along the z-axis), 
+By shifting the tail towards the right (along the x-axis) and upward (along the z-axis),
 the tail is an integrated part of the body and is clearly visible.
 
 ```clojure
@@ -224,7 +211,7 @@ import jl11 from '../../assets/blog/lemon.png'
 However, at the moment, it doesn't resemble the body of a duck at all. Instead, I would say it appears more like a peculiar lemon shape.
 To change this, we can achieve a more accurate representation by rotating the tail along the y-axis.
 
-*`os/rotate` function is used to rotate a shape in three-dimensional space*
+Let's use `os/rotate` again, the function used to rotate a shape in three-dimensional space
 
 ``` clojure
 (def tail
@@ -236,28 +223,29 @@ import jl9 from '../../assets/blog/lemon2.png'
 
 <Image alt='image' src={jl9} />
 
-Although it has improved, it is still not perfect. It's time to make some adjustments by cutting a specific shape from the duck body.
+Although it has improved, it's still not perfect. It's time to make some adjustments by cutting a specific shape from the duck body.
 This will help us create a duck body that looks, at the very least, appealing.
 
 ```clojure
-(def tail-cut (os/rotate {:y -22}
-                (os/translate {:x 8 :z 7}
-                  (os/scale {:x 3 :y 2}
-                    (os/sphere {:radius 5})))))
+(def tail-cut
+  (->> (os/sphere {:radius 5})
+       (os/scale {:x 3 :y 2})
+       (os/translate {:x 8 :z 7})
+       (os/rotate {:y -22})))
 
 (core/write tail-cut)
-
 ```
+
 import jl10 from '../../assets/blog/tailcut.png'
 
 <Image alt='image' src={jl10} />
 
-Now we will proceed to create a duck definition where we will start assembling the various pieces. The initial step
+Now let's proceed to create a duck definition where we will start assembling the various pieces. The initial step
 involves taking the difference between the body and the tail-cut. However, before doing so, we will extract the tail
 from the body function, leaving the function to exclusively handle the body. Inside the duck definition, we will introduce a hull operation.
 
 ```clojure
-(def body  
+(def body
   (os/difference (os/scale {:x 1.5}
                            (os/sphere {:radius 10
                                        :resolution resolution}))
@@ -286,7 +274,7 @@ We will include the body component once again. After removing the tail from the 
 the shape now primarily consists of an egg shape with a flat bottom. To connect multiple pieces together,
 we will utilize the `os/union` function.
 
-*`os/union` function is used to combine multiple shapes or geometries into a single object.*
+ℹ️_**`os/union` is used to combine multiple shapes or geometries into a single object.**_
 
 ```clojure
 (def duck
@@ -297,20 +285,20 @@ import jl13 from '../../assets/blog/duckbody.png'
 
 <Image alt='image' src={jl13} />
 
-Now we reach an interesting part where we will use the power of Clojure functions. We are going to create the wings for our design.
-To begin, we will start with the feather component, which involves scaling, translating, and rotating a sphere shape.
+Now we reach an interesting part where we will use the power of Clojure functions. We're going to create the wings for our design.
+Let's start with the feather component, which involves scaling, translating, and rotating a sphere shape.
 
 ```clojure
 (defn feather [translate-x translate-y feather-size rotate-y]
-  (os/rotate {:y rotate-y}
-             (os/translate {:x translate-x
-                            :y translate-y}
-                           (os/scale {:x 2.9 :z 1.5}
-                                     (os/sphere {:radius feather-size
-                                                 :resolution resolution})))))
+  (->> (os/sphere {:radius feather-size
+                   :resolution resolution})
+       (os/scale {:x 2.9 :z 1.5})
+       (os/translate {:x translate-x
+                      :y translate-y})
+       (os/rotate {:y rotate-y})))
 ```
 
-We can visualize the feather by rendering it. And by experimenting with different feather sizes, we can determine the ideal size we need for our duck.
+We can visualize the feather by rendering it. And by experimenting with different feather sizes, we can determine the ideal size for our duck.
 
 ```clojure
 (core/write (feather 0 0 2 0))
@@ -344,7 +332,7 @@ To see whether it matches our expectations, we can render the feather row.
 (core/write (apply os/union (row-of-feathers 5 0 1 4)))
 ```
 To combine all the individual feathers into a single wing, we use the `(apply (os/union ...)` function. In this particular case,
-we apply it onlly for rendering purposes to see if the row of wings aligns with our intended design. Additionally, we have provided a translation of
+we apply it only for rendering purposes to see if the row of wings aligns with our intended design. Additionally, we have provided a translation of
 `translate-x 5` to the row of feathers. This is necessary because we are rotating the feathers and need to position them further away from the center point.
 
 When we rotate the shape around its center point:
@@ -406,9 +394,9 @@ import jl18 from '../../assets/blog/duckwithwing.png'
 
 <Image alt='image' src={jl18} />
 
-To incorporate a wing on the opposite side, we can utilize the `(os/mirror)` function to mirror it around the :y axis.
+To incorporate a wing on the opposite side, we can use the `(os/mirror)` function to mirror it around the :y axis.
 
-*`os/mirror` function is used to create a mirrored or reflected copy of a shape.*
+ℹ️_**`os/mirror` function is used to create a mirrored or reflected copy of a shape.**_
 
 ```clojure
 (def duck
@@ -432,7 +420,7 @@ Incorporating the head is a straightforward process. We simply position a large 
 ```clojure
 (def head
   (os/translate {:x -5 :z 16}
-                (os/scale {:x 1.1 :y 1.1} 
+                (os/scale {:x 1.1 :y 1.1}
                           (os/sphere {:radius 10
                                       :resolution resolution}))))
 
@@ -497,13 +485,8 @@ import jl21 from '../../assets/blog/witheyes.png'
 
 <Image alt='image' src={jl21} />
 
-To construct the duck's bill, we will utilize the `os/rotate-extrude` function. This function generates a
+To construct the duck's bill, let's use the `os/rotate-extrude` function. This function generates a
 3D object by rotating a 2D shape around the z-axis. We will begin with the following 2D shape.
-
-*`os/rotate-extrude` function is used to create a 3D object by revolving a 2D shape around a specified axis.
-It takes a 2D shape as input and rotates it around the specified axis, typically the z-axis, to generate a solid 3D object.
-The resulting shape is created by sweeping the 2D shape through a full 360-degree rotation. Additionally, the function
-accepts an angle parameter to specify the desired rotation angle.*
 
 ```clojure
 (def bill
@@ -531,7 +514,7 @@ import jl22 from '../../assets/blog/2d.png'
               (os/translate {:x 10} (os/circle {:radius 4
                                                 :resolution resolution}))))))
 
-```				      		  
+```
 import jl23 from '../../assets/blog/rotateextrude.png'
 
 <Image alt='image' src={jl23} />
@@ -593,7 +576,7 @@ import jl25 from '../../assets/blog/duck.png'
 
 <Image alt='image' src={jl25} />
 
-To add a touch of elegance to our duck, we will give it a hat using shapes like `os/rounded-cylinder` and `os/cylinder`.
+To add a touch of elegance to our duck, let's give it a hat using shapes like `os/rounded-cylinder` and `os/cylinder`.
 
 ```clojure
 (def hat
@@ -614,13 +597,12 @@ import jl26 from '../../assets/blog/hat.png'
 
 <Image alt='image' src={jl26} />
 
-If you want to personalize your duck further, you can also add text using os/text. We will position it on top of the hat.
+If you want to personalize your duck further, you can also add text using `os/text`. We will position it on top of the hat.
 Since the text is a 2D object and we are working with 3D shapes, we will use the `os/linear-extrude` function.
-This function transforms the 2D shape into a 3D object by extruding it in z-axis.
-The height parameter determines the extent of the extrusion along the Z-axis.
+This function transforms the 2D shape into a 3D object by extruding it in the z-axis.
+The height parameter determines the extent of the extrusion along the z-axis.
 
-*`os/linear-extrude` function is used to create a 3D object by extruding a 2D shape in a specified direction. It takes a
-2D shape as input and extends it along the specified axis to generate a solid 3D object.*
+ℹ️_**`os/linear-extrude` is used to create a 3D object by extruding a 2D shape in a specified direction. It takes a 2D shape as input and extends it along the specified axis to generate a solid 3D object.**_
 
 ```clojure
 (def text
@@ -635,7 +617,7 @@ import jl27 from '../../assets/blog/text.png'
 
 <Image alt='image' src={jl27} />
 
-We will incorporate the text into the hat by utilizing the os/difference function, creating an embossed effect on the top surface of the hat.
+We will incorporate the text into the hat by utilizing the `os/difference` function, creating an embossed effect on the top surface of the hat.
 
 ```clojure
 (def hat
@@ -714,14 +696,12 @@ You can access the complete code and additional examples [here](https://github.c
 
 ## Bringing Your Designs to Life:
 
-To render your duck or any other object you've designed, follow these steps in OpenSCAD: navigate to `edit -> render`
+To render your duck or any other object you've designed, navigate to `edit -> render` in OpenSCAD.
 From there, you can prepare your design for printing on your 3D printer or submit it to a local or online 3D printing service.
 
-Now you can see that by combining the elegance and expressiveness of Clojure with the innovative capabilities of 3D printing, you have the power to turn your ideas into real objects.
-Whether you're a hobbyist, designer, or engineer, this blog post has equipped you with the basic knowledge and tools to start an exciting journey of 3D design using Clojure.
-Let your imagination fly and start transforming your creative visions into reality.
+Now you can see that by combining the elegance and expressiveness of Clojure with the innovative capabilities of 3D printing, you have the power to turn your ideas into reality.
 
-With Mr.Duck, we wish you luck! :)
+With Mr Duck, we wish you luck! :)
 
 import jl30 from '../../assets/blog/mrduck.jpg'
 
