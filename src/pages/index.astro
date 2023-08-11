@@ -1,4 +1,5 @@
 ---
+import { Image } from '@astrojs/image/components'
 import { getImage } from '@astrojs/image'
 import { MarkdownInstance } from 'astro'
 import { parseBlogs, slugifyPath } from '@utils/common'
@@ -12,6 +13,15 @@ import TalkToUs from '@components/TalkToUs.astro'
 import { Blog, Person } from '@utils/types'
 import CaseStudy, { CaseStudyProps } from '@layouts/CaseStudy.astro'
 import Layout from '@layouts/Layout.astro'
+import { ChevronRightIcon, TickIcon } from '@components/Icons'
+
+const threadsPicture = await getImage({
+  src: import('../assets/site/threads.png'),
+  width: 600,
+  height: 1366,
+  quality: 80,
+  alt: 'threads'
+}).then((img) => img.src)
 
 const siteMetadata = await Astro.glob('../data/metadata.json')
 
@@ -137,176 +147,632 @@ const featuredBlogs = await parseBlogs({
       </p>
     </Section>
 
-    <Section
-      className={'bg-zinc-900 bg-[length:0px_0px] bg-bottom lg:bg-cover bg-no-repeat py-20'}
+
+        <Section
+      style={{
+        backgroundImage: `url(${threadsPicture})`
+      }}
+      className={'bg-slate-900 bg-[length:0px_0px] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
     >
-      <h2 class='text-4xl pb-20 text-white font-bold'>
-        Simplicity Delivers Results
-      </h2>
-      <div class='flex flex-wrap gap-20'>
-        <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
-          <div
-            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
-          >
-            1
-          </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-lg text-white font-medium'>Delivery Focus</div>
-            <div class='font-extralight text-slate-300'>
-              We can lead complex multi-team engineering projects and meet tough
-              deadlines
+      <div class='md:w-1/2'>
+        <h2 class='text-4xl pb-10 font-bold'>Our Approach</h2>
+        <div class='text-lg font-extralight flex flex-col gap-8'>
+          <p class=''>
+            Complexity, still the primary cause of failure and delay of IT
+            projects, arises from the <span class='italic'>
+              interaction of concerns.
+            </span>
+          </p>
+          <p class=''>
+            The fundamental concerns in IT systems are
+            <span class='font-bold text-juxt'>time</span>,
+            <span class='font-bold text-juxt'>data</span>,
+            <span class='font-bold text-juxt'>form</span>, and
+            <span class='font-bold text-juxt'>code</span>
+             — their subtle interactions and couplings combine to have a suffocating
+            impact on software projects.
+          </p>
+          <p class=''>
+            Our approach to building IT systems is defined by a unique
+            methodology and a set of supporting tools that allow us to keep
+            these four concerns separate, resulting in:
+          </p>
+          <div class='flex flex-col gap-6'>
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Rapid development of large IT systems</p>
             </div>
-          </div>
-        </div>
 
-        <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
-          <div
-            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
-          >
-            2
-          </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-lg text-white font-medium'>
-              Precision Engineering
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Increased levels of agility and software re-use</p>
             </div>
-            <div class='font-extralight text-slate-300'>
-              Our highly skilled teams are collaborative and iterate quickly
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Lower maintenance costs</p>
             </div>
-          </div>
-        </div>
-
-        <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
-          <div
-            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
-          >
-            3
-          </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-lg text-white font-medium'>Visibility</div>
-            <div class='font-extralight text-slate-300'>
-              We use development processes that are optimized for visibility, to
-              keep projects on track
+            <div class='flex gap-4 items-center'>
+              <div class='bg-gray-800 w-6 h-6 shrink-0 border border-juxt'>
+                <TickIcon className={'fill-white'} />
+              </div>
+              <p>Secure, reliable systems that are robust yet flexible</p>
             </div>
           </div>
         </div>
-
-        <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
-          <div
-            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
-          >
-            4
-          </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-lg text-white font-medium'>Modern</div>
-            <div class='font-extralight text-slate-300'>
-              Our tool-set empowers us to satisfy today’s demanding standards
-              and user expectations, and our systems utilise the latest
-              techniques for maximising performance, scalability and
-              cost-efficiency
-            </div>
-          </div>
-        </div>
-
-        <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
-          <div
-            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
-          >
-            5
-          </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-lg text-white font-medium'>Methodology</div>
-            <div class='font-extralight text-slate-300'>
-              <a class='text-juxt' href='/methodology' target='_blank'>
-                Our unique methodology
-              </a>delivers systems that are reliable, flexible and secure.
-            </div>
-          </div>
-        </div>
-
-        <div class='flex w-full sm:w-2/3 md:w-1/2 lg:w-[28%] group gap-6'>
-          <div
-            class='text-3xl text-slate-300 font-medium group-hover:text-juxt transition-colors'
-          >
-            6
-          </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-lg text-white font-medium'>Re-use</div>
-            <div class='font-extralight text-slate-300'>
-              We maintain an extensive library of battle-tested open-source
-              components that fit together and allows us to deliver custom
-              systems rapidly
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class='pt-20 flex justify-center'>
-        <Clickable>
-          <a
-            href='/financial'
-            class='inline-block text-white py-2 px-3 text-3xl text-center font-light'
-            target='_blank'
-          >
-            JUXT Financial Services
-          </a>
-        </Clickable>
       </div>
     </Section>
-
-    <Section className='bg-white py-20 text-black'>
-      <div class='flex gap-6 md:gap-10 flex-col lg:flex-row justify-center'>
-        <h2
-          class='text-5xl font-extralight self-center w-96 text-center sm:text-right leading-normal'
-        >
-          JUXT Consulting Stories
-        </h2>
-        <div class='lg:w-[1px] h-[1px] lg:h-auto bg-black lg:py-20'></div>
-        <h3
-          class='text-3xl font-extralight text-center lg:text-left self-center max-w-lg sm:leading-relaxed'
-        >
-          Here are some of the projects we've been proud to build.
-        </h3>
-      </div>
-
-      <div class='flex flex-col gap-36 py-28'>
-        {featuredCaseStudies.map((caseStudy) => (
-          <CaseStudy {...caseStudy.frontmatter} />
-        ))}
-      </div>
-      <div class='flex justify-center'>
-        <Clickable>
-          <a href='/case-studies' class='text-lg' target='_blank'>
-            See all featured case studies
-          </a>
-        </Clickable>
-      </div>
-    </Section>
-
-    <div class='pb-20 bg-black'>
-      <div class='splide py-20'>
-        <div class='splide__track'>
-          <ul class='splide__list'>
-            {testimonials.map(({ quote, name, bg }) => (
-              <li class='splide__slide'>
-                <div
-                  class:list={[
-                    'w-full md:w-[35rem] h-72 md:h-80 border border-black p-4 md:py-10 md:px-8',
-                    bg
-                  ]}
-                >
-                  <div class='flex py-16 md:py-0 gap-6 h-full'>
-                    <QuoteIcon className='w-6 h-6 md:w-10 fill-juxt shrink-0' />
-                    <div class='flex flex-col justify-between text-white gap-4 max-w-xs sm:max-w-sm md:max-w-none'>
-                      <div class='text-xl md:text-2xl'>{quote}</div>
-                      <div class='text-sm uppercase font-semibold'>{name}</div>
-                    </div>
-                  </div>
+    <Section className={'bg-white py-20 text-black'}>
+      <div class='flex justify-between flex-col lg:flex-row'>
+        <div class='lg:w-1/2'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Time
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p class=''>
+              We believe that systems should be built on the conceptual bedrock
+              of a dual timeline. This provides a universal set of essential
+              capabilities for organizations who operate within disparate and
+              ever-evolving landscapes of information, and who require an
+              accurate and consistent view of information at any point:
+              <span class='italic'>past</span>,
+              <span class='italic'>present</span> and
+              <span class='italic'>future</span>.
+            </p>
+            <p>The main timeline is fully controllable and it allows for:</p>
+            <div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
                 </div>
-              </li>
-            ))}
-          </ul>
+                <p>Historical corrections</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>The integration of imported records</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-black'} />
+                </div>
+                <p>The previewable orchestration of future states</p>
+              </div>
+            </div>
+            <p>
+              The secondary timeline is immutable and provides a guaranteed
+              audit trail, 'built-in'.
+            </p>
+          </div>
+        </div>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end overflow-hidden'
+        >
+          <Image
+            alt='image'
+            width={500}
+            quality={80}
+            class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
+            src={import('../assets/site/sphere-time.png')}
+          />
         </div>
       </div>
-    </div>
+    </Section>
+    <Section className={'bg-black py-20'}>
+      <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start overflow-hidden'
+        >
+          <Image
+            alt='image'
+            width={500}
+            quality={80}
+            class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
+            src={import('../assets/site/sphere-data.png')}
+          />
+        </div>
+        <div class='lg:w-1/2'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Data
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p>
+              Data is fundamental to the creation of software. It will routinely
+              outlive the interpretations we derive from it and the applications
+              we build on top of it. Therefore, we will always seek to lay the
+              foundations of data management independently of a particular
+              application or use-case, and above a
+              <span class='italic'>common timeline</span>.
+            </p>
+            <p>
+              Table-based structures, found in spreadsheets and traditional SQL
+              databases, are helpful for displaying and analyzing data, but they
+              are not an appropriate format for storing data.
+            </p>
+            <p>
+              Tables are insufficient for representing data in its purest form,
+              and this is particularly obvious when modeling sparse data or
+              multi-valued attributes, or coping with the evolution of data over
+              time.
+            </p>
+            <p>
+              Instead, we believe that data is best recorded as units of facts
+              and relationships, without constraints.
+            </p>
+            <p>
+              More simply put, we believe graph-oriented systems point us
+              towards the correct approach for data management, and
+              organizations, such as
+              <span class='font-bold text-juxt'>Facebook</span> and
+              <span class='font-bold text-juxt'>Google</span> have proved how powerful
+              the widespread use of graph-structured data can be.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Section>
+    <Section className={'bg-white py-20 text-black'}>
+      <div class='flex justify-between flex-col lg:flex-row'>
+        <div class='lg:w-1/2'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Form
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p>
+              Organizations can unlock different amounts of value from data
+              depending on how they interpret it, how they shape it and the
+              constraints they place on it.
+            </p>
+            <p>
+              Complex
+              <span class='italic'>
+                types & tables, schemas & structures, classes & containers,
+                models & metadata, formats & encodings, representations.
+              </span>
+            </p>
+            <p>
+              These are the <span class='font-bold text-juxt'>forms</span> we construct
+              for interpreting, analyzing and extracting value from our data. Tools
+              such as relational schemas and ontologies are common structures we
+              use for understanding, analyzing and managing our information.
+            </p>
+            <p>
+              Too often, software developers will attempt to "codify" these
+              structures into their software as types and objects.
+            </p>
+            <p>
+              By understanding that schema is just another form of data, on a
+              timeline, we let our information systems grow and flex with the
+              businesses they serve. This is how we are able to build
+              maintainable models of the real world.
+            </p>
+          </div>
+        </div>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-end overflow-hidden'
+        >
+          <Image
+            alt='image'
+            width={500}
+            quality={80}
+            class='sm:w-4/5 lg:w-11/12 animate-[spin_100s_linear_infinite]'
+            src={import('../assets/site/sphere-form.png')}
+          />
+        </div>
+      </div>
+    </Section>
+    <Section className={'bg-black py-20'}>
+      <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
+        <div
+          class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start relative'
+        >
+          <Image
+            alt='image'
+            width={500}
+            quality={80}
+            class='sm:w-4/5 lg:w-10/12 animate-[spin_100s_linear_infinite]'
+            src={import('../assets/site/sphere-code.png')}
+          />
+          <Image
+            alt='image'
+            width={500}
+            quality={80}
+            class='sm:w-4/5 lg:w-10/12 absolute top-0 left-1/2 lg:left-0 transform lg:translate-x-0 -translate-x-1/2'
+            src={import('../assets/site/sphere-form.png')}
+          />
+        </div>
+        <div class='lg:w-1/2 pb-16'>
+          <h2 class='text-6xl lg:text-7xl font-semibold pb-10 uppercase'>
+            Code
+          </h2>
+          <div class='font-extralight flex flex-col gap-6'>
+            <p>
+              The software <span class='italic'>patterns</span> and
+              <span class='italic'>practices</span> that underlie your application
+              architecture are certainly important, but less fundamentally relevant
+              than making the correct choices with regards to the structure of your
+              data in time. Assuming those other foundations are in place, we believe
+              that the best approach to code is to keep it
+              <span class='italic'>short, readable</span> and
+              <span class='italic'>expressive</span>.
+            </p>
+            <p>In reality this means we prefer:</p>
+            <div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-white'} />
+                </div>
+                <p>
+                  Writing modular & generic libraries of functions that operate
+                  over many types of data structures
+                </p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-white'} />
+                </div>
+                <p>Minimizing the use of state wherever possible</p>
+              </div>
+              <div class='flex items-center'>
+                <div class='w-8 h-8 shrink-0'>
+                  <ChevronRightIcon className={'fill-white'} />
+                </div>
+                <p>
+                  Maintaining declarative structures that avoid the need for
+                  reasoning about imperative control flows
+                </p>
+              </div>
+            </div>
+            <p>
+              By pulling out the state and domain, the remaining code is simple.
+              Developers can focus on writing code to implement business
+              <span class='italic'>logic</span>, pure functional
+              <span class='italic'>calculations</span> and
+              <span class='italic'>derivations</span>, with resulting
+              <span class='italic'>actions</span> that automate the execution of
+              business processes.
+            </p>
+            <p>As software complexity is tamed, productivity soars.</p>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    <Section className={'bg-white py-20 text-black'}>
+      <div>
+        <div class='lg:w-2/3'>
+          <h2 class='text-4xl pb-10 font-bold'>Enabling Technologies</h2>
+          <h3 class='text-xl font-extralight pb-14 lg:pb-20'>
+            We select and develop particular tools and technologies that compose
+            harmoniously, chosen to support our methodology.
+          </h3>
+        </div>
+      </div>
+
+      <div class='flex flex-col gap-24'>
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/tech-talking.jpg')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>XTDB</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>XTDB is our unbundled bitemporal graph database:</p>
+              <div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>Transactional consistency</p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>Query with Datalog, EQL, or SQL</p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>
+                    Pluggable backends include PostgreSQL, Kafka, RocksDB and
+                    many more
+                  </p>
+                </div>
+              </div>
+              <p>
+                XTDB provides the data 'time-line' as a value, storing both
+                'valid' time and 'transaction' time. Queries that are often
+                impossible in other databases are made simple in XTDB.
+              </p>
+              <Clickable>
+                <a href='https://xtdb.com/' target='_blank'>
+                  See more at xtdb.com
+                </a>
+              </Clickable>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={100}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/funding-circle-mal.webp')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Clojure</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                Many object-oriented programming languages coax the developer
+                into coupling code with data.
+              </p>
+              <p>
+                Functional programming languages pull them apart. Our go-to
+                functional programming language  — Clojure — goes further,
+                providing language features to protect simplicity.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/mal-teaching.jpeg')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Agile</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                JUXT's leadership is made up of experienced software consultants
+                who have led Agile projects, run Agile training courses and
+                brought Agile methodologies into large organizations.
+              </p>
+              <p>
+                We have taken the best parts of Agile methodologies and combined
+                them into a process that scales and delivers. We deploy often,
+                provide regular showcases and encourage daily stand-ups. We use
+                best-of-breed tools to provide transparency and to manage
+                project work-streams.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/funding-circle-jon.jpeg')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Cloud</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                We’ve been building systems on AWS since early 2014, over that
+                time we’ve accumulated first-hand knowledge and expertise of
+                managing and automating AWS infrastructure.
+              </p>
+              <p>
+                Our AWS systems have been successfully audited for PCI DSS
+                compliance and won praise for their operational stability,
+                information security and regulatory compliance. We have
+                experience in meeting GDPR requirements and protecting data
+                privacy.
+              </p>
+              <Image
+                alt='image'
+                width={500}
+                quality={100}
+                class='w-full sm:max-w-md'
+                alt='aws, google cloud, heroku'
+                src={import('../assets/site/cloud-provider-logos.png')}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    <Section className={'bg-white py-20 text-black'}>
+      <div>
+        <div class='lg:w-2/3'>
+          <h2 class='text-4xl pb-10 font-bold'>Enabling Technologies</h2>
+          <h3 class='text-xl font-extralight pb-14 lg:pb-20'>
+            We select and develop particular tools and technologies that compose
+            harmoniously, chosen to support our methodology.
+          </h3>
+        </div>
+      </div>
+
+      <div class='flex flex-col gap-24'>
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/tech-talking.jpg')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>XTDB</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>XTDB is our unbundled bitemporal graph database:</p>
+              <div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>Transactional consistency</p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>Query with Datalog, EQL, or SQL</p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-black'} />
+                  </div>
+                  <p>
+                    Pluggable backends include PostgreSQL, Kafka, RocksDB and
+                    many more
+                  </p>
+                </div>
+              </div>
+              <p>
+                XTDB provides the data 'time-line' as a value, storing both
+                'valid' time and 'transaction' time. Queries that are often
+                impossible in other databases are made simple in XTDB.
+              </p>
+              <Clickable>
+                <a href='https://xtdb.com/' target='_blank'>
+                  See more at xtdb.com
+                </a>
+              </Clickable>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={100}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/funding-circle-mal.webp')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Clojure</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                Many object-oriented programming languages coax the developer
+                into coupling code with data.
+              </p>
+              <p>
+                Functional programming languages pull them apart. Our go-to
+                functional programming language  — Clojure — goes further,
+                providing language features to protect simplicity.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/mal-teaching.jpeg')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Agile</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                JUXT's leadership is made up of experienced software consultants
+                who have led Agile projects, run Agile training courses and
+                brought Agile methodologies into large organizations.
+              </p>
+              <p>
+                We have taken the best parts of Agile methodologies and combined
+                them into a process that scales and delivers. We deploy often,
+                provide regular showcases and encourage daily stand-ups. We use
+                best-of-breed tools to provide transparency and to manage
+                project work-streams.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/funding-circle-jon.jpeg')}
+            />
+          </div>
+          <div class='lg:w-1/2 shrink-0'>
+            <h2 class='text-4xl font-semibold pb-10'>Cloud</h2>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                We’ve been building systems on AWS since early 2014, over that
+                time we’ve accumulated first-hand knowledge and expertise of
+                managing and automating AWS infrastructure.
+              </p>
+              <p>
+                Our AWS systems have been successfully audited for PCI DSS
+                compliance and won praise for their operational stability,
+                information security and regulatory compliance. We have
+                experience in meeting GDPR requirements and protecting data
+                privacy.
+              </p>
+              <Image
+                alt='image'
+                width={500}
+                quality={100}
+                class='w-full sm:max-w-md'
+                alt='aws, google cloud, heroku'
+                src={import('../assets/site/cloud-provider-logos.png')}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
 
     <link rel='stylesheet' href='/styles/splide.min.css' />
     <script is:inline src='/scripts/splide.min.js'>
@@ -352,22 +818,6 @@ const featuredBlogs = await parseBlogs({
       </div>
     </Section>
     <TalkToUs />
-    <Section
-      className='py-20 dark:bg-gray-900 bg-zinc-100 text-black dark:text-white'
-    >
-      <h2 class='justify-center flex text-4xl pb-10 font-bold'>
-        Featured Articles
-      </h2>
-      <div class='mx-auto pt-10'>
-        <div class='grid md:grid-cols-[repeat(2,_24rem)] justify-center gap-10'>
-          {featuredBlogs.length
-            ? featuredBlogs.map((blog) => {
-                return <BlogCard client:only='preact' {...blog} />
-              })
-            : ''}
-        </div>
-      </div>
-    </Section>
     <Newsletter />
   </main>
 </Layout>
