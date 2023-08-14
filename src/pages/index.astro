@@ -135,7 +135,20 @@ const featuredBlogs = await parseBlogs({
         backgroundImage: `url(${homepageBannerPicture})`
       }}
     />
-    <Section className='bg-gray-800 py-12 text-white'>
+    <Section className=' bg-black'>
+      <div
+        class='flex flex-wrap py-6 justify-center border-b border-t border-gray-800'
+      >
+        {clientLogos.map((logo) => (
+          <img
+            src={`/images/client-logos/${logo}`}
+            alt=''
+            class='w-32 h-15 md:w-40 md:h-20'
+          />
+        ))}
+      </div>
+    </Section>
+    <Section className='bg-yellow-600 py-12 text-white'>
       <h2 class='pb-4 text-3xl md:text-4xl'>
         Complexity limits your organization’s potential
       </h2>
@@ -146,12 +159,8 @@ const featuredBlogs = await parseBlogs({
       </p>
     </Section>
 
-
-        <Section
-      style={{
-        backgroundImage: `url(${threadsPicture})`
-      }}
-      className={'bg-slate-900 bg-[length:0px_0px] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
+    <Section
+      className={'bg-gradient-to-b from-black to bg-gray-600 bg-[length:0px_0px] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
     >
       <div class='md:w-1/2'>
         <h2 class='text-4xl lg:text-5xl pb-10 font-bold'>Our Approach</h2>
@@ -199,13 +208,9 @@ const featuredBlogs = await parseBlogs({
           </div>
         </div>
       </div>
-    </Section>
-    <Section className={'bg-white py-20 text-black'}>
       <div class='flex justify-between flex-col lg:flex-row'>
         <div class='lg:w-1/2'>
-          <h2 class='text-4xl lg:text-5xl font-semibold pb-10 uppercase'>
-            Time
-          </h2>
+          <h2 class='text-2xl lg:text-3xl font-semibold pt-20 pb-10'>Time</h2>
           <div class='font-extralight flex flex-col gap-6'>
             <p class=''>
               We believe that systems should be built on the conceptual bedrock
@@ -256,8 +261,6 @@ const featuredBlogs = await parseBlogs({
           />
         </div>
       </div>
-    </Section>
-    <Section className={'bg-black py-20'}>
       <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
         <div
           class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start overflow-hidden'
@@ -271,9 +274,7 @@ const featuredBlogs = await parseBlogs({
           />
         </div>
         <div class='lg:w-1/2'>
-          <h2 class='text-4xl lg:text-5xl font-semibold pb-10 uppercase'>
-            Data
-          </h2>
+          <h2 class='text-2xl lg:text-3xl font-semibold py-10'>Data</h2>
           <div class='font-extralight flex flex-col gap-6'>
             <p>
               Data is fundamental to the creation of software. It will routinely
@@ -309,13 +310,9 @@ const featuredBlogs = await parseBlogs({
           </div>
         </div>
       </div>
-    </Section>
-    <Section className={'bg-white py-20 text-black'}>
       <div class='flex justify-between flex-col lg:flex-row'>
         <div class='lg:w-1/2'>
-          <h2 class='text-4xl lg:text-5xl font-semibold pb-10 uppercase'>
-            Form
-          </h2>
+          <h2 class='text-2xl lg:text-3xl font-semibold py-10'>Form</h2>
           <div class='font-extralight flex flex-col gap-6'>
             <p>
               Organizations can unlock different amounts of value from data
@@ -359,8 +356,6 @@ const featuredBlogs = await parseBlogs({
           />
         </div>
       </div>
-    </Section>
-    <Section className={'bg-black py-20'}>
       <div class='flex justify-between flex-col-reverse lg:flex-row text-white'>
         <div
           class='lg:w-1/2 lg:self-center flex justify-center lg:justify-start relative'
@@ -381,9 +376,7 @@ const featuredBlogs = await parseBlogs({
           />
         </div>
         <div class='lg:w-1/2 pb-16'>
-          <h2 class='text-4xl lg:text-5xl font-semibold pb-10 uppercase'>
-            Code
-          </h2>
+          <h2 class='text-2xl lg:text-3xl font-semibold py-10'>Code</h2>
           <div class='font-extralight flex flex-col gap-6'>
             <p>
               The software <span class='italic'>patterns</span> and
@@ -442,7 +435,8 @@ const featuredBlogs = await parseBlogs({
         <div class='lg:w-2/3'>
           <h2 class='text-4xl lg:text-5xl pb-10 font-bold'>Our Services</h2>
           <h3 class='text-xl font-extralight pb-14 lg:pb-20'>
-            We build high-performing teams, working in close collaboration with our clients.
+            We build high-performing teams, working in close collaboration with
+            our clients.
           </h3>
         </div>
       </div>
@@ -461,15 +455,21 @@ const featuredBlogs = await parseBlogs({
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
-            <h2 class='text-4xl font-semibold pb-10'>Software engineering</h2>
+            <h2 class='text-3xl font-semibold pb-10'>Software engineering</h2>
             <div class='font-extralight flex flex-col gap-6'>
-              <p>Delivery-focused software engineeers that build high-quality, adaptable systems:</p>
+              <p>
+                Delivery-focused software engineeers that build high-quality,
+                adaptable systems:
+              </p>
               <div>
                 <div class='flex items-center'>
                   <div class='w-8 h-8 shrink-0'>
                     <ChevronRightIcon className={'fill-black'} />
                   </div>
-                  <p>Elegant solutions based on research and creative problem-solving</p>
+                  <p>
+                    Elegant solutions based on research and creative
+                    problem-solving
+                  </p>
                 </div>
                 <div class='flex items-center'>
                   <div class='w-8 h-8 shrink-0'>
@@ -481,7 +481,9 @@ const featuredBlogs = await parseBlogs({
                   <div class='w-8 h-8 shrink-0'>
                     <ChevronRightIcon className={'fill-black'} />
                   </div>
-                  <p>Cloud-native backend engineering, with modern frontend UX</p>
+                  <p>
+                    Cloud-native backend engineering, with modern frontend UX
+                  </p>
                 </div>
               </div>
               <p>
@@ -506,14 +508,24 @@ const featuredBlogs = await parseBlogs({
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
-            <h2 class='text-4xl font-semibold pb-10'>Architecture design & review</h2>
+            <h2 class='text-3xl font-semibold pb-10'>
+              Architecture design & review
+            </h2>
             <div class='font-extralight flex flex-col gap-6'>
               <p>
-                We've designed data-intensive, realtime systems, solving tough architectural problems in finance and many other domains.
-                We bring the philosophies of functional programming to the architecture - treating time as a first-class concern; treating data as immutable at all levels of the stack; promoting stateless systems and operations.
+                We've designed data-intensive, realtime systems, solving tough
+                architectural problems in finance and many other domains. We
+                bring the philosophies of functional programming to the
+                architecture - treating time as a first-class concern; treating
+                data as immutable at all levels of the stack; promoting
+                stateless systems and operations.
               </p>
               <p>
-                We've designed and delivered event-driven and API-driven systems, taking careful advantage of the capabilities of the modern cloud. We also consult on existing systems to provide short and long-term recommendations for increasing scale and evolving towards new use-cases.
+                We've designed and delivered event-driven and API-driven
+                systems, taking careful advantage of the capabilities of the
+                modern cloud. We also consult on existing systems to provide
+                short and long-term recommendations for increasing scale and
+                evolving towards new use-cases.
               </p>
             </div>
           </div>
@@ -532,30 +544,42 @@ const featuredBlogs = await parseBlogs({
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
-            <h2 class='text-4xl font-semibold pb-10'>Platform engineering</h2>
+            <h2 class='text-3xl font-semibold pb-10'>Platform engineering</h2>
             <div class='font-extralight flex flex-col gap-6'>
               <p>
-                JUXT has helped Fortune 500 companies get developer tooling right. We deliver cutting-edge Internal Developer Platform projects, allowing organisations to improve the efficiency of engineering at scale.
+                JUXT has helped Fortune 500 companies get developer tooling
+                right. We deliver cutting-edge Internal Developer Platform
+                projects, allowing organisations to improve the efficiency of
+                engineering at scale.
               </p>
-              <p>Platform engineering done right can give your software teams:</p>
+              <p>
+                Platform engineering done right can give your software teams:
+              </p>
               <div>
                 <div class='flex items-center'>
                   <div class='w-8 h-8 shrink-0'>
                     <ChevronRightIcon className={'fill-black'} />
                   </div>
-                  <p>Compliance, security, and other non-functional guarantees, at scale.</p>
+                  <p>
+                    Get compliance, security, and other non-functional
+                    guarantees, at scale
+                  </p>
                 </div>
                 <div class='flex items-center'>
                   <div class='w-8 h-8 shrink-0'>
                     <ChevronRightIcon className={'fill-black'} />
                   </div>
-                  <p>Delightful internal developer experiences and documentation.</p>
+                  <p>
+                    Delightful internal developer experiences and documentation.
+                  </p>
                 </div>
                 <div class='flex items-center'>
                   <div class='w-8 h-8 shrink-0'>
                     <ChevronRightIcon className={'fill-black'} />
                   </div>
-                  <p>An internal 'open source' culture and a thriving community of contributors.</p>
+                  <p>
+                    Cloud-native backend engineering, with modern frontend UX
+                  </p>
                 </div>
               </div>
             </div>
@@ -575,7 +599,7 @@ const featuredBlogs = await parseBlogs({
             />
           </div>
           <div class='lg:w-1/2 shrink-0'>
-            <h2 class='text-4xl font-semibold pb-10'>Cloud infrastructure</h2>
+            <h2 class='text-3xl font-semibold pb-10'>Cloud infrastructure</h2>
             <div class='font-extralight flex flex-col gap-6'>
               <p>
                 We’ve been building systems on AWS since early 2014, over that
@@ -625,19 +649,6 @@ const featuredBlogs = await parseBlogs({
       })
     </script>
 
-    <Section className='pt-20 pb-40 bg-black'>
-      <div
-        class='flex flex-wrap py-6 justify-center border-b border-t border-gray-800'
-      >
-        {clientLogos.map((logo) => (
-          <img
-            src={`/images/client-logos/${logo}`}
-            alt=''
-            class='w-32 h-32 md:w-40 md:h-40'
-          />
-        ))}
-      </div>
-    </Section>
     <TalkToUs />
   </main>
 </Layout>
