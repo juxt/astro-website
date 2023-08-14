@@ -560,20 +560,6 @@ const featuredBlogs = await parseBlogs({
         }).mount()
       })
     </script>
-
-    <Section className='pt-20 pb-40 bg-black'>
-      <div
-        class='flex flex-wrap py-6 justify-center border-b border-t border-gray-800'
-      >
-        {clientLogos.map((logo) => (
-          <img
-            src={`/images/client-logos/${logo}`}
-            alt=''
-            class='w-32 h-32 md:w-40 md:h-40'
-          />
-        ))}
-      </div>
-    </Section>
     <TalkToUs />
   </main>
 </Layout>
