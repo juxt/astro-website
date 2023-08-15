@@ -1,12 +1,13 @@
 ---
-draft: 'true'
+draft: 'true
+'
 author: 'juxt'
 title: 'On-Demand Webinar: Bitemporality and the Art of Maintaining Accurate Databases'
 description: 'Discover why bitemporality is a topic industry luminaries are talking about, and how it will likely to impact your work in 2024'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-08-15'
-heroImage: 'webinar-card.jpg'
+heroImage: 'white-webinar-card.jpg'
 tags:
   - 'architecture'
   - 'bitemporality'
