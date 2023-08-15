@@ -13,7 +13,7 @@ tags:
   - 'xtdb'
 ---
 
-Last week, we hosted a thought leadership webinar, on the topic of bitemporality — a topic many luminaries, including Kent Beck, Martin Fowler, Ben Stopford, and Kris Jenkins have been discussing in depth recently, but what is it exactly, and how is it relevant to your Data Architecture? …
+Last week, we hosted a thought leadership webinar, on the topic of bitemporality — a topic many luminaries, including Kent Beck, Martin Fowler, Ben Stopford, and Kris Jenkins have been discussing in depth recently, but what is it exactly, and how is it relevant to your Data Architecture?
 
 Well, how often have you had to add a `modified_at` or `effective_from` column to a database table? Have you ever had to keep old versions of data around and make it visible to end users?
 
@@ -26,9 +26,9 @@ Listen to the on-demand recording of this webinar to discover the most common us
 
 ## Key takeaways:
 
-- Familiarize yourself with the SQL:2011 standard temporal features
-- Understand the landscape of existing approaches and tools for implementing bitemporality to ensure successful projects
-- Discover how you can visualize your own bitemporal data using an open source interactive tool
+- Familiarize yourself with the SQL:2011 standard temporal features;
+- Understand the landscape of existing approaches and tools for implementing bitemporality to ensure successful projects;
+- Discover how you can visualize your own bitemporal data using an open source interactive tool.
 
 ## Watch the recording:
 
@@ -36,7 +36,7 @@ Listen to the on-demand recording of this webinar to discover the most common us
 
 ## Webinar speakers:
 
-**Jeremy Taylor - Head of Product for XTDB** (XTDB is an open source database for solving complex problems with dynamic and temporal data)
+**Jeremy Taylor - Head of Product for XTDB** ([XTDB](https://www.xtdb.com/) is an open source database for solving complex problems with dynamic and temporal data)
 
 Before joining JUXT in 2019, Jeremy held a sales engineering position within IBM working on eCommerce systems. For over a decade, Jeremy has been fascinated by relational and non-relational databases, and is motivated by the promise of data abstractions that can improve developer productivity across domains with frequently evolving schemas.
 
