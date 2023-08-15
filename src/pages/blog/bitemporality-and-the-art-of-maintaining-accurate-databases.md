@@ -35,7 +35,7 @@ Listen to the on-demand recording of this webinar to discover the most common us
 
 ## Webinar speakers:
 
-**Jeremy Taylor - Head of Product for XTDB** ([XTDB](https://www.xtdb.com/) is an open source database for solving complex problems with dynamic and temporal data)
+**Jeremy Taylor - Head of Product for XTDB** (<a href='https://www.xtdb.com/' target='_blank'> XTDB</a> is an open source database for solving complex problems with dynamic and temporal data)
 
 Before joining JUXT in 2019, Jeremy held a sales engineering position within IBM working on eCommerce systems. For over a decade, Jeremy has been fascinated by relational and non-relational databases, and is motivated by the promise of data abstractions that can improve developer productivity across domains with frequently evolving schemas.
 
