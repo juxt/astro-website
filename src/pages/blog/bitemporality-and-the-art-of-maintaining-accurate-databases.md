@@ -31,7 +31,9 @@ Listen to the on-demand recording of this webinar to discover the most common us
 
 ## Watch the recording:
 
-<iframe class="aspect-video w-full" src="https://www.youtube.com/watch?v=9ssla_7KE_Y" title="on-demand webinar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D3KUMBEapyw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**You can access Jeremy's slides <a href='/juxt-bitemporality-webinar-230810.pdf' target='_blank'> here</a>** - the slides include the links to the various resources Jeremy showed during the session.
 
 ## Webinar speakers:
 
