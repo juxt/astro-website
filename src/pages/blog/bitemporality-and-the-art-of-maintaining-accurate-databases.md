@@ -6,7 +6,7 @@ description: 'Discover why bitemporality is a topic industry luminaries are talk
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-08-15'
-heroImage: 'white-webinar-card.jpg'
+heroImage: 'webinar-og.jpg'
 tags:
   - 'architecture'
   - 'bitemporality'
