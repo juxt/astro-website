@@ -142,7 +142,7 @@ export default function ContactUsMini() {
           />
         </div>
         <div class='text-4xl md:text-5xl font-bold'>Or Message Us</div>
-        <div class='p-8'>
+        <div class='p-12'>
           <Form />
         </div>
       </div>
