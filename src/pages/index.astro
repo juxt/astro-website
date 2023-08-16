@@ -80,7 +80,11 @@ const clientLogos = [
   'vodafone.svg',
   'on-the-market.svg',
   'mail-online.svg',
-  'bbc.svg'
+  'bbc.svg',
+  'third-bridge.svg',
+  'klarna.svg',
+  'kooth.svg',
+  'gresham.svg'
 ]
 
 const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
@@ -225,19 +229,19 @@ const featuredBlogs = await parseBlogs({
             <div>
               <div class='flex items-center'>
                 <div class='w-8 h-8 shrink-0'>
-                  <ChevronRightIcon className={'fill-black'} />
+                  <ChevronRightIcon className={'fill-white'} />
                 </div>
                 <p>Historical corrections</p>
               </div>
               <div class='flex items-center'>
                 <div class='w-8 h-8 shrink-0'>
-                  <ChevronRightIcon className={'fill-black'} />
+                  <ChevronRightIcon className={'fill-white'} />
                 </div>
                 <p>The integration of imported records</p>
               </div>
               <div class='flex items-center'>
                 <div class='w-8 h-8 shrink-0'>
-                  <ChevronRightIcon className={'fill-black'} />
+                  <ChevronRightIcon className={'fill-white'} />
                 </div>
                 <p>The previewable orchestration of future states</p>
               </div>
@@ -450,7 +454,7 @@ const featuredBlogs = await parseBlogs({
               width={500}
               quality={80}
               class='w-full h-full object-cover'
-              src={import('../assets/site/tech-talking.jpg')}
+              src={import('../assets/site/jon-conj2023.png')}
             />
           </div>
           <div class='flex flex-col gap-4'>
@@ -503,9 +507,9 @@ const featuredBlogs = await parseBlogs({
             <Image
               alt='image'
               width={500}
-              quality={100}
+              quality={80}
               class='w-full h-full object-cover'
-              src={import('../assets/site/funding-circle-mal.webp')}
+              src={import('../assets/site/JUXT-10thBday-Wiltons-2230.png')}
             />
           </div>
           <div class='flex flex-col gap-4'>
@@ -602,7 +606,7 @@ const featuredBlogs = await parseBlogs({
               width={500}
               quality={80}
               class='w-full h-full object-cover'
-              src={import('../assets/site/funding-circle-jon.jpeg')}
+              src={import('../assets/site/clojure-berlin-mal-alx.png')}
             />
           </div>
           <div class='flex flex-col gap-4'>
