@@ -36,20 +36,20 @@ function Form() {
 
   const isSubmittingComponent = (
     <div className='md:px-8 text-black text-xl md:text-2xl'>
-      Submitting your form...
+      Sending...
     </div>
   )
 
   const isSubmitSuccessfulComponent = (
     <div className='md:px-8 text-center text-xl md:text-2xl text-juxt'>
-      Thanks for leaving your details. We'll be in touch very soon.
+      Thanks for leaving your details.<br/>We'll be in touch very soon.
     </div>
   )
 
   const isSubmitErrorComponent = (
     <div className='md:px-8 text-xl md:text-2xl text-red-600'>
-      Mmm.. It seems there's a problem.. Anyways, you can directly reach out to
-      us at <strong>info@juxt.pro </strong>
+      Mmm... It seems there's a problem.<br/>
+      Please reach out to us at <strong>info@juxt.pro</strong>
     </div>
   )
 
