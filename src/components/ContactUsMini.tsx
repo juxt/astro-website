@@ -35,20 +35,21 @@ function Form() {
   const hasErrors = Object.keys(errors).length > 0
 
   const isSubmittingComponent = (
-    <div className='md:px-8 text-black text-xl md:text-2xl'>
-      Sending...
-    </div>
+    <div className='md:px-8 text-black text-xl md:text-2xl'>Sending...</div>
   )
 
   const isSubmitSuccessfulComponent = (
     <div className='md:px-8 text-center text-xl md:text-2xl text-juxt'>
-      Thanks for leaving your details.<br/>We'll be in touch very soon.
+      Thanks for leaving your details.
+      <br />
+      We'll be in touch very soon.
     </div>
   )
 
   const isSubmitErrorComponent = (
     <div className='md:px-8 text-xl md:text-2xl text-red-600'>
-      Mmm... It seems there's a problem.<br/>
+      Mmm... It seems there's a problem.
+      <br />
       Please reach out to us at <strong>info@juxt.pro</strong>
     </div>
   )
@@ -90,11 +91,11 @@ function Form() {
             placeholder='Email'
             type='email'
           />
-          <textarea rows={6}
+          <textarea
+            rows={6}
             {...inputProps}
             {...register('description', { required: true })}
             placeholder='How can we help?'
-
           />
           <div className='text-xs'>
             By submitting your details you agree to JUXT’s{' '}
@@ -104,9 +105,7 @@ function Form() {
           </div>
 
           {hasErrors && (
-            <div className='text-red-500'>
-              All fields are required
-            </div>
+            <div className='text-red-500'>All fields are required</div>
           )}
 
           <button
@@ -126,23 +125,27 @@ export default function ContactUsMini() {
     <div class='flex justify-center gap-10'>
       <div>
         <div>
-          <div class='text-5xl md:text-6xl font-bold'>Speak with us</div>
+          <div class='text-4xl md:text-5xl font-bold'>Contact Us</div>
         </div>
-        <div className='flex flex-col-reverse lg:flex-row gap-10 p-8 lg:pb-0'>
+        <div className='flex flex-col-reverse lg:flex-row gap-10 p-12 lg:pb-0'>
           <div>
             <div class='text-2xl md:text-3xl font-light'>info@juxt.pro</div>
             <div class='text-2xl md:text-3xl font-light'>
               +44 (0) 333 93 98 309 <br /> +1 (332) 867 0718
             </div>
           </div>
-          <img src='/images/site/airplane.png' class="hidden lg:block" style="width: 200px; height: 200px;" alt='contact us'/>
+          <img
+            src='/images/site/airplane.png'
+            class='hidden lg:block'
+            style='width: 200px; height: 200px;'
+            alt='contact us'
+          />
         </div>
-        <div class='text-4xl md:text-5xl font-bold'>Or</div>
+        <div class='text-4xl md:text-5xl font-bold'>Or Message Us</div>
         <div class='p-8'>
           <Form />
         </div>
       </div>
     </div>
-
   )
 }
