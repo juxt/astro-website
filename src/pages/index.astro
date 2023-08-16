@@ -8,7 +8,7 @@ import { BlogCard } from '@components/BlogCard'
 import Clickable from '@components/Clickable.astro'
 import { QuoteIcon } from '@components/Icons'
 import Section from '@components/Section.astro'
-import TalkToUs from '@components/TalkToUs.astro'
+import ContactUsMini from '@components/ContactUsMini.tsx'
 import { Blog, Person } from '@utils/types'
 import CaseStudy, { CaseStudyProps } from '@layouts/CaseStudy.astro'
 import Layout from '@layouts/Layout.astro'
@@ -628,35 +628,8 @@ const featuredBlogs = await parseBlogs({
       </div>
     </Section>
 
-    <link rel='stylesheet' href='/styles/splide.min.css' />
-    <script is:inline src='/scripts/splide.min.js'>
-
-    </script>
-    <script is:inline>
-      document.addEventListener('DOMContentLoaded', function () {
-        new Splide('.splide', {
-          type: 'loop',
-          perPage: 2,
-          focus: 'center',
-          autoWidth: true,
-          rewind: true,
-          rewindByDrag: true,
-          padding: '10%',
-          gap: '10%',
-          autoplay: true,
-          interval: 4000,
-          pagination: true,
-          throttle: 300,
-          breakpoints: {
-            768: {
-              perPage: 1,
-              padding: 0,
-              arrows: false
-            }
-          }
-        }).mount()
-      })
-    </script>
-    <TalkToUs />
+    <Section className='text-black py-20 md:py-40'>
+      <ContactUsMini client:only/>
+    </Section>
   </main>
 </Layout>
