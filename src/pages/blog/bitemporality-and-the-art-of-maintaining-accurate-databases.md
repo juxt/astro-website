@@ -1,5 +1,4 @@
 ---
-draft: 'true'
 author: 'juxt'
 title: 'On-Demand Webinar: Bitemporality and the Art of Maintaining Accurate Databases'
 description: 'Discover why bitemporality is a topic industry luminaries are talking about, and how it will likely to impact your work in 2024'
@@ -32,11 +31,13 @@ Listen to the on-demand recording of this webinar to discover the most common us
 
 ## Watch the recording:
 
-<iframe class="aspect-video w-full" src="https://www.youtube.com/watch?v=9ssla_7KE_Y" title="on-demand webinar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class='md:w-[560px] w-full h-[315px]' src="https://www.youtube.com/embed/D3KUMBEapyw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**You can access Jeremy's slides <a href='/juxt-bitemporality-webinar-230810.pdf' target='_blank'> here</a>** - the slides include the links to the various resources Jeremy showed during the session.
 
 ## Webinar speakers:
 
-**Jeremy Taylor - Head of Product for XTDB** ([XTDB](https://www.xtdb.com/) is an open source database for solving complex problems with dynamic and temporal data)
+**Jeremy Taylor - Head of Product for XTDB** (<a href='https://www.xtdb.com/' target='_blank'>XTDB</a> is an open source database for solving complex problems with dynamic and temporal data)
 
 Before joining JUXT in 2019, Jeremy held a sales engineering position within IBM working on eCommerce systems. For over a decade, Jeremy has been fascinated by relational and non-relational databases, and is motivated by the promise of data abstractions that can improve developer productivity across domains with frequently evolving schemas.
 
