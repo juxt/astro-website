@@ -141,7 +141,7 @@ export default function ContactUsMini() {
             alt='contact us'
           />
         </div>
-        <div class='text-4xl md:text-5xl font-bold'>Or Message Us</div>
+        <div class='text-2xl md:text-3xl font-bold'>Or</div>
         <div class='p-12'>
           <Form />
         </div>
