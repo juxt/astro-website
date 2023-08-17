@@ -82,8 +82,6 @@ const clientLogos = [
   'mail-online.svg',
   'bbc.svg',
   'third-bridge.svg',
-  'klarna.svg',
-  'kooth.svg',
   'gresham.svg'
 ]
 
@@ -139,19 +137,15 @@ const featuredBlogs = await parseBlogs({
         backgroundImage: `url(${homepageBannerPicture})`
       }}
     />
-    <Section className=' bg-black'>
-      <div
-        class='flex flex-wrap py-6 justify-center border-b border-t border-gray-800'
-      >
-        {clientLogos.map((logo) => (
-          <img
-            src={`/images/client-logos/${logo}`}
-            alt=''
-            class='w-40 h-20 md:w-45 md:h-35'
-          />
-        ))}
-      </div>
-    </Section>
+    <div class='bg-black flex flex-wrap justify-center border-gray-800'>
+      {clientLogos.map((logo) => (
+        <img
+          src={`/images/client-logos/${logo}`}
+          alt=''
+          class='w-25 h-20 md:w-35 md:h-30'
+        />
+      ))}
+    </div>
     <Section className='bg-yellow-600 py-12 text-white'>
       <h2 class='pb-4 text-3xl md:text-4xl'>
         Complexity limits your organization’s potential
