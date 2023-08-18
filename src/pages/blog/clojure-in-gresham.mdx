@@ -253,7 +253,7 @@ Things like Babashka are helping a lot. Previously there would be one or two peo
 
 It’s funny because you think the editor thing is really a solved problem, then VS Code has come along and is huge. It’s just a good product.
 
-**Mark:** If you’ve customised your key bindings it can get hard to pair with others or use their machine, you realize that you’re stuck without your own setup. What’s changed now though is that people are remote, so you can do the ping-ping pairing thing and say, “Okay you drive for a while” and there’s no need to use someone else’s setup. Sometimes you’ll write a test and push it to a branch, and the other person can pull and make it pass.
+**Mark:** If you’ve customised your key bindings it can get hard to pair with others or use their machine, you realize that you’re stuck without your own setup. What’s changed now though is that people are remote, so you can do the ping-pong pairing thing and say, “Okay you drive for a while” and there’s no need to use someone else’s setup. Sometimes you’ll write a test and push it to a branch, and the other person can pull and make it pass.
 
 ## REPL-Driven Development
 
@@ -269,15 +269,9 @@ I tend to write a test first, but still, with the REPL you’re working out the 
 
 **Mark:** Yes, definitely. We’ve had those things in the past, where there have been some fixtures or tests setup that must always be executed in a certain way. When we see that we always tend to break it apart, make a comment block up if you need to with parts you can run easily in the REPL.
 
-<span
-  class='pullquote'
-  text-content='If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off.'
->
-  If you break functions up so that they just do one very small thing, you can
-  run that directly in the REPL. Make sure you have ways to switch things on and
-  off
-</span>
-, bring Kafka up and down.
+<span class='pullquote' text-content='If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off.'/>
+
+If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off, bring Kafka up and down.
 
 **Colin:** Yes, that whole thing of having to keep on top of it is true. We had a PR just recently where there was a need to always run this two step process to exercise the code. After some feedback, we got this back to just a good REPL experience.
 
