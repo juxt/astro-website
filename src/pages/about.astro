@@ -7,6 +7,7 @@ import { LinkIcon } from '@components/Icons'
 import Section from '@components/Section.astro'
 import { Person } from '@utils/types'
 import Layout from '@layouts/Layout.astro'
+import ContactUsMini from '@components/ContactUsMini.tsx'
 
 const bannerPicture = await getImage({
   src: import('../assets/site/about-us-banner-v2.jpg'),
@@ -187,6 +188,9 @@ function imageToFilename(image: string) {
           </div>
         </div>
       </div>
+    </Section>
+    <Section className='text-black py-20 md:py-40 bg-gray-100'>
+      <ContactUsMini />
     </Section>
   </main>
 </Layout>
