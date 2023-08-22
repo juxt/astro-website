@@ -122,7 +122,7 @@ function Form() {
 
 export default function ContactUsMini() {
   return (
-    <div class='flex justify-center gap-10'>
+    <div class='flex justify-center gap-10 text-black'>
       <div>
         <div>
           <div class='text-4xl md:text-5xl font-bold'>Contact Us</div>
