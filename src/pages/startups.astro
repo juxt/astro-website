@@ -4,7 +4,7 @@ import { Image } from '@astrojs/image/components'
 import Banner from '@components/Banner.astro'
 import Section from '@components/Section.astro'
 import Layout from '@layouts/Layout.astro'
-import TalkToUs from '@components/TalkToUs.astro'
+import ContactUsMini from '@components/ContactUsMini'
 
 type StartUpsProps = {
   title: string
@@ -128,6 +128,8 @@ const startupPicture = await getImage({
         )
       })}
     </div>
-    <TalkToUs />
+    <Section className="pt-28">
+      <ContactUsMini/>
+    </Section>
   </main>
 </Layout>
