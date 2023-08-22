@@ -9,19 +9,24 @@ type NavLinkProp = {
   label: string
   target?: string
   active?: boolean
-  className?: string
+  style?: { normal: string; active: string }
 }
 
-function NavLink({ label, href, target, active, className }: NavLinkProp) {
+function NavLink({ label, href, target, active, style }: NavLinkProp) {
   const targetProp = target ? { target } : {}
 
   return (
     <a
       {...targetProp}
       className={classNames(
-        'hover:text-juxt transition-colors first-of-type:pt-4 xl:first-of-type:pt-0',
-        active ? 'text-juxt' : 'text-white',
-        className
+        'transition-colors first-of-type:pt-4 xl:first-of-type:pt-0',
+        style
+          ? active
+            ? style?.active
+            : style?.normal
+          : active
+          ? 'text-juxt'
+          : 'text-white hover:text-juxt'
       )}
       href={href}
     >
@@ -93,7 +98,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
               label={page.label}
               target={page.target}
               active={page.active}
-              className={page.className}
+              style={page.style}
             />
           ))}
           {enableDarkMode && <DarkModeSwitch />}
@@ -119,7 +124,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
               label={page.label}
               target={page.target}
               active={page.active}
-              className={page.className}
+              style={page.style}
             />
           ))}
           {enableDarkMode && <DarkModeSwitch />}
