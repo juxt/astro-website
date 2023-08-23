@@ -11,17 +11,17 @@ tags:
 heroImage: 'modern-java-for-clojure-devs.jpg'
 ---
 
-tl;dr: I gave a talk: "(Modern) Java for Clojure Programmers" - if you've been writing another JVM language for a while, and want to catch up with the Java world, give it a watch 🙂
+tl;dr: I gave a talk: "(Modern) Java for Clojure Programmers" - if you've been using another JVM language for a while, and want to catch up with the Java world, give it a watch 🙂
 
 <iframe class="aspect-video w-full" src="https://www.youtube.com/embed/NccnidiRknA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-It occurred to me that, commercially, I've been writing near-enough 100% Clojure for the best part of a decade now (and absolutely loving it, fwiw). For the first few of those years, Java felt like it was stagnating - but, in recent years, language/runtime improvements have been coming thick and fast.
+It occurred to me that, commercially, I've been writing near-enough 100% Clojure for the best part of a decade now (and absolutely loving it, for what it's worth). For the first few of those years Java felt like it was stagnating, but in recent years improvements to the language and runtime have been coming thick and fast.
 
 On XTDB 2.x (which is in [early access](https://xtdb.com/v2) now - don't know if I've mentioned it before? 😁) we're working a bit more with Java and Java libraries (particularly [Apache Arrow](https://arrow.apache.org)).
 
-Safe to say, after a decade away, I do feel quite out-of-date - so, what better way to force myself to catch up than to commit to giving a JUXT (juxt.pro) 'Safari' (lunch-n-learn) on the topic 🙂
+It's safe to say that, after a decade away, I do feel quite out-of-date. So, what better way to force myself to catch up than to commit to giving a JUXT 'Safari' session (our take on lunch-n-learn) on the topic 🙂
 
-So, as a nod to Rich's 'Clojure for Java Programmers' - the talk that got me into Clojure - my talk '(Modern) Java for Clojure Programmers' is up now, on YouTube.
+So, as a nod to Rich Hickey's 'Clojure for Java Programmers' - the talk that got me into Clojure - my talk '(Modern) Java for Clojure Programmers' is up now on YouTube.
 
 Covering:
 
