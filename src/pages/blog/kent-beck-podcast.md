@@ -12,7 +12,7 @@ tags:
   - 'xtdb'
 ---
 
-In our latest JUXT Cast we invited <a href='https://en.wikipedia.org/wiki/Kent_Beck' target='_blank'>Kent Beck</a>, author of the original XP book, <a href='https://www.amazon.co.uk/Extreme-Programming-Explained-Embrace-Change/dp/0321278658' target='_blank'><br> Extreme Programming Explained</a>.
+In our latest JUXT Cast we invited <a href='https://en.wikipedia.org/wiki/Kent_Beck' target='_blank'>Kent Beck</a>, author of the original XP book, <a href='https://www.amazon.co.uk/Extreme-Programming-Explained-Embrace-Change/dp/0321278658' target='_blank'> Extreme Programming <br> Explained</a>.
 
 Today, you might sub-title this book as 'Agile, the good parts', since XP introduced many of the practices that developers still value, such as Test Driven Development, Continuous Integration and Pair Programming.
 
