@@ -58,4 +58,4 @@ Pinecast: https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck
 
 YouTube:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gaRyeGrp0vU?si=SVjIlkNveDfwKfZz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe class='md:w-[560px] w-full h-[315px]' src="https://www.youtube.com/embed/gaRyeGrp0vU?si=SVjIlkNveDfwKfZz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
