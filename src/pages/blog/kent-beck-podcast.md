@@ -54,9 +54,8 @@ Happy listening!
 
 Episode available here:
 
-Apple <link>
-Google <link>
-whatever_1 <link>
-whatever_2<link>
-whatever_3 <link>
-<video embedded from YT>
+Pinecast: https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck
+
+YouTube:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gaRyeGrp0vU?si=SVjIlkNveDfwKfZz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
