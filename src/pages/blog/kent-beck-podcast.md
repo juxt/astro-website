@@ -52,6 +52,6 @@ Users often make mistakes, we’re all human after all! One of the many benefits
 
 When systems are sympathetic and forgiving to users, they feel a greater sense of safety. That can only be a good thing.
 
-This JUXT Cast episode is also available on Pinecast: https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck
+This JUXT Cast episode is also available on [Pinecast](https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck).
 
 Happy listening!
