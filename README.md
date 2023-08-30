@@ -9,9 +9,10 @@ All commands are run from the root of the project, from a terminal:
 | Command            | Action                                       |
 | :----------------- | :------------------------------------------- |
 | `yarn install`     | Installs dependencies                        |
-| `yarn start`       | Starts local dev server at `localhost:3000`  |
+| `yarn start`       | Starts local dev server at `localhost:4321`  |
 | `yarn run build`   | Build your production site to `./dist/`      |
 | `yarn run preview` | Preview your build locally, before deploying |
+| `yarn astro check` | Run a linter to check for errors and warnings|
 
 After reading the following section, you should be able to perform the most common updates to the site.
 
