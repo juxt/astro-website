@@ -1,0 +1,194 @@
+---
+author: 'joe'
+title: 'Clojure in Cloud Hosting: Exoscale'
+description: 'European cloud infrastructure with Clojure, Go, and an open source mindset'
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '2023-09-26'
+heroImage: 'exoscale-logo-clojurein-new.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'cloud',
+    quote: '"The data-first approach of Clojure really makes it a nice fit."'
+  }
+---
+
+import { Image } from 'astro:assets'
+
+[Exoscale](https://www.exoscale.com/) is a European cloud hosting service with a specialism in data security, GDPR compliance and data privacy. Their services cover fundamental cloud infrastructure as well as managed Kubernetes and database services, and an extensive catalogue of marketplace apps.
+
+We caught up with Pierre-Yves Ritschard, a.k.a [pyr](https://github.com/pyr), to chat about the Exoscale platform architecture, what differentiates Exoscale from the competition, and how Clojure fits in.
+
+import exolight from '../../assets/blog/exoscale-logo-on-light.svg'
+import exodark from '../../assets/blog/exoscale-logo-on-dark.svg'
+
+<Image class='not-prose dark:hidden' alt='Griffin' width={350} height={50} src={exolight} />
+<Image class='not-prose hidden dark:block' alt='Griffin' width={350} height={50} src={exodark} />
+
+**Joe: Great to meet you Pierre-Yves. So what does Exoscale do?**
+
+**Pierre-Yves:** Well, Exoscale provides an infrastructure-as-a-service platform. Very similar to what you're used to from the hyperscalers (AWS, Azure, Google). The catalogue of services we offer is a bit more constrained, but it's already quite evolved with infrastructure primitives around networking and security (DNS, security groups, load balancers, etc), all the way to managed container orchestration. Our platform is purely self-service and made available through an API that integrates with popular tooling like Terraform.
+
+Our platform allows you to quickly provision and stand up infrastructure. We are in a group of providers with DigitalOcean, vNode, and Scaleway, that are like the 'tier two' providers. We're a bit special because we are more advanced in compliance, governance, and our privacy ecosystem.
+
+We have a few features that cater more to larger accounts, like an advanced identity and access management framework, and an advanced audit trail and reporting ecosystem as well. So that's our focus. And we are only backed by European funds, which makes us stand out a bit too.
+
+We've been garnering a lot of attention with European academic projects and institutions that don't want to host with American or Chinese companies, and local institutions as well. We are headquartered in Switzerland, but we now also have offices in Vienna, and points of presence in most of the German-speaking region of Europe, as well as other points of presence.
+
+**Joe: So how did the business get started? And how/why did you decide to launch a cloud hosting company?**
+
+**Pierre-Yves:** I have a background in data center management and low-level systems programming, before my Clojure days. I branched out, and I ran technology for two companies before Exoscale. Both of those companies had to make a choice between, you know, using the nascent (back then) cloud services like AWS or using dedicated server providers. This was the very early days [for cloud providers], and quite expensive. But it did have this property of being always on, on-demand, API-backed, and this made it very easy to automate infrastructure. From a price and performance standpoint it was very unappealing. Then on the other end of the spectrum were dedicated server providers, which were much more cost-effective, especially for European companies that didn't have the means that US venture capital-backed companies may have had. However this forced smaller companies into caring about infrastructure too much. It ended up being too large a part of the job of standing up technology.
+
+So the idea was to try to find a sweet spot in between, where there would be just enough infrastructure primitives exposed, but with a nice price-to-performance ratio, and catering to a crowd that would be comfortable with automation tooling. You know, the initial crowd was small tech shops.
+
+I mean, of course, that was 10 years ago now. So we cater out to a larger and more diverse crowd with different needs. The world evolved since then too, with containers and other cloud tech. The competition also grew. But, you know, the core elements are still there and still resonate with a large crowd today.
+
+import exoteam from '../../assets/blog/exoscale-team.jpg'
+
+<Image alt='Exoscale team' width={600} src={exoteam} class='mx-auto' />
+
+## Architectural layers
+
+**Joe: So when did Clojure come in? Was it the language that you were using from the start when you began to build Exoscale?**
+
+**Pierre-Yves:** Yeah, it was from the beginning, even though it played a smaller part in the early days. I had used Clojure with success in two companies already.
+
+Back then (and still today) we wanted to rely on systems that were JVM backed. Apache Kafka is a major part of the infrastructure today and came relatively early on. So was Apache Cassandra, and other JVM-based subsystems.
+
+It was also the expressivity of the language, and the speed at which things can be built. The ecosystem that the underlying platform provides makes it a very, very nice contender.
+
+To be honest, the Clojure we started with would not have carried us to this day. Clojure in 2011 didn't have spec for instance, and a lot of other things that allows a large team to work efficiently. But back then we were a very small team of four people anyway, so everything could fit into a handful of heads.
+
+So I'm glad that the language evolved with us, and allowed us to structure a larger team.
+
+**Joe: What kind of systems are you using Clojure for right now?**
+
+**Pierre-Yves:** We started with the platform that would produce usage metering and data to invoice people, but now we are using it for everything.
+
+We have a very small pyramid of accepted languages in the company. Clojure's the default, and represents 70% of the code base. Anything that's close to workloads tends to be written in Go. And that's about it apart from a bit of Python as well. The rest is more anecdotal. We have some remnants of our pre-Go days, so still a bit of C here and there and a few remnants of a Java code base we inherited, but all new work tends to be in Clojure or Go.
+
+We have simple architecture, with a service tier that exposes public or private APIs. That's written in Clojure, and that talks to functionality orchestration components. Those exist once per data centre and are also written in Clojure. This reaches out to helper services, mostly written in Clojure as well, or, reaches close to the workload and anything there tends to be written in Go. So it's a very basic top-down architecture approach. And one of ways data can bubble back up is Apache Kafka, and then that gets consumed also by Clojure services.
+
+To give you a brief example, we expose an object storage service that's fully compliant with S3 (so works with all the typical S3 tooling). That is such a system with an API and orchestration. All of the complex logic is in a stateless Clojure tier, and this reaches out to storage agents that live close to the actual storage nodes (and those are written in Go).
+
+**Joe: I see. So for anything that's on the workload side, like agents or processes that are running on those nodes, you want a very small memory footprint and instantaneous startup, and that's where you use Go?**
+
+**Pierre-Yves:** Exactly. Here, the reach of the platform is interesting. Clojure was a very good fit for the orchestration layer. Go tends to have extremely extensive support for interacting with the systems, say like the virtualization technologies. There's plenty of things where it [Go] makes a bit more sense and the story for the JVM there is not great. We tend to do very simple things at this systems layer, so the benefits of Clojure aren't needed.
+
+**Joe: So in the Clojure estate, what are the key libraries and tools that you use? You mentioned that you use spec, to ensure that teams can collaborate safely. What else do you use?**
+
+**Pierre-Yves:** We are going to sound like the team with the worst [Not Invented Here](https://en.wikipedia.org/wiki/Not_invented_here) syndrome, but take this with a grain of salt because we started early and a bunch of these things we open sourced already.
+
+We tend to use a stack that is a bit specific to Exoscale. So we did make a bet on [spec](https://clojure.org/guides/spec), which I wouldn't today - if we had a blank slate I would probably go for [Malli](https://github.com/metosin/malli) because we ended up over time writing a lot of things that are now in Malli.
+
+**Joe: It's interesting because I think that Malli in many ways represents what spec 2 will be (e.g. the schemas are data-driven), and it embodies a lot of learnings from spec _already_. And it's here today!**
+
+**Pierre-Yves:** The thing I jokingly say inside the company is that Malli is basically Om Next's re-frame. Maybe it is not the ideal design that the Om Next author had in mind, but concretely and practically it is here and that's what people use.
+
+We made a bet on spec because anytime something has Clojure Core veneer, it will get prioritized over time. Also, when we made the decision Malli was still in alpha, so it made sense.
+
+On top of spec, we built a coercion library called [coax](https://github.com/exoscale/coax), which is open source, and a spec error formatter library called [lingo](https://github.com/exoscale/lingo), also open source, which we use extensively.
+
+We have an ecosystem of libraries that are not yet open source, but which will be down the line, that help us stand up APIs quickly. What we do is have a DDL (that looks a lot like Malli to be honest) with which we describe the shapes of resources we have, and the API commands that work over resources. That generates both a router and handler that gives the handling function a completely 'sanitized' input payload. We couple this with a standard interceptor style library, which we also wrote and open sourced, which makes standing up APIs relatively fast. So for both the API layer and the orchestration layer in our platform that's our go-to approach.
+
+For requests from orchestrators to agents we tend to use GRPC, because that gives us a _lingua franca_ between the Go world and the Clojure world. And we tend to be in the realm of systems where we also want more throughput out of our RPC, so we are willing to pay the penalty of going through code generation in Java for protobuf.
+
+import exodc from '../../assets/blog/exoscale-datacentres.png'
+
+<Image alt='Exoscale data centre locations across Europe' width={700} src={exodc} class='mx-auto' />
+
+
+**Joe: Why do you think Clojure has been successful for the API and orchestration layers of the system?**
+
+**Pierre-Yves:** Well mostly because at the orchestration layer we take a lot of decisions over data. That's a public part of our library ecosystem as well. We have a trifecta of libraries which we use to build orchestrators, which allow us with a very small amount of codes to stand up an orchestration platform.
+
+The first thing we have is not super exciting, but it's a SQL library called [seql](https://github.com/exoscale/seql) that allows us to use Clojure specs to infer a database schema. We augment specs with a few things, like relationships between entities, and this gives us the ability to write _pull syntax_-style queries over our schemas, and so allows us to interact with our SQL databases very simply, because at the cardinality that we work with, SQL is a perfect fit. It's also an extremely solid platform on which to base infrastructure orchestration products. Some of the things we write tend to be relatively low in the chain of infrastructure, so we need to rely on as few moving pieces as possible. So that's the first part.
+
+The second part is that we wrote a _Moore machine_-type finite state machine library called [automata](https://github.com/exoscale/automata), which we run events on. This allows us to understand which side effects we need to produce on the infrastructure.
+
+The last piece of the puzzle is called [ablauf](https://github.com/exoscale/ablauf), also open source, which is a system for expressing workflows long running side effects, because some of the side effects we produce tend to take a relatively long time to achieve. So here you write 'program', if you will, in ablauf, using a nice DSL on top of Clojure. That produces an AST, that is data, that gets picked up and executed. So it's continuation-passing-style-inspired, relatively easy to work with, and a central piece of how we distribute work. These three libraries total to something like a couple of thousand lines of code, and in any other languages would be, extremely, large libraries and much more complex.
+
+We were able to take advantage of this stack to write five or six orchestrators already. One for our network load balancers, one for our private networks, the Kubernetes orchestration platform also relies on this. Our turnaround time for new orchestrators tends to be relatively small thanks to this approach.
+
+You know, not that it wouldn't be possible with any other language, but here I think the data-first approach of Clojure really makes it a nice fit. Another example is the way in which we deal with storage for our object storage and block storage ecosystem. It relies on fast allocation decisions that need to take in a number of constraints when placing data into relevant storage areas. Here again, you have a topology that can be easily reduced to data and then a pure function of this data to the right candidates in terms of target storage areas. Here also Clojure shows its strengths.
+
+**Joe: So it sounds like at every stage in this process, you are looking for a data-centric approach, and this simplifies the solution, and simplifies the execution of each area of the platform.**
+
+**Pierre-Yves:** Exactly. And it also greatly simplifies our ability to prove our systems, because reducing everything to data allows verification. Typically, the automata library allows us to ensure that we don't have non-terminal states and that we produce the right side effects, because we decoupled this finite state machine from the shape of the target side effects. They get produced in a different stage. So every step of the way we have good controls on the quality of the system. And that allowed us to also run property-based tests.
+
+Again, those are all things that you don't _need_ Clojure for, but Clojure makes them relatively simple to apply, and I think simplicity wins.
+
+**Joe: Yeah. The infrastructure estate represents a potentially massive stateful thing, so it's possible to get yourselves into a very chaotic situation if you don't have a provably sound approach to side-effects on that state, or to the orchestration challenge.**
+
+## The hidden benefits of open source
+
+**Joe: One thing that strikes me is that you have done a lot to open-source the elements that you are working with. It sounds like you are always looking to take a problem and generalise it so that you have a general-purpose library to solve this problem. Why would you say you've done that?**
+
+**Pierre-Yves:** I think it's rooted in many of the early joiners in Exoscale's history. We were all very involved in open source. I was a member of the OpenBSD operating system development team for a really long time. We rely heavily on open source. A lot of the core virtualization primitives we use we did not write ourselves - they're present in Linux.
+
+We participated heavily in the 2014/2015 front-running projects in the observability space. The world has moved on a bit since then, to other tooling, but we heavily invested in contributing to [CollectD](https://collectd.org/), [graphite](https://graphiteapp.org/), and [Riemann](https://riemann.io/). I was maintaining Riemann for quite a while. So our way to participate, to some extent. I'm a member of the Apache Software Foundation as well, and the Apache Cloud Stack, which we based our initial compute orchestrator on (before we had time to tackle that space), we also contributed to.
+
+There's also a very selfish goal of showing the things we can do and attracting people who are interested in these things. I mean, it's not purely altruistic. I think, a bit of it is that you slowly hone the perfect stack you could write all of your software in, like, there's this evergreen goal of constantly improving. Clearly, though, some of the libraries we wrote and open-sourced tend to fit well with the Clojure approach. We have one for managing errors (the spec additions I was mentioning), they are small, and meaningful enough that it truly doesn't hurt to open source, and there's potentially an uptick or benefit elsewhere.
+
+To be honest, right now, we don't see a lot of these libraries being used and we don't market them enough. I think that's still a function of how pressed for time we are on some of the things we do. But there is an intent. For instance, we open sourced the original object storage platform we wrote. We are now at our 4th generation and we have plans to do another open-sourcing effort here to showcase the attempts.
+
+We're happy to share because yes the software is very important, but, you know, it's not a thing that you install and _voilà_ you're an infrastructure-as-a-service provider all of a sudden. It takes a bit more.
+
+**Joe: The other thing that seems clear is that, even if you put out a new open source library and it doesn't attract a big community of users and contributors outside Exoscale, it's nice that working in the open keeps you solving the problem in a general/pure way, because you don't allow concepts that shouldn't be there to leak in (like the specifics of other parts of the system that really shouldn't be there).**
+
+**If you're solving that problem correctly, and as open source, it forces you to implement a general solution. Your seql library for instance, is solving one problem, cleanly and it doesn't stray into other areas. The result is very useful and reusable software pieces, and open sourcing it you are almost guaranteeing that it's going to stay on that path.**
+
+**Pierre-Yves:** Yeah, exactly. Good point. Some of the projects that are not open source tend to be in a state where we know there's a few concerns that should be split out, separated, and moved to a different location.
+
+The library approach forces you into thinking hard about the types of coupling you're doing in the systems you write, and forces you to take as few shortcuts as possible.
+
+We couple this with an approach where we force our teams into using common idioms across different teams and so converging towards similar libraries. We are a bit strict in that regard. It does make for an initial learning curve for Clojure at Exoscale, which is steeper than you know, standing up something with a Compojure and off you go, but it does benefit us over time.
+
+## Code sharing
+
+**Joe: Do you use any ClojureScript?**
+
+**Pierre-Yves:** Oh yeah, our consumer-facing web portal is fully implemented in ClojureScript. We use [re-frame](https://github.com/day8/re-frame) (after a few experiments with [Om](https://github.com/omcljs/om) a long time ago).
+
+We do now leverage cljc quite a bit as well [to share code between client and server]. The DDL for describing resources and payload shapes that we use to produce our API is also used on the front-end to have a shorter turnaround for standing-up forms and displaying form field validation errors. They're all inferred from the same source, which forces us into being correct at the source.
+
+If we get the DDL correct, we know that with a little effort we will expose a good user experience on the front-end as well. Of course, over time, we tend to add specific behaviour because it doesn't always fit exactly one-to-one, but cljc does make our life way easier, especially for the initial landing of new functionality in the web portal.
+
+**Joe: It seems that the only way of really getting the cloud tooling side right is to have a very strong universal service definition, with data in those schemas that describes all operations and payloads, and everything that end-users use (whether it's a CLI, the web portal, or SDKs) has to be derived from this.**
+
+**Pierre-Yves:** Exactly. It's a fine line though, in the sense that especially in a large Clojure team (because we're now a relatively large team of Clojurians) there's always this appeal of _"there's only data"_ and you easily trick yourself into building the architectural data definition that will solve all of the needs. This essentially tends to become a weird AST-style structure that's impossible to write and no one understands anymore. So there is a fine line to work to.
+
+You were asking about libraries and one we use extensively is [JUXT's aero](https://github.com/juxt/aero). We wrote a workload description tool for our internal deployments (mostly to Kubernetes), which gets us a bit closer to a PaaS. That's heavily based on aero. Our API definitions also use aero extensively. It's been one of these simple libraries that really makes a lot of difference over time.
+
+**Joe: Is there anything that you would like to see next from the Clojure core team or from the Clojure community?**
+
+**Pierre-Yves:** Well, not so much anymore. So spec 2 could be a thing. mm-hmm. A few years ago I would've told you, _"a healthy core.async would be nice"_. But we fully went away from core.async since then, and we're heavily invested with [aleph](https://github.com/clj-commons/aleph) and [manifold](https://github.com/clj-commons/manifold) currently, and now proudly host one of the core maintainers.
+
+I still think every now and then that a different target would be good, that would allow us to do what we do in Go, but in Clojure. I know the bet here is [GraalVM](https://www.graalvm.org/), but I'm not sure it will ever be the right fit for the types of things we do, close to systems.
+
+Right now we are relatively happy with what we have, and I think the library-first approach of Clojure is good. The core elements of the language we use quite a lot, so transducers, spec, all of the more recent additions to the language. We started our move towards deps.edn as well. The rest, no, I wouldn't say we're waiting on much.
+
+As I say, a more easy-to-work-with spec would be nice, but we're not holding our breaths.
+
+## Hiring
+
+**Joe: A topic that always comes up sooner or later is hiring. How do you find hiring Clojure engineers? What's your take on Clojure and hiring?**
+
+**Pierre-Yves:** So we don't specifically hire Clojure people. That's not something we force ourselves into doing. We now have enough experts to bring people over to the language, if necessary.
+
+We're structured around nine or ten teams of anywhere between four and six people, that all focus on specific areas. So it's super easy to find people to join the team that does data transformation with Clojure, like Kafka consumers and stream processing. Extremely easy because it's the archetypal Clojure project. For the object storage part, it's a bit harder because here you have to find a fit of people, so a mixture of people who are able to write Clojure, but who also have mechanical sympathy, understand the underlying system and how to best work with it.
+
+It's not the typical Clojure project, and that part is harder, but would also be hard if it was Java, or C++, or whatever. I think it's a tough combination of skills to find. The same can be said of the team that works with our Kubernetes orchestration platform - you are a bit stretched out because there's very high-level concerns like data transformation and writing orchestrators with our libraries, so very involved Clojure work, but also you have to understand the underlying product. Which is a beast, in and of itself (Kubernetes). So bridging these two things tends to be tough, and our hiring struggles are more building the rightly shaped teams.
+
+**Joe: Do you find that using Clojure is a good way of attracting engineers?**
+
+**Pierre-Yves:** Yeah. At least with Clojurians [Slack], and the few avenues we have to post jobs, we tend to always have a good pipeline of applicants whenever we want to hire. So there has not been a problem so far.
+
+I think to many Clojurians we're not the most attractive company because we work with the lower layers of systems, so it's maybe not as appealing as some other jobs, potentially, but we always have a good pipeline. Anyone who's interested in the language but also has a knack for the operational part of the work tends to fit relatively easily with the team.
+
+We are always looking for that rare breed of person, someone wanting to get into the language [Clojure], but coming with a bit of operational experience, and also some lower-level knowledge.
+
+**Joe: Thank you very much for your time Pierre-Yves, lovely to speak with you.**
+
+**Pierre-Yves:** Likewise, cheers. Have a nice day!
