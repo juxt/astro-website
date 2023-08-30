@@ -45,7 +45,7 @@
     ]
   },
   "dependencies": {
-    "@preact/compat": "^17.1.1",
+    "@preact/compat": "npm:@preact/compat",
     "@tailwindui/react": "^0.1.1",
     "instantsearch.css": "^7.4.5",
     "markdown-it": "^13.0.1",
