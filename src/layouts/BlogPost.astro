@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import '../blog.css'
 import { BlogCard } from '@components/BlogCard'
@@ -13,7 +13,7 @@ import {
 import { Blog, Person } from '@utils/types'
 import { parseBlogs } from '@utils/common'
 import Layout from './Layout.astro'
-import { getImage } from '@astrojs/image'
+import { getImage } from 'astro:assets'
 
 const { title, description, heroImage, category, author, draft } = Astro.props
   .content as Blog
@@ -182,21 +182,25 @@ const categoryHref = `/blog?${encodeURI(
               </div>
             </div>
             <div class='flex flex-col gap-1 text-left'>
-              {name && lastName && (
-                <div
-                  class:list={[
-                    'text-lg font-bold text-black dark:text-zinc-100 underline-offset-2',
-                    { 'group-hover:underline': isExpert }
-                  ]}
-                >
-                  <div>{`${name} ${lastName}`}</div>
-                </div>
-              )}
-              {jobTitle && (
-                <div class='text-zinc-700 leading-snug w-36 dark:text-zinc-300'>
-                  {jobTitle}
-                </div>
-              )}
+              {
+                name && lastName && (
+                  <div
+                    class:list={[
+                      'text-lg font-bold text-black dark:text-zinc-100 underline-offset-2',
+                      { 'group-hover:underline': isExpert }
+                    ]}
+                  >
+                    <div>{`${name} ${lastName}`}</div>
+                  </div>
+                )
+              }
+              {
+                jobTitle && (
+                  <div class='text-zinc-700 leading-snug w-36 dark:text-zinc-300'>
+                    {jobTitle}
+                  </div>
+                )
+              }
             </div>
           </a>
         </div>
@@ -255,11 +259,13 @@ const categoryHref = `/blog?${encodeURI(
     <div
       class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10 pb-24'
     >
-      {finalResources.map((blog) => (
-        <div>
-          <BlogCard {...blog} />
-        </div>
-      ))}
+      {
+        finalResources.map((blog) => (
+          <div>
+            <BlogCard {...blog} />
+          </div>
+        ))
+      }
     </div>
   </main>
 </Layout>

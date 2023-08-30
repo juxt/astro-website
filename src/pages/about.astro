@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import Banner from '@components/Banner.astro'
 import { LinkIcon } from '@components/Icons'
@@ -110,15 +110,17 @@ function imageToFilename(image: string) {
       <div
         class='grid md:grid-cols-[repeat(2,_20rem)] xl:grid-cols-[repeat(3,_20rem)] justify-center gap-10'
       >
-        {values.map(([initial, value, text]) => (
-          <div class='p-4 flex flex-col gap-4'>
-            <div class='text-6xl text-center font-bold text-slate-500'>
-              {initial}
+        {
+          values.map(([initial, value, text]) => (
+            <div class='p-4 flex flex-col gap-4'>
+              <div class='text-6xl text-center font-bold text-slate-500'>
+                {initial}
+              </div>
+              <div class='text-4xl text-center font-bold'>{value}</div>
+              <div class='text-center'>{text}</div>
             </div>
-            <div class='text-4xl text-center font-bold'>{value}</div>
-            <div class='text-center'>{text}</div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </Section>
     <Section className='bg-black text-white py-20'>
@@ -126,43 +128,47 @@ function imageToFilename(image: string) {
       <div
         class='grid md:grid-cols-[repeat(2,_auto)] xl:grid-cols-[repeat(3,_auto)] justify-center gap-28'
       >
-        {featuredPeople.map(
-          ({ image, jobTitle, name, lastName, expert, code }) => (
-            <div class='flex w-64 flex-col gap-4'>
-              <div class='group relative w-full'>
-                <Image
-                  alt='image'
-                  width={300}
-                  quality={80}
-                  alt={`${name} picture`}
-                  class='w-full object-cover'
-                  src={import(`../assets/people/${imageToFilename(image)}.jpg`)}
-                />
-                {expert && (
-                  <a
-                    href={`/people/${code}`}
-                    class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
-                  >
-                    <div class='flex gap-2 justify-center items-center'>
-                      <LinkIcon className='w-5 h-5 fill-slate-800' />
-                      <p class='text-lg font-medium text-slate-800'>
-                        Visit Profile
-                      </p>
-                    </div>
-                  </a>
-                )}
-              </div>
-              <div>
-                <div class='text-sm uppercase text-juxt font-medium'>
-                  {jobTitle}
+        {
+          featuredPeople.map(
+            ({ image, jobTitle, name, lastName, expert, code }) => (
+              <div class='flex w-64 flex-col gap-4'>
+                <div class='group relative w-full'>
+                  <Image
+                    alt='image'
+                    width={300}
+                    quality={80}
+                    alt={`${name} picture`}
+                    class='w-full object-cover'
+                    src={import(
+                      `../assets/people/${imageToFilename(image)}.jpg`
+                    )}
+                  />
+                  {expert && (
+                    <a
+                      href={`/people/${code}`}
+                      class='cursor-pointer absolute bottom-0 w-full h-full flex justify-center items-center gap-4 py-2 px-4 bg-slate-100/60 backdrop-blur-sm group-hover:opacity-100 opacity-0 transition-opacity'
+                    >
+                      <div class='flex gap-2 justify-center items-center'>
+                        <LinkIcon className='w-5 h-5 fill-slate-800' />
+                        <p class='text-lg font-medium text-slate-800'>
+                          Visit Profile
+                        </p>
+                      </div>
+                    </a>
+                  )}
                 </div>
-                <div class='text-lg text-gray-300 font-light'>
-                  {name} {lastName}
+                <div>
+                  <div class='text-sm uppercase text-juxt font-medium'>
+                    {jobTitle}
+                  </div>
+                  <div class='text-lg text-gray-300 font-light'>
+                    {name} {lastName}
+                  </div>
                 </div>
               </div>
-            </div>
+            )
           )
-        )}
+        }
       </div>
     </Section>
     <Section>

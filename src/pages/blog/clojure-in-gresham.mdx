@@ -14,7 +14,7 @@ clojureIn:
   }
 ---
 
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 
 [Gresham](https://www.greshamtech.com/) is a financial technology business, with headquarters in London and offices across the UK, North America and Asia. In 2019, Gresham announced a partnership with a major bank to deliver a new dynamic cash management solution and banking platform.
 
@@ -269,7 +269,10 @@ I tend to write a test first, but still, with the REPL you’re working out the 
 
 **Mark:** Yes, definitely. We’ve had those things in the past, where there have been some fixtures or tests setup that must always be executed in a certain way. When we see that we always tend to break it apart, make a comment block up if you need to with parts you can run easily in the REPL.
 
-<span class='pullquote' text-content='If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off.'/>
+<span
+  class='pullquote'
+  text-content='If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off.'
+/>
 
 If you break functions up so that they just do one very small thing, you can run that directly in the REPL. Make sure you have ways to switch things on and off, bring Kafka up and down.
 

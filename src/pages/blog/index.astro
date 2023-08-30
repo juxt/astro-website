@@ -1,5 +1,5 @@
 ---
-import { getImage } from '@astrojs/image'
+import { getImage } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import { parseBlogs } from '@utils/common'
 import Banner from '@components/Banner.astro'
@@ -46,7 +46,9 @@ const blogBannerPicture = await getImage({
 ---
 
 <Layout navbar title='Blog'>
-  <Banner text='Blog' style={{ backgroundImage: `url(${blogBannerPicture})` }}
+  <Banner
+    text='Blog'
+    style={{ backgroundImage: `url(${blogBannerPicture})` }}
   />
   <BlogIndex client:only='preact' blogs={blogsByHref} />
 </Layout>

@@ -1,6 +1,6 @@
 ---
-import { Image } from '@astrojs/image/components'
-import { getImage } from '@astrojs/image'
+import { Image } from 'astro:assets'
+import { getImage } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import { parseBlogs, slugifyPath } from '@utils/common'
 import Banner from '@components/Banner.astro'
@@ -138,13 +138,15 @@ const featuredBlogs = await parseBlogs({
       }}
     />
     <div class='bg-black flex flex-wrap justify-center border-gray-800'>
-      {clientLogos.map((logo) => (
-        <img
-          src={`/images/client-logos/${logo}`}
-          alt=''
-          class='w-25 h-20 md:w-35 md:h-30'
-        />
-      ))}
+      {
+        clientLogos.map((logo) => (
+          <img
+            src={`/images/client-logos/${logo}`}
+            alt=''
+            class='w-25 h-20 md:w-35 md:h-30'
+          />
+        ))
+      }
     </div>
     <Section className='bg-yellow-600 py-12 text-white'>
       <h2 class='pb-4 text-3xl md:text-4xl'>
@@ -168,8 +170,8 @@ const featuredBlogs = await parseBlogs({
             <span class='font-bold text-juxt'>data</span>,
             <span class='font-bold text-juxt'>form</span>, and
             <span class='font-bold text-juxt'>code</span>
-             — their subtle interactions and couplings combine to have a suffocating
-            impact on software projects.
+              — their subtle interactions and couplings combine to have a
+            suffocating impact on software projects.
           </p>
           <p class=''>
             Our approach to building IT systems is defined by a unique
@@ -297,12 +299,11 @@ const featuredBlogs = await parseBlogs({
               and relationships, without constraints.
             </p>
             <p>
-              Simply put, we believe graph-oriented systems point us
-              towards the correct approach for data management, and
-              organizations, such as
+              Simply put, we believe graph-oriented systems point us towards the
+              correct approach for data management, and organizations, such as
               <span class='font-bold text-juxt'>Facebook</span> and
-              <span class='font-bold text-juxt'>Google</span> have proved how powerful
-              the widespread use of graph-structured data can be.
+              <span class='font-bold text-juxt'>Google</span> have proved how
+              powerful the widespread use of graph-structured data can be.
             </p>
           </div>
         </div>
@@ -324,10 +325,11 @@ const featuredBlogs = await parseBlogs({
               </span>
             </p>
             <p>
-              These are the <span class='font-bold text-juxt'>forms</span> we construct
-              for interpreting, analyzing and extracting value from our data. Tools
-              such as relational schemas and ontologies are common structures we
-              use for understanding, analyzing and managing our information.
+              These are the <span class='font-bold text-juxt'>forms</span> we
+              construct for interpreting, analyzing and extracting value from
+              our data. Tools such as relational schemas and ontologies are
+              common structures we use for understanding, analyzing and managing
+              our information.
             </p>
             <p>
               Too often, software developers will attempt to "codify" these
@@ -377,11 +379,12 @@ const featuredBlogs = await parseBlogs({
           <div class='font-extralight flex flex-col gap-6'>
             <p>
               The software <span class='italic'>patterns</span> and
-              <span class='italic'>practices</span> that underlie your application
-              architecture are certainly important, but less fundamentally relevant
-              than making the correct choices with regards to the structure of your
-              data in time. Assuming those other foundations are in place, we believe
-              that the best approach to code is to keep it
+              <span class='italic'>practices</span> that underlie your
+              application architecture are certainly important, but less
+              fundamentally relevant than making the correct choices with
+              regards to the structure of your data in time. Assuming those
+              other foundations are in place, we believe that the best approach
+              to code is to keep it
               <span class='italic'>short, readable</span> and
               <span class='italic'>expressive</span>.
             </p>

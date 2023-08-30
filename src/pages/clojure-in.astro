@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import podcastImage from '../assets/site/podcast-clojure-in.jpg'
 import { ClojureInBlogs } from '@components/ClojureInBlogs'
@@ -136,10 +136,10 @@ const finalResources = await parseBlogs({
             trade-offs in their decision to go with Clojure.
             <br />
             <br />
-            For those unfamiliar with Clojure, it's a dynamic, general-purpose programming
-            language, combining the approachability and interactive development of
-            a scripting language with an efficient and robust infrastructure for
-            multithreaded programming.
+             For those unfamiliar with Clojure, it's a dynamic, general-purpose
+            programming language, combining the approachability and interactive
+            development of a scripting language with an efficient and robust
+            infrastructure for multithreaded programming.
           </div>
         </div>
       </div>
@@ -161,24 +161,26 @@ const finalResources = await parseBlogs({
         <div
           class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(4,_1fr)] justify-center gap-6 pb-10 text-white'
         >
-          {podcasts.map((podcast) => {
-            return (
-              <a
-                href={podcast.href}
-                target='_blank'
-                class='flex flex-col justify-between gap-3 hover:underline'
-              >
-                <div class='text-lg'> {podcast.title}</div>
-                <Image
-                  alt='image'
-                  width={600}
-                  quality={80}
-                  class='aspect-square object-cover'
-                  src={podcastImage}
-                />
-              </a>
-            )
-          })}
+          {
+            podcasts.map((podcast) => {
+              return (
+                <a
+                  href={podcast.href}
+                  target='_blank'
+                  class='flex flex-col justify-between gap-3 hover:underline'
+                >
+                  <div class='text-lg'> {podcast.title}</div>
+                  <Image
+                    alt='image'
+                    width={600}
+                    quality={80}
+                    class='aspect-square object-cover'
+                    src={podcastImage}
+                  />
+                </a>
+              )
+            })
+          }
         </div>
         <a
           href='https://pod.link/juxtcast'
@@ -204,33 +206,35 @@ const finalResources = await parseBlogs({
         <div
           class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(4,_1fr)] justify-center gap-6 pb-10'
         >
-          {finalResources.map((blog) => {
-            return (
-              <a
-                href={`/blog/${blog.href}`}
-                target='_blank'
-                class='bg-white p-4 flex flex-col gap-4 justify-between text-black'
-              >
-                <div class='text-xl'>{blog.title}</div>
-                <div class='font-light'>{blog.description}</div>
-                <div class='flex gap-4 items-end'>
-                  <img
-                    class='w-20 h-20 object-cover'
-                    src={blog.person.image}
-                    alt=''
-                  />
-                  <div class='flex flex-col gap-1 text-sm'>
-                    <div class='text-black font-medium underline-offset-2'>
-                      <div>
-                        {blog.person.name} {blog.person.lastName}
+          {
+            finalResources.map((blog) => {
+              return (
+                <a
+                  href={`/blog/${blog.href}`}
+                  target='_blank'
+                  class='bg-white p-4 flex flex-col gap-4 justify-between text-black'
+                >
+                  <div class='text-xl'>{blog.title}</div>
+                  <div class='font-light'>{blog.description}</div>
+                  <div class='flex gap-4 items-end'>
+                    <img
+                      class='w-20 h-20 object-cover'
+                      src={blog.person.image}
+                      alt=''
+                    />
+                    <div class='flex flex-col gap-1 text-sm'>
+                      <div class='text-black font-medium underline-offset-2'>
+                        <div>
+                          {blog.person.name} {blog.person.lastName}
+                        </div>
                       </div>
+                      <div>{blog.person.jobTitle}</div>
                     </div>
-                    <div>{blog.person.jobTitle}</div>
                   </div>
-                </div>
-              </a>
-            )
-          })}
+                </a>
+              )
+            })
+          }
         </div>
 
         <a

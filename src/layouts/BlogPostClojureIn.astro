@@ -1,5 +1,5 @@
 ---
-import { getImage } from '@astrojs/image'
+import { getImage } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import '../blog.css'
 import DraftBanner from '@components/DraftBanner'
@@ -145,7 +145,7 @@ const clojureInPicture = await getImage({
         >
           {description}
         </h2>
-        <div class=' text-white font-thin'>
+        <div class='text-white font-thin'>
           {formatDate(publishedDate)}
         </div>
       </div>
@@ -185,7 +185,7 @@ const clojureInPicture = await getImage({
           </a>
         </div>
       </div>
-      <a href='mailto:info@juxt.pro' class='text-white underline '>
+      <a href='mailto:info@juxt.pro' class='text-white underline'>
         Contact us to share your story
       </a>
     </div>
@@ -225,44 +225,46 @@ const clojureInPicture = await getImage({
           <div
             class='grid lg:grid-cols-[repeat(2,_1fr)] gap-x-14 gap-y-14 py-12'
           >
-            {enrichedFinalBlogs.map((blog) => {
-              const [location, title] = blog.title.split(':')
-              return (
-                <div class='w-80 mx-auto'>
-                  <a
-                    href={`/blog/${blog.href}`}
-                    class='group cursor-pointer justify-end flex flex-col gap-4'
-                  >
-                    <div class='text-white flex flex-col justify-between'>
-                      <h3 class='text-lg font-semibold'>
-                        {location}: <br />
-                        {title}
-                      </h3>
-                      <h5 class='font-extralight'>{blog.description}</h5>
-                    </div>
-                    <img class='' alt='blog' src={blog.heroImage} />
-                    <div class='text-white font-semibold flex gap-2 items-center '>
-                      Read more
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke-width='1.5'
-                        stroke='currentColor'
-                        class='w-6 h-6'
-                        display='flex'
-                      >
-                        <path
-                          stroke-linecap='round'
-                          stroke-linejoin='round'
-                          d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'
-                        />
-                      </svg>
-                    </div>
-                  </a>
-                </div>
-              )
-            })}
+            {
+              enrichedFinalBlogs.map((blog) => {
+                const [location, title] = blog.title.split(':')
+                return (
+                  <div class='w-80 mx-auto'>
+                    <a
+                      href={`/blog/${blog.href}`}
+                      class='group cursor-pointer justify-end flex flex-col gap-4'
+                    >
+                      <div class='text-white flex flex-col justify-between'>
+                        <h3 class='text-lg font-semibold'>
+                          {location}: <br />
+                          {title}
+                        </h3>
+                        <h5 class='font-extralight'>{blog.description}</h5>
+                      </div>
+                      <img class='' alt='blog' src={blog.heroImage} />
+                      <div class='text-white font-semibold flex gap-2 items-center '>
+                        Read more
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke-width='1.5'
+                          stroke='currentColor'
+                          class='w-6 h-6'
+                          display='flex'
+                        >
+                          <path
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            d='M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5'
+                          />
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                )
+              })
+            }
           </div>
         </div>
         <div class='py-6 flex justify-center'>

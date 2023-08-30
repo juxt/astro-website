@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import Clickable from '@components/Clickable.astro'
 import { ChevronRightIcon, TickIcon } from '@components/Icons'
 import Section from '@components/Section.astro'
@@ -38,8 +38,8 @@ const threadsPicture = await getImage({
             <span class='font-bold text-juxt'>form</span>,
             <span class='font-bold text-juxt'>data</span>, and
             <span class='font-bold text-juxt'>time</span>
-             — their subtle interactions and couplings combine to have a suffocating
-            impact on software projects.
+              — their subtle interactions and couplings combine to have a
+            suffocating impact on software projects.
           </p>
           <p class=''>
             Our approach to building IT systems is defined by a unique
@@ -179,8 +179,8 @@ const threadsPicture = await getImage({
               towards the correct approach for data management, and
               organizations, such as
               <span class='font-bold text-juxt'>Facebook</span> and
-              <span class='font-bold text-juxt'>Google</span> have proved how powerful
-              the widespread use of graph-structured data can be.
+              <span class='font-bold text-juxt'>Google</span> have proved how
+              powerful the widespread use of graph-structured data can be.
             </p>
           </div>
         </div>
@@ -206,10 +206,11 @@ const threadsPicture = await getImage({
               </span>
             </p>
             <p>
-              These are the <span class='font-bold text-juxt'>forms</span> we construct
-              for interpreting, analyzing and extracting value from our data. Tools
-              such as relational schemas and ontologies are common structures we
-              use for understanding, analyzing and managing our information.
+              These are the <span class='font-bold text-juxt'>forms</span> we
+              construct for interpreting, analyzing and extracting value from
+              our data. Tools such as relational schemas and ontologies are
+              common structures we use for understanding, analyzing and managing
+              our information.
             </p>
             <p>
               Too often, software developers will attempt to "codify" these
@@ -263,11 +264,12 @@ const threadsPicture = await getImage({
           <div class='font-extralight flex flex-col gap-6'>
             <p>
               The software <span class='italic'>patterns</span> and
-              <span class='italic'>practices</span> that underlie your application
-              architecture are certainly important, but less fundamentally relevant
-              than making the correct choices with regards to the structure of your
-              data in time. Assuming those other foundations are in place, we believe
-              that the best approach to code is to keep it
+              <span class='italic'>practices</span> that underlie your
+              application architecture are certainly important, but less
+              fundamentally relevant than making the correct choices with
+              regards to the structure of your data in time. Assuming those
+              other foundations are in place, we believe that the best approach
+              to code is to keep it
               <span class='italic'>short, readable</span> and
               <span class='italic'>expressive</span>.
             </p>

@@ -90,7 +90,7 @@ category: 'blog'
 
 ---
 
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 import hero from '../../assets/blog/mock.jpg'
 
 # hello world

@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import Banner from '@components/Banner.astro'
 import Clickable from '@components/Clickable.astro'
 import ContactUsMini from '@components/ContactUsMini'
@@ -51,63 +51,71 @@ const servicesBannerPicture = await getImage({
       <div
         class='pt-16 flex flex-col items-center sm:items-start sm:flex-row flex-wrap gap-6'
       >
-        {servicesParsed.map((service, idx) => (
-          <Clickable>
-            <a href={`#${idx}`} class='capitalize block py-1.5 px-1.5 text-2xl'>
-              {service.title}
-            </a>
-          </Clickable>
-        ))}
+        {
+          servicesParsed.map((service, idx) => (
+            <Clickable>
+              <a
+                href={`#${idx}`}
+                class='capitalize block py-1.5 px-1.5 text-2xl'
+              >
+                {service.title}
+              </a>
+            </Clickable>
+          ))
+        }
       </div>
     </Section>
     <div class='flex flex-col text-black'>
-      {servicesParsed.map((service, idx) => {
-        const isDark = idx % 2 !== 0
-        const isLeft = service.direction === 'left' || !service.direction
-        const isCenter = service.direction === 'center'
+      {
+        servicesParsed.map((service, idx) => {
+          const isDark = idx % 2 !== 0
+          const isLeft = service.direction === 'left' || !service.direction
+          const isCenter = service.direction === 'center'
 
-        const sectionStyle = isLeft
-          ? 'flex-col-reverse xl:flex-row-reverse'
-          : isCenter
-          ? 'flex-col flex-col-reverse'
-          : 'flex-col-reverse xl:flex-row'
+          const sectionStyle = isLeft
+            ? 'flex-col-reverse xl:flex-row-reverse'
+            : isCenter
+            ? 'flex-col flex-col-reverse'
+            : 'flex-col-reverse xl:flex-row'
 
-        const bannerNoExtension = service.image.split('.')[0]
+          const bannerNoExtension = service.image.split('.')[0]
 
-        return (
-          <Section
-            id={`${idx}`}
-            className={`${isDark ? 'bg-black text-white' : ''} py-28`}
-          >
-            <div
-              class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+          return (
+            <Section
+              id={`${idx}`}
+              className={`${isDark ? 'bg-black text-white' : ''} py-28`}
             >
-              <Image
-                width={1300}
-                quality={100}
-                class={`${
-                  isCenter ? 'place-self-center' : ' xl:w-1/2'
-                } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
-                alt='award'
-                src={import(`../assets/get-started/${bannerNoExtension}.jpg`)}
-              />
-              <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
-                <h2 class='text-5xl font-light pb-8'>{service.title}</h2>
-                <div class='flex flex-col gap-8'>
-                  <div
-                    class='flex [&_li]:list-disc flex-col gap-6 text-lg font-extralight'
-                   {/* eslint-disable-next-line */}
-                    set:html={service.content}
-                  />
+              <div
+                class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+              >
+                <Image
+                  width={1300}
+                  quality={100}
+                  class={`${
+                    isCenter ? 'place-self-center' : ' xl:w-1/2'
+                  } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
+                  alt='award'
+                  src={import(`../assets/get-started/${bannerNoExtension}.jpg`)}
+                />
+                <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
+                  <h2 class='text-5xl font-light pb-8'>{service.title}</h2>
+                  <div class='flex flex-col gap-8'>
+                    <div
+                      class='flex [&_li]:list-disc flex-col gap-6 text-lg font-extralight'
+                      {
+                      /* eslint-disable-next-line */ }
+                      set:html={service.content}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Section>
-        )
-      })}
+            </Section>
+          )
+        })
+      }
     </div>
-    <Section className="pt-28">
-      <ContactUsMini/>
+    <Section className='pt-28'>
+      <ContactUsMini />
     </Section>
   </main>
 </Layout>
