@@ -46,7 +46,7 @@ There are properties we can build into our software systems that provide safety 
 
 For example, imagine how much more confidence is created by the mere presence of an 'undo' button in your spreadsheet.
 
-Or my favourite, the feature in GMail to 'undo' the sending of an email up to 30 seconds after hitting send!
+Or my favourite, the feature in Gmail to 'undo' the sending of an email up to 30 seconds after hitting send!
 
 Users often make mistakes, we’re all human after all! One of the many benefits of adopting the principle of <a href='https://tidyfirst.substack.com/p/eventual-business-consistency' target='_blank'>bitemporality (AKA "eventual business consistency")</a> in your platform is that users' mistakes can be rectified at a later date, but without losing the information about when the mistake was made, and by whom.
 
