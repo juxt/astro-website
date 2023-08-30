@@ -14,6 +14,8 @@ tags:
 
 In our latest JUXT Cast we invited <a href='https://en.wikipedia.org/wiki/Kent_Beck' target='_blank'>Kent Beck</a>, author of the original XP book, <a href='https://www.amazon.co.uk/Extreme-Programming-Explained-Embrace-Change/dp/0321278658' target='_blank'> Extreme Programming <br> Explained</a>.
 
+<iframe class='md:w-[560px] w-full h-[315px]' src="https://www.youtube.com/embed/gaRyeGrp0vU?si=SVjIlkNveDfwKfZz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 Today, you might sub-title this book as ‘Agile, the good parts’, since XP introduced many of the practices that developers still value, such as Test Driven Development, Continuous Integration and Pair Programming.
 
 This blog post touches on some of the themes that came up in our discussion.
@@ -50,12 +52,6 @@ Users often make mistakes, we’re all human after all! One of the many benefits
 
 When systems are sympathetic and forgiving to users, they feel a greater sense of safety. That can only be a good thing.
 
+This JUXT Cast episode is also available on Pinecast: https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck
+
 Happy listening!
-
-Episode available here:
-
-Pinecast: https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck
-
-YouTube:
-
-<iframe class='md:w-[560px] w-full h-[315px]' src="https://www.youtube.com/embed/gaRyeGrp0vU?si=SVjIlkNveDfwKfZz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
