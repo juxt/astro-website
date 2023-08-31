@@ -8,7 +8,7 @@ import {
   RefinementList,
   SearchBox,
   useHits
-} from 'react-instantsearch-hooks-web'
+} from 'react-instantsearch'
 import { BlogCard } from '@components/BlogCard'
 import { Blog } from '@components/utils/types'
 

@@ -1,4 +1,3 @@
-import image from '@astrojs/image'
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import { defineConfig } from 'astro/config'
@@ -14,9 +13,6 @@ export default defineConfig({
   integrations: [
     mdx(),
     preact(),
-    image({
-      serviceEntryPoint: '@astrojs/image/sharp'
-    })
   ],
   site: 'https://juxt.pro/',
   markdown: {

@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import Banner from '@components/Banner.astro'
 import Section from '@components/Section.astro'
 import Layout from '@layouts/Layout.astro'
@@ -68,27 +68,29 @@ const boxStructure = [
       <div
         class='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'
       >
-        {boxStructure.map((box) => {
-          return (
-            <a
-              href={box.href}
-              class='group h-full group cursor-pointer flex flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
-            >
-              <div class='text-white p-4 text-2xl group-hover:text-juxt transition-colors'>
-                {box.title}
-              </div>
-              <div class='flex-grow'>
-                <Image
-                  alt='image'
-                  width={800}
-                  quality={80}
-                  class='w-full h-full object-cover'
-                  src={box.src}
-                />
-              </div>
-            </a>
-          )
-        })}
+        {
+          boxStructure.map((box) => {
+            return (
+              <a
+                href={box.href}
+                class='group h-full group cursor-pointer flex flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 min-h-[24rem] overflow-hidden relative shadow-lg hover:shadow-2xl transition-all'
+              >
+                <div class='text-white p-4 text-2xl group-hover:text-juxt transition-colors'>
+                  {box.title}
+                </div>
+                <div class='flex-grow'>
+                  <Image
+                    alt='image'
+                    width={800}
+                    quality={80}
+                    class='w-full h-full object-cover'
+                    src={box.src}
+                  />
+                </div>
+              </a>
+            )
+          })
+        }
       </div>
     </Section>
 

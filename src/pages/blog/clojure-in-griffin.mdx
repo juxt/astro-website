@@ -14,7 +14,7 @@ clojureIn:
   }
 ---
 
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 
 [Griffin](https://griffin.com/) is a banking-as-a-service platform and part of the new wave of API-driven banking. Their services allow Fintech businesses to integrate banking features quickly and securely. In March 2023, Griffin was granted their UK banking license by the Financial Conduct Authority, making them a fully-regulated UK bank.
 
@@ -24,15 +24,25 @@ import griflight from '../../assets/blog/griffin-logo-on-light.png'
 
 import grifdark from '../../assets/blog/griffin-logo-on-dark.png'
 
-<Image class='not-prose dark:hidden' alt='Griffin' width={300} src={griflight} />
+<Image
+  class='not-prose dark:hidden'
+  alt='Griffin'
+  width={300}
+  src={griflight}
+/>
 
-<Image class='not-prose hidden dark:block' alt='Griffin' width={300} src={grifdark} />
+<Image
+  class='not-prose hidden dark:block'
+  alt='Griffin'
+  width={300}
+  src={grifdark}
+/>
 
 **Joe: So what does Griffin do?**
 
 **Allen:** We are a fully regulated UK bank. We call it _“the bank you can build on”_. That means we’re like AWS for banking. So there’s an API to onboard a customer, an API to create a bank account, an API to make a payment.
 
-By law, fintechs must work with a bank to do these things, and right now that means a legacy high street bank with mainframes. Griffin is the bank *plus* technology platform that all future fintechs would build on.
+By law, fintechs must work with a bank to do these things, and right now that means a legacy high street bank with mainframes. Griffin is the bank _plus_ technology platform that all future fintechs would build on.
 
 We got our license in March and we’re still in what’s called ‘mobilization’, which is basically like training wheels. The training wheels come off when we complete an audit, raise some more money, and finish writing the code. That should be Q3 or Q4 this year.
 
@@ -44,7 +54,10 @@ We got our license in March and we’re still in what’s called ‘mobilization
 
 **Allen:** I mean, the flippant answer is: because I liked it. The serious answer is: Clojure is the right choice because it’s immutable, it’s powerful; it’s a good fit for financial services and anything that needs an audit log.
 
-<span class='pullquote left' text-content="Clojure is the right choice because it’s immutable, it’s powerful; it’s a good fit for financial services and anything that needs an audit log."/>
+<span
+  class='pullquote left'
+  text-content='Clojure is the right choice because it’s immutable, it’s powerful; it’s a good fit for financial services and anything that needs an audit log.'
+/>
 
 There is a longer story about how I arrived at Clojure. I graduated from college (you UK folks would say ‘university’) in 2005, and I got a boring enterprise software job and, uh, was pretty unhappy with it. Then I started reading Paul Graham, and he was writing about how you should both start a startup and work in Lisp. And so I said, Hey, let’s do both of those. At the time he was saying, don’t use Common Lisp because it’s old, fragmented, and there wasn’t a good implementation that did everything. There was like one implementation that was good at threads and another implementation that was good at, let’s say, graphics. And if you wanted to do graphics and threads, you were outta luck. He was saying, _“Wait, wait, I’m gonna work on this”_.
 
@@ -54,7 +67,12 @@ I looked at Clojure and I said, _“Well, that’s way better than what I would�
 
 import grifounders from '../../assets/blog/griffin-founders.jpg'
 
-<Image alt='Griffin Founders, Allen Rohner and David Jarvis' width={600} src={grifounders} class='mx-auto' />
+<Image
+  alt='Griffin Founders, Allen Rohner and David Jarvis'
+  width={600}
+  src={grifounders}
+  class='mx-auto'
+/>
 
 David later went on to work at Standard Treasury, which was a YC company that was trying to sell modern APIs to US banks. That ended up not working out. Too late in Standard Treasury’s runway, they said, _“Instead of trying to sell the banks, let’s *become* a bank”_. They figured that out too late. David always liked the idea and he saw Monzo get authorized in 2017. He said, _“Well, if Monzo can get authorized for this retail bank, then we can get authorized for this tech infrastructure bank”_.
 
@@ -68,7 +86,10 @@ So, by this point, I’d been using Clojure for a decade and it worked great at 
 
 **Allen:** I did at first, but my perspective has changed. For the first couple of years I didn’t appreciate it [the JVM]. But now I’ve seen other niche startup languages try to grow, and they run into the library problems and run into problems making the compiler and the runtime fast. It’s become obvious to me that the JVM is a huge benefit.
 
-<span class='pullquote right' text-content="[N]ow I've seen other niche startup languages try to grow, ... it's become obvious to me that the JVM is a huge benefit."/>
+<span
+  class='pullquote right'
+  text-content="[N]ow I've seen other niche startup languages try to grow, ... it's become obvious to me that the JVM is a huge benefit."
+/>
 
 **Joe: When you were working on CircleCI and also when you were starting Griffin, were you mindful that this choice of language and technology would have an impact? Did you feel that using Clojure said something about the business?**
 
@@ -118,7 +139,10 @@ If you had a database and some separate messaging like ZeroMQ, Rabbit, Kafka, yo
 
 One architectural choice that we made that I highly, highly recommend is: Keep your business logic as dumb and clean as possible. For these individual log processors, if you look at the namespace, it’s almost entirely pure Clojure. No third-party libraries, and very few side effects.
 
-<span class='pullquote left' text-content="One architectural choice that we made that I highly, highly recommend is: Keep your business logic as dumb and clean as possible... We have a function that takes a Clojure map in and I write a Clojure map out."/>
+<span
+  class='pullquote left'
+  text-content='One architectural choice that we made that I highly, highly recommend is: Keep your business logic as dumb and clean as possible... We have a function that takes a Clojure map in and I write a Clojure map out.'
+/>
 
 A log processor is function that takes a Clojure map in and returns one or more Clojure maps out. There’s a protocol for proc state, but it’s a protocol so you don’t know what’s on the other side of that. So yeah, keep the business logic as clean as possible, with as few dependencies as possible, and then interact with the outside world via protocols.
 
@@ -148,7 +172,10 @@ That separation is very useful.
 
 Five years ago, this guy wrote a blog post. His argument was that you don’t need Component or Integrant, or any of that. All you need is `with-open`. You get lexical scope, you get the right-hand side of declaring your bindings to construct things. And then because of how the introduction of bindings works, it forces you to declare your things in order.
 
-<span class='pullquote right' text-content="[Y]ou don't need Component or Integrant, or any of that. All you need is with-open."/>
+<span
+  class='pullquote right'
+  text-content="[Y]ou don't need Component or Integrant, or any of that. All you need is with-open."
+/>
 
 There’s a couple of little helpers. One of them is for things that have state but don’t implement `Closeable`, or for things that are stateless, so you can declare them in the `with-open` block.
 

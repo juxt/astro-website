@@ -5,7 +5,7 @@ import { capitalizeFirstLetter, currentPage } from '@utils/common'
 
 import 'instantsearch.css/themes/satellite.css'
 import '../algolia.css'
-import { getImage } from '@astrojs/image'
+import { getImage } from 'astro:assets'
 
 type LayoutProps = {
   title?: string
@@ -64,7 +64,7 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   // they're going to fix this soon so 🤷‍♂️
   const img = await import(`../assets/blog/${ogImage}.jpg`)
   const { src } = await getImage({
-    src: img.default.src,
+    src: img.default,
     width: 1200,
     alt: 'blog background',
     height: 630
@@ -74,33 +74,41 @@ if (seo[currentPageName] && seo[currentPageName].image) {
 const metaTitle = ogTitle ?? currentPageName
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
-    {currentDescription && (
-      <meta name='description' content={currentDescription} />
-    )}
+    {
+      currentDescription && (
+        <meta name='description' content={currentDescription} />
+      )
+    }
     <!-- Meta Tags -->
     <meta property='og:url' content={url.href} />
     <meta property='og:type' content='website' />
     <meta property='og:title' content={metaTitle} />
-    {currentDescription && (
-      <meta property='og:description' content={currentDescription} />
-    )}
+    {
+      currentDescription && (
+        <meta property='og:description' content={currentDescription} />
+      )
+    }
     {imageForShare && <meta property='og:image' content={imageForShare} />}
-    {imageForShare && (
-      <meta property='og:image:secure_url' content={imageForShare} />
-    )}
+    {
+      imageForShare && (
+        <meta property='og:image:secure_url' content={imageForShare} />
+      )
+    }
 
     <!-- Twitter Meta Tags -->
     <meta name='twitter:card' content='summary_large_image' />
     <meta property='twitter:domain' content={url.hostname} />
     <meta property='twitter:url' content={url.href} />
     <meta name='twitter:title' content={metaTitle} />
-    {currentDescription && (
-      <meta name='twitter:description' content={currentDescription} />
-    )}
+    {
+      currentDescription && (
+        <meta name='twitter:description' content={currentDescription} />
+      )
+    }
     {imageForShare && <meta name='twitter:image' content={imageForShare} />}
 
     <meta name='viewport' content='width=device-width' />
@@ -135,10 +143,7 @@ const metaTitle = ogTitle ?? currentPageName
       async
       defer
       data-website-id='4a088aa2-1e6f-4f97-9e95-9619983468de'
-      src='https://bunseki.juxt.pro/t.js'
-    >
-
-    </script>
+      src='https://bunseki.juxt.pro/t.js'></script>
   </head>
   <body
     class:list={[

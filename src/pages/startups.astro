@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import Banner from '@components/Banner.astro'
 import Section from '@components/Section.astro'
 import Layout from '@layouts/Layout.astro'
@@ -52,84 +52,86 @@ const startupPicture = await getImage({
         </h2>
         <div class='text-white text-xl font-extralight leading-normal'>
           We work closely with startup founders to understand the mission deeply
-          and launch an MVP. Make JUXT your technical co-founder and we can bring a wealth of experience
-          and judgment to the early, critical stages of your startup journey.
+          and launch an MVP. Make JUXT your technical co-founder and we can
+          bring a wealth of experience and judgment to the early, critical
+          stages of your startup journey.
         </div>
       </div>
     </Section>
 
-
     <div class='flex flex-col text-black'>
-      {startUpsParsed.map((startup, idx) => {
-        const isDark = idx % 2 !== 0
-        const isLeft = startup.direction === 'left' || !startup.direction
-        const isCenter = startup.direction === 'center'
+      {
+        startUpsParsed.map((startup, idx) => {
+          const isDark = idx % 2 !== 0
+          const isLeft = startup.direction === 'left' || !startup.direction
+          const isCenter = startup.direction === 'center'
 
-        const sectionStyle = isLeft
-          ? 'flex-col-reverse xl:flex-row-reverse'
-          : isCenter
-          ? 'flex-col flex-col-reverse'
-          : 'flex-col-reverse xl:flex-row'
+          const sectionStyle = isLeft
+            ? 'flex-col-reverse xl:flex-row-reverse'
+            : isCenter
+            ? 'flex-col flex-col-reverse'
+            : 'flex-col-reverse xl:flex-row'
 
-        const bannerNoExtension = startup.image.split('.')[0]
+          const bannerNoExtension = startup.image.split('.')[0]
 
-        return (
-          <Section
-            id={`${idx}`}
-            className={`${isDark ? 'bg-black text-white' : ''} py-28`}
-          >
-            <div
-              class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+          return (
+            <Section
+              id={`${idx}`}
+              className={`${isDark ? 'bg-black text-white' : ''} py-28`}
             >
-              <Image
-                width={1300}
-                quality={80}
-                class={`${
-                  isCenter ? 'place-self-center' : ' xl:w-1/2'
-                } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
-                alt='award'
-                src={import(`../assets/startups/${bannerNoExtension}.jpg`)}
-              />
-              <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
-                <h2 class='text-5xl font-light pb-8'>{startup.title}</h2>
-                <div class='flex flex-col gap-8'>
-                  <div
-                    class='flex flex-col gap-6 text-lg font-extralight'
-                    {/* eslint-disable-next-line */}
-                    set:html={startup.content}
-                  />
-                  {startup.testimonial && (
-                    <div class='flex flex-col gap-2'>
-                      <div class='text-lg italic'>
-                        {`"${startup.testimonial.quote}"`}
+              <div
+                class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+              >
+                <Image
+                  width={1300}
+                  quality={80}
+                  class={`${
+                    isCenter ? 'place-self-center' : ' xl:w-1/2'
+                  } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
+                  alt='award'
+                  src={import(`../assets/startups/${bannerNoExtension}.jpg`)}
+                />
+                <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
+                  <h2 class='text-5xl font-light pb-8'>{startup.title}</h2>
+                  <div class='flex flex-col gap-8'>
+                    <div
+                      class='flex flex-col gap-6 text-lg font-extralight'
+                      {
+                      /* eslint-disable-next-line */ }
+                      set:html={startup.content}
+                    />
+                    {startup.testimonial && (
+                      <div class='flex flex-col gap-2'>
+                        <div class='text-lg italic'>
+                          {`"${startup.testimonial.quote}"`}
+                        </div>
+                        <div class='font-light italic'>
+                          {startup.testimonial.by}
+                        </div>
                       </div>
-                      <div class='font-light italic'>
-                        {startup.testimonial.by}
+                    )}
+                    {startup.tech && (
+                      <div class='flex flex-col gap-6'>
+                        <h3 class='text-3xl'> Supported By</h3>
+                        <div class='flex gap-2 flex-wrap'>
+                          {startup.tech.map((tech) => (
+                            <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
+                              {tech}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {startup.tech && (
-                    <div class='flex flex-col gap-6'>
-                      <h3 class='text-3xl'> Supported By</h3>
-                      <div class='flex gap-2 flex-wrap'>
-                        {startup.tech.map((tech) => (
-                          <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
-                            {tech}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </Section>
-        )
-      })}
+            </Section>
+          )
+        })
+      }
     </div>
-    <Section className="pt-28">
-      <ContactUsMini/>
+    <Section className='pt-28'>
+      <ContactUsMini />
     </Section>
   </main>
 </Layout>

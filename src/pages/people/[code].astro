@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components'
+import { Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import DraftBanner from '@components/DraftBanner'
 import { GithubIcon, LinkedInIcon, TwitterIcon } from '@components/Icons'
@@ -85,27 +85,33 @@ const shareIconStyle = 'fill-zinc-100 hover:fill-juxt transition-colors'
         <div
           class='pb-20 pt-6 flex justify-center items-center gap-4 lg:justify-end'
         >
-          {twitter && (
-            <div class='flex justify-around text-sm items-center'>
-              <a class='w-6 h-6' target='_blank' href={twitter}>
-                {<TwitterIcon className={shareIconStyle} />}
-              </a>
-            </div>
-          )}
-          {github && (
-            <div class='flex justify-around text-sm items-center'>
-              <a class='w-6 h-6' target='_blank' href={github}>
-                {<GithubIcon className={shareIconStyle} />}
-              </a>
-            </div>
-          )}
-          {linkedin && (
-            <div class='flex justify-around text-sm items-center'>
-              <a class='w-6 h-6' target='_blank' href={linkedin}>
-                {<LinkedInIcon className={shareIconStyle} />}
-              </a>
-            </div>
-          )}
+          {
+            twitter && (
+              <div class='flex justify-around text-sm items-center'>
+                <a class='w-6 h-6' target='_blank' href={twitter}>
+                  {<TwitterIcon className={shareIconStyle} />}
+                </a>
+              </div>
+            )
+          }
+          {
+            github && (
+              <div class='flex justify-around text-sm items-center'>
+                <a class='w-6 h-6' target='_blank' href={github}>
+                  {<GithubIcon className={shareIconStyle} />}
+                </a>
+              </div>
+            )
+          }
+          {
+            linkedin && (
+              <div class='flex justify-around text-sm items-center'>
+                <a class='w-6 h-6' target='_blank' href={linkedin}>
+                  {<LinkedInIcon className={shareIconStyle} />}
+                </a>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>

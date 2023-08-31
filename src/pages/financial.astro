@@ -1,6 +1,6 @@
 ---
-import { getImage } from '@astrojs/image'
-import { Image } from '@astrojs/image/components'
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
 import Banner from '@components/Banner.astro'
 import Section from '@components/Section.astro'
 import ContactUsMini from '@components/ContactUsMini'
@@ -46,102 +46,107 @@ const financialPicture = await getImage({
     />
     <Section className='bg-zinc-100 py-12 text-white'>
       <div class='text-black flex flex-col gap-6'>
-        {financialServicesParsed.map((financial, idx) => (
-          <a href={`#${idx}`} class='flex gap-3 items-center'>
-            <div class='w-5 h-5 rounded-full bg-zinc-400' />
-            <h2 class='text-2xl font-light uppercase'>{financial.title}</h2>
-          </a>
-        ))}
+        {
+          financialServicesParsed.map((financial, idx) => (
+            <a href={`#${idx}`} class='flex gap-3 items-center'>
+              <div class='w-5 h-5 rounded-full bg-zinc-400' />
+              <h2 class='text-2xl font-light uppercase'>{financial.title}</h2>
+            </a>
+          ))
+        }
       </div>
     </Section>
     <div class='flex flex-col text-black'>
-      {financialServicesParsed.map((financial, idx) => {
-        const isDark = idx % 2 !== 0
-        const isLeft = financial.direction === 'left' || !financial.direction
-        const isCenter = financial.direction === 'center'
+      {
+        financialServicesParsed.map((financial, idx) => {
+          const isDark = idx % 2 !== 0
+          const isLeft = financial.direction === 'left' || !financial.direction
+          const isCenter = financial.direction === 'center'
 
-        const sectionStyle = isLeft
-          ? 'flex-col-reverse xl:flex-row-reverse'
-          : isCenter
-          ? 'flex-col flex-col-reverse'
-          : 'flex-col-reverse xl:flex-row'
+          const sectionStyle = isLeft
+            ? 'flex-col-reverse xl:flex-row-reverse'
+            : isCenter
+            ? 'flex-col flex-col-reverse'
+            : 'flex-col-reverse xl:flex-row'
 
-        const bannerNoExtension = financial.image.split('.')[0]
+          const bannerNoExtension = financial.image.split('.')[0]
 
-        return (
-          <Section
-            id={`${idx}`}
-            className={`${isDark ? 'bg-black text-white' : ''} py-28`}
-          >
-            <div
-              class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+          return (
+            <Section
+              id={`${idx}`}
+              className={`${isDark ? 'bg-black text-white' : ''} py-28`}
             >
-              <Image
-                width={1300}
-                quality={100}
-                class={`${
-                  isCenter ? 'place-self-center' : ' xl:w-1/2'
-                } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
-                alt='award'
-                src={import(`../assets/financial/${bannerNoExtension}.jpg`)}
-              />
-              <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
-                <h2 class='text-5xl font-light pb-8'>{financial.title}</h2>
-                <div class='flex flex-col gap-8'>
-                  <div
-                    class='flex flex-col gap-6 text-lg font-extralight'
-                    {/* eslint-disable-next-line */}
-                    set:html={financial.content}
-                  />
-                  {financial.testimonial && (
-                    <div class='flex flex-col gap-2'>
-                      <div class='text-lg italic'>
-                        {`"${financial.testimonial.quote}"`}
-                      </div>
-                      <div class='font-light italic'>
-                        {financial.testimonial.by}
-                      </div>
-                    </div>
-                  )}
-                  <div class='flex flex-col gap-6'>
-                    <h3 class='text-3xl'> Technologies</h3>
-                    <div class='flex gap-2 flex-wrap'>
-                      {financial.tech.map((tech) => (
-                        <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
-                          {tech}
+              <div
+                class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+              >
+                <Image
+                  width={1300}
+                  quality={100}
+                  class={`${
+                    isCenter ? 'place-self-center' : ' xl:w-1/2'
+                  } flex-shrink-0 object-cover md:w-2/3 h-[350px] xl:h-auto`}
+                  alt='award'
+                  src={import(`../assets/financial/${bannerNoExtension}.jpg`)}
+                />
+                <div class={isCenter ? 'm-auto md:w-2/3' : 'md:w-2/3 xl:w-1/2'}>
+                  <h2 class='text-5xl font-light pb-8'>{financial.title}</h2>
+                  <div class='flex flex-col gap-8'>
+                    <div
+                      class='flex flex-col gap-6 text-lg font-extralight'
+                      {
+                      /* eslint-disable-next-line */ }
+                      set:html={financial.content}
+                    />
+                    {financial.testimonial && (
+                      <div class='flex flex-col gap-2'>
+                        <div class='text-lg italic'>
+                          {`"${financial.testimonial.quote}"`}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                  {financial.awards && (
+                        <div class='font-light italic'>
+                          {financial.testimonial.by}
+                        </div>
+                      </div>
+                    )}
                     <div class='flex flex-col gap-6'>
-                      <h3 class='text-3xl'> Awards</h3>
-                      <div class='flex gap-6 items-center flex-wrap'>
-                        {financial.awards.map(async (award) => {
-                          const awardNoExtension = award.split('.')[0]
-                          return (
-                            <Image
-                              width={150}
-                              quality={100}
-                              alt='award'
-                              src={import(
-                                `../assets/financial/${awardNoExtension}.png`
-                              )}
-                            />
-                          )
-                        })}
+                      <h3 class='text-3xl'> Technologies</h3>
+                      <div class='flex gap-2 flex-wrap'>
+                        {financial.tech.map((tech) => (
+                          <div class='text-sm font-light border-juxt border px-3 py-1 rounded-full'>
+                            {tech}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  )}
+                    {financial.awards && (
+                      <div class='flex flex-col gap-6'>
+                        <h3 class='text-3xl'> Awards</h3>
+                        <div class='flex gap-6 items-center flex-wrap'>
+                          {financial.awards.map(async (award) => {
+                            const awardNoExtension = award.split('.')[0]
+                            return (
+                              <Image
+                                width={150}
+                                quality={100}
+                                alt='award'
+                                src={import(
+                                  `../assets/financial/${awardNoExtension}.png`
+                                )}
+                              />
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </Section>
-        )
-      })}
+            </Section>
+          )
+        })
+      }
     </div>
-    <Section className="pt-28">
-      <ContactUsMini/>
+    <Section className='pt-28'>
+      <ContactUsMini />
     </Section>
   </main>
 </Layout>
