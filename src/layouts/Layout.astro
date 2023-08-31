@@ -64,7 +64,7 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   // they're going to fix this soon so 🤷‍♂️
   const img = await import(`../assets/blog/${ogImage}.jpg`)
   const { src } = await getImage({
-    src: img.default.src,
+    src: img.default,
     width: 1200,
     alt: 'blog background',
     height: 630
