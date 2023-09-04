@@ -208,7 +208,7 @@ export default function ContactUs() {
               In as little as one hour, either virtually or at your offices, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future. 
             </div>
             <div className='flex flex-col gap-10 text-white'>
-              <TickBox text='Discover little-known challenges in the development porcess - and discuss potential suitable solutions' />
+              <TickBox text='Discover little-known challenges in the development process - and discuss potential suitable solutions' />
               <TickBox text='Formulate initial project requirements, timeline, and budgets' />
               <TickBox text='Assess your overall fit with JUXT methodology and processes' />
             </div>
