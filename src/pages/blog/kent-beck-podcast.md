@@ -20,7 +20,7 @@ This blog post touches on some of the themes that came up in our discussion.
 
 <iframe class='md:w-[560px] w-full h-[315px]' src="https://www.youtube.com/embed/gaRyeGrp0vU?si=SVjIlkNveDfwKfZz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**The point of fast feedback**
+### The point of fast feedback
 
 Development isn’t just about coding to a strict specification, and Agile did away with that perception. But there is still a strong sense that developers follow a linear path, working through the backlog of end-user requirements to implementation. Yet, Kent argues that wasn’t what XP was about at all!
 
@@ -30,7 +30,7 @@ The idea of throwing away ‘work’ is at odds with the prevailing accounting-b
 
 Programmers who use interactive languages in their daily work, perhaps using a REPL, take for granted the advantages of being able to trial and reject numerous ideas as quickly as possible. It’s second-nature to us. However, many programmers still have to wait minutes for confirmation for even trivial experiments.
 
-**Safety, for users too!**
+### Safety, for users too!
 
 Kent has a personal mission to 'help geeks feel safe in the world'.
 
@@ -52,7 +52,7 @@ Users often make mistakes, we’re all human after all! One of the many benefits
 
 When systems are sympathetic and forgiving to users, they feel a greater sense of safety. That can only be a good thing.
 
-**Addendum**
+### Addendum
 
 This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck).
 
