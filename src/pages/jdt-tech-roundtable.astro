@@ -1,0 +1,11 @@
+---
+import Layout from '@layouts/Layout.astro'
+import ContactUsTech from '@components/ContactUsTech'
+---
+
+<Layout title='Technology Roundtable' noFooter />
+<main>
+  <div class='bg-zinc-100 text-black'>
+    <ContactUsTech client:only />
+  </div>
+</main>
