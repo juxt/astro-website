@@ -27,7 +27,7 @@
 }
 
 .prose a {
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .prose span.pullquote:after {
