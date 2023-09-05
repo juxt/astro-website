@@ -161,7 +161,7 @@ function Form() {
             type='submit'
             className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
           >
-            Submit Form
+            Submit
           </button>
           <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
             <div className='flex flex-col gap-2 leading-snug'>
@@ -189,11 +189,11 @@ export default function ContactUs() {
               Technology Roundtable{' '}
             </div>
             <div className='text-medium md:text-2xl text-white leading-snug uppercase'>
-              Dedicated event with Jeremy Taylor
+              Dedicated event with Jeremy Taylor, Head of Product, XTDB
             </div>
           </div>
 
-          <div className='flex items-center lg:items-stretch flex-col gap-4'>
+          <div className='flex items-center lg:items-stretch flex-col gap-4 lg:pr-2'>
             <img src={jdt.src} alt='Jdt' width='150' />
             <div className='text-sm text-left font-light text-juxt'>
               Jeremy Taylor <br /> Head of Product, XTDB
@@ -229,16 +229,16 @@ export default function ContactUs() {
             </div>
           </div>
         </div>
-        <div className='text-xl text-center text-white leading-snug py-16'>
-          A few of our favourite technologiess:
+        <div className='text-xl text-center text-white leading-snug pt-16 pb-4'>
+          A few of our favourite technologies:
         </div>
-        <div className='py-6 gap-6'>
-          <div className='flex flex-wrap justify-center gap-4 lg:w-1/2 mx-auto'>
+        <div className='py-2'>
+          <div className='flex flex-wrap justify-center lg:w-1/2 mx-auto'>
             {techLogos.map((logo) => (
               <img
                 src={`/images/tech-logos/${logo}`}
                 alt=''
-                className='w-24 md:w-20 flex-shrink-0'
+                className='w-24 md:w-32 flex-shrink-0'
               />
             ))}
           </div>
