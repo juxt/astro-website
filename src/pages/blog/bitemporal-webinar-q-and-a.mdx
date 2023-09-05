@@ -1,11 +1,10 @@
 ---
 author: 'jdt'
-title: 'Assorted Q&A on bitemporality'
-description: 'An edited transcript of live questions and answers with our recent webinar attendees.'
+title: 'FAQs on Bitemporality'
+description: 'An edited transcript of questions and answers with our recent live webinar attendees.'
 category: 'bitemporality'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-09-05'
-draft: true
 heroImage: 'bitemporal-webinar-q-and-a.jpg'
 tags:
   - 'architecture'
@@ -15,7 +14,7 @@ tags:
 
 import { Image } from 'astro:assets'
 
-Following last month’s webinar on the broad concept of ‘bitemporality’—now available on-demand <a href='https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/'>here</a>—we have written-up some of the audience Q&A below. Note: <a href='https://www.xtdb.com/' target='_blank'>XTDB</a> is a bitemporal database product by JUXT for solving complex problems with dynamic and time-related data.
+Following last month’s webinar on the broad concept of ‘bitemporality’—now available on-demand <a href='https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/'>here</a>—we have written-up some of the excellent audience Q&A below. Note: <a href='https://www.xtdb.com/' target='_blank'>XTDB</a> is a bitemporal database product by JUXT for solving complex problems with dynamic and time-related data.
 
 We have also since released a <a href='https://www.juxt.pro/blog/kent-beck-podcast/'>new JUXT Cast episode</a> where we interviewed <a href='https://en.wikipedia.org/wiki/Kent_Beck' target='_blank'>Kent Beck</a> prompted by his recent <a href='https://tidyfirst.substack.com/p/eventual-business-consistency' target='_blank'>series</a> of articles and examples that briefly featured in the webinar.
 
@@ -24,7 +23,7 @@ We have also since released a <a href='https://www.juxt.pro/blog/kent-beck-podca
 import pi from '../../assets/blog/bitemp-webinar-pi.png'
 
 <figure>
-  <Image alt='9999-12-31 is used in a table of data to represent infinity' width={600} src={pi} class='mx-auto' />
+  <Image alt='9999-12-31 is used in a table of data to represent infinity' width={1000} src={pi} class='mx-auto' />
   <figcaption>
     9999-12-31 / ‘Infinity’ / ∞ / “until changed”
   </figcaption>
@@ -39,7 +38,7 @@ import pi from '../../assets/blog/bitemp-webinar-pi.png'
 import tip from '../../assets/blog/bitemp-webinar-tip.png'
 
 <figure>
-  <Image alt='A table of synonyms for SQL:2011 system time and application time' width={600} src={tip} class='mx-auto' />
+  <Image alt='A table of synonyms for SQL:2011 system time and application time' width={1000} src={tip} class='mx-auto' />
   <figcaption>
     Naming is hard. Agreeing names is harder.
   </figcaption>
@@ -70,7 +69,7 @@ In contrast to our greenfield work on XTDB, the SQL:2011 design had a lot of bac
 import hiuh from '../../assets/blog/bitemp-webinar-hiuh.png'
 
 <figure>
-  <Image alt='An example of a bitemporal table schema in SQL:2011' width={600} src={hiuh} class='mx-auto' />
+  <Image alt='An example of a bitemporal table schema in SQL:2011' width={1000} src={hiuh} class='mx-auto' />
   <figcaption>
     Bitemporal tables are just like normal tables…with various extra columns, constraints, and update logic.
   </figcaption>
@@ -87,7 +86,7 @@ import hiuh from '../../assets/blog/bitemp-webinar-hiuh.png'
 import se from '../../assets/blog/bitemp-webinar-se.png'
 
 <figure>
-  <Image alt='A snippet of XTDB SQL showcasing the ability to insert arbitrary data without' width={600} src={se} class='mx-auto' />
+  <Image alt='A snippet of XTDB SQL showcasing the ability to insert arbitrary data without' width={1000} src={se} class='mx-auto' />
   <figcaption>
     SQL’s “Data Definition Language” doesn’t keep track of schema versions - but <a href="https://www.xtdb.com/v2">what if it did</a>?
   </figcaption>
@@ -106,7 +105,7 @@ Being schema-less at its core also means that XTDB defers many of the problems t
 import ites from '../../assets/blog/bitemp-webinar-ites.png'
 
 <figure>
-  <Image alt='A illustration of a system time timeline with data being appended, alongside an illustration of a valid time timeline where data can be inserted at any point' width={600} src={ites} class='mx-auto' />
+  <Image alt='A illustration of a system time timeline with data being appended, alongside an illustration of a valid time timeline where data can be inserted at any point' width={1000} src={ites} class='mx-auto' />
   <figcaption>
     An append-only data model with system time ordering…looks remarkably similar to an “event store”.
   </figcaption>
@@ -130,4 +129,4 @@ We’ve always been conscious that in many companies you might get some develope
 
 ### That’s a wrap!
 
-We hope you have found this transcript insightful. Be sure to check out the webinar and other links for more information and discussion. Finally, the XTDB team is always interested to hear from practitioners and people working in this space - please do get in touch: [hello@xtdb.com](mailto:hello@xtdb.com)
+We hope you have found this transcript insightful. Be sure to [check out the webinar](https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/) and other links for more information and discussion. Finally, the [XTDB team](https://www.xtdb.com/team) is always interested to hear from practitioners and people working in this space - please do get in touch: [hello@xtdb.com](mailto:hello@xtdb.com)
