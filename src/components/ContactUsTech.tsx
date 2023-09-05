@@ -165,8 +165,9 @@ function Form() {
           </button>
           <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
             <div className='flex flex-col gap-2 leading-snug'>
-              What happens after you submit your details? Usually within 48 business hours, Jeremy will be in touch
-              to talk about the event and secure a date.
+              What happens after you submit your details? Usually within 48
+              business hours, Jeremy will be in touch to talk about the event
+              and secure a date.
             </div>
           </div>
         </form>
@@ -188,7 +189,7 @@ export default function ContactUs() {
               Technology Roundtable{' '}
             </div>
             <div className='text-medium md:text-2xl text-white leading-snug uppercase'>
-              Dedicated event with Jeremy Taylor - Head of Product, XTDB
+              Dedicated event with Jeremy Taylor
             </div>
           </div>
 
@@ -202,20 +203,27 @@ export default function ContactUs() {
         <div className='flex flex-col-reverse lg:flex-row bg-zinc-800 gap-16'>
           <div className='flex flex-col gap-10 text-left lg:w-1/2'>
             <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-              Looking to explore new tech with your team? JUXT wants to take you on a tour through some of the latest open source software innovations that are relevant for you!
+              Looking to explore new tech with your team? JUXT wants to take you
+              on a tour through some of the latest open source software
+              innovations that are relevant for you!
             </div>
-           <div className='flex flex-col gap-10 text-left'>
-            <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-              In as little as one hour, either virtually or at your offices, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future. </div>
-            <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-              Discover little-known challenges in the development process - and discuss potential suitable solutions. 
-              Formulate initial project requirements, timeline, and budgets. Assess your overall fit with JUXT methodology and processes.
+            <div className='flex flex-col gap-10 text-left'>
+              <div className='text-lg text-white md-text-3xl font-light leading-snug'>
+                In as little as one hour, either virtually or at your offices,
+                let Jeremy get you up-to-speed on new technologies that can and
+                probably will impact your work in your near future.{' '}
               </div>
-              <div className='text-lg text-white md-text-3xl font-light leading-snug'>  
-              Future-proof your team & tech! Fill the form here, or send us an email with your details at: jdt@juxt.pro.
+              <div className='text-lg text-white md-text-3xl font-light leading-snug'>
+                Discover little-known challenges in the development process -
+                and discuss potential suitable solutions. Formulate initial
+                project requirements, timeline, and budgets. Assess your overall
+                fit with JUXT methodology and processes.
               </div>
-            
-            </div> 
+              <div className='text-lg text-white md-text-3xl font-light leading-snug'>
+                Future-proof your team & tech! Fill the form here, or send us an
+                email with your details at: jdt@juxt.pro.
+              </div>
+            </div>
           </div>
           <div className='flex flex-col lg:w-1/2 bg-white py-6 px-2 md:px-0'>
             <div className='flex flex-col items-center gap-8'>
