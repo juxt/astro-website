@@ -62,7 +62,7 @@ const startupPicture = await getImage({
     <div class='flex flex-col text-black'>
       {
         startUpsParsed.map((startup, idx) => {
-          const isDark = idx % 2 !== 0
+          const isCasestudy = idx > 2
           const isLeft = startup.direction === 'left' || !startup.direction
           const isCenter = startup.direction === 'center'
 
@@ -77,7 +77,7 @@ const startupPicture = await getImage({
           return (
             <Section
               id={`${idx}`}
-              className={`${isDark ? 'bg-black text-white' : ''} py-28`}
+              className={`${isCasestudy ? 'bg-gray-700 text-white' : ''} py-28`}
             >
               <div
                 class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
