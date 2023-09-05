@@ -147,7 +147,7 @@ function Form() {
           <div className='text-xs'>
             By submitting your details you agree to JUXT’s{' '}
             <a href='/privacy-policy' target='_blank' className='underline'>
-              Privacy Policy
+              Privacy Policy.
             </a>
           </div>
 
@@ -161,7 +161,7 @@ function Form() {
             type='submit'
             className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
           >
-            Get in Touch
+            Submit Form
           </button>
           <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
             <div className='flex flex-col gap-2 leading-snug'>
@@ -213,22 +213,17 @@ export default function ContactUs() {
                 let Jeremy get you up-to-speed on new technologies that can and
                 probably will impact your work in your near future.{' '}
               </div>
-              <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-                Discover little-known challenges in the development process -
-                and discuss potential suitable solutions. Formulate initial
-                project requirements, timeline, and budgets. Assess your overall
-                fit with JUXT methodology and processes.
-              </div>
-              <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-                Future-proof your team & tech! Fill the form here, or send us an
-                email with your details at: jdt@juxt.pro.
+              <div className='flex flex-col gap-10 text-white'>
+                <TickBox text='Learn about recent advances in data and cloud infrastructure' />
+                <TickBox text='Hear examples from your industry on the impact of new technologies' />
+                <TickBox text='Compare & contrast the state of the art in off-the-shelf software' />
               </div>
             </div>
           </div>
           <div className='flex flex-col lg:w-1/2 bg-white py-6 px-2 md:px-0'>
             <div className='flex flex-col items-center gap-8'>
               <div className='text-black text-2xl md:text-3xl font-bold'>
-                Get Tech-Ready for 2024
+                Book Your Roundtable Session
               </div>
               <Form />
             </div>
