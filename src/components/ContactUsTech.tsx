@@ -95,7 +95,7 @@ function Form() {
           <input
             type='hidden'
             {...register('subject')}
-            value='New Submission from Better Call Joe'
+            value='New Submission from Tech Roundtable with Jeremy Taylor'
           />
           <input
             type='hidden'
