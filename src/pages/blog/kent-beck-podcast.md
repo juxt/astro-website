@@ -56,6 +56,6 @@ When systems are sympathetic and forgiving to users, they feel a greater sense o
 
 This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck).
 
-In this podcast, and in a few of his latest blog posts, Kent Beck discussed the importance of bitemporality — <a href='https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/' target='_blank'>check out this on-demand webinar</a> to learn more about it, and how it is likely to impact your work in the near future.
+In this podcast, and in a few of his latest <a href='https://tidyfirst.substack.com/archive' target='_blank'>blog posts</a>, Kent Beck discussed the importance of bitemporality — <a href='https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/' target='_blank'>check out this on-demand webinar</a> to learn more about it, and how it is likely to impact your work in the near future.
 
 Happy listening!
