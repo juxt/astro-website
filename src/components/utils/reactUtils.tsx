@@ -1,5 +1,5 @@
-import 'preact/jsx-runtime'
-import { useRef, useEffect, useState } from 'preact/hooks'
+
+import { useRef, useEffect, useState } from 'react'
 
 export function useOutsideClick(callback) {
   const ref = useRef(null)

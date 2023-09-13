@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import jdt from '@assets/people/jdt.jpg'
 import { TickIcon } from '@components/Icons'

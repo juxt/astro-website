@@ -50,5 +50,5 @@ const blogBannerPicture = await getImage({
     text='Blog'
     style={{ backgroundImage: `url(${blogBannerPicture})` }}
   />
-  <BlogIndex client:only='preact' blogs={blogsByHref} />
+  <BlogIndex client:only='react' blogs={blogsByHref} />
 </Layout>

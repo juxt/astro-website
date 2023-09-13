@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const inputProps = {
@@ -14,7 +14,7 @@ function Form() {
     formState: { errors, isSubmitting, isSubmitSuccessful }
   } = useForm()
 
-  const [isSubmitError, setIsSubmitError] = useState<boolean>(false)
+  const [isSubmitError, setIsSubmitError] = useState < boolean > (false)
 
   function submitContactForm(data) {
     const json = JSON.stringify(data)
@@ -122,27 +122,26 @@ function Form() {
 
 export default function ContactUsMini() {
   return (
-    <div class='flex justify-center gap-10 text-black'>
+    <div className='flex justify-center gap-10 text-black'>
       <div>
         <div>
-          <div class='text-4xl md:text-5xl font-bold'>Contact Us</div>
+          <div className='text-4xl md:text-5xl font-bold'>Contact Us</div>
         </div>
         <div className='flex flex-col-reverse lg:flex-row gap-10 p-12 lg:pb-0'>
           <div>
-            <div class='text-2xl md:text-3xl font-light'>info@juxt.pro</div>
-            <div class='text-2xl md:text-3xl font-light'>
+            <div className='text-2xl md:text-3xl font-light'>info@juxt.pro</div>
+            <div className='text-2xl md:text-3xl font-light'>
               +44 (0) 333 93 98 309 <br /> +1 (332) 867 0718
             </div>
           </div>
           <img
             src='/images/site/airplane.png'
-            class='hidden lg:block'
-            style='width: 200px; height: 200px;'
+            className='hidden lg:block'
             alt='contact us'
           />
         </div>
-        <div class='text-2xl md:text-3xl font-bold'>Or</div>
-        <div class='p-12'>
+        <div className='text-2xl md:text-3xl font-bold'>Or</div>
+        <div className='p-12'>
           <Form />
         </div>
       </div>

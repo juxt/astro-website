@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch/lite'
-import { useState } from 'preact/hooks'
-import 'preact/jsx-runtime'
+import { useState } from 'react'
+
 import {
   Configure,
   InstantSearch,

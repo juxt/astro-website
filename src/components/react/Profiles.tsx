@@ -1,7 +1,35 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid'
-import { s } from 'hastscript'
-import { useState } from 'preact/hooks'
-import { useEffect } from 'react'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClient, useQuery } from '@tanstack/react-query'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import { get, set, del } from 'idb-keyval'
+import {
+  PersistedClient,
+  Persister
+} from '@tanstack/react-query-persist-client'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: 1000 * 60 * 60 * 24 // 24 hours
+    }
+  }
+})
+
+export function createIDBPersister(idbValidKey: IDBValidKey = 'reactQuery') {
+  return {
+    persistClient: async (client: PersistedClient) => {
+      set(idbValidKey, client)
+    },
+    restoreClient: async () => {
+      return await get<PersistedClient>(idbValidKey)
+    },
+    removeClient: async () => {
+      await del(idbValidKey)
+    }
+  } as Persister
+}
+
 export interface Root {
   openapi: string
   info: Info
@@ -580,10 +608,10 @@ async function fetchUser() {
 }
 
 function useUser() {
-  const [user, setUser] = useState<Root>(null)
-  useEffect(() => {
-    fetchUser().then((user) => setUser(user))
-  }, [])
+  const { data: user } = useQuery({
+    queryKey: ['user'],
+    queryFn: fetchUser
+  })
   console.log(user)
   return user
 }
@@ -592,6 +620,7 @@ export function Profile() {
   const user = useUser()
   return (
     <div className='flex justify-center items-center'>
+      hi
       {user && (
         <div className='my-8 w-1/2'>
           <div className='px-4 sm:px-0'>
@@ -706,7 +735,16 @@ export function ProfilePage() {
   return (
     <div className='bg-white'>
       <div className='max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8'>
-        <Profile />
+        <PersistQueryClientProvider
+          persistOptions={{
+            persister: createIDBPersister()
+          }}
+          client={queryClient}
+        >
+          <ReactQueryDevtools initialIsOpen />
+
+          <Profile />
+        </PersistQueryClientProvider>
       </div>
     </div>
   )

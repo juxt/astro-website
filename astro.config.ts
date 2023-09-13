@@ -1,5 +1,5 @@
 import mdx from '@astrojs/mdx'
-import preact from '@astrojs/preact'
+import react from '@astrojs/react'
 import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -10,7 +10,10 @@ import remarkGfm from 'remark-gfm'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), preact()],
+  integrations: [
+    mdx(),
+    react(),
+  ],
   site: 'https://juxt.pro/',
   markdown: {
     shikiConfig: {

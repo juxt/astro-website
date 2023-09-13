@@ -1,4 +1,4 @@
-import 'preact/jsx-runtime'
+
 
 type IconProps = {
   className?: string
@@ -7,7 +7,7 @@ type IconProps = {
 export function GithubIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 16 16'
     >
@@ -19,7 +19,7 @@ export function GithubIcon({ className }: IconProps) {
 export function TwitterIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 16 16'
     >
@@ -31,7 +31,7 @@ export function TwitterIcon({ className }: IconProps) {
 export function LinkedInIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 16 16'
     >
@@ -44,7 +44,7 @@ export function LinkedInIcon({ className }: IconProps) {
 export function YoutubeIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
     >
@@ -56,12 +56,12 @@ export function YoutubeIcon({ className }: IconProps) {
 export function SpotifyIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
-      fill-rule='evenodd'
-      stroke-linejoin='round'
-      stroke-miterlimit='2'
-      clip-rule='evenodd'
+      fillRule='evenodd'
+      strokeLinejoin='round'
+      strokeMiterlimit='2'
+      clipRule='evenodd'
       viewBox='0 0 24 24'
     >
       <g transform='translate(-40 -40)'>
@@ -80,7 +80,7 @@ export function WarningIcon({ className }: IconProps) {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 256 256'
-      class={className}
+      className={className}
     >
       <rect fill='none' />
       <line
@@ -90,16 +90,16 @@ export function WarningIcon({ className }: IconProps) {
         y2='144'
         fill='none'
         stroke='#000'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='16'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='16'
       />
       <path
         fill='none'
         stroke='#000'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        stroke-width='16'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='16'
         d='M114.15243,39.98472,26.17616,191.977a16.00005,16.00005,0,0,0,13.84762,24.01535H215.97625A16,16,0,0,0,229.82386,191.977L141.84757,39.98472A16,16,0,0,0,114.15243,39.98472Z'
       />
       <circle cx='128' cy='180' r='12' />
@@ -112,7 +112,7 @@ export function ChevronLeftIcon({ className }: IconProps) {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
-      class={className}
+      className={className}
     >
       <g data-name='16'>
         <rect width='24' height='24' fill='none' />
@@ -127,7 +127,7 @@ export function ChevronRightIcon({ className }: IconProps) {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
-      class={className}
+      className={className}
     >
       <g data-name='17'>
         <rect
@@ -148,7 +148,7 @@ export function SearchIcon({ className }: IconProps) {
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 24 24'
-      class={className}
+      className={className}
     >
       <path
         fill-rule='evenodd'
@@ -162,7 +162,7 @@ export function SearchIcon({ className }: IconProps) {
 export function RedditIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 16 16'
     >
@@ -175,7 +175,7 @@ export function RedditIcon({ className }: IconProps) {
 export function LinkIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 512 512'
     >
@@ -188,7 +188,7 @@ export function LinkIcon({ className }: IconProps) {
 export function UserIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
     >
@@ -200,7 +200,7 @@ export function UserIcon({ className }: IconProps) {
 export function ZulipIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       version='1.1'
       viewBox='0 0 256 298'
@@ -215,7 +215,7 @@ export function ZulipIcon({ className }: IconProps) {
 export function TickIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 66.1 66.1'
     >
@@ -227,16 +227,16 @@ export function TickIcon({ className }: IconProps) {
 export function StarIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       width='16'
       height='16'
       viewBox='0 0 24 24'
       fill='none'
       stroke='currentColor'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'></polygon>
     </svg>
@@ -247,7 +247,7 @@ export function ClockIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      class={className}
+      className={className}
       fill='none'
       viewBox='0 0 24 24'
       stroke='currentColor'
@@ -266,20 +266,20 @@ export function LocationIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      class={className}
+      className={className}
       fill='none'
       viewBox='0 0 24 24'
       stroke='currentColor'
-      stroke-width='2'
+      strokeWidth='2'
     >
       <path
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
         d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
       />
       <path
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
         d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
       />
     </svg>
@@ -290,7 +290,7 @@ export function PencilIcon({ className }: IconProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      class={className}
+      className={className}
       fill='none'
       viewBox='0 0 24 24'
       stroke='currentColor'
@@ -313,7 +313,7 @@ export function TagIcon({ className }: IconProps) {
       viewBox='0 0 24 24'
       strokeWidth={1.5}
       stroke='currentColor'
-      class={className}
+      className={className}
     >
       <path
         strokeLinecap='round'
@@ -332,12 +332,11 @@ export function TagIcon({ className }: IconProps) {
 export function QuoteIcon({ className }: IconProps) {
   return (
     <svg
-      class={className}
+      className={className}
       version='1.1'
       x='0px'
       y='0px'
       viewBox='0 0 3.04 2.81'
-      style='enable-background:new 0 0 3.04 2.81;'
     >
       <g>
         <path

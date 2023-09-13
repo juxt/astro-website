@@ -1,7 +1,7 @@
-import 'preact/jsx-runtime'
+
 import classNames from 'classnames'
-import { useEffect, useState } from 'preact/hooks'
-import { useOutsideClick } from '@utils/preactUtils'
+import { useEffect, useState } from 'react'
+import { useOutsideClick } from '@components/utils/reactUtils'
 import DarkModeSwitch from './DarkModeSwitch'
 
 type NavLinkProp = {
@@ -18,6 +18,7 @@ function NavLink({ label, href, target, active, style }: NavLinkProp) {
   return (
     <a
       {...targetProp}
+      key={label}
       className={classNames(
         'transition-colors first-of-type:pt-4 xl:first-of-type:pt-0',
         style
@@ -25,8 +26,8 @@ function NavLink({ label, href, target, active, style }: NavLinkProp) {
             ? style?.active
             : style?.normal
           : active
-          ? 'text-juxt'
-          : 'text-white hover:text-juxt'
+            ? 'text-juxt'
+            : 'text-white hover:text-juxt'
       )}
       href={href}
     >
@@ -63,7 +64,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
       ref={ref}
     >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>
-        <a href='/' class='flex items-center w-20 z-10'>
+        <a href='/' className='flex items-center w-20 z-10'>
           <img src='/images/logo.svg' alt='Juxt Logo' />
         </a>
         <button
@@ -77,15 +78,15 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
           <span className='sr-only'>Open main menu</span>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            class='w-6 h-6'
+            className='w-6 h-6'
             fill='none'
             viewBox='0 0 24 24'
             stroke='white'
           >
             <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              stroke-width='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth='2'
               d='M4 6h16M4 12h16m-7 6h7'
             ></path>
           </svg>
@@ -94,6 +95,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
         <div className={classNames('hidden xl:flex', linkClasses)}>
           {navLinks.map((page) => (
             <NavLink
+              key={page.label}
               href={page.href}
               label={page.label}
               target={page.target}
@@ -120,6 +122,7 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
         >
           {navLinks.map((page) => (
             <NavLink
+              key={page.label}
               href={page.href}
               label={page.label}
               target={page.target}

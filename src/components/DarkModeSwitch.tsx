@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'preact/hooks'
+import { useState, useEffect } from 'react'
 
 export default function DarkModeSwitch() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -27,9 +27,9 @@ export default function DarkModeSwitch() {
   }
 
   return (
-    <div class='w-6 h-6' onClick={toggleTheme}>
+    <div className='w-6 h-6' onClick={toggleTheme}>
       <button
-        class='flex items-center justify-center h-full w-full bg-none border-none text-inherit cursor-pointer p-0'
+        className='flex items-center justify-center h-full w-full bg-none border-none text-inherit cursor-pointer p-0'
         type='button'
         title='Switch between dark and light mode'
         aria-label='Switch between dark and light mode'

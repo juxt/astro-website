@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useState } from 'preact/hooks'
+import { useState } from 'react'
 import { formatDate } from '@utils/common'
 import { Blog } from './utils/types'
 
