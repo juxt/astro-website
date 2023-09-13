@@ -1,0 +1,13 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Layout from '@layouts/Layout.astro'
+import { ProfilePage } from '@components/react/profiles'
+import ContactUs from '@components/ContactUs'
+export const getStaticPaths = (() => {
+  return []
+}) satisfies GetStaticPaths
+---
+
+<Layout navbar title='Experts'>
+  <ProfilePage client:only='preact' />
+</Layout>

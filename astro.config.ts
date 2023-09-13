@@ -10,10 +10,7 @@ import remarkGfm from 'remark-gfm'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    mdx(),
-    preact(),
-  ],
+  integrations: [mdx(), preact()],
   site: 'https://juxt.pro/',
   markdown: {
     shikiConfig: {
