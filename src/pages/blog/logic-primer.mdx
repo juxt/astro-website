@@ -28,27 +28,27 @@ Prolog is one of the oldest and most well-known logic languages (and the progeni
 Let's consider a couple of examples.
 
 ```
-Parent(John, Jill).
-Parent(John, Jack).
+parent(John, Jill).
+parent(John, Jack).
 ```
 
 Above we assert that the predicate John is the parent of Jill, and that John is also the parent of Jack. There are no conditions under which it is true- hence it is true by default, and this is what we call a 'fact'.
 
 A Prolog program begins with a set of 'facts' are that known to be true. When we define a predicate, Prolog adds the fact to its environment, to be used later.
 
-We can also define multiple definitions for the predicate, and this is equivalent to a logical 'or'- Parent is true if the first argument is John and the second argument is Jill, OR if the first argument is John and the second is Jack.
+We can also define multiple definitions for the predicate, and this is equivalent to a logical 'or'- `parent` is true if the first argument is John and the second argument is Jill, OR if the first argument is John and the second is Jack.
 
 Now let's start to define what it means to be an 'ancestor'.
 
 ```
-Ancestor(X, Y) :- Parent(X, Y).
+ancestor(X, Y) :- parent(X, Y).
 ```
 
 This statement means that to be an ancestor (the goal) is to be a parent (the condition). That definition is a little lacking, but with recursion, we can make it better.
 
 ```
-Ancestor(X, Y) :- Parent(X, Y).
-Ancestor(X, Y) :- Parent(X, Z), Ancestor(Z, Y).
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
 ```
 
 By introducing the intermediate variable Z in the body, we have solved the problem of what is means to be an ancestor. Now we're asserting that to be an ancestor means either that X is the parent of Y, but it also could mean that X is the parent of someone who has an ancestral relation to Y. That is logically what it means to be an ancestor.
@@ -56,7 +56,7 @@ By introducing the intermediate variable Z in the body, we have solved the probl
 In first-order logic we might write this as
 
 ```
-Ancestor(X, Y) → Parent(X, Y) ∨ (Parent(X, Z) ∧ Ancestor(Z, Y)).
+ancestor(X, Y) ← parent(X, Y) ∨ (parent(X, Z) ∧ ancestor(Z, Y)).
 ```
 
 But how does this code actually execute? We haven't actually implemented any code to say how we find the ancestor - we have only said what an ancestor _is_! The trick lies in how Prolog code is executed. In a functional language, the compiled machine code boils down to 'calculate a bunch of things and return the result of those calculations', and this is how the interpreter of that machine code works- by crunching numbers.
@@ -67,13 +67,13 @@ However in Prolog, and in logic languages, it's fundamentally different. Prolog 
 2. The heap, which stores terms.
 3. The trail, which keeps track of changes to variables (E.G., binding of X to John) for the purposes of backtracking and undoing changes
 
-The core way in which the WAM derives the correct results from our clauses is via a depth-first 'search'. When we define 'Ancestor' the WAM stores information about 'Ancestor' in the heap, like the arity and the conditions.
+The core way in which the WAM derives the correct results from our clauses is via a depth-first 'search'. When we define 'ancestor' the WAM stores information about 'Ancestor' in the heap, like the arity and the conditions.
 
-When we call 'Ancestor' with bound parameters, E.G., `Ancestor(John, Jill).`, a lookup is performed for 'Ancestor', after which X and Y are bound to John and Jill respectively. This is called unification, and is similar to pattern matching- if a pattern doesn't match, the goal fails.
+When we call 'ancestor' with bound parameters, E.G., `ancestor(John, Jill).`, a lookup is performed for `ancestor`, after which X and Y are bound to John and Jill respectively. This is called unification, and is similar to pattern matching- if a pattern doesn't match, the goal fails.
 
-A lookup is performed on `Parent(John, Jill)`. If every condition in the body evaluates to true, then the predicate is true- goals are recursively evaluated. If the goal fails, the WAM will backtrack and try a different path to make the goal succeed. In this case John is the parent of Jill, so the answer is true.
+A lookup is performed on `parent(John, Jill)`. If every condition in the body evaluates to true, then the predicate is true- goals are recursively evaluated. If the goal fails, the WAM will backtrack and try a different path to make the goal succeed. In this case John is the parent of Jill, so the answer is true.
 
-The Prolog interpreter can also use 'substitution' to derive new facts. For example if we call `Ancestor(John, X).` the interpreter is smart enough to retry executing the code with X instantiated as Jill and Jack- the goal is true if X is either of those two values. The values of X for which the expression is true are returned.
+The Prolog interpreter can also use 'substitution' to derive new facts. For example if we call `ancestor(John, X).` the interpreter is smart enough to retry executing the code with X instantiated as Jill and Jack- the goal is true if X is either of those two values. The values of X for which the expression is true are returned.
 
 This allows the WAM to derive new facts for us. Peter Norvig builds a Prolog interpreter in Common Lisp that does this very thing [in his book](https://github.com/norvig/paip-lisp). For anyone wanting a deeper hands-on understanding, I'd highly recommend it- you should have everything you need to build a Prolog interpreter of your own. After writing a simple interpreter, you can enrich it with more interesting properties, and it's possible to write some _really fascinating_ meta-interpreters in Prolog itself with [only a few lines of code](https://www.youtube.com/watch?v=nmBkU-l1zyc).
 
@@ -90,8 +90,8 @@ A mathematician would look at two structures under a function and say that they 
 For every X in structure 1, and for every corresponding Y in structure 2, there is some relation between them. What is that relation? It is the mapping _predicate_. We should also consider our base case so that we have an endpoint. We can then derive Map to be
 
 ```
-Map(_, [], []).
-Map(P, [X|Xs], [Y|Ys]) :- Call(P, X, Y), Map(P, Xs, Ys).
+map(_, [], []).
+map(P, [X|Xs], [Y|Ys]) :- call(P, X, Y), map(P, Xs, Ys).
 ```
 
 In our base case, we have used the underscore to denote that we don't care what that value is- it can be any value. If the first list is empty, and the second list is empty, then that's a mapping.
@@ -105,14 +105,14 @@ So this code says 'Map is true when the lists are empty, or when the supplied pr
 Whereas maps are bijective due to the predicate being true for every corresponding element in List 1 and List 2, in filters that's not the case. Sometimes, the predicate fails. We can deal with this by adding an extra clause.
 
 ```
-Filter(_, [], []).
-Filter(P, [X|Xs], [X|Ys]) :- Call(P, X), Filter(P, Xs, Ys).
-Filter(P, [X|Xs], Ys) :- Not(Call(P, X)), Filter(P, Xs, Ys).
+filter(_, [], []).
+filter(P, [X|Xs], [X|Ys]) :- call(P, X), filter(P, Xs, Ys).
+filter(P, [X|Xs], Ys) :- not(call(P, X)), filter(P, Xs, Ys).
 ```
 
-Filter is true if the two lists are empty, OR the filter is true if for every element in list 1 there is a corresponding element in list 2 which is the same and satisfies the given predicate P, OR that there is a filtration between the rest of List 1 and List 2.
+`filter` is true if the two lists are empty, OR the filter is true if for every element in list 1 there is a corresponding element in list 2 which is the same and satisfies the given predicate P, OR that there is a filtration between the rest of List 1 and List 2.
 
-Note that in the case of `Filter(Parent, X, [John])`, X could be any list that contains John- whereas this function will return simply `[John]`. It (almost) never makes sense to call filter the inverse way- but it's cool that we can try!
+Note that in the case of `filter(Parent, X, [John])`, X could be any list that contains John- whereas this function will return simply `[John]`. It (almost) never makes sense to call filter the inverse way- but it's cool that we can try!
 
 ### Reduce
 
@@ -121,8 +121,8 @@ Reduce brings us onto tail recursion. During a reduction in functional style, we
 We can do something similar in Prolog.
 
 ```
-Reduce(Predicate, [], Result, Result).
-Reduce(Predicate, [X|Xs], Acc, Result) :- Call(P, Acc, X, Acc2), Reduce(P, Xs, Acc2, Result).
+reduce(predicate, [], Result, Result).
+reduce(predicate, [X|Xs], Acc, Result) :- call(predicate, Acc, X, Acc2), reduce(predicate, Xs, Acc2, Result).
 ```
 
 We define an intermediate value: the result when the predicate is true when called against X and the last intermediate value.
