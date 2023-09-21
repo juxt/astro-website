@@ -1,0 +1,134 @@
+---
+author: 'mat'
+layout: '../../layouts/BlogPost.astro'
+title: 'Dealing with Mutable Fields in deftype'
+description: "Read this post to discover what they are, how they work and some guidance on their use"
+category: 'clojure'
+publishedDate: '2023-11-02'
+tags:
+  - clojure
+heroImage: 'mutable-deftypes.jpg'
+---
+
+tl:dr; `deftype` can be used in Clojure to give you access to the mutable fields of its host language (e.g. Java Object Fields). When referencing mutable fields inside a deftype method body, be aware:
+* Interop field access (i.e. using `(.-fieldName this)`) will always return the current value of the field when the interop expression itself is evaluated
+* Ordinary variable references to a field (i.e. simply using `fieldName` from the method scope) are a copy of that fields value in the local scope, and if closed over will return the value at that point in time and *not* the current value held by the field.
+
+## When to deftype
+
+As one ventures in search of performance, one often sacrifices valued properties and principles of the system. In pragmatic languages, a common principle to sacrifice is 'immutability': if you need to go fast, mutate! In Clojure, one possible way to embrace the mutable performance opportunities offered by its host language is to reach for `deftype`.
+
+Deftype provides access to mutable fields in the from of `:volatile-mutable` and `:unsynchronized-mutable` - the exact behaviour of these constructs, and how they differ is not the topic of this blog post, however for the sake of completeness I will quickly note that they map onto Java volatiles and regular Java mutable fields respectively. See the following references for a more thorough explanation.[^1] [^2]
+
+What I would like to talk about is how references to these fields behave within Clojure (hosted on Java in the examples that follow) and how that might affect your usage of them.
+
+## The problem
+
+A deftype makes all fields available as variables within the local environments of its methods[^3], and this conveniently allows you to use a plain Clojure symbol to refer to the value of the corresponding field within a method body, just as you would any other Clojure variable. However, since a deftype creates a Java class under the hood we can also use instance field accessors (i.e. something like `(.-fieldName this)`) provided by Clojure's Java interop[^4] to access the value of a field. Choosing the appropriate option to reference a field is subtle yet critically important, as we shall see.
+
+For immutable fields there is no meaningful distinction between the behaviour of these two approaches, either will return the value provided during initialisation (i.e. construction of the object).
+
+```clojure
+(definterface
+  IFoo
+  (getBar []))
+
+(deftype Foo [bar]
+  IFoo
+  (getBar [_]
+    bar))
+
+(deftype Foo2 [bar]
+  IFoo
+  (getBar [this]
+    (.-bar this)))
+
+(.getBar (Foo. 1)) ;;=> 1
+
+(.getBar (Foo2. 2)) ;;=> 2
+```
+
+However if we need to use either of the mutable field types (for performance!) then a crucial difference arises. As per the docstring[^3] using a mutable type declaration for the field will enable the `(set! afield aval)` operation. This operation allows us to mutate a field to a new value at any point within a method. Because the corresponding variable in a method's local environment is a copy of that field's value, if we were to close over that variable before calling `set!` that captured variable would continue to reflect the original value rather than the new value we just `set!`. This is also true of any existing variables closed over during previous method invocations, such as in the example below. Its worth noting that future references to a field variable within a method body, after having called `set!`, will reflect that update as you might expect.
+
+```clojure
+(definterface
+  IFoo
+  (getBar [])
+  (setBar [v]))
+
+(deftype Foo [^:volatile-mutable bar]
+  IFoo
+  (getBar [_]
+    (fn []
+      bar))
+  (setBar [_ v]
+    (set! bar v)))
+
+(def foo (Foo. 0))
+
+(def getbar-fn (.getBar foo))
+
+(getbar-fn) ;;=> 0
+
+(.setBar foo 1) ;;=> 1
+
+(getbar-fn) ;;=> 0
+
+((.getBar foo)) ;;=> 1
+```
+
+If however you use the field accessor as described above, you will get the current value of the field as of the point in time the expression is evaluated.
+
+```clojure
+(deftype Foo2 [^:volatile-mutable bar]
+  IFoo
+  (getBar [this]
+    (fn []
+      (.-bar this)))
+  (setBar [_ v]
+    (set! bar v)))
+
+(def foo2 (Foo2. 0))
+
+(def getbar-fn2 (.getBar foo2))
+
+(getbar-fn2) ;;=> 0
+
+(.setBar foo2 1) ;;=> 1
+
+(getbar-fn2) ;;=> 1
+
+((.getBar foo2)) ;;=> 1
+```
+The important distinction here is that `getbar-fn` still returns `0` as opposed to `getbar-fn2` which has the updated value `1`. You can see why this is the case if you take a quick look at the bytecode. Here is a snippet of the bytecode for the inner `fn` returned by `(.getBar Foo)`, here you can see that the field `bar` taken from the local environment is returned.
+
+```java
+       0: aload_0                           // object representing the anonymous fn
+       1: getfield      #14                 // Field bar:Ljava/lang/Object;
+       4: areturn
+```
+
+Compare this to the same snippet from `(.getBar Foo2)` the field `this` is instead fetched from the local environment, before returning the mutable `bar` field on that object.
+
+```java
+       0: aload_0                           // object representing the anonymous fn
+       1: getfield      #14                 // Field this:Ljava/lang/Object;
+       4: checkcast     #18                 // class Foo2
+       7: getfield      #21                 // Field Foo2.bar:Ljava/lang/Object;
+      10: areturn
+```
+## So now what?
+
+Well there you go, if you happen to be me as of a few weeks ago, then hopefully this has helped you out, and if that's not the case and you've never had to reach for mutable fields before then I hope at least this has been somewhat informative. Handling mutability is hard, to quote the docstring "Note well that mutable fields are extremely difficult to use correctly"[^3] and while that still might be true, my hope would be that this blogpost has managed to make it a little less so.
+
+Luckily for us all Clojure has some great idiomatic constructs for handling mutability[^5][^6], which instead make the distinction between reference to the object and returning the value stored in that object explicit (via `deref`[^7]), avoiding much of the ambiguity this blog post is attempting to clear up.
+
+That being said, my tentative suggestion if you were to find yourself using deftype with mutable fields, is probably to use the field accessor, unless you are sure you want the behaviour provided by the local variable, as this will always return the up to date value, which is likely what you want if you are trying to model something mutable.
+
+[^1]: (https://www.jocas.lt/blog/post/deftype-unsynchronized-mutable)
+[^2]: (https://stackoverflow.com/questions/21127636/what-are-the-semantic-implications-of-volatile-mutable-versus-unsynchronized-m)
+[^3]: (https://clojuredocs.org/clojure.core/deftype)
+[^4]: (https://clojure.org/reference/java_interop#_member_access)
+[^5]: (https://clojure.org/reference/atoms)
+[^6]: (https://clojure.org/reference/refs)
+[^7]: (https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/deref)
