@@ -105,10 +105,15 @@ export function currentPage(pathname: string) {
 }
 
 export function formatDate(ISO8601String: string) {
-  const date = new Date(ISO8601String)
-  return new Intl.DateTimeFormat([], {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  }).format(date)
+  try {
+    const date = new Date(ISO8601String)
+    return new Intl.DateTimeFormat([], {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit'
+    }).format(date)
+  } catch (e) {
+    console.error(e)
+    return 'Invalid date'
+  }
 }
