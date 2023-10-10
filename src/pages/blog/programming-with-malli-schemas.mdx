@@ -1,0 +1,142 @@
+---
+author: 'jss'
+layout: '../../layouts/BlogPost.astro'
+title: 'Malli-able schemas'
+description: "How we used Malli's programmablity to validate CRUD operations in Clojure"
+category: 'Malli'
+publishedDate: '2023-09-07'
+tags:
+  - validation
+  - Malli
+heroImage: 'malleable-clay.jpg'
+---
+
+import { Image } from 'astro:assets'
+
+Deep down we all crave validation. It's also an important part of any application that takes untrusted input, and getting it right can save us a lot of hassle down the road. Often, we need to validate an entity differently depending on the context. Some fields are required when first creating an entity but are not required when updating it. Some fields may only be updated by admin users. Some fields may be computed and are included in a schema/spec for documentation rather than validation.
+
+So, when using validation libraries like [Malli](https://github.com/metosin/malli) or [Clojure Spec](https://github.com/clojure/spec.alpha), the schema we want to validate against is often slightly different depending on the context. It can be tempting to sweep that under the rug by using a single schema that has been watered down to support all use cases. But that usually results it in being too permissive, with required fields being made optional. Or, of course we could just copy paste the schema and modify it for each different case, but this introduces the possibility for bugs where the various schemas get out of sync when adding, changing or removing fields. We can do better! Malli's design of having 'data-driven schemas' that can be easily manipulated was a great help when we ran into these types of requirements on a recent project.
+
+### An example
+
+Let's say we have an app with a person entity, with a Malli schema that includes all possible keys for a person:
+
+```clj
+(def Person
+  [:map {:closed true}
+   [:person/id :uuid]
+   [:person/created-at inst?]
+   [:person/last-modified-at inst?]
+   [:person/name :string]
+   [:person/email :string]
+   [:person/avatar-url {:optional true} :string]])
+```
+
+### Validating a create operation
+
+The app has a `create-person!` function for creating a new person in the database, including validating against the schema first. But we don't want to allow passing in `:person/created-at` and `:person/last-modified-at`, as these are computed at the database level via SQL default column values and triggers. The `malli.util` namespace can help us to make a `CreatePerson` schema to be used by `create-person!`:
+
+
+```clj
+(require '[malli.util :as mu])
+
+(def CreatePerson (-> Person
+                      ;; mu/dissoc works like Clojure's dissoc but operates on a Malli schema 
+                      (mu/dissoc :person/created-at)
+                      (mu/dissoc :person/last-modified-at)))
+```
+
+Let's write a little helper function to make it a bit more concise:
+
+```clj
+(defn dissoc-schema-keys
+  [schema & keys-to-dissoc]
+  (reduce mu/dissoc schema keys-to-dissoc))
+
+(def CreatePerson (dissoc-schema-keys Person :person/created-at :person/last-modified-at))
+```
+
+### Validating an update operation
+
+Now, what about updating a person? As with creating a person, we want to prevent `:person/created-at` and `:person/last-modified-at` from being provided. Also, we often want to support 'partial updates', i.e. providing a subset of keys to update, leaving other keys in the person map untouched. For example, here `:person/name` and `:person/email` are required in `CreatePerson` but for `UpdatePerson`, we want all fields to be optional, except `:person/id` which identifies which person to update. To achieve this we can add another helper function that makes use of some more functions in the `malli.util` namespace:
+
+```clj
+(defn make-all-fields-optional-except-some
+  [schema fields-to-keep-as-required]
+  (mu/merge
+    (mu/optional-keys schema)
+    (mu/select-keys (mu/required-keys schema) fields-to-keep-as-required)))
+
+;; mu/optional-keys makes all schema keys optional
+;; mu/required-keys makes all schema keys required
+;; mu/merge and mu/select-keys are similar to the
+;; clojure core functions with the same names, but operate on Malli
+;; schemas rather than maps.
+
+(def UpdatePerson (make-all-fields-optional-except-some CreatePerson #{:person/id}))
+```
+
+In the person update function, we also want to support updating a person to remove an optional key. We can use a nil value for the key to represent this e.g.:
+
+```clj
+(update-person! {:person/id #uuid "0dcac8a0-2631-48a2-bce4-6704d87cc2d5"
+                 :person/avatar-url nil})
+```
+
+But at the moment the schema won't allow this, since Malli doesn't allow nil values for optional keys - if the key is present it must have the expected type.We can write another helper, `make-optional-fields-removable`, that updates any (top level keys, not nested) optional keys in the schema to allow `nil`, e.g.  `:string` -> `[:or :string :nil]`:
+
+
+```clj
+(require '[malli.core :as m])
+
+(defn- make-optional-fields-removable
+  [schema]
+  ;; first, get all the optional keys from the schema
+  (let [optional-keys (->> (m/children schema)
+                           (filter (comp :optional second))
+                           (map first))]
+    ;; for each optional key, change the schema x to [:or x nil]
+    (reduce (fn [result-schema k]
+              (mu/update result-schema k (fn [x] [:or x :nil])))
+            schema
+            optional-keys)))
+```
+
+Putting this all together:
+
+```clj
+(def UpdatePerson (-> CreatePerson
+                      make-optional-fields-removable
+                      (make-all-fields-optional-except-some #{:person/id})))
+```
+
+### What about more complex schemas?
+
+Something to be aware of is that the `malli.util` functions we've used to manipulate schemas often assume you're passing in a map schema. So, if you changed the underlying `Person` schema to be a [multi-schema](https://github.com/metosin/malli#multi-schemas) our helper functions would no longer work. We ran into that on the project, and solved it by avoiding using multi-schemas for the CRUD schemas, instead computing which schema to use at runtime within the create and update functions. TODO - is this too much / not enough detail?
+
+### Conclusion
+
+Malli's programmablity gave us a generic pattern for dealing with validating CRUD operations without weakening or duplicating schemas. I'm not sure this is possible in clojure spec, or at least not as easy, since it doesn't have Malli's foundations of representing schemas/specs as data.
+
+I hope that this gives a flavour of how you can leverage Malli's programmablity in an application. Please feel free to get in touch if you have any thoughts or suggestions 🙏
+
+
+--- 
+
+TODO.
+
+- Better opening line
+- Add links
+- Add image
+- Add profile image
+- Test all code
+- Run through grammarly
+- Make it more concise
+- Conclusion
+
+Stuff to maybe include:
+
+- Context as to how the schema is used
+- What would this look like in clojure spec?
+- Where to validate? API level? Database function level?
+
