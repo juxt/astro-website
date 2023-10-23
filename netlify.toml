@@ -1,3 +1,9 @@
+[build]
+  command = "yarn build"
+
+[context.production]
+  command = "yarn build && yarn run algolia"
+
 [[redirects]]
   from = "/blog/posts/*"
   to = "/blog/:splat"
