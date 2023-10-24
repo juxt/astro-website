@@ -1,0 +1,60 @@
+---
+import { getImage } from 'astro:assets'
+import Banner from '@components/Banner.astro'
+import { LinkIcon } from '@components/Icons'
+import Section from '@components/Section.astro'
+import Layout from '@layouts/Layout.astro'
+import ContactUsForm from '@components/ContactUsForm.tsx'
+
+const bannerPicture = await getImage({
+  src: import('../assets/site/about-us-banner-v2.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'contact us banner'
+}).then((img) => img.src)
+
+---
+
+<Layout navbar title='About'>
+  <main>
+    <Banner
+      text='Contact Us'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+    <Section className='bg-gray-100 py-12'>
+      <div class="grid grid-cols-5 gap-4">
+        <div class="col-span-3">
+          <div class="py-4">
+          Prefer filling out a form? We've got you covered.
+          </div>
+          <ContactUsForm client:only />
+        </div>
+        <div class="col-span-2 grid grid-cols-3 gap-12">
+          <div class='col-span-3 flex flex-col gap-4 text-center'>
+            <div class='text-3xl font-light'>Email</div>
+            <div class='font-light'>
+              For all general enquiries, please email
+              <span class='font-medium'>info@juxt.pro</span>
+            </div>
+          </div>
+          <div class='col-span-3 flex flex-col gap-4 text-center'>
+            <div class='text-3xl font-light'>UK Office</div>
+            <div class='flex flex-col gap-2 font-light'>
+              <div>Norfolk House, Silbury Blvd. ‍Milton Keynes, MK9 2AH</div>
+            </div>
+          </div>
+          <div class='col-span-3 flex flex-col gap-4 text-center'>
+            <div class='text-3xl font-light'>Phone</div>
+            <div class='font-light'>
+              Call us at: <span class='whitespace-nowrap'>+44 (0) 333 93 98 309</span>
+              <br />
+              or: <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>
