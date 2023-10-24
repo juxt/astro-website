@@ -79,23 +79,25 @@ In terms of the email marketing journey for an enterprise company, for example t
 
 **Paul:** Where we differ is we focus on enterprise customers who have a multi step journey with certain goals. Royal Mail from the UK is one of our customers, along with Ford and Cisco.
 
-**Jon: Wow, that's really successful! So what sort of architecture do you have?**
+**Jon: Wow, that's really successful! So what sort of architecture do you have? Lots of ETL, something like that?**
 
-**Paul:** I imagine it's a lot like the financial system you have. The biggest challenge for us is both transactional and business processes. Transactional processes such as making a withdrawals or in our case sending out an email being an atomic unit of action and business process being a series of those to formulate something that matters to the business. In the case of sending out an email it could be the creative aspects of asset to choose who to email and regulatory things like GDPR.
+**Paul:** The biggest challenge for us is both _transactional_ and _business_ processes.
 
-I watched your talk on XTDB and the problem you're solving with bitemporality. I can see that with business processes. B2B companies are simply trying to solve business processes that are complicated, failure prone, long running and super messy. The other challenge as we move to cloud architecture, which is super beneficial, and we see Kubernetes, Docker, we get more and more little pockets of service, and they kind of fail.
+Transactional processes - such as sending out an email - being an atomic unit of action, and business process being an amalgamation of those to formulate something that matters to the business. In the case of sending out an email it could be the creative aspects of choosing who to email and dealing with regulatory compliance.
+
+B2B companies are simply trying to solve business processes that are complicated, failure prone, long running and super messy.
+
+The other challenge for us, is being in the cloud, which is super beneficial, but then you get more little pockets of service, that can kind of fail.
 
 ## Clojure and AI
 
 **Jon: Where do you make use of Clojure in the stack and what do you use for the AI?**
 
-*Paul*
+**Paul:**
 
-The back-end is all in Clojure and the back-end composes most of the actual system for enterprise software. The front-end is Java Script, machine learning in Python. Python for machine learning because of the eco system and the people. It's the people that matters; the language is a tool.
+The back-end is all in Clojure, the front-end is JavaScript, and the machine learning is in Python. Python for machine learning because of the ecosystem and the people in that community. It's the people that matters; the language is a tool.
 
-*Jon*
-
-How do you integrate?
+**Jon:** How do you integrate?
 
 *Paul*
 
