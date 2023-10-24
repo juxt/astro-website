@@ -25,13 +25,13 @@ const bannerPicture = await getImage({
     />
     <Section className='bg-gray-100 py-12'>
       <div class="grid grid-cols-5 gap-4">
-        <div class="col-span-3">
+        <div class="md:col-span-3 md:order-none order-last col-span-5">
           <div class="py-4">
           Prefer filling out a form? We've got you covered.
           </div>
           <ContactUsForm client:only />
         </div>
-        <div class="col-span-2 grid grid-cols-3 gap-12">
+        <div class="md:col-span-2 grid grid-cols-3 gap-12 col-span-5">
           <div class='col-span-3 flex flex-col gap-4 text-center'>
             <div class='text-3xl font-light'>Email</div>
             <div class='font-light'>
