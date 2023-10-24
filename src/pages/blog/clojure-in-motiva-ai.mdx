@@ -99,15 +99,13 @@ The back-end is all in Clojure, the front-end is JavaScript, and the machine lea
 
 **Jon:** How do you integrate?
 
-*Paul*
-
-REST APIs, with [Flask](https://github.com/flask-restful/flask-restful) on top of it, nothing fancy.
+*Paul* REST APIs, with [Flask](https://github.com/flask-restful/flask-restful) on top of it, nothing fancy.
 
 That was the old version, but now [Sagemaker](https://aws.amazon.com/sagemaker/) make us Serverless. We're able to provision ML models much easier.
 
 What really amazes me with the explosion of large language models is the entire ecosystem that has deveoped.
 
--- need to watch back
+-- need to watch back 27:03
 
 It amazes me with the explosion of language models, the entire eco-system, the algorithm and what's on the news, to engineer; deploy a thing, we placed some nlp modules with a transformer based newer networks, aside from the technical data science stuff but deployment aspects, on the NLP side core nlp or stacey or whatever, crashed the gdk back end, you get into a whole mess, vs. in transformer world everything's built for you, choose a model, sage maker, hugging face transformer pre-built weight - it's done! That experience to delivering from model to something in production is incomparable.
 
@@ -137,14 +135,12 @@ For Clojure there's a couple of tracks, we like Serverless, Lambda functions, AP
 Number Two - traceability and operational observability is a huge deal, we process things and things fail. Our design process, build something ship it up and see what breaks - I need something that is able to trace, lots of tracking, lots of database records, logging, early on but all of that is built in on these workflow orchestration systems you can see every single step in the interface so those are the two big aspects of the product. And historically it's an ETL thing. I actually think it's going to be more useful in the future with language models, instead of single shot but I've been realising that Chat GPT is a great reasoning engine, you can talk to it, give it a context and have a conversation. When you go back to it, it's an external system that you're interacting with. Clojure for us, I published a blog about StepWise, built by Daniel Carlton now at HealthCare, Reify Health;  they were using for bioinformatics data pipeline, Clojure library, thin wrapper over step functions. Define everything in Eden, launch your Clojure process and everything just happens on step functions.
 
 
-*Jon*
-
-Do you write the functions in Clojure? What does it look like when it's executed?
+**Jon: Do you write the functions in Clojure? What does it look like when it's executed?**
 
 
-*Paul*
+**Paul:** Yes the functions are written in Clojure.
 
-Yeah the functions are written in Clojure, In Stepwise version 1 is not in Lambda; it's a long running process which can be run in anything, we choose to run in Docker. There are two parts; one is to define the  state machines, overall flow in Eden and number 2 is defining the actual node/step functions those are Clojure functions - but where do you want those functions, for now in process and we kick off core esync background and you can specify number of concurrency, it keeps a running loop to pull a specific step-function end point on AWS.
+In Stepwise version 1 is not in Lambda; it's a long running process which can be run in anything, we choose to run in Docker. There are two parts; one is to define the  state machines, overall flow in Eden and number 2 is defining the actual node/step functions those are Clojure functions - but where do you want those functions, for now in process and we kick off core esync background and you can specify number of concurrency, it keeps a running loop to pull a specific step-function end point on AWS.
 
 
 *Jon*
@@ -174,6 +170,8 @@ Yeah, actually as of this week, our team published a design proposal for Version
 Sometimes you want Lambda and sometimes you want Docker, from our experience, from using it in production, it's super tedious to keep switching, provisions etc. With wholly Lambda and some libraries it's doable For Stepwise version 1 we have it in the running process already, hosting a platform is simply a couple of lines of Clojure code, builds the flexibility. Our design is serverless first, sometimes design and load is not what we expected, Lambda has limitations, memory limits and time limits, and for some of these business processes you could be waiting on responses for days.
 Version 2 is different stage use case and sometimes it's necessary to be able to swap them.
 
+## Streaming Architectures
+
 *Jon*
 
 Have you ever used something like Storm?
@@ -182,42 +180,39 @@ Have you ever used something like Storm?
 
 At USwitch I stumbled into Kafka log (Nathan Mars) investigated Storm, one thing with Kafka Log for me I discovered this logic programming but I over used it, in hindsight I should have done some of those in streaming process. The industry has changed so much from 10 years ago, but streaming processes is something that everyone takes for granted but back in the day.
 
-*Jon*
+**Jon: How does Stepwise compare to Storm?**
 
-How does Stepwise compare to Storm?
+**Paul:** One big thing with Stepwise is that we wanted it to be hosted on AWS, and secondly I just wanted it to be a library. There's only 5 operations for Stepwise.
 
+**Jon: If someone asked you if Stepwise was a streaming architecture, would you agree?**
 
-*Paul*
-
-One big thing with Stepwise is we wanted it to be hosted on AWS and secondly I just wanted it to be a library. There's only 5 operations for Stepwise.
-
-*Jon*
-
-If someone asked you if Stepwise was a streaming architecture, would you agree?
-
-*Paul*
-
-So there's two separate tracks for AWS step functions, the standard and then express state machines for up to a million interactions per second.
-
+**Paul:** So there's two separate tracks for AWS step functions, the standard and then express state machines for up to a million interactions per second.
 
 Quartizan.com - blog details
+
+## Libraries
 
 *Jon*
 
 What are your other favourite libraries, what else is in your toolkit?
 
-
 *Paul*
 
 Lots of tooling around AWS functionalities, Stepwise, SQS, used to be Kafka, DB and tooling around on top of infrastructure products. Really like Tick'd, time library. Really like small libraries, shout out to Wes Morgan he's been maintaining Docker Clojure in my name. Manie, schema.
 
-*Jon*
+## Team
 
-How many Devs have you got?
+**Jon: How many Devs have you got?**
 
-*Paul*
+**Paul:** Four; three on Clojure and one on JavaScript.
 
-4 people fluctuating - 4 - 6, 3 on Clojure and one on Java script,
+**Jon:** Where abouts is Motiva based?**
+
+TODO:
+
+**Paul** US based, East coast, West coast, on my way from leaving the EU came to Japan, met my future wife, Covid, I would not do this again - time difference, it's not possible to do pair programming, definitely wouldn't recommend.
+
+## State of Clojure
 
 **Jon: What do you think of Clojure at the moment? You've been doing it for 15 years.**
 
@@ -232,9 +227,5 @@ This applies to the libraries too. Clojure doesn't operate in a vacuum, it keeps
 **Jon: What is the Clojure scene like in Tokyo?**
 
 **Paul**: I've been to a few meet ups, there's a few prominent Clojurians in Japan. In general the tech scene in Japan and East Asia is a few years behind the EU.
-
-**Jon:** Where abouts is Motiva based?**
-
-**Paul** US based, East coast, west coast, on my way from leaving the EU came to Japan, met my future wife, Covid, I would not do this again - time difference, it's not possible to do pair programming, definitely wouldn't recommend.
 
 ***Jon: Thank you Paul. It's been great talking to you and I've enjoyed the wonderful conversation!**
