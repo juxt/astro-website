@@ -103,19 +103,15 @@ The back-end is all in Clojure, the front-end is JavaScript, and the machine lea
 
 That was the old version, but now [Sagemaker](https://aws.amazon.com/sagemaker/) make us Serverless. We're able to provision ML models much easier.
 
-What really amazes me with the explosion of large language models is the entire ecosystem that has deveoped.
+What really amazes me with the explosion of large language models is the entire ecosystem that has developed.
 
--- need to watch back 27:03
+It used to be painful to deploy NLP modules, using CoreNLP, spaCey, where you download it, then they need GDK backends.. how d I build that using Docker with Python image base?
 
-It amazes me with the explosion of language models, the entire eco-system, the algorithm and what's on the news, to engineer; deploy a thing, we placed some nlp modules with a transformer based newer networks, aside from the technical data science stuff but deployment aspects, on the NLP side core nlp or stacey or whatever, crashed the gdk back end, you get into a whole mess, vs. in transformer world everything's built for you, choose a model, sage maker, hugging face transformer pre-built weight - it's done! That experience to delivering from model to something in production is incomparable.
+Compare this to the transformer world, everything's built for you. You choose a model, click on it in Sagemaker, it accepts any [Hugging Face](https://huggingface.co/) transformer pre-built weight. Click-click-click, and it's done! That experience to delivering from model to something in production is incomparable.
 
-*Jon*
+**Jon: Could you elaborate on Transformers?**
 
-You're saying this is the LLM, new world? You're calling it a transformer?
-
-*Paul*
-
-Transformer is the underlying architecture. LLM is the algorithm it's also the main library from Hugging Face (https://huggingface.co/). Hugging face is in a lot of the chats, all the open source new modules, it's like a git hub for new fangled language models. They host the source code and they host the actual trained modules which ends up being binary files. You take the binary files and you can run inference. So there's two steps, one is the training. You have the algorithm and you grab a terabyte of data and train, the trained output of that is the binary file. You can take this file and run questions or apply a run time thing, they call that inference step. Hugging Face hosts source code for free, you can see GPT 2 on there is prime example and many of the Lama from Facebook, Vicuna, everything is on there, AI transformer learning world.
+**Paul:** Transformer is the underlying architecture. LLM is the algorithm it's also the main library from Hugging Face (https://huggingface.co/). Hugging face is in a lot of the chats, all the open source new modules, it's like a git hub for new fangled language models. They host the source code and they host the actual trained modules which ends up being binary files. You take the binary files and you can run inference. So there's two steps, one is the training. You have the algorithm and you grab a terabyte of data and train, the trained output of that is the binary file. You can take this file and run questions or apply a run time thing, they call that inference step. Hugging Face hosts source code for free, you can see GPT 2 on there is prime example and many of the Lama from Facebook, Vicuna, everything is on there, AI transformer learning world.
 
 *Jon*
 
