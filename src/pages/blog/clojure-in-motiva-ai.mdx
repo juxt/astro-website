@@ -135,37 +135,30 @@ In tools like Step Wise, you can drill into the status of each step, the inputs 
 
 (I recently published a blog)[https://github.com/Motiva-AI/stepwise] about a Clojure library we use called (StepWise)[https://github.com/Motiva-AI/stepwise/]; a thin Clojure wrapper over step functions. It was originally built by Daniel Carlton at Reify Health using it for a bio-informatics data pipeline. We've taken it over since.
 
-Everything is defined in EDN. launch your Clojure process and everything just happens on step functions.
+Everything is defined in EDN. Launch your Clojure process and everything just happens on step functions for you.
 
-**Jon: Do you write the functions in Clojure? What does it look like when it's executed?**
+**Jon: Do you write the functions in Clojure? What does it look like when the step functions are executed?**
 
 **Paul:** Yes the functions are written in Clojure.
 
-In Stepwise version 1 is not in Lambda; it's a long running process which can be run in anything, we choose to run in Docker. There are two parts; one is to define the  state machines, overall flow in Eden and number 2 is defining the actual node/step functions those are Clojure functions - but where do you want those functions, for now in process and we kick off core esync background and you can specify number of concurrency, it keeps a running loop to pull a specific step-function end point on AWS.
+In StepWise version 1 the functions are run in a long running process, which can be run in anything; we choose Docker.
 
-*Jon*
+There are two parts: 1) define the state machines and the overall flow in EDN, and 2) define the actual node/step functions.
 
-Can you run functions separately to others?
+The step functions are Clojure functions. In StepWise we run those functions in process and we kick off core async background threads whereby you can configure the concurrency setup. The process keps a running loop to pull from a specific step-function endpoint on AWS.
 
-*Paul*
+**Jon: Can you separate out in which process you run the various functions?**
 
-Yes totally we actually separate our workers, by urgent workers vs. bash workers. At run time, we have totally different containers for each of the processes and you can run anywhere, it's just a Clojure function with an infinite latch.
+**Paul:** Yes, we actually separate our workers, by urgent workers vs batch workers.
 
-*Jon*
+**Jon: For Dependencies, if I want to have a bit of code that depends on some library, how does that work?**
 
-Dependencies, if I want to have a bit of code that depends on some library, how does that work?
+**Paul:** Yes, it's just Clojure, nothing stopping you.
 
-*Paul*
+**Jon:** It can get very expensive and complicated to distribute processes, but you seem to have the best of both worlds with this orchestration approach. If you want to you can run everything in one process, but then if you want to, you can split up the processes - you have that flexibility.
 
-Yes, it's just Clojure, nothing stopping you. Step-wise doesn't do it for you, you'd need to do yourself.
+**Paul:** Yeah, actually as of this week, our team published a design proposal for Version 2.0 of StepWise, instead of EDN we want everything to be pure Clojure. Defining state machine is procedural programming and one of my favourite Clojure operators is the threading macro. Imagine defining a threading macro and it naturally turns into this stepwise step function distributed, serverless, orchestrated, managed thing.
 
-*Jon*
-
-It can get very expensive and complicated but you seem to have the best of both worlds with the orchestration and  If you want to you can run in one process, but then you can do if you want to, giving that flexibility.
-
-*Paul*
-
-Yeah, actually as of this week, our team published a design proposal for Version 2.0 of Step-wise, instead of Eden we want everything to be pure Clojure. Defining state machine is procedural programming and one of my favourite Clojure operators is the threading macro. Imagine defining a threading macro and it naturally turns into this stepwise step function distributed, serverless, orchestrated, managed thing.
 Sometimes you want Lambda and sometimes you want Docker, from our experience, from using it in production, it's super tedious to keep switching, provisions etc. With wholly Lambda and some libraries it's doable For Stepwise version 1 we have it in the running process already, hosting a platform is simply a couple of lines of Clojure code, builds the flexibility. Our design is serverless first, sometimes design and load is not what we expected, Lambda has limitations, memory limits and time limits, and for some of these business processes you could be waiting on responses for days.
 Version 2 is different stage use case and sometimes it's necessary to be able to swap them.
 
@@ -191,13 +184,9 @@ Quartizan.com - blog details
 
 ## Libraries
 
-*Jon*
+**Jon: What are your other favourite libraries, what else is in your toolkit?**
 
-What are your other favourite libraries, what else is in your toolkit?
-
-*Paul*
-
-Lots of tooling around AWS functionalities, Stepwise, SQS, used to be Kafka, DB and tooling around on top of infrastructure products. Really like Tick'd, time library. Really like small libraries, shout out to Wes Morgan he's been maintaining Docker Clojure in my name. Manie, schema.
+**Paul:** Lots of tooling around AWS functionalities, Stepwise, SQS, used to be Kafka, DB and tooling around on top of infrastructure products. Really like Tick'd, time library. Really like small libraries, shout out to Wes Morgan he's been maintaining Docker Clojure in my name. Manie, schema.
 
 ## Team
 
