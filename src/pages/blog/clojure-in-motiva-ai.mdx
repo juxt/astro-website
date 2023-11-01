@@ -171,19 +171,9 @@ The step functions are Clojure functions. In StepWise we run those functions in 
 Sometimes you want Lambda and sometimes you want Docker, from our experience, from using it in production, it's super tedious to keep switching, provisions etc. With wholly Lambda and some libraries it's doable For Stepwise version 1 we have it in the running process already, hosting a platform is simply a couple of lines of Clojure code, builds the flexibility. Our design is serverless first, sometimes design and load is not what we expected, Lambda has limitations, memory limits and time limits, and for some of these business processes you could be waiting on responses for days.
 Version 2 is different stage use case and sometimes it's necessary to be able to swap them.
 
-## Streaming Architectures
+**Jon: How does Stepwise compare to [Storm](https://storm.apache.org/)?**
 
-**Jon: Have you ever used [Storm](https://storm.apache.org/)?**
-
-**Paul:** At USwitch I stumbled into Kafka log (Nathan Mars) and investigated Storm. One thing with Kafka Log for me I discovered this logic programming but I over used it, in hindsight I should have done some of those in streaming process. The industry has changed so much from 10 years ago, but streaming processes is something that everyone takes for granted but back in the day.
-
-**Jon: How does Stepwise compare to Storm?**
-
-**Paul:** One big thing with Stepwise is that we wanted it to be hosted on AWS, and secondly I just wanted it to be a library. There's only 5 operations for Stepwise.
-
-**Jon: If someone asked you if Stepwise was a streaming architecture, would you agree?**
-
-**Paul:** So there's two separate tracks for AWS step functions, the standard and then express state machines for up to a million interactions per second.
+**Paul:** One big thing with StepWise is that we wanted it to be hosted on AWS, and secondly I just wanted it to be a library. There's only 5 operations for StepWise.
 
 Quartizan.com - blog details
 
@@ -191,7 +181,11 @@ Quartizan.com - blog details
 
 **Jon: What are your other favourite libraries, what else is in your toolkit?**
 
-**Paul:** Lots of tooling around AWS functionalities, Stepwise, SQS, used to be Kafka, DB and tooling around on top of infrastructure products. Really like Tick'd, time library. Really like small libraries, shout out to Wes Morgan he's been maintaining Docker Clojure in my name. Manie, schema.
+**Paul:** Lots of tooling around AWS functionalitiess such as StepWise and SQS.
+
+I really like small libraries, such as your (JUXT) [Tick time library](https://github.com/juxt/tick). [Malli](https://github.com/metosin/malli) for schema is cool.
+
+Shout out to [Wes Morgan](https://github.com/cap10morgan) he's been maintaining [docker-clojure](https://github.com/Quantisan/docker-clojure) in my name.
 
 ## Team
 
