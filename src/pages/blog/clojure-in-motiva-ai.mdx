@@ -10,7 +10,7 @@ clojureIn:
   {
     season: 'two',
     industry: 'finance',
-    quote: '"Having Clojure running in every possible environment helps so much."'
+    quote: '"Step Wise is kind of like the threading macro in Clojure on steroids."'
   }
 ---
 
@@ -79,27 +79,15 @@ In terms of the email marketing journey for an enterprise company, for example t
 
 **Paul:** Where we differ is we focus on enterprise customers who have a multi step journey with certain goals. Royal Mail from the UK is one of our customers, along with Ford and Cisco.
 
-**Jon: Wow, that's really successful! So what sort of architecture do you have? Lots of ETL, something like that?**
-
-**Paul:** The biggest challenge for us is both _transactional_ and _business_ processes.
-
-Transactional processes - such as sending out an email - being an atomic unit of action, and business process being an amalgamation of those to formulate something that matters to the business. In the case of sending out an email it could be the creative aspects of choosing who to email and dealing with regulatory compliance.
-
-B2B companies are simply trying to solve business processes that are complicated, failure prone, long running and super messy.
-
-The other challenge for us, is being in the cloud, which is super beneficial, but then you get more little pockets of service, that can kind of fail.
-
 ## Clojure and AI
 
-**Jon: Where do you make use of Clojure in the stack and what do you use for the AI?**
+**Jon: Wow, that's really successful! Where do you make use of Clojure in the stack and what do you use for the AI?**
 
-**Paul:**
-
-The back-end is all in Clojure, the front-end is JavaScript, and the machine learning is in Python. Python for machine learning because of the ecosystem and the people in that community. It's the people that matters; the language is a tool.
+**Paul:** The back-end is all in Clojure, the front-end is JavaScript, and the machine learning is in Python. Python for machine learning because of the ecosystem and the people in that community. It's the people that matters; the language is a tool.
 
 **Jon:** How do you integrate?
 
-*Paul* REST APIs, with [Flask](https://github.com/flask-restful/flask-restful) on top of it, nothing fancy.
+**Paul:** REST APIs, with [Flask](https://github.com/flask-restful/flask-restful) on top of it, nothing fancy.
 
 That was the old version, but now [Sagemaker](https://aws.amazon.com/sagemaker/) make us Serverless. We're able to provision ML models much easier.
 
@@ -117,21 +105,37 @@ You take the binary files and you can run inference. So there's two steps, one i
 
 Hugging Face hosts source code for free. You can see GPT 2 on there, (LLaMA from Facebook)[https://ai.meta.com/blog/large-language-model-llama-meta-ai/], (https://lmsys.org/blog/2023-03-30-vicuna/)[Vicuna].
 
-**Jon: So you've recently swapped out some NLP modules for LLMs. What does the Clojure side look like, what's your go to Clojure tech stack?**
+## Workflow Orchestration Systems
 
-**Paul:**
+**Jon: Tell me more about your overall architecture. What does your system look like?**
 
-For Clojure there's a couple of tracks, we like Serverless, Lambda functions, API Gateway, Conesus. One thing which is core to the entire platform for Motiva is Step Functions. Earlier we talked about business processes and how best to manage, one thing with microservers is that they allow teams to be fully responsible; they limit the scope of what you need to worry about and the team themselves have full control over whatever technology, unfortunately if you identify problems at some point someone needs to know what's happening, difficult to keep track of documentation. One way to resolve this is to have the workflow orchestration as actual abstraction, people have been doing that for data pipelines, apache airflows, AWS Step-functions is one of those hosted versions. It takes care of the errors in your system, to have a high level view of errors in relationships. Threading macro in Clojure on steroids.
-Number Two - traceability and operational observability is a huge deal, we process things and things fail. Our design process, build something ship it up and see what breaks - I need something that is able to trace, lots of tracking, lots of database records, logging, early on but all of that is built in on these workflow orchestration systems you can see every single step in the interface so those are the two big aspects of the product. And historically it's an ETL thing. I actually think it's going to be more useful in the future with language models, instead of single shot but I've been realising that Chat GPT is a great reasoning engine, you can talk to it, give it a context and have a conversation. When you go back to it, it's an external system that you're interacting with. Clojure for us, I published a blog about StepWise, built by Daniel Carlton now at HealthCare, Reify Health;  they were using for bioinformatics data pipeline, Clojure library, thin wrapper over step functions. Define everything in Eden, launch your Clojure process and everything just happens on step functions.
+**Paul:** The biggest challenge for us is both _transactional_ and _business_ processes.
 
+Transactional processes - such as sending out an email - being an atomic unit of action, and business process being an amalgamation of those to formulate something that matters to the business. In the case of sending out an email it could be the creative aspects of choosing who to email and dealing with regulatory compliance.
+
+B2B companies are simply trying to solve business processes that are complicated, failure prone, long running and super messy.
+
+The other challenge for us, is being in the cloud, which is super beneficial, but then you get more little pockets of service, that can kind of fail.
+
+**Jon: How do you manage your processes in the cloud?**
+
+////
+33.00
+////
+
+**Paul:** For Clojure there's a couple of tracks, we like Serverless: (Lambda functions)[https://aws.amazon.com/pm/lambda], (API Gateway)[https://aws.amazon.com/api-gateway/], (Kinesis)[https://aws.amazon.com/pm/kinesis].
+
+One thing which is core to the entire platform for Motiva is (Step Functions)[https://aws.amazon.com/step-functions/]. Earlier we talked about how best to manage business processes. Microservices allow teams to be fully responsible, giving them full control over technology choices, whilst limiting the scope of what they have to worry about. Unfortunately, someone still needs to know the overall picture, how these Microservices are coordinating.
+
+One way to resolve this is to have the workflow orchestration as actual abstraction, people have been doing that for ETL data pipelines using tools such as (Apache Airflows][https://airflow.apache.org/], with (AWS Step Functions)[https://aws.amazon.com/step-functions/] being a hosted version. Step Wise is kind of like the threading macro in Clojure on steroids. It takes care of the errors in your system, giving you a high level view of errors in relationships, allowing for retries and that kind of thing.
+
+Traceability and operational observability is a huge deal, our processes can and do fail. We need lots of tracking and logging, and the great thing is that all of this is built into these workflow orchestration systems you can see every single step in the interface so those are the two big aspects of the product. And historically it's an ETL thing. I actually think it's going to be more useful in the future with language models, instead of single shot but I've been realising that Chat GPT is a great reasoning engine, you can talk to it, give it a context and have a conversation. When you go back to it, it's an external system that you're interacting with. Clojure for us, I published a blog about StepWise, built by Daniel Carlton now at HealthCare, Reify Health;  they were using for bioinformatics data pipeline, Clojure library, thin wrapper over step functions. Define everything in Eden, launch your Clojure process and everything just happens on step functions.
 
 **Jon: Do you write the functions in Clojure? What does it look like when it's executed?**
-
 
 **Paul:** Yes the functions are written in Clojure.
 
 In Stepwise version 1 is not in Lambda; it's a long running process which can be run in anything, we choose to run in Docker. There are two parts; one is to define the  state machines, overall flow in Eden and number 2 is defining the actual node/step functions those are Clojure functions - but where do you want those functions, for now in process and we kick off core esync background and you can specify number of concurrency, it keeps a running loop to pull a specific step-function end point on AWS.
-
 
 *Jon*
 
