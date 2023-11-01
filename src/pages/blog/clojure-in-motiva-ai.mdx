@@ -111,21 +111,15 @@ Compare this to the transformer world, everything's built for you. You choose a 
 
 **Jon: Could you elaborate on Transformers?**
 
-**Paul:** Transformer is the underlying architecture. LLM is the algorithm it's also the main library from Hugging Face (https://huggingface.co/). Hugging face is in a lot of the chats, all the open source new modules, it's like a git hub for new fangled language models. They host the source code and they host the actual trained modules which ends up being binary files. You take the binary files and you can run inference. So there's two steps, one is the training. You have the algorithm and you grab a terabyte of data and train, the trained output of that is the binary file. You can take this file and run questions or apply a run time thing, they call that inference step. Hugging Face hosts source code for free, you can see GPT 2 on there is prime example and many of the Lama from Facebook, Vicuna, everything is on there, AI transformer learning world.
+**Paul:** Transformer is the underlying architecture. LLM is the algorithm it's also the main library from Hugging Face (https://huggingface.co/). Hugging Face is like GitHub for new fangled language models. They host the source code and they host the actual trained modules which ends up being binary files.
 
-*Jon*
+You take the binary files and you can run inference. So there's two steps, one is the training. You have the algorithm and you grab a terabyte of data and train, the trained output of that is the binary file. You can take this file and run questions or apply a run time thing, they call that inference step.
 
-In the old world, who produced those NLP models for you?
+Hugging Face hosts source code for free. You can see GPT 2 on there, (LLaMA from Facebook)[https://ai.meta.com/blog/large-language-model-llama-meta-ai/], (https://lmsys.org/blog/2023-03-30-vicuna/)[Vicuna].
 
-*Paul*
+**Jon: So you've recently swapped out some NLP modules for LLMs. What does the Clojure side look like, what's your go to Clojure tech stack?**
 
-The library or package producer usually comes with a pre-treat modules for french/english, on the open ness - one thing with hugging face and all ai machine learning workflow are as easy as git hub to share code, the data sets and all those trained models are built on top of each other, it's super accessible because people can build on top of it all. CSV, python data, binaries of trained models.
-
-*Jon*
-
-So you've recently swapped out some NLP modules for LLMs. What does the Clojure side look like, what's your go to Clojure tech stack?
-
-*Paul*
+**Paul:**
 
 For Clojure there's a couple of tracks, we like Serverless, Lambda functions, API Gateway, Conesus. One thing which is core to the entire platform for Motiva is Step Functions. Earlier we talked about business processes and how best to manage, one thing with microservers is that they allow teams to be fully responsible; they limit the scope of what you need to worry about and the team themselves have full control over whatever technology, unfortunately if you identify problems at some point someone needs to know what's happening, difficult to keep track of documentation. One way to resolve this is to have the workflow orchestration as actual abstraction, people have been doing that for data pipelines, apache airflows, AWS Step-functions is one of those hosted versions. It takes care of the errors in your system, to have a high level view of errors in relationships. Threading macro in Clojure on steroids.
 Number Two - traceability and operational observability is a huge deal, we process things and things fail. Our design process, build something ship it up and see what breaks - I need something that is able to trace, lots of tracking, lots of database records, logging, early on but all of that is built in on these workflow orchestration systems you can see every single step in the interface so those are the two big aspects of the product. And historically it's an ETL thing. I actually think it's going to be more useful in the future with language models, instead of single shot but I've been realising that Chat GPT is a great reasoning engine, you can talk to it, give it a context and have a conversation. When you go back to it, it's an external system that you're interacting with. Clojure for us, I published a blog about StepWise, built by Daniel Carlton now at HealthCare, Reify Health;  they were using for bioinformatics data pipeline, Clojure library, thin wrapper over step functions. Define everything in Eden, launch your Clojure process and everything just happens on step functions.
