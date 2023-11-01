@@ -129,7 +129,13 @@ One thing which is core to the entire platform for Motiva is (Step Functions)[ht
 
 One way to resolve this is to have the workflow orchestration as actual abstraction, people have been doing that for ETL data pipelines using tools such as (Apache Airflows][https://airflow.apache.org/], with (AWS Step Functions)[https://aws.amazon.com/step-functions/] being a hosted version. Step Wise is kind of like the threading macro in Clojure on steroids. It takes care of the errors in your system, giving you a high level view of errors in relationships, allowing for retries and that kind of thing.
 
-Traceability and operational observability is a huge deal, our processes can and do fail. We need lots of tracking and logging, and the great thing is that all of this is built into these workflow orchestration systems you can see every single step in the interface so those are the two big aspects of the product. And historically it's an ETL thing. I actually think it's going to be more useful in the future with language models, instead of single shot but I've been realising that Chat GPT is a great reasoning engine, you can talk to it, give it a context and have a conversation. When you go back to it, it's an external system that you're interacting with. Clojure for us, I published a blog about StepWise, built by Daniel Carlton now at HealthCare, Reify Health;  they were using for bioinformatics data pipeline, Clojure library, thin wrapper over step functions. Define everything in Eden, launch your Clojure process and everything just happens on step functions.
+Traceability and operational observability is a huge deal, as our processes can and do fail. We need lots of tracking and logging, and the great thing is that all of this is built into these workflow orchestration systems.
+
+In tools like Step Wise, you can drill into the status of each step, the inputs and outputs, logging and everything. Historically it's been an ETL thing, but I actually think it's going to be more useful in the future with language models. ChatGPT is a great reasoning engine, whereby you can talk to it, give it a context and have a conversation. There's a lot of back and forth and making use of decision trees, so I believe this also a good fit for workflow orchestration automation.
+
+(I recently published a blog)[https://github.com/Motiva-AI/stepwise] about a Clojure library we use called (StepWise)[https://github.com/Motiva-AI/stepwise/]; a thin Clojure wrapper over step functions. It was originally built by Daniel Carlton at Reify Health using it for a bio-informatics data pipeline. We've taken it over since.
+
+Everything is defined in EDN. launch your Clojure process and everything just happens on step functions.
 
 **Jon: Do you write the functions in Clojure? What does it look like when it's executed?**
 
@@ -140,7 +146,6 @@ In Stepwise version 1 is not in Lambda; it's a long running process which can be
 *Jon*
 
 Can you run functions separately to others?
-
 
 *Paul*
 
