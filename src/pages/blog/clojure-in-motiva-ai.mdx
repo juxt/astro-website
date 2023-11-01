@@ -166,10 +166,7 @@ The step functions are Clojure functions. In StepWise we run those functions in 
 40
 ////
 
-**Paul:** Yeah, actually as of this week, our team published a design proposal for Version 2.0 of StepWise, instead of EDN we want everything to be pure Clojure. Defining state machine is procedural programming and one of my favourite Clojure operators is the threading macro. Imagine defining a threading macro and it naturally turns into this stepwise step function distributed, serverless, orchestrated, managed thing.
-
-Sometimes you want Lambda and sometimes you want Docker, from our experience, from using it in production, it's super tedious to keep switching, provisions etc. With wholly Lambda and some libraries it's doable For Stepwise version 1 we have it in the running process already, hosting a platform is simply a couple of lines of Clojure code, builds the flexibility. Our design is serverless first, sometimes design and load is not what we expected, Lambda has limitations, memory limits and time limits, and for some of these business processes you could be waiting on responses for days.
-Version 2 is different stage use case and sometimes it's necessary to be able to swap them.
+**Paul:** Yeah, actually as of this week, our team published a design proposal for Version 2.0 of StepWise, instead of EDN we want everything to be pure Clojure. Defining a state machine is procedural programming and one of my favourite Clojure operators is the threading macro. Imagine defining a threading macro and it naturally turns into StepWise step functions;  distributed, serverless, orchestrated, managed.
 
 **Jon: How does Stepwise compare to [Storm](https://storm.apache.org/)?**
 
