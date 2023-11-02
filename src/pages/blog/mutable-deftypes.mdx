@@ -12,13 +12,13 @@ heroImage: 'mutable-deftypes.jpg'
 
 tl:dr; `deftype` can be used in Clojure to give you access to the mutable fields of its host language (e.g. Java Object Fields). When referencing mutable fields inside a deftype method body, be aware:
 * Interop field access (i.e. using `(.-fieldName this)`) will always return the current value of the field when the interop expression itself is evaluated
-* Ordinary variable references to a field (i.e. simply using `fieldName` from the method scope) are a copy of that fields value in the local scope, and if closed over will return the value at that point in time and *not* the current value held by the field.
+* Ordinary variable references to a field (i.e. simply using `fieldName` from the method scope) are a copy of that field's value in the local scope, and if closed over will return the value at that point in time and *not* the current value held by the field.
 
 ## When to deftype
 
 As one ventures in search of performance, one often sacrifices valued properties and principles of the system. In pragmatic languages, a common principle to sacrifice is 'immutability': if you need to go fast, mutate! In Clojure, one possible way to embrace the mutable performance opportunities offered by its host language is to reach for `deftype`.
 
-Deftype provides access to mutable fields in the from of `:volatile-mutable` and `:unsynchronized-mutable` - the exact behaviour of these constructs, and how they differ is not the topic of this blog post, however for the sake of completeness I will quickly note that they map onto Java volatiles and regular Java mutable fields respectively. See the following references for a more thorough explanation.[^1] [^2]
+Deftype provides access to mutable fields in the from of `:volatile-mutable` and `:unsynchronized-mutable` - the exact behaviour of these constructs, and how they differ is not the topic of this post, however for the sake of completeness I will quickly note that they map onto Java volatiles and regular Java mutable fields respectively. See the following references for a more thorough explanation.[^1] [^2]
 
 What I would like to talk about is how references to these fields behave within Clojure (hosted on Java in the examples that follow) and how that might affect your usage of them.
 
@@ -48,7 +48,7 @@ For immutable fields there is no meaningful distinction between the behaviour of
 (.getBar (Foo2. 2)) ;;=> 2
 ```
 
-However if we need to use either of the mutable field types (for performance!) then a crucial difference arises. As per the docstring[^3] using a mutable type declaration for the field will enable the `(set! afield aval)` operation. This operation allows us to mutate a field to a new value at any point within a method. Because the corresponding variable in a method's local environment is a copy of that field's value, if we were to close over that variable before calling `set!` that captured variable would continue to reflect the original value rather than the new value we just `set!`. This is also true of any existing variables closed over during previous method invocations, such as in the example below. Its worth noting that future references to a field variable within a method body, after having called `set!`, will reflect that update as you might expect.
+However if we need to use either of the mutable field types (for performance!) then a crucial difference arises. As per the docstring[^3] using a mutable type declaration for the field will enable the `(set! afield aval)` operation. This operation allows us to mutate a field to a new value at any point within a method. Because the corresponding variable in a method's local environment is a copy of that field's value, if we were to close over that variable before calling `set!` that captured variable would continue to reflect the original value rather than the new value we just `set!`. This is also true of any existing variables closed over during previous method invocations, such as in the example below. It's worth noting that future references to a field variable within a method body, after having called `set!`, will reflect that update as you might expect.
 
 ```clojure
 (definterface
@@ -119,9 +119,9 @@ Compare this to the same snippet from `(.getBar Foo2)` the field `this` is inste
 ```
 ## So now what?
 
-Well there you go, if you happen to be me as of a few weeks ago, then hopefully this has helped you out, and if that's not the case and you've never had to reach for mutable fields before then I hope at least this has been somewhat informative. Handling mutability is hard, to quote the docstring "Note well that mutable fields are extremely difficult to use correctly"[^3] and while that still might be true, my hope would be that this blogpost has managed to make it a little less so.
+Well there you go, if you happen to be me as of a few weeks ago, then hopefully this has helped you out, and if that's not the case and you've never had to reach for mutable fields before then I hope at least this has been somewhat informative. Handling mutability is hard, to quote the docstring "Note well that mutable fields are extremely difficult to use correctly"[^3] and while that still might be true, my hope would be that this post has managed to make it a little less so.
 
-Luckily for us all Clojure has some great idiomatic constructs for handling mutability[^5][^6], which instead make the distinction between reference to the object and returning the value stored in that object explicit (via `deref`[^7]), avoiding much of the ambiguity this blog post is attempting to clear up.
+Luckily for us all Clojure has some great idiomatic constructs for handling mutability[^5][^6], which instead make the distinction between reference to the object and returning the value stored in that object explicit (via `deref`[^7]), avoiding much of the ambiguity this post is attempting to clear up.
 
 That being said, my tentative suggestion if you were to find yourself using deftype with mutable fields, is probably to use the field accessor, unless you are sure you want the behaviour provided by the local variable, as this will always return the up to date value, which is likely what you want if you are trying to model something mutable.
 
