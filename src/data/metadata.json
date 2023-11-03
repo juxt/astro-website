@@ -20,8 +20,8 @@
     { "label": "Get Started", "href": "/get-started" },
     { "label": "Careers", "href": "/careers" },
     { "label": "Blog", "href": "/blog" },
-    { "label": "Contact", "href": "/contact" },
     { "label": "XTDB", "href": "https://xtdb.com/", "target": "_blank" },
+    { "label": "Contact", "href": "/contact" },
     {
       "label": "Free Consultation",
       "href": "/consultation",
