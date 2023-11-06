@@ -7,6 +7,7 @@ function isClojurePost(post) {
     return (
         category == 'clojure'
         || category == 'clojurescript'
+        || category == 'clojure-in'
         || tags.includes('clojure')
         || tags.includes('clojurescript')
     );
