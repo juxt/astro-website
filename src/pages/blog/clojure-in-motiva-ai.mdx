@@ -1,0 +1,209 @@
+---
+author: 'jon'
+title: 'Clojure in Workflow Automation and AI: Motiva AI'
+description: 'Workflow Orchestration with Clojure, making use of AI'
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '2023-11-15'
+heroImage: 'gresham-logo-clojurein-new.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'ai',
+    quote: '"StepWise is like the Clojure threading macro on steroids."'
+  }
+---
+
+import { Image } from 'astro:assets'
+
+[Paul Lam](https://github.com/Quantisan) is a serial entrepreneur, using Clojure for an array of successful start-ups, contributing to open-source tooling along the way. He's been a financial trader and a data-scientist, and now he's running [Motiva AI](https://www.motiva.ai/), a generative AI platform for enterprise marketing.
+
+I caught up with Paul to learn about his story, where Clojure fits in, and what he's doing with AI and workflow orchestration.
+
+**Jon: So Paul, welcome. Why don't you introduce yourself?**
+
+**Paul:** Hi, I'm Paul Lam and I'm Head of Engineering at [Motiva](https://www.motiva.ai/). I feel very fortunate that this is my fourth Clojure start up. I've been doing this for 15 years now, I got on Clojure pretty early and now I'm just riding the wave.
+
+**Jon: Tell me from the beginning.**
+
+**Paul:** I finished my Masters in Biomedical Engineering in 2007, right in the financial crisis. I sent out my resume to a load of companies and ended up in the patent office of the Canadian Federal Government. It was a really simple job, relaxing with a great view!
+
+At the same time, like many naive young people, I thought financial trading could make me some money, and I'd been doing financial trading since high school.
+
+I got coding and trading, and one thing led to another. I participated in algorithmic trading competitions, eventually getting invited to Geneva by one of the Swiss banks. They put me on TV and had me involved in marketing.
+
+Through this experience people reached out to me to build systems for them.
+
+My first start-up was building bespoke trading platforms for family fund managers based in Dubai and Hong Kong.
+
+## Clojure?
+
+**Jon: You were using Clojure back then?**
+
+**Paul:** Yeah, it was 2010/2011, I was on my own and I needed something simple that I could manage myself.
+
+**Jon: What drew you to Clojure?**
+
+**Paul:** Java is heavily used in the FinTech world and so the JVM was a given.
+
+But I didn't like Java and all these classes. I didn't come from a specific software engineering background, I started off in computer science and switched in my 2nd semester to electrical engineering, I felt like I didn't have the training and know-how to do UMLs or classes properly. I was looking for something simple.
+
+I had a couple of options at the time; Scala or Clojure. Looking at the reference manuals, the Scala one was 700 pages long. For me the choice was clear, Clojure just clicked.
+
+**Jon: Had you used Lisp before?**
+
+**Paul:** No I've not, but rewinding back I've used many programming languages. In my robotics days in particular, programming was just a tool.
+
+**Jon: Robotics?**
+
+I was in aerospace robotics, specifically power electronics. My job was testing equipment and the various signals of different circuits. At the time we were working on the Airbus A380, making sure that everything was perfect all the time. They had me as a junior doing a lot of C for microcontrollers and also doing a lot of Matlab for simulations.
+
+## Start-ups
+
+**Jon: So you've done your first Clojure start-up, what happened next?**
+
+**Paul:** My partner at the time, wanted to move to the UK, as she was studying for grad school. Clojure was still in its early days and uSwitch in London was a Clojure destination, so I sent them my details on the off-chance, and ended up getting a job there as Data Scientist.
+
+Three years later, I moved to Boston and worked with a Co-founder doing journalism data processing. It was right after the Boston bombings and we had this realisation that the primary sources of news were on social media; people taking pictures and posting, so we tried to surface those primary sources for journalists.
+
+The next start-up was a chicken farming school in Mozambique, where we welcomed individuals from all over the country to train them how to build a profitable agriculture business. After a couple of years, they return home equipped with education, skills, and funds we helped them raise.
+
+**Jon: It sounds like you've had a really fascinating career.**
+
+**Paul:** I don't know what I'm doing most of the time, it's just about trying different things and not being afraid. I've had a lot of luck.
+
+## Motiva
+
+**Jon: Tell me about Motiva. What is it and what do you do there?**
+
+**Paul:** Motiva is a machine learning company for enterprise email marketing. We integrate into email marketing platforms for B2B companies and we place in a series of steps that they already do, or steps that they should be doing. Users don't have to move away from existing platforms, we're just a plug in on existing tools. With 7 years' experience, we can see an uplift in marketing KPIs by about 50%.
+
+In terms of the email marketing journey for an enterprise company, for example the creative stage, we provide content analysis and generation. We place NLP and algorithms, language models, deliver-ability optimizations on what to send and when to send it. We don't use any of your demographic data, we only focus on behaviours and how you're engaging with the brand. We use this to build a persona for you as an individual.
+
+**Jon: Ok, at JUXT we use MailChimp to send out a newsletter, would it help in that environment or is it a different use case?**
+
+**Paul:** Where we differ is we focus on enterprise customers who have a multi-step journey with certain goals. Royal Mail from the UK is one of our customers, along with Ford and Cisco.
+
+## Clojure and AI
+
+**Jon: Wow, that's really successful! Where do you make use of Clojure in the stack and what do you use for the AI?**
+
+**Paul:** The back-end is all in Clojure, the front-end is JavaScript, and the machine learning is in Python. Python for machine learning because of the ecosystem and the people in that community. It's the people that matter; the language is a tool.
+
+**Jon: How do you integrate?**
+
+**Paul:** REST APIs, with [Flask](https://github.com/flask-restful/flask-restful) on top of it, nothing fancy.
+
+That was the old version, but now [Sagemaker](https://aws.amazon.com/sagemaker/) makes us Serverless. We're able to provision ML models much easier.
+
+What really amazes me with the explosion of large language models is the entire ecosystem that has developed.
+
+It used to be painful to deploy NLP modules such as [CoreNLP](https://stanfordnlp.github.io/CoreNLP/), [spaCy](https://spacy.io/). First you download it, then you need GDK backends, soon it becomes questions like, "How do I build that using Docker with a Python base image and a JDK?". The deployment aspect is hard.
+
+Compare this to the transformer world where everything's built for you. You choose a model, click on it in Sagemaker, it accepts any [Hugging Face](https://huggingface.co/) transformer pre-built weights. Click-click-click, and it's done! The experience now of delivering from the model to something in production is... incomparable.
+
+**Jon: Wow, sounds like a step up**
+
+**Paul:** [Hugging Face](https://huggingface.co/) is like GitHub for new fangled language models. They host the source code and they host the actual trained models which end up being binary files.
+
+You take the binary files and you can run inference. So there's two steps, one is the training. You have the algorithm and you grab a terabyte or so of data and train, then the trained output of that is the binary file. You can take this file and run questions against it - input/output, they call that the inference step.
+
+Hugging Face hosts source code and these binary files for free. You can see GPT 2 on there, [LLaMA from Facebook](https://ai.meta.com/blog/large-language-model-llama-meta-ai/), [Vicuna](https://lmsys.org/blog/2023-03-30-vicuna/).
+
+## Workflow Orchestration Systems
+
+**Jon: Tell me more about your overall architecture. What does your system look like?**
+
+**Paul:** The biggest challenge for us is both _transactional_ and _business_ processes.
+
+Transactional processes - such as sending out an email - being an atomic unit of action, and business process being an amalgamation of those to formulate something that matters to the business. In the case of sending out an email it could be the creative aspects of choosing who to email and dealing with regulatory compliance.
+
+B2B companies are simply trying to solve business processes that are complicated, failure prone, long running and super messy.
+
+The other challenge for us, being in the cloud, is that you can get little pockets of service that can fail.
+
+**Jon: How do you manage processes in the cloud?**
+
+**Paul:** We like Serverless: [Lambda functions](https://aws.amazon.com/pm/lambda), [API Gateway](https://aws.amazon.com/api-gateway/), [Kinesis](https://aws.amazon.com/pm/kinesis).
+
+Earlier we talked about how best to manage business processes. Microservices allow teams to be fully responsible, giving them full control over technology choices, whilst limiting the scope of what they have to worry about. Unfortunately, someone still needs to understand the entire picture, of how these Microservices are interacting.
+
+One way to resolve this is to have the workflow orchestration as actual abstraction, and for this [Step Functions](https://aws.amazon.com/step-functions/) is core to our platform.
+
+People have been doing this for ETL data pipelines using tools such as [Apache Airflow](https://airflow.apache.org/), with [AWS Step Functions](https://aws.amazon.com/step-functions/) being a hosted version.
+
+Traceability and operational observability is hugely important, as processes can and do fail. We need lots of tracking and logging, and the great thing is that all of this is built into these workflow orchestration systems.
+
+**Jon: Sounds a great approach**
+
+[I recently published a blog](https://github.com/Motiva-AI/stepwise) about a Clojure library we use called [StepWise](https://github.com/Motiva-AI/stepwise/); a thin Clojure wrapper over Step Functions. It was originally built by Daniel Carlton for the University of Washington, using it for a bio-informatics data pipeline. We've taken it over since.
+
+StepWise is like the Clojure threading macro on steroids. It takes care of the errors in your system, giving you a high level view of errors in relationships, allowing for retries etc.
+
+Everything is defined in EDN. Launch your Clojure process and everything just happens on Step Functions for you.
+
+In tools like StepWise, you can drill into the status of each step and the inputs and outputs, logging and more. Historically it's been an ETL thing, but I think it's going to be more useful with language models. ChatGPT is a great reasoning engine, whereby you can talk to it; give it a context and have a conversation. There's a lot of back and forth and making use of decision trees, so I believe this is a good fit for workflow orchestration automation.
+
+**Jon: Do you write the functions in Clojure? What does it look like when the step functions are executed?**
+
+**Paul:** Yes the functions are written in Clojure.
+
+In StepWise version 1 the functions are run in a long running process, which can be run in anything; we choose Docker.
+
+There are two parts: 1) define the state machines and the overall flow in EDN, and 2) define the actual node/step functions.
+
+The step functions are Clojure functions. In StepWise we run those functions in-process and we kick off `core.async` background threads whereby you can configure concurrency. The process keeps a running loop to pull from a specific step-function endpoint on AWS.
+
+**Jon: Can you separate out in which process you run the various functions?**
+
+**Paul:** Yes, we actually separate our workers, by urgent workers vs batch workers.
+
+**Jon: Can my Clojure functions have library dependencies?**
+
+**Paul:** Yes, it's just Clojure, nothing stopping you.
+
+**Jon: It can get very expensive and complicated to distribute processes, but you seem to have the best of both worlds with this orchestration approach. If you want to run everything in one process you can, but then if you want to split up the processes - you have that flexibility.**
+
+**Paul:** Yeah, actually as of this week, our team published a design proposal for Version 2.0 of StepWise, instead of EDN we want everything to be pure Clojure. Defining a state machine is procedural programming and one of my favourite Clojure operators is the threading macro. Imagine defining a threading macro and it naturally turns into StepWise step functions;  distributed, serverless, orchestrated, managed.
+
+**Jon: It would be very cool. How does Stepwise compare to [Storm](https://storm.apache.org/)?**
+
+**Paul:** One big thing with StepWise is that we wanted it to be hosted on AWS, and secondly I just wanted it to be a library. There's only 5 operations for StepWise.
+
+## Libraries
+
+**Jon: What are your other favourite libraries, what else is in your toolkit?**
+
+**Paul:** Lots of tooling around AWS functionalities such as StepWise and SQS.
+
+I really like small libraries, such as your (JUXT) [Tick time library](https://github.com/juxt/tick). [Malli](https://github.com/metosin/malli) for schema is cool.
+
+Shout out to [Wes Morgan](https://github.com/cap10morgan) he's been maintaining [docker-clojure](https://github.com/Quantisan/docker-clojure) in my name.
+
+## Team
+
+**Jon: How many Devs have you got?**
+
+**Paul:** Four; three on Clojure and one on JavaScript.
+
+**Jon: Whereabouts is Motiva based?**
+
+**Paul:** US based; East coast and West coast, Japan.
+
+## State of Clojure
+
+**Jon: What do you think of Clojure at the moment? You've been doing it for 15 years.**
+
+**Paul:** Embarrassingly I've just been doing own my thing and have not been looking around too much. My mental model is still at Clojure 1.3 but we are in production with 1.11.2. Everything just works and you don't have to think about it.
+
+This applies to the libraries too. Clojure doesn't operate in a vacuum, it keeps up to date, but also the eco-system, the people, the interest is still there. Big shout out to all those people out there introducing Clojure to companies, generating demand, being able to supply jobs to the community.
+
+**Jon: It's great to publicise stories like yours showing how small teams can be very successful, and you're contributing back with source libraries. It's been great talking to you. Is there anything else you'd like to add?**
+
+**Paul:** I used to focus on hiring people who knew Clojure, from the Clojure community. I tend to back off that now as I don't want a 'language fanboy', I want people who see it as a powerful tool and who are pragmatic.
+
+**Jon: What is the Clojure scene like in Tokyo?**
+
+**Paul:** I've been to a few meet ups, there's a few prominent Clojurians in Japan. In general the tech scene in Japan and East Asia is a few years behind the EU.
+
+**Jon: Thank you Paul. It's been great talking to you and I've enjoyed the wonderful conversation!**
