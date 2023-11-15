@@ -7,6 +7,7 @@ import rehypeSlug from 'rehype-slug'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import remarkGfm from 'remark-gfm'
+import inspectUrls from "@jsdevtools/rehype-url-inspector";
 
 // https://astro.build/config
 export default defineConfig({
@@ -52,6 +53,24 @@ export default defineConfig({
               ]
             )
           ]
+        }
+      ],
+      [
+        inspectUrls,
+        {
+          selectors: ["a[href]"],
+          inspectEach: (url) => {
+              // Ignore hash links
+              if (url.node.properties.href.startsWith("#")) {
+                  return;
+              }
+              var href = new URL(url.node.properties.href, "https://juxt.pro/");
+              // Add target blank to external links
+              if (href.host !== "juxt.pro") {
+                  url.node.properties.target = "_blank";
+                  url.node.properties.rel = "noopener noreferrer";
+              }
+          }
         }
       ]
     ]
