@@ -9,8 +9,8 @@ heroImage: 'docker-logo-clojurein.jpg'
 clojureIn:
   {
     season: 'two',
-    industry: 'security',
-    quote: '"We''re all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."'
+    industry: 'finance,
+    quote: '"I was able to leverage Clojure to improve my own state of being."'
   }
 ---
 
@@ -36,27 +36,23 @@ The majority of our work is back-end using Clojure, with a bit of ClojureScript 
 
 [Partnership Accounting](https://en.wikipedia.org/wiki/Partnership_accounting) is one of the problems we solve. The Partnership accounting space involves large partnerships that have ownership stakes in other partnerships. You end up with a large network of thousands of individual cash flows that are owning other cash flows. Our software allows our clients to trace how that money flows through the entire network of partnerships. This involves reproducing calculations, recalculating positions and ownership stakes.
 
-The processes we create are typically high performance and able to get answers quickly. They're stateless; so we want to make sure that given a particular input, we produce the same output every single time.  We'll run these processes in the cloud,
+The data is a huge graph, and we utilisea lot of graph algorithms to make calculations.
 
+The processes we create are typically high performance and able to get answers quickly. They're stateless; so we want to make sure that given a particular input, we produce the same output every single time.
 
-It's a huge graph, utilising a lot of graph algorithms to do our calculations.
+Another space we do is mortgage backed security accounting which can also be graph based in nature. They're financial instruments that contain pools of mortgages which each mortgage is considered as a cash flow. Some instruments contain mortgage backed securities that contain other mortgage backed securities and so on it goes. The problem space is very graph like in nature and we found Clojure to be very helpful navigating across positions.
 
-Another space we do is mortgage backed security accounting which can also be graph based in nature. They're these pools of mortgages, financial instruments that contain pools of mortgages which each mortgage you consider as cash flow, some of them can contain other mortgage backed securities which contain other mortgage backed securities and on it goes - very graph like in nature and we found Clojure to be very helpful in being able to navigate those particular positions.
-
-*Jon*
-
-What kind of technologies, tools or approaches do you use to tackle those problems?
-
+**Jon: What kind of technologies, tools or approaches do you use to tackle those problems?**
 
 **Bediako:**
 
-Well mostly its about traversal. There's depth first search traversal which is very useful when doing partnership accounting because you're dealing with ownership stakes which are representative to ratios. If you can imagine I have a partnership that owns a half of another partnership, and that partnership owns half of another partnership then there's the relationship between the original partnership and the partnership that's ultimately being owned, there's a quarter ratio there. So we do a lot of those types of calculations and we use depth first search to figure out all the possible paths within a larger partnership structure.  If you have thousands of partnerships in a network depending on how they're connected you can end up with billions of relationships you've got to track as the cash flows from the bottom to the top.
+Well mostly its about graph traversal. There's depth first search traversal which is very useful when doing partnership accounting because you're dealing with ownership stakes which are representative to ratios. If you can imagine I have a partnership that owns a half of another partnership, and that partnership owns half of another partnership then there's the relationship between the original partnership and the partnership that's ultimately being owned, there's a quarter ratio there.
+
+So we do a lot of those types of calculations and we use depth first search to figure out all the possible paths within a larger partnership structure.  If you have thousands of partnerships in a network depending on how they're connected you can end up with billions of relationships you've got to track as the cash flows from the bottom to the top.
 
 Another thing we do is we like to be able to tell if we make a change to some of the data we understand at one point of the graph, we can see which partnerships are being affected.  When we do our calculations we only recalculate for those partnerships that are affected by the change. Ultimately sometimes we are asked to segment the graphs or merge graphs together and so the graph algorithms we use around merging and segmenting come in handy.
 
-*Jon*
-
-Wow, that's a really cool problem space. I can imagine people get a lot of joy looking at the best algorithms to use?
+**Jon: Wow, that's a really cool problem space. I can imagine people get a lot of joy looking at the best algorithms to use?**
 
 **Bediako:**
 
@@ -64,9 +60,7 @@ Yes absolutely, there's some other problems in that space that are brought about
 
 There are different rounding algorithms you can put in and depending on what rounding the accountants want, it could be that the general partner gets the extra dollar. Simple solution for a single partnership but if it's being carried up across thousands of partnerships it becomes quite hairy. Our solution came out of the world of solving Sudoko puzzles, so we use constraint satisfaction algorithm to solve that issue.
 
-*Jon*
-
-Is that core logic approach?
+**Jon: Is that core logic like approach?**
 
 **Bediako:**
 
@@ -205,13 +199,11 @@ Overall I'm very happy with Clojure, I couldn't tell you some major things we'd 
 
 Maybe there's something similar in place that I'm not aware of but it would be great if that was the case.
 
-*Jon*
-
-Is there anything that you'd like to add that we haven't touched on.
+**Jon: Is there anything that you'd like to add that we haven't touched on?**
 
 **Bediako:**
 
-I think for me, the experience of being able to use Clojure to solve real world problems has been quite amazing and it's actually, to be honest, it's made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previous to my exposure to Clojure. I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what i was experiencing before.
+For me, the experience of being able to use Clojure to solve real world problems has been quite amazing and it's actually made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previously without Clojure. I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what i was experiencing before.
 
 *Jon*
 
