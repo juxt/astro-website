@@ -1,0 +1,322 @@
+---
+author: 'joe'
+title: 'Clojure in Spreadsheets: George Town
+description: 'Securing the software supply chain with Clojure'
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '10 May 2023'
+heroImage: 'docker-logo-clojurein.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'security',
+    quote: '"We''re all plumbers in the end. Integrating different systems. When you do that, you need a language like Clojure."'
+  }
+---
+
+import { Image } from 'astro:assets'
+
+= Clojure in Georgetown Software House
+
+*Intro's*
+
+Jon Pither - CEO at JUXT
+
+Bediako George - CEO / Founder at George Town Software House
+
+**Jon: Why don't you start by telling me who you are and what Georgetown is?**
+
+*Bediako*
+
+Yeah absolutely, so my name is Bediako George, I'm the founder of George Town Software House. We're a relatively small consultancy based in the Washington DC area and do a lot of work within the financial and accounting areas. Computing for backend, typically high performance, very accurate processes, one of our major clients is EY.
+
+The majority of our work is Clojure based. We do a lot of back end systems written in Clojure on the Java platform with a bit of Clojure Script thrown in when we need an interface.
+
+*Jon*
+
+That's very cool, so what kind of business processes do you code up? What do your applications do for your clients?
+
+*Bediako*
+
+A lot of it has to do with accounting, the processes we create are typically high performance and able to get answers quickly. They're stateless; so we want to make sure that given a particular input, we produce the same output every single time.  We'll run these processes in the cloud, partnership accounting is one of the problems we solve.
+
+The Partnership accounting space involves large partnerships that have ownership stakes in other partnerships. You end up with this large network of thousands and thousands of individual cash flows that are owning other cash flows. Our software allows our clients to trace how that money flows through the entire network of partnerships by doing those calculations, recalculating positions and ownership stakes.
+
+It's a huge graph, utilising a lot of graph algorithms to do our calculations.
+
+Another space we do is mortgage backed security accounting which can also be graph based in nature. They're these pools of mortgages, financial instruments that contain pools of mortgages which each mortgage you consider as cash flow, some of them can contain other mortgage backed securities which contain other mortgage backed securities and on it goes - very graph like in nature and we found Clojure to be very helpful in being able to navigate those particular positions.
+
+*Jon*
+
+What kind of technologies, tools or approaches do you use to tackle those problems?
+
+
+*Bediako*
+
+Well mostly its about traversal. There's depth first search traversal which is very useful when doing partnership accounting because you're dealing with ownership stakes which are representative to ratios. If you can imagine I have a partnership that owns a half of another partnership, and that partnership owns half of another partnership then there's the relationship between the original partnership and the partnership that's ultimately being owned, there's a quarter ratio there. So we do a lot of those types of calculations and we use depth first search to figure out all the possible paths within a larger partnership structure.  If you have thousands of partnerships in a network depending on how they're connected you can end up with billions of relationships you've got to track as the cash flows from the bottom to the top.
+
+Another thing we do is we like to be able to tell if we make a change to some of the data we understand at one point of the graph, we can see which partnerships are being affected.  When we do our calculations we only recalculate for those partnerships that are affected by the change. Ultimately sometimes we are asked to segment the graphs or merge graphs together and so the graph algorithms we use around merging and segmenting come in handy.
+
+*Jon*
+
+Wow, that's a really cool problem space. I can imagine people get a lot of joy looking at the best algorithms to use?
+
+*Bediako*
+
+Yes absolutely, there's some other problems in that space that are brought about by business requirements unique to the United States, and one of them is this notion of rounding which is an easy thing to think about when you think about mathematical rounding, but is different to accounting rounding. The IRS require all reports to be rounded to the nearest dollar but money comes in in pennies. As an example, there's a $10 payment that needs to be split between three partnerships equally then you end up with $3.333 round that to the nearest dollar which is $9 and so there is a discrepancy.
+
+There are different rounding algorithms you can put in and depending on what rounding the accountants want, it could be that the general partner gets the extra dollar. Simple solution for a single partnership but if it's being carried up across thousands of partnerships it becomes quite hairy. Our solution came out of the world of solving Sudoko puzzles, so we use constraint satisfaction algorithm to solve that issue.
+
+*Jon*
+
+Is that core logic approach?
+
+*Bediako*
+
+You could possibly use core logic to do that, of course the mathematical part of it could be a bit challenging but for us it's looking at all the possible solutions and choosing the one that's closest to the original ratio of sharing.
+
+The IRS doesn't want to see that the final result in your report deviates in a dramatic way to what the original sharing percentages were, so we have constant measuring to review and ensure we don't stray to far from the original economic representation.
+
+*Jon*
+
+That is funky, it's like a man made problem!
+
+*Bediako*
+
+It is absolutely a 'shoot yourself in the foot' problem!
+
+*Jon*
+
+What does your architecture look like? What does your source data look like and what technologies do you use?
+
+*Bediako*
+
+For the partnership accounting system it's largely a back end system.  We deploy a Kubernetes cluster and each container in the cluster is a simple worker model. They subscribe to a queue that contains work that they need to do. Some aspect of partnership accounting, they produce the result, they save that result in the blob store and then they send another message saying they're done doing that particular work, another worker receives that message and continues the next task in the process. It allows us to break one long process into smaller processes, allowing us to allocate resources depending on the amount of effort required.
+
+When we're doing the analysis of the graph we produce all of these paths, therefore need more workers to do the calculations than we do for the analysis of the graph, we can allocate that accordingly within our cluster to get the performance profile we want.
+
+*Jon*
+
+Nice. And do you have any challenges to make sure that the workers are utilising the right way, not skewed?
+
+*Bediako*
+
+No there is definitely a challenge! The way we do this is even though we have a worker paradigm, each container in the cluster is running multiple workers that are able look at different queues which may be empty, to stay busy. Depending on the types of resources these particular processes need, we will group workers accordingly.
+
+*Jon*
+
+And these would be JVM processes? Have you ever looked at Lambdas or more lightweight processes?
+
+*Bediako*
+
+No we haven't looked at Lambdas, we're intrigued but we've having good results with JVM and so unlikely to change for that reason. There are other parts of the organisation that my company is not involved in that uses Lambdas to good effect.
+
+*Jon*
+
+So how did you get started with Clojure, why did you pick Clojure for George Town?
+
+*Bediako*
+
+I was an avid Java developer, to date myself, I started learning from the brown books (IS THIS THE STEPHEN BROWN BOOKS? JAVA FOR FU83KING IDIOTS), Java 1.0.
+
+I was really excited by Java because previously I'd used C and Java solved a lot of the memory management issues you'd run into with C. Over time I became jaded because of the object oriented programming, it seemed using that approach for every single problem was problematic. I'd gone into many projects where it was hard to understand what the code base was doing. I could think about solutions but the implementation eventually caught up with the entire team.
+
+Douglas Crockford first got me excited about Java Script because of the functional approach and the advantages of functional programming. I tried to make it happen in Java, I used Rhino for a while but it wasn't quite what I was looking for and then I stumbled across Clojure.
+
+I just really enjoyed how easy it was to compose smaller tasks into larger tasks, the immutable data structure. It solved a lot of problems I'd seen in my earlier days and then laziness hooked me. It became quite simple.
+
+That happened in 2015 and then I managed to convince my employer that we should use it in a project.
+
+*Jon*
+
+That's great to hear, nice story that you wanted something functional on the JVM and that's the way you came to it and Clojure was naturally a good fit as it's both of those things. I tried to write a bit of functional style java back in the day in a dynamic way, but as soon as you start using hash maps and question marks, comma it's never really going to work.
+
+*Bediako*
+
+Yeah you're right, that was the other thing, Java over time, the syntax became so ponderous. I don't consider myself a particularly brilliant person, I think I'm average in terms of brain power, but trying to keep up with all the syntax changes was terrible. Clojure's simplicity fitted the way I like to think about problems, being a minimalist myself, it was love at first sight I think.
+
+*Jon*
+
+Have you done much hiring in the Clojure space, to add to your team, to go out there and find more Clojure devs?
+
+
+*Bediako*
+
+Yeah I've had quite a few people either through clients or working directly with George Town, that have had no prior experience of working with Clojure. We look for people who are open minded, have functional programming on their resumes. We can teach you to be functional fairly quickly. We ran an internship for one of our clients, in week 1 they were doing Clojure colons and by week 12 they were creating production quality code in the accounting space. It's a useful thing to think about, they're interns and able to do this within 12 weeks, it's pretty fascinating.
+
+*Jon*
+
+In terms of engineering practices; do you do much test and development, automated testing?
+
+*Bediako*
+
+Absolutely! We use test-check and specifications to do generative testing and actually we use it for our own internal product 'Pebble Stream' which is a lightweight spreadsheet engine which runs in the cloud, again all Clojure. So we rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine to make sure it's running as close as possible to what Excel would.
+
+*Jon*
+
+That's great to hear about your involvement with interns to learn Clojure and like you said, it works, as you said in 12 weeks to be able to write production grade software! I've got to ask you about your interesting spreadsheet engine in the clouds, so you're getting hold of spreadsheets and using Clojure to peer inside of them, to use things like POI (apache library to access spreadsheets)?
+
+*Bediako*
+
+That's right, and that ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries that exist to solve problems that many people have had before us, and one of them is how to inspect an Excel spreadsheet? POI is fabulous for that because you have a stateless parser that you can use to parse open an Excel spreadsheet and examine the functions, formulas etc. And all of that information is quite useful for us to process an Excel spreadsheet in a headless manner without the gooey interface. Effectively; what our software does is to translate an Excel spreadsheet's worksheet logic into a representation, it's Eden actually, which represents all that logic in the spreadsheet and our engine executes this logic using it as a template of sorts against additional inputs and produce new outputs. Intermediary form you can think of it as.
+
+*Jon*
+
+I guess the REPL is a great tool.
+
+*Bediako*
+
+Yes REPL based developments! You asked me earlier what was it about Clojure that brought me in, it's remiss of me not to have added it then. Using a REPL to be able to inspect what you're doing is a superpower and it really comes in handy trying to understand why your spreadsheet engine isn't producing the result that Excel is producing.
+
+
+*Jon*
+
+Have you got any particular shout outs, libraries, anything that's contributed to the Clojure eco-system that's helped you in particular?
+
+*Bediako*
+
+Yes, absolutely, I think you mentioned this in your Clojure Conj talk but we found Nippy to be amazing, it's very fast, we're able to serialise very large data structures very quickly and be able to de-serialise them very quickly. Great for passing information back and forth in messages. even if the message is too big for message passing just serialising it to a blob store as just a file or within a key value store like Redis pushing that data in there and pulling it back out and being able to inspect it by the way just by using your REPL. You just point your REPL, download the data from that storage device and then just view it as a Clojure data structure, it's just a beautiful thing to be able to do.
+
+I've mentioned Test/Check before and Clojure Spec we find that to be quite useful as well but I think Nippy is the one stand out for me.
+
+*Jon*
+
+You mentioned you use Spec a lot to do generative testing?
+
+*Bediako*
+
+Yes, it's quite useful and it makes a lot of sense for spreadsheets. What is a spreadsheet? .. well it's a collection of worksheets - what is a worksheet... well it's a collection of columns, worksheets is analogous to a table and then now lets jump into the Excel world so a column is a list of cells which can have different value types but typically in a particular column there is usually a dominant value type, so maybe I'm adding two numbers together or better yet dividing two numbers and the result of that is in one of my columns. What could go wrong, I could divide by 0 therefore my answer in the cell wouldn't be a number it would be some kind of error presentation. Also the very first cell in the column is most likely going to be a strain like you know ratio maybe the header so I have a column which could effectively have multiple data types in it but there is one dominant data type which is numeric. One of the things we do is when we inspect the worksheet we look at the dominant data type, we understand there's a header, so we ignore that, we look at the dominant type but we also understand that something else could pop up during calculations. So when we're doing our test generation we can use the data type representations within test generation to say this one I need to generate numbers and this one I need to generate text and this one I need to generate numbers that are dates, right and they fall into the Excel representation for a date. Very useful because it means I can programmatically inspect a worksheet, see what the types are and then use Test/Check to generate the specific data values for each one of those columns and automatically run a test against the spreadsheet I'm analysing, so very useful and very convenient. It all happens very quickly, we can do that in milliseconds.
+
+*Jon*
+
+Do you then feedback sometimes, are you able to feedback in terms of your testing.
+
+*Bediako*
+
+The way we're able to ensure that we're doing the right thing, we generate data sets, put those in Excel see what Excel produces and then we'll run it against our own and see what we produce and then we look for a threshold based agreement. But then there's some functions and formulas in Excel that make sense in the desktop world but not in the stateless, functional, computational world that we're trying to take advantage of when we do the spreadsheet computing. One example is the 'sub-total' function which doesn't do exactly what you think it would do; it allows you to look at a column of cells and choosing a column of cells produce subtotals, but what it does is ignore some values depending on whether it's a string or as it's doing the calculation and also if you change your view in the Excel spreadsheet it will ignore the cells that are left out of the view and do the subtotal calculation, extremely useful if you're on a desktop but not when you're running it in the cloud as you've got no view. There are some others which we don't support which in my view are mistakes as they lead to spaghetti code / spaghetti spreadsheet implementation so we say we choose to work around it instead of using those. We document them so they don't get used.
+
+*Jon*
+
+It sounds like you build a very sophisticated and comprehensible solution for it which is the taking the complexity of those formulas into an AST and treating it in the same way of generative testing.
+
+What's your view of the current state of Clojure?
+
+
+*Bediako*
+
+Overall I'm very happy with Clojure, I couldn't tell you some major things we'd like to see as different. I think there are some things that we've kind of gotten used to but could be better, one is error reporting, it can be hard to understand when you first looking at it. It's different if you're in Clojure Script vs. Clojure and I'm sure it's different for Clojure CLR. Mentioning the CLR, it would be great to see Clojure becoming established on that front so I would love to see that. It would be interesting to know if there's a Clojure implementation that could be deployed in a native manner with the idea there might be opportunities for performance improvements under certain situations. Maybe something like Babashka, but self contained within Clojure, you didn't need another library. It would also make it easier for the adoption of Clojure. Right now if you start learning Clojure as a newbie you're being forced to learn two languages or platforms. You need to understand the Clojure platform and if you're on the JVM you need to understand the JVM and if you're on the Java Script side you have to understand that. I think it would be nice to learn Clojure without having the other tools or platforms to worry about.
+
+Maybe there's something similar in place that I'm not aware of but it would be great if that was the case.
+
+*Jon*
+
+Is there anything that you'd like to add that we haven't touched on.
+
+*Bediako*
+
+I think for me, the experience of being able to use Clojure to solve real world problems has been quite amazing and it's actually, to be honest, it's made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previous to my exposure to Clojure. I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what i was experiencing before.
+
+*Jon*
+
+Yes we're in a very similar camp of love and appreciation for it as well, the simplicity, dynamic nature, it cuts through a lot of the weight that gets generated for the OO world building those big systems - you get to sidestep so much complexity.
+
+10 devs - small but mighty team - three at EY 5 that are working outside of that on internal projects.
+With Clojure you don't need big teams.
+
+Thanks for the Clojure in, lets chat again soon!
+
+**Jon: Thank you for taking the time, it's really great to do these 'Clojure in's', we need to do more to popularise Clojure to get it out there. **
+
+
+**James:** It could be possible to do more in Clojure's core, but a lot of things could be added to core I suppose. It's difficult updating deeply-nested data structures, it's so common as well. Often our services just take something off a queue, update or transform it, and stick it back on.
+
+**Danny:** It depends how big your data structures are. When you start to have bigger, more complex, nested structures, it hits you and it's worth paying the cost to learn Specter. If you're dealing with very small maps, and some people end up only dealing with small maps and vectors, you'll get by with a bit of `update-in`, `assoc-in`, etc.
+
+**James:** I always have to use [the reference material](https://github.com/redplanetlabs/specter/wiki/Cheat-Sheet), all day!
+
+**Danny:** The alternative, of writing it using Clojure core, like as you said, it can blow up easily to 10 lines that aren't very readable. You can't look at that 10 lines and doing, "I know what that's doing. I know what that's updating." Even without much knowledge of Specter, you're more likely to go, "Oh yeah, I see what it's doing there."
+
+**Neil:** We don't go that far into it though. select, ALL, NONE, MAP-KEYS, MAP-VALS. That kind of thing, you know, it's basic. We're not using all of Specter. There's some really bonkers stuff in there.
+
+So it's very, very useful. And it does feel like a missing piece in Clojure's core. But, to be fair, I do like that Clojure's core developers don't just add every solution, on every whim, into the core.
+
+What's funny is that we still discover things in core that we didn't realise were there. You find something that has been there since 1.0 and you didn't know it was there, even though I have gone up and down that list of functions so many times.
+
+**Ben:** It does move slowly though, the Clojure core, and sometimes you think, "Maybe we could have had that a few years earlier."
+
+**Danny:** One thing we've not made a lot of investment in is spec. It has just not worked out for us. We still use bits of Prismatic schema on functions. It's kind of documentation more than enforcement. The schemas are checked during testing but off in production.
+
+**Ben:** I feel like it [spec] died a bit. It was huge, and we went to a Clojure Conj about eight years ago, every second talk was about spec. Everyone was talking about it and then a few years later, no one was anymore. And it just sort of faded a bit. And it felt like it got abandoned. And it's difficult to want to plug a bunch of stuff like that into your code.
+
+**Neil:** It's called Spec 'alpha', right? Yeah. I'm not comfortable with that investment. Given that it's alpha. I don't know whether that's the intention, to stop people using it yet, but it puts me off.
+
+**Danny:** I don't think it [spec] solved enough of the usability problems early on. It was too difficult for too little gain. The error messages when things were wrong weren't great.
+
+**James:** Looking at something, and immediately knowing what it's structure is, is hard with spec (compared to Prismatic Schema).
+
+**Ben:** We must have a bunch of code from that time period that is full of spec though.
+
+**Danny:** Jim [Clark], still uses a bit of spec. He's quite fluent with it, which of course helps. There's an initial barrier and a steep learning curve. A bit like Specter. Once you're there you can express what you want easily. Jim uses the `conform` features to conform complex inputs, which you can't easily get from elsewhere.
+
+## Tooling and testing
+
+**Joe: Is there anywhere you would like to see Clojure go next? Problems that you'd like to see solved? New directions that you'd like to see Clojure take?**
+
+<span
+  class='pullquote right'
+  text-content="[T]he deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine."
+/>
+
+**James:** I think, "No". It's great, and let's just stop :) But in all seriousness, the deps and the tools.build stuff has really fragmented the ecosystem. I don't think anyone cares really. Lein was fine. It's Maven-y and a bit annoying, but it really was fine. 9 times out of 10 my build is so boring, and I just don't care about it. Your build should be boring. People are putting less and less in there, and more in your multi-stage Docker build, maybe more in your delivery pipeline. You really just need `lein run`, `lein test`, it's all you need.
+
+**Joe: So do you use [Leiningen](https://leiningen.org/) across most of your projects still?**
+
+**Neil:** Yes, all new ones would be.
+
+**Ben:** I prefer lein still. I get annoyed when I open a project and it's not lein, because so many things wont work. I made a new service today, and that's lein.
+
+**Neil:** We do have deps because of the Datomic link.
+
+**James:** It's just such a pain. Thinking, "Oh, which test runner am I gonna use, how do I configure this part."
+
+**Danny:** Yeah, now that's the area I'd like to see improved. I'm unhappy with the state of Clojure testing. So many other languages have really nice systems for running tests, subsets of tests, getting nice output on the command line, or in an IDE. You're writing your matching logic a lot.
+
+**Joe: Do you use Kaocha?**
+
+**Danny:** Yeah, I do. I don't think anyone else uses it, and I know others don't like it, but I do use it a lot (privately!). It does suffer from a lot of the problems of the general Clojure test ecosystem, but what I love about it is (when I can get it to work), I can change of line of code, save, and it runs the tests, and when your tests fail, and you save, it will run just the ones that failed. And I _love_ that kind of feedback loop. It's great when you've got fast tests, it's an incredible experience.
+
+I want that to be even better. I think the ideal development experience is: I'm editing, I'm changing characters, I get instant feedback in my IDE of exactly all my syntactic errors and test failures, all related to that change. That's what everyone's looking for, right? You want instant feedback. Every time I press the button and, um, it's still not there in Clojure.
+
+**Ben:** I feel like [Midje](https://github.com/marick/Midje) may have been the high point in some ways! I mean, it was the wrong direction. Clearly it was. But in terms of actual niceness of writing tests, it really might been the high point.
+
+**Neil:** I really like Midje. But it wasn't the Clojure way, a DSL, too many macros.
+
+**Joe: Yes, it was hard to compose and reuse bits of setup code, for instance, but it did have a great auto-test/test-refresh mode that worked well.**
+
+**Ben:** Yeah, but if things went wrong with Midje, you were in so much trouble.
+
+## Clojure's Strengths
+
+**Joe: So it sounds like all new work that you're doing is implemented in Clojure?**
+
+**Ben:** Across the Atomist platform, yes. We don't represent the entirety of Docker, of course! But our team of Clojure engineers is growing, we're expanding and investing more in Clojure.
+
+**James:** At Docker there's certainly a lot of TypeScript and Go, but there's also a lot of trust in everyone to make the right decisions about tech.
+
+**Danny:** There's always a tension in any company, isn't there? There's a size [of team] where you want standards, to some degree. That makes it much easier in lots of ways. But if you make it too homogeneous, you lose out on innovation.
+
+**James:** If you're writing a microservice in a language like Clojure, it's very effective because it has the high-level abstractions you need. You really want to avoid low-level programming languages for the kind of work we do because the higher-level abstractions we need are just not there, and this really does affect productivity. Often the discussion about programming languages become religious though, and it's about what language you know.
+
+**Neil:** I would love to try and write a microservice in Rust, and just see what the experience is like and how it performs. At some point, though, I'm gonna have to ingest some JSON, or some EDN, and you have to define so much up front. I'm not used to being restricted in that way, because these values may not always have that very specific shape.
+
+**Joe: Earlier you mentioned plumbing. Many microservices you could describe as plumbing, and when you're putting together pipes and connectors, you don't want to have to codify exactly what kind of fluid can go through. You certainly only want to codify the parts that are relevant.**
+
+**James:** Yeah. I only care about certain parts of that data, which is why the _idea_ behind spec is such a good one. It's also a strong argument for not using programming languages like Go or Rust for building microservices, particularly when they're often just passing messages between different systems.
+
+## Expanding the team
+
+**Joe: You guys work in Bristol (in the UK). Is the team growing? And where else do you have engineers?**
+
+**Ben**: We've hired more engineers into our team since the acquisition and we've had engineers from elsewhere in Docker join us. Mainly based across Europe, with some East Coast US.
+
+**James:** Some of the original Atomist team has split up, but we've got a lot more people working on Atomist now (and not just engineering roles). [We're hiring!](https://www.docker.com/career-openings/)
