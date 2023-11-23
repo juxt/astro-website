@@ -26,7 +26,7 @@ Bediako George - CEO / Founder at George Town Software House
 
 **Jon: Why don't you start by telling me who you are and what Georgetown is?**
 
-**Bediako:** Yeah absolutely, so my name is Bediako George, I'm the founder of [George Town Software House](https://www.georgetownsoftware.house/). We're a relatively small consultancy based in the Washington DC area and do a lot of work within the financial and accounting areas.
+**Bediako:** My name is Bediako George, I'm the founder of [George Town Software House](https://www.georgetownsoftware.house/). We're a relatively small consultancy based in the Washington DC area and do a lot of work within the financial and accounting areas.
 
 The majority of our work is back-end using Clojure, with a bit of ClojureScript thrown in when we need an interface.
 
@@ -94,23 +94,15 @@ Nice. And do you have any challenges to make sure that the workers are utilising
 
 No there is definitely a challenge! The way we do this is even though we have a worker paradigm, each container in the cluster is running multiple workers that are able look at different queues which may be empty, to stay busy. Depending on the types of resources these particular processes need, we will group workers accordingly.
 
-*Jon*
-
-And these would be JVM processes? Have you ever looked at Lambdas or more lightweight processes?
+**Jon: And these would be JVM processes? Have you ever looked at Lambdas or more lightweight processes?**
 
 **Bediako:**
 
 No we haven't looked at Lambdas, we're intrigued but we've having good results with JVM and so unlikely to change for that reason. There are other parts of the organisation that my company is not involved in that uses Lambdas to good effect.
 
-*Jon*
+**Jon: So how did you get started with Clojure, why did you pick Clojure for George Town?**
 
-So how did you get started with Clojure, why did you pick Clojure for George Town?
-
-**Bediako:**
-
-I was an avid Java developer, to date myself, I started learning from the brown books (IS THIS THE STEPHEN BROWN BOOKS? JAVA FOR FU83KING IDIOTS), Java 1.0.
-
-I was really excited by Java because previously I'd used C and Java solved a lot of the memory management issues you'd run into with C. Over time I became jaded because of the object oriented programming, it seemed using that approach for every single problem was problematic. I'd gone into many projects where it was hard to understand what the code base was doing. I could think about solutions but the implementation eventually caught up with the entire team.
+**Bediako:** I was an avid Java developer, using it from Java 1.0. I was really excited by Java because previously I'd used C and Java solved a lot of the memory management issues. Over time I became jaded because of OOP (Object Oriented Programming). I'd gone into many projects where it was hard to understand what the code base was doing.
 
 Douglas Crockford first got me excited about Java Script because of the functional approach and the advantages of functional programming. I tried to make it happen in Java, I used Rhino for a while but it wasn't quite what I was looking for and then I stumbled across Clojure.
 
@@ -118,34 +110,24 @@ I just really enjoyed how easy it was to compose smaller tasks into larger tasks
 
 That happened in 2015 and then I managed to convince my employer that we should use it in a project.
 
-*Jon*
-
-That's great to hear, nice story that you wanted something functional on the JVM and that's the way you came to it and Clojure was naturally a good fit as it's both of those things. I tried to write a bit of functional style java back in the day in a dynamic way, but as soon as you start using hash maps and question marks, comma it's never really going to work.
+**Jon: That's great to hear, nice story that you wanted something functional on the JVM and that's the way you came to it and Clojure was naturally a good fit as it's both of those things. I tried to write a bit of functional style java back in the day in a dynamic way, but as soon as you start using hash maps and question marks, comma it's never really going to work.**
 
 **Bediako:**
 
 Yeah you're right, that was the other thing, Java over time, the syntax became so ponderous. I don't consider myself a particularly brilliant person, I think I'm average in terms of brain power, but trying to keep up with all the syntax changes was terrible. Clojure's simplicity fitted the way I like to think about problems, being a minimalist myself, it was love at first sight I think.
 
-*Jon*
-
-Have you done much hiring in the Clojure space, to add to your team, to go out there and find more Clojure devs?
+**Jon Have you done much hiring for Clojure devs?**
 
 
-**Bediako:**
+**Bediako:** Yeah I've had quite a few people either through clients or working directly with George Town, that have had no prior experience of working with Clojure. We look for people who are open minded, have functional programming on their resumes. We can teach you to be functional fairly quickly. We ran an internship for one of our clients, in week 1 they were doing Clojure colons and by week 12 they were creating production quality code in the accounting space. It's a useful thing to think about, they're interns and able to do this within 12 weeks, it's pretty fascinating.
 
-Yeah I've had quite a few people either through clients or working directly with George Town, that have had no prior experience of working with Clojure. We look for people who are open minded, have functional programming on their resumes. We can teach you to be functional fairly quickly. We ran an internship for one of our clients, in week 1 they were doing Clojure colons and by week 12 they were creating production quality code in the accounting space. It's a useful thing to think about, they're interns and able to do this within 12 weeks, it's pretty fascinating.
-
-*Jon*
-
-In terms of engineering practices; do you do much test and development, automated testing?
+**Jon: In terms of engineering practices; do you do much test and development, automated testing?**
 
 **Bediako:**
 
 Absolutely! We use test-check and specifications to do generative testing and actually we use it for our own internal product 'Pebble Stream' which is a lightweight spreadsheet engine which runs in the cloud, again all Clojure. So we rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine to make sure it's running as close as possible to what Excel would.
 
-*Jon*
-
-That's great to hear about your involvement with interns to learn Clojure and like you said, it works, as you said in 12 weeks to be able to write production grade software! I've got to ask you about your interesting spreadsheet engine in the clouds, so you're getting hold of spreadsheets and using Clojure to peer inside of them, to use things like POI (apache library to access spreadsheets)?
+**Jon: That's great to hear about your involvement with interns to learn Clojure and like you said, it works, as you said in 12 weeks to be able to write production grade software! I've got to ask you about your interesting spreadsheet engine in the clouds, so you're getting hold of spreadsheets and using Clojure to peer inside of them, to use things like POI (apache library to access spreadsheets)?**
 
 **Bediako:**
 
