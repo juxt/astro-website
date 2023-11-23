@@ -26,9 +26,7 @@ Bediako George - CEO / Founder at George Town Software House
 
 **Jon: Why don't you start by telling me who you are and what Georgetown is?**
 
-*Bediako*
-
-Yeah absolutely, so my name is Bediako George, I'm the founder of George Town Software House. We're a relatively small consultancy based in the Washington DC area and do a lot of work within the financial and accounting areas. Computing for backend, typically high performance, very accurate processes, one of our major clients is EY.
+**Bediako:** Yeah absolutely, so my name is Bediako George, I'm the founder of George Town Software House. We're a relatively small consultancy based in the Washington DC area and do a lot of work within the financial and accounting areas. Computing for backend, typically high performance, very accurate processes, one of our major clients is EY.
 
 The majority of our work is Clojure based. We do a lot of back end systems written in Clojure on the Java platform with a bit of Clojure Script thrown in when we need an interface.
 
@@ -36,7 +34,7 @@ The majority of our work is Clojure based. We do a lot of back end systems writt
 
 That's very cool, so what kind of business processes do you code up? What do your applications do for your clients?
 
-*Bediako*
+**Bediako:**
 
 A lot of it has to do with accounting, the processes we create are typically high performance and able to get answers quickly. They're stateless; so we want to make sure that given a particular input, we produce the same output every single time.  We'll run these processes in the cloud, partnership accounting is one of the problems we solve.
 
@@ -51,7 +49,7 @@ Another space we do is mortgage backed security accounting which can also be gra
 What kind of technologies, tools or approaches do you use to tackle those problems?
 
 
-*Bediako*
+**Bediako:**
 
 Well mostly its about traversal. There's depth first search traversal which is very useful when doing partnership accounting because you're dealing with ownership stakes which are representative to ratios. If you can imagine I have a partnership that owns a half of another partnership, and that partnership owns half of another partnership then there's the relationship between the original partnership and the partnership that's ultimately being owned, there's a quarter ratio there. So we do a lot of those types of calculations and we use depth first search to figure out all the possible paths within a larger partnership structure.  If you have thousands of partnerships in a network depending on how they're connected you can end up with billions of relationships you've got to track as the cash flows from the bottom to the top.
 
@@ -61,7 +59,7 @@ Another thing we do is we like to be able to tell if we make a change to some of
 
 Wow, that's a really cool problem space. I can imagine people get a lot of joy looking at the best algorithms to use?
 
-*Bediako*
+**Bediako:**
 
 Yes absolutely, there's some other problems in that space that are brought about by business requirements unique to the United States, and one of them is this notion of rounding which is an easy thing to think about when you think about mathematical rounding, but is different to accounting rounding. The IRS require all reports to be rounded to the nearest dollar but money comes in in pennies. As an example, there's a $10 payment that needs to be split between three partnerships equally then you end up with $3.333 round that to the nearest dollar which is $9 and so there is a discrepancy.
 
@@ -71,7 +69,7 @@ There are different rounding algorithms you can put in and depending on what rou
 
 Is that core logic approach?
 
-*Bediako*
+**Bediako:**
 
 You could possibly use core logic to do that, of course the mathematical part of it could be a bit challenging but for us it's looking at all the possible solutions and choosing the one that's closest to the original ratio of sharing.
 
@@ -81,7 +79,7 @@ The IRS doesn't want to see that the final result in your report deviates in a d
 
 That is funky, it's like a man made problem!
 
-*Bediako*
+**Bediako:**
 
 It is absolutely a 'shoot yourself in the foot' problem!
 
@@ -89,7 +87,7 @@ It is absolutely a 'shoot yourself in the foot' problem!
 
 What does your architecture look like? What does your source data look like and what technologies do you use?
 
-*Bediako*
+**Bediako:**
 
 For the partnership accounting system it's largely a back end system.  We deploy a Kubernetes cluster and each container in the cluster is a simple worker model. They subscribe to a queue that contains work that they need to do. Some aspect of partnership accounting, they produce the result, they save that result in the blob store and then they send another message saying they're done doing that particular work, another worker receives that message and continues the next task in the process. It allows us to break one long process into smaller processes, allowing us to allocate resources depending on the amount of effort required.
 
@@ -99,7 +97,7 @@ When we're doing the analysis of the graph we produce all of these paths, theref
 
 Nice. And do you have any challenges to make sure that the workers are utilising the right way, not skewed?
 
-*Bediako*
+**Bediako:**
 
 No there is definitely a challenge! The way we do this is even though we have a worker paradigm, each container in the cluster is running multiple workers that are able look at different queues which may be empty, to stay busy. Depending on the types of resources these particular processes need, we will group workers accordingly.
 
@@ -107,7 +105,7 @@ No there is definitely a challenge! The way we do this is even though we have a 
 
 And these would be JVM processes? Have you ever looked at Lambdas or more lightweight processes?
 
-*Bediako*
+**Bediako:**
 
 No we haven't looked at Lambdas, we're intrigued but we've having good results with JVM and so unlikely to change for that reason. There are other parts of the organisation that my company is not involved in that uses Lambdas to good effect.
 
@@ -115,7 +113,7 @@ No we haven't looked at Lambdas, we're intrigued but we've having good results w
 
 So how did you get started with Clojure, why did you pick Clojure for George Town?
 
-*Bediako*
+**Bediako:**
 
 I was an avid Java developer, to date myself, I started learning from the brown books (IS THIS THE STEPHEN BROWN BOOKS? JAVA FOR FU83KING IDIOTS), Java 1.0.
 
@@ -131,7 +129,7 @@ That happened in 2015 and then I managed to convince my employer that we should 
 
 That's great to hear, nice story that you wanted something functional on the JVM and that's the way you came to it and Clojure was naturally a good fit as it's both of those things. I tried to write a bit of functional style java back in the day in a dynamic way, but as soon as you start using hash maps and question marks, comma it's never really going to work.
 
-*Bediako*
+**Bediako:**
 
 Yeah you're right, that was the other thing, Java over time, the syntax became so ponderous. I don't consider myself a particularly brilliant person, I think I'm average in terms of brain power, but trying to keep up with all the syntax changes was terrible. Clojure's simplicity fitted the way I like to think about problems, being a minimalist myself, it was love at first sight I think.
 
@@ -140,7 +138,7 @@ Yeah you're right, that was the other thing, Java over time, the syntax became s
 Have you done much hiring in the Clojure space, to add to your team, to go out there and find more Clojure devs?
 
 
-*Bediako*
+**Bediako:**
 
 Yeah I've had quite a few people either through clients or working directly with George Town, that have had no prior experience of working with Clojure. We look for people who are open minded, have functional programming on their resumes. We can teach you to be functional fairly quickly. We ran an internship for one of our clients, in week 1 they were doing Clojure colons and by week 12 they were creating production quality code in the accounting space. It's a useful thing to think about, they're interns and able to do this within 12 weeks, it's pretty fascinating.
 
@@ -148,7 +146,7 @@ Yeah I've had quite a few people either through clients or working directly with
 
 In terms of engineering practices; do you do much test and development, automated testing?
 
-*Bediako*
+**Bediako:**
 
 Absolutely! We use test-check and specifications to do generative testing and actually we use it for our own internal product 'Pebble Stream' which is a lightweight spreadsheet engine which runs in the cloud, again all Clojure. So we rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine to make sure it's running as close as possible to what Excel would.
 
@@ -156,7 +154,7 @@ Absolutely! We use test-check and specifications to do generative testing and ac
 
 That's great to hear about your involvement with interns to learn Clojure and like you said, it works, as you said in 12 weeks to be able to write production grade software! I've got to ask you about your interesting spreadsheet engine in the clouds, so you're getting hold of spreadsheets and using Clojure to peer inside of them, to use things like POI (apache library to access spreadsheets)?
 
-*Bediako*
+**Bediako:**
 
 That's right, and that ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries that exist to solve problems that many people have had before us, and one of them is how to inspect an Excel spreadsheet? POI is fabulous for that because you have a stateless parser that you can use to parse open an Excel spreadsheet and examine the functions, formulas etc. And all of that information is quite useful for us to process an Excel spreadsheet in a headless manner without the gooey interface. Effectively; what our software does is to translate an Excel spreadsheet's worksheet logic into a representation, it's Eden actually, which represents all that logic in the spreadsheet and our engine executes this logic using it as a template of sorts against additional inputs and produce new outputs. Intermediary form you can think of it as.
 
@@ -164,7 +162,7 @@ That's right, and that ties back to the convenience of having Clojure on the JVM
 
 I guess the REPL is a great tool.
 
-*Bediako*
+**Bediako:**
 
 Yes REPL based developments! You asked me earlier what was it about Clojure that brought me in, it's remiss of me not to have added it then. Using a REPL to be able to inspect what you're doing is a superpower and it really comes in handy trying to understand why your spreadsheet engine isn't producing the result that Excel is producing.
 
@@ -173,7 +171,7 @@ Yes REPL based developments! You asked me earlier what was it about Clojure that
 
 Have you got any particular shout outs, libraries, anything that's contributed to the Clojure eco-system that's helped you in particular?
 
-*Bediako*
+**Bediako:**
 
 Yes, absolutely, I think you mentioned this in your Clojure Conj talk but we found Nippy to be amazing, it's very fast, we're able to serialise very large data structures very quickly and be able to de-serialise them very quickly. Great for passing information back and forth in messages. even if the message is too big for message passing just serialising it to a blob store as just a file or within a key value store like Redis pushing that data in there and pulling it back out and being able to inspect it by the way just by using your REPL. You just point your REPL, download the data from that storage device and then just view it as a Clojure data structure, it's just a beautiful thing to be able to do.
 
@@ -183,7 +181,7 @@ I've mentioned Test/Check before and Clojure Spec we find that to be quite usefu
 
 You mentioned you use Spec a lot to do generative testing?
 
-*Bediako*
+**Bediako:**
 
 Yes, it's quite useful and it makes a lot of sense for spreadsheets. What is a spreadsheet? .. well it's a collection of worksheets - what is a worksheet... well it's a collection of columns, worksheets is analogous to a table and then now lets jump into the Excel world so a column is a list of cells which can have different value types but typically in a particular column there is usually a dominant value type, so maybe I'm adding two numbers together or better yet dividing two numbers and the result of that is in one of my columns. What could go wrong, I could divide by 0 therefore my answer in the cell wouldn't be a number it would be some kind of error presentation. Also the very first cell in the column is most likely going to be a strain like you know ratio maybe the header so I have a column which could effectively have multiple data types in it but there is one dominant data type which is numeric. One of the things we do is when we inspect the worksheet we look at the dominant data type, we understand there's a header, so we ignore that, we look at the dominant type but we also understand that something else could pop up during calculations. So when we're doing our test generation we can use the data type representations within test generation to say this one I need to generate numbers and this one I need to generate text and this one I need to generate numbers that are dates, right and they fall into the Excel representation for a date. Very useful because it means I can programmatically inspect a worksheet, see what the types are and then use Test/Check to generate the specific data values for each one of those columns and automatically run a test against the spreadsheet I'm analysing, so very useful and very convenient. It all happens very quickly, we can do that in milliseconds.
 
@@ -191,7 +189,7 @@ Yes, it's quite useful and it makes a lot of sense for spreadsheets. What is a s
 
 Do you then feedback sometimes, are you able to feedback in terms of your testing.
 
-*Bediako*
+**Bediako:**
 
 The way we're able to ensure that we're doing the right thing, we generate data sets, put those in Excel see what Excel produces and then we'll run it against our own and see what we produce and then we look for a threshold based agreement. But then there's some functions and formulas in Excel that make sense in the desktop world but not in the stateless, functional, computational world that we're trying to take advantage of when we do the spreadsheet computing. One example is the 'sub-total' function which doesn't do exactly what you think it would do; it allows you to look at a column of cells and choosing a column of cells produce subtotals, but what it does is ignore some values depending on whether it's a string or as it's doing the calculation and also if you change your view in the Excel spreadsheet it will ignore the cells that are left out of the view and do the subtotal calculation, extremely useful if you're on a desktop but not when you're running it in the cloud as you've got no view. There are some others which we don't support which in my view are mistakes as they lead to spaghetti code / spaghetti spreadsheet implementation so we say we choose to work around it instead of using those. We document them so they don't get used.
 
@@ -202,7 +200,7 @@ It sounds like you build a very sophisticated and comprehensible solution for it
 What's your view of the current state of Clojure?
 
 
-*Bediako*
+**Bediako:**
 
 Overall I'm very happy with Clojure, I couldn't tell you some major things we'd like to see as different. I think there are some things that we've kind of gotten used to but could be better, one is error reporting, it can be hard to understand when you first looking at it. It's different if you're in Clojure Script vs. Clojure and I'm sure it's different for Clojure CLR. Mentioning the CLR, it would be great to see Clojure becoming established on that front so I would love to see that. It would be interesting to know if there's a Clojure implementation that could be deployed in a native manner with the idea there might be opportunities for performance improvements under certain situations. Maybe something like Babashka, but self contained within Clojure, you didn't need another library. It would also make it easier for the adoption of Clojure. Right now if you start learning Clojure as a newbie you're being forced to learn two languages or platforms. You need to understand the Clojure platform and if you're on the JVM you need to understand the JVM and if you're on the Java Script side you have to understand that. I think it would be nice to learn Clojure without having the other tools or platforms to worry about.
 
@@ -212,7 +210,7 @@ Maybe there's something similar in place that I'm not aware of but it would be g
 
 Is there anything that you'd like to add that we haven't touched on.
 
-*Bediako*
+**Bediako:**
 
 I think for me, the experience of being able to use Clojure to solve real world problems has been quite amazing and it's actually, to be honest, it's made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previous to my exposure to Clojure. I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what i was experiencing before.
 
