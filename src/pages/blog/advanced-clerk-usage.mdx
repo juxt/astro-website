@@ -12,6 +12,13 @@ tags:
   - 'clojure'
 ---
 
+import { Image } from 'astro:assets'
+import demo1 from '../../assets/blog/advanced-clerk-demo-1.png'
+import demo2 from '../../assets/blog/advanced-clerk-demo-2.png'
+import demo3 from '../../assets/blog/advanced-clerk-demo-3.png'
+import demo4 from '../../assets/blog/advanced-clerk-demo-4.png'
+import demo5 from '../../assets/blog/advanced-clerk-demo-5.png'
+
 ## Intro
 
 _Just a heads-up, this will contain spoilers for Day 5 of Advent of Code 2022._
@@ -56,7 +63,6 @@ For my viewer, my solution uses `reduce` for the final answers; so I was able to
    [["T" "X" "U" "J"] ["O" "R" "P"]]])
 ```
 
-
 Now let's create some simple viewer to check our data works, and ensure that this data comes through cleanly. Because of how Clerk works, the data is passed from Clojure land to Clojurescript land through SCI and a websocket; and as such we have to define a viewer as a simple object with a quoted function.
 
 We also have to specify the viewer uses a so-called `:transform-fn` to intercept and translate the data before it gets passed to the component. Here, we want to call out to `nextjournal.clerk/mark-presented`to prevent our data from being translated to a more parseable format.
@@ -74,6 +80,8 @@ Putting all that together we have
 (clerk/with-viewer crates-viewer data)
 ```
 
+<Image alt='image' src={demo1} />
+
 Which gives us a simple printout of all the data. The metadata here is important for development as it prevents caching from occurring. By default, form results are cached and only recomputed when something changes in it. When we're happy with it, we can remove it; but it also isn't doing much harm.
 
 Great! Our input vector is a vector of steps, each step having a number of towers. Since each step isn't technically guaranteed to have the same amount of towers, we have to have some way to tell the CSS to handle that nicely. We also need some kind of state to track with the slider, so we can get the right value and render it.
@@ -82,52 +90,60 @@ That sounds like a lot, but we'll get there!
 
 First let's have our viewer just render a single step.
 
-```diff
-modified   src/demo.clj
-@@ -19,7 +19,10 @@
-   {:transform-fn clerk/mark-presented
-    :render-fn
-    '(fn [steps]
--      [:div (pr-str steps)])})
-+      (into
-+       [:div]
-+       (for [tower (first steps)]
-+         [:div (pr-str tower)])))})
+```clojure
+(def crates-viewer
+  {:transform-fn clerk/mark-presented
+   :render-fn
+   '(fn [steps]
+      (into
+       [:div]
+       (for [tower (first steps)]
+         [:div (pr-str tower)])))})
 ```
+
+<Image alt='image' src={demo2} />
 
 This is shaping up well already. Now we have each tower, let's render them up. For this we'll use CSS Grid as we can easily create a number of fixed columns that can change. We'll add some basic styling here too.
 
 Out of the box, Clerk already comes with Tailwind support both for dev and prod; so no changes needed here we can just add in classes.
 
-```diff
-modified   src/demo.clj
-@@ -19,7 +19,15 @@
-   {:transform-fn clerk/mark-presented
-    :render-fn
-    '(fn [steps]
--      [:div (pr-str steps)])})
-+      (into
-+       [:div.grid.bg-white.overflow-y.h-full
-+        {:style
-+         {:grid-template-columns (str "repeat(" (count (first steps)) ", minmax(0, 1fr))")}}]
-+       (for [tower (first steps)]
-+         (into
-+          [:div.flex.flex-col.justify-end]
-+          (for [crate tower]
-+            [:div.text-black crate])))))})
+```clojure
+(def crates-viewer
+  {:transform-fn clerk/mark-presented
+   :render-fn
+   '(fn [steps]
+      (into
+       [:div.grid.bg-white.overflow-y.h-full
+        {:style
+         {:grid-template-columns (str "repeat(" (count (first steps)) ", minmax(0, 1fr))")}}]
+       (for [tower (first steps)]
+         (into
+          [:div.flex.flex-col.justify-end]
+          (for [crate tower]
+            [:div.text-black crate])))))})
 ```
 
-We use simple interpolation to define a repeated list of columns based on the count. This looks fine so far, but we can do some styling tweaks to make things a bit nicer.
+<Image alt='image' src={demo3} />
 
-```diff
-modified   src/demo.clj
-@@ -27,7 +27,7 @@
-          (into
-           [:div.flex.flex-col.justify-end]
-           (for [crate tower]
--            [:div.text-black crate])))))})
-+            [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate])))))})
+We use simple interpolation to define a repeated list of columns based on the count, as well as adding some styling and flexbox to the columns to differentiate them. This looks fine so far, but we can do some styling tweaks to make things a bit nicer.
+
+```clojure
+(def crates-viewer
+  {:transform-fn clerk/mark-presented
+   :render-fn
+   '(fn [steps]
+      (into
+       [:div.grid.bg-white.overflow-y.h-full
+        {:style
+         {:grid-template-columns (str "repeat(" (count (first steps)) ", minmax(0, 1fr))")}}]
+       (for [tower (first steps)]
+         (into
+          [:div.flex.flex-col.justify-end]
+          (for [crate tower]
+            [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate])))))})
 ```
+
+<Image alt='image' src={demo4} />
 
 That's better! Now we can look at adding in the rest of the steps, since we have this looking nice. 
 
@@ -136,91 +152,39 @@ Along with Tailwind, Reagent support is also included in the SCI config so we ca
 Let's setup a ratom with the current step and a simple slider to change steps.
 
 
-```diff
-modified   src/demo.clj
-@@ -19,15 +19,26 @@
-   {:transform-fn clerk/mark-presented
-    :render-fn
-    '(fn [steps]
--      (into
--       [:div.grid.bg-white.overflow-y.h-full
--        {:style
--         {:grid-template-columns (str "repeat(" (count (first steps)) ", minmax(0, 1fr))")}}]
--       (for [tower (first steps)]
--         (into
--          [:div.flex.flex-col.justify-end]
--          (for [crate tower]
--            [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate])))))})
-+      (reagent.core/with-let
-+        [step (reagent.core/atom (first steps))]
-+        [:div.flex.flex-col.justify-between.overflow-none
-+         [:h1 (str "Step " (inc (.indexOf steps @step)) "/" (count steps))]
-+         [:p "Move the slider to adjust the step. To make it easier, the 'top' crate is highlighted in yellow (since it'll be different when reversed!)"]
-+         [:input {:type :range
-+                  :value (.indexOf steps @step)
-+                  :max (dec (count steps))
-+                  :on-input #(reset! step (nth steps (.. % -target -valueAsNumber)))}]
-+         [:div.bg-white.overflow-y-auto.mt-4
-+          {:class "max-h-[20rem] h-[20rem]"}
-+          (into
-+           [:div.grid.h-full
-+            {:style
-+             {:grid-template-columns (str "repeat(" (count @step) ", minmax(0, 1fr))")}}]
-+           (for [tower @step]
-+             (into
-+              [:div.flex.flex-col.justify-end]
-+              (for [crate tower]
-+                [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate]))))]]))})
- ```
+```clojure
+(def crates-viewer
+  {:transform-fn clerk/mark-presented
+   :render-fn
+   '(fn [steps]
+      (reagent.core/with-let
+        [step (reagent.core/atom (first steps))]
+        [:div.flex.flex-col.justify-between.overflow-none
+         [:h1 (str "Step " (inc (.indexOf steps @step)) "/" (count steps))]
+         [:p "Move the slider to adjust the step."]
+         [:input {:type :range
+                  :value (.indexOf steps @step)
+                  :max (dec (count steps))
+                  :on-input #(reset! step (nth steps (.. % -target -valueAsNumber)))}]
+         [:div.bg-white.overflow-y-auto.mt-4
+          {:class "max-h-[20rem] h-[20rem]"}
+          (into
+           [:div.grid.h-full
+            {:style
+             {:grid-template-columns (str "repeat(" (count @step) ", minmax(0, 1fr))")}}]
+           (for [tower @step]
+             (into
+              [:div.flex.flex-col.justify-end]
+              (for [crate tower]
+                [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate]))))]]))})
+```
  
- And boom! With that, we're basically done already. You won't easily be able to tell here, but if the towers get too big, they clip off the view. Since we usually only care about what's on the bottom, let's add the ability for the view to scroll whenever there's a change.
- 
-```diff
-modified   src/demo.clj
-@@ -20,25 +20,32 @@
-    :render-fn
-    '(fn [steps]
-       (reagent.core/with-let
--        [step (reagent.core/atom (first steps))]
-+        [step (reagent.core/atom (first steps))
-+         ref (clojure.core/atom nil)]
-         [:div.flex.flex-col.justify-between.overflow-none
-+         {:class "h-[30rem]"}
-          [:h1 (str "Step " (inc (.indexOf steps @step)) "/" (count steps))]
-          [:p "Move the slider to adjust the step. To make it easier, the 'top' crate is highlighted in yellow (since it'll be different when reversed!)"]
--         [:input {:type :range
--                  :value (.indexOf steps @step)
--                  :max (dec (count steps))
--                  :on-input #(reset! step (nth steps (.. % -target -valueAsNumber)))}]
--         [:div.bg-white.overflow-y-auto.mt-4
--          {:class "max-h-[20rem] h-[20rem]"}
-+         [:input.mb-4 {:type :range
-+                       :value (.indexOf steps @step)
-+                       :max (dec (count steps))
-+                       :on-input #(do
-+                                    (reset! step (nth steps (.. % -target -valueAsNumber)))
-+                                    (when @ref
-+                                      (set! (.-scrollTop @ref) (.-scrollHeight @ref))))}]
-+         [:div.bg-white.overflow-auto
-+          {:ref (partial reset! ref)}
-           (into
--           [:div.grid.h-full
-+           [:div.grid
-             {:style
-              {:grid-template-columns (str "repeat(" (count @step) ", minmax(0, 1fr))")}}]
-            (for [tower @step]
-              (into
--              [:div.flex.flex-col.justify-end]
-+              [:div.flex.flex-col.justify-end.flex-grow]
-               (for [crate tower]
--                [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate]))))]]))})
-+                [:<>
-+                 [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate]
-+                 [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate]]))))]]))})
-``` 
+<Image alt='image' src={demo5} />
 
-Much better! Now when you slide through, it should scroll to the bottom.
+And that's it! 
 
-And that's it! The completed version has a couple of extra bits, and I encourage you to explore your own feature additions. Maybe add some animations of the crates actually moving.
+The completed version has a couple of extra bits, such as setting the scroll state to prevent bigger towers ruining the experience, and I encourage you to explore your own feature additions. Maybe add some animations of the crates actually moving between states, or if you want to turn it into a debugger show multiple steps at once with extra info.
+
+I must admit that having some of these viewers available for debugging does add a whole new dimension to problem solving.
 
 Happy hacking!
