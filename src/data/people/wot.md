@@ -2,7 +2,7 @@
 code: 'wot'
 name: 'Dan'
 lastName: 'Stone'
-jobTitle: 'Software Engineer'
+jobTitle: 'Senior Engineer'
 image: 'wot.jpg'
 linkedin: ''
 twitter: ''
