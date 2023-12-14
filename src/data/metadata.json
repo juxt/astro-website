@@ -35,7 +35,7 @@
     { "label": "Financial", "href": "/financial" },
     { "label": "Startups", "href": "/startups" },
     { "label": "Get Started", "href": "/get-started" },
-    { "label": "Careers", "href": "/careers", "flag": "hiring" },
+    { "label": "Careers", "href": "/careers" },
     { "label": "Clojure In", "href": "/clojure-in" },
     { "label": "Blog", "href": "/blog" },
     { "label": "Radar", "href": "/radar" },
