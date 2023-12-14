@@ -7,6 +7,4 @@ image: 'jba.jpg'
 linkedin: ''
 twitter: ''
 github: ''
-featured:
-  weight: 4
 ---
