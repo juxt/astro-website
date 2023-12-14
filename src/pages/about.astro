@@ -125,13 +125,11 @@ function imageToFilename(image: string) {
     </Section>
     <Section className='bg-black text-white py-20'>
       <h2 class='text-4xl pb-20 font-bold text-center'>Leadership Team</h2>
-      <div
-        class='grid md:grid-cols-[repeat(2,_auto)] xl:grid-cols-[repeat(3,_auto)] justify-center gap-28'
-      >
+      <div class='flex flex-wrap justify-center gap-28' >
         {
           featuredPeople.map(
             ({ image, jobTitle, name, lastName, expert, code }) => (
-              <div class='flex w-64 flex-col gap-4'>
+              <div class='flex flex-col gap-4 w-64'>
                 <div class='group relative w-full'>
                   <Image
                     alt='image'
