@@ -26,20 +26,20 @@ const startUpsParsed = startUps
     content: financial.compiledContent()
   }))
 
-const startupPicture = await getImage({
-  src: import('../assets/site/startup-bg.jpg'),
+const deliveryPicture = await getImage({
+  src: import('../assets/site/delivery-bg.jpg'),
   width: 1700,
   quality: 90,
   alt: 'start up'
 }).then((img) => img.src)
 ---
 
-<Layout navbar title='Startups'>
+<Layout navbar title='Delivery'>
   <main>
     <Banner
-      text='Startups'
+      text='Delivery'
       style={{
-        backgroundImage: `url(${startupPicture})`,
+        backgroundImage: `url(${deliveryPicture})`,
         backgroundPosition: 'top'
       }}
     />
@@ -47,14 +47,14 @@ const startupPicture = await getImage({
     <Section className='bg-black py-12'>
       <div class='flex flex-col gap-10'>
         <h2 class='text-3xl font-normal text-white'>
-          JUXT engineers have helped launch startups across finance, property,
+          JUXT engineers have helped delivery projects across finance, property,
           health, green-tech, and law.
         </h2>
         <div class='text-white text-xl font-extralight leading-normal'>
-          We work closely with startup founders to understand the mission deeply
-          and launch an MVP. Make JUXT your technical co-founder and we can
-          bring a wealth of experience and judgment to the early, critical
-          stages of your startup journey.
+          We work closely with project leaders to understand the core objectives
+          deeply and successfully deliver an MVP. Make JUXT your technical partner,
+          and we will bring a wealth of experience and judgment early phases of your
+          project lifecycle.
         </div>
       </div>
     </Section>

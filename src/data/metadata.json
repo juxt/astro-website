@@ -16,7 +16,7 @@
   "navbar": [
     { "label": "About", "href": "/about" },
     { "label": "Financial", "href": "/financial" },
-    { "label": "Startups", "href": "/startups" },
+    { "label": "Delivery", "href": "/delivery" },
     { "label": "Get Started", "href": "/get-started" },
     { "label": "Careers", "href": "/careers" },
     { "label": "Blog", "href": "/blog" },
@@ -33,7 +33,7 @@
   "footer": [
     { "label": "About", "href": "/about" },
     { "label": "Financial", "href": "/financial" },
-    { "label": "Startups", "href": "/startups" },
+    { "label": "Delivery", "href": "/delivery" },
     { "label": "Get Started", "href": "/get-started" },
     { "label": "Careers", "href": "/careers", "flag": "hiring" },
     { "label": "Clojure In", "href": "/clojure-in" },
@@ -60,7 +60,7 @@
     },
     "startups": {
       "description": "JUXT engineers have helped launch start-ups across finance, property, health, green-tech, and law. We work closely with start-up founders to understand the mission deeply and launch an MVP.",
-      "image": "startup-bg.jpg"
+      "image": "delivery-bg.jpg"
     },
     "get-started": {
       "description": "When we approach a new project, whether it’s joining an existing software team to get a project over the line, or designing and building an ambitious new system from scratch, we work with our clients through the four main stages",
