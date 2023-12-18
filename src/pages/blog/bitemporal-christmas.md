@@ -16,7 +16,7 @@ Jimmy was in bed, trying his hardest to sleep but he was too excited.
 Not being able to hold on any longer he threw off his covers and ran downstairs, just to get *one* look at his presents under the tree.
 
 But something was wrong, the tree was bare!
-There were no presents to be seen and instead there was a glowing blue portal where they would have been.
+There were no presents to be seen and instead there was a glowing blue portal.
 
 **Jimmy**: What's going on? Where are my presents?
 
@@ -30,7 +30,7 @@ Right in the middle of his living room!
 
 **Robot** 😢: Oh dear, I'm sorry for scaring you.
 
-**node** 😅: My name is `node`, I'm lost and need your help. I've lost my way home, maybe if we can find your presents we can find my home too!
+**node** 😅: My name is `node`, and I need your help. I've lost my way home, maybe if we can find your presents we can find my home too!
 
 **Jimmy**: But where _are_ my presents?
 
@@ -90,7 +90,7 @@ Just then Jimmy's Mum and Dad came downstairs.
 
 **Jimmy**: Sorry Mum...
 
-**Dad**: Well, seeing as it's Christmas, if this young robot here can show us how to only query for **only** presents we'd planned to give you today you can have your birthday present early.
+**Dad**: Well, seeing as it's Christmas, if this young robot here can show us how to only query for **only** presents we'd planned to give you **today** you can have your birthday present early.
 
 **node** 🫡: On it!
 
