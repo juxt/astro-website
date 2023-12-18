@@ -4,7 +4,7 @@ title: 'Advancedvent of Clerkjure'
 description: 'Advanced Clerk usage for Advent of Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2023-12-05'
+publishedDate: '2023-12-19'
 heroImage: 'clerk.jpg'
 tags:
   - 'clerk'
@@ -25,29 +25,27 @@ _Just a heads-up, this will contain spoilers for Day 5 of Advent of Code 2022._
 
 _My solutions can be found [here](https://elken.github.io/aoc/)_
 
-That time of year again! Once again, it's time for the fun annual programming challenge "Advent of Code"; a daily dose of programming problems all throughout December.
+It's that time of year again! We're in the midst of the fun annual programming challenge "Advent of Code"; a daily dose of programming problems throughout December.
 
-We've already raved about using [clerk](https://github.com/nextjournal/clerk) for this, and we're back again with more advanced usage. If you're not already familiar, I suggest that you read the article [from last year](https://www.juxt.pro/blog/using-clerk-for-aoc/) and come back here after; I'll wait for you.
-
-All good?
+I've already raved about using [Clerk](https://github.com/nextjournal/clerk) for AoC, and I'm back again with something a little more advanced. If you didn't catch [last year's post on using Clerk for AoC](https://www.juxt.pro/blog/using-clerk-for-aoc/), I suggest you read it and come back here afterwards. I'll wait!
 
 ## Fancy custom viewers
 
-Since you obviously read the first part now, let's talk more about something we briefly went over in the last one; custom viewers.
+Let's talk more about something we touched on only briefly last year: custom viewers.
 
-Clerk allows you to easily create custom ways to display and interact with the data that comes out. So, rather than tell let's show!
-  
-Here's a more complete version of what we're going to be building
+Clerk allows you to easily create custom ways to display and interact with data. So rather than tell, let's show!
+
+Here's a 'more fancy' version of what we're going to build:
 
 <video controls>
   <source src="/videos/advanced_clerk_demo.webm" type="video/webm" />
 </video>
 
-Our fancy final version has a lot of neat features that we can touch on, but for simplicity's sake we'll miss off most of the features. The complete final version can be found [here](https://elken.github.io/aoc/src/solutions/2022/day05/#custom-viewer).
+This version has a lot of neat features, but for simplicity's sake we'll skip some of these and build a basic viewer. This complete version can be found [here](https://elken.github.io/aoc/src/solutions/2022/day05/#custom-viewer).
 
 ## Building a viewer
 
-For my viewer, my solution uses `reduce` for the final answers; so I was able to instead call [`reductions`](https://clojuredocs.org/clojure.core/reductions) to get a list of all the intermediary steps. For the purposes of this demo, we can create a dummy vector of fake steps.
+Many of my solutions use `reduce` for the final answer, so for my viewer I was able to instead call [`reductions`](https://clojuredocs.org/clojure.core/reductions) to get a list of all the intermediary steps. For the purposes of this demo, let's create a dummy vector of fake steps.
 
 ```clojure
 (def data
@@ -63,9 +61,9 @@ For my viewer, my solution uses `reduce` for the final answers; so I was able to
    [["T" "X" "U" "J"] ["O" "R" "P"]]])
 ```
 
-Now let's create some simple viewer to check our data works, and ensure that this data comes through cleanly. Because of how Clerk works, the data is passed from Clojure land to Clojurescript land through SCI and a websocket; and as such we have to define a viewer as a simple object with a quoted function.
+Now let's create a simple viewer to check our data works, and ensure that this data comes through cleanly. Because of how Clerk works, the data is passed from Clojure-land to ClojureScript-land through SCI and a websocket, and we have to define a viewer as a simple object with a quoted function.
 
-We also have to specify the viewer uses a so-called `:transform-fn` to intercept and translate the data before it gets passed to the component. Here, we want to call out to `nextjournal.clerk/mark-presented`to prevent our data from being translated to a more parseable format.
+We also have to specify that the viewer uses a so-called `:transform-fn` to intercept and translate the data before it gets passed to the component. Here, we want to call out to `nextjournal.clerk/mark-presented` to prevent our data from being translated to a more parseable format.
 
 Putting all that together we have
 
@@ -82,7 +80,7 @@ Putting all that together we have
 
 <Image alt='image' src={demo1} />
 
-Which gives us a simple printout of all the data. The metadata here is important for development as it prevents caching from occurring. By default, form results are cached and only recomputed when something changes in it. When we're happy with it, we can remove it; but it also isn't doing much harm.
+Which gives us a simple printout of all the data. The metadata here is important for development as it prevents caching from occurring. By default, form results are cached and only recomputed when something changes. When we're happy with it, we can remove the metadata; but it also isn't doing much harm.
 
 Great! Our input vector is a vector of steps, each step having a number of towers. Since each step isn't technically guaranteed to have the same amount of towers, we have to have some way to tell the CSS to handle that nicely. We also need some kind of state to track with the slider, so we can get the right value and render it.
 
@@ -103,9 +101,9 @@ First let's have our viewer just render a single step.
 
 <Image alt='image' src={demo2} />
 
-This is shaping up well already. Now we have each tower, let's render them up. For this we'll use CSS Grid as we can easily create a number of fixed columns that can change. We'll add some basic styling here too.
+This is shaping up well already. Now we have each tower, let's render them. For this we'll use CSS Grid as we can easily create a number of fixed columns that can change. We'll add some basic styling here too.
 
-Out of the box, Clerk already comes with Tailwind support both for dev and prod; so no changes needed here we can just add in classes.
+Out of the box, Clerk already comes with Tailwind support both for dev and prod; so no changes needed here and we can just add in classes:
 
 ```clojure
 (def crates-viewer
@@ -145,11 +143,11 @@ We use simple interpolation to define a repeated list of columns based on the co
 
 <Image alt='image' src={demo4} />
 
-That's better! Now we can look at adding in the rest of the steps, since we have this looking nice. 
+That's better! Now we can look at adding in the rest of the steps, since we have this looking nice.
 
 Along with Tailwind, Reagent support is also included in the SCI config so we can easily call out to that (that's actually how we've been rendering these so far!).
 
-Let's setup a ratom with the current step and a simple slider to change steps.
+Let's set up a ratom with the current step and a simple slider to change steps.
 
 
 ```clojure
@@ -178,12 +176,12 @@ Let's setup a ratom with the current step and a simple slider to change steps.
               (for [crate tower]
                 [:div.border-2.p-2.text-black.text-center.shadow-lg.bg-gray-200.border-gray-400 crate]))))]]))})
 ```
- 
+
 <Image alt='image' src={demo5} />
 
-And that's it! 
+And that's it!
 
-The completed version has a couple of extra bits, such as setting the scroll state to prevent bigger towers ruining the experience, and I encourage you to explore your own feature additions. Maybe add some animations of the crates actually moving between states, or if you want to turn it into a debugger show multiple steps at once with extra info.
+The completed version has a couple of extra bits, such as setting the scroll state to prevent bigger towers ruining the experience, and I encourage you to explore your own feature additions. Maybe add some animations of the crates actually moving between states, or if you want to turn it into a debugger, show multiple steps at once with extra info.
 
 I must admit that having some of these viewers available for debugging does add a whole new dimension to problem solving.
 
