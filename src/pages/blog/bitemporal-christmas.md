@@ -150,5 +150,9 @@ Just then Jimmy's Mum and Dad came downstairs.
 And with that, `node` jumped into the portal and was gone.
 But out popped all the missing presents, and one extra present:
 
-;; Link to video & docs
-
+<!-- TODO: Replace with link to video? -->
+- Public [show-n-tell](https://us06web.zoom.us/webinar/register/4217026294818/WN_XvaJL7frQBiANfIW2_2qAg) for 2.x on the 19th December 2023
+- [XTDB 2.x docs](https://docs.xtdb.com/)
+  - [Getting Started](https://docs.xtdb.com/intro/getting-started.html#_connecting_from_clojure)
+  - [What is XTQL?](https://docs.xtdb.com/intro/what-is-xtql.html)
+  - [XTQL Query Reference](https://docs.xtdb.com/reference/main/xtql/queries.html)
