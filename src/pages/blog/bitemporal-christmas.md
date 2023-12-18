@@ -18,23 +18,23 @@ Not being able to hold on any longer he threw off his covers and ran downstairs,
 But something was wrong, the tree was bare!
 There were no presents to be seen and instead there was a glowing blue portal.
 
-**Jimmy**: What's going on? Where are my presents?
+**Jimmy:** What's going on? Where are my presents?
 
-**Robot** 👋🤖: Hello
+**Robot 👋🤖:** Hello
 
 Jimmy fell back in shock.
 There was a small, friendly looking, robot standing in front of him.
 Right in the middle of his living room!
 
-**Jimmy**: Who are you?!
+**Jimmy:** Who are you?!
 
-**Robot** 😢: Oh dear, I'm sorry for scaring you.
+**Robot 😢:** Oh dear, I'm sorry for scaring you.
 
-**node** 😅: My name is `node`, and I need your help. I've lost my way home, maybe if we can find your presents we can find my home too!
+**node 😅:** My name is `node`, and I need your help. I've lost my way home, maybe if we can find your presents we can find my home too!
 
-**Jimmy**: But where _are_ my presents?
+**Jimmy:** But where _are_ my presents?
 
-**node** 🔍: Let's have a look.
+**node 🔍:** Let's have a look.
 
 A small screen folded out of `node`'s chest on which a query appeared:
 
@@ -44,11 +44,11 @@ A small screen folded out of `node`'s chest on which a query appeared:
 []
 ```
 
-**node** ❓: Hmm, they're not here where could they be?
+**node ❓:** Hmm, they're not here where could they be?
 
-**Jimmy**: Well I got presents last year, why wouldn't I this year?
+**Jimmy:** Well I got presents last year, why wouldn't I this year?
 
-**node** ⏳: Let's look at last years presents then.
+**node ⏳:** Let's look at last years presents then.
 
 A new query appeared on `node`'s screen:
 
@@ -61,17 +61,17 @@ A new query appeared on `node`'s screen:
  {:name "NES"}]
 ```
 
-**node** 🎁: Indeed, It looks like you got some nice presents last year.
+**node 🎁:** Indeed, It looks like you got some nice presents last year.
 
-**Jimmy**: Whoa! How did you do that?
+**Jimmy:** Whoa! How did you do that?
 
-**node** 🔍🗓: It's simple really, I just queried for all the gifts you got last year.
+**node 🔍🗓:** It's simple really, I just queried for all the gifts you got last year.
 
 Just then Jimmy's Mum and Dad came downstairs.
 
-**Mum**: What's going on down here? Didn't we tell you that you couldn't open your presents until later this morning? And who is-
+**Mum:** What's going on down here? Didn't we tell you that you couldn't open your presents until later this morning? And who is-
 
-**node** 🔮: That's it! Let's look at the presents you'll be getting in the *future*!
+**node 🔮:** That's it! Let's look at the presents you'll be getting in the *future*!
 
 ```clojure
 (from :gifts {:bind [{:for "Jimmy"} name occasion xt/valid-from]
@@ -82,17 +82,17 @@ Just then Jimmy's Mum and Dad came downstairs.
  {:name "Super Soaker", :occasion "Birthday", :xt/valid-from #time/zoned-date-time "2024-06-11T00:00Z[UTC]"}]
 ```
 
-**Jimmy**: Whoa, I'll be getting a Super Soaker for my birthday next year!
+**Jimmy:** Whoa, I'll be getting a Super Soaker for my birthday next year!
 
-**node** 😣: Oops
+**node 😣:** Oops
 
-**Mum**: Now Jimmy, what did I tell you about peeking at your presents?
+**Mum:** Now Jimmy, what did I tell you about peeking at your presents?
 
-**Jimmy**: Sorry Mum...
+**Jimmy:** Sorry Mum...
 
-**Dad**: Well, seeing as it's Christmas, if this young robot here can show us how to only query for **only** presents we'd planned to give you **today** you can have your birthday present early.
+**Dad:** Well, seeing as it's Christmas, if this young robot here can show us how to only query for **only** presents we'd planned to give you **today** you can have your birthday present early.
 
-**node** 🫡: On it!
+**node 🫡:** On it!
 
 ```clojure
 (from :gifts {:bind [{:for "Jimmy"} name occasion]
@@ -102,9 +102,9 @@ Just then Jimmy's Mum and Dad came downstairs.
  {:name "Pogs", :occasion "Christmas"}]
 ```
 
-**Dad**: Well done! You've earned that early Birthday present. Let me just go and get it for you.
+**Dad:** Well done! You've earned that early Birthday present. Let me just go and get it for you.
 
-**node** 🤖: Don't worry, I can do that too!
+**node 🤖:** Don't worry, I can do that too!
 
 ```clojure
 (xt/insert-into :gifts
@@ -114,9 +114,9 @@ Just then Jimmy's Mum and Dad came downstairs.
               :occasion "Christmas"})))]
 ```
 
-**Jimmy**: Thanks Mum! Thanks Dad!
+**Jimmy:** Thanks Mum! Thanks Dad!
 
-**node**:
+**node:**
 ```clojure
 (from :gifts [{:for "Jimmy"} name])
 ; =>
@@ -125,15 +125,15 @@ Just then Jimmy's Mum and Dad came downstairs.
  {:name "Super Soaker"}]
 ```
 
-**Mum**: See, now you've waited a little, your Christmas presents are here too!
+**Mum:** See, now you've waited a little, your Christmas presents are here too!
 
-**node** 😢: I still don't see a way home though
+**node 😢:** I still don't see a way home though
 
-**Jimmy**: Hmm, I don't see Grandma's present here either.
+**Jimmy:** Hmm, I don't see Grandma's present here either.
 
-**Grandma**: Sorry dear, let me just put them under the tree now. Oh dear, they've been sucked into this portal thingy too!
+**Grandma:** Sorry dear, let me just put them under the tree now. Oh dear, they've been sucked into this portal thingy too!
 
-**node** ⏪: Not to worry, let's look at the presents that were just added.
+**node ⏪:** Not to worry, let's look at the presents that were just added.
 
 ```clojure
 (-> (from :gifts [{:for "Jimmy"} name xt/system-from])
@@ -145,7 +145,7 @@ Just then Jimmy's Mum and Dad came downstairs.
  {:name "Tamagotchi"}]
 ```
 
-**node** 🏠: There it is! XTDB! My home!
+**node 🏠:** There it is! XTDB! My home!
 
 And with that, `node` jumped into the portal and was gone.
 But out popped all the missing presents, and one extra present:
