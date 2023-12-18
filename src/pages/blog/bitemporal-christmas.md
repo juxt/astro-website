@@ -4,7 +4,7 @@ title: A Bitemporal Christmas
 subtitle: Unlike other children, Jimmy needs to query for his presents.
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2023-12-18'
+publishedDate: '2023-12-20'
 heroImage: 'bitemporal-christmas.jpg'
 tags:
   - 'bitemporality'
