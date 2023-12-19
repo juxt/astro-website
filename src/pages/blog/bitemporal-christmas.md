@@ -36,7 +36,7 @@ Right in the middle of his living room!
 
 **node 🔍:** Let's have a look.
 
-A small screen folded out of `node`'s chest on which a query appeared:
+A small screen labelled [`XTQL v2`](https://docs.xtdb.com) folded out of `node`'s chest on which a query appeared:
 
 ```clojure
 (from :gifts [{:for "Jimmy"} name])
