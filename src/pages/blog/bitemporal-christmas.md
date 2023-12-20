@@ -1,7 +1,7 @@
 ---
 author: 'osm'
 title: A Bitemporal Christmas
-subtitle: Unlike other children, Jimmy needs to query for his presents.
+description: 'Unlike other children, Jimmy needs to query for his presents.'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-12-20'
