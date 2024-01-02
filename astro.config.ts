@@ -1,6 +1,6 @@
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
-import { defineConfig, passthroughImageService } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
@@ -14,9 +14,6 @@ export default defineConfig({
     mdx(),
     preact(),
   ],
-  image: {
-      service: passthroughImageService(),
-  },
   site: 'https://juxt.pro/',
   markdown: {
     shikiConfig: {
