@@ -33,7 +33,6 @@
   ],
   "footer": [
     { "label": "About", "href": "/about" },
-    { "label": "Contact Us", "href": "/contact" },
     { "label": "Financial", "href": "/financial" },
     { "label": "Startups", "href": "/startups" },
     { "label": "Get Started", "href": "/get-started" },
