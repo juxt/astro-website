@@ -12,25 +12,25 @@
 
 [[redirects]]
   from = "/yada/*"
-  to = "https://www.juxt.land/yada/:splat"
+  to = "https://github.com/juxt/yada"
   status = 301
   force = false
 
 [[redirects]]
   from = "/yada"
-  to = "https://www.juxt.land/yada/manual/index.html" 
+  to = "https://github.com/juxt/yada" 
   status = 301
   force = false
 
 [[redirects]]
   from = "/tick/*"
-  to = "https://www.juxt.land/tick/:splat"
+  to = "https://juxt.github.io/tick/"
   status = 301
   force = false
 
 [[redirects]]
   from = "/edge"
-  to = "https://juxt.land/edge" 
+  to = "https://github.com/juxt/edge" 
   status = 301
   force = false 
 
