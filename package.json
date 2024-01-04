@@ -14,6 +14,8 @@
   "devDependencies": {
     "@astrojs/mdx": "^1.0.0",
     "@astrojs/preact": "^3.0.0",
+    "@astrojs/starlight": "^0.15.0",
+    "@astrojs/starlight-tailwind": "^2.0.1",
     "@tailwindcss/typography": "^0.5.4",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
