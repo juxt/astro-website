@@ -14,12 +14,6 @@ clojureIn:
   }
 ---
 
-////
-3000
-2825
-2696
-////
-
 import { Image } from 'astro:assets'
 
 = Clojure in Georgetown Software House
@@ -48,9 +42,7 @@ We need our processes to have high performance and to be stateless; the same inp
 
 **Jon: What kind of technologies, tools or approaches do you use to tackle those problems?**
 
-**Bediako:**
-
-Well mostly its about graph traversal. There's depth first search traversal which is very useful.
+**Bediako:** Well mostly its about graph traversal. There's depth first search traversal which is very useful.
 
 We do a lot calculations and we use depth-first search to figure out all the possible paths within a larger partnership structure. If you have thousands of partnerships in a network, you could end up with billions of relationships you've got to track, as the cash flows from the bottom to the top.
 
@@ -58,9 +50,7 @@ We also need to know which partnerships are affected by changes made in the data
 
 **Jon: Wow, that's a really cool problem space. I can imagine people get a lot of joy choosing the best algorithms?**
 
-**Bediako:**
-
-Absolutely. There's some other challenges that are unique to the US, such as the notion of accounting rounding. The IRS requires reports to be rounded to the nearest dollar, but money comes in pennies. As an example, there could be a $10 payment needing to be split between three partnerships equally, so could have $3.333 each. Round down to the nearest dollar and you end up with $9 in total, giving you a discrepancy.
+**Bediako:** Absolutely. There's some other challenges that are unique to the US, such as the notion of accounting rounding. The IRS requires reports to be rounded to the nearest dollar, but money comes in pennies. As an example, there could be a $10 payment needing to be split between three partnerships equally, so could have $3.333 each. Round down to the nearest dollar and you end up with $9 in total, giving you a discrepancy.
 
 There are different rounding algorithms you can put in place depending on what rounding the accountants want. Maybe a top level partnership gets the extra dollar, or maybe you carry it across and amalgamate the across thousands of partnerships. It can get quite hairy.
 
@@ -102,9 +92,7 @@ That happened in 2015 and then I managed to convince my employer that we should 
 
 **Jon: That's great to hear, that you wanted something functional on the JVM and that Clojure was naturally a good fit. I also tried to write functional styled Java day and being dynamic, but as soon as you start using hash maps with generics, it just gets a bit mad..**
 
-**Bediako:**
-
-Yeah you're right, the Java syntax became so ponderous. I think I'm average in terms of brain power, but trying to keep up with all the syntax changes in Java was terrible. Clojure's simplicity fitted the way I like to think about problems and being a minimalist myself, it was love at first sight.
+**Bediako:** Yeah you're right, the Java syntax became so ponderous. I think I'm average in terms of brain power, but trying to keep up with all the syntax changes in Java was terrible. Clojure's simplicity fitted the way I like to think about problems and being a minimalist myself, it was love at first sight.
 
 **Jon Have you done much hiring for Clojure devs?**
 
@@ -114,17 +102,13 @@ We also ran an internship for one of our clients, whereby in week 1 they were do
 
 **Jon: In terms of engineering practices, do you do much automated testing?**
 
-**Bediako:**
-
-Absolutely! We use [`test.check`](https://github.com/clojure/test.check) and specs to do generative testing.
+**Bediako:** Absolutely! We use [`test.check`](https://github.com/clojure/test.check) and specs to do generative testing.
 
 We use this for our own internal product 'Pebble Stream' which is a lightweight spreadsheet engine running in the cloud, which is all Clojure. We rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine, making sure it's running as close as possible to what Excel would.
 
 **Jon: I've got to ask you about how you work with Spreadsheets using Clojure. Do you use things like [Apache POI](https://poi.apache.org/)?**
 
-**Bediako:**
-
-Yes. This ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries.  [POI](https://poi.apache.org/) is fabulous because you have a stateless parser that you can use to parse open an Excel spreadsheet and to examine the functions and formulas.
+**Bediako:** Yes. This ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries.  [POI](https://poi.apache.org/) is fabulous because you have a stateless parser that you can use to parse open an Excel spreadsheet and to examine the functions and formulas.
 
 All of this information is useful for us to process an Excel spreadsheet in a headless manner without the goofy interface.
 
@@ -140,31 +124,25 @@ We use [EDN](https://clojuredocs.org/clojure.edn) to represent all the logic in 
 
 I've also mentioned [`test.check`](https://github.com/clojure/test.check) and [`spec`](https://clojure.org/guides/spec) as tools we use.
 
-**Jon@ You mentioned you use Spec to do generative testing?**
+**Jon: You mentioned you use Spec to do generative testing?**
 
-**Bediako:**
+**Bediako:** Yes, it's quite useful and it makes a lot of sense for spreadsheets.
 
-Yes, it's quite useful and it makes a lot of sense for spreadsheets. What is a spreadsheet? Well it's a collection of worksheets - what is a worksheet... well it's a collection of columns, worksheets is analogous to a table and then now lets jump into the Excel world so a column is a list of cells which can have different value types but typically in a particular column there is usually a dominant value type, so maybe I'm adding two numbers together or better yet dividing two numbers and the result of that is in one of my columns. What could go wrong, I could divide by 0 therefore my answer in the cell wouldn't be a number it would be some kind of error presentation. Also the very first cell in the column is most likely going to be a strain like you know ratio maybe the header so I have a column which could effectively have multiple data types in it but there is one dominant data type which is numeric. One of the things we do is when we inspect the worksheet we look at the dominant data type, we understand there's a header, so we ignore that, we look at the dominant type but we also understand that something else could pop up during calculations. So when we're doing our test generation we can use the data type representations within test generation to say this one I need to generate numbers and this one I need to generate text and this one I need to generate numbers that are dates, right and they fall into the Excel representation for a date. Very useful because it means I can programmatically inspect a worksheet, see what the types are and then use Test/Check to generate the specific data values for each one of those columns and automatically run a test against the spreadsheet I'm analysing, so very useful and very convenient. It all happens very quickly, we can do that in milliseconds.
+What is a spreadsheet? Well it's a collection of worksheets. What is a worksheet... well it's a collection of columns. A column is a list of cells which can have different value types but typically have a dominant value type.
 
-*Jon*
+I can programmatically inspect a worksheet, see what the column data types are and then use Test/Check to generate the specific values for each one of those columns, then run an automated test against the spreadsheet. This is so very useful and convenient. It all happens very quickly, in milliseconds.
 
-Do you then feedback sometimes, are you able to feedback in terms of your testing.
+We can generate data sets, put those in Excel to see what gets produced, then we'll compare against the output of our own processes, using a threshold based agreement.
 
-**Bediako:**
+It can get tricky because there's some functions and formulas in Excel that make sense in the desktop world but not in the stateless, functional, computational world.
 
-The way we're able to ensure that we're doing the right thing, we generate data sets, put those in Excel see what Excel produces and then we'll run it against our own and see what we produce and then we look for a threshold based agreement. But then there's some functions and formulas in Excel that make sense in the desktop world but not in the stateless, functional, computational world that we're trying to take advantage of when we do the spreadsheet computing. One example is the 'sub-total' function which doesn't do exactly what you think it would do; it allows you to look at a column of cells and choosing a column of cells produce subtotals, but what it does is ignore some values depending on whether it's a string or as it's doing the calculation and also if you change your view in the Excel spreadsheet it will ignore the cells that are left out of the view and do the subtotal calculation, extremely useful if you're on a desktop but not when you're running it in the cloud as you've got no view. There are some others which we don't support which in my view are mistakes as they lead to spaghetti code / spaghetti spreadsheet implementation so we say we choose to work around it instead of using those. We document them so they don't get used.
-
-*Jon*
-
-It sounds like you build a very sophisticated and comprehensible solution for it which is the taking the complexity of those formulas into an AST and treating it in the same way of generative testing.
+One example is the 'sub-total' function which has unexpected qualities; for example it allows you to look at a column of cells, but ignores the cells that are left out of the current user view. This is useful if you're on a desktop but not if you're running headless in the cloud! There are others functions we don't support, as they are mistakes in my opinion, that lead to spaghetti code implementations. We document them so they don't get used.
 
 **Jon: What's your view of the current state of Clojure?**
 
-**Bediako:**
+**Bediako:** Overall I'm very happy with Clojure, I couldn't tell you some major things we'd like to see done differently.
 
-Overall I'm very happy with Clojure, I couldn't tell you some major things we'd like to see done differently.
-
-I think there are some things that we've kind of got used to that could be better, such as error reporting, it can be hard to understand when you first looking at it. Error reporting is different if you're in ClojureScript vs. Clojure and I'm sure it's different for Clojure CLR.
+I think there are some things that we've kind of got used to that could be better, such as error reporting, it can be hard to understand when you first looking at it. Error reporting is different if you're in ClojureScript vs. Clojure and I'm sure it's different for [Clojure CLR](https://clojure.org/about/clojureclr).
 
 Mentioning the CLR, it would be great to see Clojure becoming established on that front. It would also be great if Clojure was less tied to any particular platform. Right now you need to understand the Clojure language and a platform such as the JVM or JavaScript. I think it would be nice to learn Clojure without having the other tools or platforms to worry about.
 
@@ -172,6 +150,8 @@ Mentioning the CLR, it would be great to see Clojure becoming established on tha
 
 **Bediako:** For me, the experience of being able to use Clojure to solve real world problems has been amazing and it's made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previously without Clojure.
 
-I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what I was experiencing before.
+I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems.
+
+Software just works once you get it running, write software that scales, and doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this techology to the world. For many years I struggled with programming and was thinking there had to be a better way. Clojure is certainly one way that is better than what I was experiencing before.
 
 **Jon: Thanks for taking the time! Meet you at the next Conj!**
