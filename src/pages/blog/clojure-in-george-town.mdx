@@ -118,8 +118,9 @@ Yeah you're right, that was the other thing, Java over time, the syntax became s
 
 **Jon Have you done much hiring for Clojure devs?**
 
+**Bediako:** I've had quite a few people that have had no prior experience of working with Clojure, become productive quickly. We look for people who are open minded and have functional programming on their resumes.
 
-**Bediako:** Yeah I've had quite a few people either through clients or working directly with George Town, that have had no prior experience of working with Clojure. We look for people who are open minded, have functional programming on their resumes. We can teach you to be functional fairly quickly. We ran an internship for one of our clients, in week 1 they were doing Clojure colons and by week 12 they were creating production quality code in the accounting space. It's a useful thing to think about, they're interns and able to do this within 12 weeks, it's pretty fascinating.
+We also ran an internship for one of our clients, whereby in week 1 they were doing Clojure koans and by week 12 they were creating production quality code in the accounting space. It was fascinating.
 
 **Jon: In terms of engineering practices; do you do much test and development, automated testing?**
 
@@ -148,9 +149,9 @@ Have you got any particular shout outs, libraries, anything that's contributed t
 
 **Bediako:**
 
-Yes, absolutely, I think you mentioned this in your Clojure Conj talk but we found Nippy to be amazing, it's very fast, we're able to serialise very large data structures very quickly and be able to de-serialise them very quickly. Great for passing information back and forth in messages. even if the message is too big for message passing just serialising it to a blob store as just a file or within a key value store like Redis pushing that data in there and pulling it back out and being able to inspect it by the way just by using your REPL. You just point your REPL, download the data from that storage device and then just view it as a Clojure data structure, it's just a beautiful thing to be able to do.
+We found Nippy to be amazing, it's very fast and we're able to serialise/deserialise very large data structures very quickly. Serialising data to a blob store like Redis, then pulling it back out and inspecting into the REPL as a Clojure data structure, is just a beautiful thing to be able to do.
 
-I've mentioned Test/Check before and Clojure Spec we find that to be quite useful as well but I think Nippy is the one stand out for me.
+I've mentioned Test/Check before and Clojure Spec.
 
 *Jon*
 
@@ -158,7 +159,7 @@ You mentioned you use Spec a lot to do generative testing?
 
 **Bediako:**
 
-Yes, it's quite useful and it makes a lot of sense for spreadsheets. What is a spreadsheet? .. well it's a collection of worksheets - what is a worksheet... well it's a collection of columns, worksheets is analogous to a table and then now lets jump into the Excel world so a column is a list of cells which can have different value types but typically in a particular column there is usually a dominant value type, so maybe I'm adding two numbers together or better yet dividing two numbers and the result of that is in one of my columns. What could go wrong, I could divide by 0 therefore my answer in the cell wouldn't be a number it would be some kind of error presentation. Also the very first cell in the column is most likely going to be a strain like you know ratio maybe the header so I have a column which could effectively have multiple data types in it but there is one dominant data type which is numeric. One of the things we do is when we inspect the worksheet we look at the dominant data type, we understand there's a header, so we ignore that, we look at the dominant type but we also understand that something else could pop up during calculations. So when we're doing our test generation we can use the data type representations within test generation to say this one I need to generate numbers and this one I need to generate text and this one I need to generate numbers that are dates, right and they fall into the Excel representation for a date. Very useful because it means I can programmatically inspect a worksheet, see what the types are and then use Test/Check to generate the specific data values for each one of those columns and automatically run a test against the spreadsheet I'm analysing, so very useful and very convenient. It all happens very quickly, we can do that in milliseconds.
+Yes, it's quite useful and it makes a lot of sense for spreadsheets. What is a spreadsheet? Well it's a collection of worksheets - what is a worksheet... well it's a collection of columns, worksheets is analogous to a table and then now lets jump into the Excel world so a column is a list of cells which can have different value types but typically in a particular column there is usually a dominant value type, so maybe I'm adding two numbers together or better yet dividing two numbers and the result of that is in one of my columns. What could go wrong, I could divide by 0 therefore my answer in the cell wouldn't be a number it would be some kind of error presentation. Also the very first cell in the column is most likely going to be a strain like you know ratio maybe the header so I have a column which could effectively have multiple data types in it but there is one dominant data type which is numeric. One of the things we do is when we inspect the worksheet we look at the dominant data type, we understand there's a header, so we ignore that, we look at the dominant type but we also understand that something else could pop up during calculations. So when we're doing our test generation we can use the data type representations within test generation to say this one I need to generate numbers and this one I need to generate text and this one I need to generate numbers that are dates, right and they fall into the Excel representation for a date. Very useful because it means I can programmatically inspect a worksheet, see what the types are and then use Test/Check to generate the specific data values for each one of those columns and automatically run a test against the spreadsheet I'm analysing, so very useful and very convenient. It all happens very quickly, we can do that in milliseconds.
 
 *Jon*
 
@@ -172,28 +173,20 @@ The way we're able to ensure that we're doing the right thing, we generate data 
 
 It sounds like you build a very sophisticated and comprehensible solution for it which is the taking the complexity of those formulas into an AST and treating it in the same way of generative testing.
 
-What's your view of the current state of Clojure?
-
+**Jon: What's your view of the current state of Clojure?**
 
 **Bediako:**
 
-Overall I'm very happy with Clojure, I couldn't tell you some major things we'd like to see as different. I think there are some things that we've kind of gotten used to but could be better, one is error reporting, it can be hard to understand when you first looking at it. It's different if you're in Clojure Script vs. Clojure and I'm sure it's different for Clojure CLR. Mentioning the CLR, it would be great to see Clojure becoming established on that front so I would love to see that. It would be interesting to know if there's a Clojure implementation that could be deployed in a native manner with the idea there might be opportunities for performance improvements under certain situations. Maybe something like Babashka, but self contained within Clojure, you didn't need another library. It would also make it easier for the adoption of Clojure. Right now if you start learning Clojure as a newbie you're being forced to learn two languages or platforms. You need to understand the Clojure platform and if you're on the JVM you need to understand the JVM and if you're on the Java Script side you have to understand that. I think it would be nice to learn Clojure without having the other tools or platforms to worry about.
+Overall I'm very happy with Clojure, I couldn't tell you some major things we'd like to see done differently.
 
-Maybe there's something similar in place that I'm not aware of but it would be great if that was the case.
+I think there are some things that we've kind of got used to that could be better, such as error reporting, it can be hard to understand when you first looking at it. Error reporting is different if you're in ClojureScript vs. Clojure and I'm sure it's different for Clojure CLR.
+
+Mentioning the CLR, it would be great to see Clojure becoming established on that front. It would also be great if Clojure was less tied to any particular platform. Right now you need to understand the Clojure language and a platform such as the JVM or JavaScript. I think it would be nice to learn Clojure without having the other tools or platforms to worry about.
 
 **Jon: Is there anything that you'd like to add that we haven't touched on?**
 
-**Bediako:**
+**Bediako:** For me, the experience of being able to use Clojure to solve real world problems has been amazing and it's made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previously without Clojure.
 
-For me, the experience of being able to use Clojure to solve real world problems has been quite amazing and it's actually made a big positive to my bottom line. I've been able to do a lot of things that I wouldn't have been able to do previously without Clojure. I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what i was experiencing before.
+I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what I was experiencing before.
 
-*Jon*
-
-Yes we're in a very similar camp of love and appreciation for it as well, the simplicity, dynamic nature, it cuts through a lot of the weight that gets generated for the OO world building those big systems - you get to sidestep so much complexity.
-
-10 devs - small but mighty team - three at EY 5 that are working outside of that on internal projects.
-With Clojure you don't need big teams.
-
-Thanks for the Clojure in, lets chat again soon!
-
-**Jon: Thank you for taking the time, it's really great to do these 'Clojure in's', we need to do more to popularise Clojure to get it out there. **
+**Jon: Thanks for taking the time!**
