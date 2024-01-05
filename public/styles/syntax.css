@@ -1,0 +1,88 @@
+/* Base styles */
+code[class*='language-'],
+pre[class*='language-'] {
+  color: var(--astro-code-color-text); /* Default text color */
+  background: var(--astro-code-color-background); /* Background color */
+}
+
+/* Token styles */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--astro-code-token-comment); /* Color for comments and similar */
+}
+
+.token.url {
+  background: var(--astro-code-token-comment);
+}
+
+.token.punctuation {
+  color: var(--astro-code-color-text); /* Color for punctuation */
+}
+
+.token.namespace {
+  /* Namespace color not specified; will use default text color or you can set it */
+}
+
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.deleted {
+  color: var(--astro-code-token-constant);
+}
+
+.token.attr-name,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--astro-code-token-string);
+}
+
+.token.entity,
+.token.url,
+.token.variable {
+  color: var(--astro-code-token-link);
+}
+
+.token.atrule,
+.token.interpolation .token.interpolation-punctuation,
+.token.attr-value,
+.token.keyword,
+.token.function,
+.token.property,
+.token.operator {
+  color: var(--astro-code-token-keyword);
+  background: none;
+}
+
+.token.regex,
+.token.string,
+.token.important,
+.token.interpolation .token.expression {
+  color: var(--astro-code-token-string-expression);
+}
+
+.token.class-name,
+.token.selector,
+.token.symbol {
+  color: var(--astro-code-token-function);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold; /* Bold style for important elements */
+}
+
+.token.italic {
+  font-style: italic; /* Italic style for italic elements */
+}
+
+.token.entity {
+  cursor: help; /* Help cursor on entities */
+}
+
+.token.string {
+  background: none !important;
+}
