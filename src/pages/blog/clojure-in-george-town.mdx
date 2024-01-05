@@ -17,6 +17,7 @@ clojureIn:
 ////
 3000
 2825
+2696
 ////
 
 import { Image } from 'astro:assets'
@@ -93,7 +94,7 @@ They subscribe to a queue that contains work that they need to do. They do some 
 
 **Bediako:** I was an avid Java developer, using it from Java 1.0. I was really excited by Java because previously I'd used C and Java solved a lot of the memory management issues. Over time I became jaded because of OOP (Object Oriented Programming). I'd gone into many projects where it was hard to understand what the codebase was doing.
 
-Douglas Crockford first got me excited about JavaScript because of the functional approach and the advantages of functional programming. I tried to make it happen in Java, I used Rhino for a while but it wasn't quite what I was looking for and then I stumbled across Clojure.
+Douglas Crockford first got me excited about JavaScript and the advantages of functional programming. I tried to make it happen in Java, I used Rhino for a while but it wasn't quite what I was looking for and then I stumbled across Clojure.
 
 I just really enjoyed how easy it was to compose smaller tasks into larger tasks using immutable data structures. Laziness hooked me and it became quite simple.
 
@@ -111,40 +112,35 @@ Yeah you're right, the Java syntax became so ponderous. I think I'm average in t
 
 We also ran an internship for one of our clients, whereby in week 1 they were doing Clojure koans and by week 12 they were creating production quality code in the accounting space. It was fascinating.
 
-**Jon: In terms of engineering practices; do you do much test and development, automated testing?**
+**Jon: In terms of engineering practices, do you do much automated testing?**
 
 **Bediako:**
 
-Absolutely! We use test-check and specifications to do generative testing and actually we use it for our own internal product 'Pebble Stream' which is a lightweight spreadsheet engine which runs in the cloud, again all Clojure. So we rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine to make sure it's running as close as possible to what Excel would.
+Absolutely! We use [`test.check`](https://github.com/clojure/test.check) and specs to do generative testing.
 
-**Jon: That's great to hear about your involvement with interns to learn Clojure and like you said, it works, as you said in 12 weeks to be able to write production grade software! I've got to ask you about your interesting spreadsheet engine in the clouds, so you're getting hold of spreadsheets and using Clojure to peer inside of them, to use things like POI (apache library to access spreadsheets)?**
+We use this for our own internal product 'Pebble Stream' which is a lightweight spreadsheet engine running in the cloud, which is all Clojure. We rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine, making sure it's running as close as possible to what Excel would.
 
-**Bediako:**
-
-That's right, and that ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries that exist to solve problems that many people have had before us, and one of them is how to inspect an Excel spreadsheet? POI is fabulous for that because you have a stateless parser that you can use to parse open an Excel spreadsheet and examine the functions, formulas etc. And all of that information is quite useful for us to process an Excel spreadsheet in a headless manner without the gooey interface. Effectively; what our software does is to translate an Excel spreadsheet's worksheet logic into a representation, it's Eden actually, which represents all that logic in the spreadsheet and our engine executes this logic using it as a template of sorts against additional inputs and produce new outputs. Intermediary form you can think of it as.
-
-*Jon*
-
-I guess the REPL is a great tool.
+**Jon: I've got to ask you about how you work with Spreadsheets using Clojure. Do you use things like [Apache POI](https://poi.apache.org/)?**
 
 **Bediako:**
 
-Yes REPL based developments! You asked me earlier what was it about Clojure that brought me in, it's remiss of me not to have added it then. Using a REPL to be able to inspect what you're doing is a superpower and it really comes in handy trying to understand why your spreadsheet engine isn't producing the result that Excel is producing.
+Yes. This ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries.  [POI](https://poi.apache.org/) is fabulous because you have a stateless parser that you can use to parse open an Excel spreadsheet and to examine the functions and formulas.
 
+All of this information is useful for us to process an Excel spreadsheet in a headless manner without the goofy interface.
 
-*Jon*
+We use [EDN](https://clojuredocs.org/clojure.edn) to represent all the logic in the spreadsheet, and our engine executes this against additional inputs to produce new outputs.
 
-Have you got any particular shout outs, libraries, anything that's contributed to the Clojure eco-system that's helped you in particular?
+**Jon: Have you got any particular shout outs for tools in the Clojure eco-system that have helped you?**
 
-**Bediako:**
+**Bediako:** We found [Nippy](https://github.com/taoensso/nippy) to be amazing, it's very fast and we're able to serialise/deserialise very large data structures very quickly. Serialising data to a blob store like Redis, then pulling it back out and inspecting into the REPL as a Clojure data structure, is just a beautiful thing to be able to do.
 
-We found Nippy to be amazing, it's very fast and we're able to serialise/deserialise very large data structures very quickly. Serialising data to a blob store like Redis, then pulling it back out and inspecting into the REPL as a Clojure data structure, is just a beautiful thing to be able to do.
+**Jon: The REPL is a great tool.**
 
-I've mentioned Test/Check before and Clojure Spec.
+**Bediako:** Yes REPL based development! Using a REPL to inspect what you're doing is a superpower and it really comes in handy trying to understand why your spreadsheet engine isn't producing the result that Excel is producing.
 
-*Jon*
+I've also mentioned [`test.check`](https://github.com/clojure/test.check) and [`spec`](https://clojure.org/guides/spec) as tools we use.
 
-You mentioned you use Spec a lot to do generative testing?
+**Jon@ You mentioned you use Spec to do generative testing?**
 
 **Bediako:**
 
@@ -178,4 +174,4 @@ Mentioning the CLR, it would be great to see Clojure becoming established on tha
 
 I was able to leverage Clojure to improve my own state of being; the way I think, my quality of life. I spend less time at 2am trying to solve problems. Software just works once you get it running, you can write software that scales, doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this package to the world. For many years I struggled with programming and was thinking there had to be a better way and Clojure certainly represents one way that is better than what I was experiencing before.
 
-**Jon: Thanks for taking the time!**
+**Jon: Thanks for taking the time! Meet you at the next Conj!**
