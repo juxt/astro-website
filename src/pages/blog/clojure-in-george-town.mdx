@@ -60,7 +60,7 @@ There are different rounding algorithms you can put in place depending on what r
 
 The solution we use comes out of the world of solving Sudoko puzzles, so we use constraint satisfaction algorithms.
 
-**Jon: Is that `core.logic` like approach?**
+**Jon: Is that a [`core.logic`](https://github.com/clojure/core.logic) like approach?**
 
 **Bediako:** You could possibly use `core.logic` to do that. For us it's looking at all the possible solutions and choosing the one that's closest to the original ratio of sharing.
 
@@ -82,7 +82,7 @@ They subscribe to a queue that contains work that they need to do. They do some 
 
 **Jon: And these would be JVM processes? Have you ever looked at Lambdas or more lightweight processes?**
 
-**Bediako:** No we haven't looked at Lambdas yet, we're intrigued but we've having good results with JVM and so we're unlikely to change for that reason.
+**Bediako:** No we haven't looked at Lambdas yet, we're intrigued but we've been having good results with JVM and so we're unlikely to change for that reason.
 
 **Jon: So how did you get started with Clojure, why did you pick Clojure for Georgetown?**
 
@@ -108,17 +108,17 @@ We also ran an internship for one of our clients, whereby at week 1 they were do
 
 **Bediako:** Absolutely! We use [`test.check`](https://github.com/clojure/test.check) and specs to do generative testing.
 
-We use this for our own internal product [Pebble Stream](https://www.pebblestream.com/) which is a lightweight spreadsheet engine running in the cloud, which is all Clojure. We rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine, making sure it's running as close as possible to what Excel would.
+We use this for our own internal product [Pebble Stream](https://www.pebblestream.com/) which is a lightweight spreadsheet engine running in the cloud, which is all Clojure. We rely on test specifications, generative testing, generation of test scenarios to effectively test our spreadsheet engine, making sure it's running as close as possible to how Excel would.
 
 **Jon: I've got to ask you about how you work with Spreadsheets using Clojure. Do you use libraries like [Apache POI](https://poi.apache.org/)?**
 
 **Bediako:** Yes. This ties back to the convenience of having Clojure on the JVM because now we have access to all these great libraries.  [POI](https://poi.apache.org/) is fabulous because you have a stateless parser that you can use to parse open an Excel spreadsheet and to examine the functions and formulas.
 
-All of this information is useful for us to process an Excel spreadsheet in a headless manner without the goofy interface.
+All of this information is useful for us to process an Excel spreadsheet in a headless manner without the GUI interface.
 
 We use [EDN](https://clojuredocs.org/clojure.edn) to represent all the logic in the spreadsheet, and our engine executes this against additional inputs to produce new outputs.
 
-**Jon: Have you got any particular shout outs for tools in the Clojure eco-system?**
+**Jon: Have you got any particular shout outs for tools in the Clojure ecosystem?**
 
 **Bediako:** We found [Nippy](https://github.com/taoensso/nippy) to be amazing, it's very fast and we're able to serialise/deserialise very large data structures quickly. Serialising data to a blob store like Redis, then pulling it back out and inspecting into the REPL as a Clojure data structure, is just a beautiful thing to be able to do.
 
@@ -126,21 +126,19 @@ We use [EDN](https://clojuredocs.org/clojure.edn) to represent all the logic in 
 
 **Bediako:** Yes REPL based development! Using a REPL to inspect what you're doing is a superpower and it really comes in handy trying to understand why your spreadsheet engine isn't producing the result that Excel is producing.
 
-I've also mentioned [`test.check`](https://github.com/clojure/test.check) and [`spec`](https://clojure.org/guides/spec) as tools we use.
-
-**Jon: You mentioned you use Spec to do generative testing?**
+**Jon: You mentioned you use [`spec`](https://clojure.org/guides/spec) to do generative testing?**
 
 **Bediako:** Yes, it's quite useful and it makes a lot of sense for spreadsheets.
 
 What is a spreadsheet? Well it's a collection of worksheets. What is a worksheet... well it's a collection of columns. A column is a list of cells which can have different value types but typically have a dominant value type.
 
-I can programmatically inspect a worksheet, see what the column data types are and then use Test/Check to generate the specific values for each one of those columns, then run an automated test against the spreadsheet. This is so very useful and convenient. It all happens very quickly, in milliseconds.
+I can programmatically inspect a worksheet, see what the column data types are and then use [`test.check`](https://github.com/clojure/test.check) to generate the specific values for each one of those columns, then run an automated test against the spreadsheet. This is so very useful and convenient. It all happens very quickly, in milliseconds.
 
 We can generate data sets, put those in Excel to see what gets produced, then we'll compare against the output of our own processes, using a threshold based agreement.
 
 It can get tricky because there's some functions and formulas in Excel that make sense in the desktop world but not in the stateless, functional, computational world.
 
-One example is the 'sub-total' function which has unexpected qualities; for example it allows you to look at a column of cells, but ignores the cells that are left out of the current user view. This is useful if you're on a desktop but not if you're running headless in the cloud!
+One example is the 'subtotal' function which has unexpected qualities; for example it allows you to look at a column of cells, but ignores the cells that are left out of the current user view. This is useful if you're on a desktop but not if you're running headless in the cloud!
 
 **Jon: What's your view of the current state of Clojure?**
 
