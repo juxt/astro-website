@@ -36,7 +36,7 @@ The majority of our work is back-end using Clojure, with a bit of ClojureScript 
 
 **Bediako:** [Partnership Accounting](https://en.wikipedia.org/wiki/Partnership_accounting) is one of the problems we solve. The Partnership accounting space involves large partnerships that have ownership stakes in other partnerships. You end up with a large network of thousands of individual cash-flows that own other cash-flows. Our software allows our clients to trace how the money flows through the entire network of partnerships. This involves reproducing calculations, recalculating positions and ownership stakes.
 
-We also handle mortgage backed security accounting, which is also graph-based in nature. You can have pools of mortgage-backed-securities that are nested, and so it goes on.
+We also handle mortgage backed security accounting, which is also graph-based in nature. You can have pools of mortgage-backed securities that are nested, and so it goes on.
 
 Our data is essentially a huge graph and we utilise lot of graph algorithms to make calculations. Clojure is a good fit for this.
 
@@ -46,7 +46,7 @@ We need our processes to have high performance and to be stateless; the same inp
 
 **Bediako:** Well mostly it's about graph traversal. Depth-first search traversal is very useful.
 
-We do a lot calculations and we use depth-first search to figure out all the possible paths within a larger partnership structure. If you have thousands of partnerships in a network, you could end up with billions of relationships you've got to track, as the cash flows from the bottom to the top.
+We do a lot of calculations and we use depth-first search to figure out all the possible paths within a larger partnership structure. If you have thousands of partnerships in a network, you could end up with billions of relationships you've got to track, as the cash flows from the bottom to the top.
 
 We also need to know which partnerships are affected by changes made in the graph, so that we can limit the amount of recalculations that are needed. Algorithms for segmenting and merging graphs also come in handy.
 
@@ -58,7 +58,7 @@ As an example, there could be a \$10 payment needing to be split between three p
 
 There are different rounding algorithms you can put in place depending on what rounding the accountants want. Maybe a top level partnership gets the extra dollar, or maybe you carry it across and amalgamate across thousands of partnerships. It can become quite hairy.
 
-The solution we use comes out of the world of solving Sudoko puzzles, so we use constraint satisfaction algorithms.
+The solution we use comes out of the world of solving Sudoku puzzles, so we use constraint satisfaction algorithms.
 
 **Jon: Is that a [`core.logic`](https://github.com/clojure/core.logic) like approach?**
 
@@ -76,9 +76,9 @@ The IRS doesn't want to see that the final result in your report deviates in a d
 
 They subscribe to a queue that contains work that they need to do. They do some aspect of partnership accounting, produce the result, then save that result in a blob store and then send another message to say it's done. Another worker then picks up this message and continues the next task in the process. This approach allows us to break up one long process into smaller processes, allowing us to allocate resources depending on the amount of effort required.
 
-**Jon Nice. And do you have any challenges to make sure that workers are utilised in the right way and not skewed?**
+**Jon: Nice. And do you have any challenges to make sure that workers are utilised in the right way and not skewed?**
 
-**Bediako:** This is definitely a challenge! The way we do this, is even though we have a worker paradigm, each container in the cluster is running multiple workers that are able look at different queues which may be empty, to stay busy. Depending on the types of resources these particular processes need, we will group workers accordingly.
+**Bediako:** This is definitely a challenge! The way we do this, is even though we have a worker paradigm, each container in the cluster is running multiple workers that are able to look at different queues which may be empty, to stay busy. Depending on the types of resources these particular processes need, we will group workers accordingly.
 
 **Jon: And these would be JVM processes? Have you ever looked at Lambdas or more lightweight processes?**
 
@@ -98,7 +98,7 @@ That happened in 2015 and then I managed to convince my employer that we should 
 
 **Bediako:** Yeah you're right, the Java syntax became so ponderous. I think I'm average in terms of brain power, but trying to keep up with all the syntax changes in Java was terrible. Clojure's simplicity fitted the way I like to think about problems and being a minimalist myself, it was love at first sight.
 
-**Jon Have you done much hiring for Clojure devs?**
+**Jon: Have you done much hiring for Clojure devs?**
 
 **Bediako:** I've had quite a few people that have had no prior Clojure experience become productive quickly. We look for people who are open minded and have functional programming on their resumes.
 
@@ -130,7 +130,7 @@ We use [EDN](https://clojuredocs.org/clojure.edn) to represent all the logic in 
 
 **Bediako:** Yes, it's quite useful and it makes a lot of sense for spreadsheets.
 
-What is a spreadsheet? Well it's a collection of worksheets. What is a worksheet... well it's a collection of columns. A column is a list of cells which can have different value types but typically have a dominant value type.
+What is a spreadsheet? Well it's a collection of worksheets. What is a worksheet? Well it's a collection of columns. A column is a list of cells which can have different value types but typically have a dominant value type.
 
 I can programmatically inspect a worksheet, see what the column data types are and then use [`test.check`](https://github.com/clojure/test.check) to generate the specific values for each one of those columns, then run an automated test against the spreadsheet. This is so very useful and convenient. It all happens very quickly, in milliseconds.
 
