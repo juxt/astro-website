@@ -4,16 +4,21 @@ import { Image } from 'astro:assets'
 const {name, title, expertise, src, alt = name + ', ' + title} = Astro.props;
 
 ---
-<div>
+<div class="bg-zinc-800 px-5 py-10 grid grid-cols-2 gap-4">
     <Image src={src} alt={alt} />
-    <div>
-        <h4>{name}</h4>
-        <h5>{title}</h5>
-        <br/>
-        <h5>Expert in:</h5>
-        <ul>
-            {expertise.map((expertise) => <li>{expertise}</li>)}
-        </ul>
-        <button>Connect Now</button>
+    <div class="grid grid-cols-1 gap-5">
+        <div>
+            <h4 class="uppercase text-xl">{name}</h4>
+            <h5 class="uppercase text-lg font-light">{title}</h5>
+        </div>
+        <div>
+            <h5 class="uppercase text-lg">Expert in:</h5>
+            <ul class="list-disc list-inside">
+                {expertise.map((expertise) => <li>{expertise}</li>)}
+            </ul>
+        </div>
+        <button class="bg-juxt p-1 rounded">
+            Connect Now
+        </button>
     </div>
 </div>

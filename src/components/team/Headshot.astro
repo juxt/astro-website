@@ -4,10 +4,13 @@ import { Image } from 'astro:assets'
 const {name, title, src, alt = name + ', ' + title} = Astro.props;
 
 ---
-<div>
-    <div>
-        <p>{name}</p>
-        <p>{title}</p>
+<div class="relative">
+    {/* https://stackoverflow.com/a/67194215 */}
+    <div class="absolute top-10 left-1/2 transform -translate-x-1/2">
+        <div class="text-sm text-black">
+            <p>{name}</p>
+            <p>{title}</p>
+        </div>
     </div>
     <Image src={src} alt={alt}>
 </div>
