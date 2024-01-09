@@ -1,0 +1,20 @@
+---
+import { getImage } from 'astro:assets'
+import { Image } from 'astro:assets'
+import Banner from '@components/Banner.astro'
+import Clickable from '@components/Clickable.astro'
+import Newsletter from '@components/Newsletter.astro'
+import Section from '@components/Section.astro'
+import TalkToUs from '@components/TalkToUs.astro'
+import Layout from '@layouts/Layout.astro'
+
+---
+
+<Layout navbar title='Hi!'>
+  <main>
+    <Banner
+      text='Oliver, where are you?'
+    />
+    <Newsletter />
+  </main>
+</Layout>

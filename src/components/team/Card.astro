@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets'
+
+const {name, title, expertise, src, alt = name + ', ' + title} = Astro.props;
+
+---
+<div>
+    <Image src={src} alt={alt} />
+    <div>
+        <h4>{name}</h4>
+        <h5>{title}</h5>
+        <br/>
+        <h5>Expert in:</h5>
+        <ul>
+            {expertise.map((expertise) => <li>{expertise}</li>)}
+        </ul>
+        <button>Connect Now</button>
+    </div>
+</div>

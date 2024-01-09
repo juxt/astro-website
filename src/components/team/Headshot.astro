@@ -1,0 +1,13 @@
+---
+import { Image } from 'astro:assets'
+
+const {name, title, src, alt = name + ', ' + title} = Astro.props;
+
+---
+<div>
+    <div>
+        <p>{name}</p>
+        <p>{title}</p>
+    </div>
+    <Image src={src} alt={alt}>
+</div>
