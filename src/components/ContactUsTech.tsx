@@ -42,6 +42,7 @@ function Form() {
   const [isSubmitError, setIsSubmitError] = useState<boolean>(false)
 
   function submitContactForm(data) {
+    setIsSubmitError(false)
     const json = JSON.stringify(data)
 
     return fetch('https://api.web3forms.com/submit', {
@@ -80,17 +81,10 @@ function Form() {
 
   return (
     <>
-      {isSubmitting ? (
-        isSubmittingComponent
-      ) : isSubmitError ? (
-        isSubmitErrorComponent
-      ) : isSubmitSuccessful ? (
-        isSubmitSuccessfulComponent
-      ) : (
         <form
           onSubmit={handleSubmit(submitContactForm)}
           id='form'
-          className='flex flex-col gap-4'
+          className={ (isSubmitting || isSubmitSuccessful) ? 'hidden' : 'flex flex-col gap-4'}
         >
           <input
             type='hidden'
@@ -171,7 +165,9 @@ function Form() {
             </div>
           </div>
         </form>
-      )}
+      {isSubmitting && isSubmittingComponent}
+      {isSubmitSuccessful && !isSubmitError && isSubmitSuccessfulComponent}
+      {isSubmitError && isSubmitErrorComponent}
     </>
   )
 }
