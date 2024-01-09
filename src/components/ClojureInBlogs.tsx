@@ -45,7 +45,7 @@ export function ClojureInBlogs({
               return (
                 <a
                   href={`/blog/${blog.href}`}
-                  className='text-white group cursor-pointer justify-end flex flex-col w-80 mx-auto gap-4'
+                  className='text-white group cursor-pointer justify-end flex flex-col w-96 mx-auto gap-4'
                 >
                   <div className='flex flex-col justify-between'>
                     <h3 className='text-lg font-semibold'>
