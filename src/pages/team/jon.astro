@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets'
+import Layout from '@layouts/Layout.astro'
+import SocialMediaPost from '@components/team/SocialMediaPost.astro'
+
+import jdt_curve from '../../assets/team/headshots/curve/jdt.png'
+import tmp_rectangle from '../../assets/blog/akvocollage.png'
+
+---
+
+<Layout navbar title="Jon Pither - CEO">
+    <div class='bg-zinc-900 text-white'>
+
+        <div class='px-10'>
+            <h1>I am Jon Pither</h1>
+            <h2>CEO</h2>
+            <h2>Expert In</h2>
+            <ul>
+                <li>Architecture analysis and review</li>
+                <li>Cloud-native design</li>
+                <li>Roadmapping and getting to MVP</li>
+                <li>Unblocking teams</li>
+                <li>Functional programming, JVM languages</li>
+            </ul>
+            <h3>About me</h3>
+            <p>
+                Joe Littlejohn is a deliver expert with two decades of software engineering experience.
+                He has led projects across a wide variety of industries, including Fintech, HR, smart
+                devices, and entertainment, in both small startups and blue-chip companies like Nokia,
+                Microsoft, and Experian. Joe has built data-intensive cloud systems at global scale in
+                the B2B and B2C space, and has been using lean and agile methods since the mid 00s.
+            </p>
+            <Image src={jdt_curve} alt="" />
+        </div>
+
+        <div class="px-10">
+            <p>
+                [Highlight specific accomplishments, projects, or milestones that showcase the
+                expert's expertise and impact. Share results and outcomes achieved.]
+                [Provide examples of how the expert has directly contributed to your company's or clients' success.]
+            </p>
+
+            <h3>Why Joe?</h3>
+            <p>
+                [Explain why clients should trust and collaborate with this expert.]
+            </p>
+
+            <ul>
+                <li>Proven Track Record: [Discuss the expert's history of delivering successful outcomes and solving complex challenges.]</li>
+                <li>Industry Recognition: [Mention any awards, honors, or industry affiliations that demonstrate the expert's credibility.]</li>
+                <li>Client Testimonials: [Include positive feedback or testimonials from satisfied clients or colleagues who have worked with the expert.]</li>
+            </ul>
+            <!-- TODO: Replace w/ big rectangle -->
+            <Image src={jdt_curve} alt="" />
+        </div>
+
+        <div class="px-10">
+            <blockquote>
+                "Lorem ipsum dolor sit amet, consetetur sadipscing etir, sed diam
+                nonumy eirmod tempor invidunt ut labore et dolore magna"
+            </blockquote>
+            <p>
+                Name, Title, Company
+            </p>
+        </div>
+
+        <div class="px-10">
+            <h3>The Latest SM</h3>
+            <p>
+                [By integrating these social media into these profile pages, you provide visitors
+                with real-time access to the experts' latest social media posts and activities.
+                This can help demonstrate their engagement and thought leadership in the
+                field, adding credibility to their expertise. Additionally, it encourages visitors to connect with and follow your experts on social media, enhancing engagement and building relationships.]
+            </p>
+
+            <!-- TODO: Replace w/ video -->
+            <Image src={jdt_curve} alt="">
+        </div>
+
+        <div class="px-10">
+            <SocialMediaPost />
+            <SocialMediaPost />
+            <SocialMediaPost />
+            <SocialMediaPost />
+        </div>
+
+    </div>
+</Layout>
