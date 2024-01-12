@@ -12,6 +12,10 @@
   border-radius: 0.2rem;
 }
 
+pre.astro-code code {
+  padding: 0;
+}
+
 .prose :where(code):not(:where([class~='not-prose'] *))::before {
   content: '';
 }
