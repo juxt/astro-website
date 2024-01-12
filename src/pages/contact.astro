@@ -1,0 +1,64 @@
+---
+import { getImage } from 'astro:assets'
+import Banner from '@components/Banner.astro'
+import { LinkIcon } from '@components/Icons'
+import Section from '@components/Section.astro'
+import Layout from '@layouts/Layout.astro'
+import ContactUsForm from '@components/ContactUsForm.tsx'
+
+const bannerPicture = await getImage({
+  src: import('../assets/site/firepit.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'contact us banner'
+}).then((img) => img.src)
+
+---
+
+<Layout navbar title='Contact Us'>
+  <main>
+    <Banner
+      text='Contact Us'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+    <Section className='bg-gray-100 text-black py-12'>
+      <div class="grid grid-cols-5 gap-4">
+        <div class="md:col-span-3 md:order-none order-last col-span-5">
+          <div class="pb-4 text-3xl font-light">
+          Let's Talk
+          </div>
+          <ContactUsForm client:only subject="New Submission from Contact Us page" />
+        </div>
+        <div class="md:col-span-2 grid grid-cols-3 gap-12 col-span-5">
+          <div class='col-span-3 flex flex-col gap-3 text-center'>
+            <div class='text-3xl font-light'>Email</div>
+            <div class='font-light'>
+              For all general enquiries, please email
+              <span class='font-medium'>info@juxt.pro</span>
+            </div>
+          </div>
+          <div class='col-span-3 flex flex-col gap-3 text-center'>
+            <div class='text-3xl font-light'>Home Office</div>
+            <div class='flex flex-col gap-2 font-light leading-none'>
+              <span>Norfolk House</span>
+              <span>Silbury Blvd.</span>
+              <span>Milton Keynes</span>
+              <span>MK9 2AH</span>
+              <span>UK</span>
+            </div>
+          </div>
+          <div class='col-span-3 flex flex-col gap-3 text-center'>
+            <div class='text-3xl font-light'>Phone</div>
+            <div class='font-light'>
+              Call us at: <span class='whitespace-nowrap'>+44 (0) 333 93 98 309</span>
+              <br />
+              or: <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>
