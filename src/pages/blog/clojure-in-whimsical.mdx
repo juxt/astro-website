@@ -24,7 +24,7 @@ import { Image } from 'astro:assets'
 
 [Whimsical](https://whimsical.com/) is a popular online tool to help teams collaborate and express ideas. The Whimsical hub combines whiteboards, flowcharts, docs, wireframes and more.
 
-The platform is built on Clojure and ClojureScript. I wanted to meet them, to learn about life on the cutting edge of ClojureScript, and what the modern-day pros and cons are.
+The platform is built on Clojure and ClojureScript. I wanted to meet them to learn about life on the cutting edge of ClojureScript, and what the modern-day pros and cons are.
 
 We chatted with engineers [Jānis Peisenieks](https://www.linkedin.com/in/janispeisenieks/) and [Nate Hunzaker](https://www.linkedin.com/in/nate-hunzaker-5b0095166/) to get their view.
 
@@ -71,20 +71,23 @@ That's probably the reason why Whimsical took off in the early days was getting 
 
 As time has gone on, we have actually kind of dialled back some of those thoughts because we recognised some of the inherent struggles when you have everybody spread out over the whole world.
 
-**Jon: Tell us a bit about the tech. What's the what's the tech make up here of a Whimsical like what does it look like?**
+**Jon: So, what's the overall tech estate look like?**
 
-**Jānis:** Whimsical is pretty much a Clojure company as far as the product is concerned. Essentially every place in our product that can be in Clojure almost definitely is in Clojure.
-In terms of the way we do things at Whimsical, it's very front-end heavy, that is by design. My guess is that it's one third of our codebase is back-end and two thirds front-end.
+The code-base is about one third back-end and two thirds front-end.
 
-**Nate:** I wonder if it's even starker than that, I was going to say it's like 80:20. But I'm also a frontend developer so I'm much more aware of its vastness on the front end than what's going on in the backend.
+**Nate:** I wonder if it's even starker than that, I was going to say it's like 80:20. But I'm also a frontend developer so I'm much more aware of its vastness on the front-end than what's going on in the backend.
 
-**Jānis:** To some extent that's also reflected in our engineering team makeup. So for every backend engineer we have two front end engineers. On the other end of the technical spectrum, cloud wise, we run on AWS and we keep things lean and mean. We maintain everything ourselves, everything in containers. And, and we have a saying internally that we'd rather have a shiny product and boring technology than shiny technology and a boring product. So that is our mantra in a lot of our technology choices and selections.
+**Jānis:** Yeah, for every back-end engineer we have two front end engineers.
 
-**Jon: So what are your technology choices?**
+Cloud-wise, we run on AWS and we keep things lean and mean. We maintain everything ourselves, everything in containers.
 
-**Jānis:** It's all ClojureScript.
+We have a saying that we'd rather have a shiny product and boring technology, than shiny technology and a boring product. So that is our mantra in a lot of our technology choices and selections.
 
-**Nate:** It's all ClojureScript. ShadowCLJs for build. Reframe, we've got some stuff on top of Reframe, React and Reagent. We've got some cool stuff. We've got a little bit of WebAssembly in for some specific problems. We're a canvas app so we've got a bunch of graphical stuff too. It's shiny to me anyway, even though maybe it's less shiny to others. I think Clojure and the associated data structures are a really important part of our app. We're using AVL maps, not that that's specific to Clojure, but there's a really great library for it. We're using hiccup everywhere for a lot of things. I'd say that Clojure really does describe not just the code that we're writing, but also operationally, a lot of the things that we do are really heavily influenced by it.
+**Jon: And you use Clojure?**
+
+**Jānis:** We use Clojure extensively, for everything where Clojure is a reasonable choice.
+
+**Nate:** The front-end is all ClojureScript. ShadowCLJs for build. Reframe, we've got some stuff on top of Reframe, React and Reagent. We've got some cool stuff. We've got a little bit of WebAssembly in for some specific problems. We're a canvas app so we've got a bunch of graphical stuff too. It's shiny to me anyway, even though maybe it's less shiny to others. I think Clojure and the associated data structures are a really important part of our app. We're using AVL maps, not that that's specific to Clojure, but there's a really great library for it. We're using hiccup everywhere for a lot of things. I'd say that Clojure really does describe not just the code that we're writing, but also operationally, a lot of the things that we do are really heavily influenced by it.
 
 **Jon: Do you have any shared code between the front end and the back end?**
 
