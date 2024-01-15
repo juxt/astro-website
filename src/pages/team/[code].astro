@@ -8,6 +8,7 @@ import { Person } from '@utils/types'
 import { BlogCard } from '@components/BlogCard'
 import ContactUsProfile from '@components/ContactUsProfile'
 import DraftBanner from '@components/DraftBanner'
+import Section from '@components/team/Section.astro'
 
 import tmp_rectangle from '../../assets/blog/akvocollage.png'
 
@@ -94,7 +95,7 @@ const blogs = filteredBlogs
     <DraftBanner draft={expertDraft} pageName='profile' />
     <div class='bg-zinc-900 text-white text-xs'>
 
-        <div class='px-10 grid grid-cols-2'>
+        <Section className='grid grid-cols-2'>
             <div class='py-20'>
                 <h1 class="text-5xl font-bold">I am {fullName}</h1>
                 <h2 class="justify-end text-3xl font-medium">{jobTitle}</h2>
@@ -129,11 +130,11 @@ const blogs = filteredBlogs
                            src={headshots[headshotPath]()} alt="" />
                 </div>
             </div>
-        </div>
+        </Section>
 
         {
             whyMe &&
-            <div class="px-10 py-20 bg-[#b76330] grid grid-cols-2 gap-4">
+            <Section bgClass='bg-[#b76330]' className="py-20 grid grid-cols-2 gap-4">
                 <div>
                     <p>{whyMe.overview}</p>
 
@@ -148,12 +149,12 @@ const blogs = filteredBlogs
                 </div>
                 <!-- TODO: Replace w/ big rectangle -->
                 <Image src={tmp_rectangle} alt="" />
-            </div>
+            </Section>
         }
 
         {
             quote &&
-            <div class="px-10 py-40 bg-black">
+            <Section bgClass="bg-black" className="py-40">
                 <blockquote>
                     <p class="text-xl font-medium text-center">
                         "{quote.quote}"
@@ -162,10 +163,10 @@ const blogs = filteredBlogs
                 <p class="pt-10 text-2xl font-medium text-center">
                     {quote.author}
                 </p>
-            </div>
+            </Section>
         }
 
-        <div class="px-10 pt-60 grid grid-cols-2 gap-4">
+        <Section className="pt-60 grid grid-cols-2 gap-4">
             <div>
                 <h3 class="text-xl font-medium">The Latest SM</h3>
                 <p>
@@ -177,21 +178,21 @@ const blogs = filteredBlogs
             </div>
 
             <!-- TODO: Replace w/ video -->
-            <Image src={tmp_rectangle} alt="">
-        </div>
+            <Image src={tmp_rectangle} alt="" />
+        </Section>
 
-        <div class="px-10 py-40 grid grid-cols-3 gap-4">
+        <Section className="py-40 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {
                 // Show 4 most recent blog posts
                 blogs.slice(0, 3).map(blog => (
                     <BlogCard hideAuthor=true {...blog} />
                 ))
             }
-        </div>
+        </Section>
 
         {
             previousWorks &&
-            <div class="px-10 py-20 bg-[#b76330]">
+            <Section bgClass="bg-[#b76330]" className="py-20">
                 <h3 class="text-xl font-medium">Previous Works</h3>
                 <p class="pb-10">
                     [downloadable assets that experts can offer on their pages to provide value to visitors and showcase their expertise.]
@@ -209,10 +210,10 @@ const blogs = filteredBlogs
                         </div>
                     ))
                 }
-            </div>
+            </Section>
         }
 
-        <div class="p-10 grid grid-cols-2">
+        <Section className="py-10 grid grid-cols-2">
             <div>
                 <h3 class="text-xl font-medium">Get in Touch</h3>
                 <p>
@@ -262,7 +263,7 @@ const blogs = filteredBlogs
                     />
                 </div>
             </div>
-        </div>
+        </Section>
 
     </div>
 </Layout>
