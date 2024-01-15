@@ -30,7 +30,8 @@ export function BlogCard({
   href,
   draft,
   heroImage,
-  person
+  person,
+  hideAuthor
 }: Blog) {
   return (
     <a
@@ -63,9 +64,12 @@ export function BlogCard({
             <h3 className='px-4 dark:text-zinc-50 font-light'>{description}</h3>
           </div>
         </div>
-        <div className='px-4 group flex gap-4 w-fit'>
-          <BlogAuthor {...person} />
-        </div>
+        {
+            !hideAuthor &&
+            <div className='px-4 group flex gap-4 w-fit'>
+              <BlogAuthor {...person} />
+            </div>
+        }
       </div>
       <DraftBanner draft={draft} pageName='Blog' />
     </a>

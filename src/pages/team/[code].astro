@@ -184,7 +184,7 @@ const blogs = filteredBlogs
             {
                 // Show 4 most recent blog posts
                 blogs.slice(0, 3).map(blog => (
-                    <BlogCard {...blog} />
+                    <BlogCard hideAuthor=true {...blog} />
                 ))
             }
         </div>
