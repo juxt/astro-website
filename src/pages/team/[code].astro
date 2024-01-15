@@ -1,0 +1,265 @@
+---
+import { getImage, Image } from 'astro:assets'
+import { parseBlogs } from '@utils/common'
+import { MarkdownInstance, ImageMetadata } from 'astro'
+import Layout from '@layouts/Layout.astro'
+import SocialMediaPost from '@components/team/SocialMediaPost.astro'
+import { Person } from '@utils/types'
+import { BlogCard } from '@components/BlogCard'
+import ContactUsProfile from '@components/ContactUsProfile'
+import DraftBanner from '@components/DraftBanner'
+
+import tmp_rectangle from '../../assets/blog/akvocollage.png'
+
+const isDev = import.meta.env.DEV;
+
+export async function getStaticPaths() {
+  const people = await Astro.glob<MarkdownInstance<Person>>(
+    '../../data/people/{*.mdx,*.md}'
+  )
+
+  const isDev = import.meta.env.DEV;
+
+  return people
+    .filter(
+      ({ frontmatter: { expertDraft, expert } }) =>
+        (isDev || !expertDraft) && expert
+    )
+    .map(({ frontmatter, Content }) => ({
+      params: { code: frontmatter.code },
+      props: { ...frontmatter, Content: Content }
+    }))
+}
+
+const {
+  expertDraft,
+  name,
+  lastName,
+  code,
+  jobTitle,
+
+  expertise,
+  aboutMe,
+  whyMe,
+  quote,
+  previousWorks,
+
+  phone,
+  twitter,
+  linkedin,
+  github,
+
+  Content
+} = Astro.props
+
+// Derived props
+const fullName = name + ' ' + lastName;
+const email = code + '@juxt.pro';
+
+// Headshots
+const headshots = import.meta.glob<{ default: ImageMetadata }>('/src/assets/team/headshots/*.{jpeg,jpg,png,gif}');
+const headshotPath = `/src/assets/team/headshots/${code}.png`;
+if (!headshots[headshotPath])
+    throw new Error(`"${headshotPath}" does not exist in glob: "src/assets/team/headshots/*.{jpeg,jpg,png,gif}"`);
+
+// Blog posts
+// TODO: Make nicer
+const authorImageImport = {
+  heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) => import(`../../assets/people/${authorImage}.jpg`)
+}
+const unfilteredBlogs = await parseBlogs({
+  rawBlogs: await Astro.glob<MarkdownInstance<Blog>>('/src/pages/blog/{*.mdx,*.md}'),
+  rawPeople: await Astro.glob<MarkdownInstance<Person>>('/src/data/people/{*.mdx,*.md}'),
+  isDev: isDev,
+  getImage,
+  ...authorImageImport
+})
+
+const blogs = unfilteredBlogs
+    .filter(({ draft, author }) => (isDev || !draft) && (author == code))
+    // Sort by publishedDate
+    // NOTE: There's a potential bug here with dates being in different formats
+    //       e.g. Kpow has the date: 29 Mar 2023, but most other posts use ISO format 2023-03-29
+    .toSorted((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+
+// TODO: Error on required properties?
+// - fullName, jobTitle, expertise
+---
+
+<Layout navbar title={fullName + " - " + jobTitle}>
+    <DraftBanner draft={expertDraft} pageName='profile' />
+    <div class='bg-zinc-900 text-white text-xs'>
+
+        <div class='px-10 grid grid-cols-2'>
+            <div class='py-20'>
+                <h1 class="text-5xl font-bold">I am {fullName}</h1>
+                <h2 class="justify-end text-3xl font-medium">{jobTitle}</h2>
+
+                <h2 class="pt-5 text-3xl font-medium">Expert In</h2>
+                {
+                    expertise.map((expertise) => (
+                        <ul class="list-disc list-inside text-lg font-medium">
+                            <li>{expertise}</li>
+                        </ul>
+                    ))
+                }
+
+                {
+                    aboutMe &&
+                    <>
+                        <h3 class="pt-5 text-xl font-medium">About me</h3>
+                        <p>{aboutMe}</p>
+                    </>
+                }
+            </div>
+            <div class="grid grid-cols-1 place-content-center">
+                <!-- TODO: Make a component, or just bake into the images 😅 -->
+                <div class="relative w-96 h-96">
+                    <!-- Tall -->
+                    <div class="absolute bottom-0 right-0 bg-amber-300 rounded-full w-1/2 h-full"></div>
+                    <!-- Stout -->
+                    <div class="absolute bottom-0 right-1/3 bg-orange-200 rounded-full w-1/2 h-[70%]"></div>
+                    <!-- Lazy -->
+                    <div class="absolute bottom-0 left-0 bg-orange-400 rounded-full w-2/3 h-1/4"></div>
+                    <Image class="absolute bottom-0 w-[90%] h-[90%]"
+                           src={headshots[headshotPath]()} alt="" />
+                </div>
+            </div>
+        </div>
+
+        {
+            whyMe &&
+            <div class="px-10 py-20 bg-[#b76330] grid grid-cols-2 gap-4">
+                <div>
+                    <p>{whyMe.overview}</p>
+
+                    <h2 class="pt-10 text-xl font-medium">Why {name}?</h2>
+                    {
+                        whyMe.points.map((point) => 
+                            <ul class="list-disc list-inside">
+                                <li>{point}</li>
+                            </ul>
+                        )
+                    }
+                </div>
+                <!-- TODO: Replace w/ big rectangle -->
+                <Image src={tmp_rectangle} alt="" />
+            </div>
+        }
+
+        {
+            quote &&
+            <div class="px-10 py-40 bg-black">
+                <blockquote>
+                    <p class="text-xl font-medium text-center">
+                        "{quote.quote}"
+                    </p>
+                </blockquote>
+                <p class="pt-10 text-2xl font-medium text-center">
+                    {quote.author}
+                </p>
+            </div>
+        }
+
+        <div class="px-10 pt-60 grid grid-cols-2 gap-4">
+            <div>
+                <h3 class="text-xl font-medium">The Latest SM</h3>
+                <p>
+                    [By integrating these social media into these profile pages, you provide visitors
+                    with real-time access to the experts' latest social media posts and activities.
+                    This can help demonstrate their engagement and thought leadership in the
+                    field, adding credibility to their expertise. Additionally, it encourages visitors to connect with and follow your experts on social media, enhancing engagement and building relationships.]
+                </p>
+            </div>
+
+            <!-- TODO: Replace w/ video -->
+            <Image src={tmp_rectangle} alt="">
+        </div>
+
+        <div class="px-10 py-40 grid grid-cols-3 gap-4">
+            {
+                // Show 4 most recent blog posts
+                blogs.slice(0, 3).map(blog => (
+                    <BlogCard {...blog} />
+                ))
+            }
+        </div>
+
+        {
+            previousWorks &&
+            <div class="px-10 py-20 bg-[#b76330]">
+                <h3 class="text-xl font-medium">Previous Works</h3>
+                <p class="pb-10">
+                    [downloadable assets that experts can offer on their pages to provide value to visitors and showcase their expertise.]
+                </p>
+
+                {
+                    previousWorks.map(item => (
+                        <div class="grid grid-cols-2">
+                            <h4 class="text-lg col-span-2">{item.name}</h4>
+                            <p>{item.description}</p>
+                            <div class="flex justify-end">
+                                <a href={item.link} target="_blank" class="rounded-full bg-zinc-800 w-20 px-3 py-3">View</a>
+                            </div>
+                            <hr class="border-black my-5 col-span-2" />
+                        </div>
+                    ))
+                }
+            </div>
+        }
+
+        <div class="p-10 grid grid-cols-2">
+            <div>
+                <h3 class="text-xl font-medium">Get in Touch</h3>
+                <p>
+                    We are very approachable and would love to speak to you.
+                    Feel free to call, email, tweet or send us a message.
+                </p>
+
+                <div class="pt-10 grid grid-cols-2 gap-4">
+                    {
+                        phone &&
+                        <>
+                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                            <a href={"tel:" + phone}>{phone}</a>
+                        </>
+                    }
+
+                    <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                    <a href={"mailto:" + email }>{email}</a>
+                    {
+                        twitter &&
+                        <>
+                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                            <a href={"https://twitter.com/" + twitter} target="_blank">@{twitter}</a>
+                        </>
+                    }
+                    {
+                        linkedin &&
+                        <>
+                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                            <a href={"https://linkedin.com/in/" + linkedin} target="_blank">{fullName}</a>
+                        </>
+                    }
+                    {
+                        github &&
+                        <>
+                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                            <a href={"https://github.com/" + github} target="_blank">{github}</a>
+                        </>
+                    }
+                </div>
+            </div>
+            <div>
+                <h3 class="text-xl font-medium">Or get in contact directly:</h3>
+                <div class="pt-5">
+                    <ContactUsProfile
+                        subject={"New contact submission from " + fullName + "'s profile page"}
+                    />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</Layout>
