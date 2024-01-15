@@ -77,12 +77,14 @@ const unfilteredBlogs = await parseBlogs({
   ...authorImageImport
 })
 
-const blogs = unfilteredBlogs
-    .filter(({ draft, author }) => (isDev || !draft) && (author == code))
-    // Sort by publishedDate
-    // NOTE: There's a potential bug here with dates being in different formats
-    //       e.g. Kpow has the date: 29 Mar 2023, but most other posts use ISO format 2023-03-29
-    .toSorted((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+const filteredBlogs = unfilteredBlogs
+    .filter(({ draft, author }) => (isDev || !draft) && (author == code));
+
+// Sort by publishedDate
+// NOTE: There's a potential bug here with dates being in different formats
+//       e.g. Kpow has the date: 29 Mar 2023, but most other posts use ISO format 2023-03-29
+const blogs = filteredBlogs
+    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
 
 // TODO: Error on required properties?
 // - fullName, jobTitle, expertise
