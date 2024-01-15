@@ -18,7 +18,8 @@ export async function getStaticPaths() {
     '../../data/people/{*.mdx,*.md}'
   )
 
-  const isDev = import.meta.env.DEV;
+  // TODO: Replace w/ `import.meta.env.DEV`
+  const isDev = true;
 
   return people
     .filter(
