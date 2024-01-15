@@ -50,13 +50,13 @@ For example, the stickies, were introduced because we recognised that there are 
 
 **Jon: You're now five years in and there are a lot of companies using your products. Obviously your intuitions about how such a tool should work have proven correct so far.**
 
-**Jānis:** I think that early on in Whimsical's existence many of the engineers and people were talking to said that there was already a hundred different whiteboard tools or a hundred different diagram tools. My response was always there's space for a hundred and one.
+**Jānis:** Early on, many people said that there was already a hundred different whiteboard and diagramming tools. I always replied that there's space for _a hundred and one_.
 
-We're not trying to be the Ubers of the world in that sense. We're not necessarily like the quintessential disruptors in that sense.
+We're not trying to be quintessential disruptors, we just have ideas of how to make collaboration between remote teams work better.
 
-We just have ideas of how to make collaboration between remote teams work better. The way that Whimsical came to be was we had two founders in Colorado in around 2017, in the early days we then had a bunch of us over in Latvia and a couple of folks in the US, we felt the pain of trying to convey ideas and thoughts in a coherent, beautiful, meaningful manner. And I think that led us to think like, man, there has to be a better way. There has to be a better way to communicate ideas visually. There has to be a better way to communicate them in a written format, how to structure information better. And that is how Whimsical came to be. And I mean, that is also why we're dogfooding.
+At the beginning we had a globally distributed team - two founders in Colorado, a bunch of us in Latvia and a couple of folks in the US. We felt the pain of trying to convey ideas and thoughts in a coherent, beautiful, and a visually meaningful manner. We thought there had to be a better way. This is how Whimsical came to be, and why we're dogfooding.
 
-Another principle to mention here, is that there are other people like you out there. No matter who you are, there are other people out there like you or who think like you or like the same things that you like. So if you build tools that are really, really well suited for you, there are going to be other people out there who are also going to be well suited to them. I think is one of the reasons why Whimsical continues to have an ever increasing amount of folks that really like it. We're just finding who those people are and bringing our tool to them.
+No matter who you are, there are always other people out there who think like you do or like the same things that you like. So if you build tools that are really, really well suited for you, then they will be well suited to others too. I think is one of the reasons why Whimsical continues to have an ever increasing amount of folks that really like it. We're just finding who those people are and bringing our tool to them.
 
 **Jon: Clearly once you've proven some traction the network effect of people using it and then sharing is the way.**
 
@@ -115,11 +115,7 @@ Luckily we deploy code, we've got feature deploys that basically builds the app 
 
 **Jon: Do you make use of PRs or are you more trunk based?**
 
-**Jānis:** We use PRs for everything. Another interesting thing to mention here in terms of PRS is that a couple of years ago we cooked up a thing before it was cool to have branch builds and cooked up our own. Now we have this functionality that whenever you open up a PR, there's a static link that you can share with anybody. And so we spin up a whole new environment with all the different services that we would have put into production, like a full copy of our environment. There's a persistent link. You can share it with anybody. It has all the goodies with like you know, Https and whatnot. This gave us a  really big boost in terms of our productivity, our designers didn't have to like spin up environments on their local machines.
-
-**Oliver: Specifically in an environment where you are so global, having a tool like that seems vital.**
-
-**Nate:** Yes it's essential. Not having the ability to do that as a front-end developer would be a real tax. To figure out 'how are we going to feature flag this?' If this is an 80% complete solution that doesn't have any business being on the master. It's great being able to spin that up for ideas. There'll be times where the designer will say, 'What if we did it this way? What would happen if we change the icon size? Being able to just go in and say 'I just threw this up. Let's see what it looks like. Here's a link'. It really improves collaboration on the product.
+**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up a service for when you open up a PR, there's a static link that you can share with anybody to deployed version, having a full copy of our environment. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
 
 **Jon: So you said you've got about 40 developers, and presumably a lot of those are doing Clojure.**
 
