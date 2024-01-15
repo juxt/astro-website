@@ -58,7 +58,7 @@
         { "label": "Radar", "href": "/radar" },
         {
           "label": "Free Techstack Roundtable",
-          "href": "",
+          "href": "/contact",
           "target": "_blank",
           "className": "bg-slate-700 px-2 py-1 rounded"
         }
@@ -70,10 +70,10 @@
         { "label": "About Us", "href": "/about" },
         { "label": "Careers", "href": "/careers" },
         { "label": "Meet the Experts/Team", "href": "" },
-        { "label": "Open Positions", "href": "" },
+        { "label": "Open Positions", "href": "/careers#job-openings" },
         {
           "label": "Get in touch",
-          "href": "/contact-us",
+          "href": "/contact",
           "target": "_blank",
           "className": "bg-slate-700 px-2 py-1 rounded"
         }
