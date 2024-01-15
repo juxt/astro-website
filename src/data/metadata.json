@@ -39,7 +39,6 @@
         { "label": "Financial Services", "href": "/financial" },
         { "label": "Delivery Experts", "href": "/delivery" },
         { "label": "Getting Started", "href": "/get-started" },
-        { "label": "Services & Expertise", "href": "" },
         {
           "label": "Free Consultation",
           "href": "/consultation",
@@ -69,7 +68,6 @@
       "items": [
         { "label": "About Us", "href": "/about" },
         { "label": "Careers", "href": "/careers" },
-        { "label": "Meet the Experts/Team", "href": "" },
         { "label": "Open Positions", "href": "/careers#job-openings" },
         {
           "label": "Get in touch",
