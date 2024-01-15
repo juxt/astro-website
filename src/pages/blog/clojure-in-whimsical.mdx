@@ -105,11 +105,11 @@ Luckily we deploy code, we've got feature deploys that basically builds the app 
 
 **Jon: OK, so you've not gone all in on micro-services?**
 
-**Jānis:** I think when I say the shiny product, boring technology, this is one of those things where we want to we want to be pragmatic about the things that we do, and we want to understand clearly why we are doing each specific thing? And of course, that  means that sometimes we reinvent the wheel, or sometimes we repeat a mistake, and then we realise why we're doing it. But at the same time, in terms of micro-services, we only split out something as a specific micro-service where it makes sense, where it's scaling characteristics or operational characteristics. Otherwise, we keep it as a monolith. And I think that is working pretty well for us. In terms of deployments, we deploy between five and 50 times a day.
+**Jānis:** We only split out something as a specific micro-service where it makes sense, where it's scaling characteristics or operational characteristics. Otherwise, we keep it as a monolith. In terms of deployments, we deploy between five and 50 times a day.
 
 **Jon: Do you make use of PRs or are you more trunk based?**
 
-**Jānis:** We do use PRs for everything. Another interesting thing to mention here in terms of PRS is that a couple of years ago we cooked up a thing before it was cool to have branch builds and cooked up our own. Now we have this functionality that whenever you open up a PR, there's a static link that you can share with anybody. And so we spin up a whole new environment with all the different services that we would have put into production, like a full copy of our environment. There's a persistent link. You can share it with anybody. It has all the goodies with like you know, Https and whatnot. This gave us a  really big boost in terms of our productivity, our designers didn't have to like spin up environments on their local machines.
+**Jānis:** We use PRs for everything. Another interesting thing to mention here in terms of PRS is that a couple of years ago we cooked up a thing before it was cool to have branch builds and cooked up our own. Now we have this functionality that whenever you open up a PR, there's a static link that you can share with anybody. And so we spin up a whole new environment with all the different services that we would have put into production, like a full copy of our environment. There's a persistent link. You can share it with anybody. It has all the goodies with like you know, Https and whatnot. This gave us a  really big boost in terms of our productivity, our designers didn't have to like spin up environments on their local machines.
 
 **Oliver: Specifically in an environment where you are so global, having a tool like that seems vital.**
 
@@ -118,7 +118,6 @@ Luckily we deploy code, we've got feature deploys that basically builds the app 
 **Jon: So you said you've got about 40 developers, and presumably a lot of those are doing Clojure.**
 
 **Jānis:** About 45 employees total at Whimsical and out of those 17/18 are specifically engineers, two of us you could call managers so 15 in total.
-
 
 **Jon: And would they mostly all be touching Clojure? Have you trained people that don't know it; what's your story in terms of growing the team?**
 
