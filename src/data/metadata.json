@@ -31,22 +31,78 @@
       }
     }
   ],
+
   "footer": [
-    { "label": "About", "href": "/about" },
-    { "label": "Financial", "href": "/financial" },
-    { "label": "Delivery", "href": "/delivery" },
-    { "label": "Get Started", "href": "/get-started" },
-    { "label": "Careers", "href": "/careers" },
-    { "label": "Clojure In", "href": "/clojure-in" },
-    { "label": "Blog", "href": "/blog" },
-    { "label": "Radar", "href": "/radar" },
     {
-      "label": "Free Consultation",
-      "href": "/consultation",
-      "target": "_blank",
-      "className": "bg-slate-700 px-2 py-1 rounded"
+      "groupLabel": "Work with us",
+      "items": [
+        { "label": "Financial Services", "href": "/financial" },
+        { "label": "Delivery Experts", "href": "/delivery" },
+        { "label": "Getting Started", "href": "/get-started" },
+        { "label": "Services & Expertise", "href": "" },
+        {
+          "label": "Free Consultation",
+          "href": "/consultation",
+          "target": "_blank",
+          "className": "bg-slate-700 px-2 py-1 rounded"
+        }
+      ]
+    },
+
+    {
+      "groupLabel": "Resources",
+      "items": [
+        { "label": "Blog", "href": "/blog" },
+        { "label": "Clojure In", "href": "/clojure-in" },
+        { "label": "JUXT Cast", "href": "https://pod.link/juxtcast" },
+        { "label": "Radar", "href": "/radar" },
+        {
+          "label": "Free Techstack Roundtable",
+          "href": "",
+          "target": "_blank",
+          "className": "bg-slate-700 px-2 py-1 rounded"
+        }
+      ]
+    },
+    {
+      "groupLabel": "Company",
+      "items": [
+        { "label": "About Us", "href": "/about" },
+        { "label": "Careers", "href": "/careers" },
+        { "label": "Meet the Experts/Team", "href": "" },
+        { "label": "Open Positions", "href": "" },
+        {
+          "label": "Get in touch",
+          "href": "/contact-us",
+          "target": "_blank",
+          "className": "bg-slate-700 px-2 py-1 rounded"
+        }
+      ]
+    },
+    {
+      "groupLabel": "XTDB",
+      "items": [
+        { "image": "/images/xtdb-logo.svg", "href": "https://xtdb.com/" },
+        {
+          "label": "Github",
+          "icon": "github",
+          "href": "https://github.com/xtdb/xtdb"
+        },
+        {
+          "label": "Zuplip",
+          "icon": "zulip",
+          "href": "https://juxt-oss.zulipchat.com/#narrow/stream/194466-xtdb"
+        },
+        {
+          "label": "Get in touch",
+          "href": "/contact-us",
+          "target": "_blank",
+          "className": "bg-slate-700 px-2 py-1 rounded"
+        }
+      ]
     }
   ],
+
   "seo": {
     "home": {
       "description": "We are a unique software engineering firm, with a track record of rapidly delivering high-quality IT systems to meet challenging business objectives.",

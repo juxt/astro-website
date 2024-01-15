@@ -10,11 +10,18 @@ import {
   ZulipIcon
 } from './Icons'
 
-type Navigation = {
-  label: string
+type NavigationItem = {
   href: string
-  flag?: boolean
   className?: string
+  label?: string
+  flag?: boolean
+  icon?: string
+  image?: string
+}
+
+type Navigation = {
+  groupLabel: string
+  items: NavigationItem[]
 }
 
 const navigation = await Astro.glob<{ footer: Navigation[] }>(
@@ -23,192 +30,174 @@ const navigation = await Astro.glob<{ footer: Navigation[] }>(
 
 const [{ footer }] = navigation
 
-const pagesInFooter = footer
+function renderIcon(item: NavigationItem) {
+  const Icon = item.icon
+    ? {
+        github: GithubIcon,
+        linkedin: LinkedInIcon,
+        twitter: TwitterIcon,
+        bluesky: BlueskyIcon,
+        youtube: YoutubeIcon,
+        spotify: SpotifyIcon,
+        zulip: ZulipIcon
+      }[item.icon]
+    : null
+
+  if (item.icon && !Icon) throw new Error('No icon provided')
+  return Icon
+}
+
+const followUs = [
+  { icon: GithubIcon, link: 'https://github.com/juxt', name: 'Github' },
+  {
+    icon: LinkedInIcon,
+    link: 'https://www.linkedin.com/company/juxt-juxt-pro-/mycompany/',
+    name: 'LinkedIn'
+  },
+  { icon: TwitterIcon, link: 'https://twitter.com/juxtpro', name: 'Twitter' },
+  {
+    icon: BlueskyIcon,
+    link: 'https://bsky.app/profile/juxtpro.bsky.social',
+    name: 'Bluesky'
+  },
+  {
+    icon: YoutubeIcon,
+    link: 'https://www.youtube.com/@juxt4112',
+    name: 'YouTube'
+  },
+  {
+    icon: SpotifyIcon,
+    link: 'https://open.spotify.com/show/2sQiB5T3x1rL3nwyLef6kg',
+    name: 'JUXT Cast'
+  }
+]
 ---
 
 <div class='w-full text-white bg-black py-20'>
-  <div
-    class='mx-auto max-w-7xl px-4 sm:px-12 2xl:px-0 gap-16 grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap justify-between'
-  >
-    <div class='flex flex-col gap-6 text-sm'>
-      <a target='_blank' class='w-20' href='/'>
-        <img class='w-full' src='/images/logo.svg' alt='' />
-      </a>
+  <div class='mx-auto max-w-7xl px-4 sm:px-12 2xl:px-0 gap-16'>
+    <div class='flex gap-8 sm:gap-20 flex-col sm:flex-row'>
+      <div class='flex flex-col gap-6 text-sm shrink-0'>
+        <a target='_blank' class='w-20' href='/'>
+          <img class='w-full' src='/images/logo.svg' alt='' />
+        </a>
 
-      <div class='flex flex-col gap-3'>
-        <div class='flex flex-col gap-2'>
-          <div class='font-semibold text-zinc-300'>Head Office</div>
-          <div class='flex flex-col gap-1 text-xs text-zinc-400 font-light'>
-            <div>Norfolk House, Silbury Blvd.</div>
-            <div>Milton Keynes, MK9 2AH</div>
-            <div>United Kingdom</div>
+        <div class='flex flex-col gap-3'>
+          <div class='flex flex-col gap-2'>
+            <div class='font-semibold text-zinc-300'>Head Office</div>
+            <div class='flex flex-col gap-1 text-xs text-zinc-400 font-light'>
+              <div>Norfolk House, Silbury Blvd.</div>
+              <div>Milton Keynes, MK9 2AH</div>
+              <div>United Kingdom</div>
+            </div>
           </div>
-        </div>
 
-        <div class='text-zinc-300 text-xs font-light'>
-          Company registration: 08457399
-        </div>
+          <div class='text-zinc-300 text-xs font-light'>
+            Company registration: 08457399
+          </div>
 
-        <div class='text-zinc-300 text-xs font-light'>
-          Copyright © JUXT LTD. 2012-2024
-        </div>
-        <a
-          href='/privacy-policy'
-          class='text-zinc-300 text-xs font-light underline'
-        >
-          Privacy Policy
-        </a>
-        <a
-          href='/terms-of-use'
-          class='text-zinc-300 text-xs font-light underline'
-        >
-          Terms of Use
-        </a>
-        <a
-          href='/contact'
-          class='text-zinc-300 text-xs font-light underline'
-        >
-          Contact Us
-        </a>
-      </div>
-    </div>
-
-    <div class='flex flex-col gap-6'>
-      <div class='text-zinc-400 text-sm'>Sitemap</div>
-      <div class='flex flex-col gap-4 font-light'>
-        {pagesInFooter.map((page) => (
+          <div class='text-zinc-300 text-xs font-light'>
+            Copyright © JUXT LTD. 2012-2024
+          </div>
           <a
-            class:list={[
-              'flex gap-1 items-center text-zinc-100 capitalize text-xs hover:text-juxt transition-colors',
-              page.className
-            ]}
-            href={page.href}
+            href='/privacy-policy'
+            class='text-zinc-300 text-xs font-light underline'
           >
-            {page.label}
-            {page.flag && (
-              <div class='font-normal uppercase text-[0.6rem] rounded-lg bg-gray-700 tracking-wider text-white px-1.5 py-[0.1rem]'>
-                {page.flag}
-              </div>
-            )}
+            Privacy Policy
           </a>
-        ))}
+          <a
+            href='/terms-of-use'
+            class='text-zinc-300 text-xs font-light underline'
+          >
+            Terms of Use
+          </a>
+          <a href='/contact' class='text-zinc-300 text-xs font-light underline'>
+            Contact Us
+          </a>
+        </div>
+      </div>
+
+      <div
+        class='grid md:grid-rows-2 md:grid-cols-2 gap-8 sm:gap-10 lg:grid-rows-none lg:grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] w-full'
+      >
+        {
+          footer.map((group) => {
+            return (
+              <div class='flex flex-col gap-4 font-light'>
+                <div class='text-zinc-400 text-sm text-bold'>
+                  {group.groupLabel}
+                </div>
+                <div class='flex flex-col gap-4 font-light'>
+                  {group.items.map((item) => {
+                    const Icon = renderIcon(item)
+
+                    return (
+                      <a
+                        class:list={[
+                          'w-fit group flex gap-1 items-center text-zinc-100 capitalize text-xs hover:text-juxt transition-colors',
+                          item.className
+                        ]}
+                        href={item.href}
+                      >
+                        {item.label && (
+                          <div class='flex gap-2 items-center'>
+                            {item.icon && (
+                              <div class='w-4'>
+                                <Icon className='fill-white group-hover:fill-juxt transition-all' />
+                              </div>
+                            )}
+
+                            {item.label}
+                          </div>
+                        )}
+                        {item.image && <img class='w-16' src={item.image} />}
+                        {item.flag && (
+                          <div class='font-normal uppercase text-[0.6rem] rounded-lg bg-gray-700 tracking-wider text-white px-1.5 py-[0.1rem]'>
+                            {item.flag}
+                          </div>
+                        )}
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
     </div>
 
-    <div class='flex flex-col gap-6'>
-      <div class='text-zinc-400 text-sm'>Follow Us</div>
-      <div class='flex flex-col gap-4 font-light'>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://github.com/juxt'
-        >
-          <div class='w-4'>
-            <GithubIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>Github</p>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://www.linkedin.com/company/juxt-juxt-pro-/mycompany/'
-        >
-          <div class='w-4'>
-            <LinkedInIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>LinkedIn</p>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://twitter.com/juxtpro'
-        >
-          <div class='w-4'>
-            <TwitterIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>Twitter</p>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://bsky.app/profile/juxtpro.bsky.social'
-        >
-          <div class='w-4'>
-            <BlueskyIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>Bluesky</p>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://www.youtube.com/@juxt4112'
-        >
-          <div class='w-4'>
-            <YoutubeIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>YouTube</p>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://open.spotify.com/show/2sQiB5T3x1rL3nwyLef6kg'
-        >
-          <div class='w-4'>
-            <SpotifyIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>JUXT Cast</p>
-        </a>
+    <div class='flex flex-col justify-center sm:flex-row gap-40 mt-10'>
+      <div class='flex flex-col items-center gap-4'>
+        <div class='text-zinc-400 text-sm text-bold text-center'>
+          In the Loop!
+        </div>
+        <div class='text-zinc-400 text-xs'>
+          Get industry news, insights, research, updates and events directly to
+          your inbox
+        </div>
+        <div class='flex flex-row gap-6 justify-center'>
+          <div class='text-white text-sm'>email field</div>
+          <div class='text-white text-sm'>Sign Me Up!</div>
+        </div>
       </div>
-    </div>
-
-    <div class='flex flex-col gap-6'>
-      <div class='text-zinc-400 text-sm'>XTDB</div>
-      <div class='flex flex-col gap-4 font-light'>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://xtdb.com/'
-        >
-          <div class='w-20'>
-            <img src='/images/xtdb-logo.svg' alt='XTDB' />
-          </div>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://github.com/xtdb/xtdb'
-        >
-          <div class='w-4'>
-            <GithubIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>Github</p>
-        </a>
-        <a
-          target='_blank'
-          class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
-          href='https://juxt-oss.zulipchat.com/#narrow/stream/194466-xtdb'
-        >
-          <div class='w-4'>
-            <ZulipIcon
-              className='fill-white group-hover:fill-juxt transition-all'
-            />
-          </div>
-          <p>Zulip</p>
-        </a>
+      <div class='flex flex-col gap-4'>
+        <div class='text-zinc-400 text-sm text-bold text-center'>Follow Us</div>
+        <div class='flex gap-4 font-light flex-wrap justify-center'>
+          {
+            followUs.map(({ icon: Icon, link, name }) => (
+              <a
+                target='_blank'
+                class='group text-zinc-100 flex gap-2 items-center text-xs capitalize hover:text-juxt transition-colors'
+                href={link}
+              >
+                <div class='w-4'>
+                  <Icon className='fill-white group-hover:fill-juxt transition-all' />
+                </div>
+                <p>{name}</p>
+              </a>
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>
