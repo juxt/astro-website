@@ -143,14 +143,15 @@ const blogs = filteredBlogs
                     <p>{whyMe.overview}</p>
 
                     <h2 class="pt-10 text-xl font-medium">Why {name}?</h2>
-                    {
-                        whyMe.points.map((point) => 
-                            <ul class="list-disc list-inside">
+                    <ul class="list-disc list-inside">
+                        {
+                            whyMe.points.map((point) => 
                                 <li>{point}</li>
-                            </ul>
-                        )
-                    }
+                            )
+                        }
+                    </ul>
                 </div>
+
                 <!-- TODO: Replace w/ big rectangle -->
                 <Image class="my-auto ml-auto" src={tmp_rectangle} alt="" />
             </Section>
