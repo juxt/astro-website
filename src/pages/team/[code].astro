@@ -137,7 +137,7 @@ const blogs = filteredBlogs
 
         {
             whyMe &&
-            <Section bgClass='bg-[#b76330]' className="py-20 grid grid-cols-2 gap-4">
+            <Section bgClass='bg-[#b76330]' className="py-20 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <h2 class="text-xl font-medium">Notable Accomplishments:</h2>
                     <p>{whyMe.overview}</p>
@@ -226,7 +226,7 @@ const blogs = filteredBlogs
             </Section>
         }
 
-        <Section className="py-10 flex gap-10">
+        <Section className="py-10 flex flex-col md:flex-row gap-10">
             <div class="basis-1 grow">
                 <h3 class="text-xl font-medium">Get in Touch</h3>
                 <p>
@@ -261,8 +261,8 @@ const blogs = filteredBlogs
                     }
                 </div>
             </div>
-            { /* Vertical line */ }
-            <div class="border-r border-slate-600"></div>
+            { /* Mobile: Horizontal line, otherwise vertical */ }
+            <div class="border-t md:border-r border-slate-600"></div>
             <div class="basis-1 grow">
                 <h3 class="text-xl font-medium">Send a Message</h3>
                 <p>Your message is important to us. We aim to get back to you within 48 hours.</p>
