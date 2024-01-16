@@ -95,9 +95,9 @@ const blogs = filteredBlogs
 
 <Layout navbar title={fullName + " - " + jobTitle}>
     <DraftBanner draft={expertDraft} pageName='profile' />
-    <div class='bg-zinc-900 text-white text-xs'>
+    <div class='bg-zinc-900 text-white text-xs overflow-x-hidden'>
 
-        <Section className='pl-10 pr-0 grid grid-cols-2 gap-4'>
+        <Section className='pl-10 pr-0 py-10 grid grid-cols-2 gap-4'>
             <div class='py-20'>
                 <h1 class="text-5xl font-bold">Hello<span class="text-orange-400">.</span></h1>
                 <h1 class="justify-end text-3xl font-bold"><span class="text-orange-400">—</span> I am {fullName}</h1>
@@ -122,7 +122,7 @@ const blogs = filteredBlogs
             </div>
             <div class="my-auto ml-auto">
                 { /* TODO: Make a component, or just bake into the images 😅 */ }
-                <div class="relative w-96 h-96">
+                <div class="relative w-[30rem] h-[30rem]">
                     { /* Tall */ }
                     <div class="absolute bottom-0 right-0 bg-amber-300 rounded-full w-1/2 h-full"></div>
                     { /* Stout */ }
