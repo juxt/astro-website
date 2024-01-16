@@ -6,6 +6,9 @@ category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '16 Jan 2024'
 heroImage: 'effective-teams.jpg'
+tags:
+  - 'teams'
+  - 'analysis'
 ---
 
 # Highly-effective Teams
