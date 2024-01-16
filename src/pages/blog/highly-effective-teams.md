@@ -1,5 +1,6 @@
 ---
 author: 'joe'
+draft: true
 title: 'Highly-effective Teams'
 description: 'The common traits of teams that work fast and build impressive things.'
 category: 'analysis'
