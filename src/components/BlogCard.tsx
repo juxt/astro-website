@@ -54,10 +54,17 @@ export function BlogCard({
           </div>
 
           <div className='flex flex-col gap-4'>
-            <img
-              src={heroImage}
-              className='w-full h-52 object-cover group-hover:brightness-110'
-            />
+            <div class="relative w-full h-52 group-hover:brightness-110">
+                <img
+                  src={heroImage}
+                  className='w-full h-full object-cover'
+                />
+                <div class="absolute w-full h-full top-0 left-0 backdrop-blur-lg"></div>
+                <img
+                  src={heroImage}
+                  className='absolute h-full top-0 left-1/2 -translate-x-1/2'
+                />
+            </div>
             <h2 className='px-4 dark:text-zinc-50 text-2xl font-light capitalize underline-offset-4 hover:underline'>
               {title}
             </h2>

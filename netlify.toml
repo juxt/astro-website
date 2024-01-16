@@ -5,6 +5,12 @@
   command = "yarn build && yarn run algolia"
 
 [[redirects]]
+  from = "/startups"
+  to = "/delivery"
+  status = 301
+  force = false
+
+[[redirects]]
   from = "/blog/posts/*"
   to = "/blog/:splat"
   status = 301
