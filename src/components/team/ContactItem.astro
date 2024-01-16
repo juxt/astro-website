@@ -1,0 +1,14 @@
+---
+const {href} = Astro.props;
+
+import { QuoteIcon } from '@components/Icons'
+
+---
+<div class="flex gap-8 items-center">
+    <div class="rounded-full bg-amber-500 w-10 h-10 flex place-content-center">
+        <slot name="icon">
+            <QuoteIcon className="w-5" />
+        </slot>
+    </div>
+    <slot name="default"/>
+</div>

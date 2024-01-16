@@ -4,11 +4,13 @@ import { parseBlogs } from '@utils/common'
 import { MarkdownInstance, ImageMetadata } from 'astro'
 import Layout from '@layouts/Layout.astro'
 import SocialMediaPost from '@components/team/SocialMediaPost.astro'
+import Section from '@components/team/Section.astro'
+import ContactItem from '@components/team/ContactItem.astro'
 import { Person } from '@utils/types'
 import { BlogCard } from '@components/BlogCard'
 import ContactUsProfile from '@components/ContactUsProfile'
 import DraftBanner from '@components/DraftBanner'
-import Section from '@components/team/Section.astro'
+import { GithubIcon, LinkedInIcon, TwitterIcon, QuoteIcon } from '@components/Icons'
 
 import tmp_rectangle from '../../assets/blog/akvocollage.png'
 
@@ -232,29 +234,30 @@ const blogs = filteredBlogs
                     Feel free to call, email, tweet or send us a message.
                 </p>
 
-                <div class="pt-10 grid grid-cols-2 gap-4">
-                    <div class="rounded-full bg-amber-500 w-10 h-10"></div>
-                    <a href={"mailto:" + email }>{email}</a>
+                <div class="pt-10 flex flex-col gap-4">
+                    <ContactItem>
+                        <a href={"mailto:" + email}>{email}</a>
+                    </ContactItem>
                     {
                         twitter &&
-                        <>
-                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                        <ContactItem>
+                            <TwitterIcon slot="icon" className="w-7"/>
                             <a href={"https://twitter.com/" + twitter} target="_blank">@{twitter}</a>
-                        </>
+                        </ContactItem>
                     }
                     {
                         linkedin &&
-                        <>
-                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                        <ContactItem>
+                            <LinkedInIcon slot="icon" className="w-6"/>
                             <a href={"https://linkedin.com/in/" + linkedin} target="_blank">{fullName}</a>
-                        </>
+                        </ContactItem>
                     }
                     {
                         github &&
-                        <>
-                            <div class="rounded-full bg-amber-500 w-10 h-10"></div>
+                        <ContactItem>
+                            <GithubIcon slot="icon"/>
                             <a href={"https://github.com/" + github} target="_blank">{github}</a>
-                        </>
+                        </ContactItem>
                     }
                 </div>
             </div>
