@@ -1,12 +1,10 @@
 ---
-draft: true
-token: '1234'
 author: 'joe'
 title: 'Highly-effective Teams'
 description: 'The common traits of teams that work fast and build impressive things.'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '16 Jan 2023'
+publishedDate: '16 Jan 2024'
 heroImage: 'effective-teams.jpg'
 ---
 
