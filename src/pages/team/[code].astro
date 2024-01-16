@@ -205,17 +205,19 @@ const blogs = filteredBlogs
 
                 {
                     previousWorks.map(item => (
-                        <div class="grid grid-cols-2">
-                            <h4 class="text-lg col-span-2">{item.name}</h4>
-                            <p>{item.description}</p>
-                            <div class="flex justify-end">
+                        <>
+                            <div class="flex items-center">
+                                <div class="grow flex flex-col space-y-4">
+                                    <h4 class="text-lg col-span-2">{item.name}</h4>
+                                    <p>{item.description}</p>
+                                </div>
                                 <a href={item.link} target="_blank"
-                                   class="rounded-full bg-zinc-800 w-20 px-3 py-3 flex justify-center">
+                                   class="rounded-full bg-zinc-800 w-20 h-max px-3 py-3 flex justify-center">
                                     View
                                 </a>
                             </div>
                             <hr class="border-black my-5 col-span-2" />
-                        </div>
+                        </>
                     ))
                 }
             </Section>
