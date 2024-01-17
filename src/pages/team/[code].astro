@@ -12,8 +12,6 @@ import ContactUsProfile from '@components/ContactUsProfile'
 import DraftBanner from '@components/DraftBanner'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
-import tmp_rectangle from '../../assets/blog/akvocollage.png'
-
 const isDev = import.meta.env.DEV;
 
 export async function getStaticPaths() {
@@ -175,30 +173,21 @@ const blogs = filteredBlogs
             </Section>
         }
 
-        <Section className="pt-60 grid grid-cols-2 gap-4">
-            <div>
-                <h3 class="text-xl font-medium">The Latest SM</h3>
-                <p>
-                    [By integrating these social media into these profile pages, you provide visitors
-                    with real-time access to the experts' latest social media posts and activities.
-                    This can help demonstrate their engagement and thought leadership in the
-                    field, adding credibility to their expertise. Additionally, it encourages visitors to connect with and follow your experts on social media, enhancing engagement and building relationships.]
-                </p>
+        <Section className="py-20">
+            <div class="pb-10 flex flex-col items-center">
+                <h3 class="text-xl font-medium">Latest Blogs</h3>
             </div>
 
-            <!-- TODO: Replace w/ video -->
-            <Image class="my-auto ml-auto" src={tmp_rectangle} alt="" />
-        </Section>
-
-        <Section className="py-40 grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
-            {
-                /* TODO: Do this using css instead */
-                blogs.slice(0, numCards).map((blog, idx) => (
-                    <div class={(idx == (numCards - 1) ? "xl:hidden" : "")}>
-                        <BlogCard hideAuthor=true {...blog} />
-                    </div>
-                ))
-            }
+            <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
+                {
+                    /* TODO: Do this using css instead */
+                    blogs.slice(0, numCards).map((blog, idx) => (
+                        <div class={(idx == (numCards - 1) ? "xl:hidden" : "")}>
+                            <BlogCard hideAuthor=true {...blog} />
+                        </div>
+                    ))
+                }
+            </div>
         </Section>
 
         {
