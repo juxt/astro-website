@@ -66,6 +66,9 @@ const headshotPath = `/src/assets/team/headshots/${code}.png`;
 if (!headshots[headshotPath])
     throw new Error(`"${headshotPath}" does not exist in glob: "src/assets/team/headshots/*.{jpeg,jpg,png,gif}"`);
 
+// Quote
+const quoteBg = await getImage({src: import("../../assets/team/quote-bg.png")})
+
 // Blog posts
 // TODO: Make nicer
 const authorImageImport = {
@@ -159,7 +162,9 @@ const blogs = filteredBlogs
 
         {
             quote &&
-            <Section bgClass="bg-black" className="py-40 max-w-4xl">
+            <Section bgStyle={`background-image: url('${quoteBg.src}');`}
+                     bgClass="bg-no-repeat bg-center bg-cover"
+                     className="py-40 max-w-4xl">
                 <blockquote>
                     <p class="text-2xl font-medium text-center">
                         "{quote.quote}"
