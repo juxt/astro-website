@@ -1,16 +1,16 @@
 ---
-const {bgClass, className} = Astro.props;
+const {bgClass, bgStyle, className} = Astro.props;
 ---
 {
-    bgClass &&
-    <div class={bgClass}>
+    (bgClass || bgStyle) &&
+    <div class={bgClass} style={bgStyle}>
         <Astro.self className={className}>
             <slot/>
         </Astro.self>
     </div>
 }
 {
-    !bgClass &&
+    !(bgClass || bgStyle) &&
     <div class={"container mx-auto lg:max-w-5xl px-10 " + className}>
         <slot/>
     </div>
