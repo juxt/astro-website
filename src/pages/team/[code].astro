@@ -10,7 +10,7 @@ import { Person } from '@utils/types'
 import { BlogCard } from '@components/BlogCard'
 import ContactUsProfile from '@components/ContactUsProfile'
 import DraftBanner from '@components/DraftBanner'
-import { GithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
+import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
 import tmp_rectangle from '../../assets/blog/akvocollage.png'
 
@@ -257,7 +257,7 @@ const blogs = filteredBlogs
                     {
                         github &&
                         <ContactItem>
-                            <GithubIcon slot="icon"/>
+                            <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
                             <a href={"https://github.com/" + github} target="_blank">{github}</a>
                         </ContactItem>
                     }
