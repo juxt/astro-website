@@ -140,12 +140,14 @@ const blogs = filteredBlogs
 
         {
             whyMe &&
-            <Section bgClass='bg-[#b76330]' className="py-20 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+            <Section bgClass='bg-[#b76330]' className="py-20 grid grid-cols-2 gap-4">
+                <div class="">
                     <h2 class="text-xl font-medium">Notable Accomplishments:</h2>
                     <p>{whyMe.overview}</p>
+                </div>
 
-                    <h2 class="pt-10 text-xl font-medium">Why {name}?</h2>
+                <div class="col-start-2 row-start-2">
+                    <h2 class="text-xl font-medium">Why {name}?</h2>
                     <ul class="list-disc list-inside">
                         {
                             whyMe.points.map((point) => 
@@ -154,9 +156,6 @@ const blogs = filteredBlogs
                         }
                     </ul>
                 </div>
-
-                <!-- TODO: Replace w/ big rectangle -->
-                <Image class="my-auto ml-auto" src={tmp_rectangle} alt="" />
             </Section>
         }
 
