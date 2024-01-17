@@ -1,7 +1,7 @@
 ---
 author: 'jan'
 layout: '../../layouts/BlogPost.astro'
-title: 'Safari: "Embracing Common Lisp in Modern World"'
+title: 'Safari: "Embracing Common Lisp in the Modern World"'
 description: 'What are the foundations that continue to influence our tech choices in our digital world?'
 category: 'clojure'
 publishedDate: '2024-01-17'
