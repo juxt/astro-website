@@ -141,6 +141,10 @@
     "clojure-conj": {
       "description": "JUXT is a proud gold sponsor of Clojure/Conj 2023. Stop by our sponsor table to meet our co-founders and get your limited-edition Conj tee!",
       "image": "clojure-conj-banner.jpg"
+    },
+    "contact": {
+      "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future.",
+      "image": "jdt.jpg"
     }
   }
 }
