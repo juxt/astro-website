@@ -92,7 +92,7 @@
         },
         {
           "label": "Get in touch",
-          "href": "/contact-us",
+          "href": "mailto:hello@xtdb.com",
           "target": "_blank",
           "className": "bg-slate-700 px-2 py-1 rounded"
         }
