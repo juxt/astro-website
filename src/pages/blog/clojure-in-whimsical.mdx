@@ -122,19 +122,17 @@ We don't do a lot of shared rendering with React server components but we have s
 
 **Jon: And would they mostly all be touching Clojure? Have you trained people that don't know it; what's your story in terms of growing the team?**
 
-**Jānis:** I think the first couple of people we hired into Whimsical, so Nate, and then a couple of other engineers were in the very early days. This is when we were looking for extremely capable people who were up for working with this esoteric language on a daily basis. As time went on and we became a bit more established and had more opportunities and possibilities, we started looking for Clojure developers specifically. I would say back-end developers, like Clojure developers isn't usually a problem. I'm not going to say that it's not challenging at times getting the best Clojurists out there. But at the same time, hiring ClojureScript engineers is much more difficult. I feel like it's more a case of finding really great front-end engineers and then helping them learn ClojureScript specifically. That is much more of a challenge.
+**Jānis:** In the early days we were looking for extremely capable people who were up for working with this esoteric language on a daily basis.
 
-**Jon: I suppose. Do you see that back-end engineers don't normally make for great front-end engineers. Do you see a natural split in terms of where people tend to orient themselves?**
+As time went on we started looking for Clojure developers specifically. Finding back-end Clojure developers isn't usually a problem, although I wouldn't say it's without challenge to get the Clojurists out there. But at the same time, hiring ClojureScript engineers is much more difficult. I feel like it's more a case of finding really great front-end engineers and then helping them to learn ClojureScript specifically.
 
-**Nate:** *I mean **it depends** is a great answer for that.*
+**Jon: Do you see a natural split in terms of where people tend to orient themselves, back-end vs front-end?**
 
-I think from my experience, I've worked with a back-end engineer at Whimsical for two or maybe three years now and they're great. They're able to dive in, contribute and I think especially with all of the shared code, it helps that so much of it, especially for the product that we're working on has a lot of back-end-like tasks, that have to be done on the front end, but then having good component systems, having good libraries available and existing features to work from. They don't know they've contributed that. That particular member contributed very heavily to the front-end in a way that I think if you were to look at their work over the past year or two like you would, you would say that they're a full stack or a front-end developer in a lot of cases for the I think the caliber of the work that they're doing.
+**Jānis:** There is always a spectrum. Everybody has a little bit of back-end in them and a little bit of front-end in them. The only question is how comfortable they are with it all and where do they want to make an impact.
 
-**Jānis:** Lori, if you're listening to this or if you're reading this, Hello!
+This is one of the main benefits of having the same language on the front-end and back-end, and it helps there is so much shared code. Of course, there are differences, i.e. CSS is its own beast. But as far as logic is concerned, it's just Clojure.
 
-One thing that I'd say is that with most things there is always a spectrum. Everybody has a little bit of back-end in them and a little bit of front-end in them. The only question is how comfortable they are with it all, where do they want to make an impact. And we, of course, have some folks on the team who fall at either ends of the spectrum and are really back-end and some who prefer front-end and aren't quite sure how back-end works. But for most folks that we hire to be a back-end engineer and then, once they get going and some front-end work needs to be done, you would see a PR coming in from them that is front end and you're like, huh? That's probably one of the main benefits of having the same language on the front-end and back-end, they get it. Of course, there are different patterns. You know, CSS is its own beast, but at the same time, it's as far as logic is concerned, it's just Clojure.
-
-**Jon: So yeah, that's really great, getting away from that dichotomy of having to have two separate teams. If it's the same language, then you can have that cross-pollination.**
+**Jon: So yeah, that's really great to get away from the dichotomy of having two separate teams. If it's the same language, then you have that cross-pollination.**
 
 **Nate:** Yeah. And I think that it helps too with a lot of the way that we scope out our work, it's not specific to the back-end or front-end. When we're doing planning for what work the team is going to do, every pitch that we work on has a very obvious integration with GitHub, like we're going to have a lot of network layer API interaction that we have to figure out, and we've got to figure out, do we want to store that. There is a good chunk of back-end work that has to happen here, but fundamentally what we're doing is we're building a product feature and that has different skills across the board. And I think that the trick there is then based on who can work on it, who has both the motivation and the skills to work on it, how do we give them the support that they need to to do good work?
 
@@ -143,7 +141,6 @@ And I think that's where having team members that are really good about, asking 
 **Jon: What is your database of choice?**
 
 **Nate:** Postgres
-
 
 **Jon: What IDEs do you use?  Do you use different IDEs? Have you fought the wars and you've all decided to use the same one?**
 
