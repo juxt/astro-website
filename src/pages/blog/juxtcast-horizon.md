@@ -4,7 +4,7 @@ layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast: UK Post Office Horizon Scandal'
 description: 'Beyond the Horizon: Challenges in managing and securing complex enterprise-grade IT systems'
 category: 'tech'
-publishedDate: '2024-01-22'
+publishedDate: '2024-01-23'
 tags:
   - technology
   - security
