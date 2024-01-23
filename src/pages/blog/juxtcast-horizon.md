@@ -14,7 +14,7 @@ heroImage: 'JuxtCast-dark.jpg'
 
 Last Friday, on January 19th, we recorded a fresh episode of our JUXT Cast, diving deep into the UK Post Office Horizon scandal:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/z6IpPyIhTG4?si=tVN1B7etUWUiZOLn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SZfSKDuz2yg?si=FnLtziYx-glW9LM1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 While the media rightly focuses on the management and political corruption aspects of the scandal, our discussion brought attention to the crucial lessons applicable to everyone in today's tech-centric world.
 
