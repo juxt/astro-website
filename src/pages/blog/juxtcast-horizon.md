@@ -9,7 +9,7 @@ tags:
   - technology
   - security
 
-heroImage: 'JuxtCast-square.jpg'
+heroImage: 'JuxtCast-dark.jpg'
 ---
 
 Last Friday, on January 19th, we recorded a fresh episode of our JUXT Cast, diving deep into the UK Post Office Horizon scandal:
