@@ -14,7 +14,7 @@ heroImage: 'modern-java-for-clojure-devs.jpg'
 
 Enter "Embracing Common Lisp in the Modern World," a presentation that takes you on a captivating journey through the historical context and evolution of Common Lisp, Clojure, and the Java Virtual Machine (JVM):
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/prGu-nxIMtw?si=yo5W4EZj8ji8GUxi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hPulycyXGp4?si=ffZ4tXCvZGIz_D0U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 In a digital world where languages and technologies evolve at breakneck speed, it's crucial to understand the foundations that continue to influence our tech choices. This presentation not only reveals how Clojure is deeply rooted in Common Lisp but also explores the grand vision of the JVM as a universal computing platform. It paints a vivid picture of how the tech landscape has transformed since the late '90s, offering a compelling comparison between then and now. Additionally, it dives into the efficiency and performance disparities between Common Lisp and Clojure, providing valuable insights for developers navigating the complex realm of programming languages.
 
