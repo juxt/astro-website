@@ -27,3 +27,7 @@ While acknowledging the significance of addressing management and political corr
 - serves as a straightforward reminder for individuals and organizations to stay vigilant and proactive in ensuring the reliability and integrity of the technology that's part of our daily lives.
 
 Have a listen and let us know your opinion!
+
+This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/ced5f98b/uk-post-office-horizon-scandal).
+
+Happy listening!
