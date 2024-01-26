@@ -3,6 +3,13 @@ import { useState } from 'preact/hooks'
 import { formatDate } from '@utils/common'
 import { Blog } from './utils/types'
 
+var now = new Date();
+var sixMonthsAgo = new Date(now).setMonth(now.getMonth() - 6);
+
+function isNew(blog: Blog) {
+    return new Date(blog.publishedDate) > sixMonthsAgo;
+}
+
 export function ClojureInBlogs({
   sortedBlogs,
   industries
@@ -54,7 +61,15 @@ export function ClojureInBlogs({
                     </h3>
                     <h5 className='font-extralight'>{blog.description}</h5>
                   </div>
-                  <img className='' alt='blog' src={blog.heroImage} />
+                  <div class="relative overflow-hidden">
+                      <img className='' alt='blog' src={blog.heroImage} />
+                      {
+                          isNew(blog) &&
+                          <div class="absolute top-[10%] left-[10%] bg-[#00ff42] px-16 transform -translate-x-1/2 -translate-y-1/2 -rotate-45 p-1">
+                              <span class="text-2xl text-black font-extrabold font-serif">NEW</span>
+                          </div>
+                      }
+                  </div>
                   <div className='font-thin'>
                     {formatDate(blog.publishedDate)}
                   </div>
