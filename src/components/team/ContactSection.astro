@@ -16,10 +16,12 @@ const { email, twitter, linkedin, github, fullName } = Astro.props
         </p>
 
         <div class="pt-10 flex flex-col gap-4">
-            <ContactItem>
-                <EmailIcon slot="icon" className="w-7"/>
-                <a href={"mailto:" + email}>{email}</a>
-            </ContactItem>
+            { email &&
+                <ContactItem>
+                    <EmailIcon slot="icon" className="w-7"/>
+                    <a href={"mailto:" + email}>{email}</a>
+                </ContactItem>
+            }
             {
                 twitter &&
                 <ContactItem>
