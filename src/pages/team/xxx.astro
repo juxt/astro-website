@@ -19,7 +19,7 @@ const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
-import Layout from '@layouts/Layout.astro'
+import TeamLayout from '@components/team/TeamLayout.astro'
 
 import SimpleSection from '@components/team/SimpleSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
@@ -29,83 +29,80 @@ import ResourceCollectionSection from '@components/team/ResourceCollectionSectio
 import ResourceItem from '@components/team/ResourceItem.astro'
 import ContactSection from '@components/team/ContactSection.astro'
 ---
-<Layout navbar title={fullName + " - " + jobTitle}>
-  <div class='bg-zinc-900 text-white text-xs overflow-x-hidden'>
-    <GreetingSection code={code} fullName={fullName} jobTitle={jobTitle}>
-      <p class="italic">
-        This is the &lt;GreetingSection&gt;. Anything below this is custom HTML you can add:
-      </p>
-  
-      <h2 class="py-5 text-3xl font-medium">Expert In</h2>
-      <ul class="list-disc list-inside text-lg font-medium">
-        <li>Java, Kotlin</li>
-        <li>Security</li>
-        <li>Platform Engineering</li>
-      </ul>
-    </GreetingSection>
-  
-    <SimpleSection>
-      <div>
-        <p class="italic pb-10">
-          This is a &lt;SimpleSection&gt;, it only sets the color for now but is useful as a placeholder and for you to work on copy.
-        </p>
-  
-        <h2 class="text-xl font-medium">Background</h2>
-        <p class="py-2 italic">
-          Add anything you like here
-        </p>
-      </div>
-  
-      <div class="col-start-2 row-start-1">
-        <h2 class="text-xl font-medium">Skills</h2>
-        <p class="py-2 italic">
-          Perhaps write up a few of your skills here.
-        </p>
-  
-      </div>
-  
-      <div class="col-start-2 row-start-2">
-        <h2 class="text-xl font-medium">Why {fullName}?</h2>
-        <ul class="list-disc list-inside">
-          <li>Item A</li>
-          <li>Item B</li>
-          <li>Item C</li>
-        </ul>
-      </div>
-    </SimpleSection>
-  
-    <QuoteSection author="Attribution Needed (perhaps put the author in here)">
-      This is the &lt;QuoteSection&gt;. Did you say something profound? Did someone say something nice about you? Why not add it here.
-    </QuoteSection>
-  
-    <LatestBlogsSection code={code}>
-      <p class="italic pt-5">
-        This is a component called &lt;LatestBlogsSection&gt;.
-        You can use it to list your latest blogs.
-        Given your code as a property it will automatically fetch your latest blogs!
-      </p>
-    </LatestBlogsSection>
-  
-    <ResourceCollectionSection title="Notable Works" subtitle="From the web">
-      <p class="italic py-5">
-        This is a component called &lt;ResourceCollectionSection&gt;.
-        It's a useful placeholder for various links.
-        </br>
-        Use the &lt;ResourceCollectionSection&gt; component to render items so they look like:
-      </p>
-      <ResourceItem
-        name="foo"
-        description="my foo package I wrote"
-        link="https://github.com/juxt/foo"
-      />
-      <ResourceItem
-        name="bar"
-        description="my bar blog I wrote"
-        link="/blog/foo"
-      />
-    </ResourceCollectionSection>
-  
-    <ContactSection {...myData.frontmatter} />
+<TeamLayout title={fullName + " - " + jobTitle}>
+  <GreetingSection code={code} fullName={fullName} jobTitle={jobTitle}>
+    <p class="italic">
+      This is the &lt;GreetingSection&gt;. Anything below this is custom HTML you can add:
+    </p>
 
-  </div>
-</Layout>
+    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-lg font-medium">
+      <li>Java, Kotlin</li>
+      <li>Security</li>
+      <li>Platform Engineering</li>
+    </ul>
+  </GreetingSection>
+
+  <SimpleSection>
+    <div>
+      <p class="italic pb-10">
+        This is a &lt;SimpleSection&gt;, it only sets the color for now but is useful as a placeholder and for you to work on copy.
+      </p>
+
+      <h2 class="text-xl font-medium">Background</h2>
+      <p class="py-2 italic">
+        Add anything you like here
+      </p>
+    </div>
+
+    <div class="col-start-2 row-start-1">
+      <h2 class="text-xl font-medium">Skills</h2>
+      <p class="py-2 italic">
+        Perhaps write up a few of your skills here.
+      </p>
+
+    </div>
+
+    <div class="col-start-2 row-start-2">
+      <h2 class="text-xl font-medium">Why {fullName}?</h2>
+      <ul class="list-disc list-inside">
+        <li>Item A</li>
+        <li>Item B</li>
+        <li>Item C</li>
+      </ul>
+    </div>
+  </SimpleSection>
+
+  <QuoteSection author="Attribution Needed (perhaps put the author in here)">
+    This is the &lt;QuoteSection&gt;. Did you say something profound? Did someone say something nice about you? Why not add it here.
+  </QuoteSection>
+
+  <LatestBlogsSection code={code}>
+    <p class="italic pt-5">
+      This is a component called &lt;LatestBlogsSection&gt;.
+      You can use it to list your latest blogs.
+      Given your code as a property it will automatically fetch your latest blogs!
+    </p>
+  </LatestBlogsSection>
+
+  <ResourceCollectionSection title="Notable Works" subtitle="From the web">
+    <p class="italic py-5">
+      This is a component called &lt;ResourceCollectionSection&gt;.
+      It's a useful placeholder for various links.
+      </br>
+      Use the &lt;ResourceCollectionSection&gt; component to render items so they look like:
+    </p>
+    <ResourceItem
+      name="foo"
+      description="my foo package I wrote"
+      link="https://github.com/juxt/foo"
+    />
+    <ResourceItem
+      name="bar"
+      description="my bar blog I wrote"
+      link="/blog/foo"
+    />
+  </ResourceCollectionSection>
+
+  <ContactSection {...myData.frontmatter} />
+</TeamLayout>
