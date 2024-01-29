@@ -23,7 +23,7 @@ const { code, jobTitle, fullName } = myData.frontmatter
 import { getImage, Image } from 'astro:assets'
 import TeamLayout from '@components/team/TeamLayout.astro'
 
-import SimpleSection from '@components/team/SimpleSection.astro'
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
@@ -45,10 +45,12 @@ import ContactSection from '@components/team/ContactSection.astro'
     </ul>
   </GreetingSection>
 
-  <SimpleSection>
+  <TwoColumnSection>
     <div>
       <p class="italic pb-10">
-        This is a &lt;SimpleSection&gt;, it only sets the color for now but is useful as a placeholder and for you to work on copy.
+        This is a &lt;TwoColumnSection&gt;, it's useful as a placeholder and for you to work on copy.
+        <br/>
+        It creates a 2 column grid, just add divs and they'll appears as columns.
       </p>
 
       <h2 class="text-xl font-medium">Background</h2>
@@ -73,7 +75,7 @@ import ContactSection from '@components/team/ContactSection.astro'
         <li>Item C</li>
       </ul>
     </div>
-  </SimpleSection>
+  </TwoColumnSection>
 
   <QuoteSection author="Attribution Needed (perhaps put the author in here)">
     This is the &lt;QuoteSection&gt;. Did you say something profound? Did someone say something nice about you? Why not add it here.
