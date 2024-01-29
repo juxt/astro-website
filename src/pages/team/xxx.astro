@@ -19,20 +19,15 @@ const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
-import { MarkdownInstance, ImageMetadata } from 'astro'
 import Layout from '@layouts/Layout.astro'
-import SocialMediaPost from '@components/team/SocialMediaPost.astro'
-import Section from '@components/team/Section.astro'
+
 import SimpleSection from '@components/team/SimpleSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
-import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
-import { Person } from '@utils/types'
-import DraftBanner from '@components/DraftBanner'
-import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
+import ContactSection from '@components/team/ContactSection.astro'
 ---
 <Layout navbar title={fullName + " - " + jobTitle}>
   <div class='bg-zinc-900 text-white text-xs overflow-x-hidden'>
