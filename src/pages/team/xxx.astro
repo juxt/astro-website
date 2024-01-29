@@ -47,33 +47,40 @@ import ContactSection from '@components/team/ContactSection.astro'
 
   <TwoColumnSection>
     <div>
-      <p class="italic pb-10">
+      <h2 class="text-xl font-medium">Section 1</h2>
+      <p class="italic">
         This is a &lt;TwoColumnSection&gt;, it's useful as a placeholder and for you to work on copy.
-        <br/>
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-medium">Section 2</h2>
+      <p class="italic">
         It creates a 2 column grid, just add divs and they'll appears as columns.
       </p>
+    </div>
 
-      <h2 class="text-xl font-medium">Background</h2>
-      <p class="py-2 italic">
-        Add anything you like here
+    <div>
+      <h2 class="text-xl font-medium">Section 3</h2>
+      <p class="italic">
+        Nice and simple
+      </p>
+    </div>
+  </TwoColumnSection>
+
+  <TwoColumnSection>
+    <div class="bg-black p-5">
+      <h2 class="text-xl font-medium">Section 1</h2>
+      <p class="italic">
+        If you want to get more fancy, try out <a href="https://tailwindcss.com/docs/grid-column">col-start</a> and <a href="https://tailwindcss.com/docs/grid-row">row-start</a>
       </p>
     </div>
 
-    <div class="col-start-2 row-start-1">
-      <h2 class="text-xl font-medium">Skills</h2>
-      <p class="py-2 italic">
-        Perhaps write up a few of your skills here.
+    <div class="bg-black p-5 row-start-2 col-start-2">
+      <h2 class="text-xl font-medium">Section 2</h2>
+      <p class="italic">
+        See how I'm down here now?
       </p>
-
-    </div>
-
-    <div class="col-start-2 row-start-2">
-      <h2 class="text-xl font-medium">Why {fullName}?</h2>
-      <ul class="list-disc list-inside">
-        <li>Item A</li>
-        <li>Item B</li>
-        <li>Item C</li>
-      </ul>
     </div>
   </TwoColumnSection>
 
