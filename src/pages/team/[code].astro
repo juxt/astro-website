@@ -59,44 +59,44 @@ const {
 ---
 
 <Layout navbar title={fullName + " - " + jobTitle}>
-    <DraftBanner draft={expertDraft} pageName='profile' />
-    <div class='bg-zinc-900 text-white text-xs overflow-x-hidden'>
+  <DraftBanner draft={expertDraft} pageName='profile' />
+  <div class='bg-zinc-900 text-white text-xs overflow-x-hidden'>
 
-      <GreetingSection fullName={fullName} code={code} jobTitle={jobTitle}>
-	<h2 class="py-5 text-3xl font-medium">Expert In</h2>
-	<ul class="list-disc list-inside text-lg font-medium">
-	  <li>Web Standards</li>
-	  <li>API Security</li>
-	  <li>Databases</li>
-	  <li>Clojure Development</li>
+    <GreetingSection fullName={fullName} code={code} jobTitle={jobTitle}>
+      <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+      <ul class="list-disc list-inside text-lg font-medium">
+	<li>Web Standards</li>
+	<li>API Security</li>
+	<li>Databases</li>
+	<li>Clojure Development</li>
+      </ul>
+    </GreetingSection>
+
+    <SimpleSection>
+      <div>
+        <h2 class="text-xl font-medium">Notable Accomplishments:</h2>
+      </div>
+
+      <div class="col-start-2 row-start-2">
+	<h2 class="text-xl font-medium">Why {name}?</h2>
+	<ul class="list-disc list-inside">
 	</ul>
-      </GreetingSection>
+      </div>
+    </SimpleSection>
 
-      <SimpleSection>
-          <div>
-            <h2 class="text-xl font-medium">Notable Accomplishments:</h2>
-          </div>
+    <QuoteSection author="Albert Einstein">
+      God does not play dice with the Universe
+    </QuoteSection>
 
-          <div class="col-start-2 row-start-2">
-	    <h2 class="text-xl font-medium">Why {name}?</h2>
-	    <ul class="list-disc list-inside">
-	    </ul>
-	  </div>
-      </SimpleSection>
+    <LatestBlogsSection code={code}>
+    </LatestBlogsSection>
 
-      <QuoteSection author="Albert Einstein">
-	God does not play dice with the Universe
-      </QuoteSection>
+    <ResourceCollectionSection title="Notable Works" subtitle="From the web">
+      <ResourceItem name="reap" description="A regex and parsing Clojure library" link="https://github.com/juxt/reap"/>
+    </ResourceCollectionSection>
 
-      <LatestBlogsSection code={code}>
-      </LatestBlogsSection>
+    <ContactSection {...Astro.props}>
+    </ContactSection>
 
-      <ResourceCollectionSection title="Notable Works" subtitle="From the web">
-	<ResourceItem name="reap" description="A regex and parsing Clojure library" link="https://github.com/juxt/reap"/>
-      </ResourceCollectionSection>
-
-      <ContactSection {...Astro.props}>
-      </ContactSection>
-
-    </div>
+  </div>
 </Layout>
