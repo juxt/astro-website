@@ -1,0 +1,57 @@
+---
+import { getImage, Image } from 'astro:assets'
+import Section from '@components/team/Section.astro'
+import ContactItem from '@components/team/ContactItem.astro'
+import ContactUsProfile from '@components/ContactUsProfile'
+import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
+
+const { email, twitter, linkedin, github, fullName } = Astro.props
+---
+<Section className="py-10 flex flex-col md:flex-row gap-10">
+    <div class="basis-1 grow">
+        <h3 class="text-xl font-medium">Get in Touch</h3>
+        <p>
+            We are very approachable and would love to speak to you.
+            Feel free to call, email, tweet or send us a message.
+        </p>
+
+        <div class="pt-10 flex flex-col gap-4">
+            <ContactItem>
+                <EmailIcon slot="icon" className="w-7"/>
+                <a href={"mailto:" + email}>{email}</a>
+            </ContactItem>
+            {
+                twitter &&
+                <ContactItem>
+                    <TwitterIcon slot="icon" className="w-7"/>
+                    <a href={"https://twitter.com/" + twitter} target="_blank">@{twitter}</a>
+                </ContactItem>
+            }
+            {
+                linkedin &&
+                <ContactItem>
+                    <LinkedInIcon slot="icon" className="w-6"/>
+                    <a href={"https://linkedin.com/in/" + linkedin} target="_blank">{linkedin}</a>
+                </ContactItem>
+            }
+            {
+                github &&
+                <ContactItem>
+                    <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
+                    <a href={"https://github.com/" + github} target="_blank">{github}</a>
+                </ContactItem>
+            }
+        </div>
+    </div>
+    { /* Mobile: Horizontal line, otherwise vertical */ }
+    <div class="border-t md:border-r border-slate-600"></div>
+    <div class="basis-1 grow">
+        <h3 class="text-xl font-medium">Send a Message</h3>
+        <p>Your message is important to us. We aim to get back to you within 48 hours.</p>
+        <div class="pt-5">
+            <ContactUsProfile
+                subject={"New contact submission from " + fullName + "'s profile page"}
+            />
+        </div>
+    </div>
+</Section>

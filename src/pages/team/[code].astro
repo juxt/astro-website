@@ -4,13 +4,14 @@ import { MarkdownInstance, ImageMetadata } from 'astro'
 import Layout from '@layouts/Layout.astro'
 import SocialMediaPost from '@components/team/SocialMediaPost.astro'
 import Section from '@components/team/Section.astro'
-import ContactItem from '@components/team/ContactItem.astro'
 import SimpleSection from '@components/team/SimpleSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
 import { Person } from '@utils/types'
-import ContactUsProfile from '@components/ContactUsProfile'
 import DraftBanner from '@components/DraftBanner'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
@@ -25,10 +26,6 @@ export async function getStaticPaths() {
   const isDev = true;
 
   return people
-    .filter(
-      ({ frontmatter: { expertDraft, expert } }) =>
-        (isDev || !expertDraft) && expert
-    )
     .map(({ frontmatter, Content }) => ({
       params: { code: frontmatter.code },
       props: { ...frontmatter, Content: Content }
@@ -51,13 +48,11 @@ const {
   twitter,
   linkedin,
   github,
+  email,
+  fullName,
 
   Content
 } = Astro.props
-
-// Derived props
-const fullName = name + ' ' + lastName;
-const email = code + '@juxt.pro';
 
 // TODO: Error on required properties?
 // - fullName, jobTitle, expertise
@@ -78,7 +73,7 @@ const email = code + '@juxt.pro';
       </GreetingSection>
 
       <SimpleSection>
-          <div class="">
+          <div>
             <h2 class="text-xl font-medium">Notable Accomplishments:</h2>
           </div>
 
@@ -96,84 +91,12 @@ const email = code + '@juxt.pro';
       <LatestBlogsSection code={code}>
       </LatestBlogsSection>
 
-        {
-            previousWorks &&
-            <Section bgClass="bg-[#b76330]" className="py-20">
-                <div class="flex flex-col items-center">
-                    <h3 class="text-xl font-medium">Previous Works</h3>
-                    <p class="pb-10">
-                        [downloadable assets that experts can offer on their pages to provide value to visitors and showcase their expertise.]
-                    </p>
-                </div>
+      <ResourceCollectionSection title="Notable Works" subtitle="From the web">
+	<ResourceItem name="reap" description="A regex and parsing Clojure library" link="https://github.com/juxt/reap"/>
+      </ResourceCollectionSection>
 
-                {
-                    previousWorks.map(item => (
-                        <>
-                            <div class="flex items-center">
-                                <div class="grow flex flex-col space-y-4">
-                                    <h4 class="text-lg col-span-2">{item.name}</h4>
-                                    <p>{item.description}</p>
-                                </div>
-                                <a href={item.link} target="_blank"
-                                   class="rounded-full bg-zinc-800 w-20 h-max px-3 py-3 flex justify-center">
-                                    View
-                                </a>
-                            </div>
-                            <hr class="border-black my-5 col-span-2" />
-                        </>
-                    ))
-                }
-            </Section>
-        }
-
-        <Section className="py-10 flex flex-col md:flex-row gap-10">
-            <div class="basis-1 grow">
-                <h3 class="text-xl font-medium">Get in Touch</h3>
-                <p>
-                    We are very approachable and would love to speak to you.
-                    Feel free to call, email, tweet or send us a message.
-                </p>
-
-                <div class="pt-10 flex flex-col gap-4">
-                    <ContactItem>
-                        <EmailIcon slot="icon" className="w-7"/>
-                        <a href={"mailto:" + email}>{email}</a>
-                    </ContactItem>
-                    {
-                        twitter &&
-                        <ContactItem>
-                            <TwitterIcon slot="icon" className="w-7"/>
-                            <a href={"https://twitter.com/" + twitter} target="_blank">@{twitter}</a>
-                        </ContactItem>
-                    }
-                    {
-                        linkedin &&
-                        <ContactItem>
-                            <LinkedInIcon slot="icon" className="w-6"/>
-                            <a href={"https://linkedin.com/in/" + linkedin} target="_blank">{fullName}</a>
-                        </ContactItem>
-                    }
-                    {
-                        github &&
-                        <ContactItem>
-                            <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
-                            <a href={"https://github.com/" + github} target="_blank">{github}</a>
-                        </ContactItem>
-                    }
-                </div>
-            </div>
-            { /* Mobile: Horizontal line, otherwise vertical */ }
-            <div class="border-t md:border-r border-slate-600"></div>
-            <div class="basis-1 grow">
-                <h3 class="text-xl font-medium">Send a Message</h3>
-                <p>Your message is important to us. We aim to get back to you within 48 hours.</p>
-                <div class="pt-5">
-                    <ContactUsProfile
-                        subject={"New contact submission from " + fullName + "'s profile page"}
-                    />
-                </div>
-            </div>
-        </Section>
+      <ContactSection {...Astro.props}>
+      </ContactSection>
 
     </div>
 </Layout>
