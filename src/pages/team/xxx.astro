@@ -1,5 +1,8 @@
 ---
-const myData =   {"frontmatter": {
+// 1. Replace with:
+// import * as myData from '../../data/people/mal.md'
+const myData =   {
+"frontmatter": {
   "code": "mal",
   "name": "Demo",
   "lastName": "Sparks",
@@ -11,6 +14,7 @@ const myData =   {"frontmatter": {
   "linkedin": "juxtpro"
 }}
 
+// 2. Here you extract the data needed for the page
 const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
