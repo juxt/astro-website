@@ -5,7 +5,8 @@ import ContactItem from '@components/team/ContactItem.astro'
 import ContactUsProfile from '@components/ContactUsProfile'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
-const { email, twitter, linkedin, github, fullName } = Astro.props
+var { email, twitter, linkedin, github, fullName } = Astro.props
+twitter = twitter?.replace(/^@/, '')
 ---
 <Section className="py-10 flex flex-col md:flex-row gap-10">
     <div class="basis-1 grow">
