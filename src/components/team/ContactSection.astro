@@ -5,7 +5,7 @@ import ContactItem from '@components/team/ContactItem.astro'
 import ContactUsProfile from '@components/ContactUsProfile'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
-var { email, twitter, linkedin, github, fullName } = Astro.props
+var { email, twitter, linkedin, github, hackernews, fullName } = Astro.props
 twitter = twitter?.replace(/^@/, '')
 ---
 <Section className="py-10 flex flex-col md:flex-row gap-10">
@@ -42,6 +42,13 @@ twitter = twitter?.replace(/^@/, '')
                 <ContactItem>
                     <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
                     <a href={"https://github.com/" + github} target="_blank">{github}</a>
+                </ContactItem>
+            }
+            {
+                hackernews &&
+                <ContactItem>
+                    <EmailIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
+                    <a href={"https://news.ycombinator.com/user?id=" + hackernews} target="_blank">{hackernews}</a>
                 </ContactItem>
             }
         </div>

@@ -1,8 +1,8 @@
 ---
 code: 'mal'
 name: 'Malcolm'
-fullName: 'Malcolm Sparks'
 lastName: 'Sparks'
+fullName: 'Malcolm Sparks'
 email: 'mal@juxt.pro'
 jobTitle: 'CTO'
 image: 'mal.jpg'
