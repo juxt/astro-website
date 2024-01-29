@@ -1,0 +1,21 @@
+---
+draft: true
+author: 'mal'
+title: 'Connecting babashka to a socket REPL'
+description: 'Musings about a frustrating situation'
+category: 'site'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '01 Feb 2023'
+heroImage: 'site-safari-000001.png'
+tags:
+  - 'clojure'
+  - 'site'
+---
+
+Finn Voelkel (@fin) mentioned to me last week that he thought the on-ramp to [Site 2.0](https://github.com/juxt-site/site) was a little steep, and I agreed.
+There are quite a few steps involved in getting a Site instance running on a new machine.
+Although I really like the `mkcert` tool that Alex (@alx) suggested, it does add more steps, including the need to installing and configuring nginx as a reverse proxy.
+
+Meanwhile, I'd been in conversations with Jack Tolley (@jck) about how to ease Site's bootstrapping procedure, up to the point that a user can access and authenticate with Site using a browser.
+Site supports all manners of authentication, (classic 'basic http' auth, form-based auth with cookies through to OpenID Connect).
+But whichever authentication scheme the user might choose, there will be some things to configure out-of-the-box.
