@@ -1,5 +1,5 @@
 ---
-author: 'jon'
+author: 'Jon'
 title: 'Clojure in Collaboration: Whimsical'
 description: "Bridging Remote Work Challenges with Whimsical's Clojure-Based Tools"
 category: 'clojure-in'
@@ -10,7 +10,7 @@ clojureIn:
   {
     season: 'two',
     industry: 'sass',
-    quote: '"I''d say that Clojure really does describe not just the code that we''re writing, but also operationally."'
+    quote: '"I'd say that Clojure really does describe not just the code that we're writing, but also operationally."'
   }
 ---
 
@@ -24,7 +24,7 @@ We chatted with engineers [Jānis Peisenieks](https://www.linkedin.com/in/janisp
 
 ## Whimsical
 
-**Jon: Ok so tell us, what is Whimsical?**
+**Jon: OK so tell us, what is Whimsical?**
 
 **Jānis:** Whimsical is a Visual collaboration tool. The initial idea came from one of our founders ([Kaspars](https://www.linkedin.com/in/kasparsd/)) who felt that conveying ideas, specifically how things should flow, was too hard, from a usability perspective. There were a lot of tools out there like Visio etc. but they tend to feel clunky and you have to do lots of re-formatting.
 
@@ -34,17 +34,17 @@ Our first tools were Mind maps and Stickies, then we built our own 2D Program ma
 
 We're continually interested in helping people to communicate in a better way.
 
-**Nate:** There are times when you want to share ideas and get consensus and work on a board. But on the flip side; working in isolation can be really valuable too, to explore ideas and to think things through.
+**Nate:** There are times when you want to share ideas and get consensus and work on a board. But on the flip side; working in isolation can be valuable too, to explore ideas and to think things through.
 
-That's something we've especially had to think about with our docs product. We want to balance the collaboration and the communication when you're working on something together, but also asynchronously, what does it look like to share your ideas, get some feedback and then to iterate from there?
+That's something we've especially had to think about with our docs product. We want to balance collaboration and communication when you're working on something together, but also asynchronously, what does it look like to share your ideas, get some feedback and then iterate from there?
 
 **Oliver: Do you dogfood your own tools?**
 
 **Jānis:** Whimsical runs on Whimsical. A lot of the tools we built because we needed them and we wanted to have them tailored to how we like to work.
 
-**Jon: You're now five years in and there are a lot of companies using your products. Obviously your intuitions about how such a tool should work have proven correct so far.**
+**Jon: You're now five years in and there are a lot of companies using your products. Your intuitions about how such a tool should work have proven correct so far.**
 
-**Jānis:** Early on, many people said that there was already a hundred different whiteboard and diagramming tools. I always replied that there's space for _a hundred and one_.
+**Jānis:** Early on, many people said that there were already a hundred different whiteboard and diagramming tools. I always replied that there's space for _a hundred and one_.
 
 We're not trying to be quintessential disruptors, we just have ideas of how to make collaboration between remote teams work better.
 
@@ -52,19 +52,19 @@ We've always been a globally distributed team. We've felt the pain of trying to 
 
 **Jon: Clearly you've got traction and the network-effect.**
 
-**Jānis:** At the start we posted Whimsical Flowchart on Product hunt. There were a couple of product managers from a well known Silicon Valley company who found it and really liked it. Then it spread like wildfire within those companies. Those early users went to new companies and took it with them.
+**Jānis:** At the start we posted a Whimsical Flowchart on Product Hunt. There were a couple of product managers from a well-known Silicon Valley company who found it and liked it. Then it spread like wildfire within those companies. Those early users went to new companies and took it with them.
 
 ## Set Up
 
-**Jon: What is your team set up?**
+**Jon: What is your team set-up?**
 
-**Jānis:** Whimsical is currently around 45 people, with maybe 18 of those being engineers. In terms of location we started out in Latvia, then Austria, Germany, Denmark and the UK, and now we're in the US, with some folks on the East Coast, West Coast, and central US. We also have 3 people in New Zealand.
+**Jānis:** Whimsical is currently around 45 people, with maybe 18 of those being engineers. In terms of location, we started in Latvia, then Austria, Germany, Denmark and the UK, and now we're in the US, with some folks on the East Coast, West Coast, and central US. We also have 3 people in New Zealand.
 
 **Nate:** We've got almost all the time zones.
 
 **Jon: So, what's the overall tech estate look like?**
 
-**Jānis:** The code-base is about one third back-end and two thirds front-end. For every back-end engineer we have two front end engineers.
+**Jānis:** The code base is about one-third back-end and two-thirds front-end. For every back-end engineer, we have two front-end engineers.
 
 **Jānis:** Cloud-wise, we run on AWS and we keep things lean and mean. We maintain everything ourselves, everything in containers.
 
@@ -82,19 +82,19 @@ We've got WebAssembly for specific problems. Since we're a canvas app we're usin
 
 Clojure and the associated data structures are an important part of our app. We're using [AVL](https://github.com/clojure/data.avl) maps, not that that's specific to Clojure, but there's a really great library for it. We're using [Hiccup](https://github.com/weavejester/hiccup) everywhere.
 
-I'd say that Clojure really does describe not just the code that we're writing, but also operationally, a lot of the things that we do are really heavily influenced by it.
+I'd say that Clojure really does describe not just the code that we're writing, but also operationally, a lot of the things that we do are heavily influenced by it.
 
-**Jon: Because you're building quite an UI intensive app, it'd be interesting to get your take on ClojureScript.**
+**Jon: Because you're building quite a UI-intensive app, it'd be interesting to get your take on ClojureScript.**
 
 **Nate:** I think ClojureScript is in a really interesting space; I've worked with it for four years now and my experience with it has been awesome. It's super nice to have Clojure on the front-end.
 
-Where the language needs to catch up is with the innovation happening in JavaScript. There are some challenging things such as loading JavaScript and managing JavaScript in the browser, managing assets, authoring CSS and building components and things like that, where a lot of the experimentation and the innovation is happening in JavaScript. I think  we can learn and adopt what the JavaScript community is doing for ClojureScript.
+Where the language needs to catch up is with the innovation happening in JavaScript. There are some challenging things such as loading JavaScript and managing JavaScript in the browser, managing assets, authoring CSS and building components and things like that, where a lot of the experimentation and innovation is happening in JavaScript. I think we can learn and adopt what the JavaScript community is doing for ClojureScript.
 
-**Oliver: There's both advantages and disadvantages to evolving more slowly than JavaScript. If it were easier to learn from and innovate with JavaScript I wonder how it would affect ClojureScript and it's ecosystem.**
+**Oliver: There are both advantages and disadvantages to evolving more slowly than JavaScript. If it were easier to learn from and innovate with JavaScript I wonder how it would affect ClojureScript and its ecosystem.**
 
 **Nate:** Yeah, especially once you start thinking about the difference between where [ES modules](https://nodejs.org/api/esm.html) are static and whenever we load code and in ClojureScript right now it's evaluating, I mean JavaScript does the same thing but there are differences.
 
-I would have said that a while back Clojure was kind of ahead and JavaScript was aspiring but it's since then moved onto doing its own thing. I don't think ClojureScript should be emulating everything happening in JavaScript, but we can definitely learn by taking things that have been experimented within JavaScript.
+I would have said that a while back Clojure was kind of ahead and JavaScript was aspiring but it's since then moved on to doing its own thing. I don't think ClojureScript should be emulating everything happening in JavaScript, but we can definitely learn by taking things that have been experimented with within JavaScript.
 
 **Jon: Do you have any shared front-end and back-end code?**
 
@@ -102,33 +102,33 @@ I would have said that a while back Clojure was kind of ahead and JavaScript was
 
 We don't do a lot of shared rendering with React server components but we have shared rendering code for backend thumbnail generation, for file previews.
 
-**Jānis:** Nearly all of Whimsical is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), including the front-end and back-end infrastructure. We did this to facilitate this reuse of code between front end and back end.
+**Jānis:** Nearly all of Whimsical is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), including the front-end and back-end infrastructure. We did this to facilitate this reuse of code between the front end and back end.
 
 **Jon: What's your take on micro-services?**
 
-**Jānis:** We only split out something as a specific micro-service where it makes sense, be for scaling characteristics or operational characteristics. Otherwise, we stick to the monolith. In terms of deployments, we deploy between five and 50 times a day.
+**Jānis:** We only split out something as a specific micro-service where it makes sense, be it for scaling characteristics or operational characteristics. Otherwise, we stick to the monolith. In terms of deployments, we deploy between five and 50 times a day.
 
-**Jon: Do you make use of PRs or are you more trunk based?**
+**Jon: Do you make use of PRs or are you more trunk-based?**
 
-**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up a service for when you open up a PR, there's a static link that you can share with anybody to deployed version, having a full copy of our environment. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
+**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up a service for when you open up a PR, there's a static link that you can share with anybody to deployed the version, having a full copy of our environment. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
 
 **Jon: So you said you've got about 40 developers, and presumably a lot of those are doing Clojure.**
 
 **Jānis:** About 45 employees total at Whimsical and out of those 17/18 are specifically engineers, two of us you could call managers so 15 in total.
 
-**Jon: And would they mostly all be touching Clojure? Have you trained people that don't know it; what's your story in terms of growing the team?**
+**Jon: And would they mostly all be touching Clojure? Have you trained people who don't know it; what's your story in terms of growing the team?**
 
-**Jānis:** In the early days we were looking for extremely capable people who were up for working with this esoteric language on a daily basis.
+**Jānis:** In the early days we were looking for extremely capable people who were up for working with this esoteric language daily.
 
-As time went on we started looking for Clojure developers specifically. Finding back-end Clojure developers isn't usually a problem, although I wouldn't say it's without challenge to get the Clojurists out there. But at the same time, hiring ClojureScript engineers is much more difficult. I feel like it's more a case of finding really great front-end engineers and then helping them to learn ClojureScript specifically.
+As time went on we started looking for Clojure developers specifically. Finding back-end Clojure developers isn't usually a problem, although I wouldn't say it's without a challenge to get the Clojurists out there. But at the same time, hiring ClojureScript engineers is much more difficult. I feel like it's more a case of finding great front-end engineers and then helping them to learn ClojureScript specifically.
 
 **Jon: Do you see a natural split in terms of where people tend to orient themselves, back-end vs front-end?**
 
-**Jānis:** There is always a spectrum. Everybody has a little bit of back-end in them and a little bit of front-end in them. The only question is how comfortable they are with it all and where do they want to make an impact.
+**Jānis:** There is always a spectrum. Everybody has a little bit of back-end in them and a little bit of front-end in them. The only question is how comfortable they are with it all and where they want to make an impact.
 
-This is one of the main benefits of having the same language on the front-end and back-end, and it helps there is so much shared code. Of course there are differences, i.e. CSS is its own beast. But as far as logic is concerned, it's just Clojure.
+This is one of the main benefits of having the same language on the front-end and back-end, and it helps because there is so much shared code. Of course, there are differences, i.e. CSS is its own beast. But as far as logic is concerned, it's just Clojure.
 
-**Jon: So yeah, that's really great to get away from the dichotomy of having two separate teams. If it's the same language, then you have that cross-pollination.**
+**Jon: So yeah, that's great to get away from the dichotomy of having two separate teams. If it's the same language, then you have that cross-pollination.**
 
 **Nate:** Yeah, it's great that technology isn't the barrier.
 
@@ -140,36 +140,36 @@ The hard part is usually the domain or something very specific, such as CSS or i
 
 **Jon: What IDEs do you use?**
 
-**Nate:** We have a peaceful coexistence of an Emacs contingent and an IntelliJ contingent, with one or two using Visual Studio Code. At my old job I was the only one using Emacs, it's pretty cool to be on a team with ten Emacs users.
+**Nate:** We have a peaceful coexistence of an Emacs contingent and an IntelliJ contingent, with one or two using Visual Studio Code. At my old job, I was the only one using Emacs, it's pretty cool to be on a team with ten Emacs users.
 
 **Jon: So taking a view of Clojure more holistically, what do you think the current state of Clojure is?**
 
 **Nate:** I think Clojure is a fantastic language to build UI in.
 
-I think it's going to be really interesting to see how ClojureScript as a hosted language continues to evolve over the next couple of years.
+I think it's going to be interesting to see how ClojureScript as a hosted language continues to evolve over the next couple of years.
 
-One of the things I'm looking forward to seeing is what new projects in Clojure are there that will give us alternatives to compiling. There are kind of these pillars that we just accept: compiling using Clojure the compiler; leaning on the Google Closure library. I'll be curious to see how projects continue to evolve away from this because it's just another option.
+One of the things I'm looking forward to seeing is what new projects in Clojure are there that will give us alternatives to compiling. There are kind of these pillars that we just accept: compiling using Clojure as the compiler; and leaning on the Google Closure library. I'll be curious to see how projects continue to evolve away from this because it's just another option.
 
-**Jānis:** Clojure is very well suited for a company like Whimsical. We want to have a really good place to work, a great product, and we want to be sustainable for years to come.
+**Jānis:** Clojure is very well suited for a company like Whimsical. We want to have a really good place to work and a great product, and we want to be sustainable for years to come.
 
 Clojure is stable right now and although it has a slower release cadence and less flashy new features being released regularly, this stability means we don't need to worry about whether Clojure is going to disappear tomorrow.
 
-Sometimes you see library authors stating that a library is finished, _'this is done, it does what it needs to do, it's done'_. And that's extremely cool.
+Sometimes you see library authors stating that a library is finished, _' this is done, it does what it needs to do, it's done_. And that's extremely cool.
 
-On the other hand, we have see instances of Clojure projects lacking people to maintain them. For a while we were depending on a package that had a known vulnerability due to one of its dependencies.
+On the other hand, we have seen instances of Clojure projects lacking people to maintain them. For a while, we were dependent on a package that had a known vulnerability due to one of its dependencies.
 
 Seeing what [Clojurists Together](https://www.clojuriststogether.org/) have been doing has been awesome. We have a couple of folks from Whimsical working with Clojurists Together and the impact that they've had on the ecosystem cannot be understated. They've helped make sure that the areas needing maintenance have had the financial backing to be maintained.
 
-**Nate:** Yeah, they pushed for adding custom formatters to Firefox, working with Mozilla and really pursued that which was so awesome. That community is really going a great job of pushing the language forward and finding key pain points that need work.
+**Nate:** Yeah, they pushed for adding custom formatters to Firefox, working with Mozilla and pursued that which was so awesome. That community is doing a great job of pushing the language forward and finding key pain points that need work.
 
 **Jānis:** Things always can be better. But I think Clojure is in a pretty good place to be right now.
 
-**Jon: Is there anything else you want to give a shout out to in terms of libraries or tooling or anything really in the Clojure Sphere?**
+**Jon: Is there anything else you want to shout out to in terms of libraries or tooling or anything really in the Clojure Sphere?**
 
-**Jānis:** I want to shout out [Thomas Heller](https://github.com/thheller), shadow-cljs has been really good for us. And [Maria Geller](https://www.linkedin.com/in/mariageller/) an engineer at Whimsical, because when she joined she was a member of the board at Clojurists Together. One of the first conversations that she had with me, was around sponsoring Clojurists Together. I had a conversation with our CEO and it was that simple. It's nice to give back to a community and tooling that we're reaping a lot of benefit.
+**Jānis:** I want to shout out [Thomas Heller](https://github.com/thheller), shadow-cljs has been really good for us. And [Maria Geller](https://www.linkedin.com/in/mariageller/) an engineer at Whimsical, because when she joined she was a member of the board at Clojurists Together. One of the first conversations that she had with me, was around sponsoring Clojurists Together. I had a conversation with our CEO and it was that simple. It's nice to give back to a community and tooling that we're reaping a lot of benefits.
 
 **Jon: I can see that you're a map member, so one of the highest ones which is super awesome. You're really contributing back to the community, which is great.**
 
-**Jānis:** Thank you for putting this together and thank you for the series. It was really a lot of fun reading back on the previous episodes that you folks have done, seeing well known and some lesser known names. It's been great.
+**Jānis:** Thank you for putting this together and thank you for the series. It was really a lot of fun reading back on the previous episodes that you folks have done and seeing well-known and some lesser-known names. It's been great.
 
-**Jon: It's been great to chat to you. It's a really cool, awesome project. You are exactly what a small/medium sized Clojure team should be doing, punching above it's weight and delivering lots of cool stuff.**
+**Jon: It's been great to chat with you. It's a really cool, awesome project. You are exactly what a small/medium-sized Clojure team should be doing, punching above its weight and delivering lots of cool stuff.**
