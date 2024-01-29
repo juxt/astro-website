@@ -1,6 +1,5 @@
 ---
 import { getImage, Image } from 'astro:assets'
-import { parseBlogs } from '@utils/common'
 import { MarkdownInstance, ImageMetadata } from 'astro'
 import Layout from '@layouts/Layout.astro'
 import SocialMediaPost from '@components/team/SocialMediaPost.astro'
@@ -9,8 +8,8 @@ import ContactItem from '@components/team/ContactItem.astro'
 import SimpleSection from '@components/team/SimpleSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import { Person } from '@utils/types'
-import { BlogCard } from '@components/BlogCard'
 import ContactUsProfile from '@components/ContactUsProfile'
 import DraftBanner from '@components/DraftBanner'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
@@ -60,29 +59,6 @@ const {
 const fullName = name + ' ' + lastName;
 const email = code + '@juxt.pro';
 
-// Blog posts
-// TODO: Make nicer
-const authorImageImport = {
-  heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
-  authorImageImport: (authorImage) => import(`../../assets/people/${authorImage}.jpg`)
-}
-const unfilteredBlogs = await parseBlogs({
-  rawBlogs: await Astro.glob<MarkdownInstance<Blog>>('/src/pages/blog/{*.mdx,*.md}'),
-  rawPeople: await Astro.glob<MarkdownInstance<Person>>('/src/data/people/{*.mdx,*.md}'),
-  isDev: isDev,
-  getImage,
-  ...authorImageImport
-})
-const filteredBlogs = unfilteredBlogs
-    .filter(({ draft, author }) => (isDev || !draft) && (author == code));
-const numCards = 4;
-
-// Sort by publishedDate
-// NOTE: There's a potential bug here with dates being in different formats
-//       e.g. Kpow has the date: 29 Mar 2023, but most other posts use ISO format 2023-03-29
-const blogs = filteredBlogs
-    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
-
 // TODO: Error on required properties?
 // - fullName, jobTitle, expertise
 ---
@@ -117,22 +93,8 @@ const blogs = filteredBlogs
 	God does not play dice with the Universe
       </QuoteSection>
 
-      <Section className="py-20">
-        <div class="pb-10 flex flex-col items-center">
-                <h3 class="text-xl font-medium">Latest Blogs</h3>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
-                {
-                    /* TODO: Do this using css instead */
-                    blogs.slice(0, numCards).map((blog, idx) => (
-                        <div class={(idx == (numCards - 1) ? "xl:hidden" : "")}>
-                            <BlogCard hideAuthor=true {...blog} />
-                        </div>
-                    ))
-                }
-            </div>
-        </Section>
+      <LatestBlogsSection code={code}>
+      </LatestBlogsSection>
 
         {
             previousWorks &&
