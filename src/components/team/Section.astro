@@ -1,9 +1,11 @@
 ---
 const {bgClass, bgStyle, className} = Astro.props;
 ---
+{ /* If either a bgClass or bgStyle is specified then we wrap the container in a div with the bg styles */ }
 {
     (bgClass || bgStyle) &&
     <div class={bgClass} style={bgStyle}>
+        { /* NOTE: Recursive */ }
         <Astro.self className={className}>
             <slot/>
         </Astro.self>

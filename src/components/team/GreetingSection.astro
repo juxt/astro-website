@@ -6,9 +6,13 @@ const {fullName, jobTitle, code} = Astro.props;
 
 // Headshots
 const headshots = import.meta.glob<{ default: ImageMetadata }>('/src/assets/team/headshots/*.{jpeg,jpg,png,gif}');
-const headshotPath = `/src/assets/team/headshots/${code}.png`;
-if (!headshots[headshotPath])
-    throw new Error(`"${headshotPath}" does not exist in glob: "src/assets/team/headshots/*.{jpeg,jpg,png,gif}"`);
+function getHeadshot(path) {
+    if (!headshots[path]) {
+        throw new Error(`"${path}" does not exist in glob: "/src/assets/team/headshots/*.{jpeg,jpg,png,gif}"`);
+    }
+    return headshots[path]();
+}
+const headshot = getHeadshot(`/src/assets/team/headshots/${code}.png`);
 ---
 <Section className='pl-10 pr-0 py-10 grid grid-cols-2 gap-4'>
   <div class='py-20'>
@@ -28,7 +32,7 @@ if (!headshots[headshotPath])
       { /* Lazy */ }
       <div class="absolute bottom-0 left-0 bg-orange-400 rounded-full w-2/3 h-1/4"></div>
       <Image class="absolute bottom-0 w-[90%] h-[90%]"
-        src={headshots[headshotPath]()} alt="" />
+        src={headshot} alt="" />
     </div>
   </div>
 </Section>

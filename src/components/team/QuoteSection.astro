@@ -14,7 +14,10 @@ const quoteBg = await getImage({src: import("../../assets/team/quote-bg.png")})
       "<slot/>"
     </p>
   </blockquote>
-  <p class="pt-10 text-md font-medium text-center">
-    {author}
-  </p>
+  {
+    author &&
+    <p class="pt-10 text-md font-medium text-center">
+      {author}
+    </p>
+  }
 </Section>

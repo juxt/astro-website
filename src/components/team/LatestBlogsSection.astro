@@ -6,9 +6,7 @@ import { BlogCard } from '@components/BlogCard'
 
 const isDev = import.meta.env.DEV;
 
-const {
-  code
-  } = Astro.props
+const { code } = Astro.props
 
 const authorImageImport = {
   heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
@@ -42,12 +40,12 @@ const blogs = filteredBlogs
 
   <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
     {
-                    /* TODO: Do this using css instead */
-blogs.slice(0, numCards).map((blog, idx) => (
-  <div class={(idx == (numCards - 1) ? "xl:hidden" : "")}>
-    <BlogCard hideAuthor=true {...blog} />
-  </div>
-))
-   }
+      /* TODO: Do this using css instead */
+      blogs.slice(0, numCards).map((blog, idx) => (
+        <div class={(idx == (numCards - 1) ? "xl:hidden" : "")}>
+          <BlogCard hideAuthor=true {...blog} />
+        </div>
+      ))
+    }
   </div>
 </Section>
