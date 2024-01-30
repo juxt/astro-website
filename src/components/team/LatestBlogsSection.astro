@@ -33,7 +33,7 @@ const filteredBlogs = unfilteredBlogs
 const blogs = filteredBlogs
     .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
 ---
-<Section className="py-20">
+<Section className="py-20" {...Astro.props}>
   <div class="pb-10 flex flex-col items-center">
     <h3 class="text-xl font-medium">Latest Blogs</h3>
     <slot/>

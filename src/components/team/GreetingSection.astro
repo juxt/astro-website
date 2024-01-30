@@ -14,7 +14,7 @@ function getHeadshot(path) {
 }
 const headshot = getHeadshot(`/src/assets/team/headshots/${code}.png`);
 ---
-<Section className='pl-10 pr-0 py-10 grid grid-cols-2 gap-4'>
+<Section className='pl-10 pr-0 py-10 grid grid-cols-2 gap-4' {...Astro.props}>
   <div class='py-20'>
     <h1 class="text-5xl font-bold">Hello<span class="text-orange-400">.</span></h1>
     <h1 class="justify-end text-3xl font-bold"><span class="text-orange-400">—</span> I am {fullName}</h1>
