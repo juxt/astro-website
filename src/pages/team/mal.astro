@@ -15,6 +15,8 @@ import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import GitHubRepositoriesSection from '@components/team/GitHubRepositoriesSection.astro'
+import GitHubRepositoryItem from '@components/team/GitHubRepositoryItem.astro'
 import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 ---
@@ -76,9 +78,12 @@ Maolm has been building web APIs for customers for over a decade and is intimate
 
   <LatestBlogsSection {...myData.frontmatter} />
 
-  <ResourceCollectionSection title="Notable Works" subtitle="From the web">
-    <ResourceItem name="reap" description="A regex and parsing Clojure library" link="https://github.com/juxt/reap"/>
-  </ResourceCollectionSection>
+  <GitHubRepositoriesSection {...myData.frontmatter} >
+    <GitHubRepositoryItem owner ="juxt-site" name="site" />
+    <GitHubRepositoryItem owner="juxt" name="reap" />
+    <GitHubRepositoryItem owner="juxt" name="jinx"/>
+    <GitHubRepositoryItem owner="juxt" name="yada"/>
+  </GitHubRepositoriesSection>
 
   <ContactSection {...myData.frontmatter}>
   </ContactSection>
