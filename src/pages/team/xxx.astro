@@ -89,7 +89,7 @@ import ContactSection from '@components/team/ContactSection.astro'
     This is the &lt;QuoteSection&gt;. Did you say something profound? Did someone say something nice about you? Why not add it here.
   </QuoteSection>
 
-  <LatestBlogsSection code={code}>
+  <LatestBlogsSection {...myData.frontmatter}>
     <p class="italic pt-5">
       This is a component called &lt;LatestBlogsSection&gt;.
       You can use it to list your latest blogs.

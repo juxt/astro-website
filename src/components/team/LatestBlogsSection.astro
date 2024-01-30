@@ -6,7 +6,10 @@ import { BlogCard } from '@components/BlogCard'
 
 const isDev = import.meta.env.DEV;
 
-const { code } = Astro.props
+const { code, name, lastName } = Astro.props
+
+// NOTE: This is an implementation from /algolia/index.cljs (when setting the "author")
+const searchName = (name && lastName) ? `${name}%20${lastName}` : null;
 
 const authorImageImport = {
   heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
@@ -56,4 +59,11 @@ const blogs = filteredBlogs
       </div>
     }
   </div>
+
+  {
+    searchName &&
+    <div class="pt-10 flex flex-col items-center">
+        <a class="bg-juxt px-4 py-3 text-white hover:text-zinc-800 rounded-sm" href={"/blog?blog%5BrefinementList%5D%5Bauthor%5D%5B0%5D=" + searchName}>More...</a>
+    </div>
+  }
 </Section>

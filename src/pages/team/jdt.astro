@@ -70,7 +70,7 @@ import ResourceItem from '@components/team/ResourceItem.astro'
     Always super helpful and responsive and in great spirits, high standard of delivering quality”, pragmatic, possesses wide and in-depth technical knowledge, and is always ready for a challenge!
   </QuoteSection>
 
-  <LatestBlogsSection code={code} />
+  <LatestBlogsSection {...myData.frontmatter} />
 
   <ResourceCollectionSection title="Resources" subtitle="Jeremy's talks, podcasts and webinars">
     <ResourceItem
