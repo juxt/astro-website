@@ -1,5 +1,5 @@
 ---
-const { owner, name } = Astro.props;
+const { owner, name, description } = Astro.props;
 
 const apiUrl = `https://api.github.com/repos/${owner}/${name}`
 const url = `https://github.com/${owner}/${name}`
@@ -8,11 +8,13 @@ const response = await fetch(apiUrl, {headers: {"accept": "application/json"}});
 const data = await response.json();
 if (response.status == 403) { console.warn(data) }
 
+const actualDescription = data.description ? `${data.description} (${data.stargazers_count} stars)` : description;
+
 ---
 <div class="flex items-center">
-  <div class="grow flex flex-col space-y-4">
+  <div class="grow flex flex-col space-y-1">
     <h4 class="text-lg col-span-2">{name}</h4>
-    <p>{data.description} ({data.stargazers_count} stars)</p>
+    <p>{actualDescription}</p>
   </div>
   <a href="{url}" target="_blank"
     class="shrink-0 rounded-full bg-zinc-800 w-20 h-max px-3 py-3 flex justify-center">
