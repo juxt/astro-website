@@ -1,0 +1,102 @@
+---
+// 1. Source profile data from your profile file
+import * as myData from '../../data/people/joe.md'
+
+// 2. Extract the fields you are planning to use in your profile page.
+// NOTE: This won't error if properties are missing
+const { code, jobTitle, fullName } = myData.frontmatter;
+
+// 3. Import any components you need
+import { getImage, Image } from 'astro:assets'
+import ProfilePage from '@components/team/ProfilePage.astro'
+
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GreetingSection from '@components/team/GreetingSection.astro'
+import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
+---
+<ProfilePage title={fullName + " - " + jobTitle}>
+  <GreetingSection fullName={fullName} code={code} jobTitle={jobTitle}>
+    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-lg font-medium">
+      <li>Architecture analysis and review</li>
+      <li>Cloud-native design</li>
+      <li>Roadmapping and getting to MVP</li>
+      <li>Unblocking teams</li>
+      <li>Functional programming, JVM languages</li>
+    </ul>
+  </GreetingSection>
+
+  <TwoColumnSection>
+    <div>
+      <h2 class="text-xl font-medium">About</h2>
+      <p class="py-2">
+        Joe Littlejohn is a delivery expert with two decades of software engineering experience. He has led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
+      </p>
+      <p class="py-2">
+        Joe has steered JUXT projects from inception to MVP and beyond. He advises on technical direction, finding a route forward to solve technical problems and also guiding wider engineering strategy.
+      </p>
+      <p class="py-2">
+
+      </p>
+    </div>
+    <div>
+      <h2 class="text-xl font-medium">Why Joe?</h2>
+      <ul class="list-disc">
+        <li class="py-2">
+          Joe has built data-intensive cloud systems at global scale in the B2B and B2C space.
+        </li>
+        <li class="py-2">
+          Joe has been using lean and agile methods since the mid 00s, and brings a wealth of experience in helping teams stay on track and continuously improve.
+        </li>
+      </ul>
+    </div>
+  </TwoColumnSection>
+
+  <TwoColumnSection class="py-1">
+    <div class="bg-black p-5">
+      <h2 class="text-xl font-medium">Open Source</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" class="fill-white h-20 w-20 p-4" viewBox="0 0 496 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      <p class="italic py-2">
+        Joe has built and run a number of successful open source projects, attracting over 6,000 GitHub stars and over 130 contributors.
+      </p>
+    </div>
+
+    <div class="bg-black p-5 row-start-2 col-start-2">
+      <h2 class="text-xl font-medium">Feedback</h2>
+      <p class="italic  py-3">
+        "I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions."<br> -- Rice Lake Weighing Systems
+      </p>
+      <p class="italic py-3">
+        "[Joe's] communication followed by execution is beyond impressive."<br> -- Excel Energy Services
+      </p>
+    </div>
+  </TwoColumnSection>
+
+
+  <QuoteSection>
+    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and a composed style; provides direction, confidence, and reassurance across a team and organisation.
+  </QuoteSection>
+
+  <ResourceCollectionSection title="Resources" subtitle="Joe's podcasts and blogs">
+    <ResourceItem
+      name="JUXTCast S5E7 - UK Post Office Horizon Scandal"
+      description="Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal."
+      link="https://www.youtube.com/watch?v=SZfSKDuz2yg"/>
+    <ResourceItem
+      name="Cutting software waste"
+      description="Where are the most impactful wastes in the software business, and how can we eliminate them?"
+      link="https://www.podchaser.com/podcasts/juxt-cast-893524"/>
+    <ResourceItem
+      name="JUXT Clojure Radar"
+      description="An opinionated guide to the Clojure ecosystem - the tools, libraries and frameworks that we reach of, and also those that we avoid."
+      link="https://www.juxt.pro/radar/"/>
+  </ResourceCollectionSection>
+
+  <ContactSection {...myData.frontmatter}>
+  </ContactSection>
+
+</ProfilePage>
