@@ -24,8 +24,6 @@ const unfilteredBlogs = await parseBlogs({
 const filteredBlogs = unfilteredBlogs
     .filter(({ draft, author }) => (isDev || !draft) && (author == code));
 
-const numCards = 4;
-
 // Sort by publishedDate
 // NOTE: There's a potential bug here with dates being in different formats
 //       e.g. Kpow has the date: 29 Mar 2023, but most other posts use ISO format 2023-03-29
@@ -40,12 +38,22 @@ const blogs = filteredBlogs
 
   <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
     {
-      /* TODO: Do this using css instead */
-      blogs.slice(0, numCards).map((blog, idx) => (
-        <div class={(idx == (numCards - 1) ? "xl:hidden" : "")}>
-          <BlogCard hideAuthor=true {...blog} />
-        </div>
-      ))
+      blogs[0] &&
+      <div class="">
+        <BlogCard hideAuthor=true {...blogs[0]} />
+      </div>
+    }
+    {
+      blogs[1] &&
+      <div class="max-lg:hidden">
+        <BlogCard hideAuthor=true {...blogs[1]} />
+      </div>
+    }
+    {
+      blogs[2] &&
+      <div class="max-xl:hidden">
+        <BlogCard hideAuthor=true {...blogs[2]} />
+      </div>
     }
   </div>
 </Section>
