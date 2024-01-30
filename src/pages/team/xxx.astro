@@ -16,13 +16,13 @@ const myData =   {
   "linkedin": "juxtpro"
 }}
 
-// 2. Here you extract the data needed for the page 
+// 2. Here you extract the data needed for the page
 // NOTE: This won't error if properties are missing
 const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
-import TeamLayout from '@components/team/TeamLayout.astro'
+import ProfilePage from '@components/team/ProfilePage.astro'
 
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
@@ -32,7 +32,7 @@ import ResourceCollectionSection from '@components/team/ResourceCollectionSectio
 import ResourceItem from '@components/team/ResourceItem.astro'
 import ContactSection from '@components/team/ContactSection.astro'
 ---
-<TeamLayout title={fullName + " - " + jobTitle}>
+<ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection code={code} fullName={fullName} jobTitle={jobTitle}>
     <p class="italic">
       This is the &lt;GreetingSection&gt;. Anything below this is custom HTML you can add:
@@ -117,4 +117,4 @@ import ContactSection from '@components/team/ContactSection.astro'
   </ResourceCollectionSection>
 
   <ContactSection {...myData.frontmatter} />
-</TeamLayout>
+</ProfilePage>

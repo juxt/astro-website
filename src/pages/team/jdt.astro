@@ -8,7 +8,7 @@ const { code, jobTitle, fullName } = myData.frontmatter;
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
-import TeamLayout from '@components/team/TeamLayout.astro'
+import ProfilePage from '@components/team/ProfilePage.astro'
 
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
@@ -18,7 +18,7 @@ import ResourceCollectionSection from '@components/team/ResourceCollectionSectio
 import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 ---
-<TeamLayout title={fullName + " - " + jobTitle}>
+<ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection fullName={fullName} code={code} jobTitle={jobTitle}>
     <h2 class="py-5 text-3xl font-medium">Expert In</h2>
     <ul class="list-disc list-inside text-lg font-medium">
@@ -90,4 +90,4 @@ import ResourceItem from '@components/team/ResourceItem.astro'
   <ContactSection {...myData.frontmatter}>
   </ContactSection>
 
-</TeamLayout>
+</ProfilePage>
