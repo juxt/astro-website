@@ -8,7 +8,7 @@ import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@compo
 var { email, twitter, linkedin, github, hackernews, fullName } = Astro.props
 twitter = twitter?.replace(/^@/, '')
 ---
-<Section className="py-10 flex flex-col md:flex-row gap-10" {...Astro.props}>
+<Section className="py-10 flex flex-col md:flex-row gap-10">
     <div class="basis-1 grow">
         <h3 class="text-xl font-medium">Get in Touch</h3>
         <p>
@@ -47,6 +47,7 @@ twitter = twitter?.replace(/^@/, '')
             {
                 hackernews &&
                 <ContactItem href={"https://news.ycombinator.com/user?id=" + hackernews}>
+                    <svg fill="#000000" slot="icon" class="w-9" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M 5 5 L 5 27 L 27 27 L 27 5 Z M 7 7 L 25 7 L 25 25 L 7 25 Z M 11.5 11 L 15 17 L 15 22 L 17 22 L 17 17 L 20.5 11 L 18.5 11 L 16 15.28125 L 13.5 11 Z"/></svg>
                     {hackernews}
                 </ContactItem>
             }
