@@ -1,0 +1,94 @@
+---
+// 1. Source profile data from your profile file
+import * as myData from '../../data/people/jdt.md'
+
+// 2. Extract the fields you are planning to use in your profile page.
+// NOTE: This won't error if properties are missing
+const { code, jobTitle, fullName } = myData.frontmatter;
+
+// 3. Import any components you need
+import { getImage, Image } from 'astro:assets'
+import ProfilePage from '@components/team/ProfilePage.astro'
+
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GreetingSection from '@components/team/GreetingSection.astro'
+import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+---
+<ProfilePage title={fullName + " - " + jobTitle}>
+  <GreetingSection {...myData.frontmatter}>
+    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-lg font-medium">
+      <li>Data Intensive Applications</li>
+      <li>Information Architecture</li>
+      <li>Software Evaluation</li>
+      <li>Database Internals</li>
+      <li>Cloud Trends</li>
+    </ul>
+  </GreetingSection>
+
+  <TwoColumnSection>
+    <SimpleColumn>
+      <SmallTitle>About</SmallTitle>
+      <p>
+        Jeremy Taylor is a product expert at JUXT with primary responsibility for <a class="underline" href="https://xtdb.com">XTDB</a>.
+      </p>
+      <p>
+        Prior to leading JUXT’s commercial software initiatives Jeremy held a sales engineering position within IBM, delivering eCommerce systems for major companies across a broad range of sectors including retail, insurance, telecoms and automotive.
+      </p>
+      <p>
+        Jeremy is passionate about database technologies of all shapes & sizes, motivated by the promise of simplifying the work of both developers and non-technical end users.
+      </p>
+    </SimpleColumn>
+
+    <SimpleColumn>
+      <SmallTitle>Notable Accomplishments</SmallTitle>
+      <p>
+        Founded the open source user community around XTDB and developed partnerships with a range of companies across numerous language ecosystems.
+      </p>
+    </SimpleColumn>
+
+    <SimpleColumn>
+      <SmallTitle>Why Jeremy?</SmallTitle>
+      <ul class="list-disc flex flex-col gap-2">
+        <li>
+          A trusted advisor on open source tools and software trends who has: facilitated workshops on strategy technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
+        </li>
+        <li>
+          IBM Certified IT Specialist and invited speaker: Strange Loop 2019, SPA 2021, HYTRADBOI 2022, Stange Loop 2023
+        </li>
+      </ul>
+    </SimpleColumn>
+
+  </TwoColumnSection>
+
+  <QuoteSection>
+    Always super helpful and responsive and in great spirits, high standard of delivering quality”, pragmatic, possesses wide and in-depth technical knowledge, and is always ready for a challenge!
+  </QuoteSection>
+
+  <LatestBlogsSection {...myData.frontmatter} />
+
+  <ResourceCollectionSection title="Resources" subtitle="Jeremy's talks, podcasts and webinars">
+    <ResourceItem
+      name="The Distributed Fabric Pod | Ep 21"
+      description="Understanding XTDB with @refset (Head of Product)"
+      link="https://twitter.com/vaibhaw_vipul/status/1732037357342486667"/>
+    <ResourceItem
+      name="UPDATE Considered Harmful"
+      description="SQL is almost 50 years old and the cost of storage has decreased dramatically over its lifetime. In this talk, Jeremy Taylor explains why SQL's UPDATE statement is problematic in our modern context and how developers are forced to work around it. He also examines 'bitemporality' - a standardised model for working with versioned historical data that mitigates the need for such workarounds."
+      link="https://www.youtube.com/watch?v=JxMz-tyicgo"/>
+    <ResourceItem
+      name="On-Demand Webinar: Bitemporality and the Art of Maintaining Accurate Databases"
+      description="Discover why bitemporality is a topic industry luminaries are talking about, and how it will likely to impact your work in 2024"
+      link="https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases"/>
+  </ResourceCollectionSection>
+
+  <ContactSection {...myData.frontmatter}>
+  </ContactSection>
+
+</ProfilePage>

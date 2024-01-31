@@ -1,0 +1,50 @@
+---
+// 1. Source profile data from your profile file
+import * as myData from '../../data/people/jon.md'
+
+// 2. Extract the fields you are planning to use in your profile page.
+// NOTE: This won't error if properties are missing
+const { code, jobTitle, fullName } = myData.frontmatter;
+
+// 3. Import any components you need
+import { getImage, Image } from 'astro:assets'
+import ProfilePage from '@components/team/ProfilePage.astro'
+
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GreetingSection from '@components/team/GreetingSection.astro'
+import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+---
+<ProfilePage title={fullName + " - " + jobTitle}>
+  <GreetingSection {...myData.frontmatter}>
+    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-lg font-medium">
+      <li>Project Leadership</li>
+      <li>Banking and Finance</li>
+      <li>Technical Strategy</li>
+      <li>Databases</li>
+      <li><a class="underline" href="http://xtdb.com">XTDB</a></li>
+      <li>Clojure Development</li>
+    </ul>
+  </GreetingSection>
+
+  <TwoColumnSection>
+    <SimpleColumn>
+      <SmallTitle>About</SmallTitle>
+      <p>
+        Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme. Jon is a co-founder of JUXT; a software engineering firm that uses Clojure as its primary weapon of choice. Before co-founding JUXT Jon worked as a senior consultant at ThoughtWorks where he became well versed in Agile software development techniques. During his time as a consultant Jon worked at large institutions such as the BBC and Sky, a major publishing house and a fashion retail giant.
+      </p>
+    </SimpleColumn>
+  </TwoColumnSection>
+
+  <LatestBlogsSection {...myData.frontmatter} />
+
+
+  <ContactSection {...myData.frontmatter} />
+
+</ProfilePage>

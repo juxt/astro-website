@@ -1,9 +1,16 @@
 ---
-const {bgClass, bgStyle, className} = Astro.props;
+var {bgClass, bgStyle, bgColor, className} = Astro.props;
+if (bgColor == "orange") {
+    bgClass += " bg-[#b76330]";
+} else if (bgColor == "yellow") {
+    bgClass += " bg-[#ca8a04]";
+}
 ---
+{ /* If either a bgClass or bgStyle is specified then we wrap the container in a div with the bg styles */ }
 {
     (bgClass || bgStyle) &&
     <div class={bgClass} style={bgStyle}>
+        { /* NOTE: Recursive */ }
         <Astro.self className={className}>
             <slot/>
         </Astro.self>
