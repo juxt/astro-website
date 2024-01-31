@@ -31,6 +31,8 @@ import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import ContactSection from '@components/team/ContactSection.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection code={code} fullName={fullName} jobTitle={jobTitle}>
@@ -47,42 +49,58 @@ import ContactSection from '@components/team/ContactSection.astro'
   </GreetingSection>
 
   <TwoColumnSection>
-    <div>
-      <h2 class="text-xl font-medium">Section 1</h2>
+    <SimpleColumn>
+      <SmallTitle>Section 1</SmallTitle>
       <p class="italic">
-        This is a &lt;TwoColumnSection&gt;, it's useful as a placeholder and for you to work on copy.
+        This is a &lt;TwoColumnSection&gt;
       </p>
-    </div>
+      <p class="italic">
+        It's useful as a placeholder and for you to work on copy.
+      </p>
+    </SimpleColumn>
 
-    <div>
-      <h2 class="text-xl font-medium">Section 2</h2>
+    <SimpleColumn>
+      <SmallTitle>Section 2</SmallTitle>
       <p class="italic">
         It creates a 2 column grid, just add divs and they'll appears as columns.
       </p>
-    </div>
+    </SimpleColumn>
 
-    <div>
-      <h2 class="text-xl font-medium">Section 3</h2>
+    <SimpleColumn>
+      <SmallTitle>Section 3</SmallTitle>
+      <p class="italic">
+        We also have a &lt;SimpleColumn&gt; component for adding a nicely spaced column of things like paragraphs & titles.
+      </p>
+      <p class="italic">
+        And a &lt;SmallTitle&gt; component for a common title.
+      </p>
+    </SimpleColumn>
+
+    <SimpleColumn>
+      <SmallTitle>Section 4</SmallTitle>
       <p class="italic">
         Nice and simple
       </p>
-    </div>
+    </SimpleColumn>
   </TwoColumnSection>
 
-  <TwoColumnSection>
-    <div class="bg-black p-5">
-      <h2 class="text-xl font-medium">Section 1</h2>
+  { /* You can set the background colour to a fixed set of colors ("orange" & "grey") with bgColor.
+     * For more info see the team/Section.astro component
+     */ }
+  <TwoColumnSection bgColor="grey">
+    <SimpleColumn className="bg-black p-5">
+      <SmallTitle>Section 1</SmallTitle>
       <p class="italic">
-        If you want to get more fancy, try out <a href="https://tailwindcss.com/docs/grid-column">col-start</a> and <a href="https://tailwindcss.com/docs/grid-row">row-start</a>
+        If you want to get more fancy, try out <a class="underline" href="https://tailwindcss.com/docs/grid-column">col-start</a> and <a class="underline" href="https://tailwindcss.com/docs/grid-row">row-start</a>
       </p>
-    </div>
+    </SimpleColumn>
 
-    <div class="bg-black p-5 row-start-2 col-start-2">
-      <h2 class="text-xl font-medium">Section 2</h2>
+    <SimpleColumn className="bg-black p-5 row-start-2 col-start-2">
+      <SmallTitle>Section 2</SmallTitle>
       <p class="italic">
         See how I'm down here now?
       </p>
-    </div>
+    </SimpleColumn>
   </TwoColumnSection>
 
   <QuoteSection author="Attribution Needed (perhaps put the author in here)">
