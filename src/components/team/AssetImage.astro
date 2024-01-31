@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets'
+
+const { src } = Astro.props;
+
+var props = Astro.props;
+delete props.src;
+
+// Images
+const img_assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
+function importImage(path) {
+    if (!img_assets[path]) {
+        throw new Error(`Image ${path} not found.`);
+    }
+    return img_assets[path]();
+}
+---
+<Image src={importImage(src)} {...props}>

@@ -21,7 +21,7 @@ const myData =   {
 const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
-import { getImage, Image } from 'astro:assets'
+import AssetImage from '@components/team/AssetImage.astro'
 import ProfilePage from '@components/team/ProfilePage.astro'
 
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
@@ -31,6 +31,8 @@ import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import ContactSection from '@components/team/ContactSection.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
@@ -47,6 +49,28 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       <li>Platform Engineering</li>
     </ul>
   </GreetingSection>
+
+  <GallerySection>
+    <GalleryImage
+        src="/src/assets/blog/10-test.jpg"
+        alt="Chalkboard with some maths scribblings" />
+    { /* Got something important on the left, try setting `object-left` and friends */ }
+    <GalleryImage
+        src="/src/assets/blog/clojureD-2022-minecraft-workshop.jpg"
+        alt="People talking around laptops"
+        imgClass="object-left" />
+    <GalleryImage
+        src="/src/assets/blog/clojutre-juxt.jpg"
+        alt="A desk at a convention" />
+    <GalleryImage
+        src="/src/assets/blog/confs.jpg"
+        alt="People talking around a convention desk" />
+
+    { /* A max of 4 images will be displayed, the rest will be hidden */ }
+    <GalleryImage
+        src="/src/assets/blog/confs.jpg"
+        alt="People talking around a convention desk" />
+  </GallerySection>
 
   <TwoColumnSection>
     <SimpleColumn>
