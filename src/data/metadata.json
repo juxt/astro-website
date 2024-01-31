@@ -21,10 +21,9 @@
     { "label": "Careers", "href": "/careers" },
     { "label": "Blog", "href": "/blog" },
     { "label": "XTDB", "href": "https://xtdb.com/", "target": "_blank" },
-    { "label": "Contact", "href": "/contact" },
     {
-      "label": "Free Consultation",
-      "href": "/consultation",
+      "label": "Get in touch",
+      "href": "/contact",
       "style": {
         "normal": "bg-yellow-500 hover:text-white text-black px-2 py-1 rounded",
         "active:": "text-black"
@@ -56,8 +55,8 @@
         { "label": "JUXT Cast", "href": "https://pod.link/juxtcast" },
         { "label": "Radar", "href": "/radar" },
         {
-          "label": "Free Techstack Roundtable",
-          "href": "/contact",
+          "label": "Tech Roundtable",
+          "href": "/jdt-tech-roundtable",
           "target": "_blank",
           "className": "bg-slate-700 px-2 py-1 rounded"
         }
@@ -93,7 +92,7 @@
         },
         {
           "label": "Get in touch",
-          "href": "/contact-us",
+          "href": "mailto:hello@xtdb.com",
           "target": "_blank",
           "className": "bg-slate-700 px-2 py-1 rounded"
         }
@@ -142,6 +141,9 @@
     "clojure-conj": {
       "description": "JUXT is a proud gold sponsor of Clojure/Conj 2023. Stop by our sponsor table to meet our co-founders and get your limited-edition Conj tee!",
       "image": "clojure-conj-banner.jpg"
+    },
+    "contact": {
+      "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future."
     }
   }
 }
