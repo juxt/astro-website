@@ -1,7 +1,7 @@
 ---
 author: 'jon'
 title: 'Clojure in Collaboration: Whimsical'
-description: "Bridging Remote Work Challenges with Whimsical's Clojure-Based Tools"
+description: "Bridging remote work challenges with Whimsical's Clojure-based tools"
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '29 January 2024'
@@ -104,23 +104,23 @@ We don't do a lot of shared rendering with React server components but we have s
 
 **Jānis:** Nearly all of Whimsical is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), including the front-end and back-end infrastructure. We did this to facilitate this reuse of code between the front end and back end.
 
-**Jon: What's your take on micro-services?**
+**Jon: What's your take on microservices?**
 
-**Jānis:** We only split out something as a specific micro-service where it makes sense, be it for scaling characteristics or operational characteristics. Otherwise, we stick to the monolith. In terms of deployments, we deploy between 5 and 50 times a day.
+**Jānis:** We only split out something as a specific microservice where it makes sense, be it for scaling characteristics or operational characteristics. Otherwise, we stick to the monolith. In terms of deployments, we deploy between 5 and 50 times a day.
 
 **Jon: Do you make use of PRs or are you more trunk-based?**
 
-**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up a service for when you open up a PR, there's a static link that you can share with anybody to deployed the version, having a full copy of our environment. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
+**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up a service for when you open up a PR, there's a static link that you can share with anybody to the deployed version, having a full copy of our environment. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
 
 **Jon: So you said you've got about 40 developers, and presumably a lot of those are doing Clojure.**
 
-**Jānis:** About 45 employees total at Whimsical and out of those 17/18 are specifically engineers, two of us you could call managers so 15 in total.
+**Jānis:** About 45 employees total at Whimsical and out of those 17 or 18 are specifically engineers, two of us you could call managers so 15 in total.
 
 **Jon: And would they mostly all be touching Clojure? Have you trained people who don't know it; what's your story in terms of growing the team?**
 
 **Jānis:** In the early days we were looking for extremely capable people who were up for working with this esoteric language daily.
 
-As time went on we started looking for Clojure developers specifically. Finding back-end Clojure developers isn't usually a problem, although I wouldn't say it's without a challenge to get the Clojurists out there. But at the same time, hiring ClojureScript engineers is much more difficult. I feel like it's more a case of finding great front-end engineers and then helping them to learn ClojureScript specifically.
+As time went on we started looking for Clojure developers specifically. Finding back-end Clojure developers isn't usually a problem, although I wouldn't say it's without a challenge to get the Clojurists out there. But at the same time, hiring ClojureScript engineers is much more difficult. I feel like it's more a case of finding great front-end engineers and then helping them to learn ClojureScript.
 
 **Jon: Do you see a natural split in terms of where people tend to orient themselves, back-end vs front-end?**
 
@@ -136,7 +136,7 @@ The hard part is usually the domain or something very specific, such as CSS or i
 
 **Jon: What is your database of choice?**
 
-**Nate:** Postgres
+**Nate:** Postgres.
 
 **Jon: What IDEs do you use?**
 
@@ -154,7 +154,7 @@ One of the things I'm looking forward to seeing is what new projects in Clojure 
 
 Clojure is stable right now and although it has a slower release cadence and less flashy new features being released regularly, this stability means we don't need to worry about whether Clojure is going to disappear tomorrow.
 
-Sometimes you see library authors stating that a library is finished, _' this is done, it does what it needs to do, it's done_. And that's extremely cool.
+Sometimes you see library authors stating that a library is finished, _"This is done. It does what it needs to do, it's done."_ And that's extremely cool.
 
 On the other hand, we have seen instances of Clojure projects lacking people to maintain them. For a while, we were dependent on a package that had a known vulnerability due to one of its dependencies.
 
@@ -162,11 +162,11 @@ Seeing what [Clojurists Together](https://www.clojuriststogether.org/) have been
 
 **Nate:** Yeah, they pushed for adding custom formatters to Firefox, working with Mozilla and pursued that which was so awesome. That community is doing a great job of pushing the language forward and finding key pain points that need work.
 
-**Jānis:** Things always can be better. But I think Clojure is in a pretty good place to be right now.
+**Jānis:** Things always can be better. But I think Clojure is a pretty good place to be right now.
 
-**Jon: Is there anything else you want to shout out to in terms of libraries or tooling or anything really in the Clojure Sphere?**
+**Jon: Is there anything else you want to shout out to in terms of libraries or tooling or anything really in the Clojure-sphere?**
 
-**Jānis:** I want to shout out [Thomas Heller](https://github.com/thheller), shadow-cljs has been really good for us. And [Maria Geller](https://www.linkedin.com/in/mariageller/) an engineer at Whimsical, because when she joined she was a member of the board at Clojurists Together. One of the first conversations that she had with me, was around sponsoring Clojurists Together. I had a conversation with our CEO and it was that simple. It's nice to give back to a community and tooling that we're reaping a lot of benefits.
+**Jānis:** I want to shout out [Thomas Heller](https://github.com/thheller) - shadow-cljs has been really good for us. And [Maria Geller](https://www.linkedin.com/in/mariageller/), an engineer at Whimsical, because when she joined she was a member of the board at Clojurists Together. One of the first conversations that she had with me was around sponsoring Clojurists Together. I had a conversation with our CEO and it was that simple. It's nice to give back to a community and tooling that we're reaping a lot of benefits from.
 
 **Jon: I can see that you're a map member, so one of the highest ones which is super awesome. You're really contributing back to the community, which is great.**
 
