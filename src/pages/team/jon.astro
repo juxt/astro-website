@@ -17,6 +17,8 @@ import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
 import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
@@ -26,24 +28,23 @@ import ResourceItem from '@components/team/ResourceItem.astro'
       <li>Banking and Finance</li>
       <li>Technical Strategy</li>
       <li>Databases</li>
-      <li><a href="http://xtdb.com">XTDB</a></li>
+      <li><a class="underline" href="http://xtdb.com">XTDB</a></li>
       <li>Clojure Development</li>
     </ul>
   </GreetingSection>
 
   <TwoColumnSection>
-    <div>
-      <h2 class="text-xl font-medium">About</h2>
-      <p class="py-2">
+    <SimpleColumn>
+      <SmallTitle>About</SmallTitle>
+      <p>
         Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme. Jon is a co-founder of JUXT; a software engineering firm that uses Clojure as its primary weapon of choice. Before co-founding JUXT Jon worked as a senior consultant at ThoughtWorks where he became well versed in Agile software development techniques. During his time as a consultant Jon worked at large institutions such as the BBC and Sky, a major publishing house and a fashion retail giant.
       </p>
-    </div>
+    </SimpleColumn>
   </TwoColumnSection>
 
   <LatestBlogsSection {...myData.frontmatter} />
 
 
-  <ContactSection {...myData.frontmatter}>
-  </ContactSection>
+  <ContactSection {...myData.frontmatter} />
 
 </ProfilePage>
