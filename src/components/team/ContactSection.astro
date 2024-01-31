@@ -18,36 +18,36 @@ twitter = twitter?.replace(/^@/, '')
 
         <div class="pt-10 flex flex-col gap-4">
             { email &&
-                <ContactItem>
+                <ContactItem href={"mailto:" + email}>
                     <EmailIcon slot="icon" className="w-7"/>
-                    <a href={"mailto:" + email}>{email}</a>
+                    {email}
                 </ContactItem>
             }
             {
                 twitter &&
-                <ContactItem>
+                <ContactItem href={"https://twitter.com/" + twitter}>
                     <TwitterIcon slot="icon" className="w-7"/>
-                    <a href={"https://twitter.com/" + twitter} target="_blank">@{twitter}</a>
+                   @{twitter}
                 </ContactItem>
             }
             {
                 linkedin &&
-                <ContactItem>
+                <ContactItem href={"https://linkedin.com/in/" + linkedin + "/"}>
                     <LinkedInIcon slot="icon" className="w-6"/>
-                    <a href={"https://linkedin.com/in/" + linkedin} target="_blank">{linkedin}</a>
+                    {linkedin}
                 </ContactItem>
             }
             {
                 github &&
-                <ContactItem>
+                <ContactItem href={"https://github.com/" + github}>
                     <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
-                    <a href={"https://github.com/" + github} target="_blank">{github}</a>
+                    {github}
                 </ContactItem>
             }
             {
                 hackernews &&
-                <ContactItem>
-                    <a href={"https://news.ycombinator.com/user?id=" + hackernews} target="_blank">{hackernews}</a>
+                <ContactItem href={"https://news.ycombinator.com/user?id=" + hackernews}>
+                    {hackernews}
                 </ContactItem>
             }
         </div>
