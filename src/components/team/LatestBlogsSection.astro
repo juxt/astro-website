@@ -33,37 +33,43 @@ const filteredBlogs = unfilteredBlogs
 const blogs = filteredBlogs
     .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
 ---
-<Section className="py-20" {...Astro.props}>
-  <div class="pb-10 flex flex-col items-center">
-    <h3 class="text-xl font-medium">Recent Content</h3>
-    <slot/>
-  </div>
-
-  <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
-    {
-      blogs[0] &&
-      <div class="">
-        <BlogCard hideAuthor=true {...blogs[0]} />
-      </div>
-    }
-    {
-      blogs[1] &&
-      <div class="max-lg:hidden">
-        <BlogCard hideAuthor=true {...blogs[1]} />
-      </div>
-    }
-    {
-      blogs[2] &&
-      <div class="max-xl:hidden">
-        <BlogCard hideAuthor=true {...blogs[2]} />
-      </div>
-    }
-  </div>
-
-  {
-    searchName &&
-    <div class="pt-10 flex flex-col items-center">
-        <a class="bg-juxt px-4 py-3 text-white hover:text-zinc-800 rounded-sm" href={"/blog?blog%5BrefinementList%5D%5Bauthor%5D%5B0%5D=" + searchName}>More...</a>
+<>
+  <Section className="pt-20" {...Astro.props}>
+    <div class="pb-10 flex flex-col items-center">
+      <h3 class="text-xl font-medium">Recent Content</h3>
+      <slot/>
     </div>
-  }
-</Section>
+  </Section>
+  
+  <div>
+    <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
+      {
+        blogs[0] &&
+        <div class="">
+          <BlogCard hideAuthor=true {...blogs[0]} />
+        </div>
+      }
+      {
+        blogs[1] &&
+        <div class="max-lg:hidden">
+          <BlogCard hideAuthor=true {...blogs[1]} />
+        </div>
+      }
+      {
+        blogs[2] &&
+        <div class="max-xl:hidden">
+          <BlogCard hideAuthor=true {...blogs[2]} />
+        </div>
+      }
+    </div>
+  </div>
+  
+  <Section className="pb-20" {...Astro.props}>
+    {
+      searchName &&
+      <div class="pt-10 flex flex-col items-center">
+          <a class="bg-juxt px-4 py-3 text-white hover:text-zinc-800 rounded-sm" href={"/blog?blog%5BrefinementList%5D%5Bauthor%5D%5B0%5D=" + searchName}>More...</a>
+      </div>
+    }
+  </Section>
+</>
