@@ -19,7 +19,7 @@ import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
-  <GreetingSection fullName={fullName} code={code} jobTitle={jobTitle}>
+  <GreetingSection {...myData.frontmatter}>
     <h2 class="py-5 text-3xl font-medium">Expert In</h2>
     <ul class="list-disc list-inside text-lg font-medium">
       <li>Data Intensive Applications</li>

@@ -1,8 +1,10 @@
 ---
 import { getImage, Image } from 'astro:assets'
 import Section from '@components/team/Section.astro'
+import ContactItem from '@components/team/ContactItem.astro'
+import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
-const {fullName, jobTitle, code} = Astro.props;
+const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } = Astro.props;
 
 // Headshots
 const headshots = import.meta.glob<{ default: ImageMetadata }>('/src/assets/team/headshots/*.{jpeg,jpg,png,gif}');
@@ -22,6 +24,7 @@ const headshot = getHeadshot(`/src/assets/team/headshots/${code}.png`);
 
     <slot/>
   </div>
+
   <div class="my-auto ml-auto">
     { /* TODO: Make a component, or just bake into the images 😅 */ }
     <div class="relative w-[30rem] h-[30rem]">
@@ -34,5 +37,34 @@ const headshot = getHeadshot(`/src/assets/team/headshots/${code}.png`);
       <Image class="absolute bottom-0 w-[90%] h-[90%]"
         src={headshot} alt="" />
     </div>
+
+    <div class="pt-5 inline-flex">
+      { email &&
+      <ContactItem href={"mailto:" + email}>
+        <EmailIcon slot="icon" className="w-7"/>
+      </ContactItem>
+      }
+      { twitter &&
+        <ContactItem href={"https://twitter.com/" + twitter}>
+          <TwitterIcon slot="icon" className="w-7"/>
+        </ContactItem>
+      }
+      { linkedin &&
+        <ContactItem href={"https://linkedin.com/in/" + linkedin + "/"}>
+          <LinkedInIcon slot="icon" className="w-6"/>
+        </ContactItem>
+      }
+      { github &&
+        <ContactItem href={"https://github.com/" + github}>
+          <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
+        </ContactItem>
+      }
+      { hackernews &&
+        <ContactItem href={"https://news.ycombinator.com/user?id=" + hackernews}>
+          <svg fill="#000000" slot="icon" class="w-9" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M 5 5 L 5 27 L 27 27 L 27 5 Z M 7 7 L 25 7 L 25 25 L 7 25 Z M 11.5 11 L 15 17 L 15 22 L 17 22 L 17 17 L 20.5 11 L 18.5 11 L 16 15.28125 L 13.5 11 Z"/></svg>
+        </ContactItem>
+      }
+    </div>
+
   </div>
 </Section>
