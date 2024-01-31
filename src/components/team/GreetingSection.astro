@@ -6,16 +6,14 @@ import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@compo
 
 const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } = Astro.props;
 ---
-<Section className='pl-10 pr-0 py-10 grid grid-cols-2 gap-4' {...Astro.props}>
-  <div class='py-20'>
+<Section className='pl-10 pr-0 py-10 grid grid-cols-1 md:grid-cols-2 gap-4' {...Astro.props}>
+  <div class="md:pt-20 pr-10">
     <h1 class="text-5xl font-bold">Hello<span class="text-orange-400">.</span></h1>
     <h1 class="justify-end text-3xl font-bold"><span class="text-orange-400">—</span> I am {fullName}</h1>
     <h2 class="justify-end text-3xl font-medium">{jobTitle}</h2>
-
-    <slot/>
   </div>
 
-  <div class="my-auto ml-auto">
+  <div class="my-auto ml-auto md:col-start-2 md:row-start-1 md:row-span-2">
     { /* TODO: Make a component, or just bake into the images 😅 */ }
     <div class="relative w-[30rem] h-[30rem]">
       { /* Tall */ }
@@ -56,5 +54,9 @@ const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } 
       }
     </div>
 
+  </div>
+
+  <div class="lg:col-start-1">
+    <slot/>
   </div>
 </Section>
