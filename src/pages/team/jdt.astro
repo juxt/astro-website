@@ -17,6 +17,8 @@ import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
 import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
@@ -31,37 +33,37 @@ import ResourceItem from '@components/team/ResourceItem.astro'
   </GreetingSection>
 
   <TwoColumnSection>
-    <div>
-      <h2 class="text-xl font-medium">About</h2>
-      <p class="py-2">
-        Jeremy Taylor is a product expert at JUXT with primary responsibility for <a href="https://xtdb.com">XTDB</a>.
+    <SimpleColumn>
+      <SmallTitle>About</SmallTitle>
+      <p>
+        Jeremy Taylor is a product expert at JUXT with primary responsibility for <a class="underline" href="https://xtdb.com">XTDB</a>.
       </p>
-      <p class="py-2">
+      <p>
         Prior to leading JUXT’s commercial software initiatives Jeremy held a sales engineering position within IBM, delivering eCommerce systems for major companies across a broad range of sectors including retail, insurance, telecoms and automotive.
       </p>
-      <p class="py-2">
+      <p>
         Jeremy is passionate about database technologies of all shapes & sizes, motivated by the promise of simplifying the work of both developers and non-technical end users.
       </p>
-    </div>
+    </SimpleColumn>
 
-    <div>
-      <h2 class="text-xl font-medium">Notable Accomplishments</h2>
-      <p class="py-2">
+    <SimpleColumn>
+      <SmallTitle>Notable Accomplishments</SmallTitle>
+      <p>
         Founded the open source user community around XTDB and developed partnerships with a range of companies across numerous language ecosystems.
       </p>
-    </div>
+    </SimpleColumn>
 
-    <div>
-      <h2 class="text-xl font-medium">Why Jeremy?</h2>
-      <ul class="list-disc">
-        <li class="py-2">
+    <SimpleColumn>
+      <SmallTitle>Why Jeremy?</SmallTitle>
+      <ul class="list-disc flex flex-col gap-2">
+        <li>
           A trusted advisor on open source tools and software trends who has: facilitated workshops on strategy technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
         </li>
-        <li class="py-2">
+        <li>
           IBM Certified IT Specialist and invited speaker: Strange Loop 2019, SPA 2021, HYTRADBOI 2022, Stange Loop 2023
         </li>
       </ul>
-    </div>
+    </SimpleColumn>
 
   </TwoColumnSection>
 
