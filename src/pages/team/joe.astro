@@ -18,6 +18,8 @@ import ResourceCollectionSection from '@components/team/ResourceCollectionSectio
 import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import { GithubIcon } from '@components/Icons'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
 
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
@@ -33,30 +35,31 @@ import { GithubIcon } from '@components/Icons'
   </GreetingSection>
 
   <TwoColumnSection>
-    <div>
-      <h2 class="text-xl font-medium">About</h2>
-      <p class="py-2">
+    <SimpleColumn>
+      <SmallTitle>About</SmallTitle>
+      <p>
         Joe Littlejohn is a delivery expert with two decades of software engineering experience. He has led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
       </p>
-      <p class="py-2">
+      <p>
         Joe has steered JUXT projects from inception to MVP and beyond. He advises on technical direction, finding a route forward to solve technical problems and also guiding wider engineering strategy.
       </p>
-    </div>
-    <div>
-      <h2 class="text-xl font-medium">Why Joe?</h2>
-      <ul class="list-disc">
-        <li class="py-2">
+    </SimpleColumn>
+
+    <SimpleColumn>
+      <SmallTitle>Why Joe?</SmallTitle>
+      <ul class="list-disc flex flex-col gap-2">
+        <li>
           Joe has built data-intensive cloud systems at global scale in the B2B and B2C space.
         </li>
-        <li class="py-2">
+        <li>
           Joe has been using lean and agile methods since the mid 00s, and brings a wealth of experience in helping teams stay on track and continuously improve.
         </li>
       </ul>
-    </div>
+    </SimpleColumn>
   </TwoColumnSection>
 
-  <TwoColumnSection>
-    <div class="bg-black p-5">
+  <TwoColumnSection bgColor="grey">
+    <div class="bg-[#b76330] p-5">
       <h2 class="text-xl font-medium">Open Source</h2>
       <GithubIcon className="h-20 w-20 p-4 fill-white float-left"/>
       <p class="italic py-4">
@@ -64,15 +67,15 @@ import { GithubIcon } from '@components/Icons'
       </p>
     </div>
 
-    <div class="bg-black p-5 row-start-2 col-start-2">
+    <SimpleColumn className="bg-[#b76330] gap-4 p-5 row-start-2 col-start-2">
       <h2 class="text-xl font-medium">Feedback</h2>
-      <p class="italic  py-3">
+      <p class="italic">
         "I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions."<br> -- Rice Lake Weighing Systems
       </p>
-      <p class="italic py-3">
+      <p class="italic">
         "[Joe's] communication followed by execution is beyond impressive."<br> -- Excel Energy Services
       </p>
-    </div>
+    </SimpleColumn>
   </TwoColumnSection>
 
 
@@ -103,7 +106,6 @@ import { GithubIcon } from '@components/Icons'
       link="https://www.juxt.pro/radar/"/>
   </ResourceCollectionSection>
 
-  <ContactSection {...myData.frontmatter}>
-  </ContactSection>
+  <ContactSection {...myData.frontmatter} />
 
 </ProfilePage>
