@@ -3,7 +3,7 @@ const {name, description, link} = Astro.props;
 ---
 <div class="flex items-center">
   <div class="grow flex flex-col space-y-4">
-    <h4 class="text-lg col-span-2">{name}</h4>
+    <a href={link} target="_blank" class="text-lg col-span-2">{name}</a>
     <p>{description}</p>
   </div>
   <a href={link} target="_blank"
