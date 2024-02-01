@@ -1,8 +1,8 @@
 ---
-var {bgClass, bgStyle, bgColor, className} = Astro.props;
+var {bgClass = "", bgStyle = "", bgColor = "grey", className = ""} = Astro.props;
 
 // NOTE: Also change in LatestBlogsSection
-// TODO: Move somewhere else?
+// TODO: Move somewhere else? Tailwind?
 if (bgColor == "orange") {
     bgClass += " bg-[#b76330]";
 } else if (bgColor == "yellow") {
