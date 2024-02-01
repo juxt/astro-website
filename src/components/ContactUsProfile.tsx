@@ -95,7 +95,7 @@ export default function ContactUsProfile({subject}) {
             rows={6}
             {...inputProps}
             {...register('description', { required: true })}
-            placeholder='How can we help?'
+            placeholder='How can I help?'
           />
           <div className='text-xs'>
             By submitting your details you agree to JUXT’s{' '}

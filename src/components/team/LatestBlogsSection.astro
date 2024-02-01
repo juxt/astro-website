@@ -6,7 +6,15 @@ import { BlogCard } from '@components/BlogCard'
 
 const isDev = import.meta.env.DEV;
 
-const { code, name, lastName } = Astro.props
+const { code, name, lastName, bgColor } = Astro.props
+
+var bgClass = ""
+// NOTE: Also change in Section
+if (bgColor == "orange") {
+    bgClass += " bg-[#b76330]";
+} else if (bgColor == "yellow") {
+    bgClass += " bg-[#ca8a04]";
+}
 
 // NOTE: This is an implementation from /algolia/index.cljs (when setting the "author")
 const searchName = (name && lastName) ? `${name}%20${lastName}` : null;
@@ -41,27 +49,25 @@ const blogs = filteredBlogs
     </div>
   </Section>
   
-  <div>
-    <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
-      {
-        blogs[0] &&
-        <div class="">
-          <BlogCard hideAuthor=true {...blogs[0]} />
-        </div>
-      }
-      {
-        blogs[1] &&
-        <div class="max-lg:hidden">
-          <BlogCard hideAuthor=true {...blogs[1]} />
-        </div>
-      }
-      {
-        blogs[2] &&
-        <div class="max-xl:hidden">
-          <BlogCard hideAuthor=true {...blogs[2]} />
-        </div>
-      }
-    </div>
+  <div class={"grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center" + bgClass}>
+    {
+      blogs[0] &&
+      <div class="">
+        <BlogCard hideAuthor=true {...blogs[0]} />
+      </div>
+    }
+    {
+      blogs[1] &&
+      <div class="max-lg:hidden">
+        <BlogCard hideAuthor=true {...blogs[1]} />
+      </div>
+    }
+    {
+      blogs[2] &&
+      <div class="max-xl:hidden">
+        <BlogCard hideAuthor=true {...blogs[2]} />
+      </div>
+    }
   </div>
   
   <Section className="pb-20" {...Astro.props}>
