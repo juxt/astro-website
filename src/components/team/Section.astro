@@ -1,5 +1,5 @@
 ---
-var {bgClass = "", bgStyle = "", bgColor = "grey", className = ""} = Astro.props;
+var {bgClass = "", bgStyle = "", bgColor = "grey", pClass = "px-10", className = ""} = Astro.props;
 
 // NOTE: Also change in LatestBlogsSection
 // TODO: Move somewhere else? Tailwind?
@@ -21,7 +21,7 @@ if (bgColor == "orange") {
 }
 {
     !(bgClass || bgStyle) &&
-    <div class={"container mx-auto lg:max-w-5xl px-10 " + className}>
+    <div class={"container mx-auto lg:max-w-5xl " + pClass + " " + className}>
         <slot/>
     </div>
 }
