@@ -1,0 +1,16 @@
+---
+import Section from '@components/team/Section.astro'
+
+const {imgPos = "left"} = Astro.props;
+---
+<Section pClass="" className="grid grid-cols-1 md:grid-cols-2" {...Astro.props}>
+    {
+      (imgPos == "left") && <slot name="image"/>
+    }
+    <div class="p-10">
+        <slot/>
+    </div>
+    {
+      (imgPos == "right") && <slot name="image"/>
+    }
+</Section>

@@ -31,6 +31,7 @@ import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import ContactSection from '@components/team/ContactSection.astro'
+import FeatureSection from '@components/team/FeatureSection.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
@@ -49,6 +50,16 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       <li>Platform Engineering</li>
     </ul>
   </GreetingSection>
+
+  <FeatureSection link="/jdt-tech-roundtable">
+    <AssetImage slot="image" src="/src/assets/blog/confs.jpg" alt="" />
+    <SimpleColumn>
+      <SmallTitle>Technology Roundtable</SmallTitle>
+      <p>
+        Something here about the roundtable and why it's good.
+      </p>
+    </SimpleColumn>
+  </FeatureSection>
 
   <GallerySection>
     <GalleryImage
@@ -71,6 +82,16 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
         src="/src/assets/blog/confs.jpg"
         alt="People talking around a convention desk" />
   </GallerySection>
+
+  <FeatureSection link="/jdt-tech-roundtable" imgPos="right">
+    <AssetImage slot="image" src="/src/assets/blog/confs.jpg" alt="" />
+    <SimpleColumn>
+      <SmallTitle>Technology Roundtable</SmallTitle>
+      <p>
+        Something here about the roundtable and why it's good.
+      </p>
+    </SimpleColumn>
+  </FeatureSection>
 
   <TwoColumnSection>
     <SimpleColumn>
