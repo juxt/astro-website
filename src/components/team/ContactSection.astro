@@ -5,18 +5,14 @@ import ContactItem from '@components/team/ContactItem.astro'
 import ContactUsProfile from '@components/ContactUsProfile'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
-var { email, twitter, linkedin, github, hackernews, fullName } = Astro.props
+var { email, twitter, linkedin, github, hackernews, name, fullName } = Astro.props
 twitter = twitter?.replace(/^@/, '')
 ---
 <Section className="py-10 flex flex-col md:flex-row gap-10">
     <div class="basis-1 grow">
         <h3 class="text-xl font-medium">Get in Touch</h3>
-        <p>
-            We are very approachable and would love to speak to you.
-            Feel free to call, email, tweet or send us a message.
-        </p>
 
-        <div class="pt-10 flex flex-col gap-4">
+        <div class="pt-5 flex flex-col gap-4">
             { email &&
                 <ContactItem href={"mailto:" + email}>
                     <EmailIcon slot="icon" className="w-7"/>
@@ -56,8 +52,7 @@ twitter = twitter?.replace(/^@/, '')
     { /* Mobile: Horizontal line, otherwise vertical */ }
     <div class="border-t md:border-r border-slate-600"></div>
     <div class="basis-1 grow">
-        <h3 class="text-xl font-medium">Send a Message</h3>
-        <p>Your message is important to us. We aim to get back to you within 48 hours.</p>
+        <h3 class="text-xl font-medium">Message {name}</h3>
         <div class="pt-5">
             <ContactUsProfile
                 subject={"New contact submission from " + fullName + "'s profile page"}
