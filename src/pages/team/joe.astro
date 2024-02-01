@@ -1,0 +1,111 @@
+---
+// 1. Source profile data from your profile file
+import * as myData from '../../data/people/joe.md'
+
+// 2. Extract the fields you are planning to use in your profile page.
+// NOTE: This won't error if properties are missing
+const { code, jobTitle, fullName } = myData.frontmatter;
+
+// 3. Import any components you need
+import { getImage, Image } from 'astro:assets'
+import ProfilePage from '@components/team/ProfilePage.astro'
+
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GreetingSection from '@components/team/GreetingSection.astro'
+import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
+import { GithubIcon } from '@components/Icons'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+
+---
+<ProfilePage title={fullName + " - " + jobTitle}>
+  <GreetingSection {...myData.frontmatter}>
+    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-lg font-medium">
+      <li>Architecture analysis and review</li>
+      <li>Cloud-native design</li>
+      <li>Roadmapping and getting to MVP</li>
+      <li>Unblocking teams</li>
+      <li>Functional programming, JVM languages</li>
+    </ul>
+  </GreetingSection>
+
+  <TwoColumnSection>
+    <SimpleColumn>
+      <SmallTitle>About</SmallTitle>
+      <p>
+        Joe Littlejohn is a delivery expert with two decades of software engineering experience. He has led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
+      </p>
+      <p>
+        Joe has steered JUXT projects from inception to MVP and beyond. He advises on technical direction, finding a route forward to solve technical problems and also guiding wider engineering strategy.
+      </p>
+    </SimpleColumn>
+
+    <SimpleColumn>
+      <SmallTitle>Why Joe?</SmallTitle>
+      <ul class="list-disc flex flex-col gap-2">
+        <li>
+          Joe has built data-intensive cloud systems at global scale in the B2B and B2C space.
+        </li>
+        <li>
+          Joe has been using lean and agile methods since the mid 00s, and brings a wealth of experience in helping teams stay on track and continuously improve.
+        </li>
+      </ul>
+    </SimpleColumn>
+  </TwoColumnSection>
+
+  <TwoColumnSection bgColor="grey">
+    <div class="bg-[#ac480d] p-5 rounded-sm">
+      <h2 class="text-xl font-medium">Open Source</h2>
+      <GithubIcon className="h-20 w-20 p-4 fill-white float-left"/>
+      <p class="italic py-4">
+        Joe has built and run a number of successful open source projects, attracting over 6,000 GitHub stars and over 130 contributors.
+      </p>
+    </div>
+
+    <SimpleColumn className="bg-[#ac480d] gap-4 p-5 rounded-sm md:row-start-2 md:col-start-2">
+      <h2 class="text-xl font-medium">Feedback</h2>
+      <p class="italic">
+        "I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions."<br> -- Rice Lake Weighing Systems
+      </p>
+      <p class="italic">
+        "[Joe's] communication followed by execution is beyond impressive."<br> -- Excel Energy Services
+      </p>
+    </SimpleColumn>
+  </TwoColumnSection>
+
+
+  <QuoteSection>
+    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and a composed style; provides direction, confidence, and reassurance across a team and organisation.
+  </QuoteSection>
+
+  <ResourceCollectionSection title="Resources" subtitle="Joe's podcasts and blogs">
+    <ResourceItem
+      name="JUXTCast S5E7 - UK Post Office Horizon Scandal"
+      description="Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal."
+      link="https://www.youtube.com/watch?v=SZfSKDuz2yg"/>
+    <ResourceItem
+      name="Cutting software waste"
+      description="Where are the most impactful wastes in the software business, and how can we eliminate them?"
+      link="https://www.podchaser.com/podcasts/juxt-cast-893524"/>
+    <ResourceItem
+      name="Clojure in Banking: Griffin"
+      description="A fully-regulated, API-driven bank, with Clojure"
+      link="https://www.juxt.pro/blog/clojure-in-griffin/"/>
+    <ResourceItem
+      name="Clojure in Security: Docker"
+      description="Securing the software supply chain with Clojure"
+      link="https://www.juxt.pro/blog/clojure-in-docker/"/>
+    <ResourceItem
+      name="JUXT Clojure Radar"
+      description="An opinionated guide to the Clojure ecosystem - the tools, libraries and frameworks that we reach of, and also those that we avoid."
+      link="https://www.juxt.pro/radar/"/>
+  </ResourceCollectionSection>
+
+  <ContactSection {...myData.frontmatter} />
+
+</ProfilePage>

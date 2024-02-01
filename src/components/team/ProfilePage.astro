@@ -1,0 +1,10 @@
+---
+import Layout from '@layouts/Layout.astro'
+
+const {title} = Astro.props;
+---
+<Layout navbar title={title}>
+  <div class='bg-zinc-900 text-white text-xs overflow-x-hidden'>
+    <slot/>
+  </div>
+</Layout>

@@ -1,0 +1,123 @@
+---
+// 1. Source profile data from your profile file
+import * as myData from '../../data/people/mal.md'
+
+// 2. Extract the fields you are planning to use in your profile page.
+// NOTE: This won't error if properties are missing
+const { code, jobTitle, fullName } = myData.frontmatter;
+
+// 3. Import any components you need
+import { getImage, Image } from 'astro:assets'
+import ProfilePage from '@components/team/ProfilePage.astro'
+
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GreetingSection from '@components/team/GreetingSection.astro'
+import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import GitHubRepositoriesSection from '@components/team/GitHubRepositoriesSection.astro'
+import GitHubRepositoryItem from '@components/team/GitHubRepositoryItem.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+---
+<ProfilePage title={fullName + " - " + jobTitle}>
+  <GreetingSection {...myData.frontmatter}>
+    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-lg font-medium">
+      <li>Systems Architecture</li>
+      <li>Web Standards</li>
+      <li>API Security</li>
+      <li>Middleware</li>
+      <li>Databases</li>
+      <li>Clojure Development</li>
+      <li>Linux</li>
+    </ul>
+  </GreetingSection>
+
+  <TwoColumnSection>
+    <SimpleColumn>
+      <SmallTitle>Background</SmallTitle>
+      <p>
+        During the 80s he wrote a number of games in 68000 assembler for the Atari ST, and almost had a title published by Electronic Arts. In 1993, he won an award for his final year undergraduate project at Warwick University, a vector-based satellite navigation system for cars, written in C++ and XWin.
+      </p>
+      <p>
+        Malcolm's first roles post-university led him into Unix systems administration and from there to becoming an Oracle DBA, before finding a route back into full-time programming with Java in 1996. He was part of the original team that built jcoverage, which became Coburtura, still a hugely popular tool for measuring test code coverage for Java.
+      </p>
+      <p>
+        In 1998 he built one of the first Java EJB servers — EJBHome — which was acquired by IONA Technologies the following year. At IONA he co-led the team that created their J2EE application server, one of the first to receive a compatibility certification from Sun. Malcolm built the first version of the JSP engine, sitting on Sun’s EJB 2.0 technical committee and won the President’s Award for revolutionising IONA’s approach to product packaging.
+      </p>
+      <p>
+        Malcolm has worked for many years as a developer, consultant, speaker and trainer in Agile methodologies in various sectors, including banking and telecommunications.
+      </p>
+    </SimpleColumn>
+
+    <SimpleColumn>
+      <SmallTitle>Skills</SmallTitle>
+      <p>
+        Malcolm is a Clojure expert, systems designer and builder. He is a prolific library author and responsible for many of JUXT's open-source libraries on GitHub.
+      </p>
+      <p>
+        Malcolm has been building web APIs for customers for over a decade and is intimately acquainted with the HTTP specifications. He has authored or contributed to a number of web libraries that assist in the creation of HTTP-based services, including plugboard, Liberator, yada, https://www.rest.guide and Site.
+      </p>
+
+    <SimpleColumn class="col-start-2">
+      <SmallTitle>Talks</SmallTitle>
+      <p>
+        Malcolm is a regular speaker and gives many tech talks.
+      </p>
+    </SimpleColumn>
+
+
+    </SimpleColumn>
+  <!--
+    <SimpleColumn className="col-start-2 row-start-2">
+      <SmallTitle>Why {name}?</SmallTitle>
+      <ul class="list-disc list-inside">
+      </ul>
+    </SimpleColumn>
+  -->
+  </TwoColumnSection>
+
+  <!--
+  <QuoteSection author="Albert Einstein">
+    God does not play dice with the Universe
+  </QuoteSection>
+  -->
+
+  <ResourceCollectionSection title="Notable Talks" subtitle="A selection of Malcolm's online talks">
+
+    <ResourceItem
+      name="Building A Secure API Platform: A Data-driven Approach"
+      description="A talk I gave in October 2023 at the Nordic APIs Platform Summit in Stockholm"
+      link="https://www.youtube.com/watch?v=7qZ-GWvx6lM"
+    />
+
+    <ResourceItem
+      name="Clojure on SCIs"
+      description="The opening keynote I gave at Babashka Conf in June 2023"
+      link="https://www.youtube.com/watch?v=Cq4S7nO1KOo"
+    />
+
+    <ResourceItem
+      name="The Universe As A Value"
+      description="A talk given at ClojuTRE 2016"
+      link="https://www.youtube.com/watch?v=odPAkEO2uPQ"
+    />
+
+  </ResourceCollectionSection>
+
+  <LatestBlogsSection {...myData.frontmatter} />
+
+  <GitHubRepositoriesSection {...myData.frontmatter} >
+    <GitHubRepositoryItem owner ="juxt-site" name="site" description="A platform for building stateful API services." />
+    <GitHubRepositoryItem owner="juxt" name="pick" description="A Clojure library for HTTP server-driven content negotiation." />
+    <GitHubRepositoryItem owner="juxt" name="reap" description="A Clojure library for decoding and encoding strings used by web protocols." />
+    <GitHubRepositoryItem owner="juxt" name="grab" description="A Clojure library for parsing and executing GraphQL queries. " />
+    <GitHubRepositoryItem owner="juxt" name="jinx" description="jinx is not xml-schema (it's json-schema!)" />
+    <GitHubRepositoryItem owner="juxt" name="bidi" description="Bidirectional URI routing" />
+  </GitHubRepositoriesSection>
+
+  <ContactSection {...myData.frontmatter} />
+</ProfilePage>

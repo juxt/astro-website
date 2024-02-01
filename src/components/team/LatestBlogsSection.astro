@@ -1,0 +1,75 @@
+---
+import { getImage, Image } from 'astro:assets'
+import Section from '@components/team/Section.astro'
+import { parseBlogs } from '@utils/common'
+import { BlogCard } from '@components/BlogCard'
+
+const isDev = import.meta.env.DEV;
+
+const { code, name, lastName } = Astro.props
+
+// NOTE: This is an implementation from /algolia/index.cljs (when setting the "author")
+const searchName = (name && lastName) ? `${name}%20${lastName}` : null;
+
+const authorImageImport = {
+  heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) => import(`../../assets/people/${authorImage}.jpg`)
+}
+
+const unfilteredBlogs = await parseBlogs({
+  rawBlogs: await Astro.glob<MarkdownInstance<Blog>>('/src/pages/blog/{*.mdx,*.md}'),
+  rawPeople: await Astro.glob<MarkdownInstance<Person>>('/src/data/people/{*.mdx,*.md}'),
+  isDev: isDev,
+  getImage,
+  ...authorImageImport
+})
+
+const filteredBlogs = unfilteredBlogs
+    .filter(({ draft, author }) => (isDev || !draft) && (author == code));
+
+// Sort by publishedDate
+// NOTE: There's a potential bug here with dates being in different formats
+//       e.g. Kpow has the date: 29 Mar 2023, but most other posts use ISO format 2023-03-29
+const blogs = filteredBlogs
+    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+---
+<>
+  <Section className="pt-20" {...Astro.props}>
+    <div class="pb-10 flex flex-col items-center">
+      <h3 class="text-xl font-medium">Recent Content</h3>
+      <slot/>
+    </div>
+  </Section>
+  
+  <div>
+    <div class="grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center">
+      {
+        blogs[0] &&
+        <div class="">
+          <BlogCard hideAuthor=true {...blogs[0]} />
+        </div>
+      }
+      {
+        blogs[1] &&
+        <div class="max-lg:hidden">
+          <BlogCard hideAuthor=true {...blogs[1]} />
+        </div>
+      }
+      {
+        blogs[2] &&
+        <div class="max-xl:hidden">
+          <BlogCard hideAuthor=true {...blogs[2]} />
+        </div>
+      }
+    </div>
+  </div>
+  
+  <Section className="pb-20" {...Astro.props}>
+    {
+      searchName &&
+      <div class="pt-10 flex flex-col items-center">
+          <a class="bg-juxt px-4 py-3 text-white hover:text-zinc-800 rounded-sm" href={"/blog?blog%5BrefinementList%5D%5Bauthor%5D%5B0%5D=" + searchName}>More...</a>
+      </div>
+    }
+  </Section>
+</>

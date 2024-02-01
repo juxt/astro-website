@@ -2,11 +2,14 @@
 code: 'joe'
 name: 'Joe'
 lastName: 'Littlejohn'
+fullName: 'Joe Littlejohn'
 jobTitle: 'Head of Delivery'
 image: 'joe.jpg'
-linkedin: ''
-twitter: ''
-github: ''
+email: 'joe@juxt.pro'
+linkedin: 'joelittlejohn'
+twitter: 'joelittlejohn'
+github: 'joelittlejohn'
+hackernews: 'joelittlejohn'
 featured:
-  weight: 5
+  weight: 6
 ---

@@ -1,0 +1,17 @@
+---
+import { AtIcon } from '@components/Icons'
+
+const {href} = Astro.props;
+---
+<div class="flex gap-8 items-center">
+    <a href={href} target="_blank">
+        <div class="rounded-full bg-amber-500 w-10 h-10 flex place-content-center relative float-left">
+            <slot name="icon">
+                <AtIcon className="w-7" />
+            </slot>
+        </div>
+        <div class="float-left p-3">
+          <slot name="default"/>
+        </div>
+    </a>
+</div>

@@ -2,18 +2,14 @@
 code: 'jon'
 name: 'Jon'
 lastName: 'Pither'
+fullName: 'Jon Pither'
+email: 'jon@juxt.pro'
 jobTitle: 'CEO'
 image: 'jon.jpg'
-linkedin: ''
-twitter: ''
-github: ''
+linkedin: 'jon-pither-juxt-ceo'
+twitter: 'jonpither'
+github: 'jonpither'
+
 featured:
   weight: 1
-
-expert: true
-expertDraft: true
-expertise:
-  - 'Frontend'
-  - 'Data Driven Apps'
-  - 'Performance'
 ---

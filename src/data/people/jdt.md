@@ -2,11 +2,15 @@
 code: 'jdt'
 name: 'Jeremy'
 lastName: 'Taylor'
+fullName: 'Jeremy Taylor'
+email: 'jdt@juxt.pro'
 jobTitle: 'Head of Product'
 image: 'jdt.jpg'
-linkedin: ''
-twitter: ''
-github: ''
+linkedin: 'jdtaylor'
+twitter: 'refset'
+github: 'refset'
+hackernews: 'refset'
+
 featured:
   weight: 6
 ---
