@@ -1,0 +1,18 @@
+---
+import AssetImage from '@components/team/AssetImage.astro'
+
+const { link } = Astro.props;
+---
+<div class="relative group">
+  {
+    link &&
+    <a class="hidden group-hover:grid absolute bg-white/25 w-full h-full place-items-center"
+       href={link}
+       target="_blank">
+      <span class="bg-juxt px-4 py-3 text-white hover:text-zinc-800 rounded-sm">
+        Find out more
+      </span>
+    </a>
+  }
+  <AssetImage className="hover:greyscale" {...Astro.props} />
+</div>
