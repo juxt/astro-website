@@ -1,14 +1,15 @@
 ---
 const {name, description, link} = Astro.props;
 ---
-<div class="flex items-center">
-  <div class="grow flex flex-col space-y-4">
-    <h4 class="text-lg col-span-2">{name}</h4>
-    <p>{description}</p>
-  </div>
-  <a href={link} target="_blank"
-    class="shrink-0 rounded-full bg-zinc-800 w-20 h-max px-3 py-3 flex justify-center">
-    View
+<div class="flex items-center w-full">
+  <a href={link} target="_blank" class="w-full flex-row flex">
+    <div class="flex flex-col space-y-4 grow">
+      <h4 class="text-lg col-span-2">{name}</h4>
+      <p>{description}</p>
+    </div>
+    <span class="shrink-0 rounded-full bg-zinc-800 my-auto w-20 h-max px-3 py-3 flex justify-center">
+      View
+    </span>
   </a>
 </div>
 <hr class="border-black my-5 col-span-2" />
