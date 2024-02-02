@@ -1,0 +1,102 @@
+---
+author: 'mal'
+title: 'Fun with URIs'
+description: ''
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2024-02-02'
+heroImage: 'the-uri-is-the-thing.jpg'
+tags:
+  - 'rfc'
+  - 'web'
+  - 'routing'
+---
+
+Image attribution: https://www.flickr.com/photos/nickwebb/2918883446
+
+import { Image } from 'astro:assets'
+import winking from '../../assets/blog/winking_babushka.jpg'
+
+If there's one invention in the 20th Century that gets overlooked, it's the URI.
+URIs are the magic that makes the web work, bringing the Internet to almost everyone on the planet today.
+
+As I write this, many people are re-discovering the hypertext foundations of the web.
+Indeed, there are web development libraries, such as [htmx](https://htmx.org), that are rewinding the clock and imagining a different future for the early web.
+
+Hypertext systems work by presenting a set of URIs (links) embedded inside a page.
+When a user clicks on one of these links, the browser navigates to a new page.
+With some care, a web application can be developed as a set of hypertext pages.
+Developers often need to embed some state in the link's URI.
+For example, a URI in a banking application might embed the account number and transaction period so that the web server generating the response can query the correct data from a database.
+
+## URI Templates
+
+Typically, developers use basic ad-hoc techniques such as string concatenation to embed state in a URI.
+However, there's actually a standard called **URI Template** ([RFC 6570](https://www.rfc-editor.org/rfc/rfc6570)).
+
+You may not have seen a standard URI Template before, but if you're familiar with OpenAPI the syntax may look familiar.
+
+> OpenAPI serialization rules are based on a subset of URI template patterns defined by RFC 6570.
+> -- https://swagger.io/docs/specification/serialization/
+
+Here's an example:
+
+```
+https://bank.com/accounts/{accno}/transactions{.format}{?from,to}
+```
+
+## URI Templates in Clojure
+
+I've recently added support for URI Templates to our Clojure library, [reap](https://github.com/juxt/reap).
+
+Using reap, we can compile a URI Template and, providing some data values, construct a URI from it:
+
+```clojure
+(require '[juxt.reap.rfc6570 :refer [compile-uri-template make-uri]])
+
+(make-uri
+
+  (compile-uri-template
+    "https://bank.com/accounts/{accno}/transactions{.format}{?from,to}"
+
+  {"accno" "12345678"
+   "format" "csv"
+   "from" "20201010"
+   "to" "20201110"}))
+
+=>
+
+"https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110"
+```
+
+We can also use a compiled template to go in the other direction.
+Say we have a URI of `https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110`
+and want to extract the data encoded into it.
+
+```clojure
+(require '[juxt.reap.rfc6570 :refer [compile-uri-template match-uri]])
+
+(match-uri
+
+  (compile-uri-template
+    "https://bank.com/accounts/{accno}/transactions{.format}{?from,to}"
+
+  "https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110"))
+
+=>
+
+{"accno" "12345678"
+ "format" "csv"
+ "from" "20201010"
+ "to" "20201110"}
+```
+
+## Applications of URI Template
+
+The ability to construct and consume URIs makes it easier to build hypertext-based web applications.
+
+For example, you could use our reap library as the basis of a web router to decode state encoded into URIs.
+
+Of course, there are many Clojure libraries already that do this well, including our own [bidi](https://github.com/juxt/bidi) library.
+
+However, URI Template supports more sophisticated features, such as embedding lists and maps into URIs.
