@@ -21,6 +21,9 @@ import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
+import FeatureSection from '@components/team/FeatureSection.astro'
+import FeatureText from '@components/team/FeatureText.astro'
+import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 ---
@@ -82,27 +85,45 @@ import GalleryImage from '@components/team/GalleryImage.astro'
   -->
   </TwoColumnSection>
 
-  <GallerySection className="max-w-5xl m-0">
-    <div class="w-1/2 p-5 text-justify mt-24">
+  <FeatureSection imgPos="right">
 
-      <h2 class="text-sm font-medium">Featured Talk</h2>
-      <h3 class="text-lg font-medium">Backends. Where did they come from and why are they here?</h3>
+    <FeatureText
+      category="Featured Talk"
+      title="Backends. Where did they come from and why are they here?">
 
-      <p class="py-4">
+      <SimpleColumn>
+	<p>Here's a talk I gave at JUXT's 10 year birthday celebration last May (2023).</p>
+	<p>We're always trying to think of ways to dramatically simplify IT architectures, which almost always become over-complicated for little gain.</p>
+	<p>This talk presents the possibility of a 2-tier architecture where the usual business-logic backend and database tiers are merged.</p>
+      </SimpleColumn>
+    </FeatureText>
 
-        Here's a talk I gave at JUXT's 10 year birthday celebration
-        last May (2023). We're always trying to think of ways to
-        dramatically simplify IT architectures, which almost always
-        become over-complicated for little gain. This talk presents
-        the possibility of a 2-tier architecture where the usual
-        business-logic backend and database tiers are merged.
+    <FeatureYouTube slot="image"
+      title="Backends. Where did they come from and why are they here?"
+      embedUrl="https://www.youtube.com/embed/BG38x677s44"
+    />
 
-      </p>
-    </div>
+  </FeatureSection>
 
-    <iframe class="w-1/2" src="https://www.youtube.com/embed/BG38x677s44" title="&quot;Backends. Where did they come from and why are they here?&quot; by JUXT CTO Malcolm Sparks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <FeatureSection imgPos="left">
 
-  </GallerySection>
+    <FeatureText
+      category="Featured Talk"
+      title="Babashka Conf 2023: Clojure on SCIs (Opening Keynote)">
+
+      <SimpleColumn>
+	<p>I gave the opening Key Note at the inaugural Babashka conf, last year in Berlin!</p>
+	<p>Babashka is a wonderful replacement for bash, with all the power and without the arcane syntax.</p>
+	<p>It's my go-to tool for anything that requires a bit of scripting together.</p>
+      </SimpleColumn>
+    </FeatureText>
+
+    <FeatureYouTube slot="image"
+      title="Clojure on SCIs"
+      embedUrl="https://www.youtube.com/embed/Cq4S7nO1KOo"
+    />
+
+  </FeatureSection>
 
   <!--
   <QuoteSection author="Albert Einstein">
