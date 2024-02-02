@@ -1,19 +1,22 @@
 ---
 import Section from '@components/team/Section.astro'
 
+const { className } = Astro.props
+
 // These use css :nth-child and arbitrary variants from tailwind
 // https://tailwindcss.com/docs/hover-focus-and-other-states#using-arbitrary-variants
 
 // This hides all except the first two children
 var show2OnMobile = "[&>*:nth-child(n+3)]:hidden";
 // This:
-// - reverses `show2OnMobile` 
+// - reverses `show2OnMobile`
 // - hides all except the last four children
 var show4OnLg = "lg:[&>*:nth-child(n+3)]:block lg:[&>*:nth-child(n+5)]:hidden";
 ---
 <div class={ "container mx-auto max-w-8xl h-96 flex "
              + show2OnMobile + " "
-             + show4OnLg}
+             + show4OnLg
+             + " " + className}
      {...Astro.props}>
   <slot/>
 </div>

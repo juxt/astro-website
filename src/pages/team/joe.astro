@@ -11,6 +11,8 @@ import { getImage, Image } from 'astro:assets'
 import ProfilePage from '@components/team/ProfilePage.astro'
 
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
@@ -38,37 +40,68 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
     <SimpleColumn>
       <SmallTitle>About</SmallTitle>
       <p>
-        Joe Littlejohn is a delivery expert with two decades of software engineering experience. He has led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
+        I'm a software delivery expert with two decades of software engineering experience. I have led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
       </p>
       <p>
-        Joe has steered JUXT projects from inception to MVP and beyond. He advises on technical direction, finding a route forward to solve technical problems and also guiding wider engineering strategy.
+        I have steered JUXT projects from inception to MVP and beyond, advising on technical direction, finding a route forward to solve technical problems, and also guiding wider engineering strategy.
+      </p>
+      <p>
+        I started programming in Commodore BASIC on the C64, but my professional programming has been mostly using JVM languages. I began my career using OOP and became interested in functional programming around 2011. In 2012 I started writing production systems in Clojure and have loved the language ever since.
       </p>
     </SimpleColumn>
 
     <SimpleColumn>
-      <SmallTitle>Why Joe?</SmallTitle>
+      <SmallTitle>Skills</SmallTitle>
       <ul class="list-disc flex flex-col gap-2">
         <li>
-          Joe has built data-intensive cloud systems at global scale in the B2B and B2C space.
+          I have built data-intensive cloud systems at global scale in the B2B and B2C space.
         </li>
         <li>
-          Joe has been using lean and agile methods since the mid 00s, and brings a wealth of experience in helping teams stay on track and continuously improve.
+          I have been a trusted technical advisor to startups across entertainment, fintech, and law.
+        </li>
+        <li>
+          I have designed public-facing APIs for flexibility and evolvability, built novel API Gateway and service discovery solutions at scale, delivered event-based systems using Kafka and other messaging technology, and solved problems of global data replication (including across China's Great Firewall). I'm most familiar with AWS, having built systems with it for over 10 years.
+        </li>
+        <li>
+          I've been using lean and agile methods since the mid 00s, and bring a wealth of experience in helping teams stay on track and continuously improve.
         </li>
       </ul>
     </SimpleColumn>
   </TwoColumnSection>
 
-  <TwoColumnSection bgColor="grey">
-    <div class="bg-[#ac480d] p-5 rounded-sm text-justify">
-      <h2 class="text-xl font-medium">Open Source</h2>
-      <GithubIcon className="h-20 w-20 p-4 fill-white float-left"/>
-      <p class="italic py-4">
-        Joe has built and run a number of successful open source projects, attracting over 6,000 GitHub stars and over 130 contributors.
-      </p>
-    </div>
+  <GallerySection className="max-w-5xl">
+    <a href="https://github.com/joelittlejohn" class="h-full w-3/6 bg-[#ac480d]" target="_blank">
+      <div class="p-5 text-justify mt-24">
+        <h2 class="text-xl font-medium">Open Source</h2>
+        <GithubIcon className="h-20 w-20 p-4 fill-white float-left"/>
+        <p class="italic py-4">
+          I've built and run a number of successful open source projects, attracting over 6,000 GitHub stars and over 130 contributors.
+        </p>
+        <p class="text-right">
+          <img class="inline" alt="joelittlejohn's stars" src="https://img.shields.io/github/stars/joelittlejohn?style=social"/>
+        </p>
+      </div>
+    </a>
+    <GalleryImage
+      src="/src/assets/team/joe/1.jpg"
+      alt="" />
+  </GallerySection>
 
-    <SimpleColumn className="bg-[#ac480d] gap-4 p-5 rounded-sm md:row-start-2 md:col-start-2">
-      <h2 class="text-xl font-medium">Feedback</h2>
+  <GallerySection className="max-w-5xl">
+    <GalleryImage
+      src="/src/assets/team/joe/2.jpg"
+      alt="" />
+    <GalleryImage
+      src="/src/assets/team/joe/3.jpg"
+      alt="" />
+  </GallerySection>
+
+  <GallerySection className="max-w-5xl">
+    <GalleryImage
+      src="/src/assets/team/joe/4.jpg"
+      alt="" />
+    <SimpleColumn className="bg-[#ac480d] gap-5 p-5 w-3/6">
+      <h2 class="text-xl font-medium mt-20">Feedback</h2>
       <p class="italic">
         "I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions."<br> -- Rice Lake Weighing Systems
       </p>
@@ -76,18 +109,20 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
         "[Joe's] communication followed by execution is beyond impressive."<br> -- Excel Energy Services
       </p>
     </SimpleColumn>
-  </TwoColumnSection>
+  </GallerySection>
 
-
-  <QuoteSection>
-    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and a composed style; provides direction, confidence, and reassurance across a team and organisation.
-  </QuoteSection>
-
-  <ResourceCollectionSection title="Resources" subtitle="Joe's podcasts and blogs">
+  <ResourceCollectionSection title="Podcasts">
     <ResourceItem
       name="JUXTCast S5E7 - UK Post Office Horizon Scandal"
       description="Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal."
       link="https://www.youtube.com/watch?v=SZfSKDuz2yg"/>
+    <ResourceItem
+      name="JUXTCast S5E5 - Platform Engineering and Internal Developer Platforms"
+      description="Joe Littlejohn is joined by JUXT Software Engineers Aaron Knauf and Mariusz Saternus to talk Platform Engineering, and their experiences delivering effective developer platforms in large tech organisations."
+      link="https://www.youtube.com/watch?v=uFWO2chGZOs"/>
+  </ResourceCollectionSection>
+
+  <ResourceCollectionSection title="Blogs & Articles" bgColor="orange">
     <ResourceItem
       name="Cutting software waste"
       description="Where are the most impactful wastes in the software business, and how can we eliminate them?"
@@ -101,14 +136,14 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       description="Securing the software supply chain with Clojure"
       link="https://www.juxt.pro/blog/clojure-in-docker/"/>
     <ResourceItem
-      name="JUXTCast S5E5 - Platform Engineering and Internal Developer Platforms"
-      description="Joe Littlejohn is joined by JUXT Software Engineers Aaron Knauf and Mariusz Saternus to talk Platform Engineering, and their experiences delivering effective developer platforms in large tech organisations."
-      link="https://www.youtube.com/watch?v=uFWO2chGZOs"/>
-    <ResourceItem
       name="JUXT Clojure Radar"
       description="An opinionated guide to the Clojure ecosystem - the tools, libraries and frameworks that we reach of, and also those that we avoid."
       link="https://www.juxt.pro/radar/"/>
   </ResourceCollectionSection>
+
+  <QuoteSection author="Jamie Robertson, CEO, Invisible Systems">
+    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and a composed style; provides direction, confidence, and reassurance across a team and organisation.
+  </QuoteSection>
 
   <ContactSection {...myData.frontmatter} />
 
