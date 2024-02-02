@@ -21,6 +21,8 @@ import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
@@ -79,6 +81,28 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
     </SimpleColumn>
   -->
   </TwoColumnSection>
+
+  <GallerySection className="max-w-5xl m-0">
+    <div class="w-1/2 p-5 text-justify mt-24">
+
+      <h2 class="text-sm font-medium">Featured Talk</h2>
+      <h3 class="text-lg font-medium">Backends. Where did they come from and why are they here?</h3>
+
+      <p class="py-4">
+
+        Here's a talk I gave at JUXT's 10 year birthday celebration
+        last May (2023). We're always trying to think of ways to
+        dramatically simplify IT architectures, which almost always
+        become over-complicated for little gain. This talk presents
+        the possibility of a 2-tier architecture where the usual
+        business-logic backend and database tiers are merged.
+
+      </p>
+    </div>
+
+    <iframe class="w-1/2" src="https://www.youtube.com/embed/BG38x677s44" title="&quot;Backends. Where did they come from and why are they here?&quot; by JUXT CTO Malcolm Sparks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+  </GallerySection>
 
   <!--
   <QuoteSection author="Albert Einstein">
