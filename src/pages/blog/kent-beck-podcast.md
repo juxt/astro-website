@@ -10,6 +10,7 @@ tags:
   - 'architecture'
   - 'bitemporality'
   - 'xtdb'
+  - podcast
 ---
 
 In our latest <a href='https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck' target='_blank'>JUXT Cast</a> we invited <a href='https://en.wikipedia.org/wiki/Kent_Beck' target='_blank'>Kent Beck</a>, author of the original XP book, <a href='https://www.amazon.co.uk/Extreme-Programming-Explained-Embrace-Change/dp/0321278658' target='_blank'> Extreme Programming <br> Explained</a>.
