@@ -8,6 +8,9 @@ module.exports = {
   content: ['./src/**/*.{astro,html,md,mdx,ts,tsx,json}'],
   theme: {
     extend: {
+      fontSize: {
+        xs: '0.8rem'
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans]
       },
