@@ -7,10 +7,11 @@ import * as myData from '../../data/people/joe.md'
 const { code, jobTitle, fullName } = myData.frontmatter;
 
 // 3. Import any components you need
-import { getImage, Image } from 'astro:assets'
 import ProfilePage from '@components/team/ProfilePage.astro'
-
+import { BlogCard } from '@components/BlogCard'
+import BlockQuote from '@components/BlockQuote.astro'
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import Section from '@components/team/Section.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
@@ -18,13 +19,12 @@ import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
 import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
 import ContactSection from '@components/team/ContactSection.astro'
-import ResourceItem from '@components/team/ResourceItem.astro'
 import { GithubIcon } from '@components/Icons'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
 
 ---
-<ProfilePage title={fullName + " - " + jobTitle}>
+<ProfilePage title={fullName + " - " + jobTitle} >
   <GreetingSection {...myData.frontmatter}>
     <h2 class="py-5 text-3xl font-medium">Expert In</h2>
     <ul class="list-disc list-inside text-lg font-medium">
@@ -36,50 +36,26 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
     </ul>
   </GreetingSection>
 
-  <TwoColumnSection>
-    <SimpleColumn>
-      <SmallTitle>About</SmallTitle>
-      <p>
-        I'm a software delivery expert with two decades of software engineering experience. I have led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
-      </p>
-      <p>
-        I have steered JUXT projects from inception to MVP and beyond, advising on technical direction, finding a route forward to solve technical problems, and also guiding wider engineering strategy.
-      </p>
-      <p>
-        I started programming in Commodore BASIC on the C64, but my professional programming has been mostly using JVM languages. I began my career using OOP and became interested in functional programming around 2011. In 2012 I started writing production systems in Clojure and have loved the language ever since.
-      </p>
-    </SimpleColumn>
+  <Section bgColor='orange' className="py-20 grid grid-cols-1 gap-5">
+    <SmallTitle>Bio</SmallTitle>
+    <p>
+      I'm a software delivery expert with two decades of professional software engineering experience. I started programming in Commodore BASIC on the C64, but my professional work has been mostly using JVM languages. I began my career using OOP and became interested in functional programming around 2011. In 2012 I started writing production systems in Clojure and have loved the language ever since.
+    </p>
+    <p>
+      I have led projects across a wide variety of industries, including Fintech, HR, smart devices, and entertainment, in both small startups and blue-chip companies like Nokia, Microsoft, and Experian.
+    </p>
+    <p>
+      I have steered JUXT projects from inception to MVP and beyond, advising on technical direction, finding a route forward to solve technical problems, and guiding wider engineering strategy.
+    </p>
+  </Section>
 
-    <SimpleColumn>
-      <SmallTitle>Skills</SmallTitle>
-      <ul class="list-disc flex flex-col gap-2">
-        <li>
-          I have built data-intensive cloud systems at global scale in the B2B and B2C space.
-        </li>
-        <li>
-          I have been a trusted technical advisor to startups across entertainment, fintech, and law.
-        </li>
-        <li>
-          I have designed public-facing APIs for flexibility and evolvability, built novel API Gateway and service discovery solutions at scale, delivered event-based systems using Kafka and other messaging technology, and solved problems of global data replication (including across China's Great Firewall). I'm most familiar with AWS, having built systems with it for over 10 years.
-        </li>
-        <li>
-          I've been using lean and agile methods since the mid 00s, and bring a wealth of experience in helping teams stay on track and continuously improve.
-        </li>
-      </ul>
-    </SimpleColumn>
-  </TwoColumnSection>
-
-  <GallerySection className="max-w-5xl">
-    <a href="https://github.com/joelittlejohn" class="h-full w-3/6 bg-[#ac480d]" target="_blank">
-      <div class="p-5 text-justify mt-24">
-        <h2 class="text-xl font-medium">Open Source</h2>
-        <GithubIcon className="h-20 w-20 p-4 fill-white float-left"/>
-        <p class="italic py-4">
-          I've built and run a number of successful open source projects, attracting over 6,000 GitHub stars and over 130 contributors.
-        </p>
-        <p class="text-right">
-          <img class="inline" alt="joelittlejohn's stars" src="https://img.shields.io/github/stars/joelittlejohn?style=social"/>
-        </p>
+  <GallerySection className="max-w-5xl mt-10">
+    <a href="https://github.com/joelittlejohn" class="h-full w-3/6 bg-[#ac480d] grid gap-1" target="_blank">
+      <div class="p-5 w-3/4 m-auto">
+        <GithubIcon className="w-28 p-4 fill-white float-left m-auto" alt="GitHub"/>
+        <img class="p-1 h-10" alt="joelittlejohn's stars" src="https://img.shields.io/github/stars/joelittlejohn?style=social&logo=none"/>
+        <img class="p-1 h-10" alt="joelittlejohn's followers" src="https://img.shields.io/github/followers/joelittlejohn?style=social&logo=none">
+        <img class="p-1 h-10" alt="joelittlejohn's followers" src="https://img.shields.io/github/contributors-anon/joelittlejohn/jsonschema2pojo?style=social&logo=none">
       </div>
     </a>
     <GalleryImage
@@ -96,53 +72,54 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       alt="" />
   </GallerySection>
 
-  <GallerySection className="max-w-5xl">
+  <GallerySection className="max-w-5xl mb-10">
     <GalleryImage
       src="/src/assets/team/joe/4.jpg"
       alt="" />
     <SimpleColumn className="bg-[#ac480d] gap-5 p-5 w-3/6">
-      <h2 class="text-xl font-medium mt-20">Feedback</h2>
-      <p class="italic">
-        "I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions."<br> -- Rice Lake Weighing Systems
-      </p>
-      <p class="italic">
-        "[Joe's] communication followed by execution is beyond impressive."<br> -- Excel Energy Services
-      </p>
+        <div class="m-auto">
+      <SmallTitle>Feedback</SmallTitle>
+      <BlockQuote author="Rice Lake Weighing Systems">
+        I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions.
+      </BlockQuote>
+      <BlockQuote author="Excel Energy Services">
+        [Joe's] communication followed by execution is beyond impressive.
+      </BlockQuote>
+        </div>
     </SimpleColumn>
   </GallerySection>
 
   <ResourceCollectionSection title="Podcasts">
-    <ResourceItem
-      name="JUXTCast S5E7 - UK Post Office Horizon Scandal"
-      description="Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal."
-      link="https://www.youtube.com/watch?v=SZfSKDuz2yg"/>
-    <ResourceItem
-      name="JUXTCast S5E5 - Platform Engineering and Internal Developer Platforms"
-      description="Joe Littlejohn is joined by JUXT Software Engineers Aaron Knauf and Mariusz Saternus to talk Platform Engineering, and their experiences delivering effective developer platforms in large tech organisations."
-      link="https://www.youtube.com/watch?v=uFWO2chGZOs"/>
+    <GallerySection className="max-w-5xl h-90">
+      <iframe class="w-3/6 h-5/6 m-auto" src="https://www.youtube.com/embed/SZfSKDuz2yg?si=2njNlnQs3OSiMK9B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <SimpleColumn className="p-5 w-3/6">
+        <div class="m-auto">
+          <h2 class="text-xl font-bold">JUXTCast S5E7</h2>
+          <h3 class="text-xl font-medium">UK Post Office Horizon Scandal</h3>
+          <p class="mt-3">
+            Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal.
+          </p>
+        </div>
+      </SimpleColumn>
+    </GallerySection>
+    <GallerySection className="max-w-5xl h-90">
+      <SimpleColumn className="gap-5 p-5 w-3/6">
+        <div class="m-auto">
+          <h2 class="text-xl font-bold">JUXTCast S5E5</h2>
+          <h3 class="text-xl font-medium">Platform Engineering and IDPs</h3>
+          <p>
+            Joe Littlejohn is joined by JUXT Software Engineers Aaron Knauf and Mariusz Saternus to talk Platform Engineering, and their experiences delivering effective developer platforms in large tech organisations.
+          </p>
+        </div>
+      </SimpleColumn>
+      <iframe class="w-3/6 h-5/6 m-auto" src="https://www.youtube.com/embed/uFWO2chGZOs?si=tH3BXilTzQaIOVDn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </GallerySection>
   </ResourceCollectionSection>
 
-  <ResourceCollectionSection title="Blogs & Articles" bgColor="orange">
-    <ResourceItem
-      name="Cutting software waste"
-      description="Where are the most impactful wastes in the software business, and how can we eliminate them?"
-      link="https://www.juxt.pro/blog/waste/"/>
-    <ResourceItem
-      name="Clojure in Banking: Griffin"
-      description="A fully-regulated, API-driven bank, with Clojure"
-      link="https://www.juxt.pro/blog/clojure-in-griffin/"/>
-    <ResourceItem
-      name="Clojure in Security: Docker"
-      description="Securing the software supply chain with Clojure"
-      link="https://www.juxt.pro/blog/clojure-in-docker/"/>
-    <ResourceItem
-      name="JUXT Clojure Radar"
-      description="An opinionated guide to the Clojure ecosystem - the tools, libraries and frameworks that we reach of, and also those that we avoid."
-      link="https://www.juxt.pro/radar/"/>
-  </ResourceCollectionSection>
+  <LatestBlogsSection title="Blogs & Articles" hidePodcasts=true {...myData.frontmatter} />
 
   <QuoteSection author="Jamie Robertson, CEO, Invisible Systems">
-    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and a composed style; provides direction, confidence, and reassurance across a team and organisation.
+    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and composed style; provide direction, confidence, and reassurance across a team and organisation.
   </QuoteSection>
 
   <ContactSection {...myData.frontmatter} />
