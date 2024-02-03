@@ -3,6 +3,7 @@ import { getImage, Image } from 'astro:assets'
 import Section from '@components/team/Section.astro'
 import { parseBlogs } from '@utils/common'
 import { BlogCard } from '@components/BlogCard'
+import SmallTitle from '@components/team/SmallTitle.astro'
 
 const isDev = import.meta.env.DEV;
 
@@ -44,7 +45,7 @@ const blogs = filteredBlogs
 <>
   <Section className="pt-20" {...Astro.props}>
     <div class="pb-10 flex flex-col items-center">
-      <h3 class="text-2xl font-medium">{title || 'Recent Content'}</h3>
+      <SmallTitle>{title || 'Recent Content'}</SmallTitle>
       <slot/>
     </div>
   </Section>
