@@ -1,0 +1,10 @@
+---
+const {author} = Astro.props;
+---
+<blockquote {...Astro.props} class="m-1 text-left">
+  <span class="text-4xl block relative -bottom-4">“</span>
+  <span class="italic text-sm">
+    <slot/>
+  </span>
+  <footer class="text-right w-full text-xs">—{author}</footer>
+</blockquote>
