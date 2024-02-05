@@ -10,6 +10,7 @@ const { code, jobTitle, fullName } = myData.frontmatter;
 import { getImage, Image } from 'astro:assets'
 import ProfilePage from '@components/team/ProfilePage.astro'
 
+import Section from '@components/team/Section.astro'
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
@@ -41,8 +42,7 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     </ul>
   </GreetingSection>
 
-  <TwoColumnSection>
-    <SimpleColumn>
+  <Section bgColor='orange' className="py-20 grid grid-cols-1 gap-5">
       <SmallTitle>Background</SmallTitle>
       <p>
 	I started programming in the early 80s, first on the 8-bit ZX81 and ZX Spectrum computers, and later on the 68000-based Atari SI home computer. I spent almost two years on a 3D driving game, and almost had a title published by Electronic Arts. In 1993, I won an award for my final year undergraduate project at Warwick University, a vector-based satellite navigation system for cars, written in C++ and XWin.
@@ -56,19 +56,11 @@ import GalleryImage from '@components/team/GalleryImage.astro'
       <p>
         I've worked for many years as a developer, consultant, speaker and trainer in Agile methodologies in various sectors, including banking and telecommunications.
       </p>
-    </SimpleColumn>
-
-    <SimpleColumn>
-      <SmallTitle>Skills</SmallTitle>
-      <p>
-        I'm a Clojure expert, systems designer and builder. I'm the author of a large number of open-source libraries which can be found on GitHub.
-      </p>
       <p>
         I've has been building web APIs for customers for over a decade and I'm intimately acquainted with the HTTP specifications. I've has authored or contributed to a number of web libraries that assist in the creation of HTTP-based services, including plugboard, Liberator, bidi, yada, pick, jinx, grab, reap, https://www.rest.guide and Site.
       </p>
 
-    </SimpleColumn>
-  </TwoColumnSection>
+  </Section>
 
   <FeatureSection imgPos="right">
 
