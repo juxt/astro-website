@@ -14,7 +14,7 @@
     ]
   },
   "navbar": [
-    { "label": "About", "href": "/about" },
+    { "label": "About", "href": "/team" },
     { "label": "Financial", "href": "/financial" },
     { "label": "Delivery", "href": "/delivery" },
     { "label": "Get Started", "href": "/get-started" },
@@ -65,7 +65,7 @@
     {
       "groupLabel": "Company",
       "items": [
-        { "label": "About Us", "href": "/about" },
+        { "label": "About Us", "href": "/team" },
         { "label": "Careers", "href": "/careers" },
         { "label": "Open Positions", "href": "/careers#job-openings" },
         {

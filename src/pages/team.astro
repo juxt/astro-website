@@ -1,147 +1,202 @@
 ---
-import { Image } from 'astro:assets'
+import { getImage } from 'astro:assets'
+import { MarkdownInstance } from 'astro'
+import Banner from '@components/Banner.astro'
+import Section from '@components/Section.astro'
+import { Person } from '@utils/types'
 import Layout from '@layouts/Layout.astro'
-import Headshot from '@components/team/Headshot.astro'
-import Card from '@components/team/Card.astro'
-import ListNumber from '@components/team/ListNumber.astro'
+import ContactUsProfile from '@components/ContactUsProfile.tsx'
+import ValueItem from '@components/team/ValueItem.astro'
+import FeaturedPersonCard from '@components/team/FeaturedPersonCard.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
 
-import jdt_curve from '../assets/team/headshots/curve/jdt.png'
-import joe_curve from '../assets/team/headshots/curve/joe.png'
-import jon_curve from '../assets/team/headshots/curve/jon.png'
-import mal_curve from '../assets/team/headshots/curve/mal.png'
+const bannerPicture = await getImage({
+  src: import('../assets/site/about-us-banner-v2.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'about us banner'
+}).then((img) => img.src)
 
-import jdt_circle from '../assets/team/headshots/circle/jdt.png'
-import joe_circle from '../assets/team/headshots/circle/joe.png'
-import jon_circle from '../assets/team/headshots/circle/jon.png'
-import mal_circle from '../assets/team/headshots/circle/mal.png'
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
 
+const teamPages = new Set(
+    (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
+        .map(p => p.url)
+        .map(p => p.split("/"))
+        .map(p => p.pop())
+)
+
+const isDev = import.meta.env.DEV
+
+function ensureFeaturedWeight(person) {
+    if (!person.frontmatter.featured) {
+        person.frontmatter.featured = {};
+    }
+    if (!person.frontmatter.featured.weight) {
+        person.frontmatter.featured.weight = 999;
+    }
+
+    return person;
+}
+
+const featuredPeople = people
+  // Show if has the featured property, or has a team page
+  .filter(({ frontmatter: { featured, code } }) => featured || teamPages.has(code))
+  // Sort by weight (defaults to last)
+  .map(ensureFeaturedWeight)
+  .sort((a, b) => a.frontmatter.featured.weight - b.frontmatter.featured.weight)
+  // Extract only what we want
+  .map(({ frontmatter }) => ({
+    ...frontmatter,
+    expert: teamPages.has(frontmatter.code)
+  }))
 ---
 
-<Layout navbar title='The Team'>
-    <div class='bg-zinc-900 text-white'>
+<Layout navbar title='About'>
+  <main class="bg-zinc-900">
 
-        <div class='px-10 pt-20 pb-10 grid grid-cols-2 gap-4'>
-            <div class="uppercase text-4xl">
-                <h1 class="font-medium">The Team</h1>
-                <h1 class="font-light">you've been searching for</h1>
-            </div>
-            <p>
-                At JUXT, we understand that the world of technology
-                and business is not one-size-fits-all. That's why we've
-                assembled a remarkable team of experts, each bringing
-                their own unique skills and knowledge to the table.
+    <Banner
+      text='About Us'
+      style={{
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+
+    <Section className='bg-[#b76330] py-20 text-white'>
+      <h2 class='pb-4 text-3xl md:text-4xl'>Experience the Difference</h2>
+      <p class='text-xl md:text-2xl text-justify font-extralight'>
+        In a world where business success depends on innovation and expertise, choosing
+        the right partner is paramount. Our team at JUXT is dedicated to making a difference
+        in your business ensuring that you receive solutions that match your unique requirements. Elevate Your Business with JUXT.
+      </p>
+    </Section>
+
+    <Section className='bg-zinc-900 py-20 text-white'>
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div>
+          <h2 class='text-3xl md:text-4xl'>Simplicity Delivers Results</h2>
+        </div>
+        <div class='flex flex-col gap-4'>
+          <ValueItem number="1"
+                     title="Delivery Focus">
+            We can lead complex multi-team engineering projects and meet tough deadlines
+          </ValueItem>
+          <hr class="border-b-0 border-[#b76330]" />
+
+          <ValueItem number="2"
+                     title="Precision Engineering">
+            Our highly skilled teams are collaborative and iterate quickly
+          </ValueItem>
+          <hr class="border-b-0 border-[#b76330]" />
+
+          <ValueItem number="3"
+                     title="Visibility">
+            We use development processes that are optimised for visibility, to keep projects on track
+          </ValueItem>
+          <hr class="border-b-0 border-[#b76330]" />
+
+          <ValueItem number="4"
+                     title="Modern">
+            Our tool-set empowers us to satisfy today's demanding standards and user expectations, and our systems utilise the latest techniques for maximising performance, scalability and cost-efficiency
+          </ValueItem>
+          <hr class="border-b-0 border-[#b76330]" />
+
+          <ValueItem number="5"
+                     title="Methodology">
+            Our unique methodology delivers systems that are reliable, flexible and secure
+          </ValueItem>
+          <hr class="border-b-0 border-[#b76330]" />
+
+          <ValueItem number="6"
+                     title="Re-use">
+            We maintain an extensive library of battle-tested open-source components that fit together and allow us to deliver custom systems rapidly
+          </ValueItem>
+          <hr class="border-b-0 border-[#b76330]" />
+        </div>
+      </div>
+    </Section>
+
+    <Section className='bg-black text-white py-20'>
+      <h2 class='text-4xl pb-4 font-bold text-center'>JUXT Team</h2>
+      <p class='text-xl pb-20 md:text-2xl text-justify font-extralight'>
+        Our experts are at the forefront of innovation in various domains, ensuring that we provide
+        tailored solutions for your specific needs.
+      </p>
+      <div class='flex flex-wrap justify-center gap-28' >
+        {
+          featuredPeople.map( frontmatter => <FeaturedPersonCard {...frontmatter} />)
+        }
+      </div>
+    </Section>
+
+    <GallerySection>
+      <GalleryImage src="/src/assets/site/JUXT-10thBday-Wiltons-2230.png"
+        imgClass="object-right" 
+        alt="Something"/>
+      <GalleryImage src="/src/assets/site/career-benefits.jpeg"
+        imgClass="object-right" 
+        alt="Something"/>
+      <GalleryImage src="/src/assets/blog/clojureD-2022-minecraft-workshop.jpg"
+        alt="Something"/>
+      <GalleryImage src="/src/assets/blog/clojureD-2022-minecraft-workshop.jpg"
+        imgClass="object-right" 
+        alt="Something"/>
+    </GallerySection>
+
+    <Section className='bg-[#b76330] py-20 text-white'>
+      <div class="flex flex-col items-center">
+        <a href="" class='pb-4 text-3xl md:text-4xl'>Click here to see our Services</a>
+      </div>
+    </Section>
+
+    <Section className='py-10 md:py-20'>
+      <h2 class='pb-4 text-3xl md:text-4xl'>Contact us today</h2>
+      <div class="py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="flex flex-col gap-4">
+
+          <div>
+            <h3 class='text-3xl font-light'>Head Office</h3>
+            <p class='font-light'>
+              Norfolk House, Silbury Blvd.
             </p>
+            <p class='font-light'>
+              Milton Keynes, MK9 2AH
+            </p>
+            <p class='font-light'>
+              United Kingdom
+            </p>
+          </div>
+
+          <div>
+            <h3 class='text-3xl font-light'>Email</h3>
+            <p class='font-light'>
+              For all general enquiries,
+            </p>
+            <p class='font-light'>
+              please email: <a href="mailto:info@juxt.pro" class="font-medium">info@juxt.pro</a>
+            </p>
+          </div>
+
+          <div>
+            <h3 class='text-3xl font-light'>Phone</h3>
+            <p class='font-light'>
+              Call us at: <span class='whitespace-nowrap'>+44 (0) 333 93 98 309</span>
+            </p>
+            <p class='font-light'>
+              or <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
+            </p>
+          </div>
+
         </div>
-
-        <div class='px-10 flex'>
-            <Headshot
-                name="Jon Pither"
-                title="CEO"
-                src={jon_curve}
-            />
-            <Headshot
-                name="Malcolm Sparks"
-                title="CTO"
-                src={mal_curve}
-            />
-            <Headshot
-                name="Joe Littlejohn"
-                title="Head of Delivery"
-                src={joe_curve}
-            />
-            <Headshot 
-                name="Jeremy Taylor"
-                title="Head of Product - XTDB"
-                src={jdt_curve}
-                alt="Jeremy Taylor, Head of Product (XTDB)"
-            />
+        <div>
+            <p class='font-light pb-2'>Or let us get back to you:</p>
+          <ContactUsProfile subject="New contact submission from about us page." />
         </div>
+      </div>
+    </Section>
 
-        <div class='bg-[#b76330] px-10 py-40 grid grid-cols-5'>
-            <div class="col-span-3">
-                <h3 class="text-2xl text-bold">Your Vision, Our Expertise</h3>
-                <p class="pt-5 font-extralight">
-                    Our experts are at the forefront of innovation in various domains,
-                    ensuring that we provide tailored solutions for your specific needs.
-                </p>
-            </div>
-        </div>
-
-        <div class='px-10 py-20 grid grid-cols-2'>
-            <div class='col-start-2 grid grid-cols-5 gap-y-8'>
-                <h3 class="text-2xl col-start-2 col-span-4">Why Choose JUXT?</h3>
-                <ListNumber>01</ListNumber>
-                <p class="col-span-4">
-                    Proven Excellence: Our experts have a track record of delivering successful results, consistently overcoming complex challenges.
-                </p>
-
-                <ListNumber>02</ListNumber>
-                <p class="col-span-4">
-                    Industry Recognition: We've received industry accolades, awards, and affiliations that underline our commitment to excellence.
-                </p>
-
-                <ListNumber>03</ListNumber>
-                <p class="col-span-4">
-                    Client Success Stories: Our clients' success stories and testimonials speak to the impact our experts have had on their businesses.
-                </p>
-            </div>
-        </div>
-
-        <div class='bg-[#b76330] px-10 py-40 grid grid-cols-5'>
-            <div class="col-span-3">
-                <h3 class="text-2xl text-bold">Experience the Difference</h3>
-                <p class="pt-5 font-extralight">
-                    In a world where businsess success depends on innovation
-                    and expertise, choosing the right partner is paramount. Our
-                    team at JUXT is dedicated to making a difference in your
-                    business, ensuring that you receive the solutions that match
-                    your unique requirements. Elevate Your Business with JUXT.
-                </p>
-            </div>
-        </div>
-
-        <div class='px-10 py-5 grid grid-cols-2 gap-4'>
-            <Card
-                name="Jon Pither"
-                title="CEO"
-                src={jon_circle}
-                expertise={[
-                    "Business Strategy",
-                    "Leadership & Vision",
-                    "Strategic Partnerships",
-                ]}
-            />
-            <Card
-                name="Malcolm Sparks"
-                title="CTO"
-                src={mal_circle}
-                expertise={[
-                    "APIs",
-                    "Cybersecurity",
-                    "Scalability",
-                ]}
-            />
-            <Card
-                name="Joe Littlejohn"
-                title="Head of Delivery"
-                src={joe_circle}
-                expertise={[
-                    "Platform Engineering",
-                    "Discoveries",
-                    "Client Satisfaction",
-                ]}
-            />
-            <Card
-                name="Jeremy Taylor"
-                title="Head of Product - XTDB"
-                src={jdt_circle}
-                alt="Jeremy Taylor, Head of Product (XTDB)"
-                expertise={[
-                    "Data Analysis",
-                    "Risk Management",
-                    "Product Launch",
-                ]}
-            />
-        </div>
-    </div>
+  </main>
 </Layout>
