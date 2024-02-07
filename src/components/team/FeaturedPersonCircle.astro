@@ -1,0 +1,36 @@
+---
+import AssetImage from '@components/team/AssetImage.astro'
+const {
+    code,
+    name, lastName, fullName = `${name} ${lastName}`,
+    jobTitle,
+    expert,
+    idx = 0,
+} = Astro.props;
+
+const colourClasses = [
+    'bg-[#e78041]',
+    'bg-[#e7ab40]',
+    'bg-[#e29a37]',
+    'bg-[#efc286]',
+    'bg-[#ab673c]',
+    'bg-[#ac490d]',
+    'bg-[#ab764d]',
+    'bg-[#ac5a43]',
+];
+
+const colourClass = colourClasses[idx % colourClasses.length];
+---
+<div class="flex flex-col gap-2 items-center">
+    <div class={"relative rounded-full w-36 h-36 overflow-hidden " + colourClass}>
+        <AssetImage 
+            class="absolute top-2"
+            src={`/src/assets/team/headshots/${code}.png`}
+            width={500}
+            alt={`A headshot of ${fullName}`}>
+    </div>
+    <div class="text-sm text-white flex flex-col items-center">
+        <p>{fullName}</p>
+        <p>{jobTitle}</p>
+    </div>
+</div>

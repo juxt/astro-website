@@ -7,7 +7,4 @@ image: 'tom.jpg'
 linkedin: 'thomas-dalziel'
 twitter: ''
 github: 'tomdl89'
-
-featured:
-  weight: 999
 ---

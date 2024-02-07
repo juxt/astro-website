@@ -7,7 +7,4 @@ image: 'oly.jpg'
 linkedin: ''
 twitter: ''
 github: ''
-
-featured:
-  weight: 999
 ---

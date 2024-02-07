@@ -10,7 +10,4 @@ linkedin: 'jdtaylor'
 twitter: 'refset'
 github: 'refset'
 hackernews: 'refset'
-
-featured:
-  weight: 6
 ---

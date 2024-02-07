@@ -8,6 +8,7 @@ import Layout from '@layouts/Layout.astro'
 import ContactUsProfile from '@components/ContactUsProfile.tsx'
 import ValueItem from '@components/team/ValueItem.astro'
 import FeaturedPersonCard from '@components/team/FeaturedPersonCard.astro'
+import FeaturedPersonCircle from '@components/team/FeaturedPersonCircle.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 
@@ -18,60 +19,64 @@ const bannerPicture = await getImage({
   alt: 'about us banner'
 }).then((img) => img.src)
 
-const people = await Astro.glob<MarkdownInstance<Person>>(
+// {"code": Person}
+var people = (await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
-)
-
-const teamPages = new Set(
-    (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
-        .map(p => p.url)
-        .map(p => p.split("/"))
-        .map(p => p.pop())
-)
-
-const isDev = import.meta.env.DEV
-
-function ensureFeaturedWeight(person) {
-    if (!person.frontmatter.featured) {
-        person.frontmatter.featured = {};
-    }
-    if (!person.frontmatter.featured.weight) {
-        person.frontmatter.featured.weight = 999;
-    }
-
-    return person;
-}
-
-const featuredPeople = people
-  // Show if has the featured property, or has a team page
-  .filter(({ frontmatter: { featured, code } }) => featured || teamPages.has(code))
-  // Sort by weight (defaults to last)
-  .map(ensureFeaturedWeight)
-  .sort((a, b) => a.frontmatter.featured.weight - b.frontmatter.featured.weight)
-  // Extract only what we want
-  .map(({ frontmatter }) => ({
-    ...frontmatter,
-    expert: teamPages.has(frontmatter.code)
-  }))
+))
+    .reduce((acc, person) => {
+        acc[person.frontmatter.code] = person.frontmatter;
+        return acc;
+    }, {})
 ---
 
 <Layout navbar title='About'>
   <main class="bg-zinc-900">
 
     <Banner
-      text='About Us'
+      text='JUXT Team'
       style={{
         backgroundImage: `url(${bannerPicture})`
       }}
     />
 
-    <Section className='bg-[#b76330] py-20 text-white'>
-      <h2 class='pb-4 text-3xl md:text-4xl'>Experience the Difference</h2>
-      <p class='text-xl md:text-2xl text-justify font-extralight'>
-        In a world where business success depends on innovation and expertise, choosing
-        the right partner is paramount. Our team at JUXT is dedicated to making a difference
-        in your business ensuring that you receive solutions that match your unique requirements. Elevate Your Business with JUXT.
+    <Section className='bg-black text-white py-20'>
+      <p class='text-xl pb-20 md:text-2xl text-justify font-extralight'>
+        Our experts are at the forefront of innovation in various domains, ensuring that we provide
+        tailored solutions for your specific needs.
       </p>
+
+      <div class="px-32">
+          <div class='mb-12 grid grid-cols-1 md:grid-cols-2 gap-12'>
+            <FeaturedPersonCard {...people["jon"]} square={false} img="/src/assets/site/jon-on-stage.jpg" />
+            <FeaturedPersonCard {...people["mal"]} square={false} class="object-right" img="/src/assets/site/JUXT-10thBday-Wiltons-2230.png" />
+          </div>
+          <div class='grid grid-cols-1 md:grid-cols-3 gap-12'>
+            <FeaturedPersonCard {...people["joe"]} img="/src/assets/site/tom_joe.jpg" />
+            <FeaturedPersonCard {...people["jdt"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2432.jpg" />
+            <FeaturedPersonCard {...people["tom"]} img="/src/assets/site/JUXT-10thBday-Wiltons-3003.jpg" />
+
+            <FeaturedPersonCard {...people["oly"]} img="/src/assets/site/tom_joe.jpg" />
+            <FeaturedPersonCard {...people["jms"]} class={"object-left"} img="/src/assets/site/20230525_120544_D1CC4D0D.jpg" />
+            <FeaturedPersonCard {...people["mtf"]} img="/src/assets/site/JUXT-10thBday-Wiltons-3003.jpg" />
+
+            <FeaturedPersonCard {...people["jss"]} img="/src/assets/site/20230525_180945_D3A06286.jpg" />
+            <FeaturedPersonCard {...people["fcb"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2771.jpg" />
+            <FeaturedPersonCard {...people["fin"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2268.jpg" />
+            <FeaturedPersonCard {...people["mat"]} img="/src/assets/site/20230525_120544_D1CC4D0D.jpg" />
+            <FeaturedPersonCard {...people["yfx"]} img="/src/assets/site/20230525_203958_C4B14D81.jpg" />
+            <FeaturedPersonCard {...people["zyx"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2486.jpg" />
+            <FeaturedPersonCard {...people["mic"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2749.jpg" />
+            <FeaturedPersonCard {...people["fjb"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2549.jpg" />
+          </div>
+          <div class="mb-20"></div>
+
+          <h2 class='text-4xl pb-4 font-bold text-center'>Support Team</h2>
+          <div class='grid grid-cols-1 md:grid-cols-3 gap-12'>
+            {
+              ["kth", "aby", "emt"].map((code, idx) => <FeaturedPersonCircle idx={idx} {...people[code]} />)
+            }
+          </div>
+      </div>
     </Section>
 
     <Section className='bg-zinc-900 py-20 text-white'>
@@ -116,19 +121,6 @@ const featuredPeople = people
           </ValueItem>
           <hr class="border-b-0 border-[#b76330]" />
         </div>
-      </div>
-    </Section>
-
-    <Section className='bg-black text-white py-20'>
-      <h2 class='text-4xl pb-4 font-bold text-center'>JUXT Team</h2>
-      <p class='text-xl pb-20 md:text-2xl text-justify font-extralight'>
-        Our experts are at the forefront of innovation in various domains, ensuring that we provide
-        tailored solutions for your specific needs.
-      </p>
-      <div class='flex flex-wrap justify-center gap-28' >
-        {
-          featuredPeople.map( frontmatter => <FeaturedPersonCard {...frontmatter} />)
-        }
       </div>
     </Section>
 

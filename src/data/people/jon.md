@@ -9,7 +9,4 @@ image: 'jon.jpg'
 linkedin: 'jon-pither-juxt-ceo'
 twitter: 'jonpither'
 github: 'jonpither'
-
-featured:
-  weight: 1
 ---

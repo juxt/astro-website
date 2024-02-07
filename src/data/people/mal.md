@@ -9,7 +9,4 @@ image: 'mal.jpg'
 linkedin: 'malcolmsparks'
 twitter: 'malcolmsparks'
 github: 'malcolmsparks'
-
-featured:
-  weight: 2
 ---

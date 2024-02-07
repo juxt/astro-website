@@ -2,28 +2,26 @@
 import AssetImage from '@components/team/AssetImage.astro'
 import MaybeLink from '@components/team/MaybeLink.astro'
 
-const {
+var {
     code,
-    firstName, lastName, name = `${firstName} ${lastName}`,
+    name, lastName, fullName = `${name} ${lastName}`,
     jobTitle,
     expert,
+    img,
+    square = true,
 } = Astro.props;
-
 ---
-<div class="flex flex-col gap-2 items-center">
-    <div class="relative rounded-full w-36 h-36 overflow-hidden bg-[#ce7720]">
-        <MaybeLink href={expert ? `/team/${code}` : null}>
+<MaybeLink href={expert ? `/team/${code}` : null}>
+    <div class="flex flex-col gap-2 items-center">
+        <div class={"relative w-72 overflow-hidden " + (square ? "h-72" : "h-96") }>
             <AssetImage 
-                class="absolute top-2"
-                src={`/src/assets/team/headshots/${code}.png`}
-                alt={`A headshot of ${name}`}>
-        </MaybeLink>
+                class={"absolute h-full grayscale hover:grayscale-0 animate duration-300 top-0 object-cover " + Astro.props.class}
+                src={img}
+                alt={`A headshot of ${fullName}`} />
+        </div>
+        <div class="text-sm text-white flex flex-col items-center">
+            <p>{fullName}</p>
+            <p>{jobTitle}</p>
+        </div>
     </div>
-    <div class="text-sm text-white flex flex-col items-center">
-        { /* Not so sure about the styling */ }
-        <MaybeLink href={expert ? `/team/${code}` : ""} class="text-[#ce7720]">
-            {name}
-        </MaybeLink>
-        <p>{jobTitle}</p>
-    </div>
-</div>
+</MaybeLink>
