@@ -19,12 +19,20 @@ const bannerPicture = await getImage({
   alt: 'about us banner'
 }).then((img) => img.src)
 
+const teamPages = new Set(
+    (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
+        .map(p => p.url)
+        .map(p => p.split("/"))
+        .map(p => p.pop())
+)
+
 // {"code": Person}
 var people = (await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 ))
     .reduce((acc, person) => {
         acc[person.frontmatter.code] = person.frontmatter;
+        acc[person.frontmatter.code].expert = teamPages.has(person.frontmatter.code);
         return acc;
     }, {})
 ---
