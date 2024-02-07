@@ -3,9 +3,9 @@
 // import * as myData from '../../data/people/mal.md'
 const myData =   {
 "frontmatter": {
-  "code": "mal",
+  "code": "xxx",
   "name": "Demo",
-  "lastName": "Sparks",
+  "lastName": "Demo",
   "fullName": "Mr. Demo",
   "jobTitle": "XXX",
 
@@ -24,6 +24,8 @@ const { code, jobTitle, fullName } = myData.frontmatter
 import AssetImage from '@components/team/AssetImage.astro'
 import ProfilePage from '@components/team/ProfilePage.astro'
 
+import Section from '@components/team/Section.astro'
+import BlockQuote from '@components/BlockQuote.astro'
 import TwoColumnSection from '@components/team/TwoColumnSection.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
@@ -38,17 +40,72 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection code={code} fullName={fullName} jobTitle={jobTitle}>
-    <p class="italic">
-      This is the &lt;GreetingSection&gt;. Anything below this is custom HTML you can add:
-    </p>
-
-    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
-    <ul class="list-disc list-inside text-lg font-medium">
-      <li>Java, Kotlin</li>
-      <li>Security</li>
-      <li>Platform Engineering</li>
+    <h2 class="text-2xl font-medium">Expert In</h2>
+    <ul class="list-disc list-inside text-md font-medium">
+      <li>What do you want to do for customers?</li>
+      <li>This will set the context for the Bio & the first section</li>
+      <li>Keep to 3 or 4</li>
     </ul>
+
+    <h2 class="pt-5 text-2xl font-medium">Bio</h2>
+    <p class="text-md font-medium">
+      Imagine someone asked you: What do you <i>actually do</i>?<br />
+      This should be short, Let's say for me:<br />
+      I steer JUXT projects from inception to MVP and beyond, advising on technical direction, finding a route forward to solve technical problems, and guiding wider engineering strategy.<br />
+    </p>
   </GreetingSection>
+
+  <GallerySection className="mt-10">
+    <SimpleColumn className="bg-[#ac480d] gap-5 p-5 w-3/6">
+      <div class="m-auto">
+        <p class="italic">
+          Here you should show a potential customer you doing what it is you said you can do. This could be:
+        </p>
+        <ul class="list-disc list-inside">
+            <li>Talks you've given</li>
+            <li>Feedback you've gotten</li>
+            <li>Successful projects you've delivered</li>
+            <li>etc.</li>
+        </ul>
+        <p class="italic pb-5">For example:</p>
+        <SmallTitle>Client Projects</SmallTitle>
+        <p>
+          The variety keeps every day exciting and challenging; I love seeing how different solutions can drive success across various industries. It's incredibly rewarding to navigate the complexities of a new project and see our clients' visions come to life. Plus, the constant learning and adaptation help us stay ahead in our field, ensuring we're always offering cutting-edge solutions.
+        </p>
+      </div>
+    </SimpleColumn>
+
+    <GalleryImage
+      src="/src/assets/team/xxx/1.png"
+      alt="" />
+  </GallerySection>
+
+  <GallerySection className="mb-10">
+    <GalleryImage
+      src="/src/assets/team/xxx/2.png"
+      alt="" />
+    <SimpleColumn className="bg-[#ac480d] gap-5 p-5 w-3/6">
+        <div class="m-auto">
+      <SmallTitle>Feedback</SmallTitle>
+      <BlockQuote author="Emily Carter, Head of Product at Streamline Social">
+        Demo's knack for translating complex technical jargon into actionable insights has been a cornerstone of our project's momentum.
+      </BlockQuote>
+      <BlockQuote author="Sophia Loren, Co-founder of EduTech Innovations">
+        Demo's guidance on our technical direction was pivotal. His clear vision and expert steering took our product from concept to reality.
+      </BlockQuote>
+        </div>
+    </SimpleColumn>
+  </GallerySection>
+
+  <Section bgColor="orange" className='py-20 text-white'>
+    <div class="flex flex-col items-center">
+      <h1 href="" class='pb-4 text-3xl md:text-4xl'>
+      What's under here doesn't matter so much
+      <br/>
+      But I think these first two "screens" worth of space is important.
+      </h1>
+    </div>
+  </Section>
 
   <GallerySection>
     <GalleryImage
