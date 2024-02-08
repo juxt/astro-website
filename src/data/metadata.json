@@ -144,6 +144,10 @@
     },
     "contact": {
       "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future."
+    },
+    "jdt-tech-roundtable": {
+      "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future.",
+      "image": "sm-tech-roundtable-jdt.jpg"
     }
   }
 }
