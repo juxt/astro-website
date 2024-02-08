@@ -157,10 +157,17 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
     <Section className='py-10 md:py-20 text-white'>
       <h2 class='pb-4 text-3xl md:text-4xl'>Contact us today</h2>
       <div class="py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div class="flex flex-col gap-4">
+        <div>
+            <p class='font-light pb-2'>Or let us get back to you:</p>
+            <ContactUsProfile subject="New contact submission from about us page." />
+        </div>
+
+        <div class="flex flex-col gap-4 text-right">
 
           <div>
-            <h3 class='text-3xl font-light'>Head Office</h3>
+            <div class="flex justify-end">
+                <h3 class='text-3xl font-light'>Head Office</h3>
+            </div>
             <p class='font-light'>
               Norfolk House, Silbury Blvd.
             </p>
@@ -173,7 +180,9 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           </div>
 
           <div>
-            <h3 class='text-3xl font-light'>Email</h3>
+            <div class="flex justify-end">
+                <h3 class='text-3xl font-light'>Email</h3>
+            </div>
             <p class='font-light'>
               For all general enquiries,
             </p>
@@ -183,7 +192,9 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           </div>
 
           <div>
-            <h3 class='text-3xl font-light'>Phone</h3>
+            <div class="flex justify-end">
+                <h3 class='text-3xl font-light'>Phone</h3>
+            </div>
             <p class='font-light'>
               Call us at: <span class='whitespace-nowrap'>+44 (0) 333 93 98 309</span>
             </p>
@@ -193,11 +204,8 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           </div>
 
         </div>
-        <div>
-            <p class='font-light pb-2'>Or let us get back to you:</p>
-          <ContactUsProfile subject="New contact submission from about us page." />
-        </div>
       </div>
+
     </Section>
 
   </main>
