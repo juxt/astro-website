@@ -7,8 +7,8 @@ import { Person } from '@utils/types'
 import Layout from '@layouts/Layout.astro'
 import ContactUsProfile from '@components/ContactUsProfile.tsx'
 import ValueItem from '@components/team/ValueItem.astro'
-import FeaturedPersonCard from '@components/team/FeaturedPersonCard.astro'
-import FeaturedPersonCircle from '@components/team/FeaturedPersonCircle.astro'
+import FeaturedEngineer from '@components/team/FeaturedEngineer.astro'
+import FeaturedSupport from '@components/team/FeaturedSupport.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 
@@ -48,46 +48,53 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
     />
 
     <Section className='bg-black text-white py-20'>
-      <p class='text-xl pb-20 md:text-2xl text-justify font-extralight'>
-        Our experts are at the forefront of innovation in various domains, ensuring that we provide
-        tailored solutions for your specific needs.
+      <p class='text-xl md:text-2xl text-justify font-extralight'>
+        With 573 years of combined software engineering experience, you know you're getting the best team to get your project off the ground
       </p>
+    </Section>
 
-      <div class="px-32">
-          <div class='mb-12 grid grid-cols-1 md:grid-cols-2 gap-12'>
-            <FeaturedPersonCard {...people["jon"]} square={false} img="/src/assets/site/jon-on-stage.jpg" />
-            <FeaturedPersonCard {...people["mal"]} square={false} class="object-right" img="/src/assets/site/JUXT-10thBday-Wiltons-2230.png" />
-          </div>
-          <div class='grid grid-cols-1 md:grid-cols-3 gap-12'>
-            <FeaturedPersonCard {...people["joe"]} img="/src/assets/site/tom_joe.jpg" />
-            <FeaturedPersonCard {...people["jdt"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2432.jpg" />
-            <FeaturedPersonCard {...people["tom"]} img="/src/assets/site/JUXT-10thBday-Wiltons-3003.jpg" />
+    <Section className='text-white py-20'>
+      <div class="flex justify-center pb-12">
+        <h2 class='text-4xl font-bold'>Engine Room</h2>
+      </div>
 
-            <FeaturedPersonCard {...people["oly"]} img="/src/assets/site/tom_joe.jpg" />
-            <FeaturedPersonCard {...people["jms"]} class={"object-left"} img="/src/assets/site/20230525_120544_D1CC4D0D.jpg" />
-            <FeaturedPersonCard {...people["mtf"]} img="/src/assets/site/JUXT-10thBday-Wiltons-3003.jpg" />
+      <div class='px-10 xl:px-32'>
+        <div class='px-12 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-12'>
+          <FeaturedEngineer {...people["jon"]} square={false} img="/src/assets/site/jon-on-stage.jpg" />
+          <FeaturedEngineer {...people["mal"]} square={false} class="object-right" img="/src/assets/site/JUXT-10thBday-Wiltons-2230.png" />
+        </div>
 
-            <FeaturedPersonCard {...people["jss"]} img="/src/assets/site/20230525_180945_D3A06286.jpg" />
-            <FeaturedPersonCard {...people["fcb"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2771.jpg" />
-            <FeaturedPersonCard {...people["fin"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2268.jpg" />
-            <FeaturedPersonCard {...people["mat"]} img="/src/assets/site/20230525_120544_D1CC4D0D.jpg" />
-            <FeaturedPersonCard {...people["yfx"]} img="/src/assets/site/20230525_203958_C4B14D81.jpg" />
-            <FeaturedPersonCard {...people["zyx"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2486.jpg" />
-            <FeaturedPersonCard {...people["mic"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2749.jpg" />
-            <FeaturedPersonCard {...people["fjb"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2549.jpg" />
-          </div>
-          <div class="mb-20"></div>
+        <div class='grid grid-cols-1 md:grid-cols-3 gap-12'>
+          <FeaturedEngineer {...people["joe"]} img="/src/assets/site/tom_joe.jpg" />
+          <FeaturedEngineer {...people["jdt"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2432.jpg" />
+          <FeaturedEngineer {...people["tom"]} img="/src/assets/site/JUXT-10thBday-Wiltons-3003.jpg" />
 
-          <h2 class='text-4xl pb-4 font-bold text-center'>Support Team</h2>
-          <div class='grid grid-cols-1 md:grid-cols-3 gap-12'>
-            {
-              ["kth", "aby", "emt"].map((code, idx) => <FeaturedPersonCircle idx={idx} {...people[code]} />)
-            }
-          </div>
+          <FeaturedEngineer {...people["oly"]} img="/src/assets/site/tom_joe.jpg" />
+          <FeaturedEngineer {...people["jms"]} class="object-left" img="/src/assets/site/20230525_120544_D1CC4D0D.jpg" />
+          <FeaturedEngineer {...people["mtf"]} img="/src/assets/site/JUXT-10thBday-Wiltons-3003.jpg" />
+
+          <FeaturedEngineer {...people["jss"]} img="/src/assets/site/20230525_180945_D3A06286.jpg" />
+          <FeaturedEngineer {...people["fcb"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2771.jpg" />
+          <FeaturedEngineer {...people["fin"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2268.jpg" />
+          <FeaturedEngineer {...people["mat"]} img="/src/assets/site/20230525_120544_D1CC4D0D.jpg" />
+          <FeaturedEngineer {...people["yfx"]} img="/src/assets/site/20230525_203958_C4B14D81.jpg" />
+          <FeaturedEngineer {...people["zyx"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2486.jpg" />
+          <FeaturedEngineer {...people["mic"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2749.jpg" />
+          <FeaturedEngineer {...people["fjb"]} img="/src/assets/site/JUXT-10thBday-Wiltons-2549.jpg" />
+        </div>
+      </div>
+
+      <div class="flex justify-center pt-20 pb-12">
+        <h2 class='text-4xl font-bold'>Control Tower</h2>
+      </div>
+      <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
+        {
+          ["kth", "aby", "emt"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
+        }
       </div>
     </Section>
 
-    <Section className='bg-zinc-900 py-20 text-white'>
+    <Section className='bg-black py-20 text-white'>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
           <h2 class='text-3xl md:text-4xl'>Simplicity Delivers Results</h2>
@@ -132,7 +139,7 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
       </div>
     </Section>
 
-    <GallerySection>
+    <GallerySection className="my-10">
       <GalleryImage src="/src/assets/site/JUXT-10thBday-Wiltons-2230.png"
         imgClass="object-right" 
         alt="Something"/>

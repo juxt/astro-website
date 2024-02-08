@@ -22,7 +22,7 @@ const colourClasses = [
 const colourClass = colourClasses[idx % colourClasses.length];
 ---
 <div class="flex flex-col gap-2 items-center">
-    <div class={"relative rounded-full w-36 h-36 overflow-hidden " + colourClass}>
+    <div class={"relative rounded w-36 h-36 overflow-hidden " + colourClass}>
         <AssetImage 
             class="absolute top-2"
             src={`/src/assets/team/headshots/${code}.png`}
