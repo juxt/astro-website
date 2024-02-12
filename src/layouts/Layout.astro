@@ -116,6 +116,8 @@ const metaTitle = ogTitle ?? currentPageName
     <meta name='viewport' content='width=device-width' />
     <link href='/images/favicon.png' rel='shortcut icon' type='image/x-icon' />
     <link href='/images/favicon-apple.svg' rel='apple-touch-icon' />
+    <link rel='stylesheet' href='/styles/prism.css' />
+    <link rel='stylesheet' href='/styles/syntax.css' />
     <link rel='stylesheet' href='/styles/inter.css' />
     <link rel='stylesheet' href='/styles/global.css' />
     <link rel='stylesheet' href='/styles/katex.min.css' />
@@ -141,52 +143,15 @@ const metaTitle = ogTitle ?? currentPageName
         scroll-behavior: smooth;
       }
     </style>
-    <script>
-      let blocks = document.querySelectorAll("pre");
 
-      blocks.forEach((block) => {
-        if (navigator.clipboard) {
-          const container = document.createElement('div');
-          container.style.position = "relative";
-
-          block.parentNode.insertBefore(container, block)
-          container.appendChild(block)
-
-          let button = document.createElement("button");
-
-          button.innerText = "Add to clipboard";
-          button.className = 'copy-button bg-gray-50 text-zinc-700 dark:bg-gray-900 dark:text-white p-1 rounded-bl-lg';
-          container.insertBefore(button, block);
-
-          button.addEventListener("click", async () => {
-            await copyCode(block, button);
-          });
-        }
-      });
-
-      async function copyCode(block, button) {
-        let code = block.querySelector("code");
-        let text = code.innerText;
-
-        await navigator.clipboard.writeText(text);
-
-        // visual feedback that task is completed
-        button.innerText = "Code Copied";
-
-        setTimeout(() => {
-          button.innerText = "Add to clipboard";
-        }, 700);
-      }
-    </script>
+    <script is:inline src='/scripts/prism.js'></script>
     <script
-      async
-      defer
-      data-website-id='4a088aa2-1e6f-4f97-9e95-9619983468de'
-      src='https://bunseki.juxt.pro/t.js'></script>
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.js"
+      data-autoloader-path="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/"></script>
   </head>
   <body
     class:list={[
-      'bg-gray-50 transition-colors',
+      'bg-gray-50 transition-colors rainbow-braces line-numbers match-braces',
       { 'dark:bg-gray-900': enableDarkMode }
     ]}
   >

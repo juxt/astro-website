@@ -17,6 +17,7 @@ export default defineConfig({
   ],
   site: 'https://juxt.pro/',
   markdown: {
+    syntaxHighlight: false,
     shikiConfig: {
       theme: 'css-variables'
     },
