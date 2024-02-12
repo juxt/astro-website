@@ -39,17 +39,31 @@ You may not have seen a standard URI Template before, but if you're familiar wit
 > OpenAPI serialization rules are based on a subset of URI template patterns defined by RFC 6570.
 > -- https://swagger.io/docs/specification/serialization/
 
-Here's an example:
+Below is an example of a non-trivial URI template.
+It makes use of some, though not all, or the features available in URI Template.
 
 ```
-https://bank.com/accounts/{accno}/transactions{.format}{?from,to}
+https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}
 ```
+
+In this template note the use of open and close braces to enclose variables.
+The variables are;
+
+- `env`: An optional string so we can generate, say, https://uat.bank.com for testing.
+- `/ctx*`: The forward-slash indicates this is a path segment. The asterisk modifies this to mean it can have multiple segments.
+- `accno`: This will be the account number of our bank account.
+- `.format`: This might be `.csv` or `.json`.
+- `.from`: The start of the date range.
+- `.to`: The end of the date range.
+- `#frag`: An optional fragment, the `#`-prefix indicates 'fragment expansion'
 
 ## URI Templates in Clojure
 
-I've recently added support for URI Templates to our Clojure library, [reap](https://github.com/juxt/reap).
+I've recently added complete and comprehensive support for URI Templates to our Clojure library, [Reap](https://github.com/juxt/reap).
 
-Using reap, we can compile a URI Template and, providing some data values, construct a URI from it:
+Using Reap, we can compile the URI template above.
+Once compiled, we can construct a URI, satisfying the variables with their corresponding values.
+Here's some Clojure code to do just that:
 
 ```clojure
 (require '[juxt.reap.rfc6570 :refer [compile-uri-template make-uri]])
@@ -57,21 +71,23 @@ Using reap, we can compile a URI Template and, providing some data values, const
 (make-uri
 
   (compile-uri-template
-    "https://bank.com/accounts/{accno}/transactions{.format}{?from,to}"
+    "https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}"
 
-  {"accno" "12345678"
-   "format" "csv"
-   "from" "20201010"
-   "to" "20201110"}))
+    {:ctx ["europe" "uk"]
+     :accno "12345678"
+     :format "csv"
+     :from "20201010"
+     :to "20201110"}))
 
 =>
 
-"https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110"
+"https://bank.com/europe/uk/accounts/12345678/transactions.csv?from=20201010&to=20201110"
 ```
 
-We can also use a compiled template to go in the other direction.
-Say we have a URI of `https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110`
+Usefully, we can use a compiled template to go in the other direction.
+Say we have a URI of `https://bank.com/europe/uk/accounts/12345678/transactions.csv?from=20201010&to=20201110`
 and want to extract the data encoded into it.
+We must provide the types of the variables we wish to extract, which influences what is returned.
 
 ```clojure
 (require '[juxt.reap.rfc6570 :refer [compile-uri-template match-uri]])
@@ -79,16 +95,28 @@ and want to extract the data encoded into it.
 (match-uri
 
   (compile-uri-template
-    "https://bank.com/accounts/{accno}/transactions{.format}{?from,to}"
+    "https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}")
 
-  "https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110"))
+  ;; Specify the types of the variables we want to extract
+  {:env :string
+   :frag :string
+   :accno :string
+   :ctx :list
+   :format :string
+   :from :string
+   :to :string}
+
+  "https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110")
 
 =>
 
-{"accno" "12345678"
- "format" "csv"
- "from" "20201010"
- "to" "20201110"}
+{:env ""
+ :ctx ["europe" "uk"]
+ :accno "12345678"
+ :format "csv"
+ :from "20201010"
+ :to "20201110"
+ :frag nil}
 ```
 
 ## Applications of URI Template
@@ -100,3 +128,88 @@ For example, you could use our reap library as the basis of a web router to deco
 Of course, there are many Clojure libraries already that do this well, including our own [bidi](https://github.com/juxt/bidi) library.
 
 However, URI Template supports more sophisticated features, such as embedding lists and maps into URIs.
+But more importantly, URI Template is a Proposed Standard from the Internet Engineering Task Force (IETF) and can be relied upon for many years ahead.
+
+## Digging deeper into the implementation
+
+You can stop reading now, unless you're curious about how I have implemented URI Templates in Reap.
+
+Let's start with the `compile-uri-template` function:
+
+```clojure
+(ns juxt.reap.rfc6570
+  (:require
+    [juxt.reap.regex :as re]
+    [juxt.reap.decoders.rfc6570 :refer [uri-template]]))
+
+(defn compile-uri-template [uri-template-str]
+  (let [components (uri-template (re/input uri-template-str))]
+    {:components components
+     :pattern …
+     }))
+```
+
+As you can see, it takes the URI Template as a string turns it into a `java.util.Matcher` with `re/input`.
+Reap is an implementation of a parsing technology called PEG parsing.
+PEG stands for 'Parsing Expression Grammer'.
+
+Reap comes with a number of built-in parsing expression grammers but you can write your own.
+Parsing expression grammers are built up from some simple building blocks such as 'sequence', 'choice' and others.
+
+In Section 2 of RFC 6570, we find the following ABNF definition:
+
+```
+URI-Template  = *( literals / expression )
+```
+
+We code this ABNF into a Reap parsing expression grammar:
+
+```clojure
+(ns juxt.reap.decoders.rfc6570
+  (:require
+   [juxt.reap.regex :as re]
+   [juxt.reap.combinators :as p]))
+
+(def uri-template
+  (p/complete
+   (p/zero-or-more
+    (p/alternatives
+     (p/pattern-parser (re-pattern (re/re-compose "%s+" literals)))
+     expression))))
+```
+
+The grammar starts with a `p/complete` wrapper, which tells the parser that it can only return the peg if the input has been fully consumed.
+
+Wrapped inside is a `p/zero-or-more` parser.
+This corresponds to the `*( )` notation in the ABNF.
+
+Wrapped inside this is a `p/alternatives` parser.
+In PEG terminology, this is our 'choices' building block, corresponding to the `/` notation in ABNF.
+
+Finally, wrapped inside this are the two choices. The first is a `p/pattern-parser` which we give a Java regular expression pattern that corresponds to the definition of a `literal`.
+
+The second is a peg corresponding to the following ABNF, also given in RFC 6570:
+
+```
+expression    =  "{" [ operator ] variable-list "}"
+operator      =  op-level2 / op-level3 / op-reserve
+op-level2     =  "+" / "#"
+op-level3     =  "." / "/" / ";" / "?" / "&"
+op-reserve    =  "=" / "," / "!" / "@" / "|"
+```
+
+Here's the peg coded in Reap:
+
+```clojure
+(def expression
+  (p/into
+   {}
+   (p/sequence-group
+    (p/ignore (p/pattern-parser #"\{"))
+    (p/optionally
+     (p/as-entry :operator (p/comp first (p/pattern-parser (re-pattern operator)))))
+    (p/as-entry :varlist variable-list)
+    (p/ignore (p/pattern-parser #"\}")))))
+```
+
+This peg makes use of some special Reap functions that allow us to construct a Clojure map of the result.
