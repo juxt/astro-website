@@ -167,10 +167,10 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
             <ContactUsProfile subject="New contact submission from about us page." />
         </div>
 
-        <div class="flex flex-col gap-4 text-right">
+        <div class="flex flex-col gap-4 text-center md:text-right">
 
           <div>
-            <div class="flex justify-end">
+            <div class="flex justify-center md:justify-end">
                 <h3 class='text-3xl font-light'>Head Office</h3>
             </div>
             <p class='font-light'>
@@ -185,7 +185,7 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           </div>
 
           <div>
-            <div class="flex justify-end">
+            <div class="flex justify-center md:justify-end">
                 <h3 class='text-3xl font-light'>Email</h3>
             </div>
             <p class='font-light'>
@@ -197,7 +197,7 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           </div>
 
           <div>
-            <div class="flex justify-end">
+            <div class="flex justify-center md:justify-end">
                 <h3 class='text-3xl font-light'>Phone</h3>
             </div>
             <p class='font-light'>
