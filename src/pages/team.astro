@@ -47,19 +47,19 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
       }}
     />
 
-    <Section className='bg-black text-white py-20'>
+    <Section className='bg-black text-white py-16'>
       <p class='text-xl md:text-2xl text-justify font-extralight'>
         With 573 years of combined software engineering experience, you know you're getting the best team to get your project off the ground
       </p>
     </Section>
 
     <Section className='text-white py-20'>
-      <div class="flex justify-center pb-12">
-        <h2 class='text-4xl font-bold'>Engine Room</h2>
-      </div>
+      <div class='px-10 xl:px-32 flex flex-col gap-12'>
+        <div class="flex justify-center">
+          <h2 class='text-4xl font-bold'>Engine Room</h2>
+        </div>
 
-      <div class='px-10 xl:px-32'>
-        <div class='px-12 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-12'>
+        <div class='px-12 grid grid-cols-1 lg:grid-cols-2 gap-12'>
           <FeaturedEngineer {...people["jon"]} square={false} img="/src/assets/team/action/jon.jpg" />
           <FeaturedEngineer {...people["mal"]} square={false} class="object-right" img="/src/assets/team/action/mal.jpg" />
         </div>
@@ -86,20 +86,21 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           <FeaturedEngineer {...people["alx"]} img="/src/assets/team/action/alx.jpg" />
           <FeaturedEngineer {...people["joa"]} img="/src/assets/team/action/joa.jpg" />
         </div>
-      </div>
 
-      <div>
-        <p class="text-2xl text-center pb-4">...and many more.</p>
-        <p class="text-2xl text-center hover:text-juxt transition-colors"><a href="#contact">Get in touch to build your dream team.</a></p>
-      </div>
+        <div>
+          <p class="text-2xl text-center pb-4">...and many more.</p>
+          <p class="text-2xl text-center hover:text-juxt transition-colors"><a href="#contact">Get in touch to build your dream team.</a></p>
+        </div>
 
-      <div class="flex justify-center pt-20 pb-12">
-        <h2 class='text-4xl font-bold'>Control Tower</h2>
-      </div>
-      <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
-        {
-          ["kth", "aby", "emt"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
-        }
+        <div class="flex justify-center pt-8">
+          <h2 class='text-4xl font-bold'>Control Tower</h2>
+        </div>
+
+        <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
+          {
+            ["kth", "aby", "emt"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
+          }
+        </div>
       </div>
     </Section>
 
