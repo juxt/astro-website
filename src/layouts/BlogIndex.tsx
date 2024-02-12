@@ -27,7 +27,8 @@ function CustomHits({ blogs }) {
     return blogs.get(hit.permalink)
   })
   return (
-    <div>
+    /* This component is styled in dark mode only, so we set dark mode for the blog cards */
+    <div class="dark">
       <div className='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
         {filteredHits.map((hit) => (
           <div key={hit.permalink}>
@@ -53,7 +54,7 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
           <SearchBox />
           <div className='flex justify-between'>
             <button
-              className='text-xs bg-slate-200 dark:bg-slate-600 dark:text-white dark:hover:text-slate-600 dark:hover:bg-slate-200 text-slate-800 hover:bg-slate-400 transition-all hover:text-white rounded-md px-2 py-1'
+              className='text-xs bg-slate-600 text-white hover:text-slate-600 hover:bg-slate-200 transition-all rounded-md px-2 py-1'
               onClick={() => setFiltersVisible(!filtersVisible)}
             >
               Show Filters
@@ -61,7 +62,7 @@ export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
           </div>
 
           <div
-            className={`transition-all text-black dark:text-white flex flex-wrap justify-between pt-4 overflow-hidden
+            className={`transition-all text-white flex flex-wrap justify-between pt-4 overflow-hidden
               ${filtersVisible ? 'h-full opacity-100' : 'h-0 opacity-0'}`}
           >
             <div className='flex flex-col gap-2'>

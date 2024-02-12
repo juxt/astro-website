@@ -2,7 +2,6 @@ import 'preact/jsx-runtime'
 import classNames from 'classnames'
 import { useEffect, useState } from 'preact/hooks'
 import { useOutsideClick } from '@utils/preactUtils'
-import DarkModeSwitch from './DarkModeSwitch'
 
 type NavLinkProp = {
   href: string
@@ -35,7 +34,7 @@ function NavLink({ label, href, target, active, style }: NavLinkProp) {
   )
 }
 
-export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
+export default function Navbar({ navLinks, navbarNoBg }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const ref = useOutsideClick(() => setIsMenuOpen(false))
   const linkClasses = 'items-center gap-8 uppercase tracking-widest text-xs'
@@ -101,7 +100,6 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
               style={page.style}
             />
           ))}
-          {enableDarkMode && <DarkModeSwitch />}
         </div>
 
         {/* mobile */}
@@ -127,7 +125,6 @@ export default function Navbar({ navLinks, enableDarkMode, navbarNoBg }) {
               style={page.style}
             />
           ))}
-          {enableDarkMode && <DarkModeSwitch />}
         </div>
       </div>
     </nav>
