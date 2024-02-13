@@ -1,12 +1,18 @@
 ---
 import AssetImage from '@components/team/AssetImage.astro'
+import MaybeLink from '@components/team/MaybeLink.astro'
+
 const {
     code,
     name, lastName, fullName = `${name} ${lastName}`,
     jobTitle,
     expert,
     idx = 0,
+
+    linkedin,
 } = Astro.props;
+
+const link = linkedin ? `https://www.linkedin.com/in/${linkedin}` : null;
 
 const colourClasses = [
     'bg-[#e78041]',
@@ -21,16 +27,18 @@ const colourClasses = [
 
 const colourClass = colourClasses[idx % colourClasses.length];
 ---
-<div class="flex flex-col gap-2 items-center">
-    <div class={"relative rounded w-36 h-36 overflow-hidden " + colourClass}>
-        <AssetImage 
-            class="absolute top-2"
-            src={`/src/assets/team/headshots/${code}.png`}
-            width={500}
-            alt={`A headshot of ${fullName}`}>
+<MaybeLink href={link} target="_blank">
+    <div class="flex flex-col gap-2 items-center">
+        <div class={"relative rounded w-36 h-36 overflow-hidden " + colourClass}>
+            <AssetImage 
+                class="absolute top-2"
+                src={`/src/assets/team/headshots/${code}.png`}
+                width={500}
+                alt={`A headshot of ${fullName}`}>
+        </div>
+        <div class="text-sm text-white flex flex-col items-center">
+            <p class="font-bold text-lg">{fullName}</p>
+            <p class="font-extralight">{jobTitle}</p>
+        </div>
     </div>
-    <div class="text-sm text-white flex flex-col items-center">
-        <p class="font-bold text-lg">{fullName}</p>
-        <p class="font-extralight">{jobTitle}</p>
-    </div>
-</div>
+</MaybeLink>
