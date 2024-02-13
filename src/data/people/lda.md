@@ -4,7 +4,7 @@ name: 'Lucio'
 lastName: "D'Alessandro"
 jobTitle: 'Senior Software Engineer'
 image: 'lda.jpg'
-linkedin: ''
+linkedin: 'lucio-d-alessandro-38639bb6'
 twitter: ''
-github: ''
+github: 'luciodale'
 ---

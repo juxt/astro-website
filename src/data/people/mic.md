@@ -2,9 +2,9 @@
 code: 'mic'
 name: 'Mike'
 lastName: 'Bruce'
-jobTitle: 'Software Engineer'
-image: 'ajk.jpg'
-linkedin: ''
+jobTitle: 'Senior Software Engineer'
+image: 'ajk.jpg' # TODO: Change me
+linkedin: 'mikepjb'
 twitter: ''
-github: ''
+github: 'mikepjb'
 ---
