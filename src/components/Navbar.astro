@@ -30,15 +30,10 @@ const pagesInNavbar = navbar.map((page) => ({
   style: page.style,
   active: page.href === currentPage
 }))
-
-const firstPathInUrl = Astro.url.pathname.split('/')[1]
-const enableDarkMode =
-  firstPathInUrl === 'blog' || firstPathInUrl === 'clojure-in'
 ---
 
 <Navbar
   client:visible
   navLinks={pagesInNavbar}
-  enableDarkMode={enableDarkMode}
   navbarNoBg={navbarNoBg}
 />

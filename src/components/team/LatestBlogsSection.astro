@@ -50,7 +50,8 @@ const blogs = filteredBlogs
     </div>
   </Section>
 
-  <div class={"grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center" + bgClass}>
+  { /* This component is styled in dark mode only, so we set dark mode for the blog cards */ }
+  <div class={"dark grid grid-cols-1 lg:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] gap-10 justify-center " + bgClass}>
     {
       blogs[0] &&
       <div class="">

@@ -14,6 +14,7 @@ import { Blog, Person } from '@utils/types'
 import { parseBlogs } from '@utils/common'
 import Layout from './Layout.astro'
 import { getImage } from 'astro:assets'
+import DarkModeSwitch from '../components/DarkModeSwitch'
 
 const { title, description, heroImage, category, author, draft } = Astro.props
   .content as Blog
@@ -140,7 +141,7 @@ const categoryHref = `/blog?${encodeURI(
   ogImage={heroImageFilename}
 >
   <DraftBanner draft={draft} pageName='Blog' />
-  <main class='transition-colors'>
+  <main class='transition-colors dark:bg-gray-900'>
     <div class='px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>
       <div class='flex flex-col lg:flex-row gap-12 items-center pt-10'>
         <div
@@ -216,6 +217,7 @@ const categoryHref = `/blog?${encodeURI(
       <div
         class='pb-20 pt-6 flex justify-center items-center gap-4 lg:justify-end'
       >
+        <DarkModeSwitch client:only class={shareIconStyle} />
         <div class='flex justify-around text-sm items-center'>
           <a
             class='w-6 h-6'
