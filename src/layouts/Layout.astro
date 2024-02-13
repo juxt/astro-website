@@ -155,7 +155,7 @@ const metaTitle = ogTitle ?? currentPageName
           let button = document.createElement("button");
 
           button.innerText = "Add to clipboard";
-          button.className = 'copy-button bg-gray-50 text-zinc-700 dark:bg-gray-900 dark:text-white p-1 rounded-bl-lg';
+          button.className = 'copy-button text-xs bg-gray-50 border border-zinc-200 text-zinc-600 dark:border-zinc-700 dark:bg-gray-900 dark:text-zinc-400 p-1 rounded-bl-lg';
           container.insertBefore(button, block);
 
           button.addEventListener("click", async () => {
