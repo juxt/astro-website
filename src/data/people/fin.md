@@ -4,7 +4,7 @@ name: 'Finn'
 lastName: 'Völkel'
 jobTitle: 'Software Engineer'
 image: 'fin.jpg'
-linkedin: 'finn-völkel-21ba2150'
+linkedin: ''
 twitter: 'fiv0'
 github: 'fiv0'
 ---
