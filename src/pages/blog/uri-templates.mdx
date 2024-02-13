@@ -62,15 +62,15 @@ The variables in this template are the following:
 - `/ctx*`: The forward-slash indicates this is a path segment. The asterisk modifies this to mean it can have multiple segments.
 - `accno`: This will be the account number of our bank account.
 - `.format`: This might be `.csv` or `.json`.
-- `.from`: The start of the date range.
-- `.to`: The end of the date range.
+- `from`: The start of the date range.
+- `to`: The end of the date range.
 - `#frag`: An optional fragment, the `#`-prefix indicates 'fragment expansion'
 
 ## URI Templates in Clojure
 
 We've recently added complete and comprehensive support for URI Templates to our Clojure library, [Reap](https://github.com/juxt/reap).
 Reap is a sort of [swiss-army knife](https://en.wikipedia.org/wiki/Swiss_Army_knife) for creating precise parsers.
-It is particularly useful for string formats defined by Internet RFCs, including the URI Tempalte syntax.
+It is particularly useful for string formats defined by Internet RFCs, including the URI Template syntax.
 
 Using Reap, we can compile the URI template above.
 Once compiled, we can construct a URI, satisfying the variables with their corresponding values.
@@ -161,13 +161,13 @@ Let's start with the `compile-uri-template` function:
 ```
 
 As you can see, it takes the URI Template as a string turns it into a `java.util.Matcher` with `re/input`.
-Reap implements a parsing technique known as 'Parsing Expression Grammer', or PEG for short.
+Reap implements a parsing technique known as 'Parsing Expression Grammar', or PEG for short.
 PEG is formally described [in the original paper](https://bford.info/pub/lang/peg.pdf) by Bryan Ford at MIT.
 
 Pegs are built up from some simple building blocks called _parsing expressions_.
 These include 'sequence', 'prioritized choice', 'zero-or-more repetitions' and others.
 
-Reap comes with these are many more built-in 'pegs' (parsing expression grammers), and you can easily create your own.
+Reap comes with many more built-in 'pegs' (parsing expression grammers), and you can easily create your own.
 
 To create a parser for URI Template we only need to translate a grammar from the RFC to Clojure.
 
