@@ -150,19 +150,23 @@ Let's start with the `compile-uri-template` function:
 ```
 
 As you can see, it takes the URI Template as a string turns it into a `java.util.Matcher` with `re/input`.
-Reap is an implementation of a parsing technology called PEG parsing.
-PEG stands for 'Parsing Expression Grammer'.
+Reap implements a parsing technique known as 'Parsing Expression Grammer', or PEG for short.
+PEG is formally described [in the original paper](https://bford.info/pub/lang/peg.pdf) by Bryan Ford at MIT.
 
-Reap comes with a number of built-in parsing expression grammers but you can write your own.
-Parsing expression grammers are built up from some simple building blocks such as 'sequence', 'choice' and others.
+Pegs are built up from some simple building blocks called _parsing expressions_.
+These include 'sequence', 'prioritized choice', 'zero-or-more repetitions' and others.
 
-In Section 2 of RFC 6570, we find the following ABNF definition:
+Reap comes with these are many more built-in 'pegs' (parsing expression grammers), and you can easily create your own.
+
+To create a parser for URI Template we only need to translate a grammar from the RFC to Clojure.
+
+For example, in Section 2 of RFC 6570, we find the following ABNF definition:
 
 ```
 URI-Template  = *( literals / expression )
 ```
 
-We code this ABNF into a Reap parsing expression grammar:
+Using the parser combinator facilities in Reap, we can convert this ABNF into a Clojure-language parsing expression grammar:
 
 ```clojure
 (ns juxt.reap.decoders.rfc6570
@@ -178,15 +182,19 @@ We code this ABNF into a Reap parsing expression grammar:
      expression))))
 ```
 
-The grammar starts with a `p/complete` wrapper, which tells the parser that it can only return the peg if the input has been fully consumed.
+The `uri-template` PEG is a nested structure of Clojure s-exprs.
 
-Wrapped inside is a `p/zero-or-more` parser.
-This corresponds to the `*( )` notation in the ABNF.
+The outer wrapper is `p/complete`, which tells the parser that it can only return the peg if the input has been fully consumed.
+Note, this corresponds to the special `EndOfLine` symbol in the original PEG syntax.
+
+Wrapped inside is a `p/zero-or-more` parser, that maps to the `*( )` notation in the ABNF.
 
 Wrapped inside this is a `p/alternatives` parser.
-In PEG terminology, this is our 'choices' building block, corresponding to the `/` notation in ABNF.
+In PEG terminology, this is our 'prioritized choices' parsing expression.
+In ABNF, it is denoted with `/`.
 
-Finally, wrapped inside this are the two choices. The first is a `p/pattern-parser` which we give a Java regular expression pattern that corresponds to the definition of a `literal`.
+Finally, wrapped inside this are the two choices.
+The first is a `p/pattern-parser` which we give a Java regular expression pattern that corresponds to the definition of a `literal`.
 
 The second is a peg corresponding to the following ABNF, also given in RFC 6570:
 
@@ -212,7 +220,8 @@ Here's the peg coded in Reap:
     (p/ignore (p/pattern-parser #"\}")))))
 ```
 
-This peg makes use of some special Reap functions that allow us to construct a Clojure map of the result.
+This peg makes use of some special Reap functions (`p/into`, `p/ignore`, `p/as-entry`, `p/comp`, etc.).
+These allow us to construct a bespoke Clojure map of the result.
 
 Putting all this together, let's see the result of the `uri-template` parser expression grammar for a simple template:
 
