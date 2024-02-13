@@ -15,16 +15,21 @@ tags:
 import { Image } from 'astro:assets'
 import winking from '../../assets/blog/winking_babushka.jpg'
 
+## The URI Is The Thing
+
 If there's one invention in the 20th Century that gets overlooked, it's the URI.
 URIs are the magic that makes the web work, bringing the Internet to almost everyone on the planet today.
 
-As I write this, many are re-discovering the hypertext foundations of the web.
+Before the URI was introduced, a great number of different approaches existed for locating and transferring information between computers. The arrival of the URI unlocked the potential of the Internet to bring information to everyone.
+And yet, somehow technology trends in the past 30 years have diminished the role of URIs in distributed systems.
+
+As I write this, many are re-discovering the URI as the key component of the hypertext origins of the web.
 Indeed, there are web development libraries, such as [htmx](https://htmx.org), that are rewinding the clock and imagining a different future for the early web.
 
 Hypertext systems work by presenting a set of URIs (links) embedded inside a page.
 When a user clicks on one of these links, the browser navigates to a new page.
 With some care, a web application can be developed as a set of hypertext pages.
-Developers often need to embed some state in the link's URI.
+Developers of hypertext systems need to embed an application's state in links they include in the content they serve.
 For example, a URI in a banking application might embed the account number and transaction period so that the web server generating the response can query the correct data from a database.
 
 ## URI Templates
@@ -32,20 +37,26 @@ For example, a URI in a banking application might embed the account number and t
 Typically, developers use basic ad-hoc techniques such as string concatenation to embed state in a URI.
 However, there's actually a standard called **URI Template** ([RFC 6570](https://www.rfc-editor.org/rfc/rfc6570)).
 
-You may not have seen a standard URI Template before, but if you're familiar with OpenAPI the syntax may look familiar.
+Here's a simple URI Template:
+
+```
+http://example.com/~{username}/
+```
+
+If you're familiar with OpenAPI the syntax may look familiar.
 
 > OpenAPI serialization rules are based on a subset of URI template patterns defined by RFC 6570.
 > -- https://swagger.io/docs/specification/serialization/
 
-Below is an example of a non-trivial URI template.
-It makes use of some, though not all, or the features available in URI Template.
+Here's a more complex example.
+It makes use of some (though not all) of the features available in URI Template.
 
 ```
 https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}
 ```
 
 In this template note the use of open and close braces to enclose variables.
-The variables are;
+The variables in this template are the following:
 
 - `env`: An optional string so we can generate, say, https://uat.bank.com for testing.
 - `/ctx*`: The forward-slash indicates this is a path segment. The asterisk modifies this to mean it can have multiple segments.
@@ -57,7 +68,7 @@ The variables are;
 
 ## URI Templates in Clojure
 
-I've recently added complete and comprehensive support for URI Templates to our Clojure library, [Reap](https://github.com/juxt/reap).
+We've recently added complete and comprehensive support for URI Templates to our Clojure library, [Reap](https://github.com/juxt/reap).
 Reap is a sort of [swiss-army knife](https://en.wikipedia.org/wiki/Swiss_Army_knife) for creating precise parsers.
 It is particularly useful for string formats defined by Internet RFCs, including the URI Tempalte syntax.
 
