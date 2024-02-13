@@ -8,6 +8,7 @@ import { Blog, Person } from '@utils/types'
 import Layout from './Layout.astro'
 import Section from '@components/Section.astro'
 import { parseBlogs, formatDate } from '@utils/common'
+import DarkModeSwitch from '../components/DarkModeSwitch'
 
 const {
   title,
@@ -184,6 +185,7 @@ const clojureInPicture = await getImage({
             {(<LinkedInIcon className={shareIconStyle} />)}
           </a>
         </div>
+        <DarkModeSwitch client:only class={shareIconStyle} />
       </div>
       <a href='mailto:info@juxt.pro' class='text-white underline'>
         Contact us to share your story
@@ -192,7 +194,7 @@ const clojureInPicture = await getImage({
   </div>
 
   <DraftBanner draft={draft} pageName='Blog' />
-  <main class='transition-colors'>
+  <main class='transition-colors dark:bg-gray-900'>
     <article
       class='px-4 py-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert dark:hover:prose-a:text-white'
     >
