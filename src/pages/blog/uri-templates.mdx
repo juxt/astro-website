@@ -182,7 +182,7 @@ Using the parser combinator facilities in Reap, we can convert this ABNF into a 
      expression))))
 ```
 
-The `uri-template` PEG is a nested structure of Clojure s-exprs.
+The `uri-template` peg is a nested structure of Clojure s-exprs.
 
 The outer wrapper is `p/complete`, which tells the parser that it can only return the peg if the input has been fully consumed.
 Note, this corresponds to the special `EndOfLine` symbol in the original PEG syntax.
