@@ -213,3 +213,50 @@ Here's the peg coded in Reap:
 ```
 
 This peg makes use of some special Reap functions that allow us to construct a Clojure map of the result.
+
+Putting all this together, let's see the result of the `uri-template` parser expression grammar for a simple template:
+
+```clojure
+(compile-uri-template
+ "http://example.com/~{username}/")
+
+=>
+
+("http://example.com/~"
+ {:varlist [{:varname "username"}]}
+ "/")
+```
+
+There are 3 components to this template.
+The first and last components are literals, which we can match using Java's regex for quoted literals:
+
+```clojure
+\Qhttp://example.com/~\E … \Q/\E
+```
+
+The middle component is a variable expression.
+Using Reap's facilities to compose regular expressions, we can convert this to the following regex pattern:
+
+```clojure
+(re/re-compose
+  "((?:[%s]|%s)*)"
+  (re/re-str (rfc5234/merge-alternatives rfc3986/unreserved \, \=))
+  rfc3986/pct-encoded)
+=>
+((?:[[\x2C-\x2E][0-9]\x3D[A-Z]\x5F[a-z]\x7E]|%[0-9A-F]{2})*)
+```
+
+Here you can see that RFC 6570 refers to ABNF productions in other RFCs.
+In this case, RFC 5234 and RFC 3986 are referenced.
+
+One of the things I love about RFCs is leverage: that many RFCs put down the foundations for others.
+RFCs are the interlocking components that define the Internet.
+
+Back to our example, by concatenating these regular expressions we end up with a single regular expression that can match URIs.
+This is the basis for the matching URI capabilities of Reap which we saw at the beginning of this article.
+
+## Wrapping up
+
+I hope you enjoyed this tour of URI Templates and have gained an understanding of PEG parsing as implemented by Reap.
+
+If you have any questions or points of feedback, please email me at mal@juxt.pro and I'll do my best to answer them.
