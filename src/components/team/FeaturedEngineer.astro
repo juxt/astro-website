@@ -2,16 +2,25 @@
 import AssetImage from '@components/team/AssetImage.astro'
 import MaybeLink from '@components/team/MaybeLink.astro'
 
-var {
+const {
     code,
     name, lastName, fullName = `${name} ${lastName}`,
     jobTitle,
     expert,
     img,
     square = true,
+
+    linkedin, github,
 } = Astro.props;
+
+var link = null;
+if (linkedin) {
+    link = `https://www.linkedin.com/in/${linkedin}`;
+} else if (github) {
+    link = `https://github.com/${github}`;
+}
 ---
-<MaybeLink href={expert ? `/team/${code}` : null}>
+<MaybeLink href={link} target="_blank">
     <div class="flex flex-col gap-2 items-center">
         <div class={"relative w-72 overflow-hidden " + (square ? "h-72" : "h-96") }>
             <AssetImage 
