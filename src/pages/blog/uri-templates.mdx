@@ -1,0 +1,289 @@
+---
+author: 'mal'
+title: 'URI Templates'
+description: 'Unlocking the potential of URIs to embed state in hypertext applications'
+category: 'clojure'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2024-02-14'
+heroImage: 'the-uri-is-the-thing.jpg'
+tags:
+  - 'rfc'
+  - 'web'
+  - 'routing'
+---
+
+import { Image } from 'astro:assets'
+import winking from '../../assets/blog/winking_babushka.jpg'
+
+## The URI is the Thing
+
+If there's one invention in the 20th Century that gets overlooked, it's the URI.
+URIs are the magic that makes the web work, bringing the Internet to almost everyone on the planet today.
+
+Before the URI was introduced, a great number of different approaches existed for locating and transferring information between computers. The arrival of the URI unlocked the potential of the Internet to bring information to everyone.
+And yet, somehow technology trends in the past 30 years have diminished the role of URIs in distributed systems.
+
+As I write this, many are re-discovering the URI as the key component of the hypertext origins of the web.
+Indeed, there are web development libraries, such as [htmx](https://htmx.org), that are rewinding the clock and imagining a different future for the early web.
+
+Hypertext systems work by presenting a set of URIs (links) embedded inside a page.
+When a user clicks on one of these links, the browser navigates to a new page.
+With some care, a web application can be developed as a set of hypertext pages.
+Developers of hypertext systems need to embed an application's state in links they include in the content they serve.
+For example, a URI in a banking application might embed the account number and transaction period so that the web server generating the response can query the correct data from a database.
+
+## URI Templates
+
+Typically, developers use basic ad-hoc techniques such as string concatenation to embed state in a URI.
+However, there's actually a standard called **URI Template** ([RFC 6570](https://www.rfc-editor.org/rfc/rfc6570)).
+
+Here's a simple URI Template:
+
+```
+http://example.com/~{username}/
+```
+
+If you're familiar with OpenAPI the syntax may look familiar.
+
+> <p>
+>   OpenAPI serialization rules are based on a subset of URI template patterns
+>   defined by RFC 6570.
+> </p>
+> <footer>
+>   -- <cite>https://swagger.io/docs/specification/serialization/</cite>
+> </footer>
+
+Here's a more complex example.
+It makes use of some (though not all) of the features available in URI Template.
+
+```
+https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}
+```
+
+In this template note the use of open and close braces to enclose variables.
+The variables in this template are the following:
+
+- `env`: An optional string so we can generate, say, https://uat.bank.com for testing.
+- `/ctx*`: The forward-slash indicates this is a path segment. The asterisk modifies this to mean it can have multiple segments.
+- `accno`: This will be the account number of our bank account.
+- `.format`: This might be `.csv` or `.json`.
+- `from`: The start of the date range.
+- `to`: The end of the date range.
+- `#frag`: An optional fragment, the `#`-prefix indicates 'fragment expansion'
+
+## URI Templates in Clojure
+
+We've recently added complete and comprehensive support for URI Templates to our Clojure library, [Reap](https://github.com/juxt/reap).
+Reap is a sort of [swiss-army knife](https://en.wikipedia.org/wiki/Swiss_Army_knife) for creating precise parsers.
+It is particularly useful for string formats defined by Internet RFCs, including the URI Template syntax.
+
+Using Reap, we can compile the URI template above.
+Once compiled, we can construct a URI, satisfying the variables with their corresponding values.
+Here's some Clojure code to do just that:
+
+```clojure
+(require '[juxt.reap.rfc6570 :refer [compile-uri-template make-uri]])
+
+(make-uri
+
+  (compile-uri-template
+    "https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}"
+
+    {:ctx ["europe" "uk"]
+     :accno "12345678"
+     :format "csv"
+     :from "20201010"
+     :to "20201110"}))
+
+=>
+
+"https://bank.com/europe/uk/accounts/12345678/transactions.csv?from=20201010&to=20201110"
+```
+
+Usefully, we can use a compiled template to go in the other direction.
+Say we have a URI of `https://bank.com/europe/uk/accounts/12345678/transactions.csv?from=20201010&to=20201110`
+and want to extract the data encoded into it.
+We must provide the types of the variables we wish to extract, which influences what is returned.
+
+```clojure
+(require '[juxt.reap.rfc6570 :refer [compile-uri-template match-uri]])
+
+(match-uri
+
+  (compile-uri-template
+    "https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}")
+
+  ;; Specify the types of the variables we want to extract
+  {:env :string
+   :frag :string
+   :accno :string
+   :ctx :list
+   :format :string
+   :from :string
+   :to :string}
+
+  "https://bank.com/accounts/12345678/transactions.csv?from=20201010&to=20201110")
+
+=>
+
+{:env ""
+ :ctx ["europe" "uk"]
+ :accno "12345678"
+ :format "csv"
+ :from "20201010"
+ :to "20201110"
+ :frag nil}
+```
+
+## Applications of URI Template
+
+The ability to construct and consume URIs makes it easier to build hypertext-based web applications.
+
+For example, you could use our reap library as the basis of a web router to decode state encoded into URIs.
+
+Of course, there are many Clojure libraries already that do this well, including our own [bidi](https://github.com/juxt/bidi) library.
+
+However, URI Template supports more sophisticated features, such as embedding lists and maps into URIs.
+But more importantly, URI Template is a Proposed Standard from the Internet Engineering Task Force (IETF) and can be relied upon for many years ahead.
+
+## Digging Deeper into the Implementation
+
+You can stop reading now, unless you're curious about how we have implemented URI Templates in Reap.
+
+Let's start with the `compile-uri-template` function:
+
+```clojure
+(ns juxt.reap.rfc6570
+  (:require
+    [juxt.reap.regex :as re]
+    [juxt.reap.decoders.rfc6570 :refer [uri-template]]))
+
+(defn compile-uri-template [uri-template-str]
+  (let [components (uri-template (re/input uri-template-str))]
+    {:components components
+     :pattern …
+     }))
+```
+
+As you can see, it takes the URI Template as a string turns it into a `java.util.Matcher` with `re/input`.
+Reap implements a parsing technique known as 'Parsing Expression Grammar', or PEG for short.
+PEG is formally described [in the original paper](https://bford.info/pub/lang/peg.pdf) by Bryan Ford at MIT.
+
+Pegs are built up from some simple building blocks called _parsing expressions_.
+These include 'sequence', 'prioritized choice', 'zero-or-more repetitions' and others.
+
+Reap comes with many more built-in 'pegs' (parsing expression grammers), and you can easily create your own.
+
+To create a parser for URI Template we only need to translate a grammar from the RFC to Clojure.
+
+For example, in Section 2 of RFC 6570, we find the following ABNF definition:
+
+```
+URI-Template  = *( literals / expression )
+```
+
+Using the parser combinator facilities in Reap, we can convert this ABNF into a Clojure-language parsing expression grammar:
+
+```clojure
+(ns juxt.reap.decoders.rfc6570
+  (:require
+   [juxt.reap.regex :as re]
+   [juxt.reap.combinators :as p]))
+
+(def uri-template
+  (p/complete
+   (p/zero-or-more
+    (p/alternatives
+     (p/pattern-parser (re-pattern (re/re-compose "%s+" literals)))
+     expression))))
+```
+
+The `uri-template` peg is a nested structure of Clojure s-exprs.
+
+The outer wrapper is `p/complete`, which tells the parser that it can only return the peg if the input has been fully consumed.
+Note, this corresponds to the special `EndOfLine` symbol in the original PEG syntax.
+
+Wrapped inside is a `p/zero-or-more` parser, that maps to the `*( )` notation in the ABNF.
+
+Wrapped inside this is a `p/alternatives` parser.
+In PEG terminology, this is our 'prioritized choices' parsing expression.
+In ABNF, it is denoted with `/`.
+
+Finally, wrapped inside this are the two choices.
+The first is a `p/pattern-parser` which we give a Java regular expression pattern that corresponds to the definition of a `literal`.
+
+The second is a peg corresponding to the following ABNF, also given in RFC 6570:
+
+```
+expression    =  "{" [ operator ] variable-list "}"
+operator      =  op-level2 / op-level3 / op-reserve
+op-level2     =  "+" / "#"
+op-level3     =  "." / "/" / ";" / "?" / "&"
+op-reserve    =  "=" / "," / "!" / "@" / "|"
+```
+
+Here's the peg coded in Reap:
+
+```clojure
+(def expression
+  (p/into
+   {}
+   (p/sequence-group
+    (p/ignore (p/pattern-parser #"\{"))
+    (p/optionally
+     (p/as-entry :operator (p/comp first (p/pattern-parser (re-pattern operator)))))
+    (p/as-entry :varlist variable-list)
+    (p/ignore (p/pattern-parser #"\}")))))
+```
+
+This peg makes use of some special Reap functions (`p/into`, `p/ignore`, `p/as-entry`, `p/comp`, etc.).
+These allow us to construct a bespoke Clojure map of the result.
+
+Putting all this together, let's see the result of the `uri-template` parser expression grammar for a simple template:
+
+```clojure
+(compile-uri-template
+ "http://example.com/~{username}/")
+
+=>
+
+("http://example.com/~"
+ {:varlist [{:varname "username"}]}
+ "/")
+```
+
+There are 3 components to this template.
+The first and last components are literals, which we can match using Java's regex for quoted literals:
+
+```clojure
+\Qhttp://example.com/~\E … \Q/\E
+```
+
+The middle component is a variable expression.
+Using Reap's facilities to compose regular expressions, we can convert this to the following regex pattern:
+
+```clojure
+(re/re-compose
+  "((?:[%s]|%s)*)"
+  (re/re-str (rfc5234/merge-alternatives rfc3986/unreserved \, \=))
+  rfc3986/pct-encoded)
+=>
+((?:[[\x2C-\x2E][0-9]\x3D[A-Z]\x5F[a-z]\x7E]|%[0-9A-F]{2})*)
+```
+
+Here you can see that RFC 6570 refers to ABNF productions in other RFCs.
+In this case, RFC 5234 and RFC 3986 are referenced.
+
+One of the things I love about RFCs is leverage: that many RFCs put down the foundations for others.
+RFCs are the interlocking components that define the Internet.
+
+Back to our example, by concatenating these regular expressions we end up with a single regular expression that can match URIs.
+This is the basis for the matching URI capabilities of Reap which we saw at the beginning of this article.
+
+## Wrapping up
+
+I hope you enjoyed this tour of URI Templates and have gained an understanding of PEG parsing as implemented by Reap.
+
+If you have any questions or points of feedback, please email me at mal@juxt.pro and I'll do my best to answer them.
+
+Image attribution: https://www.flickr.com/photos/nickwebb/2918883446
