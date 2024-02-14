@@ -7,4 +7,7 @@ image: 'jms.jpg'
 linkedin: 'jarohen'
 twitter: 'jarohen'
 github: 'jarohen'
+
+feature:
+  jobTitle: true
 ---

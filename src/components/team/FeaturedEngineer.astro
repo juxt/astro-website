@@ -8,6 +8,7 @@ const {
     jobTitle,
     expert,
     img,
+    feature = {},
     square = true,
 
     linkedin, github,
@@ -31,7 +32,9 @@ if (linkedin) {
         </div>
         <div class="text-sm text-white flex flex-col items-center">
             <p class="font-bold text-lg">{fullName}</p>
-            <p class="font-extralight">{jobTitle}</p>
+            <p class="font-extralight">
+              {feature.jobTitle ? jobTitle : "Engineer"}
+            </p>
         </div>
     </div>
 </MaybeLink>

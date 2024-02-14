@@ -10,4 +10,7 @@ linkedin: 'jdtaylor'
 twitter: 'refset'
 github: 'refset'
 hackernews: 'refset'
+
+feature:
+  jobTitle: true
 ---

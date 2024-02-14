@@ -10,4 +10,7 @@ linkedin: 'joelittlejohn'
 twitter: 'joelittlejohn'
 github: 'joelittlejohn'
 hackernews: 'joelittlejohn'
+
+feature:
+  jobTitle: true
 ---
