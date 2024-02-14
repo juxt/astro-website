@@ -6,5 +6,5 @@ jobTitle: 'Software Engineer'
 image: 'osm.jpg'
 linkedin: ''
 twitter: ''
-github: ''
+github: 'Akeboshiwind'
 ---
