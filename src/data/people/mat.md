@@ -4,6 +4,9 @@ name: 'Matt'
 lastName: 'Butler'
 jobTitle: 'Software Engineer'
 image: 'mat.jpg'
-linkedin: ''
+linkedin: 'matt-butler-53b81a148'
 github: 'mbutlerw'
+
+feature:
+  link: https://github.com/mbutlerw
 ---
