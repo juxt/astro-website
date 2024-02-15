@@ -1,0 +1,117 @@
+---
+draft: true
+author: 'mal'
+title: 'DORA, the Infra Exploder'
+description: 'The EU wants to disrupt your IT-infra. Tech your way out'
+category: 'compliance'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2024-02-16'
+heroImage: 'dora_eu_flags.jpg'
+tags:
+  - 'DORA'
+  - 'BoE'
+  - 'compliance'
+  - 'consistency'
+  - 'distributed'
+---
+
+import { Image } from 'astro:assets'
+import winking from '../../assets/blog/winking_babushka.jpg'
+
+_In this article, we’ll look at what the UK and EU operational resilience legislations mandate and how they try to steer financial institutions towards less exposure to 3rd-party ICT-provider risk. We’ll talk about how we can turn legal problems into technical ones using advances in computer science and software engineering, and how these challenges can be turned into opportunities._
+
+_Except when specifically discussing the text of the EU legislation, we'll use ‘DORA’ to refer to requirements present in both (current and upcoming) UK guidelines and EU regulations._
+
+## Introduction
+
+Much like [SOX](https://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act), which led to widespread anti-corruption measures in its wake all over the world, [DORA](https://www.eiopa.europa.eu/digital-operational-resilience-act-dora_en) disrupts the status-quo by putting the responsibility for looking after certain kinds of risks on management. The legislation calls systemic dependence on 3rd-party ICT vendors a “concentration risk” and it stops just shy of imposing strict limits on reliance on these services. What it does instead is shift the responsibility for operational resilience onto internal processes, so that disruption from external services is kept within appropriate boundaries, and knock-on effects are mitigated as much as they can be.
+
+In other words: it expects financial institutions to either not enter into contracts which expose their (_[critical](https://www.handbook.fca.org.uk/handbook/glossary/G3442.html?date=2021-01-01)_ or _[important](https://www.handbook.fca.org.uk/handbook/glossary/G3505i.html?date=2022-03-31)_) functions to such external risks, or implement strict technical, governance and legal safeguards around potential disruption-events. DORA therefore makes it harder for financial institutions to rely on single-vendor solutions, both in terms of technology and governance. It’s clear  that the challenges of building vendor-agnostic software, and the lack of ability to build resilient safeguards against potential disruptions, are not yet thought of as the central problem they should be.
+
+The UK was actually ‘first to the party’ and published its rules and [guidance on operational resilience](https://www.handbook.fca.org.uk/handbook/SYSC/15A/?view=chapter) back in  March 2022:
+>As soon as possible after 31 March 2022, and by no later than 31 March 2025, firms must have performed mapping and testing so that they are able to remain within impact tolerances for each important business service. Firms must also have made the necessary investments to enable them to operate consistently within their impact tolerances.
+
+[_BoE operational resilience policy page_](https://www.bankofengland.co.uk/prudential-regulation/publication/2018/building-the-uk-financial-sectors-operational-resilience-discussion-paper)
+
+But similarities don't end there. The Bank of England is now running another [public consultation](https://www.bankofengland.co.uk/prudential-regulation/publication/2023/december/operational-resilience-critical-third-parties-to-the-uk-financial-sector) with the [specific aim](https://www.ft.com/content/8fd1112a-c114-4a8e-92de-fc6610f757b6) to “make their framework interoperable with EU and US standards”.
+
+That's not a bad thing. Vendor lock-in and ‘all eggs in one basket’ strategies are rarely in anyone's best interests. An example is the [horror story](https://www.siliconrepublic.com/business/broadcom-vmware-subscription-perpetual-licence) currently being played out following Broadcom's acquisition of VMWare, which resulted in a [multiple-fold increase in renewal costs](https://www.reddit.com/r/vmware/comments/196odnb/300_increase_in_renewal/) for [some](https://www.reddit.com/r/vmware/comments/19dm7md/another_vmware_renewal_story_likely_a_1250_uplift/) [users](https://www.reddit.com/r/vmware/comments/18tt1wk/finally_got_our_renewal_quote_back/).
+
+import compliance from '../../assets/blog/dora_compliance.png'
+
+<Image style="margin-left: auto; margin-right: auto" alt='Regulators attempt to disentangle banks from ICT infra-providers' src={compliance} />
+
+In a sense, all this aims at remedying the result of a kind of short-term thinking which exposes our financial system to a new form of systemic risk. To put it bluntly: the fact that a handful of ICT providers can hold an entire continent to ransom is a political problem. The EU Commission puts [data sovereignty](https://en.wikipedia.org/wiki/Data_sovereignty) front-and-centre of its [data strategy](https://digital-strategy.ec.europa.eu/en/policies/strategy-data) and the only way to guarantee sovereignty is to treat 3rd-party providers as commodities instead of relying on them as exclusive solutions as most do now.
+
+## DORA in practice
+
+Since DORA expects financial institutions to be able to **explain fully** what knock-on effects can be expected to **any of its business functions** due to the failure of **any 3rd-party ICT provider**, establishing the connection between vendors and business functions must be a central pillar of any DORA-compliance strategy. In fact, DORA goes further than this and mandates that mitigating strategies must also be available to reestablish impacted business functions as soon as possible. 
+
+It’s safe to say that it can be near impossible to establish this level of business continuity without first-hand experience in distributing operations between multiple providers safely. For management this means having actual distributed systems expertise at-hand, a specialism that  Big Name consultancies can rarely provide.
+
+### How long is a piece of tangled up string?
+
+Banks typically publish data feeds from their front office desks to downstream solutions like CRM or the Risk department. We call the intent to make data available for consumption by others a “_promise_”, as it clarifies the inherent risks involved. Consuming systems rely on these promises both directly and indirectly, by using data published by others. Some of these applications inform each other, back-and-forth (like Compliance and Risk), so looking in from the outside it can be unclear where essential information “originally comes from”. These promises (results) feed maybe a few hundred different systems, are maintained by many different teams across different countries and jurisdictions, and provide _important_ or _critical_ functions, the continuous operation of which make the difference between BAU and a weekend-long all-hands video conference.
+
+import tangled from '../../assets/blog/dora_tangled.png'
+
+<Image style="margin-left: auto; margin-right: auto" alt='Oh, what a tangled web we weave' src={tangled} />
+
+Mapping out which promises inform which business function in this Gordian Knot is a daunting task by itself, but tracing back where (and through which 3rd parties) departments like “Cross-products” get all their information from, is a different level of complexity altogether. 
+
+DORA not only mandates establishing which business function is exposed to which external provider, but it also prescribes monitoring the liveness of the promised relationships. In such a heterogeneous environment, this requires careful analysis. Many already rely on 3rd parties for their monitoring, auditing, or logging, which makes designing mitigation strategies even harder.
+
+### Promise Theory
+
+Managing systems by thinking in terms of promises is the defining idea behind the now ubiquitous [Promise Theory](https://en.wikipedia.org/wiki/Promise_theory), which has been behind a lot of the technology that scaled data centres for our modern cloud era. In their recent book Promising Digital Risk Management: What not to do in Cybersecurity, DevOps pioneers Burgess and DeBois argue (much like DORA does) for broadening our understanding of risk into two parts: disaster avoidance and disaster recovery.
+
+Over the years, the [Netflix technical blog](https://netflixtechblog.com/) has become a go-to source for discussions about large-scale system resilience. [This article](https://netflixtechblog.com/lessons-netflix-learned-from-the-aws-outage-deefe5fd0c04) might already be more than a decade old, but what it says about the technical challenges and the strategies to minimise 3rd-party resilience risks are as up to date as the day they were written.
+
+## What can you promise?
+
+DORA (and the recently published [Technical Standards](https://www.esma.europa.eu/sites/default/files/2024-01/JC_2023_84_-_Final_report_on_draft_RTS_to_specify_the_policy_on_ICT_services_supporting_critical_or_important_functions.pdf) [PDF]) applies to services classified as both _critical_ and _important_: in other words, anything that might negatively affect downstream clients, even slower-moving areas like reporting. It stipulates that providers must _assess_ and ultimately _promise_ downstream clients either a multi-vendor strategy for the dependencies they rely on for their own service reliability or at least the ability to recover quickly from 3rd-party disruptions. Most significantly, it requires an explanation on the rationale behind the chosen path.
+
+>_Art. 7 §9: Financial entities may, in the context of the digital operational resilience strategy (...) define a holistic ICT multi-vendor strategy, at group or entity level, showing key dependencies on ICT third-party service providers and explaining the rationale behind the procurement mix of ICT third-party service providers._
+
+[_DORA text of regulation [PDF]_](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
+
+These typical exposures are “Single Points of Failure” ([SPoF](https://en.wikipedia.org/wiki/Single_point_of_failure)). Having these means the risk to the entire enterprise multiplies with the introduction of each one. Even if the chance of a specific ICT provider’s failure is low, these events could have devastating effects as they ripple throughout the wider system unless self-repairing failsafes are put in place.
+
+Some causal factors in failure are technical, some stem from human negligence, and some even from intent to cause harm (e.g. rogue traders). [Dan Luu’s public compilation of outage postmortem causes](https://github.com/danluu/post-mortems) can be a real eye-opener.
+
+## The Future is Shared Consistency
+
+Cloud-providers differentiate their offerings by promising painless scaling on top of what is a commodity: computers connected over a network. Crossing the DORA-chasm is therefore an exercise in also commoditising these extra services. Sharing loads between different vendors (and potentially any data centre) is called a “[hybrid cloud](https://en.wikipedia.org/wiki/Cloud_computing#Hybrid)”. 
+
+Let's look at the flipside of the same coin that is data-sharing: the consistency of information that is replicated across multiple locations and systems. Is this actually promised by our data systems? We mostly assume that it is, but the truth is often far from this ideal. In the past, this has been a troublesome problem –easily solved for one system at a time, but impossible across related ones. Today, we have better answers to this, but the problem is subtle and often not widely recognised by engineers.
+
+We can now piece together the fruits of 30 years of research into a complete solution. Remember how [CFEngine](https://en.wikipedia.org/wiki/CFEngine) applied self-healing contextual consistency to operating system and application level resources? We’ve seen how [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes) did the same for cloud workloads in recent years. These tools were both the by-products of two important innovations: [Consensus Groups](https://en.wikipedia.org/wiki/Consensus_(computer_science)) and Promise Theory. The first one is about how different computers can agree on what (e.g.) the "current balance of bank account is" (think of the UK Post Office scandal), the second one explains how these outcomes depend on promises and services working together. 
+
+The overlap between these two innovations is also where we can handle the larger problem of shared data consistency. Now we actually get inside the datastreams and keep these promises for all shared data in a framework that is both more robust and easier to use.
+
+import replication from '../../assets/blog/dora_replication.png'
+
+<Image style="margin-left: auto; margin-right: auto" alt='let every man be a master of his time' src={replication} />
+
+To address our compliance needs, we need an easy way for both developers and operations to work with it. To turn this into an opportunity, we need this to be easier to work with than what cloud providers offer. An improved [platform solution](https://omniledger.io) to make compliance easy is now within reach. It allows consistent data-streaming between applications via SQL, (so no rewrites needed) and since it scales linearly with Kafka, it's already supported by the internal operations team.
+
+In short: There's no reason DORA has to cause more bureaucratic, technical or governance complexity. In fact, it could turn out to be a way to simplify BAU operations substantially. Generating compliance reports for example, becomes trivial with a unified data-platform.
+
+## Summary
+
+Having worked as an investment banking IT contractor for over a decade at 5 different institutions, I’ve experienced first-hand that they live on data. Thinking back, I can count on one hand the number of serious production-incidents which were due to in-house software, but would quickly lose count of the ones which were due to disruption of some other system’s data feed.
+
+DORA drags these concerns out of the tall grass to make providers promise due diligence to downstream clients. It's a public safety issue. Though daunting for providers, this has the potential to become a change for the better. Now is the age of the platform solution. If we embed technical diligence into the platforms, we can indeed make those promises with confidence, and without having to hide behind legal liability protections. It's time to modernise data systems for compliance. This will not only help with DORA compliance, but also simplify software development radically, decrease operational and infrastructure costs and simplify IT governance in one fell swoop. 
+
+## Appendix
+
+The following are some examples in the text of DORA legislation which identify various tasks and responsibilities of management that are technically very close to impossible to de-risk completely whilst relying on single-vendor solutions for applicable functions:
+
+>Art. 7 §8: (...) <br/>f) evidencing the current digital operational resilience situation on the basis of the number of major ICT-related incidents reported and the effectiveness of preventive measures;
+<br/>g) implementing digital operational resilience testing, in accordance with Chapter IV of this Regulation;
+
+>Art. 9 §1:(...) financial entities shall design the network connection infrastructure in a way that allows it to be instantaneously severed or segmented in order to minimise and prevent contagion, especially for interconnected financial processes.
+
+>Art. 10 §1: Financial entities shall have in place mechanisms to promptly detect anomalous activities, (...) including ICT network performance issues and ICT-related incidents, and to identify potential material single points of failure. All detection mechanisms referred to in the first subparagraph shall be regularly tested in accordance with Article 25.
+
+>Art. 25 §2: As part of their ICT risk management framework, financial entities, (...) shall adopt, and regularly review, a strategy on ICT third-party risk, taking into account the multi-vendor strategy referred to in Article 6(9), where applicable. The strategy on ICT third-party risk shall include a policy on the use of ICT services supporting critical or important functions provided by ICT third-party service providers and shall apply on an individual basis and, where relevant, on a sub-consolidated and consolidated basis. The management body shall, on the basis of an assessment of the overall risk profile of the financial entity and the scale and complexity of the business services, regularly review the risks identified in respect to contractual arrangements on the use of ICT services supporting critical or important functions.
