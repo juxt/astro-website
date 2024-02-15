@@ -2,7 +2,8 @@
 code: 'mat'
 name: 'Matt'
 lastName: 'Butler'
-jobTitle: 'XTDB Developer'
+jobTitle: 'Software Engineer'
 image: 'mat.jpg'
+linkedin: ''
 github: 'mbutlerw'
 ---

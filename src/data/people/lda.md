@@ -6,5 +6,5 @@ jobTitle: 'Senior Software Engineer'
 image: 'lda.jpg'
 linkedin: ''
 twitter: ''
-github: ''
+github: 'luciodale'
 ---
