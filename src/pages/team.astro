@@ -98,6 +98,7 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
 
         <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
           {
+            //["kth", "aby", "emt", "sar"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
             ["kth", "aby", "emt"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
           }
         </div>
