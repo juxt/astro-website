@@ -10,6 +10,7 @@ linkedin: 'joelittlejohn'
 twitter: 'joelittlejohn'
 github: 'joelittlejohn'
 hackernews: 'joelittlejohn'
-featured:
-  weight: 6
+
+feature:
+  jobTitle: true
 ---

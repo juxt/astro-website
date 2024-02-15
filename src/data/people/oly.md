@@ -2,9 +2,12 @@
 code: 'oly'
 name: 'Oliver'
 lastName: 'Hine'
-jobTitle: 'Senior Software Engineer'
+jobTitle: 'Principal Consultant'
 image: 'oly.jpg'
-linkedin: ''
+linkedin: 'oliyh'
 twitter: ''
-github: ''
+github: 'oliyh'
+
+feature:
+  link: https://github.com/oliyh
 ---

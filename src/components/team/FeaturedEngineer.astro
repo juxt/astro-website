@@ -1,0 +1,43 @@
+---
+import AssetImage from '@components/team/AssetImage.astro'
+import MaybeLink from '@components/team/MaybeLink.astro'
+
+var {
+    code,
+    name, lastName, fullName = `${name} ${lastName}`,
+    jobTitle,
+    expert,
+    img,
+    feature,
+    square = true,
+
+    linkedin, github,
+} = Astro.props;
+feature = feature || {};
+
+var link = null;
+if (feature.link) {
+    link = feature.link;
+} else if (linkedin) {
+    link = `https://www.linkedin.com/in/${linkedin}`;
+} else if (github) {
+    link = `https://github.com/${github}`;
+}
+---
+<MaybeLink href={link} target="_blank">
+    <div class="flex flex-col gap-2 items-center">
+        <div class={"relative w-72 overflow-hidden " + (square ? "h-72" : "h-96") }>
+            <AssetImage 
+                class={"absolute h-full grayscale hover:grayscale-0 animate duration-300 top-0 object-cover " + Astro.props.class}
+                src={img}
+                width={500}
+                alt={`A headshot of ${fullName}`} />
+        </div>
+        <div class="text-sm text-white flex flex-col items-center">
+            <p class="font-bold text-lg">{fullName}</p>
+            <p class="font-extralight">
+              {feature.jobTitle ? jobTitle : "Engineering"}
+            </p>
+        </div>
+    </div>
+</MaybeLink>
