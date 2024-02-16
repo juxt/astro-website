@@ -93,7 +93,10 @@ import replication from '../../assets/blog/dora_replication.png'
 
 <Image style="margin-left: auto; margin-right: auto" alt='let every man be a master of his time' src={replication} />
 
-To address our compliance needs, we need an easy way for both developers and operations to work with it. To turn this into an opportunity, we need this to be easier to work with than what cloud providers offer. An improved [platform solution](https://omniledger.io) to make compliance easy is now within reach. It allows consistent data-streaming between applications via SQL, (so no rewrites needed) and since it scales linearly with Kafka, it's already supported by the internal operations team.
+To address our compliance needs, we need an easy way for both developers and operations to work with it. To turn this into an opportunity, we need this to be easier to work with than what cloud providers offer.
+
+
+When I designed our [platform solution](https://omniledger.io), compliance was at the forefront of my mind. Not only because I spent so much of my career integrating banking systems, but also because meeting requirements like disaster recovery, zero data loss or clear security is a good idea everywhere. I also wanted to avoid exposing developers and operations to extra complexity. To achieve this, our platform works transparently through their established tools, namely: various SQL databases and Kafka.
 
 In short: There's no reason DORA has to cause more bureaucratic, technical or governance complexity. In fact, it could turn out to be a way to simplify BAU operations substantially. Generating compliance reports for example, becomes trivial with a unified data-platform.
 
