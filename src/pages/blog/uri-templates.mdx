@@ -87,13 +87,13 @@ Here's some Clojure code to do just that:
 (make-uri
 
   (compile-uri-template
-    "https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}"
+    "https://{env}bank.com{/ctx*}/accounts/{accno}/transactions{.format}{?from,to}{#frag}")
 
     {:ctx ["europe" "uk"]
      :accno "12345678"
      :format "csv"
      :from "20201010"
-     :to "20201110"}))
+     :to "20201110"})
 
 =>
 
