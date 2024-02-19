@@ -23,9 +23,9 @@ const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 )
 
-const blogs = await Astro.glob<MarkdownInstance<Blog>>(
+const blogs = (await Astro.glob<MarkdownInstance<Blog>>(
   '../pages/blog/{*.mdx,*.md}'
-)
+)).filter((blog) => !blog.frontmatter.draft)
 
 const blogsWithoutCurrent = blogs.filter(
   (blog) => blog.frontmatter.title !== title
