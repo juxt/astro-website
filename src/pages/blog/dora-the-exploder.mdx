@@ -53,9 +53,9 @@ Vendors in this space often concentrate on Article 11's focus on the recovery pr
 
 [_Article 10, Response and recovery_](#response-and-recovery)
 
-A new class of service called “[Disaster Recovery as a Service](https://en.wikipedia.org/wiki/Recovery_as_a_service)” has popped up recently, which promises a painless solution to these problems. Some of these like [Azure Recovery Service](https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview) are specifically disallowed by the legislation, as DORA concentrates on the holistic risk posed by the vendor. Other such services are allowed as long as they can provide a way to recover *all the functions and data* within a predetermined time. This is only possible if the software envelopes all the operations of the cloud-provider and acts as a “middle-man” between calls made to the main provider. This means that instead of one resilience problem we now have two, as any continued operation presumes that both the DRaaS service and the original provider work as expected. To put it differently: DRaaS can either fulfill business-continuity requirements or work without potentially disrupting our BAU operations, but they can't achieve both.
+A new class of service called “[Disaster Recovery as a Service](https://en.wikipedia.org/wiki/Recovery_as_a_service)” has popped up recently, which promises a painless solution to these problems. Some of these like [Azure Recovery Service](https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview) are specifically disallowed by the legislation, as DORA concentrates on the holistic risk posed by the vendor. Other such services are allowed as long as they can provide a way to recover *all the functions and data* within a predetermined time. This is only possible if the software envelopes all the operations of the cloud-provider and acts as a “middle-man” between calls made to the main provider. This means that instead of one resilience problem we now have two, as any continued operation presumes that both the DRaaS service and the original provider work as expected. To put it differently: DRaaS can either fulfill business-continuity requirements or work without potentially disrupting BAU operations, but they can't achieve both.
 
-It’s safe to say that it can be near impossible to establish this level of business continuity without first-hand experience in distributing operations between multiple providers safely. For management this means having actual distributed systems expertise at-hand, a specialism that Big Name consultancies can rarely provide. 
+It’s safe to say that it's near impossible to establish this level of business continuity without first-hand experience in distributing operations between multiple providers safely. For management this means having actual distributed systems expertise at-hand, a specialism that Big Name consultancies can rarely provide. 
 
 ### How long is a piece of tangled up string?
 
@@ -115,7 +115,7 @@ DORA drags these concerns out of the tall grass to make providers promise due di
 
 ## Appendix
 
-The following are some examples in the text of DORA legislation which identify various tasks and responsibilities of management that are technically impossible to de-risk completely whilst relying on single-vendor solutions for applicable functions:
+Following two sections are the most important Articles: 10 and 11, from the text of the DORA legislation that deal with business-continuity requirements. It also cites the most relevant sections from Article 25, where the regulation defines the kind of failures the financial entity needs to be prepared for.
 
 ### _Article 10_
 
@@ -189,3 +189,21 @@ The following are some examples in the text of DORA legislation which identify v
 >6.In determining the recovery time and point objectives for each function, financial entities shall take into account the potential overall impact on market efficiency. Such time objectives shall ensure that, in extreme scenarios, the agreed service levels are met.
 
 >7.When recovering from an ICT-related incident, financial entities shall perform multiple checks, including reconciliations, in order to ensure that the level of data integrity is of the highest level. These checks shall also be performed when reconstructing data from external stakeholders, in order to ensure that all data is consistent between systems. 
+
+### Article 25
+
+>Financial entities shall put in place exit strategies in order to take into account risks that may emerge at the level of ICT third-party service provider, in particular **a possible failure of the latter, a deterioration of the quality of the functions provided**, any business disruption due to **inappropriate or failed provision of services** or **material risk arising in relation to the appropriate and continuous deployment of the function.**
+
+>Financial entities shall ensure that they are able to exit contractual arrangements without:
+
+>(a)disruption to their business activities,
+
+>(b)limiting compliance with regulatory requirements,
+
+>(c)detriment to the continuity and quality of their provision of services to clients.
+
+>Exit plans shall be comprehensive, documented and, where appropriate, sufficiently tested.
+
+>Financial entities shall identify alternative solutions and develop transition plans enabling them to remove the contracted functions and the relevant data from the ICT third-party service provider and securely and integrally transfer them to alternative providers or reincorporate them in-house.
+
+>Financial entities shall take appropriate contingency measures to **maintain business continuity under all of the circumstances referred to in the first subparagraph.** 
