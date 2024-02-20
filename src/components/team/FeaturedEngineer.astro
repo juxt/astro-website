@@ -27,8 +27,8 @@ if (feature.link) {
 <MaybeLink href={link} target="_blank">
     <div class="flex flex-col gap-2 items-center">
         <div class={"relative w-72 overflow-hidden " + (square ? "h-72" : "h-96") }>
-            <AssetImage 
-                class={"absolute h-full grayscale hover:grayscale-0 animate duration-300 top-0 object-cover " + Astro.props.class}
+            <AssetImage
+                class={"absolute h-full grayscale hover:grayscale-0 saturate-[0.8] animate duration-300 top-0 object-cover " + Astro.props.class}
                 src={img}
                 width={500}
                 alt={`A headshot of ${fullName}`} />
