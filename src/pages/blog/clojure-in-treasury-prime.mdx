@@ -4,7 +4,7 @@ title: 'Clojure in Banking: Treasury Prime'
 description: 'Connecting Fintechs to the largest network of Banks, through a single API'
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'
-publishedDate: '2024-02-13'
+publishedDate: '2024-02-21'
 heroImage: 'treasuryprime-logo-clojurein-new.jpg'
 clojureIn:
   {
@@ -22,7 +22,13 @@ We caught up with Mike Clarke, VP Engineering, to discuss a lineage of Banking A
 
 import tplogo from '../../assets/blog/treasuryprime.svg'
 
-<Image class='not-prose dark:invert' alt='Treasury Prime' width={350} height={50} src={tplogo} />
+<Image
+  class='not-prose dark:invert'
+  alt='Treasury Prime'
+  width={350}
+  height={50}
+  src={tplogo}
+/>
 
 **Joe: So, tell me about Treasury Prime, Mike. What do you do?**
 
@@ -34,7 +40,7 @@ I joined as a Software Engineer, around three and a half years ago now, and I th
 
 import tpmike from '../../assets/blog/treasuryprime-mike.jpg'
 
-<Image alt='Joe and Mike on Zoom' src={tpmike} width={500} class="m-auto"/>
+<Image alt='Joe and Mike on Zoom' src={tpmike} width={500} class='m-auto' />
 
 **Joe: Do you know how Treasury Prime got started?**
 
@@ -56,7 +62,7 @@ We built the stack in Clojure based on Chris's vision, really. He inducted us al
 
 <span
   class='pullquote right'
-  text-content="We built the stack in Clojure based on Chris [Dean]s vision, really. He inducted us all into thinking the right ways about how to write software to solve this problem."
+  text-content='We built the stack in Clojure based on Chris [Dean]s vision, really. He inducted us all into thinking the right ways about how to write software to solve this problem.'
 />
 
 So, time passes, and Standard Treasury was acquired by the (now infamous) Silicon Valley Bank. And we all went to Silicon Valley Bank, to build what became api.svb.com, their APIs for banking. We were there for two years and then went in different directions, but the system lived on and they had Clojure running there for many years after we left. It basically ran itself and never needed much maintenance.
@@ -216,9 +222,8 @@ If you have a memory leak, you can take advantage of all this tooling out in the
 
 <span
   class='pullquote right'
-  text-content="The REPL is a huge boost for productivity."
+  text-content='The REPL is a huge boost for productivity.'
 />
-
 
 The REPL is a huge boost for productivity, even in situations where we need to just understand some unexpected behavior. The things that it enables are underappreciated from my vantage point. Part of this is the experience of having done it in production for, you know, five or seven years. It's different if you're trying to build a 'To Do' app and you're trying to evaluate it from that vantage point. I think you have to look at it from the vantage point of it's an enterprise problem and you will have some real traffic, and there are the things that it [the JVM] gives you that don't help if it's just on your laptop. And that's an important part of what makes Clojure work for us.
 
@@ -238,7 +243,7 @@ There's also something related to queuing and backtick - maybe we should see if 
 
 I think that some of the other things that we've had to build are potentially just less sophisticated versions of what's out there already, and perhaps if there was a more obvious choice in the ecosystem, then we should probably use that instead.
 
-**Joe: Yeah. Something I think the Clojure community is not always great at is _convergence_ on a solution. There's been a few different attempts to create more batteries-included experience in frameworks, usually for webapp development for APIs, but the Clojure community is not that good at converging on one of these solutions. So you end up in that situation where (like that [XKCD on Standards](https://m.xkcd.com/927/))  everyone thinks "Right, we just need _one more_, and that's going to bring about convergence."**
+**Joe: Yeah. Something I think the Clojure community is not always great at is _convergence_ on a solution. There's been a few different attempts to create more batteries-included experience in frameworks, usually for webapp development for APIs, but the Clojure community is not that good at converging on one of these solutions. So you end up in that situation where (like that [XKCD on Standards](https://m.xkcd.com/927/)) everyone thinks "Right, we just need _one more_, and that's going to bring about convergence."**
 
 **I suppose with any framework, people need to accept some benefits and some drawbacks. You need to take the rough with the smoother and say, "Well, it's not perfect, but the convergence is a big benefit". But people in the Clojure community don't like having to put up with annoyances. They want those things to be solved because everything else is so neat.**
 
