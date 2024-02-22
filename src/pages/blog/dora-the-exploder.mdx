@@ -29,17 +29,8 @@ In other words: DORA expects financial institutions to either not enter into con
 
 The UK was actually ‘first to the party’ and published its rules and [guidance on operational resilience](https://www.handbook.fca.org.uk/handbook/SYSC/15A/?view=chapter) back in March 2022:
 
-> <p>
->   As soon as possible after 31 March 2022, and by no later than 31 March 2025,
->   firms must have performed mapping and testing so that they are able to
->   remain within impact tolerances for each important business service. Firms
->   must also have made the necessary investments to enable them to operate
->   consistently within their impact tolerances.
-> </p>
-> <footer>
->   --[_BoE operational resilience policy
->   page_](https://www.bankofengland.co.uk/prudential-regulation/publication/2018/building-the-uk-financial-sectors-operational-resilience-discussion-paper)
-> </footer>
+> <p>As soon as possible after 31 March 2022, and by no later than 31 March 2025, firms must have performed mapping and testing so that they are able to remain within impact tolerances for each important business service. Firms must also have made the necessary investments to enable them to operate consistently within their impact tolerances.</p>
+> <footer>--[_BoE operational resilience policy page_](https://www.bankofengland.co.uk/prudential-regulation/publication/2018/building-the-uk-financial-sectors-operational-resilience-discussion-paper)</footer>
 
 But similarities don't end there. The Bank of England is now running another [public consultation](https://www.bankofengland.co.uk/prudential-regulation/publication/2023/december/operational-resilience-critical-third-parties-to-the-uk-financial-sector) with the [specific aim](https://www.ft.com/content/8fd1112a-c114-4a8e-92de-fc6610f757b6) to [make their](https://www.reuters.com/world/uk/bank-england-proposes-new-checks-banks-reliance-tech-companies-2023-12-07/) framework "interoperable" with EU and U.S. standards.
 
@@ -53,15 +44,8 @@ Since DORA expects financial institutions to be able to **explain fully** what k
 
 Vendors in this space often concentrate on [Article 11](#article-11-backup-policies-and-recovery-methods)'s focus on the recovery processes prescribed to the service providers, but often disregard the fact that business continuity presumes that all data needed for the affected business functions can be recovered from the (disrupted) main service-provider.
 
-> <p>
->   Financial entities shall put in place, maintain and periodically test
->   appropriate ICT business continuity plans, notably with regard to critical
->   or important functions outsourced or contracted through arrangements with
->   ICT third-party service providers.
-> </p>
-> <footer>
->   --[_Article 10, Response and recovery_](#article-10-response-and-recovery)
-> </footer>
+><p>Financial entities shall put in place, maintain and periodically test appropriate ICT business continuity plans, notably with regard to critical or important functions outsourced or contracted through arrangements with ICT third-party service providers.</p>
+><footer>--[_Article 10, Response and recovery_](#article-10-response-and-recovery)</footer>
 
 A new class of service called “[Disaster Recovery as a Service](https://en.wikipedia.org/wiki/Recovery_as_a_service)” has popped up recently, which promises a painless solution to these problems. Some of these like [Azure Recovery Service](https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview) are clearly disallowed by the legislation, as DORA concentrates on the holistic risk posed by the vendor. Other such services are allowed as long as they can provide a way to recover **all the functions and data** within a predetermined time. This is only possible if the software envelopes all the operations of the cloud provider and acts as a “middle-man” between calls made to the main provider. This means that instead of one resilience problem we now have two, as any continued operation presumes that both the DRaaS service and the original provider work as expected. To put it differently: DRaaS can either fulfil business-continuity requirements _or_ work without potentially disrupting our BAU operations, but they can't achieve both.
 
@@ -93,17 +77,8 @@ Over the years, the [Netflix technical blog](https://netflixtechblog.com/) has b
 
 DORA (and the recently published [Technical Standards](https://www.esma.europa.eu/sites/default/files/2024-01/JC_2023_84_-_Final_report_on_draft_RTS_to_specify_the_policy_on_ICT_services_supporting_critical_or_important_functions.pdf) [PDF]) applies to services classified as both _critical_ and _important_: in other words, anything that might negatively affect downstream clients, even slower-moving areas like reporting. It stipulates that providers must _assess_ and ultimately _promise_ downstream clients either a multi-vendor strategy for the dependencies they rely on for their own service reliability or at least the ability to recover quickly from 3rd-party disruptions. Most significantly, it requires an explanation on the rationale behind the chosen path.
 
-> <p>
->   Art. 7 §9: Financial entities may, in the context of the digital operational
->   resilience strategy (...) define a holistic ICT multi-vendor strategy, at
->   group or entity level, showing key dependencies on ICT third-party service
->   providers and explaining the rationale behind the procurement mix of ICT
->   third-party service providers.
-> </p>
-> <footer>
->   -- [_DORA text of regulation
->   [PDF]_](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
-> </footer>
+><p>Art. 7 §9: Financial entities may, in the context of the digital operational resilience strategy (...) define a holistic ICT multi-vendor strategy, at group or entity level, showing key dependencies on ICT third-party service providers and explaining the rationale behind the procurement mix of ICT third-party service providers.</p>
+> <footer>-- [_DORA text of regulation [PDF]_](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)</footer>
 
 These typical exposures are “Single Points of Failure” ([SPoF](https://en.wikipedia.org/wiki/Single_point_of_failure)). Having these means the risk to the entire enterprise multiplies with the introduction of each one. Even if the chance of a specific ICT provider’s failure is low, these events could have a devastating effect as they ripple throughout the wider system unless self-repairing failsafes are put in place.
 
