@@ -42,10 +42,10 @@ In a sense, all this aims at remedying the result of a kind of short-term thinki
 
 Since DORA expects financial institutions to be able to **explain fully** what knock-on effects can be expected to **any of its business functions** due to the failure of **any 3rd-party ICT provider**, establishing the connection between vendors and business functions must be a central pillar of any DORA compliance strategy. In fact, DORA goes further than this and mandates that business continuity plans must also be established by the **financial entity**.
 
-Vendors in this space often concentrate on [Article 11](#article-11-backup-policies-and-recovery-methods)'s focus on the recovery processes prescribed to the service providers, but often disregard the fact that business continuity presumes that all data needed for the affected business functions can be recovered from the (disrupted) main service-provider.
+Vendors in this space often concentrate on [Article 12](#article-12-backup-policies-and-procedures-restoration-and-recovery-procedures-and-methods)'s focus on the recovery processes prescribed to the service providers, but often disregard the fact that business continuity presumes that all data needed for the affected business functions can be recovered from the (disrupted) main service-provider.
 
 ><p>Financial entities shall put in place, maintain and periodically test appropriate ICT business continuity plans, notably with regard to critical or important functions outsourced or contracted through arrangements with ICT third-party service providers.</p>
-><footer>--[_Article 10, Response and recovery_](#article-10-response-and-recovery)</footer>
+><footer>--[_Article 11, Response and recovery_](#article-11-response-and-recovery)</footer>
 
 A new class of service called “[Disaster Recovery as a Service](https://en.wikipedia.org/wiki/Recovery_as_a_service)” has popped up recently, which promises a painless solution to these problems. Some of these like [Azure Recovery Service](https://learn.microsoft.com/en-us/azure/backup/backup-azure-recovery-services-vault-overview) are clearly disallowed by the legislation, as DORA concentrates on the holistic risk posed by the vendor. Other such services are allowed as long as they can provide a way to recover **all the functions and data** within a predetermined time. This is only possible if the software envelopes all the operations of the cloud provider and acts as a “middle-man” between calls made to the main provider. This means that instead of one resilience problem we now have two, as any continued operation presumes that both the DRaaS service and the original provider work as expected. To put it differently: DRaaS can either fulfil business-continuity requirements _or_ work without potentially disrupting our BAU operations, but they can't achieve both.
 
@@ -77,8 +77,8 @@ Over the years, the [Netflix technical blog](https://netflixtechblog.com/) has b
 
 DORA (and the recently published [Technical Standards](https://www.esma.europa.eu/sites/default/files/2024-01/JC_2023_84_-_Final_report_on_draft_RTS_to_specify_the_policy_on_ICT_services_supporting_critical_or_important_functions.pdf) [PDF]) applies to services classified as both _critical_ and _important_: in other words, anything that might negatively affect downstream clients, even slower-moving areas like reporting. It stipulates that providers must _assess_ and ultimately _promise_ downstream clients either a multi-vendor strategy for the dependencies they rely on for their own service reliability or at least the ability to recover quickly from 3rd-party disruptions. Most significantly, it requires an explanation on the rationale behind the chosen path.
 
-><p>Art. 7 §9: Financial entities may, in the context of the digital operational resilience strategy (...) define a holistic ICT multi-vendor strategy, at group or entity level, showing key dependencies on ICT third-party service providers and explaining the rationale behind the procurement mix of ICT third-party service providers.</p>
-> <footer>-- [_DORA text of regulation [PDF]_](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)</footer>
+><p>Art. 6 §9: Financial entities may, in the context of the digital operational resilience strategy (...) define a holistic ICT multi-vendor strategy, at group or entity level, showing key dependencies on ICT third-party service providers and explaining the rationale behind the procurement mix of ICT third-party service providers.</p>
+> <footer>-- [_DORA text of regulation [PDF]_](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32022R2554)</footer>
 
 These typical exposures are “Single Points of Failure” ([SPoF](https://en.wikipedia.org/wiki/Single_point_of_failure)). Having these means the risk to the entire enterprise multiplies with the introduction of each one. Even if the chance of a specific ICT provider’s failure is low, these events could have a devastating effect as they ripple throughout the wider system unless self-repairing failsafes are put in place.
 
@@ -122,81 +122,73 @@ If you're interested to learn more about bringing consistency and resilience to 
 
 ## Appendix
 
-The following two sections are the most important, Articles 10 and 11, from the text of the DORA legislation that deal with business continuity requirements. Also cited is the most relevant section from Article 28, where the regulation defines the kind of failures that a financial entity needs to be prepared for, and finally a definition that clarifies the scope of this document.
+The following two sections are the most important, Articles 11 and 12, from the text of the DORA legislation that deal with business continuity requirements. Also cited is the most relevant section from Article 28, where the regulation defines the kind of failures that a financial entity needs to be prepared for, and finally a definition that clarifies the scope of this document.
 
-### Article 10, Response and recovery
+### Article 11, Response and recovery
 
-> 1\. As part of the ICT risk management framework referred to in Article 5(1) and based on the identification requirements set out in Article 7, financial entities shall put in place a dedicated and comprehensive ICT Business Continuity Policy as an integral part of the operational business continuity policy of the financial entity.\_
+> 1\. As part of the ICT risk management framework referred to in Article 6(1) and based on the identification requirements set out in Article 8, financial entities shall put in place a comprehensive ICT business continuity policy, which may be adopted as a dedicated specific policy, forming an integral part of the overall business continuity policy of the financial entity.
 >
-> 2\. Financial entities shall implement the ICT Business Continuity Policy referred to in paragraph 1 through dedicated, appropriate and documented arrangements, plans, procedures and mechanisms aimed at:
+> 2\. Financial entities shall implement the ICT business continuity policy through dedicated, appropriate and documented arrangements, plans, procedures and mechanisms aiming to:
 >
-> (a) recording all ICT-related incidents;
+> (a) ensure the continuity of the financial entity’s critical or important functions;
 >
-> (b) ensuring the continuity of the financial entity’s critical functions;
+> (b) quickly, appropriately and effectively respond to, and resolve, all ICT-related incidents in a way that limits damage and prioritises the resumption of activities and recovery actions;
 >
-> (c) quickly, appropriately and effectively responding to and resolving all ICT-related incidents, in particular but not limited to cyber-attacks, in a way which limits damage and prioritises resumption of activities and recovery actions;
+> (c) activate, without delay, dedicated plans that enable containment measures, processes and technologies suited to each type of ICT-related incident and prevent further damage, as well as tailored response and recovery procedures established in accordance with Article 12;
 >
-> (d) activating without delay dedicated plans that enable containment measures, processes and technologies suited to each type of ICT-related incident and preventing further damage, as well as tailored response and recovery procedures established in accordance with Article 11;
+> (d) estimate preliminary impacts, damages and losses;
 >
-> (e) estimating preliminary impacts, damages and losses;
+> (e) set out communication and crisis management actions that ensure that updated information is transmitted to all relevant internal staff and external stakeholders in accordance with Article 14, and report to the competent authorities in accordance with Article 19.
 >
-> (f) setting out communication and crisis management actions which ensure that updated information is transmitted to all relevant internal staff and external stakeholders in accordance with Article 13, and reported to competent authorities in accordance with Article 17.
->
-> 3\. As part of the ICT risk management framework referred to in Article 5(1), financial entities shall implement an associated ICT Disaster Recovery Plan, which, in the case of financial entities other than microenterprises, shall be subject to independent audit reviews.
+> 3\. As part of the ICT risk management framework referred to in Article 6(1), financial entities shall implement associated ICT response and recovery plans which, in the case of financial entities other than microenterprises, shall be subject to independent internal audit reviews.
 >
 > 4\. Financial entities shall put in place, maintain and periodically test appropriate ICT business continuity plans, notably with regard to critical or important functions outsourced or contracted through arrangements with ICT third-party service providers.
 >
-> 5\. As part of their comprehensive ICT risk management, financial entities shall:
+> 5\. As part of the overall business continuity policy, financial entities shall conduct a business impact analysis (BIA) of their exposures to severe business disruptions. Under the BIA, financial entities shall assess the potential impact of severe business disruptions by means of quantitative and qualitative criteria, using internal and external data and scenario analysis, as appropriate. The BIA shall consider the criticality of identified and mapped business functions, support processes, third-party dependencies and information assets, and their interdependencies. Financial entities shall ensure that ICT assets and ICT services are designed and used in full alignment with the BIA, in particular with regard to adequately ensuring the redundancy of all critical components.
 >
-> (a) test the ICT Business Continuity Policy and the ICT Disaster Recovery Plan at least yearly and after substantive changes to the ICT systems;
+> 6\. As part of their comprehensive ICT risk management, financial entities shall:
 >
-> (b) test the crisis communication plans established in accordance with Article 13.
+> (a) test the ICT business continuity plans and the ICT response and recovery plans in relation to ICT systems supporting all functions at least yearly, as well as in the event of any substantive changes to ICT systems supporting critical or important functions;
 >
-> For the purposes of point (a), financial entities other than microenterprises shall include in the testing plans scenarios of cyber-attacks and switchovers between the primary ICT infrastructure and the redundant capacity, backups and redundant facilities necessary to meet the obligations set out in Article 11.
+> (b) test the crisis communication plans established in accordance with Article 14.
 >
-> Financial entities shall regularly review their ICT Business Continuity Policy and ICT Disaster Recovery Plan taking into account the results of tests carried out in accordance with the first subparagraph and recommendations stemming from audit checks or supervisory reviews.
+> For the purposes of the first subparagraph, point (a), financial entities, other than microenterprises, shall include in the testing plans scenarios of cyber-attacks and switchovers between the primary ICT infrastructure and the redundant capacity, backups and redundant facilities necessary to meet the obligations set out in Article 12.
 >
-> 6\. Financial entities other than microenterprises shall have a crisis management function, which, in case of activation of their ICT Business Continuity Policy or ICT Disaster Recovery Plan, shall set out clear procedures to manage internal and external crisis communications in accordance with Article 13.
+> Financial entities shall regularly review their ICT business continuity policy and ICT response and recovery plans, taking into account the results of tests carried out in accordance with the first subparagraph and recommendations stemming from audit checks or supervisory reviews.
 >
-> 7\. Financial entities shall keep records of activities before and during disruption events when their ICT Business Continuity Policy or ICT Disaster Recovery Plan is activated. Such records shall be readily available.
+> 7\. Financial entities other than microenterprises shall have a crisis management function, which, in case of activation of their ICT Business Continuity Policy or ICT Disaster Recovery Plan, shall set out clear procedures to manage internal and external crisis communications in accordance with Article 13.
 >
-> 8\. Financial entities referred to in point (f) of Article 2(1) shall provide to the competent authorities copies of the results of the ICT business continuity tests or similar exercises performed during the period under review.
+> 8\. Financial entities shall keep readily accessible records of activities before and during disruption events when their ICT business continuity plans and ICT response and recovery plans are activated.
 >
-> 9\. Financial entities other than microenterprises shall report to competent authorities all costs and losses caused by ICT disruptions and ICT-related incidents.
+> 9\. Central securities depositories shall provide the competent authorities with copies of the results of the ICT business continuity tests, or of similar exercises.
+>
+> 10\. Financial entities, other than microenterprises, shall report to the competent authorities, upon their request, an estimation of aggregated annual costs and losses caused by major ICT-related incidents.
+>
+> 11\.  In accordance with Article 16 of Regulations (EU) No 1093/2010, (EU) No 1094/2010 and (EU) No 1095/2010, the ESAs, through the Joint Committee, shall by 17 July 2024 develop common guidelines on the estimation of aggregated annual costs and losses referred to in paragraph 10.
 
-### Article 11, Backup policies and recovery methods
+### Article 12, Backup policies and procedures, restoration and recovery procedures and methods
 
-> 1\. For the purpose of ensuring the restoration of ICT systems with minimum downtime and limited disruption, as part of their ICT risk management framework, financial entities shall develop:
+> 1\. For the purpose of ensuring the restoration of ICT systems and data with minimum downtime, limited disruption and loss, as part of their ICT risk management framework, financial entities shall develop and document:
 >
-> (a) a backup policy specifying the scope of the data that is subject to the backup and the minimum frequency of the backup, based on the criticality of information or the sensitiveness of the data;
+> (a) backup policies and procedures specifying the scope of the data that is subject to the backup and the minimum frequency of the backup, based on the criticality of information or the confidentiality level of the data;
 >
-> (b) recovery methods.
+> (b) restoration and recovery procedures and methods.
 >
-> 2\. Backup systems shall begin processing without undue delay, unless such start would jeopardize the security of the network and information systems or the integrity or confidentiality of data.
+> 2\. Financial entities shall set up backup systems that can be activated in accordance with the backup policies and procedures, as well as restoration and recovery procedures and methods. The activation of backup systems shall not jeopardise the security of the network and information systems or the availability, authenticity, integrity or confidentiality of data. Testing of the backup procedures and restoration and recovery procedures and methods shall be undertaken periodically.
 >
-> 3\. When restoring backup data using own systems, financial entities shall use ICT systems that have an operating environment different from the main one, that is not directly connected with the latter and that is securely protected from any unauthorized access or ICT corruption.
+> 3\. When restoring backup data using own systems, financial entities shall use ICT systems that are physically and logically segregated from the source ICT system. The ICT systems shall be securely protected from any unauthorised access or ICT corruption and allow for the timely restoration of services making use of data and system backups as necessary.
 >
-> For financial entities referred to in point (g) of Article 2(1), the recovery plans shall enable the recovery of all transactions at the time of disruption to allow the central counterparty to continue to operate with certainty and to complete settlement on the scheduled date.
+> For central counterparties, the recovery plans shall enable the recovery of all transactions at the time of disruption to allow the central counterparty to continue to operate with certainty and to complete settlement on the scheduled date.
 >
-> 4\. Financial entities shall maintain redundant ICT capacities equipped with resources capabilities and functionalities that are sufficient and adequate to ensure business needs.
+> ...
 >
-> 5\. Financial entities referred to in point (f) of Article 2(1) shall maintain or ensure that their ICT third-party providers maintain at least one secondary processing site endowed with resources, capabilities, functionalities and staffing arrangements sufficient and appropriate to ensure business needs.
+>  6\. In determining the recovery time and recovery point objectives for each function, financial entities shall take into account whether it is a critical or important function and the potential overall impact on market efficiency. Such time objectives shall ensure that, in extreme scenarios, the agreed service levels are met.
 >
-> The secondary processing site shall be:
->
-> (a) located at a geographical distance from the primary processing site to ensure that it bears a distinct risk profile and to prevent it from being affected by the event which has affected the primary site;
->
-> (b) capable of ensuring the continuity of critical services identically to the primary site, or providing the level of services necessary to ensure that the financial entity performs its critical operations within the recovery objectives;
->
-> (c) immediately accessible to the financial entity’s staff to ensure continuity of critical services in case the primary processing site has become unavailable.
->
-> 6\. In determining the recovery time and point objectives for each function, financial entities shall take into account the potential overall impact on market efficiency. Such time objectives shall ensure that, in extreme scenarios, the agreed service levels are met.
->
-> 7\. When recovering from an ICT-related incident, financial entities shall perform multiple checks, including reconciliations, in order to ensure that the level of data integrity is of the highest level. These checks shall also be performed when reconstructing data from external stakeholders, in order to ensure that all data is consistent between systems.
+>  7\. When recovering from an ICT-related incident, financial entities shall perform necessary checks, including any multiple checks and reconciliations, in order to ensure that the highest level of data integrity is maintained. These checks shall also be performed when reconstructing data from external stakeholders, in order to ensure that all data is consistent between systems.
 
 ### Article 28, General principles
 
-> 8\. For ICT services supporting critical or important functions, financial entities shall put in place exit strategies. The exit strategies shall take into account risks that may emerge at the level of ICT third-party service providers, in particular a **possible failure on their part, a deterioration of the quality of the ICT services provided, any business disruption due to inappropriate or failed provision of ICT services** or any material risk arising in relation to the appropriate and continuous deployment of the respective ICT service, or the termination of contractual arrangements with ICT third-party service providers under any of the circumstances listed in paragraph 7.
+> 9\. Financial entities shall put in place exit strategies in order to take into account risks that may emerge at the level of ICT third-party service provider, in particular **a possible failure of the latter, a deterioration of the quality of the functions provided**, any business disruption due to **inappropriate or failed provision of services** or **material risk arising in relation to the appropriate and continuous deployment of the function.**
 >
 > Financial entities shall ensure that they are able to exit contractual arrangements without:
 >
