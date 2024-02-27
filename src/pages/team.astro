@@ -96,10 +96,13 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
           <h2 class='text-4xl font-bold'>Control Tower</h2>
         </div>
 
-        <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
+        <div class='flex flex-wrap justify-center px-12 gap-[20px]'>
           {
             // TODO: Add sar
-            ["kth", "aby", "emt", "krt"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
+            ["kth", "aby", "emt", "krt"].map((code, idx) =>
+              <div class="w-full md:w-[calc(50%_-_20px)] lg:w-[calc(33.333%_-_20px)]">
+                <FeaturedSupport idx={idx} {...people[code]} />
+              </div>)
           }
         </div>
       </div>
