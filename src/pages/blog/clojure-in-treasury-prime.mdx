@@ -1,0 +1,300 @@
+---
+author: 'joe'
+title: 'Clojure in Banking: Treasury Prime'
+description: 'Connecting Fintechs to the largest network of Banks, through a single API'
+category: 'clojure-in'
+layout: '../../layouts/BlogPostClojureIn.astro'
+publishedDate: '2024-02-27'
+heroImage: 'tp-logo.jpg'
+clojureIn:
+  {
+    season: 'two',
+    industry: 'cloud',
+    quote: '"On the technical side I can do more by writing less code with Clojure."'
+  }
+---
+
+import { Image } from 'astro:assets'
+
+[Treasury Prime](https://www.treasuryprime.com/) is a US-based banking technology provider. They help developers embed financial services in their applications and provide API-driven, automated banking. They are focused on developer experience and offering the widest-available range of features for banking products at any scale. Originally funded by Y Combinator in 2018, Treasury Prime has raised over $70M in investment to date.
+
+We caught up with Mike Clarke, VP Engineering, to discuss a lineage of Banking API startups going back a decade, and how Clojure has played a key role in the execution of Treasury Prime.
+
+import tplogo from '../../assets/blog/treasuryprime.svg'
+
+<Image
+  class='not-prose dark:invert'
+  alt='Treasury Prime'
+  width={350}
+  height={50}
+  src={tplogo}
+/>
+
+**Joe: So, tell me about Treasury Prime, Mike. What do you do?**
+
+**Mike:** We're in the FinTech space, writing software to provide the next generation of Fintechs with banking capabilities. In the US market there's a lot of banks, which is quite different to the European market, so we help fintechs interact with that large banking network.
+
+We have two technical co-founders, both of whom are big Clojure advocates. That's Chris Dean and Jim Brusstar.
+
+I joined as a Software Engineer, around three and a half years ago now, and I think the business was around 8 or 9 people when I joined (we have around 25 software engineers today and growing). I had worked with Chris and Jim before so it felt natural for me to jump in.
+
+import tpmike from '../../assets/blog/treasuryprime-mike.jpg'
+
+<Image alt='Joe and Mike on Zoom' src={tpmike} width={500} class='m-auto' />
+
+**Joe: Do you know how Treasury Prime got started?**
+
+**Mike:** I do. It's kind of a fun origin story.
+
+We started 'Standard Treasury' back in 2014. It's a very similar sounding name, which has caused some confusion over time! It was the same mission, to build a platform that helps developers connect to banks in the US, and do things like see transactions, move money, send ACH payments, Fedwire payments. So in many ways the same mission.
+
+I think the idea was perhaps a little ahead of its time. We had a real struggle selling it to the banks. These were like top 10 or top 100 banks in the United States, so very long sales cycles and very big enterprises to be selling to.
+
+I joined as a founding software engineer, one of the first three employees. We got a year into it (and this was in Python at the time, and very early React). About a year in we wanted to switch gears on the technical side. We ultimately decided to hire a new CTO. And as part of the interview process (and we still use this interview process today!) there was a quiz and it required a submission of code from the candidate. We had someone submit it in Clojure. Which we'd never seen before.
+
+We thought that this candidate was messing with us - we were just used to seeing Python and, you know, maybe some Ruby. We couldn't grade it because we all basically all had to very quickly learn a bit of Clojure to read this submission. And that was Chris Dean's submission! We hired him as CTO.
+
+**Joe: So the first bit of Clojure he got into the organisation was through the hiring process? That's great.**
+
+**Mike:** Yeah, he got us reading it and then in a typical CTO or 'change management' move, he said, "Let's run an assessment, and figure out which language we should use". But I think he knew the right answer the whole time. We were thinking, "Oh, maybe we should try Scala", but when we tried Clojure we could immediately see how good it is.
+
+We built the stack in Clojure based on Chris's vision, really. He inducted us all into thinking the right ways about how to write software to solve this problem. That's what kinda started us down this path. That was with Jim Brusstar and Chris, and we were all working together.
+
+<span
+  class='pullquote right'
+  text-content='We built the stack in Clojure based on Chris [Dean]s vision, really. He inducted us all into thinking the right ways about how to write software to solve this problem.'
+/>
+
+So, time passes, and Standard Treasury was acquired by the (now infamous) Silicon Valley Bank. And we all went to Silicon Valley Bank, to build what became api.svb.com, their APIs for banking. We were there for two years and then went in different directions, but the system lived on and they had Clojure running there for many years after we left. It basically ran itself and never needed much maintenance.
+
+I tell this long story to say that after SVB, Chris and Jim founded Treasury Prime. I went off and worked at Sentry.io for a couple of years. That's where the Clojure started really - Chris brought it to us, and convinced Jim, and they started Treasury Prime with Clojure.
+
+import tpapis from '../../assets/blog/treasuryprime-apis.jpg'
+
+<Image alt='The Treasury Prime YC demo' src={tpapis} />
+
+## Architecture & Deployment
+
+**Joe: At a very high level, how would you describe the Treasury Prime architecture?**
+
+**Mike:** So a lot of this is informed by what we learned in the Standard Treasury days. It's very simple and the reason for that is that when we got started we didn't know what constraints would be placed upon us re how our software was delivered.
+
+When we were selling the original version to banks, we often encountered a reaction, "It's gotta be running on-premise, in my server closet in Santa Clara". You know, that's kind of more scary to me than running it on AWS! But that's just the shape of the compliance concerns that they had.
+
+So our stack is very, very simple. We're running on AWS, it's nginx behind ELBs. We've got nginx proxying directly to our Clojure stack. There's a Postgres database that's running on AWS Aurora.
+
+We're sending payments to banks and so we have a lot of background processing. We've got very few services - it's largely a monolith and we're not using a big constellation of microservices. The reason for this is that this makes it very easy to build up into a jar to hand to someone else to deploy. You gotta connect it to a JDBC database, but it would be easy for us to ship in that way if necessary. If we ran into a stricter, on-premise deployment, we wouldn't have to worry about educating the bank on Kubernetes.
+
+<span
+  class='pullquote left'
+  text-content="We’ve got what I would call sorta internal services that are part of the monolith, but they’re really just namespaces... This has worked for us, and I think given the size of the team we've been able to move very quickly."
+/>
+
+Conceptually we've broken up our services within the monolith. We've got what I would call sorta internal services that are part of the monolith, but they're really just namespaces that we call into directly. We could potentially break this out in the future or certain services could be peeled away.
+
+This has worked for us, and I think given the size of the team we've been able to move very quickly. It helps us be flexible, deploying quickly and not having to think about dependencies across these services and things like that.
+
+We can also move the Clojure engineers around quite flexibly, to work on different parts of the system a little more easily since they're comfortable with the full code base. There are certainly some trade offs with that, but that's where we're situated today.
+
+**Joe: Have you had to take advantage of this plan to support an on-premise deployment?**
+
+**Mike:** We've not had to do that yet. When we were in this deep sales process with Silicon Valley Bank back in the day, they had that requirement, and in order to deploy software we were actually required to be in the same building as them on a specific network.
+
+We had one laptop that we had to use to access the corporate network and do the deployments. There was an evaluation that they had scheduled for us - a demo to a bunch of key stakeholders - so we had to deploy software. I had to go into the stairwell and go up 17 stories to reach the wifi so that I could deploy into their on-premise environment.
+
+Thankfully we have not had to do that kind of thing recently. But we still have conversations where it's something that folks ask about. We're dealing with a lot of sensitive financial information, so there are concerns about multi-tenancy and the cloud.
+
+**Joe: I guess even if you are still able to deploy to the public cloud, you may want to easily create single-tenant instances of your platform. You want to know that the platform is simple enough that deployment of a new instance isn't a huge exercise.**
+
+**Mike:** That's exactly right. Full disclosure, that's kind of where we started...
+
+We're sort of the 'in-between'. We've got fintechs, neobanks, those sorts of use cases that we're supporting and we're transforming brokering requests, connecting directly to core banking systems. So we really are sort of this middleware tier, and there's a lot of _partners_ out there, like KYC vendors or transaction monitoring, and lots of different pieces like that, that folks wanna buy in. What we're learning is that as we build our software, the first step for us when we have a new integration like that is we'll pop open a new namespace and start understanding the APIs and building some of the glue between these things.
+
+Where we see a big opportunity is to kind of turn this model inside out. Like Salesforce or Heroku, or some of these other ecosystems, where folks can build to a well-defined interface. You can help other partners to the table, and we just offer the interface which they build to. Today we have a monolith with connectors out, but that's difficult to scale. I expect this might push us more to a microservices model. Or at least, something that makes it possible for other folks to build on top of our platform.
+
+import tpteam from '../../assets/blog/treasuryprime-team.jpg'
+
+<Image alt='The Treasury Prime team' src={tpteam} />
+
+## Modular Banking
+
+**Joe: So ideally you want the providers of those different systems to come and do _their own_ integration work. you just provide that spec that describes what your service needs them to do, and they do it themselves.**
+
+**You need enough convergence on your platform to make this worthwhile, I suppose, to flip that relationship where vendors really want to be integrated with your platform, rather than you really needing them, because it gives them access to those that use your network.**
+
+**Mike:** That's certainly the dream. We've seen some initial indications of that, where especially as the market has changed, folks are looking for new opportunities, new distribution. If anything it would also help us bring in someone like JUXT. Not to make this a sales pitch for both of us, but you know, if you can build to that spec, then put a boundary around that problem and say, "We need some help", either spin up a new team to do this with an external. Make it easier to add not just the first partner, but you know, 6, 7, 8, 9 down the road.
+
+**Joe: So right now your system is mostly monolithic. It's a large Clojure codebase, and you use namespaces as a way of modularizing and dividing this code base. Do you use any libraries or anything more heavyweight to manage/enforce this modularization?**
+
+<span
+  class='pullquote right'
+  text-content="We've been really happy using Malli schemas for specifying the internal interface[s]."
+/>
+
+**Mike:** Yeah, so we've been really happy using [Malli](https://github.com/metosin/malli) schemas, for specifying the internal interface for these relationships. That's worked really well for us. We learned along the way that it's really useful to build some standard expectations around these things, and we're still in the process of rolling that out.
+
+**Joe: So you use schemas at the boundaries, to make sure that there's some sense to what's going between these modules?**
+
+**Mike:** Exactly. That's the kind of thing that will help us take that next step eventually. If we didn't even move a module outside the code base or maybe run on a separate port or something like that, then these [schemas] at least give us some shape to the problem.
+
+**Joe: How about wiring up the modules of the application itself? Do you use any library or pattern to achieve that?**
+
+**Mike:** Not a lot, I would say. I think we experimented with some of those patterns and frameworks early on. We poked at Pedestal for a while, but for our specific use-case we haven't had the need to do a ton of dependency injection and things like that.
+
+The abstraction layer that works well for us is really just `defmulti` and defining interfaces that way. One of the core things that we do is: if I'm a FinTech and I have banking services at Bank Alpha and Bank Bravo that I'm trying to connect to, we use `defmulti` as sort of an interface to define what a bank is.
+
+So if I want to get my balances or I want to get transactions, I need to have a method for the balances call and a method for the transactions call. It might be implemented differently because Bank Alpha is using an FIS product, and Bank Bravo is using a Fiserv product. We've solved for this by encapsulating those interfaces and then we use some of the routing of features to make it as painless as we can to translate across a bunch of different backend services.
+
+**Joe: So you have a common abstraction across banks, but implementation details of how you achieve each of those tasks might be different per bank.**
+
+**Do you also have the notion of a bank having a subset of these features? And do you then do feature detection for banks?**
+
+**Mike:** Yeah. That's an interesting thing that falls out of this. For now, let me just call every one of these features 'methods that should exist'.
+
+I can generate the results of whether I have made a successful call, or maybe a 'not implemented' exception instead. We can programmatically identify whether an integration is 40% complete versus 95% complete against our spec of what a bank should do.
+
+There's different limitations with a lot of these older banking systems that we're trying to work around. So it helps us to track our progress in that way.
+
+## Clojure and Other Languages
+
+**Joe: Are there areas of the system where you are not using Clojure? Have you got any other languages in the mix?**
+
+**Mike:** Just on our front ends. We've got some folks who are excited about ClojureScript but for the team that we've got today it's primarily a Javascript and React front end.
+
+I'd say there's a pretty strong commitment to Clojure in the rest of the stack. The one other area might be where we have a QA team. I think in some ways it's useful to do black-box testing in a different language, where we have integration tests that run prior to each deployment.
+
+I should say we're on modern CI/CD, GitHub Actions, using the GitHub packages product to manage releases. We do several releases daily and we'll make sure that these Python integration tests pass.
+
+The unintended consequence of this is that we end up with a Python SDK that works really well. So we're looking at ways that we could generalize this, you know, we have the OpenAPI/Swagger specs as well to generate clients.
+
+But largely it's Clojure. I'll say that.
+
+**Joe: It's a very powerful model, isn't it, to have this specification from which clients are generated. AWS is a perfect example of the incredible consistency you get between the CLI, the APIs, the SDKs. You can build up massive trust that everything the developer needs is there, because it's all generated from the same service definition.**
+
+**Mike:** Yeah, they [AWS] have set the bar pretty high.
+
+Again, we're into that ecosystem idea. We're trying to follow suit in terms of how we can set the expectation that the things we're building could be something that you could turn inside out and publish.
+
+Right? That was an early thing that we committed to. There's a lot of overlap, and we envision ourselves being the AWS for financial services and banking. Long term. We're not there yet of course.
+
+import tpteam2 from '../../assets/blog/treasuryprime-team2.jpg'
+
+<Image alt='The Treasury Prime team' src={tpteam2} />
+
+**Joe: Why do you think Clojure has been successful for you and has stood the test of time at Treasury Prime?**
+
+**Mike:** It's interesting because I think there are both non-technical and technical implications of this.
+
+To start with the non-technical, I think that as we've built this team, Clojure is an interesting 'razor' for us. There are folks that I will talk to, and on the very first call of the hiring process I'll explain and say, "Look, we're a Clojure shop, I just want to let you know that". And I've had folks that say, "Hang on, let me stop you right there. I want nothing to do with the JVM. It's not for me. I wanna go do something else. So like, this call is over." And I, I say, "Great", because that drives us to a clear conclusion very quickly. You know, good luck and God bless!
+
+For other folks, they're so excited to write Clojure. They almost don't care what the problem is. It's gotta be interesting, of course, but they're so excited to write Clojure that this is what they're looking for in their next opportunity. And then I have to sell them on where this thing is going. This pitch is becoming a little bit more challenging as Clojure becomes more widespread and better established!
+
+I have a friend that works at Stripe and he was like, "Mike, what are you gonna do when you hire all 60 Clojure engineers in the United States?" And I said, "I don't think that's exactly the right number, and we'll be just fine!"
+
+<span
+  class='pullquote left'
+  text-content="We don't look for Clojure experience in the interview process. We have to get very good at coaching people, and teaching them Clojure."
+/>
+
+The flip side of that is that we don't look for Clojure experience in the interview process. We have to get very good at coaching people, and teaching them Clojure. We've got a great team that's familiar with getting folks up to speed on the language that has helped. I really enjoy the team that I get to work with here. The folks that are interested in Clojure want to learn, even if they don't know it on day one. It's self-selecting, I think, for the right type of curious engineering personalities.
+
+Our engineers take this problem very seriously. It's money - we can't mess this up. We have to be very cautious and it leads to us hiring the right types of people for Treasury Prime and for our use case. It continues to work well for us and the language helps us differentiate.
+
+On the technical side, we're communicating with all kinds of banking software systems, and a lot of these are built on SOAP and other sort 2010-era tech (perhaps earlier). XML signing or other encryption libraries that with the JVM we get for free, out-of-the-box. So we take a lot of advantage of the interop to help streamline the connections into other systems. It would be really challenging to build this in Python, mainly because these libraries are just not there,and in my opinion there's a bit of an impedance mismatch.
+
+On the performance side of things, there's so much you can do with concurrency very easily in Clojure. It really helps us scale out. We're using a very simple EC2 auto-scaling group. It's very simple for us to scale out horizontally with the Clojure stack that we have a stateless, shared-nothing model.
+
+Where we've started to see some scaling issues recently in one part of the System. In the very early days, in the interests of keeping a very simple stack, Chris [Dean] built a background task execution framework. I think he'd also had some experience in Ruby, so kind of similar to some of the things that are available in Ruby. We call it [backtick](https://github.com/ctdean/backtick). The idea is that you can call a function either directly in code e.g. for unit testing or you can call it in async way and it goes (in our model) into a database table and that job gets scheduled for the future. We have retries and timeouts and things like this. So this is a database-backed queue, and we knew that it was gonna start to creak eventually. And I think we're starting to see some limitations of this. It's convenient to have the tasks in the same primary data store, but we're starting to see that reach its limits. We've seen database contention issues, and we're working to kinda expand out and use some of the other things AWS has to offer instead.
+
+But again, with the theme of doing the very simple thing first to try to get to where you need to be. I'm thankful that we have this scaling problem because it means that we've had some success. We've got a lot of activity, so yeah, that's an area where we're spending a lot more time today.
+
+**Joe: Yeah. Otherwise you can very easily find that you've built the most incredible and sophisticated background scheduling solution and not really gone very far to tackling anything in your own domain. It's good to hit those limits sometimes and overcome them only when you have to!**
+
+## The JVM
+
+**Joe: It's interesting that you mentioned that when talking to engineers sometimes people will immediately say, "Oh, the JVM, I want nothing to do with that." And you've obviously now experienced some of the positives of being in that ecosystem too.**
+
+**What's your take on this? Is the JVM an albatross around Clojure's neck, or is it a real benefit?**
+
+**Mike:** Think it's a benefit. I get where people are coming from, especially if you had a bad experience say 10 or 15 years ago where you were having to modify and tune a lot of JVM parameters, and Clojure's JVM stack traces were hard to understand but there's been a lot of work done to improve that. I really see it as a big benefit for us. Not just the Java interop, but also being able to do a thread dump and understand where things are slowing down, or what things are going on at a given time.
+
+If you have a memory leak, you can take advantage of all this tooling out in the world to help you understand what is being held on the heap. As time goes on it [the JVM] just becomes more and more bulletproof. I do wish that it started up as quickly as some of the JavaScript static site generators. Sure, that would be helpful.
+
+<span
+  class='pullquote right'
+  text-content='The REPL is a huge boost for productivity.'
+/>
+
+The REPL is a huge boost for productivity, even in situations where we need to just understand some unexpected behavior. The things that it enables are underappreciated from my vantage point. Part of this is the experience of having done it in production for, you know, five or seven years. It's different if you're trying to build a 'To Do' app and you're trying to evaluate it from that vantage point. I think you have to look at it from the vantage point of it's an enterprise problem and you will have some real traffic, and there are the things that it [the JVM] gives you that don't help if it's just on your laptop. And that's an important part of what makes Clojure work for us.
+
+**Joe: Yeah. The diagnostic tooling around the JVM is excellent. We've gone from very basic analysis of heap dumps, to VisualVM, and now Java Flight Recorder. The tooling just gets better and better.**
+
+**Mike:** I should mention too that we're using Datadog. I worked at Sentry for a few years so I keep pushing them to build a better Clojure experience! But it's nice that you turn on Datadog and it's already integrated via their Java library and the Sentry library as well. You get so much instrumentation for free where e.g. they already know about the JDBC driver, and it can give observability into the performance of the platform, live, in real time. I have confidence that it won't take the site down, _because_ it's on the JVM.
+
+**Joe: Is there any area of Clojure that you would like to see improved? Or anything about the experience of using Clojure that you think is the next area that's holding people back?**
+
+**Mike:** Good question. We're looking to take parts of our platform, carve them out and externalize them. I think about how that will work, and it could be another language really but I think we'll reach for Clojure because that's what we're comfortable with.
+
+I get the idea of composing a bunch of libraries, but also, I came from a Python/Django, batteries-included kind of perspective. I understand the trade-offs between that approach and Clojure's more library-focused approach, but having something that just kind of ties everything together would be great.
+
+I know there's been certain efforts over time, with Duct, or Pedestal, and others. There's an activation energy of getting started and having to reexamine what the best practices are every time. There's just more friction than Rails or Django or something like that. I think about that for folks who are coming language fresh, and they need to see that success moment quickly. It can be tough if you have to evaluate three different web frameworks. I think of Flask or something in Python-land - something along those lines would be great. Maybe that's wishful thinking!
+
+There's also something related to queuing and backtick - maybe we should see if there's an opportunity there to share what we've learned. I know there's so much that you can do with core.async, but it would be great to have one backed by a flexible data store like Redis or Postgres. I do worry that we have had a case of [NIH syndrome](https://en.wikipedia.org/wiki/Not_invented_here) and we've built a lot of things that in other frameworks would probably be off the shelf. Like parameter validation or API framework.
+
+I think that some of the other things that we've had to build are potentially just less sophisticated versions of what's out there already, and perhaps if there was a more obvious choice in the ecosystem, then we should probably use that instead.
+
+**Joe: Yeah. Something I think the Clojure community is not always great at is _convergence_ on a solution. There's been a few different attempts to create more batteries-included experience in frameworks, usually for webapp development for APIs, but the Clojure community is not that good at converging on one of these solutions. So you end up in that situation where (like that [XKCD on Standards](https://m.xkcd.com/927/)) everyone thinks "Right, we just need _one more_, and that's going to bring about convergence."**
+
+**I suppose with any framework, people need to accept some benefits and some drawbacks. You need to take the rough with the smoother and say, "Well, it's not perfect, but the convergence is a big benefit". But people in the Clojure community don't like having to put up with annoyances. They want those things to be solved because everything else is so neat.**
+
+**Joe: What about the language itself or the core? Is there any direction you would like to see Clojure take? Things that are missing?**
+
+**Mike:** Boy, it's such a tough question.
+
+**Joe: Often when I ask people this question, their answer is "No, it's done. Just leave it alone!"**
+
+**Mike:** Yeah, you know I kinda agree.
+
+When I was at Sentry there was a years-long project to upgrade from Python 2 to Python 3. Also with some of the major Django revisions, for a long time they were running on a fork that was several years behind. With Clojure it's great to have the confidence that every time there's a new Clojure release, I can bump that rev and just make sure all the tests pass. It's no problem, and everything just works. It's such a departure from what I've experienced in the past.
+
+Nothing really stands out. I mean, on the language itself, I would stop now! [just kidding]
+
+## The Learning Journey
+
+**Joe: You mentioned bringing people into the business that don't have Clojure experience. What has been most effective to get people up to speed with the language?**
+
+**Mike:** I think we're still trying to get it right. It's a hard problem. I wanna maybe take a moment to plug where I first learned some ideas here. Back in the Standard Treasury days I worked with David Jarvis (founder of a challenger bank in the UK, Griffin). For my model for how to teach people Clojure, I think back to David Jarvis, where he got everybody in the conference room and it felt almost like a college course. He's using the whiteboard and we talked about the Lisp foundations, the different data types, and things like that. Kind of going back to first principles.
+
+I think the tendency, especially for new engineers, is that they wanna jump in. They jump in and start writing code, and if we want to support that if we can, but there's also something to be said for saying "Hang on, let's put some shape around this", do some reading, take the time to read [Clojure for the Brave and True](https://www.braveclojure.com/clojure-for-the-brave-and-true/).
+
+We've also had success just creating space and saying, like, look at [4Clojure](https://4clojure.oxal.org/), and then setting a goal. Say in the first 30 days you have to do all the easy problems and 25 of the intermediate problems. It's like homework and we'll check and make sure you have the time and space to go do this. It starts with setting the expectation that it's gonna take time. I think it takes six months for someone to really get comfortable and up to speed, on both the problem and the language, and then the way that we're using it specifically at Treasury Prime.
+
+It's not something that just happens by accident, so kudos to David Jarvis! He taught me how to teach Clojure.
+
+There's some other things that are out there that I would love to see, like a Clojure equivalent of [Execute Program](https://www.executeprogram.com/) by Gary Benhardt.
+
+It's not an easy problem. If folks come to Treasury Prime and are excited about Clojure, and already know it, it probably shortens the lead time for getting up to speed by half.
+
+**Joe: You mentioned David Jarvis as an inspiration, and starting with the fundamentals. I think that if people are completely new to Clojure, watching those early Rich Hickey talks like [Simple Made Easy](https://www.youtube.com/watch?v=SxdOUGdseq4) and [The Value of Values](https://www.infoq.com/presentations/Value-Values/) is really important. It's still probably the best way of getting _why_ you should care about this, and get excited about those fundamentals. Before you start worrying about, say, "How do I make a quick REST API in this language?"**
+
+**Mike:** Yeah. So often if you're coming from a Python background, say, your first question is, "How do I write a for loop?". It feels like you're going back to school in a way. It's a fresh start and a completely different way of thinking.
+
+**Joe: From a business perspective, how has Clojure helped? And how would you pitch Clojure to others?**
+
+**Mike:** I think it's really about efficiency. I haven't checked out what our lines of code is, but I feel like for the code surface area, Treasury Prime is so broad. We've got cards, and payments, and accounts, KYC. Fintech is very broad. What I've learned is that you can be very efficient. I don't wanna make the pitch that value can be measured in lines of code, but on the technical side I can do more by writing less code with Clojure. The deployment model and ongoing maintenance of this allows for a smaller team to be able to do more.
+
+I think there's some trade-offs too, right? If I needed to go hire a hundred Golang developers, it's probably easier to source that than a hundred Clojure developers. But ultimately I think it's about ROI. For the smallest investment, you'll have the biggest output. Both in terms of the product itself and how it can scale.
+
+**Joe: Are you guys hiring at the moment?**
+
+**Mike:** We've paused on hiring engineers because of uncertain market conditions, but we're always interested in finding the right person. If someone has Fintech experience and is excited about Clojure, we want to talk to those folks and could find space on the boat. Check out the [careers page](https://www.treasuryprime.com/careers#open-positions) for other open positions.
+
+We're a remote company, but we're focused primarily on US time zones. Our engineers are based across the United States and Canada.
+
+**Joe: Thanks for putting aside the time Mike. Great to chat with you.**
+
+**Mike:** Really happy to. Thanks so much, Joe!
+
+----
+
+_If you're looking to kick-off a project with Clojure and you're interested in some help or advice, don't hesitate to reach out to JUXT. Drop a call into [the calender](https://calendar.google.com/calendar/appointments/schedules/AcZssZ2cJ8bzj8OAv43p7Su3vJ_bjPO4wr_2wJVvXxTL_oPq0xeNPEG_iSYGT8of7HX-ldS3DUAMaWFP) now or reach out via [info@juxt.pro](info@juxt.pro)._
