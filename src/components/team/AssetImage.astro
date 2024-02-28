@@ -7,7 +7,7 @@ var props = Astro.props;
 delete props.src;
 
 // Images
-const img_assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
+const img_assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif,svg}');
 function importImage(path) {
     if (!img_assets[path]) {
         throw new Error(`Image ${path} not found.`);
