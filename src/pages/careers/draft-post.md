@@ -3,14 +3,14 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Remote'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Junior Kotlin Engineer'
+position: 'CEO/CTO'
 draft: true
-weight: 2
+weight: 1
 googleJobs:
   {
-    location: 'London',
-    position: 'Junior Kotlin Engineer',
-    publishedDate: '2022-11-05'
+    location: 'Milton Keynes',
+    position: 'CEO/CTO',
+    publishedDate: '2024-02-27'
   }
 ---
 
@@ -29,5 +29,6 @@ and modernize the existing set of systems and applications.
 - Kotlin (beneficial, but training can be given)
 - TDD
 - DevOps/Cloud (OpenShift, Kubernetes)
+- Anything you think Malcolm or Jon would do
 
 Permanent
