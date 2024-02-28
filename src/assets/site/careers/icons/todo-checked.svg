@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="74.926" height="71.44" viewBox="0 0 74.926 71.44">
+  <g id="Circle_Button_SIZE_MEDIUM_STATE_DEFAULT_STYLE_STYLE2_" data-name="Circle Button [SIZE=MEDIUM][STATE=DEFAULT][STYLE=STYLE2]" transform="translate(-23.351 -25.061)">
+    <g id="Icon_ICON_feather_coffee_SIZE_MEDIUM_STATE_DEFAULT_STYLE_STYLE2_" data-name="Icon [ICON=feather/coffee][SIZE=MEDIUM][STATE=DEFAULT][STYLE=STYLE2]" transform="translate(23.351 25.061)">
+      <g id="Icon" transform="translate(0 0)">
+        <g id="Group_7" data-name="Group 7" transform="translate(0 0)">
+          <g id="__TEMP__SVG__">
+            <path id="Path_11" data-name="Path 11" d="M23.78,32.031l-9.547-9.547L2.183,34.534l9.547,9.547-.007.007L22.033,54.4l1.747,1.736.007.007L34.1,45.831l1.736-1.747L66.977,12.941,54.925.891Zm6.825,10.309-1.736,1.747L23.78,49.177l-.007-.007-5.085-5.085.007-.007L9.148,34.532l5.082-5.082L23.778,39,54.925,7.854l5.085,5.085Z" transform="translate(7.949 -0.676)" fill="#f4901d"/>
+            <path id="Path_12" data-name="Path 12" d="M66.94,67.367H5.354V5.781H51.577L56.5.854H.427v71.44h71.44V23.5L66.94,28.429Z" transform="translate(-0.427 -0.854)" fill="#f4901d"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

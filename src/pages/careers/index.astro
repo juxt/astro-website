@@ -1,8 +1,12 @@
 ---
 import { getImage } from 'astro:assets'
-import { Image } from 'astro:assets'
+import AssetImage from '@components/team/AssetImage.astro'
 import { MarkdownInstance } from 'astro'
 import Banner from '@components/Banner.astro'
+import Title from '@components/careers/Title.astro'
+import Paragraph from '@components/careers/Paragraph.astro'
+import Button from '@components/careers/Button.astro'
+import OutlineItem from '@components/careers/OutlineItem.astro'
 import Clickable from '@components/Clickable.astro'
 import JobCard from '@components/JobCard.astro'
 import Section from '@components/Section.astro'
@@ -15,7 +19,8 @@ const jobPosts =
 
 const jobPostsParsed = jobPosts
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
-  .filter((jobPost) => isDev || !jobPost.frontmatter.draft)
+  .filter((jobPost) => isDev || !jobPost.frontmatter.draft);
+console.log(jobPostsParsed.length)
 
 const careersBannerPicture = await getImage({
   src: import('../../assets/site/work-with-us-banner.jpg'),
@@ -24,11 +29,11 @@ const careersBannerPicture = await getImage({
   alt: 'work with us'
 }).then((img) => img.src)
 
-const whyJuxtPicture = await getImage({
-  src: import('../../assets/site/careers-why-juxt.jpeg'),
+const workingAtJUXT = await getImage({
+  src: import('../../assets/site/careers/working-at-juxt.png'),
   width: 1700,
   quality: 90,
-  alt: 'why JUXT'
+  alt: 'Working at JUXT'
 }).then((img) => img.src)
 
 const benefitsPicture = await getImage({
@@ -44,284 +49,348 @@ const benefitsPicture = await getImage({
     text='Careers'
     style={{ backgroundImage: `url(${careersBannerPicture})` }}
   />
-  <Section className='bg-zinc-900 py-12 text-white'>
+  <Section className='bg-[#b76330] py-12 text-white'>
     <p class='text-xl md:text-2xl font-extralight'>
-      JUXT a developer-first company, founded and run by developers
+      JUXT - a developer-first company, founded and run by developers!
     </p>
   </Section>
 
-  <Section
-    className='bg-cover relative before:absolute before:w-full before:h-full before:bg-black/70'
-    style={{ backgroundImage: `url(${whyJuxtPicture})` }}
-  >
-    <div class='relative py-20'>
-      <h2 class='text-4xl pb-20 text-white font-medium flex justify-center'>
-        Why JUXT?
-      </h2>
-      <div class='flex gap-12 flex-col lg:flex-row'>
+  <Section className='bg-zinc-800' >
+    <div class="py-20 flex flex-col gap-4">
+    
+      <Title>Why JUXT?</Title>
+
+      <div class='flex gap-8 flex-col lg:flex-row'>
+
         <div class='lg:w-1/3 flex flex-col gap-4'>
-          <h3 class='text-3xl text-juxt font-medium'>Community</h3>
-          <p class='text-white text-xl lg:text-lg font-light'>
+          <Title>Community</Title>
+          <Paragraph>
             Amazing developers to work with, and call upon great experience when
             you need
-          </p>
+          </Paragraph>
         </div>
+
         <div class='lg:w-1/3 flex flex-col gap-4'>
-          <h3 class='text-3xl text-juxt font-medium'>Accomplishment</h3>
-          <p class='text-white text-xl lg:text-lg font-light'>
+          <Title>Accomplishment</Title>
+          <Paragraph>
             We're constantly helping each other improve our skills, in
             programming and using our tools
-          </p>
+          </Paragraph>
         </div>
+
         <div class='lg:w-1/3 flex flex-col gap-4'>
-          <h3 class='text-3xl text-juxt font-medium'>Opportunity</h3>
-          <p class='text-white text-xl lg:text-lg font-light'>
+          <Title>Opportunity</Title>
+          <Paragraph>
             We believe that the technology choices we have made over the years
             give us a huge boost, and we're constantly looking for ways to
             improve
-          </p>
+          </Paragraph>
         </div>
       </div>
 
-      <div class='pt-20 flex justify-center'>
-        <Clickable>
-          <a class='text-white text-lg' href='/careers/#job-openings'>
-            Go To Openings
+    </div>
+  </Section>
+
+  <Section className='py-20 bg-cover bg-center'
+           style={{
+               backgroundImage: `url(${workingAtJUXT})`,
+           }} >
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div class="lg:col-start-2 flex flex-col gap-12">
+
+        <Title>Working At JUXT</Title>
+
+        <div>
+          <Title>Culture</Title>
+          <Paragraph>
+            We have a developer-led culture. Our developers are at the heart of our consulting and product development.
+          </Paragraph>
+        </div>
+
+        <div>
+          <Title>Coding</Title>
+
+          <div class="flex flex-col gap-2">
+            <Paragraph>
+              We know coding is hard, so we try to do everything we can to help.
+            </Paragraph>
+
+            <Paragraph>
+              Letting you focus on your code when you need, but with the support of a rich community of colleagues when you need help.
+            </Paragraph>
+
+            <Paragraph>
+              We’re huge fans of Clojure, functional programming, Arch Linux, Git, plain-text, and Emacs, or Vim :).
+            </Paragraph>
+
+            <Paragraph>
+              We’re a growing vibrant company, but still small enough for you to get to know everyone.
+            </Paragraph>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </Section>
+
+  <Section className='bg-zinc-800 text-white py-20'>
+    <Title class="pb-10">Our Hiring Process</Title>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <OutlineItem title="Write to Us">
+        <AssetImage slot="image"
+                    alt="Pencil"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/pencil.svg" />
+        If you're interested in joining JUXT, simply email us your CV to careers@juxt.pro and we'll provide further guidance through the steps in the application process.
+      </OutlineItem>
+
+      <OutlineItem title="Intro Interview">
+        <AssetImage slot="image"
+                    alt="Speech Bubble"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/speech-bubble.svg" />
+        During our introductory interview, we'll delve into your background while also providing insights into our company culture and available opportunities. We'll schedule the interview call at a time convenient for you
+      </OutlineItem>
+
+      <OutlineItem title="Technical Test">
+        <AssetImage slot="image"
+                    alt="Cornered Cube"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/cornered-cube.svg" />
+        Be  fore extending a job offer, we require all candidates to complete a technical test. This entails modifying a project for which we'll provide specific instructions. The nature of the modification will vary based on your level of experience.
+      </OutlineItem>
+
+      <OutlineItem title="Technical Interview">
+        <AssetImage slot="image"
+                    alt="Question Mark"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/question-mark.svg" />
+        This interview is designed for us to discuss your technical test, engage in pair programming, and explore your skills further. 
+      </OutlineItem>
+
+      <OutlineItem title="Finial Interview">
+        <AssetImage slot="image"
+                    alt="Hot Drink"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/hot-drink.svg" />
+        The final interview is to discuss the role and answer any questions you may have about working with us.
+      </OutlineItem>
+
+      <OutlineItem title="Offer">
+        <AssetImage slot="image"
+                    alt="Check Mark"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/todo-checked.svg" />
+        Upon successful completion of the interview process, we'll present you with a formal offer. This offer will encompass comprehensive details of the compensation package, including salary, pension, vacation entitlement, and health benefits.
+      </OutlineItem>
+
+    </div>
+
+    <div class="flex justify-center pt-5">
+      <a href="#job-openings">
+        <Button>Open Positions</Button>
+      </a>
+    </div>
+  </Section>
+
+  <div class="bg-zinc-800">
+    <div class="flex flex-row h-72 2xl:container 2xl:mx-auto">
+      <AssetImage alt="Three JUXT employees walking together"
+                  class="w-1/3 sepia object-cover object-center hidden md:block"
+                  width={1700}
+                  quality={80}
+                  src="/src/assets/site/careers/walk.jpg" />
+      <AssetImage alt="Three JUXT employees walking together"
+                  class="md:w-1/3 sepia object-cover object-center"
+                  width={1700}
+                  quality={80}
+                  src="/src/assets/site/careers/rafts.jpg" />
+      <AssetImage alt="Three JUXT employees walking together"
+                  class="w-1/3 sepia object-cover object-center hidden md:block"
+                  width={1700}
+                  quality={80}
+                  src="/src/assets/site/careers/bikes.jpg" />
+    </div>
+  </div>
+
+  <Section className='bg-zinc-800 text-white py-20'>
+    <Title class="pb-10">Benefits at JUXT</Title>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <OutlineItem title="All the Hardware You Need">
+        <AssetImage slot="image"
+                    alt="Laptop"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/laptop.svg" />
+        No barriers between you and the code. Top-of-the-range XPS 13 laptops with Arch Linux pre-installed. You have the flexibility to expense any additional items necessary for your role, ensuring you have the right equipment tailored to your needs.
+      </OutlineItem>
+
+      <OutlineItem title="Conferences & Training">
+        <AssetImage slot="image"
+                    alt="Paused Settings Cog"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/paused-cog.svg" />
+        You have the flexibility to attend training courses and conferences that align with your role and career goals. In addition, you can apply for sponsorship to pursue professional qualifications, further enhancing your expertise.
+      </OutlineItem>
+
+      <OutlineItem title="Employee Referral Bonus">
+        <AssetImage slot="image"
+                    alt="Two people icons"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/two-people.svg" />
+        Our company values the contributions of our employees in building a talented team. we offer a generous Referral Bonus Scheme to reward employees for referring qualified candidates to join our team.
+      </OutlineItem>
+
+      <OutlineItem title="Remote & Office Socials">
+        <AssetImage slot="image"
+                    alt="Burger and Drink"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/burger-and-drink.svg" />
+        We arrange a weekly lunch in the town of Milton Keynes, offering an open invitation to all team members who can attend. Additionally, JUXT sponsors weekly team lunches in different locations.
+      </OutlineItem>
+
+      <OutlineItem title="Flexible Working Hours">
+        <AssetImage slot="image"
+                    alt="Clock"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/clock.svg" />
+        We understand the value of a flexible work environment, which is why we offer Remote Working Space Membership. This membership allows you the freedom to choose your ideal workspace, whether it’s in our modern office or the comfort of your own home.
+      </OutlineItem>
+
+      <OutlineItem title="Private Health Insurance">
+        <AssetImage slot="image"
+                    alt="Heart"
+                    width={100}
+                    quality={80}
+                    src="/src/assets/site/careers/icons/heart.svg" />
+        On successful completion of your probation period, you will be eligible to join our private medical scheme. This is offered on a medical history disregarded basis and family members can also be covered (subject to scheme rules).
+      </OutlineItem>
+
+    </div>
+  </Section>
+
+  <Section className='py-10 bg-zinc-700 text-white'>
+    <div class="flex flex-col gap-8 lg:gap-20 md:flex-row justify-center text-center">
+
+      <div>
+        <div class="flex justify-center">
+          <h3 class='text-3xl font-light'>Head Office</h3>
+        </div>
+        <p class='font-light'>
+          Norfolk House, Silbury Blvd.
+        </p>
+        <p class='font-light'>
+          Milton Keynes, MK9 2AH
+        </p>
+        <p class='font-light'>
+          United Kingdom
+        </p>
+      </div>
+
+      <div>
+        <div class="flex justify-center">
+          <h3 class='text-3xl font-light'>Email</h3>
+        </div>
+        <p class='font-light'>
+          For all general enquiries,
+        </p>
+        <p class='font-light'>
+          please email: <a href="mailto:info@juxt.pro" class="font-medium">info@juxt.pro</a>
+        </p>
+      </div>
+
+      <div>
+        <div class="flex justify-center">
+          <h3 class='text-3xl font-light'>Phone</h3>
+        </div>
+        <p class='font-light'>
+          Call us at: <span class='whitespace-nowrap'>+44 (0) 333 93 98 309</span>
+        </p>
+        <p class='font-light'>
+          or <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
+        </p>
+      </div>
+
+    </div>
+  </Section>
+
+  <Section className='py-20 bg-zinc-800'>
+    <div class="flex flex-col gap-10">
+      <div class="flex justify-center">
+        <Title id='job-openings'>Open Positions</Title>
+      </div>
+
+
+      {
+        jobPostsParsed.length > 0 ?
+        <>
+          <div class="flex flex-col items-center justify-center lg:flex-row lg:flex-wrap gap-[15px]">
+            {
+              jobPostsParsed.map(({url, frontmatter: {department, draft, position, location, contract}}) => {
+                return (
+                  <div class="relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)]">
+                    <span class="absolute top-5 right-5 uppercase text-juxt text-xs">{department}</span>
+                    <h1 class="text-lg font-bold pt-10">{position + (draft ? " (draft)" : "")}</h1>
+                    <div class="pt-10">
+                      <div class="flex gap-3">
+                        <AssetImage alt="Map pin"
+                                    class="w-3"
+                                    width={100}
+                                    quality={80}
+                                    src="/src/assets/site/careers/icons/pin-dark.svg" />
+                        <p>{location}</p>
+                      </div>
+                      <div class="flex gap-2">
+                        <AssetImage alt="Clock"
+                                    class="w-4"
+                                    width={100}
+                                    quality={80}
+                                    src="/src/assets/site/careers/icons/clock-dark.svg" />
+                        <p>{contract}</p>
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-16">
+                      <a href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`}>
+                        <Button theme="dark-hovered">Apply</Button>
+                      </a>
+                      <a href={url}>
+                        <Button theme="dark">Full Job Profile</Button>
+                      </a>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+
+          <div class="flex flex-col items-center justify-center gap-4">
+            <Title id='job-openings'>Can't find the perfect position?</Title>
+            <a href="mailto:careers@juxt.pro?subject=OPEN APPLICATION">
+              <Button>Contact Us Anyway</Button>
+            </a>
+          </div>
+        </>
+        :
+        <div class="flex flex-col items-center justify-center gap-4">
+          <Title id='job-openings'>We don't have any open positions</Title>
+          <a href="mailto:careers@juxt.pro?subject=OPEN APPLICATION">
+            <Button>Contact Us Anyway</Button>
           </a>
-        </Clickable>
-      </div>
+        </div>
+      }
     </div>
   </Section>
 
-  <Section className='py-20 text-black'>
-    <h2
-      class='text-4xl pb-10 md:pb-20 text-black font-medium flex md:justify-center'
-    >
-      Working At JUXT
-    </h2>
-    <div
-      class='flex flex-col-reverse md:flex-row gap-10 md:gap-12 lg:gap-16 items-center'
-    >
-      <Image
-        alt='image'
-        width={600}
-        quality={80}
-        class='w-full max-w-3xl md:min-h-[400px] object-cover md:w-1/2 lg:w-7/12 shrink-0'
-        src={import('../../assets/site/working-with-us1.jpeg')}
-      />
-      <p class='text-2xl lg:text-3xl lg:leading-snug font-light'>
-        We have a developer-led culture. Our developers are at the heart of our
-        consulting and product development.
-      </p>
-    </div>
-    <div
-      class='pt-10 md:pt-20 flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-16 md:items-center'
-    >
-      <div
-        class='text-2xl md:text-xl lg:text-2xl flex flex-col gap-6 md:gap-6 lg:gap-10 lg:leading-snug font-light'
-      >
-        <p>
-          <span class='font-medium'> We know coding is hard</span>, so we try to
-          do everything we can to help.
-        </p>
-        <p>
-          Letting you focus on your code when you need, but with the support of
-          a rich community of colleagues when you need help.
-        </p>
-        <p>
-          We're huge fans of Clojure, functional programming, Arch Linux, Git,
-          plain-text, and Emacs, or Vim :).
-        </p>
-        <p>
-          We're a growing vibrant company, but still small enough for you to get
-          to know everyone.
-        </p>
-      </div>
-      <Image
-        alt='image'
-        width={600}
-        quality={80}
-        class='w-full max-w-3xl md:max-h-[600px] sm:min-h-[450px] object-cover md:w-5/12 lg:w-6/12 shrink-0'
-        src={import('../../assets/site/working-with-us2.jpeg')}
-      />
-    </div>
-  </Section>
-  <Section className='bg-black text-white py-20'>
-    <h2 class='text-4xl pb-20 font-medium flex justify-center'>
-      Our Hiring Process
-    </h2>
-    <div class='flex flex-wrap justify-center gap-14'>
-      <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-        <img
-          class='w-28'
-          src='/images/site/hiring-process-envelope.svg'
-          alt=''
-        />
-        <h3 class='text-2xl text-zinc-400 font-semibold'>Write to us!</h3>
-        <p class='text-lg font-light sm:w-72'>
-          Write to us at <span class='font-medium'>careers@juxt.pro</span>! We
-          regularly receive CVs via email. If you want to work at JUXT, pop us
-          an email with your CV and we'll guide you through the rest of the
-          process.
-        </p>
-      </div>
-
-      <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-        <img class='w-28' src='/images/site/hiring-process-bubble.svg' alt='' />
-        <h3 class='text-2xl text-zinc-400 font-semibold'>Intro Interview</h3>
-        <p class='text-lg font-light sm:w-72'>
-          If we think we have an opening for you, or sometimes even if we don't,
-          we'll arrange an interview call with you at a time that suits you.
-        </p>
-      </div>
-
-      <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-        <img class='w-28' src='/images/site/hiring-process-paper.svg' alt='' />
-        <h3 class='text-2xl text-zinc-400 font-semibold'>Technical test</h3>
-        <p class='text-lg font-light sm:w-72'>
-          Before we can offer you a role, we ask everyone to complete a
-          technical test. This involves making a change to a project we provide
-          details of. What kind of change we ask you to make will depend on your
-          experience level.
-        </p>
-      </div>
-
-      <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-        <img
-          class='w-28'
-          src='/images/site/hiring-process-light-bulb.svg'
-          alt=''
-        />
-        <h3 class='text-2xl text-zinc-400 font-semibold'>
-          Technical interview
-        </h3>
-        <p class='text-lg font-light sm:w-72'>
-          After reviewing your technical test, we may invite you to a technical
-          interview. We'll start by talking about your technical test, and do
-          some pair programming with you.
-        </p>
-      </div>
-
-      <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-        <img class='w-28' src='/images/site/hiring-process-coffee.svg' alt='' />
-        <h3 class='text-2xl text-zinc-400 font-semibold'>Final Interview</h3>
-        <p class='text-lg font-light sm:w-72'>
-          The final interview is to discuss the role and answer any questions
-          you may have about working with us.
-        </p>
-      </div>
-
-      <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-        <img class='w-28' src='/images/site/hiring-process-target.svg' alt='' />
-        <h3 class='text-2xl text-zinc-400 font-semibold'>Offer</h3>
-        <p class='text-lg font-light sm:w-72'>
-          We'll send you a formal offer, with full details of the package,
-          including salary, pension, holiday entitlement and private health
-          cover.
-        </p>
-      </div>
-    </div>
-  </Section>
-
-  <Section className='py-20'>
-    <h2 id='job-openings' class='text-4xl font-medium flex justify-center'>
-      Open Positions
-    </h2>
-    <div class='text-black flex justify-center'>
-      <div
-        class='w-fit flex flex-col gap-8 justify-center items-center p-10 bg-stone-100 rounded-lg shadow-lg'
-      >
-        <h2 class='sm:text-3xl text-2xl text-center'>
-          We don't have any open positions
-        </h2>
-
-        <Clickable>
-          <a
-            class='text-xl'
-            href={`mailto:careers@juxt.pro?subject=OPEN APPLICATION`}
-            >Contact us anyway
-          </a>
-        </Clickable>
-      </div>
-    </div>
-  </Section>
-
-  <Section
-    className='text-white bg-cover relative before:absolute before:w-full before:h-full before:bg-black/80'
-    style={{ backgroundImage: `url(${benefitsPicture})` }}
-  >
-    <div class='relative py-20'>
-      <h2 class='text-4xl pb-20 font-medium flex justify-center'>
-        Some of our benefits...
-      </h2>
-      <div class='flex flex-wrap justify-center gap-14'>
-        <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-          <img class='w-28' src='/images/site/benefits-hardware.svg' alt='' />
-          <h3 class='text-2xl text-zinc-400 font-semibold'>
-            All the hardware you need
-          </h3>
-          <p class='text-lg font-light sm:w-72'>
-            No barriers between you and the code. Top-of-the-range XPS 13
-            laptops with Arch Linux pre-installed, and anything else you want.
-          </p>
-        </div>
-
-        <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-          <img
-            class='w-28'
-            src='/images/site/benefits-conferences.svg'
-            alt=''
-          />
-          <h3 class='text-2xl text-zinc-400 font-semibold'>
-            Conferences & Training
-          </h3>
-          <p class='text-lg font-light sm:w-72'>
-            Go to the conferences you want and get all the training you need.
-          </p>
-        </div>
-
-        <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-          <img class='w-28' src='/images/site/benefits-referral.svg' alt='' />
-          <h3 class='text-2xl text-zinc-400 font-semibold'>
-            Employee referral bonus
-          </h3>
-          <p class='text-lg font-light sm:w-72'>
-            Help JUXT grow a high-calibre team.
-          </p>
-        </div>
-
-        <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-          <img class='w-28' src='/images/site/benefits-socials.svg' alt='' />
-          <h3 class='text-2xl text-zinc-400 font-semibold'>
-            Remote & office socials
-          </h3>
-          <p class='text-lg font-light sm:w-72'>
-            Regular free food & drink with optional light entertainment.
-          </p>
-        </div>
-
-        <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-          <img
-            class='w-28'
-            src='/images/site/benefits-flexibility.svg'
-            alt=''
-          />
-          <h3 class='text-2xl text-zinc-400 font-semibold'>
-            Flexible working hours
-          </h3>
-          <p class='text-lg font-light sm:w-72'>
-            Focus on the goals and quality of your delivery.
-          </p>
-        </div>
-
-        <div class='flex flex-col gap-4 w-2/3 sm:w-auto'>
-          <img class='w-28' src='/images/site/benefits-insurance.svg' alt='' />
-          <h3 class='text-2xl text-zinc-400 font-semibold'>
-            Private health insurance
-          </h3>
-          <p class='text-lg font-light sm:w-72'>BUPA.</p>
-        </div>
-      </div>
-    </div>
-  </Section>
 </Layout>

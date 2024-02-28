@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76" height="76" viewBox="0 0 76 76">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Area_ICON:feather_camera_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE2_" data-name="Area [ICON:feather/camera][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE2]" width="76" height="76" transform="translate(-0.105 -0.105)" fill="#f4901d" opacity="0"/>
+    </clipPath>
+  </defs>
+  <g id="Circle_Button_SIZE_MEDIUM_STATE_DEFAULT_STYLE_STYLE2_" data-name="Circle Button [SIZE=MEDIUM][STATE=DEFAULT][STYLE=STYLE2]" transform="translate(-21.652 -21.797)">
+    <g id="Icon_ICON_feather_camera_SIZE_MEDIUM_STATE_DEFAULT_STYLE_STYLE2_" data-name="Icon [ICON=feather/camera][SIZE=MEDIUM][STATE=DEFAULT][STYLE=STYLE2]" transform="translate(21.758 21.902)">
+      <g id="Mask_Group_5" data-name="Mask Group 5" transform="translate(0 0)" clip-path="url(#clip-path)">
+        <g id="__TEMP__SVG__" transform="translate(16.058 0.902)">
+          <path id="Path_10" data-name="Path 10" d="M11.7,28.924h11.01c0-6.513,3.818-11.543,11.343-11.543,5.712,0,10.95,2.862,10.95,9.742,0,5.3-3.121,7.733-8.048,11.436C31.341,42.636,26.9,47.4,27.212,55.132l.059,3.863h10.9V56.033c0-5.987,2.276-7.733,8.422-12.4,5.079-3.863,10.376-8.148,10.376-17.148,0-12.6-10.643-18.69-22.293-18.69-11.061,0-23.239,5.4-22.972,21.126ZM24.725,74.931c0,4.445,3.544,7.733,8.422,7.733,5.078,0,8.574-3.288,8.574-7.733,0-4.6-3.5-7.84-8.582-7.84-4.871,0-8.415,3.236-8.415,7.84Z" transform="translate(-11.698 -7.799)" fill="#f4901d"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

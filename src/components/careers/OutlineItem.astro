@@ -1,0 +1,18 @@
+---
+import Title from '@components/careers/Title.astro'
+import Paragraph from '@components/careers/Paragraph.astro'
+
+const { title } = Astro.props;
+---
+<div class="flex flex-row">
+  <div class="w-1/5 h-max pr-4">
+    <slot name="image">
+  </div>
+
+  <div class="w-4/5">
+    <Title class="text-base">{title}</Title>
+    <Paragraph>
+      <slot/>
+    </Paragraph>
+  </div>
+</div>
