@@ -20,7 +20,6 @@ const jobPosts =
 const jobPostsParsed = jobPosts
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
   .filter((jobPost) => isDev || !jobPost.frontmatter.draft);
-console.log(jobPostsParsed.length)
 
 const careersBannerPicture = await getImage({
   src: import('../../assets/site/work-with-us-banner.jpg'),
