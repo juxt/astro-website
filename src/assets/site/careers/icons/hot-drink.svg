@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="79.405" height="75.952" viewBox="0 0 79.405 75.952">
+  <g id="Circle_Button_SIZE_MEDIUM_STATE_DEFAULT_STYLE_STYLE2_" data-name="Circle Button [SIZE=MEDIUM][STATE=DEFAULT][STYLE=STYLE2]" transform="translate(-20.548 -22.328)">
+    <g id="Icon_ICON_feather_coffee_SIZE_MEDIUM_STATE_DEFAULT_STYLE_STYLE2_" data-name="Icon [ICON=feather/coffee][SIZE=MEDIUM][STATE=DEFAULT][STYLE=STYLE2]" transform="translate(24 24.055)">
+      <rect id="Area_ICON:feather_coffee_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE2_" data-name="Area [ICON:feather/coffee][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE2]" width="72.5" height="72.5" fill="rgba(253,73,198,0.35)" opacity="0"/>
+      <g id="Icon" transform="translate(1.395 1.73)">
+        <path id="_96429eaf-85b4-4cc3-9173-10c09b021781" data-name="96429eaf-85b4-4cc3-9173-10c09b021781" d="M62.143,27.619H65.6a13.809,13.809,0,1,1,0,27.619H62.143" transform="translate(-8.3 -3.456)" fill="none" stroke="#f4901d" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.905"/>
+        <path id="e8411609-f3f8-4058-8e97-5b18f9fd05c7" d="M6.905,27.619H62.143V58.69A13.81,13.81,0,0,1,48.333,72.5H20.714A13.809,13.809,0,0,1,6.905,58.69Z" transform="translate(-8.3 -3.456)" fill="none" stroke="#f4901d" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.905"/>
+        <line id="b33bdbf4-3959-4a1d-8184-b709e03ae6a5" y2="10.357" transform="translate(12.414 -0.004)" fill="none" stroke="#f4901d" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.905"/>
+        <line id="_40ea3331-a9d6-4c82-ab0f-0e7295506967" data-name="40ea3331-a9d6-4c82-ab0f-0e7295506967" y2="10.357" transform="translate(26.224 -0.004)" fill="none" stroke="#f4901d" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.905"/>
+        <line id="_99fe1602-3d2c-4b2a-b79a-bc6c6b25e74b" data-name="99fe1602-3d2c-4b2a-b79a-bc6c6b25e74b" y2="10.357" transform="translate(40.033 -0.004)" fill="none" stroke="#f4901d" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.905"/>
+      </g>
+    </g>
+  </g>
+</svg>

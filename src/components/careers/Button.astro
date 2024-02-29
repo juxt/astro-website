@@ -1,0 +1,19 @@
+---
+const className = Astro.props.class ? Astro.props.class : '';
+delete Astro.props.class;
+
+const { theme } = Astro.props;
+
+var colors = "border-juxt text-white hover:bg-juxt hover:text-white";
+if (theme == "dark") {
+    colors = "border-juxt text-juxt hover:bg-juxt hover:text-white";
+} else if (theme == "dark-hovered") {
+    colors = "border-juxt text-white bg-juxt";
+}
+---
+<div class={"border w-fit px-4 py-1.5 cursor-pointer transition-colors"
+            + " " + colors
+            + " " + className}
+    {...Astro.props}>
+    <slot/>
+</div>

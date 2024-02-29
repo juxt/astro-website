@@ -1,0 +1,7 @@
+---
+const className = Astro.props.class ? Astro.props.class : '';
+delete Astro.props.class;
+---
+<p class={"text-white font-extralight " + className} {...Astro.props}>
+    <slot/>
+</p>
