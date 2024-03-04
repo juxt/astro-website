@@ -1,9 +1,10 @@
 ---
+const { category, title } = Astro.props;
 ---
 <>
-<h2 class="text-sm font-medium">Featured Talk</h2>
+<h2 class="text-sm font-medium">{category}</h2>
 
-<h3 class="text-lg font-medium">Backends. Where did they come from and why are they here?</h3>
+<h3 class="text-lg font-medium">{title}</h3>
 
 <div class="pt-8">
   <slot/>
