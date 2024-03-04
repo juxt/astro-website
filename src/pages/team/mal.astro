@@ -30,54 +30,45 @@ import GalleryImage from '@components/team/GalleryImage.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
-    <ul class="list-disc list-inside text-lg font-medium">
-      <li>Systems Architecture</li>
-      <li>Web Standards</li>
-      <li>API Security</li>
-      <li>Middleware</li>
-      <li>Databases</li>
-      <li>Clojure Development</li>
-      <li>Linux</li>
-    </ul>
+    <div class="flex flex-col gap-3">
+      <h2 class="text-2xl font-medium">Expert In</h2>
+      <ul class="list-disc list-inside text-base lg:text-md">
+        <li>Systems Architecture</li>
+        <li>Web Standards</li>
+        <li>API Security</li>
+        <li>Databases</li>
+      </ul>
+      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
+      <p class="text-base lg:text-md">
+        For you I'll ensure you build the right thing in the right way.
+        <br/>
+        For you I'll ensure you build the right thing in the right way.
+        For you I'll ensure you build the right thing in the right way.
+        For you I'll ensure you build the right thing in the right way.
+      </p>
+    </div>
   </GreetingSection>
-
-  <Section bgColor='orange' className="py-20 grid grid-cols-1 gap-5">
-      <SmallTitle>Background</SmallTitle>
-      <p>
-	I started programming in the early 80s, first on the 8-bit ZX81 and ZX Spectrum computers, and later on the 68000-based Atari SI home computer. I spent almost two years on a 3D driving game, and almost had a title published by Electronic Arts. In 1993, I won an award for my final year undergraduate project at Warwick University, a vector-based satellite navigation system for cars, written in C++ and XWin.
-      </p>
-      <p>
-        My first roles post-university led him into Unix systems administration and from there to becoming an Oracle DBA, before finding a route back into full-time programming with Java in 1996. I was part of the original team that built jcoverage, which became Coburtura, still a hugely popular tool for measuring test code coverage for Java.
-      </p>
-      <p>
-        In 1998 I built one of the first Java EJB servers — EJBHome — which was acquired by IONA Technologies the following year. At IONA I co-led the team that created their J2EE application server, one of the first to receive a compatibility certification from Sun. I built the first version of the JSP engine, sitting on Sun’s EJB 2.0 technical committee and won the President’s Award for revolutionising IONA’s approach to product packaging.
-      </p>
-      <p>
-        I've worked for many years as a developer, consultant, speaker and trainer in Agile methodologies in various sectors, including banking and telecommunications.
-      </p>
-      <p>
-        I've has been building web APIs for customers for over a decade and I'm intimately acquainted with the HTTP specifications. I've has authored or contributed to a number of web libraries that assist in the creation of HTTP-based services, including plugboard, Liberator, bidi, yada, pick, jinx, grab, reap, https://www.rest.guide and Site.
-      </p>
-
-  </Section>
 
   <FeatureSection imgPos="right">
 
     <FeatureText
-      category="Featured Talk"
-      title="Backends. Where did they come from and why are they here?">
+      category="Nordic APIs Platform Summit, Stockholm 2023"
+      title="Building A Secure API Platform: A Data-driven Approach">
 
       <SimpleColumn>
-	<p>Here's a talk I gave at JUXT's 10 year birthday celebration last May (2023).</p>
-	<p>We're always trying to think of ways to dramatically simplify IT architectures, which almost always become over-complicated for little gain.</p>
-	<p>This talk presents the possibility of a 2-tier architecture where the usual business-logic backend and database tiers are merged.</p>
+        <p>
+          API development is hard, especially if we need to add security. There are so many things to worry about!
+        </p>
+
+        <p>
+          We know we can specify an API as an OpenAPI document. But how far can we extend this data-driven approach? Can we implement security, durability, behaviour? This talk will attempt to answer some of these questions, in part, by delving into the design of Site, an open-source API-platform I have been helping to build. I will explain the advantages of a ‘data-first’ mindset in the development and evolution of APIs, and how we can begin to make the development and deployments of secure APIs a little easier.
+        </p>
       </SimpleColumn>
     </FeatureText>
 
     <FeatureYouTube slot="image"
-      title="Backends. Where did they come from and why are they here?"
-      embedUrl="https://www.youtube.com/embed/BG38x677s44"
+      title="Building A Secure API Platform: A Data-driven Approach"
+      embedUrl="https://www.youtube.com/embed/7qZ-GWvx6lM"
     />
 
   </FeatureSection>
@@ -85,19 +76,26 @@ import GalleryImage from '@components/team/GalleryImage.astro'
   <FeatureSection imgPos="left">
 
     <FeatureText
-      category="Featured Talk"
-      title="Babashka Conf 2023: Clojure on SCIs (Opening Keynote)">
+      category="On-demand webinar, October 2023"
+      title="Atomic Architecture — An Architectural Vision for Better Information Systems">
 
       <SimpleColumn>
-	<p>I gave the opening Key Note at the inaugural Babashka conf, last year in Berlin!</p>
-	<p>Babashka is a wonderful replacement for bash, with all the power and without the arcane syntax.</p>
-	<p>It's my go-to tool for anything that requires a bit of scripting together.</p>
+        <p>
+          As part of our drive to design better data systems for our customers, we’ve identified seven architectural principles that yield exceptional results.
+        </p>
+        <p>
+          In this webinar, I explained the principles behind Atomic Architecture, an architectural blueprint for building reliable information systems.
+        </p>
+        <p>
+          My viewpoint is that current trends in software architecture create unnecessary complexity, delivering poor outcomes for users.
+          Atom Architecture incorporates key ideas and principles from Functional Programming, Domain Driven Design, Event Driven Architecture, Data Mesh and more — to let data take back its central place at the heart of a distributed information system.
+        </p>
       </SimpleColumn>
     </FeatureText>
 
     <FeatureYouTube slot="image"
       title="Clojure on SCIs"
-      embedUrl="https://www.youtube.com/embed/Cq4S7nO1KOo"
+      embedUrl="https://www.youtube.com/embed/sf3QZ-HBNFk"
     />
 
   </FeatureSection>
@@ -108,6 +106,7 @@ import GalleryImage from '@components/team/GalleryImage.astro'
   </QuoteSection>
   -->
 
+  <!--
   <ResourceCollectionSection title="Notable Talks" subtitle="A selection of Malcolm's online talks">
 
     <ResourceItem
@@ -129,9 +128,52 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     />
 
   </ResourceCollectionSection>
+  -->
 
   <LatestBlogsSection {...myData.frontmatter} />
 
+  <GitHubRepositoriesSection {...myData.frontmatter} >
+      <div class="px-36 grid grid-cols-3 gap-3">
+        <div class="bg-zinc-800 p-5 transition-colors cursor-pointer hover:bg-juxt">
+          <div>site</div>
+          <p>
+            A platform for building stateful API services.
+          </p>
+        </div>
+        <div class="bg-zinc-800 p-5">
+          <div>site</div>
+          <p>
+            A platform for building stateful API services.
+          </p>
+        </div>
+        <div class="bg-zinc-800 p-5">
+          <div>site</div>
+          <p>
+            A platform for building stateful API services.
+          </p>
+        </div>
+        <div class="bg-zinc-800 p-5">
+          <div>site</div>
+          <p>
+            A platform for building stateful API services.
+          </p>
+        </div>
+        <div class="bg-zinc-800 p-5">
+          <div>site</div>
+          <p>
+            A platform for building stateful API services.
+          </p>
+        </div>
+        <div class="bg-zinc-800 p-5">
+          <div>site</div>
+          <p>
+            A platform for building stateful API services.
+          </p>
+        </div>
+      </div>
+  </GitHubRepositoriesSection>
+
+<!--
   <GitHubRepositoriesSection {...myData.frontmatter} >
     <GitHubRepositoryItem owner ="juxt-site" name="site" description="A platform for building stateful API services." />
     <GitHubRepositoryItem owner="juxt" name="pick" description="A Clojure library for HTTP server-driven content negotiation." />
@@ -140,6 +182,7 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     <GitHubRepositoryItem owner="juxt" name="jinx" description="jinx is not xml-schema (it's json-schema!)" />
     <GitHubRepositoryItem owner="juxt" name="bidi" description="Bidirectional URI routing" />
   </GitHubRepositoriesSection>
+-->
 
   <ContactSection {...myData.frontmatter} />
 </ProfilePage>
