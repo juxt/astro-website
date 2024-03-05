@@ -1,12 +1,11 @@
 ---
-const { category, title } = Astro.props;
+const { title , subtitle } = Astro.props;
 ---
-<>
-<h2 class="text-sm font-medium">{category}</h2>
-
-<h3 class="text-lg font-medium">{title}</h3>
-
-<div class="pt-8">
-  <slot/>
+<div class={Astro.props.class || "p-10"}>
+  <h2 class="text-lg font-medium">{title}</h2>
+  <h3 class="text-sm font-medium">{subtitle}</h3>
+  
+  <div class="pt-8">
+    <slot/>
+  </div>
 </div>
-</>

@@ -22,6 +22,9 @@ import ContactSection from '@components/team/ContactSection.astro'
 import { GithubIcon } from '@components/Icons'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
+import FeatureSection from '@components/team/FeatureSection.astro'
+import FeatureText from '@components/team/FeatureText.astro'
+import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 
 ---
 <ProfilePage title={fullName + " - " + jobTitle} >
@@ -41,75 +44,52 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
     </div>
   </GreetingSection>
 
-  <GallerySection className="max-w-5xl mt-10">
-    <GalleryImage
-      src="/src/assets/team/joe/4.jpg"
-      alt="" />
-    <SimpleColumn className="bg-[#ac480d] gap-5 p-5 w-3/6">
-        <div class="m-auto">
-      <SmallTitle>Feedback</SmallTitle>
+  <FeatureSection imgPos="left">
+    <div class="overflow-hidden">
+    <!-- TODO: Fix image -->
+        <GalleryImage
+          slot="image"
+          src="/src/assets/team/joe/4.jpg"
+          alt="" />
+    </div>
+
+    <SimpleColumn className="bg-[#ac480d] flex flex-col gap-5 p-5">
+      <SmallTitle>Customer Feedback</SmallTitle>
       <BlockQuote author="Rice Lake Weighing Systems">
         I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions.
       </BlockQuote>
       <BlockQuote author="Excel Energy Services">
         [Joe's] communication followed by execution is beyond impressive.
       </BlockQuote>
-        </div>
+      <BlockQuote author="Jamie Robertson, CEO, Invisible Systems">
+        Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and composed style; provide direction, confidence, and reassurance across a team and organisation.
+      </BlockQuote>
     </SimpleColumn>
-  </GallerySection>
+  </FeatureSection>
 
-  <GallerySection className="max-w-5xl mb-10">
-    <a href="https://github.com/joelittlejohn" class="h-full w-3/6 bg-[#ac480d] grid gap-1" target="_blank">
-      <div class="p-5 w-full sm:w-3/4 m-auto">
-        <GithubIcon className="w-28 p-4 fill-white float-left m-auto" alt="GitHub"/>
-        <div class="float-left">
-          <img class="p-1 h-10" alt="joelittlejohn's stars" src="https://img.shields.io/github/stars/joelittlejohn?style=social&logo=none"/>
-          <img class="p-1 h-10" alt="joelittlejohn's followers" src="https://img.shields.io/github/followers/joelittlejohn?style=social&logo=none">
-          <img class="p-1 h-10" alt="joelittlejohn's followers" src="https://img.shields.io/github/contributors-anon/joelittlejohn/jsonschema2pojo?style=social&logo=none">
-        </div>
-      </div>
-    </a>
-    <GalleryImage
-      src="/src/assets/team/joe/1.jpg"
-      alt="" />
-  </GallerySection>
+  <FeatureSection imgPos="right">
 
-  <LatestBlogsSection bgColor="yellow" title="Blogs & Articles" hidePodcasts=true {...myData.frontmatter} />
+    <FeatureText
+      title="Platform Engineering and Internal Developer Platforms"
+      subtitle="Joe's latest JUXTCast podcast episode, November 2023"
+      class="p-10 bg-[#ca8a04]">
 
-  <QuoteSection author="Jamie Robertson, CEO, Invisible Systems">
-    Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and composed style; provide direction, confidence, and reassurance across a team and organisation.
-  </QuoteSection>
-
-  <ResourceCollectionSection bgColor="orange" title="Podcasts">
-    <GallerySection className="max-w-5xl h-90">
-      <iframe class="w-full sm:w-3/6 h-5/6 m-auto" src="https://www.youtube.com/embed/SZfSKDuz2yg?si=2njNlnQs3OSiMK9B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <SimpleColumn className="p-5 w-3/6 hidden sm:flex">
-        <div class="m-auto">
-          <h2 class="text-xl font-bold">JUXTCast S5E7</h2>
-          <h3 class="text-xl font-medium">UK Post Office Horizon Scandal</h3>
-          <p class="mt-3">
-            Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal.
-          </p>
-          <p class="mt-3">
-            JUXTers Joe Littlejohn, Alex Davis and Malcolm Sparks are joined by Andras Gerlits, creator of OmniLedger.
-          </p>
-        </div>
+      <SimpleColumn>
+        <p>
+          In this episode of JUXTCast, Joe Littlejohn was joined by JUXT engineers Aaron Knauf and Mariusz Saternus to talk about Platform Engineering, and delivering effective developer platforms in large organizations.
+        </p>
       </SimpleColumn>
-    </GallerySection>
-    <GallerySection className="max-w-5xl h-90">
-      <SimpleColumn className="gap-5 p-5 w-3/6 hidden sm:flex">
-        <div class="m-auto">
-          <h2 class="text-xl font-bold">JUXTCast S5E5</h2>
-          <h3 class="text-xl font-medium">Platform Engineering and IDPs</h3>
-          <p>
-            Joe Littlejohn is joined by JUXT Software Engineers Aaron Knauf and Mariusz Saternus to talk Platform Engineering, and their experiences delivering effective developer platforms in large tech organisations.
-          </p>
-        </div>
-      </SimpleColumn>
-      <iframe class="w-full sm:w-3/6 h-5/6 m-auto" src="https://www.youtube.com/embed/uFWO2chGZOs?si=tH3BXilTzQaIOVDn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </GallerySection>
-  </ResourceCollectionSection>
+    </FeatureText>
+
+    <FeatureYouTube slot="image"
+      title="Building A Secure API Platform: A Data-driven Approach"
+      embedUrl="https://www.youtube.com/embed/uFWO2chGZOs"
+    />
+
+  </FeatureSection>
 
   <ContactSection {...myData.frontmatter} />
+
+  <LatestBlogsSection bgColor="yellow" title="Joe's Blogs & Articles" hidePodcasts=true {...myData.frontmatter} />
 
 </ProfilePage>

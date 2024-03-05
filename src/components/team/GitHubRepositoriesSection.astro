@@ -2,12 +2,13 @@
 import { getImage, Image } from 'astro:assets'
 import Section from '@components/team/Section.astro'
 
-const { name } = Astro.props;
+const { name, title } = Astro.props;
 ---
 <Section bgColor="yellow" className="py-20" {...Astro.props}>
-  <div class="flex flex-col">
-    <h3 class="text-xl font-medium">GitHub Repositories</h3>
-    <p class="pb-10">{name} is a key contributor to the following libraries</p>
+  <div class="flex flex-col pb-7">
+    <h3 class="text-2xl font-medium">{ title || "GitHub Repositories"}</h3>
   </div>
-  <slot/>
+  <div class="grid grid-cols-3 gap-3">
+    <slot/>
+  </div>
 </Section>

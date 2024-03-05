@@ -22,17 +22,22 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
-    <ul class="list-disc list-inside text-lg font-medium">
-      <li>Project Leadership</li>
-      <li>Banking and Finance</li>
-      <li>Technical Strategy</li>
-      <li>Databases</li>
-      <li><a class="underline" href="http://xtdb.com">XTDB</a></li>
-      <li>Clojure Development</li>
-    </ul>
-  </GreetingSection>
+    <div class="flex flex-col gap-3">
+      <h2 class="text-2xl font-medium">Expert In</h2>
+      <ul class="list-disc list-inside text-base lg:text-md">
+        <li>Project Leadership & Technical Strategy</li>
+        <li>Banking and Finance Tech</li>
+        <li>Databases</li>
+        <li>Clojure</li>
+      </ul>
+      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
+      <p class="text-base lg:text-md">
+        Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme.
+      </p>
+    </div>
+  </GetingSection>
 
+<!--
   <TwoColumnSection>
     <SimpleColumn>
       <SmallTitle>About</SmallTitle>
@@ -41,9 +46,10 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       </p>
     </SimpleColumn>
   </TwoColumnSection>
-
-  <LatestBlogsSection bgColor="yellow" {...myData.frontmatter} />
+-->
 
   <ContactSection {...myData.frontmatter} />
+
+  <LatestBlogsSection bgColor="yellow" title="Jon's Recent Blogs and Articles" {...myData.frontmatter} />
 
 </ProfilePage>

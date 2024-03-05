@@ -6,9 +6,7 @@ const { imgPos = "left" } = Astro.props
     {
       (imgPos == "left") && <slot name="image"/>
     }
-    <div class="p-10">
-        <slot/>
-    </div>
+    <slot/>
     {
       (imgPos == "right") && <slot name="image"/>
     }

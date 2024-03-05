@@ -41,10 +41,7 @@ import GalleryImage from '@components/team/GalleryImage.astro'
       <h2 class="pt-2 text-2xl font-medium">Bio</h2>
       <p class="text-base lg:text-md">
         For you I'll ensure you build the right thing in the right way.
-        <br/>
-        For you I'll ensure you build the right thing in the right way.
-        For you I'll ensure you build the right thing in the right way.
-        For you I'll ensure you build the right thing in the right way.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
       </p>
     </div>
   </GreetingSection>
@@ -52,8 +49,9 @@ import GalleryImage from '@components/team/GalleryImage.astro'
   <FeatureSection imgPos="right">
 
     <FeatureText
-      category="Nordic APIs Platform Summit, Stockholm 2023"
-      title="Building A Secure API Platform: A Data-driven Approach">
+      title="Building A Secure API Platform: A Data-driven Approach"
+      subtitle="Malcolm's Talk @ Nordic APIs Platform Summit, Stockholm 2023"
+      class="p-10 bg-[#ca8a04]">
 
       <SimpleColumn>
         <p>
@@ -76,8 +74,9 @@ import GalleryImage from '@components/team/GalleryImage.astro'
   <FeatureSection imgPos="left">
 
     <FeatureText
-      category="On-demand webinar, October 2023"
-      title="Atomic Architecture — An Architectural Vision for Better Information Systems">
+      title="Atomic Architecture — An Architectural Vision for Better Information Systems"
+      subtitle="Malcolm's on-demand webinar, October 2023"
+      class="p-10 bg-[#ca8a04]">
 
       <SimpleColumn>
         <p>
@@ -99,6 +98,8 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     />
 
   </FeatureSection>
+
+  <ContactSection {...myData.frontmatter} />
 
   <!--
   <QuoteSection author="Albert Einstein">
@@ -130,51 +131,11 @@ import GalleryImage from '@components/team/GalleryImage.astro'
   </ResourceCollectionSection>
   -->
 
-  <LatestBlogsSection {...myData.frontmatter} />
+  <LatestBlogsSection bgColor="yellow" title="Malcolm's Recent Blogs and Articles" {...myData.frontmatter} />
 
-  <GitHubRepositoriesSection {...myData.frontmatter} >
-      <div class="px-36 grid grid-cols-3 gap-3">
-        <div class="bg-zinc-800 p-5 transition-colors cursor-pointer hover:bg-juxt">
-          <div>site</div>
-          <p>
-            A platform for building stateful API services.
-          </p>
-        </div>
-        <div class="bg-zinc-800 p-5">
-          <div>site</div>
-          <p>
-            A platform for building stateful API services.
-          </p>
-        </div>
-        <div class="bg-zinc-800 p-5">
-          <div>site</div>
-          <p>
-            A platform for building stateful API services.
-          </p>
-        </div>
-        <div class="bg-zinc-800 p-5">
-          <div>site</div>
-          <p>
-            A platform for building stateful API services.
-          </p>
-        </div>
-        <div class="bg-zinc-800 p-5">
-          <div>site</div>
-          <p>
-            A platform for building stateful API services.
-          </p>
-        </div>
-        <div class="bg-zinc-800 p-5">
-          <div>site</div>
-          <p>
-            A platform for building stateful API services.
-          </p>
-        </div>
-      </div>
-  </GitHubRepositoriesSection>
-
-<!--
-  <GitHubRepositoriesSection {...myData.frontmatter} >
+  <GitHubRepositoriesSection bgColor="orange"
+                             title="Github Repositories Malcolm contributes to"
+                             {...myData.frontmatter} >
     <GitHubRepositoryItem owner ="juxt-site" name="site" description="A platform for building stateful API services." />
     <GitHubRepositoryItem owner="juxt" name="pick" description="A Clojure library for HTTP server-driven content negotiation." />
     <GitHubRepositoryItem owner="juxt" name="reap" description="A Clojure library for decoding and encoding strings used by web protocols." />
@@ -182,7 +143,4 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     <GitHubRepositoryItem owner="juxt" name="jinx" description="jinx is not xml-schema (it's json-schema!)" />
     <GitHubRepositoryItem owner="juxt" name="bidi" description="Bidirectional URI routing" />
   </GitHubRepositoriesSection>
--->
-
-  <ContactSection {...myData.frontmatter} />
 </ProfilePage>
