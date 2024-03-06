@@ -27,6 +27,7 @@ import FeatureText from '@components/team/FeatureText.astro'
 import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
+
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
@@ -51,7 +52,7 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     <FeatureText
       title="Building A Secure API Platform: A Data-driven Approach"
       subtitle="Malcolm's Talk @ Nordic APIs Platform Summit, Stockholm 2023"
-      class="p-10 bg-[#ca8a04]">
+      bgColor="yellow">
 
       <SimpleColumn>
         <p>
@@ -76,7 +77,7 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     <FeatureText
       title="Atomic Architecture — An Architectural Vision for Better Information Systems"
       subtitle="Malcolm's on-demand webinar, October 2023"
-      class="p-10 bg-[#ca8a04]">
+      bgColor="yellow">
 
       <SimpleColumn>
         <p>

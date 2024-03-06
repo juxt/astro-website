@@ -1,7 +1,19 @@
 ---
-const { title , subtitle } = Astro.props;
+var { title , subtitle, bgClass, bgColor } = Astro.props;
+
+if (!bgClass) {
+    bgClass = "px-10 flex flex-col justify-center";
+}
+
+// NOTE: Also change in LatestBlogsSection
+// TODO: Move somewhere else?
+if (bgColor == "orange") {
+    bgClass += " bg-[#b76330]";
+} else if (bgColor == "yellow") {
+    bgClass += " bg-[#ca8a04]";
+}
 ---
-<div class={Astro.props.class || "p-10"}>
+<div class={bgClass}>
   <h2 class="text-lg font-medium">{title}</h2>
   <h3 class="text-sm font-medium">{subtitle}</h3>
   
