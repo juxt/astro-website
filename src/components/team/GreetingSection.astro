@@ -4,7 +4,15 @@ import Section from '@components/team/Section.astro'
 import ContactItem from '@components/team/ContactItem.astro'
 import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
 
-const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } = Astro.props;
+const {
+    code,
+    fullName,
+    jobTitle,
+
+    calendarLink,
+
+    email, twitter, linkedin, github, hackernews 
+} = Astro.props;
 ---
 <Section className='pl-10 pr-0 py-10 grid grid-cols-1 md:grid-cols-2 gap-4' {...Astro.props}>
   <div class="md:pt-10 pr-10">
@@ -57,9 +65,11 @@ const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } 
           </ContactItem>
         }
       </div>
-      <p class="text-end text-base">
-        Want to talk? <a class="underline hover:text-juxt" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2cJ8bzj8OAv43p7Su3vJ_bjPO4wr_2wJVvXxTL_oPq0xeNPEG_iSYGT8of7HX-ldS3DUAMaWFP">Book time in my calendar</a>
-      </p>
+      { calendarLink &&
+        <p class="text-end text-base">
+          Want to talk? <a class="underline hover:text-juxt" href={calendarLink}>Book time in my calendar</a>
+        </p>
+      }
     </div>
 
   </div>
