@@ -19,6 +19,9 @@ import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
+
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
@@ -36,6 +39,21 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       </p>
     </div>
   </GetingSection>
+
+  <GallerySection>
+    <GalleryImage
+        src="/src/assets/team/jon/jon-on-stage.jpg"
+        alt="Jon giving a talk on stage" />
+    <GalleryImage
+        src="/src/assets/team/jon/jon-suit.jpg"
+        alt="Jon on stage with Malcolm at the 10 year party" />
+    <GalleryImage
+        src="/src/assets/team/jon/jon-conj-2023.jpg"
+        alt="Jot on stage at Conj 2023" />
+    <GalleryImage
+        src="/src/assets/team/jon/jon-background.jpg"
+        alt="Jon listening to a talk" />
+  </GallerySection>
 
 <!--
   <TwoColumnSection>

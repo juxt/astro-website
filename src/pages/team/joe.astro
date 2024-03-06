@@ -14,6 +14,7 @@ import TwoColumnSection from '@components/team/TwoColumnSection.astro'
 import Section from '@components/team/Section.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
+import AssetImage from '@components/team/AssetImage.astro'
 import GreetingSection from '@components/team/GreetingSection.astro'
 import QuoteSection from '@components/team/QuoteSection.astro'
 import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
@@ -45,12 +46,10 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
   </GreetingSection>
 
   <FeatureSection imgPos="left">
-    <div class="overflow-hidden">
-    <!-- TODO: Fix image -->
-        <GalleryImage
-          slot="image"
-          src="/src/assets/team/joe/4.jpg"
-          alt="" />
+    <div slot="image" class="overflow-hidden">
+      <AssetImage
+        src="/src/assets/team/joe/4.jpg"
+        alt="" />
     </div>
 
     <SimpleColumn className="bg-[#ac480d] flex flex-col gap-5 p-5">

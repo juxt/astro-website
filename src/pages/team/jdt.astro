@@ -19,6 +19,11 @@ import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
+import FeatureSection from '@components/team/FeatureSection.astro'
+import FeatureText from '@components/team/FeatureText.astro'
+import FeatureYouTube from '@components/team/FeatureYouTube.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
+
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
@@ -32,10 +37,84 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       </ul>
       <h2 class="pt-2 text-2xl font-medium">Bio</h2>
       <p class="text-base lg:text-md">
-        A trusted advisor on open source tools and software trends who has: facilitated workshops on strategy technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
+        A trusted advisor on open source tools and software trends who has facilitated workshops on strategic technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
       </p>
     </div>
   </GreetingSection>
+
+  <FeatureSection imgPos="right">
+
+    <FeatureText
+      title="UPDATE Considered Harmful"
+      subtitle="Jeremy's talk at JUXT 10-year party, May 2023"
+      class="p-10 bg-[#ca8a04]">
+
+      <SimpleColumn>
+        <p>
+          SQL is almost 50 years old and the cost of storage has decreased dramatically over its lifetime.
+In this talk, Jeremy Taylor explains why SQL’s UPDATE statement is problematic in our modern context and how developers are forced to work around it. He also examines ‘bitemporality’ — a standardised model for working with versioned historical data that mitigates the need for such workarounds.
+        </p>
+      </SimpleColumn>
+    </FeatureText>
+
+    <FeatureYouTube slot="image"
+      title="UPDATE Considered Harmful"
+      embedUrl="https://www.youtube.com/embed/JxMz-tyicgo"
+    />
+
+  </FeatureSection>
+
+  <FeatureSection imgPos="left">
+
+    <FeatureText
+      title="Columnar Data — The Future of Efficient Data Analytics"
+      subtitle="Jeremy's on-demand webinar, October 2023"
+      class="p-10 bg-[#ca8a04]">
+
+      <SimpleColumn>
+        <p>
+          In the context of big data, columnar storage & processing has emerged as a central theme for software engineers and data professionals. Columnar data is not just a trend; it’s a response to the increasing need for efficient data analytics. Learn how to optimize system design and performance by understanding columnar data and the underlying mechanics that make it effective.
+        </p>
+      </SimpleColumn>
+    </FeatureText>
+
+    <FeatureYouTube slot="image"
+      title="Columnar Data — The Future of Efficient Data Analytics"
+      embedUrl="https://www.youtube.com/embed/Nlpe0Q-ARl8"
+    />
+
+  </FeatureSection>
+
+  <FeatureSection imgPos="right">
+
+    <FeatureText
+      title="Technology Roundtable with Jeremy"
+      class="p-10 bg-[#ca8a04]">
+
+      <SimpleColumn>
+        <p>
+          Looking to explore new tech with your team? Let Jeremy take you on a tour through some of the latest open source software innovations that are relevant for you.
+In as little as one hour, either virtually or at your offices, Jeremy will get you up-to-speed on new technologies that can and probably will impact your work in your near future, including recent advances in data and cloud infrastructure.
+        </p>
+        <div class="pt-10 flex flex-col items-center">
+            <a class="bg-zinc-800 hover:bg-zinc-600 px-4 py-3 text-white rounded-sm"
+               href="/jdt-tech-roundtable">
+               More Info
+            </a>
+        </div>
+      </SimpleColumn>
+    </FeatureText>
+
+    <div slot="image" class="overflow-hidden">
+        <!-- TODO: Fix image -->
+        <GalleryImage
+          src="/src/assets/team/jdt/JUXT-10thBday-Wiltons-1871.jpg"
+          alt="" />
+    </div>
+
+  </FeatureSection>
+
+  <ContactSection {...myData.frontmatter} />
 
 <!--
   <TwoColumnSection>
@@ -80,8 +159,9 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
   </QuoteSection>
 -->
 
-  <LatestBlogsSection title="Jeremy's Recent Content" {...myData.frontmatter} />
+  <LatestBlogsSection bgColor="orange" title="Jeremy's Recent Content" {...myData.frontmatter} />
 
+<!--
   <ResourceCollectionSection title="Resources" subtitle="Jeremy's talks, podcasts and webinars">
     <ResourceItem
       name="The Distributed Fabric Pod | Ep 21"
@@ -103,8 +183,6 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       link="/jdt-tech-roundtable"/>
 
   </ResourceCollectionSection>
-
-  <ContactSection {...myData.frontmatter}>
-  </ContactSection>
+-->
 
 </ProfilePage>
