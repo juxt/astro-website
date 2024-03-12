@@ -97,7 +97,7 @@ No doubt a lucrative career in management consultancy now beckons 😁
 
 ## Continuing the conversation
 
-If you've read this far, I'd love to hear what works for you as well - please come join us in the [comments](#todo)!
+If you've read this far, I'd love to hear what works for you as well - please come join us in the [comments](https://www.linkedin.com/posts/jarohen_juxt-blog-ways-to-improve-one-to-ones-for-activity-7173346566164979712-hIct)!
 
 Good luck!
 
