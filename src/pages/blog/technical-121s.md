@@ -2,9 +2,9 @@
 author: 'jms'
 layout: '../../layouts/BlogPost.astro'
 title: 'Ways to improve one-to-ones for technical people-managers'
-description: "Actionable ideas for you and your team to get more from your regular one-to-ones."
+description: 'Actionable ideas for you and your team to get more from your regular one-to-ones'
 category: 'culture'
-publishedDate: '2024-03-07'
+publishedDate: '2024-03-12'
 tags:
   - management skills
   - culture
@@ -31,13 +31,15 @@ A few quick ones to begin:
 
    The schedule can even vary for different people in the same team.
    In the past I've had people who prefer 1-to-1s more often, and some who prefer them less; some who prefer them as scheduled meetings, and some who prefer an ad-hoc chat at the local coffee shop.
-2. These meetings aren't for me to lead - they're for a team member to talk about the things that are important to them. 
+
+2. These meetings aren't for me to lead - they're for a team member to talk about the things that are important to them.
    They decide the topics, it's for me to actively listen.
 
    Specifically, if I have any other messages or feedback that I need to raise, they are strictly **out-of-scope** here.
    These are absolutely _not_ the forum for unsolicited advice or, shall we say, "unsolicited feedback on areas-for-improvement" - it's a sure-fire way for people to lose trust in the process if they're dialling-in and expecting an earful.
 
    (Exceptions being positive feedback, which is always nice to hear, or other feedback if it's actively solicited.)
+
 3. I really make an effort not to significantly reschedule or cancel 1-to-1s.
 
    These are typically one of the first meetings to be postponed if time is tight.
@@ -50,11 +52,11 @@ A few quick ones to begin:
 
 ## Some concrete practices
 
-In terms of concrete practices: firstly, I keep a personal (unshared) journal of what we talk about. 
+In terms of concrete practices: firstly, I keep a personal (unshared) journal of what we talk about.
 I'll take brief notes throughout the call, but I also make a point of taking 5 minutes at the end to write up more detailed reflections.
 
-* These notes include my team member's own aims and learning objectives for themselves (even ones mentioned off-hand, in passing) - this means that when I later come to wider team/project planning, I find it much easier to take an individual's personal development aims and preferences into account.
-* They also include even vague hints and gut feelings - things I wouldn't otherwise remember between catch-ups, things I might not notice in the day-to-day.
+- These notes include my team member's own aims and learning objectives for themselves (even ones mentioned off-hand, in passing) - this means that when I later come to wider team/project planning, I find it much easier to take an individual's personal development aims and preferences into account.
+- They also include even vague hints and gut feelings - things I wouldn't otherwise remember between catch-ups, things I might not notice in the day-to-day.
   This note-taking makes it easier to spot recurring themes - both for an individual, but also issues that affect more than one person in the team (even if they're not all raising it).
 
 Openly, I'm not naturally the most perceptive of people - no doubt there are better managers for whom this kind of thing is second nature - but this practice around notes has helped me improve.
@@ -66,7 +68,7 @@ Openly, I'm not naturally the most perceptive of people - no doubt there are bet
 When I first started managing people, one of the things I found hardest (relative to writing software) was the appreciation of context, nuance, grey areas - something my own early managers would no doubt tell you wasn't my strong suit!
 In particular, the need to adapt my managerial style to suit the situation and people at hand - to my dismay, there was never a neat, silver-bullet, one-size-fits-all solution.
 
-This doesn't seem at all uncommon in our industry. 
+This doesn't seem at all uncommon in our industry.
 Indeed, it's well understood that the skills and characteristics required to write good software are very different from those required to be a good manager!
 
 A lot of these are skills that you continually develop over a longer term, but there are a few specific areas that I find require more frequent fine-tuning - this is where I really value regular feedback from my team:
