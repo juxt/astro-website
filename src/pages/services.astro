@@ -1,0 +1,333 @@
+---
+import { Image } from 'astro:assets'
+import { getImage } from 'astro:assets'
+import { MarkdownInstance } from 'astro'
+import { parseBlogs, slugifyPath } from '@utils/common'
+import Banner from '@components/Banner.astro'
+import { BlogCard } from '@components/BlogCard'
+import Clickable from '@components/Clickable.astro'
+import { QuoteIcon } from '@components/Icons'
+import Section from '@components/Section.astro'
+import ContactUsMini from '@components/ContactUsMini.tsx'
+import { Blog, Person } from '@utils/types'
+import CaseStudy, { CaseStudyProps } from '@layouts/CaseStudy.astro'
+import Layout from '@layouts/Layout.astro'
+import { ChevronRightIcon, TickIcon } from '@components/Icons'
+
+const threadsPicture = await getImage({
+  src: import('../assets/site/threads.png'),
+  width: 600,
+  height: 1366,
+  quality: 80,
+  alt: 'threads'
+}).then((img) => img.src)
+
+const siteMetadata = await Astro.glob('../data/metadata.json')
+
+const homepageBannerPicture = await getImage({
+  src: import('../assets/site/homepage-banner.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'homepage banner'
+}).then((img) => img.src)
+
+const testimonials = [
+  {
+    name: 'MORGAN ROSS, TECHNICAL DIRECTOR, ONTHEMARKET PLC',
+    quote:
+      'JUXT led the development team through this period of incredible achievements.',
+    bg: 'bg-red-600'
+  },
+  {
+    name: 'MANAGING DIRECTOR, T1 INVESTMENT BANK',
+    quote:
+      'The JUXT team are tremendously technically capable – delivering elegant solutions to complex problems.',
+    bg: 'bg-green-800'
+  },
+  {
+    name: 'ANDY DWELLEY',
+    quote: 'XTDB has been an absolute dream to use.',
+    bg: 'bg-slate-800'
+  },
+  {
+    name: 'PATRICK GALVIN',
+    quote: 'XTDB has been working great for me. It is a lovely lovely project.',
+    bg: 'bg-blue-800'
+  },
+  {
+    name: 'JULIAN GAMBLE',
+    quote:
+      'JUXT have made a huge contribution to the Open Source and Clojure community',
+    bg: 'bg-pink-800'
+  },
+  {
+    name: 'NIC FERRIER',
+    quote:
+      'They are programmers employing programmers to do work with the best tools in the most interesting ways.',
+    bg: 'bg-violet-800'
+  },
+  {
+    name: "JACOB O'BRYANT",
+    quote:
+      'I really appreciate the straightforward simplicity of schemaless persistence. With XTDB it was just so easy.',
+    bg: 'bg-gray-800'
+  }
+]
+
+const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
+
+const isDev = import.meta.env.DEV
+
+const caseStudies = await Astro.glob<CaseStudyProps>(
+  '../data/case-studies/*.md'
+)
+
+const featuredCaseStudiesMetadata = siteMetadata[0].homepage.featuredCaseStudies
+
+const featuredCaseStudies = featuredCaseStudiesMetadata.map((slug) => {
+  return caseStudies.find((caseStudy) => slugifyPath(caseStudy.file) === slug)
+})
+
+const people = await Astro.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}'
+)
+
+const peopleByCode = new Map(
+  people.map((person) => [person.frontmatter.code, person.frontmatter])
+)
+
+const featuredBlogsMetadata = siteMetadata[0].homepage.featuredBlogs
+
+const filteredBlogs = featuredBlogsMetadata.map((slug) => {
+  return blogs.find((blog) => slugifyPath(blog.url) === slug)
+})
+
+const heroAuthorImports = {
+  heroImageImport: (heroImage) => import(`../assets/blog/${heroImage}.jpg`),
+  authorImageImport: (authorImage) =>
+    import(`../assets/people/${authorImage}.jpg`)
+}
+
+const featuredBlogs = await parseBlogs({
+  rawBlogs: filteredBlogs,
+  rawPeople: people,
+  isDev: isDev,
+  getImage,
+  ...heroAuthorImports
+})
+---
+
+<Layout title='Services' navbar navbarNoBg>
+  <main>
+    <Banner
+      navbarNoBg
+      text='Services'
+      style={{
+        backgroundImage: `url(${homepageBannerPicture})`
+      }}
+    />
+
+    <Section className={'bg-zinc-900 py-20 text-white'}>
+      <div class="flex flex-col gap-10 pb-14 lg:pb-20">
+        <p class='text-xl font-extralight'>
+          For over a decade, we’ve built high-quality, scalable, and resilient software systems — without fail.
+        </p>
+        <p class='text-xl font-extralight'>
+          Check out our <a href="/financial" class="text-juxt cursor-pointer">Solutions for Financial Services</a> and <a href="/delivery" class="text-juxt cursor-pointer">Case Studies</a> for various innovative startups and SMBs.
+        </p>
+      </div>
+
+      <div class='flex flex-col gap-24'>
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/jon-conj2023.png')}
+            />
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+              Software Engineering
+            </div>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                Delivery-focused software engineers that build high-quality,
+                adaptable systems:
+              </p>
+              <div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-white'} />
+                  </div>
+                  <p>
+                    Elegant solutions based on research and creative
+                    problem-solving
+                  </p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-white'} />
+                  </div>
+                  <p>Well-tested, robust, efficient applications</p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-white'} />
+                  </div>
+                  <p>
+                    Cloud-native backend engineering, with modern frontend UX
+                  </p>
+                </div>
+              </div>
+              <p>
+                We can join your existing engineering staff or run dedicated
+                JUXT teams. Our projects succeed because we work hard to
+                understand the mission deeply and our engineers take ownership.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/JUXT-10thBday-Wiltons-2230.png')}
+            />
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+              Architecture Design & Review
+            </div>
+            <div
+              class='font-extralight flex flex-col gap-6 w-full sm:w-[550px]'
+            >
+              <p>
+                We've designed data-intensive, realtime systems, solving tough
+                architectural problems in finance and many other domains. We
+                bring the philosophies of functional programming to the
+                architecture - treating time as a first-class concern; treating
+                data as immutable at all levels of the stack; promoting
+                stateless systems and operations.
+              </p>
+              <p>
+                We've designed and delivered event-driven and API-driven
+                systems, taking careful advantage of the capabilities of the
+                modern cloud.
+              </p>
+              <p>
+                We consult on existing systems to provide short and long-term
+                recommendations for increasing scale and evolving towards new
+                use-cases.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/fjb.jpg')}
+            />
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+              Platform Engineering
+            </div>
+            <div class='font-extralight flex flex-col gap-6'>
+              <p>
+                JUXT has helped Fortune 500 companies get developer tooling
+                right. We deliver cutting-edge Internal Developer Platform
+                projects, allowing organisations to improve the efficiency of
+                engineering at scale.
+              </p>
+              <p>
+                Platform engineering done right can give your software teams:
+              </p>
+              <div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-white'} />
+                  </div>
+                  <p>
+                    Compliance, security, and other non-functional guarantees,
+                    at scale
+                  </p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-white'} />
+                  </div>
+                  <p>
+                    Delightful internal developer experiences and documentation.
+                  </p>
+                </div>
+                <div class='flex items-center'>
+                  <div class='w-8 h-8 shrink-0'>
+                    <ChevronRightIcon className={'fill-white'} />
+                  </div>
+                  <p>
+                    An internal 'open source' culture and a thriving community
+                    of contributors.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
+        >
+          <div class='w-full h-96'>
+            <Image
+              alt='image'
+              width={500}
+              quality={80}
+              class='w-full h-full object-cover'
+              src={import('../assets/site/mal-teaching.jpeg')}
+            />
+          </div>
+          <div class='flex flex-col gap-4'>
+            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+              Cloud Infrastructure
+            </div>
+            <div
+              class='font-extralight flex flex-col gap-6 w-full sm:w-[550px]'
+            >
+              <p>
+                We’ve been building systems on AWS since early 2014, over that
+                time we’ve accumulated first-hand knowledge and expertise of
+                managing and automating AWS infrastructure through code.
+              </p>
+              <p>
+                Our AWS systems have been successfully audited for PCI DSS
+                compliance and won praise for their operational stability,
+                information security and regulatory compliance. We have
+                experience in meeting GDPR requirements and protecting data
+                privacy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+  </main>
+</Layout>
