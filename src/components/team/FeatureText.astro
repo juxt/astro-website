@@ -4,7 +4,7 @@ import { bgColorClass } from '@utils/common'
 var { title , subtitle, bgClass, bgColor } = Astro.props;
 
 if (!bgClass) {
-    bgClass = "px-10 flex flex-col justify-center";
+    bgClass = "p-10 md:max-lg:p-4 h-full flex flex-col justify-center text-ellipsis";
 }
 
 bgColor = bgColorClass(bgColor);
@@ -16,7 +16,7 @@ if (bgColor) {
   { title && <h2 class="text-lg font-medium">{title}</h2> }
   { subtitle && <h3 class="text-sm font-medium">{subtitle}</h3> }
   
-  <div class="pt-8">
+  <div class="pt-2 overflow-hidden">
     <slot/>
   </div>
 </div>
