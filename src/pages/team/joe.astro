@@ -42,12 +42,11 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
   </GreetingSection>
 
   <FeatureSection>
-    <div slot="image" class="overflow-hidden">
-      <AssetImage
-        src="/src/assets/team/profiles/joe/4.jpg"
-        width={800}
-        alt="" />
-    </div>
+    <AssetImage
+      slot="image"
+      src="/src/assets/team/profiles/joe/4.jpg"
+      width={800}
+      alt="" />
 
     <SimpleColumn className="bg-[#ac480d] flex flex-col gap-5 p-5">
       <SmallTitle>Customer Feedback</SmallTitle>
@@ -63,6 +62,7 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
     </SimpleColumn>
   </FeatureSection>
 
+<!--
   <FeatureSection flip={true}>
 
     <FeatureText
@@ -83,6 +83,7 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
     />
 
   </FeatureSection>
+-->
 
   <ContactSection {...myData.frontmatter} />
 
