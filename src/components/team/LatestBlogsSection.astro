@@ -1,20 +1,19 @@
 ---
 import { getImage, Image } from 'astro:assets'
 import Section from '@components/team/Section.astro'
-import { parseBlogs } from '@utils/common'
+import { parseBlogs, bgColorClass } from '@utils/common'
 import { BlogCard } from '@components/BlogCard'
 import SmallTitle from '@components/team/SmallTitle.astro'
 
 const isDev = import.meta.env.DEV;
 
-const { code, name, lastName, bgColor, title, hidePodcasts } = Astro.props
+var { code, name, lastName, bgColor, title, hidePodcasts } = Astro.props
 
 var bgClass = ""
-// NOTE: Also change in Section
-if (bgColor == "orange") {
-    bgClass += " bg-[#b76330]";
-} else if (bgColor == "yellow") {
-    bgClass += " bg-[#ca8a04]";
+
+bgColor = bgColorClass(bgColor);
+if (bgColor) {
+    bgClass += " " + bgColor;
 }
 
 // NOTE: This is an implementation from /algolia/index.cljs (when setting the "author")

@@ -1,16 +1,15 @@
 ---
+import { bgColorClass } from '@utils/common'
+
 var { title , subtitle, bgClass, bgColor } = Astro.props;
 
 if (!bgClass) {
     bgClass = "px-10 flex flex-col justify-center";
 }
 
-// NOTE: Also change in LatestBlogsSection
-// TODO: Move somewhere else?
-if (bgColor == "orange") {
-    bgClass += " bg-[#b76330]";
-} else if (bgColor == "yellow") {
-    bgClass += " bg-[#ca8a04]";
+bgColor = bgColorClass(bgColor);
+if (bgColor) {
+    bgClass += " " + bgColor;
 }
 ---
 <div class={bgClass}>

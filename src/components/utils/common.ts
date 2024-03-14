@@ -117,3 +117,12 @@ export function formatDate(ISO8601String: string) {
     return 'Invalid date'
   }
 }
+
+export function bgColorClass(color: string) {
+  if (color == "orange") {
+    return "bg-[#b76330]";
+  } else if (color == "yellow") {
+    return "bg-[#ca8a04]";
+  }
+  return null;
+}
