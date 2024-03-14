@@ -48,21 +48,21 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
       width={800}
       alt="" />
 
-    <SimpleColumn className="bg-[#ac480d] flex flex-col gap-5 p-5">
-      <SmallTitle>Customer Feedback</SmallTitle>
-      <BlockQuote author="Rice Lake Weighing Systems">
-        I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions.
-      </BlockQuote>
-      <BlockQuote author="Excel Energy Services">
-        [Joe's] communication followed by execution is beyond impressive.
-      </BlockQuote>
-      <BlockQuote author="Jamie Robertson, CEO, Invisible Systems">
-        Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and composed style; provide direction, confidence, and reassurance across a team and organisation.
-      </BlockQuote>
-    </SimpleColumn>
+    <FeatureText bgColor="orange" title="Customer Feedback">
+      <SimpleColumn>
+        <BlockQuote author="Rice Lake Weighing Systems">
+          I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions.
+        </BlockQuote>
+        <BlockQuote author="Excel Energy Services">
+          [Joe's] communication followed by execution is beyond impressive.
+        </BlockQuote>
+        <BlockQuote author="Jamie Robertson, CEO, Invisible Systems">
+          Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and composed style; provide direction, confidence, and reassurance across a team and organisation.
+        </BlockQuote>
+      </SimpleColumn>
+    </FeatureText>
   </FeatureSection>
 
-<!--
   <FeatureSection flip={true}>
 
     <FeatureText
@@ -83,7 +83,6 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
     />
 
   </FeatureSection>
--->
 
   <ContactSection {...myData.frontmatter} />
 
