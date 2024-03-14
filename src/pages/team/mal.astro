@@ -31,19 +31,15 @@ import GalleryImage from '@components/team/GalleryImage.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <div class="flex flex-col gap-3">
-      <h2 class="text-2xl font-medium">Expert In</h2>
-      <ul class="list-disc list-inside text-base lg:text-md">
-        <li>Systems Architecture</li>
-        <li>Web Standards</li>
-        <li>API Security</li>
-        <li>Databases</li>
-      </ul>
-      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
-      <p class="text-base lg:text-md">
-As JUXT's CTO, I lead technological innovation and strategy, drawing upon over three decades of experience in tech leadership and software development, which spanned pivotal roles, including 5 years as Vice President at Deutsche Bank where I managed critical financial systems.
-      </p>
-    </div>
+    <Fragment slot="expert-in">
+      <li>Systems Architecture</li>
+      <li>Web Standards</li>
+      <li>API Security</li>
+      <li>Databases</li>
+    </Fragment>
+    <Fragment slot="bio">
+      As JUXT's CTO, I lead technological innovation and strategy, drawing upon over three decades of experience in tech leadership and software development, which spanned pivotal roles, including 5 years as Vice President at Deutsche Bank where I managed critical financial systems.
+    </Fragment>
   </GreetingSection>
 
   <FeatureSection imgPos="right">

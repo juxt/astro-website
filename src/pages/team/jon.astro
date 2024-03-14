@@ -25,20 +25,16 @@ import GalleryImage from '@components/team/GalleryImage.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <div class="flex flex-col gap-3">
-      <h2 class="text-2xl font-medium">Expert In</h2>
-      <ul class="list-disc list-inside text-base lg:text-md">
-        <li>Project Leadership & Technical Strategy</li>
-        <li>Banking and Finance Tech</li>
-        <li>Databases</li>
-        <li>Clojure</li>
-      </ul>
-      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
-      <p class="text-base lg:text-md">
-        Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme.
-      </p>
-    </div>
-  </GetingSection>
+    <Fragment slot="expert-in">
+      <li>Project Leadership & Technical Strategy</li>
+      <li>Banking and Finance Tech</li>
+      <li>Databases</li>
+      <li>Clojure</li>
+    </Fragment>
+    <Fragment slot="bio">
+      Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme.
+    </Fragment>
+  </GreetingSection>
 
   <GallerySection>
     <GalleryImage

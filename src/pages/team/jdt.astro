@@ -27,19 +27,15 @@ import GalleryImage from '@components/team/GalleryImage.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <div class="flex flex-col gap-3">
-      <h2 class="text-2xl font-medium">Expert In</h2>
-      <ul class="list-disc list-inside text-base lg:text-md">
-        <li>Data Intensive Applications</li>
-        <li>Information Architecture</li>
-        <li>Software Evaluation & Cloud Trends</li>
-        <li>Database Internals</li>
-      </ul>
-      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
-      <p class="text-base lg:text-md">
-        A trusted advisor on open source tools and software trends who has facilitated workshops on strategic technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
-      </p>
-    </div>
+    <Fragment slot="expert-in">
+      <li>Data Intensive Applications</li>
+      <li>Information Architecture</li>
+      <li>Software Evaluation & Cloud Trends</li>
+      <li>Database Internals</li>
+    </Fragment>
+    <Fragment slot="bio">
+      A trusted advisor on open source tools and software trends who has facilitated workshops on strategic technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
+    </Fragment>
   </GreetingSection>
 
   <FeatureSection imgPos="right">

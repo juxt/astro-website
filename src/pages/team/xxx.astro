@@ -38,16 +38,14 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection code={code} fullName={fullName} jobTitle={jobTitle}>
-    <p class="italic">
-      This is the &lt;GreetingSection&gt;. Anything below this is custom HTML you can add:
-    </p>
-
-    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
-    <ul class="list-disc list-inside text-lg font-medium">
+    <Fragment slot="expert-in">
       <li>Java, Kotlin</li>
       <li>Security</li>
       <li>Platform Engineering</li>
-    </ul>
+    </Fragment>
+    <Fragment slot="bio">
+    I'm an example bio. I'm a software engineer, and I've been working with Java and Kotlin for the past 10 years. I'm passionate about security and platform engineering.
+    </Fragment>
   </GreetingSection>
 
   <GallerySection>

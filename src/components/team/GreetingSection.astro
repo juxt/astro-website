@@ -76,6 +76,15 @@ const {
   </div>
 
   <div class="lg:col-start-1">
-    <slot/>
+    <div class="flex flex-col gap-3">
+      <h2 class="text-2xl font-medium">Expert In</h2>
+      <ul class="list-disc list-inside text-base lg:text-md">
+        <slot name="expert-in" />
+      </ul>
+      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
+      <p class="text-base lg:text-md">
+        <slot name="bio" />
+      </p>
+    </div>
   </div>
 </Section>

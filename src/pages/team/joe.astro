@@ -30,19 +30,15 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 ---
 <ProfilePage title={fullName + " - " + jobTitle} >
   <GreetingSection {...myData.frontmatter}>
-    <div class="flex flex-col gap-3">
-      <h2 class="text-2xl font-medium">Expert In</h2>
-      <ul class="list-disc list-inside text-base lg:text-md">
-        <li>Architecture analysis and review</li>
-        <li>Cloud-native design</li>
-        <li>Roadmapping and getting to MVP</li>
-        <li>Functional programming, JVM languages</li>
-      </ul>
-      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
-      <p class="text-base lg:text-md">
-        I'm a software delivery expert with two decades of professional software engineering experience. I started programming in Commodore BASIC on the C64, but my professional work has been mostly using JVM languages.
-      </p>
-    </div>
+    <Fragment slot="expert-in">
+      <li>Architecture analysis and review</li>
+      <li>Cloud-native design</li>
+      <li>Roadmapping and getting to MVP</li>
+      <li>Functional programming, JVM languages</li>
+    </Fragment>
+    <Fragment slot="bio">
+      I'm a software delivery expert with two decades of professional software engineering experience. I started programming in Commodore BASIC on the C64, but my professional work has been mostly using JVM languages.
+    </Fragment>
   </GreetingSection>
 
   <FeatureSection imgPos="left">
