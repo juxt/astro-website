@@ -1,13 +1,14 @@
 ---
-const { imgPos = "left" } = Astro.props
+const { flip = false } = Astro.props
 ---
 <div class={ "container mx-auto max-w-6xl h-96 grid grid-cols-2"}
      {...Astro.props}>
     {
-      (imgPos == "left") && <slot name="image"/>
+      /* Default to the left side */
+      !flip && <slot name="image"/>
     }
     <slot/>
     {
-      (imgPos == "right") && <slot name="image"/>
+      flip && <slot name="image"/>
     }
 </div>
