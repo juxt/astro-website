@@ -1,8 +1,9 @@
 ---
 import AssetImage from '@components/team/AssetImage.astro'
 import Section from '@components/team/Section.astro'
+import IconCircle from '@components/team/IconCircle.astro'
 import ContactItem from '@components/team/ContactItem.astro'
-import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
+import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon, HackernewsIcon } from '@components/Icons'
 
 const {
     code,
@@ -37,36 +38,36 @@ const {
       </div>
     </div>
 
-    <div class="flex flex-col gap-3 pt-4 items-end">
-      <div class="flex w-full justify-end">
+    <div class="flex flex-col gap-3 pt-4 pb-4 md:pb-0">
+      <div class="flex w-full gap-5">
         { email &&
-        <ContactItem href={"mailto:" + email}>
-          <EmailIcon slot="icon" className="w-6"/>
-        </ContactItem>
+        <IconCircle href={"mailto:" + email}>
+          <EmailIcon className="w-6"/>
+        </IconCircle>
         }
         { twitter &&
-          <ContactItem href={"https://twitter.com/" + twitter}>
-            <TwitterIcon slot="icon" className="w-5"/>
-          </ContactItem>
+          <IconCircle href={"https://twitter.com/" + twitter}>
+            <TwitterIcon className="w-5"/>
+          </IconCircle>
         }
         { linkedin &&
-          <ContactItem href={"https://linkedin.com/in/" + linkedin + "/"}>
-            <LinkedInIcon slot="icon" className="w-5"/>
-          </ContactItem>
+          <IconCircle href={"https://linkedin.com/in/" + linkedin + "/"}>
+            <LinkedInIcon className="w-5"/>
+          </IconCircle>
         }
         { github &&
-          <ContactItem href={"https://github.com/" + github}>
-            <InvertedGithubIcon slot="icon" className="w-8 absolute -bottom-0.5"/>
-          </ContactItem>
+          <IconCircle href={"https://github.com/" + github}>
+            <InvertedGithubIcon className="w-8 absolute -bottom-0.5"/>
+          </IconCircle>
         }
         { hackernews &&
-          <ContactItem href={"https://news.ycombinator.com/user?id=" + hackernews}>
-            <svg fill="#000000" slot="icon" class="w-7" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M 5 5 L 5 27 L 27 27 L 27 5 Z M 7 7 L 25 7 L 25 25 L 7 25 Z M 11.5 11 L 15 17 L 15 22 L 17 22 L 17 17 L 20.5 11 L 18.5 11 L 16 15.28125 L 13.5 11 Z"/></svg>
-          </ContactItem>
+          <IconCircle href={"https://news.ycombinator.com/user?id=" + hackernews}>
+            <HackernewsIcon className="w-7"/>
+          </IconCircle>
         }
       </div>
       { calendarLink &&
-        <p class="text-end text-base">
+        <p class="text-base">
           Want to talk? <a class="underline hover:text-juxt" href={calendarLink}>Book time in my calendar</a>
         </p>
       }
