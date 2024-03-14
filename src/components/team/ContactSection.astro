@@ -3,7 +3,7 @@ import { getImage, Image } from 'astro:assets'
 import Section from '@components/team/Section.astro'
 import ContactItem from '@components/team/ContactItem.astro'
 import ContactUsProfile from '@components/ContactUsProfile'
-import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
+import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon, HackernewsIcon } from '@components/Icons'
 
 var { email, twitter, linkedin, github, hackernews, name, fullName } = Astro.props
 twitter = twitter?.replace(/^@/, '')
@@ -12,38 +12,38 @@ twitter = twitter?.replace(/^@/, '')
     <div class="basis-1 grow">
         <h3 class="text-xl font-medium">Get in Touch</h3>
 
-        <div class="pt-5 flex flex-col gap-4">
+        <div class="pt-5 flex flex-col gap-4 content-center">
             { email &&
                 <ContactItem href={"mailto:" + email}>
-                    <EmailIcon slot="icon" className="w-7"/>
+                    <EmailIcon slot="icon" className="w-6"/>
                     {email}
                 </ContactItem>
             }
             {
                 twitter &&
                 <ContactItem href={"https://twitter.com/" + twitter}>
-                    <TwitterIcon slot="icon" className="w-7"/>
+                    <TwitterIcon slot="icon" className="w-5"/>
                    @{twitter}
                 </ContactItem>
             }
             {
                 linkedin &&
                 <ContactItem href={"https://linkedin.com/in/" + linkedin + "/"}>
-                    <LinkedInIcon slot="icon" className="w-6"/>
+                    <LinkedInIcon slot="icon" className="w-5"/>
                     {linkedin}
                 </ContactItem>
             }
             {
                 github &&
                 <ContactItem href={"https://github.com/" + github}>
-                    <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
+                    <InvertedGithubIcon slot="icon" className="w-8 absolute -bottom-0.5"/>
                     {github}
                 </ContactItem>
             }
             {
                 hackernews &&
                 <ContactItem href={"https://news.ycombinator.com/user?id=" + hackernews}>
-                    <svg fill="#000000" slot="icon" class="w-9" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M 5 5 L 5 27 L 27 27 L 27 5 Z M 7 7 L 25 7 L 25 25 L 7 25 Z M 11.5 11 L 15 17 L 15 22 L 17 22 L 17 17 L 20.5 11 L 18.5 11 L 16 15.28125 L 13.5 11 Z"/></svg>
+                    <HackernewsIcon slot="icon" className="w-7"/>
                     {hackernews}
                 </ContactItem>
             }
