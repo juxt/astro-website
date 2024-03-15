@@ -1,13 +1,22 @@
 ---
 import AssetImage from '@components/team/AssetImage.astro'
 import Section from '@components/team/Section.astro'
+import IconCircle from '@components/team/IconCircle.astro'
 import ContactItem from '@components/team/ContactItem.astro'
-import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@components/Icons'
+import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon, HackernewsIcon } from '@components/Icons'
 
-const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } = Astro.props;
+const {
+    code,
+    fullName,
+    jobTitle,
+
+    calendarLink,
+
+    email, twitter, linkedin, github, hackernews 
+} = Astro.props;
 ---
 <Section className='pl-10 pr-0 py-10 grid grid-cols-1 md:grid-cols-2 gap-4' {...Astro.props}>
-  <div class="md:pt-20 pr-10">
+  <div class="md:pt-10 pr-10">
     <h1 class="text-5xl font-bold">Hello<span class="text-orange-400">.</span></h1>
     <h1 class="justify-end text-3xl font-bold"><span class="text-orange-400">—</span> I'm {fullName}</h1>
     <h2 class="justify-end text-3xl font-medium">{jobTitle}</h2>
@@ -24,41 +33,58 @@ const {fullName, jobTitle, code, email, twitter, linkedin, github, hackernews } 
       <div class="absolute bottom-0 left-0 bg-orange-400 rounded-full w-2/3 h-1/4"></div>
       <div class="absolute bottom-0 right-0 w-[90%] h-[90%] overflow-hidden">
           <AssetImage class="w-full"
+            width={500}
             src={`/src/assets/team/headshots/${code}.png`} alt={`A headshot of ${fullName}`} />
       </div>
     </div>
 
-    <div class="pt-5 flex w-full justify-center">
-      { email &&
-      <ContactItem href={"mailto:" + email}>
-        <EmailIcon slot="icon" className="w-7"/>
-      </ContactItem>
-      }
-      { twitter &&
-        <ContactItem href={"https://twitter.com/" + twitter}>
-          <TwitterIcon slot="icon" className="w-7"/>
-        </ContactItem>
-      }
-      { linkedin &&
-        <ContactItem href={"https://linkedin.com/in/" + linkedin + "/"}>
-          <LinkedInIcon slot="icon" className="w-6"/>
-        </ContactItem>
-      }
-      { github &&
-        <ContactItem href={"https://github.com/" + github}>
-          <InvertedGithubIcon slot="icon" className="w-9 absolute -bottom-0.5"/>
-        </ContactItem>
-      }
-      { hackernews &&
-        <ContactItem href={"https://news.ycombinator.com/user?id=" + hackernews}>
-          <svg fill="#000000" slot="icon" class="w-9" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M 5 5 L 5 27 L 27 27 L 27 5 Z M 7 7 L 25 7 L 25 25 L 7 25 Z M 11.5 11 L 15 17 L 15 22 L 17 22 L 17 17 L 20.5 11 L 18.5 11 L 16 15.28125 L 13.5 11 Z"/></svg>
-        </ContactItem>
+    <div class="flex flex-col gap-3 pt-4 pb-4 md:pb-0">
+      <div class="flex w-full gap-5">
+        { email &&
+        <IconCircle href={"mailto:" + email}>
+          <EmailIcon className="w-6"/>
+        </IconCircle>
+        }
+        { twitter &&
+          <IconCircle href={"https://twitter.com/" + twitter}>
+            <TwitterIcon className="w-5"/>
+          </IconCircle>
+        }
+        { linkedin &&
+          <IconCircle href={"https://linkedin.com/in/" + linkedin + "/"}>
+            <LinkedInIcon className="w-5"/>
+          </IconCircle>
+        }
+        { github &&
+          <IconCircle href={"https://github.com/" + github}>
+            <InvertedGithubIcon className="w-8 absolute -bottom-0.5"/>
+          </IconCircle>
+        }
+        { hackernews &&
+          <IconCircle href={"https://news.ycombinator.com/user?id=" + hackernews}>
+            <HackernewsIcon className="w-7"/>
+          </IconCircle>
+        }
+      </div>
+      { calendarLink &&
+        <p class="text-base">
+          Want to talk? <a class="underline hover:text-juxt" href={calendarLink}>Book time in my calendar</a>
+        </p>
       }
     </div>
 
   </div>
 
   <div class="lg:col-start-1">
-    <slot/>
+    <div class="flex flex-col gap-3">
+      <h2 class="text-2xl font-medium">Expert In</h2>
+      <ul class="list-disc list-inside text-base lg:text-md">
+        <slot name="expert-in" />
+      </ul>
+      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
+      <p class="text-base lg:text-md">
+        <slot name="bio" />
+      </p>
+    </div>
   </div>
 </Section>

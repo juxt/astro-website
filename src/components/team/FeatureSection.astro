@@ -1,15 +1,14 @@
 ---
-const { imgPos = "left" } = Astro.props
+const { flip = false, shrinkMobile = true } = Astro.props
+let flipClass = flip ? "" : "md:order-first";
+let shrinkMobileClass = shrinkMobile ? "hidden md:block" : "";
 ---
-<div class={ "container mx-auto max-w-6xl h-96 grid grid-cols-2"}
+<div class={ "container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2"}
      {...Astro.props}>
-    {
-      (imgPos == "left") && <slot name="image"/>
-    }
-    <div class="p-10">
+    <div class={ "md:h-96 " + shrinkMobileClass }>
         <slot/>
     </div>
-    {
-      (imgPos == "right") && <slot name="image"/>
-    }
+    <div class={"h-96 overflow-hidden " + flipClass}>
+        <slot name="image"/>
+    </div>
 </div>

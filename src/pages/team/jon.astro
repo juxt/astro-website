@@ -19,20 +19,43 @@ import ContactSection from '@components/team/ContactSection.astro'
 import ResourceItem from '@components/team/ResourceItem.astro'
 import SmallTitle from '@components/team/SmallTitle.astro'
 import SimpleColumn from '@components/team/SimpleColumn.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
+
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <h2 class="py-5 text-3xl font-medium">Expert In</h2>
-    <ul class="list-disc list-inside text-lg font-medium">
-      <li>Project Leadership</li>
-      <li>Banking and Finance</li>
-      <li>Technical Strategy</li>
+    <Fragment slot="expert-in">
+      <li>Project Leadership & Technical Strategy</li>
+      <li>Banking and Finance Tech</li>
       <li>Databases</li>
-      <li><a class="underline" href="http://xtdb.com">XTDB</a></li>
-      <li>Clojure Development</li>
-    </ul>
+      <li>Clojure</li>
+    </Fragment>
+    <Fragment slot="bio">
+      Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme.
+    </Fragment>
   </GreetingSection>
 
+  <GallerySection>
+    <GalleryImage
+        src="/src/assets/team/profiles/jon/jon-on-stage.jpg"
+        width={1000}
+        alt="Jon giving a talk on stage" />
+    <GalleryImage
+        src="/src/assets/team/profiles/jon/jon-suit.jpg"
+        width={1000}
+        alt="Jon on stage with Malcolm at the 10 year party" />
+    <GalleryImage
+        src="/src/assets/team/profiles/jon/jon-conj-2023.jpg"
+        width={1000}
+        alt="Jot on stage at Conj 2023" />
+    <GalleryImage
+        src="/src/assets/team/profiles/jon/jon-background.jpg"
+        width={1000}
+        alt="Jon listening to a talk" />
+  </GallerySection>
+
+<!--
   <TwoColumnSection>
     <SimpleColumn>
       <SmallTitle>About</SmallTitle>
@@ -41,9 +64,10 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
       </p>
     </SimpleColumn>
   </TwoColumnSection>
-
-  <LatestBlogsSection bgColor="yellow" {...myData.frontmatter} />
+-->
 
   <ContactSection {...myData.frontmatter} />
+
+  <LatestBlogsSection bgColor="yellow" title="Jon's Recent Blogs and Articles" {...myData.frontmatter} />
 
 </ProfilePage>
