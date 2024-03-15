@@ -14,4 +14,5 @@ hackernews: 'joelittlejohn'
 
 feature:
   jobTitle: true
+  link: /team/joe
 ---

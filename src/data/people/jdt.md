@@ -13,4 +13,5 @@ hackernews: 'refset'
 
 feature:
   jobTitle: true
+  link: /team/jdt
 ---

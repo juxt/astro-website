@@ -12,4 +12,5 @@ github: 'malcolmsparks'
 
 feature:
   jobTitle: true
+  link: /team/mal
 ---

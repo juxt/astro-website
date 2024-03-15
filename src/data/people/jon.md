@@ -12,4 +12,5 @@ github: 'jonpither'
 
 feature:
   jobTitle: true
+  link: /team/jon
 ---
