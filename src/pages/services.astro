@@ -1,28 +1,16 @@
 ---
 import { Image } from 'astro:assets'
 import { getImage } from 'astro:assets'
-import { MarkdownInstance } from 'astro'
-import { parseBlogs, slugifyPath } from '@utils/common'
 import Banner from '@components/Banner.astro'
-import { BlogCard } from '@components/BlogCard'
-import Clickable from '@components/Clickable.astro'
-import { QuoteIcon } from '@components/Icons'
 import Section from '@components/Section.astro'
 import ContactUsMini from '@components/ContactUsMini.tsx'
-import { Blog, Person } from '@utils/types'
-import CaseStudy, { CaseStudyProps } from '@layouts/CaseStudy.astro'
 import Layout from '@layouts/Layout.astro'
-import { ChevronRightIcon, TickIcon } from '@components/Icons'
+import { ChevronRightIcon} from '@components/Icons'
 
-const threadsPicture = await getImage({
-  src: import('../assets/site/threads.png'),
-  width: 600,
-  height: 1366,
-  quality: 80,
-  alt: 'threads'
-}).then((img) => img.src)
-
-const siteMetadata = await Astro.glob('../data/metadata.json')
+import AssetImage from '@components/team/AssetImage.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+import Service from '@components/services/Service.astro'
+import MiniBlog from '@components/services/MiniBlog.astro'
 
 const homepageBannerPicture = await getImage({
   src: import('../assets/site/homepage-banner.jpg'),
@@ -30,94 +18,9 @@ const homepageBannerPicture = await getImage({
   quality: 90,
   alt: 'homepage banner'
 }).then((img) => img.src)
-
-const testimonials = [
-  {
-    name: 'MORGAN ROSS, TECHNICAL DIRECTOR, ONTHEMARKET PLC',
-    quote:
-      'JUXT led the development team through this period of incredible achievements.',
-    bg: 'bg-red-600'
-  },
-  {
-    name: 'MANAGING DIRECTOR, T1 INVESTMENT BANK',
-    quote:
-      'The JUXT team are tremendously technically capable – delivering elegant solutions to complex problems.',
-    bg: 'bg-green-800'
-  },
-  {
-    name: 'ANDY DWELLEY',
-    quote: 'XTDB has been an absolute dream to use.',
-    bg: 'bg-slate-800'
-  },
-  {
-    name: 'PATRICK GALVIN',
-    quote: 'XTDB has been working great for me. It is a lovely lovely project.',
-    bg: 'bg-blue-800'
-  },
-  {
-    name: 'JULIAN GAMBLE',
-    quote:
-      'JUXT have made a huge contribution to the Open Source and Clojure community',
-    bg: 'bg-pink-800'
-  },
-  {
-    name: 'NIC FERRIER',
-    quote:
-      'They are programmers employing programmers to do work with the best tools in the most interesting ways.',
-    bg: 'bg-violet-800'
-  },
-  {
-    name: "JACOB O'BRYANT",
-    quote:
-      'I really appreciate the straightforward simplicity of schemaless persistence. With XTDB it was just so easy.',
-    bg: 'bg-gray-800'
-  }
-]
-
-const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
-
-const isDev = import.meta.env.DEV
-
-const caseStudies = await Astro.glob<CaseStudyProps>(
-  '../data/case-studies/*.md'
-)
-
-const featuredCaseStudiesMetadata = siteMetadata[0].homepage.featuredCaseStudies
-
-const featuredCaseStudies = featuredCaseStudiesMetadata.map((slug) => {
-  return caseStudies.find((caseStudy) => slugifyPath(caseStudy.file) === slug)
-})
-
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-)
-
-const peopleByCode = new Map(
-  people.map((person) => [person.frontmatter.code, person.frontmatter])
-)
-
-const featuredBlogsMetadata = siteMetadata[0].homepage.featuredBlogs
-
-const filteredBlogs = featuredBlogsMetadata.map((slug) => {
-  return blogs.find((blog) => slugifyPath(blog.url) === slug)
-})
-
-const heroAuthorImports = {
-  heroImageImport: (heroImage) => import(`../assets/blog/${heroImage}.jpg`),
-  authorImageImport: (authorImage) =>
-    import(`../assets/people/${authorImage}.jpg`)
-}
-
-const featuredBlogs = await parseBlogs({
-  rawBlogs: filteredBlogs,
-  rawPeople: people,
-  isDev: isDev,
-  getImage,
-  ...heroAuthorImports
-})
 ---
 
-<Layout title='Services' navbar navbarNoBg>
+<Layout title='Services' navbar>
   <main>
     <Banner
       navbarNoBg
@@ -126,7 +29,6 @@ const featuredBlogs = await parseBlogs({
         backgroundImage: `url(${homepageBannerPicture})`
       }}
     />
-
 
     <Section className={'bg-zinc-900 py-20 text-white'}>
       <div class="flex flex-col gap-10 pb-14 lg:pb-20">
@@ -138,98 +40,137 @@ const featuredBlogs = await parseBlogs({
           Check out our <a href="/financial" class="text-juxt cursor-pointer">Solutions for Financial Services</a> and <a href="/delivery" class="text-juxt cursor-pointer">Case Studies</a> for various innovative startups and SMBs.
         </p>
       </div>
+    </Section>
 
-      <div class="pt-16">
-	<h1 class="text-2xl">Financial Technology</h1>
-	<p>From front-end blotters to backend databases and APIs, in equities derivatives, fixed income, structured-products, FX and more</p>
-      </div>
+    <Section className={'bg-zinc-900 py-10 text-white'}>
 
-      <div class="pt-16">
-	<h1 class="text-2xl">Programming Language Expertise</h1>
-	<p>We are the original masters of Clojure and also have experts in Kotlin, Python, TypeScript and more. If you need experienced engineers in these languages, JUXT are the best firm to use.</p>
-      </div>
-
-      <div class="pt-16">
-	<h1 class="text-2xl">Access to the top engineering talent</h1>
-	<p>JUXT is an engineering-led company, with a depth of talented individuals</p>
-	<p><em>This is the staff augmentation feature</em></p>
-      </div>
-
-      <div class="pt-16">
-	<h1 class="text-2xl">AI Implementation</h1>
-	<p>We work on a number of client projects that are already leveraging LLMs at scale, in banking and finance. We are gaining significant experience in what works and the best techniques which we can share with you. Are you struggling with your AI strategy and implementation? Let's talk.</p>
-      </div>
-
-      <div class="pt-16">
-	<h1 class="text-2xl">Data Expertise</h1>
-	<p>JUXT think, eat and breathe data expertise. From knowledge graphs, client reporting, record management, ETL pipelines, Cloud-migration, analytics, database modelling, data catalogues, Data Mesh to latest AI techniques such as Knowledge Graphs, Retrieval Augmented Generation and vector databases.</p>
-      </div>
-
-      <div class="pt-16">
-	<h1 class="text-2xl">System Design &amp; Architecture Review</h1>
-	<p>including System Modernisation, event-sourcing, event driven architectures, domain driven design</p>
-      </div>
-
-      <div class="pt-16">
-	<h1 class="text-2xl">Platform Engineering</h1>
-	<p>DevOps, Containerisation, Cloud-migrations, IDPs</p>
-	<p>
-	  JUXT has helped Fortune 500 companies get developer tooling
-                right. We deliver cutting-edge Internal Developer Platform
-                projects, allowing organisations to improve the efficiency of
-                engineering at scale.
-	</p>
-	<p>
-          Platform engineering done right can give your software teams:
+      <Service title="Financial Technology">
+        <p slot="blurb">
+          From front-end blotters to backend databases and APIs, in equities derivatives, fixed income, structured-products, FX and more
         </p>
-        <div>
-          <div class='flex items-center'>
-            <div class='w-8 h-8 shrink-0'>
-              <ChevronRightIcon className={'fill-white'} />
-            </div>
-            <p>
-              Compliance, security, and other non-functional guarantees,
-                    at scale
-            </p>
-          </div>
-          <div class='flex items-center'>
-            <div class='w-8 h-8 shrink-0'>
-              <ChevronRightIcon className={'fill-white'} />
-            </div>
-            <p>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="Programming Language Expertise">
+        <p slot="blurb">
+          We are the original masters of Clojure and also have experts in Kotlin, Python, TypeScript and more.
+          If you need experienced engineers in these languages, JUXT are the best firm to use.
+        </p>
+        <MiniBlog tall={true} />
+      </Service>
+
+      <Service title="Access to the top engineering talent">
+        <SimpleColumn slot="blurb">
+          <p>JUXT is an engineering-led company, with a depth of talented individuals</p>
+          <p><em>This is the staff augmentation feature</em></p>
+        </SimpleColumn>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="AI Implementation">
+        <p slot="blurb">
+          We work on a number of client projects that are already leveraging LLMs at scale, in banking and finance.
+          We are gaining significant experience in what works and the best techniques which we can share with you.
+          Are you struggling with your AI strategy and implementation? Let's talk.
+        </p>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="Data Expertise">
+        <p slot="blurb">
+          JUXT think, eat and breathe data expertise. From knowledge graphs, client reporting, record management,
+          ETL pipelines, Cloud-migration, analytics, database modelling, data catalogues, Data Mesh to latest
+          AI techniques such as Knowledge Graphs, Retrieval Augmented Generation and vector databases.
+        </p>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="System Design &amp; Architecture Review">
+        <p slot="blurb">
+          Including System Modernisation, event-sourcing, event driven architectures, domain driven design
+        </p>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="Platform Engineering">
+        <SimpleColumn slot="blurb">
+          <p>DevOps, Containerisation, Cloud-migrations, IDPs</p>
+          <p>
+            JUXT has helped Fortune 500 companies get developer tooling right.
+            We deliver cutting-edge Internal Developer Platform projects, allowing organisations to improve
+            the efficiency of engineering at scale.
+          </p>
+          <p>
+            Platform engineering done right can give your software teams:
+          </p>
+          <ul class="list-inside list-image-[url(/images/chevron-right.svg)]">
+            <li>
+              Compliance, security, and other non-functional guarantees, at scale
+            </li>
+            <li>
               Delightful internal developer experiences and documentation.
-            </p>
-          </div>
-          <div class='flex items-center'>
-            <div class='w-8 h-8 shrink-0'>
-              <ChevronRightIcon className={'fill-white'} />
-            </div>
-            <p>
-              An internal 'open source' culture and a thriving community
-                    of contributors.
-            </p>
-          </div>
+            </li>
+            <li>
+              An internal 'open source' culture and a thriving community of contributors.
+            </li>
+          </ul>
+        </SimpleColumn>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
 
-	</div>
+	  <Service title="MVP and beyond">
+        <SimpleColumn slot="blurb">
+          <p>
+            We work closely with project leaders to understand the core
+              objectives deeply and successfully deliver an MVP. Make JUXT
+              your technical partner, and we will bring a wealth of
+              experience and judgment to the early phases of your project
+              lifecycle and beyond.
+          </p>
+          <p>
+            For example: bike scheme in Spain, probate tree, Excel - from small to large companies in many industries: energy, finance, manufacturing, agriculture, healthcare and more.
+          </p>
+        </SimpleColumn>
+        <div class="flex gap-4 items-center">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+	  </Service>
 
-	<div class="pt-16">
-	  <h1 class="text-2xl">MVP and beyond</h1>
-	  <p>
-	    We work closely with project leaders to understand the core
-          objectives deeply and successfully deliver an MVP. Make JUXT
-          your technical partner, and we will bring a wealth of
-          experience and judgment to the early phases of your project
-          lifecycle and beyond.
-	  </p>
-	  <p>
-	    For example: bike scheme in Spain, probate tree, Excel - from small to large companies in many industries: energy, finance, manufacturing, agriculture, healthcare and more.
-	  <p>
-	</div>
+    </Section>
 
-	<div class="pt-16">
-	</div>
+    <Section className={'bg-zinc-900 py-10 text-white'}>
+        <hr class="border-dashed">
+        <h1 class="text-8xl">Old Stuff - To Remove</h1>
+    </Section>
 
 
+    <Section className={'bg-zinc-900 py-10 text-white'}>
 
 
 	<div class='flex flex-col gap-24'>
@@ -293,11 +234,11 @@ const featuredBlogs = await parseBlogs({
           >
             <div class='w-full h-96'>
               <Image
-		alt='image'
-		width={500}
-		quality={80}
-		class='w-full h-full object-cover'
-		src={import('../assets/site/JUXT-10thBday-Wiltons-2230.png')}
+                alt='image'
+                width={500}
+                quality={80}
+                class='w-full h-full object-cover'
+                src={import('../assets/site/JUXT-10thBday-Wiltons-2230.png')}
               />
             </div>
             <div class='flex flex-col gap-4'>

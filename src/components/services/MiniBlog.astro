@@ -1,0 +1,23 @@
+---
+import AssetImage from '@components/team/AssetImage.astro'
+
+const { tall = false } = Astro.props;
+---
+<div class="flex flex-col w-full">
+    <AssetImage
+      src="/src/assets/blog/tesla-sphere-inverted.png"
+      alt="Something"
+      class={ "object-cover " + (tall ? "h-52" : "h-32") }
+      />
+    <p class="font-extralight text-[0.6rem]">
+        Category | 2024-01-02
+    </p>
+    <h3>My Title</h3>
+    <p class="font-extralight text-sm">
+        My description.
+        <br>
+        It has many lines.
+        <br>
+        This is one of them
+    </p>
+</div>
