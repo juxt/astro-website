@@ -23,8 +23,14 @@ if (feature.link) {
 } else if (github) {
     link = `https://github.com/${github}`;
 }
+
+var external = link
+    // Not a relative link
+    && link.startsWith("http")
+    // Not localhost or base domain
+    && !link.includes("localhost") && !link.includes("juxt.pro");
 ---
-<MaybeLink href={link} target="_blank">
+<MaybeLink href={link} target={external && "_blank"}>
     <div class="flex flex-col gap-2 items-center">
         <div class={"relative w-72 overflow-hidden " + (square ? "h-72" : "h-96") }>
             <AssetImage
