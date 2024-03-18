@@ -6,7 +6,7 @@ import ContactUsFormXT24 from '@components/ContactUsFormXT24'
 ---
 <Layout title='XT24' noFooter>
   <div class="bg-zinc-800">
-    <div class='container mx-auto min-h-screen py-10 flex flex-col text-white'>
+    <div class='container max-w-6xl mx-auto min-h-screen p-10 flex flex-col text-white'>
       <!-- JUXT Logo -->
       <div class="w-full flex flex-row justify-end">
         <a href="/">
@@ -15,11 +15,11 @@ import ContactUsFormXT24 from '@components/ContactUsFormXT24'
       </div>
 
       <!-- XT24 Logo & copy -->
-      <div class="grid grid-cols-2 py-20">
-        <div class="">
-          <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 py-20">
+        <div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
             <img src="/images/XT24.png" alt="XT24 Logo" />
-            <h1 class="text-juxt text-6xl font-bold uppercase">FinTech <br/> Conference</h1>
+            <h1 class="text-juxt text-4xl md:text-6xl font-bold uppercase">FinTech <br/> Conference</h1>
           </div>
           <p style="text-align-last: justify;" class="w-full text-xl uppercase">
             Scaling Simplicity in Financial Technology
@@ -30,7 +30,7 @@ import ContactUsFormXT24 from '@components/ContactUsFormXT24'
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <!-- Event Details -->
         <div class="flex flex-col gap-5">
           <h2 class="uppercase text-juxt text-xl">9 may 2024 | Unity Place | Milton Keynes</h2>
