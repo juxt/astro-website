@@ -164,7 +164,7 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
       <h2 id="contact" class='pb-4 text-3xl md:text-4xl'>Let's talk</h2>
       <div class="py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
-            <ContactUsForm subject="New contact submission from about us page." />
+            <ContactUsForm client:only subject="New contact submission from about us page." />
         </div>
 
         <div class="flex flex-col gap-4 text-center md:text-right">
