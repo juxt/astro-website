@@ -1,0 +1,73 @@
+---
+import AssetImage from '@components/team/AssetImage.astro'
+import Layout from '@layouts/Layout.astro'
+import ContactUsFormXT24 from '@components/ContactUsFormXT24'
+
+---
+<Layout title='XT24' noFooter>
+  <div class="bg-zinc-800">
+    <div class='container max-w-6xl mx-auto min-h-screen p-5 sm:p-10 flex flex-col text-white'>
+      <!-- JUXT Logo -->
+      <div class="w-full flex flex-row justify-end">
+        <a href="/">
+          <img width={100} src="/images/logo-on-dark.svg" alt="JUXT Logo" />
+        </a>
+      </div>
+
+      <!-- XT24 Logo & copy -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 py-5 lg:pb-16">
+        <div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+            <img src="/images/XT24.png" alt="XT24 Logo" />
+            <h1 class="text-juxt text-4xl md:text-6xl font-bold uppercase">FinTech <br/> Conference</h1>
+          </div>
+          <p class="w-full font-semibold sm:font-normal sm:text-xl uppercase">
+            Scaling Simplicity in Financial Technology
+          </p>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col gap-5">
+        <!-- Blurb -->
+        <p class="font-light">
+          Engineering Leaders from global banks, fintech companies and hedge funds are meeting in Milton Keynes to explore how groundbreaking technology concepts, tools and solutions are shaping the future of financial services.
+        </p>
+
+        <!-- Details -->
+        <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">9 may 2024 | Unity Place | Milton Keynes</h2>
+
+        <!-- Event plan -->
+        <div class="grid grid-cols-1 sm:max-lg:grid-cols-2 gap-5">
+          <div>
+            <h3>9AM - 4PM</h3>
+            <p class="font-light">
+              Join fintech engineering leaders for a day of tech talks covering GenAI, Platform Engineering, Embedded Banking, RegTech, Data Governance, System Design, Architecture and more.
+            </p>
+          </div>
+
+          <div>
+            <h3>4PM - 7PM</h3>
+            <p class="font-light">
+              Enjoy an evening of networking and mingling - exclusive access to the Sky Bar, complete with drinks and food.
+            </p>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="flex items-end max-lg:order-last">
+          <p class="uppercase text-xs sm:text-base">Unity Place | 200 Grafton Gate | Milton Keynes | MK9 1UP</p>
+        </div>
+
+        <!-- Form -->
+        <div class="row-span-4 flex flex-col gap-4 bg-white p-10 text-black">
+          <span class="text-juxt text-2xl font-semibold uppercase self-center">This event is invite-only</span>
+          <p class="uppercase text-center">
+            If you wish to attend, please fill the form below and we’ll get back to you
+          </p>
+          <ContactUsFormXT24 client:only subject="XT24 RFI" />
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
