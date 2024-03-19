@@ -41,12 +41,6 @@ export default function ContactUsFormXT24(props) {
 
     const hasErrors = Object.keys(errors).length > 0
 
-    const isSubmittingComponent = (
-        <div className='md:px-8 text-black text-xl md:text-2xl'>
-            Submitting your form...
-        </div>
-    )
-
     const isSubmitSuccessfulComponent = (
         <div className='md:px-8 text-center text-xl md:text-2xl text-juxt'>
             Thanks for your submission! We'll be in touch shortly.
