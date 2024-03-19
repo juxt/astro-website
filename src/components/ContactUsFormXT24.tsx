@@ -21,6 +21,8 @@ export default function ContactUsFormXT24(props) {
 
     const [isSubmitError, setIsSubmitError] = useState<boolean>(false)
 
+    const isSubmitted = isSubmitSuccessful || isSubmitError;
+
     function submitContactForm(data) {
         const json = JSON.stringify(data)
 
@@ -59,97 +61,91 @@ export default function ContactUsFormXT24(props) {
 
     return (
         <>
-            {isSubmitting ? (
-                isSubmittingComponent
-            ) : isSubmitError ? (
-                isSubmitErrorComponent
-            ) : isSubmitSuccessful ? (
-                isSubmitSuccessfulComponent
-            ) : (
-                <form
-                    onSubmit={handleSubmit(submitContactForm)}
-                    id={id}
-                    className='flex flex-col gap-4'
-                >
+            {isSubmitSuccessful && !isSubmitError && isSubmitSuccessfulComponent}
+            {isSubmitError && isSubmitErrorComponent}
+            <form
+                onSubmit={handleSubmit(submitContactForm)}
+                id={id}
+                class={'flex flex-col gap-4 ' + (isSubmitted ? 'hidden' : '')}
+            >
+                <input
+                    type='hidden'
+                    {...register('subject')}
+                    value={subject}
+                />
+                <input
+                    type='hidden'
+                    {...register('access_key')}
+                    value='c2bf653a-2baa-466d-bbcc-390272663918'
+                />
 
-                    <input
-                        type='hidden'
-                        {...register('subject')}
-                        value={subject}
-                    />
-                    <input
-                        type='hidden'
-                        {...register('access_key')}
-                        value='c2bf653a-2baa-466d-bbcc-390272663918'
-                    />
-
-                    <div class="flex flex-row gap-4">
-                        <input
-                            {...inputProps}
-                            {...register('firstName', { required: true })}
-                            placeholder='First Name'
-                        />
-                        <input
-                            {...inputProps}
-                            {...register('lastName', { required: true })}
-                            placeholder='Last Name'
-                        />
-                    </div>
-
+                <div class="flex flex-row gap-4">
                     <input
                         {...inputProps}
-                        {...register('email', { required: true })}
-                        placeholder='Work Email'
-                        type='email'
+                        {...register('firstName', { required: true })}
+                        placeholder='First Name'
                     />
+                    <input
+                        {...inputProps}
+                        {...register('lastName', { required: true })}
+                        placeholder='Last Name'
+                    />
+                </div>
 
-                    <div class="flex flex-row gap-4">
-                        <input
-                            {...inputProps}
-                            {...register('jobTitle', { required: true })}
-                            placeholder='Job Title'
-                        />
-                        <input
-                            {...inputProps}
-                            {...register('company', { required: true })}
-                            placeholder='Company'
-                        />
+                <input
+                    {...inputProps}
+                    {...register('email', { required: true })}
+                    placeholder='Work Email'
+                    type='email'
+                />
+
+                <div class="flex flex-row gap-4">
+                    <input
+                        {...inputProps}
+                        {...register('jobTitle', { required: true })}
+                        placeholder='Job Title'
+                    />
+                    <input
+                        {...inputProps}
+                        {...register('company', { required: true })}
+                        placeholder='Company'
+                    />
+                </div>
+
+                <div class="flex flex-row gap-4">
+                    <input
+                        {...inputProps}
+                        {...register('phone')}
+                        placeholder='Phone (optional)'
+                    />
+                    <input
+                        {...inputProps}
+                        {...register('country', { required: true })}
+                        placeholder='Country'
+                    />
+                </div>
+
+                <div className='text-xs font-light'>
+                    By submitting your details you agree to JUXT’s{' '}
+                    <a href='/privacy-policy' target='_blank' className='underline'>
+                        Privacy Policy
+                    </a>
+                </div>
+
+                {hasErrors && (
+                    <div className='text-red-500'>
+                        All fields are required
                     </div>
+                )}
 
-                    <div class="flex flex-row gap-4">
-                        <input
-                            {...inputProps}
-                            {...register('phone')}
-                            placeholder='Phone (optional)'
-                        />
-                        <input
-                            {...inputProps}
-                            {...register('country', { required: true })}
-                            placeholder='Country'
-                        />
-                    </div>
-
-                    <div className='text-xs font-light'>
-                        By submitting your details you agree to JUXT’s{' '}
-                        <a href='/privacy-policy' target='_blank' className='underline'>
-                            Privacy Policy
-                        </a>
-                    </div>
-
-                    {hasErrors && (
-                        <div className='text-red-500'>
-                            All fields are required
-                        </div>
-                    )}
-
-                    <button
-                        type='submit'
-                        className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
-                    >
-                        Submit Form
-                    </button>
-                </form>
-            )}
+                <input
+                    type='submit'
+                    disabled={isSubmitting}
+                    class='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm disabled:opacity-50 disabled:cursor-not-allowed'
+                >
+                    Submit Form
+                </input>
+            </form>
         </>
     )
 }
