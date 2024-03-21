@@ -1,17 +1,18 @@
 ---
 import Section from '@components/Section.astro'
+import { CloseIcon } from '@components/Icons.tsx'
 
 // Update this ID to show the banner to users who closed it
 const updateId = "xt24";
 ---
 <alert-banner class="hidden" data-update-id={updateId}>
   <Section className="w-full z-[60] text-black text-xs p-5 bg-juxt">
-    <div class="flex flex-row justify-between">
+    <div class="flex flex-row justify-between items-center">
       <span class="flex-grow text-center">
         Join Engineering Leaders from Global Banks, Fintech Companies and Hedge Funds at XT24 Conf — <a class="cursor-pointer underline" href="/xt24">Click Here</a>
       </span>
-      <button>
-          x
+      <button class="w-3 h-3">
+          <CloseIcon />
       </button>
     </div>
   </Section>
