@@ -1,5 +1,4 @@
 ---
-draft: 'true'
 author: 'jdt'
 title: 'JUXT Cast: Sane Query Languages — with Prof. Viktor Leis'
 description: 'Jeremy Taylor spoke with Viktor Leis to understand the history & future of both SQL and relational databases more generally.'
