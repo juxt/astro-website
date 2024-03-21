@@ -1,0 +1,42 @@
+---
+import Section from '@components/Section.astro'
+
+// Update this ID to show the banner to users who closed it
+const updateId = "xt24";
+---
+<alert-banner class="hidden" data-update-id={updateId}>
+  <Section className="w-full z-[60] text-black text-xs p-5 bg-juxt">
+    <div class="flex flex-row justify-between">
+      <span>
+        Join Fintech Engineering Leaders at XT24 Conference — for more info and RSVP, please <a class="cursor-pointer underline" href="/xt24">click here</a>
+      </span>
+      <button>
+          x
+      </button>
+    </div>
+  </Section>
+</alert-banner>
+
+<script>
+class AlertBanner extends HTMLElement {
+  constructor() {
+    super();
+    let updateId = this.dataset.updateId;
+
+    // Check if user has already closed the banner
+    let closed = localStorage.getItem(updateId);
+    if (!closed) {
+      this.classList.remove('hidden');
+    }
+
+    // Add event listener to close the banner
+    let button = this.querySelector('button');
+    button.addEventListener('click', () => {
+      this.classList.add('hidden');
+      localStorage.setItem(updateId, 'true');
+    });
+  }
+}
+
+customElements.define('alert-banner', AlertBanner);
+</script>
