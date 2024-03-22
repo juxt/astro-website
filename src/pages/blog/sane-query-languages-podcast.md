@@ -17,7 +17,7 @@ Our guest is Prof. Viktor Leis, a Full Professor in the Computer Science Departm
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/tyVkNlUP3-k?si=TZP2eHi_EIWQbI4b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-In this episode we discussed a <a href="https://www.cs.cit.tum.de/dis/team/prof-dr-viktor-leis/">paper</a> that Viktor recently co-authored with Thomas Neumann, titled "A Critique of Modern SQL And A Proposal Towards A Simple and Expressive Query Language", for CIDR 2024.
+In this episode we discussed a <a href="https://www.cidrdb.org/cidr2024/papers/p48-neumann.pdf">paper</a> that Viktor recently co-authored with Thomas Neumann, titled "A Critique of Modern SQL And A Proposal Towards A Simple and Expressive Query Language", for CIDR 2024.
 Beyond the specifics of SQL, many other topics are touched on also including: machine learning in the database, the state of PostgreSQL, and the potential for massive performance gains in the world of practical database systems.
 
 Notes: <br/>
