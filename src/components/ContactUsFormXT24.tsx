@@ -42,8 +42,13 @@ export default function ContactUsFormXT24(props) {
     const hasErrors = Object.keys(errors).length > 0
 
     const isSubmitSuccessfulComponent = (
-        <div className='md:px-8 text-center text-xl md:text-2xl text-juxt'>
-            Thanks for your submission! We'll be in touch shortly.
+        <div className='pt-10 text-center text-xl md:text-xl text-juxt'>
+            Thank you for your interest in XT24!
+            <br />
+            We'll reach out if spots become available.
+            <br />
+            <br />
+            <b class="bold">Please note: <br /> this is not a ticket confirmation</b>
         </div>
     )
 
@@ -134,11 +139,10 @@ export default function ContactUsFormXT24(props) {
 
                 <input
                     type='submit'
+                    value="Submit"
                     disabled={isSubmitting}
-                    class='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm disabled:opacity-50 disabled:cursor-not-allowed'
-                >
-                    Submit Form
-                </input>
+                    class='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+                />
             </form>
         </>
     )
