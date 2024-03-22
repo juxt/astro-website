@@ -1,7 +1,7 @@
 ---
 author: 'jdt'
 title: 'JUXT Cast: Sane Query Languages — with Prof. Viktor Leis'
-description: 'Jeremy Taylor spoke with Viktor Leis to understand the history & future of both SQL and relational databases more generally.'
+description: 'In our latest episode of the JUXT Tech Podcast, XTDB Head of Product, Jeremy Taylor, spoke with Prof. Viktor Leis about the history and the future of SQL and relational databases in general.'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-03-22'
