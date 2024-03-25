@@ -26,6 +26,7 @@ import SimpleColumn from '@components/team/SimpleColumn.astro'
 import FeatureSection from '@components/team/FeatureSection.astro'
 import FeatureText from '@components/team/FeatureText.astro'
 import FeatureYouTube from '@components/team/FeatureYouTube.astro'
+import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
 ---
 <ProfilePage title={fullName + " - " + jobTitle} >
@@ -83,6 +84,8 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
     />
 
   </FeatureSection>
+
+  <MeetOtherExecs {...myData.frontmatter} />
 
   <ContactSection {...myData.frontmatter} />
 
