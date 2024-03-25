@@ -23,6 +23,7 @@ import FeatureSection from '@components/team/FeatureSection.astro'
 import FeatureText from '@components/team/FeatureText.astro'
 import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 import AssetImage from '@components/team/AssetImage.astro'
+import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
@@ -108,6 +109,8 @@ In as little as one hour, either virtually or at your offices, Jeremy will get y
       alt="" />
 
   </FeatureSection>
+
+  <MeetOtherExecs {...myData.frontmatter} />
 
   <ContactSection {...myData.frontmatter} />
 

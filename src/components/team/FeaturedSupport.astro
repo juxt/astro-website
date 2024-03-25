@@ -8,11 +8,23 @@ const {
     jobTitle,
     expert,
     idx = 0,
+    feature,
 
     linkedin,
 } = Astro.props;
 
-const link = linkedin ? `https://www.linkedin.com/in/${linkedin}` : null;
+var link = null;
+if (feature && feature.link) {
+    link = feature.link;
+} else if (linkedin) {
+    link = `https://www.linkedin.com/in/${linkedin}`;
+}
+
+var external = link
+    // Not a relative link
+    && link.startsWith("http")
+    // Not localhost or base domain
+    && !link.includes("localhost") && !link.includes("juxt.pro");
 
 const colourClasses = [
     'bg-[#e78041]',
@@ -27,7 +39,7 @@ const colourClasses = [
 
 const colourClass = colourClasses[idx % colourClasses.length];
 ---
-<MaybeLink href={link} target="_blank">
+<MaybeLink href={link} target={external && "_blank"}>
     <div class="flex flex-col gap-2 items-center">
         <div class={"relative rounded w-36 h-36 overflow-hidden " + colourClass}>
             <AssetImage 

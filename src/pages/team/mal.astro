@@ -27,6 +27,7 @@ import FeatureText from '@components/team/FeatureText.astro'
 import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
+import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
 ---
 <ProfilePage title={fullName + " - " + jobTitle}>
@@ -94,6 +95,8 @@ import GalleryImage from '@components/team/GalleryImage.astro'
     />
 
   </FeatureSection>
+
+  <MeetOtherExecs {...myData.frontmatter} />
 
   <ContactSection {...myData.frontmatter} />
 
