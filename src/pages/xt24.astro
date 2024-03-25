@@ -3,6 +3,22 @@ import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
 import ContactUsFormXT24 from '@components/ContactUsFormXT24'
 
+const speakers = [
+    {
+        name: 'Francine Bennett',
+        role: 'Interim Director and Board Member',
+        company: 'Ada Lovelace Institute',
+        image: '/src/assets/xt24/francine.png',
+        link: 'https://www.linkedin.com/in/francine-bennett-a4a852/'
+    },
+    {
+        name: 'Zohar Melamaed',
+        role: 'Quantitative Technical Director',
+        company: 'Qube Research and Technology',
+        image: '/src/assets/xt24/zohar.jpg',
+        link: 'https://www.linkedin.com/in/zohar-melamed-ba7394/'
+    },
+]
 ---
 <Layout title='XT24' noFooter>
   <div class="bg-zinc-800">
@@ -71,6 +87,23 @@ import ContactUsFormXT24 from '@components/ContactUsFormXT24'
             Leave us your details, and we'll get back to you.
           </p>
           <ContactUsFormXT24 client:only subject="XT24 RFI" />
+        </div>
+      </div>
+
+      <!-- Speakers -->
+      <div class="flex flex-col pt-5 sm:pt-20 gap-6 items-center sm:items-start">
+        <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">Speakers</h2>
+        <div class="flex flex-col sm:flex-row gap-4">
+          { speakers.map(({name, role, company, image, link, }) => (
+            <a href={link} target="_blank">
+              <div class="flex flex-col items-center">
+                <AssetImage class="w-44 h-48 object-cover object-top" src={image} alt={`Headshot of ${name}`} />
+                <h3>{name}</h3>
+                <p class="font-extralight text-xs">{role}</p>
+                <p class="font-extralight text-xs">{company}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </div>
