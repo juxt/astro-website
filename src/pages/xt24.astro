@@ -2,6 +2,7 @@
 import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
 import ContactUsFormXT24 from '@components/ContactUsFormXT24'
+import { LinkedInIcon } from '@components/Icons'
 
 const speakers = [
     {
@@ -98,7 +99,10 @@ const speakers = [
             <a href={`https://www.linkedin.com/in/${linkedin}`} target="_blank">
               <div class="flex flex-col items-center">
                 <AssetImage class="w-44 h-48 object-cover object-top" src={image} alt={`Headshot of ${name}`} />
-                <h3>{name}</h3>
+                <div class="flex items-center gap-1">
+                  <h3>{name}</h3>
+                  <LinkedInIcon className="w-3 h-3 fill-cyan-700" />
+                </div>
                 <p class="font-extralight text-xs">{role}</p>
                 <p class="font-extralight text-xs">{company}</p>
               </div>
