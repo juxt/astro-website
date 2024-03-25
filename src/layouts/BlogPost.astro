@@ -11,12 +11,12 @@ import {
   TwitterIcon
 } from '@components/Icons'
 import { Blog, Person } from '@utils/types'
-import { parseBlogs } from '@utils/common'
+import { parseBlogs, formatDate } from '@utils/common'
 import Layout from './Layout.astro'
 import { getImage } from 'astro:assets'
 import DarkModeSwitch from '../components/DarkModeSwitch'
 
-const { title, description, heroImage, category, author, draft } = Astro.props
+const { title, description, heroImage, category, author, draft, publishedDate } = Astro.props
   .content as Blog
 
 const people = await Astro.glob<MarkdownInstance<Person>>(
@@ -147,7 +147,7 @@ const categoryHref = `/blog?${encodeURI(
         <div
           class='flex text-center max-w-xl mx-auto lg:text-left lg:max-w-none lg:w-1/2 lg:mx-0 flex-col lg:justify-center items-center lg:items-start'
         >
-          <div class='flex gap-1 pb-1 items-center foo'>
+          <div class='w-full flex gap-1 pb-1 items-center'>
             <TagIcon className='w-4 h-4 stroke-juxt dark:stroke-slate-300' />
             <a
               href={categoryHref}
@@ -155,6 +155,10 @@ const categoryHref = `/blog?${encodeURI(
             >
               {category}
             </a>
+            <div class="grow" />
+            <div class="text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm">
+              {formatDate(publishedDate)}
+            </div>
           </div>
           <h1
             class='text-black text-4xl dark:text-white font-semibold leading-tight pb-4'
