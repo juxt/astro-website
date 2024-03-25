@@ -19,7 +19,7 @@ const allExecs = ["mal", "jon", "jdt", "joe"];
 const otherExecs = allExecs.filter(c => c !== code);
 ---
 <Section className="py-10 sm:py-20 flex flex-col items-center gap-10">
-  <SmallTitle>Meet the other execs</SmallTitle>
+  <SmallTitle>Meet the other leaders</SmallTitle>
   <div class='px-32 flex flex-col md:flex-row justify-center gap-5 sm:gap-20'>
     {
       otherExecs.map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
