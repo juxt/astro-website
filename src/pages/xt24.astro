@@ -93,7 +93,7 @@ const speakers = [
       <!-- Speakers -->
       <div class="flex flex-col pt-5 sm:pt-20 gap-6 items-center sm:items-start">
         <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">Speakers</h2>
-        <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex flex-col sm:flex-row gap-4 items-stretch">
           { speakers.map(({name, role, company, image, link, }) => (
             <a href={link} target="_blank">
               <div class="flex flex-col items-center">
@@ -104,6 +104,13 @@ const speakers = [
               </div>
             </a>
           ))}
+          <div class="flex flex-col justify-center">
+            <p class="font-semibold sm:font-normal sm:text-xl text-center">
+              More speakers
+              <br />
+              to be announced soon...
+            </p>
+          </div>
         </div>
       </div>
     </div>
