@@ -9,14 +9,14 @@ const speakers = [
         role: 'Interim Director and Board Member',
         company: 'Ada Lovelace Institute',
         image: '/src/assets/xt24/francine.png',
-        link: 'https://www.linkedin.com/in/francine-bennett-a4a852/'
+        linkedin: 'francine-bennett-a4a852'
     },
     {
         name: 'Zohar Melamaed',
         role: 'Quantitative Technical Director',
         company: 'Qube Research and Technology',
         image: '/src/assets/xt24/zohar.jpg',
-        link: 'https://www.linkedin.com/in/zohar-melamed-ba7394/'
+        linkedin: 'zohar-melamed-ba7394'
     },
 ]
 ---
@@ -94,8 +94,8 @@ const speakers = [
       <div class="flex flex-col pt-5 sm:pt-20 gap-6 items-center sm:items-start">
         <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">Speakers</h2>
         <div class="flex flex-col sm:flex-row gap-4 items-stretch">
-          { speakers.map(({name, role, company, image, link, }) => (
-            <a href={link} target="_blank">
+          { speakers.map(({name, role, company, image, linkedin, }) => (
+            <a href={`https://www.linkedin.com/in/${linkedin}`} target="_blank">
               <div class="flex flex-col items-center">
                 <AssetImage class="w-44 h-48 object-cover object-top" src={image} alt={`Headshot of ${name}`} />
                 <h3>{name}</h3>
