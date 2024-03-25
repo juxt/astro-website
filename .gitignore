@@ -26,3 +26,7 @@ auto-save-list
 .\#*
 # Local Netlify folder
 .netlify
+/.clj-kondo/babashka/
+/.clj-kondo/http-kit/
+/.clj-kondo/rewrite-clj/
+/.cpcache/
