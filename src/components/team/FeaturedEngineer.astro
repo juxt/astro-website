@@ -16,7 +16,7 @@ var {
 feature = feature || {};
 
 var link = null;
-if (feature.link) {
+if (feature && feature.link) {
     link = feature.link;
 } else if (linkedin) {
     link = `https://www.linkedin.com/in/${linkedin}`;
