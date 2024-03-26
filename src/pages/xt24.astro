@@ -7,7 +7,7 @@ import { LinkedInIcon } from '@components/Icons'
 const speakers = [
     {
         name: 'Francine Bennett',
-        role: 'Interim Director and Board Member',
+        role: 'Interim Director & Board Member',
         company: 'Ada Lovelace Institute',
         image: '/src/assets/xt24/francine-bennett.png',
         linkedin: 'francine-bennett-a4a852'
@@ -105,7 +105,7 @@ const speakers = [
           { speakers.map(({name, role, company, image, linkedin, }) => (
             <a href={`https://www.linkedin.com/in/${linkedin}`} target="_blank">
               <div class="flex flex-col items-center">
-                <AssetImage class="w-44 h-64 object-cover object-center" src={image} alt={`Headshot of ${name}`} />
+                <AssetImage class="mx-3 w-44 h-64 object-cover object-center" src={image} alt={`Headshot of ${name}`} />
                 <div class="flex items-center gap-2">
                   <h3>{name}</h3>
                   <LinkedInIcon className="w-3 h-3 fill-cyan-700" />
