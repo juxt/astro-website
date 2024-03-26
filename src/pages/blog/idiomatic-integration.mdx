@@ -76,7 +76,7 @@ generally expensive as it will create a lot of interim data structures.
 Secondly `postwalk` is expensive because it is needless - our JSON
 parser has already walked the data structure while marshalling it, and
 now we're doing it again. Finally, if your data structure contains
-sequences of maps with the same keys then `+->kebab-case-keyword+` is
+sequences of maps with the same keys then `->kebab-case-keyword` is
 performing the same expensive name/regex/format/keyword operations for
 the same keys over and over again.
 

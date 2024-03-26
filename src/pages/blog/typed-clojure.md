@@ -205,14 +205,14 @@ interface to other part), that you can fully annotate. This will allow
 you to reap the full rewards of core.typed without dealing with the
 drawbacks of a big surface area between typed / un-typed code. However
 you choose, you will need to sprinkle your code with some `tc-ignore`
-and `+^:no-check+` for the parts of the code that are not yet annotated.
+and `^:no-check` for the parts of the code that are not yet annotated.
 
 ## Typed Clojure stability
 
 core.typed is complicated software, and still relatively new. Expect to
 find and work around bugs. Most of the popular libraries you are using
 lack core.typed annotations, so you are left with the choice of writing
-these annotations yourself or add `tc-ignore`, `+^:no-check+`. None of
+these annotations yourself or add `tc-ignore`, `^:no-check`. None of
 these options are particularly appealing, but hopefully more and more
 libraries will get type annotations are core.typed will get more stable.
 

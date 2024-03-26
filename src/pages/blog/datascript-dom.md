@@ -247,7 +247,7 @@ tranformation happens in `replace-node`:
 of the zipper, which if it contains a node, it will have already been
 transformed (because `zip/next` traverses the tree left to right). If
 there are no siblings to the left of the current position, `zip/left`
-will return `nil`, and `+some->+` will bail out and return `nil`.
+will return `nil`, and `some->` will bail out and return `nil`.
 Otherwise the chain of calls continues to `zip/node` and all the way to
 `inc` which calculates the index as the index of the node to our left
 +1. If at any point this expression evaluates to `nil`, we assume we are
@@ -327,7 +327,7 @@ written as:
 See the [actual
 code](https://github.com/stathissideris/datascript-dom/blob/master/src/datascript_dom/core.clj)
 for the rules that I defined while experimenting (stored at the top, see
-`+(def rules ...)+`). There are a few rules that warrant some
+`(def rules ...)`). There are a few rules that warrant some
 explanation:
 
 ```clojure
@@ -402,7 +402,7 @@ from the HTML:
 (def _ (d/transact conn (dom->transaction dom)))
 ```
 
-The `+(def _ ...)+` is to prevent Clojure from printing the whole result
+The `(def _ ...)` is to prevent Clojure from printing the whole result
 of transact, because it's too large.
 
 Here's how to extract the title and year:

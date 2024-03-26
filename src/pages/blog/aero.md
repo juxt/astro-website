@@ -246,7 +246,7 @@ flexibility without resorting to adding language features into the
 configuration syntax (or horror-of-horrors, making the configuration
 itself Turing complete).
 
-Also notice how we use `+^:ref+` metadata to reference the otherwise
+Also notice how we use `^:ref` metadata to reference the otherwise
 isolated part of the configuration that deals with secrets.
 
 The result is a configuration file that is consistent, complete and
