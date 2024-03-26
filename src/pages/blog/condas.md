@@ -17,17 +17,17 @@ clean, expressing what I want to do without having to concern myself
 with wiring function calls together.
 
 When dealing with varying function signatures or repeated references to
-the threaded value, I have `+as->+`. When there are many branches in
-logic and I want conditional threading I have `+cond->+`.
+the threaded value, I have `as->`. When there are many branches in
+logic and I want conditional threading I have `cond->`.
 
-But sometimes `+cond->+` has the same problem as `+->+` when function
+But sometimes `cond->` has the same problem as `->` when function
 signatures differ; and by the way, wouldn't it be nice if my condition
 predicates could use the current value being threaded rather than those
 bound before the threading block began?
 
 # Does exactly what it says on the tin
 
-`+condas->+` combines the semantics of `+cond->+` and `+as->+` to give
+`condas->` combines the semantics of `cond->` and `as->` to give
 you more flexible conditional threading. You may not need to use it
 often, but in the more complicated areas of your codebase where
 readability is valued at a premium you will hopefully find it helps.

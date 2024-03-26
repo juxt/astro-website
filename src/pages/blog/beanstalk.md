@@ -108,7 +108,7 @@ versions to a target environment.
 
 When you deploy an application version to Beanstalk, it automatically
 sets up a DNS pointing to
-`+{your-app-name}-{environment}.elasticbeanstalk.com+`. It also sets up
+`{your-app-name}-{environment}.elasticbeanstalk.com`. It also sets up
 CloudWatch and various other pieces of the AWS stack that you would
 normally have to configure manually.
 
@@ -170,7 +170,7 @@ If you are using Clojure then there are a couple of options. At the time
 of writing the Leiningen plugin `lein-beanstalk` focuses on building and
 deploying WAR files to Beanstalk. I have built a very small wrapper here
 [`lein-dockerstalk`](https://github.com/juxt/lein-dockerstalk), where
-you can simply do `+lein dockerstalk deploy dev {path-to-zip-file}+`.
+you can simply do `lein dockerstalk deploy dev {path-to-zip-file}`.
 You need to build the ZIP file in advance, containing typically just the
 Dockerfile and the uberjar (you can use `lein-zip`). `lein-dockerstalk`
 may well get factored into `lein-beanstalk` in the future.

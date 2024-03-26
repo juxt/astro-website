@@ -51,7 +51,7 @@ For example, I could provide my own wrapper replacement for the
     (defn- query [db q]
       (clojure.jdbc/query db q :row-fn kebab/->kebab-case-keyword))
 
-The magic happens in `+->kebab-case-keyword+` that will coerce all
+The magic happens in `->kebab-case-keyword` that will coerce all
 \`\`last_updated\`\`s to `last-updated` when they come out of the db (it
 can also convert from camel-case, helping with the third party JSON
 example).
