@@ -153,7 +153,7 @@ function Form() {
                     type='submit'
                     className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
                 >
-                    Send This Form to Joe
+                    Submit
                 </button>
                 <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
                     <div className='flex flex-col gap-2 leading-snug'>
@@ -183,7 +183,7 @@ export default function ContactUs() {
                         </div>
                         <div className='text-medium md:text-2xl text-white leading-snug'>
                             Book a
-                            <span className='text-juxt'> 30-minute free consultation </span>
+                            <span className='text-juxt'> 30-minute discovery call </span>
                             with our Head of Delivery, and discover how JUXT can help bring
                             your vision to market, on time and on budget.
                         </div>
@@ -217,7 +217,7 @@ export default function ContactUs() {
                     <div className='flex flex-col lg:w-1/2 bg-white py-6 px-2 md:px-0'>
                         <div className='flex flex-col items-center gap-8'>
                             <div className='text-black text-2xl md:text-3xl font-bold'>
-                                Book your free consultation
+                                Book time with Joe
                             </div>
                             <Form />
                         </div>
