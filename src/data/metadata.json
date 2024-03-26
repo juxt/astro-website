@@ -39,7 +39,7 @@
         { "label": "Delivery Experts", "href": "/delivery" },
         { "label": "Getting Started", "href": "/get-started" },
         {
-          "label": "Free Consultation",
+          "label": "Discovery Call",
           "href": "/consultation",
           "target": "_blank",
           "className": "bg-slate-700 px-2 py-1 rounded"
