@@ -30,7 +30,7 @@ We chatted with engineers [Jānis Peisenieks](https://www.linkedin.com/in/janisp
 
 Kaspars wanted a tool to let you get your idea onto the page as quickly as possible, in a visually appealing way.
 
-Our first tools were Mind maps and Stickies, then we built our own roadmap management tool. We've since branched out to tools which are less visual and have denser information such as [Whimsical Docs](https://whimsical.com/docs), a multi-user text editing software.
+Our first tools were Flowcharts and Diagrams. Followed later on by Wireframes which truly helped us take off. Mind maps and Stickies followed later. We continued building the tools we need for our own Roadmap and product management, such as [Whimsical Docs](https://whimsical.com/docs), a multi-user text editing software.
 
 We're continually interested in helping people to communicate in a better way.
 
@@ -44,15 +44,15 @@ That's something we've especially had to think about with our docs product. We w
 
 **Jon: You're now five years in and there are a lot of companies using your products. Your intuitions about how such a tool should work have proven correct so far.**
 
-**Jānis:** Early on, many people said that there were already a hundred different whiteboard and diagramming tools. I always replied that there's space for _a hundred and one_.
+**Jānis:** Yes, we’ve always had this (slightly) controversial thought that if we build a tool for ourselves - there would be a lot of other people out there who would also find it useful! Not to say that everyone has to be like us, but the world is big!
 
-We're not trying to be quintessential disruptors, we just have ideas of how to make collaboration between remote teams work better.
+We're not trying to be growth-at-all-cost/quintessential disruptors, we just have ideas of how to make collaboration between remote teams work better.
 
 We've always been a globally distributed team. We've felt the pain of trying to convey ideas and thoughts in a coherent, beautiful, and visually meaningful manner. We thought there had to be a better way. This is how Whimsical came to be, and why we're dogfooding all the time.
 
 **Jon: Clearly you've got traction and the network-effect.**
 
-**Jānis:** At the start we posted a Whimsical Flowchart on Product Hunt. There were a couple of product managers from a well-known Silicon Valley company who found it and liked it. Then it spread like wildfire within those companies. Those early users went to new companies and took it with them.
+**Jānis:** At the start we posted a Whimsical Wireframes on Product Hunt. There were a couple of product managers from a well-known Silicon Valley company who found it and liked it. Then it spread like wildfire within those companies. Those early users went to new companies and took it with them.
 
 ## Set Up
 
@@ -64,7 +64,7 @@ We've always been a globally distributed team. We've felt the pain of trying to 
 
 **Jon: So, what's the overall tech estate look like?**
 
-**Jānis:** The code base is about one-third back-end and two-thirds front-end. For every back-end engineer, we have two front-end engineers.
+**Jānis:** The code base is about one-third back-end and two-thirds front-end. For every back-end engineer, we have two front-end engineers. Not claiming that this is some sort of a universal golden ratio, but it suits our product approach.
 
 **Jānis:** Cloud-wise, we run on AWS and we keep things lean and mean. We maintain everything ourselves, everything in containers.
 
@@ -106,11 +106,11 @@ We don't do a lot of shared rendering with React server components but we have s
 
 **Jon: What's your take on microservices?**
 
-**Jānis:** We only split out something as a specific microservice where it makes sense, be it for scaling characteristics or operational characteristics. Otherwise, we stick to the monolith. In terms of deployments, we deploy between 5 and 50 times a day.
+**Jānis:** We only split out something as a specific microservice where it makes sense, be it for scaling characteristics or operational characteristics. Otherwise, keep the service count to a minimum. In terms of deployments, we deploy between 5 and 50 times a day.
 
 **Jon: Do you make use of PRs or are you more trunk-based?**
 
-**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up a service for when you open up a PR, there's a static link that you can share with anybody to the deployed version, having a full copy of our environment. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
+**Jānis:** We use PRs for everything. A couple of years ago before it was cool, we cooked up our own version of what’s currently called branch deploys. Every PR gets a fresh, full copy of our environment, with a static link that anybody can access. This gave us a really big boost in terms of our productivity, as our designers didn't have to spin up environments on their local machines.
 
 **Jon: So you said you've got about 40 developers, and presumably a lot of those are doing Clojure.**
 
@@ -148,7 +148,7 @@ The hard part is usually the domain or something very specific, such as CSS or i
 
 I think it's going to be interesting to see how ClojureScript as a hosted language continues to evolve over the next couple of years.
 
-One of the things I'm looking forward to seeing is what new projects in Clojure are there that will give us alternatives to compiling. There are kind of these pillars that we just accept: compiling using Clojure as the compiler; and leaning on the Google Closure library. I'll be curious to see how projects continue to evolve away from this because it's just another option.
+One of the things I'm looking forward to seeing is what new projects in Clojure are there that will give us alternatives to compiling. There are kind of these pillars that we just accept: compiling using Google Clojure Library as the compiler; and leaning on the Google Closure library. I'll be curious to see how projects continue to evolve away from this because it's just another option.
 
 **Jānis:** Clojure is very well suited for a company like Whimsical. We want to have a really good place to work and a great product, and we want to be sustainable for years to come.
 
