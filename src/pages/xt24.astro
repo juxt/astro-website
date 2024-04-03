@@ -135,27 +135,27 @@ const speakers = [
       <!-- Speakers -->
       <div class="flex flex-col pt-5 sm:pt-20 gap-6 items-center sm:items-start">
         <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">Speakers</h2>
-        <div class="flex flex-col sm:flex-row gap-4 items-stretch">
+        <div class="flex flex-wrap gap-4 justify-center">
           { speakers.map(({name, role, company, image, linkedin, }) => (
-            <a href={`https://www.linkedin.com/in/${linkedin}`} target="_blank">
+            <a href={linkedin && `https://www.linkedin.com/in/${linkedin}`} target="_blank">
               <div class="flex flex-col items-center">
                 <AssetImage class="mx-3 w-44 h-64 object-cover object-center" src={image} alt={`Headshot of ${name}`} />
                 <div class="flex items-center gap-2">
                   <h3>{name}</h3>
-                  <LinkedInIcon className="w-3 h-3 fill-cyan-700" />
+                  { linkedin && <LinkedInIcon className="w-3 h-3 fill-cyan-700" /> }
                 </div>
                 <p class="font-extralight text-xs">{role}</p>
                 <p class="font-extralight text-xs">{company}</p>
               </div>
             </a>
           ))}
-          <div class="flex flex-col justify-center">
-            <p class="font-semibold sm:font-normal sm:text-xl text-center">
-              More speakers
-              <br />
-              to be announced soon
-            </p>
-          </div>
+        </div>
+        <div class="w-full flex flex-col justify-center">
+          <p class="font-semibold sm:font-normal sm:text-xl text-center">
+            More speakers
+            <br />
+            to be announced soon
+          </p>
         </div>
       </div>
     </div>
