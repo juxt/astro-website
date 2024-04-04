@@ -148,6 +148,10 @@
     "jdt-tech-roundtable": {
       "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future.",
       "image": "sm-tech-roundtable-jdt.jpg"
+    },
+    "xt24": {
+      "description": "Engineering Leaders from global banks, fintech companies and hedge funds are meeting in Milton Keynes to explore how groundbreaking technology concepts, tools and solutions are shaping the future of financial services.",
+      "image": "sm-xt24.jpg"
     }
   }
 }
