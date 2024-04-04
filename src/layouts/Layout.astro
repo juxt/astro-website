@@ -64,7 +64,7 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   })
   imageForShare = `${url.origin}${src}`
 }
-const metaTitle = ogTitle ?? currentPageName
+const metaTitle = ogTitle ?? (title ?? currentPageName)
 ---
 
 <!doctype html>
