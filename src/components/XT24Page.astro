@@ -6,6 +6,7 @@
 import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
 import ContactUsFormXT24 from '@components/ContactUsFormXT24'
+import XT24Agenda from '@components/XT24Agenda.astro'
 import { LinkedInIcon } from '@components/Icons'
 import speakers from '../data/xt24/speakers.json';
 
@@ -13,16 +14,16 @@ const { contactSubject } = Astro.props
 ---
 <Layout title='XT24 Fintech Conference' noFooter>
   <div class="bg-zinc-800">
-    <div class='container max-w-6xl mx-auto min-h-screen p-5 sm:p-10 flex flex-col text-white'>
+    <div class='container max-w-6xl mx-auto min-h-screen flex flex-col text-white'>
       <!-- JUXT Logo -->
-      <div class="w-full flex flex-row justify-end">
+      <div class="w-full px-5 sm:px-10 pt-5 sm:pt-10 flex flex-row justify-end">
         <a href="/">
           <img width={100} src="/images/logo-on-dark.svg" alt="JUXT Logo" />
         </a>
       </div>
 
       <!-- XT24 Logo & copy -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 py-5 lg:pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 p-5 sm:px-10">
         <div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
             <img src="/images/XT24.png" alt="XT24 Logo" />
@@ -35,7 +36,7 @@ const { contactSubject } = Astro.props
       </div>
 
       <!-- Main content -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col gap-5">
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col p-5 sm:p-10 sm:pt-10 gap-5">
         <!-- Blurb -->
         <p class="font-light">
           Engineering Leaders from global banks, fintech companies and hedge funds are meeting in Milton Keynes to explore how groundbreaking technology concepts, tools and solutions are shaping the future of financial services.
@@ -82,7 +83,7 @@ const { contactSubject } = Astro.props
       </div>
 
       <!-- Speakers -->
-      <div class="flex flex-col pt-5 sm:pt-20 gap-6 items-center sm:items-start">
+      <div class="flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6 items-center sm:items-start">
         <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">Speakers</h2>
         <div class="flex flex-wrap gap-4 justify-center">
           { speakers.map(({name, role, company, image, linkedin, }) => (
@@ -102,6 +103,11 @@ const { contactSubject } = Astro.props
         <p class="w-full font-semibold sm:font-normal sm:text-xl text-center">
           More speakers to be announced soon
         </p>
+      </div>
+
+      <!-- Agenda -->
+      <div id="agenda" class="flex flex-col pt-5 sm:p-10">
+        <XT24Agenda />
       </div>
     </div>
   </div>
