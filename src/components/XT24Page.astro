@@ -33,11 +33,13 @@ const { contactSubject } = Astro.props
             Scaling Simplicity in Financial Technology
           </p>
           
-          <p class="w-full pt-5">
-            <span class="md:hidden"><a href="#register"><span class="uppercase underline text-juxt">Register</span></a> |</span>
-            <a href="#speakers"><span class="uppercase underline text-juxt">Speakers</span></a> |
-            <a href="#agenda"><span class="uppercase underline text-juxt">Agenda</span></a> 
-          </p>
+          <div class="w-full pt-5 flex flex-row gap-3">
+            <span class="sm:hidden uppercase underline text-juxt"><a href="#register">Register</a></span>
+            <p class="sm:hidden">|</p>
+            <span class="uppercase underline text-juxt"><a href="#speakers">Speakers</a></span>
+            <p>|</p>
+            <span class="uppercase underline text-juxt"><a href="#agenda">Agenda</a></span> 
+          </div>
         </div>
       </div>
 
