@@ -59,6 +59,7 @@ export default function Navbar({ navLinks, navbarNoBg }) {
       className={classNames('w-full fixed transition-all z-50 xl:py-4 h-14', {
         'bg-black': !navbarNoBg
       })}
+      id="nav"
       ref={ref}
     >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>

@@ -15,7 +15,9 @@ export default defineConfig({
   integrations: [
     mdx(),
     preact(),
-    swup(),
+    swup({
+      containers: ['main', '#nav'],
+    }),
   ],
   site: 'https://juxt.pro/',
   markdown: {
