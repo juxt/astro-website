@@ -16,7 +16,12 @@ export default defineConfig({
     mdx(),
     preact(),
     swup({
+      theme: false,
       containers: ['main', '#nav'],
+      parallel: true,
+      preload: {
+        visible: true,
+      },
     }),
   ],
   site: 'https://juxt.pro/',
