@@ -48,6 +48,7 @@
     "@astrojs/rss": "^3.0.0",
     "@jsdevtools/rehype-url-inspector": "^2.0.2",
     "@preact/compat": "npm:@preact/compat",
+    "@swup/astro": "^1.4.1",
     "@tailwindui/react": "^0.1.1",
     "instantsearch.css": "^8.0.0",
     "markdown-it": "^13.0.1",

@@ -1,5 +1,6 @@
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
+import swup from '@swup/astro';
 import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -14,6 +15,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     preact(),
+    swup(),
   ],
   site: 'https://juxt.pro/',
   markdown: {
