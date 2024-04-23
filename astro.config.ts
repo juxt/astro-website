@@ -16,9 +16,9 @@ export default defineConfig({
     mdx(),
     preact(),
     swup({
-      theme: false,
+      theme: 'fade',
       containers: ['main', '#nav'],
-      parallel: true,
+      progress: true,
       preload: {
         hover: false,
         visible: true,
