@@ -20,6 +20,7 @@ export default defineConfig({
       containers: ['main', '#nav'],
       parallel: true,
       preload: {
+        hover: false,
         visible: true,
       },
     }),
