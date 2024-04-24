@@ -19,6 +19,7 @@ export default defineConfig({
       theme: false,
       animationClass: false,
       containers: ['main', '#nav'],
+      progress: true,
       parallel: true,
       preload: false,
     }),
