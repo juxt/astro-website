@@ -17,6 +17,7 @@ export default defineConfig({
     preact(),
     swup({
       theme: false,
+      animationClass: false,
       containers: ['main', '#nav'],
       parallel: true,
       preload: {
