@@ -20,10 +20,7 @@ export default defineConfig({
       animationClass: false,
       containers: ['main', '#nav'],
       parallel: true,
-      preload: {
-        hover: false,
-        visible: true,
-      },
+      preload: false
     }),
   ],
   site: 'https://juxt.pro/',
