@@ -19,10 +19,7 @@ export default defineConfig({
       theme: 'fade',
       containers: ['main', '#nav'],
       progress: true,
-      preload: {
-        hover: false,
-        visible: true,
-      },
+      preload: false,
     }),
   ],
   site: 'https://juxt.pro/',
