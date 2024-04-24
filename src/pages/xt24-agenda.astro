@@ -42,7 +42,7 @@ import speakers from '../data/xt24/speakers.json';
       <!-- Speakers -->
       <div class="flex flex-col p-5 sm:pt-20 gap-6 items-center sm:items-start">
         <h2 class="uppercase text-juxt font-semibold sm:font-normal sm:text-xl">Speakers</h2>
-        <div class="flex flex-wrap gap-4 justify-center">
+        <div class="flex flex-wrap lg:px-10 gap-4 justify-center">
           { speakers.map(({name, role, company, image, linkedin, }) => (
             <a href={linkedin && `https://www.linkedin.com/in/${linkedin}`} target="_blank">
               <div class="flex flex-col items-center">
