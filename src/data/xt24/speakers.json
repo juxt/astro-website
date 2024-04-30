@@ -81,5 +81,12 @@
         "role": "CTO",
         "company": "Artis.Works",
         "image": "/src/assets/xt24/manpreet-babbra.png"
+    },
+    {
+        "name": "Phill Barber",
+        "role": "Software Consultant",
+        "company": "Credit Suisse",
+        "image": "/src/assets/xt24/phill-barber.png",
+        "linkedin": "phill-barber-5b656a21"
     }
 ]
