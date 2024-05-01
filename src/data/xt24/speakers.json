@@ -42,6 +42,13 @@
         "linkedin": "jay-modha-8b29893"
     },
     {
+        "name": "Phill Barber",
+        "role": "Software Consultant",
+        "company": "Credit Suisse",
+        "image": "/src/assets/xt24/phill-barber.png",
+        "linkedin": "phill-barber-5b656a21"
+    },
+    {
         "name": "Mark Burgess",
         "role": "Founder and Principal",
         "company": "ChiTek-i",
@@ -54,13 +61,6 @@
         "company": "JUXT",
         "image": "/src/assets/xt24/malcolm-sparks.png",
         "linkedin": "malcolmsparks"
-    },
-    {
-        "name": "Jeremy Taylor",
-        "role": "Head of Product",
-        "company": "XTDB",
-        "image": "/src/assets/xt24/jeremy-taylor.png",
-        "linkedin": "jdtaylor"
     },
     {
         "name": "Oliver Hine",
@@ -83,10 +83,17 @@
         "image": "/src/assets/xt24/manpreet-babbra.png"
     },
     {
-        "name": "Phill Barber",
-        "role": "Software Consultant",
-        "company": "Credit Suisse",
-        "image": "/src/assets/xt24/phill-barber.png",
-        "linkedin": "phill-barber-5b656a21"
+        "name": "Jon Pither",
+        "role": "CEO & Co-founder",
+        "company": "JUXT",
+        "image": "/src/assets/xt24/jon-pither.png",
+        "linkedin": "jon-pither-juxt-ceo"
+    },
+    {
+        "name": "Jeremy Taylor",
+        "role": "Head of Product",
+        "company": "XTDB",
+        "image": "/src/assets/xt24/jeremy-taylor.png",
+        "linkedin": "jdtaylor"
     }
 ]
