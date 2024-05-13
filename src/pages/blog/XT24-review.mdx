@@ -1,0 +1,33 @@
+---
+author: 'jon
+layout: '../../layouts/BlogPost.astro'
+title: 'XT24 Review'
+description: 'Engineering leaders from global banks, fintech companies and hedge funds met in Milton Keynes for XT24 Fintech Conf'
+category: 'conference'
+publishedDate: '2024-05-15'
+tags:
+  - fintech
+  - tech talks
+  - conference
+heroImage: 'xt24-og-image.jpg'
+---
+
+XT24 happened last week, and it was a blast.
+
+Sunkissed in Santanders' UK Headquarters in Milton Keynes, the audience were given a diverse set of talks, ranging from the technical to the philosophical, each giving different perspectives on how to solve today's problems in FinTech, whilst discussing what the future holds.
+
+We kicked off with Francine Bennett's excellent talk on the unintended consequences of AI. Fran raised our consciousness on the different ways that AI can introduce uncertainty into our systems, and of the questions we need to ask about our sources, and the role legislation and regulation can play. Fran is deeply involved with the UK governments use of AI through her work at the Ada Lovelace institute as an interim director and board member. Given the various scandals we see, such as with the UK post-office Horizon system, she's warning this is only going to get worse with systems become more opaque, and we need to increase our guard collectively.
+
+We then had Allen Rohner's talk on 'breaking the bank with contract testing'. Allen previously founded CircleCi, worth 1.4 billion at the time of writing, and is now the CTO/co-founder of the newly UK-licensed Griffin bank. Allen introduced a generative testing tool called `test.contract`, but the talk served a higher level purpose, encouraging us to think about how the different parts of our codebase are better aligned with different testing strategies. Automated testing has always been about choosing the right tradeoffs, and the thinking has evolved over the decades. It was fantastic to get Allen's view, given the stakes involved in creating a new bank.
+
+After the coffee break, Sebastian Ferraccù (CEO) and Alex Davis (Lead Engineer) of Artis Works, demonstrated 'Artis', and showed how they have reimagined the Market Sheet as a high-performance, collaborative application. They gave an insight into what modern commodities trading looks like and showed off how their Artis application aggregates vast amounts of market and derived data, allowing traders to work more effectively. Alex described their architecture, and some of the difficult technical challenges they've had to overcome in building the application. They run over 3.2M calculations on market data in under 100ms, with a UI that is accessible from the web, smart phone app, and Excel, and updated 4 times every second. Artis have been working with JUXT engineers since late 2020.
+
+Next, I sat down for a fireside discussion with Kim Johannessen, a CTO and consultant having spend decades working on the 'buy-side', including major hedgefunds. Kim gave us a tour of what the buy-side does and the main challenges, and what the landscape of the small and large players looks like. He reflected on the technologies typically used and where the future is headed. Kim has seen it all, and it was a pleasure to receive his overview.
+
+Phill Barber -- Chapter Lead at UBS -- then gave us an overview of Workflow Automation Orchestration. So many engineering teams re-invent the wheel and build their own custom workflow tooling, and they can miss out on having a higher level systems-level view of worfklows, which is a critical need in large enterprises, where there can be lots of moving parts and long lived processes. Phill covered workflow orchestration vs choreography, reflecting on anti-patterns and his preferred hybrid approach of broad-grained services wrapping workflow libraries.
+
+It had to happen - we needed to talk about JSON. Oliver Hine -- JUXT Principal Consultant -- gave a layered talk, building up the benefits of defining a schema for your data-model. JSON has won out as a plain-text data format, and JSON schema - also JSON - is a powerful and simple way of declaring your data-model, including types and constraints. Once you've got a well defined schema, you will unlock a series of benefits, including the auto-generation of rich UIs, and having contracts between services.
+
+I then had the pleasure of fire-side interviewing Vlad Yatsenko, to learn about his stellar journey co-founding Revolut, and being the CTO since inception. I make no bones about it - I'm deeply impressed with Vlad's accomplishments - building out a system to scale with over a thousand engineers working on it. He's had to make some bold decisions, such as limiting the stack of technologies in use, but from this Revolut have gained great leveraged, through a focus on standardisation and platform engineering. Rather than engineers focussing on the latest innovations of code-in-the-small, engineers at Revolut are empowered to bring their technical skills to bear on modelling out the problem domain, and to continously improve the supporting platform.
+
+The last wonderfully entertaining talk was entitled "Not So Clever: How we Built a Global-Scale Successful Risk System Guided by Simplicity" by Zohar Melamed -- Quantitative Technical Dir at QRT. Zohar gave us a spiritual talk on what simplicity means in practice, eschewing magic and using universally available data interchange formats and protocols, such as URIs, HTTP and JSON to build systems on. He talked about scaling up this simplicity and entrusting teams, attacking with rigour anything that slows down development. It was a great talk to round off the conference and was extremely well received in the intimate auditorium.
