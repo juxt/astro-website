@@ -9,8 +9,10 @@ tags:
   - fintech
   - tech talks
   - conference
-heroImage: 'xt24-og-image.jpg'
+heroImage: 'xt24-lobby.jpg'
 ---
+
+import { Image } from 'astro:assets'
 
 [XT24](https://www.juxt.pro/xt24/) happened last week, and it was a blast.
 
@@ -18,40 +20,87 @@ Sunkissed in Santanders' UK headquarters -- [Unity Place](https://www.unityplace
 
 ### AI: Unintended Consequences
 
+import ai from '../../assets/blog/xt24/AI_Unintended_Con.jpg'
+
+<Image alt='Francine Bennett talking about AI' src={ai} />
+
 We kicked off with [Francine Bennett](https://www.adalovelaceinstitute.org/person/francine-bennett/)'s excellent talk on the unintended consequences of AI. Fran enlightened us on the different ways that AI can introduce uncertainty into our systems, the questions we need to ask about our sources, and the role that legislation and regulation can play. Fran is deeply involved with the UK government's use of AI through her work at the [Ada Lovelace Institute](https://www.adalovelaceinstitute.org/) as an interim director and board member. Given the various scandals we see, such as with the UK Post Office's Horizon system, she's warning this is only going to get worse as systems become more opaque, and we need to raise our guard collectively.
 
 ### Breaking the Bank with Contract Testing
+
+import breaking from '../../assets/blog/xt24/Breaking the Bank.png'
+
+<Image alt='Allen Rohner talking about Contract Testing' src={breaking} />
 
 We then had [Allen Rohner](https://www.linkedin.com/in/allenrohner/)'s talk on 'breaking the bank with contract testing'. Allen previously founded [CircleCi](https://circleci.com/), a billion-dollar company, and is now the founder & CTO of the newly UK-licensed [Griffin](https://griffin.com/) bank. Allen introduced a generative testing tool called [`test.contract`](https://github.com/griffinbank/test.contract), but the talk served a higher level purpose, encouraging us to think about how the different parts of our codebase are better aligned with different testing strategies. Automated testing has always been about choosing the right trade-offs, and the thinking has evolved over the decades. It was fantastic to get Allen's view, given the stakes involved in creating a new bank.
 
 ### Workflows, the Benefits and Pitfalls
 
+import workflows from '../../assets/blog/xt24/Workflows.png'
+
+<Image alt='Phill Barber talking about Workflow Automation Orchestration' src={workflows} />
+
 [Phill Barber](https://www.linkedin.com/in/phill-barber-5b656a21/) -- Chapter Lead at UBS -- then gave us an overview of Workflow Automation Orchestration. So many engineering teams re-invent the wheel and build their own custom workflow tooling, and they can miss out on having a higher level systems-level view of workflows, which is a critical need in large enterprises, where there can be lots of moving parts and long lived processes. Phill covered workflow orchestration vs. choreography, reflecting on anti-patterns and his preferred hybrid approach of broad-grained services wrapping workflow libraries.
 
 ### Data Collaboration and Price Discovery for the Commodities Market
+
+import datacollab from '../../assets/blog/xt24/Data Collaboration EDIT.png'
+
+<Image alt='Sebastian Ferraccù talking about Data Collaboration' src={datacollab} />
 
 After the coffee break, [Sebastian Ferraccù](https://www.linkedin.com/in/sebastian-ferracc%C3%B9-27b9b71ba/) (CEO) and Alex Davis (Lead Engineer) of [Artis Works](https://www.artis.works/), demonstrated 'Artis', and showed how they have re-imagined the Market Sheet as a high-performance, collaborative application. They gave an insight into what modern commodities trading looks like and showed off how their Artis application aggregates vast amounts of market and derived data, allowing traders to work more effectively. Alex described their architecture, and some of the difficult technical challenges they've had to overcome in building the application. They run over 3.2M calculations on market data in under 100ms, with a UI that is accessible from the web, smart phone app, and Excel, with updates 4 times every second. Artis have been working with JUXT engineers since late 2020.
 
 ### Tales from the Buy-Side
 
+import tales from '../../assets/blog/xt24/Tales from the Buy-Side.jpg'
+
+<Image alt='Kim Johannessen talking about Buy-Side challenges' src={tales} />
+
 Next, I sat down for a fireside discussion with [Kim Johannessen](https://www.linkedin.com/in/kjohannessen), a CTO and consultant who has spent decades working on the 'buy-side', including major hedge funds. Kim gave us a tour of what the buy-side does, the main challenges, and what the landscape of the small and large players looks like. He reflected on the technologies typically used and where the future is headed. Kim has seen it all, and it was a pleasure to receive his overview.
 
 ### Financial Use Cases for an Immutable Database
 
-Following the lunch break, JUXT's very own CTO [Malcolm Sparks](https://www.juxt.pro/team/mal/) discussed the context and motivations for building [XTDB](https://xtdb.com). Cross-cutting issues around time and auditable record keeping seem to show up on nearly every project, and Malcolm explained how finanicial organizations like Goldman Sachs have been able to differentiate and compete effectively on the basis of their approach to centralising Risk in a bitemporal database. Joining Malcolm on stage was [Jeremy Taylor](https://www.juxt.pro/team/jdt/), JUXT's Head of Product, to run through real-world scenarios using SQL to address various hard problems of data management in financial systems.
+import database from '../../assets/blog/xt24/Database.jpg'
+
+<Image alt='Jeremy Taylor talking about immutable databases' src={database} />
+
+Following the lunch break, JUXT's very own CTO [Malcolm Sparks](https://www.juxt.pro/team/mal/) discussed the context and motivations for building [XTDB](https://xtdb.com). Cross-cutting issues around time and auditable record keeping seem to show up on nearly every project, and Malcolm explained how finanicial organizations like Goldman Sachs have been able to differentiate and compete effectively on the basis of their approach to centralising Risk in a bitemporal database. Joining Malcolm on stage was [Jeremy Taylor](https://www.juxt.pro/team/jdt/), JUXT's Head of Product, to run through real-world scenarios using SQL to address a [variety of hard data management problems](https://docs.xtdb.com/tutorials/financial-usecase/time-in-finance.html) that are common throughout financial systems.
 
 ### We Need to Talk About JSON
+
+import json from '../../assets/blog/xt24/We Need to Talk About JSON.jpg'
+
+<Image alt='Oliver Hine talking about JSON' src={json} />
 
 It had to happen - we needed to talk about JSON. [Oliver Hine](https://www.linkedin.com/in/oliyh/) -- JUXT Principal Consultant -- gave a layered talk, building up the benefits of defining a schema for your data model. JSON has won out as a plain-text data format, and [JSON schema](https://json-schema.org/) is a powerful and simple way of declaring your data model, including types and constraints. Once you've got a well-defined schema, you will unlock a series of benefits, including the auto-generation of rich UIs, and having contracts between services.
 
 ### Simplifying All Things Money: Lessons Learnt Building a Bank from Scratch
 
+import vlad from '../../assets/blog/xt24/Simplifying All Things Money.jpg'
+
+<Image alt='Vlad Yatsenko talking about building Revolut' src={vlad} />
+
 I then had the pleasure of fire-side interviewing [Vlad Yatsenko](https://www.linkedin.com/in/yatsenko), to learn about his stellar journey co-founding [Revolut](https://www.revolut.com/), and being the CTO since inception. I make no bones about it - I'm deeply impressed with Vlad's accomplishments - building out a system to scale with over a thousand engineers working on it. He's had to make some bold decisions, such as limiting the stack of technologies in use, but from this Revolut have gained great leveraged, through a focus on standardisation and platform engineering. Rather than engineers focusing on the latest innovations of code-in-the-small, engineers at Revolut are empowered to bring their technical skills to bear on modelling out the problem domain, and to continuously improve the supporting platform.
 
 ### XT28 Schedule: Future of Fintech — Expert Panel
 
-Vlad was then joined on stage for a wider discussion alongside a whole panel of speakers: [Mark Burgess](https://www.linkedin.com/in/markburgessoslo/) (physicist, author and original architect of [CFEngine](http://cfengine.com/)), [Francine Bennett](https://www.adalovelaceinstitute.org/person/francine-bennett/) ([Ada Lovelace Institute](https://www.adalovelaceinstitute.org/)), and [Malcolm Sparks](https://www.juxt.pro/team/mal/) (CTO, JUXT). The session was hosted by [Jason Bloomberg](https://www.linkedin.com/in/jasonbloomberg/) (Managing Director, [Intellyx](https://intellyx.com/)), who guided the panel through a series of wider-ranging topics including AI impact, blockchain adoption, and soon-to-be legacy technologies.
+import panel from '../../assets/blog/xt24/Panel.jpg'
+
+<Image alt='Future of Fintech - Expert Panel' src={panel} />
+
+Vlad was then joined on stage for a broader discussion alongside a whole panel of speakers: [Mark Burgess](https://www.linkedin.com/in/markburgessoslo/) (physicist, author and original architect of [CFEngine](http://cfengine.com/)), [Francine Bennett](https://www.adalovelaceinstitute.org/person/francine-bennett/) ([Ada Lovelace Institute](https://www.adalovelaceinstitute.org/)), and [Malcolm Sparks](https://www.juxt.pro/team/mal/) (CTO, JUXT). The session was hosted by [Jason Bloomberg](https://www.linkedin.com/in/jasonbloomberg/) (Managing Director, [Intellyx](https://intellyx.com/)), who guided the panel through a series of wide-ranging topics including AI impact, blockchain adoption, and soon-to-be-legacy tech.
 
 ### Not So Clever: How we Built a Global-Scale Successful Risk System Guided by Simplicity
 
+import zohar from '../../assets/blog/xt24/Not So Clever.jpg'
+
+<Image alt='Zohar Melamed talking about building a Risk System guided by simplicity' src={zohar} />
+
 The wonderfully entertaining final talk of the day was entitled "Not So Clever: How we Built a Global-Scale Successful Risk System Guided by Simplicity" by [Zohar Melamed](https://www.linkedin.com/in/zohar-melamed-ba7394/) -- Quantitative Technical Director at [QRT](https://www.qube-rt.com/). Zohar gave us a spiritual talk on what simplicity means in practice, eschewing magic and using universally available data interchange formats and protocols, such as URIs, HTTP and JSON to build systems on. He talked about scaling up this simplicity and entrusting teams, attacking with rigour anything that slows down development. It was a great talk to round off the conference and was extremely well received in the intimate auditorium.
+
+### Until next time...
+
+import drinks from '../../assets/blog/xt24/Drinks.jpg'
+
+<Image alt='Reception drinks' src={drinks} />
+
