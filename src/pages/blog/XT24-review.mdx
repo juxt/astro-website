@@ -1,8 +1,8 @@
 ---
 author: 'jon'
 layout: '../../layouts/BlogPost.astro'
-title: 'XT24 Review'
-description: 'Engineering leaders from global banks, fintech companies and hedge funds met in Milton Keynes for XT24 Fintech Conf'
+title: 'XT24 Fintech Conf - In Review'
+description: 'Over 100 engineering leaders from global banks, fintech companies and hedge funds met in Milton Keynes to discuss how groundbreaking technology is shaping the future of financial services'
 category: 'conference'
 publishedDate: '2024-05-15'
 tags:
@@ -38,7 +38,10 @@ We then had [Allen Rohner](https://www.linkedin.com/in/allenrohner/)'s talk on '
 
 import workflows from '../../assets/blog/xt24/Workflows.png'
 
-<Image alt='Phill Barber talking about Workflow Automation Orchestration' src={workflows} />
+<Image
+  alt='Phill Barber talking about Workflow Automation Orchestration'
+  src={workflows}
+/>
 
 [Phill Barber](https://www.linkedin.com/in/phill-barber-5b656a21/) -- Chapter Lead at UBS -- then gave us an overview of Workflow Automation Orchestration. So many engineering teams re-invent the wheel and build their own custom workflow tooling, and they can miss out on having a higher level systems-level view of workflows, which is a critical need in large enterprises, where there can be lots of moving parts and long lived processes. Phill covered workflow orchestration vs. choreography, reflecting on anti-patterns and his preferred hybrid approach of broad-grained services wrapping workflow libraries.
 
@@ -46,13 +49,16 @@ import workflows from '../../assets/blog/xt24/Workflows.png'
 
 import datacollab from '../../assets/blog/xt24/Data Collaboration EDIT.png'
 
-<Image alt='Sebastian Ferraccù talking about Data Collaboration' src={datacollab} />
+<Image
+  alt='Sebastian Ferraccù talking about Data Collaboration'
+  src={datacollab}
+/>
 
 After the coffee break, [Sebastian Ferraccù](https://www.linkedin.com/in/sebastian-ferracc%C3%B9-27b9b71ba/) (CEO) and Alex Davis (Lead Engineer) of [Artis Works](https://www.artis.works/), demonstrated 'Artis', and showed how they have re-imagined the Market Sheet as a high-performance, collaborative application. They gave an insight into what modern commodities trading looks like and showed off how their Artis application aggregates vast amounts of market and derived data, allowing traders to work more effectively. Alex described their architecture, and some of the difficult technical challenges they've had to overcome in building the application. They run over 3.2M calculations on market data in under 100ms, with a UI that is accessible from the web, smart phone app, and Excel, with updates 4 times every second. Artis have been working with JUXT engineers since late 2020.
 
 ### Tales from the Buy-Side
 
-import tales from '../../assets/blog/xt24/Tales from the Buy-Side.jpg'
+import tales from '../../assets/blog/kim-johannessen-xt24.jpg'
 
 <Image alt='Kim Johannessen talking about Buy-Side challenges' src={tales} />
 
@@ -68,7 +74,7 @@ Following the lunch break, JUXT's very own CTO [Malcolm Sparks](https://www.juxt
 
 ### We Need to Talk About JSON
 
-import json from '../../assets/blog/xt24/We Need to Talk About JSON.jpg'
+import json from '../../assets/blog/oliver-xt24.jpg'
 
 <Image alt='Oliver Hine talking about JSON' src={json} />
 
@@ -94,7 +100,10 @@ Vlad was then joined on stage for a broader discussion alongside a whole panel o
 
 import zohar from '../../assets/blog/xt24/Not So Clever.jpg'
 
-<Image alt='Zohar Melamed talking about building a Risk System guided by simplicity' src={zohar} />
+<Image
+  alt='Zohar Melamed talking about building a Risk System guided by simplicity'
+  src={zohar}
+/>
 
 The wonderfully entertaining final talk of the day was entitled "Not So Clever: How we Built a Global-Scale Successful Risk System Guided by Simplicity" by [Zohar Melamed](https://www.linkedin.com/in/zohar-melamed-ba7394/) -- Quantitative Technical Director at [QRT](https://www.qube-rt.com/). Zohar gave us a spiritual talk on what simplicity means in practice, eschewing magic and using universally available data interchange formats and protocols, such as URIs, HTTP and JSON to build systems on. He talked about scaling up this simplicity and entrusting teams, attacking with rigour anything that slows down development. It was a great talk to round off the conference and was extremely well received in the intimate auditorium.
 
@@ -103,4 +112,3 @@ The wonderfully entertaining final talk of the day was entitled "Not So Clever: 
 import drinks from '../../assets/blog/xt24/Drinks.jpg'
 
 <Image alt='Reception drinks' src={drinks} />
-
