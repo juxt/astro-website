@@ -102,12 +102,11 @@ const schema = JSON.stringify({
             <span class='text-zinc-600'> careers@juxt.pro</span>
           </div>
           <div class='mt-4'>
-            <Clickable>
-              <a
-                href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`}
-                >APPLY NOW
-              </a>
-            </Clickable>
+            <a href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`} >
+              <Clickable>
+                APPLY NOW
+              </Clickable>
+            </a>
           </div>
         </div>
         <div
