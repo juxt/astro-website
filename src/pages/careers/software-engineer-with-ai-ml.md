@@ -3,7 +3,7 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Remote'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Software Engineer'
+position: 'Python Engineer'
 weight: 1
 googleJobs:
   {
