@@ -46,11 +46,13 @@ const blogBannerPicture = await getImage({
 ---
 
 <Layout navbar title='Blog'>
-  <div class="bg-gray-900">
-    <Banner
-      text='Blog'
-      style={{ backgroundImage: `url(${blogBannerPicture})` }}
-    />
-    <BlogIndex client:only='preact' blogs={blogsByHref} />
-  </div>
+  <main>
+    <div class="bg-gray-900">
+      <Banner
+        text='Blog'
+        style={{ backgroundImage: `url(${blogBannerPicture})` }}
+      />
+      <BlogIndex client:only='preact' blogs={blogsByHref} />
+    </div>
+  </main>
 </Layout>
