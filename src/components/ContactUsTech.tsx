@@ -86,6 +86,9 @@ function Form() {
           id='form'
           className={ (isSubmitting || isSubmitSuccessful) ? 'hidden' : 'flex flex-col gap-4'}
         >
+          <div className='text-black text-2xl md:text-3xl font-bold'>
+            Book Your Roundtable Session
+          </div>
           <input
             type='hidden'
             {...register('subject')}
@@ -218,9 +221,6 @@ export default function ContactUs() {
           </div>
           <div className='flex flex-col lg:w-1/2 bg-white py-6 px-2 md:px-0'>
             <div className='flex flex-col items-center gap-8'>
-              <div className='text-black text-2xl md:text-3xl font-bold'>
-                Book Your Roundtable Session
-              </div>
               <Form />
             </div>
           </div>
