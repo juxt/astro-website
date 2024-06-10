@@ -14,11 +14,11 @@ heroImage: 'clojure_lambda_guide.jpg'
 
 import { Image } from 'astro:assets'
 
-Recently to help protect our docs and [xt-play](https://play.xtdb.com) against
-"the hackernews effect" I converted the backend of `xt-play` to run on AWS
-Lambda (previously it was running on AWS ECS with Fargate). While doing so I
-had a bunch of trouble so I wanted to write down what worked for me. Hopefully
-it can help you out too!
+In order to prevent [xt-play](https://play.xtdb.com) from having downtime due
+to [traffic spikes](https://www.atomic14.com/2022/12/15/the-hacker-news-effect.html),
+I converted the backend to run on AWS Lambda (previously it was running on AWS
+ECS with Fargate). While doing so I had a bunch of trouble so I wanted to write
+down what worked for me. Hopefully it can help you out too!
 
 A quick note on my constraints: `xt-play` works by spinning up a fresh [XTDB](https://xtdb.com)
 node for each request. This meant that I needed the lambda to run on the plain
