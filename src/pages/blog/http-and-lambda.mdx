@@ -1,0 +1,303 @@
+---
+author: 'osm'
+layout: '../../layouts/BlogPost.astro'
+title: 'Calling AWS Lambda over HTTP'
+description: 'Everything You Need to Know About Calling AWS Lambda over HTTP: Setup, Formats, and Error Handling Explained'
+category: 'architecture'
+publishedDate: '2024-06-11'
+tags:
+  - http
+  - aws
+  - lambda
+  - 'api gateway'
+  - cloudfront
+heroImage: 'xt24-stage.jpg'
+---
+
+{/*
+
+The requirement that this blog post fulfils is:
+As a developer, I want to know:
+- What different ways are there I can call a lambda over HTTP
+- For each of those:
+  - What is the formats of requests and responses?
+  - What happens if the request/response is in the wrong format?
+  - What happens if exceptions are thrown?
+  - What other quirks are there?
+And I want to have it all in one place.
+
+*/}
+
+As far as I'm aware, there are two different methods to call an AWS Lambda over
+HTTP: [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)
+and [API Gateway](https://aws.amazon.com/api-gateway/)
+
+Each has their benefits, quirks, slightly different APIs, behaviours and setup
+instructions. While writing a lambda recently I found myself with 20+ tabs open
+and writing a bunch of test cases to understand out different behaviours. So I
+thought I would share that with you!
+
+
+
+## Methodology
+
+While reading, the questions I found myself trying to answer were:
+- How do I set this up?
+- What are the input and output formats?
+- What happens if I don't use these formats?
+- What happens if an exception is thrown?
+- What other quirks are there?
+
+For most of these I can link you to the relevant part of the docs, but for
+some I needed to run some tests. The tests I ran were:
+
+| Test                  | Command                                                                |
+| ---                   | ---                                                                    |
+| Valid JSON request    | `curl -v -XPOST --data '{}' <url under test>`                          |
+| Invalid JSON request  | `curl -v -XPOST --data '{'  <url under test>`                          |
+| Valid JSON response   | Covered by that first test                                             |
+| Invalid JSON response | `curl -v -XPOST --data '{}' --header 'Test: invalid' <url under test>` |
+| Exception thrown      | `curl -v -XPOST --data '{}' --header 'Test: error'   <url under test>` |
+
+And the code I used to setup the lambda was:
+  
+```clojure
+(ns lambda
+  (:gen-class
+   :implements [com.amazonaws.services.lambda.runtime.RequestStreamHandler]))
+
+(defn -handleRequest [_ is os context]
+  (let [input (slurp is)]
+    (println "input:" input)
+    ; If the word "error" is found in the input
+    (when (re-find #"error" input)
+      (throw (ex-info "test" {:my "error"})))
+    ; If the word "invalid" is found in the input
+    (if (re-find #"invalid" input)
+      (spit os "{")
+      (spit os "{}"))))
+```
+
+(See my [last post](https://juxt.pro/blog/plain-clojure-lambda) for how I set
+the project up)
+
+Please note that I include *no JSON parsing*, so any errors that come from bad
+JSON come from AWS. Also note that the JSON does not conform to
+any of the formats required by below setups, for more details see the specific
+section.
+
+So turns out that there's multiple ways to setup each option. These are
+the options that I know of:
+- [Plain Function URLs](#plain-function-urls)
+- [Function URLs + CloudFront](#function-urls--cloudfront)
+- [API Gateway w/ HTTP API](#api-gateway-w-http-api)
+- [API Gateway w/ REST API](#api-gateway-w-rest-api)
+- [API Gateway w/ REST API & Lambda Proxy Integration](#api-gateway-w-rest-api--lambda-proxy-integration)
+
+
+
+## Which should you choose?
+
+Before we get into things. This article doesn't aim to judge which option of
+these you should choose, but if you're wanting a quick judgement for which to
+check out first:
+- If you just want some URL to hit: Plain Function URLs
+- If you want a custom URL, but don't care about sub-paths: Function URLs + CloudFront
+- For everything else: API Gateway w/ REST & Lambda Proxy Integration
+
+
+
+## Plain Function URLs
+
+This is by far the easiest option to setup: [just enable it and set two
+settings](https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html#create-url-console)
+and you're done!
+
+The (small) downside is that you get a randomly generated url of the form:
+`https://<url-id>.lambda-url.<region>.on.aws`. For many use cases this is just
+fine.
+
+As with most of these options, the [request](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-request-payload)
+and [response](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-response-payload)
+formats are in JSON. Particularly worth noting is if the response *does not*
+match this format then a 200 response is assumed.
+
+Here are the results of my tests:
+
+| Test                  | Status Code | Response Body           | `input` in lambda          |
+| ---                   | ---         | ---                     | ---                        |
+| Valid JSON request    | 200         | `{}`                    | The JSON formatted request |
+| Invalid JSON request  | 200         | `{}`                    | The JSON formatted request |
+| Invalid JSON response | 200         | `{`                     | The JSON formatted request |
+| Exception thrown      | 502         | `Internal Server Error` | The JSON formatted request |
+
+
+
+## Function URLs + CloudFront
+
+This option allows you to create a [TLD](https://en.wikipedia.org/wiki/Top-level_domain)
+that points at your Lambda Function URL. The setup is to:
+- [Create a Function URL](https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html#create-url-console) 
+(same as above)
+- [Create your CloudFront Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html)
+  - Use the Function URL you just created
+  - Set the alternate domain to the TLD you want
+  - Add a certificate for the TLD you want
+  - For a simple setup you can say "no" to caching and a WAF
+  - A "gotcha" is to make sure to enable all the HTTP Methods you plan to use
+- [Add an A record to Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
+  - Use an alias to point to your Distribution's URL
+- Remember to wait until the CloudFront Distribution has finished deploying
+
+Because this setup uses Function URLs under the hood, the [request](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-request-payload)
+and [response](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-response-payload)
+formats are the same as above.
+
+As noted in the setup, there's an additional caveat: must enable all HTTP
+Methods you plan to use. Because of this I've added an additional test for when
+the `POST` method is disabled:
+
+| Test                  | Status Code | Response Body             | `input` in lambda          |
+| ---                   | ---         | ---                       | ---                        |
+| Valid JSON request    | 200         | `{}`                      | The JSON formatted request |
+| Invalid JSON request  | 200         | `{}`                      | The JSON formatted request |
+| Invalid JSON response | 200         | `{`                       | The JSON formatted request |
+| Exception thrown      | 502         | `Internal Server Error`   | The JSON formatted request |
+| POST Method disabled  | 403         | HTML explaining the error | Nothing                    |
+
+
+
+## Side Note: There are three ways of connecting Lambda to API Gateway?
+
+Yes, I don't know why 😅. They do have different properties that may be useful:
+- The HTTP Integration gives you the least flexibility in transforming requests and responses and a familiar request and response format
+- The REST Integration w/o lambda proxy gives you ultimate flexibility in transformation at the cost of having to configure it
+- The REST Integration w/ lambda proxy gives you a middle ground between the two
+
+
+
+<a id="custom-domain-setup"></a> 
+
+## Second Side Note: Custom Domains and API Gateway
+
+Because these are all the same service, setting up a Custom Domain for API
+Gateway is the same process. So to limit repetition here are the setup
+instructions:
+- [Create a Certificate](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains-prerequisites.html) if you don't already have one
+- Setup a [Custom Domain](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html) in API Gateway
+- [Add an A record to Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
+  - Use an alias to point to your Custom Domain
+- In the Custom Domain [add an API Mapping](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html) to the stage of your API
+
+
+
+## API Gateway w/ HTTP API
+
+All the API Gateway options allows you to call your lambda function at any path
+under your TLD with any HTTP Method, to learn more about API Gateway I
+recommend starting [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
+
+Despite the increased complexity, this option was relatively simple to setup:
+- [Create your HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop.html)
+  - Add a *Lambda integration* that points to your lambda
+- See above for [setting up a custom domain](#custom-domain-setup)
+
+The [request](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.proxy-format-structure)
+and [response](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.v2)
+formats seem to be identical to Function URLs, also similarly to Function URLs
+it's worth noting that responses that don't match this format are assumed to be
+a 200 response.
+
+Here are my test results:
+
+| Test                  | Status Code | Response Body                         | `input` in lambda          |
+| ---                   | ---         | ---                                   | ---                        |
+| Valid JSON request    | 200         | `{}`                                  | The JSON formatted request |
+| Invalid JSON request  | 200         | `{}`                                  | The JSON formatted request |
+| Invalid JSON response | 500         | `{"message":"Internal Server Error"}` | The JSON formatted request |
+| Exception thrown      | 500         | `{"message":"Internal Server Error"}` | The JSON formatted request |
+
+
+
+## API Gateway w/ REST API
+
+Setting up a REST API was a tiny bit more involved:
+- [Create your API REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-api)
+  - Choose *New API* instead of *Example API*
+- [Create your Lambda Integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-integration)
+  - Keep *Lambda Proxy Integration* turned off (that's the next section)
+- See above for [setting up a custom domain](#custom-domain-setup)
+
+The request and response formats are a bit more fuzzily documented for this
+option because requests are configured using [Integration Requests](https://docs.aws.amazon.com/apigateway/latest/developerguide/integration-request-basic-setup.html)
+and responses are configured using [Integration Responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-integration-settings-integration-response.html).
+Meaning you can [transform](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html)
+the request and response in a variety of ways. By default the body is passed
+through to the lambda directly and I've left things as the default for the
+tests.
+
+To test this setup I had to tweak two of the commands:
+
+| Test                  | Command                                              |
+| ---                   | ---                                                  |
+| Invalid JSON response | `curl -v -XPOST --data '"invalid"' <url under test>` |
+| Exception thrown      | `curl -v -XPOST --data '"error"'   <url under test>` |
+
+(The lambda function itself remained the same for these commands)
+
+Also note that because REST APIs are so configurable these tests might not have
+much meaning (although I found the results surprising). I would suggest running
+your own tests once you've configured your Method. Feel free to use the one's
+I've shown as a basis for your own!
+
+Anyway, here are the results:
+
+| Test                  | Status Code | Response Body                                               | `input` in lambda            |
+| ---                   | ---         | ---                                                         | ---                          |
+| Valid JSON request    | 200         | `{}`                                                        | `{}` (the input body)        |
+| Invalid JSON request  | 400         | A JSON object with a `message` field explaining parse error | Nothing                      |
+| Invalid JSON response | 200         | `{`                                                         | `"invalid"` (the input body) |
+| Exception thrown      | 200         | A JSON object in [this format](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html#handle-standard-errors-in-lambda-integration) showing the error thrown   | `"error"` (the input)   |
+
+A couple things to note here: First if the request is not valid JSON then your 
+function won't even be called! I was not able to find a way around this but I
+may have missed something. Second throwing an error gets you a 200 by default!
+The official way to handle this is to configure the *Lambda error regex* which
+is matched against the *errorMessage* property in the response (as noted [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html)
+in the final *Note* box, search for *errorMessage*), so make sure to format
+your responses correctly (throwing an exception does so already).
+
+
+
+## API Gateway w/ REST API & Lambda Proxy Integration
+
+The setup is nearly identical to the above:
+- [Create your API REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-api)
+  - Choose *New API* instead of *Example API*
+- [Create your Lambda Integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-integration)
+  - This time turn *Lambda Proxy Integration* on
+- See above for [setting up a custom domain](#custom-domain-setup)
+
+This [request](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format)
+and [response](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format)
+formats are similar to the Function URL formats but with enough small
+differences that it's worth you taking a look at them.
+
+Please note that I used the original set of commands for these tests:
+| Test                  | Status Code | Response Body                          | `input` in lambda          |
+| ---                   | ---         | ---                                    | ---                        |
+| Valid JSON request    | 200         | (an empty body)                        | The JSON formatted request |
+| Invalid JSON request  | 200         | (an empty body)                        | The JSON formatted request |
+| Invalid JSON response | 502         | `{"message": "Internal server error"}` | The JSON formatted request |
+| Exception thrown      | 502         | `{"message": "Internal server error"}` | The JSON formatted request |
+
+
+
+## Conclusion
+
+There are many different options for calling an AWS Lambda via HTTP, and while
+it's fairly obvious that each of them would have different setup instructions I
+found that the variance in their behaviours was enough to trip me up many
+times. Hopefully the above information will be useful to decide which option is
+best and avoid it's gotchas the next time either of us wants to call a Lambda
+over HTTP.
