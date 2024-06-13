@@ -28,27 +28,26 @@ And I want to have it all in one place.
 
 */}
 
-As far as I'm aware, there are two different methods to call an AWS Lambda over
-HTTP: [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)
+There are two different methods to call an AWS Lambda over HTTP externally:
+[Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)
 and [API Gateway](https://aws.amazon.com/api-gateway/)
 
-Each has their benefits, quirks, slightly different APIs, behaviours and setup
-instructions. While writing a lambda recently I found myself with 20+ tabs open
-and writing a bunch of test cases to understand out different behaviours. So I
-thought I would share that with you!
+But as I investigated, I found each had slightly different behaviours, quirks
+and setup instructions. I ended up with 20+ tabs open and writing a bunch of
+test cases, so I thought I would share what I had learned all in one place.
 
 
 
 ## Methodology
 
-While reading, the questions I found myself trying to answer were:
-- How do I set this up?
-- What are the input and output formats?
-- What happens if I don't use these formats?
-- What happens if an exception is thrown?
-- What other quirks are there?
+While reading, the questions tried to answer were:
+1. How do I set this up?
+2. What are the input and output formats?
+3. What happens if I don't use these formats?
+4. What happens if an exception is thrown?
+5. What other quirks are there?
 
-For most of these I can link you to the relevant part of the docs, but for
+For the most part I can link you to the relevant part of the docs, but for
 some I needed to run some tests. The tests I ran were:
 
 | Test                  | Command                                                                |
@@ -81,13 +80,11 @@ And the code I used to setup the lambda was:
 (See my [last post](https://juxt.pro/blog/plain-clojure-lambda) for how I set
 the project up)
 
-Please note that I include *no JSON parsing*, so any errors that come from bad
-JSON come from AWS. Also note that the JSON does not conform to
-any of the formats required by below setups, for more details see the specific
-section.
+Please note that the input is *not parsed*, so any errors that come parsing
+the input must come from AWS. Also note that the output does not conform to
+any of the formats required, this tests how each option behaves in this case.
 
-So turns out that there's multiple ways to setup each option. These are
-the options that I know of:
+There are multiple ways to setup each option, I cover these methods:
 - [Plain Function URLs](#plain-function-urls)
 - [Function URLs + CloudFront](#function-urls--cloudfront)
 - [API Gateway w/ HTTP API](#api-gateway-w-http-api)
@@ -98,12 +95,12 @@ the options that I know of:
 
 ## Which should you choose?
 
-Before we get into things. This article doesn't aim to judge which option of
-these you should choose, but if you're wanting a quick judgement for which to
-check out first:
-- If you just want some URL to hit: Plain Function URLs
-- If you want a custom URL, but don't care about sub-paths: Function URLs + CloudFront
-- For everything else: API Gateway w/ REST & Lambda Proxy Integration
+Before we start, this article doesn't aim to judge which option of these fits
+your requirements. If you're wanting a quick judgement for which to check out
+first my preferences are:
+- If you don't want a custom domain: [Plain Function URLs](#plain-function-urls)
+- If you *do* want a custom domain: [Function URLs + CloudFront](#function-urls--cloudfront)
+- For everything else I'd suggest: [API Gateway w/ REST & Lambda Proxy Integration](#api-gateway-w-rest-api--lambda-proxy-integration)
 
 
 
@@ -136,26 +133,30 @@ Here are the results of my tests:
 ## Function URLs + CloudFront
 
 This option allows you to create a [TLD](https://en.wikipedia.org/wiki/Top-level_domain)
-that points at your Lambda Function URL. The setup is to:
+that points at your Lambda Function URL. The behaviour mostly identical to
+Function URLs but I have included it because of one "gotcha" in the setup that
+can change the behaviour.
+
+The setup is:
 - [Create a Function URL](https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html#create-url-console) 
 (same as above)
 - [Create your CloudFront Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html)
-  - Use the Function URL you just created
-  - Set the alternate domain to the TLD you want
-  - Add a certificate for the TLD you want
-  - For a simple setup you can say "no" to caching and a WAF
-  - A "gotcha" is to make sure to enable all the HTTP Methods you plan to use
+  - For **origin domain** choose your **Function URL**
+  - For **Allowed HTTP methods** choose all the methods you plan to use (this is the "gotcha" I mentioned)
+  - For **Alternate domain name** choose the TLD you want
+  - For **Custom SSL certificate** choose a certificate for the TLD you chose
+  - For a simple setup you can disable caching and the WAF
 - [Add an A record to Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
   - Use an alias to point to your Distribution's URL
-- Remember to wait until the CloudFront Distribution has finished deploying
+- Wait until the CloudFront Distribution has finished deploying
 
-Because this setup uses Function URLs under the hood, the [request](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-request-payload)
+As mentioned, this option uses Function URLs under the hood so the [request](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-request-payload)
 and [response](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-response-payload)
 formats are the same as above.
 
-As noted in the setup, there's an additional caveat: must enable all HTTP
-Methods you plan to use. Because of this I've added an additional test for when
-the `POST` method is disabled:
+Because we have our additional "gotcha", I wanted to test the case where the
+`POST` method is disabled and so I've added an additional test using the 
+command from `Valid JSON request`:
 
 | Test                  | Status Code | Response Body             | `input` in lambda          |
 | ---                   | ---         | ---                       | ---                        |
@@ -167,40 +168,14 @@ the `POST` method is disabled:
 
 
 
-## Side Note: There are three ways of connecting Lambda to API Gateway?
-
-Yes, I don't know why 😅. They do have different properties that may be useful:
-- The HTTP Integration gives you the least flexibility in transforming requests and responses and a familiar request and response format
-- The REST Integration w/o lambda proxy gives you ultimate flexibility in transformation at the cost of having to configure it
-- The REST Integration w/ lambda proxy gives you a middle ground between the two
-
-
-
-<a id="custom-domain-setup"></a> 
-
-## Second Side Note: Custom Domains and API Gateway
-
-Because these are all the same service, setting up a Custom Domain for API
-Gateway is the same process. So to limit repetition here are the setup
-instructions:
-- [Create a Certificate](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains-prerequisites.html) if you don't already have one
-- Setup a [Custom Domain](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html) in API Gateway
-- [Add an A record to Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
-  - Use an alias to point to your Custom Domain
-- In the Custom Domain [add an API Mapping](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html) to the stage of your API
-
-
-
 ## API Gateway w/ HTTP API
 
-All the API Gateway options allows you to call your lambda function at any path
-under your TLD with any HTTP Method, to learn more about API Gateway I
-recommend starting [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
-
-Despite the increased complexity, this option was relatively simple to setup:
+HTTP APIs are API Gateway's less featureful option, which is reflected in it's
+relatively simple setup:
 - [Create your HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop.html)
-  - Add a *Lambda integration* that points to your lambda
-- See above for [setting up a custom domain](#custom-domain-setup)
+  - For **Integrations** select **lambda**
+  - For **Lambda function** choose your lambda
+- See [here](#custom-domain-setup) setting up a custom domain
 
 The [request](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.proxy-format-structure)
 and [response](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.v2)
@@ -223,34 +198,31 @@ Here are my test results:
 
 Setting up a REST API was a tiny bit more involved:
 - [Create your API REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-api)
-  - Choose *New API* instead of *Example API*
+  - Choose **New API** instead of **Example API**
 - [Create your Lambda Integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-integration)
-  - Keep *Lambda Proxy Integration* turned off (that's the next section)
-- See above for [setting up a custom domain](#custom-domain-setup)
+  - Keep **Lambda Proxy Integration** turned off (that's the next section)
+- See [here](#custom-domain-setup) setting up a custom domain
 
 The request and response formats are a bit more fuzzily documented for this
-option because requests are configured using [Integration Requests](https://docs.aws.amazon.com/apigateway/latest/developerguide/integration-request-basic-setup.html)
-and responses are configured using [Integration Responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-integration-settings-integration-response.html).
+option due to requests being configured using [Integration Requests](https://docs.aws.amazon.com/apigateway/latest/developerguide/integration-request-basic-setup.html)
+and responses being configured using [Integration Responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-integration-settings-integration-response.html).
 Meaning you can [transform](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html)
 the request and response in a variety of ways. By default the body is passed
 through to the lambda directly and I've left things as the default for the
 tests.
 
-To test this setup I had to tweak two of the commands:
-
+To test this setup I had to tweak two of the commands (while keeping the lambda
+the same):
 | Test                  | Command                                              |
 | ---                   | ---                                                  |
 | Invalid JSON response | `curl -v -XPOST --data '"invalid"' <url under test>` |
 | Exception thrown      | `curl -v -XPOST --data '"error"'   <url under test>` |
 
-(The lambda function itself remained the same for these commands)
-
-Also note that because REST APIs are so configurable these tests might not have
-much meaning (although I found the results surprising). I would suggest running
-your own tests once you've configured your Method. Feel free to use the one's
-I've shown as a basis for your own!
-
-Anyway, here are the results:
+Please note that a lot of the results of the tests this time can be configured
+(as you'll see after the results). It's still worth understanding the default
+behaviours though to know what you need to configure. I would suggest
+re-running these tests (and others!) after making configuration changes to
+see how these behaviours have really changed:
 
 | Test                  | Status Code | Response Body                                               | `input` in lambda            |
 | ---                   | ---         | ---                                                         | ---                          |
@@ -259,13 +231,16 @@ Anyway, here are the results:
 | Invalid JSON response | 200         | `{`                                                         | `"invalid"` (the input body) |
 | Exception thrown      | 200         | A JSON object in [this format](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html#handle-standard-errors-in-lambda-integration) showing the error thrown   | `"error"` (the input)   |
 
-A couple things to note here: First if the request is not valid JSON then your 
-function won't even be called! I was not able to find a way around this but I
-may have missed something. Second throwing an error gets you a 200 by default!
-The official way to handle this is to configure the *Lambda error regex* which
-is matched against the *errorMessage* property in the response (as noted [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html)
-in the final *Note* box, search for *errorMessage*), so make sure to format
-your responses correctly (throwing an exception does so already).
+A couple things to note here:
+1. If the request is not valid JSON, your function won't be called.
+   I was not able to find a way around this in my testing, please let me know if I missed something.
+2. Throwing an error gets you a 200 by default.
+   The official way to handle this is to configure the **Lambda error regex**
+   which is matched against the *errorMessage* property in the response (as
+   noted [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html)
+   in the final *Note* box, search for *errorMessage*). Luckily exceptions are
+   already formatted this way, but note that you can also return JSON in this
+   format if you like.
 
 
 
@@ -273,17 +248,17 @@ your responses correctly (throwing an exception does so already).
 
 The setup is nearly identical to the above:
 - [Create your API REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-api)
-  - Choose *New API* instead of *Example API*
+  - Choose **New API** instead of **Example API**
 - [Create your Lambda Integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-integration)
-  - This time turn *Lambda Proxy Integration* on
-- See above for [setting up a custom domain](#custom-domain-setup)
+  - This time turn **Lambda Proxy Integration** on
+- See [here](#custom-domain-setup) setting up a custom domain
 
-This [request](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format)
+The [request](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format)
 and [response](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format)
 formats are similar to the Function URL formats but with enough small
 differences that it's worth you taking a look at them.
 
-Please note that I used the original set of commands for these tests:
+And here are my test results (using the original commands):
 | Test                  | Status Code | Response Body                          | `input` in lambda          |
 | ---                   | ---         | ---                                    | ---                        |
 | Valid JSON request    | 200         | (an empty body)                        | The JSON formatted request |
@@ -293,11 +268,24 @@ Please note that I used the original set of commands for these tests:
 
 
 
-## Conclusion
+# Conclusion
 
 There are many different options for calling an AWS Lambda via HTTP, and while
 it's fairly obvious that each of them would have different setup instructions I
 found that the variance in their behaviours was enough to trip me up many
-times. Hopefully the above information will be useful to decide which option is
-best and avoid it's gotchas the next time either of us wants to call a Lambda
-over HTTP.
+times. Hopefully the above information will be useful to avoid the gotchas in
+your chosen option the next time either of us wants to call a Lambda over HTTP.
+
+
+
+<a id="custom-domain-setup"></a> 
+
+#### Appendix: Custom Domains and API Gateway
+
+Setting up a Custom Domain works the same way for all API Gateway options. To
+limit repetition here are the setup instructions all in one place:
+- [Create a Certificate](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains-prerequisites.html) if you don't already have one
+- Setup a [Custom Domain](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html) in API Gateway
+- [Add an A record to Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
+  - Use an alias to point to your Custom Domain
+- In the Custom Domain [add an API Mapping](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html) to the stage of your API
