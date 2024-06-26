@@ -1,6 +1,4 @@
 ---
-draft: true
-token: '4321'
 author: 'jdt'
 title: 'JUXT Cast: Distributed Consistency — with András Gerlits'
 description: 'A discussion with András Gerlits on the central role of consistency in software and information systems'
