@@ -3,7 +3,7 @@ draft: true
 token: '4321'
 author: 'jdt'
 title: 'JUXT Cast: Distributed Consistency — with András Gerlits'
-description: 'A discussion with András Gerlits on the central role of consistency in software and information systems.'
+description: 'A discussion with András Gerlits on the central role of consistency in software and information systems'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-06-26'
@@ -32,6 +32,6 @@ At the end of the recording we mentioned the XT24 conference that took place in 
 
 ### Addendum
 
-This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/469dbc7a/juxt-cast-sane-query-languages-with-prof-viktor-leis).
+This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/b3c22a7c/distributed-consistency-with-andr-s-gerlits).
 
 Happy listening!
