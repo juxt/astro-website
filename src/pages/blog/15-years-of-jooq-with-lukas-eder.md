@@ -16,7 +16,7 @@ Our guest is Lukas Eder, creator of [jOOQ](https://jooq.org/) - a fluent Java AP
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/W2uavVs3BsI?si=U5cd0I9EKXd8C5-5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-In this episode we discussed the often under-appreciated power and significance of SQL for developers, and how Lukas' jOOQ library helps Java developers sidestep the pitfalls of ORMs.
+In this podcast episode, we discussed the often under-appreciated power and significance of SQL for developers, and how Lukas' jOOQ library helps Java developers sidestep the pitfalls of ORMs.
 
 Lukas has been developing jOOQ since 2009 and has diligently supported many thousands of companies with their use of relational databases since then. He has written huge amounts of documentation and blogged extensively to advocate for SQL.
 
