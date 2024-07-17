@@ -10,6 +10,8 @@ tags:
   - 'fintech'
   - 'conference'
   - 'AI'
+  - 'tech talks'
+  - 'XT24'
 ---
 
 On May 9th, 2024, JUXT held its [XT24 Fintech Conference](https://www.juxt.pro/xt24/) in Milton Keynes.
