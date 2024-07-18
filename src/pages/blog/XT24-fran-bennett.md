@@ -4,7 +4,7 @@ title: 'AI: Unintended Consequences'
 description: "Watch Francine Bennett's talk at XT24 Fintech Conference"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2024-07-17'
+publishedDate: '2024-07-18'
 heroImage: 'francine-bennett.jpg'
 tags:
   - 'fintech'
