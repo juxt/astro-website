@@ -4,7 +4,7 @@ title: 'JUXT Cast: 50 Years of SQL, 15 Years of jOOQ — with Lukas Eder'
 description: 'A discussion with Lukas Eder on the enduring nature of SQL, its ecosystem, and his role within it'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2024-07-18'
+publishedDate: '2024-07-23'
 heroImage: 'JuxtCast-dark.jpg'
 tags:
   - 'sql'
