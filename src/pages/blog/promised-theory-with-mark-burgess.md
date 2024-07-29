@@ -1,7 +1,7 @@
 ---
 author: 'mal'
 title: 'JUXT Cast: Promised Theory with Mark Burgess'
-description: 'Mark's journey to developing Promised Theory, techniques scaling simplicty to build reliable systems, and much more'
+description: 'Mark's journey to developing Promised Theory, techniques scaling simplicity to build reliable systems, and much more'
 category: 'architecture'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-08-02'
