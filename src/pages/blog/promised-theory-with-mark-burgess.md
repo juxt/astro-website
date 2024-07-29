@@ -12,7 +12,7 @@ tags:
   - 'podcast'
 ---
 
-In this podcast epoisode, JUXT Head of Delivery Joe Littlejohn, XTDB Head of Product Jeremy Taylor, and I spoke with guest Mark Burgess, an independent researcher and writer.
+In this podcast episode, JUXT Head of Delivery Joe Littlejohn, XTDB Head of Product Jeremy Taylor, and I spoke with guest Mark Burgess, an independent researcher and writer.
 
 Formerly a professor at Oslo University College in Norway and the creator of the CFEngine software and company, Mark was invited to write the [foreward](https://sre.google/sre-book/foreword/) to Google's 2016 book: "Site Reliability Engineering - How Google runs production systems".
 
