@@ -1,20 +1,20 @@
 ---
 author: 'osm'
-layout: '../../layouts/BlogPost.astro'
 title: 'Calling AWS Lambda over HTTP'
 description: 'Learning too much about calling a Lambda over HTTP'
 category: 'architecture'
+layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-07-29'
-tags:
-  - http
-  - aws
-  - lambda
-  - 'api gateway'
-  - cloudfront
 heroImage: 'http-lambda-blog-osm.jpg'
+tags:
+  - 'http'
+  - 'aws'
+  - 'lambda'
+  - 'api gateway'
+  - 'cloudfront'
 ---
 
-{/\*
+{/*
 
 The requirement that this blog post fulfils is:
 As a developer, I want to know:
@@ -27,7 +27,7 @@ As a developer, I want to know:
   - What other quirks are there?
     And I want to have it all in one place.
 
-\*/}
+*/}
 
 There are three different methods to call an AWS Lambda over HTTP externally:
 [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html),
