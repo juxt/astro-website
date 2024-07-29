@@ -4,7 +4,7 @@ layout: '../../layouts/BlogPost.astro'
 title: 'Calling AWS Lambda over HTTP'
 description: 'Learning too much about calling a Lambda over HTTP'
 category: 'architecture'
-publishedDate: '2024-06-11'
+publishedDate: '2024-07-29'
 tags:
   - http
   - aws
@@ -14,19 +14,20 @@ tags:
 heroImage: 'http-lambda-blog-osm.jpg'
 ---
 
-{/*
+{/\*
 
 The requirement that this blog post fulfils is:
 As a developer, I want to know:
+
 - What different ways are there I can call a lambda over HTTP
 - For each of those:
   - What is the formats of requests and responses?
   - What happens if the request/response is in the wrong format?
   - What happens if exceptions are thrown?
   - What other quirks are there?
-And I want to have it all in one place.
+    And I want to have it all in one place.
 
-*/}
+\*/}
 
 There are three different methods to call an AWS Lambda over HTTP externally:
 [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html),
@@ -39,11 +40,10 @@ and setup instructions. I ended up with 20+ tabs open and even wrote bunch of
 test cases to learn more. I thought I would collect all that together in one
 place to share with you all (and my future self).
 
-
-
 ## Methodology
 
 While researching, the questions tried to answer were:
+
 1. How do I set this up?
 2. What are the input and output formats?
 3. What happens if I don't use those formats?
@@ -54,7 +54,7 @@ Mostly I can link you to the relevant section of the docs, but for some
 questions I needed to run experiments. The tests I ran were:
 
 | Test                  | Command                                                                |
-| ---                   | ---                                                                    |
+| --------------------- | ---------------------------------------------------------------------- |
 | Valid JSON request    | `curl -v -XPOST --data '{}' <url under test>`                          |
 | Invalid JSON request  | `curl -v -XPOST --data '{'  <url under test>`                          |
 | Valid JSON response   | Covered by that first test                                             |
@@ -62,7 +62,7 @@ questions I needed to run experiments. The tests I ran were:
 | Exception thrown      | `curl -v -XPOST --data '{}' --header 'Test: error'   <url under test>` |
 
 And the Clojure code I used to setup the lambda was (no Clojure knowledge is needed for the rest of this post):
-  
+
 ```clojure
 (ns lambda
   (:gen-class
@@ -92,6 +92,7 @@ when this is the case.
 
 Most services have multiple ways of configuring them, the methods I'm covering
 are:
+
 - [Plain Function URLs](#plain-function-urls)
 - [Function URLs + CloudFront](#function-urls--cloudfront)
 - [ALB](#alb)
@@ -99,19 +100,16 @@ are:
 - [API Gateway w/ REST API](#api-gateway-w-rest-api)
 - [API Gateway w/ REST API & Lambda Proxy Integration](#api-gateway-w-rest-api--lambda-proxy-integration)
 
-
-
 ## Which should you choose?
 
 Before we start, this article doesn't aim to judge which option of these fits
 your requirements. But if you want to know which to check out first I would
 suggest:
+
 - If you want just a URL with one lambda on the other end:
   - If you don't want a custom domain: [Plain Function URLs](#plain-function-urls)
-  - If you *do* want a custom domain: [Function URLs + CloudFront](#function-urls--cloudfront)
+  - If you _do_ want a custom domain: [Function URLs + CloudFront](#function-urls--cloudfront)
 - Otherwise try: [ALBs](#alb) or [API Gateway w/ REST & Lambda Proxy Integration](#api-gateway-w-rest-api--lambda-proxy-integration)
-
-
 
 ## Plain Function URLs
 
@@ -130,7 +128,7 @@ formats are in JSON.
 Here are the results of my tests:
 
 | Test                  | Status Code | Response Body           | `input` in lambda          |
-| ---                   | ---         | ---                     | ---                        |
+| --------------------- | ----------- | ----------------------- | -------------------------- |
 | Valid JSON request    | `200`       | `{}`                    | The JSON formatted request |
 | Invalid JSON request  | `200`       | `{}`                    | The JSON formatted request |
 | Invalid JSON response | `200`       | `{`                     | The JSON formatted request |
@@ -141,21 +139,20 @@ being invalid JSON) a `200` response is assumed! That said it's unlikely to run
 into this in practice, how often do you hand craft your response after all?
 Just be wary if you are.
 
-
-
 ## Function URLs + CloudFront
 
 This option allows you to create a [TLD](https://en.wikipedia.org/wiki/Top-level_domain)
 that points at your Lambda Function URL. The behaviour mostly identical to
-Function URLs but I have included it because of one *gotcha* in the setup that
+Function URLs but I have included it because of one _gotcha_ in the setup that
 can change the behaviour.
 
 The setup is:
-- [Create a Function URL](https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html#create-url-console) 
-(same as above)
+
+- [Create a Function URL](https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html#create-url-console)
+  (same as above)
 - [Create your CloudFront Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html)
   - For **origin domain** choose your **Function URL**
-  - For **Allowed HTTP methods** choose all the methods you plan to use (this is the *gotcha* I mentioned)
+  - For **Allowed HTTP methods** choose all the methods you plan to use (this is the _gotcha_ I mentioned)
 - If you want a custom domain, [add an A record to Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
   - Use an alias to point to your Distribution's URL
   - Make sure to setup [**Alternative domain names**](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCNAME) in the distribution
@@ -165,12 +162,12 @@ As mentioned, this option uses Function URLs under the hood so the [request](htt
 and [response](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html#urls-response-payload)
 formats are the same as above.
 
-Because we have our additional *gotcha*, I've added an additional test for when
+Because we have our additional _gotcha_, I've added an additional test for when
 the `POST` method is disabled in CloudFront. For this test I used the same
 command as in "Valid JSON request":
 
 | Test                  | Status Code | Response Body             | `input` in lambda          |
-| ---                   | ---         | ---                       | ---                        |
+| --------------------- | ----------- | ------------------------- | -------------------------- |
 | Valid JSON request    | `200`       | `{}`                      | The JSON formatted request |
 | Invalid JSON request  | `200`       | `{}`                      | The JSON formatted request |
 | Invalid JSON response | `200`       | `{`                       | The JSON formatted request |
@@ -180,8 +177,6 @@ command as in "Valid JSON request":
 This last test result was very confusing to me initially because I missed the
 **Allowed HTTP methods** option initially. Once setup correctly though I had no
 issues, so this is only a problem during initial setup.
-
-
 
 ## ALB
 
@@ -194,7 +189,7 @@ misconfigured.
 The [request](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html#receive-event-from-load-balancer)
 and [response](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html#respond-to-load-balancer)
 formats are similar but slightly different to the Function URL formats. The
-major difference is in behaviour, ALBs are more *strict* with the response
+major difference is in behaviour, ALBs are more _strict_ with the response
 format.
 
 Because of this strictness I wanted to test the case where the response
@@ -206,31 +201,30 @@ Because of this strictness I wanted to test the case where the response
 -                "{}") ; output valid JSON
 +                (if (re-find #"valid" input)
 +                  ; 👇 Added an option to return JSON in the format that the ALB wants
-+                  "{\"isBase64Encoded\":false,\"statusCode\":200}" 
++                  "{\"isBase64Encoded\":false,\"statusCode\":200}"
 +                  "{}")) ; output valid JSON
     (spit os output))))
 ```
 
 I added an additional test using the command: `curl -v -XPOST --data '{}' --header 'Test: valid' <url under test>`
 
-| Test                  | Status Code | Response Body             | `input` in lambda          |
-| ---                   | ---         | ---                       | ---                        |
-| Valid JSON request    | `502`       | HTML for 502 Bad Gateway  | The JSON formatted request |
-| Invalid JSON request  | `502`       | HTML for 502 Bad Gateway  | The JSON formatted request |
-| Invalid JSON response | `502`       | HTML for 502 Bad Gateway  | The JSON formatted request |
-| Exception thrown      | `502`       | HTML for 502 Bad Gateway  | The JSON formatted request |
-| Valid response format | `200`       | (an empty body)           | The JSON formatted request |
+| Test                  | Status Code | Response Body            | `input` in lambda          |
+| --------------------- | ----------- | ------------------------ | -------------------------- |
+| Valid JSON request    | `502`       | HTML for 502 Bad Gateway | The JSON formatted request |
+| Invalid JSON request  | `502`       | HTML for 502 Bad Gateway | The JSON formatted request |
+| Invalid JSON response | `502`       | HTML for 502 Bad Gateway | The JSON formatted request |
+| Exception thrown      | `502`       | HTML for 502 Bad Gateway | The JSON formatted request |
+| Valid response format | `200`       | (an empty body)          | The JSON formatted request |
 
 As mentioned the response format is very strict, failing to use it means an
 obscure `502 Bad Gateway` error. Make sure to catch exceptions and always
 return the response in the correct format.
 
-
-
 ## API Gateway w/ HTTP API
 
 Using API Gateway presents a few options, but using HTTP APIs is the simplest
 option:
+
 - [Create your HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop.html)
   - For **Integrations** select **lambda**
   - For **Lambda function** choose your lambda
@@ -245,7 +239,7 @@ a `200` response.
 Here are my test results:
 
 | Test                  | Status Code | Response Body                         | `input` in lambda          |
-| ---                   | ---         | ---                                   | ---                        |
+| --------------------- | ----------- | ------------------------------------- | -------------------------- |
 | Valid JSON request    | `200`       | `{}`                                  | The JSON formatted request |
 | Invalid JSON request  | `200`       | `{}`                                  | The JSON formatted request |
 | Invalid JSON response | `500`       | `{"message":"Internal Server Error"}` | The JSON formatted request |
@@ -255,11 +249,10 @@ As mentioned these results are similar to Function URLs, to save you scrolling
 up the two main differences are: "Invalid JSON response" now returns a `500`
 instead of a `200`; and the body of `500` responses are now JSON.
 
-
-
 ## API Gateway w/ REST API
 
 Setting up a REST API is a tiny bit more involved:
+
 - [Create your API REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-api)
   - Choose **New API** instead of **Example API**
 - [Create your Lambda Integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-integration)
@@ -281,36 +274,36 @@ really changed:
 
 To test this setup I had to tweak two of the commands (the lambda code was kept
 the same):
-| Test                  | Command                                              |
-| ---                   | ---                                                  |
+| Test | Command |
+| --- | --- |
 | Invalid JSON response | `curl -v -XPOST --data '"invalid"' <url under test>` |
-| Exception thrown      | `curl -v -XPOST --data '"error"'   <url under test>` |
+| Exception thrown | `curl -v -XPOST --data '"error"'   <url under test>` |
 
 And now for the tests:
 
-| Test                  | Status Code | Response Body                                               | `input` in lambda            |
-| ---                   | ---         | ---                                                         | ---                          |
-| Valid JSON request    | `200`       | `{}`                                                        | `{}` (the input body)        |
-| Invalid JSON request  | `400`       | A JSON object with a `message` field explaining parse error | Nothing                      |
-| Invalid JSON response | `200`       | `{`                                                         | `"invalid"` (the input body) |
-| Exception thrown      | `200`       | A JSON object in [this format](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html#handle-standard-errors-in-lambda-integration) showing the error thrown   | `"error"` (the input)   |
+| Test                  | Status Code | Response Body                                                                                                                                                                                               | `input` in lambda            |
+| --------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| Valid JSON request    | `200`       | `{}`                                                                                                                                                                                                        | `{}` (the input body)        |
+| Invalid JSON request  | `400`       | A JSON object with a `message` field explaining parse error                                                                                                                                                 | Nothing                      |
+| Invalid JSON response | `200`       | `{`                                                                                                                                                                                                         | `"invalid"` (the input body) |
+| Exception thrown      | `200`       | A JSON object in [this format](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html#handle-standard-errors-in-lambda-integration) showing the error thrown | `"error"` (the input)        |
 
 A couple things to note here:
+
 1. If the request is not valid JSON, your function won't be called.
    I was not able to find a way around this in my testing, please let me know if I missed something.
 2. Throwing an error gets you a `200` by default.
    The official way to handle this is to configure the **Lambda error regex**
-   which is matched against the *errorMessage* property in the response (as
+   which is matched against the _errorMessage_ property in the response (as
    noted [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings-execution-console.html)
-   in the final *Note* box, search for *errorMessage*). Luckily exceptions are
+   in the final _Note_ box, search for _errorMessage_). Luckily exceptions are
    already formatted this way, but note that you can also return JSON in this
    format if you like.
-
-
 
 ## API Gateway w/ REST API & Lambda Proxy Integration
 
 The setup is nearly identical to the above:
+
 - [Create your API REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-api)
   - Choose **New API** instead of **Example API**
 - [Create your Lambda Integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-rest-new-console.html#getting-started-rest-new-console-create-integration)
@@ -323,19 +316,17 @@ formats are similar to the Function URL formats but with enough small
 differences that it's worth you taking a look at them.
 
 And here are my test results (using the original commands):
-| Test                  | Status Code | Response Body                          | `input` in lambda          |
-| ---                   | ---         | ---                                    | ---                        |
-| Valid JSON request    | `200`       | (an empty body)                        | The JSON formatted request |
-| Invalid JSON request  | `200`       | (an empty body)                        | The JSON formatted request |
-| Invalid JSON response | `502`       | `{"message": "Internal server error"}` | The JSON formatted request |
-| Exception thrown      | `502`       | `{"message": "Internal server error"}` | The JSON formatted request |
+| Test | Status Code | Response Body | `input` in lambda |
+| --- | --- | --- | --- |
+| Valid JSON request | `200` | (an empty body) | The JSON formatted request |
+| Invalid JSON request | `200` | (an empty body) | The JSON formatted request |
+| Invalid JSON response | `502` | `{"message": "Internal server error"}` | The JSON formatted request |
+| Exception thrown | `502` | `{"message": "Internal server error"}` | The JSON formatted request |
 
 The results here are very similar to using API Gateway w/ HTTP API, the main
 difference being that if you don't conform to the output format (i.e. you have
-valid JSON but an invalid format) it *doesn't* fill the body of the request
+valid JSON but an invalid format) it _doesn't_ fill the body of the request
 with your original response.
-
-
 
 # Conclusion
 
