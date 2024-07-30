@@ -1,7 +1,7 @@
 ---
 author: 'mal'
-title: 'JUXT Cast: Promised Theory with Mark Burgess'
-description: 'The journey of Mark to developing Promised Theory, techniques scaling simplicity to build reliable systems, and much more'
+title: 'JUXT Cast: Promise Theory with Mark Burgess'
+description: 'The journey of Mark to developing Promise Theory, techniques scaling simplicity to build reliable systems, and much more'
 category: 'architecture'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-08-02'
@@ -18,7 +18,7 @@ In this podcast episode, JUXT Head of Delivery Joe Littlejohn, XTDB Head of Prod
 
 Formerly a professor at Oslo University College in Norway and the creator of the CFEngine software and company, Mark was invited to write the [foreward](https://sre.google/sre-book/foreword/) to Google's 2016 book: "Site Reliability Engineering - How Google runs production systems".
 
-We discussed Mark's journey to developing Promised Theory and explored techniques to 'scale simplicity' in the creation of large, reliable systems. One common (yet false) assumption is that all components of a system can be trusted to be 100% reliable. This misconception can lead to costly workarounds in production.
+We discussed Mark's journey to developing Promise Theory and explored techniques to 'scale simplicity' in the creation of large, reliable systems. One common (yet false) assumption is that all components of a system can be trusted to be 100% reliable. This misconception can lead to costly workarounds in production.
 
 We touched on the 'congruence' debate, considering whether and to what extent we should be concerned with the inherent inefficiencies in 'the automated building of things from scratch.'
 
@@ -28,6 +28,6 @@ Please let us know if you have any points to add or if you were inspired by any 
 
 ### Addendum
 
-This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/317a3071/promised-theory-with-mark-burgess).
+This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/317a3071/promise-theory-with-mark-burgess).
 
 Happy listening!
