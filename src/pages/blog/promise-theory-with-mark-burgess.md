@@ -4,7 +4,7 @@ title: 'JUXT Cast: Promise Theory with Mark Burgess'
 description: 'The journey of Mark to developing Promise Theory, techniques scaling simplicity to build reliable systems, and much more'
 category: 'architecture'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2024-08-02'
+publishedDate: '2024-08-05'
 heroImage: 'JuxtCast-dark.jpg'
 tags:
   - 'reliability'
