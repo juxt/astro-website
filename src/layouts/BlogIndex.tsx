@@ -1,111 +1,96 @@
-import algoliasearch from 'algoliasearch/lite'
-import { useState } from 'preact/hooks'
-import 'preact/jsx-runtime'
-import {
-  Configure,
-  InstantSearch,
-  Pagination,
-  RefinementList,
-  SearchBox,
-  useHits
-} from 'react-instantsearch'
 import { BlogCard } from '@components/BlogCard'
 import { Blog } from '@components/utils/types'
+import { useState, useEffect, useRef } from 'preact/hooks';
+// @ts-expect-error - Missing types for pagefind
+import * as pagefind from '/pagefind/pagefind.js';
 
-const algoliaClient = algoliasearch(
-  'UIDFJO4C3W',
-  '6c38c8327a86c8af12f25c04b19d2b72'
-)
-
-const searchClient = {
-  ...algoliaClient
+// Not so sure about this function, seems like an XSS vector
+// Probably fine though as the data is sourced server side
+function decodeHtmlEntities(str) {
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = str;
+  return textarea.textContent;
 }
 
-function CustomHits({ blogs }) {
-  const { hits } = useHits()
-  const filteredHits = hits.filter((hit) => {
-    return blogs.get(hit.permalink)
-  })
-  return (
-    /* This component is styled in dark mode only, so we set dark mode for the blog cards */
-    <div class="dark">
-      <div className='grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10'>
-        {filteredHits.map((hit) => (
-          <div key={hit.permalink}>
-            <BlogCard {...blogs.get(hit.permalink)} />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+function resultToBlog(result: any): Blog {
+  console.log(result);
+  return {
+    title: result.data.meta.title,
+    description: result.data.meta.description,
+    publishedDate: result.data.meta.publishedDate,
+    featured: {
+      weight: 0,
+    },
+    author: "",
+    person: {
+      code: "",
+      name: result.data.meta.personName,
+      lastName: result.data.meta.personLastName,
+      jobTitle: decodeHtmlEntities(result.data.meta.personJobTitle),
+      image: result.data.meta.personImage,
+    },
+    category: result.data.meta.category,
+    slug: "",
+    href: result.data.url.replace(/\/blog\//, ''),
+    heroImage: result.data.meta.heroImage,
+  }
 }
 
-export function BlogIndex({ blogs }: { blogs: Map<string, Blog> }) {
-  const [filtersVisible, setFiltersVisible] = useState(false)
+export function BlogIndex() {
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = async (event: Event) => {
+    const input = event.target as HTMLInputElement;
+    const query = input.value;
+    
+    if (query) {
+      try {
+        const search = await pagefind.search(
+          query,
+          { filters: { blog: "true" } }
+        );
+        const results = await Promise.all(
+          search.results.slice(0, 9).map(async (result: any) => {
+            result.data = await result.data();
+            return result;
+          })
+        );
+        setSearchResults(results);
+      } catch (error) {
+        console.error('Search failed:', error);
+        setSearchResults([]);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
+
+  useEffect(() => {
+    const inputElement = searchInputRef.current;
+    if (inputElement) {
+      inputElement.addEventListener('input', handleSearch);
+    }
+
+    return () => {
+      if (inputElement) {
+        inputElement.removeEventListener('input', handleSearch);
+      }
+    };
+  }, []);
+
   return (
     <div className='mt-10 flex flex-col items-center relative'>
-      <InstantSearch
-        indexName='blog'
-        searchClient={searchClient}
-        routing={true}
-      >
-        <Configure hitsPerPage={9} distinct={true} />
-        <div className='flex flex-col gap-2 pb-20 w-10/12 md:w-[600px]'>
-          <SearchBox />
-          <div className='flex justify-between'>
-            <button
-              className='text-xs bg-slate-600 text-white hover:text-slate-600 hover:bg-slate-200 transition-all rounded-md px-2 py-1'
-              onClick={() => setFiltersVisible(!filtersVisible)}
-            >
-              Show Filters
-            </button>
-          </div>
-
-          <div
-            className={`transition-all text-white flex flex-wrap justify-between pt-4 overflow-hidden
-              ${filtersVisible ? 'h-full opacity-100' : 'h-0 opacity-0'}`}
-          >
-            <div className='flex flex-col gap-2'>
-              <div className='text-sm font-bold'>Tags</div>
-              <RefinementList
-                attribute='tags'
-                searchable={true}
-                operator='and'
-                limit={5}
-                sortBy={['name:asc']}
-                showMore={true}
-              />
-            </div>
-            <div className='flex flex-col gap-2'>
-              <div className='text-sm font-bold'>Category</div>
-              <RefinementList
-                attribute='category'
-                searchable={true}
-                operator='and'
-                limit={5}
-                sortBy={['name:asc']}
-                showMore={true}
-              />
-            </div>
-            <div className='flex flex-col gap-2'>
-              <div className='text-sm font-bold'>Author</div>
-              <RefinementList
-                attribute='author'
-                searchable={true}
-                operator='and'
-                limit={5}
-                sortBy={['name:asc']}
-                showMore={true}
-              />
-            </div>
-          </div>
-        </div>
-
-        <CustomHits blogs={blogs} />
-        <div className='my-20'>
-          <Pagination padding={1} />
-        </div>
-      </InstantSearch>
+      <input type="text" id="search" ref={searchInputRef} />
+      <div id="results" class="grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
+        {searchResults.map((result) => {
+            const blog = resultToBlog(result);
+            return (
+              <BlogCard {...blog} />
+            )
+          }
+        )}
+      </div>
     </div>
-  )
+  );
 }

@@ -4,38 +4,8 @@ import { MarkdownInstance } from 'astro'
 import { parseBlogs } from '@utils/common'
 import Banner from '@components/Banner.astro'
 import { Blog, Person } from '@utils/types'
-import { BlogIndex } from '@layouts/BlogIndex'
+import { BlogIndex } from '@layouts/BlogIndex.tsx'
 import Layout from '@layouts/Layout.astro'
-
-const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
-
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../../data/people/{*.mdx,*.md}'
-)
-
-const peopleByCode = new Map(
-  people.map((person) => [person.frontmatter.code, person.frontmatter])
-)
-
-const isDev = import.meta.env.DEV
-
-const authorImageImport = {
-  heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
-  authorImageImport: (authorImage) =>
-    import(`../../assets/people/${authorImage}.jpg`)
-}
-
-const unfilteredBlogs = await parseBlogs({
-  rawBlogs: pages,
-  rawPeople: people,
-  isDev: isDev,
-  getImage,
-  ...authorImageImport
-})
-
-const blogs = unfilteredBlogs.filter(({ draft }) => isDev || !draft)
-
-const blogsByHref = new Map(blogs.map((blog) => [blog.href, blog]))
 
 const blogBannerPicture = await getImage({
   src: import('../../assets/site/blog-banner.jpeg'),
@@ -51,6 +21,11 @@ const blogBannerPicture = await getImage({
       text='Blog'
       style={{ backgroundImage: `url(${blogBannerPicture})` }}
     />
-    <BlogIndex client:only='preact' blogs={blogsByHref} />
+    { import.meta.env.PROD && <BlogIndex client:only='preact' /> }
+    {
+      // The reason for this is that pagefind requires the fully built, static site to build it's indexes
+      !import.meta.env.PROD &&
+      <div class="text-white">Search disabled on dev builds</div>
+    }
   </div>
 </Layout>

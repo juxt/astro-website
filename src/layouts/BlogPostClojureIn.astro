@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets'
+import { getImage, Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import '../blog.css'
 import DraftBanner from '@components/DraftBanner'
@@ -28,6 +28,17 @@ const blogs = await Astro.glob<MarkdownInstance<Blog>>(
 const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 )
+
+const person = people.find((person) => person.frontmatter.code === author)
+
+if (!person) {
+  throw new Error(`Author ${author} not found`)
+}
+
+const {
+  frontmatter: { name, lastName, jobTitle, image }
+} = person
+const personImageFilename = image.split('.').slice(0, -1)
 
 const blogsWithoutCurrent = blogs.filter(
   (blog) => blog.frontmatter.title !== title && !blog.frontmatter.draft
@@ -133,7 +144,22 @@ const clojureInPicture = await getImage({
   <div
     class='flex items-end w-full min-h-[30vh] bg-cover bg-[50%_55%]'
     style={{ backgroundImage: `url(${clojureInPicture})` }}
+    data-pagefind-filter="blog:true"
+    data-category={category}
+    data-published-date={publishedDate}
+    data-person-name={name}
+    data-person-last-name={lastName}
+    data-person-job-title={jobTitle}
+    data-pagefind-meta="category[data-category], publishedDate[data-published-date], personName=[data-person-name], personLastName[data-person-last-name], personJobTitle[data-person-job-title]"
   >
+    <Image
+      width={200}
+      quality={80}
+      alt='author picture'
+      class='hidden'
+      src={import(`../assets/people/${personImageFilename}.jpg`)}
+      data-pagefind-meta="personImage[src]"
+    />
     <div class='flex justify-center w-full'>
       <div class='flex flex-col gap-2 w-2/3'>
         <h1
@@ -143,6 +169,7 @@ const clojureInPicture = await getImage({
         </h1>
         <h2
           class='text-white drop-shadow-lg shadow-black tracking-widest font-sans text-2xl md:text-3xl lg:text-4xl'
+          data-pagefind-meta='description'
         >
           {description}
         </h2>
@@ -243,7 +270,7 @@ const clojureInPicture = await getImage({
                         </h3>
                         <h5 class='font-extralight'>{blog.description}</h5>
                       </div>
-                      <img class='' alt='blog' src={blog.heroImage} />
+                      <img class='' alt='blog' src={blog.heroImage} data-pagefind-meta="heroImage[src]" />
                       <div class='text-white font-semibold flex gap-2 items-center '>
                         Read more
                         <svg
