@@ -95,7 +95,10 @@ export function BlogIndex() {
       try {
         const search = await pagefind.search(
           query,
-          { filters: { blog: "true" } }
+          {
+            sort: { publishedDate: "desc" },
+            filters: { blog: "true" }
+          }
         );
         setSearchResults(search.results);
       } catch (error) {
