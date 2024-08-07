@@ -1,6 +1,6 @@
 import { BlogCard } from '@components/BlogCard'
 import { Blog } from '@components/utils/types'
-import { useState, useEffect, useRef } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 // @ts-expect-error - Missing types for pagefind
 import * as pagefind from '/pagefind/pagefind.js';
 
