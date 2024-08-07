@@ -141,7 +141,11 @@ export function BlogIndex() {
 
   return (
     <>
-      <input type="text" onInput={handleSearch} />
+      <input type="text"
+             onInput={handleSearch}
+             class="bg-gray-800 border border-gray-700 rounded-md p-2 w-96 text-white"
+             placeholder="Search blog posts..."
+             />
       <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={Math.floor(searchResults.length/pageSize)+1} />
       <div class="grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
         {page.map((result) => {
