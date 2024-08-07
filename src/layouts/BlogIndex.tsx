@@ -13,7 +13,6 @@ function decodeHtmlEntities(str) {
 }
 
 function resultToBlog(result: any): Blog {
-  console.log(result);
   return {
     title: result.data.meta.title,
     description: result.data.meta.description,
