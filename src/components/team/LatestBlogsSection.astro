@@ -16,9 +16,6 @@ if (bgColor) {
     bgClass += " " + bgColor;
 }
 
-// NOTE: This is an implementation from /algolia/index.cljs (when setting the "author")
-const searchName = (name && lastName) ? `${name}%20${lastName}` : null;
-
 const authorImageImport = {
   heroImageImport: (heroImage) => import(`../../assets/blog/${heroImage}.jpg`),
   authorImageImport: (authorImage) => import(`../../assets/people/${authorImage}.jpg`)
@@ -72,11 +69,8 @@ const blogs = filteredBlogs
   </div>
 
   <Section className="pb-20" {...Astro.props}>
-    {
-      searchName &&
-      <div class="pt-10 flex flex-col items-center">
-          <a class="bg-juxt px-4 py-3 text-white rounded-sm" href={"/blog?blog%5BrefinementList%5D%5Bauthor%5D%5B0%5D=" + searchName}>More...</a>
-      </div>
-    }
+    <div class="pt-10 flex flex-col items-center">
+        <a class="bg-juxt px-4 py-3 text-white rounded-sm" href={"/blog?personName=" + name + "&personLastName=" + lastName}>More...</a>
+    </div>
   </Section>
 </>

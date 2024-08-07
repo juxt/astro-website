@@ -85,6 +85,7 @@ export function BlogIndex() {
   const pageSize = 9;
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [page, setPage] = useState<any[]>([]);
+  const filters = Object.fromEntries(new URLSearchParams(location.search));
 
   const handleSearch = async (event: Event) => {
     const input = event.target as HTMLInputElement;
@@ -98,7 +99,7 @@ export function BlogIndex() {
         query,
         {
           sort: { publishedDate: "desc" },
-          filters: { blog: "true" }
+          filters: { blog: "true", ...filters }
         }
       );
       setSearchResults(search.results);

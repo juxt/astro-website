@@ -150,7 +150,8 @@ const clojureInPicture = await getImage({
     data-person-name={name}
     data-person-last-name={lastName}
     data-person-job-title={jobTitle}
-    data-pagefind-meta="category[data-category], publishedDate[data-published-date], personName=[data-person-name], personLastName[data-person-last-name], personJobTitle[data-person-job-title]"
+    data-pagefind-meta="category[data-category], publishedDate[data-published-date], personName[data-person-name], personLastName[data-person-last-name], personJobTitle[data-person-job-title]"
+    data-pagefind-filter="personName[data-person-name], personLastName[data-person-last-name]"
     data-pagefind-sort="publishedDate[data-published-date]"
   >
     <Image
