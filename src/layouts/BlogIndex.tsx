@@ -153,7 +153,7 @@ export function BlogIndex() {
         {page.map((result) => {
             const blog = resultToBlog(result);
             return (
-              <BlogCard {...blog} />
+              <BlogCard key={result.id} {...blog} />
             )
           }
         )}
