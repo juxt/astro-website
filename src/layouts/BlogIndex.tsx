@@ -147,7 +147,7 @@ export function BlogIndex() {
              class="bg-gray-800 border border-gray-700 rounded-md p-2 w-96 text-white"
              placeholder="Search blog posts..."
              />
-      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={Math.floor(searchResults.length/pageSize)+1} />
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={Math.ceil(searchResults.length/pageSize)} />
       { /* Set dark mode for BlogCard */ }
       <div class="dark grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
         {page.map((result) => {
