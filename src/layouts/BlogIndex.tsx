@@ -37,7 +37,6 @@ function resultToBlog(result: any): Blog {
 
 export function BlogIndex() {
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = async (event: Event) => {
     const input = event.target as HTMLInputElement;
@@ -65,21 +64,9 @@ export function BlogIndex() {
     }
   };
 
-  useEffect(() => {
-    const inputElement = searchInputRef.current;
-    if (inputElement) {
-      inputElement.addEventListener('input', handleSearch);
-    }
-
-    return () => {
-      if (inputElement) {
-        inputElement.removeEventListener('input', handleSearch);
-      }
-    };
-  }, []);
-
   return (
     <>
+      <input type="text" id="search" onInput={handleSearch} />
       <div id="results" class="grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
         {searchResults.map((result) => {
             const blog = resultToBlog(result);
