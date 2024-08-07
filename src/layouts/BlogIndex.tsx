@@ -79,8 +79,7 @@ export function BlogIndex() {
   }, []);
 
   return (
-    <div className='mt-10 flex flex-col items-center relative'>
-      <input type="text" id="search" ref={searchInputRef} />
+    <>
       <div id="results" class="grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
         {searchResults.map((result) => {
             const blog = resultToBlog(result);
@@ -90,6 +89,6 @@ export function BlogIndex() {
           }
         )}
       </div>
-    </div>
+    </>
   );
 }
