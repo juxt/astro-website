@@ -141,9 +141,9 @@ export function BlogIndex() {
 
   return (
     <>
-      <input type="text" id="search" onInput={handleSearch} />
+      <input type="text" onInput={handleSearch} />
       <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={Math.floor(searchResults.length/pageSize)+1} />
-      <div id="results" class="grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
+      <div class="grid md:grid-cols-[repeat(2,_24rem)] xl:grid-cols-[repeat(3,_24rem)] justify-center gap-10">
         {page.map((result) => {
             const blog = resultToBlog(result);
             return (
