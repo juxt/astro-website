@@ -88,27 +88,30 @@ export function BlogIndex() {
 
   const handleSearch = async (event: Event) => {
     const input = event.target as HTMLInputElement;
-    const query = input.value;
+    var query = input.value;
+    if (query == "") { query = null; }
+    console.log("Query: " + query);
     
     setPageNumber(0);
-    if (query) {
-      try {
-        const search = await pagefind.search(
-          query,
-          {
-            sort: { publishedDate: "desc" },
-            filters: { blog: "true" }
-          }
-        );
-        setSearchResults(search.results);
-      } catch (error) {
-        console.error('Search failed:', error);
-        setSearchResults([]);
-      }
-    } else {
+    try {
+      const search = await pagefind.search(
+        query,
+        {
+          sort: { publishedDate: "desc" },
+          filters: { blog: "true" }
+        }
+      );
+      setSearchResults(search.results);
+    } catch (error) {
+      console.error('Search failed:', error);
       setSearchResults([]);
     }
   };
+
+  // Initial search on load
+  useEffect(() => {
+    handleSearch({ target: { value: "" } } as unknown as Event);
+  }, []);
 
   useEffect(() => {
     async function fetchPage() {
