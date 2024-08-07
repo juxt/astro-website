@@ -5,7 +5,7 @@ title: 'Highly-effective Teams'
 description: 'The common traits of teams that work fast and build impressive things.'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '16 Jan 2024'
+publishedDate: '2024-01-16'
 heroImage: 'effective-teams.jpg'
 tags:
   - 'teams'
