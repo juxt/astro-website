@@ -27,7 +27,6 @@ const clientLogos = [
   'vodafone.svg',
   'on-the-market.svg',
   'mail-online.svg',
-  'bbc.svg'
 ]
 
 function Form() {
