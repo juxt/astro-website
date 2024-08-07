@@ -141,7 +141,12 @@ const categoryHref = `/blog?${encodeURI(
   ogImage={heroImageFilename}
 >
   <DraftBanner draft={draft} pageName='Blog' />
-  <main class='transition-colors dark:bg-gray-900'>
+  <main
+    class='transition-colors dark:bg-gray-900'
+    data-pagefind-filter="blog:true"
+    data-published-date={publishedDate}
+    data-pagefind-meta="publishedDate[data-published-date]"
+  >
     <div class='px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>
       <div class='flex flex-col lg:flex-row gap-12 items-center pt-10'>
         <div
@@ -152,6 +157,7 @@ const categoryHref = `/blog?${encodeURI(
             <a
               href={categoryHref}
               class='text-juxt hover:underline font-medium font-mono dark:text-zinc-300 uppercase text-sm'
+              data-pagefind-meta="category"
             >
               {category}
             </a>
@@ -165,7 +171,7 @@ const categoryHref = `/blog?${encodeURI(
           >
             {title}
           </h1>
-          <h2 class='text-lg text-zinc-600 dark:text-zinc-300'>
+          <h2 class='text-lg text-zinc-600 dark:text-zinc-300' data-pagefind-meta="description">
             {description}
           </h2>
           <a
@@ -183,10 +189,16 @@ const categoryHref = `/blog?${encodeURI(
                   alt='author picture'
                   class='absolute w-full h-full object-cover'
                   src={import(`../assets/people/${personImageFilename}.jpg`)}
+                  data-pagefind-meta="personImage[src]"
                 />
               </div>
             </div>
-            <div class='flex flex-col gap-1 text-left'>
+            <div class='flex flex-col gap-1 text-left'
+                 data-name={name}
+                 data-last-name={lastName}
+                 data-job-title={jobTitle}
+                 data-pagefind-meta="personName[data-name], personLastName[data-last-name], personJobTitle[data-job-title]"
+            >
               {
                 name && lastName && (
                   <div
@@ -215,6 +227,7 @@ const categoryHref = `/blog?${encodeURI(
           quality={90}
           class='w-full max-w-3xl lg:max-w-none lg:w-1/2 aspect-square object-cover'
           src={import(`../assets/blog/${heroImageFilename}.jpg`)}
+          data-pagefind-meta="heroImage[src]"
         />
       </div>
 
