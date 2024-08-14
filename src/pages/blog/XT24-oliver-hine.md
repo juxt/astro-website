@@ -22,4 +22,4 @@ The [XT24 Fintech Conference](https://www.juxt.pro/xt24/), hosted by JUXT in Mil
 
 A well-defined JSON schema brings a multitude of advantages. It facilitates the auto-generation of rich user interfaces and establishes clear contracts between services. These benefits streamline development processes, enhance interoperability, and contribute to the creation of more robust and maintainable systems. Hine's layered approach effectively conveyed the significance of JSON schema in modern data modeling, making his talk a significant highlight of the XT24 conference.
 
-Access Oliver’s slides <a href="/slides/Francine-Bennett-AI.pdf" target="_blank">here.</a>
+Access Oliver’s slides <a href="/slides/oliver-hine_We-need-to-talk-about-JSON.pdf" target="_blank">here.</a>
