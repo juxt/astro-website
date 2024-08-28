@@ -1,8 +1,8 @@
 ---
 author: 'mtf'
 layout: '../../layouts/BlogPost.astro'
-title: '"Safari": Engineering Session: Git Plumbing [video]'
-description: 'Watch this talk to gain an understanding of how git works — hopefully giving you an "under the hood" look at what's going on when you issue git commands'
+title: '"Safari" Engineering Session: Git Plumbing - Video'
+description: 'Watch this talk to gain an understanding of how git works — hopefully giving you an "under the hood" look at what is going on when you issue git commands'
 category: 'architecture'
 publishedDate: '2024-08-28'
 tags:
