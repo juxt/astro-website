@@ -1,8 +1,8 @@
 ---
 author: 'mtf'
 layout: '../../layouts/BlogPost.astro'
-title: 'Safari: "Git Plumbing"'
-description: 'The Internals of Git'
+title: '"Safari": Engineering Session: Git Plumbing [video]'
+description: 'Watch this talk to gain an understanding of how git works — hopefully giving you an "under the hood" look at what's going on when you issue git commands'
 category: 'architecture'
 publishedDate: '2024-08-28'
 tags:
