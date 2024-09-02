@@ -4,6 +4,7 @@ location: 'London / Remote'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Python Engineer'
+draft: true
 weight: 1
 googleJobs:
   {
@@ -19,7 +20,7 @@ JUXT is seeking experienced engineers to join a critical client project. You’l
 
 This project is leading Generative AI development and integration across the bank. This includes developer enablement work as well as Gen AI-based tooling for business users. For example, the generation of database queries from free text, and the generation of client reports based on the results from these queries.
 
-The ideal candidate is a seasoned Python developer with hands-on experience in engineering transformative solutions using open-source tech, and deep experience in varied language stacks *(Python is the main requirement, but experience in other languages would be beneficial)*. We expect candidates who apply to this role to be well versed in hybrid i.e. on-prem enterprise and cloud technologies.
+The ideal candidate is a seasoned Python developer with hands-on experience in engineering transformative solutions using open-source tech, and deep experience in varied language stacks _(Python is the main requirement, but experience in other languages would be beneficial)_. We expect candidates who apply to this role to be well versed in hybrid i.e. on-prem enterprise and cloud technologies.
 
 ## Responsibilities
 
@@ -28,7 +29,7 @@ The ideal candidate is a seasoned Python developer with hands-on experience in e
 - Working with PDF parsing and/or OCR (optical character recognition)
 - Building data pipelines and working with large-scale, enterprise systems
 - Developing robust, reusable code with a focus on core engineering, building
-libraries and frameworks
+  libraries and frameworks
 
 ## Experience required
 
