@@ -3,7 +3,7 @@ layout: '../../layouts/CareerPost.astro'
 location: 'Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior/Principal Engineer - Data Warehousing'
+position: 'Senior/Principal Engineer - Data'
 weight: 2
 googleJobs:
   {
