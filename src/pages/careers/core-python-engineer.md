@@ -3,12 +3,12 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Remote'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior Core Phyton Engineer'
+position: 'Senior Core Python Engineer'
 weight: 1
 googleJobs:
   {
     location: 'London',
-    position: 'Senior Core Phyton Engineer',
+    position: 'Senior Core Python Engineer',
     publishedDate: '2024-09-03'
   }
 ---
