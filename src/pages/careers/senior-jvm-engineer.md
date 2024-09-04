@@ -16,7 +16,6 @@ googleJobs:
 ## About
 
 JUXT is a cutting-edge software consultancy that delivers innovation to large enterprises and
-JUXT is a cutting-edge software consultancy that delivers innovation to large enterprises and
 high-performing organisations.
 
 Our projects come in all shapes and sizes, from building large systems for Tier 1 investment
@@ -31,7 +30,6 @@ make mature decisions about the direction of the projects they work on.
 
 ## The Role
 
-We are about to embark on an exciting greenfield project with a tier one investment bank,
 We are about to embark on an exciting greenfield project with a tier one investment bank,
 who have been a long standing client of ours. We are building new data warehousing tools,
 pulling data from a variety of trading systems, in order to comply with banking data
