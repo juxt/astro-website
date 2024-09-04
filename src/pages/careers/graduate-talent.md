@@ -28,7 +28,6 @@ transformation projects.
 
 ## The Role
 
-We are about to embark on an exciting greenfield project with a tier one investment bank,
 We are about to embark on a huge growth drive as we expand our client base, with several new
 projects kicking off this year. We want you to be part of this exciting journey, playing a pivotal part in
 facilitating the resourcing of these strategic projects across our organisation. You will help us to grow
