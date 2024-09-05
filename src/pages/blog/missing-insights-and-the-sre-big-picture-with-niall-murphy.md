@@ -16,7 +16,7 @@ Our guest is <a href="https://relyabilit.ie/">Niall Murphy</a>, CEO of [Stanza](
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/W2uavVs3BsI?si=U5cd0I9EKXd8C5-5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-In this podcast episode we discussed Niall's extensive experiences including his role within an important era for Google's infrastructure transformation beginning in the late 2000s, and the wider contemporary challenges in the SRE landscape.
+In this podcast episode we discussed Niall's extensive experience including his role within an important era for Google's infrastructure transformation beginning in the late 2000s, and the wider contemporary challenges in the SRE landscape.
 
 Niall's reflections on operating distributed systems has lead him to the conclusion that there is still a profound missing gap in SRE tooling between discovering 'signals' and taking 'actions'.
 
