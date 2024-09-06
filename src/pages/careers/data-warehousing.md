@@ -8,7 +8,7 @@ weight: 2
 googleJobs:
   {
     location: 'London',
-    position: 'Senior/Principal Engineer - Data Warehousing',
+    position: 'Senior/Principal Engineer - Markets Data',
     publishedDate: '2024-09-03'
   }
 ---
@@ -50,15 +50,14 @@ delivery-focused mindset is essential.
 
 ## Experience Required
 
-- Solid Kotlin or Java experience (7+ years)
+- Solid Java experience (7+ years)
 - Previous experience working with investment banking trade data
 - Strong experience creating data/ETL pipelines
 - In-depth knowledge of data warehousing tools
 - Proven track record building data warehouse systems with large data sets
 - Good understanding of tracking data lineage
 - Phenomenal communication and interpersonal skills
-- Experience dealing with multiple stakeholders and understanding business
-  requirements
+- Experience dealing with multiple stakeholders and understanding business requirements
 
 ## Nice-to-haves
 

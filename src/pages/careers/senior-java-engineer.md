@@ -3,12 +3,12 @@ layout: '../../layouts/CareerPost.astro'
 location: 'Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior/Principal JVM Engineer'
+position: 'Senior/Principal Java Engineer'
 weight: 3
 googleJobs:
   {
     location: 'London',
-    position: 'Senior/Principal JVM Engineer',
+    position: 'Senior/Principal Java Engineer',
     publishedDate: '2024-09-03'
   }
 ---
@@ -41,11 +41,11 @@ build out this new flagship team.
 
 The ideal candidate to join this project is someone who enjoys solving complex problems,
 someone who is curious and happy to take time researching new technologies or solutions.
-We are ideally looking for an experienced JVM software engineer who can bring kotlin or
-java expertise to the project. You will be someone who thinks about the bigger picture whilst
-not shying away from rolling your sleeves up with investigative work. As this is a mission
-critical project, there is a strong focus on delivery within this team, so a delivery-focused
-mindset is essential.
+We are ideally looking for an experienced Java software engineer who can bring Java
+expertise to the project. You will be someone who thinks about the bigger picture whilst not
+shying away from rolling your sleeves up with investigative work. As this is a mission critical
+project, there is a strong focus on delivery within this team, so a delivery-focused mindset is
+essential.
 
 Absolutely NO banking experience is needed, so this is an excellent opportunity for
 someone looking to break into investment banking and gain in-depth markets and trade data
@@ -53,7 +53,7 @@ product knowledge.
 
 ## Experience Required
 
-- Solid Kotlin or Java experience (7+ years)
+- Solid Java experience (7+ years)
 - Strong experience working with TDD
 - Experience building CI/CD pipelines
 - Experience working with DevOps
