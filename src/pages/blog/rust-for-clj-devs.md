@@ -16,7 +16,7 @@ In this Safari session, I share my personal journey with Rust, exploring both th
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/26ikUYlo8_A?si=lDscLNsj0OdzLceB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-I have come to realise that Rust and Clojure are quite complimentary to each other. Areas where rust fades have quite a bit of overlap with Clojure's strengths and vice-versa.
+I have come to realise that Rust and Clojure are quite complimentary to each other. Areas where Rust fades have quite a bit of overlap with Clojure's strengths and vice-versa.
 
 Learning Rust over the past 7 months has been a great roller-coaster ride and will hopefully also help me improve my Clojure skills!
 
