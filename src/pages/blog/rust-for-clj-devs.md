@@ -20,6 +20,6 @@ I have come to realise that Rust and Clojure are quite complimentary to each oth
 
 Learning Rust over the past 7 months has been a great roller-coaster ride and will hopefully also help me improve my Clojure skills!
 
-Access Rhishikesh’s slides <a href="/slides/rust-for-clj-devs.pdf" target="_blank">here.</a>
+Access the slides from the session <a href="/slides/rust-for-clj-devs.pdf" target="_blank">here.</a>
 
 Happy listening!
