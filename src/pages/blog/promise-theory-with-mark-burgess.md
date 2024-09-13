@@ -12,7 +12,7 @@ tags:
   - 'podcast'
 ---
 
-In this podcast episode, JUXT Head of Delivery Joe Littlejohn, XTDB Head of Product Jeremy Taylor, and I spoke with guest Mark Burgess, an independent researcher and writer.
+In this podcast episode, JUXT Chief Delivery Officer Joe Littlejohn, XTDB Head of Product Jeremy Taylor, and I spoke with guest Mark Burgess, an independent researcher and writer.
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/s8VKdt0o7y0?si=LvB0yCwawCAYNw0a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

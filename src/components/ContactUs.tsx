@@ -183,7 +183,7 @@ export default function ContactUs() {
                         <div className='text-medium md:text-2xl text-white leading-snug'>
                             Book a
                             <span className='text-juxt'> 30-minute discovery call </span>
-                            with our Head of Delivery, and discover how JUXT can help bring
+                            with our Chief Delivery Officer, and discover how JUXT can help bring
                             your vision to market, on time and on budget.
                         </div>
                     </div>
@@ -191,14 +191,14 @@ export default function ContactUs() {
                     <div className='flex items-center lg:items-stretch flex-col gap-4'>
                         <img src={joe.src} alt='Joe' width='150' />
                         <div className='text-sm text-left font-light text-juxt'>
-                            Joe Littlejohn <br /> JUXT Head of Delivery
+                            Joe Littlejohn <br /> JUXT Chief Delivery Officer
                         </div>
                     </div>
                 </div>
                 <div className='flex flex-col-reverse lg:flex-row bg-zinc-800 gap-16'>
                     <div className='flex flex-col gap-10 text-left lg:w-1/2'>
                         <div className='text-lg text-white md-text-3xl font-light leading-snug'>
-                            Our Head of Delivery, Joe Littlejohn, has worked in software
+                            Our Chief Delivery Officer, Joe Littlejohn, has worked in software
                             development and technical advisory roles for two decades, shipping
                             systems at scale for companies ranging from global banks to
                             early-stage startups.

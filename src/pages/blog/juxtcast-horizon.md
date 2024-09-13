@@ -19,7 +19,7 @@ Last Friday, on January 19th, we recorded a fresh episode of our JUXT Cast, divi
 
 While the media rightly focuses on the management and political corruption aspects of the scandal, our discussion brought attention to the crucial lessons applicable to everyone in today's tech-centric world.
 
-Joined by our JUXT team members Joe Littlejohn, Head of Delivery, and Alex Davis, Senior Software Engineer, we were fortunate to have Andras Gerlits from http://omniledger.io/ as our guest, adding an external perspective to the conversation. Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal.
+Joined by our JUXT team members Joe Littlejohn, Chief Delivery Officer, and Alex Davis, Senior Software Engineer, we were fortunate to have Andras Gerlits from http://omniledger.io/ as our guest, adding an external perspective to the conversation. Beyond the headlines, this episode exposes the intricate challenges in managing and securing complex IT systems, providing a more detailed understanding of the Horizon scandal.
 
 While acknowledging the significance of addressing management and political corruption, this episode:
 
