@@ -226,18 +226,19 @@ export function UserIcon({ className }: IconProps) {
     )
 }
 
-export function ZulipIcon({ className }: IconProps) {
+export function DiscussIcon({ className }: IconProps) {
     return (
         <svg
             class={className}
             xmlns='http://www.w3.org/2000/svg'
-            version='1.1'
-            viewBox='0 0 256 298'
+	    viewBox='0 0 24 24'
+	    stroke='currentColor'
+	    stroke-width='2'
+	    stroke-linecap='round'
+	    stroke-linejoin='round'
         >
-            <path d='M 0,0 H 220.5 L 154,68 H 32 z' />
-            <path d='M 224,0 L 256,68 L 100.5,227.5 L 2.5,227.5 z' />
-            <path d='M 0,230 H 224 L256,298 H 32 z' />
-        </svg>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+	</svg>
     )
 }
 

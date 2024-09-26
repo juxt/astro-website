@@ -6,7 +6,7 @@ import {
   SpotifyIcon,
   TwitterIcon,
   YoutubeIcon,
-  ZulipIcon
+  DiscussIcon
 } from './Icons'
 
 type NavigationItem = {
@@ -38,7 +38,7 @@ function renderIcon(item: NavigationItem) {
         bluesky: BlueskyIcon,
         youtube: YoutubeIcon,
         spotify: SpotifyIcon,
-        zulip: ZulipIcon
+        discuss: DiscussIcon
       }[item.icon]
     : null
 

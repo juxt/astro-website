@@ -86,9 +86,9 @@
           "href": "https://github.com/xtdb/xtdb"
         },
         {
-          "label": "Zulip",
-          "icon": "zulip",
-          "href": "https://juxt-oss.zulipchat.com/#narrow/stream/194466-xtdb"
+          "label": "Discuss",
+          "icon": "discuss",
+          "href": "https://discuss.xtdb.com/"
         },
         {
           "label": "Email XT Team",
