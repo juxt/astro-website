@@ -1,7 +1,7 @@
-import 'preact/jsx-runtime'
+import { useOutsideClick } from '@utils/preactUtils'
 import classNames from 'classnames'
 import { useEffect, useState } from 'preact/hooks'
-import { useOutsideClick } from '@utils/preactUtils'
+import 'preact/jsx-runtime'
 
 type NavLinkProp = {
   href: string
@@ -62,7 +62,7 @@ export default function Navbar({ navLinks, navbarNoBg }) {
       ref={ref}
     >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>
-        <a href='/' class='flex items-center w-20 z-10'>
+        <a href='/' class='flex items-center w-40 z-10'>
           <img src='/images/logo.svg' alt='Juxt Logo' />
         </a>
         <button

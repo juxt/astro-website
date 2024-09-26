@@ -2,46 +2,55 @@
 import Section from '@components/Section.astro'
 import { CloseIcon } from '@components/Icons.tsx'
 
-const enabled = false;
+const enabled = true
 // Update this ID to show the banner to users who closed it
-const updateId = "xt24";
+const updateId = 'grid-dynamics-announcement'
 ---
+
 {
   enabled && (
-  <alert-banner class="hidden" data-update-id={updateId}>
-    <Section className="w-full z-[60] text-black text-xs p-5 bg-juxt">
-      <div class="flex flex-row justify-between items-center">
-        <span class="flex-grow text-center">
-          Join Engineering Leaders from Global Banks, Fintech Companies and Hedge Funds at XT24 Conf — <a class="cursor-pointer underline" href="/xt24">Click Here</a>
-        </span>
-        <button class="w-3 h-3">
+    <alert-banner class='hidden' data-update-id={updateId}>
+      <Section className='w-full z-[60] text-black text-xs p-5 bg-juxt'>
+        <div class='flex flex-row justify-between items-center'>
+          <span class='flex-grow text-center'>
+            JUXT joins forces with Grid Dynamics — Read the full announcement
+            <a
+              class='cursor-pointer underline'
+              href='https://www.griddynamics.com/press-releases/grid-dynamics-expands-global-footprint-with-juxt-acquisition'
+              target='_blank'
+            >
+              here
+            </a>
+          </span>
+          <button class='w-3 h-3'>
             <CloseIcon />
-        </button>
-      </div>
-    </Section>
-  </alert-banner>)
+          </button>
+        </div>
+      </Section>
+    </alert-banner>
+  )
 }
 
 <script>
-class AlertBanner extends HTMLElement {
-  constructor() {
-    super();
-    let updateId = this.dataset.updateId;
+  class AlertBanner extends HTMLElement {
+    constructor() {
+      super()
+      let updateId = this.dataset.updateId
 
-    // Check if user has already closed the banner
-    let closed = localStorage.getItem(updateId);
-    if (!closed) {
-      this.classList.remove('hidden');
+      // Check if user has already closed the banner
+      let closed = localStorage.getItem(updateId)
+      if (!closed) {
+        this.classList.remove('hidden')
+      }
+
+      // Add event listener to close the banner
+      let button = this.querySelector('button')
+      button.addEventListener('click', () => {
+        this.classList.add('hidden')
+        localStorage.setItem(updateId, 'true')
+      })
     }
-
-    // Add event listener to close the banner
-    let button = this.querySelector('button');
-    button.addEventListener('click', () => {
-      this.classList.add('hidden');
-      localStorage.setItem(updateId, 'true');
-    });
   }
-}
 
-customElements.define('alert-banner', AlertBanner);
+  customElements.define('alert-banner', AlertBanner)
 </script>

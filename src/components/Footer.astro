@@ -1,12 +1,11 @@
 ---
 import {
+  BlueskyIcon,
   GithubIcon,
   LinkedInIcon,
-  TwitterIcon,
-  BlueskyIcon,
-  UserIcon,
-  YoutubeIcon,
   SpotifyIcon,
+  TwitterIcon,
+  YoutubeIcon,
   ZulipIcon
 } from './Icons'
 
@@ -77,9 +76,9 @@ const followUs = [
   <div class='mx-auto max-w-7xl px-4 sm:px-12 2xl:px-0 gap-16'>
     <div class='flex gap-8 sm:gap-20 flex-col sm:flex-row'>
       <div class='flex flex-col gap-6 text-sm shrink-0'>
-        <a target='_blank' class='w-20' href='/'>
+        <div class='w-40'>
           <img class='w-full' src='/images/logo.svg' alt='' />
-        </a>
+        </div>
 
         <div class='flex flex-col gap-3'>
           <div class='flex flex-col gap-2'>
@@ -89,8 +88,11 @@ const followUs = [
               <div>Milton Keynes, MK9 2AH</div>
               <div>United Kingdom</div>
             </div>
-            <div class="font-semibold text-zinc-300 ">
-              Tel: <a class="text-xs text-zinc-400 font-light hover:text-juxt" href="tel:03339398309">0333 939 8309</a>
+            <div class='font-semibold text-zinc-300'>
+              Tel: <a
+                class='text-xs text-zinc-400 font-light hover:text-juxt'
+                href='tel:03339398309'>0333 939 8309</a
+              >
             </div>
           </div>
 

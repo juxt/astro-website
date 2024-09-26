@@ -1,7 +1,7 @@
-import { useState } from 'preact/hooks'
-import { useForm } from 'react-hook-form'
 import jdt from '@assets/people/jdt.jpg'
 import { TickIcon } from '@components/Icons'
+import { useState } from 'preact/hooks'
+import { useForm } from 'react-hook-form'
 
 const inputProps = {
   type: 'text',
@@ -81,93 +81,95 @@ function Form() {
 
   return (
     <>
-        <form
-          onSubmit={handleSubmit(submitContactForm)}
-          id='form'
-          className={ (isSubmitting || isSubmitSuccessful) ? 'hidden' : 'flex flex-col gap-4'}
-        >
-          <div className='text-black text-2xl md:text-3xl font-bold'>
-            Book Your Roundtable Session
-          </div>
-          <input
-            type='hidden'
-            {...register('subject')}
-            value='New Submission from Tech Roundtable with Jeremy Taylor'
-          />
-          <input
-            type='hidden'
-            {...register('access_key')}
-            value='c2bf653a-2baa-466d-bbcc-390272663918'
-          />
-          <div className='flex flex-col md:flex-row gap-4'>
-            <input
-              {...inputProps}
-              {...register('firstName', { required: true })}
-              placeholder='First Name'
-            />
-            <input
-              {...inputProps}
-              {...register('lastName', { required: true })}
-              placeholder='Last Name'
-            />
-          </div>
+      <form
+        onSubmit={handleSubmit(submitContactForm)}
+        id='form'
+        className={
+          isSubmitting || isSubmitSuccessful ? 'hidden' : 'flex flex-col gap-4'
+        }
+      >
+        <div className='text-black text-2xl md:text-3xl font-bold'>
+          Book Your Roundtable Session
+        </div>
+        <input
+          type='hidden'
+          {...register('subject')}
+          value='New Submission from Tech Roundtable with Jeremy Taylor'
+        />
+        <input
+          type='hidden'
+          {...register('access_key')}
+          value='c2bf653a-2baa-466d-bbcc-390272663918'
+        />
+        <div className='flex flex-col md:flex-row gap-4'>
           <input
             {...inputProps}
-            {...register('email', { required: true })}
-            placeholder='Work Email'
-            type='email'
+            {...register('firstName', { required: true })}
+            placeholder='First Name'
           />
-          <div className='flex flex-col md:flex-row gap-4'>
-            <input
-              {...inputProps}
-              {...register('jobTitle', { required: true })}
-              placeholder='Job Title'
-            />
-            <input
-              {...inputProps}
-              {...register('companyName', { required: true })}
-              placeholder='Company Name'
-            />
-          </div>
-          <div className='flex flex-col md:flex-row gap-4'>
-            <input
-              {...inputProps}
-              {...register('phone')}
-              placeholder='Phone (Optional)'
-            />
-            <input
-              {...inputProps}
-              {...register('country', { required: true })}
-              placeholder='Country'
-            />
-          </div>
-          <div className='text-xs'>
-            By submitting your details you agree to JUXT’s{' '}
-            <a href='/privacy-policy' target='_blank' className='underline'>
-              Privacy Policy.
-            </a>
-          </div>
+          <input
+            {...inputProps}
+            {...register('lastName', { required: true })}
+            placeholder='Last Name'
+          />
+        </div>
+        <input
+          {...inputProps}
+          {...register('email', { required: true })}
+          placeholder='Work Email'
+          type='email'
+        />
+        <div className='flex flex-col md:flex-row gap-4'>
+          <input
+            {...inputProps}
+            {...register('jobTitle', { required: true })}
+            placeholder='Job Title'
+          />
+          <input
+            {...inputProps}
+            {...register('companyName', { required: true })}
+            placeholder='Company Name'
+          />
+        </div>
+        <div className='flex flex-col md:flex-row gap-4'>
+          <input
+            {...inputProps}
+            {...register('phone')}
+            placeholder='Phone (Optional)'
+          />
+          <input
+            {...inputProps}
+            {...register('country', { required: true })}
+            placeholder='Country'
+          />
+        </div>
+        <div className='text-xs'>
+          By submitting your details you agree to JUXT’s{' '}
+          <a href='/privacy-policy' target='_blank' className='underline'>
+            Privacy Policy.
+          </a>
+        </div>
 
-          {hasErrors && (
-            <div className='text-red-500'>
-              All fields but 'Phone' are required
-            </div>
-          )}
-
-          <button
-            type='submit'
-            className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
-          >
-            Submit
-          </button>
-          <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
-            <div className='flex flex-col gap-2 leading-snug'>
-              What happens after you submit your details? Usually within 48
-              business hours, Jeremy will be in touch to talk about the event
-              and secure a date.
-            </div>
+        {hasErrors && (
+          <div className='text-red-500'>
+            All fields but 'Phone' are required
           </div>
-        </form>
+        )}
+
+        <button
+          type='submit'
+          className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm'
+        >
+          Submit
+        </button>
+        <div className='flex flex-row gap-6 text-xs items-center max-w-[350px]'>
+          <div className='flex flex-col gap-2 leading-snug'>
+            What happens after you submit your details? Usually within 48
+            business hours, Jeremy will be in touch to talk about the event and
+            secure a date.
+          </div>
+        </div>
+      </form>
       {isSubmitting && isSubmittingComponent}
       {isSubmitSuccessful && !isSubmitError && isSubmitSuccessfulComponent}
       {isSubmitError && isSubmitErrorComponent}
@@ -180,7 +182,7 @@ export default function ContactUs() {
     <div className='min-h-screen flex justify-center bg-zinc-800'>
       <div className='p-8 py-8 px-8 lg:py-14 lg:px-16 max-w-7xl'>
         <a href='/' className='block pb-8'>
-          <img width='100' src='/images/logo-on-dark.svg' alt='Juxt Logo' />
+          <img width={300} src='/images/logo.svg' alt='Juxt Logo' />
         </a>
         <div className='flex flex-col lg:justify-between lg:flex-row gap-3 pb-14'>
           <div className='flex flex-col lg:gap-6 lg:w-2/3 gap-8'>
