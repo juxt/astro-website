@@ -158,6 +158,7 @@ export function BlogIndex() {
           }
         )}
       </div>
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={Math.ceil(searchResults.length/pageSize)} />
     </>
   );
 }
