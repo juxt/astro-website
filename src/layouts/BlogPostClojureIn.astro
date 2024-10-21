@@ -222,6 +222,16 @@ const clojureInPicture = await getImage({
     </div>
   </div>
 
+  <!-- Included but hidden so that pagefind can index the heroImage -->
+  <Image
+    alt='image'
+    width={900}
+    quality={90}
+    class='hidden'
+    src={import(`../assets/blog/${heroImageFilename}.jpg`)}
+    data-pagefind-meta="heroImage[src]"
+  />
+
   <DraftBanner draft={draft} pageName='Blog' />
   <main class='transition-colors dark:bg-gray-900'>
     <article
@@ -273,7 +283,7 @@ const clojureInPicture = await getImage({
                         </h3>
                         <h5 class='font-extralight'>{blog.description}</h5>
                       </div>
-                      <img class='' alt='blog' src={blog.heroImage} data-pagefind-meta="heroImage[src]" />
+                      <img class='' alt='blog' src={blog.heroImage} />
                       <div class='text-white font-semibold flex gap-2 items-center '>
                         Read more
                         <svg
