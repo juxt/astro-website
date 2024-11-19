@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets'
+import { getImage } from 'astro:assets'
+import Banner from '@components/Banner.astro'
+import Section from '@components/Section.astro'
+import ContactUsMini from '@components/ContactUsMini.tsx'
+import Layout from '@layouts/Layout.astro'
+import { ChevronRightIcon} from '@components/Icons'
+
+import AssetImage from '@components/team/AssetImage.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+import Service from '@components/services/Service.astro'
+import MiniBlog from '@components/services/MiniBlog.astro'
+
+const homepageBannerPicture = await getImage({
+  src: import('../assets/site/homepage-banner.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'homepage banner'
+}).then((img) => img.src)
+---
+
+<Layout title='Services' navbar>
+  <main>
+    <Banner
+      navbarNoBg
+      text='Services'
+      style={{
+        backgroundImage: `url(${homepageBannerPicture})`
+      }}
+    />
+
+    <Section className={'bg-zinc-900 pt-20 text-white'}>
+      <div class="flex flex-col gap-10 pb-14 lg:pb-20">
+        <p class='text-xl font-extralight'>
+          For over a decade, we’ve built high-quality, scalable, and
+          resilient software systems — without fail.
+        </p>
+        <p class='text-xl font-extralight'>
+          Check out our <a href="/financial" class="text-juxt cursor-pointer">Solutions for Financial Services</a> and <a href="/delivery" class="text-juxt cursor-pointer">Case Studies</a> for various innovative startups and SMBs.
+        </p>
+      </div>
+    </Section>
+
+    <Section className={'bg-zinc-900 py-10 text-white'}>
+
+      <Service title="Financial Technology">
+        <p slot="blurb">
+          From front-end blotters to backend databases and APIs, in equities derivatives, fixed income, structured-products, FX and more
+        </p>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="Programming Language Expertise">
+        <p slot="blurb">
+          We are the original masters of Clojure and also have experts in Kotlin, Python, TypeScript and more.
+          If you need experienced engineers in these languages, JUXT are the best firm to use.
+        </p>
+        <MiniBlog tall={true} />
+      </Service>
+
+      <Service title="Access to the top engineering talent">
+        <SimpleColumn slot="blurb">
+          <p>JUXT is an engineering-led company, with a depth of talented individuals</p>
+          <p><em>This is the staff augmentation feature</em></p>
+        </SimpleColumn>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="AI Implementation">
+        <p slot="blurb">
+          We work on a number of client projects that are already leveraging LLMs at scale, in banking and finance.
+          We are gaining significant experience in what works and the best techniques which we can share with you.
+          Are you struggling with your AI strategy and implementation? Let's talk.
+        </p>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="Data Expertise">
+        <p slot="blurb">
+          JUXT think, eat and breathe data expertise. From knowledge graphs, client reporting, record management,
+          ETL pipelines, Cloud-migration, analytics, database modelling, data catalogues, Data Mesh to latest
+          AI techniques such as Knowledge Graphs, Retrieval Augmented Generation and vector databases.
+        </p>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="System Design &amp; Architecture Review">
+        <p slot="blurb">
+          Including System Modernisation, event-sourcing, event driven architectures, domain driven design
+        </p>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+      <Service title="Platform Engineering">
+        <SimpleColumn slot="blurb">
+          <p>DevOps, Containerisation, Cloud-migrations, IDPs</p>
+          <p>
+            JUXT has helped Fortune 500 companies get developer tooling right.
+            We deliver cutting-edge Internal Developer Platform projects, allowing organisations to improve
+            the efficiency of engineering at scale.
+          </p>
+          <p>
+            Platform engineering done right can give your software teams:
+          </p>
+          <ul class="list-inside list-image-[url(/images/chevron-right.svg)]">
+            <li>
+              Compliance, security, and other non-functional guarantees, at scale
+            </li>
+            <li>
+              Delightful internal developer experiences and documentation.
+            </li>
+            <li>
+              An internal 'open source' culture and a thriving community of contributors.
+            </li>
+          </ul>
+        </SimpleColumn>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+      </Service>
+
+	  <Service title="MVP and beyond">
+        <SimpleColumn slot="blurb">
+          <p>
+            We work closely with project leaders to understand the core
+              objectives deeply and successfully deliver an MVP. Make JUXT
+              your technical partner, and we will bring a wealth of
+              experience and judgment to the early phases of your project
+              lifecycle and beyond.
+          </p>
+          <p>
+            For example: bike scheme in Spain, probate tree, Excel - from small to large companies in many industries: energy, finance, manufacturing, agriculture, healthcare and more.
+          </p>
+        </SimpleColumn>
+        <div class="flex gap-4 items-top">
+            <MiniBlog />
+            <MiniBlog />
+            <MiniBlog />
+        </div>
+	  </Service>
+
+    </Section>
+
+    <Section className='text-black py-20 md:py-40 bg-gray-100'>
+      <ContactUsMini client:only />
+    </Section>
+
+  </main>
+</Layout>
