@@ -1,0 +1,134 @@
+---
+author: 'mpi'
+title: 'Bitemporal TraderX - augmenting a sample trading system'
+description: 'Adding XTDB and Clojure into a sample microservices trading application for the FINOS 2024 Tech Sprint'
+category: 'database'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2024-11-20'
+heroImage: 'bitemporal-traderx.jpg'
+tags:
+  - 'SQL'
+  - 'database'
+  - 'XTDB'
+  - 'FINOS'
+---
+
+import { Image } from 'astro:assets'
+
+## Joining FINOS: The Fintech Open Source Foundation
+
+In case you missed the news, JUXT is now a member of [FINOS](https://www.finos.org/)! The Fintech Open Source Foundation (FINOS) is an umbrella organization under the Linux Foundation, whose purpose is to accelerate collaboration and innovation in financial services through the adoption of open source software, standards and best practices.
+
+Throughout August and September I was the main engineer on a team from JUXT who took part in FINOS' [2024 Tech Sprint](https://www.finos.org/blog/finos-tech-sprint-2024) - a multi-week hackathon centred around one the FINOS projects called '[TraderX](https://github.com/finox/traderx)'. Unlike most of the other projects that FINOS hosts, which are used in production by various member organisations, TraderX is essentially an example system (think '[Pet Store](https://en.wikipedia.org/wiki/Java_BluePrints)') that is intended purely for educational and training purposes. TraderX was initially developed by Morgan Stanley.
+
+## What we achieved in the 2024 Tech Sprint
+
+Here's a short video that the team put together which gives an overview of the system and some of the changes we made:
+
+<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/d_o6Dy3I2r8?si=huuab9Qxb_8Hmqs1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+In summary, we:
+
+- Lightly modified the TraderX microservice architecture to implement blotter history and reporting capabilities based on a central [XTDB](https://xtdb.com) database that stores bitemporal versions of all data, allowing for strong auditability and correction/adjustment facilities
+- Extended the blotter dashboards to show pricing data, and added 'sliders' to control the as-of reporting windows, giving users an ability to trivially understand the evolving state of their portfolio of positions
+- Used XTDB's bitemporal SQL features to easily model the TraderX domain with limited code changes. The underlying data model now allows for all reference and pricing data to be auditably adjusted, and for all trades to be amended or cancelled retroactively, while providing complete visibility to the end user
+- Opened a [PR](https://github.com/finos/traderX/pull/237) to propose these changes back to the main TraderX repository
+
+This work was showcased at the FINOS 'OSFF' conference in New York last month, where my colleague Jeremy (XTDB Head of Product) also presented on the importance of bitemporality more broadly - you can read/watch more about this [here](/blog/reconciliation-risk-ml-and-use-cases-for-bitemporal-systems/).
+
+## Changes implemented in our PR
+
+The existing application has been extended in several ways...
+
+### Basic UI Tweaks
+
+Firstly, we cleared up the sample data and added some basic constraints to the Angular UI. We noticed that some initial trades are on the ‘Sell’ side - which should not be possible if the securities sold are not owned - so we changed all the initial trades to be on the ‘Buy’ side and now only allow selling owned securities to the limit of quantity owed - to simulate a real world portfolio.
+
+import dialog from '../../assets/blog/bitemporal-traderx-dialog.png'
+
+<Image style="width: 100%; margin-left: auto; margin-right: auto" alt='View of TraderX showing a modified dialog component' src={dialog} />
+
+We introduced changes to the trade ticket component (used for creating trades):
+- It displays error messages in case some fields are not filled or have incorrect values.
+- Only allows buying if you don’t own selected security
+- Only allows selling up to amount that you own
+
+We added unit prices to the trade blotter.
+We added market value and cost of transaction to the position blotter.
+We then added an additional ‘Closed Position’ blotter for displaying positions that have been closed - i.e. show when all securities have been sold, along with final PnL and current market unit price.
+
+### New 'Report' tab with sliders
+
+We introduced a ‘Report’ tab which displays largely similar data to the ‘Trade’ tab, but using XTDB as backing store.
+Positions which result in net gain (cost of buying securities is lower than current market value) have green backgrounds, while those representing loss (cost of purchasing securities is higher than current market value) have red backgrounds. Positions also have ‘Calculation’ column representing how we’ve arrived at current position value (result of summing up trades values).
+
+This tab also adds two sliders:
+- Trade timeline slider - allowing the user to quickly understand how trades unfolded (as best known, and ignoring the system_time audit timeline)
+- Price history slider - allowing to the user to simulate and discover what the aggregate positions would look like given prices at a particular date in the past (again, as best known)
+
+### A re-imagined 'Reference Service'
+
+In supporting of all these UI additions we created a new microservice to replace the existing 'reference-service'. It is written in Clojure and is split across several clearly delineated namespaces. This service now does a few things:
+- Fully replaces and supersedes the existing 'reference-data' microservice for serving up ‘static’ / lookup data (securities and accounts)
+- Provides bitemporal storage for trades, positions and prices
+- Generates a year’s worth of daily prices (initial value randomly generated, thereafter - last price varied by 10% so that we have an approximation of how prices change over time on the market - prices rise and fall)
+- Generates initial ‘seed’ trades for seven securities for every account within fifteen days before starting date - so that each account starts with some open positions (and some potentially closed). This gives us realistic demo data.
+- Sends current ‘market’ prices via websocket to the clients (so that the prices displayed in the app are ‘fresh’). Current prices are generated and stored every 10 seconds (to simulate a ‘live market’ price stream).
+
+The reference-service is written in Clojure, which we chose for expedience, but it also neatly showcases how succinct Clojure can be compared to the other language stacks found in the TraderX repo (Spring, TypeScript etc.) The service exposes endpoints using the [Aleph](https://github.com/clj-commons/aleph) webserver and implements streaming using the [Manifold](https://github.com/clj-commons/manifold) library.
+
+The service interfaces with XTDB via vanilla [pgJDBC](https://jdbc.postgresql.org/) and SQL, which is possible thanks to XTDB v2's compatibility with the Postgres wire protocol. This also meant that during development we could access the database using tools like VSCode's [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [Metabase](https://www.metabase.com/) to debug our queries and data, without the need for any custom drivers or less conventional tools.
+
+## XTDB experience report - first impressions
+
+This was my first time using XTDB so I had some learning to do myself. It takes a little time to get used to the temporal syntax for making ‘updates’ with valid_time (but then - you only have to learn it once).
+My first reaction was to add dedicated columns for handling various application and auditing timestamps like `traded_at` and `updated_at` - but what a pleasant surprise it was to find out there’s little need for many of these use-cases - timestamping is already ubiquitous and all done under the covers.
+
+*For all intents and purposes how you interact with the database does not change, compared to traditional SQL databases* - until you need to get the historical data or introduce retrospective updates (where you now know that some data was incorrect in the past and you can update that fact specifying the correct value and period during which it was the case). This still leaves you with a perfectly auditable history - you can see that the retrospective change for a particular record was created at `system time`.
+
+Wait - what? History? Yes! You get all the change history for free! - not just what changed when - but you can inspect all those historical values. Updates don’t actually overwrite old values - they create new entries with two time lines - valid time (or application time) and system time (or what you can think of as wall-clock really).
+
+The way the XTDB team have extended the 'normal' update-in-place semantics of SQL is very intuitive.
+
+### Integrating sliders with SQL
+
+import sliders from '../../assets/blog/bitemporal-traderx.png'
+
+<Image style="width: 100%; margin-left: auto; margin-right: auto" alt='View of TraderX showing SQL overlayed' src={sliders} />
+
+Adding temporal 'sliders' to the UI is an easy way to expose the time-travel abilities, and makes it far more efficient to quickly observe changing data than having users click on simple calendar widgets.
+
+Getting data from a couple of joined tables (when you want to see it ‘as of’ a certain point in time) needs to be done with some ceremony (for each table you have to specify its own `valid time` or `system time`).
+
+It also took me a couple iterations to get correct `time points` for the ‘event’ slider (which shows ‘history’ of trades - and therefore positions).
+
+My initial thought was to naively query for a collection of time periods, with the period start being `_valid_from` and period end being `_valid_to`, for all trades in ascending order. This however yielded unwanted results and seemed quite confusing (because `_valid_from` and `_valid_to` would be interleaved and not correlated between trades, as some trades ‘disappeared’ while others concurrently ‘changed state’ from settled to pending).
+
+At that point I changed the ‘period dropdown’ to a slider where the points are all `_valid_from` values for all trades (and there’s no restriction on `_valid_to`). This resulted in a clear history of trades and their lifecycle - from their creation in pending state to settlement.
+
+In addition to the main blotter slider I also added a price slider. This was much easier, essentially a basic view of price ‘as of’ some given day, using regular daily steps. The blotter query then effortlessly joins across these two underlying table sources using their respective as-of timestamps.
+
+## My XTDB Takeaways
+
+I have worked on several applications that incorporate reporting requirements previously, and I can safely say XTDB brings a lot of benefits over the traditional SQL database paradigm.
+
+**Having added bitemporal storage unlocks incredible reporting capabilities** - not only over past changes, but also opening the door to speculative analysis (e.g. "what would my account PnL look like with prices from a given day in the past" / "how much could I have gained/lost if I had bought stock X on date Y").
+
+**A first-class history close to hand is a game changer in terms of application development** - a whole range of time related complexities are taken care of by the bitemporal model and XTDB makes working with bitemporal data very easy. You could compare it to what happened when you could relegate transaction management from application logic into the database layer. There is a little bit to learn about in order to start using [SQL:2011](https://en.wikipedia.org/wiki/SQL:2011)’s temporal operators - but this is really nothing compared to benefits you get from just using it.
+
+**XTDB provides bitemporal storage with virtually no barrier to entry** - DML (SQL statements for storing / updating entities) simply does not change existing data, while the retrieval of historical data is trivial using SQL2011 queries (leveraging ‘FOR VALID TIME’ to get a point/period in the past). The only caveat in this project was that XTDB doesn't yet fully work with JPA style persistence due to minor differences with real Postgres, but working with plain SQL or simpler abstractions (e.g. [jOOQ](/blog/15-years-of-jooq-with-lukas-eder/)) is my preference anyway.
+
+**No more need for audit tables** or manual addition of more timestamped fields (such as ‘updated_at’) - history is transparently preserved along with the two timelines - system time and valid time.
+
+**XTDB drastically reduces complexity** otherwise introduced by hand-rolled reporting solutions - these usually come in later as post production release requirements (dictated by reporting/auditing/legal needs).
+You’re free to focus on adding competitive value to your application - unique features that will set you out from your competition - without expending effort on things which, whilst often absolutely required, do not necessarily give end users visible benefit.
+
+## Ideas for the future
+
+If XTDB can add complete support for JPA style annotations, then XTDB could fully replace the use of the [H2](https://www.h2database.com/html/main.html) database within the TraderX repo, without any code changes. In a future Tech Sprint we may consider attempting this, and also adding additional reporting functionality (e.g. predicted vs. actual comparisons).
+
+JUXT is currently collaborating with several Design Partners using XTDB who help us discover missing features - we cannot responsibly take on too many partners (as we do need to support those features!), but if you feel like XTDB is the right fit for your problem, please do get in touch: [hello@xtdb.com](mailto://hello@xtdb.com)
+
+## XTDB webinar on 11th December
+
+Finally, the XTDB team is running a webinar in conjunction with FINOS on 11th December, you can learn more and register for that [here](https://zoom.us/webinar/register/4617283986911/WN_3b4DvHhvQbCtt98DOvjbDQ).
