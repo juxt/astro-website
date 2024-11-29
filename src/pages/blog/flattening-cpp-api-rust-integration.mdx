@@ -5,7 +5,7 @@ description: 'Recipe for using an existing C++ API in Rust'
 category: 'programming'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-01-20'
-draft: true
+draft: false
 heroImage: 'cpp-rust-flattening.jpg'
 tags:
   - 'C++'
@@ -156,7 +156,7 @@ The main client interface wraps the unsafe C API in a safe abstraction:
 ```rust
 pub struct Client {
     session: *mut bindings::mqtt_session_t,
-    _context: Arc<Mutex<CallbackContext>>,
+    _context: Box<CallbackContext>,
 }
 
 impl Client {
@@ -171,6 +171,13 @@ impl Client {
         F2: Fn(ConnectionState) + Send + Sync + 'static,
         F3: Fn(i32, &str) + Send + Sync + 'static,
     {
+        let context = Box::new(CallbackContext {
+            message_callback: Box::new(on_message),
+            state_callback: Box::new(on_state_change),
+            error_callback: Box::new(on_error),
+        });
+
+        let context_ptr = Box::into_raw(context) as *mut std::ffi::c_void;
         // Implementation...
     }
 }
@@ -251,6 +258,78 @@ fn test_integration() {
     assert_eq!(received.payload(), message.payload());
 }
 ```
+
+## Understanding Unsafe Extern C Callbacks
+
+The callback system represents a critical part of our FFI layer, requiring careful handling of unsafe code and data lifetimes:
+
+```rust
+unsafe extern "C" fn message_callback(
+    message: *const bindings::mqtt_message_data_t,
+    context: *mut std::ffi::c_void,
+) {
+    // 1. Safety: Validate raw pointers
+    if message.is_null() || context.is_null() {
+        return;
+    }
+
+    // 2. Context recovery
+    let context = &*(context as *const CallbackContext);
+
+    // 3. Safe payload handling
+    let payload = if (*message).payload.is_null() || (*message).payload_length == 0 {
+        &[]
+    } else if (*message).payload_length > isize::MAX as usize {
+        eprintln!("Payload too large");
+        return;
+    } else {
+        std::slice::from_raw_parts((*message).payload, (*message).payload_length)
+    };
+
+    // 4. String conversion
+    let topic = match CStr::from_ptr((*message).topic).to_str() {
+        Ok(s) => s,
+        Err(_) => return,
+    };
+
+    // 5. Create safe view
+    let msg = MessageView {
+        topic,
+        payload,
+        qos: (*message).qos.into(),
+        retained: (*message).retained != 0,
+    };
+
+    // 6. Execute callback
+    (context.message_callback)(&msg);
+}
+```
+
+### Key Safety Considerations
+
+1. **Context Management**: The `CallbackContext` must outlive all callbacks:
+   ```rust
+   pub struct Client {
+       session: *mut bindings::mqtt_session_t,
+       _context: Box<CallbackContext>, // Kept alive by Client
+   }
+   ```
+
+2. **Lifetime Guarantees**: `MessageView` borrows data only for the duration of the callback:
+   ```rust
+   pub struct MessageView<'a> {
+       topic: &'a str,    // Lives for callback duration
+       payload: &'a [u8], // Lives for callback duration
+       // ...
+   }
+   ```
+
+3. **Thread Safety**: Callbacks can occur from any thread, requiring `Send + Sync`:
+   ```rust
+   pub type MessageCallback = dyn Fn(&MessageView) + Send + Sync;
+   unsafe impl Send for Client {}
+   unsafe impl Sync for Client {}
+   ```
 
 ## Best Practices
 
