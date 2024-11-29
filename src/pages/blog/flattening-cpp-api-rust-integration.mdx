@@ -5,6 +5,7 @@ description: 'Recipe for using an existing C++ API in Rust'
 category: 'programming'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-01-20'
+draft: true
 heroImage: 'cpp-rust-flattening.jpg'
 tags:
   - 'C++'
@@ -17,7 +18,7 @@ tags:
 
 When working on legacy modernization projects, we often need to integrate Rust with existing C++ codebases. This presents unique challenges due to fundamental differences in how these languages handle object models, memory management, and binary interfaces.
 
-Today, we'll explore a technique called "API flattening" using PolarMqtt, a toy C++ library I created specifically for this demonstration. While inspired by [Eclipse Paho](https://github.com/eclipse-paho/paho.mqtt.c), PolarMqtt exists purely to illustrate these concepts - for production MQTT needs, use the official [paho-mqtt](https://crates.io/crates/paho-mqtt) crate.
+Today, we'll explore a technique called "API flattening" using PolarMqtt, a toy C++ library I created specifically for this demonstration. While inspired by [Eclipse Paho C++ API](https://github.com/eclipse-paho/paho.mqtt.cpp) (it is implemented using the [C API](https://github.com/eclipse-paho/paho.mqtt.c)), PolarMqtt exists purely to illustrate these concepts - for production MQTT needs, use the official [paho-mqtt](https://crates.io/crates/paho-mqtt) crate.
 
 The complete source code for this demonstration is available in the [PolarMqtt repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). All code examples in this post correspond to this version, which has been archived for reference.
 
