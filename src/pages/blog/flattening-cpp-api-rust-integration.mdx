@@ -1,0 +1,299 @@
+---
+author: 'jan'
+title: 'Flattening Legacy C++ APIs for Rust Integration'
+description: 'Recipe for using an existing C++ API in Rust'
+category: 'programming'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2024-07-29'
+heroImage: 'http-lambda-blog-osm.jpg'
+tags:
+  - 'C++'
+  - 'Rust'
+  - 'FFI'
+---
+
+# Bridging C++ and Rust: A Practical Guide to API Flattening
+
+When working on legacy modernization projects, we often need to integrate Rust with existing C++ codebases. This presents unique challenges due to fundamental differences in how these languages handle object models, memory management, and binary interfaces.
+
+Today, we'll explore a technique called "API flattening" using PolarMqtt, a toy C++ library I created specifically for this demonstration. While inspired by [Eclipse Paho](https://github.com/eclipse-paho/paho.mqtt.c), PolarMqtt exists purely to illustrate these concepts - for production MQTT needs, use the official [paho-mqtt](https://crates.io/crates/paho-mqtt) crate.
+
+The complete source code for this demonstration is available in the [PolarMqtt repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). All code examples in this post correspond to this version, which has been archived for reference.
+
+
+## Understanding the Challenge
+
+Legacy C++ APIs often present several integration challenges for Rust:
+- Incompatible vtable implementations ([Virtual Method Tables](https://en.wikipedia.org/wiki/Virtual_method_table))
+- Complex inheritance hierarchies
+- [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) patterns that need careful handling
+- Thread safety guarantees that must be preserved
+- Exception handling that must be converted to Rust's Result type
+
+Here's a typical C++ API we might encounter:
+
+```cpp
+// Original C++ API
+class Session {
+public:
+    virtual void onMessage(const Message& msg) = 0;
+    virtual void onStateChange(SessionState state) = 0;
+    // ... more virtual methods
+};
+
+// Usage requires inheritance
+class MySession : public Session {
+    void onMessage(const Message& msg) override {
+        // Handle message
+    }
+};
+```
+
+## The bindgen Challenge
+
+> **Important Note**: While [bindgen](https://rust-lang.github.io/rust-bindgen/) works excellently for C APIs, it often struggles with C++ codebases. As of 2024, there's no robust, general-purpose solution for automatically generating Rust bindings to C++ APIs. Common issues include:
+> - Inability to properly handle C++ templates
+> - Broken callback bindings due to vtable incompatibilities
+> - Complications with STL containers and RAII types
+> - Name mangling mismatches
+> - Template instantiation problems
+> - Complex inheritance hierarchies that don't map to Rust's trait system
+>
+> This is why we need to "flatten" C++ APIs to C first, creating a simpler intermediate layer that bindgen can reliably handle. While this requires more upfront work, it results in more maintainable and reliable bindings.
+
+
+## The Solution: API Flattening
+
+API flattening introduces a C-compatible intermediate layer that bridges these incompatibilities:
+
+```ascii
+┌────────────┐     ┌────────────┐     ┌────────────┐
+│   C++ API  │ --> │    C API   │ --> │  Rust API  │
+│ (Original) │     │(Flattened) │     │ (Binding)  │
+└────────────┘     └────────────┘     └────────────┘
+```
+
+### 1. Creating the C Bridge
+
+First, we flatten the C++ interface into C-compatible types:
+
+```c
+// C bridge layer
+typedef struct mqtt_session_t* mqtt_session_handle_t;
+
+typedef void (*mqtt_message_callback_t)(
+    const mqtt_message_data_t* message,
+    void* user_context
+);
+
+mqtt_session_handle_t mqtt_create_session(
+    const char* client_id,
+    mqtt_message_callback_t message_cb,
+    void* user_context
+);
+```
+
+### 2. Designing Safe Rust Types 
+
+In Rust, we create two distinct message types to handle different ownership scenarios:
+
+```rust
+// For publishing: Owned data
+#[derive(Debug, Clone)]
+pub struct Message {
+    topic: String,
+    payload: Vec<u8>,
+    qos: QoS,
+    retained: bool,
+}
+
+// For callbacks: Borrowed data
+#[derive(Debug)]
+pub struct MessageView<'a> {
+    topic: &'a str,      // Borrows from C++
+    payload: &'a [u8],   // Borrows from C++
+    qos: QoS,
+    retained: bool,
+}
+```
+
+#### Why MessageView Needs a Lifetime Parameter 
+
+The `'a` lifetime in MessageView is crucial for safety:
+
+- During callbacks, the C++ layer owns the message data (topic and payload).
+- `MessageView` borrows this data only for the duration of the callback.
+- The `'a` lifetime ensures these references cannot outlive the callback.
+- After the callback returns, the C++ layer may free or modify the data.
+
+#### MessageView::to_owned()
+When receiving messages through a callback, the data arrives as a MessageView reference, which provides zero-copy access to data held by the underlying C++ API. If you need to retain the message data beyond the callback's scope, you can call `to_owned()` to create a deep copy, which returns an owned Message. 
+See [here](https://github.com/jsulmont/rs-polar-mqtt/blob/blog-v1.0.0/examples/message_view.rs) for an example.
+
+
+### 3. Implementing Thread-Safe Callbacks
+
+The callback system must be thread-safe as C++ can invoke callbacks from any thread:
+
+```rust
+pub type MessageCallback = dyn Fn(&MessageView) + Send + Sync;
+pub type StateCallback = dyn Fn(ConnectionState) + Send + Sync;
+pub type ErrorCallback = dyn Fn(i32, &str) + Send + Sync;
+
+struct CallbackContext {
+    message_callback: Box<MessageCallback>,
+    state_callback: Box<StateCallback>,
+    error_callback: Box<ErrorCallback>,
+}
+```
+
+### 4. Building the Safe Client Interface
+
+The main client interface wraps the unsafe C API in a safe abstraction:
+
+```rust
+pub struct Client {
+    session: *mut bindings::mqtt_session_t,
+    _context: Arc<Mutex<CallbackContext>>,
+}
+
+impl Client {
+    pub fn new<F1, F2, F3>(
+        client_id: &str,
+        on_message: F1,
+        on_state_change: F2,
+        on_error: F3,
+    ) -> Result<Self>
+    where
+        F1: Fn(&MessageView) + Send + Sync + 'static,
+        F2: Fn(ConnectionState) + Send + Sync + 'static,
+        F3: Fn(i32, &str) + Send + Sync + 'static,
+    {
+        // Implementation...
+    }
+}
+
+// Safety: All mutable state is protected by Mutex
+unsafe impl Send for Client {}
+unsafe impl Sync for Client {}
+```
+
+### 5. Error Handling with thiserror
+
+We use [thiserror](https://crates.io/crates/thiserror) to define our error types:
+
+```rust
+use thiserror::Error;
+
+#[derive(Debug, Error)]
+pub enum Error {
+    #[error("MQTT initialization failed")]
+    InitializationError,
+    #[error("Invalid broker URL")]
+    InvalidBrokerUrl,
+    #[error("Connection failed")]
+    ConnectionError,
+    #[error("String contains null byte: {0}")]
+    NulError(#[from] NulError),
+}
+
+pub type Result<T> = std::result::Result<T, Error>;
+```
+
+## Usage Example
+
+Here's how the flattened API looks in practice:
+
+```rust
+fn main() -> Result<()> {
+    let mut client = Client::new(
+        "test-client",
+        |msg| println!("Received: {}", msg.topic()),
+        |state| println!("State: {:?}", state),
+        |code, err| eprintln!("Error {}: {}", code, err),
+    )?;
+
+    client.connect("test.mosquito.org", 1883)?;
+    
+    let message = Message::new("test/topic", "Hello MQTT!");
+    client.publish(&message)?;
+    
+    Ok(())
+}
+```
+
+## Testing Strategy
+
+Integration testing is crucial for FFI code:
+
+```rust
+#[test]
+fn test_integration() {
+    let (tx, rx) = mpsc::channel();
+    
+    let mut client = Client::new(
+        "test-client",
+        move |msg| {
+            tx.send(msg.to_owned()).unwrap();
+        },
+        |state| println!("State: {:?}", state),
+        |code, err| eprintln!("Error {}: {}", code, err),
+    ).unwrap();
+
+    client.connect("test.mosquito.org", 1883).unwrap();
+    
+    let message = Message::new("test/topic", "test data");
+    client.publish(&message).unwrap();
+    
+    let received = rx.recv_timeout(Duration::from_secs(5)).unwrap();
+    assert_eq!(received.payload(), message.payload());
+}
+```
+
+## Best Practices
+
+1. **Memory Safety**
+   - Use RAII in both C++ and Rust layers
+   - Document ownership transfers explicitly
+   - Minimize unsafe code blocks
+
+2. **Error Handling**
+   - Convert C++ exceptions to error codes at the FFI boundary
+   - Use thiserror for error definitions
+   - Provide rich error context
+
+3. **Thread Safety**
+   - Make thread safety requirements explicit
+   - Use appropriate synchronization primitives
+   - Ensure callbacks are Send + Sync
+
+4. **Documentation**
+   - Document safety requirements for unsafe functions
+   - Explain lifetime guarantees for borrowed data
+   - Provide usage examples
+
+## Conclusion
+
+While our example uses PolarMqtt, a toy library created for this demonstration, the patterns and techniques shown here apply to real-world C++ to Rust integration scenarios. The key is understanding the incompatibilities between the languages (particularly around ABI, vtables, and RAII) and systematically addressing them through a well-designed intermediary layer.
+
+## Publicly available test MQTT brokers
+
+The examples above use `test.mosquitto.org`, a public MQTT broker maintained by the Eclipse Foundation. While this broker is typically reliable, it may occasionally be unavailable for maintenance. Alternative public test brokers include `broker.emqx.io` (provided by EMQ) and `broker.hivemq.com` (provided by HiveMQ) - both accessible on port 1883. Remember that these are public test brokers intended for development and testing purposes only; production deployments should use dedicated, secured MQTT brokers.
+
+
+## Source Code
+
+The complete implementation of the patterns discussed in this post can be found in the [PolarMqtt repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). The repository includes:
+
+- The original C++ API
+- The flattened C interface
+- The complete Rust bindings
+- Integration tests and examples
+
+## Further Reading
+
+- [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)
+- [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/)
+- [Virtual Method Tables](https://en.wikipedia.org/wiki/Virtual_method_table)
+- [RAII Pattern](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)
+- [thiserror Documentation](https://crates.io/crates/thiserror)
