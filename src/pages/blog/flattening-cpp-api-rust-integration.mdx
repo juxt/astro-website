@@ -239,7 +239,7 @@ fn main() -> Result<()> {
         |code, err| eprintln!("Error {}: {}", code, err),
     )?;
 
-    client.connect("test.mosquito.org", 1883)?;
+    client.connect("test.mosquitto.org", 1883)?;
     
     let message = Message::new("test/topic", "Hello MQTT!");
     client.publish(&message)?;
@@ -266,7 +266,7 @@ fn test_integration() {
         |code, err| eprintln!("Error {}: {}", code, err),
     ).unwrap();
 
-    client.connect("test.mosquito.org", 1883).unwrap();
+    client.connect("test.mosquitto.org", 1883).unwrap();
     
     let message = Message::new("test/topic", "test data");
     client.publish(&message).unwrap();
