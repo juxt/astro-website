@@ -16,21 +16,20 @@ tags:
 
 # Introduction
 
-This blog post tackles a problem I've encountered while integrating Rust with a legacy C++ API for near-realtime data streaming: managing callbacks in a safe and efficient manner. During development, I struggled with the challenges of reconciling Rust's safety guarantees with the inherently unsafe nature of cross-language interactions.
+This blog post presents a solution for integrating Rust with legacy C++ APIs, focusing on safe and efficient callback management. While developing a near-realtime data streaming system, I encountered several challenges in reconciling Rust's safety guarantees with cross-language interactions. The approach described here, though developed for a specific use case, provides patterns applicable to many C++-to-Rust integration scenarios.
 
-These callbacks are challenging because they involve transitioning from C++ to Rust. During the callback, you only have access to entities provided by the C++ library: values or pointers to memory that Rust didn't allocate, which means Rust has no information about their structure or alignment. As a result, the code in this layer must be "unsafe," undermining Rust's safety guarantees. This makes it crucial to minimize the amount of unsafe code and consolidate it in a single, well-defined part of the codebase.
+# Overview
 
-In most cases, we want to interact with Rust-allocated data in callbacks, but from the C++ perspective, Rust's structures are equally opaque: their layout, mutability, and alignment are unknown. To simplify the problem at the time, I implemented a singleton pattern for the API. This ensured that only one connection could exist per process, and all callbacks mapped to static, externally defined Rust functions. While this solution worked well for the specific use case, it introduced complexity in managing state for clients of the API, especially since the interaction was stateful and asynchronous.
+Managing callbacks between C++ and Rust presents unique challenges. During a callback, Rust code must work with memory owned by the C++ library - data whose structure and alignment are opaque to Rust's type system. This requires careful handling of unsafe code, which can undermine Rust's safety guarantees.
 
-The blog post describes what I believe is a more elegant solution. In this approach, we encapsulate the API's callback closures within a Rust object (a `CallbackContext`) that is stored alongside the Rust `Client` object. This allows us to implement the `extern "C"` functions as members of the `Client`, giving them access to `self` and, by extension, the associated `CallbackContext`. At callback time, we cast this context back to its original Rust type, allowing us to resume "normal" Rust operations while preserving safety.
+My initial solution used a singleton pattern, limiting each process to one connection to the upstream service (in this case, an MQTT broker, but the same limitation would apply when connecting to other systems like financial exchanges or data feeds). While this worked technically, it had several major drawbacks:
 
-This approach requires support in the C bridge for passing an additional raw pointer as context, which represents the Rust-managed data. Looking back, I wish I had thought of this during earlier work on a similar system—it would have simplified the design significantly.
+1. The singleton pattern meant only one connection to the upstream service could exist per process
+2. State had to be managed through global static variables (via something like `lazy_static!`)
+3. Async code became particularly difficult as the global state needed thread-safe access patterns
+4. Testing was cumbersome as the global state had to be carefully managed between test cases
 
-Another interesting point is the use of zero-copy access at callback time. When the API delivers a message, it provides a view into the underlying data in the C++ library (`MessageView` in the blog). This avoids unnecessary data copying, though the developer can choose to create a deep copy if needed. This approach provides flexibility while keeping performance costs explicit.
-
-Finally, thanks to a recent code review, I was able to refine this solution further, removing an unnecessary mutex during callbacks. The underlying memory is owned and managed by the C++ API and guaranteed to remain stable for the duration of the callback, making the mutex redundant.
-
-In the following sections, we'll dive into the details of this approach, exploring how it contributes to safer and more efficient Rust-C++ integration.
+The improved approach presented here encapsulates API callbacks within a Rust object stored alongside the client. By implementing extern "C" functions as client members with access to this context, we can maintain Rust's safety guarantees while providing efficient zero-copy access to callback data when needed.
 
 # Bridging C++ and Rust: A Practical Guide to API Flattening
 
