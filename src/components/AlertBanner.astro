@@ -4,22 +4,25 @@ import { CloseIcon } from '@components/Icons.tsx'
 
 const enabled = true
 // Update this ID to show the banner to users who closed it
-const updateId = 'grid-dynamics-announcement'
+const updateId = 'finos-jeremy-webinar'
 ---
 
 {
   enabled && (
     <alert-banner class='hidden' data-update-id={updateId}>
-      <Section className='w-full z-[60] text-black p-5 bg-juxt'>
+      <Section
+        className='w-full z-[60] text-black p-5'
+        style={`background-color: #F27918;`}
+      >
         <div class='flex flex-row justify-between items-center'>
           <span class='flex-grow text-center'>
-            JUXT joins forces with Grid Dynamics — Read the full announcement
             <a
               class='cursor-pointer underline'
-              href='https://www.griddynamics.com/press-releases/grid-dynamics-expands-global-footprint-with-juxt-acquisition'
+              href='https://zoom.us/webinar/register/4617283986911/WN_3b4DvHhvQbCtt98DOvjbDQ#/registration'
               target='_blank'
             >
-              here
+              [Live Webinar] Accelerated As-Of Reporting Without The Hassle:
+              Modern Databases, Bitemporal Data, and XTDB
             </a>
           </span>
           <button class='w-3 h-3'>
