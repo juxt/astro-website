@@ -293,7 +293,11 @@ unsafe impl Sync for Client {}
 
 ### 5. Error Handling with thiserror
 
-We use [thiserror](https://crates.io/crates/thiserror) to define our error types:
+We use [thiserror](https://crates.io/crates/thiserror) to define our error
+types, though any error handling approach would work equally well here. The
+choice of thiserror is merely for demonstration purposes - you could just as
+easily use standard error enums, anyhow, or your preferred error handling
+solution:
 
 ```rust
 use thiserror::Error;
@@ -311,7 +315,13 @@ pub enum Error {
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
+
 ```
+
+The key point here isn't the specific error handling crate, but rather
+ensuring that C++ errors are properly translated into Rust's error handling
+paradigm in a way that preserves important error context and maintains type
+safety.
 
 ## Usage Example
 
