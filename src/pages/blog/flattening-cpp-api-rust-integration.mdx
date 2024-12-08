@@ -16,28 +16,92 @@ tags:
 
 # Introduction
 
-This blog post presents a solution for integrating Rust with legacy C++ APIs, focusing on safe and efficient callback management. While developing a near-realtime data streaming system, I encountered several challenges in reconciling Rust's safety guarantees with cross-language interactions. The approach described here, though developed for a specific use case, provides patterns applicable to many C++-to-Rust integration scenarios.
+This blog post presents a solution for integrating Rust with legacy C++ APIs,
+focusing on safe and efficient callback management. While developing a
+near-realtime data streaming system, I encountered several challenges in
+reconciling Rust's safety guarantees with cross-language interactions. The
+approach described here, though developed for a specific use case, provides
+patterns applicable to many C++-to-Rust integration scenarios.
 
 # Overview
 
-Managing callbacks between C++ and Rust presents unique challenges. During a callback, Rust code must work with memory owned by the C++ library - data whose structure and alignment are opaque to Rust's type system. This requires careful handling of unsafe code, which can undermine Rust's safety guarantees.
+Managing callbacks between C++ and Rust presents unique challenges. During a
+callback, Rust code must work with memory owned by the C++ library - data whose
+structure and alignment are opaque to Rust's type system. This requires careful
+handling of unsafe code, which can undermine Rust's safety guarantees.
 
-My initial solution used a singleton pattern, limiting each process to one connection to the upstream service (in this case, an MQTT broker, but the same limitation would apply when connecting to other systems like financial exchanges or data feeds). While this worked technically, it had several major drawbacks:
+My initial solution used a [singleton
+pattern](https://en.wikipedia.org/wiki/Singleton_pattern), limiting each process
+to one connection to the upstream service (in this case, an MQTT broker, but the
+same limitation would apply when connecting to other systems like financial
+exchanges or data feeds). While this worked technically, it had several major
+drawbacks:
 
 1. The singleton pattern meant only one connection to the upstream service could exist per process
 2. State had to be managed through global static variables (via something like `lazy_static!`)
 3. Async code became particularly difficult as the global state needed thread-safe access patterns
 4. Testing was cumbersome as the global state had to be carefully managed between test cases
 
-The improved approach presented here encapsulates API callbacks within a Rust object stored alongside the client. By implementing extern "C" functions as client members with access to this context, we can maintain Rust's safety guarantees while providing efficient zero-copy access to callback data when needed.
+```rust
+use dashmap::DashMap;
+use lazy_static::lazy_static;
+
+#[derive(Debug, Clone)]
+enum ClientState { New, Active, Error }
+
+// Forced to use global state for all clients
+lazy_static! {
+   static ref CLIENT_STATES: DashMap<i64, ClientState> = DashMap::new();
+}
+
+pub unsafe extern "C" fn message_event_cb(event_ptr: *const MessageEvent) {
+   let event = match event_ptr.as_ref() {
+       Some(e) => e,
+       None => {
+           println!("Null pointer in callback");
+           return;
+       }
+   };
+
+   let tag = event.get_tag();
+
+   // Hard to test/maintain state machine through global state
+   let next_state = match CLIENT_STATES.get(&tag).map(|s| s.clone()) {
+       None => ClientState::New,
+       Some(ClientState::New) if event.is_valid() => ClientState::Active,
+       Some(ClientState::Active) => ClientState::Active,
+       _ => ClientState::Error,
+   };
+
+   CLIENT_STATES.insert(tag, next_state);
+}
+```
+
+
+The improved approach presented here encapsulates API callbacks within a Rust
+object stored alongside the client. By implementing extern "C" functions as
+client members with access to this context, we can maintain Rust's safety
+guarantees while providing efficient zero-copy access to callback data when
+needed.
 
 # Bridging C++ and Rust: A Practical Guide to API Flattening
 
-When working on legacy modernization projects, we often need to integrate Rust with existing C++ codebases. This presents unique challenges due to fundamental differences in how these languages handle object models, memory management, and binary interfaces.
+When working on legacy modernization projects, we often need to integrate Rust
+with existing C++ codebases. This presents unique challenges due to fundamental
+differences in how these languages handle object models, memory management, and
+binary interfaces.
 
-Today, we'll explore a technique called "API flattening" using PolarMqtt, a toy C++ library I created specifically for this demonstration. While inspired by [Eclipse Paho C++ API](https://github.com/eclipse-paho/paho.mqtt.cpp) (it is implemented using the [C API](https://github.com/eclipse-paho/paho.mqtt.c)), PolarMqtt exists purely to illustrate these concepts - for production MQTT needs, use the official [paho-mqtt](https://crates.io/crates/paho-mqtt) crate.
+Today, we'll explore a technique called "API flattening" using PolarMqtt, a toy
+C++ library I created specifically for this demonstration. While inspired by
+[Eclipse Paho C++ API](https://github.com/eclipse-paho/paho.mqtt.cpp) (it is
+implemented using the [C API](https://github.com/eclipse-paho/paho.mqtt.c)),
+PolarMqtt exists purely to illustrate these concepts - for production MQTT
+needs, use the official [paho-mqtt](https://crates.io/crates/paho-mqtt) crate.
 
-The complete source code for this demonstration is available in the [PolarMqtt repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). All code examples in this post correspond to this version, which has been archived for reference.
+The complete source code for this demonstration is available in the [PolarMqtt
+repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). All
+code examples in this post correspond to this version, which has been archived
+for reference.
 
 
 ## C++ Object Model Challenges in FFI
@@ -145,9 +209,23 @@ The `'a` lifetime in MessageView is crucial for safety:
 - The `'a` lifetime ensures these references cannot outlive the callback.
 - After the callback returns, the C++ layer may free or modify the data.
 
-#### MessageView::to_owned()
-When receiving messages through a callback, the data arrives as a MessageView reference, which provides zero-copy access to data held by the underlying C++ API. If you need to retain the message data beyond the callback's scope, you can call `to_owned()` to create a deep copy, which returns an owned Message. 
-See [here](https://github.com/jsulmont/rs-polar-mqtt/blob/blog-v1.0.0/examples/message_view.rs) for an example.
+For example, this code would fail to compile:
+
+```rust
+let stored_message: Option<MessageView> = None;
+
+client.on_message(|msg| {
+    stored_message = Some(msg);  // Compile error! Can't store borrowed data
+});
+````
+
+#### MessageView::to_owned() When receiving messages through a callback, the
+data arrives as a MessageView reference, which provides zero-copy access to data
+held by the underlying C++ API. If you need to retain the message data beyond
+the callback's scope, you can call `to_owned()` to create a deep copy, which
+returns an owned Message. See
+[here](https://github.com/jsulmont/rs-polar-mqtt/blob/blog-v1.0.0/examples/message_view.rs)
+for an example.
 
 
 ### 3. Implementing Thread-Safe Callbacks
