@@ -219,11 +219,20 @@ client.on_message(|msg| {
 });
 ````
 
-#### MessageView::to_owned() When receiving messages through a callback, the
-data arrives as a MessageView reference, which provides zero-copy access to data
-held by the underlying C++ API. If you need to retain the message data beyond
-the callback's scope, you can call `to_owned()` to create a deep copy, which
-returns an owned Message. See
+#### MessageView::to_owned()
+
+When receiving messages through a callback, the data arrives as a MessageView
+reference, which provides zero-copy access to data held by the underlying C++
+API. If you need to retain the message data beyond the callback's scope, you can
+call `to_owned()` to create a deep copy, which returns an owned Message:
+```rust
+client.on_message(|msg| {
+    let owned_message = msg.to_owned();  // Creates owned copy we can store
+    process_later(owned_message);
+});
+```
+
+See
 [here](https://github.com/jsulmont/rs-polar-mqtt/blob/blog-v1.0.0/examples/message_view.rs)
 for an example.
 
