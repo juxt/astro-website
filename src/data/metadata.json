@@ -15,11 +15,9 @@
   },
   "navbar": [
     { "label": "Team", "href": "/team" },
-    { "label": "Financial", "href": "/financial" },
-    { "label": "Delivery", "href": "/delivery" },
-    { "label": "Get Started", "href": "/get-started" },
-    { "label": "Careers", "href": "/careers" },
+    { "label": "Services", "href": "/services" },
     { "label": "Blog", "href": "/blog" },
+    { "label": "Careers", "href": "/careers" },
     { "label": "XTDB", "href": "https://xtdb.com/", "target": "_blank" },
     {
       "label": "Get in touch",
