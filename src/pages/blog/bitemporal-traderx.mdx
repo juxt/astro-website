@@ -19,7 +19,7 @@ import { Image } from 'astro:assets'
 
 In case you missed the news, JUXT is now a member of [FINOS](https://www.finos.org/)! The Fintech Open Source Foundation (FINOS) is an umbrella organization under the Linux Foundation, whose purpose is to accelerate collaboration and innovation in financial services through the adoption of open source software, standards and best practices.
 
-Throughout August and September I was the lead engineer on a team from JUXT who took part in the FINOS [2024 Tech Sprint](https://www.finos.org/blog/finos-tech-sprint-2024) - a multi-week hackathon centred around one the FINOS projects called '[TraderX](https://github.com/finox/traderx)'. Unlike most of the other projects that FINOS hosts, which are used in production by various member organisations, TraderX is essentially an example system (think '[Pet Store](https://en.wikipedia.org/wiki/Java_BluePrints)') that is intended purely for educational and training purposes. TraderX was initially developed by Morgan Stanley.
+Throughout August and September I was the lead engineer on a team from JUXT who took part in the FINOS [2024 Tech Sprint](https://www.finos.org/blog/finos-tech-sprint-2024) - a multi-week hackathon centered around one of the FINOS projects called '[TraderX](https://github.com/finox/traderx)'. Unlike most of the other projects that FINOS hosts, which are used in production by various member organizations, TraderX is essentially an example system (think '[Pet Store](https://en.wikipedia.org/wiki/Java_BluePrints)') that is intended purely for educational and training purposes. TraderX was initially developed by Morgan Stanley.
 
 ## What we achieved in the 2024 Tech Sprint
 
@@ -42,7 +42,7 @@ The existing application has been extended in several ways...
 
 ### Basic UI Tweaks
 
-Firstly, we cleared up the sample data and added some basic constraints to the Angular UI. We noticed that some initial trades are on the ‘Sell’ side - which should not be possible if the securities sold are not owned - so we changed all the initial trades to be on the ‘Buy’ side and now only allow selling owned securities to the limit of quantity owed - to simulate a real world portfolio.
+Firstly, we cleared up the sample data and added some basic constraints to the Angular UI. We noticed that some initial trades are on the ‘Sell’ side - which should not be possible if the securities sold are not owned - so we changed all the initial trades to be on the ‘Buy’ side and now only allow selling owned securities to the limit of quantity owned - to simulate a real world portfolio.
 
 import dialog from '../../assets/blog/bitemporal-traderx-dialog.png'
 
@@ -60,30 +60,30 @@ We then added an additional ‘Closed Position’ blotter for displaying positio
 ### New 'Report' tab with sliders
 
 We introduced a ‘Report’ tab which displays largely similar data to the ‘Trade’ tab, but using XTDB as backing store.
-Positions which result in net gain (cost of buying securities is lower than current market value) have green backgrounds, while those representing loss (cost of purchasing securities is higher than current market value) have red backgrounds. Positions also have ‘Calculation’ column representing how we’ve arrived at current position value (result of summing up trades values).
+Positions with a net gain (where the cost of buying securities is lower than the current market value) are highlighted in green, while those with a loss are highlighted in red. Positions also have a ‘Calculation’ column representing how we’ve arrived at the current position value (by summing up trades values).
 
 This tab also adds two sliders:
 - Trade timeline slider - allowing the user to quickly understand how trades unfolded (as best known, and ignoring the system_time audit timeline)
-- Price history slider - allowing to the user to simulate and discover what the aggregate positions would look like given prices at a particular date in the past (again, as best known)
+- Price history slider - allowing the user to explore how aggregate positions would appear at a specific past price point (again, using prices and data as best known)
 
 ### A re-imagined 'Reference Service'
 
-In supporting of all these UI additions we created a new microservice to replace the existing 'reference-service'. It is written in Clojure and is split across several clearly delineated namespaces. This service now does a few things:
+In support of all these UI additions we created a new microservice to replace the existing 'reference-service'. It is written in Clojure and is split across several clearly delineated namespaces. This service now does a few things:
 - Fully replaces and supersedes the existing 'reference-data' microservice for serving up ‘static’ / lookup data (securities and accounts)
 - Provides bitemporal storage for trades, positions and prices
 - Generates a year’s worth of daily prices (initial value randomly generated, thereafter - last price varied by 10% so that we have an approximation of how prices change over time on the market - prices rise and fall)
-- Generates initial ‘seed’ trades for seven securities for every account within fifteen days before starting date - so that each account starts with some open positions (and some potentially closed). This gives us realistic demo data.
+- Generates initial ‘seed’ trades for seven securities for every account within fifteen days before the starting date - so that each account starts with some open positions (and some potentially closed). This gives us realistic demo data.
 - Sends current ‘market’ prices via websocket to the clients (so that the prices displayed in the app are ‘fresh’). Current prices are generated and stored every 10 seconds (to simulate a ‘live market’ price stream).
 
 The reference-service is written in Clojure, which we chose for expedience, but it also neatly showcases how succinct Clojure can be compared to the other language stacks found in the TraderX repo (Spring, TypeScript etc.) The service exposes endpoints using the [Aleph](https://github.com/clj-commons/aleph) webserver and implements streaming using the [Manifold](https://github.com/clj-commons/manifold) library.
 
-The service interfaces with XTDB via vanilla [pgJDBC](https://jdbc.postgresql.org/) and SQL, which is possible thanks to XTDB v2's compatibility with the Postgres wire protocol. This also meant that during development we could access the database using tools like VSCode's [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [Metabase](https://www.metabase.com/) to debug our queries and data, without the need for any custom drivers or less conventional tools.
+The service interfaces with XTDB via vanilla [pgJDBC](https://jdbc.postgresql.org/) and SQL, which is possible thanks to XTDB v2's compatibility with the Postgres wire protocol. This also meant that during development we could access the database using tools like VSCode's [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [Metabase](https://www.metabase.com/) to debug our queries and data, without the need for custom drivers or unconventional tools.
 
 Overall the project was quite straightforward as all the pieces fit together nicely. However, having worked with many other databases previously, I had strong first impressions when picking up XTDB for this project and plan to share more details on that soon. Stay tuned!
 
-## XTDB webinar on 11th December and the search for Design Partners
+## Upcoming XTDB Tech Talk on 11th December and a Call for Design Partners
 
 The XTDB team is running a webinar in conjunction with FINOS on 11th December, you can learn more and register for that [here](https://zoom.us/webinar/register/4617283986911/WN_3b4DvHhvQbCtt98DOvjbDQ).
 
-Finally, JUXT is currently collaborating with several Design Partners using XTDB who help us discover missing features - we cannot responsibly take on too many partners (as we do need to support those features!), but if you feel like XTDB is the right fit for your problems, please do get in touch: [hello@xtdb.com](mailto://hello@xtdb.com)
+Finally, JUXT is collaborating with several Design Partners who are using XTDB and helping us discover missing features - we cannot responsibly take on too many partners (as we do need to support those features!), but if you feel like XTDB is the right fit for your problems, please do get in touch: [hello@xtdb.com](mailto://hello@xtdb.com)
 
