@@ -23,6 +23,6 @@ The conversation also offers unique insights into the evolving role of AI in aug
 
 ### Addendum
 
-This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/736d5a29/juxt-cast-special-with-kent-beck).
+This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/fb61eb8f/insights-into-devops-ai-and-high-performance-technology-organizations-with-gene-kim).
 
 Happy listening!
