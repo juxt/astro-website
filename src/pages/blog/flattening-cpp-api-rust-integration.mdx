@@ -134,15 +134,20 @@ class MySession : public Session {
 
 ## The bindgen Challenge
 
-> **Important Note**: While [bindgen](https://rust-lang.github.io/rust-bindgen/) works excellently for C APIs, it often struggles with C++ codebases. As of 2024, there's no robust, general-purpose solution for automatically generating Rust bindings to C++ APIs. Common issues include:
-> - Inability to properly handle C++ templates
-> - Broken callback bindings due to vtable incompatibilities
-> - Complications with STL containers and RAII types
-> - Name mangling mismatches
-> - Template instantiation problems
-> - Complex inheritance hierarchies that don't map to Rust's trait system
->
-> This is why we need to "flatten" C++ APIs to C first, creating a simpler intermediate layer that bindgen can reliably handle. While this requires more upfront work, it results in more maintainable and reliable bindings.
+ While [bindgen](https://rust-lang.github.io/rust-bindgen/) works excellently
+ for C APIs, it often struggles with C++ codebases. As of 2024, there's no
+ robust, general-purpose solution for automatically generating Rust bindings to
+ C++ APIs. Common issues include: - Inability to properly handle C++ templates
+
+ - Broken callback bindings due to vtable incompatibilities
+ - Complications with STL containers and RAII types
+ - Name mangling mismatches
+ - Template instantiation problems
+ - Complex inheritance hierarchies that don't map to Rust's trait system
+
+ This is why we need to "flatten" C++ APIs to C first, creating a simpler
+ intermediate layer that bindgen can reliably handle. While this requires more
+ upfront work, it results in more maintainable and reliable bindings.
 
 
 ## The Solution: API Flattening
@@ -296,7 +301,8 @@ unsafe impl Sync for Client {}
 We use [thiserror](https://crates.io/crates/thiserror) to define our error
 types, though any error handling approach would work equally well here. The
 choice of thiserror is merely for demonstration purposes - you could just as
-easily use standard error enums, anyhow, or your preferred error handling
+easily use standard error enums, [anyhow](https://crates.io/crates/anyhow),
+[snafu](https://crates.io/crates/snafu) or your preferred error handling
 solution:
 
 ```rust
@@ -446,6 +452,9 @@ unsafe extern "C" fn message_callback(
    ```
 
 ## Best Practices
+
+There are a few more good practices that will produce a good Rust library,
+that's safe, effective, and pleasant to use.
 
 1. **Memory Safety**
    - Use RAII in both C++ and Rust layers
