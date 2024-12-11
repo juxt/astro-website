@@ -134,6 +134,44 @@ const clojureInPicture = await getImage({
 }).then((img) => img.src)
 ---
 
+<!-- Script to dynamically add a margin to account for the alert banner -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const alertBanner = document.querySelector('alert-banner')
+    const mainDiv = document.querySelector('.blog-container') as HTMLElement
+
+    if (!mainDiv) return
+
+    // Function to update the margin based on the alert banner's height
+    const updateMargin = () => {
+      if (alertBanner && !alertBanner.classList.contains('hidden')) {
+        const bannerHeight = (alertBanner as HTMLElement).offsetHeight // Get the actual height of the alert banner
+        mainDiv.style.marginTop = `${bannerHeight}px`
+      } else {
+        mainDiv.style.marginTop = '0'
+      }
+    }
+    updateMargin()
+
+    // Observe changes to the alert banner's attributes
+    if (alertBanner) {
+      const observer = new MutationObserver(() => {
+        updateMargin()
+      })
+
+      observer.observe(alertBanner, {
+        attributes: true,
+        attributeFilter: ['class']
+      })
+    }
+
+    // Check for zooming/resizing
+    window.addEventListener('resize', () => {
+      updateMargin()
+    })
+  })
+</script>
+
 <Layout
   navbar
   title={title}
@@ -142,17 +180,17 @@ const clojureInPicture = await getImage({
   ogImage={heroImageFilename}
 >
   <div
-    class='flex items-end w-full min-h-[30vh] bg-cover bg-[50%_55%]'
+    class='blog-container flex items-end w-full min-h-[30vh] bg-cover bg-[50%_55%]'
     style={{ backgroundImage: `url(${clojureInPicture})` }}
-    data-pagefind-filter="blog:true"
+    data-pagefind-filter='blog:true'
     data-category={category}
     data-published-date={publishedDate}
     data-person-name={name}
     data-person-last-name={lastName}
     data-person-job-title={jobTitle}
-    data-pagefind-meta="category[data-category], publishedDate[data-published-date], personName[data-person-name], personLastName[data-person-last-name], personJobTitle[data-person-job-title]"
-    data-pagefind-filter="personName[data-person-name], personLastName[data-person-last-name]"
-    data-pagefind-sort="publishedDate[data-published-date]"
+    data-pagefind-meta='category[data-category], publishedDate[data-published-date], personName[data-person-name], personLastName[data-person-last-name], personJobTitle[data-person-job-title]'
+    data-pagefind-filter='personName[data-person-name], personLastName[data-person-last-name]'
+    data-pagefind-sort='publishedDate[data-published-date]'
   >
     <Image
       width={200}
@@ -160,7 +198,7 @@ const clojureInPicture = await getImage({
       alt='author picture'
       class='hidden'
       src={import(`../assets/people/${personImageFilename}.jpg`)}
-      data-pagefind-meta="personImage[src]"
+      data-pagefind-meta='personImage[src]'
     />
     <div class='flex justify-center w-full'>
       <div class='flex flex-col gap-2 w-2/3'>
@@ -229,7 +267,7 @@ const clojureInPicture = await getImage({
     quality={90}
     class='hidden'
     src={import(`../assets/blog/${heroImageFilename}.jpg`)}
-    data-pagefind-meta="heroImage[src]"
+    data-pagefind-meta='heroImage[src]'
   />
 
   <DraftBanner draft={draft} pageName='Blog' />

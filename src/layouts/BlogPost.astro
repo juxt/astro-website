@@ -16,16 +16,23 @@ import Layout from './Layout.astro'
 import { getImage } from 'astro:assets'
 import DarkModeSwitch from '../components/DarkModeSwitch'
 
-const { title, description, heroImage, category, author, draft, publishedDate } = Astro.props
-  .content as Blog
+const {
+  title,
+  description,
+  heroImage,
+  category,
+  author,
+  draft,
+  publishedDate
+} = Astro.props.content as Blog
 
 const people = await Astro.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}'
 )
 
-const blogs = (await Astro.glob<MarkdownInstance<Blog>>(
-  '../pages/blog/{*.mdx,*.md}'
-)).filter((blog) => !blog.frontmatter.draft)
+const blogs = (
+  await Astro.glob<MarkdownInstance<Blog>>('../pages/blog/{*.mdx,*.md}')
+).filter((blog) => !blog.frontmatter.draft)
 
 const blogsWithoutCurrent = blogs.filter(
   (blog) => blog.frontmatter.title !== title
@@ -133,6 +140,44 @@ const categoryHref = `/blog?${encodeURI(
 )}`
 ---
 
+<!-- Script to dynamically add a margin to account for the alert banner -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const alertBanner = document.querySelector('alert-banner')
+    const mainDiv = document.querySelector('.blog-container') as HTMLElement
+
+    if (!mainDiv) return
+
+    // Function to update the margin based on the alert banner's height
+    const updateMargin = () => {
+      if (alertBanner && !alertBanner.classList.contains('hidden')) {
+        const bannerHeight = (alertBanner as HTMLElement).offsetHeight // Get the actual height of the alert banner
+        mainDiv.style.marginTop = `${bannerHeight}px`
+      } else {
+        mainDiv.style.marginTop = '0'
+      }
+    }
+    updateMargin()
+
+    // Observe changes to the alert banner's attributes
+    if (alertBanner) {
+      const observer = new MutationObserver(() => {
+        updateMargin()
+      })
+
+      observer.observe(alertBanner, {
+        attributes: true,
+        attributeFilter: ['class']
+      })
+    }
+
+    // Check for zooming/resizing
+    window.addEventListener('resize', () => {
+      updateMargin()
+    })
+  })
+</script>
+
 <Layout
   navbar
   title={title}
@@ -143,12 +188,12 @@ const categoryHref = `/blog?${encodeURI(
   <DraftBanner draft={draft} pageName='Blog' />
   <main
     class='transition-colors dark:bg-gray-900'
-    data-pagefind-filter="blog:true"
+    data-pagefind-filter='blog:true'
     data-published-date={publishedDate}
-    data-pagefind-meta="publishedDate[data-published-date]"
-    data-pagefind-sort="publishedDate[data-published-date]"
+    data-pagefind-meta='publishedDate[data-published-date]'
+    data-pagefind-sort='publishedDate[data-published-date]'
   >
-    <div class='px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>
+    <div class='blog-container px-4 sm:px-12 2xl:px-0 max-w-7xl mx-auto'>
       <div class='flex flex-col lg:flex-row gap-12 items-center pt-10'>
         <div
           class='flex text-center max-w-xl mx-auto lg:text-left lg:max-w-none lg:w-1/2 lg:mx-0 flex-col lg:justify-center items-center lg:items-start'
@@ -158,12 +203,14 @@ const categoryHref = `/blog?${encodeURI(
             <a
               href={categoryHref}
               class='text-juxt hover:underline font-medium font-mono dark:text-zinc-300 uppercase text-sm'
-              data-pagefind-meta="category"
+              data-pagefind-meta='category'
             >
               {category}
             </a>
-            <div class="grow" />
-            <div class="text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm">
+            <div class='grow'></div>
+            <div
+              class='text-juxt font-medium font-mono dark:text-zinc-300 uppercase text-sm'
+            >
               {formatDate(publishedDate)}
             </div>
           </div>
@@ -172,7 +219,10 @@ const categoryHref = `/blog?${encodeURI(
           >
             {title}
           </h1>
-          <h2 class='text-lg text-zinc-600 dark:text-zinc-300' data-pagefind-meta="description">
+          <h2
+            class='text-lg text-zinc-600 dark:text-zinc-300'
+            data-pagefind-meta='description'
+          >
             {description}
           </h2>
           <a
@@ -190,16 +240,17 @@ const categoryHref = `/blog?${encodeURI(
                   alt='author picture'
                   class='absolute w-full h-full object-cover'
                   src={import(`../assets/people/${personImageFilename}.jpg`)}
-                  data-pagefind-meta="personImage[src]"
+                  data-pagefind-meta='personImage[src]'
                 />
               </div>
             </div>
-            <div class='flex flex-col gap-1 text-left'
-                 data-name={name}
-                 data-last-name={lastName}
-                 data-job-title={jobTitle}
-                 data-pagefind-meta="personName[data-name], personLastName[data-last-name], personJobTitle[data-job-title]"
-                 data-pagefind-filter="personName[data-name], personLastName[data-last-name]"
+            <div
+              class='flex flex-col gap-1 text-left'
+              data-name={name}
+              data-last-name={lastName}
+              data-job-title={jobTitle}
+              data-pagefind-meta='personName[data-name], personLastName[data-last-name], personJobTitle[data-job-title]'
+              data-pagefind-filter='personName[data-name], personLastName[data-last-name]'
             >
               {
                 name && lastName && (
@@ -229,7 +280,7 @@ const categoryHref = `/blog?${encodeURI(
           quality={90}
           class='w-full max-w-3xl lg:max-w-none lg:w-1/2 aspect-square object-cover'
           src={import(`../assets/blog/${heroImageFilename}.jpg`)}
-          data-pagefind-meta="heroImage[src]"
+          data-pagefind-meta='heroImage[src]'
         />
       </div>
 
