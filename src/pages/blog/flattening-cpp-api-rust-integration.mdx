@@ -4,7 +4,7 @@ title: 'Flattening Legacy C++ APIs for Rust Integration'
 description: 'Recipe for using an existing C++ API in Rust'
 category: 'programming'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2025-01-20'
+publishedDate: '2024-12-17'
 draft: true
 heroImage: 'cpp-rust-flattening.jpg'
 tags:
@@ -77,7 +77,6 @@ pub unsafe extern "C" fn message_event_cb(event_ptr: *const MessageEvent) {
 }
 ```
 
-
 The improved approach presented here encapsulates API callbacks within a Rust
 object stored alongside the client. By implementing extern "C" functions as
 client members with access to this context, we can maintain Rust's safety
@@ -103,10 +102,10 @@ repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). All
 code examples in this post correspond to this version, which has been archived
 for reference.
 
-
 ## C++ Object Model Challenges in FFI
 
 Legacy C++ APIs often present several integration challenges for Rust:
+
 - Incompatible vtable implementations ([Virtual Method Tables](https://en.wikipedia.org/wiki/Virtual_method_table))
 - Complex inheritance hierarchies
 - [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) patterns that need careful handling
@@ -134,21 +133,20 @@ class MySession : public Session {
 
 ## The bindgen Challenge
 
- While [bindgen](https://rust-lang.github.io/rust-bindgen/) works excellently
- for C APIs, it often struggles with C++ codebases. As of 2024, there's no
- robust, general-purpose solution for automatically generating Rust bindings to
- C++ APIs. Common issues include: - Inability to properly handle C++ templates
+While [bindgen](https://rust-lang.github.io/rust-bindgen/) works excellently
+for C APIs, it often struggles with C++ codebases. As of 2024, there's no
+robust, general-purpose solution for automatically generating Rust bindings to
+C++ APIs. Common issues include: - Inability to properly handle C++ templates
 
- - Broken callback bindings due to vtable incompatibilities
- - Complications with STL containers and RAII types
- - Name mangling mismatches
- - Template instantiation problems
- - Complex inheritance hierarchies that don't map to Rust's trait system
+- Broken callback bindings due to vtable incompatibilities
+- Complications with STL containers and RAII types
+- Name mangling mismatches
+- Template instantiation problems
+- Complex inheritance hierarchies that don't map to Rust's trait system
 
- This is why we need to "flatten" C++ APIs to C first, creating a simpler
- intermediate layer that bindgen can reliably handle. While this requires more
- upfront work, it results in more maintainable and reliable bindings.
-
+This is why we need to "flatten" C++ APIs to C first, creating a simpler
+intermediate layer that bindgen can reliably handle. While this requires more
+upfront work, it results in more maintainable and reliable bindings.
 
 ## The Solution: API Flattening
 
@@ -181,7 +179,7 @@ mqtt_session_handle_t mqtt_create_session(
 );
 ```
 
-### 2. Designing Safe Rust Types 
+### 2. Designing Safe Rust Types
 
 In Rust, we create two distinct message types to handle different ownership scenarios:
 
@@ -205,7 +203,7 @@ pub struct MessageView<'a> {
 }
 ```
 
-#### Why MessageView Needs a Lifetime Parameter 
+#### Why MessageView Needs a Lifetime Parameter
 
 The `'a` lifetime in MessageView is crucial for safety:
 
@@ -222,7 +220,7 @@ let stored_message: Option<MessageView> = None;
 client.on_message(|msg| {
     stored_message = Some(msg);  // Compile error! Can't store borrowed data
 });
-````
+```
 
 #### MessageView::to_owned()
 
@@ -230,6 +228,7 @@ When receiving messages through a callback, the data arrives as a MessageView
 reference, which provides zero-copy access to data held by the underlying C++
 API. If you need to retain the message data beyond the callback's scope, you can
 call `to_owned()` to create a deep copy, which returns an owned Message:
+
 ```rust
 client.on_message(|msg| {
     let owned_message = msg.to_owned();  // Creates owned copy we can store
@@ -240,7 +239,6 @@ client.on_message(|msg| {
 See
 [here](https://github.com/jsulmont/rs-polar-mqtt/blob/blog-v1.0.0/examples/message_view.rs)
 for an example.
-
 
 ### 3. Implementing Thread-Safe Callbacks
 
@@ -343,10 +341,10 @@ fn main() -> Result<()> {
     )?;
 
     client.connect("test.mosquitto.org", 1883)?;
-    
+
     let message = Message::new("test/topic", "Hello MQTT!");
     client.publish(&message)?;
-    
+
     Ok(())
 }
 ```
@@ -359,7 +357,7 @@ Integration testing is crucial for FFI code:
 #[test]
 fn test_integration() {
     let (tx, rx) = mpsc::channel();
-    
+
     let mut client = Client::new(
         "test-client",
         move |msg| {
@@ -370,10 +368,10 @@ fn test_integration() {
     ).unwrap();
 
     client.connect("test.mosquitto.org", 1883).unwrap();
-    
+
     let message = Message::new("test/topic", "test data");
     client.publish(&message).unwrap();
-    
+
     let received = rx.recv_timeout(Duration::from_secs(5)).unwrap();
     assert_eq!(received.payload(), message.payload());
 }
@@ -428,6 +426,7 @@ unsafe extern "C" fn message_callback(
 ### Key Safety Considerations
 
 1. **Context Management**: The `CallbackContext` must outlive all callbacks:
+
    ```rust
    pub struct Client {
        session: *mut bindings::mqtt_session_t,
@@ -436,6 +435,7 @@ unsafe extern "C" fn message_callback(
    ```
 
 2. **Lifetime Guarantees**: `MessageView` borrows data only for the duration of the callback:
+
    ```rust
    pub struct MessageView<'a> {
        topic: &'a str,    // Lives for callback duration
@@ -457,16 +457,19 @@ There are a few more good practices that will produce a good Rust library,
 that's safe, effective, and pleasant to use.
 
 1. **Memory Safety**
+
    - Use RAII in both C++ and Rust layers
    - Document ownership transfers explicitly
    - Minimize unsafe code blocks
 
 2. **Error Handling**
+
    - Convert C++ exceptions to error codes at the FFI boundary
    - Use thiserror for error definitions
    - Provide rich error context
 
 3. **Thread Safety**
+
    - Make thread safety requirements explicit
    - Use appropriate synchronization primitives
    - Ensure callbacks are Send + Sync
@@ -483,7 +486,6 @@ While our example uses PolarMqtt, a toy library created for this demonstration, 
 ## Publicly available test MQTT brokers
 
 The examples above use `test.mosquitto.org`, a public MQTT broker maintained by the Eclipse Foundation. While this broker is typically reliable, it may occasionally be unavailable for maintenance. Alternative public test brokers include `broker.emqx.io` (provided by EMQ) and `broker.hivemq.com` (provided by HiveMQ) - both accessible on port 1883. Remember that these are public test brokers intended for development and testing purposes only; production deployments should use dedicated, secured MQTT brokers.
-
 
 ## Source Code
 
