@@ -2,7 +2,7 @@
 code: 'jan'
 name: 'Jan'
 lastName: 'Sulmont'
-jobTitle: 'Clojure Developer'
+jobTitle: 'Developer'
 image: 'jan.jpg'
 linkedin: ''
 twitter: ''
