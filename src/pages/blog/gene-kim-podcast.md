@@ -4,7 +4,7 @@ title: 'Gene Kim on JUXTCast: Insights into DevOps, AI, and High-Performance Tec
 description: 'In this episode, Jeremy Taylor and Malcolm Sparks are joined by Gene Kim to explore the evolution of technology through modularity, AI-driven programming, and the future of innovation.'
 category: 'AI'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2024-12-11'
+publishedDate: '2024-12-18'
 heroImage: 'JuxtCast-dark.jpg'
 tags:
   - 'AI'
