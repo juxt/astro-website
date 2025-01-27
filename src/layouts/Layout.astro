@@ -49,20 +49,25 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   }).then((img) => img.src)
   imageForShare = `${url.origin}${importedPic}`
 } else if (ogImage) {
-  // would be nice not to hardcode blog here, but then vite can't do the dynamic import...
-  // this whole dynamic import thing is nasty anyway, probably its better to
-  // have a seperate step for images outside astro, though the astro people say
-  // they're going to fix this soon so 🤷‍♂️
-  const img = await import(`../assets/blog/${ogImage}.jpg`)
-  const { src } = await getImage({
-    src: img.default,
-    width: 1200,
-    alt: 'blog background',
-    height: 630
-  })
-  imageForShare = `${url.origin}${src}`
+  if (ogImage.startsWith('/')) {
+    // Direct path, no dynamic import needed
+    imageForShare = `${url.origin}${ogImage}`
+  } else {
+    // would be nice not to hardcode blog here, but then vite can't do the dynamic import...
+    // this whole dynamic import thing is nasty anyway, probably its better to
+    // have a seperate step for images outside astro, though the astro people say
+    // they're going to fix this soon so 🤷‍♂️
+    const img = await import(`../assets/blog/${ogImage}.jpg`)
+    const { src } = await getImage({
+      src: img.default,
+      width: 1200,
+      alt: 'blog background',
+      height: 630
+    })
+    imageForShare = `${url.origin}${src}`
+  }
 }
-const metaTitle = ogTitle ?? (title ?? currentPageName)
+const metaTitle = ogTitle ?? title ?? currentPageName
 ---
 
 <!doctype html>
@@ -90,7 +95,12 @@ const metaTitle = ogTitle ?? (title ?? currentPageName)
       )
     }
 
-    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="XTDB Blog">
+    <link
+      rel='alternate'
+      type='application/rss+xml'
+      href='/feed.xml'
+      title='XTDB Blog'
+    />
 
     <!-- Twitter Meta Tags -->
     <meta name='twitter:card' content='summary_large_image' />
@@ -117,7 +127,11 @@ const metaTitle = ogTitle ?? (title ?? currentPageName)
       // See src/components/DarkModeSwitch.tsx for more info on dark mode setup
 
       // Source: https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
         document.documentElement.classList.add('dark')
       } else {
         document.documentElement.classList.remove('dark')
@@ -132,40 +146,41 @@ const metaTitle = ogTitle ?? (title ?? currentPageName)
       // Add a "Add to clipboard" button to all code blocks
       // TODO: maybe this could be a rehype/remark plugin?
 
-      let blocks = document.querySelectorAll("pre");
+      let blocks = document.querySelectorAll('pre')
 
       blocks.forEach((block) => {
         if (navigator.clipboard) {
-          const container = document.createElement('div');
-          container.style.position = "relative";
+          const container = document.createElement('div')
+          container.style.position = 'relative'
 
           block.parentNode.insertBefore(container, block)
           container.appendChild(block)
 
-          let button = document.createElement("button");
+          let button = document.createElement('button')
 
-          button.innerText = "Add to clipboard";
-          button.className = 'copy-button text-xs bg-gray-50 border border-zinc-200 text-zinc-600 dark:border-zinc-700 dark:bg-gray-900 dark:text-zinc-400 p-1 rounded-bl-lg';
-          container.insertBefore(button, block);
+          button.innerText = 'Add to clipboard'
+          button.className =
+            'copy-button text-xs bg-gray-50 border border-zinc-200 text-zinc-600 dark:border-zinc-700 dark:bg-gray-900 dark:text-zinc-400 p-1 rounded-bl-lg'
+          container.insertBefore(button, block)
 
-          button.addEventListener("click", async () => {
-            await copyCode(block, button);
-          });
+          button.addEventListener('click', async () => {
+            await copyCode(block, button)
+          })
         }
-      });
+      })
 
       async function copyCode(block, button) {
-        let code = block.querySelector("code");
-        let text = code.innerText;
+        let code = block.querySelector('code')
+        let text = code.innerText
 
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(text)
 
         // visual feedback that task is completed
-        button.innerText = "Code Copied";
+        button.innerText = 'Code Copied'
 
         setTimeout(() => {
-          button.innerText = "Add to clipboard";
-        }, 700);
+          button.innerText = 'Add to clipboard'
+        }, 700)
       }
     </script>
     <script
@@ -174,8 +189,7 @@ const metaTitle = ogTitle ?? (title ?? currentPageName)
       data-website-id='4a088aa2-1e6f-4f97-9e95-9619983468de'
       src='https://bunseki.juxt.pro/t.js'></script>
   </head>
-  <body 
-      class='bg-gray-50 transition-colors'>
+  <body class='bg-gray-50 transition-colors'>
     {navbar && <Navbar navbarNoBg={navbarNoBg} />}
     <div class:list={[{ 'pt-14': !navbarNoBg && navbar }]}>
       <slot />
