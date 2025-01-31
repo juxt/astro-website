@@ -1,0 +1,123 @@
+---
+import ContactUsFormNYCFintech25 from '@components/ContactUsFormNYCFintech25'
+import { LinkedInIcon } from '@components/Icons'
+import AssetImage from '@components/team/AssetImage.astro'
+import NYCFintech25Agenda from '@components/NYCFintech25Agenda.astro'
+import Layout from '@layouts/Layout.astro'
+import speakers from '../data/xt24/speakers.json'
+
+const { contactSubject } = Astro.props
+---
+
+<Layout
+  title='Trading Systems in 2030'
+  ogImage='/images/NYC.png'
+  ogTitle='Trading Systems in 2030'
+  ogDescription='Join us for an evening of tech talks, networking, and innovation in the heart of New York City.'
+>
+  <!-- Background Section -->
+  <div
+    class='relative bg-cover bg-center'
+    style="background-image: url('/images/NYC.jpg');"
+  >
+    <div class='absolute inset-0 bg-black opacity-50'></div>
+    <div
+      class='container max-w-6xl mx-auto flex flex-col text-white py-10 relative'
+    >
+      <!-- Header -->
+      <div class='flex gap-8 items-center px-5 sm:px-10 max-w-6xl mx-auto'>
+        <div class='max-w-[400px]'>
+          <img src='/images/logo.svg' alt='JUXT Logo' class='w-full h-auto' />
+        </div>
+        <div class='max-w-[300px]'>
+          <img src='/images/FINOS.png' alt='FINOS Logo' class='w-full h-auto' />
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class='grid grid-cols-1 lg:grid-cols-2 p-5 sm:px-10'>
+        <div>
+          <h1 class='text-4xl md:text-6xl font-bold uppercase'>
+            Trading Systems in 2030
+          </h1>
+          <h2 class='text-2xl font-bold'>Future-Proof Your Trading Systems</h2>
+
+          <br />
+          <br />
+          <p class='mt-4 text-lg font-bold'>
+            Join us to explore how AI, open source, and high-performance
+            engineering will shape fintech.
+          </p>
+          <h2 class='mt-4 text-xl font-semibold text-orange-400'>
+            Wednesday, March 5, 2025 | 5:30PM - 7:30PM | Midtown Manhattan, NYC
+          </h2>
+        </div>
+
+        <!-- Registration Form -->
+        <div class='bg-white text-black p-8 rounded-lg shadow-lg ml-auto'>
+          <h3 class='text-xl font-semibold mb-4'>Registration</h3>
+          <ContactUsFormNYCFintech25
+            client:only
+            subject={contactSubject || 'NYC Tech Meetup Registration'}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Details Section -->
+  <div class='bg-zinc-800 text-white py-10'>
+    <div class='container max-w-6xl mx-auto px-5 sm:px-10 grid grid-cols-2'>
+      <div class='col-span-1'>
+        <p class='text-lg'>
+          Over the next five years, AI, cloud platforms, and high-performance
+          engineering will redefine financial trading. Firms that will fail to
+          embrace quality data integration, scalable architectures, and modern
+          engineering principles risk falling behind.
+        </p>
+        <div class='mt-4'>
+          <p class='text-lg'>
+            Join fintech engineering leaders as they explore the key trends
+            shaping the future of trading, and connect with senior developers
+            leveraging open source, cloud-native platforms, and cutting-edge
+            languages like Rust and Kotlin to build next-generation trading
+            systems.
+          </p>
+        </div>
+        <div class='mt-4'>
+          <p class='text-lg'>
+            <strong>And yes - there will be pizza, snacks, and beer!</strong>
+          </p>
+        </div>
+      </div>
+      <div class='col-span-1'></div>
+    </div>
+  </div>
+
+  <!-- Agenda -->
+  <div id='agenda' class='bg-zinc-800 text-white py-10'>
+    <div class='container max-w-6xl mx-auto px-5 sm:px-10'>
+      <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
+        Agenda
+      </h2>
+      <div class='flex flex-col pt-5'>
+        <NYCFintech25Agenda />
+      </div>
+      <p class='font-thin text-sm pb-5'>
+        *Please note agenda is subject to change
+      </p>
+      <!-- <p class='font-thin text-sm pb-5'>
+        *Please note agenda and speakers are subject to change
+      </p> -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class='bg-zinc-800 text-white py-5'>
+    <div class='text-center text-xs sm:text-base'>
+      <strong
+        >WEDNESDAY, MARCH 5, 2025 | 5:30PM - 7:30PM | MIDTOWN MANHATTAN, NYC</strong
+      >
+    </div>
+  </div>
+</Layout>

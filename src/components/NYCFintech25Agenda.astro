@@ -1,0 +1,67 @@
+---
+const agenda = [
+  {
+    time: '17:30',
+    title: 'Opening Remarks & Industry Insights',
+    subTitle:
+      'An introduction to key trends in fintech, open source, and high-performance engineering, followed by an overview of how FINOS and JUXT are shaping the future of trading systems.'
+  },
+  {
+    time: '17:40',
+    title:
+      'Talk 1: Scaling Regulated GenAI in Finance with an Open Source Platform',
+    subTitle:
+      'Exploring how open-source GenAI can empower financial institutions to transition from proof of concept to production, leveraging secure data workflows, AI-driven insights, and scalable automation.'
+  },
+  {
+    time: '18:00',
+    title:
+      'Talk 2: Shared Data Models of the Future – CDM for RegTech Interoperability',
+    subTitle:
+      'The evolution of shared data models for compliance, reconciliation, and interoperability in regulatory technology.'
+  },
+  {
+    time: '18:20',
+    title: 'Networking Break over Pizza and Beer',
+    isSpecialEvent: true
+  },
+  {
+    time: '18:50',
+    title: 'PoC Lightning Talk: TraderX with XTDB for RFQ Summarization',
+    subTitle:
+      'Showcasing the integration of XTDB with TraderX to summarize past trading activity and discussions using LLMs for sales desk optimization.'
+  },
+  {
+    time: '19:00',
+    title: 'Talk 4: Accelerated As-Of Reporting Without The Hassle',
+    subTitle:
+      'A practical demonstration of next-gen reporting capabilities that streamline real-time pricing, risk analysis, and client positioning.'
+  },
+  {
+    time: '19:30',
+    title: 'Lights Out',
+    isSpecialEvent: true
+  }
+]
+---
+
+{
+  agenda.map(({ time, title, subTitle, isSpecialEvent }) => (
+    <div
+      class:list={[
+        'grid grid-cols-1 sm:grid-cols-5 sm:divide-x sm:divide-juxt',
+        { 'bg-zinc-900': isSpecialEvent }
+      ]}
+    >
+      <p class='px-5 pt-5 sm:p-5 font-semibold text-lg align-text-top'>
+        {time}
+      </p>
+      <div class='px-5 pb-5 sm:p-5 sm:col-span-4'>
+        <h2 class='font-light text-lg text-juxt uppercase'>{title}</h2>
+        {(Array.isArray(subTitle) ? subTitle : [subTitle]).map((s) => (
+          <p class='font-light text-lg'>{s}</p>
+        ))}
+      </div>
+    </div>
+  ))
+}
