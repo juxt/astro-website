@@ -65,8 +65,16 @@ export default function ContactUsFormXT24(props) {
 
       {!isSubmitted && (
         <div className='text-center'>
-          <span className='uppercase text-center'>Save Your Spot!</span>
-          <br />
+          <p class='mt-4 text-lg'>
+            Engineering leaders will explore how
+            <br />
+            AI, open source, and high-performance engineering
+            <br />
+            are shaping the future of fintech.
+          </p>
+          <span class='mt-4 text-0.1xl font-bold text-orange-400 text-center block'>
+            Wednesday March 5 | 5:30pm - 7:30pm | NYC
+          </span>
           <br />
         </div>
       )}
@@ -116,7 +124,7 @@ export default function ContactUsFormXT24(props) {
           />
         </div>
 
-        <div className='flex flex-row gap-4'>
+        {/* <div className='flex flex-row gap-4'>
           <input
             {...inputProps}
             {...register('phone')}
@@ -127,10 +135,10 @@ export default function ContactUsFormXT24(props) {
             {...register('country', { required: true })}
             placeholder='Country'
           />
-        </div>
+        </div> */}
 
         <div className='text-xs font-light'>
-          By submitting your details you agree to JUXT’s{' '}
+          By submitting your details you agree to JUXT's{' '}
           <a href='/privacy-policy' target='_blank' className='underline'>
             Privacy Policy
           </a>
@@ -142,7 +150,7 @@ export default function ContactUsFormXT24(props) {
 
         <input
           type='submit'
-          value='Submit'
+          value='Save Your Spot!'
           disabled={isSubmitting}
           className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
         />

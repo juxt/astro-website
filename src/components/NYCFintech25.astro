@@ -25,37 +25,69 @@ const { contactSubject } = Astro.props
       class='container max-w-6xl mx-auto flex flex-col text-white py-10 relative'
     >
       <!-- Header -->
-      <div class='flex gap-8 items-center px-5 sm:px-10 max-w-6xl mx-auto'>
-        <div class='max-w-[400px]'>
-          <img src='/images/logo.svg' alt='JUXT Logo' class='w-full h-auto' />
+      <div class='flex gap-4 sm:gap-8 items-center justify-center px-5 sm:px-10 w-full mx-auto max-w-screen-xl'>
+        <div class='flex-none max-w-[45%] xs:max-w-[50%] sm:max-w-[400px] p-2'>
+          <img
+            src='/images/logo.svg'
+            alt='JUXT Logo'
+            class='w-full h-auto max-h-[70px] object-contain mx-auto flex-shrink-1'
+          />
         </div>
-        <div class='max-w-[300px]'>
-          <img src='/images/FINOS.png' alt='FINOS Logo' class='w-full h-auto' />
+        <div class='flex-none max-w-[45%] xs:max-w-[50%] sm:max-w-[500px] p-2'>
+          <img
+            src='/images/FINOS.png'
+            alt='FINOS Logo'
+            class='w-full h-auto max-h-[200px] object-contain mx-auto flex-shrink-1'
+          />
         </div>
       </div>
 
-      <!-- Main Content -->
-      <div class='grid grid-cols-1 lg:grid-cols-2 p-5 sm:px-10'>
+      <!-- Main Content - Modified grid layout -->
+      <div
+        class='grid grid-cols-1 lg:grid-cols-2 p-5 sm:px-10 items-start gap-8'
+      >
+        {/* Left Column - Content */}
         <div>
-          <h1 class='text-4xl md:text-6xl font-bold uppercase'>
-            Trading Systems in 2030
+          <h1 class='text-4xl md:text-5xl font-bold uppercase'>
+            Trading Systems <br /> in 2030
           </h1>
-          <h2 class='text-2xl font-bold'>Future-Proof Your Trading Systems</h2>
+          <h2 class='text-2xl font-bold mt-4'></h2>
 
-          <br />
-          <br />
-          <p class='mt-4 text-lg font-bold'>
-            Join us to explore how AI, open source, and high-performance
-            engineering will shape fintech.
-          </p>
-          <h2 class='mt-4 text-xl font-semibold text-orange-400'>
-            Wednesday, March 5, 2025 | 5:30PM - 7:30PM | Midtown Manhattan, NYC
-          </h2>
+          <div class='mt-8 relative'>
+            <div class='absolute inset-0 bg-black opacity-50'></div>
+            <div class='relative'>
+              <p class='text-lg'>
+                Over the next five years, AI, cloud platforms, and
+                high-performance engineering will redefine financial trading.
+                Firms that will fail to embrace quality data integration,
+                scalable architectures, and modern engineering principles risk
+                falling behind.
+              </p>
+              <div class='mt-4'>
+                <p class='text-lg'>
+                  Join fintech engineering leaders as they explore the key
+                  trends shaping the future of trading, and connect with senior
+                  developers leveraging open source, cloud-native platforms, and
+                  cutting-edge languages like Rust and Kotlin to build
+                  next-generation trading systems.
+                </p>
+              </div>
+              <div class='mt-4'>
+                <p class='text-lg'>
+                  <strong
+                    >And yes - there will be pizza, snacks, and beer!</strong
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Registration Form -->
-        <div class='bg-white text-black p-8 rounded-lg shadow-lg ml-auto'>
-          <h3 class='text-xl font-semibold mb-4'>Registration</h3>
+        {/* Right Column - Registration Form */}
+        <div
+          class='bg-white text-black p-8 rounded-lg shadow-lg h-fit lg:sticky lg:top-10'
+        >
+          <h3 class='text-2xl font-bold mb-4 flex justify-center'>Join Us!</h3>
           <ContactUsFormNYCFintech25
             client:only
             subject={contactSubject || 'NYC Tech Meetup Registration'}
@@ -65,32 +97,15 @@ const { contactSubject } = Astro.props
     </div>
   </div>
 
-  <!-- Event Details Section -->
-  <div class='bg-zinc-800 text-white py-10'>
-    <div class='container max-w-6xl mx-auto px-5 sm:px-10 grid grid-cols-2'>
-      <div class='col-span-1'>
-        <p class='text-lg'>
-          Over the next five years, AI, cloud platforms, and high-performance
-          engineering will redefine financial trading. Firms that will fail to
-          embrace quality data integration, scalable architectures, and modern
-          engineering principles risk falling behind.
-        </p>
-        <div class='mt-4'>
-          <p class='text-lg'>
-            Join fintech engineering leaders as they explore the key trends
-            shaping the future of trading, and connect with senior developers
-            leveraging open source, cloud-native platforms, and cutting-edge
-            languages like Rust and Kotlin to build next-generation trading
-            systems.
-          </p>
-        </div>
-        <div class='mt-4'>
-          <p class='text-lg'>
-            <strong>And yes - there will be pizza, snacks, and beer!</strong>
-          </p>
-        </div>
-      </div>
-      <div class='col-span-1'></div>
+  <!-- Footer -->
+  <div class='bg-zinc-800 text-white py-5'>
+    <div class='text-center text-xs sm:text-base mb-2'>
+      <strong
+        >WEDNESDAY, MARCH 5, 2025 | 5:30PM - 7:30PM | MIDTOWN MANHATTAN, NYC</strong
+      >
+    </div>
+    <div class='text-center text-xs sm:text-base'>
+      Address will be shared with confirmed attendees
     </div>
   </div>
 
@@ -106,18 +121,6 @@ const { contactSubject } = Astro.props
       <p class='font-thin text-sm pb-5'>
         *Please note agenda is subject to change
       </p>
-      <!-- <p class='font-thin text-sm pb-5'>
-        *Please note agenda and speakers are subject to change
-      </p> -->
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <div class='bg-zinc-800 text-white py-5'>
-    <div class='text-center text-xs sm:text-base'>
-      <strong
-        >WEDNESDAY, MARCH 5, 2025 | 5:30PM - 7:30PM | MIDTOWN MANHATTAN, NYC</strong
-      >
     </div>
   </div>
 </Layout>
