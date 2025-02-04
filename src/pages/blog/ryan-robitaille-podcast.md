@@ -13,7 +13,7 @@ tags:
   - podcast
 ---
 
-In this engaging episode of the JUXT Cast, Jeremy Taylor and Malcolm Sparks sit down with Ryan Robitaille, the founder of Rabbit. Ryan shares his unique journey—from working with Oracle systems as a young Solutions Engineer to becoming a creative force in the world of data visualization.
+In this engaging episode of the JUXT Cast, Jeremy Taylor and Malcolm Sparks sit down with Ryan Robitaille, the founder of [Rabbit](https://github.com/ryrobes/rvbbit). Ryan shares his unique journey—from working with Oracle systems as a young Solutions Engineer to becoming a creative force in the world of data visualization.
 
 Ryan explores his experience building Rabbit, a tool designed to bridge the gap between proprietary BI tools and custom-built engineering solutions. Frustrated by the limitations of traditional tools like Tableau, Ryan envisioned a platform that offers the "best of both worlds": the simplicity of drag-and-drop dashboards with the power and flexibility of live coding and version control.
 
