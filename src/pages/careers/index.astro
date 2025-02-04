@@ -119,12 +119,12 @@ const benefitsPicture = await getImage({
             </Paragraph>
 
             <Paragraph>
-              We’re huge fans of Clojure, functional programming, Arch Linux,
+              We're huge fans of Clojure, functional programming, Arch Linux,
               Git, plain-text, and Emacs, or Vim :).
             </Paragraph>
 
             <Paragraph>
-              We’re a growing vibrant company, but still small enough for you to
+              We're a growing vibrant company, but still small enough for you to
               get to know everyone.
             </Paragraph>
           </div>
@@ -400,7 +400,10 @@ const benefitsPicture = await getImage({
                   }
                 }) => {
                   return (
-                    <div class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)]'>
+                    <button
+                      onclick={`window.location.href='${url}'`}
+                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group'
+                    >
                       <span class='absolute top-5 right-5 uppercase text-juxt text-xs'>
                         {department}
                       </span>
@@ -430,16 +433,14 @@ const benefitsPicture = await getImage({
                         </div>
                       </div>
                       <div class='flex flex-wrap gap-4 pt-16'>
-                        <a
-                          href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`}
+                        <Button
+                          theme='dark'
+                          class='group-hover:bg-juxt group-hover:text-white pointer-events-none'
                         >
-                          <Button theme='dark-hovered'>Apply</Button>
-                        </a>
-                        <a href={url}>
-                          <Button theme='dark'>Full Job Profile</Button>
-                        </a>
+                          Full Job Profile
+                        </Button>
                       </div>
-                    </div>
+                    </button>
                   )
                 }
               )}

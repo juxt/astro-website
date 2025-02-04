@@ -2,10 +2,10 @@
 import { getImage } from "astro:assets"
 import { slugifyPath } from '@utils/common'
 import Banner from '@components/Banner.astro'
-import Clickable from '@components/Clickable.astro'
 import DraftBanner from '@components/DraftBanner'
 import Section from '@components/Section.astro'
 import Layout from './Layout.astro'
+import Button from '@components/careers/Button.astro'
 
 export type CareerPostProps = {
   location: string
@@ -103,9 +103,9 @@ const schema = JSON.stringify({
           </div>
           <div class='mt-4'>
             <a href={`mailto:careers@juxt.pro?subject=JOB APPLICATION: ${position}`} >
-              <Clickable>
+              <Button theme='dark-hovered'>
                 APPLY NOW
-              </Clickable>
+              </Button>
             </a>
           </div>
         </div>
