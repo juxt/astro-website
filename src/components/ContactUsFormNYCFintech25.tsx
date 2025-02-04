@@ -66,15 +66,15 @@ export default function ContactUsFormXT24(props) {
       {!isSubmitted && (
         <div className='text-center'>
           <p class='mt-4 text-lg'>
-            Engineering leaders will explore how
-            <br />
-            AI, open source, and high-performance engineering
-            <br />
-            are shaping the future of fintech.
+            Engineering leaders will explore how AI, open source, and financial-grade infrastructure will shape fintech.
           </p>
           <span class='mt-4 text-0.1xl font-bold text-orange-400 text-center block'>
             Wednesday March 5 | 5:30pm - 7:30pm | NYC
           </span>
+          <span class='text-xs font-light'>
+            Venue location will be emailed to confirmed attendees
+          </span>
+          <br />
           <br />
         </div>
       )}
