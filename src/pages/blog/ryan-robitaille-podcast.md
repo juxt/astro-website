@@ -28,7 +28,7 @@ Key Takeaways from the Episode:
 
 Watch the full episode here:
 
-<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/bzUywCAdsmY?si=FugVHxybVoqkwNsT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/yI0WnyZBUIg?si=pAHtPMunNw5in2a8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Addendum
 
