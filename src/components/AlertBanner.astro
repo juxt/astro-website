@@ -11,7 +11,10 @@ const updateId = 'finos-jeremy-webinar'
 
 {
   enabled && (
-    <alert-banner class='hidden' data-update-id={updateId}>
+    <alert-banner
+      class='hidden fixed w-full top-0 left-0'
+      data-update-id={updateId}
+    >
       <Section
         className='w-full z-[60] text-black p-5'
         style={`background-color: #F27918;`}
@@ -43,6 +46,8 @@ const updateId = 'finos-jeremy-webinar'
       let closed = localStorage.getItem(updateId)
       if (!closed) {
         this.classList.remove('hidden')
+        // Add margin to body when banner is shown
+        document.body.style.marginTop = this.offsetHeight + 'px'
       }
 
       // Add event listener to close the banner
@@ -50,6 +55,17 @@ const updateId = 'finos-jeremy-webinar'
       button.addEventListener('click', () => {
         this.classList.add('hidden')
         localStorage.setItem(updateId, 'true')
+        // Remove margin when banner is closed
+        document.body.style.marginTop = '0'
+      })
+    }
+
+    // Handle resize events to adjust margin
+    connectedCallback() {
+      window.addEventListener('resize', () => {
+        if (!this.classList.contains('hidden')) {
+          document.body.style.marginTop = this.offsetHeight + 'px'
+        }
       })
     }
   }

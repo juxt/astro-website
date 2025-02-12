@@ -66,7 +66,8 @@ export default function ContactUsFormXT24(props) {
       {!isSubmitted && (
         <div className='text-center'>
           <p class='mt-4 text-lg'>
-            Engineering leaders will explore how AI, open source, and financial-grade infrastructure will shape fintech.
+            Engineering leaders will explore how AI, open source, and
+            financial-grade infrastructure will shape fintech.
           </p>
           <span class='mt-4 text-0.1xl font-bold text-orange-400 text-center block'>
             Wednesday March 5 | 5:30pm - 7:30pm | NYC

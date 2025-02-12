@@ -140,44 +140,46 @@ const categoryHref = `/blog?${encodeURI(
 )}`
 ---
 
-<!-- Script to dynamically add a margin to account for the alert banner -->
+<!-- Script to dynamically add a margin to account for the alert banner on blog pages -->
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    const alertBanner = document.querySelector('alert-banner')
-    const mainDiv = document.querySelector('.blog-container') as HTMLElement
+    if (!window.location.pathname.startsWith('/blog')) {
+      return
+    }
 
-    if (!mainDiv) return
+    // Calculate the threshold based on the height of the alert banner
+    const calculateThreshold = () => {
+      const alertBanner = document.querySelector('alert-banner')
+      let threshold = 0
 
-    // Function to update the margin based on the alert banner's height
-    const updateMargin = () => {
       if (alertBanner && !alertBanner.classList.contains('hidden')) {
-        const bannerHeight = (alertBanner as HTMLElement).offsetHeight // Get the actual height of the alert banner
-        mainDiv.style.marginTop = `${bannerHeight}px`
-      } else {
-        mainDiv.style.marginTop = '0'
+        threshold += alertBanner.offsetHeight
       }
-    }
-    updateMargin()
 
-    // Observe changes to the alert banner's attributes
-    if (alertBanner) {
-      const observer = new MutationObserver(() => {
-        updateMargin()
-      })
-
-      observer.observe(alertBanner, {
-        attributes: true,
-        attributeFilter: ['class']
-      })
+      return threshold
     }
 
-    // Check for zooming/resizing
+    // Set initial scroll position
+    let scrollThreshold = calculateThreshold()
+    window.scrollTo({ top: scrollThreshold, behavior: 'instant' })
+
+    // Enforce scroll position
+    window.addEventListener('scroll', () => {
+      const newThreshold = calculateThreshold()
+      if (window.scrollY < newThreshold) {
+        window.scrollTo({ top: newThreshold, behavior: 'instant' })
+      }
+    })
+
+    // Update on resize
     window.addEventListener('resize', () => {
-      updateMargin()
+      scrollThreshold = calculateThreshold()
+      if (window.scrollY < scrollThreshold) {
+        window.scrollTo({ top: scrollThreshold, behavior: 'instant' })
+      }
     })
   })
 </script>
-
 <Layout
   navbar
   title={title}
