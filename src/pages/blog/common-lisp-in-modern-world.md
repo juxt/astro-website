@@ -20,6 +20,6 @@ In a digital world where languages and technologies evolve at breakneck speed, i
 
 Now, let's consider something we all hold dear – our planet and the technology we use. By embracing Common Lisp over Clojure and the JVM, we're not only choosing a powerful programming language but also making a greener choice for the environment. In a world where sustainability matters more than ever, our programming decisions can play a significant role. Join us in uncovering the enduring legacy of Common Lisp and its relevance in the ever-evolving modern tech world while making a conscious choice for a greener future.
 
-You can find a summary of the presentation here: http://juxt.pro/embracing-common-lisp.pdf.
+You can find a summary of the presentation here: https://juxt.pro/embracing-common-lisp.pdf.
 
 Let me know what you think!
