@@ -84,7 +84,7 @@ how to fund and manage them properly.
 >
 > -- Alan Kay
 
-# The extended cut!
+## The extended cut!
 
 We continued the discussion, and here is the _long-form_ of Alan's
 thoughts on invention, climate change, Covid-19, education and more.

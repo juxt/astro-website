@@ -13,7 +13,7 @@ tags:
   - 'MQTT'
 ---
 
-# Introduction
+## Introduction
 
 This blog post presents a solution for integrating Rust with legacy C++ APIs,
 focusing on safe and efficient callback management. While developing a
@@ -22,7 +22,7 @@ reconciling Rust's safety guarantees with cross-language interactions. The
 approach described here, though developed for a specific use case, provides
 patterns applicable to many C++-to-Rust integration scenarios.
 
-# Overview
+## Overview
 
 Managing callbacks between C++ and Rust presents unique challenges. During a
 callback, Rust code must work with memory owned by the C++ library - data whose
@@ -82,7 +82,7 @@ client members with access to this context, we can maintain Rust's safety
 guarantees while providing efficient zero-copy access to callback data when
 needed.
 
-# Bridging C++ and Rust: A Practical Guide to API Flattening
+## Bridging C++ and Rust: A Practical Guide to API Flattening
 
 When working on legacy modernization projects, we often need to integrate Rust
 with existing C++ codebases. This presents unique challenges due to fundamental
@@ -130,7 +130,7 @@ class MySession : public Session {
 };
 ```
 
-## The bindgen Challenge
+### The bindgen Challenge
 
 While [bindgen](https://rust-lang.github.io/rust-bindgen/) works excellently
 for C APIs, it often struggles with C++ codebases. As of 2024, there's no
@@ -147,7 +147,7 @@ This is why we need to "flatten" C++ APIs to C first, creating a simpler
 intermediate layer that bindgen can reliably handle. While this requires more
 upfront work, it results in more maintainable and reliable bindings.
 
-## The Solution: API Flattening
+### The Solution: API Flattening
 
 API flattening introduces a C-compatible intermediate layer that bridges these incompatibilities:
 
@@ -158,7 +158,7 @@ API flattening introduces a C-compatible intermediate layer that bridges these i
 └────────────┘     └────────────┘     └────────────┘
 ```
 
-### 1. Creating the C Bridge
+#### 1. Creating the C Bridge
 
 First, we flatten the C++ interface into C-compatible types:
 
@@ -178,7 +178,7 @@ mqtt_session_handle_t mqtt_create_session(
 );
 ```
 
-### 2. Designing Safe Rust Types
+#### 2. Designing Safe Rust Types
 
 In Rust, we create two distinct message types to handle different ownership scenarios:
 
@@ -239,7 +239,7 @@ See
 [here](https://github.com/jsulmont/rs-polar-mqtt/blob/blog-v1.0.0/examples/message_view.rs)
 for an example.
 
-### 3. Implementing Thread-Safe Callbacks
+#### 3. Implementing Thread-Safe Callbacks
 
 The callback system must be thread-safe as C++ can invoke callbacks from any thread:
 
@@ -255,7 +255,7 @@ struct CallbackContext {
 }
 ```
 
-### 4. Building the Safe Client Interface
+#### 4. Building the Safe Client Interface
 
 The main client interface wraps the unsafe C API in a safe abstraction:
 
@@ -293,7 +293,7 @@ unsafe impl Send for Client {}
 unsafe impl Sync for Client {}
 ```
 
-### 5. Error Handling with thiserror
+#### 5. Error Handling with thiserror
 
 We use [thiserror](https://crates.io/crates/thiserror) to define our error
 types, though any error handling approach would work equally well here. The
@@ -326,7 +326,7 @@ ensuring that C++ errors are properly translated into Rust's error handling
 paradigm in a way that preserves important error context and maintains type
 safety.
 
-## Usage Example
+### Usage Example
 
 Here's how the flattened API looks in practice:
 
@@ -348,7 +348,7 @@ fn main() -> Result<()> {
 }
 ```
 
-## Testing Strategy
+### Testing Strategy
 
 Integration testing is crucial for FFI code:
 
@@ -376,7 +376,7 @@ fn test_integration() {
 }
 ```
 
-## Understanding Unsafe Extern C Callbacks
+### Understanding Unsafe Extern C Callbacks
 
 The callback system represents a critical part of our FFI layer, requiring careful handling of unsafe code and data lifetimes:
 
@@ -422,7 +422,7 @@ unsafe extern "C" fn message_callback(
 }
 ```
 
-### Key Safety Considerations
+#### Key Safety Considerations
 
 1. **Context Management**: The `CallbackContext` must outlive all callbacks:
 
@@ -450,7 +450,7 @@ unsafe extern "C" fn message_callback(
    unsafe impl Sync for Client {}
    ```
 
-## Best Practices
+### Best Practices
 
 There are a few more good practices that will produce a good Rust library,
 that's safe, effective, and pleasant to use.
@@ -478,15 +478,15 @@ that's safe, effective, and pleasant to use.
    - Explain lifetime guarantees for borrowed data
    - Provide usage examples
 
-## Conclusion
+### Conclusion
 
 While our example uses PolarMqtt, a toy library created for this demonstration, the patterns and techniques shown here apply to real-world C++ to Rust integration scenarios. The key is understanding the incompatibilities between the languages (particularly around ABI, vtables, and RAII) and systematically addressing them through a well-designed intermediary layer.
 
-## Publicly available test MQTT brokers
+### Publicly available test MQTT brokers
 
 The examples above use `test.mosquitto.org`, a public MQTT broker maintained by the Eclipse Foundation. While this broker is typically reliable, it may occasionally be unavailable for maintenance. Alternative public test brokers include `broker.emqx.io` (provided by EMQ) and `broker.hivemq.com` (provided by HiveMQ) - both accessible on port 1883. Remember that these are public test brokers intended for development and testing purposes only; production deployments should use dedicated, secured MQTT brokers.
 
-## Source Code
+### Source Code
 
 The complete implementation of the patterns discussed in this post can be found in the [PolarMqtt repository](https://github.com/jsulmont/rs-polar-mqtt/tree/blog-v1.0.0). The repository includes:
 
@@ -495,7 +495,7 @@ The complete implementation of the patterns discussed in this post can be found 
 - The complete Rust bindings
 - Integration tests and examples
 
-## Further Reading
+### Further Reading
 
 - [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)
 - [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)

@@ -130,7 +130,7 @@ just seen the opposite cost of locking everything down and attempting to
 keep pace with modeling out the business domain, in all its minutiae,
 tirelessly, forever.
 
-# References
+## References
 
 - Introducing
   [Bitemporality](https://www.juxt.pro/blog/value-of-bitemporality).

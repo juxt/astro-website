@@ -73,7 +73,7 @@ when annotating protocols, records and some of Clojure's looping
 constructs. Depending on your familiarity with type systems in general,
 expect to spend some time to reading up on these topics.
 
-# Core.typed, Prismatic/schema and tests
+## Core.typed, Prismatic/schema and tests
 
 Clojure codebases typically rely on tests to verify the correctness of
 the code. Dynamic languages in general tend to depend more on tests than
@@ -125,7 +125,7 @@ are so similar you can even write your schemas once and [generate the
 core.typed annotations](https://github.com/circleci/schema-typer) from
 them.
 
-# Working with core.typed
+## Working with core.typed
 
 Where do all these annotations go and how much of them do you need? As a
 rule of thumb, type annotations will make up about 10% of your code. The
@@ -170,7 +170,7 @@ checked. You should also incorporate
 [lein-typed](https://github.com/typedclojure/lein-typed) in build chain
 to check all namespaces regularly.
 
-## Retrofitting type annotations to your existing code
+### Retrofitting type annotations to your existing code
 
 If you are thinking about adopting Typed Clojure chances are you already
 have a codebase with a bunch of tests, schemas and coercers. The first
@@ -240,7 +240,7 @@ Clojure. The [core.typed mailing
 list](https://groups.google.com/forum/#!forum/clojure-core-typed) is
 also a great place to look for help.
 
-# What's next?
+## What's next?
 
 Typed Clojure is still under active development, and currently [gradual
 typing](http://frenchy64.github.io/2015/06/19/gradual-typing.html) is
@@ -257,7 +257,7 @@ code.
 [This demo of a typed REPL](https://www.youtube.com/watch?v=HQidWfemPgA)
 is a great example of what gradual typing in Clojure could look like.
 
-# Conclusion
+## Conclusion
 
 The million dollar question, is Typed Clojure worth the trouble? My
 conclusion is yes; if you make the effort to add it to your code, and

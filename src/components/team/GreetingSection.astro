@@ -3,87 +3,133 @@ import AssetImage from '@components/team/AssetImage.astro'
 import Section from '@components/team/Section.astro'
 import IconCircle from '@components/team/IconCircle.astro'
 import ContactItem from '@components/team/ContactItem.astro'
-import { InvertedGithubIcon, LinkedInIcon, TwitterIcon, EmailIcon, HackernewsIcon } from '@components/Icons'
+import {
+  InvertedGithubIcon,
+  LinkedInIcon,
+  TwitterIcon,
+  EmailIcon,
+  HackernewsIcon
+} from '@components/Icons'
 
 const {
-    code,
-    fullName,
-    jobTitle,
+  code,
+  fullName,
+  jobTitle,
 
-    calendarLink,
+  calendarLink,
 
-    email, twitter, linkedin, github, hackernews 
-} = Astro.props;
+  email,
+  twitter,
+  linkedin,
+  github,
+  hackernews
+} = Astro.props
 ---
-<Section className='pl-10 pr-0 py-10 grid grid-cols-1 md:grid-cols-2 gap-4' {...Astro.props}>
-  <div class="md:pt-10 pr-10">
-    <h1 class="text-5xl font-bold">Hello<span class="text-orange-400">.</span></h1>
-    <h1 class="justify-end text-3xl font-bold"><span class="text-orange-400">—</span> I'm {fullName}</h1>
-    <h2 class="justify-end text-3xl font-medium">{jobTitle}</h2>
+
+<Section
+  className='pl-10 pr-0 py-10 grid grid-cols-1 md:grid-cols-2 gap-4'
+  {...Astro.props}
+>
+  <div class='md:pt-10 pr-10'>
+    <h1 class='text-5xl font-bold'>
+      Hello<span class='text-orange-400'>.</span>
+    </h1>
+    <h2 class='justify-end text-3xl font-bold'>
+      <span class='text-orange-400'>—</span> I'm {fullName}
+    </h2>
+    <h2 class='justify-end text-3xl font-medium'>{jobTitle}</h2>
   </div>
 
-  <div class="my-auto ml-auto md:col-start-2 md:row-start-1 md:row-span-2">
-    { /* TODO: Make a component, or just bake into the images 😅 */ }
-    <div class="relative w-[30rem] h-[30rem]">
-      { /* Tall */ }
-      <div class="absolute bottom-0 right-0 bg-amber-300 rounded-full w-1/2 h-full"></div>
-      { /* Stout */ }
-      <div class="absolute bottom-0 right-1/3 bg-orange-200 rounded-full w-1/2 h-[70%]"></div>
-      { /* Lazy */ }
-      <div class="absolute bottom-0 left-0 bg-orange-400 rounded-full w-2/3 h-1/4"></div>
-      <div class="absolute bottom-0 right-0 w-[90%] h-[90%] overflow-hidden">
-          <AssetImage class="w-full"
-            width={500}
-            src={`/src/assets/team/headshots/${code}.png`} alt={`A headshot of ${fullName}`} />
+  <div class='my-auto ml-auto md:col-start-2 md:row-start-1 md:row-span-2'>
+    {/* TODO: Make a component, or just bake into the images 😅 */}
+    <div class='relative w-[30rem] h-[30rem]'>
+      {/* Tall */}
+      <div
+        class='absolute bottom-0 right-0 bg-amber-300 rounded-full w-1/2 h-full'
+      >
+      </div>
+      {/* Stout */}
+      <div
+        class='absolute bottom-0 right-1/3 bg-orange-200 rounded-full w-1/2 h-[70%]'
+      >
+      </div>
+      {/* Lazy */}
+      <div
+        class='absolute bottom-0 left-0 bg-orange-400 rounded-full w-2/3 h-1/4'
+      >
+      </div>
+      <div class='absolute bottom-0 right-0 w-[90%] h-[90%] overflow-hidden'>
+        <AssetImage
+          class='w-full'
+          width={500}
+          src={`/src/assets/team/headshots/${code}.png`}
+          alt={`A headshot of ${fullName}`}
+        />
       </div>
     </div>
 
-    <div class="flex flex-col gap-3 pt-4 pb-4 md:pb-0">
-      <div class="flex w-full gap-5">
-        { email &&
-        <IconCircle href={"mailto:" + email}>
-          <EmailIcon className="w-6"/>
-        </IconCircle>
+    <div class='flex flex-col gap-3 pt-4 pb-4 md:pb-0'>
+      <div class='flex w-full gap-5'>
+        {
+          email && (
+            <IconCircle href={'mailto:' + email}>
+              <EmailIcon className='w-6' />
+            </IconCircle>
+          )
         }
-        { twitter &&
-          <IconCircle href={"https://twitter.com/" + twitter}>
-            <TwitterIcon className="w-5"/>
-          </IconCircle>
+        {
+          twitter && (
+            <IconCircle href={'https://twitter.com/' + twitter}>
+              <TwitterIcon className='w-5' />
+            </IconCircle>
+          )
         }
-        { linkedin &&
-          <IconCircle href={"https://linkedin.com/in/" + linkedin + "/"}>
-            <LinkedInIcon className="w-5"/>
-          </IconCircle>
+        {
+          linkedin && (
+            <IconCircle href={'https://linkedin.com/in/' + linkedin + '/'}>
+              <LinkedInIcon className='w-5' />
+            </IconCircle>
+          )
         }
-        { github &&
-          <IconCircle href={"https://github.com/" + github}>
-            <InvertedGithubIcon className="w-8 absolute -bottom-0.5"/>
-          </IconCircle>
+        {
+          github && (
+            <IconCircle href={'https://github.com/' + github}>
+              <InvertedGithubIcon className='w-8 absolute -bottom-0.5' />
+            </IconCircle>
+          )
         }
-        { hackernews &&
-          <IconCircle href={"https://news.ycombinator.com/user?id=" + hackernews}>
-            <HackernewsIcon className="w-7"/>
-          </IconCircle>
+        {
+          hackernews && (
+            <IconCircle
+              href={'https://news.ycombinator.com/user?id=' + hackernews}
+            >
+              <HackernewsIcon className='w-7' />
+            </IconCircle>
+          )
         }
       </div>
-      { calendarLink &&
-        <p class="text-base">
-          Want to talk? <a class="underline hover:text-juxt" href={calendarLink}>Book time in my calendar</a>
-        </p>
+      {
+        calendarLink && (
+          <p class='text-base'>
+            Want to talk?{' '}
+            <a class='underline hover:text-juxt' href={calendarLink}>
+              Book time in my calendar
+            </a>
+          </p>
+        )
       }
     </div>
-
   </div>
 
-  <div class="lg:col-start-1">
-    <div class="flex flex-col gap-3">
-      <h2 class="text-2xl font-medium">Expert In</h2>
-      <ul class="list-disc list-inside text-base lg:text-md">
-        <slot name="expert-in" />
+  <div class='lg:col-start-1'>
+    <div class='flex flex-col gap-3'>
+      <h2 class='text-2xl font-medium'>Expert In</h2>
+      <ul class='list-disc list-inside text-base lg:text-md'>
+        <slot name='expert-in' />
       </ul>
-      <h2 class="pt-2 text-2xl font-medium">Bio</h2>
-      <p class="text-base lg:text-md">
-        <slot name="bio" />
+      <h2 class='pt-2 text-2xl font-medium'>Bio</h2>
+      <p class='text-base lg:text-md'>
+        <slot name='bio' />
       </p>
     </div>
   </div>

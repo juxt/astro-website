@@ -10,7 +10,7 @@ tags:
   - 'clojurescript'
 ---
 
-# AWS Lambda and Clojure frustrations
+## AWS Lambda and Clojure frustrations
 
 As part of our work with Clojure at Funding Circle I've been considering
 how best to approach creating AWS Lambdas. AWS Lambda has proven itself
@@ -35,7 +35,7 @@ fast cold starts, with great runtime performance, easy editing in the
 console, a simple packaging experience, and a large and accessible
 library ecosystem. Enter [`nbb`](https://github.com/babashka/nbb).
 
-# Serverless joy with `nbb`
+## Serverless joy with `nbb`
 
 `nbb` is a scripting tool that interprets ClojureScript using the nodejs
 runtime. It was not made for AWS Lambda but is a great fit to the
@@ -54,7 +54,7 @@ constraints of a serverless environment. Specifically, nbb offers:
 - **Performance**: it has comparable performance to compiled
   ClojureScript programs (only modest overhead).
 
-# Hello World
+## Hello World
 
 The [nbb
 docs](https://github.com/babashka/nbb/blob/main/doc/aws_lambda.md) give
@@ -90,13 +90,13 @@ example.cljs:
 Just run `np install`, zip up the result, and you're ready to deploy
 using the Node.js Lambda runtime v14.x or later.
 
-# Local serverless
+## Local serverless
 
 With `nbb`, local development is a breeze. No need for any emulators.
 Just grab some sample JSON and start feeding it to your handlers that
 you can run directly in the CLI or in a REPL.
 
-# API Gateway vs Lambda console testing
+## API Gateway vs Lambda console testing
 
 Often you want to put Lambdas behind the AWS API Gateway and be able to
 test them via the both the API Gateway console and the Lambda console.
@@ -129,7 +129,7 @@ Gateway. Here is one way:
 You can also specify a different `Content-Type` header to produce HTML,
 CSVs etc.
 
-# Lambda URLS, ALB, etc
+## Lambda URLS, ALB, etc
 
 You can now access Lambdas via dedicated [HTTP
 URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html) -
@@ -140,7 +140,7 @@ restrictions](https://docs.aws.amazon.com/elasticloadbalancing/latest/applicatio
 The model for producing valid responses is the same as that for API
 Gateway.
 
-# Performance tweaking
+## Performance tweaking
 
 AWS Lambdas are capable of high performance, but we should be careful
 about how we measure performance on nodejs - **remember promises are
@@ -194,7 +194,7 @@ link](https://aws.amazon.com/blogs/compute/operating-lambda-performance-optimiza
 So good news: with this level of performance, I'm not planning to make
 any code changes.
 
-# nbb and nodejs on Lambda - CPU bound?
+## nbb and nodejs on Lambda - CPU bound?
 
 The design of nodejs was meant specifically to enable evented IO. See
 [this deep cut
@@ -209,7 +209,7 @@ Lambdas are different: you can consume as much CPU as you wish because
 it's not multi-user! This could result in new and simpler designs for
 Lambda functions.
 
-# nbb - managing promises
+## nbb - managing promises
 
 One might argue, given the above, that you are paying the cognitive
 price of the asynchronous model without any need.
@@ -237,7 +237,7 @@ like standard Clojure.
 **Bonus:** AWS Lambda expects to be returned a promise, and you get that
 for free with `promesa`
 
-# Conclusion
+## Conclusion
 
 Rounding things up:
 

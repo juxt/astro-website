@@ -24,7 +24,7 @@ In the [previous](../event-driven-architecture) blog post, we attempted to map o
 This post is exploring Domain Driven Design (DDD).
 While Domain Events are an important part of modern EDA, having a grounding in the concepts of DDD before Domain Events are introduced is beneficial to all aspects of EDA.
 
-# Pattern Language Overview
+## Pattern Language Overview
 
 From Eric Evans', Domain-Driven Design Reference <sup>[[1]]</sup> we have the classic Pattern Language Overview.
 
@@ -33,7 +33,7 @@ From Eric Evans', Domain-Driven Design Reference <sup>[[1]]</sup> we have the cl
 This slightly-edited version of the diagram is split into two parts: strategic and tactical.
 The key concepts this post will discuss at are highlighted.
 
-# Tactical DDD
+## Tactical DDD
 
 As you might expect from the name, tactical DDD deals with the patterns used by software engineers to codify the business model.
 
@@ -45,7 +45,7 @@ We will start our example without domain events to make the other concepts clear
 
 The definitions below are all taken from [[1]].
 
-## Entities
+### Entities
 
 > Many objects represent a thread of continuity and identity, going through a lifecycle, though their attributes may change. An object primarily defined by its identity is called an Entity. Importantly equality is defined by the identity (name).
 
@@ -56,7 +56,7 @@ More typical business examples include an order raised, a bank account, a loan a
 
 _Note: Entities are also known as Reference Objects_
 
-## Value Objects
+### Value Objects
 
 > Many objects have no conceptual identity. These objects describe some characteristics of a thing. An object that represents a descriptive aspect of the domain with no conceptual identity is called a Value Object. Value Objects are instantiated to represent elements of the design that we care about only for what they are, not who or what they are.
 
@@ -70,7 +70,7 @@ More typical business examples include products, line items in an order, and cus
 What makes a Value Object or an Entity is fluid and context-sensitive.
 For example, a product on a raised order may be considered a Value Object, but other systems in an organisation responsible for designing products may well treat them as entities as they research and develop them.
 
-## Summary Table
+### Summary Table
 
 |                  | Entities            | Value Objects           |
 | ---------------- | ------------------- | ----------------------- |
@@ -78,7 +78,7 @@ For example, a product on a raised order may be considered a Value Object, but o
 | Mutability       | Mutable             | Immutable               |
 | Lifespan         | Has a lifespan      | Doesn't have a lifespan |
 
-## Aggregates
+### Aggregates
 
 > It is difficult to guarantee the consistency of changes to objects in a model with complex associations.
 > Objects are supposed to maintain their own internal consistent state, but they can be blindsided by changes in other objects that are conceptually constituent parts.
@@ -101,7 +101,7 @@ We have an invariant upon creation to guarantee that no robot looks like a human
 When working with message-driven architectures and EDA it's easy to think of the Aggregate as data only i.e., the events and state.
 However, it's important to realise that business logic is an essential part of the Aggregate.
 
-# The Robot Example in Clojure
+## The Robot Example in Clojure
 
 Let's expand upon the robot example used in the Entity, Value Object and Aggregate definitions.
 
@@ -119,7 +119,7 @@ The robot's Aggregate is a single robot Entity (also the Root) and the upper, lo
 
 The full example code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/src/juxty/ddd/domain.clj).
 
-## Modelling the Data
+### Modelling the Data
 
 We can use spec to model the data:
 
@@ -137,7 +137,7 @@ We can use spec to model the data:
 
 The additional field `version` helps deal with consistency.
 
-## Modelling the Business Logic
+### Modelling the Business Logic
 
 Standard Clojure functions model the business logic.
 First, we define a human-likeness function:
@@ -173,7 +173,7 @@ Next, a constructor-like function and a setter function for creating and updatin
 
 The `create-bot` function uses spec to ensure the values are within the requirements and the `human-likeness` function to enforce the aggregate business invariant. The return value of `create-bot` is the aggregate data as a map.
 
-## Repositories
+### Repositories
 
 A Repository is another DDD concept.
 It represents a place of safety for aggregates to be stored (i.e. providing persistence).
@@ -231,11 +231,11 @@ We have a simple query function
 
 We now have enough of a domain model to be able to test the domain.
 
-# Testing the Robot Example
+## Testing the Robot Example
 
 The full test code can be found [here](https://github.com/juxt/eventing-examples/blob/master/juxty/test/juxty/ddd/domain_test.clj).
 
-## A Side Note about Testing EDA and DDD
+### A Side Note about Testing EDA and DDD
 
 When dealing with events, messages, and data models, there are often fields that are populated at run-time or by nature random (UUIDs). These can be awkward in testing. Anything you can do to make your testing framework generate predictable values will help.
 
@@ -263,7 +263,7 @@ For the robot example, we boot-strap our testing like so, to ensure we know what
 (use-fixtures :each uuid-fixture repo-fixture)
 ```
 
-## Simple Robot Creation
+### Simple Robot Creation
 
 Here's our first example of what aggregate data looks like for a valid robot.
 
@@ -281,7 +281,7 @@ Here's our first example of what aggregate data looks like for a valid robot.
 
 The test also shows that we can't create robots with invalid body configurations.
 
-## Simple Repository Saving
+### Simple Repository Saving
 
 Here's our first example of what the repository data looks like when we save three unique robots.
 
@@ -306,7 +306,7 @@ Here's our first example of what the repository data looks like when we save thr
          @sut/repo)))
 ```
 
-## Checking the Human Likeness Body Invariant Holds
+### Checking the Human Likeness Body Invariant Holds
 
 We try to create a robot with a human likeness
 
@@ -324,7 +324,7 @@ We try to create a robot with a human likeness
          @sut/repo)))
 ```
 
-## Update Consistency
+### Update Consistency
 
 The consistency check is at the aggregate level.
 
@@ -380,14 +380,14 @@ The test to check aggregate level consistency looks like this:
 
 This time around we also simulate saving `bot2` first despite it being created second.
 
-# Summary
+## Summary
 
 We have created a tactical DDD example using the core concepts of entities, value objects, aggregates with business logic (invariants), and repositories.
 
 From this simple domain model foundation, we can explore the rest of the EDA map at the start of this post, including the addition of Domain-Events, Command Sourcing, and Event Sourcing.
 We can pivot out the underpinnings to show the impact of using message-driven architecture or event-stores to implement the solutions.
 
-# References
+## References
 
 [1]: https://www.domainlanguage.com/ddd/reference/
 [2]: https://blog.jannikwempe.com/domain-driven-design-entities-value-objects

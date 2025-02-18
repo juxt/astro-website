@@ -26,7 +26,7 @@ this post I'm going to delve into this, coming at it from my perspective
 of working in a software consultancy, that is expected to place
 individuals that are highly motivated.
 
-# Purpose
+## Purpose
 
 I recently saw the Michael Jordan documentary _The Last Dance_ on
 Netflix, where you can see the astounding level of motivation that
@@ -61,7 +61,7 @@ those executing it.
 
 Above all, what is needed to help a team fufill a purpose is _autonomy_.
 
-# Autonomy
+## Autonomy
 
 The Agile manifesto promotes _People over Process_, with process being
 there to support and to help, never to impose. Yet this is so often what
@@ -95,7 +95,7 @@ Autonomy means entrusting developers with greater responsibility -- but
 it doesn't imply a lack of hierarchy. Strong cohesive leadership by the
 _chief programmer_ is still required. _Software is not a democracy_.
 
-# Mastery
+## Mastery
 
 > A true vocation calls us out beyond ourselves; breaks our heart in the
 > process and then humbles, simplifies and enlightens us about the
@@ -125,7 +125,7 @@ of it, this is a tough message for the clients, but it cuts both ways:
 the clients of today will be richly rewarded by the learnt
 experiences - both successes and failures - of previous clients.
 
-# Conclusion
+## Conclusion
 
 There are projects that suffer from a deep lack of motivation, commonly
 known as _bodyshop projects_ or, in polite corporate speak, _staff
