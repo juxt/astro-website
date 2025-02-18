@@ -46,6 +46,7 @@
   "dependencies": {
     "@astrojs/check": "^0.2.0",
     "@astrojs/rss": "^3.0.0",
+    "@astrojs/sitemap": "^3.2.1",
     "@jsdevtools/rehype-url-inspector": "^2.0.2",
     "@preact/compat": "npm:@preact/compat",
     "@tailwindui/react": "^0.1.1",
