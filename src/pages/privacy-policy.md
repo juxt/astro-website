@@ -1,9 +1,10 @@
 ---
 title: 'Privacy Policy'
 layout: '../layouts/PolicyTerms.astro'
+description: 'JUXT Privacy Policy - Learn how we collect, use, and protect your personal data when you use our websites.'
 ---
 
-# Privacy Policy
+<h1>Privacy Policy</h1>
 
 This privacy policy will explain how our organization uses the personal data we collect from you when you use our websites.
 By using this website you consent to the collection and use of your information in accordance with this privacy policy. The privacy policy is incorporated into and subject to the [Terms of Use](/terms-of-use).
@@ -48,13 +49,13 @@ Statistical data collected and stored may include:
 - Time zone
 - Location
 - Pages you visit within our websites, and your interactions with elements on those pages, such as button clicks, forms submitted, search queries you executed on our sites, etc.
-- Length of time you spend on our websites’ pages
+- Length of time you spend on our websites' pages
 - Site from which you arrived to our websites (i.e. original referrer)
 - Search terms used in search engines that resulted in directing you to our websites, etc.
 
 This information might be used to generate aggregated statistics about website traffic and visitors. If you would like to change your browser settings or learn what information you are sharing with third party sites, please check your web browser.
 
-If you submit your email address in any one of our online forms, you will be saved in our systems as a “contact”. We will link your activity on our sites to that entity. If you register using your company email address, we may add publicly-available information about the company in that contact entity.
+If you submit your email address in any one of our online forms, you will be saved in our systems as a "contact". We will link your activity on our sites to that entity. If you register using your company email address, we may add publicly-available information about the company in that contact entity.
 
 ## **How do we collect your data?**
 
@@ -96,7 +97,7 @@ JUXT will delete your data if you submit a Right to Erasure Request. You do not 
 JUXT would like to send you information about products and services of ours that we think you might like.
 Even if at any point in time, you have agreed to receive marketing communications from us, you can opt out at a later date.
 You have the right at any time to stop JUXT from contacting you for marketing purposes.
-If you no longer wish to be contacted for marketing purposes, please contact us at info@juxt.pro, or hit “unsubscribe” on our marketing emails.
+If you no longer wish to be contacted for marketing purposes, please contact us at info@juxt.pro, or hit "unsubscribe" on our marketing emails.
 Emails could be sent on our behalf via third party companies, such as MailChimp, GoTo, Salesforce, and others.
 
 ## **What are your data protection rights?**
@@ -107,7 +108,7 @@ JUXT would like to make sure you are fully aware of all of your data protection 
 - The right to rectification – You have the right to request that JUXT correct any information you believe is inaccurate. You also have the right to request JUXT to complete the information you believe is incomplete.
 - The right to erasure – You have the right to request that JUXT erase your personal data, under certain conditions.
 - The right to restrict processing – You have the right to request that JUXT restrict the processing of your personal data, under certain conditions.
-- The right to object to processing – You have the right to object to JUXT’s processing of your personal data, under certain conditions.
+- The right to object to processing – You have the right to object to JUXT's processing of your personal data, under certain conditions.
 - The right to data portability – You have the right to request that JUXT transfer the data that we have collected to another organization, or directly to you, under certain conditions.
 
 If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at our email: info@juxt.pro
@@ -155,7 +156,7 @@ JUXT keeps its privacy policy under regular review and places any updates on thi
 
 ## **How to contact us**
 
-If you have any questions about JUXT’s privacy policy, the data we hold on you, or you would like to exercise one of your data protection rights, please do not hesitate to contact us.
+If you have any questions about JUXT's privacy policy, the data we hold on you, or you would like to exercise one of your data protection rights, please do not hesitate to contact us.
 
 Email us at: info@juxt.pro
 
@@ -171,4 +172,4 @@ United Kingdom
 
 ## **How to contact the appropriate authority**
 
-Should you wish to report a complaint or if you feel that JUXT has not addressed your concern in a satisfactory manner, you may contact the Information Commissioner’s Office. Visit <a href='https://ico.org.uk/' target='_blank'> ico.org.uk/ </a> for more information.
+Should you wish to report a complaint or if you feel that JUXT has not addressed your concern in a satisfactory manner, you may contact the Information Commissioner's Office. Visit <a href='https://ico.org.uk/' target='_blank'> ico.org.uk/ </a> for more information.

@@ -1,11 +1,17 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import ContactUsTech from '@components/ContactUsTech'
+
+const title = 'Technology Roundtable'
+const description =
+  'Join JUXT Technology Roundtable - Connect with industry experts and discuss the latest trends in software development and digital innovation.'
 ---
 
-<Layout title='Technology Roundtable' noFooter />
-<main>
-  <div class='bg-zinc-100 text-black'>
-    <ContactUsTech client:only />
-  </div>
-</main>
+<Layout title={title} description={description} noFooter>
+  <main>
+    <div class='bg-zinc-100 text-black'>
+      <h1 class='sr-only'>Technology Roundtable</h1>
+      <ContactUsTech client:only />
+    </div>
+  </main>
+</Layout>

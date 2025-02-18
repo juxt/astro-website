@@ -1,11 +1,17 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import ContactUs from '@components/ContactUs'
+
+const title = 'Consultation'
+const description =
+  'Book a consultation with JUXT - Get expert advice on your software development needs and digital transformation projects.'
 ---
 
-<Layout title='Free Consultation' noFooter />
-<main>
-  <div class='bg-zinc-100 text-black'>
-    <ContactUs client:only />
-  </div>
-</main>
+<Layout title={title} description={description} noFooter>
+  <main>
+    <div class='bg-zinc-100 text-black'>
+      <h1 class='sr-only'>Consultation</h1>
+      <ContactUs client:only />
+    </div>
+  </main>
+</Layout>

@@ -1,11 +1,12 @@
 ---
 title: 'Terms of Use'
 layout: '../layouts/PolicyTerms.astro'
+description: 'JUXT Terms of Use - Legal terms and conditions governing the use of our websites and services.'
 ---
 
-# **Terms of Use**
+<h1>Terms of Use</h1>
 
-Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our [Privacy Policy](/privacy-policy) govern JUXT’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our [Privacy Policy](/privacy-policy) govern JUXT's relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
 
 The term 'JUXT' or 'XTDB' or 'us' or 'we' refers to the owner of the website, JUXT Ltd., a company incorporated in England and Wales and whose registered office is JUXT Ltd. Norfolk House, Studio 1, Ground Floor, Silbury Blvd, Milton Keynes, MK9 2AH, United Kingdom. Our company registration number is 08457399. The term 'you' refers to the user or viewer of our websites.
 
