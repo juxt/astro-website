@@ -1,7 +1,7 @@
 ---
 author: 'jon'
 title: 'Autonomy, Mastery, Purpose'
-description: ''
+description: 'Explore the three key elements of motivation in software development - autonomy, mastery, and purpose. Learn how these principles can transform software projects and create highly engaged teams.'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2021-05-12'

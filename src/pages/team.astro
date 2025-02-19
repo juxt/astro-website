@@ -20,26 +20,28 @@ const bannerPicture = await getImage({
 }).then((img) => img.src)
 
 const teamPages = new Set(
-    (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
-        .map(p => p.url)
-        .map(p => p.split("/"))
-        .map(p => p.pop())
+  (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
+    .map((p) => p.url)
+    .map((p) => p.split('/'))
+    .map((p) => p.pop())
 )
 
 // {"code": Person}
-var people = (await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-))
-    .reduce((acc, person) => {
-        acc[person.frontmatter.code] = person.frontmatter;
-        acc[person.frontmatter.code].expert = teamPages.has(person.frontmatter.code);
-        return acc;
-    }, {})
+var people = (
+  await Astro.glob<MarkdownInstance<Person>>('../data/people/{*.mdx,*.md}')
+).reduce((acc, person) => {
+  acc[person.frontmatter.code] = person.frontmatter
+  acc[person.frontmatter.code].expert = teamPages.has(person.frontmatter.code)
+  return acc
+}, {})
 ---
 
-<Layout navbar title='Team'>
-  <main class="bg-zinc-900">
-
+<Layout
+  navbar
+  title='Team'
+  description="JUXT's engineering team brings 593 years of combined software engineering experience to help get your project off the ground. Meet our expert engineers and support staff."
+>
+  <main class='bg-zinc-900'>
     <Banner
       text='100x engineering power'
       style={{
@@ -49,169 +51,248 @@ var people = (await Astro.glob<MarkdownInstance<Person>>(
 
     <Section className='bg-black text-white py-16'>
       <p class='text-xl md:text-2xl text-justify font-extralight'>
-        With 593 years of combined software engineering experience, you know you're getting the best team to get your project off the ground
+        With 593 years of combined software engineering experience, you know
+        you're getting the best team to get your project off the ground
       </p>
     </Section>
 
     <Section className='text-white py-20'>
       <div class='px-10 xl:px-32 flex flex-col gap-12'>
-        <div class="flex justify-center">
+        <div class='flex justify-center'>
           <h2 class='text-4xl font-bold'>Engine Room</h2>
         </div>
 
         <div class='lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-12'>
-          <FeaturedEngineer {...people["jon"]} square={false} img="/src/assets/team/action/jon.png" />
-          <FeaturedEngineer {...people["mal"]} square={false} img="/src/assets/team/action/mal.png" />
+          <FeaturedEngineer
+            {...people['jon']}
+            square={false}
+            img='/src/assets/team/action/jon.png'
+          />
+          <FeaturedEngineer
+            {...people['mal']}
+            square={false}
+            img='/src/assets/team/action/mal.png'
+          />
         </div>
 
         <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12'>
-          <FeaturedEngineer {...people["joe"]} img="/src/assets/team/action/joe.png" />
-          <FeaturedEngineer {...people["jdt"]} img="/src/assets/team/action/jdt.png" />
-          <FeaturedEngineer {...people["tom"]} img="/src/assets/team/action/tom.png" />
+          <FeaturedEngineer
+            {...people['joe']}
+            img='/src/assets/team/action/joe.png'
+          />
+          <FeaturedEngineer
+            {...people['jdt']}
+            img='/src/assets/team/action/jdt.png'
+          />
+          <FeaturedEngineer
+            {...people['tom']}
+            img='/src/assets/team/action/tom.png'
+          />
 
-          <FeaturedEngineer {...people["oly"]} img="/src/assets/team/action/oly.png" />
-          <FeaturedEngineer {...people["jms"]} img="/src/assets/team/action/jms.png" />
-          <FeaturedEngineer {...people["mtf"]} img="/src/assets/team/action/mtf.png" />
+          <FeaturedEngineer
+            {...people['oly']}
+            img='/src/assets/team/action/oly.png'
+          />
+          <FeaturedEngineer
+            {...people['jms']}
+            img='/src/assets/team/action/jms.png'
+          />
+          <FeaturedEngineer
+            {...people['mtf']}
+            img='/src/assets/team/action/mtf.png'
+          />
 
-          <FeaturedEngineer {...people["jss"]} img="/src/assets/team/action/jss.png" />
-          <FeaturedEngineer {...people["fcb"]} img="/src/assets/team/action/fcb.png" />
-          <FeaturedEngineer {...people["fin"]} img="/src/assets/team/action/fin.png" />
-          <FeaturedEngineer {...people["mat"]} img="/src/assets/team/action/mat.png" />
-          <FeaturedEngineer {...people["osm"]} img="/src/assets/team/action/osm.png" />
-          <FeaturedEngineer {...people["zyx"]} img="/src/assets/team/action/zyx.png" />
-          <FeaturedEngineer {...people["mic"]} img="/src/assets/team/action/mic.png" />
-          <FeaturedEngineer {...people["fjb"]} img="/src/assets/team/action/fjb.png" />
-          <FeaturedEngineer {...people["lda"]} img="/src/assets/team/action/lda.png" />
-          <FeaturedEngineer {...people["daj"]} img="/src/assets/team/action/daj.png" />
-          <FeaturedEngineer {...people["alx"]} img="/src/assets/team/action/alx.png" />
-          <FeaturedEngineer {...people["joa"]} img="/src/assets/team/action/joa.png" />
+          <FeaturedEngineer
+            {...people['jss']}
+            img='/src/assets/team/action/jss.png'
+          />
+          <FeaturedEngineer
+            {...people['fcb']}
+            img='/src/assets/team/action/fcb.png'
+          />
+          <FeaturedEngineer
+            {...people['fin']}
+            img='/src/assets/team/action/fin.png'
+          />
+          <FeaturedEngineer
+            {...people['mat']}
+            img='/src/assets/team/action/mat.png'
+          />
+          <FeaturedEngineer
+            {...people['osm']}
+            img='/src/assets/team/action/osm.png'
+          />
+          <FeaturedEngineer
+            {...people['zyx']}
+            img='/src/assets/team/action/zyx.png'
+          />
+          <FeaturedEngineer
+            {...people['mic']}
+            img='/src/assets/team/action/mic.png'
+          />
+          <FeaturedEngineer
+            {...people['fjb']}
+            img='/src/assets/team/action/fjb.png'
+          />
+          <FeaturedEngineer
+            {...people['lda']}
+            img='/src/assets/team/action/lda.png'
+          />
+          <FeaturedEngineer
+            {...people['daj']}
+            img='/src/assets/team/action/daj.png'
+          />
+          <FeaturedEngineer
+            {...people['alx']}
+            img='/src/assets/team/action/alx.png'
+          />
+          <FeaturedEngineer
+            {...people['joa']}
+            img='/src/assets/team/action/joa.png'
+          />
         </div>
 
         <div>
-          <p class="text-2xl text-center pb-4">...and many more.</p>
-          <p class="text-2xl text-center hover:text-juxt transition-colors"><a href="#contact">Get in touch to build your dream team.</a></p>
+          <p class='text-2xl text-center pb-4'>...and many more.</p>
+          <p class='text-2xl text-center hover:text-juxt transition-colors'>
+            <a href='#contact'>Get in touch to build your dream team.</a>
+          </p>
         </div>
 
-        <div class="flex justify-center pt-8">
+        <div class='flex justify-center pt-8'>
           <h2 class='text-4xl font-bold'>Control Tower</h2>
         </div>
 
         <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
           {
-            ["kth", "aby", "emt"].map((code, idx) => <FeaturedSupport idx={idx} {...people[code]} />)
+            ['kth', 'aby', 'emt'].map((code, idx) => (
+              <FeaturedSupport idx={idx} {...people[code]} />
+            ))
           }
         </div>
       </div>
     </Section>
 
     <Section className='bg-black py-20 text-white'>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class='grid grid-cols-1 md:grid-cols-2 gap-10'>
         <div>
           <h2 class='text-3xl md:text-4xl'>Simplicity Delivers Results</h2>
         </div>
         <div class='flex flex-col gap-4'>
-          <ValueItem number="V"
-                     title="Vision">
-            Technology is a fast moving industry, susceptible to fads and fashions. But we prefer to make conservative decisions that optimize the longer-term.
+          <ValueItem number='V' title='Vision'>
+            Technology is a fast moving industry, susceptible to fads and
+            fashions. But we prefer to make conservative decisions that optimize
+            the longer-term.
           </ValueItem>
-          <hr class="border-b-0 border-[#b76330]" />
+          <hr class='border-b-0 border-[#b76330]' />
 
-          <ValueItem number="A"
-                     title="Authenticity">
-            We are honest. We have in-depth knowledge and understanding of the systems we build and support. We are self-reliant and able to speak from the facts.
+          <ValueItem number='A' title='Authenticity'>
+            We are honest. We have in-depth knowledge and understanding of the
+            systems we build and support. We are self-reliant and able to speak
+            from the facts.
           </ValueItem>
-          <hr class="border-b-0 border-[#b76330]" />
+          <hr class='border-b-0 border-[#b76330]' />
 
-          <ValueItem number="L"
-                     title="Leverage">
-            Rather than picking “the best tool for the job”, we choose to master a small number of powerful and composable tools, applicable in a broad range of situations.
+          <ValueItem number='L' title='Leverage'>
+            Rather than picking "the best tool for the job", we choose to master
+            a small number of powerful and composable tools, applicable in a
+            broad range of situations.
           </ValueItem>
-          <hr class="border-b-0 border-[#b76330]" />
+          <hr class='border-b-0 border-[#b76330]' />
 
-          <ValueItem number="U"
-                     title="Understanding">
-            We take time to understand a problem or domain in depth, rather than jumping to quick fixes and rushing to a temporary solution.
+          <ValueItem number='U' title='Understanding'>
+            We take time to understand a problem or domain in depth, rather than
+            jumping to quick fixes and rushing to a temporary solution.
           </ValueItem>
-          <hr class="border-b-0 border-[#b76330]" />
+          <hr class='border-b-0 border-[#b76330]' />
 
-          <ValueItem number="E"
-                     title="Excellence">
-            We strive to meet the highest standards in ourselves and our creations. We meet deadlines, respect budgets, communicate clearly, and deliver the highest-quality software.
+          <ValueItem number='E' title='Excellence'>
+            We strive to meet the highest standards in ourselves and our
+            creations. We meet deadlines, respect budgets, communicate clearly,
+            and deliver the highest-quality software.
           </ValueItem>
-          <hr class="border-b-0 border-[#b76330]" />
+          <hr class='border-b-0 border-[#b76330]' />
 
-          <ValueItem number="S"
-                     title="Simplicity">
-            We take time to untangle separate concerns. We erect defenses against the creeping complexity that starves projects of their agility. Simplicity underpins all the values above.
+          <ValueItem number='S' title='Simplicity'>
+            We take time to untangle separate concerns. We erect defenses
+            against the creeping complexity that starves projects of their
+            agility. Simplicity underpins all the values above.
           </ValueItem>
-          <hr class="border-b-0 border-[#b76330]" />
+          <hr class='border-b-0 border-[#b76330]' />
         </div>
       </div>
     </Section>
 
-    <GallerySection className="my-10">
-      <GalleryImage width={500} src="/src/assets/site/20231206_222934_AB69D3CF.jpg"
-        alt="People sitting at round tables inside at JUXT's 2023 Christmas celebration"/>
-      <GalleryImage width={500} src="/src/assets/site/20220611_102406_CB2A2F55.jpg"
-        alt="Malcolm and other JUXTers talking at a conference"/>
-      <GalleryImage width={500} src="/src/assets/site/JUXT-10thBday-Wiltons-3200.jpg"
-        alt="People chatting outside the Wilsons hall at JUXT's 10 year birthday party"/>
-      <GalleryImage width={500} src="/src/assets/site/20220611_144756_A4C5BEAA.jpg"
-        alt="JUXTers chatting around the table in front of a cool looking boat"/>
+    <GallerySection className='my-10'>
+      <GalleryImage
+        width={500}
+        src='/src/assets/site/20231206_222934_AB69D3CF.jpg'
+        alt="People sitting at round tables inside at JUXT's 2023 Christmas celebration"
+      />
+      <GalleryImage
+        width={500}
+        src='/src/assets/site/20220611_102406_CB2A2F55.jpg'
+        alt='Malcolm and other JUXTers talking at a conference'
+      />
+      <GalleryImage
+        width={500}
+        src='/src/assets/site/JUXT-10thBday-Wiltons-3200.jpg'
+        alt="People chatting outside the Wilsons hall at JUXT's 10 year birthday party"
+      />
+      <GalleryImage
+        width={500}
+        src='/src/assets/site/20220611_144756_A4C5BEAA.jpg'
+        alt='JUXTers chatting around the table in front of a cool looking boat'
+      />
     </GallerySection>
 
     <Section className='py-10 md:py-20 text-white'>
-      <h2 id="contact" class='pb-4 text-3xl md:text-4xl'>Let's talk</h2>
-      <div class="py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <h2 id='contact' class='pb-4 text-3xl md:text-4xl'>Let's talk</h2>
+      <div class='py-10 grid grid-cols-1 md:grid-cols-2 gap-10'>
         <div>
-            <ContactUsForm client:only subject="New contact submission from about us page." />
+          <ContactUsForm
+            client:only
+            subject='New contact submission from about us page.'
+          />
         </div>
 
-        <div class="flex flex-col gap-4 text-center md:text-right">
+        <div class='flex flex-col gap-4 text-center md:text-right'>
+          <div>
+            <div class='flex justify-center md:justify-end'>
+              <h3 class='text-3xl font-light'>Head Office</h3>
+            </div>
+            <p class='font-light'>Norfolk House, Silbury Blvd.</p>
+            <p class='font-light'>Milton Keynes, MK9 2AH</p>
+            <p class='font-light'>United Kingdom</p>
+          </div>
 
           <div>
-            <div class="flex justify-center md:justify-end">
-                <h3 class='text-3xl font-light'>Head Office</h3>
+            <div class='flex justify-center md:justify-end'>
+              <h3 class='text-3xl font-light'>Email</h3>
             </div>
+            <p class='font-light'>For all general enquiries,</p>
             <p class='font-light'>
-              Norfolk House, Silbury Blvd.
-            </p>
-            <p class='font-light'>
-              Milton Keynes, MK9 2AH
-            </p>
-            <p class='font-light'>
-              United Kingdom
+              please email: <a href='mailto:info@juxt.pro' class='font-medium'
+                >info@juxt.pro</a
+              >
             </p>
           </div>
 
           <div>
-            <div class="flex justify-center md:justify-end">
-                <h3 class='text-3xl font-light'>Email</h3>
+            <div class='flex justify-center md:justify-end'>
+              <h3 class='text-3xl font-light'>Phone</h3>
             </div>
             <p class='font-light'>
-              For all general enquiries,
-            </p>
-            <p class='font-light'>
-              please email: <a href="mailto:info@juxt.pro" class="font-medium">info@juxt.pro</a>
-            </p>
-          </div>
-
-          <div>
-            <div class="flex justify-center md:justify-end">
-                <h3 class='text-3xl font-light'>Phone</h3>
-            </div>
-            <p class='font-light'>
-              Call us at: <span class='whitespace-nowrap'>+44 (0) 333 93 98 309</span>
+              Call us at: <span class='whitespace-nowrap'
+                >+44 (0) 333 93 98 309</span
+              >
             </p>
             <p class='font-light'>
               or <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
             </p>
           </div>
-
         </div>
       </div>
-
     </Section>
-
   </main>
 </Layout>

@@ -4,7 +4,7 @@ import * as myData from '../../data/people/jon.md'
 
 // 2. Extract the fields you are planning to use in your profile page.
 // NOTE: This won't error if properties are missing
-const { code, jobTitle, fullName } = myData.frontmatter;
+const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
@@ -23,42 +23,50 @@ import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
+description: 'Meet Jon Pither, JUXT co-founder and experienced tech lead with a proven track record leading projects at Tier-1 Investment Banks and major enterprises. Learn about his expertise in project leadership, banking technology, and Clojure development.'
 ---
-<ProfilePage title={fullName + " - " + jobTitle}>
+
+<ProfilePage title={fullName + ' - ' + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <Fragment slot="expert-in">
+    <Fragment slot='expert-in'>
       <li>Project Leadership & Technical Strategy</li>
       <li>Banking and Finance Tech</li>
       <li>Databases</li>
       <li>Clojure</li>
     </Fragment>
-    <Fragment slot="bio">
-      Jon Pither is a tech lead by trade having led projects for JUXT at multiple Tier-1 Investment Banks, an online newspaper website, a major property portal, and an international public electric bikes scheme.
+    <Fragment slot='bio'>
+      Jon Pither is a tech lead by trade having led projects for JUXT at
+      multiple Tier-1 Investment Banks, an online newspaper website, a major
+      property portal, and an international public electric bikes scheme.
     </Fragment>
   </GreetingSection>
 
   <GallerySection>
     <GalleryImage
-        src="/src/assets/team/profiles/jon/jon-on-stage.jpg"
-        width={1000}
-        alt="Jon giving a talk on stage" />
+      src='/src/assets/team/profiles/jon/jon-on-stage.jpg'
+      width={1000}
+      alt='Jon giving a talk on stage'
+    />
     <GalleryImage
-        src="/src/assets/team/profiles/jon/jon-suit.jpg"
-        width={1000}
-        alt="Jon on stage with Malcolm at the 10 year party" />
+      src='/src/assets/team/profiles/jon/jon-suit.jpg'
+      width={1000}
+      alt='Jon on stage with Malcolm at the 10 year party'
+    />
     <GalleryImage
-        src="/src/assets/team/profiles/jon/jon-conj-2023.jpg"
-        width={1000}
-        alt="Jot on stage at Conj 2023" />
+      src='/src/assets/team/profiles/jon/jon-conj-2023.jpg'
+      width={1000}
+      alt='Jot on stage at Conj 2023'
+    />
     <GalleryImage
-        src="/src/assets/team/profiles/jon/jon-background.jpg"
-        width={1000}
-        alt="Jon listening to a talk" />
+      src='/src/assets/team/profiles/jon/jon-background.jpg'
+      width={1000}
+      alt='Jon listening to a talk'
+    />
   </GallerySection>
 
   <MeetOtherExecs {...myData.frontmatter} />
 
-<!--
+  <!--
   <TwoColumnSection>
     <SimpleColumn>
       <SmallTitle>About</SmallTitle>
@@ -71,6 +79,9 @@ import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
   <ContactSection {...myData.frontmatter} />
 
-  <LatestBlogsSection bgColor="yellow" title="Jon's Recent Blogs and Articles" {...myData.frontmatter} />
-
+  <LatestBlogsSection
+    bgColor='yellow'
+    title="Jon's Recent Blogs and Articles"
+    {...myData.frontmatter}
+  />
 </ProfilePage>

@@ -4,7 +4,7 @@ import * as myData from '../../data/people/joe.md'
 
 // 2. Extract the fields you are planning to use in your profile page.
 // NOTE: This won't error if properties are missing
-const { code, jobTitle, fullName } = myData.frontmatter;
+const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import ProfilePage from '@components/team/ProfilePage.astro'
@@ -28,67 +28,83 @@ import FeatureText from '@components/team/FeatureText.astro'
 import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
+description: 'Meet Joe Littlejohn, a software delivery expert with over 20 years of experience in professional software engineering. Learn about his expertise in architecture analysis, cloud-native design, and functional programming with JVM languages.'
 ---
-<ProfilePage title={fullName + " - " + jobTitle} >
+
+<ProfilePage title={fullName + ' - ' + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <Fragment slot="expert-in">
+    <Fragment slot='expert-in'>
       <li>Architecture analysis and review</li>
       <li>Cloud-native design</li>
       <li>Roadmapping and getting to MVP</li>
       <li>Functional programming, JVM languages</li>
     </Fragment>
-    <Fragment slot="bio">
-      I'm a software delivery expert with two decades of professional software engineering experience. I started programming in Commodore BASIC on the C64, but my professional work has been mostly using JVM languages.
+    <Fragment slot='bio'>
+      I'm a software delivery expert with two decades of professional software
+      engineering experience. I started programming in Commodore BASIC on the
+      C64, but my professional work has been mostly using JVM languages.
     </Fragment>
   </GreetingSection>
 
   <FeatureSection shrinkMobile={false}>
     <AssetImage
-      slot="image"
-      src="/src/assets/team/profiles/joe/4.jpg"
+      slot='image'
+      src='/src/assets/team/profiles/joe/4.jpg'
       width={800}
-      alt="" />
+      alt=''
+    />
 
-    <FeatureText bgColor="orange" title="Customer Feedback">
+    <FeatureText bgColor='orange' title='Customer Feedback'>
       <SimpleColumn>
-        <BlockQuote author="Rice Lake Weighing Systems">
-          I appreciated communicating with Joe. He would provide valuable insight that helped us in critical decisions.
+        <BlockQuote author='Rice Lake Weighing Systems'>
+          I appreciated communicating with Joe. He would provide valuable
+          insight that helped us in critical decisions.
         </BlockQuote>
-        <BlockQuote author="Excel Energy Services">
+        <BlockQuote author='Excel Energy Services'>
           [Joe's] communication followed by execution is beyond impressive.
         </BlockQuote>
-        <BlockQuote author="Jamie Robertson, CEO, Invisible Systems">
-          Joe is held in high esteem as an engineer and technology leader across his peer group. Having worked with Joe across two software-led businesses - his thought process, approach to problems and composed style; provide direction, confidence, and reassurance across a team and organisation.
+        <BlockQuote author='Jamie Robertson, CEO, Invisible Systems'>
+          Joe is held in high esteem as an engineer and technology leader across
+          his peer group. Having worked with Joe across two software-led
+          businesses - his thought process, approach to problems and composed
+          style; provide direction, confidence, and reassurance across a team
+          and organisation.
         </BlockQuote>
       </SimpleColumn>
     </FeatureText>
   </FeatureSection>
 
   <FeatureSection flip={true}>
-
     <FeatureText
-      title="Platform Engineering and Internal Developer Platforms"
+      title='Platform Engineering and Internal Developer Platforms'
       subtitle="Joe's latest JUXTCast podcast episode, November 2023"
-      bgColor="yellow">
-
+      bgColor='yellow'
+    >
       <SimpleColumn>
         <p>
-          In this episode of JUXTCast, Joe Littlejohn was joined by JUXT engineers Aaron Knauf and Mariusz Saternus to talk about Platform Engineering, and delivering effective developer platforms in large organizations.
+          In this episode of JUXTCast, Joe Littlejohn was joined by JUXT
+          engineers Aaron Knauf and Mariusz Saternus to talk about Platform
+          Engineering, and delivering effective developer platforms in large
+          organizations.
         </p>
       </SimpleColumn>
     </FeatureText>
 
-    <FeatureYouTube slot="image"
-      title="Building A Secure API Platform: A Data-driven Approach"
-      embedUrl="https://www.youtube.com/embed/uFWO2chGZOs"
+    <FeatureYouTube
+      slot='image'
+      title='Building A Secure API Platform: A Data-driven Approach'
+      embedUrl='https://www.youtube.com/embed/uFWO2chGZOs'
     />
-
   </FeatureSection>
 
   <MeetOtherExecs {...myData.frontmatter} />
 
   <ContactSection {...myData.frontmatter} />
 
-  <LatestBlogsSection bgColor="yellow" title="Joe's Blogs & Articles" hidePodcasts=true {...myData.frontmatter} />
-
+  <LatestBlogsSection
+    bgColor='yellow'
+    title="Joe's Blogs & Articles"
+    hidePodcasts='true'
+    {...myData.frontmatter}
+  />
 </ProfilePage>

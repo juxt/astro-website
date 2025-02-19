@@ -4,7 +4,7 @@ import * as myData from '../../data/people/mal.md'
 
 // 2. Extract the fields you are planning to use in your profile page.
 // NOTE: This won't error if properties are missing
-const { code, jobTitle, fullName } = myData.frontmatter;
+const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
@@ -29,71 +29,89 @@ import GallerySection from '@components/team/GallerySection.astro'
 import GalleryImage from '@components/team/GalleryImage.astro'
 import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
+description: "Meet Malcolm Sparks, JUXT's CTO and technical visionary with over 30 years of experience in software development and systems architecture. Learn about his expertise in API security, web standards, and database design."
 ---
-<ProfilePage title={fullName + " - " + jobTitle}>
+
+<ProfilePage title={fullName + ' - ' + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <Fragment slot="expert-in">
+    <Fragment slot='expert-in'>
       <li>Systems Architecture</li>
       <li>Web Standards</li>
       <li>API Security</li>
       <li>Databases</li>
     </Fragment>
-    <Fragment slot="bio">
-      As JUXT's CTO, I lead technological innovation and strategy, drawing upon over three decades of experience in tech leadership and software development, which spanned pivotal roles, including 5 years as Vice President at Deutsche Bank where I managed critical financial systems.
+    <Fragment slot='bio'>
+      As JUXT's CTO, I lead technological innovation and strategy, drawing upon
+      over three decades of experience in tech leadership and software
+      development, which spanned pivotal roles, including 5 years as Vice
+      President at Deutsche Bank where I managed critical financial systems.
     </Fragment>
   </GreetingSection>
 
   <FeatureSection flip={true}>
-
     <FeatureText
-      title="Building A Secure API Platform: A Data-driven Approach"
+      title='Building A Secure API Platform: A Data-driven Approach'
       subtitle="Malcolm's Talk @ Nordic APIs Platform Summit, Stockholm 2023"
-      bgColor="yellow">
-
+      bgColor='yellow'
+    >
       <SimpleColumn>
         <p>
-          API development is hard, especially if we need to add security. There are so many things to worry about!
+          API development is hard, especially if we need to add security. There
+          are so many things to worry about!
         </p>
 
         <p>
-          We know we can specify an API as an OpenAPI document. But how far can we extend this data-driven approach? Can we implement security, durability, behaviour? This talk will attempt to answer some of these questions, in part, by delving into the design of Site, an open-source API-platform I have been helping to build. I will explain the advantages of a ‘data-first’ mindset in the development and evolution of APIs, and how we can begin to make the development and deployments of secure APIs a little easier.
+          We know we can specify an API as an OpenAPI document. But how far can
+          we extend this data-driven approach? Can we implement security,
+          durability, behaviour? This talk will attempt to answer some of these
+          questions, in part, by delving into the design of Site, an open-source
+          API-platform I have been helping to build. I will explain the
+          advantages of a 'data-first' mindset in the development and evolution
+          of APIs, and how we can begin to make the development and deployments
+          of secure APIs a little easier.
         </p>
       </SimpleColumn>
     </FeatureText>
 
-    <FeatureYouTube slot="image"
-      title="Building A Secure API Platform: A Data-driven Approach"
-      embedUrl="https://www.youtube.com/embed/7qZ-GWvx6lM"
+    <FeatureYouTube
+      slot='image'
+      title='Building A Secure API Platform: A Data-driven Approach'
+      embedUrl='https://www.youtube.com/embed/7qZ-GWvx6lM'
     />
-
   </FeatureSection>
 
   <FeatureSection>
-
     <FeatureText
-      title="Atomic Architecture — An Architectural Vision for Better Information Systems"
+      title='Atomic Architecture — An Architectural Vision for Better Information Systems'
       subtitle="Malcolm's on-demand webinar, October 2023"
-      bgColor="yellow">
-
+      bgColor='yellow'
+    >
       <SimpleColumn>
         <p>
-          As part of our drive to design better data systems for our customers, we’ve identified seven architectural principles that yield exceptional results.
+          As part of our drive to design better data systems for our customers,
+          we've identified seven architectural principles that yield exceptional
+          results.
         </p>
         <p>
-          In this webinar, I explained the principles behind Atomic Architecture, an architectural blueprint for building reliable information systems.
+          In this webinar, I explained the principles behind Atomic
+          Architecture, an architectural blueprint for building reliable
+          information systems.
         </p>
         <p>
-          My viewpoint is that current trends in software architecture create unnecessary complexity, delivering poor outcomes for users.
-          Atom Architecture incorporates key ideas and principles from Functional Programming, Domain Driven Design, Event Driven Architecture, Data Mesh and more.
+          My viewpoint is that current trends in software architecture create
+          unnecessary complexity, delivering poor outcomes for users. Atom
+          Architecture incorporates key ideas and principles from Functional
+          Programming, Domain Driven Design, Event Driven Architecture, Data
+          Mesh and more.
         </p>
       </SimpleColumn>
     </FeatureText>
 
-    <FeatureYouTube slot="image"
-      title="Clojure on SCIs"
-      embedUrl="https://www.youtube.com/embed/sf3QZ-HBNFk"
+    <FeatureYouTube
+      slot='image'
+      title='Clojure on SCIs'
+      embedUrl='https://www.youtube.com/embed/sf3QZ-HBNFk'
     />
-
   </FeatureSection>
 
   <MeetOtherExecs {...myData.frontmatter} />
@@ -130,35 +148,69 @@ import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
   </ResourceCollectionSection>
   -->
 
-  <LatestBlogsSection bgColor="yellow" title="Malcolm's Recent Blogs and Articles" {...myData.frontmatter} />
+  <LatestBlogsSection
+    bgColor='yellow'
+    title="Malcolm's Recent Blogs and Articles"
+    {...myData.frontmatter}
+  />
 
   <GallerySection>
     <GalleryImage
-        src="/src/assets/team/profiles/mal/mal_atom.jpg"
-        width={1000}
-        alt="Malcolm giving a talk featuring a slide with an atom" />
+      src='/src/assets/team/profiles/mal/mal_atom.jpg'
+      width={1000}
+      alt='Malcolm giving a talk featuring a slide with an atom'
+    />
     <GalleryImage
-        src="/src/assets/team/profiles/mal/mal_bbq.jpg"
-        width={1000}
-        alt="Malcolm with some tongs in front of some BBQs" />
+      src='/src/assets/team/profiles/mal/mal_bbq.jpg'
+      width={1000}
+      alt='Malcolm with some tongs in front of some BBQs'
+    />
     <GalleryImage
-        src="/src/assets/team/profiles/mal/mal_laptop.jpg"
-        width={1000}
-        alt="Malcolm at a laptop having something pointed out to him" />
+      src='/src/assets/team/profiles/mal/mal_laptop.jpg'
+      width={1000}
+      alt='Malcolm at a laptop having something pointed out to him'
+    />
     <GalleryImage
-        src="/src/assets/team/profiles/mal/mal_lights.jpeg"
-        width={1000}
-        alt="Malcolm smiling at the camera in a nice shirt and jacket with lights in the background" />
+      src='/src/assets/team/profiles/mal/mal_lights.jpeg'
+      width={1000}
+      alt='Malcolm smiling at the camera in a nice shirt and jacket with lights in the background'
+    />
   </GallerySection>
 
-  <GitHubRepositoriesSection bgColor="orange"
-                             title="Github Repositories Malcolm contributes to"
-                             {...myData.frontmatter} >
-    <GitHubRepositoryItem owner ="juxt-site" name="site" description="A platform for building stateful API services." />
-    <GitHubRepositoryItem owner="juxt" name="pick" description="A Clojure library for HTTP server-driven content negotiation." />
-    <GitHubRepositoryItem owner="juxt" name="reap" description="A Clojure library for decoding and encoding strings used by web protocols." />
-    <GitHubRepositoryItem owner="juxt" name="grab" description="A Clojure library for parsing and executing GraphQL queries. " />
-    <GitHubRepositoryItem owner="juxt" name="jinx" description="jinx is not xml-schema (it's json-schema!)" />
-    <GitHubRepositoryItem owner="juxt" name="bidi" description="Bidirectional URI routing" />
+  <GitHubRepositoriesSection
+    bgColor='orange'
+    title='Github Repositories Malcolm contributes to'
+    {...myData.frontmatter}
+  >
+    <GitHubRepositoryItem
+      owner='juxt-site'
+      name='site'
+      description='A platform for building stateful API services.'
+    />
+    <GitHubRepositoryItem
+      owner='juxt'
+      name='pick'
+      description='A Clojure library for HTTP server-driven content negotiation.'
+    />
+    <GitHubRepositoryItem
+      owner='juxt'
+      name='reap'
+      description='A Clojure library for decoding and encoding strings used by web protocols.'
+    />
+    <GitHubRepositoryItem
+      owner='juxt'
+      name='grab'
+      description='A Clojure library for parsing and executing GraphQL queries. '
+    />
+    <GitHubRepositoryItem
+      owner='juxt'
+      name='jinx'
+      description="jinx is not xml-schema (it's json-schema!)"
+    />
+    <GitHubRepositoryItem
+      owner='juxt'
+      name='bidi'
+      description='Bidirectional URI routing'
+    />
   </GitHubRepositoriesSection>
 </ProfilePage>

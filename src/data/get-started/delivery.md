@@ -3,6 +3,7 @@ title: 'Delivery'
 image: 'services-delivery.jpg'
 weight: 3
 direction: 'right'
+description: 'Learn how JUXT delivers exceptional software through iterative development, clear communication, and adaptability to change.'
 ---
 
 This is where we bring our skills and experience to bear, to build exceptional things, fast. During delivery we’ll always:
