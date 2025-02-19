@@ -1,6 +1,6 @@
 ---
 author: 'jdt'
-title: 'JUXT Cast: Missing insights and the SRE big picture — with Niall Murphy'
+title: 'JUXT Cast: SRE Insights with Niall Murphy'
 description: 'Niall Murphy, CEO of Stanza and former Google SRE, discusses the evolution of Site Reliability Engineering and distributed systems.'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'

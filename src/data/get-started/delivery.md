@@ -1,5 +1,5 @@
 ---
-title: 'Delivery'
+title: 'Delivery Process and Methodology at JUXT'
 image: 'services-delivery.jpg'
 weight: 3
 direction: 'right'

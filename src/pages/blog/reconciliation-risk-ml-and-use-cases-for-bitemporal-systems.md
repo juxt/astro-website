@@ -1,6 +1,6 @@
 ---
 author: 'jdt'
-title: 'Reconciliation, Risk, ML and Other Use Cases for Bitemporal Systems'
+title: 'Bitemporal Systems: Reconciliation, Risk, and ML Use Cases'
 metaTitle: 'Reconciliation, Risk, ML and Other Use Cases for Bitemporal Systems'
 description: 'Learn about bitemporal data models for reporting and compliance, and discover common pitfalls in implementing these systems.'
 category: 'data'

@@ -102,6 +102,7 @@
 
   "seo": {
     "home": {
+      "title": "Welcome to JUXT - Innovative Software Engineering",
       "description": "We are a unique software engineering firm, with a track record of rapidly delivering high-quality IT systems to meet challenging business objectives.",
       "image": "homepage-banner.jpg"
     },
@@ -117,10 +118,12 @@
       "image": "delivery-bg.jpg"
     },
     "get-started": {
+      "title": "Getting Started with JUXT's Methodology",
       "description": "Learn about our four-stage approach to new projects, from joining existing teams to building ambitious systems from scratch.",
       "image": "services-banner.jpg"
     },
     "careers": {
+      "title": "Join Our Team",
       "description": "We have a developer-led culture. Our developers are at the heart of our consulting and product development.",
       "image": "work-with-us-banner.jpg"
     },
@@ -129,9 +132,11 @@
       "image": "hero-image-clojurein.jpg"
     },
     "blog": {
+      "title": "Engineering Insights",
       "description": "A curated collection of in-depth technical articles where our experienced engineers share their insights, best practices, and lessons learned with the wider tech community."
     },
     "radar": {
+      "title": "Technology Radar",
       "description": "An opinionated and subjective view, based on our collective experience of building projects with Clojure."
     },
     "consultation": {
@@ -143,6 +148,7 @@
       "image": "clojure-conj-banner.jpg"
     },
     "contact": {
+      "title": "Contact JUXT/XTDB",
       "description": "Schedule a virtual or on-site session with Jeremy to explore new technologies that will impact your work.",
       "image": "sm-tech-roundtable-jdt.jpg"
     },

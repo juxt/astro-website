@@ -1,5 +1,5 @@
 ---
-title: 'Terms of Use'
+title: 'JUXT - Terms of Use'
 layout: '../layouts/PolicyTerms.astro'
 description: 'JUXT Terms of Use - Legal terms and conditions governing the use of our websites and services.'
 ---

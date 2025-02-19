@@ -1,5 +1,5 @@
 ---
-title: 'Privacy Policy'
+title: 'JUXT Privacy Policy'
 layout: '../layouts/PolicyTerms.astro'
 description: 'JUXT Privacy Policy - Learn how we collect, use, and protect your personal data when you use our websites.'
 ---
