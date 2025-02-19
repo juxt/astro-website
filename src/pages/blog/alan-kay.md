@@ -1,7 +1,7 @@
 ---
 author: 'jon'
 title: 'XT20: Alan Kay'
-description: 'Thoughts and perspectives'
+description: 'Exploring Alan Kay's insights on innovation, research funding, and how the groundbreaking work at ARPA and Xerox PARC shaped modern computing'
 category: 'interview'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2020-06-26'

@@ -1,7 +1,7 @@
 ---
 author: 'jdt'
 title: 'FAQs on Bitemporality'
-description: 'An edited transcript of questions and answers with our recent live webinar attendees.'
+description: 'An edited transcript capturing the insightful questions and answers from our recent live webinar attendees on bitemporality.'
 category: 'bitemporality'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-09-05'
@@ -23,10 +23,13 @@ We have also since released a <a href='https://www.juxt.pro/blog/kent-beck-podca
 import pi from '../../assets/blog/bitemp-webinar-pi.png'
 
 <figure>
-  <Image alt='9999-12-31 is used in a table of data to represent infinity' width={1000} src={pi} class='mx-auto' />
-  <figcaption>
-    9999-12-31 / ‘Infinity’ / ∞ / “until changed”
-  </figcaption>
+  <Image
+    alt='9999-12-31 is used in a table of data to represent infinity'
+    width={1000}
+    src={pi}
+    class='mx-auto'
+  />
+  <figcaption>9999-12-31 / ‘Infinity’ / ∞ / “until changed”</figcaption>
 </figure>
 
 **Question: In various examples shown infinity was modelled as a very large date, e.g. ‘9999-12-31’, however in some domains you might want to model much further into the future (for example in a simulation or game). Does XTDB have a principled model of infinity with an explicit sentinel value? Or does it also use that same kind of MAX_DATE style valid-to?**
@@ -38,10 +41,13 @@ import pi from '../../assets/blog/bitemp-webinar-pi.png'
 import tip from '../../assets/blog/bitemp-webinar-tip.png'
 
 <figure>
-  <Image alt='A table of synonyms for SQL:2011 system time and application time' width={1000} src={tip} class='mx-auto' />
-  <figcaption>
-    Naming is hard. Agreeing names is harder.
-  </figcaption>
+  <Image
+    alt='A table of synonyms for SQL:2011 system time and application time'
+    width={1000}
+    src={tip}
+    class='mx-auto'
+  />
+  <figcaption>Naming is hard. Agreeing names is harder.</figcaption>
 </figure>
 
 **Question: Thinking about the slide where you showed the terms used by various systems, including Kafka - I wonder if you can compare and contrast how the main modern systems handle temporality and bitemporality.**
@@ -69,9 +75,15 @@ In contrast to our greenfield work on XTDB, the SQL:2011 design had a lot of bac
 import hiuh from '../../assets/blog/bitemp-webinar-hiuh.png'
 
 <figure>
-  <Image alt='An example of a bitemporal table schema in SQL:2011' width={1000} src={hiuh} class='mx-auto' />
+  <Image
+    alt='An example of a bitemporal table schema in SQL:2011'
+    width={1000}
+    src={hiuh}
+    class='mx-auto'
+  />
   <figcaption>
-    Bitemporal tables are just like normal tables…with various extra columns, constraints, and update logic.
+    Bitemporal tables are just like normal tables…with various extra columns,
+    constraints, and update logic.
   </figcaption>
 </figure>
 
@@ -86,9 +98,15 @@ import hiuh from '../../assets/blog/bitemp-webinar-hiuh.png'
 import se from '../../assets/blog/bitemp-webinar-se.png'
 
 <figure>
-  <Image alt='A snippet of XTDB SQL showcasing the ability to insert arbitrary data without' width={1000} src={se} class='mx-auto' />
+  <Image
+    alt='A snippet of XTDB SQL showcasing the ability to insert arbitrary data without'
+    width={1000}
+    src={se}
+    class='mx-auto'
+  />
   <figcaption>
-    SQL’s “Data Definition Language” doesn’t keep track of schema versions - but <a href="https://www.xtdb.com/v2">what if it did</a>?
+    SQL’s “Data Definition Language” doesn’t keep track of schema versions - but{' '}
+    <a href='https://www.xtdb.com/v2'>what if it did</a>?
   </figcaption>
 </figure>
 
@@ -105,9 +123,15 @@ Being schema-less at its core also means that XTDB defers many of the problems t
 import ites from '../../assets/blog/bitemp-webinar-ites.png'
 
 <figure>
-  <Image alt='A illustration of a system time timeline with data being appended, alongside an illustration of a valid time timeline where data can be inserted at any point' width={1000} src={ites} class='mx-auto' />
+  <Image
+    alt='A illustration of a system time timeline with data being appended, alongside an illustration of a valid time timeline where data can be inserted at any point'
+    width={1000}
+    src={ites}
+    class='mx-auto'
+  />
   <figcaption>
-    An append-only data model with system time ordering…looks remarkably similar to an “event store”.
+    An append-only data model with system time ordering…looks remarkably similar
+    to an “event store”.
   </figcaption>
 </figure>
 

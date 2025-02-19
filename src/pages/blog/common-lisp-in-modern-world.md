@@ -2,7 +2,7 @@
 author: 'jan'
 layout: '../../layouts/BlogPost.astro'
 title: 'Safari: "Embracing Common Lisp in the Modern World"'
-description: 'What are the foundations that continue to influence our tech choices in our digital world?'
+description: 'Explore how Common Lisp and Clojure shape modern programming, and discover why understanding these foundations is crucial for tech choices today'
 category: 'clojure'
 publishedDate: '2024-01-17'
 tags:

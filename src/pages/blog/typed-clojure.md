@@ -1,7 +1,7 @@
 ---
 author: 'mtr'
 title: 'Is Typed Clojure worth the trouble?'
-description: 'Working with types in Clojure'
+description: 'Explore the benefits and tradeoffs of adding static type checking to Clojure codebases with core.typed, and learn when it makes sense to use'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-06-22'

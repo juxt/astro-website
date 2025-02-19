@@ -1,7 +1,7 @@
 ---
 author: 'rmc'
 title: 'AWS Lambda, now with first class parentheses'
-description: 'Deploying Clojure on AWS Lambda with no compromises'
+description: 'Deploying Clojure on AWS Lambda with no compromises - fast cold starts, small artifacts, simple packaging, and full access to npm libraries'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-07-14'

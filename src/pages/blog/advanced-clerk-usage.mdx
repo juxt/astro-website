@@ -1,7 +1,7 @@
 ---
 author: 'lkn'
 title: 'Advancedvent of Clerkjure'
-description: 'Advanced Clerk usage for Advent of Clojure'
+description: 'Exploring advanced Clerk usage patterns and custom viewers through interactive visualizations of Advent of Code solutions in Clojure'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-12-19'
@@ -38,7 +38,7 @@ Clerk allows you to easily create custom ways to display and interact with data.
 Here's a 'more fancy' version of what we're going to build:
 
 <video controls>
-  <source src="/videos/advanced_clerk_demo.webm" type="video/webm" />
+  <source src='/videos/advanced_clerk_demo.webm' type='video/webm' />
 </video>
 
 This version has a lot of neat features, but for simplicity's sake we'll skip some of these and build a basic viewer. This complete version can be found [here](https://elken.github.io/aoc/src/solutions/2022/day05/#custom-viewer).
@@ -148,7 +148,6 @@ That's better! Now we can look at adding in the rest of the steps, since we have
 Along with Tailwind, Reagent support is also included in the SCI config so we can easily call out to that (that's actually how we've been rendering these so far!).
 
 Let's set up a ratom with the current step and a simple slider to change steps.
-
 
 ```clojure
 (def crates-viewer

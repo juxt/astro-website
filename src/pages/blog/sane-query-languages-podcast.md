@@ -1,7 +1,7 @@
 ---
 author: 'jdt'
 title: 'JUXT Cast: Sane Query Languages — with Prof. Viktor Leis'
-description: 'A discussion with Prof. Viktor Leis on the legacy of SQL and the future of databases.'
+description: 'Join us for an engaging discussion with Prof. Viktor Leis as we explore the legacy of SQL, its impact on modern databases, and the exciting future of data management systems.'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-03-22'

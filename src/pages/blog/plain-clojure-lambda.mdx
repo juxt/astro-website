@@ -2,7 +2,7 @@
 author: 'osm'
 layout: '../../layouts/BlogPost.astro'
 title: 'A Recipe for Plain Clojure Lambdas'
-description: 'Build Resilient AWS Lambdas with Clojure: Fast, Familiar, and Simple Setup'
+description: 'Learn how to build resilient and efficient AWS Lambdas using Clojure, ensuring a fast, familiar, and straightforward setup process for your applications.'
 category: 'clojure'
 publishedDate: '2024-06-12'
 tags:
@@ -25,8 +25,6 @@ node for each request. This meant that I needed the lambda to run on the plain
 old JVM. No ClojureScript for me! As it happened this was quite quick to get
 started with (once I figured out what functions to put where).
 
-
-
 ## Creating our jar
 
 Let's start by making a sample project:
@@ -38,6 +36,7 @@ $ cd sample-lambda
 
 Next let's add our dependencies, I'll be using `deps.edn` but feel free to use
 whatever build tooling you like:
+
 ```clojure
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
@@ -49,6 +48,7 @@ whatever build tooling you like:
 
 The important one is [`aws-lambda-java-core`](https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-core)
 which provides the interface we need to implement in our `src/lambda.clj`:
+
 ```clojure
 (ns lambda
   (:gen-class
@@ -67,6 +67,7 @@ success reading JSON using [cheshire's](https://github.com/dakrone/cheshire)
 
 The Lambda [Java runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-java.html)
 requires a jar so let's build one with `tools.build`:
+
 ```clojure
 (ns build
   (:require [clojure.tools.build.api :as b]))
@@ -105,8 +106,6 @@ to create your new Lambda!
 
 All of this code can be found in [this repo](https://github.com/juxt/plain-clojure-lambda).
 
-
-
 ## Bonus: A full-stack application in a lambda
 
 For `xt-play` I wanted the deployment to be as simple as possible, and what could
@@ -116,6 +115,7 @@ I've got a demo repo [here](https://github.com/juxt/plain-clojure-lambda/tree/re
 or you can look at the (much messier) [`xt-play` source](https://github.com/xtdb/xt-fiddle/tree/4257436e744838c714be33c28ec053875e3fae83).
 
 As an overview, I:
+
 - Moved the clojure source to `src/clj`
 - Added `reitit` and `muuntaja` as dependencies
 - Added `resources` to the paths (took me too long to figure out!)
@@ -129,8 +129,6 @@ Just upload your new jar and [create a function url](https://docs.aws.amazon.com
 then any requests to it will go through to the `reitit` handler.
 
 As a bonus bonus: you can even develop against a local webserver using `user/go!`.
-
-
 
 ## A note on performance
 
@@ -153,8 +151,14 @@ Here's the output for xt-play's cold starts:
 
 import cold from '../../assets/blog/plain-clojure-cold.png'
 
-<a target="_blank" href="https://lambda-power-tuning.show/#AAEAAgAEAAYACMAL;AKCARQCA00QA4IxEAMCIRAAAJUQAwGpE;+wORN4NzbjeZ0543jEPnN5kGujfSXEI4">
-  <Image alt='As memory increases, invocation time goes down and cost goes up. The graphs meet at roughly 1024MB.' src={cold} />
+<a
+  target='_blank'
+  href='https://lambda-power-tuning.show/#AAEAAgAEAAYACMAL;AKCARQCA00QA4IxEAMCIRAAAJUQAwGpE;+wORN4NzbjeZ0543jEPnN5kGujfSXEI4'
+>
+  <Image
+    alt='As memory increases, invocation time goes down and cost goes up. The graphs meet at roughly 1024MB.'
+    src={cold}
+  />
 </a>
 
 It's slightly inaccurate because each configuration is only executed once, but
@@ -165,8 +169,14 @@ And here's the output for warm starts (I set it to 100 invocations each):
 
 import warm from '../../assets/blog/plain-clojure-warm.png'
 
-<a target="_blank" href="https://lambda-power-tuning.show/#AAEAAgAEAAYACMAL;AABAQImIWEBVVWVAAABQQHd3V0C8u1tA;Y3dYMpdPEDOXT5AzY3fYM5dPEDTm9FM0">
-  <Image alt='As memory increases, invocation time stays the same and cost goes up.' src={warm} />
+<a
+  target='_blank'
+  href='https://lambda-power-tuning.show/#AAEAAgAEAAYACMAL;AABAQImIWEBVVWVAAABQQHd3V0C8u1tA;Y3dYMpdPEDOXT5AzY3fYM5dPEDTm9FM0'
+>
+  <Image
+    alt='As memory increases, invocation time stays the same and cost goes up.'
+    src={warm}
+  />
 </a>
 
 So it looks like (for xt-play) more memory/CPU won't give us more performance
@@ -174,6 +184,7 @@ once the Lambda's warm, but it will improve our cold start time.
 
 I found this was enough for xt-play, but AWS has some [other recommendations](https://docs.aws.amazon.com/lambda/latest/operatorguide/perf-optimize.html)
 that might be useful. And if you don't require a JVM you can always:
+
 - [Use nbb](https://www.juxt.pro/blog/nbb-lambda/)
 - [Use CloureScript on Nodejs](http://www.cesarolea.com/posts/writing-aws-lambdas-with-shadow-cljs/)
 - [Use holy-lambda](https://github.com/FieryCod/holy-lambda)

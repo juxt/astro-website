@@ -2,7 +2,7 @@
 author: 'jdt'
 title: 'Reconciliation, Risk, ML and Other Use Cases for Bitemporal Systems'
 metaTitle: 'Reconciliation, Risk, ML and Other Use Cases for Bitemporal Systems'
-description: 'The bitemporal data model is known for solving key reporting and compliance requirements, but it is tricky to implement and maintain correctly. Watch this talk to discover the pitfalls of various approaches to implementing bitemporal systems.'
+description: 'Learn about bitemporal data models for reporting and compliance, and discover common pitfalls in implementing these systems.'
 category: 'data'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-10-23'
