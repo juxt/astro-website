@@ -79,7 +79,11 @@
     {
       "groupLabel": "XTDB",
       "items": [
-        { "image": "/images/xtdb-logo.svg", "href": "https://xtdb.com/" },
+        {
+          "image": "/images/xtdb-logo.svg",
+          "href": "https://xtdb.com/",
+          "alt": "XTDB Logo"
+        },
         {
           "label": "Github",
           "icon": "github",

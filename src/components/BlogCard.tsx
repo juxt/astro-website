@@ -8,7 +8,11 @@ function BlogAuthor({ name, lastName, image, jobTitle }: Person) {
     <>
       <div className='flex-shrink-0 flex flex-col gap-3'>
         <div className='w-20 h-20 relative overflow-hidden'>
-          <img src={image} className=' absolute w-full h-full object-cover' />
+          <img
+            src={image}
+            className=' absolute w-full h-full object-cover'
+            alt={`${name} ${lastName}`}
+          />
         </div>
       </div>
       <div className='flex flex-col gap-1'>
@@ -54,16 +58,18 @@ export function BlogCard({
           </div>
 
           <div className='flex flex-col gap-4'>
-            <div class="relative w-full h-52 group-hover:brightness-110">
-                <img
-                  src={heroImage}
-                  className='w-full h-full object-cover'
-                />
-                <div class="absolute w-full h-full top-0 left-0 backdrop-blur-lg"></div>
-                <img
-                  src={heroImage}
-                  className='absolute h-full top-0 left-1/2 -translate-x-1/2'
-                />
+            <div className='relative w-full h-52 group-hover:brightness-110'>
+              <img
+                src={heroImage}
+                alt={`${title}`}
+                className='w-full h-full object-cover'
+              />
+              <div className='absolute w-full h-full top-0 left-0 backdrop-blur-lg'></div>
+              <img
+                src={heroImage}
+                alt={`${title}`}
+                className='absolute h-full top-0 left-1/2 -translate-x-1/2'
+              />
             </div>
             <h2 className='px-4 dark:text-zinc-50 text-2xl font-light capitalize underline-offset-4 hover:underline'>
               {title}
@@ -71,12 +77,11 @@ export function BlogCard({
             <h3 className='px-4 dark:text-zinc-50 font-light'>{description}</h3>
           </div>
         </div>
-        {
-            !hideAuthor &&
-            <div className='px-4 group flex gap-4 w-fit'>
-              <BlogAuthor {...person} />
-            </div>
-        }
+        {!hideAuthor && (
+          <div className='px-4 group flex gap-4 w-fit'>
+            <BlogAuthor {...person} />
+          </div>
+        )}
       </div>
       <DraftBanner draft={draft} pageName='Blog' />
     </a>
