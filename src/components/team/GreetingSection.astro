@@ -31,13 +31,15 @@ const {
   {...Astro.props}
 >
   <div class='md:pt-10 pr-10'>
-    <h1 class='text-5xl font-bold'>
-      Hello<span class='text-orange-400'>.</span>
+    <h1 class='flex flex-col items-start'>
+      <span class='text-5xl font-bold'>
+        Hello<span class='text-orange-400'>.</span>
+      </span>
+      <span class='text-3xl font-bold'>
+        <span class='text-orange-400'>—</span> I'm {fullName}
+      </span>
+      <span class='text-3xl font-medium'>{jobTitle}</span>
     </h1>
-    <h2 class='justify-end text-3xl font-bold'>
-      <span class='text-orange-400'>—</span> I'm {fullName}
-    </h2>
-    <h2 class='justify-end text-3xl font-medium'>{jobTitle}</h2>
   </div>
 
   <div class='my-auto ml-auto md:col-start-2 md:row-start-1 md:row-span-2'>
