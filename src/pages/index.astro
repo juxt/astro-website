@@ -141,7 +141,7 @@ const featuredBlogs = await parseBlogs({
         clientLogos.map((logo) => (
           <img
             src={`/images/client-logos/${logo}`}
-            alt=''
+            alt={`${logo.replace('.svg', '')} company logo`}
             class='w-25 h-20 md:w-35 md:h-30'
           />
         ))
@@ -357,7 +357,7 @@ const featuredBlogs = await parseBlogs({
     </Section>
 
     <Section
-      className={'bg-gradient-to-b from-black to bg-gray-600 bg-[length:0px_0px] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
+      className={'bg-gient-to-b from-black to bg-gray-600 bg-[length:0px_0px] md:bg-no-repeat md:bg-right md:bg-contain py-20 text-white'}
     >
       <div class='md:w-1/2'>
         <h2 class='text-4xl lg:text-5xl pb-10 font-bold'>Our Approach</h2>

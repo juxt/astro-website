@@ -1,7 +1,7 @@
 ---
 author: 'jdt'
 title: 'JUXT Cast: 50 Years of SQL, 15 Years of jOOQ — with Lukas Eder'
-description: 'A discussion with Lukas Eder on the enduring nature of SQL, its ecosystem, and his role within it'
+description: "A deep dive with jOOQ creator Lukas Eder exploring SQL's enduring relevance, the evolving database landscape, and building developer-friendly tools"
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-07-23'

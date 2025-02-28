@@ -1,7 +1,7 @@
 ---
 author: 'mpi'
 title: 'Bitemporal TraderX - XTDB Reflections'
-description: 'Using XTDB in a sample microservices trading application for the FINOS 2024 Tech Sprint (part 2)'
+description: 'Exploring the use of XTDB within a microservices trading application developed for the FINOS 2024 Tech Sprint event (part 2)'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-02-06'
@@ -19,14 +19,22 @@ In the [previous blog post](/blog/bitemporal-traderx/) on this topic I wrote abo
 
 In this follow-up post I will share some thoughts about [XTDB](https://xtdb.com) (a 'bitemporal' database created by JUXT) and discuss a few potential future directions for the codebase. As a recap, here is a short video we put together that provides an overview of the system and some of the changes we made:
 
-<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/d_o6Dy3I2r8?si=huuab9Qxb_8Hmqs1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe
+  class='aspect-video w-full'
+  src='https://www.youtube.com/embed/d_o6Dy3I2r8?si=huuab9Qxb_8Hmqs1'
+  title='YouTube video player'
+  frameborder='0'
+  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+  referrerpolicy='strict-origin-when-cross-origin'
+  allowfullscreen
+></iframe>
 
 ## First Impressions
 
 This was my first time using XTDB so I had some learning to do. Being a SQL database, most things about XTDB felt quite familiar but it still takes a little time to get used to the temporal syntax (at least you only have to learn it once!).
 After studying the existing TraderX data model and reading the project brief, my instinctive reaction was to start adding dedicated columns to the application's schema for handling various application and auditing timestamps like `traded_at` and `updated_at` - but what a pleasant surprise it was to find out there’s little need for many of these kinds of columns in XTDB - such timestamping is already ubiquitous and all handled under the covers.
 
-The biggest surprise, however, was that because of this built-in functionality, *compared to using a traditional SQL database for recording changes and keeping old versions around, how you interact with an XTDB database remains intuitive* - at least until you need to retrieve the historical data or introduce 'retroactive' updates (e.g. when you discover some past data was incorrect and need to correct it, or when you want to backfill some missing data). Essentially, you are able to use plain INSERT, UPDATE and DELETE statements to modify data as normal, yet you are left with a fully auditable history of all changes across all records _and_ can easily query past states.
+The biggest surprise, however, was that because of this built-in functionality, _compared to using a traditional SQL database for recording changes and keeping old versions around, how you interact with an XTDB database remains intuitive_ - at least until you need to retrieve the historical data or introduce 'retroactive' updates (e.g. when you discover some past data was incorrect and need to correct it, or when you want to backfill some missing data). Essentially, you are able to use plain INSERT, UPDATE and DELETE statements to modify data as normal, yet you are left with a fully auditable history of all changes across all records _and_ can easily query past states.
 
 Wait - what? History? Yes! You get all the change history for free! Not just what changed when, but a fine-grained ability to query the myriad historical database states exactly as they looked previously. For example, UPDATE statements in XTDB don’t actually overwrite old values - instead they create new entries that are carefully tracked across two time lines - 'valid time' (otherwise known as 'application time') and system time (what you can think of as wall-clock time).
 
@@ -36,7 +44,11 @@ The way the XTDB team have extended the 'normal' update-in-place semantics of SQ
 
 import sliders from '../../assets/blog/bitemporal-traderx.png'
 
-<Image style="width: 100%; margin-left: auto; margin-right: auto" alt='View of TraderX showing SQL overlayed' src={sliders} />
+<Image
+  style='width: 100%; margin-left: auto; margin-right: auto'
+  alt='View of TraderX showing SQL overlayed'
+  src={sliders}
+/>
 
 Adding temporal 'sliders' to the TraderX UI was an easy way to expose XTDB's time-travel capabilities. This approach makes it efficient for users of the various blotters and dashboards to quickly observe and scrub through the changing data, compared to alternatives like having to click on some calendar widget to navigate through the history. It's a great way to understand the value that the [bitemporal model](https://en.wikipedia.org/wiki/Bitemporal_modeling) can bring: just imagine any existing application with a time slider and how useful that could be for the end user - especially in domains where the end user is making important decisions based on the changing data, and you later want (or need!) to be able to reconstruct the full context behind the decision.
 
@@ -54,8 +66,8 @@ Having worked on several applications that incorporate reporting requirements, I
 
 **Automatic bitemporal versioning unlocks powerful reporting capabilities** - not only over past changes, but also for speculative analysis. For example:
 
-* "What would my account PnL look like with prices from a given day in the past?"
-* "How much could I have gained/lost if I had bought stock X on date Y?"
+- "What would my account PnL look like with prices from a given day in the past?"
+- "How much could I have gained/lost if I had bought stock X on date Y?"
 
 XTDB makes this possible without requiring planning ahead or implementing distinct versioning requirements in each part of the schema.
 

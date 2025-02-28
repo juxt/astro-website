@@ -4,7 +4,7 @@ import * as myData from '../../data/people/jdt.md'
 
 // 2. Extract the fields you are planning to use in your profile page.
 // NOTE: This won't error if properties are missing
-const { code, jobTitle, fullName } = myData.frontmatter;
+const { code, jobTitle, fullName } = myData.frontmatter
 
 // 3. Import any components you need
 import { getImage, Image } from 'astro:assets'
@@ -25,96 +25,110 @@ import FeatureYouTube from '@components/team/FeatureYouTube.astro'
 import AssetImage from '@components/team/AssetImage.astro'
 import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
 
+description: "Meet Jeremy Taylor, JUXT's product expert and trusted advisor on open source tools and software trends. Learn about his expertise in data-intensive applications, information architecture, and database technologies."
 ---
-<ProfilePage title={fullName + " - " + jobTitle}>
+
+<ProfilePage title={fullName + ' - ' + jobTitle}>
   <GreetingSection {...myData.frontmatter}>
-    <Fragment slot="expert-in">
+    <Fragment slot='expert-in'>
       <li>Data Intensive Applications</li>
       <li>Information Architecture</li>
       <li>Software Evaluation & Cloud Trends</li>
       <li>Database Internals</li>
     </Fragment>
-    <Fragment slot="bio">
-      A trusted advisor on open source tools and software trends who has facilitated workshops on strategic technology decisions, delivered training for consulting clients, and developed proof-of-concepts in collaboration with business stakeholders.
+    <Fragment slot='bio'>
+      A trusted advisor on open source tools and software trends who has
+      facilitated workshops on strategic technology decisions, delivered
+      training for consulting clients, and developed proof-of-concepts in
+      collaboration with business stakeholders.
     </Fragment>
   </GreetingSection>
 
   <FeatureSection flip={true}>
-
     <FeatureText
-      title="UPDATE Considered Harmful"
+      title='UPDATE Considered Harmful'
       subtitle="Jeremy's talk at JUXT 10-year party, May 2023"
-      bgColor="yellow">
-
+      bgColor='yellow'
+    >
       <SimpleColumn>
         <p>
-          SQL is almost 50 years old and the cost of storage has decreased dramatically over its lifetime.
-In this talk, Jeremy Taylor explains why SQL’s UPDATE statement is problematic in our modern context and how developers are forced to work around it. He also examines ‘bitemporality’ — a standardised model for working with versioned historical data that mitigates the need for such workarounds.
+          SQL is almost 50 years old and the cost of storage has decreased
+          dramatically over its lifetime. In this talk, Jeremy Taylor explains
+          why SQL’s UPDATE statement is problematic in our modern context and
+          how developers are forced to work around it. He also examines
+          ‘bitemporality’ — a standardised model for working with versioned
+          historical data that mitigates the need for such workarounds.
         </p>
       </SimpleColumn>
     </FeatureText>
 
-    <FeatureYouTube slot="image"
-      title="UPDATE Considered Harmful"
-      embedUrl="https://www.youtube.com/embed/JxMz-tyicgo"
+    <FeatureYouTube
+      slot='image'
+      title='UPDATE Considered Harmful'
+      embedUrl='https://www.youtube.com/embed/JxMz-tyicgo'
     />
-
   </FeatureSection>
 
   <FeatureSection>
-
     <FeatureText
-      title="Columnar Data — The Future of Efficient Data Analytics"
+      title='Columnar Data — The Future of Efficient Data Analytics'
       subtitle="Jeremy's on-demand webinar, October 2023"
-      bgColor="yellow">
-
+      bgColor='yellow'
+    >
       <SimpleColumn>
         <p>
-          In the context of big data, columnar storage & processing has emerged as a central theme for software engineers and data professionals. Columnar data is not just a trend; it’s a response to the increasing need for efficient data analytics. Learn how to optimize system design and performance by understanding columnar data and the underlying mechanics that make it effective.
+          In the context of big data, columnar storage & processing has emerged
+          as a central theme for software engineers and data professionals.
+          Columnar data is not just a trend; it’s a response to the increasing
+          need for efficient data analytics. Learn how to optimize system design
+          and performance by understanding columnar data and the underlying
+          mechanics that make it effective.
         </p>
       </SimpleColumn>
     </FeatureText>
 
-    <FeatureYouTube slot="image"
-      title="Columnar Data — The Future of Efficient Data Analytics"
-      embedUrl="https://www.youtube.com/embed/Nlpe0Q-ARl8"
+    <FeatureYouTube
+      slot='image'
+      title='Columnar Data — The Future of Efficient Data Analytics'
+      embedUrl='https://www.youtube.com/embed/Nlpe0Q-ARl8'
     />
-
   </FeatureSection>
 
   <FeatureSection flip={true} shrinkMobile={false}>
-
-    <FeatureText
-      title="Technology Roundtable with Jeremy"
-      bgColor="yellow">
-
+    <FeatureText title='Technology Roundtable with Jeremy' bgColor='yellow'>
       <SimpleColumn>
         <p>
-          Looking to explore new tech with your team? Let Jeremy take you on a tour through some of the latest open source software innovations that are relevant for you.
-In as little as one hour, either virtually or at your offices, Jeremy will get you up-to-speed on new technologies that can and probably will impact your work in your near future, including recent advances in data and cloud infrastructure.
+          Looking to explore new tech with your team? Let Jeremy take you on a
+          tour through some of the latest open source software innovations that
+          are relevant for you. In as little as one hour, either virtually or at
+          your offices, Jeremy will get you up-to-speed on new technologies that
+          can and probably will impact your work in your near future, including
+          recent advances in data and cloud infrastructure.
         </p>
-        <div class="pt-10 flex flex-col items-center">
-            <a class="bg-zinc-800 hover:bg-zinc-600 px-4 py-3 text-white rounded-sm"
-               href="/jdt-tech-roundtable">
-               More Info
-            </a>
+        <div class='pt-10 flex flex-col items-center'>
+          <a
+            class='bg-zinc-800 hover:bg-zinc-600 px-4 py-3 text-white rounded-sm'
+            href='/jdt-tech-roundtable'
+          >
+            More Info
+          </a>
         </div>
       </SimpleColumn>
     </FeatureText>
 
     <AssetImage
-      slot="image"
-      src="/src/assets/team/profiles/jdt/JUXT-10thBday-Wiltons-1871.jpg"
+      slot='image'
+      src='/src/assets/team/profiles/jdt/JUXT-10thBday-Wiltons-1871.jpg'
       width={800}
-      alt="" />
-
+      alt=''
+    />
   </FeatureSection>
 
   <MeetOtherExecs {...myData.frontmatter} />
 
   <ContactSection {...myData.frontmatter} />
 
-<!--
+  <!--
   <TwoColumnSection>
     <SimpleColumn>
       <SmallTitle>About</SmallTitle>
@@ -151,15 +165,19 @@ In as little as one hour, either virtually or at your offices, Jeremy will get y
   </TwoColumnSection>
 -->
 
-<!--
+  <!--
   <QuoteSection>
     Always super helpful and responsive and in great spirits, high standard of delivering quality”, pragmatic, possesses wide and in-depth technical knowledge, and is always ready for a challenge!
   </QuoteSection>
 -->
 
-  <LatestBlogsSection bgColor="orange" title="Jeremy's Recent Content" {...myData.frontmatter} />
+  <LatestBlogsSection
+    bgColor='orange'
+    title="Jeremy's Recent Content"
+    {...myData.frontmatter}
+  />
 
-<!--
+  <!--
   <ResourceCollectionSection title="Resources" subtitle="Jeremy's talks, podcasts and webinars">
     <ResourceItem
       name="The Distributed Fabric Pod | Ep 21"
@@ -182,5 +200,4 @@ In as little as one hour, either virtually or at your offices, Jeremy will get y
 
   </ResourceCollectionSection>
 -->
-
 </ProfilePage>

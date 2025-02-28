@@ -79,7 +79,11 @@
     {
       "groupLabel": "XTDB",
       "items": [
-        { "image": "/images/xtdb-logo.svg", "href": "https://xtdb.com/" },
+        {
+          "image": "/images/xtdb-logo.svg",
+          "href": "https://xtdb.com/",
+          "alt": "XTDB Logo"
+        },
         {
           "label": "Github",
           "icon": "github",
@@ -102,6 +106,7 @@
 
   "seo": {
     "home": {
+      "title": "Welcome to JUXT - Innovative Software Engineering",
       "description": "We are a unique software engineering firm, with a track record of rapidly delivering high-quality IT systems to meet challenging business objectives.",
       "image": "homepage-banner.jpg"
     },
@@ -117,10 +122,12 @@
       "image": "delivery-bg.jpg"
     },
     "get-started": {
-      "description": "When we approach a new project, whether it’s joining an existing software team to get a project over the line, or designing and building an ambitious new system from scratch, we work with our clients through the four main stages",
+      "title": "Getting Started with JUXT's Methodology",
+      "description": "Learn about our four-stage approach to new projects, from joining existing teams to building ambitious systems from scratch.",
       "image": "services-banner.jpg"
     },
     "careers": {
+      "title": "Join Our Team",
       "description": "We have a developer-led culture. Our developers are at the heart of our consulting and product development.",
       "image": "work-with-us-banner.jpg"
     },
@@ -129,9 +136,11 @@
       "image": "hero-image-clojurein.jpg"
     },
     "blog": {
-      "description": "A list of articles where our engineers share their knowledge and experience with the community."
+      "title": "Engineering Insights",
+      "description": "A curated collection of in-depth technical articles where our experienced engineers share their insights, best practices, and lessons learned with the wider tech community."
     },
     "radar": {
+      "title": "Technology Radar",
       "description": "An opinionated and subjective view, based on our collective experience of building projects with Clojure."
     },
     "consultation": {
@@ -143,14 +152,16 @@
       "image": "clojure-conj-banner.jpg"
     },
     "contact": {
-      "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future."
+      "title": "Contact JUXT/XTDB",
+      "description": "Schedule a virtual or on-site session with Jeremy to explore new technologies that will impact your work.",
+      "image": "sm-tech-roundtable-jdt.jpg"
     },
     "jdt-tech-roundtable": {
-      "description": "In just one hour, either virtually or on-site, let Jeremy get you up-to-speed on new technologies that can and probably will impact your work in your near future.",
+      "description": "Join Jeremy for an hour to learn about emerging technologies that will impact your future work.",
       "image": "sm-tech-roundtable-jdt.jpg"
     },
     "xt24": {
-      "description": "Engineering Leaders from global banks, fintech companies and hedge funds are meeting in Milton Keynes to explore how groundbreaking technology concepts, tools and solutions are shaping the future of financial services.",
+      "description": "Engineering leaders meet to explore groundbreaking technology shaping the future of financial services.",
       "image": "sm-xt24.jpg"
     }
   }

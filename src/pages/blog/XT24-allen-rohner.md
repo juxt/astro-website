@@ -1,7 +1,7 @@
 ---
 author: 'juxt'
 title: 'Breaking the Bank with Contract Testing'
-description: "Watch Allen Rohner's talk at XT24 Fintech Conference"
+description: "Watch Allen Rohner's insightful talk at the XT24 Fintech Conference, where he shares his expertise."
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-08-21'

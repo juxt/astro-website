@@ -1,7 +1,7 @@
 ---
 author: 'juxt'
 title: 'We Need to Talk about JSON'
-description: "Watch Oliver Hine's talk at XT24 Fintech Conference"
+description: "Join us to watch Oliver Hine's insightful talk at the XT24 Fintech Conference, where he discusses the critical role of JSON schema."
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-08-14'

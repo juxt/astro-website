@@ -1,7 +1,7 @@
 ---
 author: 'jdt'
-title: 'JUXT Cast: Missing insights and the SRE big picture — with Niall Murphy'
-description: 'CEO of Stanza, Niall Murphy, was guest speaker on our latest podcast episode, where we discussed the evolution of Site Reliability Engineering (SRE) and the challenges of building distributed systems.'
+title: 'JUXT Cast: SRE Insights with Niall Murphy'
+description: 'Niall Murphy, CEO of Stanza and former Google SRE, discusses the evolution of Site Reliability Engineering and distributed systems.'
 category: 'database'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-09-06'

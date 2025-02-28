@@ -1,7 +1,7 @@
 ---
 author: 'jon'
-title: 'XT20: Alan Kay'
-description: 'Thoughts and perspectives'
+title: 'XT20: Alan Kay - A Visionary in Computing and Innovation'
+description: "Exploring Alan Kay's insights on innovation, research funding, and how the groundbreaking work at ARPA and Xerox PARC shaped modern computing"
 category: 'interview'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2020-06-26'
@@ -84,7 +84,7 @@ how to fund and manage them properly.
 >
 > -- Alan Kay
 
-# The extended cut!
+## The extended cut!
 
 We continued the discussion, and here is the _long-form_ of Alan's
 thoughts on invention, climate change, Covid-19, education and more.

@@ -16,6 +16,7 @@ type NavigationItem = {
   flag?: boolean
   icon?: string
   image?: string
+  alt?: string
 }
 
 type Navigation = {
@@ -77,7 +78,7 @@ const followUs = [
     <div class='flex gap-8 sm:gap-20 flex-col sm:flex-row'>
       <div class='flex flex-col gap-6 text-sm shrink-0'>
         <div class='w-40'>
-          <img class='w-full' src='/images/logo.svg' alt='' />
+          <img class='w-full' src='/images/logo.svg' alt='JUXT Company Logo' />
         </div>
 
         <div class='flex flex-col gap-3'>
@@ -154,7 +155,13 @@ const followUs = [
                             {item.label}
                           </div>
                         )}
-                        {item.image && <img class='w-16' src={item.image} />}
+                        {item.image && (
+                          <img
+                            class='w-16'
+                            src={item.image}
+                            alt={item.alt || ''}
+                          />
+                        )}
                         {item.flag && (
                           <div class='font-normal uppercase text-[0.6rem] rounded-lg bg-gray-700 tracking-wider text-white px-1.5 py-[0.1rem]'>
                             {item.flag}

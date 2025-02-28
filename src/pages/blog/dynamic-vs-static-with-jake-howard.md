@@ -1,7 +1,7 @@
 ---
 author: 'jon'
-title: 'JUXT Cast: Static vs Dynamic Typing - A Balanced Discussion on Modern Programming Practices'
-description: "In this podcast episode, JUXT's leadership team and guest Jake Howard explore the benefits of dynamic typing and its role in today’s development landscape - Video."
+title: 'JUXT Cast: Static vs Dynamic Typing - A Balanced Discussion'
+description: "JUXT's leadership team and guest Jake Howard discuss the merits of dynamic typing and its growing role in modern development."
 category: 'programming'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-09-18'

@@ -1,7 +1,7 @@
 ---
 author: 'joe'
 title: 'Clojure in Cloud Hosting: Exoscale'
-description: 'European cloud infrastructure with Clojure, Go, and an open source mindset'
+description: 'Exoscale is a European cloud infrastructure provider that leverages Clojure, Go, and an open source mindset for innovative solutions.'
 category: 'clojure-in'
 layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-09-26'
@@ -23,8 +23,20 @@ We caught up with Pierre-Yves Ritschard, a.k.a [pyr](https://github.com/pyr), to
 import exolight from '../../assets/blog/exoscale-logo-on-light.svg'
 import exodark from '../../assets/blog/exoscale-logo-on-dark.svg'
 
-<Image class='not-prose dark:hidden' alt='Exoscale' width={350} height={50} src={exolight} />
-<Image class='not-prose hidden dark:block' alt='Exoscale' width={350} height={50} src={exodark} />
+<Image
+  class='not-prose dark:hidden'
+  alt='Exoscale'
+  width={350}
+  height={50}
+  src={exolight}
+/>
+<Image
+  class='not-prose hidden dark:block'
+  alt='Exoscale'
+  width={350}
+  height={50}
+  src={exodark}
+/>
 
 **Joe: Great to meet you Pierre-Yves. So what does Exoscale do?**
 
@@ -96,8 +108,12 @@ For requests from orchestrators to agents we tend to use GRPC, because that give
 
 import exodc from '../../assets/blog/exoscale-datacentres.png'
 
-<Image alt='Exoscale data centre locations across Europe' width={700} src={exodc} class='mx-auto' />
-
+<Image
+  alt='Exoscale data centre locations across Europe'
+  width={700}
+  src={exodc}
+  class='mx-auto'
+/>
 
 **Joe: Why do you think Clojure has been successful for the API and orchestration layers of the system?**
 

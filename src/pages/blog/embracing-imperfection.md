@@ -1,7 +1,7 @@
 ---
 author: 'jon'
 title: 'Embracing Imperfection'
-description: "Jon Pither's past mistakes, and how to cope with real data in an imperfect world"
+description: 'Jon Pither reflects on his past mistakes in software development and shares insights on navigating real data challenges in an imperfect world.'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-09-08'
@@ -130,7 +130,7 @@ just seen the opposite cost of locking everything down and attempting to
 keep pace with modeling out the business domain, in all its minutiae,
 tirelessly, forever.
 
-# References
+## References
 
 - Introducing
   [Bitemporality](https://www.juxt.pro/blog/value-of-bitemporality).

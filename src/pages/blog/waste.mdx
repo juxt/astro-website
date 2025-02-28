@@ -1,7 +1,7 @@
 ---
 author: 'joe'
 title: 'Cutting software waste'
-description: 'Where are the most impactful wastes in the software business, and how can we eliminate them?'
+description: 'Exploring the most impactful sources of waste in software development, from strategic missteps to execution inefficiencies, and how to eliminate them.'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-01-16'
@@ -48,7 +48,10 @@ Research is an investment that allows us to solve future problems more effective
 
 We might think of research as inventory - partially complete work that has not yet delivered customer value. However, there are two problems with this way of thinking. The first being that it implies organisations should work hard to minimise research. The second being that this view of research risks characterising negative results as pure failure.
 
-<span class='pullquote left' text-content="[W]e should view the value of research as learning, realised once we have improved our organisational knowledge."></span>
+<span
+  class='pullquote left'
+  text-content='[W]e should view the value of research as learning, realised once we have improved our organisational knowledge.'
+></span>
 
 Rather, we should view the _value_ of research as learning, realised once we have improved our organisational knowledge. This way, we might use Lean principles to limit our inventory of incomplete research, but not to avoid the practice altogether.
 
@@ -60,7 +63,12 @@ We've all seen the graph showing how the cost to fix defects grows exponentially
 
 import cd1 from '../../assets/blog/cost-of-defects-1.svg'
 
-<Image alt='Graph showing the cost to fix defects rises exponentially over time.' width={500} src={cd1} class='mx-auto' />
+<Image
+  alt='Graph showing the cost to fix defects rises exponentially over time.'
+  width={500}
+  src={cd1}
+  class='mx-auto'
+/>
 
 Modern software engineering, though, has flattened this curve considerably. Agile planning and engineering practices, cloud computing and SaaS, Continuous Delivery - these have pushed down the cost to release and the cost of change. Of course fundamental flaws in the early understanding of a system can be costly to fix later, but as an industry we've brought down the cost to fix defects drastically since the first research on which this graph is based was published by IEEE nearly 5 decades ago. Let's conclude then, that getting definitive specifications right early is far less important now than it once was.
 
@@ -68,7 +76,12 @@ I'd like to propose a similar graph as we look at the impact of waste from strat
 
 import cd2 from '../../assets/blog/cost-of-defects-2.svg'
 
-<Image alt='Graph showing the cost of waste, and hence opportunity for optimisation, reduces as we move from strategy to execution.' width={500} src={cd2} class='mx-auto'/>
+<Image
+  alt='Graph showing the cost of waste, and hence opportunity for optimisation, reduces as we move from strategy to execution.'
+  width={500}
+  src={cd2}
+  class='mx-auto'
+/>
 
 Modern software engineering has _steepened_ this curve. Version control, continuous integration, automated testing, automated deployment, cloud computing, have all eliminated waste in our execution and many of these practices are not just commonplace but ubiquitous.
 

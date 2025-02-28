@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [require.resolve('prettier-plugin-astro')],
-  files: ['src/**/*.{html,js,jsx,md,ts,tsx}'],
+  files: ['src/**/*.{html,js,jsx,md,mdx,ts,tsx}'],
   semi: false,
   singleQuote: true,
   tabWidth: 2,

@@ -233,7 +233,7 @@ export default function ContactUs() {
             {clientLogos.map((logo) => (
               <img
                 src={`/images/client-logos/${logo}`}
-                alt=''
+                alt={`Client logo for ${logo.split('.')[0]}`}
                 className='h-24 md:h-20'
               />
             ))}

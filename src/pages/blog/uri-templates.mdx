@@ -1,7 +1,7 @@
 ---
 author: 'mal'
-title: 'URI Templates'
-description: 'Unlocking the potential of URIs to embed state in hypertext applications'
+title: 'URI Template Syntax'
+description: 'Learn how URIs can be used to embed state in hypertext applications, and how to use the URI Template syntax to construct and consume URIs.'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-02-14'
@@ -45,8 +45,13 @@ http://example.com/~{username}/
 
 If you're familiar with OpenAPI the syntax may look familiar.
 
-><p>OpenAPI serialization rules are based on a subset of URI template patterns defined by RFC 6570.</p> 
-> <footer>-- <cite>https://swagger.io/docs/specification/serialization/</cite></footer>
+> <p>
+>   OpenAPI serialization rules are based on a subset of URI template patterns
+>   defined by RFC 6570.
+> </p>
+> <footer>
+>   -- <cite>https://swagger.io/docs/specification/serialization/</cite>
+> </footer>
 
 Here's a more complex example.
 It makes use of some (though not all) of the features available in URI Template.
@@ -143,7 +148,11 @@ But more importantly, URI Template is a Proposed Standard from the Internet Engi
 
 import me from '../../assets/blog/uri-thing-tshirt.png'
 
-<Image style="width: 50%; margin-left: auto; margin-right: auto" alt='My talk at EuroClojure 2012. Check out the t-shirt' src={me} />
+<Image
+  style='width: 50%; margin-left: auto; margin-right: auto'
+  alt='My talk at EuroClojure 2012. Check out the t-shirt'
+  src={me}
+/>
 
 ## Digging Deeper into the Implementation
 

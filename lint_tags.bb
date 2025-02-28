@@ -8,7 +8,7 @@
   #{:author :title :category :layout :publishedDate :heroImage})
 
 (def optional-tags
-  #{:draft :tags :clojureIn :description})
+  #{:draft :tags :clojureIn :description :metaTitle})
 
 (def all-tags
   (set/union required-tags optional-tags))

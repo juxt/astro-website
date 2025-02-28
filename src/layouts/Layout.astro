@@ -13,6 +13,7 @@ type LayoutProps = {
   ogTitle?: string
   ogDescription?: string
   noFooter?: boolean
+  robots?: string
 }
 
 const url = new URL(Astro.request.url)
@@ -29,8 +30,16 @@ type Metadata = {
   seo: Record<string, { description: string; image?: string }>
 }
 
-const { title, navbar, navbarNoBg, ogImage, ogTitle, ogDescription, noFooter } =
-  Astro.props as LayoutProps
+const {
+  title,
+  navbar,
+  navbarNoBg,
+  ogImage,
+  ogTitle,
+  ogDescription,
+  noFooter,
+  robots
+} = Astro.props as LayoutProps
 
 const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
 
@@ -188,6 +197,7 @@ const metaTitle = ogTitle ?? title ?? currentPageName
       defer
       data-website-id='4a088aa2-1e6f-4f97-9e95-9619983468de'
       src='https://bunseki.juxt.pro/t.js'></script>
+    {robots && <meta name='robots' content={robots} />}
   </head>
   <body class='bg-gray-50 transition-colors'>
     {navbar && <Navbar navbarNoBg={navbarNoBg} />}

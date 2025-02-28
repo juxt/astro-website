@@ -1,5 +1,6 @@
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
+import sitemap from '@astrojs/sitemap'
 import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -7,13 +8,19 @@ import rehypeSlug from 'rehype-slug'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import remarkGfm from 'remark-gfm'
-import inspectUrls from "@jsdevtools/rehype-url-inspector";
+import inspectUrls from '@jsdevtools/rehype-url-inspector'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     mdx(),
     preact(),
+    sitemap({
+      filter: (page) => {
+        // Exclude any pages we don't want in the sitemap, like search pages
+        return !page.includes('?')
+      }
+    })
   ],
   site: 'https://juxt.pro/',
   markdown: {
@@ -58,18 +65,18 @@ export default defineConfig({
       [
         inspectUrls,
         {
-          selectors: ["a[href]"],
+          selectors: ['a[href]'],
           inspectEach: (url) => {
-              // Ignore hash links
-              if (url.node.properties.href.startsWith("#")) {
-                  return;
-              }
-              var href = new URL(url.node.properties.href, "https://juxt.pro/");
-              // Add target blank to external links
-              if (href.host !== "juxt.pro") {
-                  url.node.properties.target = "_blank";
-                  url.node.properties.rel = "noopener noreferrer";
-              }
+            // Ignore hash links
+            if (url.node.properties.href.startsWith('#')) {
+              return
+            }
+            var href = new URL(url.node.properties.href, 'https://juxt.pro/')
+            // Add target blank to external links
+            if (href.host !== 'juxt.pro') {
+              url.node.properties.target = '_blank'
+              url.node.properties.rel = 'noopener noreferrer'
+            }
           }
         }
       ]
@@ -78,7 +85,7 @@ export default defineConfig({
   vite: {
     build: {
       rollupOptions: {
-        external: ['/pagefind/pagefind.js'],
+        external: ['/pagefind/pagefind.js']
       }
     }
   }

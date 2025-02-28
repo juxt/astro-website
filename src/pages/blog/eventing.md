@@ -2,7 +2,7 @@
 author: 'mtf'
 layout: '../../layouts/BlogPost.astro'
 title: 'Day-to-Day Event Driven Architecture'
-description: ''
+description: 'Explore the complex world of Event Driven Architecture (EDA), from core concepts to implementation challenges. Learn about common patterns, terminology, and organizational considerations for successful EDA adoption.'
 category: 'architecture'
 publishedDate: '2023-06-06'
 tags:

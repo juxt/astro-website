@@ -235,7 +235,7 @@ export default function ContactUs() {
             {techLogos.map((logo) => (
               <img
                 src={`/images/tech-logos/${logo}`}
-                alt=''
+                alt={`Logo of ${logo.split('.')[0]}`}
                 className='w-24 md:w-32 flex-shrink-0'
               />
             ))}
