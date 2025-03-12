@@ -11,168 +11,313 @@ const { contactSubject } = Astro.props
 
 <Layout
   title='XT25 Fintech Conference'
-  ogImage='/images/XT25_SaveTheDate.png'
+  ogImage='/images/XT25/XT25_SaveTheDate.png'
   ogTitle='XT25 Fintech Conference'
   ogDescription='Join fintech engineering leaders for a day of tech talks on GenAI, Platform Engineering, Banking, RegTech, System Architecture and more.'
 >
   <div class='bg-zinc-800 pb-5'>
+    <!-- Background Image Section -->
     <div
-      class='container max-w-6xl mx-auto min-h-screen flex flex-col text-white'
+      class='relative bg-cover bg-center'
+      style="background-image: url('/images/XT25/london-bridge.jpg'); background-size: cover;"
     >
-      <!-- JUXT Logo -->
-      <div class='w-full px-5 sm:px-10 pt-5 sm:pt-10 flex flex-row justify-end'>
-        <a href='/'>
-          <img width={300} src='/images/logo.svg' alt='JUXT Logo' />
-        </a>
-      </div>
-
-      <!-- XT25 Logo & copy -->
-      <div class='grid grid-cols-1 lg:grid-cols-2 p-5 sm:px-10'>
-        <div>
-          <div class='grid grid-cols-1 md:grid-cols-2 gap-1'>
-            <img src='/images/XT25.png' alt='XT25 Logo' />
-            <h1 class='text-juxt text-4xl md:text-6xl font-bold uppercase'>
-              FinTech <br /> Conference
-            </h1>
-          </div>
-          <p class='w-full font-semibold sm:font-normal sm:text-xl uppercase'>
-            Scaling Simplicity in Financial Technology
-          </p>
-          <!-- <div class='w-full pt-5 flex flex-row gap-3'>
-            <span class='sm:hidden uppercase underline text-juxt'
-              ><a href='#register'>Register</a></span
-            >
-            <p class='sm:hidden'>|</p>
-            <span class='uppercase underline text-juxt'
-              ><a href='#speakers'>Speakers</a></span
-            >
-            <p>|</p>
-            <span class='uppercase underline text-juxt'
-              ><a href='#agenda'>Agenda</a></span
-            >
-          </div> -->
-        </div>
-      </div>
-
-      <!-- Main content -->
+      <div class='absolute inset-0 bg-black opacity-70'></div>
       <div
-        class='grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col p-5 sm:p-10 sm:pt-10 gap-5'
+        class='container max-w-6xl mx-auto flex flex-col text-white relative'
       >
-        <!-- Blurb -->
-        <p class='font-light text-lg mb-4'>
-          Engineering Leaders from global banks, fintech companies and hedge
-          funds are meeting in London to explore how groundbreaking technology
-          concepts, tools and solutions are shaping the future of financial
-          services.
-        </p>
-
-        <!-- Details -->
-        <h2
-          class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl mb-4'
-        >
-          12 JUNE 2025 | LONDON | EC3N 2BQ
-        </h2>
-
-        <!-- Event plan -->
-        <div class='grid grid-cols-1 sm:max-lg:grid-cols-2 gap-5'>
-          <div>
-            <h3 class='text-lg'>9AM - 5PM</h3>
-            <p class='font-light text-lg'>
-              Join fintech leaders for a day of tech talks covering GenAI,
-              Platform Engineering, Embedded Banking, RegTech, Data Governance,
-              System Design, Architecture and more.
-            </p>
-          </div>
-
-          <div>
-            <h3 class='text-lg'>5PM - 7PM</h3>
-            <p class='font-light text-lg'>
-              Enjoy an evening of networking and mingling - exclusive access to
-              Leo's Bar and Terrace, complete with drinks and food.
-            </p>
-          </div>
-        </div>
-
-        <!-- Address -->
-        <div class='flex items-end max-lg:order-last'>
-          <p class='uppercase text-xs sm:text-base text-lg'>
-            LEONARDO "CITY OF LONDON" ROYAL HOTEL <br />
-             8-14 COOPER'S ROW | LONDON | EC3N 2BQ
-          </p>
-        </div>
-
-        <!-- Form -->
+        <!-- JUXT Logo -->
         <div
-          id='register'
-          class='row-span-4 flex flex-col gap-4 bg-white p-10 text-black'
+          class='w-full px-5 sm:px-10 pt-5 sm:pt-10 flex flex-row justify-end'
         >
-          <span
-            class='text-juxt text-2xl font-semibold uppercase self-center text-center'
-          >
-            This Event is Invite-Only and Free for Attendees
-          </span>
-          <ContactUsFormXT24
-            client:only
-            subject={contactSubject || 'XT25 RFI'}
-          />
+          <a href='/'>
+            <img width={300} src='/images/logo.svg' alt='JUXT Logo' />
+          </a>
         </div>
-      </div>
 
-      <!-- Speakers -->
-      <!-- <div
-        id='speakers'
-        class='flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6 items-center sm:items-start'
-      >
-        <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
-          Speakers
-        </h2>
-        <div class='flex flex-wrap lg:px-10 gap-4 justify-center'>
-          {
-            speakers.map(({ name, role, company, image, linkedin }) => (
-              <a
-                href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
-                target='_blank'
+        <!-- XT25 Logo & copy -->
+        <div class='grid grid-cols-1 lg:grid-cols-2 p-5 sm:px-10'>
+          <div>
+            <div class='grid grid-cols-1 md:grid-cols-2 gap-1'>
+              <img src='/images/XT25/XT25.png' alt='XT25 Logo' />
+              <h1 class='text-juxt text-4xl md:text-6xl font-bold uppercase'>
+                FinTech <br /> Conference
+              </h1>
+            </div>
+            <p class='w-full font-semibold sm:font-normal sm:text-xl uppercase'>
+              Scaling Simplicity in Financial Technology
+            </p>
+            <!-- <div class='w-full pt-5 flex flex-row gap-3'>
+              <span class='sm:hidden uppercase underline text-juxt'
+                ><a href='#register'>Register</a></span
               >
-                <div class='flex flex-col items-center'>
-                  <AssetImage
-                    class='mx-3 w-44 h-64 object-cover object-center'
-                    src={image}
-                    alt={`Headshot of ${name}`}
-                  />
-                  <div class='flex items-center gap-2'>
-                    <h3>{name}</h3>
-                    {linkedin && (
-                      <LinkedInIcon className='w-3 h-3 fill-cyan-700' />
-                    )}
-                  </div>
-                  <p class='font-extralight text-xs'>{role}</p>
-                  <p class='font-extralight text-xs'>{company}</p>
-                </div>
-              </a>
-            ))
-          }
+              <p class='sm:hidden'>|</p>
+              <span class='uppercase underline text-juxt'
+                ><a href='#speakers'>Speakers</a></span
+              >
+              <p>|</p>
+              <span class='uppercase underline text-juxt'
+                ><a href='#agenda'>Agenda</a></span
+              >
+            </div> -->
+          </div>
         </div>
-      </div> -->
 
-      <!-- Agenda -->
-      <!-- <div
-        id='agenda'
-        class='flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start'
+        <!-- Main content -->
+        <div
+          class='grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col p-5 sm:p-10 sm:pt-10 gap-5'
+        >
+          <!-- Blurb -->
+          <p class='font-light text-lg mb-4'>
+            Engineering Leaders from global banks, fintech companies and hedge
+            funds are meeting in London to explore how groundbreaking technology
+            concepts, tools and solutions are shaping the future of financial
+            services.
+          </p>
+
+          <!-- Details -->
+          <h2
+            class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl mb-4'
+          >
+            12 JUNE 2025 | LONDON | EC3N 2BQ
+          </h2>
+
+          <!-- Event plan -->
+          <div class='grid grid-cols-1 sm:max-lg:grid-cols-2 gap-5'>
+            <div>
+              <h3 class='text-lg'>9AM - 5PM</h3>
+              <p class='font-light text-lg'>
+                Join fintech leaders for a day of tech talks covering GenAI,
+                Platform Engineering, Embedded Banking, RegTech, Data
+                Governance, System Design, Architecture and more.
+              </p>
+            </div>
+
+            <div>
+              <h3 class='text-lg'>5PM - 7PM</h3>
+              <p class='font-light text-lg'>
+                Enjoy an evening of networking and mingling - exclusive access
+                to Leo's Bar and Terrace, complete with drinks and food.
+              </p>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class='flex items-end max-lg:order-last'>
+            <p class='uppercase text-xs sm:text-base text-lg'>
+              LEONARDO "CITY OF LONDON" ROYAL HOTEL <br />
+               8-14 COOPER'S ROW | LONDON | EC3N 2BQ
+            </p>
+          </div>
+
+          <!-- Form -->
+          <div
+            id='register'
+            class='row-span-4 flex flex-col gap-4 bg-white p-10 text-black'
+          >
+            <span
+              class='text-juxt text-2xl font-semibold uppercase self-center text-center'
+            >
+              This Event is Invite-Only and Free for Attendees
+            </span>
+            <ContactUsFormXT24
+              client:only
+              subject={contactSubject || 'XT25 RFI'}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Speakers and Agenda announcement (outside the background image) -->
+    <div
+      class='container max-w-6xl mx-auto flex items-center justify-center'
+      style='min-height: 120px;'
+    >
+      <div
+        class='text-center uppercase text-xs sm:text-base text-lg text-white'
       >
-        <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
-          Agenda
-        </h2>
-      </div>
-      <div class='flex flex-col pt-5'>
-        <XT24Agenda />
-      </div>
-      <p class='font-thin text-sm pb-5'>
-        *Please note agenda and speakers are subject to change
-      </p>
-    </div> -->
-      <div class='text-center uppercase text-xs sm:text-base text-lg'>
         <strong> Speakers and Agenda will be announced soon</strong>
       </div>
     </div>
+
+    <!-- XT24 Conference Image Carousel -->
+    <div class='w-full mx-auto py-0 overflow-hidden'>
+      <div id='imageCarousel' class='flex animate-slide'></div>
+    </div>
+
+    <style>
+      @keyframes slide {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(
+            calc(-100vw / 4 * 22)
+          ); /* Width of one image * number of real images (22) */
+        }
+      }
+
+      .animate-slide {
+        animation: slide 100s linear infinite;
+      }
+    </style>
+
+    <script>
+      // Image paths
+      const imagePaths = Array.from(
+        { length: 22 }, // Total Images
+        (_, i) => `/images/XT25/JUXT XT24 Conference ${i + 1}.jpg`
+      )
+
+      // Function to create image element
+      function createImageElement(src, alt) {
+        const div = document.createElement('div')
+        div.className = 'flex-shrink-0'
+
+        // Responsive width based on screen size
+        div.style.width = 'calc(100vw)' // Full width on mobile
+
+        // Adjust width based on screen size
+        if (window.innerWidth >= 640) {
+          div.style.width = 'calc(100vw / 2)' // 2 images on small screens
+        }
+        if (window.innerWidth >= 768) {
+          div.style.width = 'calc(100vw / 3)' // 3 images on medium screens
+        }
+        if (window.innerWidth >= 1024) {
+          div.style.width = 'calc(100vw / 4)' // 4 images on large screens
+        }
+        if (window.innerWidth >= 2048) {
+          div.style.width = 'calc(100vw / 5)' // 5 images on 4k screens
+        }
+
+        const img = document.createElement('img')
+        img.src = src
+        img.alt = alt
+        img.className = 'w-full h-64 object-cover'
+
+        div.appendChild(img)
+        return div
+      }
+
+      // Initialise seamless looping carousel
+      function initialiseCarousel() {
+        const carousel = document.getElementById('imageCarousel')
+        carousel.innerHTML = ''
+
+        // Add the initial main set of images
+        imagePaths.forEach((path, index) => {
+          carousel.appendChild(
+            createImageElement(path, `JUXT XT24 Conference Image ${index + 1}`)
+          )
+        })
+
+        // Add the same set again for seamless looping
+        imagePaths.forEach((path, index) => {
+          carousel.appendChild(
+            createImageElement(path, `JUXT XT24 Conference Image ${index + 1}`)
+          )
+        })
+      }
+
+      // Initialise the carousel
+      initialiseCarousel()
+
+      // Update animation based on screen size
+      function updateAnimation() {
+        const style = document.createElement('style')
+
+        // Adaptively set the number of images per view based on screen size
+        let imagesPerView = 1 // Default for mobile
+        if (window.innerWidth >= 640) imagesPerView = 2 // sm
+        if (window.innerWidth >= 768) imagesPerView = 3 // md
+        if (window.innerWidth >= 1024) imagesPerView = 4 // lg
+        if (window.innerWidth >= 2048) imagesPerView = 5 // 4k
+
+        // Create updated keyframes
+        style.textContent = `
+          @keyframes slide {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(calc(-100vw / ${imagesPerView} * 22));
+            }
+          }
+          
+          .animate-slide {
+            animation: slide 120s linear infinite;
+          }
+        `
+
+        // Add ID to new style and append to document
+        style.id = 'carousel-style'
+        document.head.appendChild(style)
+      }
+
+      // Initial update
+      updateAnimation()
+
+      // Update on window resize
+      window.addEventListener('resize', () => {
+        initialiseCarousel() // Recreate carousel with new widths
+        updateAnimation() // Update animation parameters
+      })
+    </script>
+
+    <!-- Speakers -->
+    <!-- <div
+      id='speakers'
+      class='flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6 items-center sm:items-start'
+    >
+      <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
+        Speakers
+      </h2>
+      <div class='flex flex-wrap lg:px-10 gap-4 justify-center'>
+        {
+          speakers.map(({ name, role, company, image, linkedin }) => (
+            <a
+              href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
+              target='_blank'
+            >
+              <div class='flex flex-col items-center'>
+                <AssetImage
+                  class='mx-3 w-44 h-64 object-cover object-center'
+                  src={image}
+                  alt={`Headshot of ${name}`}
+                />
+                <div class='flex items-center gap-2'>
+                  <h3>{name}</h3>
+                  {linkedin && (
+                    <LinkedInIcon className='w-3 h-3 fill-cyan-700' />
+                  )}
+                </div>
+                <p class='font-extralight text-xs'>{role}</p>
+                <p class='font-extralight text-xs'>{company}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div> -->
+
+    <!-- Agenda -->
+    <!-- <div
+      id='agenda'
+      class='flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start'
+    >
+      <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
+        Agenda
+      </h2>
+    </div>
+    <div class='flex flex-col pt-5'>
+      <XT24Agenda />
+    </div>
+    <p class='font-thin text-sm pb-5'>
+      *Please note agenda and speakers are subject to change
+    </p>
+  </div>
+</Layout>
+-->
   </div>
 </Layout>
