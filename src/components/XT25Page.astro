@@ -4,7 +4,7 @@ import { LinkedInIcon } from '@components/Icons'
 import AssetImage from '@components/team/AssetImage.astro'
 import XT24Agenda from '@components/XT24Agenda.astro'
 import Layout from '@layouts/Layout.astro'
-import speakers from '../data/xt24/speakers.json'
+import speakers from '../data/xt25/speakers.json'
 
 const { contactSubject } = Astro.props
 ---
@@ -45,29 +45,30 @@ const { contactSubject } = Astro.props
             </div>
             <p class='w-full font-semibold sm:font-normal sm:text-xl uppercase'>
               Scaling Simplicity in Financial Technology
+              <br />
             </p>
-            <!-- <div class='w-full pt-5 flex flex-row gap-3'>
-              <span class='sm:hidden uppercase underline text-juxt'
+            <div class='w-full pt-3 flex flex-row gap-3'>
+              <!-- <span class='sm:hidden uppercase underline text-juxt'
                 ><a href='#register'>Register</a></span
-              >
+              > -->
               <p class='sm:hidden'>|</p>
               <span class='uppercase underline text-juxt'
                 ><a href='#speakers'>Speakers</a></span
               >
-              <p>|</p>
+              <!-- <p>|</p>
               <span class='uppercase underline text-juxt'
                 ><a href='#agenda'>Agenda</a></span
-              >
-            </div> -->
+              > -->
+            </div>
           </div>
         </div>
 
         <!-- Main content -->
         <div
-          class='grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col p-5 sm:p-10 sm:pt-10 gap-5'
+          class='grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col p-5 sm:p-10 sm:pt-5 gap-4'
         >
           <!-- Blurb -->
-          <p class='font-light text-lg mb-4'>
+          <p class='font-light text-lg mb-2'>
             Engineering Leaders from global banks, fintech companies and hedge
             funds are meeting in London to explore how groundbreaking technology
             concepts, tools and solutions are shaping the future of financial
@@ -128,7 +129,56 @@ const { contactSubject } = Astro.props
       </div>
     </div>
 
-    <!-- Speakers and Agenda announcement (outside the background image) -->
+    <!-- Speakers -->
+    <div
+      id='speakers'
+      class='flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6 items-center'
+    >
+      <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
+        Speakers
+      </h2>
+      <div
+        class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto justify-items-center'
+      >
+        {
+          speakers.map(({ name, role, company, image, linkedin }) => (
+            <a
+              href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
+              target='_blank'
+              class='flex justify-center'
+            >
+              <div class='flex flex-col items-center text-white w-44'>
+                <AssetImage
+                  class='w-44 h-64 object-cover object-center'
+                  src={image}
+                  alt={`Headshot of ${name}`}
+                />
+                <div class='flex items-center gap-2 mt-2'>
+                  <h3>{name}</h3>
+                  {linkedin && (
+                    <LinkedInIcon className='w-3 h-3 fill-cyan-700' />
+                  )}
+                </div>
+                <p class='font-extralight text-xs text-center'>
+                  {role}
+                  {company && (
+                    <>
+                      {' @ '}
+                      <span class='font-bold'>{company.toUpperCase()}</span>
+                    </>
+                  )}
+                </p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Gap section for visual spacing -->
+    <div class='w-full py-2'></div>
+
+    <!-- Speakers and Agenda to be announced  -->
     <div
       class='container max-w-6xl mx-auto flex items-center justify-center'
       style='min-height: 120px;'
@@ -136,9 +186,12 @@ const { contactSubject } = Astro.props
       <div
         class='text-center uppercase text-xs sm:text-base text-lg text-white'
       >
-        <strong> Speakers and Agenda will be announced soon</strong>
+        <strong>More speakers and full agenda to be announced soon.</strong>
       </div>
     </div>
+
+    <!-- Gap section for visual spacing -->
+    <div class='w-full py-1'></div>
 
     <!-- XT24 Conference Image Carousel -->
     <div class='w-full mx-auto py-0 overflow-hidden'>
@@ -265,42 +318,6 @@ const { contactSubject } = Astro.props
       })
     </script>
 
-    <!-- Speakers -->
-    <!-- <div
-      id='speakers'
-      class='flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6 items-center sm:items-start'
-    >
-      <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
-        Speakers
-      </h2>
-      <div class='flex flex-wrap lg:px-10 gap-4 justify-center'>
-        {
-          speakers.map(({ name, role, company, image, linkedin }) => (
-            <a
-              href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
-              target='_blank'
-            >
-              <div class='flex flex-col items-center'>
-                <AssetImage
-                  class='mx-3 w-44 h-64 object-cover object-center'
-                  src={image}
-                  alt={`Headshot of ${name}`}
-                />
-                <div class='flex items-center gap-2'>
-                  <h3>{name}</h3>
-                  {linkedin && (
-                    <LinkedInIcon className='w-3 h-3 fill-cyan-700' />
-                  )}
-                </div>
-                <p class='font-extralight text-xs'>{role}</p>
-                <p class='font-extralight text-xs'>{company}</p>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div> -->
-
     <!-- Agenda -->
     <!-- <div
       id='agenda'
@@ -315,9 +332,6 @@ const { contactSubject } = Astro.props
     </div>
     <p class='font-thin text-sm pb-5'>
       *Please note agenda and speakers are subject to change
-    </p>
-  </div>
-</Layout>
--->
+    </p> -->
   </div>
 </Layout>

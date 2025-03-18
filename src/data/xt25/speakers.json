@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Alexey Gabsatarov",
+    "role": "CTO",
+    "company": "Kroo Bank",
+    "linkedin": "alexeygabsatarov",
+    "image": "/src/assets/xt25/XT25-alexey-gabstarov-CTO-Kroo.jpeg"
+  },
+  {
+    "name": "Charlie Browne",
+    "role": "Head of Market Data, Quant & Risk Solutions",
+    "company": "GoldenSource",
+    "linkedin": "brownecharlie",
+    "image": "/src/assets/xt25/xt25-charlie-browne-head-of-market-data-quant-and-risk-solutions-goldersource.jpeg"
+  },
+  {
+    "name": "Eion Woods",
+    "role": "Chief Engineer",
+    "company": "",
+    "linkedin": "eoinwoods",
+    "image": "/src/assets/xt25/XT25-Eion-Woods.jpeg"
+  },
+  {
+    "name": "Rob Moffat",
+    "role": "Senior Technical Architect",
+    "company": "FINOS",
+    "linkedin": "robmoffat",
+    "image": "/src/assets/xt25/XT25-rob-moffat-Senior-Technical-Architect-FINOS.jpeg"
+  },
+  {
+    "name": "Henry Garner",
+    "role": "Principal Engineer & AI Chapter Lead",
+    "company": "JUXT",
+    "linkedin": "henrygarner",
+    "image": "/src/assets/xt25/XT25-Henry-Garner-Principal-Engineer-and-AI-Chapter-Lead-JUXT.jpeg"
+  },
+  {
+    "name": "Alex Davis",
+    "role": "Senior Engineer & Tech Lead",
+    "company": "Artis",
+    "linkedin": "alexander-davis-a1b001132",
+    "image": "/src/assets/xt25/alx.jpg"
+  }
+]
