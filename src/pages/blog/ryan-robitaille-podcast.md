@@ -4,7 +4,7 @@ title: 'JUXT Cast: Exploring Data, Visualization, and Innovation with Ryan Robit
 description: 'In this podcast episode, Jeremy Taylor and Malcolm Sparks chat with Ryan Robitaille about Rabbit, blending creativity, BI tools, and the power of Clojure.'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2025-02-05'
+publishedDate: '2025-03-19'
 heroImage: 'JuxtCast-dark.jpg'
 tags:
   - 'clojure'
@@ -17,7 +17,7 @@ In this engaging episode of the JUXT Cast, Jeremy Taylor and Malcolm Sparks sit 
 
 Ryan explores his experience building Rabbit, a tool designed to bridge the gap between proprietary BI tools and custom-built engineering solutions. Frustrated by the limitations of traditional tools like Tableau, Ryan envisioned a platform that offers the "best of both worlds": the simplicity of drag-and-drop dashboards with the power and flexibility of live coding and version control.
 
-Key Takeaways from the Episode:
+## Key Takeaways from the Episode:
 
 - The Origins of Rabbit: How Ryan’s passion for combining artistry and data engineering sparked the creation of a platform that feels like a "game engine for data."
 - Balancing Build vs. Buy: Insights into the perpetual organizational dilemma of purchasing BI tools versus building in-house solutions.
