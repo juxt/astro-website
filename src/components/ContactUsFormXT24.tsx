@@ -46,7 +46,7 @@ export default function ContactUsFormXT24(props) {
       <br />
       <br />
       <b class='bold'>
-        Please note: <br /> this is not a ticket confirmation
+        Please note: <br /> This is not a ticket confirmation
       </b>
     </div>
   )
