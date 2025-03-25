@@ -4,7 +4,7 @@ title: 'JUXT Cast: Exploring Data, Visualization, and Innovation with Ryan Robit
 description: 'In this podcast episode, Jeremy Taylor and Malcolm Sparks chat with Ryan Robitaille about Rabbit, blending creativity, BI tools, and the power of Clojure.'
 category: 'clojure'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2025-03-19'
+publishedDate: '2025-03-26'
 heroImage: 'JuxtCast-dark.jpg'
 tags:
   - 'clojure'
