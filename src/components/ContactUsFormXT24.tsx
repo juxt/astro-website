@@ -147,6 +147,7 @@ export default function ContactUsFormXT24(props) {
               className='bg-black px-4 py-2 text-white hover:bg-orange-100 hover:text-juxt font-bold shadow rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm w-full'
             />
           </div>
+          <div class='flex-grow' style='min-height: 10px;'></div>
         </div>
       </form>
     </>
