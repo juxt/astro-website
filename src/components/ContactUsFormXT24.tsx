@@ -39,7 +39,7 @@ export default function ContactUsFormXT24(props) {
   const hasErrors = Object.keys(errors).length > 0
 
   const isSubmitSuccessfulComponent = (
-    <div className='pt-10 text-center text-xl md:text-xl text-juxt'>
+    <div className='pt-10 text-center text-xl md:text-xl text-black'>
       Thank you for your interest in XT25!
       <br />
       We'll reach out if spots become available.
@@ -65,7 +65,7 @@ export default function ContactUsFormXT24(props) {
 
       {!isSubmitted && (
         <div className='text-center'>
-          <span className='uppercase text-center'>
+          <span className='text-center'>
             Interested in Receiving an Invite?
             <br />
             Leave us your details, and we'll get back to you.
@@ -101,7 +101,7 @@ export default function ContactUsFormXT24(props) {
         <input
           {...inputProps}
           {...register('email', { required: true })}
-          placeholder='Work Email'
+          placeholder='Email'
           type='email'
         />
 
@@ -111,18 +111,13 @@ export default function ContactUsFormXT24(props) {
             {...register('jobTitle', { required: true })}
             placeholder='Job Title'
           />
-          <input
-            {...inputProps}
-            {...register('company', { required: true })}
-            placeholder='Company'
-          />
         </div>
 
         <div className='flex flex-row gap-4'>
           <input
             {...inputProps}
-            {...register('phone')}
-            placeholder='Phone (optional)'
+            {...register('company', { required: true })}
+            placeholder='Company'
           />
           <input
             {...inputProps}
@@ -132,7 +127,7 @@ export default function ContactUsFormXT24(props) {
         </div>
 
         <div className='text-xs font-light'>
-          By submitting your details you agree to JUXT’s{' '}
+          By submitting your details you agree to JUXT's{' '}
           <a href='/privacy-policy' target='_blank' className='underline'>
             Privacy Policy
           </a>
@@ -142,12 +137,17 @@ export default function ContactUsFormXT24(props) {
           <div className='text-red-500'>All fields are required</div>
         )}
 
-        <input
-          type='submit'
-          value='Submit'
-          disabled={isSubmitting}
-          className='bg-juxt px-4 py-3 text-white hover:text-zinc-800 font-bold hover:shadow-lg visited:text-white active:text-white text-md rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
-        />
+        <div className='grid grid-cols-5 gap-4 mb-[-20px]'>
+          <div className='col-span-3'></div>
+          <div className='col-span-2'>
+            <input
+              type='submit'
+              value='Submit'
+              disabled={isSubmitting}
+              className='bg-black px-4 py-2 text-white hover:bg-orange-100 hover:text-juxt font-bold shadow rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm w-full'
+            />
+          </div>
+        </div>
       </form>
     </>
   )

@@ -1,51 +1,93 @@
 [
   {
+    "name": "Peter Windle",
+    "role": "MD & Distinguished Engineer",
+    "company": "HSBC",
+    "linkedin": "pete-windle-05ba92",
+    "image": "/src/assets/xt25/xt25-pew.png"
+  },
+  {
     "name": "Alexey Gabsatarov",
     "role": "CTO",
     "company": "Kroo Bank",
     "linkedin": "alexeygabsatarov",
-    "image": "/src/assets/xt25/XT25-alexey-gabstarov-CTO-Kroo.jpeg"
+    "image": "/src/assets/xt25/xt25-alg.jpg"
   },
   {
-    "name": "Charlie Browne",
-    "role": "Head of Market Data, Quant & Risk Solutions",
-    "company": "GoldenSource",
-    "linkedin": "brownecharlie",
-    "image": "/src/assets/xt25/xt25-charlie-browne-head-of-market-data-quant-and-risk-solutions-goldersource.jpeg"
-  },
-  {
-    "name": "Eoin Woods",
-    "role": "Chief Engineer",
-    "company": "Endava",
-    "linkedin": "eoinwoods",
-    "image": "/src/assets/xt25/eoinwoods.jpg"
+    "name": "Donato Lucia",
+    "role": "Head of Platform",
+    "company": "Revolut",
+    "linkedin": "donatolucia",
+    "image": "/src/assets/xt25/xt25-dol.jpg"
   },
   {
     "name": "Jing Ai",
     "role": "Director - Equity Derivatives Platform",
-    "company": "BANK OF AMERICA",
+    "company": "Bank of America",
     "linkedin": "jing-ai-619a012",
-    "image": "/src/assets/xt25/Jing Ai.jpeg"
+    "image": "/src/assets/xt25/xt25-jia.png"
   },
   {
     "name": "Rob Moffat",
     "role": "Senior Technical Architect",
     "company": "FINOS",
     "linkedin": "robmoffat",
-    "image": "/src/assets/xt25/XT25-rob-moffat-Senior-Technical-Architect-FINOS.jpeg"
+    "image": "/src/assets/xt25/xt25-rom.png"
+  },
+  {
+    "name": "Charlie Browne",
+    "role": "Head of Market Data, Quant & Risk Solutions",
+    "company": "GoldenSource",
+    "linkedin": "brownecharlie",
+    "image": "/src/assets/xt25/xt25-chb.jpeg"
+  },
+  {
+    "name": "Samantha Reiss Gibson",
+    "role": "Managing Director / VP, Head of Product - Public Markets, Regulatory & Compliance, Data Science",
+    "company": "S&P Global",
+    "linkedin": "samantha-reiss-gibson",
+    "image": "/src/assets/xt25/xt25-srg.jpg"
+  },
+  {
+    "name": "Dave Clack",
+    "role": "CPO",
+    "company": "Adaptive Financial Consulting",
+    "linkedin": "daveclack",
+    "image": "/src/assets/xt25/xt25-dac.jpg"
   },
   {
     "name": "Henry Garner",
     "role": "Principal Engineer & AI Chapter Lead",
     "company": "JUXT",
     "linkedin": "henrygarner",
-    "image": "/src/assets/xt25/XT25-Henry-Garner-Principal-Engineer-and-AI-Chapter-Lead-JUXT.jpeg"
+    "image": "/src/assets/xt25/xt25-heg.png"
+  },
+  {
+    "name": "Eoin Woods",
+    "role": "Author, Chief Engineer",
+    "company": "Endava",
+    "linkedin": "eoinwoods",
+    "image": "/src/assets/xt25/xt25-eow.png"
   },
   {
     "name": "Alex Davis",
     "role": "Senior Engineer & Tech Lead",
     "company": "Artis",
     "linkedin": "alexander-davis-a1b001132",
-    "image": "/src/assets/xt25/alx.jpg"
+    "image": "/src/assets/xt25/xt25-ald.png"
+  },
+  {
+    "name": "Jon Pither",
+    "role": "CEO & Founder",
+    "company": "JUXT",
+    "linkedin": "jon-pither-juxt-ceo",
+    "image": "/src/assets/xt25/xt25-jop.jpg"
+  },
+  {
+    "name": "Malcolm Sparks",
+    "role": "CTO & Founder",
+    "company": "JUXT",
+    "linkedin": "malcolmsparks",
+    "image": "/src/assets/xt25/xt25-mas.jpg"
   }
 ]
