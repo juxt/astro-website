@@ -85,7 +85,7 @@ const { contactSubject } = Astro.props
         </p> -->
 
         <!-- Details -->
-        <h2 class='text-juxt font-bold text-3xl sm:font-bold sm:text-4xl mb-6'>
+        <h2 class='text-juxt font-bold text-2xl sm:font-bold sm:text-3xl mb-6'>
           Thursday 12th June 2025, London
         </h2>
 
@@ -120,11 +120,11 @@ const { contactSubject } = Astro.props
         <!-- Form -->
         <div
           id='register'
-          class='row-span-4 flex flex-col gap-3 bg-juxt p-6 text-black rounded-xl shadow-lg max-w-md mx-auto overflow-hidden'
+          class='row-span-4 flex flex-col gap-3 bg-juxt p-6 pb-4 text-black rounded-xl shadow-lg max-w-md mx-auto overflow-hidden'
           style='border-radius: 0.75rem; isolation: isolate;'
         >
           <span
-            class='text-white font-semibold uppercase self-center text-center underline'
+            class='text-white font-semibold uppercase self-center text-center underline text-sm'
           >
             This Event is Invite-Only and Free for Attendees
           </span>
@@ -147,9 +147,7 @@ const { contactSubject } = Astro.props
       id='speakers'
       class='flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6 items-center'
     >
-      <h2
-        class='uppercase text-juxt font-bold text-3xl sm:font-bold sm:text-4xl'
-      >
+      <h2 class='text-juxt font-bold text-2xl sm:font-bold sm:text-3xl mb-6'>
         Speakers
       </h2>
       <div
@@ -160,7 +158,7 @@ const { contactSubject } = Astro.props
             <a
               href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
               target='_blank'
-              class={`speaker-card rounded-xl overflow-hidden flex flex-row shadow-lg max-w-md ${
+              class={`speaker-card rounded-xl overflow-hidden flex flex-row shadow-lg w-full ${
                 linkedin ? 'cursor-pointer' : 'cursor-default'
               }`}
               style='border-radius: 0.75rem; isolation: isolate; background-color: #3f3f46;'

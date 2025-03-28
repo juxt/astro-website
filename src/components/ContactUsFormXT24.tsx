@@ -137,14 +137,14 @@ export default function ContactUsFormXT24(props) {
           <div className='text-red-500'>All fields are required</div>
         )}
 
-        <div className='grid grid-cols-5 gap-4'>
+        <div className='grid grid-cols-5 gap-4 mb-[-20px]'>
           <div className='col-span-3'></div>
           <div className='col-span-2'>
             <input
               type='submit'
               value='Submit'
               disabled={isSubmitting}
-              className='bg-black px-4 py-2 text-white hover:bg-orange-100 font-bold shadow rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm w-full'
+              className='bg-black px-4 py-2 text-white hover:bg-orange-100 hover:text-juxt font-bold shadow rounded-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm w-full'
             />
           </div>
         </div>
