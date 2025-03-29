@@ -1,0 +1,231 @@
+---
+author: 'lda'
+title: 'My experience in building an oauth2 client library in Typescript'
+description: 'A collection of steps to build and deploy a Typescript library starting from scratch'
+category: 'typescript'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2023-05-02'
+heroImage: 'building-blocks.jpg'
+---
+
+After spending a few months working mainly with Typescript, I finally had the opportunity to build a library using this language.
+
+In fact, I was involved by our CTO in one of our internal projects, and I was asked to build a library that would help us interact with our OAuth2 server. I'm talking about [pass](https://github.com/juxt-site/pass).
+I had never built a Typescript library before, so I decided to document my experience in this article.
+
+Coming from a Clojure background, I was looking for a seemless dev experience, where I could quickly iterate on my changes to test them.
+I also wanted to be able to publish the library on the npm registry, so that other developers could easily find it and use it.
+
+### Prerequisites:
+
+At the time of writing, I've used the following yarn and node versions:
+
+```sh
+yarn version 1.22.19
+node version 18.10.0
+```
+
+Notice that if you don't want to start from scratch there is a github repo I setup, which you could clone and use as a template.
+The link is [here](https://github.com/luciodale/writing-a-typescript-library)
+
+## Part 1: Setting Up a Local Project
+
+As very first step, you need to create a new folder for your library project.
+Then, you can initialize a new yarn project using the following command:
+
+```sh
+yarn init
+```
+
+This command will ask you a few questions about your project, and it will generate a `package.json` file.
+
+Get typescript if you want to build a library with types, which is strongly recommended these days:
+
+```sh
+yarn add --dev typescript
+```
+
+and then create a `tsconfig.json` file in your project root with the following content:
+
+```json
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "module": "es2020",
+    "target": "es2020",
+    "declaration": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+```
+
+After a bit of googling, I found out about `preconstruct`, which is a tool that encapsulates a lot of logic for the management of your library. I definitely recommend it.
+To add preconstruct to your project, you can use the following command:
+
+```sh
+yarn add --dev @preconstruct/cli
+```
+
+As we're building a library, it's important to specify the entry point via the `main` and `module` fields in the `package.json` file.
+Usually, you want to point to the `dist` folder, where the compiled code will be stored.
+
+```json
+{
+  "name": "@org/libname",
+  "version": "1.0.0",
+  "main": "dist/org-libname.cjs.js",
+  "module": "dist/org-libname.esm.js"
+}
+```
+
+Make sure that the main and module values match the name of your library. For scoped libraries notice how the `@` gets dropped and `/` becomes a `-`. In fact, `@org/libname` becomes `org-libname`.
+
+An error that I initially made was to ignore the `dist` folder via the `.gitignore` file. Make sure you always commit it along with your code changes.
+Also, for full typescript support, we need to add a babel preset to our project.
+You can install it like this:
+
+```sh
+yarn add --dev @babel/preset-typescript
+```
+
+Then, add the following Babel config in a `babel.config.json` file in your project root:
+
+```json
+{
+  "presets": ["@babel/preset-typescript"]
+}
+```
+
+## Part 2: Deploying the Library
+
+When publishing your library on the npm registry, consider using scopes.
+Scoped packages are those that start with an `@` symbol, and they can be used to group related packages together i.e. `@org/my-lib`.
+I think it's a good practice to always use scopes, as it helps you organize your packages and avoid name collisions.
+To learn more about this, you can follow the official npm documentation [here](https://docs.npmjs.com/cli/v9/using-npm/scope#description).
+
+To build and publish the library, you can use the following scripts in your `package.json` file:
+
+```json
+{
+  "scripts": {
+    "release": "preconstruct build && yarn publish --access public"
+  }
+}
+```
+
+Note that this script will ask you to enter your npm credentials, so make sure you have an account.
+
+## Part 3: Setting Up Hot Reloading
+
+Figuring this one out took me a while, but it was so worth it.
+If you don't know what hot reloading is, it basically allows you to test your library changes in real time.
+
+I didn't simply want to work on the library in isolation, but I wanted to test it from another project and have the hot reloading feature enabled.
+
+Here's how to set it up:
+
+1. In the project you want to test your library from, add the library as a local dependency using the following command:
+
+```sh
+yarn add @org/libname@link:../lib
+```
+
+Replace `@org/libname` with your library name, and `../lib` with the relative path to your library folder.
+
+2. Then, in your library project, run `yarn link`. This command tells yarn to use your local library folder instead of the one on the npm registry.
+
+Finally, add a watch script to your library project using the following command:
+
+```json
+{
+  "scripts": {
+    "watch": "preconstruct watch"
+  }
+}
+```
+
+This script will rebuild the `dist` folder each time your library files change.
+
+I can't stress enough how useful this feature is. It allows you to quickly iterate on your changes and test them in real time.
+It gets close to the Clojure REPL experience, and makes me miss it a little less :)
+
+## Part 4: Adding some code
+
+At this point, you can create a `src/index.ts` and start writing code.
+
+```ts
+export function add(a: number, b: number): number {
+  return a + b
+}
+```
+
+Remember to export the functions you want to call from your test project otherwise you won't be able to import them.
+
+## Part 5: Adding CLI tools
+
+While writing my library, I quickly realized that I needed a one-off script to be run right after the library was installed.
+This script would help me copy some files from the library to the project that was using it.
+
+Particularly, my goal was to mainly copy a service worker file under the `public` folder of the main project.
+
+Why a service worker file? Because that's where I would store sensitive data like the session and refresh tokens for the user.
+
+On a side note, if you checked the `pass` repo you might haven noticed that I'm using regular javascript for the service worker file.
+The reason is that TS support is not great just yet. Some big open issues:
+
+- [Issue #14877](https://github.com/microsoft/TypeScript/issues/14877): definition of `self` is not nicely resolved
+- [Issue #20595](https://github.com/Microsoft/TypeScript/issues/20595): type conflicts
+
+Anyways, back to the main topic. How do we run custom scripts after the library is installed?
+
+I leveraged the `bin` field in the `package.json` file. Here's an example:
+
+```json
+{
+  "bin": {
+    "init": "./init.js"
+  }
+}
+```
+
+This will create an `init` command that you can run from the terminal.
+More specifically, if your library is called `@org/libname`, you can run it like this:
+
+```sh
+npx @org/libname init
+```
+
+The `init.js` file needs to start with `#!/usr/bin/env node` to tell the OS that it's a node script:
+
+```js
+#!/usr/bin/env node
+
+...
+const args = process.argv.slice(2);
+console.log(args)
+...
+```
+
+Of course you can create as many commands as you want and bind them to different files. You can store these files anywhere under the root folder of your project
+as long as you specify the correct path in the `bin` section.
+
+if you want to test your commands locally, you can run them directly via node:
+
+```sh
+node ./init.js
+```
+
+if you want to test them from the test project, you can retrieve them from the `node_modules` folder:
+
+```sh
+node ./node_modules/@org/libname/init.js
+```
+
+## Conclusion
+
+These are the most crucial steps I wish I could find in a single place when I started writing the library.
+That's why I decided to write this article, so that others in the same situation as me can save time and easily find the resources they need.
