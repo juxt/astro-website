@@ -66,7 +66,7 @@ export default function ContactUsFormXT24(props) {
       {!isSubmitted && (
         <div className='text-center'>
           <span className='text-center'>
-            Interested in Receiving an Invite?
+            Interested in receiving an invite?
             <br />
             Leave us your details, and we'll get back to you.
           </span>
