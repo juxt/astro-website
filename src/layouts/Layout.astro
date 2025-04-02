@@ -91,18 +91,21 @@ const metaTitle = ogTitle ?? title ?? currentPageName
     <!-- Meta Tags -->
     <meta property='og:url' content={url.href} />
     <meta property='og:type' content='website' />
-    <meta property='og:title' content={metaTitle} />
-    {
-      currentDescription && (
-        <meta property='og:description' content={currentDescription} />
-      )
-    }
+    <meta property='og:title' content={ogTitle} />
+    <meta property='og:description' content={ogDescription} />
     {imageForShare && <meta property='og:image' content={imageForShare} />}
     {
       imageForShare && (
         <meta property='og:image:secure_url' content={imageForShare} />
       )
     }
+
+    <link
+      rel='canonical'
+      href={Astro.url.pathname.endsWith('/')
+        ? Astro.url.href
+        : `${Astro.url.href}/`}
+    />
 
     <link
       rel='alternate'
