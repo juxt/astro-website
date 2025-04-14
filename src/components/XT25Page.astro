@@ -169,7 +169,15 @@ const { contactSubject } = Astro.props
                 </div>
                 <div class='w-2/3 md:w-3/5 p-4 flex flex-col justify-center text-white'>
                   <h3 class='font-bold text-lg md:text-xl mb-4'>{name}</h3>
-                  <p class='text-sm md:text-base font-medium mb-4'>{role}</p>
+                  {Array.isArray(role) ? (
+                    role.map((line) => (
+                      <p class='text-sm md:text-base font-medium mb-1'>
+                        {line}
+                      </p>
+                    ))
+                  ) : (
+                    <p class='text-sm md:text-base font-medium mb-4'>{role}</p>
+                  )}
                   {company && (
                     <p class='font-bold text-sm md:text-base'>{company}</p>
                   )}

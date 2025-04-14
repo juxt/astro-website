@@ -1,7 +1,10 @@
 [
   {
     "name": "Peter Windle",
-    "role": "Distinguished Engineer, Managing Director, Head of FICC IT Architecture and Engineering",
+    "role": [
+      "Distinguished Engineer, Managing Director",
+      "Head of FICC IT Architecture and Engineering"
+    ],
     "company": "HSBC",
     "linkedin": "pete-windle-05ba92",
     "image": "/src/assets/xt25/xt25-pew.png"
@@ -43,7 +46,10 @@
   },
   {
     "name": "Samantha Reiss Gibson",
-    "role": "Managing Director / VP, Head of Product - Public Markets, Regulatory & Compliance, Data Science",
+    "role": [
+      "Managing Director / VP",
+      "Head of Product - Public Markets, Regulatory & Compliance, Data Science"
+    ],
     "company": "S&P Global",
     "linkedin": "samantha-reiss-gibson",
     "image": "/src/assets/xt25/xt25-srg.jpg"
