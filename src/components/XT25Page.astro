@@ -4,7 +4,7 @@ import ContactUsFormXT24 from '@components/ContactUsFormXT24'
 import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
 import speakers from '../data/xt25/speakers.json'
-import XT24Agenda from './XT24Agenda.astro'
+import XT25Agenda from '@components/XT25Agenda.astro'
 
 const { contactSubject } = Astro.props
 ---
@@ -169,7 +169,15 @@ const { contactSubject } = Astro.props
                 </div>
                 <div class='w-2/3 md:w-3/5 p-4 flex flex-col justify-center text-white'>
                   <h3 class='font-bold text-lg md:text-xl mb-4'>{name}</h3>
-                  <p class='text-sm md:text-base font-medium mb-4'>{role}</p>
+                  {Array.isArray(role) ? (
+                    role.map((line) => (
+                      <p class='text-sm md:text-base font-medium mb-1'>
+                        {line}
+                      </p>
+                    ))
+                  ) : (
+                    <p class='text-sm md:text-base font-medium mb-4'>{role}</p>
+                  )}
                   {company && (
                     <p class='font-bold text-sm md:text-base'>{company}</p>
                   )}
@@ -183,18 +191,16 @@ const { contactSubject } = Astro.props
       <!-- Agenda -->
       <div
         id='agenda'
-        class='flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start text-white'
+        class='container max-w-6xl mx-auto flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start'
       >
-        <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
-          Agenda
-        </h2>
+        <h2 class='text-juxt font-bold text-4xl mb-8'>Agenda</h2>
+        <div class='w-full pt-5'>
+          <XT25Agenda />
+        </div>
+        <p class='font-thin text-sm pb-5 text-white'>
+          *Agenda and speakers are subject to change
+        </p>
       </div>
-      <div class='flex flex-col pt-5 text-white'>
-        <XT24Agenda />
-      </div>
-      <p class='font-thin text-sm pb-5 text-center text-gray-200 pt-4'>
-        *Please note agenda and speakers are subject to change
-      </p>
 
       <!-- Gap section for visual spacing -->
       <div class='w-full py-2'></div>
@@ -207,7 +213,7 @@ const { contactSubject } = Astro.props
         <div
           class='text-center uppercase text-xs sm:text-base text-lg text-white'
         >
-          <strong>More speakers and full agenda to be announced soon.</strong>
+          <strong>More speakers to be announced soon.</strong>
         </div>
       </div>
 

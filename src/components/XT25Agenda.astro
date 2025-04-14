@@ -1,0 +1,141 @@
+---
+const agenda = [
+  {
+    time: '08:30',
+    title: 'Registration and Morning Refreshments',
+    isSpecialEvent: true
+  },
+  {
+    time: '09:00',
+    title: 'Welcome to XT25',
+    subTitle: 'Malcolm Sparks | JUXT | CTO & Founder',
+    isSpecialEvent: true
+  },
+  {
+    time: '09:20',
+    title: 'Risk Factors and Data Lineage in Derivative Pricing',
+    subTitle:
+      'Charlie Browne | GoldenSource | Head of Market Data, Quant & Risk Solutions'
+  },
+  {
+    time: '09:50',
+    title: 'Unlocking Success: Navigating Tech Projects in Investment Banking',
+    subTitle:
+      'Jing Ai | Global Tier-1 Bank | Director - Equity Derivatives Platform'
+  },
+  {
+    time: '10:20',
+    title: "7 Patterns of Revolut's Software Success",
+    subTitle: 'Donato Lucia | Revolut | Head of Platform'
+  },
+  {
+    time: '10:50',
+    title: 'Coffee and Networking',
+    isSpecialEvent: true
+  },
+  {
+    time: '11:10',
+    title: 'Taking Control of Your Trading System',
+    subTitle: [
+      'Peter Windle | HSBC | Distinguished Engineer, Managing Director',
+      'Head of FICC IT Architecture & Engineering'
+    ]
+  },
+  {
+    time: '11:40',
+    title: 'Talk Title Coming Soon',
+    subTitle: [
+      'Samantha Reiss Gibson | S&P Global | Managing Director',
+      ' VP, Head of Product - Public Markets, Regulatory & Compliance, Data Science'
+    ]
+  },
+  {
+    time: '12:10',
+    title:
+      'From Unstructured to Actionable: AI-Powered Regulatory Intelligence',
+    subTitle: 'Henry Garner | JUXT | Principal Engineer & AI Chapter Lead'
+  },
+  {
+    time: '12:40',
+    title: 'Lunch',
+    isSpecialEvent: true
+  },
+  {
+    time: '13:45',
+    title: 'XTDB Lightning Talk',
+    isSpecialEvent: false
+  },
+  {
+    time: '14:00',
+    title: 'Why Banks Are Building Sequencer Architectures',
+    subTitle: 'Dave Clack | Adaptive Financial Consulting | CPO'
+  },
+  {
+    time: '14:30',
+    title:
+      "Becoming a Digital Retail Bank: What We've Learned on Kroo's Journey",
+    subTitle: 'Alexey Gabsatarov | Kroo Bank | CTO'
+  },
+  {
+    time: '15:00',
+    title: 'Coffee and Networking',
+    isSpecialEvent: true
+  },
+  {
+    time: '15:20',
+    title: 'Pragmatic Solutions to Extreme Fintech Challenges - Expert Panel',
+    subTitle: [],
+    isSpecialEvent: false
+  },
+  {
+    time: '16:20',
+    title: 'Risk-First Software Development',
+    subTitle: 'Rob Moffat | FINOS | Senior Technical Architect'
+  },
+  {
+    time: '16:50',
+    title: 'XT25 Wrap Up',
+    subTitle: 'Jon Pither | JUXT | CEO & Founder',
+    isSpecialEvent: true
+  },
+  {
+    time: '17:00',
+    title: 'Evening Reception',
+    subTitle: 'Canapés, Drinks, Networking',
+    isSpecialEvent: true
+  }
+]
+---
+
+{
+  agenda.map(({ time, title, subTitle, isSpecialEvent }, index) => {
+    // Check if this item and the next item are both special events
+    const nextItem = index < agenda.length - 1 ? agenda[index + 1] : null
+    const isConsecutiveSpecialEvent = isSpecialEvent && nextItem?.isSpecialEvent
+
+    return (
+      <div>
+        <div
+          class:list={[
+            'grid grid-cols-1 sm:grid-cols-5 sm:divide-x sm:divide-juxt',
+            { 'bg-zinc-900': !isSpecialEvent, 'bg-[#2f2f2f]': isSpecialEvent }
+          ]}
+        >
+          <p class='px-5 pt-5 sm:p-5 font-semibold text-lg align-text-top text-center text-white'>
+            {time}
+          </p>
+          <div class='px-5 pb-5 sm:p-5 sm:col-span-4'>
+            <h2 class='font-bold text-2xl text-juxt'>{title}</h2>
+            {subTitle &&
+              (Array.isArray(subTitle) ? subTitle : [subTitle]).map((s) => (
+                <p class='font-light text-sl text-white'>{s}</p>
+              ))}
+          </div>
+        </div>
+
+        {/* Add a small gap if this is a special event followed by another special event */}
+        {isConsecutiveSpecialEvent && <div class='h-4' />}
+      </div>
+    )
+  })
+}
