@@ -4,6 +4,7 @@ import ContactUsFormXT24 from '@components/ContactUsFormXT24'
 import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
 import speakers from '../data/xt25/speakers.json'
+import XT24Agenda from './XT24Agenda.astro'
 
 const { contactSubject } = Astro.props
 ---
@@ -180,20 +181,20 @@ const { contactSubject } = Astro.props
       </div>
 
       <!-- Agenda -->
-      <!-- <div
+      <div
         id='agenda'
-        class='flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start'
+        class='flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start text-white'
       >
         <h2 class='uppercase text-juxt font-semibold sm:font-normal sm:text-xl'>
           Agenda
         </h2>
       </div>
-      <div class='flex flex-col pt-5'>
+      <div class='flex flex-col pt-5 text-white'>
         <XT24Agenda />
       </div>
-      <p class='font-thin text-sm pb-5'>
+      <p class='font-thin text-sm pb-5 text-center text-gray-200 pt-4'>
         *Please note agenda and speakers are subject to change
-      </p> -->
+      </p>
 
       <!-- Gap section for visual spacing -->
       <div class='w-full py-2'></div>
