@@ -7,6 +7,10 @@ import speakers from '../data/xt25/speakers.json'
 import XT25Agenda from '@components/XT25Agenda.astro'
 
 const { contactSubject } = Astro.props
+let subject = 'XT25 RFI'
+if (Astro.url.pathname.includes('xt25-gs')) {
+  subject = 'XT25-GS RFI'
+}
 ---
 
 <Layout
@@ -129,10 +133,7 @@ const { contactSubject } = Astro.props
           >
             This Event is Invite-Only and Free for Attendees
           </span>
-          <ContactUsFormXT24
-            client:only
-            subject={contactSubject || 'XT25 RFI'}
-          />
+          <ContactUsFormXT24 client:only subject={contactSubject || subject} />
         </div>
       </div>
     </div>
