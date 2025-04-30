@@ -7,28 +7,28 @@
     ],
     "company": "HSBC",
     "linkedin": "pete-windle-05ba92",
-    "image": "/src/assets/xt25/xt25-pew.png"
+    "image": "/src/assets/xt25/xt25-pew2.png"
   },
   {
     "name": "Alexey Gabsatarov",
     "role": "CTO",
     "company": "Kroo Bank",
     "linkedin": "alexeygabsatarov",
-    "image": "/src/assets/xt25/xt25-alg.jpg"
+    "image": "/src/assets/xt25/xt25-alg2.jpeg"
   },
   {
     "name": "Donato Lucia",
     "role": "Head of Platform",
     "company": "Revolut",
     "linkedin": "donatolucia",
-    "image": "/src/assets/xt25/xt25-dol.jpg"
+    "image": "/src/assets/xt25/xt25-dol2.png"
   },
   {
     "name": "Jing Ai",
     "role": "Director - Equity Derivatives Platform",
     "company": "Global Tier-1 Bank",
     "linkedin": "jing-ai-619a012",
-    "image": "/src/assets/xt25/xt25-jia.png"
+    "image": "/src/assets/xt25/xt25-jia2.jpeg"
   },
   {
     "name": "Rob Moffat",
@@ -52,41 +52,34 @@
     ],
     "company": "S&P Global",
     "linkedin": "samantha-reiss-gibson",
-    "image": "/src/assets/xt25/xt25-srg.jpg"
+    "image": "/src/assets/xt25/xt25-srg2.jpeg"
   },
   {
     "name": "Dave Clack",
     "role": "CPO",
     "company": "Adaptive Financial Consulting",
     "linkedin": "daveclack",
-    "image": "/src/assets/xt25/xt25-dac.jpg"
+    "image": "/src/assets/xt25/xt25-dac2.jpeg"
   },
   {
     "name": "Henry Garner",
     "role": "Principal Engineer & AI Chapter Lead",
     "company": "JUXT",
     "linkedin": "henrygarner",
-    "image": "/src/assets/xt25/xt25-heg.png"
-  },
-  {
-    "name": "Alex Davis",
-    "role": "Senior Engineer & Tech Lead",
-    "company": "Artis",
-    "linkedin": "alexander-davis-a1b001132",
-    "image": "/src/assets/xt25/xt25-ald.png"
+    "image": "/src/assets/xt25/xt25-heg2.jpeg"
   },
   {
     "name": "Jon Pither",
     "role": "CEO & Founder",
     "company": "JUXT",
     "linkedin": "jon-pither-juxt-ceo",
-    "image": "/src/assets/xt25/xt25-jop.jpg"
+    "image": "/src/assets/xt25/xt25-jop2.jpg"
   },
   {
     "name": "Malcolm Sparks",
     "role": "CTO & Founder",
     "company": "JUXT",
     "linkedin": "malcolmsparks",
-    "image": "/src/assets/xt25/xt25-mas.jpg"
+    "image": "/src/assets/xt25/xt25-mas2.jpg"
   }
 ]

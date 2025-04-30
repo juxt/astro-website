@@ -19,341 +19,261 @@ if (Astro.url.pathname.includes('xt25-gs')) {
   ogTitle='XT25 Fintech Conference'
   ogDescription='Join fintech engineering leaders for a day of tech talks on GenAI, Platform Engineering, Banking, RegTech, System Architecture and more.'
 >
-  <div class='bg-zinc-800 pb-5'>
-    <!-- Background Image Section -->
-    <div
-      class='relative bg-cover bg-center'
-      style="background-image: url('/images/XT25/london-bridge.jpg'); background-size: cover;"
-    >
-      <div class='absolute inset-0 bg-black opacity-50'></div>
-      <div
-        class='container max-w-6xl mx-auto flex flex-col text-white relative'
-      >
-        <!-- JUXT Logo -->
-        <div
-          class='w-full px-5 sm:px-10 pt-5 sm:pt-10 flex flex-row justify-end'
-        >
-          <a href='/'>
-            <img
-              class='w-[150px] sm:w-[200px] md:w-[250px] max-w-[80%]'
-              src='/images/logo.svg'
-              alt='JUXT Logo'
-            />
-          </a>
-        </div>
+  <!-- Header Image Section -->
+  <div
+    class='relative w-full'
+    style='background-position: center;'
+    aria-label='XT25 Conference Banner'
+    role='img'
+  >
+    <!-- Image with natural height preserved -->
+    <img
+      src='/images/XT25/XT25 Banner.png'
+      alt='XT25 Conference Banner'
+      class='w-full h-auto max-w-full'
+    />
+    <h1 class='sr-only'>XT25 Fintech Conference</h1>
+  </div>
 
-        <!-- Added empty space div to increase height -->
-        <div class='flex-grow' style='min-height: 375px;'></div>
-
-        <!-- XT25 Logo & Navigation -->
-        <div class='p-5 pb-0 sm:px-10'>
-          <div>
-            <!-- Hidden H1 for SEO -->
-            <h1 class='sr-only'>XT25 Fintech Conference</h1>
-
-            <img
-              width={600}
-              src='/images/XT25/XT25 Header.png'
-              alt='XT25 Fintech Conference Logo'
-            />
-            <div class='w-full pt-4 flex flex-row gap-3'>
-              <!-- <span class='sm:hidden uppercase underline text-juxt'
-                        ><a href='#register'>Register</a></span
-                      > -->
-              <!-- <p class='sm:hidden'>|</p> -->
-              <!-- <span class='uppercase underline text-juxt font-bold'
-                        ><a href='#speakers'>Speakers</a></span
-                      > -->
-              <!-- <p>|</p>
-                      <span class='uppercase underline text-juxt'
-                        ><a href='#agenda'>Agenda</a></span
-                      > -->
-            </div>
-          </div>
-          <div class='flex-grow' style='min-height: 75px;'></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main content -->
-    <div class='container max-w-6xl mx-auto text-white'>
-      <div class='flex-grow' style='min-height: 10px;'></div>
-      <div
-        class='grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col p-5 pt-8 sm:p-10 sm:pt-12 gap-4'
-      >
-        <!-- Blurb -->
-        <!-- <p class='font-light text-lg mb-2'>
-          Engineering Leaders from global banks, fintech companies and hedge
-          funds are meeting in London to explore how groundbreaking technology
-          concepts, tools and solutions are shaping the future of financial
-          services.
-        </p> -->
-
-        <!-- Details -->
-        <h2 class='text-juxt font-bold text-4xl mb-8'>
-          Thursday, June 12, London
+  <!-- Main content -->
+  <div class='container max-w-6xl mx-auto text-black py-10'>
+    <div class='flex flex-col lg:flex-row gap-8 px-4 sm:px-8'>
+      <!-- Left column with text content -->
+      <div class='lg:w-7/12 flex flex-col justify-center'>
+        <h2 class='text-black font-bold text-3xl sm:text-3xl mb-4'>
+          XT25: THE FUTURE OF FINTECH
         </h2>
 
-        <!-- Event plan -->
-        <div class='grid grid-cols-1 sm:max-lg:grid-cols-2 gap-12'>
-          <div>
-            <h3 class='text-lg font-bold'>9AM - 5PM</h3>
-            <p class='font-light'>
-              Join fintech leaders for a day of tech talks covering GenAI,
-              Platform Engineering, Embedded Banking, RegTech, Data Governance,
-              System Design, Architecture and more.
-            </p>
-          </div>
+        <p class='text-gray-800 mb-6'>
+          After the huge success of XT24, XT25 returns to London for another
+          high-energy, one-day event celebrating the financial technology
+          ecosystem. Join leaders from tech companies, financial institutions,
+          investors, and disruptors for a packed day of keynotes, panel
+          discussions, stage talks, interactive panels, and relaxed networking
+          as you dive into the latest trends, innovations, and ideas reshaping
+          the financial world.
+        </p>
 
-          <div>
-            <h3 class='text-lg font-bold'>5PM - 7PM</h3>
-            <p class='font-light'>
-              Enjoy an evening of networking and mingling - exclusive access to
-              Leo's Bar and Terrace, complete with drinks and food.
-            </p>
-          </div>
-        </div>
-
-        <!-- Address -->
-        <div class='flex items-end max-lg:order-last mt-8'>
-          <p class='font-bold text-lg'>
-            XT25 Conference will be held in central London. <br /> Venue details
-            will be provided to confirmed attendees.
-          </p>
-        </div>
-
-        <!-- Form -->
-        <div
-          id='register'
-          class='row-span-5 flex flex-col gap-3 bg-juxt p-6 pb-4 text-black rounded-xl shadow-lg max-w-md mx-auto overflow-hidden'
-          style='border-radius: 0.75rem; isolation: isolate;'
+        <a
+          href='#register'
+          class='bg-juxt hover:bg-juxt/90 text-white font-bold py-3 px-6 rounded-md inline-block text-center uppercase w-2/3 text-left text-2xl'
         >
-          <span
-            class='text-white font-semibold uppercase self-center text-center underline text-sm'
-          >
-            This Event is Invite-Only and Free for Attendees
-          </span>
-          <ContactUsFormXT24 client:only subject={contactSubject || subject} />
-        </div>
+          Invite-Only Enquire Now
+        </a>
+      </div>
+
+      <!-- Right column with image -->
+      <div class='lg:w-5/12 flex items-center justify-center'>
+        <img
+          src='/images/XT25/XT25 Intro.jpg'
+          alt='Speaker at XT25 Conference'
+          class='rounded-lg shadow-lg max-w-full h-auto'
+        />
       </div>
     </div>
 
-    <!-- New background section for all remaining content -->
-    <div style='background-color: #212025;'>
-      <!-- Speakers section -->
+    <!-- Horizontal divider -->
+    <hr class='border-t border-gray-300 w-full my-10' />
+
+    <!-- Speakers section -->
+    <div
+      id='speakers'
+      class='container max-w-6xl mx-auto flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6'
+    >
+      <h2 class='text-black font-bold text-4xl mb-8'>Speakers</h2>
       <div
-        id='speakers'
-        class='container max-w-6xl mx-auto flex flex-col px-5 sm:px-10 pt-5 sm:pt-10 gap-6'
+        class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 w-full'
       >
-        <h2 class='text-juxt font-bold text-4xl mb-8'>Speakers</h2>
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-6 w-full'>
-          {
-            speakers.map(({ name, role, company, image, linkedin }) => (
-              <a
-                href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
-                target='_blank'
-                class={`speaker-card rounded-xl overflow-hidden flex flex-row shadow-lg w-full ${
-                  linkedin ? 'cursor-pointer' : 'cursor-default'
-                }`}
-                style='border-radius: 0.75rem; isolation: isolate; background-color: #3f3f46;'
-              >
-                <div
-                  class='w-1/3 md:w-2/5 overflow-hidden rounded-xl'
-                  style='border-radius: 0.75rem; isolation: isolate;'
-                >
-                  <AssetImage
-                    class='w-90 h-90 object-cover object-center m-auto'
-                    style='aspect-ratio: 3/4; height: 90%; width: 90%; min-height: 140px; margin: 5%; border-radius: 0.75rem;'
+        {
+          speakers.map(({ name, role, company, image, linkedin }) => (
+            <a
+              href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
+              target='_blank'
+              class={`speaker-card flex flex-col items-center text-center ${
+                linkedin ? 'cursor-pointer' : 'cursor-default'
+              }`}
+            >
+              <div class='relative mb-4'>
+                <div class='w-56 h-56 border-4 border-green-500 rounded-full overflow-hidden inline-flex'>
+                  <img
                     src={image}
                     alt={`Headshot of ${name}`}
+                    class='w-full h-full object-cover'
+                    style='aspect-ratio: 1/1;'
                   />
                 </div>
-                <div class='w-2/3 md:w-3/5 p-4 flex flex-col justify-center text-white'>
-                  <h3 class='font-bold text-lg md:text-xl mb-4'>{name}</h3>
-                  {Array.isArray(role) ? (
-                    role.map((line) => (
-                      <p class='text-sm md:text-base font-medium mb-1'>
-                        {line}
-                      </p>
-                    ))
-                  ) : (
-                    <p class='text-sm md:text-base font-medium mb-4'>{role}</p>
-                  )}
-                  {company && (
-                    <p class='font-bold text-sm md:text-base'>{company}</p>
-                  )}
-                </div>
-              </a>
-            ))
-          }
-        </div>
+              </div>
+              <h3
+                class='font-bold text-xl text-juxt mb-1'
+                style='color: #000000;'
+              >
+                {name}
+              </h3>
+              {Array.isArray(role) ? (
+                role.map((line) => (
+                  <p class='text-sm text-gray-800 mb-0'>{line}</p>
+                ))
+              ) : (
+                <p class='text-sm text-gray-800'>{role}</p>
+              )}
+              {company && (
+                <p class='text-sm font-medium text-gray-800'>{company}</p>
+              )}
+            </a>
+          ))
+        }
       </div>
+    </div>
 
-      <!-- Agenda -->
-      <div
-        id='agenda'
-        class='container max-w-6xl mx-auto flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start'
-      >
-        <h2 class='text-juxt font-bold text-4xl mb-8'>Agenda</h2>
-        <div class='w-full pt-5'>
-          <XT25Agenda />
-        </div>
-        <p class='font-thin text-sm pb-5 text-white pt-4'>
+    <!-- Horizontal divider -->
+    <hr class='border-t border-gray-300 w-full my-10' />
+
+    <!-- Agenda -->
+    <div
+      id='agenda'
+      class='container max-w-6xl mx-auto flex flex-col px-5 sm:px-10 pt-10 sm:pt-20 items-center sm:items-start'
+    >
+      <h2 class='text-black font-bold text-4xl mb-8'>Agenda</h2>
+      <div class='w-full bg-gray-100 rounded-lg overflow-hidden p-10 sm:p-14'>
+        <XT25Agenda />
+      </div>
+      <div class='w-full flex justify-end'>
+        <p class='text-sm pb-5 text-black pt-4'>
           *Agenda and speakers are subject to change
         </p>
       </div>
-
-      <!-- Gap section for visual spacing -->
-      <div class='w-full py-2'></div>
-
-      <!-- Speakers and Agenda to be announced  -->
-      <div
-        class='container max-w-6xl mx-auto flex items-center justify-center'
-        style='min-height: 120px;'
-      >
-        <div
-          class='text-center uppercase text-xs sm:text-base text-lg text-white'
-        >
-          <strong>More speakers to be announced soon.</strong>
-        </div>
-      </div>
-
-      <!-- Gap section for visual spacing -->
-      <div class='w-full py-1'></div>
-
-      <!-- XT24 Conference Image Carousel -->
-      <div class='w-full mx-auto py-0 overflow-hidden'>
-        <div id='imageCarousel' class='flex animate-slide'></div>
-      </div>
     </div>
 
-    <style>
-      @keyframes slide {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(
-            calc(-100vw / 4 * 22)
-          ); /* Width of one image * number of real images (22) */
-        }
+    <!-- Horizontal divider -->
+    <hr class='border-t border-gray-300 w-full my-10' />
+
+    <!-- Form -->
+    <div
+      id='register'
+      class='flex flex-col gap-3 bg-juxt p-6 pb-4 text-black rounded-xl shadow-lg max-w-2xl mx-auto overflow-hidden mt-8'
+      style='border-radius: 0.75rem; isolation: isolate;'
+    >
+      <span
+        class='text-black font-bold uppercase self-center text-center text-2xl'
+      >
+        This Event is Invite-Only and Free for Attendees
+      </span>
+      <ContactUsFormXT24 client:only subject={contactSubject || subject} />
+    </div>
+  </div>
+
+  <style>
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(
+          calc(-100vw / 4 * 22)
+        ); /* Width of one image * number of real images (22) */
+      }
+    }
+
+    .animate-slide {
+      animation: slide 100s linear infinite;
+    }
+
+    .sr-only {
+      /* Hidden from screen readers */
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .speaker-card {
+      transition: transform 0.3s ease;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+
+  <script>
+    // Image paths
+    const imagePaths = Array.from(
+      { length: 22 }, // Total Images
+      (_, i) => `/images/XT25/JUXT XT24 Conference ${i + 1}.jpg`
+    )
+
+    // Function to create image element
+    function createImageElement(src, alt) {
+      const div = document.createElement('div')
+      div.className = 'flex-shrink-0'
+
+      // Responsive width based on screen size
+      div.style.width = 'calc(100vw)' // Full width on mobile
+
+      // Adjust width based on screen size
+      if (window.innerWidth >= 640) {
+        div.style.width = 'calc(100vw / 2)' // 2 images on small screens
+      }
+      if (window.innerWidth >= 768) {
+        div.style.width = 'calc(100vw / 3)' // 3 images on medium screens
+      }
+      if (window.innerWidth >= 1024) {
+        div.style.width = 'calc(100vw / 4)' // 4 images on large screens
+      }
+      if (window.innerWidth >= 2048) {
+        div.style.width = 'calc(100vw / 5)' // 5 images on 4k screens
       }
 
-      .animate-slide {
-        animation: slide 100s linear infinite;
-      }
+      const img = document.createElement('img')
+      img.src = src
+      img.alt = alt
+      img.className = 'w-full h-64 object-cover'
 
-      .sr-only {
-        /* Hidden from screen readers */
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
-      }
+      div.appendChild(img)
+      return div
+    }
 
-      .speaker-card {
-        transition:
-          background-color 0.4s ease,
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
+    // Initialise seamless looping carousel
+    function initialiseCarousel() {
+      const carousel = document.getElementById('imageCarousel')
+      carousel.innerHTML = ''
 
-      .speaker-card:hover {
-        background-color: #f4901d !important;
-        transform: translateY(-5px);
-        box-shadow:
-          0 10px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      }
+      // Add the initial main set of images
+      imagePaths.forEach((path, index) => {
+        carousel.appendChild(
+          createImageElement(path, `JUXT XT24 Conference Image ${index + 1}`)
+        )
+      })
 
-      .speaker-card .text-white {
-        transition: color 0.4s ease;
-      }
+      // Add the same set again for seamless looping
+      imagePaths.forEach((path, index) => {
+        carousel.appendChild(
+          createImageElement(path, `JUXT XT24 Conference Image ${index + 1}`)
+        )
+      })
+    }
 
-      .speaker-card:hover .text-white {
-        color: black !important;
-      }
-    </style>
+    // Initialise the carousel
+    initialiseCarousel()
 
-    <script>
-      // Image paths
-      const imagePaths = Array.from(
-        { length: 22 }, // Total Images
-        (_, i) => `/images/XT25/JUXT XT24 Conference ${i + 1}.jpg`
-      )
+    // Update animation based on screen size
+    function updateAnimation() {
+      const style = document.createElement('style')
 
-      // Function to create image element
-      function createImageElement(src, alt) {
-        const div = document.createElement('div')
-        div.className = 'flex-shrink-0'
+      // Adaptively set the number of images per view based on screen size
+      let imagesPerView = 1 // Default for mobile
+      if (window.innerWidth >= 640) imagesPerView = 2 // sm
+      if (window.innerWidth >= 768) imagesPerView = 3 // md
+      if (window.innerWidth >= 1024) imagesPerView = 4 // lg
+      if (window.innerWidth >= 2048) imagesPerView = 5 // 4k
 
-        // Responsive width based on screen size
-        div.style.width = 'calc(100vw)' // Full width on mobile
-
-        // Adjust width based on screen size
-        if (window.innerWidth >= 640) {
-          div.style.width = 'calc(100vw / 2)' // 2 images on small screens
-        }
-        if (window.innerWidth >= 768) {
-          div.style.width = 'calc(100vw / 3)' // 3 images on medium screens
-        }
-        if (window.innerWidth >= 1024) {
-          div.style.width = 'calc(100vw / 4)' // 4 images on large screens
-        }
-        if (window.innerWidth >= 2048) {
-          div.style.width = 'calc(100vw / 5)' // 5 images on 4k screens
-        }
-
-        const img = document.createElement('img')
-        img.src = src
-        img.alt = alt
-        img.className = 'w-full h-64 object-cover'
-
-        div.appendChild(img)
-        return div
-      }
-
-      // Initialise seamless looping carousel
-      function initialiseCarousel() {
-        const carousel = document.getElementById('imageCarousel')
-        carousel.innerHTML = ''
-
-        // Add the initial main set of images
-        imagePaths.forEach((path, index) => {
-          carousel.appendChild(
-            createImageElement(path, `JUXT XT24 Conference Image ${index + 1}`)
-          )
-        })
-
-        // Add the same set again for seamless looping
-        imagePaths.forEach((path, index) => {
-          carousel.appendChild(
-            createImageElement(path, `JUXT XT24 Conference Image ${index + 1}`)
-          )
-        })
-      }
-
-      // Initialise the carousel
-      initialiseCarousel()
-
-      // Update animation based on screen size
-      function updateAnimation() {
-        const style = document.createElement('style')
-
-        // Adaptively set the number of images per view based on screen size
-        let imagesPerView = 1 // Default for mobile
-        if (window.innerWidth >= 640) imagesPerView = 2 // sm
-        if (window.innerWidth >= 768) imagesPerView = 3 // md
-        if (window.innerWidth >= 1024) imagesPerView = 4 // lg
-        if (window.innerWidth >= 2048) imagesPerView = 5 // 4k
-
-        // Create updated keyframes
-        style.textContent = `
+      // Create updated keyframes
+      style.textContent = `
             @keyframes slide {
               0% {
                 transform: translateX(0);
@@ -368,19 +288,18 @@ if (Astro.url.pathname.includes('xt25-gs')) {
             }
           `
 
-        // Add ID to new style and append to document
-        style.id = 'carousel-style'
-        document.head.appendChild(style)
-      }
+      // Add ID to new style and append to document
+      style.id = 'carousel-style'
+      document.head.appendChild(style)
+    }
 
-      // Initial update
-      updateAnimation()
+    // Initial update
+    updateAnimation()
 
-      // Update on window resize
-      window.addEventListener('resize', () => {
-        initialiseCarousel() // Recreate carousel with new widths
-        updateAnimation() // Update animation parameters
-      })
-    </script>
-  </div>
+    // Update on window resize
+    window.addEventListener('resize', () => {
+      initialiseCarousel() // Recreate carousel with new widths
+      updateAnimation() // Update animation parameters
+    })
+  </script>
 </Layout>
