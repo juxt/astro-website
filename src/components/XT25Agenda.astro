@@ -43,7 +43,7 @@ const agenda = [
   },
   {
     time: '11:40',
-    title: 'Talk Title Coming Soon',
+    title: 'TBC',
     subTitle: [
       'Samantha Reiss Gibson | S&P Global | Managing Director',
       ' VP, Head of Product - Public Markets, Regulatory & Compliance, Data Science'
@@ -117,18 +117,22 @@ const agenda = [
       <div>
         <div
           class:list={[
-            'grid grid-cols-1 sm:grid-cols-5 sm:divide-x sm:divide-juxt',
-            { 'bg-zinc-900': !isSpecialEvent, 'bg-[#2f2f2f]': isSpecialEvent }
+            'grid grid-cols-1 sm:grid-cols-5',
+            { 'bg-white': !isSpecialEvent }
           ]}
+          style={isSpecialEvent ? 'background-color: #c7e5b8;' : ''}
         >
-          <p class='px-5 pt-5 sm:p-5 font-semibold text-lg align-text-top text-center text-white'>
+          <p
+            class='px-5 pt-5 sm:p-5 font-semibold text-lg align-text-top text-center text-gray-800 border-r-2 border-black'
+            style='border-right-width: 2px;'
+          >
             {time}
           </p>
           <div class='px-5 pb-5 sm:p-5 sm:col-span-4'>
-            <h2 class='font-bold text-2xl text-juxt'>{title}</h2>
+            <h2 class='font-bold text-xl text-black'>{title}</h2>
             {subTitle &&
               (Array.isArray(subTitle) ? subTitle : [subTitle]).map((s) => (
-                <p class='font-light text-sl text-white'>{s}</p>
+                <p class='font-light text-sm text-gray-700'>{s}</p>
               ))}
           </div>
         </div>
