@@ -38,21 +38,11 @@
     "image": "/src/assets/xt25/xt25-rom.png"
   },
   {
-    "name": "Charlie Browne",
-    "role": "Head of Market Data, Quant & Risk Solutions",
-    "company": "GoldenSource",
-    "linkedin": "brownecharlie",
-    "image": "/src/assets/xt25/xt25-chb.jpeg"
-  },
-  {
-    "name": "Samantha Reiss Gibson",
-    "role": [
-      "Managing Director / VP",
-      "Head of Product - Public Markets, Regulatory & Compliance, Data Science"
-    ],
-    "company": "S&P Global",
-    "linkedin": "samantha-reiss-gibson",
-    "image": "/src/assets/xt25/xt25-srg2.jpeg"
+    "name": "Dave Morris",
+    "role": "CEO",
+    "company": "11:FS Foundry",
+    "linkedin": "dave-morris-517b7512",
+    "image": "/src/assets/xt25/xt25-dam.png"
   },
   {
     "name": "Dave Clack",
@@ -60,6 +50,13 @@
     "company": "Adaptive Financial Consulting",
     "linkedin": "daveclack",
     "image": "/src/assets/xt25/xt25-dac2.jpeg"
+  },
+  {
+    "name": "Charlie Browne",
+    "role": "Head of Market Data, Quant & Risk Solutions",
+    "company": "GoldenSource",
+    "linkedin": "brownecharlie",
+    "image": "/src/assets/xt25/xt25-chb.jpeg"
   },
   {
     "name": "Henry Garner",
