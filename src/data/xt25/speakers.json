@@ -17,6 +17,13 @@
     "image": "/src/assets/xt25/xt25-alg2.jpeg"
   },
   {
+    "name": "Steve Pegg",
+    "role": "Head of Risk and P&L Technology",
+    "company": "Qube Research & Technologies",
+    "linkedin": "steve-pegg-a88b8b6",
+    "image": "/src/assets/xt25/xt25-stp.jpeg"
+  },
+  {
     "name": "Donato Lucia",
     "role": "Head of Platform",
     "company": "Revolut",
@@ -31,6 +38,20 @@
     "image": "/src/assets/xt25/xt25-jia2.jpeg"
   },
   {
+    "name": "Charlie Browne",
+    "role": "Head of Market Data, Quant & Risk Solutions",
+    "company": "GoldenSource",
+    "linkedin": "brownecharlie",
+    "image": "/src/assets/xt25/xt25-chb.jpeg"
+  },
+  {
+    "name": "Dave Clack",
+    "role": "CPO",
+    "company": "Adaptive Financial Consulting",
+    "linkedin": "daveclack",
+    "image": "/src/assets/xt25/xt25-dac2.jpeg"
+  },
+  {
     "name": "Rob Moffat",
     "role": "Senior Technical Architect",
     "company": "FINOS",
@@ -43,20 +64,6 @@
     "company": "11:FS Foundry",
     "linkedin": "dave-morris-517b7512",
     "image": "/src/assets/xt25/xt25-dam.png"
-  },
-  {
-    "name": "Dave Clack",
-    "role": "CPO",
-    "company": "Adaptive Financial Consulting",
-    "linkedin": "daveclack",
-    "image": "/src/assets/xt25/xt25-dac2.jpeg"
-  },
-  {
-    "name": "Charlie Browne",
-    "role": "Head of Market Data, Quant & Risk Solutions",
-    "company": "GoldenSource",
-    "linkedin": "brownecharlie",
-    "image": "/src/assets/xt25/xt25-chb.jpeg"
   },
   {
     "name": "Henry Garner",
