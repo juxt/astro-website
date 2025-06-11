@@ -32,10 +32,24 @@
   },
   {
     "name": "Jing Ai",
-    "role": "Director - Equity Derivatives Platform",
-    "company": "Global Tier-1 Bank",
+    "role": "Product Owner - Equity Derivatives Platforms",
+    "company": "HSBC",
     "linkedin": "jing-ai-619a012",
     "image": "/src/assets/xt25/xt25-jia2.jpeg"
+  },
+  {
+    "name": "Zohar Melamed",
+    "role": "Quantitative Technical Director",
+    "company": "Qube Research & Technologies",
+    "linkedin": "zohar-melamed-ba7394",
+    "image": "/src/assets/xt25/xt25-zom.jpeg"
+  },
+  {
+    "name": "Fuzz (Farzad) Pezeshkpour",
+    "role": "Principal Consultant",
+    "company": "JUXT",
+    "linkedin": "dazraf",
+    "image": "/src/assets/xt25/xt25-fup.jpeg"
   },
   {
     "name": "Charlie Browne",
@@ -78,6 +92,13 @@
     "company": "JUXT",
     "linkedin": "henrygarner",
     "image": "/src/assets/xt25/xt25-heg2.jpeg"
+  },
+  {
+    "name": "Kevin Peel",
+    "role": "EQD Strategic Risk Lead",
+    "company": "Citi",
+    "linkedin": "kevin-peel-1863562",
+    "image": "/src/assets/xt25/Stock Male.jpg"
   },
   {
     "name": "Jon Pither",
