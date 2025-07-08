@@ -3,7 +3,7 @@ author: 'juxt'
 layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast: New Office, XT25 Fintech Conf, and the rise of AI'
 description: 'A new season of change and innovation [video].'
-category: 'fintech'
+category: 'podcast'
 publishedDate: '2025-07-08'
 tags:
   - fintech
