@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 3: Handy Function Patterns You Might Be Missing'
+title: 'Chapter 2 - Part 3: Handy Function Patterns You Might Be Missing'
 description: 'Small but powerful Go patterns for slices, maps, safe defaults, and error handling.'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

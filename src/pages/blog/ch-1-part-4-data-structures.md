@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 4: Data Structures'
+title: 'Chapter 1 - Part 4: Data Structures'
 description: 'Built-in types and how to compose them into higher-level containers'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

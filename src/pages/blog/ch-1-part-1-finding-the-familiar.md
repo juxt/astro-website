@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 1: Finding the Familiar'
+title: 'Chapter 1 - Part 1: Finding the Familiar'
 description: 'Static typing, binaries, data-types, stdlib, tooling'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 2: Dependency Injection vs Functional Programming'
+title: 'Chapter 2 - Part 2: Dependency Injection vs Functional Programming'
 description: 'How to glue Go code together quickly and safely — and when to use each style'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

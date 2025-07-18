@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 1: Adapter, Repository, Factory & Builder Patterns'
+title: 'Chapter 2 - Part 1: Adapter, Repository, Factory & Builder Patterns'
 description: 'Pragmatic patterns for decoupling, testability, and safe construction in Go'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
