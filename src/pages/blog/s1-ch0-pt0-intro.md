@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 0: Write Go Fast'
+title: 'Introduction: Write Go Fast (Foundations)'
 description: 'A pragmatic guide to Go programming when time is your scarcest resource'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
