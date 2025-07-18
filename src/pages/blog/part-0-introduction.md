@@ -5,7 +5,7 @@ description: 'A pragmatic guide to Go programming when time is your scarcest res
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-17'
-heroImage: 'go-intro.png'
+heroImage: 'abstract-clojure.png'
 tags:
   - 'go'
   - 'programming'
