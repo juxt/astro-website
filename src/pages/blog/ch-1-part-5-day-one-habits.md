@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 5: Day-One Habits'
+title: 'Chapter 1 - Part 5: Day-One Habits'
 description: 'Best practices for starting strong with Go'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

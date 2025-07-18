@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 2: Unlearning the Familiar'
+title: 'Chapter 1 - Part 2: Unlearning the Familiar'
 description: 'Habits that trip newcomers to Go and their idiomatic fixes'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 2: Project Structure & Composition Patterns'
+title: 'Chapter 2 - Part 2: Project Structure & Composition Patterns'
 description: 'How to structure Go projects for speed, clarity, and long-term maintainability'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

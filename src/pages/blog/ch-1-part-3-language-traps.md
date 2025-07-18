@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 3: Language Traps'
+title: 'Chapter 1 - Part 3: Language Traps'
 description: 'Quirks that compile fine but explode at runtime or review'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'

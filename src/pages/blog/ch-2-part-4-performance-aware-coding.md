@@ -1,6 +1,6 @@
 ---
 author: 'jey'
-title: 'Part 4: Performance-Aware Coding Tips'
+title: 'Chapter 2 - Part 4: Performance-Aware Coding Tips'
 description: 'Practical Go tips for writing fast, memory-efficient code that scales.'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
