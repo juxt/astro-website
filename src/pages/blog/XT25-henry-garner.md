@@ -28,6 +28,6 @@ Watch the full talk here:
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/CUp70_daGjo?si=sJk35AJaV4OOTBhX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Access Henry's slides <a href="/slides/Henry-Garner-AI.pdf" target="_blank">here.</a>
+Access Henry's slides <a href="https://docs.google.com/presentation/d/1usl0GD1BXq-DzKhcu2XiD9vj9wyZCbdwRwVdMQLEKo4/edit?usp=sharing" target="_blank">here.</a>
 
-For more on the XT25 Fintech Conference, visit: https://www.juxt.pro/xt25/.
+To learn more about Financial Services offerings at JUXT, visit: https://www.juxt.pro/financial.
