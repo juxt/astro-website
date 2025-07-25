@@ -5,8 +5,8 @@ title: 'From Unstructured to Actionable AI-Powered Regulatory Intelligence'
 description: "Watch Henry Garner's talk at XT25 Fintech Conference [video]"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2025-07-24'
-heroImage: 'henry-garner.jpg'
+publishedDate: '2025-07-25'
+heroImage: 'henry-garner-2.jpg'
 tags:
   - 'fintech'
   - 'conference'
