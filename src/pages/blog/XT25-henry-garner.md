@@ -5,7 +5,7 @@ description: "Watch Henry Garner's talk at XT25 Fintech Conference [video]"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-25'
-heroImage: 'henry-garner-2.jpg'
+heroImage: 'henry-garner.jpg'
 tags:
   - 'fintech'
   - 'conference'
@@ -27,6 +27,6 @@ Watch the full talk here:
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/CUp70_daGjo?si=sJk35AJaV4OOTBhX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Access Henry's slides <a href="https://docs.google.com/presentation/d/1usl0GD1BXq-DzKhcu2XiD9vj9wyZCbdwRwVdMQLEKo4/edit?usp=sharing" target="_blank">here.</a>
+Access Henry's slides <a href="/assets/xt25/henry-garner.pdf" target="_blank">here.</a>
 
 To learn more about Financial Services offerings at JUXT, visit: https://www.juxt.pro/financial.
