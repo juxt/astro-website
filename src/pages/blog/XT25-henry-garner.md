@@ -1,6 +1,6 @@
 ---
 author: 'juxt'
-title: 'From Unstructured to Actionable AI-Powered Regulatory Intelligence'
+title: 'From Unstructured to Actionable: AI-Powered Regulatory Intelligence'
 description: "Watch Henry Garner's talk at XT25 Fintech Conference [video]"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
@@ -21,7 +21,7 @@ The full-day conference featured talks and fireside chats with notable engineeri
 We are now excited to share the first in a series of recorded talks from the event.
 
 Henry Garner, Principal Engineer at JUXT, delivers a compelling session:
-'From Unstructured to Actionable AI-Powered Regulatory Intelligence'. In this talk, Henry explores how AI and LLMs can help transform complex, unstructured regulatory data into usable, trustworthy knowledge—helping financial institutions move from compliance burden to strategic insight.
+'From Unstructured to Actionable: AI-Powered Regulatory Intelligence'. In this talk, Henry explores how AI and LLMs can help transform complex, unstructured regulatory data into usable, trustworthy knowledge, helping financial institutions move from compliance burden to strategic insight.
 
 Watch the full talk here:
 
