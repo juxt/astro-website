@@ -27,6 +27,6 @@ Watch the full talk here:
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/CUp70_daGjo?si=sJk35AJaV4OOTBhX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Access Henry's slides <a href="xt25/henry-garner.pdf" target="_blank">here.</a>
+Access Henry's slides <a href="/xt25/henry-garner.pdf" target="_blank">here.</a>
 
 To learn more about Financial Services offerings at JUXT, visit: https://www.juxt.pro/financial.
