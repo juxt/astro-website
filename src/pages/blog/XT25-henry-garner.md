@@ -1,6 +1,5 @@
 ---
 author: 'juxt'
-draft: true
 title: 'From Unstructured to Actionable AI-Powered Regulatory Intelligence'
 description: "Watch Henry Garner's talk at XT25 Fintech Conference [video]"
 category: 'conference'
