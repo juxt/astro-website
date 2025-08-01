@@ -14,7 +14,7 @@ tags:
   - 'XT25'
 ---
 
-The [XT25 Fintech Conference](https://www.juxt.pro/xt25/), held on June 12th, opened with a powerful keynote by Charlie Browne, Head of Market Data, Quant & Risk solutions at [GoldenSource](www.thegoldensource.com), setting the tone for a day of insight-driven, technical exploration.
+The [XT25 Fintech Conference](https://www.juxt.pro/xt25/), held on June 12th, opened with a powerful keynote by Charlie Browne, Head of Market Data, Quant & Risk solutions at [GoldenSource](https://www.thegoldensource.com), setting the tone for a day of insight-driven, technical exploration.
 
 In his talk, titled 'Risk Factors and Data Lineage in Derivative Pricing', Charlie examined the growing regulatory pressure on financial institutions to bring transparency and traceability to the data used in pricing and risk management, especially in the post-Basel III landscape.
 
@@ -36,6 +36,8 @@ Watch the full keynote here:
 
 Access Charlie's slides <a href="/xt25/charlie-browne.pdf" target="_blank">here.</a>
 
-To get in touch with Charlie, Head of Market Data, Quant & Risk solutions at [GoldenSource](https://www.thegoldensource.com): cbrowne@thegoldensource.com
+To get in touch with Charlie: cbrowne@thegoldensource.com.
 
-To learn more about Financial Services offerings at JUXT, visit: https://www.juxt.pro/financial.
+To learn more about GoldenSource's solutions for data lineage and risk management, visit: https://www.thegoldensource.com.
+
+To discover Financial Services offerings at JUXT, visit: https://www.juxt.pro/financial.
