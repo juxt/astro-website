@@ -5,7 +5,7 @@ description: "Watch Charlie Browne's opening keynote at XT25 Fintech Conference 
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-08-01'
-heroImage: 'Juxt 2025-102.jpg'
+heroImage: 'charlie-browne-1.jpg'
 tags:
   - 'fintech'
   - 'conference'
