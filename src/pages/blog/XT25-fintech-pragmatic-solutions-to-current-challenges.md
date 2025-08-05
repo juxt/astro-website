@@ -20,15 +20,15 @@ Moderated by Steve Pegg (Head of Risk and P&L Technology at [Qube Research & Tec
 
 Panelists included:
 
-- Kevin Peel | Citi | Head of Equities Risk Technology
+- Kevin Peel | [Citi](https://www.citi.com) | Head of Equities Risk Technology
 
-- Jing Ai | HSBC | Product Owner – Equity Derivatives Platforms
+- Jing Ai | [HSBC](https://www.hsbc.com) | Product Owner – Equity Derivatives Platforms
 
-- Zohar Melamed | Qube Research & Technologies | Quantitative Technical Director
+- Zohar Melamed | [Qube Research & Technologies](https://www.qube-rt.com) | Quantitative Technical Director
 
-- Fuzz (Farzad) Pezeshkpour | JUXT | Principal Consultant
+- Fuzz (Farzad) Pezeshkpour | [JUXT](https://www.juxt.pro) | Principal Consultant
 
-- Henry Garner | JUXT | Principal Engineer & AI Chapter Lead
+- Henry Garner | [JUXT](https://www.juxt.pro) | Principal Engineer & AI Chapter Lead
 
 This wide-ranging conversation addressed:
 
@@ -40,7 +40,7 @@ This wide-ranging conversation addressed:
 
 - Cross-team collaboration between quant, tech, and ops
 
-The session offered candid, insightful views from those building and operating the tech behind today’s financial markets—focusing not on theoretical futures, but on what’s actually working now.
+The session offered candid, insightful views from those building and operating the tech behind today’s financial markets, focusing not on theoretical futures, but on what is actually working now.
 
 Watch the full Expert Panel recording here:
 
