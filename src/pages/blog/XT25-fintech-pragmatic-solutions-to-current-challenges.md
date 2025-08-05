@@ -40,7 +40,7 @@ This wide-ranging conversation addressed:
 
 - Cross-team collaboration between quant, tech, and ops
 
-The session offered candid, insightful views from those building and operating the tech behind today’s financial markets, focusing not on theoretical futures, but on what is actually working now.
+The session offered candid, insightful views from those building and operating the tech behind today’s financial markets, focusing not on theoretical future, but on what is actually working now.
 
 Watch the full Expert Panel recording here:
 
