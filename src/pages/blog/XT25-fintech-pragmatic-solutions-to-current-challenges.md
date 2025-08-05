@@ -14,8 +14,6 @@ tags:
   - 'XT25'
 ---
 
-The [XT25 Fintech Conference](https://www.juxt.pro/xt25/), held on June 12th, opened with a powerful keynote by Charlie Browne, Head of Market Data, Quant & Risk solutions at [GoldenSource](https://www.thegoldensource.com), setting the tone for a day of insight-driven, technical exploration.
-
 As part of the [XT25 Fintech Conference](https://www.juxt.pro/xt25/), one of the most engaging sessions of the day was the Expert Panel discussion: Pragmatic Solutions to Current Challenges.
 
 Moderated by Steve Pegg (Head of Risk and P&L Technology at [Qube Research & Technologies](https://www.qube-rt.com/)), the panel brought together senior leaders and practitioners tackling real-world issues in trading platforms, risk systems, and applied AI.
