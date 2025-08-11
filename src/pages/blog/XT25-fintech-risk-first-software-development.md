@@ -4,7 +4,7 @@ title: 'Risk-First Software Development'
 description: "Watch Rob Moffat's talk at the XT25 Fintech Conference [video]"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2025-08-11'
+publishedDate: '2025-08-13'
 heroImage: 'rob-moffat.jpg'
 tags:
   - 'fintech'
