@@ -1,5 +1,6 @@
 ---
 author: 'juxt'
+draft: 'true'
 title: 'Risk-First Software Development'
 description: "Watch Rob Moffat's talk at the XT25 Fintech Conference [video]"
 category: 'conference'
