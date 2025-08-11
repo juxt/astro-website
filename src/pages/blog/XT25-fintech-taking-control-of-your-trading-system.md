@@ -36,4 +36,6 @@ Watch the full talk here:
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/A3yR4OlEBCA?si=-ZeVBxnl7q0E96a3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+Access Peter's slides <a href="/xt25/peter-windle.pdf" target="_blank">here.</a>
+
 To discover Financial Services offerings at JUXT, visit: https://www.juxt.pro/financial.
