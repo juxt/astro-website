@@ -1,6 +1,6 @@
 ---
 author: 'juxt'
-title: 'Becoming a Digital Retail Bank:What We’ve Learned on Kroo’s Journey'
+title: 'Becoming a Digital Retail Bank: What We’ve Learned on Kroo’s Journey'
 description: "Watch Alexey Gabsatarov's talk at the XT25 Fintech Conference [video]"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
