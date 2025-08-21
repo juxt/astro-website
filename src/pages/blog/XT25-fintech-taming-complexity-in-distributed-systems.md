@@ -5,7 +5,7 @@ title: 'Taming Complexity in Distributed Systems: What’s Behind Revolut’s Su
 description: "Watch Donato Lucia's talk at the XT25 Fintech Conference [video]"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2025-08-20'
+publishedDate: '2025-08-21'
 heroImage: 'donato.jpg'
 tags:
   - 'fintech'
