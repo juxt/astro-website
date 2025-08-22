@@ -5,7 +5,7 @@ description: 'How to decouple API, business logic, and persistence for maintaina
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-18'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

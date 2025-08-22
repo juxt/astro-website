@@ -5,7 +5,7 @@ description: 'Small but powerful Go patterns for slices, maps, safe defaults, an
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-17'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

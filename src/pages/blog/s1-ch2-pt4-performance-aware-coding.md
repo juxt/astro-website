@@ -5,7 +5,7 @@ description: 'Practical Go tips for writing fast, memory-efficient code that sca
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-17'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

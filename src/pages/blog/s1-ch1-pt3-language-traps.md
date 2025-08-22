@@ -5,7 +5,7 @@ description: 'Quirks that compile fine but explode at runtime or review'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-08-04'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

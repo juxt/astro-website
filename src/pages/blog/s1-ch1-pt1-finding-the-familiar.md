@@ -5,7 +5,7 @@ description: 'Static typing, binaries, data-types, stdlib, tooling'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-21'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

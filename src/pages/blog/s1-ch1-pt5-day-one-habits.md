@@ -5,7 +5,7 @@ description: 'Best practices for starting strong with Go'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-08-18'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

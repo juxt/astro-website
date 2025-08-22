@@ -5,7 +5,7 @@ description: 'How to build, standardize, and automate a reusable Go baseplate fo
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-18'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

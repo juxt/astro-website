@@ -5,7 +5,7 @@ description: 'How to standardize logging, configuration, and metrics for a robus
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-18'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

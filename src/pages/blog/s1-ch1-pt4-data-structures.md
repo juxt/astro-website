@@ -5,7 +5,7 @@ description: 'Built-in types and how to compose them into higher-level container
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-08-11'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

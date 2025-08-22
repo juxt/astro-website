@@ -5,7 +5,7 @@ description: 'How to structure Go projects for speed, clarity, and long-term mai
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-17'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

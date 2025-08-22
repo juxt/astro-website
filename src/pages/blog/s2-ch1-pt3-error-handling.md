@@ -5,7 +5,7 @@ description: 'How to treat errors as data, not just strings, for robust Go servi
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-18'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

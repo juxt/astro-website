@@ -5,7 +5,7 @@ description: 'How to design a database layer that keeps business logic clean, te
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-18'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'

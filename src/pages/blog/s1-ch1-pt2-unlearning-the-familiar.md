@@ -5,7 +5,7 @@ description: 'Habits that trip newcomers to Go and their idiomatic fixes'
 category: 'go'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-07-28'
-heroImage: 'abstract-clojure.png'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'go'
   - 'programming'
