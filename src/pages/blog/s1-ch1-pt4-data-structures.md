@@ -91,8 +91,3 @@ Use `heap.Init(&h)` then `heap.Push`, `heap.Pop`—no custom sorting each time.
 
 Stick these on a Post‑it; you’ll save hours of debugging.
 
-## Next Up
-
-With the foundations locked in, we pivot to architecture. Phase 2 starts with Patterns That Actually Help—Builder, Adapter, and injected Singleton patterns that play nicely with Go’s philosophy.
-
-Subscribe to get the Phase 2 kickoff and the copy‑paste container cookbook PDF.

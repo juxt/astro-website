@@ -35,7 +35,7 @@ A shaky baseplate leaks abstractions everywhere: exotic log formats, ad‑hoc me
 Conversely, a stable foundation lets you:
 - **Diagnose faster.** Consistent IDs and labels tie logs ↔ metrics ↔ traces.
 - **Upgrade safely.** Swap out pgx for Cloud Spanner behind one interface.
-- **Hire smoothly.** New joiners grok one pattern instead of five.
+- **Hire smoothly.** New joiners only have to learn one pattern instead of five.
 - **Code with confidence.** Engineers focus on business logic, not plumbing.
 
 **Rule of thumb:** If two teams copy‑paste the same helper twice, promote it to the baseplate.

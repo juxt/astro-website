@@ -155,9 +155,3 @@ If `ctx` times out, the HTTP call aborts automatically.
 | context          | Stored global             | Pass down; never keep            |
 
 Stick this table in your wiki; it has saved me hours of head‑scratching.
-
-Next Up
-
-Part 1.4 lands next week: “Start Fast—Skip the Over‑Idiomatic Rabbit Holes.” We’ll set up folders, tooling, and linting so you can ship code, not yak‑shave.
-
-Get Part 1.4 and our goroutine‑leak checklist in your inbox.

@@ -124,10 +124,4 @@ Integration tests have value—just not in your save loop.
 - One logger → everywhere.
 - Unit tests under two seconds.
 
-Print, laminate, tape to monitor.
 
-## Where We Go Next
-
-Foundations are done—congrats 🎉.  Phase 2 kicks off with Patterns That Actually Help: Builder, Adapter, and injected Singleton patterns that scale from toy apps to fleet‑wide services.
-
-Get Phase 2 updates + the Fast‑Start cheat‑sheet PDF now.

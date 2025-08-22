@@ -153,9 +153,3 @@ prometheus.MustRegister(httpRequests)
 * **Expose `/metrics` endpoint:** Standard Prometheus scraping target.
 * **Ship logs to ELK, Loki, or Otel pipeline:** JSON logs are machine-parsable and ready for search.
 * **Integrate OpenTelemetry:** If your system uses tracing, emit logs with trace IDs to unify observability.
-
----
-
-## Next Steps
-
-Would you like me to add a **benchmark summary** comparing Zerolog, Zap, slog, and Otel logging (performance, memory, throughput) to finalize which one to recommend for the baseplate?
