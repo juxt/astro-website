@@ -1,6 +1,5 @@
 ---
 author: 'juxt'
-draft: true
 title: 'Taming Complexity in Distributed Systems: What’s Behind Revolut’s Success'
 description: "Watch Donato Lucia's talk at the XT25 Fintech Conference [video]"
 category: 'conference'
