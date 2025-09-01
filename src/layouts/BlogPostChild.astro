@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets'
+import { MarkdownInstance } from 'astro'
+import '../blog.css'
+import { Blog, Person } from '@utils/types'
+import Layout from './Layout.astro'
+interface Props {
+  content: Blog & {
+    bannerClassName?: string
+    bannerTitle?: string
+  }
+}
+
+const { content } = Astro.props
+
+const { title, description, parentArticle, bannerClassName, bannerTitle } =
+  content
+---
+
+<!-- Script to dynamically add a margin to account for the alert banner on blog pages -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (!window.location.pathname.startsWith('/blog')) {
+      return
+    }
+
+    // Calculate the threshold based on the height of the alert banner
+    const calculateThreshold = () => {
+      const alertBanner: HTMLElement = document.querySelector('alert-banner')
+      let threshold = 0
+
+      if (alertBanner && !alertBanner.classList.contains('hidden')) {
+        threshold += alertBanner.offsetHeight
+      }
+
+      return threshold
+    }
+
+    // Set initial scroll position
+    let scrollThreshold = calculateThreshold()
+    window.scrollTo({ top: scrollThreshold, behavior: 'instant' })
+
+    // Enforce scroll position
+    window.addEventListener('scroll', () => {
+      const newThreshold = calculateThreshold()
+      if (window.scrollY < newThreshold) {
+        window.scrollTo({ top: newThreshold, behavior: 'instant' })
+      }
+    })
+
+    // Update on resize
+    window.addEventListener('resize', () => {
+      scrollThreshold = calculateThreshold()
+      if (window.scrollY < scrollThreshold) {
+        window.scrollTo({ top: scrollThreshold, behavior: 'instant' })
+      }
+    })
+  })
+</script>
+
+<Layout
+  navbar
+  title={title}
+  ogTitle={`JUXT Blog: ${title}`}
+  ogDescription={description}
+  robots='noindex,follow'
+>
+  <main class='transition-colors dark:bg-gray-900'>
+    <!-- Full-width Cool Banner -->
+    <div class={`w-full shadow-lg py-8 ${bannerClassName}`}>
+      <div class='px-4 sm:px-12 2xl:px-0 max-w-4xl mx-auto'>
+        <div class='flex items-center gap-8'>
+          {
+            parentArticle && (
+              <a
+                href={`/blog/${parentArticle}`}
+                class='inline-flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium px-4 py-2 rounded-lg hover:bg-white/10'
+              >
+                <svg
+                  class='w-5 h-5'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M15 19l-7-7 7-7'
+                  />
+                </svg>
+                Back
+              </a>
+            )
+          }
+          <h1
+            class='text-2xl md:text-3xl font-bold text-white tracking-wide flex-1 text-center'
+          >
+            {bannerTitle || title}
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <div class='blog-container px-4 sm:px-12 2xl:px-0 max-w-4xl mx-auto'>
+      <!-- Content -->
+      <article class='py-8 prose prose-lg dark:prose-invert max-w-none'>
+        <slot />
+      </article>
+    </div>
+  </main>
+</Layout>

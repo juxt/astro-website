@@ -1,0 +1,37 @@
+---
+author: 'juxt'
+layout: '../../../../layouts/BlogPostChild.astro'
+title: 'Techniques: Hold'
+description: 'AI techniques that are either outdated, have better alternatives, or lack sufficient evidence for adoption'
+category: 'ai'
+publishedDate: '2025-01-15'
+tags:
+  - ai
+  - techniques
+  - hold
+  - deprecated
+parentArticle: 'ai-radar/techniques'
+bannerClassName: 'bg-red-600'
+---
+
+These AI techniques are not recommended for new projects due to various limitations, better alternatives, or insufficient evidence of effectiveness. While some may still have niche applications, they generally represent approaches that have been superseded by more effective methods.
+
+<div data-radar='true' data-meta='{"label":"Word2Vec & GloVe"}' />
+## Word2Vec & GloVe
+
+While Word2Vec and GloVe were groundbreaking when introduced, they have been largely superseded by more sophisticated embedding techniques. Modern transformer-based models provide better semantic understanding and context awareness. These older techniques may still be useful for specific legacy applications but are not recommended for new projects.
+
+<div data-radar='true' data-meta='{"label":"t-SNE"}' />
+## t-SNE
+
+t-SNE has been largely replaced by more efficient and effective dimensionality reduction techniques like UMAP. While t-SNE can still produce visually appealing results, its computational complexity and lack of global structure preservation make it less suitable for modern applications. UMAP offers better performance and more reliable results.
+
+<div data-radar='true' data-meta='{"label":"Zero-shot Prompting"}' />
+## Zero-shot Prompting
+
+Zero-shot prompting has been largely superseded by few-shot and chain-of-thought approaches that provide better performance and reliability. While zero-shot can work for simple tasks, it often produces inconsistent results and lacks the precision needed for production applications. More sophisticated prompting techniques are recommended.
+
+<div data-radar='true' data-meta='{"label":"AI Pull Request Review"}' />
+## AI Pull Request Review
+
+Automated AI-powered code review tools have shown limited effectiveness in practice. While they can catch some basic issues, they often miss complex problems and can generate false positives that waste developer time. Human review remains essential for code quality, and AI tools should be used as supplements rather than replacements.

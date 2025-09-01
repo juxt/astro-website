@@ -1,6 +1,6 @@
-import { BlogCard } from '@components/BlogCard'
-import { Blog } from '@components/utils/types'
-import { useState, useEffect } from 'preact/hooks';
+import { BlogCard } from '@components/BlogCard';
+import { Blog } from '@components/utils/types';
+import { useEffect, useState } from 'preact/hooks';
 // @ts-expect-error - Missing types for pagefind
 import * as pagefind from '/pagefind/pagefind.js';
 
@@ -30,7 +30,7 @@ function resultToBlog(result: any): Blog {
     },
     category: result.data.meta.category,
     slug: "",
-    href: result.data.url.replace(/\/blog\//, ''),
+    href: result.data.url,
     heroImage: result.data.meta.heroImage,
   }
 }

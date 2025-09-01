@@ -1,0 +1,84 @@
+---
+interface Props {
+  data: {
+    title?: string
+    quadrants: Array<{ name: string }>
+    rings: Array<{ name: string; color: string }>
+    entries: Array<{
+      label: string
+      quadrant: number
+      ring: number
+      moved?: number
+      url?: string
+      active?: boolean
+      description?: string
+    }>
+  }
+  scale?: number
+  colors?: {
+    background: string
+    grid: string
+    inactive: string
+  }
+  fontFamily?: string
+  printLayout?: boolean
+  linksInNewTabs?: boolean
+}
+
+const {
+  data,
+  scale = 1.0,
+  colors = {
+    background: 'transparent',
+    grid: '#bbb',
+    inactive: '#ddd'
+  },
+  fontFamily = 'Arial, Helvetica',
+  printLayout = true,
+  linksInNewTabs = true
+} = Astro.props
+
+// Prepare radar configuration
+const radarConfig = {
+  repo_url: 'https://github.com/juxt/astro-website',
+  svg_id: 'radar',
+  scale,
+  colors,
+  font_family: fontFamily,
+  title: data.title,
+  quadrants: data.quadrants,
+  rings: data.rings,
+  print_layout: printLayout,
+  links_in_new_tabs: linksInNewTabs,
+  entries: data.entries
+}
+---
+
+<div class='w-11/12 mx-auto overflow-hidden flex justify-center items-center'>
+  <svg
+    viewBox='0 0 1450 1000'
+    id='radar'
+    class='block max-w-full dark:fill-white'></svg>
+</div>
+
+<script is:inline src='https://d3js.org/d3.v7.min.js'></script>
+<script
+  is:inline
+  src='https://zalando.github.io/tech-radar/release/radar-0.12.js'></script>
+
+<script define:vars={{ radarConfig }}>
+  // Initialize the radar visualization
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof radar_visualization === 'function') {
+      // Get parent container width and set height proportionally
+
+      const config = {
+        ...radarConfig
+      }
+
+      radar_visualization(config)
+    } else {
+      console.error('radar_visualization function not found')
+    }
+  })
+</script>

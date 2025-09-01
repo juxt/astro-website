@@ -15,6 +15,7 @@ import { parseBlogs, formatDate } from '@utils/common'
 import Layout from './Layout.astro'
 import { getImage } from 'astro:assets'
 import DarkModeSwitch from '../components/DarkModeSwitch'
+import AIRadarData from '@components/AIRadarData.astro'
 
 const {
   title,
@@ -247,34 +248,6 @@ const categoryHref = `/blog?${encodeURI(
                 />
               </div>
             </div>
-            <div
-              class='flex flex-col gap-1 text-left'
-              data-name={name}
-              data-last-name={lastName}
-              data-job-title={jobTitle}
-              data-pagefind-meta='personName[data-name], personLastName[data-last-name], personJobTitle[data-job-title]'
-              data-pagefind-filter='personName[data-name], personLastName[data-last-name]'
-            >
-              {
-                name && lastName && (
-                  <div
-                    class:list={[
-                      'text-lg font-bold text-black dark:text-zinc-100 underline-offset-2',
-                      { 'group-hover:underline': isExpert }
-                    ]}
-                  >
-                    <div>{`${name} ${lastName}`}</div>
-                  </div>
-                )
-              }
-              {
-                jobTitle && (
-                  <div class='text-zinc-700 leading-snug w-36 dark:text-zinc-300'>
-                    {jobTitle}
-                  </div>
-                )
-              }
-            </div>
           </a>
         </div>
         <Image
@@ -320,6 +293,8 @@ const categoryHref = `/blog?${encodeURI(
         </div>
       </div>
     </div>
+
+    <AIRadarData />
 
     <article
       class='px-4 pb-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert dark:hover:prose-a:text-white'
