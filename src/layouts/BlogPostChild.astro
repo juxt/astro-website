@@ -13,8 +13,34 @@ interface Props {
 
 const { content } = Astro.props
 
-const { title, description, parentArticle, bannerClassName, bannerTitle } =
-  content
+const { title, description, bannerClassName, bannerTitle } = content
+
+// Auto-infer parent article from file path
+const inferredParentArticle = inferParentFromPath(Astro.url.pathname)
+
+function inferParentFromPath(pathname: string): string | null {
+  // Remove /blog prefix and get the path parts
+  const pathWithoutBlog = pathname.replace(/^\/blog\//, '')
+  const pathParts = pathWithoutBlog.split('/')
+
+  // If we're at the main ai-radar level (ai-radar), no parent
+  if (pathParts.length === 1) {
+    return null
+  }
+
+  // If we're at a quadrant level (ai-radar/techniques), go back to main ai-radar
+  if (pathParts.length === 2) {
+    return 'ai-radar'
+  }
+
+  // If we're at a ring level (ai-radar/techniques/adopt), go back to quadrant (ai-radar/techniques)
+  if (pathParts.length === 3) {
+    return `${pathParts[0]}/${pathParts[1]}`
+  }
+
+  // For any deeper levels, go up one level
+  return pathParts.slice(0, -1).join('/')
+}
 ---
 
 <!-- Script to dynamically add a margin to account for the alert banner on blog pages -->
@@ -71,9 +97,9 @@ const { title, description, parentArticle, bannerClassName, bannerTitle } =
       <div class='px-4 sm:px-12 2xl:px-0 max-w-4xl mx-auto'>
         <div class='flex items-center gap-8'>
           {
-            parentArticle && (
+            inferredParentArticle && (
               <a
-                href={`/blog/${parentArticle}`}
+                href={`/blog/${inferredParentArticle}`}
                 class='inline-flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium px-4 py-2 rounded-lg hover:bg-white/10'
               >
                 <svg
