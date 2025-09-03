@@ -9,7 +9,8 @@
     "build": "astro build && yarn run build:css && yarn run pagefind",
     "preview": "astro preview",
     "prepare": "husky install",
-    "pagefind": "pagefind --site dist"
+    "pagefind": "pagefind --site dist",
+    "generate-ai-radar-docs": "node scripts/generate-ai-radar-docs.js"
   },
   "devDependencies": {
     "@astrojs/mdx": "^1.0.0",
