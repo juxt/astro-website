@@ -231,10 +231,6 @@ function parseRadarFromMarkdown(
       active: true
     }
 
-    console.log(
-      `Entry: ${entry.label}, moved: ${entry.moved}, metadata:`,
-      sectionMetadata.moved
-    )
     entries.push(entry)
   }
 
@@ -251,9 +247,7 @@ console.log(
 )
 
 // Debug: Show which files we're processing
-allMarkdownFiles.forEach((file) => {
-  console.log(`Processing: ${file}`)
-})
+allMarkdownFiles.forEach((file) => {})
 
 for (const filePath of allMarkdownFiles) {
   try {
@@ -267,7 +261,6 @@ for (const filePath of allMarkdownFiles) {
     const entries = parseRadarFromMarkdown(content, baseUrl, filePath)
 
     if (entries.length > 0) {
-      console.log(`Extracted ${entries.length} entries from ${filePath}`)
       allEntries.push(...entries)
     }
   } catch (error) {
