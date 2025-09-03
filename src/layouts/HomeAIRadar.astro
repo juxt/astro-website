@@ -7,7 +7,6 @@ import Layout from './Layout.astro'
 import AIRadarData from '../components/AIRadarData.astro'
 import { RADAR_COLORS } from '../utils/radar-colors'
 import SocialShare from '../components/SocialShare.astro'
-import aiRadarImage from '../assets/site/ai-radar.jpg'
 
 type Props = MarkdownInstance<Blog>
 
@@ -23,7 +22,7 @@ const shareIconStyle =
   title={title}
   ogTitle={`JUXT AI Radar: ${title}`}
   ogDescription={description}
-  ogImage={aiRadarImage.src}
+  ogImage='ai-radar'
   robots='noindex,follow'
 >
   <main class='transition-colors dark:bg-gray-900'>
