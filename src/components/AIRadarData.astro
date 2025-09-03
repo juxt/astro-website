@@ -2,6 +2,7 @@
 import { readFileSync, readdirSync, statSync } from 'fs'
 import { join } from 'path'
 import RadarChart from './RadarChart.astro'
+import { RADAR_COLORS } from '../utils/radar-colors'
 
 // Function to recursively find all markdown files in a directory
 function findMarkdownFiles(dir: string): string[] {
@@ -30,11 +31,11 @@ function findMarkdownFiles(dir: string): string[] {
 // Function to generate base URL from file path
 function generateBaseUrl(filePath: string): string {
   const relativePath = filePath.replace(
-    join(process.cwd(), 'src/pages/blog/'),
+    join(process.cwd(), 'src/pages/ai-radar/'),
     ''
   )
   const pathWithoutExt = relativePath.replace(/\.(mdx|md)$/, '')
-  return `/blog/${pathWithoutExt}`
+  return `/ai-radar/${pathWithoutExt}`
 }
 
 // Simple slugify function
@@ -57,7 +58,7 @@ function getQuadrantForSegment(quadrant: string): number {
     case 'platforms':
       return 0 // Bottom Right
     default:
-      return 0
+      throw new Error(`Invalid quadrant: ${quadrant}`)
   }
 }
 
@@ -73,7 +74,7 @@ function getRingForAdoptionLevel(ring: string): number {
     case 'hold':
       return 3 // OUTER
     default:
-      return 1
+      throw new Error(`Invalid ring: ${ring}`)
   }
 }
 
@@ -95,31 +96,6 @@ function getMovedValue(moved: string | number | undefined): number {
   return 0 // Default to no change
 }
 
-// Extract description text following a section header
-function extractDescription(content: string, sectionIndex: number): string {
-  const afterSection = content.substring(sectionIndex)
-  const nextSectionMatch = afterSection.match(/\n## /)
-  const endIndex = nextSectionMatch
-    ? nextSectionMatch.index!
-    : afterSection.length
-
-  const sectionContent = afterSection.substring(0, endIndex)
-  const lines = sectionContent.split('\n').slice(1) // Skip the ## line
-
-  // Find the first paragraph (non-empty lines)
-  const descriptionLines: string[] = []
-  for (const line of lines) {
-    const trimmed = line.trim()
-    if (trimmed && !trimmed.startsWith('#')) {
-      descriptionLines.push(trimmed)
-    } else if (trimmed.startsWith('#')) {
-      break // Stop at next section
-    }
-  }
-
-  return descriptionLines.join(' ').substring(0, 200) + '...'
-}
-
 // Infer quadrant from file path by reading parent article
 function inferQuadrantFromFilePath(filePath: string): string {
   const pathParts = filePath.split('/')
@@ -134,7 +110,7 @@ function inferQuadrantFromFilePath(filePath: string): string {
   // Read the parent article to get the title
   const parentArticlePath = join(
     process.cwd(),
-    'src/pages/blog/ai-radar',
+    'src/pages/ai-radar',
     segment,
     'index.mdx'
   )
@@ -191,14 +167,24 @@ function parseRadarFromMarkdown(
 ) {
   const entries: any[] = []
 
-  // Find all divs with data-radar="true" or data-radar='true' and data-meta attributes
-  const metaDivRegex =
-    /<div\s+data-radar=['"]true['"]\s+data-meta='([^']+)'\s*\/>/g
+  // Find all divs with data-radar attribute and data-meta attributes
+  const metaDivRegex = /<div\s+data-radar\s+data-meta='([^']+)'\s*\/>/g
   let metaMatch
 
+  // Store all matches with their positions to sort them by order of appearance
+  const matches = []
+
   while ((metaMatch = metaDivRegex.exec(content)) !== null) {
-    const metaString = metaMatch[1]
-    const metaIndex = metaMatch.index
+    matches.push({ match: metaMatch, index: metaMatch.index })
+  }
+
+  // Sort matches by their position in the document to maintain order
+  matches.sort((a, b) => a.index - b.index)
+
+  // Process matches in order of appearance
+  for (const { match } of matches) {
+    const metaString = match[1]
+    const metaIndex = match.index
 
     // Parse metadata
     let sectionMetadata: Record<string, any> = {}
@@ -242,8 +228,7 @@ function parseRadarFromMarkdown(
       ring: getRingForAdoptionLevel(ring),
       moved: getMovedValue(sectionMetadata.moved), // Map string values to numeric
       link: `${baseUrl}#${slugify(sectionName)}`,
-      active: true,
-      description: extractDescription(content, metaIndex)
+      active: true
     }
 
     console.log(
@@ -257,8 +242,8 @@ function parseRadarFromMarkdown(
 }
 
 // Main logic to collect all radar data at build time
-const aiRadarDir = join(process.cwd(), 'src/pages/blog/ai-radar')
-const allMarkdownFiles = findMarkdownFiles(aiRadarDir)
+const aiRadarDir = join(process.cwd(), 'src/pages/ai-radar')
+const allMarkdownFiles = findMarkdownFiles(aiRadarDir).sort() // Sort files for predictable order
 const allEntries: any[] = []
 
 console.log(
@@ -295,19 +280,19 @@ console.log(`Total radar entries collected: ${allEntries.length}`)
 // Prepare AI radar data
 const radarData = {
   quadrants: [
-    { name: 'Platforms', link: '/blog/ai-radar/platforms' },
-    { name: 'Tools', link: '/blog/ai-radar/tools' },
+    { name: 'Platforms', link: '/ai-radar/platforms' },
+    { name: 'Tools', link: '/ai-radar/tools' },
     {
       name: 'Languages & Frameworks',
-      link: '/blog/ai-radar/languages-frameworks'
+      link: '/ai-radar/languages-frameworks'
     },
-    { name: 'Techniques', link: '/blog/ai-radar/techniques' }
+    { name: 'Techniques', link: '/ai-radar/techniques' }
   ],
   rings: [
-    { name: 'ADOPT', color: 'var(--color-adopt)' },
-    { name: 'TRIAL', color: 'var(--color-trial)' },
-    { name: 'ASSESS', color: 'var(--color-assess)' },
-    { name: 'HOLD', color: 'var(--color-hold)' }
+    { name: 'ADOPT', color: RADAR_COLORS.adopt },
+    { name: 'TRIAL', color: RADAR_COLORS.trial },
+    { name: 'ASSESS', color: RADAR_COLORS.assess },
+    { name: 'HOLD', color: RADAR_COLORS.hold }
   ],
   entries: allEntries
 }

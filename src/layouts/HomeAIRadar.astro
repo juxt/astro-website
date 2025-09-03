@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets'
+import { MarkdownInstance } from 'astro'
+import '../blog.css'
+import { Blog } from '@utils/types'
+import Layout from './Layout.astro'
+import AIRadarData from '../components/AIRadarData.astro'
+import { RADAR_COLORS } from '../utils/radar-colors'
+import SocialShare from '../components/SocialShare.astro'
+
+type Props = MarkdownInstance<Blog>
+
+const { frontmatter } = Astro.props
+const { title, description } = frontmatter
+
+const shareIconStyle =
+  'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
+---
+
+<Layout
+  navbar
+  title={title}
+  ogTitle={`JUXT AI Radar: ${title}`}
+  ogDescription={description}
+  robots='noindex,follow'
+>
+  <main class='transition-colors dark:bg-gray-900'>
+    <div
+      class='w-full shadow-lg py-12'
+      style={`background: ${RADAR_COLORS.mainRadarBanner}`}
+    >
+      <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto flex justify-center'>
+        <div class='text-center flex flex-col items-center'>
+          <h1
+            class='text-4xl md:text-5xl font-bold text-white tracking-wide mb-4'
+          >
+            {title}
+          </h1>
+          <p class='text-xl text-white/90 max-w-3xl mx-auto'>
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <AIRadarData />
+
+    <!-- Social Sharing -->
+    <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
+      <SocialShare
+        title={title}
+        url={Astro.url.href}
+        shareIconStyle={shareIconStyle}
+        containerClass='pb-20 pt-6 flex justify-end items-center gap-4'
+      />
+    </div>
+
+    <!-- AI Radar Content -->
+    <div class='ai-radar-container px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
+      <article class='py-12 prose prose-lg dark:prose-invert max-w-none'>
+        <slot />
+      </article>
+    </div>
+  </main>
+</Layout>

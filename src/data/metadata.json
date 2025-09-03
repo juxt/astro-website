@@ -21,6 +21,7 @@
     { "label": "Careers", "href": "/careers" },
     { "label": "Blog", "href": "/blog" },
     { "label": "XTDB", "href": "https://xtdb.com/", "target": "_blank" },
+    { "label": "AI Radar", "href": "/ai-radar" },
     {
       "label": "Get in touch",
       "href": "/contact",
@@ -53,7 +54,8 @@
         { "label": "Blog", "href": "/blog" },
         { "label": "Clojure In", "href": "/clojure-in" },
         { "label": "JUXT Cast", "href": "https://pod.link/juxtcast" },
-        { "label": "Radar", "href": "/radar" },
+        { "label": "Clojure Radar", "href": "/radar" },
+        { "label": "AI Radar", "href": "/ai-radar" },
         {
           "label": "Tech Roundtable",
           "href": "/jdt-tech-roundtable",
@@ -163,6 +165,10 @@
     "xt24": {
       "description": "Engineering leaders meet to explore groundbreaking technology shaping the future of financial services.",
       "image": "sm-xt24.jpg"
+    },
+    "ai-radar": {
+      "description": "An opinionated guide to the AI landscape from JUXT, a Grid Dynamics company",
+      "image": "ai-radar.png"
     }
   }
 }

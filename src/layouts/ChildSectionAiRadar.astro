@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets'
+import { MarkdownInstance } from 'astro'
+import { Blog } from '@utils/types'
+import Layout from './Layout.astro'
+import { RADAR_COLORS, getRingColor } from '../utils/radar-colors'
+
+type Props = MarkdownInstance<Blog>
+
+const { frontmatter } = Astro.props
+const { title, description } = frontmatter
+
+// Auto-infer parent section and banner color from file path
+const { inferredParentSection, bannerColor } = inferPathInfo(Astro.url.pathname)
+
+function inferPathInfo(pathname: string): {
+  inferredParentSection: string | null
+  bannerColor: string
+} {
+  // Normalize pathname by removing trailing slash and then remove /ai-radar prefix
+  const normalizedPathname = pathname.replace(/\/$/, '')
+  const pathWithoutPrefix = normalizedPathname.replace(/^\/ai-radar\//, '')
+  const pathParts = pathWithoutPrefix.split('/')
+
+  let inferredParentSection: string | null = null
+  let bannerColor: string = RADAR_COLORS.fallback // Default fallback
+
+  // If we're at the main ai-radar level (ai-radar), no parent
+  if (pathParts.length === 0) {
+    inferredParentSection = null
+    bannerColor = RADAR_COLORS.mainRadarBanner
+  }
+  // If we're at a quadrant level (ai-radar/techniques), go back to main ai-radar
+  else if (pathParts.length === 1) {
+    inferredParentSection = 'ai-radar'
+    bannerColor = RADAR_COLORS.quadrantBanner
+  }
+  // If we're at a ring level (ai-radar/techniques/adopt), go back to quadrant (ai-radar/techniques)
+  else if (pathParts.length === 2) {
+    inferredParentSection = `ai-radar/${pathParts[0]}`
+
+    // Infer banner color based on ring level
+    const ringName = pathParts[1]
+    bannerColor = getRingColor(ringName)
+  }
+  // For any deeper levels, go up one level
+  else {
+    inferredParentSection = `ai-radar/${pathParts.slice(0, -1).join('/')}`
+    bannerColor = RADAR_COLORS.fallback
+  }
+
+  return { inferredParentSection, bannerColor }
+}
+---
+
+<Layout
+  navbar
+  title={title}
+  ogTitle={`JUXT AI Radar: ${title}`}
+  ogDescription={description}
+  robots='noindex,follow'
+>
+  <main class='transition-colors dark:bg-gray-900'>
+    <!-- Full-width Section Banner -->
+    <div class='w-full shadow-lg py-8' style={`background: ${bannerColor}`}>
+      <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
+        <div class='flex items-center gap-8'>
+          {
+            inferredParentSection && (
+              <a
+                href={`/${inferredParentSection}`}
+                class='inline-flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium px-4 py-2 rounded-lg hover:bg-white/10'
+              >
+                <svg
+                  class='w-5 h-5'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M15 19l-7-7 7-7'
+                  />
+                </svg>
+                Back
+              </a>
+            )
+          }
+          <h1
+            class='text-2xl md:text-3xl font-bold text-white tracking-wide flex-1 text-center'
+          >
+            {title}
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Radar Section Content -->
+    <div
+      class='ai-radar-section-container px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'
+    >
+      <article class='py-8 prose prose-lg dark:prose-invert max-w-none'>
+        <slot />
+      </article>
+    </div>
+  </main>
+</Layout>

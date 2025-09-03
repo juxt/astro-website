@@ -69,29 +69,3 @@ pre.astro-code.css-variables {
   right: 0;
   z-index: 10;
 }
-
-/* Radar colors as CSS custom properties - matching Tailwind colors */
-:root {
-  --color-adopt: #16a34a; /* Tailwind green-600 */
-  --color-trial: #0891b2; /* Tailwind cyan-600 */
-  --color-assess: #ca8a04; /* Tailwind yellow-600 */
-  --color-hold: #dc2626; /* Tailwind red-600 */
-}
-
-/* Dark mode variants */
-.dark {
-  --color-adopt: #22c55e; /* Tailwind green-500 */
-  --color-trial: #06b6d4; /* Tailwind cyan-500 */
-  --color-assess: #eab308; /* Tailwind yellow-500 */
-  --color-hold: #ef4444; /* Tailwind red-500 */
-}
-
-/* Banner gradient using radar colors */
-.banner-gradient {
-  background: linear-gradient(
-    to right,
-    var(--color-adopt),
-    var(--color-trial),
-    var(--color-assess)
-  );
-}
