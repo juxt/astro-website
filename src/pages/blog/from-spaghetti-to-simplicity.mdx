@@ -81,7 +81,7 @@ At this stage, we did not involve traders directly in demos. The app was still t
 
 A complex highlight for us was orchestrating socket connections, two separate services, and funneling the data into grid and chart widgets. Once we solved that, the rest of the UI was much more approachable.
 
-This might get a bit technical, so feel free to skip this part, but we found a very elegant approach to managing the socket messages using RTK Query's `onCacheEntryAdded` lifecycle hook. The concept looks something like this:
+This might get a bit technical, so feel free to skip the following part, but we found a very elegant approach to managing the socket messages using RTK Query's `onCacheEntryAdded` lifecycle hook. The concept looks something like this:
 
 ```ts
 export const helloApi = createApi({
