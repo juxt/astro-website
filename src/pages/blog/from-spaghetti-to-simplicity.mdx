@@ -69,7 +69,7 @@ Another core principle we adopted was having one single source of truth for our 
 
 We embraced a functional approach with React hooks and leaned heavily on RTK Query for server state management. For real time updates, we combined RTK Query with sockets.
 
-One concern I had was performance. Redux is not always the best fit for fast streaming data, and traders' sockets could produce thousands of messages per second. Instead of adopting a new state library, we added a tiny client side buffer, just four lines of my code. It collected incoming messages in memory and flushed them to Redux four times per second. Profiling showed negligible CPU usage, so this was a solid compromise.
+One concern I had was performance. Redux is not always the best fit for fast streaming data, and traders' sockets could produce thousands of messages per second. Instead of adopting a new state library, we added a tiny client side buffer, just four lines of code. It collected incoming messages in memory and flushed them to Redux four times per second. Profiling showed negligible CPU usage, so this was a solid compromise.
 
 Contrary to the old codebase, we avoided unnecessary complexity like web workers for this. The main thread handled it just fine. Using Mock Service Worker, we stress tested the app with tens of thousands of continuous messages, well beyond realistic scenarios.
 
