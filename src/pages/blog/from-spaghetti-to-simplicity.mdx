@@ -79,7 +79,7 @@ Our first production release was intentionally minimal: a grid and a chart. Thes
 
 At this stage, we did not involve traders directly in demos. The app was still too rough, and we wanted to polish the basics before showing it. Instead, we kept management engaged with weekly demos. Once the backbone was stable, we could make reliable estimates for adding further widgets.
 
-The most complex part for us was orchestrating socket connections, two separate services, and funneling the data into grid and chart widgets. Once we solved that, the rest of the UI was much more approachable.
+A complex highlight for us was orchestrating socket connections, two separate services, and funneling the data into grid and chart widgets. Once we solved that, the rest of the UI was much more approachable.
 
 This might get a bit technical, so feel free to skip this part, but we found a very elegant approach to managing the socket messages using RTK Query's `onCacheEntryAdded` lifecycle hook. The concept looks something like this:
 
