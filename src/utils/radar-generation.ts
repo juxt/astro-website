@@ -37,11 +37,11 @@ export interface RadarEntry {
 
 export interface RadarQuadrant {
   name: string;
+  color: string;
 }
 
 export interface RadarRing {
   name: string;
-  color: string;
   radius?: number;
   description?: string;
 }
@@ -74,6 +74,10 @@ export interface RadarConfig {
   rings: RadarRing[];
   entries: RadarEntry[];
   zoomed_quadrant?: number;
+  themeColors?: {
+    ringTextColor: string;
+    mainTextColor: string;
+  };
 }
 
 import * as d3 from 'd3';
@@ -101,7 +105,7 @@ export function radar_visualization(config: RadarConfig): void {
   config.title_offset = config.title_offset || { x: -675, y: -420 };
   config.footer_offset = config.footer_offset || { x: -155, y: 450 };
   config.legend_column_width = config.legend_column_width || 140
-  config.legend_line_height = config.legend_line_height || 10
+  config.legend_line_height = config.legend_line_height || 14
 
   // custom random number generator, to make random sequence reproducible
   // source: https://stackoverflow.com/questions/521295
@@ -217,7 +221,7 @@ export function radar_visualization(config: RadarConfig): void {
     entry.x = point.x;
     entry.y = point.y;
     entry.color = entry.active || config.print_layout ?
-      config.rings[entry.ring].color : config.colors.inactive;
+      config.quadrants[entry.quadrant].color : config.colors.inactive;
   }
 
   // partition entries according to segments
@@ -320,7 +324,7 @@ export function radar_visualization(config: RadarConfig): void {
         .text(config.rings[i].name)
         .attr("y", -rings[i].radius + 62)
         .attr("text-anchor", "middle")
-        .style("fill", config.rings[i].color)
+        .style("fill", config.themeColors?.ringTextColor || "#666")
         .style("opacity", 0.35)
         .style("font-family", config.font_family)
         .style("font-size", "42px")
@@ -332,7 +336,7 @@ export function radar_visualization(config: RadarConfig): void {
 
   function legend_transform(quadrant, ring, legendColumnWidth, index=null, previousHeight = null) {
     const dx = ring < 2 ? 0 : legendColumnWidth;
-    let dy = (index == null ? -16 : index * config.legend_line_height);
+    let dy = (index == null ? -16 : (index * config.legend_line_height) + 6);
 
     if (ring % 2 === 1) {
       dy = dy + 36 + previousHeight;
@@ -372,7 +376,8 @@ export function radar_visualization(config: RadarConfig): void {
       .text("▲ moved up     ▼ moved down     ★ new     ⬤ no change")
       .attr("xml:space", "preserve")
       .style("font-family", config.font_family)
-      .style("font-size", "12px");
+      .style("font-size", "12px")
+      .style("fill", config.themeColors?.mainTextColor || "#333");
 
     // legend
     const legend = radar.append("g");
@@ -385,11 +390,38 @@ export function radar_visualization(config: RadarConfig): void {
         .text(config.quadrants[quadrant].name)
         .style("font-family", config.font_family)
         .style("font-size", "18px")
-        .style("font-weight", "bold");
+        .style("font-weight", "bold")
+        .style("fill", config.quadrants[quadrant].color);
+      // Pre-calculate heights for adopt (ring 0) and assess (ring 2) sections
+      let adoptHeight = 0
+      let assessHeight = 0
+      
+      // Calculate adopt section height (ring 0)
+      segmented[quadrant][0].forEach(entry => {
+        // Estimate height based on text wrapping
+        const words = entry.label.split(" ")
+        const estimatedLines = Math.ceil(words.join(" ").length / (config.legend_column_width / 8)) // rough estimate
+        adoptHeight += Math.max(1, estimatedLines) * config.legend_line_height
+      })
+      
+      // Calculate assess section height (ring 2)  
+      segmented[quadrant][2].forEach(entry => {
+        // Estimate height based on text wrapping
+        const words = entry.label.split(" ")
+        const estimatedLines = Math.ceil(words.join(" ").length / (config.legend_column_width / 8)) // rough estimate
+        assessHeight += Math.max(1, estimatedLines) * config.legend_line_height
+      })
+      
+      // Use the maximum height for both bottom sections, plus breathing space
+      const maxTopSectionHeight = Math.max(adoptHeight, assessHeight) + 4
+      
       let previousLegendHeight = 0
       for (let ring = 0; ring < 4; ring++) {
         if (ring % 2 === 0) {
           previousLegendHeight = 0
+        } else {
+          // For trial (ring 1) and hold (ring 3), use the same baseline height
+          previousLegendHeight = maxTopSectionHeight
         }
         legend.append("text")
           .attr("transform", legend_transform(quadrant, ring, config.legend_column_width, null, previousLegendHeight))
@@ -397,7 +429,7 @@ export function radar_visualization(config: RadarConfig): void {
           .style("font-family", config.font_family)
           .style("font-size", "12px")
           .style("font-weight", "bold")
-          .style("fill", config.rings[ring].color);
+          .style("fill", config.themeColors?.ringTextColor || "#666");
         legend.selectAll(".legend" + quadrant + ring)
           .data(segmented[quadrant][ring])
           .enter()
@@ -416,13 +448,17 @@ export function radar_visualization(config: RadarConfig): void {
               .text(function(d: RadarEntry) { return d.id + ". " + d.label; })
               .style("font-family", config.font_family)
               .style("font-size", "11px")
-              .on("mouseover", function(event, d) { showBubble(d); highlightLegendItem(d); })
-              .on("mouseout", function(event, d) { hideBubble(d); unhighlightLegendItem(d); })
+              .style("fill", config.themeColors?.mainTextColor || "#333")
+              .on("mouseover", function(event, d) { highlightLegendItem(d); })
+              .on("mouseout", function(event, d) { unhighlightLegendItem(d); })
               .call(wrap_text)
               .each(function() {
                 const node = d3.select(this).node() as SVGTextElement;
                 if (node) {
-                  previousLegendHeight += node.getBBox().height;
+                  // Only accumulate height for the current section (not used for bottom alignment)
+                  if (ring % 2 === 0) {
+                    previousLegendHeight += node.getBBox().height;
+                  }
                 }
               });
       }
@@ -455,9 +491,8 @@ export function radar_visualization(config: RadarConfig): void {
         line.push(words[position]);
         tspan.text(line.join(" "));
 
-        // Avoid wrap for first line (position !== 1) to not end up in a situation where the long text without
-        // whitespace is wrapped (causing the first line near the legend number to be blank).
-        if (tspan.node().getComputedTextLength() > config.legend_column_width && position !== 1) {
+        // Wrap text when it exceeds column width, but avoid wrapping single words on first line
+        if (tspan.node().getComputedTextLength() > (config.legend_column_width - 10) && (position > 1 || line.length > 1)) {
           line.pop();
           tspan.text(line.join(" "));
           line = [words[position]];
@@ -526,14 +561,16 @@ export function radar_visualization(config: RadarConfig): void {
 
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    legendItem.setAttribute("filter", "url(#solid)");
-    legendItem.setAttribute("fill", "white");
+    if (legendItem) {
+      legendItem.style.fontWeight = "bold";
+    }
   }
 
   function unhighlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    legendItem.removeAttribute("filter");
-    legendItem.removeAttribute("fill");
+    if (legendItem) {
+      legendItem.style.fontWeight = "normal";
+    }
   }
 
   // draw blips on radar
@@ -543,8 +580,8 @@ export function radar_visualization(config: RadarConfig): void {
       .append("g")
         .attr("class", "blip")
         .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, config.legend_column_width, i); })
-        .on("mouseover", function(event, d) { showBubble(d); highlightLegendItem(d); })
-        .on("mouseout", function(event, d) { hideBubble(d); unhighlightLegendItem(d); });
+        .on("mouseover", function(event, d) { highlightLegendItem(d); })
+        .on("mouseout", function(event, d) { unhighlightLegendItem(d); });
 
   // configure each blip
   blips.each(function(d) {
@@ -637,8 +674,8 @@ export function radar_visualization(config: RadarConfig): void {
       .append("th")
       .style("padding", "8px")
       .style("border", "1px solid #ddd")
-      .style("background-color", d => d.color)
-      .style("color", "#fff")
+      .style("background-color", "#f3f4f6")
+      .style("color", "#374151")
       .style("width", columnWidth)
       .text(d => d.name);
 

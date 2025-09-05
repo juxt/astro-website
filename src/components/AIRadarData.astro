@@ -273,19 +273,28 @@ console.log(`Total radar entries collected: ${allEntries.length}`)
 // Prepare AI radar data
 const radarData = {
   quadrants: [
-    { name: 'Platforms', link: '/ai-radar/platforms' },
-    { name: 'Tools', link: '/ai-radar/tools' },
+    {
+      name: 'Platforms',
+      link: '/ai-radar/platforms',
+      color: RADAR_COLORS.platforms
+    },
+    { name: 'Tools', link: '/ai-radar/tools', color: RADAR_COLORS.tools },
     {
       name: 'Languages & Frameworks',
-      link: '/ai-radar/languages-frameworks'
+      link: '/ai-radar/languages-frameworks',
+      color: RADAR_COLORS.languagesFrameworks
     },
-    { name: 'Techniques', link: '/ai-radar/techniques' }
+    {
+      name: 'Techniques',
+      link: '/ai-radar/techniques',
+      color: RADAR_COLORS.techniques
+    }
   ],
   rings: [
-    { name: 'ADOPT', color: RADAR_COLORS.adopt },
-    { name: 'TRIAL', color: RADAR_COLORS.trial },
-    { name: 'ASSESS', color: RADAR_COLORS.assess },
-    { name: 'HOLD', color: RADAR_COLORS.hold }
+    { name: 'ADOPT' },
+    { name: 'TRIAL' },
+    { name: 'ASSESS' },
+    { name: 'HOLD' }
   ],
   entries: allEntries
 }

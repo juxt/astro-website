@@ -10,8 +10,8 @@ import type {
 interface Props {
   data: {
     title?: string
-    quadrants: Array<{ name: string }>
-    rings: Array<{ name: string; color: string }>
+    quadrants: Array<{ name: string; color: string }>
+    rings: Array<{ name: string }>
     entries: Array<{
       label: string
       quadrant: number
@@ -63,10 +63,7 @@ const radarConfig = {
 ---
 
 <div class='w-11/12 mx-auto overflow-hidden flex justify-center items-center'>
-  <svg
-    viewBox='0 0 1450 1000'
-    id='radar'
-    class='block max-w-full dark:fill-white'></svg>
+  <svg viewBox='0 0 1450 1000' id='radar' class='block max-w-full'></svg>
 </div>
 
 <script>
@@ -77,14 +74,78 @@ const radarConfig = {
     document.getElementById('radar-config')?.textContent || '{}'
   )
 
+  let radarInitialized = false
+
+  // Function to get theme colors based on current mode
+  function getThemeColors() {
+    const isDarkMode = document.documentElement.classList.contains('dark')
+    return {
+      ringTextColor: isDarkMode ? '#9ca3af' : '#6b7280', // gray-400 : gray-500
+      mainTextColor: isDarkMode ? '#d1d5db' : '#374151' // gray-300 : gray-700
+    }
+  }
+
+  // Function to update colors when theme changes
+  function updateRadarColors() {
+    if (!radarInitialized) return
+
+    const themeColors = getThemeColors()
+
+    // Update ring labels in legend
+    document.querySelectorAll('#radar text').forEach((textElement) => {
+      const element = textElement as SVGTextElement
+      // Check if it's a ring label (ADOPT, TRIAL, ASSESS, HOLD)
+      const text = element.textContent
+      if (text && ['ADOPT', 'TRIAL', 'ASSESS', 'HOLD'].includes(text)) {
+        element.style.fill = themeColors.ringTextColor
+      }
+      // Check if it's an entry text (has number prefix like "1. ")
+      else if (text && /^\d+\./.test(text)) {
+        element.style.fill = themeColors.mainTextColor
+      }
+      // Check if it's the footer legend (contains the symbols)
+      else if (text && text.includes('▲ moved up')) {
+        element.style.fill = themeColors.mainTextColor
+      }
+    })
+
+    // Update large ring text on radar background
+    document
+      .querySelectorAll('#radar text[font-size="42px"]')
+      .forEach((textElement) => {
+        const element = textElement as SVGTextElement
+        element.style.fill = themeColors.ringTextColor
+      })
+  }
+
   // Initialize the radar visualization
   document.addEventListener('DOMContentLoaded', function () {
     try {
       const config = {
-        ...radarConfig
+        ...radarConfig,
+        themeColors: getThemeColors()
       }
 
       radar_visualization(config)
+      radarInitialized = true
+
+      // Set up observer to watch for theme changes
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'class'
+          ) {
+            updateRadarColors()
+          }
+        })
+      })
+
+      // Start observing the document element for class changes
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+      })
     } catch (error) {
       console.error('Failed to load radar visualization:', error)
     }
