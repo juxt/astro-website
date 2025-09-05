@@ -1,4 +1,12 @@
 ---
+import type {
+  RadarConfig,
+  RadarEntry,
+  RadarQuadrant,
+  RadarRing,
+  RadarColors
+} from '../utils/radar-generation'
+
 interface Props {
   data: {
     title?: string
@@ -61,24 +69,30 @@ const radarConfig = {
     class='block max-w-full dark:fill-white'></svg>
 </div>
 
-<script is:inline src='https://d3js.org/d3.v7.min.js'></script>
-<script
-  is:inline
-  src='https://zalando.github.io/tech-radar/release/radar-0.12.js'></script>
+<script>
+  import { radar_visualization } from '../utils/radar-generation'
 
-<script define:vars={{ radarConfig }}>
+  // Get the radar config from the component
+  const radarConfig = JSON.parse(
+    document.getElementById('radar-config')?.textContent || '{}'
+  )
+
   // Initialize the radar visualization
   document.addEventListener('DOMContentLoaded', function () {
-    if (typeof radar_visualization === 'function') {
-      // Get parent container width and set height proportionally
-
+    try {
       const config = {
         ...radarConfig
       }
 
       radar_visualization(config)
-    } else {
-      console.error('radar_visualization function not found')
+    } catch (error) {
+      console.error('Failed to load radar visualization:', error)
     }
   })
 </script>
+
+<script
+  id='radar-config'
+  type='application/json'
+  set:html={JSON.stringify(radarConfig)}
+/>
