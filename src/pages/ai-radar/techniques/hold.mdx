@@ -11,15 +11,14 @@ These techniques are not recommended for new projects due to declining relevance
 
 ## Word2Vec & GloVe
 
-We've placed both GloVe (Global Vectors for Word Representation) and Word2Vec (Word to Vector) in the Hold ring of our techniques quadrant. While these word embedding techniques were groundbreaking when introduced and served as fundamental building blocks for many NLP applications, they have been largely superseded by more advanced approaches.
+We've placed both [GloVe (Global Vectors for Word Representation)](https://nlp.stanford.edu/projects/glove/) and [Word2Vec (Word to Vector)](https://www.tensorflow.org/text/tutorials/word2vec) in the Hold ring of our techniques quadrant. While these word embedding techniques were groundbreaking when introduced and served as fundamental building blocks for many NLP applications, they have been largely superseded by more advanced approaches.
 
 These older embedding techniques, though computationally efficient, lack the contextual understanding that modern transformer-based models provide. Modern large language models and contextual embeddings like BERT produce more nuanced representations that capture word meaning based on surrounding context, rather than the static embeddings that GloVe and Word2Vec generate. For new projects, we recommend exploring more recent embedding techniques (see "BERT Variants" in our Adopt ring) unless you have very specific constraints around computational resources or model size that make these older approaches necessary.
 
 <div data-radar data-meta='{"label":"t-SNE"}' />
-
 ## t-SNE
 
-We've placed t-SNE (t-distributed Stochastic Neighbor Embedding) in the Hold ring of our techniques quadrant. While t-SNE was groundbreaking when introduced for visualising high-dimensional data in lower dimensions, particularly for understanding the internal representations of neural networks, we're seeing its limitations become more apparent in modern AI workflows.
+We've placed [t-SNE (t-distributed Stochastic Neighbor Embedding)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding) in the Hold ring of our techniques quadrant. While t-SNE was groundbreaking when introduced for visualising high-dimensional data in lower dimensions, particularly for understanding the internal representations of neural networks, we're seeing its limitations become more apparent in modern AI workflows.
 
 The core issue is that t-SNE can be misleading when interpreting AI model behaviour, as it prioritises preserving local structure at the expense of global relationships. This can lead teams to draw incorrect conclusions about their models' decision boundaries and feature representations. We're increasingly recommending alternatives like UMAP (Uniform Manifold Approximation and Projection), which better preserves both local and global structure while offering superior computational performance. For projects requiring dimensionality reduction and visualisation of AI model internals, we suggest exploring these newer techniques rather than defaulting to t-SNE.
 
