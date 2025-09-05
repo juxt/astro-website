@@ -3,24 +3,38 @@ layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Languages & Frameworks: Hold'
 ---
 
+# Hold
+
 These languages and frameworks are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.
 
 <div data-radar data-meta='{"label":"TensorFlow"}' />
+
 ## TensorFlow
 
-While TensorFlow was once the dominant deep learning framework, it has been largely superseded by PyTorch in most domains. TensorFlow's complexity, limited debugging capabilities, and slower development pace have made it less attractive for new projects. PyTorch offers better developer experience and more active community support.
+We have placed TensorFlow in the Hold ring for several reasons. While TensorFlow remains a capable deep learning framework that helped popularise machine learning at scale, we're seeing teams struggle with its steep learning curve and complex deployment story compared to more modern alternatives. The framework's verbose syntax and intricate architecture often lead to longer development cycles, particularly for teams new to machine learning.
+
+PyTorch has emerged as the clear community favourite for both research and production deployments, with a more intuitive programming model and better debugging capabilities. Additionally, with the rise of AI platforms that abstract away much of the underlying complexity, many teams no longer need to work directly with low-level frameworks like TensorFlow. For new projects, we recommend exploring higher-level tools or PyTorch unless there are compelling reasons to use TensorFlow, such as maintaining existing deployments or specific requirements around TensorFlow Extended (TFX) for ML pipelines.
 
 <div data-radar data-meta='{"label":"Keras"}' />
+
 ## Keras
 
-Keras has been integrated into TensorFlow and has lost much of its independent value. While it still provides a high-level API, the benefits of using Keras standalone have diminished. Modern PyTorch workflows and other high-level frameworks offer better alternatives for rapid prototyping and development.
+We have placed Keras in the Hold ring primarily due to its transition from a standalone deep learning framework to becoming more tightly integrated with TensorFlow, along with the emergence of more modern alternatives that offer better developer experiences.
+
+While Keras served as an excellent entry point for many developers into deep learning, providing an intuitive API that made neural networks more accessible, the landscape has evolved significantly. Frameworks like PyTorch have gained substantial momentum, offering clearer debugging, better documentation and a more Pythonic approach. Additionally, recent high-level frameworks such as Lightning and FastAI provide similar ease-of-use benefits while maintaining closer alignment with current best practices in deep learning development. For new projects, we recommend exploring these alternatives rather than investing in Keras-specific expertise.
 
 <div data-radar data-meta='{"label":"R"}' />
+
 ## R
 
-R's role in AI and machine learning has diminished significantly with the rise of Python and its rich ecosystem. While R still has strengths in statistical analysis, its limited deep learning capabilities and smaller community make it less suitable for modern AI development. Python offers better tools and broader ecosystem support.
+Despite R's historical significance in data science and statistical computing, we've placed it in the Hold ring for new projects. While R remains capable for statistical analysis and data visualisation, we're seeing its adoption declining in favour of Python's more comprehensive ecosystem for machine learning and AI workflows.
+
+The key factors driving this recommendation are the overwhelming industry preference for Python-based ML frameworks, the stronger integration of Python with modern AI platforms and tools, and the challenges of hiring R specialists in today's market. While R retains some advantages for specific statistical applications and academic research, we believe teams starting new AI initiatives will benefit from standardising on Python to maximise their access to cutting-edge AI libraries, tools, and talent.
 
 <div data-radar data-meta='{"label":"OpenCL"}' />
+
 ## OpenCL
 
-OpenCL has been largely superseded by more modern GPU computing frameworks like CUDA and specialized AI frameworks. While OpenCL offers cross-platform compatibility, its complexity and limited AI-specific optimizations make it less suitable for modern AI development. More specialized frameworks provide better performance and easier development.
+We've placed OpenCL in the Hold ring of our Languages & Frameworks quadrant. While OpenCL (Open Computing Language) was groundbreaking when introduced as a standard for parallel programming across different types of processors, we believe teams should look to alternatives for new projects.
+
+Despite its promise of write-once-run-anywhere code for GPUs, CPUs, and other accelerators, OpenCL has seen declining industry support and faces significant challenges. Major hardware vendors have shifted their focus to more specialised frameworks like CUDA for NVIDIA hardware, while newer alternatives such as SYCL and modern GPU compute frameworks offer better developer experiences with similar cross-platform benefits. The complexity of the OpenCL programming model, combined with inconsistent tooling support and a fragmented ecosystem, makes it increasingly difficult to justify for new development compared to more actively maintained alternatives.

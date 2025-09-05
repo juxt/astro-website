@@ -3,12 +3,18 @@ layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Platforms: Hold'
 ---
 
-These platforms are not recommended for adoption due to limited value, better alternatives, or significant vendor lock-in risks. While some may offer specific capabilities, they generally represent approaches that don't provide sufficient value to justify the associated risks and limitations.
+# Hold
 
-<div
-  data-radar
-  data-meta='{"label":"Building against Vendor-specific APIs"}'
-/>
-## Building against Vendor-specific APIs
+These platforms are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent approaches that have been superseded by more effective solutions.
 
-Building AI applications that are tightly coupled to vendor-specific APIs creates significant vendor lock-in and limits flexibility. While these APIs may offer convenience in the short term, they create long-term dependencies that can be costly and difficult to overcome. Teams should prefer provider-agnostic approaches that maintain flexibility and reduce vendor lock-in risks.
+<div data-radar data-meta='{"label":"Building against vendor-specific APIs"}' />
+
+## Building against vendor-specific APIs
+
+We've placed "Building against vendor-specific APIs" in the Hold ring of the Platforms quadrant because tightly coupling your applications to vendor-specific LLM APIs poses significant business risks in this rapidly evolving landscape.
+
+The foundation model ecosystem is changing at breakneck speed, with model capabilities, pricing and even entire companies shifting dramatically from month to month. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges. We've seen teams invest substantial engineering effort into rewriting API integrations after discovering their chosen vendor has been outperformed or has significantly increased its pricing.
+
+Instead, we recommend using abstraction libraries that provide a common interface to multiple LLM providers. Libraries such as AISuite or Simon Willison's LLM CLI let you switch between different models with minimal code changes, sometimes just a configuration update. These libraries handle the nuances of different vendor APIs, managing context windows, token limitations and provider-specific parameters behind a consistent interface. This approach preserves your flexibility to take advantage of new capabilities or improved pricing as the market evolves, while significantly reducing the engineering effort required to switch between models.
+
+These abstractions do add some complexity and may occasionally limit access to vendor-specific features, but in our view, the protection against vendor lock-in far outweighs these drawbacks in most cases. As the foundation model market continues to consolidate, maintaining the flexibility to adapt quickly will be crucial for both cost management and staying competitive.

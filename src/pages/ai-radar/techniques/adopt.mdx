@@ -3,32 +3,60 @@ layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Techniques: Adopt'
 ---
 
-These AI techniques have proven their value in production environments and are recommended for immediate use. They represent mature, well-understood approaches that deliver reliable results across a wide range of applications.
+# Adopt
+
+These techniques represent mature, well-supported approaches that are ready for production use. They offer excellent performance, extensive documentation, and proven track records in real-world applications.
 
 <div data-radar data-meta='{"label":"Classical ML"}' />
+
 ## Classical ML
 
-Classical machine learning techniques remain foundational to AI development, providing robust solutions for structured data problems. These algorithms, including linear regression, decision trees, and support vector machines, offer excellent interpretability and performance for many real-world applications. Their maturity means extensive documentation, proven implementations, and well-understood limitations.
+We continue to see tremendous value in classical machine learning approaches like random forests, gradient boosting (XGBoost, LightGBM), linear/logistic regression and support vector machines for many business problems. While attention has shifted dramatically towards deep learning and large language models in the last couple of years, these traditional techniques often provide the best balance of explainability, computational efficiency, and performance for structured data problems.
 
-<div
-  data-radar
-  data-meta='{"label":"RAG (Retrieval-Augmented Generation)"}'
-/>
-## RAG (Retrieval-Augmented Generation)
+The key advantages that keep classical ML firmly in our Adopt ring include faster training times, lower computing requirements, and easier deployment compared to deep learning approaches. However, it's important to recognise that realising these benefits requires both quality training data and staff with appropriate expertise. Unlike the recent wave of LLM-based solutions that have democratised AI capabilities for organisations without extensive data science teams, classical ML continues to demand specialised knowledge in feature engineering, model selection, and evaluation.
 
-RAG has emerged as a critical technique for building AI applications that can access and reason about external knowledge. By combining retrieval systems with generative models, RAG enables more accurate, up-to-date, and verifiable AI responses. The technique has proven particularly valuable for enterprise applications where accuracy and source attribution are crucial.
+For organisations with the necessary data assets and technical capabilities, these methods work well even with the smaller datasets common in enterprise settings, often matching or exceeding the performance of more complex approaches while remaining more interpretable to stakeholders and easier to maintain. Their lower training costs, smaller carbon footprint, and built-in feature importance metrics provide practical advantages that directly translate to business value, particularly as organisations face increasing pressure to make their ML systems both cost-effective and environmentally sustainable.
+
+<div data-radar data-meta='{"label":"RAG"}' />
+
+## RAG
+
+Retrieval-Augmented Generation (RAG) is an AI approach that combines search and text generation to produce more accurate responses. The approach helps prevent confabulation—cases where AI models generate plausible but incorrect information—by grounding responses in real data.
+
+We're placing RAG in the Adopt ring because it addresses key challenges in deploying AI systems in information retrieval contexts. The technique is particularly valuable when accuracy and traceability of information are crucial, such as in customer service, technical documentation, or compliance scenarios. While implementing RAG requires careful attention to document processing and embedding strategies, the widespread availability of tools and frameworks has significantly lowered the barriers to adoption. Teams should consider RAG as a foundational technique when building AI applications that need to leverage organisational knowledge.
+
+We're particularly interested in monitoring how this technique develops alongside others improving AI system reliability and truthfulness. For example, by augmenting the approach with Self-RAG to recognise when more evidence needs to be gathered, conflicting information verified, or responses refined for better accuracy. This 'self-criticism' mechanism has shown promising results in improving response quality and reducing hallucinations.
+
+See also Cross-encoder reranking, Chain of thought, Structured RAG.
 
 <div data-radar data-meta='{"label":"LLM-as-a-Judge"}' />
+
 ## LLM-as-a-Judge
 
-Using large language models to evaluate and judge the quality of AI-generated content has become an essential technique for quality assurance. This approach provides scalable, consistent evaluation of AI outputs across various domains, from code generation to content creation. The technique helps maintain high standards in AI applications while reducing manual review overhead.
+We've placed LLM-as-a-judge in the Adopt ring because it has quickly proven itself to be one of the most practical and cost-effective techniques for evaluating AI system outputs. At first glance, it might seem like circular reasoning to have one LLM evaluate another LLM's work. However, the capabilities of today's strongest models are such that they can provide nuanced, multidimensional critique that simpler evaluation methods cannot match, except when using very constrained metrics like exact match or BLEU scores (Bilingual Evaluation Understudy, a method for automatically evaluating machine translations).
 
-<div data-radar data-meta='{"label":"BERT Variants"}' />
-## BERT Variants
+This technique has become widely adopted in both offline and online evaluation scenarios. In offline evaluation, it scales far better than human assessment, allowing teams to test thousands of outputs quickly during development and quality assurance workflows. In online scenarios, an LLM judge can evaluate another LLM's output in real-time in production, enabling dynamic workflow adjustments or user experience modifications based on quality assessments. This real-time evaluation approach serves as a foundation for more sophisticated agentic workflows, where multiple AI components collaborate to refine outputs before user delivery.
 
-BERT and its variants continue to be the foundation for many natural language processing tasks. These transformer-based models provide excellent performance for text classification, named entity recognition, and question answering. Their pre-trained nature and fine-tuning capabilities make them accessible for a wide range of applications.
+Recent research demonstrates that the current frontier models can provide judgements that correlate strongly with human preferences across many common evaluation dimensions. For best results, we recommend using a different LLM as the judge than the one being evaluated, and viewing this approach as an augmentation to, not replacement for, human evaluation. The strongest LLMs can identify nuanced issues in reasoning, factuality, and tone that would otherwise require substantial human review time, creating a more efficient evaluation pipeline whilst preserving critical human oversight for final quality assurance.
 
-<div data-radar data-meta='{"label":"Few-shot Prompting"}' />
-## Few-shot Prompting
+<div data-radar data-meta='{"label":"BERT variants"}' />
 
-Few-shot prompting has proven to be an effective technique for leveraging large language models with minimal training data. By providing examples in the prompt, developers can quickly adapt models to new tasks without extensive fine-tuning. This technique is particularly valuable for rapid prototyping and domain-specific applications.
+## BERT variants
+
+Bidirectional Encoder Representations from Transformers (BERT) revolutionised Natural Language Processing (NLP) by allowing AI models to process human language by looking at words in relation to their entire context, rather than just left-to-right or right-to-left. Think of it like a reader who can understand a word by looking at all the surrounding words for context, rather than reading sequentially. The original BERT spawned a family tree of variants and new versions are still being developed, most recently ModernBERT, which is too new at the time of writing for us to have independently evaluated.
+
+BERT-style models serve fundamentally different purposes than generative models like GPT. While GPT models excel at generating text and conversational interactions, BERT models are optimised for understanding and analysis tasks such as classification, named entity recognition, and sentiment analysis. They're particularly valuable for creating semantic vector embeddings that capture text meaning in numerical form, making them essential components in Retrieval Augmented Generation (RAG) systems. In these pipelines, BERT embeddings help retrieve relevant information that is then fed as text to GPT models for generation: the models don't directly share embeddings, but rather work in complementary roles.
+
+We particularly recommend DeBERTa for organisations starting new NLP projects. It handles word relationships more effectively using a disentangled attention mechanism and enhanced position encoding. DistilBERT is smaller and faster whilst retaining most of the model's performance, so it is particularly valuable for production deployments where latency requirements are strict or computing resources are limited, such as edge devices or high-throughput API services.
+
+For organisations choosing between BERT and GPT models, consider your specific use case: BERT models require fewer computational resources for inference and excel at precise understanding tasks, while GPT models offer impressive out-of-the-box generation capabilities through accessible APIs. Many sophisticated AI applications today use both types in complementary roles—BERT for understanding and information retrieval, and GPT for generation based on that understanding.
+
+There are options for specialised domains like biomedical (BioBERT) or financial text (FinBERT). While these can outperform general models in their niches, they often require significant expertise to use effectively and may need additional tuning for specific use cases.
+
+<div data-radar data-meta='{"label":"Few-shot prompting"}' />
+
+## Few-shot prompting
+
+The technique of providing examples to guide an AI model's responses has proven consistently effective across different Large Language Models. By showing the model a few examples of desired input-output pairs, developers can achieve more reliable, consistent, and contextually appropriate responses without resorting to complex prompt engineering or fine-tuning.
+
+The method's strength lies in its simplicity and portability across different AI platforms. Our team members report significantly improved results when moving from zero-shot (no examples) to few-shot approaches, particularly for tasks requiring specific formats, technical terminology, or domain expertise. While the optimal number of examples varies by use case, we typically see diminishing returns beyond 3-5 examples. The main trade-off to consider is token consumption, as each example uses up context window space that could be used for other content.

@@ -3,25 +3,40 @@ layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Tools: Adopt'
 ---
 
-These tools represent essential additions to AI development workflows that significantly improve productivity, code quality, and development experience. They have proven their value in production environments and are recommended for immediate adoption by AI development teams.
+# Adopt
 
-<div
-  data-radar
-  data-meta='{"label":"Software Engineering Copilots", "moved": "up"}'
-/>
+These tools represent mature, well-supported technologies that are ready for production use. They offer excellent productivity gains, extensive documentation, and proven track records in real-world development workflows.
+
+<div data-radar data-meta='{"label":"Software Engineering Copilots"}' />
+
 ## Software Engineering Copilots
 
-AI-powered coding assistants like GitHub Copilot and similar tools have become essential for modern software development. These tools significantly improve developer productivity by providing intelligent code suggestions, documentation generation, and automated testing. Their integration with existing development workflows makes them valuable for teams of all sizes.
+Software Engineering Copilots represent a new category of AI-powered development tools that act as intelligent coding assistants. These tools, including Cursor, Copilot, Windsurf, Zed, Traycer, Cody, Cline, Tabnine and Aider either exist as standalone IDEs or integrate as plugins into existing IDEs, and offer code completion, refactoring suggestions, and automated implementation of routine tasks.
 
-<div
-  data-radar
-  data-meta='{"label":"Provider-agnostic LLM Facades", "moved": "down"}'
-/>
-## Provider-agnostic LLM Facades
+We're seeing a clear pattern emerge in how these tools impact different experience levels. Counter-intuitively, senior engineers are deriving the most value by leveraging AI to accelerate well-understood tasks and automate routine code generation, whilst maintaining strict quality control over the output. Junior developers often struggle to effectively evaluate AI suggestions, sometimes accepting problematic implementations or failing to spot edge cases that weren't properly handled.
 
-Provider-agnostic abstractions for large language models have become essential for building robust AI applications. These tools allow developers to switch between different LLM providers without changing application code, providing flexibility and reducing vendor lock-in. The ability to optimize costs and performance across different providers makes these tools valuable for production applications.
+We've placed Software Engineering Copilots firmly in the Adopt ring. The productivity gains (particularly for experienced developers who can effectively guide and evaluate AI suggestions) are substantial enough to justify this placement. Organisations report significant productivity improvements on routine coding tasks, with some teams achieving even more impressive results through careful integration into their workflows.
 
-<div data-radar data-meta='{"label":"Notebooks", "moved": "new"}' />
+Cursor has emerged as a current frontrunner with its implementation of .cursorrules, which allows teams to share configuration settings and enforce consistent coding practices across projects. This feature enables organisations to codify their standards, architectural patterns, and security guidelines directly into the AI assistant, addressing many of our previous concerns about inconsistent output and quality control. While other tools will likely implement similar capabilities soon, Cursor's current implementation provides a robust framework for enterprise adoption.
+
+For teams adopting these tools, we still recommend a "trust but verify" approach: use AI assistance for initial implementation and routine tasks, but maintain rigorous code review and testing practices. Organisations should also consider providing structured training for junior developers on effectively collaborating with AI tools, focusing on developing the critical thinking skills needed to evaluate and refine AI-generated code.
+
+The rate of improvement in this space continues to be remarkable, with new capabilities being added regularly. Teams should remain flexible in their tool selection, as today's leader may be surpassed by innovations in competing products tomorrow. Regardless of the specific tool chosen, the fundamental shift towards AI-augmented development appears to be permanent, and organisations delaying adoption risk finding themselves at a competitive disadvantage.
+
+<div data-radar data-meta='{"label":"Provider-agnostic LLM facades"}' />
+
+## Provider-agnostic LLM facades
+
+The LLM landscape evolves rapidly, making today's optimal choice potentially outdated within months. We recommend implementing a facade pattern between your application and LLM providers, rather than building directly against specific APIs. This approach reduces vendor lock-in and enables easier testing of alternative models as they emerge. When considering whether to write your own code, be sure to consider tools such as the lightweight AISuite, Simon Willison's LLM library and CLI tool, or heavyweight alternatives such as LangChain and LlamaIndex.
+
+This recommendation reflects our team's experience seeing projects hampered by tight coupling to specific LLM providers, and the subsequent maintenance burden when transitioning to newer, more capable models.
+
+<div data-radar data-meta='{"label":"Notebooks"}' />
+
 ## Notebooks
 
-Jupyter notebooks and similar interactive development environments remain essential for AI development, particularly for data exploration, model experimentation, and documentation. Modern notebook environments with enhanced collaboration features, version control integration, and production deployment capabilities make them valuable for both research and production workflows.
+We've placed Notebooks in the Adopt ring because they have become the de facto standard for data science and machine learning experimentation, prototyping, and documentation. The interactive nature of notebooks, combining code execution with rich text explanations and visualisations, makes them particularly valuable for AI/ML workflows where iterative exploration and clear documentation of model development are essential.
+
+Widespread adoption across both industry and academia, plus an extensive plugin ecosystem and integration with popular AI frameworks, demonstrates their maturity as a method of interacting with code. We especially value how notebooks facilitate collaboration between technical and non-technical team members, as they can serve as living documents that combine business requirements, technical implementation, and results in a single, shareable format.
+
+Jupyter notebooks are the most widely used, supporting multiple languages including Python, R and Julia. The cloud platforms provide their own implementations: Google Colab, AWS Sagemaker Notebooks, Azure Notebooks, Databricks Notebooks. And there are language specific notebooks, such as Pluto.jl for Julia, Clerk for Clojure, Polynote for Scala.

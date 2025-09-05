@@ -3,14 +3,62 @@ layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Platforms: Adopt'
 ---
 
-These platforms represent mature, reliable infrastructure that is essential for AI development and deployment. They offer proven capabilities, excellent performance, and strong ecosystem support that make them the foundation for most AI applications.
+# Adopt
+
+These platforms represent mature, well-supported services that are ready for production use. They offer excellent reliability, extensive features, and proven track records in real-world AI deployments.
 
 <div data-radar data-meta='{"label":"Weights & Biases"}' />
+
 ## Weights & Biases
 
-Weights & Biases has become the standard platform for experiment tracking and model management in AI development. Its comprehensive suite of tools for experiment tracking, model versioning, and collaboration makes it essential for teams building AI applications. The platform's integration with popular frameworks and extensive feature set justify its adoption for most AI projects.
+Weights & Biases is a platform designed for tracking and visualising machine learning experiments. In recent projects, we've observed that it provides a robust solution for managing machine learning workflows, particularly when dealing with complex models and large datasets. Its user-friendly interface and integration capabilities with popular machine learning libraries make it accessible for teams looking to improve their model development processes.
 
-<div data-radar data-meta='{"label":"Foundation Models"}' />
-## Foundation Models
+We've seen how systems such as Weights & Biases can catalyse positive cultural changes in ML teams. By making experiment tracking very light touch, requiring just a few lines of code, they remove the friction that sometimes prevents teams from maintaining good measurement practices. When tracking experiments becomes a natural part of the workflow rather than an extra burden, teams tend to measure more, compare results more frequently, and generally make more data-driven decisions.
 
-Foundation model platforms provide access to pre-trained large language models that serve as the foundation for many AI applications. These platforms offer the infrastructure, APIs, and tools needed to leverage state-of-the-art models without the complexity of training from scratch. Their proven capabilities and growing ecosystem make them essential for modern AI development.
+Collaboration features such as shared dashboards and reports amplify these benefits by making results and insights visible to the whole team. Rather than knowledge being siloed in individual notebooks or spreadsheets, experiments become shared assets that everyone can learn from. This visibility often leads to more discussion about results, faster knowledge sharing, and ultimately quicker iteration cycles as teams build upon each other's work rather than inadvertently duplicating efforts. However, it's important to note that tool adoption alone isn't enough—teams need to actively foster a culture that values measurement and experimentation for these benefits to fully materialise.
+
+<div data-radar data-meta='{"label":"Foundation models"}' />
+
+## Foundation models
+
+Foundation model providers continue to evolve at a rapid pace. Major players like OpenAI, Anthropic, Google, and Meta compete alongside emerging organisations such as DeepSeek, Alibaba, IBM and others. While industry benchmarks help compare these models, they tell only part of the story: different models excel in different areas, and benchmark results should be viewed as indicative rather than definitive.
+
+A clear trend has emerged in how providers differentiate their offerings across three distinct tiers: smaller, faster models (e.g., Claude Haiku, DeepSeek Coder, Qwen Turbo) optimised for speed and cost; larger, more capable models (e.g., Claude Sonnet, DeepSeek V3, Qwen Max) balancing capabilities with reasonable response times; and specialised reasoning models (e.g., Claude Sonnet Extended, OpenAI o1, DeepSeek R1) designed for complex problem-solving. These reasoning models consume significantly more tokens and command higher per-token costs, but demonstrate remarkable capabilities in solving challenging logical puzzles, mathematics problems, and coding tasks.
+
+We believe foundation models have matured enough to warrant adoption for many business applications. When paired with appropriate infrastructure (few-shot prompting, guardrails, retrieval-augmented generation, and evaluation frameworks), they offer compelling solutions to a wide range of problems. Our experience suggests there's no universal "best model". We recommend implementing your own benchmarking process focused on your specific use cases. When selecting a model, consider factors beyond raw performance, such as pricing, reliability, data privacy requirements, and whether on-premise deployment is needed. The recent emergence of high-quality open-source models with permissive licensing (such as DeepSeek's offerings) provides additional options for organisations with specific security or deployment requirements.
+
+### Key Considerations:
+
+- **Performance & capabilities** (accuracy, speed, and domain-specific strengths)
+- **Total cost of ownership** (API costs, compute resources, and integration)
+- **Deployment options & technical requirements** (cloud, self-hosted, edge)
+- **Data privacy & compliance** (regulatory, legal, and security implications)
+- **Integration & lifecycle management** (context limitations, version control, updates)
+- **Vendor stability & support** (roadmap alignment, documentation, community)
+
+### Foundation Model Providers Feature Comparison (April 2025)
+
+| Provider             | Reasoning Models | Multimodal | Self-hosting | Open Weights | Long Context | RAG Optimised | Multilingual | Edge Deployment | Real-time Data | Enterprise Focus | Model Selection Link                            |
+| -------------------- | ---------------- | ---------- | ------------ | ------------ | ------------ | ------------- | ------------ | --------------- | -------------- | ---------------- | ----------------------------------------------- |
+| OpenAI               | ✓                | ✓          |              |              |              | ✓             | ✓            | ✓               |                | ✓                | [Models](https://openai.com/models)             |
+| Anthropic            | ✓                | ✓          |              |              |              | ✓             | ✓            | ✓               |                | ✓                | [Models](https://anthropic.com/models)          |
+| DeepSeek             | ✓                | ✓          | ✓            | ✓            | ✓            |               | ✓            | ✓               |                |                  | [Models](https://deepseek.com/models)           |
+| Meta                 |                  |            | ✓            | ✓            | ✓            |               | ✓            | ✓               |                |                  | [Models](https://meta.ai/models)                |
+| Alibaba (Qwen)       | ✓                | ✓          | ✓            | ✓            | ✓            |               | ✓            |                 |                |                  | [Models](https://qwen.alibaba.com/models)       |
+| AWS                  |                  |            | ✓            |              |              | ✓             | ✓            | ✓               |                | ✓                | [Models](https://aws.amazon.com/bedrock/models) |
+| X (formerly Twitter) |                  |            |              |              |              |               |              |                 |                | ✓                | [Models](https://x.ai/models)                   |
+| Mistral AI           | ✓                | ✓          | ✓            | ✓            |              | ✓             | ✓            | ✓               |                |                  | [Models](https://mistral.ai/models)             |
+| Google               | ✓                | ✓          |              |              |              | ✓             | ✓            | ✓               |                | ✓                | [Models](https://ai.google.dev/models)          |
+
+### Feature Definitions
+
+- **Open Weights**: Models whose weights are publicly available for download and customisation
+- **Self-hosting**: Ability to run models on your own infrastructure
+- **Reasoning Models**: Specialised models for complex reasoning tasks like mathematics or step-by-step problem solving
+- **Multimodal**: Support for multiple input/output modalities (text, images, audio, etc.)
+- **Long Context**: Support for context windows of 100K tokens or more
+- **RAG Optimised**: Perform well at generating coherent responses that integrate external knowledge from retrieved documents with model knowledge, might include specific capabilities like improved citation of sources
+- **Enterprise Focus**: Strong emphasis on governance, security, and enterprise integration
+- **Multilingual**: Strong support for multiple languages beyond English
+- **Edge Deployment**: Optimised for deployment on edge devices or resource-constrained environments
+- **Real-time Data**: Access to real-time (or very recent) information
