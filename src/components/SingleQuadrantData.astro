@@ -1,0 +1,22 @@
+---
+import SingleQuadrantRadar from './SingleQuadrantRadar.astro'
+import { extractQuadrantData } from '../utils/radar-data-extractor'
+
+interface Props {
+  quadrantName: string // 'languages-frameworks', 'techniques', 'tools', 'platforms'
+}
+
+const { quadrantName } = Astro.props
+
+// Extract data for the specific quadrant using the common utility
+const quadrantData = extractQuadrantData(quadrantName)
+---
+
+<SingleQuadrantRadar
+  quadrantName={quadrantData.quadrantName}
+  quadrantColor={quadrantData.quadrantColor}
+  data={{
+    rings: quadrantData.rings,
+    entries: quadrantData.entries
+  }}
+/>

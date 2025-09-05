@@ -81,6 +81,7 @@ export interface RadarConfig {
 
 import * as d3 from 'd3';
 import { getRadarStructureColors, getTooltipColors, RADAR_COLORS } from './radar-colors';
+import { applyCollisionDetection } from './radar-collision';
 
 export function radar_visualization(config: RadarConfig): void {
 
@@ -600,7 +601,6 @@ export function radar_visualization(config: RadarConfig): void {
         .attr("class", "blip")
         .attr("id", function(d) { return "blip" + d.id; })
         .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, config.legend_column_width, i); })
-        .style("opacity", 0.8)
         .on("mouseover", function(event, d) { highlightLegendItem(d); })
         .on("mouseout", function(event, d) { unhighlightLegendItem(d); });
 
@@ -661,10 +661,11 @@ export function radar_visualization(config: RadarConfig): void {
   }
 
   // distribute blips, while avoiding collisions
-  d3.forceSimulation()
-    .nodes(config.entries)
-    .velocityDecay(0.19) // magic number (found by experimentation)
-    .force("collision", d3.forceCollide().radius(12).strength(0.85))
-    .on("tick", ticked);
+  applyCollisionDetection(config.entries, {
+    radius: 18,
+    strength: 0.95,
+    velocityDecay: 0.19,
+    onTick: ticked
+  });
 
 }

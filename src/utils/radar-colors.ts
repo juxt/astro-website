@@ -7,9 +7,6 @@ const baseColors = {
   techniques: '#dc2626',          // red-600
   
   // === RADAR STRUCTURE COLORS ===
-  // Universal ring color (for all rings)
-  ring: '#6366f1',               // indigo-500
-  
   // Grid and background colors
   radarBackground: '#ffffff',     // white
   radarGrid: '#dddde0',          // light gray for grid lines
@@ -86,10 +83,6 @@ export function getQuadrantColorFromPath(pathname: string): string {
   return RADAR_COLORS.fallback
 }
 
-// Helper function to get universal ring color
-export function getRingColor(): string {
-  return RADAR_COLORS.ring
-}
 
 // Theme-aware color helpers (simplified - only used server-side)
 export function getThemeColors(isDarkMode: boolean) {
