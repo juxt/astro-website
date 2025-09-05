@@ -1,26 +1,58 @@
-// AI Radar Colors - Single source of truth
+// AI Radar Colors - Single source of truth for all radar visualizations
 const baseColors = {
-  // Quadrant colors
+  // === QUADRANT COLORS ===
   platforms: '#16a34a',           // green-600
   tools: '#0891b2',              // cyan-600
   languagesFrameworks: '#ca8a04', // yellow-600
   techniques: '#dc2626',          // red-600
   
-  // Ring colors (for backward compatibility in banners)
-  adopt: '#16a34a',      // green-600
-  trial: '#0891b2',      // cyan-600
-  assess: '#ca8a04',     // yellow-600
-  hold: '#dc2626',       // red-600
+  // === RADAR STRUCTURE COLORS ===
+  // Universal ring color (for all rings)
+  ring: '#6366f1',               // indigo-500
   
-  // Fallback colors
-  fallback: '#475569'    // slate-600
+  // Grid and background colors
+  radarBackground: '#ffffff',     // white
+  radarGrid: '#dddde0',          // light gray for grid lines
+  radarGridDark: '#bbbbbb',      // darker grid for better contrast
+  
+  // Inactive/disabled state
+  inactiveEntry: '#dddddd',      // light gray for inactive entries
+  
+  // === TEXT COLORS ===
+  // Light mode text colors
+  lightRingText: '#6b7280',      // gray-500 - for ring labels
+  lightMainText: '#374151',      // gray-700 - for main text/entries
+  lightSecondaryText: '#9ca3af', // gray-400 - for secondary text
+  
+  // Dark mode text colors  
+  darkRingText: '#9ca3af',       // gray-400 - for ring labels
+  darkMainText: '#d1d5db',       // gray-300 - for main text/entries
+  
+  // === TOOLTIP COLORS ===
+  // Light mode tooltip
+  lightTooltipBg: '#f9fafb',     // gray-50
+  lightTooltipText: '#374151',   // gray-700
+  lightTooltipBorder: '#d1d5db', // gray-300
+  
+  // Dark mode tooltip
+  darkTooltipBg: '#374151',      // gray-700
+  darkTooltipText: '#f9fafb',    // gray-50
+  darkTooltipBorder: '#6b7280',  // gray-500
+  
+  // === MISC COLORS ===
+  white: '#ffffff',              // pure white for blips/highlights
+  fallback: '#475569'            // slate-600 - fallback color
 } as const
 
 export const RADAR_COLORS = {
   ...baseColors,
-  // Banner colors (using quadrant colors)
+  
+  // === BANNER GRADIENTS ===
   quadrantBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks})`,
   mainRadarBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks}, ${baseColors.techniques})`,
+  
+  // === THEME-AWARE COLOR GETTERS ===
+  // These will be used by helper functions
 } as const
 
 // Helper function to get quadrant color based on quadrant name
@@ -41,18 +73,46 @@ export function getQuadrantColor(quadrantName: string): string {
   }
 }
 
-// Helper function to get ring color based on ring name (for backward compatibility)
-export function getRingColor(ringName: string): string {
-  switch (ringName) {
-    case 'adopt':
-      return RADAR_COLORS.adopt
-    case 'trial':
-      return RADAR_COLORS.trial
-    case 'assess':
-      return RADAR_COLORS.assess
-    case 'hold':
-      return RADAR_COLORS.hold
-    default:
-      return RADAR_COLORS.fallback
+// Helper function to get quadrant color from path (for banner logic)
+export function getQuadrantColorFromPath(pathname: string): string {
+  const pathWithoutPrefix = pathname.replace(/^\/ai-radar\//, '')
+  const pathParts = pathWithoutPrefix.split('/')
+  
+  if (pathParts.length >= 1) {
+    const quadrantName = pathParts[0]
+    return getQuadrantColor(quadrantName)
+  }
+  
+  return RADAR_COLORS.fallback
+}
+
+// Helper function to get universal ring color
+export function getRingColor(): string {
+  return RADAR_COLORS.ring
+}
+
+// Theme-aware color helpers (simplified - only used server-side)
+export function getThemeColors(isDarkMode: boolean) {
+  return {
+    ringTextColor: isDarkMode ? RADAR_COLORS.darkRingText : RADAR_COLORS.lightRingText,
+    mainTextColor: isDarkMode ? RADAR_COLORS.darkMainText : RADAR_COLORS.lightMainText
   }
 }
+
+export function getTooltipColors(isDarkMode: boolean) {
+  return {
+    background: isDarkMode ? RADAR_COLORS.darkTooltipBg : RADAR_COLORS.lightTooltipBg,
+    text: isDarkMode ? RADAR_COLORS.darkTooltipText : RADAR_COLORS.lightTooltipText,
+    border: isDarkMode ? RADAR_COLORS.darkTooltipBorder : RADAR_COLORS.lightTooltipBorder
+  }
+}
+
+export function getRadarStructureColors() {
+  return {
+    background: RADAR_COLORS.radarBackground,
+    grid: RADAR_COLORS.radarGrid,
+    gridDark: RADAR_COLORS.radarGridDark,
+    inactive: RADAR_COLORS.inactiveEntry
+  }
+}
+

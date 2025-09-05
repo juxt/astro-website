@@ -60,7 +60,6 @@ export interface RadarConfig {
   print_layout?: boolean;
   links_in_new_tabs?: boolean;
   repo_url?: string;
-  print_ring_descriptions_table?: boolean;
   legend_offset?: Array<{ x: number; y: number }>;
   title_offset?: { x: number; y: number };
   footer_offset?: { x: number; y: number };
@@ -81,21 +80,22 @@ export interface RadarConfig {
 }
 
 import * as d3 from 'd3';
+import { getRadarStructureColors, getTooltipColors, RADAR_COLORS } from './radar-colors';
 
 export function radar_visualization(config: RadarConfig): void {
 
   config.svg_id = config.svg_id || "radar";
   config.width = config.width || 1450;
   config.height = config.height || 1000;
+  const structureColors = getRadarStructureColors();
   config.colors = ("colors" in config) ? config.colors : {
-      background: "#fff",
-      grid: '#dddde0',
-      inactive: "#ddd"
+      background: structureColors.background,
+      grid: structureColors.grid,
+      inactive: structureColors.inactive
     };
   config.print_layout = ("print_layout" in config) ? config.print_layout : true;
   config.links_in_new_tabs = ("links_in_new_tabs" in config) ? config.links_in_new_tabs : true;
   config.repo_url = config.repo_url || '#';
-  config.print_ring_descriptions_table = ("print_ring_descriptions_table" in config) ? config.print_ring_descriptions_table : false;
   config.legend_offset = config.legend_offset || [
     { x: 450, y: 90 },
     { x: -675, y: 90 },
@@ -296,19 +296,7 @@ export function radar_visualization(config: RadarConfig): void {
     .style("stroke", config.colors.grid)
     .style("stroke-width", 1);
 
-  // background color. Usage `.attr("filter", "url(#solid)")`
-  // SOURCE: https://stackoverflow.com/a/31013492/2609980
-  var defs = grid.append("defs");
-  var filter = defs.append("filter")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", 1)
-    .attr("height", 1)
-    .attr("id", "solid");
-  filter.append("feFlood")
-    .attr("flood-color", "rgb(0, 0, 0, 0.8)");
-  filter.append("feComposite")
-    .attr("in", "SourceGraphic");
+  // Removed unused solid filter - no longer needed without bubble tooltips
 
   // draw rings
   for (var i = 0; i < rings.length; i++) {
@@ -321,10 +309,11 @@ export function radar_visualization(config: RadarConfig): void {
       .style("stroke-width", 1);
     if (config.print_layout) {
       grid.append("text")
+        .attr("class", "radar-background-ring-text")
         .text(config.rings[i].name)
         .attr("y", -rings[i].radius + 62)
         .attr("text-anchor", "middle")
-        .style("fill", config.themeColors?.ringTextColor || "#666")
+        .style("fill", config.themeColors?.ringTextColor || RADAR_COLORS.lightRingText)
         .style("opacity", 0.35)
         .style("font-family", config.font_family)
         .style("font-size", "42px")
@@ -368,10 +357,11 @@ export function radar_visualization(config: RadarConfig): void {
       .text(config.date || "")
       .style("font-family", config.font_family)
       .style("font-size", "14")
-      .style("fill", "#999")
+      .style("fill", RADAR_COLORS.lightSecondaryText)
 
     // footer
     radar.append("text")
+      .attr("class", "radar-footer-legend")
       .attr("transform", translate(config.footer_offset.x, config.footer_offset.y))
       .text("▲ moved up     ▼ moved down     ★ new     ⬤ no change")
       .attr("xml:space", "preserve")
@@ -424,12 +414,13 @@ export function radar_visualization(config: RadarConfig): void {
           previousLegendHeight = maxTopSectionHeight
         }
         legend.append("text")
+          .attr("class", "radar-ring-label")
           .attr("transform", legend_transform(quadrant, ring, config.legend_column_width, null, previousLegendHeight))
           .text(config.rings[ring].name)
           .style("font-family", config.font_family)
           .style("font-size", "12px")
           .style("font-weight", "bold")
-          .style("fill", config.themeColors?.ringTextColor || "#666");
+          .style("fill", config.themeColors?.ringTextColor || RADAR_COLORS.lightRingText);
         legend.selectAll(".legend" + quadrant + ring)
           .data(segmented[quadrant][ring])
           .enter()
@@ -443,12 +434,12 @@ export function radar_visualization(config: RadarConfig): void {
               })
             .append("text")
               .attr("transform", function(d, i) { return legend_transform(quadrant, ring, config.legend_column_width, i, previousLegendHeight); })
-              .attr("class", "legend" + quadrant + ring)
+              .attr("class", "radar-entry-text")
               .attr("id", function(d: RadarEntry, i) { return "legendItem" + d.id; })
               .text(function(d: RadarEntry) { return d.id + ". " + d.label; })
               .style("font-family", config.font_family)
               .style("font-size", "11px")
-              .style("fill", config.themeColors?.mainTextColor || "#333")
+              .style("fill", config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText)
               .on("mouseover", function(event, d) { highlightLegendItem(d); })
               .on("mouseout", function(event, d) { unhighlightLegendItem(d); })
               .call(wrap_text)
@@ -514,56 +505,16 @@ export function radar_visualization(config: RadarConfig): void {
   var rink = radar.append("g")
     .attr("id", "rink");
 
-  // rollover bubble (on top of everything else)
-  var bubble = radar.append("g")
-    .attr("id", "bubble")
-    .attr("x", 0)
-    .attr("y", 0)
-    .style("opacity", 0)
-    .style("pointer-events", "none")
-    .style("user-select", "none");
-  bubble.append("rect")
-    .attr("rx", 4)
-    .attr("ry", 4)
-    .style("fill", "#333");
-  bubble.append("text")
-    .style("font-family", config.font_family)
-    .style("font-size", "10px")
-    .style("fill", "#fff");
-  bubble.append("path")
-    .attr("d", "M 0,0 10,0 5,8 z")
-    .style("fill", "#333");
-
-  function showBubble(d) {
-    if (d.active || config.print_layout) {
-      var tooltip = d3.select("#bubble text")
-        .text(d.label);
-      const tooltipNode = tooltip.node() as SVGTextElement;
-      var bbox = tooltipNode ? tooltipNode.getBBox() : { x: 0, y: 0, width: 100, height: 20 };
-      d3.select("#bubble")
-        .attr("transform", translate(d.x - bbox.width / 2, d.y - 16))
-        .style("opacity", 0.8);
-      d3.select("#bubble rect")
-        .attr("x", -5)
-        .attr("y", -bbox.height)
-        .attr("width", bbox.width + 10)
-        .attr("height", bbox.height + 4);
-      d3.select("#bubble path")
-        .attr("transform", translate(bbox.width / 2 - 5, 3));
-    }
-  }
-
-  function hideBubble(d) {
-    var bubble = d3.select("#bubble")
-      .attr("transform", translate(0,0))
-      .style("opacity", 0);
-  }
+  // Removed unused bubble tooltip code for cleaner implementation
 
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
     if (legendItem) {
       legendItem.style.fontWeight = "bold";
     }
+    
+    // Show tooltip for the corresponding radar circle
+    showTooltip(d);
   }
 
   function unhighlightLegendItem(d) {
@@ -571,6 +522,74 @@ export function radar_visualization(config: RadarConfig): void {
     if (legendItem) {
       legendItem.style.fontWeight = "normal";
     }
+    
+    // Hide tooltip
+    hideTooltip();
+  }
+
+  function showTooltip(d) {
+    var blipItem = document.getElementById("blip" + d.id);
+    if (!blipItem) return;
+    
+    // Remove any existing tooltip
+    hideTooltip();
+    
+    // Get the current theme colors
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    const tooltipColors = getTooltipColors(isDarkMode);
+    const tooltipBg = tooltipColors.background;
+    const tooltipText = tooltipColors.text;
+    const tooltipBorder = tooltipColors.border;
+    
+    // Create tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.id = 'radar-tooltip';
+    tooltip.textContent = d.label;
+    tooltip.style.cssText = `
+      position: absolute;
+      background: ${tooltipBg};
+      color: ${tooltipText};
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid ${tooltipBorder};
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      pointer-events: none;
+      z-index: 1000;
+      white-space: nowrap;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    `;
+    
+    // Get blip position relative to viewport and account for scroll
+    var rect = blipItem.getBoundingClientRect();
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    
+    // Position tooltip right above the circle with breathing room
+    tooltip.style.left = (rect.left + scrollLeft + rect.width / 2) + 'px';
+    tooltip.style.top = (rect.top + scrollTop - 42) + 'px'; // Tooltip height (~27px) + breathing room (~15px)
+    tooltip.style.transform = 'translateX(-50%)';
+    
+    document.body.appendChild(tooltip);
+    
+    // Highlight the circle slightly
+    blipItem.style.opacity = "1";
+    blipItem.style.filter = "brightness(1.2)";
+  }
+
+  function hideTooltip() {
+    var tooltip = document.getElementById('radar-tooltip');
+    if (tooltip) {
+      tooltip.remove();
+    }
+    
+    // Remove highlight from all blips
+    document.querySelectorAll('.blip').forEach(function(blip) {
+      const element = blip as HTMLElement;
+      element.style.opacity = "";
+      element.style.filter = "";
+    });
   }
 
   // draw blips on radar
@@ -579,7 +598,9 @@ export function radar_visualization(config: RadarConfig): void {
     .enter()
       .append("g")
         .attr("class", "blip")
+        .attr("id", function(d) { return "blip" + d.id; })
         .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, config.legend_column_width, i); })
+        .style("opacity", 0.8)
         .on("mouseover", function(event, d) { highlightLegendItem(d); })
         .on("mouseout", function(event, d) { unhighlightLegendItem(d); });
 
@@ -613,7 +634,7 @@ export function radar_visualization(config: RadarConfig): void {
         .style("fill", d.color);
     } else {
       blip.append("circle")
-        .attr("r", 9)
+        .attr("r", 12)
         .attr("fill", d.color);
     }
 
@@ -624,7 +645,7 @@ export function radar_visualization(config: RadarConfig): void {
         .text(blip_text)
         .attr("y", 3)
         .attr("text-anchor", "middle")
-        .style("fill", "#fff")
+        .style("fill", RADAR_COLORS.white)
         .style("font-family", config.font_family)
         .style("font-size", function(d) { return blip_text.length > 2 ? "8px" : "9px"; })
         .style("pointer-events", "none")
@@ -646,54 +667,4 @@ export function radar_visualization(config: RadarConfig): void {
     .force("collision", d3.forceCollide().radius(12).strength(0.85))
     .on("tick", ticked);
 
-  function ringDescriptionsTable() {
-    var table = d3.select("body").append("table")
-      .attr("class", "radar-table")
-      .style("border-collapse", "collapse")
-      .style("position", "relative")
-      .style("top", "-70px")  // Adjust this value to move the table closer vertically
-      .style("margin-left", "50px")
-      .style("margin-right", "50px")
-      .style("font-family", config.font_family)
-      .style("font-size", "13px")
-      .style("text-align", "left");
-
-    var thead = table.append("thead");
-    var tbody = table.append("tbody");
-
-    // define fixed width for each column
-    var columnWidth = `${100 / config.rings.length}%`;
-
-    // create table header row with ring names
-    var headerRow = thead.append("tr")
-      .style("border", "1px solid #ddd");
-
-    headerRow.selectAll("th")
-      .data(config.rings)
-      .enter()
-      .append("th")
-      .style("padding", "8px")
-      .style("border", "1px solid #ddd")
-      .style("background-color", "#f3f4f6")
-      .style("color", "#374151")
-      .style("width", columnWidth)
-      .text(d => d.name);
-
-    // create table body row with descriptions
-    var descriptionRow = tbody.append("tr")
-      .style("border", "1px solid #ddd");
-
-    descriptionRow.selectAll("td")
-      .data(config.rings)
-      .enter()
-      .append("td")
-      .style("padding", "8px")
-      .style("border", "1px solid #ddd")
-      .style("width", columnWidth)
-      .text(d => d.description);
-  }
-
-  if (config.print_ring_descriptions_table) {
-    ringDescriptionsTable();
-  }
 }

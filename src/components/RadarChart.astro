@@ -1,11 +1,5 @@
 ---
-import type {
-  RadarConfig,
-  RadarEntry,
-  RadarQuadrant,
-  RadarRing,
-  RadarColors
-} from '../utils/radar-generation'
+import { getThemeColors, getRadarStructureColors } from '../utils/radar-colors'
 
 interface Props {
   data: {
@@ -33,13 +27,15 @@ interface Props {
   linksInNewTabs?: boolean
 }
 
+const structureColors = getRadarStructureColors()
+
 const {
   data,
   scale = 1.0,
   colors = {
     background: 'transparent',
-    grid: '#bbb',
-    inactive: '#ddd'
+    grid: structureColors.gridDark,
+    inactive: structureColors.inactive
   },
   fontFamily = 'Arial, Helvetica',
   printLayout = true,
@@ -48,7 +44,6 @@ const {
 
 // Prepare radar configuration
 const radarConfig = {
-  repo_url: 'https://github.com/juxt/astro-website',
   svg_id: 'radar',
   scale,
   colors,
@@ -66,18 +61,11 @@ const radarConfig = {
   <svg viewBox='0 0 1450 1000' id='radar' class='block max-w-full'></svg>
 </div>
 
-<script>
-  import { radar_visualization } from '../utils/radar-generation'
-
-  // Get the radar config from the component
-  const radarConfig = JSON.parse(
-    document.getElementById('radar-config')?.textContent || '{}'
-  )
-
+<script define:vars={{ radarConfig }}>
   let radarInitialized = false
 
   // Function to get theme colors based on current mode
-  function getThemeColors() {
+  function getThemeColorsForMode() {
     const isDarkMode = document.documentElement.classList.contains('dark')
     return {
       ringTextColor: isDarkMode ? '#9ca3af' : '#6b7280', // gray-400 : gray-500
@@ -89,41 +77,42 @@ const radarConfig = {
   function updateRadarColors() {
     if (!radarInitialized) return
 
-    const themeColors = getThemeColors()
+    const themeColors = getThemeColorsForMode()
 
-    // Update ring labels in legend
-    document.querySelectorAll('#radar text').forEach((textElement) => {
-      const element = textElement as SVGTextElement
-      // Check if it's a ring label (ADOPT, TRIAL, ASSESS, HOLD)
-      const text = element.textContent
-      if (text && ['ADOPT', 'TRIAL', 'ASSESS', 'HOLD'].includes(text)) {
-        element.style.fill = themeColors.ringTextColor
-      }
-      // Check if it's an entry text (has number prefix like "1. ")
-      else if (text && /^\d+\./.test(text)) {
-        element.style.fill = themeColors.mainTextColor
-      }
-      // Check if it's the footer legend (contains the symbols)
-      else if (text && text.includes('▲ moved up')) {
-        element.style.fill = themeColors.mainTextColor
-      }
+    // Update ring labels in legend using class selector
+    document.querySelectorAll('.radar-ring-label').forEach((element) => {
+      element.style.fill = themeColors.ringTextColor
     })
 
-    // Update large ring text on radar background
+    // Update entry text using class selector
+    document.querySelectorAll('.radar-entry-text').forEach((element) => {
+      element.style.fill = themeColors.mainTextColor
+    })
+
+    // Update footer legend using class selector
+    document.querySelectorAll('.radar-footer-legend').forEach((element) => {
+      element.style.fill = themeColors.mainTextColor
+    })
+
+    // Update background ring text using class selector
     document
-      .querySelectorAll('#radar text[font-size="42px"]')
-      .forEach((textElement) => {
-        const element = textElement as SVGTextElement
+      .querySelectorAll('.radar-background-ring-text')
+      .forEach((element) => {
         element.style.fill = themeColors.ringTextColor
       })
   }
 
   // Initialize the radar visualization
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', async function () {
     try {
+      // Dynamically import the radar visualization function
+      const { radar_visualization } = await import(
+        '/src/utils/radar-generation.ts'
+      )
+
       const config = {
         ...radarConfig,
-        themeColors: getThemeColors()
+        themeColors: getThemeColorsForMode()
       }
 
       radar_visualization(config)
@@ -151,9 +140,3 @@ const radarConfig = {
     }
   })
 </script>
-
-<script
-  id='radar-config'
-  type='application/json'
-  set:html={JSON.stringify(radarConfig)}
-/>

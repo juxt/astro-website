@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import { Blog } from '@utils/types'
 import Layout from './Layout.astro'
-import { RADAR_COLORS, getRingColor } from '../utils/radar-colors'
+import { RADAR_COLORS, getQuadrantColorFromPath } from '../utils/radar-colors'
 
 type Props = MarkdownInstance<Blog>
 
@@ -39,9 +39,8 @@ function inferPathInfo(pathname: string): {
   else if (pathParts.length === 2) {
     inferredParentSection = `ai-radar/${pathParts[0]}`
 
-    // Infer banner color based on ring level
-    const ringName = pathParts[1]
-    bannerColor = getRingColor(ringName)
+    // Use quadrant color based on the parent quadrant
+    bannerColor = getQuadrantColorFromPath(pathname)
   }
   // For any deeper levels, go up one level
   else {
