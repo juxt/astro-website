@@ -373,11 +373,27 @@ export function radar_visualization(config: RadarConfig): void {
     // legend
     const legend = radar.append("g");
     for (let quadrant = 0; quadrant < 4; quadrant++) {
-      legend.append("text")
+      // Create clickable quadrant label
+      const quadrantLabel = legend.append("g")
         .attr("transform", translate(
           config.legend_offset[quadrant].x,
           config.legend_offset[quadrant].y - 45
         ))
+        .style("cursor", "pointer")
+        .on("click", () => {
+          // Use the link from the quadrant data structure
+          if (config.quadrants[quadrant].link) {
+            window.location.href = config.quadrants[quadrant].link;
+          }
+        })
+        .on("mouseover", function() {
+          d3.select(this).select("text").style("opacity", 0.7);
+        })
+        .on("mouseout", function() {
+          d3.select(this).select("text").style("opacity", 1);
+        });
+
+      quadrantLabel.append("text")
         .text(config.quadrants[quadrant].name)
         .style("font-family", config.font_family)
         .style("font-size", "18px")

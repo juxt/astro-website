@@ -174,7 +174,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
   config.entries.forEach((entry) => {
     const ring = rings[entry.ring];
     const prevRing = entry.ring > 0 ? rings[entry.ring - 1] : { radius: 0 };
-    const circleRadius = 12; // The actual circle size
+    const circleRadius = 9; // The actual circle size (smaller for better fit)
     
     // Calculate safe bounds accounting for circle circumference + buffer
     const buffer = 8; // Extra buffer to ensure circles never touch edges
@@ -304,14 +304,14 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
     })
     .on("click", (event, d) => {
       if (d.link) {
-        window.open(d.link, '_blank');
+        window.location.href = d.link;
       }
     });
 
   blips.append("circle")
     .attr("cx", 0)
     .attr("cy", 0)
-    .attr("r", 12)
+    .attr("r", 9) // Smaller circles to fit more entries
     .style("fill", d => d.color);
 
   // Add sequential numbers to circles
@@ -328,11 +328,11 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
   blips.append("text")
     .text(d => d.legendNumber || d.id) // Use sequential number if available
     .attr("x", 0)
-    .attr("y", 4)
+    .attr("y", 3) // Slightly adjust for smaller circles
     .attr("text-anchor", "middle")
     .style("fill", RADAR_COLORS.white)
     .style("font-family", config.font_family)
-    .style("font-size", "10px")
+    .style("font-size", "9px") // Smaller font for smaller circles
     .style("font-weight", "bold")
     .style("pointer-events", "none")
     .style("user-select", "none");
@@ -385,7 +385,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
         .on("mouseout", () => unhighlightLegendItem(entry))
         .on("click", () => {
           if (entry.link) {
-            window.open(entry.link, '_blank');
+            window.location.href = entry.link;
           }
         });
 
@@ -407,7 +407,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
 
   // Apply collision detection to prevent overlapping circles
   function updateBlipPositions() {
-    const circleRadius = 12;
+    const circleRadius = 9;
     
     // Additional safety check: constrain entries to proper boundaries after collision
     config.entries.forEach((entry) => {
@@ -446,7 +446,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
   }
 
   applyCollisionDetection(config.entries, {
-    radius: 16, // Slightly smaller for single quadrant
+    radius: 12, // Smaller collision radius for better packing
     strength: 0.9,
     velocityDecay: 0.2,
     onTick: updateBlipPositions
