@@ -1,5 +1,5 @@
 ---
-import { getThemeColors, getRadarStructureColors } from '../utils/radar-colors'
+import { getRadarStructureColors } from '../utils/radar-colors'
 
 interface Props {
   quadrantName: string
@@ -46,95 +46,118 @@ const singleQuadrantConfig = {
 }
 ---
 
-<div class='single-quadrant-radar-container'>
-  <svg
-    id='single-quadrant-radar'
-    class='w-full h-auto'
-    viewBox='0 0 800 500'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-  </svg>
-</div>
+<astro-single-radar-config data-config={JSON.stringify(singleQuadrantConfig)}>
+  <div class='single-quadrant-radar-container'>
+    <svg
+      id='single-quadrant-radar'
+      class='w-full h-auto'
+      viewBox='0 0 800 500'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+    </svg>
+  </div>
+</astro-single-radar-config>
 
-<script define:vars={{ singleQuadrantConfig }}>
-  let singleRadarInitialized = false
+<script>
+  import { single_quadrant_visualization } from '../utils/single-quadrant-generation'
+  import { getThemeColors, getQuadrantColor } from '../utils/radar-colors'
 
-  // Function to get theme colors based on current mode
-  async function getSingleQuadrantThemeColors() {
-    const isDarkMode = document.documentElement.classList.contains('dark')
-    const { getThemeColors } = await import('/src/utils/radar-colors.ts')
-    return getThemeColors(isDarkMode)
-  }
-
-  // Function to update colors when theme changes
-  async function updateSingleQuadrantColors() {
-    if (!singleRadarInitialized) return
-
-    const themeColors = await getSingleQuadrantThemeColors()
-
-    // Import and use the centralized color function
-    const { getQuadrantColor } = await import('/src/utils/radar-colors.ts')
-
-    const quadrantColor = getQuadrantColor(singleQuadrantConfig.quadrantName)
-
-    // Update ring labels to use quadrant color
-    document.querySelectorAll('.radar-ring-label').forEach((element) => {
-      element.style.fill = quadrantColor
-    })
-
-    // Update background ring text to use quadrant color
-    document
-      .querySelectorAll('.radar-background-ring-text')
-      .forEach((element) => {
-        element.style.fill = quadrantColor
-      })
-
-    // Update entry text
-    document.querySelectorAll('.radar-entry-text').forEach((element) => {
-      element.style.fill = themeColors.mainTextColor
-    })
-  }
-
-  // Initialize the single quadrant radar visualization
-  document.addEventListener('DOMContentLoaded', async function () {
-    try {
-      // Dynamically import the single quadrant visualization function
-      const { single_quadrant_visualization } = await import(
-        '/src/utils/single-quadrant-generation.ts'
-      )
-
-      const config = {
-        ...singleQuadrantConfig,
-        themeColors: await getSingleQuadrantThemeColors()
+  class AstroSingleRadarConfig extends HTMLElement {
+    connectedCallback() {
+      // Read the config from the data attribute
+      const configData = this.dataset.config
+      if (!configData) {
+        console.error('No single quadrant radar config found')
+        return
       }
 
-      single_quadrant_visualization(config)
-      singleRadarInitialized = true
+      const singleQuadrantConfig = JSON.parse(configData)
 
-      // Set up observer to watch for theme changes
-      const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-          if (
-            mutation.type === 'attributes' &&
-            mutation.attributeName === 'class'
-          ) {
-            updateSingleQuadrantColors()
+      const lightThemeColors = getThemeColors(false)
+      const darkThemeColors = getThemeColors(true)
+
+      let singleRadarInitialized = false
+
+      // Function to get theme colors based on current mode
+      function getSingleQuadrantThemeColors() {
+        const isDarkMode = document.documentElement.classList.contains('dark')
+        return isDarkMode ? darkThemeColors : lightThemeColors
+      }
+
+      // Function to update colors when theme changes
+      function updateSingleQuadrantColors() {
+        if (!singleRadarInitialized) return
+
+        const themeColors = getSingleQuadrantThemeColors()
+        const quadrantColor = getQuadrantColor(
+          singleQuadrantConfig.quadrantName
+        )
+
+        // Update ring labels to use quadrant color
+        document.querySelectorAll('.radar-ring-label').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = quadrantColor
           }
         })
-      })
 
-      // Start observing the document element for class changes
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class']
+        // Update background ring text to use quadrant color
+        document
+          .querySelectorAll('.radar-background-ring-text')
+          .forEach((element) => {
+            if (element instanceof SVGElement) {
+              element.style.fill = quadrantColor
+            }
+          })
+
+        // Update entry text
+        document.querySelectorAll('.radar-entry-text').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = themeColors.mainTextColor
+          }
+        })
+      }
+
+      // Initialize the single quadrant radar visualization
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          const config = {
+            ...singleQuadrantConfig,
+            themeColors: getSingleQuadrantThemeColors()
+          }
+
+          single_quadrant_visualization(config)
+          singleRadarInitialized = true
+
+          // Set up observer to watch for theme changes
+          const observer = new MutationObserver(
+            (mutations: MutationRecord[]) => {
+              mutations.forEach((mutation) => {
+                if (
+                  mutation.type === 'attributes' &&
+                  mutation.attributeName === 'class'
+                ) {
+                  updateSingleQuadrantColors()
+                }
+              })
+            }
+          )
+
+          // Start observing the document element for class changes
+          observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+          })
+        } catch (error) {
+          console.error(
+            'Failed to load single quadrant radar visualization:',
+            error
+          )
+        }
       })
-    } catch (error) {
-      console.error(
-        'Failed to load single quadrant radar visualization:',
-        error
-      )
     }
-  })
+  }
+
+  customElements.define('astro-single-radar-config', AstroSingleRadarConfig)
 </script>
 
 <style>
