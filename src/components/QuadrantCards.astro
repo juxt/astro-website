@@ -1,0 +1,43 @@
+---
+import { getQuadrantColor } from '../utils/radar-colors'
+
+interface Props {
+  data: {
+    title?: string
+    quadrants: Array<{ name: string; color: string; link?: string }>
+    rings: Array<{ name: string }>
+    entries: Array<{
+      label: string
+      quadrant: number
+      ring: number
+      moved?: number
+      url?: string
+      description?: string
+    }>
+  }
+}
+
+const { data } = Astro.props
+
+// Use the centralized function directly - it already handles name normalization
+---
+
+<div class='grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 py-8'>
+  {
+    data.quadrants.map((quadrant) => {
+      const quadrantColor = getQuadrantColor(quadrant.name)
+
+      return (
+        <a
+          href={quadrant.link}
+          class='block rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 transform hover:scale-105'
+          style={`background-color: ${quadrantColor}`}
+        >
+          <div class='px-6 py-8 text-center'>
+            <h2 class='text-xl font-bold text-white'>{quadrant.name}</h2>
+          </div>
+        </a>
+      )
+    })
+  }
+</div>

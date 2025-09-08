@@ -42,7 +42,10 @@ const singleQuadrantConfig = {
   colors: {
     background: 'transparent',
     grid: structureColors.grid
-  }
+  },
+  // Mobile-optimized dimensions for better readability
+  width: 800,
+  height: 500
 }
 ---
 
@@ -163,9 +166,43 @@ const singleQuadrantConfig = {
 <style>
   .single-quadrant-radar-container {
     @apply w-full;
+    /* Increase height on mobile for better readability */
+    min-height: 400px;
   }
 
   .single-quadrant-radar-container svg {
     @apply max-w-full h-auto;
+    /* Ensure minimum height on mobile */
+    min-height: 400px;
+  }
+
+  /* Mobile-specific adjustments */
+  @media (max-width: 768px) {
+    .single-quadrant-radar-container {
+      min-height: 500px;
+      /* Add more padding on mobile */
+      padding: 1rem 0;
+    }
+
+    .single-quadrant-radar-container svg {
+      min-height: 500px;
+      /* Scale up slightly on mobile for better text readability */
+      transform: scale(1.1);
+      transform-origin: center;
+    }
+  }
+
+  /* Small mobile screens */
+  @media (max-width: 480px) {
+    .single-quadrant-radar-container {
+      min-height: 600px;
+      padding: 1.5rem 0;
+    }
+
+    .single-quadrant-radar-container svg {
+      min-height: 600px;
+      /* Scale up more on very small screens */
+      transform: scale(1.2);
+    }
   }
 </style>

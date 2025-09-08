@@ -12,11 +12,14 @@ const { quadrantName } = Astro.props
 const quadrantData = extractQuadrantData(quadrantName)
 ---
 
-<SingleQuadrantRadar
-  quadrantName={quadrantData.quadrantName}
-  quadrantColor={quadrantData.quadrantColor}
-  data={{
-    rings: quadrantData.rings,
-    entries: quadrantData.entries
-  }}
-/>
+<!-- Hide radar on mobile, show on desktop/tablet only -->
+<div class='hidden md:block'>
+  <SingleQuadrantRadar
+    quadrantName={quadrantData.quadrantName}
+    quadrantColor={quadrantData.quadrantColor}
+    data={{
+      rings: quadrantData.rings,
+      entries: quadrantData.entries
+    }}
+  />
+</div>
