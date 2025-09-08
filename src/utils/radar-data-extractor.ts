@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync, statSync } from 'fs'
 import { join } from 'path'
-import { RADAR_COLORS } from './radar-colors'
+import { RADAR_COLORS, getQuadrantColor } from './radar-colors'
 
 // Function to recursively find all markdown files in a directory
 function findMarkdownFiles(dir: string): string[] {
@@ -317,9 +317,7 @@ export function extractQuadrantData(quadrantName: string) {
   
   return {
     quadrantName: quadrantDisplayName,
-    quadrantColor: allData.quadrants.find(q => 
-      q.name.toLowerCase().replace(/[^a-z0-9]/g, '-') === quadrantName.replace(/[^a-z0-9]/g, '-')
-    )?.color || RADAR_COLORS.fallback,
+    quadrantColor: getQuadrantColor(quadrantName),
     rings: [
       { name: 'Adopt' },
       { name: 'Trial' },

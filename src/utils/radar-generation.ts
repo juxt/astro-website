@@ -49,7 +49,6 @@ export interface RadarRing {
 export interface RadarColors {
   background: string;
   grid: string;
-  inactive: string;
 }
 
 export interface RadarConfig {
@@ -91,8 +90,7 @@ export function radar_visualization(config: RadarConfig): void {
   const structureColors = getRadarStructureColors();
   config.colors = ("colors" in config) ? config.colors : {
       background: structureColors.background,
-      grid: structureColors.grid,
-      inactive: structureColors.inactive
+      grid: structureColors.grid
     };
   config.print_layout = ("print_layout" in config) ? config.print_layout : true;
   config.links_in_new_tabs = ("links_in_new_tabs" in config) ? config.links_in_new_tabs : true;
@@ -221,8 +219,7 @@ export function radar_visualization(config: RadarConfig): void {
     var point = entry.segment.random();
     entry.x = point.x;
     entry.y = point.y;
-    entry.color = entry.active || config.print_layout ?
-      config.quadrants[entry.quadrant].color : config.colors.inactive;
+    entry.color = config.quadrants[entry.quadrant].color;
   }
 
   // partition entries according to segments
@@ -358,7 +355,7 @@ export function radar_visualization(config: RadarConfig): void {
       .text(config.date || "")
       .style("font-family", config.font_family)
       .style("font-size", "14")
-      .style("fill", RADAR_COLORS.lightSecondaryText)
+      .style("fill", "#9ca3af") // gray-400 for date text
 
     // footer
     radar.append("text")
@@ -368,7 +365,7 @@ export function radar_visualization(config: RadarConfig): void {
       .attr("xml:space", "preserve")
       .style("font-family", config.font_family)
       .style("font-size", "12px")
-      .style("fill", config.themeColors?.mainTextColor || "#333");
+      .style("fill", config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText);
 
     // legend
     const legend = radar.append("g");
@@ -625,7 +622,7 @@ export function radar_visualization(config: RadarConfig): void {
     var blip = d3.select(this);
 
     // blip link
-    if (d.active && Object.prototype.hasOwnProperty.call(d, "link") && d.link) {
+    if (Object.prototype.hasOwnProperty.call(d, "link") && d.link) {
       const linkElement = blip.append("a")
         .attr("xlink:href", d.link);
       blip = linkElement as any;
@@ -655,18 +652,16 @@ export function radar_visualization(config: RadarConfig): void {
     }
 
     // blip text
-    if (d.active || config.print_layout) {
-      var blip_text = config.print_layout ? d.id : (d.label.match(/[a-z]/i)?.[0] || d.label.charAt(0));
-      blip.append("text")
-        .text(blip_text)
-        .attr("y", 3)
-        .attr("text-anchor", "middle")
-        .style("fill", RADAR_COLORS.white)
-        .style("font-family", config.font_family)
-        .style("font-size", function(d) { return blip_text.length > 2 ? "8px" : "9px"; })
-        .style("pointer-events", "none")
-        .style("user-select", "none");
-    }
+    var blip_text = config.print_layout ? d.id : (d.label.match(/[a-z]/i)?.[0] || d.label.charAt(0));
+    blip.append("text")
+      .text(blip_text)
+      .attr("y", 3)
+      .attr("text-anchor", "middle")
+      .style("fill", RADAR_COLORS.circleEntryText)
+      .style("font-family", config.font_family)
+      .style("font-size", function(d) { return blip_text.length > 2 ? "8px" : "9px"; })
+      .style("pointer-events", "none")
+      .style("user-select", "none");
   });
 
   // make sure that blips stay inside their segment

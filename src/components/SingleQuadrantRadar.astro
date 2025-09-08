@@ -41,8 +41,7 @@ const singleQuadrantConfig = {
   font_family: fontFamily,
   colors: {
     background: 'transparent',
-    grid: structureColors.gridDark,
-    inactive: structureColors.inactive
+    grid: structureColors.grid
   }
 }
 ---
@@ -61,40 +60,22 @@ const singleQuadrantConfig = {
   let singleRadarInitialized = false
 
   // Function to get theme colors based on current mode
-  function getSingleQuadrantThemeColors() {
+  async function getSingleQuadrantThemeColors() {
     const isDarkMode = document.documentElement.classList.contains('dark')
-    return {
-      ringTextColor: isDarkMode ? '#9ca3af' : '#6b7280', // gray-400 : gray-500
-      mainTextColor: isDarkMode ? '#d1d5db' : '#374151' // gray-300 : gray-700
-    }
+    const { getThemeColors } = await import('/src/utils/radar-colors.ts')
+    return getThemeColors(isDarkMode)
   }
 
   // Function to update colors when theme changes
-  function updateSingleQuadrantColors() {
+  async function updateSingleQuadrantColors() {
     if (!singleRadarInitialized) return
 
-    const themeColors = getSingleQuadrantThemeColors()
+    const themeColors = await getSingleQuadrantThemeColors()
 
-    // Helper function to get quadrant color from radar-colors.ts
-    function getQuadrantColorFromName(quadrantName) {
-      const normalizedName = quadrantName.toLowerCase().replace(/[\s&-]/g, '')
-      switch (normalizedName) {
-        case 'platforms':
-          return '#16a34a' // green-600
-        case 'tools':
-          return '#0891b2' // cyan-600
-        case 'languagesframeworks':
-          return '#ca8a04' // yellow-600
-        case 'techniques':
-          return '#dc2626' // red-600
-        default:
-          return singleQuadrantConfig.quadrantColor || '#16a34a'
-      }
-    }
+    // Import and use the centralized color function
+    const { getQuadrantColor } = await import('/src/utils/radar-colors.ts')
 
-    const quadrantColor = getQuadrantColorFromName(
-      singleQuadrantConfig.quadrantName
-    )
+    const quadrantColor = getQuadrantColor(singleQuadrantConfig.quadrantName)
 
     // Update ring labels to use quadrant color
     document.querySelectorAll('.radar-ring-label').forEach((element) => {
@@ -124,7 +105,7 @@ const singleQuadrantConfig = {
 
       const config = {
         ...singleQuadrantConfig,
-        themeColors: getSingleQuadrantThemeColors()
+        themeColors: await getSingleQuadrantThemeColors()
       }
 
       single_quadrant_visualization(config)

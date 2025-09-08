@@ -29,7 +29,6 @@ interface SingleQuadrantConfig {
   colors?: {
     background: string;
     grid: string;
-    inactive: string;
   };
   quadrantName: string;
   quadrantColor: string;
@@ -69,8 +68,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
   const structureColors = getRadarStructureColors();
   config.colors = config.colors || {
     background: structureColors.background,
-    grid: structureColors.grid,
-    inactive: structureColors.inactive
+    grid: structureColors.grid
   };
 
   // Ring configuration for quarter-circle (bigger radar)
@@ -200,7 +198,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
     
     entry.x = x;
     entry.y = y;
-    entry.color = entry.active !== false ? quadrantColor : config.colors.inactive;
+    entry.color = quadrantColor;
   });
 
   // Tooltip functions
@@ -330,7 +328,7 @@ export function single_quadrant_visualization(config: SingleQuadrantConfig): voi
     .attr("x", 0)
     .attr("y", 3) // Slightly adjust for smaller circles
     .attr("text-anchor", "middle")
-    .style("fill", RADAR_COLORS.white)
+    .style("fill", RADAR_COLORS.circleEntryText)
     .style("font-family", config.font_family)
     .style("font-size", "9px") // Smaller font for smaller circles
     .style("font-weight", "bold")

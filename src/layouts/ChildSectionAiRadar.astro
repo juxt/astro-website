@@ -23,7 +23,7 @@ function inferPathInfo(pathname: string): {
   const pathParts = pathWithoutPrefix.split('/')
 
   let inferredParentSection: string | null = null
-  let bannerColor: string = RADAR_COLORS.fallback // Default fallback
+  let bannerColor: string = RADAR_COLORS.platforms // Default to platforms color
 
   // If we're at the main ai-radar level (ai-radar), no parent
   if (pathParts.length === 0) {
@@ -46,7 +46,7 @@ function inferPathInfo(pathname: string): {
   // For any deeper levels, go up one level
   else {
     inferredParentSection = `ai-radar/${pathParts.slice(0, -1).join('/')}`
-    bannerColor = RADAR_COLORS.fallback
+    bannerColor = RADAR_COLORS.platforms
   }
 
   return { inferredParentSection, bannerColor }

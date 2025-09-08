@@ -1,25 +1,21 @@
 // AI Radar Colors - Single source of truth for all radar visualizations
 const baseColors = {
   // === QUADRANT COLORS ===
-  platforms: '#16a34a',           // green-600
-  tools: '#0891b2',              // cyan-600
-  languagesFrameworks: '#ca8a04', // yellow-600
-  techniques: '#dc2626',          // red-600
+  platforms: '#F09758',           // green-600
+  tools: '#CA4527',              // cyan-600
+  languagesFrameworks: '#E8AA41', // yellow-600
+  techniques: '#F26A24',          // red-600
   
   // === RADAR STRUCTURE COLORS ===
   // Grid and background colors
   radarBackground: '#ffffff',     // white
-  radarGrid: '#dddde0',          // light gray for grid lines
-  radarGridDark: '#bbbbbb',      // darker grid for better contrast
+  radarGrid: '#7a8397',          // grid lines (used in both light and dark mode)
   
-  // Inactive/disabled state
-  inactiveEntry: '#dddddd',      // light gray for inactive entries
   
   // === TEXT COLORS ===
   // Light mode text colors
   lightRingText: '#6b7280',      // gray-500 - for ring labels
   lightMainText: '#374151',      // gray-700 - for main text/entries
-  lightSecondaryText: '#9ca3af', // gray-400 - for secondary text
   
   // Dark mode text colors  
   darkRingText: '#9ca3af',       // gray-400 - for ring labels
@@ -36,16 +32,14 @@ const baseColors = {
   darkTooltipText: '#f9fafb',    // gray-50
   darkTooltipBorder: '#6b7280',  // gray-500
   
-  // === MISC COLORS ===
-  white: '#ffffff',              // pure white for blips/highlights
-  fallback: '#475569'            // slate-600 - fallback color
+  // === ENTRY COLORS ===
+  circleEntryText: '#ffffff'     // white text on colored circles
 } as const
 
 export const RADAR_COLORS = {
   ...baseColors,
   
   // === BANNER GRADIENTS ===
-  quadrantBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks})`,
   mainRadarBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks}, ${baseColors.techniques})`,
   
   // === THEME-AWARE COLOR GETTERS ===
@@ -66,7 +60,7 @@ export function getQuadrantColor(quadrantName: string): string {
     case 'techniques':
       return RADAR_COLORS.techniques
     default:
-      return RADAR_COLORS.fallback
+      throw new Error(`Unknown quadrant name: ${quadrantName}`)
   }
 }
 
@@ -80,7 +74,7 @@ export function getQuadrantColorFromPath(pathname: string): string {
     return getQuadrantColor(quadrantName)
   }
   
-  return RADAR_COLORS.fallback
+  throw new Error(`Cannot determine quadrant from path: ${pathname}`)
 }
 
 
@@ -103,9 +97,8 @@ export function getTooltipColors(isDarkMode: boolean) {
 export function getRadarStructureColors() {
   return {
     background: RADAR_COLORS.radarBackground,
-    grid: RADAR_COLORS.radarGrid,
-    gridDark: RADAR_COLORS.radarGridDark,
-    inactive: RADAR_COLORS.inactiveEntry
+    grid: RADAR_COLORS.radarGrid
   }
 }
+
 

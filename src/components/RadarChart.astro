@@ -20,7 +20,6 @@ interface Props {
   colors?: {
     background: string
     grid: string
-    inactive: string
   }
   fontFamily?: string
   printLayout?: boolean
@@ -34,8 +33,7 @@ const {
   scale = 1.0,
   colors = {
     background: 'transparent',
-    grid: structureColors.gridDark,
-    inactive: structureColors.inactive
+    grid: structureColors.grid
   },
   fontFamily = 'Arial, Helvetica',
   printLayout = true,
@@ -65,19 +63,17 @@ const radarConfig = {
   let radarInitialized = false
 
   // Function to get theme colors based on current mode
-  function getThemeColorsForMode() {
+  async function getThemeColorsForMode() {
     const isDarkMode = document.documentElement.classList.contains('dark')
-    return {
-      ringTextColor: isDarkMode ? '#9ca3af' : '#6b7280', // gray-400 : gray-500
-      mainTextColor: isDarkMode ? '#d1d5db' : '#374151' // gray-300 : gray-700
-    }
+    const { getThemeColors } = await import('/src/utils/radar-colors.ts')
+    return getThemeColors(isDarkMode)
   }
 
   // Function to update colors when theme changes
-  function updateRadarColors() {
+  async function updateRadarColors() {
     if (!radarInitialized) return
 
-    const themeColors = getThemeColorsForMode()
+    const themeColors = await getThemeColorsForMode()
 
     // Update ring labels in legend using class selector
     document.querySelectorAll('.radar-ring-label').forEach((element) => {
@@ -112,7 +108,7 @@ const radarConfig = {
 
       const config = {
         ...radarConfig,
-        themeColors: getThemeColorsForMode()
+        themeColors: await getThemeColorsForMode()
       }
 
       radar_visualization(config)
