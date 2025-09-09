@@ -76,11 +76,11 @@ function getRingForAdoptionLevel(ring: string): number {
   }
 }
 
-// Convert move string to numeric value for Zalando radar
-function getMovedValue(moved: string | number | undefined): number {
-  if (typeof moved === 'number') return moved
-  if (typeof moved === 'string') {
-    switch (moved.toLowerCase()) {
+// Convert change string to numeric value for Zalando radar
+function getMovedValue(change: string | number | undefined): number {
+  if (typeof change === 'number') return change
+  if (typeof change === 'string') {
+    switch (change.toLowerCase()) {
       case 'up':
         return 1
       case 'down':
@@ -135,29 +135,7 @@ function inferQuadrantFromFilePath(filePath: string): string {
   return segment
 }
 
-// Infer ring from file path
-function inferRingFromFilePath(filePath: string): string {
-  const pathParts = filePath.split('/')
-
-  for (const part of pathParts) {
-    if (['adopt', 'trial', 'assess', 'hold'].includes(part)) {
-      return part
-    }
-    // Check for ring with file extension
-    if (
-      part.startsWith('adopt.') ||
-      part.startsWith('trial.') ||
-      part.startsWith('assess.') ||
-      part.startsWith('hold.')
-    ) {
-      return part.split('.')[0]
-    }
-  }
-
-  return 'assess' // fallback
-}
-
-// Parse radar entries from markdown content
+// Parse radar entries from markdown content using data-label and data-ring attributes
 function parseRadarFromMarkdown(
   content: string,
   baseUrl: string,
@@ -165,15 +143,16 @@ function parseRadarFromMarkdown(
 ) {
   const entries: any[] = []
 
-  // Find all divs with data-radar attribute and data-meta attributes
-  const metaDivRegex = /<div\s+data-radar\s+data-meta='([^']+)'\s*\/>/g
-  let metaMatch
+  // Find all divs with data-radar attribute and data-label/data-ring attributes
+  const radarDivRegex =
+    /<div\s+data-radar\s+data-label=['"]([^'"]+)['"]\s+data-ring=['"]([^'"]+)['"](?:\s+data-change=['"]([^'"]+)['"])?\s*\/>/g
+  let radarMatch
 
   // Store all matches with their positions to sort them by order of appearance
   const matches = []
 
-  while ((metaMatch = metaDivRegex.exec(content)) !== null) {
-    matches.push({ match: metaMatch, index: metaMatch.index })
+  while ((radarMatch = radarDivRegex.exec(content)) !== null) {
+    matches.push({ match: radarMatch, index: radarMatch.index })
   }
 
   // Sort matches by their position in the document to maintain order
@@ -181,25 +160,17 @@ function parseRadarFromMarkdown(
 
   // Process matches in order of appearance
   for (const { match } of matches) {
-    const metaString = match[1]
+    const label = match[1]
+    const ring = match[2]
+    const change = match[3] // Optional change attribute
     const metaIndex = match.index
-
-    // Parse metadata
-    let sectionMetadata: Record<string, any> = {}
-    try {
-      const meta = JSON.parse(metaString)
-      sectionMetadata = meta
-    } catch (e) {
-      console.warn('Failed to parse metadata:', metaString)
-      continue
-    }
 
     // Find the next heading after this metadata div
     const contentAfterMeta = content.substring(metaIndex)
     const headingMatch = contentAfterMeta.match(/\n## (.+)$/m)
 
     if (!headingMatch) {
-      console.warn('No heading found after metadata div')
+      console.warn('No heading found after radar div')
       continue
     }
 
@@ -215,16 +186,15 @@ function parseRadarFromMarkdown(
       continue
     }
 
-    // Infer quadrant and ring from file structure
+    // Infer quadrant from file structure
     const quadrant = inferQuadrantFromFilePath(filePath)
-    const ring = inferRingFromFilePath(filePath)
 
     // Convert to radar format
     const entry = {
-      label: sectionMetadata.label || sectionName,
+      label: label || sectionName,
       quadrant: getQuadrantForSegment(quadrant),
       ring: getRingForAdoptionLevel(ring),
-      moved: getMovedValue(sectionMetadata.moved), // Map string values to numeric
+      moved: getMovedValue(change), // Map string values to numeric
       link: `${baseUrl}#${slugify(sectionName)}`,
       active: true
     }
@@ -298,23 +268,27 @@ export function extractAllRadarData() {
 // Function to filter data for a specific quadrant
 export function extractQuadrantData(quadrantName: string) {
   const allData = extractAllRadarData()
-  
+
   // Map quadrant names to numbers for filtering
   const quadrantNumber = getQuadrantForSegment(quadrantName)
-  
+
   // Filter entries for this quadrant
-  const quadrantEntries = allData.entries.filter(entry => entry.quadrant === quadrantNumber)
-  
+  const quadrantEntries = allData.entries.filter(
+    (entry) => entry.quadrant === quadrantNumber
+  )
+
   // Re-assign sequential IDs for single quadrant display
   const entriesWithIds = quadrantEntries.map((entry, index) => ({
     ...entry,
     id: index + 1
   }))
-  
+
   // Get quadrant display name
-  const quadrantDisplayName = quadrantName === 'languages-frameworks' ? 'Languages & Frameworks' :
-    quadrantName.charAt(0).toUpperCase() + quadrantName.slice(1)
-  
+  const quadrantDisplayName =
+    quadrantName === 'languages-frameworks'
+      ? 'Languages & Frameworks'
+      : quadrantName.charAt(0).toUpperCase() + quadrantName.slice(1)
+
   return {
     quadrantName: quadrantDisplayName,
     quadrantColor: getQuadrantColor(quadrantName),

@@ -9,9 +9,88 @@ Software tools and utilities that enhance AI development workflows, from coding 
 
 <SingleQuadrantData quadrantName='tools' />
 
-## Adoption Levels
+# Adopt
 
-- **[Adopt](/ai-radar/tools/adopt)**: Software Engineering Copilots, Provider-agnostic LLM facades, Notebooks
-- **[Trial](/ai-radar/tools/trial)**: Agentic Computer Use
-- **[Assess](/ai-radar/tools/assess)**: AI Application Bootstrappers
-- **[Hold](/ai-radar/tools/hold)**: Conversational data analysis
+These tools represent mature, well-supported technologies that are ready for production use. They offer excellent productivity gains, extensive documentation, and proven track records in real-world development workflows.
+
+<div data-radar data-label="Software Engineering Copilots" data-ring="adopt" />
+
+## Software Engineering Copilots
+
+Software Engineering Copilots represent a new category of AI-powered development tools that act as intelligent coding assistants. These tools, including [Cursor](https://www.cursor.com/), [Copilot](https://github.com/features/copilot), [Windsurf](https://codeium.com/windsurf), [Zed](https://zed.dev/), [Traycer](https://traycer.ai/), [Cody](https://sourcegraph.com/demo/cody), [Cline](https://github.com/cline/cline), [Tabnine](https://www.tabnine.com/) and [Aider](https://github.com/Aider-AI/aider) either exist as standalone IDEs or integrate as plugins into existing IDEs, and offer code completion, refactoring suggestions, and automated implementation of routine tasks.
+
+We're seeing a clear pattern emerge in how these tools impact different experience levels. Counter-intuitively, senior engineers are deriving the most value by leveraging AI to accelerate well-understood tasks and automate routine code generation, whilst maintaining strict quality control over the output. Junior developers often struggle to effectively evaluate AI suggestions, sometimes accepting problematic implementations or failing to spot edge cases that weren't properly handled.
+
+We've placed Software Engineering Copilots firmly in the Adopt ring. The productivity gains (particularly for experienced developers who can effectively guide and evaluate AI suggestions) are substantial enough to justify this placement. Organisations report significant productivity improvements on routine coding tasks, with some teams achieving even more impressive results through careful integration into their workflows.
+
+[Cursor](https://www.cursor.com/) has emerged as a current frontrunner with its implementation of .cursorrules, which allows teams to share configuration settings and enforce consistent coding practices across projects. This feature enables organisations to codify their standards, architectural patterns, and security guidelines directly into the AI assistant, addressing many of our previous concerns about inconsistent output and quality control. While other tools will likely implement similar capabilities soon, Cursor's current implementation provides a robust framework for enterprise adoption.
+
+For teams adopting these tools, we still recommend a "trust but verify" approach: use AI assistance for initial implementation and routine tasks, but maintain rigorous code review and testing practices. Organisations should also consider providing structured training for junior developers on effectively collaborating with AI tools, focusing on developing the critical thinking skills needed to evaluate and refine AI-generated code.
+
+The rate of improvement in this space continues to be remarkable, with new capabilities being added regularly. Teams should remain flexible in their tool selection, as today's leader may be surpassed by innovations in competing products tomorrow. Regardless of the specific tool chosen, the fundamental shift towards AI-augmented development appears to be permanent, and organisations delaying adoption risk finding themselves at a competitive disadvantage.
+
+<div data-radar data-label="Provider-agnostic LLM facades" data-ring="adopt" />
+
+## Provider-agnostic LLM facades
+
+The LLM landscape evolves rapidly, making today's optimal choice potentially outdated within months. We recommend implementing a facade pattern between your application and LLM providers, rather than building directly against specific APIs. This approach reduces vendor lock-in and enables easier testing of alternative models as they emerge. When considering whether to write your own code, be sure to consider tools such as the lightweight [AISuite](https://github.com/andrewyng/aisuite), Simon Willison's [LLM](https://github.com/simonw/llm) library and CLI tool, or heavyweight alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/).
+
+This recommendation reflects our team's experience seeing projects hampered by tight coupling to specific LLM providers, and the subsequent maintenance burden when transitioning to newer, more capable models.
+
+<div data-radar data-label="Notebooks" data-ring="adopt" />
+
+## Notebooks
+
+We've placed Notebooks in the Adopt ring because they have become the de facto standard for data science and machine learning experimentation, prototyping, and documentation. The interactive nature of notebooks, combining code execution with rich text explanations and visualisations, makes them particularly valuable for AI/ML workflows where iterative exploration and clear documentation of model development are essential.
+
+Widespread adoption across both industry and academia, plus an extensive plugin ecosystem and integration with popular AI frameworks, demonstrates their maturity as a method of interacting with code. We especially value how notebooks facilitate collaboration between technical and non-technical team members, as they can serve as living documents that combine business requirements, technical implementation, and results in a single, shareable format.
+
+[Jupyter](https://jupyter.org/) notebooks are the most widely used, supporting multiple languages including Python, R and Julia. The cloud platforms provide their own implementations: [Google Colab](https://colab.research.google.com/), AWS [Sagemaker Notebooks](https://aws.amazon.com/sagemaker-ai/notebooks/), [Azure Notebooks](https://learn.microsoft.com/en-gb/azure/machine-learning/how-to-run-jupyter-notebooks), [Databricks Notebooks](https://docs.databricks.com/en/notebooks/index.html). And there are language specific notebooks, such as Pluto.jl for Julia, [Clerk](https://github.com/nextjournal/clerk) for Clojure, [Polynote](https://github.com/polynote/polynote) for Scala.
+
+# Trial
+
+These tools show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt tools, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
+
+<div data-radar data-label="Agentic Computer Use" data-ring="trial" />
+
+## Agentic Computer Use
+
+We're seeing AI agents being developed for increasingly complex and varied environments, such as web agents that can browse and interact with online content like [OpenAI's Operator](https://operator.chatgpt.com/) to systems that interact with a user's whole operating system such as [Claude Computer Use](https://docs.anthropic.com/en/docs/build-with-claude/computer-use). Each agent is designed with specific capabilities and constraints suited to its operational environment: a RAG (Retrieval Augmented Generation) agent might be optimised for searching and synthesising internal documentation, while a development environment agent needs deep understanding of codebases and development workflows.
+
+A particularly interesting trend is the emergence of agents that operate across entire computing environments such as [Devin](https://devin.ai/), with the ability to execute terminal commands, manipulate files, and interact with development tools. This expanded scope brings both opportunities and challenges: while these agents can potentially automate complex workflows, they require careful consideration around access controls, security boundaries, and failure recovery mechanisms.
+
+We've placed AI Agents in the Trial ring. While we're seeing promising early applications, particularly in constrained environments like RAG systems, the technology is still evolving rapidly and best practices around security, reliability, and control mechanisms are still emerging. The potential for both value and risk is significant, warranting close attention but careful consideration before widespread adoption.
+
+We're seeing a clear pattern of successful implementations when agents are given well-defined boundaries and carefully curated tool access. Organisations are reporting meaningful productivity gains, particularly in areas like document processing, customer service, and development workflows. The ability to chain together multiple operations while maintaining context is proving valuable in many scenarios.
+
+However, we're also observing significant challenges around reliability, security, and control. Agents can sometimes get stuck in loops, make incorrect tool selections, or fail to properly handle edge cases. There are also important questions around audit trails, permissions management, and failure recovery that need to be addressed. Until these concerns are more fully resolved, we recommend careful assessment and controlled trials rather than widespread adoption.
+
+# Assess
+
+These tools represent emerging or specialized technologies that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.
+
+<div data-radar data-label="AI Application Bootstrappers" data-ring="assess" />
+
+## AI Application Bootstrappers
+
+We have placed AI Application Bootstrappers like [V0](https://v0.dev/), [Bolt.new](https://bolt.new/) and [Replit Agent](https://replit.com/ai) in the Assess ring of our Tools quadrant. These tools represent an intriguing new approach to rapidly generating complete applications from prompts or designs. While they can dramatically accelerate the creation of demos and proofs of concept, their current limitations lead us to recommend careful assessment before adoption.
+
+The primary value proposition is clear: the ability to go from concept to working prototype in hours instead of days or weeks. However, our experience shows that success with these tools correlates strongly with existing software engineering expertise. Senior developers can effectively use them as accelerators, understanding how to refactor the generated code, identify potential issues, and establish proper architectural boundaries. In contrast, junior developers or non-technical users often struggle with maintaining and evolving the generated codebase, finding themselves unable to effectively debug issues or make substantial modifications without creating cascading problems.
+
+While these tools excel at creating initial implementations, the significant effort required to make applications production-ready still requires substantial engineering knowledge. We're particularly concerned about teams using bootstrapped code as a foundation for production systems without the expertise to properly evaluate and refactor the generated codebase. The tools are promising but should be approached with clear understanding of their current limitations and best used by teams with strong software engineering fundamentals.
+
+Looking ahead, we expect these tools to mature and potentially move into the Trial ring as they develop better guardrails and more maintainable output. For now, we recommend assessing them primarily for simple prototyping and proof-of-concept work, while maintaining careful separation between bootstrapped demos and production codebases.
+
+# Hold
+
+These tools are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.
+
+<div data-radar data-label="Conversational data analysis" data-ring="hold" />
+
+## Conversational data analysis
+
+We've placed conversational data analysis tools in the Hold ring as this emerging category shows promise but requires careful evaluation at present. These tools aim to enable data analysis through natural language interactions rather than writing code directly.
+
+Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/), [Julius](https://julius.ai/), and [Gathr's data engineering](https://www.gathr.ai/data-engineering/) allow analysts to query datasets using plain English, generating code behind the scenes. While this could potentially democratise data analysis and data engineering, we have concerns about the reliability and predictability of the generated code. The AI can sometimes misinterpret requests or misrepresent results. For instance, Uber has documented its internal [QueryGPT tool](https://www.uber.com/en-GB/blog/query-gpt/), highlighting the significant number of example queries and guardrails required to achieve acceptable reliability.
+
+We're also monitoring how these tools handle data privacy, given they often require sending queries to external AI services. For teams considering these tools, we recommend starting with non-sensitive datasets and asking analytics questions to which you already know the answers.

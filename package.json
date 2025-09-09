@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "prepare": "husky install",
     "pagefind": "pagefind --site dist",
-    "generate-ai-radar-docs": "node scripts/generate-ai-radar-docs.js"
+    "generate-ai-radar-docs": "node scripts/generate-ai-radar-docs.mjs"
   },
   "devDependencies": {
     "@astrojs/mdx": "^1.0.0",

@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
 import fs from 'fs/promises'
-import fsSync from 'fs'
+import MarkdownIt from 'markdown-it'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import MarkdownIt from 'markdown-it'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -31,33 +30,32 @@ const articleContent = new Map()
 async function extractArticleContent(filePath) {
   try {
     const content = await fs.readFile(filePath, 'utf-8')
-    
+
     // Remove frontmatter (everything between --- and ---)
     let cleanContent = content.replace(/^---[\s\S]*?---\s*/m, '')
-    
+
     // Remove layout imports and other metadata
     cleanContent = cleanContent.replace(/^import.*$/gm, '')
     cleanContent = cleanContent.replace(/^export.*$/gm, '')
-    
+
     // Remove data-radar divs (these are metadata, not content)
     cleanContent = cleanContent.replace(/<div\s+data-radar[^>]*\/>/g, '')
-    
+
+    // Fix table rendering by removing className attributes that interfere with markdown parsing
+    cleanContent = cleanContent.replace(
+      /<div className="overflow-x-auto">\s*/g,
+      ''
+    )
+    cleanContent = cleanContent.replace(/\s*<\/div>/g, '')
+
     // Remove empty lines at the beginning
     cleanContent = cleanContent.replace(/^\s*\n/g, '')
-    
+
     return cleanContent.trim()
   } catch (error) {
     console.error(`Error reading file ${filePath}:`, error.message)
     return ''
   }
-}
-
-/**
- * Style adoption level terms consistently
- */
-function styleAdoptionLevels(content) {
-  // No styling for adoption level terms - return content as-is
-  return content
 }
 
 /**
@@ -68,17 +66,30 @@ function processContentLinks(content, currentFolderPath) {
   content = content.replace(
     /href="\/ai-radar\/([^"]+)"/g,
     (match, linkPath) => {
+      // Handle the new structure: /ai-radar/techniques#adopt -> #techniques-adopt
+      if (linkPath.includes('#')) {
+        const [path, anchor] = linkPath.split('#')
+        const folderName = path.replace(/\.mdx?$/, '').replace(/\/$/, '')
+        return `href="#${folderName}-${anchor}"`
+      }
       // Convert path to anchor format and remove trailing dash
-      const anchor = linkPath.replace(/\//g, '-').replace(/\.mdx?$/, '').replace(/-$/, '')
+      const anchor = linkPath
+        .replace(/\//g, '-')
+        .replace(/\.mdx?$/, '')
+        .replace(/-$/, '')
       return `href="#${anchor}"`
     }
   )
-  
-  // Add hyperlinks to all headings (h1, h2, h3, h4, h5, h6)
-  // Use a more specific regex to avoid nested replacements
+
+  // Fix heading hierarchy: h1 -> h2, h2 -> h3, etc.
   content = content.replace(
     /<(h[1-6])([^>]*)>([^<]+)<\/\1>/g,
     (match, tag, attributes, headingText) => {
+      // Convert heading levels: h1->h2, h2->h3, etc.
+      const level = parseInt(tag[1])
+      const newLevel = Math.min(level + 1, 6) // Cap at h6
+      const newTag = `h${newLevel}`
+
       // Create unique anchor by prefixing with folder path
       let anchor = headingText
         .toLowerCase()
@@ -86,81 +97,30 @@ function processContentLinks(content, currentFolderPath) {
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .trim()
-      
+
       // Prefix with folder path to make IDs unique
       if (currentFolderPath && currentFolderPath !== '.') {
         const folderPrefix = currentFolderPath.replace(/\//g, '-')
         anchor = `${folderPrefix}-${anchor}`
       }
-      
-      return `<${tag}${attributes} id="${anchor}"><a href="#${anchor}" class="heading-link">${headingText}</a></${tag}>`
+
+      return `<${newTag}${attributes} id="${anchor}"><a href="#${anchor}" class="heading-link">${headingText}</a></${newTag}>`
     }
   )
-  
+
   return content
 }
 
 /**
- * Extract internal links from markdown content
+ * Wrap tables in scrollable containers for better mobile display
  */
-function extractInternalLinks(content) {
-  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
-  const links = []
-  let match
-  
-  while ((match = linkRegex.exec(content)) !== null) {
-    const [fullMatch, linkText, linkUrl] = match
-    
-    // Only process internal ai-radar links
-    if (linkUrl.startsWith('/ai-radar/') || linkUrl.startsWith('ai-radar/')) {
-      links.push({
-        text: linkText,
-        url: linkUrl,
-        fullMatch
-      })
-    }
-  }
-  
-  return links
-}
+function processTables(content) {
+  // Wrap tables in scrollable containers
+  content = content.replace(/<table[^>]*>[\s\S]*?<\/table>/g, (match) => {
+    return `<div class="table-container">${match}</div>`
+  })
 
-/**
- * Resolve relative path to absolute file path
- */
-function resolveLinkPath(linkUrl, currentFilePath) {
-  if (linkUrl.startsWith('/ai-radar/')) {
-    // Absolute path from root - remove trailing slash and try both with and without index
-    const cleanUrl = linkUrl.replace(/\/$/, '')
-    const basePath = path.join(__dirname, '../src/pages', cleanUrl)
-    
-    // Try the path as-is first
-    if (fsSync.existsSync(basePath + '.mdx')) {
-      return basePath + '.mdx'
-    }
-    if (fsSync.existsSync(basePath + '.md')) {
-      return basePath + '.md'
-    }
-    
-    // Try with index.mdx/index.md
-    if (fsSync.existsSync(path.join(basePath, 'index.mdx'))) {
-      return path.join(basePath, 'index.mdx')
-    }
-    if (fsSync.existsSync(path.join(basePath, 'index.md'))) {
-      return path.join(basePath, 'index.md')
-    }
-    
-    return null
-  } else if (linkUrl.startsWith('ai-radar/')) {
-    // Relative path
-    const relativePath = linkUrl.replace('ai-radar/', '')
-    return path.join(AI_RADAR_DIR, relativePath)
-  } else if (linkUrl.startsWith('./') || linkUrl.startsWith('../')) {
-    // Relative path from current file
-    const currentDir = path.dirname(currentFilePath)
-    return path.resolve(currentDir, linkUrl)
-  }
-  
-  return null
+  return content
 }
 
 /**
@@ -170,56 +130,21 @@ async function processArticle(filePath, fileType, folderPath) {
   if (processedFiles.has(filePath)) {
     return
   }
-  
+
   processedFiles.add(filePath)
-  console.log(`    📄 Processing: ${path.relative(AI_RADAR_DIR, filePath)} (${fileType})`)
-  
+  console.log(
+    `    📄 Processing: ${path.relative(AI_RADAR_DIR, filePath)} (${fileType})`
+  )
+
   const content = await extractArticleContent(filePath)
   if (!content) return
-  
+
   // Store the content with metadata for proper rendering
   articleContent.set(filePath, {
     content,
     type: fileType,
-    folderPath,
-    fileName: path.basename(filePath, path.extname(filePath))
+    folderPath
   })
-}
-
-/**
- * Add linked content to articles
- */
-async function addLinkedContent(filePath) {
-  const content = articleContent.get(filePath)
-  if (!content) return
-  
-  // Extract internal links
-  const links = extractInternalLinks(content)
-  if (links.length === 0) return
-  
-  console.log(`  Adding linked content to ${path.relative(AI_RADAR_DIR, filePath)}`)
-  
-  // Build the content with linked articles at the end
-  let resolvedContent = content
-  
-  // Add linked content at the very end of the article
-  for (const link of links) {
-    const resolvedPath = resolveLinkPath(link.url, filePath)
-    
-    if (resolvedPath && await fs.access(resolvedPath).then(() => true).catch(() => false)) {
-      // Check if it's a markdown file
-      if (resolvedPath.endsWith('.mdx') || resolvedPath.endsWith('.md')) {
-        const linkedContent = articleContent.get(resolvedPath)
-        if (linkedContent) {
-          // Add the linked content at the very end
-          resolvedContent += `\n\n---\n\n<div class="linked-article-header"><strong>Linked Article: ${link.text}</strong></div>\n\n<div class="linked-article-content">${linkedContent}</div>\n\n---\n\n`
-        }
-      }
-    }
-  }
-  
-  // Update the stored content
-  articleContent.set(filePath, resolvedContent)
 }
 
 /**
@@ -228,17 +153,18 @@ async function addLinkedContent(filePath) {
  */
 async function findMarkdownFiles(dir) {
   const folderStructure = new Map()
-  
+
   async function scanDirectory(currentDir, relativePath = '') {
     const entries = await fs.readdir(currentDir, { withFileTypes: true })
     const folderFiles = []
-    
+
     // First, find index.mdx
-    const indexFile = entries.find(entry => 
-      entry.isFile() && 
-      (entry.name === 'index.mdx' || entry.name === 'index.md')
+    const indexFile = entries.find(
+      (entry) =>
+        entry.isFile() &&
+        (entry.name === 'index.mdx' || entry.name === 'index.md')
     )
-    
+
     if (indexFile) {
       folderFiles.push({
         path: path.join(currentDir, indexFile.name),
@@ -246,28 +172,14 @@ async function findMarkdownFiles(dir) {
         type: 'index'
       })
     }
-    
-    // Then find adopt, trial, assess, hold files in order
-    const order = ['adopt', 'trial', 'assess', 'hold']
-    for (const fileName of order) {
-      const file = entries.find(entry => 
-        entry.isFile() && 
-        (entry.name === `${fileName}.mdx` || entry.name === `${fileName}.md`)
-      )
-      
-      if (file) {
-        folderFiles.push({
-          path: path.join(currentDir, file.name),
-          relativePath: path.join(relativePath, file.name),
-          type: fileName
-        })
-      }
-    }
-    
+
+    // The old adopt/trial/assess/hold files have been consolidated into index.mdx
+    // No need to look for separate files anymore
+
     if (folderFiles.length > 0) {
       folderStructure.set(relativePath || '.', folderFiles)
     }
-    
+
     // Recursively scan subdirectories
     for (const entry of entries) {
       if (entry.isDirectory()) {
@@ -276,7 +188,7 @@ async function findMarkdownFiles(dir) {
       }
     }
   }
-  
+
   await scanDirectory(dir)
   return folderStructure
 }
@@ -286,15 +198,15 @@ async function findMarkdownFiles(dir) {
  */
 async function generateOutputFiles() {
   console.log('Generating HTML file...')
-  
+
   // Combine all article content with proper folder structure and visual cues
   let allContent = ''
   let articleCount = 0
   let currentFolder = ''
-  
+
   // Process files in the correct folder order to avoid duplicate headers
   const folderStructure = await findMarkdownFiles(AI_RADAR_DIR)
-  
+
   for (const [folderPath, files] of folderStructure) {
     // Add folder separator if we're entering a new folder
     if (folderPath !== currentFolder) {
@@ -302,37 +214,32 @@ async function generateOutputFiles() {
         allContent += '\n<hr class="folder-separator">\n'
       }
       currentFolder = folderPath
-      
-      // Add folder header
-      const folderName = folderPath === '.' ? 'Main AI Radar' : folderPath.replace(/\//g, ' → ')
-      const folderAnchor = folderPath === '.' ? 'main-ai-radar' : folderPath.replace(/\//g, '-')
-      allContent += `\n<div class="folder-header">\n<h1 class="folder-title" id="${folderAnchor}"><a href="#${folderAnchor}" class="heading-link">${folderName}</a></h1>\n</div>\n\n`
+
+      // Add folder header (h2 for the four main quadrants)
+      const folderName =
+        folderPath === '.' ? 'Main AI Radar' : folderPath.replace(/\//g, ' → ')
+      const folderAnchor =
+        folderPath === '.' ? 'main-ai-radar' : folderPath.replace(/\//g, '-')
+      allContent += `\n<div class="folder-header">\n<h2 class="folder-title" id="${folderAnchor}"><a href="#${folderAnchor}" class="heading-link">${folderName}</a></h2>\n</div>\n\n`
     }
-    
+
     // Process each file in the folder
     for (const fileInfo of files) {
       const filePath = fileInfo.path
       const storedContent = articleContent.get(filePath)
       if (!storedContent) continue
-      
+
       // Convert the article content to HTML
       let articleHtml = md.render(storedContent.content)
-      articleHtml = styleAdoptionLevels(articleHtml)
       articleHtml = processContentLinks(articleHtml, folderPath)
-      
-      // Skip adding headings for index files (they're redundant)
-      if (fileInfo.type === 'index') {
-        allContent += `\n<section class="article-section ${fileInfo.type}-section">\n\n${articleHtml}\n</section>\n\n`
-      } else {
-        // For adopt/trial/assess/hold files, add the heading with ID
-        const fileName = path.basename(fileInfo.path, path.extname(fileInfo.path))
-        const sectionId = `${folderPath === '.' ? 'main' : folderPath.replace(/\//g, '-')}-${fileName}`
-        allContent += `\n<section class="article-section ${fileInfo.type}-section">\n<h3 class="sub-heading" id="${sectionId}">${fileName}</h3>\n\n${articleHtml}\n</section>\n\n`
-      }
+      articleHtml = processTables(articleHtml)
+
+      // All content is now in index files, so just add the content directly
+      allContent += `\n<section class="article-section ${fileInfo.type}-section">\n\n${articleHtml}\n</section>\n\n`
       articleCount++
     }
   }
-  
+
   // Create the main HTML structure
   const htmlBody = `
     <div class="main-header">
@@ -344,7 +251,7 @@ async function generateOutputFiles() {
     
     ${allContent}
   `
-  
+
   // Generate HTML file
   const htmlContent = `<!DOCTYPE html>
 <html>
@@ -514,6 +421,16 @@ async function generateOutputFiles() {
         margin: 25px 0;
         border-radius: 16px;
         overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        font-size: 0.9em;
+        min-width: 800px;
+      }
+      
+      /* Make tables horizontally scrollable on smaller screens */
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+        border-radius: 16px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       }
       th, td {
@@ -700,7 +617,7 @@ async function generateOutputFiles() {
     </div>
   </body>
 </html>`
-  
+
   await fs.writeFile(OUTPUT_HTML, htmlContent, 'utf-8')
   console.log(`✅ HTML file generated: ${OUTPUT_HTML}`)
   console.log(`📊 Total articles processed: ${articleCount}`)
@@ -716,29 +633,30 @@ async function main() {
   try {
     console.log('🚀 Starting AI Radar PDF generation...')
     console.log(`📁 Scanning directory: ${AI_RADAR_DIR}`)
-    
+
     // Find all markdown files organized by folder structure
     const folderStructure = await findMarkdownFiles(AI_RADAR_DIR)
     console.log(`📁 Found ${folderStructure.size} folders with content`)
-    
+
     // Process files in folder order with visual cues
     console.log('\n📖 Processing articles by folder structure...')
-    
+
     for (const [folderPath, files] of folderStructure) {
       console.log(`  📂 Processing folder: ${folderPath}`)
-      
+
       for (const fileInfo of files) {
         await processArticle(fileInfo.path, fileInfo.type, folderPath)
       }
     }
-    
-    console.log(`\n📚 Processing complete. Processed ${articleContent.size} articles.`)
-    
+
+    console.log(
+      `\n📚 Processing complete. Processed ${articleContent.size} articles.`
+    )
+
     // Generate HTML file
     await generateOutputFiles()
-    
+
     console.log('\n🎉 All done!')
-    
   } catch (error) {
     console.error('❌ Error during execution:', error)
     process.exit(1)

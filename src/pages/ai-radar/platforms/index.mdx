@@ -9,9 +9,158 @@ Infrastructure and platform services that support AI applications, from model ho
 
 <SingleQuadrantData quadrantName='platforms' />
 
-## Adoption Levels
+# Adopt
 
-- **[Adopt](/ai-radar/platforms/adopt)**: Weights & Biases, Foundation models
-- **[Trial](/ai-radar/platforms/trial)**: MLflow, Open weight LLMs, Lakera, Vector Databases
-- **[Assess](/ai-radar/platforms/assess)**: Crew.ai, Galileo.ai, Kubeflow
-- **[Hold](/ai-radar/platforms/hold)**: Building against vendor-specific APIs
+These platforms represent mature, well-supported services that are ready for production use. They offer excellent reliability, extensive features, and proven track records in real-world AI deployments.
+
+<div data-radar data-label="Weights & Biases" data-ring="adopt" />
+
+## Weights & Biases
+
+[Weights & Biases](https://wandb.ai/site/) is a platform designed for tracking and visualising machine learning experiments. In recent projects, we've observed that it provides a robust solution for managing machine learning workflows, particularly when dealing with complex models and large datasets. Its user-friendly interface and integration capabilities with popular machine learning libraries make it accessible for teams looking to improve their model development processes.
+
+We've seen how systems such as Weights & Biases can catalyse positive cultural changes in ML teams. By making experiment tracking very light touch, requiring just a few lines of code, they remove the friction that sometimes prevents teams from maintaining good measurement practices. When tracking experiments becomes a natural part of the workflow rather than an extra burden, teams tend to measure more, compare results more frequently, and generally make more data-driven decisions.
+
+Collaboration features such as shared dashboards and reports amplify these benefits by making results and insights visible to the whole team. Rather than knowledge being siloed in individual notebooks or spreadsheets, experiments become shared assets that everyone can learn from. This visibility often leads to more discussion about results, faster knowledge sharing, and ultimately quicker iteration cycles as teams build upon each other's work rather than inadvertently duplicating efforts. However, it's important to note that tool adoption alone isn't enough—teams need to actively foster a culture that values measurement and experimentation for these benefits to fully materialise.
+
+<div data-radar data-label="Foundation models" data-ring="adopt" />
+
+## Foundation models
+
+Foundation model providers continue to evolve at a rapid pace. Major players like OpenAI, Anthropic, Google, and Meta compete alongside emerging organisations such as DeepSeek, Alibaba, IBM and others. While industry benchmarks help compare these models, they tell only part of the story: different models excel in different areas, and benchmark results should be viewed as indicative rather than definitive.
+
+A clear trend has emerged in how providers differentiate their offerings across three distinct tiers: smaller, faster models (e.g., Claude Haiku, DeepSeek Coder, Qwen Turbo) optimised for speed and cost; larger, more capable models (e.g., Claude Sonnet, DeepSeek V3, Qwen Max) balancing capabilities with reasonable response times; and specialised reasoning models (e.g., Claude Sonnet Extended, OpenAI o1, DeepSeek R1) designed for complex problem-solving. These reasoning models consume significantly more tokens and command higher per-token costs, but demonstrate remarkable capabilities in solving challenging logical puzzles, mathematics problems, and coding tasks.
+
+We believe foundation models have matured enough to warrant adoption for many business applications. When paired with appropriate infrastructure (few-shot prompting, guardrails, retrieval-augmented generation, and evaluation frameworks), they offer compelling solutions to a wide range of problems. Our experience suggests there's no universal "best model". We recommend implementing your own benchmarking process focused on your specific use cases. When selecting a model, consider factors beyond raw performance, such as pricing, reliability, data privacy requirements, and whether on-premise deployment is needed. The recent emergence of high-quality open-source models with permissive licensing (such as DeepSeek's offerings) provides additional options for organisations with specific security or deployment requirements.
+
+### Key Considerations:
+
+- **Performance & capabilities** (accuracy, speed, and domain-specific strengths)
+- **Total cost of ownership** (API costs, compute resources, and integration)
+- **Deployment options & technical requirements** (cloud, self-hosted, edge)
+- **Data privacy & compliance** (regulatory, legal, and security implications)
+- **Integration & lifecycle management** (context limitations, version control, updates)
+- **Vendor stability & support** (roadmap alignment, documentation, community)
+
+### Foundation Model Providers Feature Comparison (April 2025)
+
+<div className="overflow-x-auto">
+| Provider             | Reasoning Models | Multimodal | Self-hosting | Open Weights | Long Context | RAG Optimised | Multilingual | Edge Deployment | Real-time Data | Enterprise Focus | Model Selection Link                                                          |
+| -------------------- | ---------------- | ---------- | ------------ | ------------ | ------------ | ------------- | ------------ | --------------- | -------------- | ---------------- | ----------------------------------------------------------------------------- |
+| OpenAI               | ✓                | ✓          |              |              | ✓            | ✓             | ✓            |                 | ✓              | ✓                | [Models](https://platform.openai.com/docs/models)                             |
+| Anthropic            | ✓                | ✓          |              |              | ✓            | ✓             | ✓            |                 |                | ✓                | [Models](https://docs.anthropic.com/en/docs/about-claude/models/all-models)   |
+| DeepSeek             | ✓                | ✓          | ✓            | ✓            | ✓            |               | ✓            | ✓               |                |                  | [Models](https://api-docs.deepseek.com/quick_start/pricing)                   |
+| Meta                 |                  | ✓          | ✓            | ✓            | ✓            |               | ✓            | ✓               |                |                  | [Models](https://www.llama.com/docs/model-cards-and-prompt-formats/)          |
+| Alibaba (Qwen)       | ✓                | ✓          | ✓            | ✓            | ✓            |               | ✓            |                 |                |                  | [Models](https://www.alibabacloud.com/help/en/model-studio/model-user-guide/) |
+| AWS                  |                  | ✓          |              |              | ✓            | ✓             | ✓            |                 |                | ✓                | [Models](https://aws.amazon.com/ai/generative-ai/nova/)                       |
+| X (formerly Twitter) |                  |            |              |              |              |               |              |                 | ✓              |                  | [Models](https://docs.x.ai/docs/models)                                       |
+| Mistral AI           | ✓                | ✓          | ✓            | ✓            |              | ✓             | ✓            | ✓               |                |                  | [Models](https://docs.mistral.ai/getting-started/models/models_overview/)     |
+| Google               | ✓                | ✓          |              |              | ✓            | ✓             | ✓            |                 |                | ✓                | [Models](https://ai.google.dev/gemini-api/docs/models)                        |
+</div>
+
+### Feature Definitions
+
+- **Open Weights**: Models whose weights are publicly available for download and customisation
+- **Self-hosting**: Ability to run models on your own infrastructure
+- **Reasoning Models**: Specialised models for complex reasoning tasks like mathematics or step-by-step problem solving
+- **Multimodal**: Support for multiple input/output modalities (text, images, audio, etc.)
+- **Long Context**: Support for context windows of 100K tokens or more
+- **RAG Optimised**: Perform well at generating coherent responses that integrate external knowledge from retrieved documents with model knowledge, might include specific capabilities like improved citation of sources
+- **Enterprise Focus**: Strong emphasis on governance, security, and enterprise integration
+- **Multilingual**: Strong support for multiple languages beyond English
+- **Edge Deployment**: Optimised for deployment on edge devices or resource-constrained environments
+- **Real-time Data**: Access to real-time (or very recent) information
+
+# Trial
+
+These platforms show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt platforms, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
+
+<div data-radar data-label="MLflow" data-ring="trial" />
+
+## MLflow
+
+We have placed [MLFlow](https://mlflow.org/) in the Trial ring of the Platforms quadrant due to its potential as a lightweight and modular option for teams seeking to manage the machine learning lifecycle. Its open-source nature makes it an attractive alternative to the more monolithic cloud-based MLOps platforms provided by vendors like AWS, Microsoft and Google. A key advantage of MLFlow is its ability to avoid vendor lock-in, offering teams the flexibility to maintain control of their infrastructure and adapt workflows as their needs evolve.
+
+That said, realising the benefits of MLFlow requires teams to have a certain level of technical expertise to configure and integrate it into their existing systems effectively. Unlike cloud-native behemoths such as [SageMaker](https://aws.amazon.com/sagemaker/) or [Vertex](https://cloud.google.com/vertex-ai) AI, MLFlow does not provide an all-in-one, plug-and-play experience. Instead, it offers modular components that must be tailored to specific use cases. We recommend assessing MLFlow if your organisation values flexibility, has the technical proficiency to manage integrations, and prefers avoiding dependency on proprietary platforms early in your MLOps journey.
+
+<div data-radar data-label="Open weight LLMs" data-ring="trial" />
+
+## Open weight LLMs
+
+2024 was the year when open weight LLMs (which are sometimes incorrectly referred to as 'open source') from companies such as [Meta](https://www.llama.com/) and [Deepseek](https://www.deepseek.com/) reached maturity, with some even surpassing flagship frontier models on certain tasks. We've placed open weight LLMs in the Trial ring because they allow organisations to benefit from AI capabilities while maintaining control over their data and deployment. These models have demonstrated impressive performance, particularly in specialised domains when fine-tuned on specific tasks.
+
+The key benefits include reduced operational costs compared to API-based services, full control over model deployment and customisation, and the ability to run models in air-gapped environments where data privacy is paramount. However, we've kept them in Trial because organisations need considerable ML engineering expertise to deploy and maintain these models effectively, and the total cost of ownership isn't always lower than API-based alternatives when accounting for computational resources and engineering time.
+
+For certain use cases, the simplicity of a pay-per-use API integration outweighs the benefits and greater control of hosting an open source LLM. Additionally, implementing appropriate security controls, prompt injection protection, and data governance poses significant challenges.
+
+<div data-radar data-label="Lakera" data-ring="trial" />
+
+## Lakera
+
+[Lakera](https://www.lakera.ai/) is an AI safety and robustness platform designed to detect and mitigate risks in machine learning systems. It provides mechanisms for testing, analysis, and quality assurance to help developers identify weaknesses or vulnerabilities in AI/ML models prior to deployment. This makes it particularly appealing in contexts where reliability and safety are paramount, such as finance, healthcare, or any domain subject to compliance constraints.
+
+We have placed Lakera in the Trial ring because its value is clearly demonstrated in scenarios where established safety practices need to be extended to AI systems. Its ability to identify edge cases and potential failures adds a layer of assurance that is crucial for risk-sensitive operations. However, as a newer and relatively niche platform, it is still finding its place within mainstream AI development processes. Teams looking to leverage its capabilities will need to have a certain level of maturity in their own testing and validation workflows.
+
+For now, Lakera stands out as a focused and valuable tool for teams committed to addressing AI risk in the most responsible way. We recommend conducting small-scale experiments to assess its suitability for your specific requirements before considering broader adoption.
+
+<div data-radar data-label="Vector Databases" data-ring="trial" />
+
+## Vector Databases
+
+Vector databases have emerged as specialised tools for managing the high-dimensional data representations (embeddings) required by AI models. They enable efficient similarity search across text, images, and other content types. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus 2.0](https://milvus.io/) and [Weaviate](https://weaviate.io/).
+
+We've generally placed vector databases in the Trial ring, as they have proven valuable for specific use cases such as semantic search and recommendation systems. However, their adoption should be carefully evaluated based on individual requirements. Traditional databases may be sufficient for simpler operations and typically require less coordination. Alternative approaches, such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer, bring vector embedding search directly into the Postgres database, ensuring embeddings remain synchronised with underlying content changes.
+
+If a vector database is required for your use case, the choice of provider often depends on factors such as scale requirements, the need for real-time updates, and whether a managed or self-hosted solution is preferred. Pinecone leads in production readiness but comes with the costs of a managed service, while open-source alternatives like Qdrant and Milvus offer greater control but demand more operational expertise.
+
+# Assess
+
+These platforms represent emerging or specialized services that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.
+
+<div data-radar data-label="Crew.ai" data-ring="assess" />
+
+## Crew.ai
+
+We've placed [Crew.ai](http://Crew.ai) in the Assess ring of the Platforms radiant because it represents a promising approach to multi-agent orchestration that's gaining traction among developers building complex AI systems.
+
+Crew.ai provides a framework for creating teams of specialised AI agents that work together to accomplish tasks through coordinated effort. Our team members report that it offers a well-structured approach to defining agent roles, communication patterns, and task delegation: addressing many of the challenges involved in building effective agentic systems. The framework's emphasis on human-in-the-loop integration, along with the ability to combine specialised agents with different capabilities, makes it particularly valuable for complex workflows where single-agent solutions fall short.
+
+While Crew.ai shows significant promise and has already been used successfully in production environments, we've placed it in Assess rather than Trial because the multi-agent paradigm itself is still evolving. Organisations need to carefully evaluate whether the added complexity of managing multiple agents offers sufficient benefits over simpler approaches for their specific use cases. Teams should also be aware that best practices for agent collaboration are still emerging, and implementations may require considerable tuning and oversight to achieve reliable results.
+
+<div data-radar data-label="Galileo.ai" data-ring="assess" />
+
+## Galileo.ai
+
+We've placed [Galileo.ai](http://Galileo.ai) in the Assess ring of the Platforms radiant because it represents an interesting approach to evaluating and improving AI model performance. It deserves attention but requires careful consideration before being adopted more broadly.
+
+Galileo.ai offers tools for understanding, measuring, and refining the performance of large language models, providing visibility into model behaviour through data exploration and analytics. Our committee has noted that teams using the platform report better insights into how their AI systems perform across different scenarios and edge cases. It shows promise in helping developers identify and fix issues such as hallucinations, biases, and performance degradation, which are often difficult to detect through traditional testing methods.
+
+We recommend assessing this platform, particularly if your organisation is developing custom models or fine-tuning existing ones, as the insights it provides could significantly improve model quality. However, we've stopped short of recommending it for trial by all teams, as its value varies depending on your level of AI maturity and your specific use cases. Organisations with simpler AI implementations, or those primarily using out-of-the-box models, may find less immediate benefit. The platform is likely to offer the most value to organisations that are actively developing or fine-tuning models, or deploying AI in high-stakes environments where consistent performance is critical. Teams should also consider whether they have the technical resources required to act effectively on the insights the platform provides.
+
+<div data-radar data-label="Kubeflow" data-ring="assess" />
+
+## Kubeflow
+
+We've placed [Kubeflow](https://www.kubeflow.org/) in the Assess ring of our Platforms quadrant. This open-source machine learning platform, built on Kubernetes, offers a comprehensive solution for managing ML workflows, but it requires careful evaluation before widespread adoption.
+
+Kubeflow is gaining traction among data science and MLOps teams looking to standardise their machine learning workflows. Its strength lies in combining Kubernetes' orchestration capabilities with ML-specific tools: Pipelines for workflow automation, Katib for hyperparameter tuning, and KFServing for model deployment. This integrated approach helps bridge the gap between data scientists and operations teams, addressing one of the core challenges in operationalising ML models.
+
+However, several factors keep Kubeflow in our Assess ring. First, implementing Kubeflow demands significant expertise in both Kubernetes and ML engineering—a specialised skill set that remains relatively uncommon. Second, while the platform is maturing, we've observed that many organisations struggle with its complexity during initial setup and ongoing maintenance. Teams often report a steep learning curve before realising tangible benefits.
+
+Organisations with established ML practices and existing Kubernetes expertise should consider assessing Kubeflow, particularly if they're facing challenges with ML model deployment, experiment reproducibility or resource utilisation. The platform is especially suited to enterprises managing multiple ML models in production that require systematic oversight across their lifecycle. Smaller teams, or those earlier in their ML journey, may want to explore simpler alternatives first or consider managed options like [Vertex AI Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction), which abstract away some of the infrastructure complexity.
+
+# Hold
+
+These platforms are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent approaches that have been superseded by more effective solutions.
+
+<div data-radar data-label="Building against vendor-specific APIs" data-ring="hold" />
+
+## Building against vendor-specific APIs
+
+We've placed "Building against vendor-specific APIs" in the Hold ring of the Platforms quadrant because tightly coupling your applications to vendor-specific LLM APIs poses significant business risks in this rapidly evolving landscape.
+
+The foundation model ecosystem is changing at breakneck speed, with model capabilities, pricing and even entire companies shifting dramatically from month to month. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges. We've seen teams invest substantial engineering effort into rewriting API integrations after discovering their chosen vendor has been outperformed or has significantly increased its pricing.
+
+Instead, we recommend using abstraction libraries that provide a common interface to multiple LLM providers. Libraries such as [AISuite](https://github.com/andrewyng/aisuite) or Simon Willison's [LLM CLI](https://github.com/simonw/llm) let you switch between different models with minimal code changes, sometimes just a configuration update. These libraries handle the nuances of different vendor APIs, managing context windows, token limitations and provider-specific parameters behind a consistent interface. This approach preserves your flexibility to take advantage of new capabilities or improved pricing as the market evolves, while significantly reducing the engineering effort required to switch between models.
+
+These abstractions do add some complexity and may occasionally limit access to vendor-specific features, but in our view, the protection against vendor lock-in far outweighs these drawbacks in most cases. As the foundation model market continues to consolidate, maintaining the flexibility to adapt quickly will be crucial for both cost management and staying competitive.
