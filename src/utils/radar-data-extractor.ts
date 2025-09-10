@@ -32,7 +32,7 @@ function generateBaseUrl(filePath: string): string {
     join(process.cwd(), 'src/pages/ai-radar/'),
     ''
   )
-  const pathWithoutExt = relativePath.replace(/\.(mdx|md)$/, '')
+  const pathWithoutExt = relativePath.replace(/index\.(mdx|md)$/, '')
   return `/ai-radar/${pathWithoutExt}`
 }
 
@@ -195,7 +195,7 @@ function parseRadarFromMarkdown(
       quadrant: getQuadrantForSegment(quadrant),
       ring: getRingForAdoptionLevel(ring),
       moved: getMovedValue(change), // Map string values to numeric
-      link: `${baseUrl}#${slugify(sectionName)}`,
+      link: `${baseUrl}#${slugify(sectionName.replace('.',''))}`,
       active: true
     }
 

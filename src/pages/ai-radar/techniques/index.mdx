@@ -27,7 +27,7 @@ For organisations with the necessary data assets and technical capabilities, the
 
 ## RAG
 
-Retrieval-Augmented Generation (RAG) is an AI approach that combines search and text generation to produce more accurate responses. The approach helps prevent confabulation—cases where AI models generate plausible but incorrect information—by grounding responses in real data.
+Retrieval-Augmented Generation (RAG) is an AI approach that combines search and text generation to produce more accurate responses. The approach helps prevent confabulation, cases where AI models generate plausible but incorrect information, by grounding responses in real data.
 
 We're placing RAG in the Adopt ring because it addresses key challenges in deploying AI systems in information retrieval contexts. The technique is particularly valuable when accuracy and traceability of information are crucial, such as in customer service, technical documentation, or compliance scenarios. While implementing RAG requires careful attention to document processing and embedding strategies, the widespread availability of tools and frameworks has significantly lowered the barriers to adoption. Teams should consider RAG as a foundational technique when building AI applications that need to leverage organisational knowledge.
 
@@ -35,9 +35,9 @@ We're particularly interested in monitoring how this technique develops alongsid
 
 See also Cross-encoder reranking, Chain of thought, Structured RAG.
 
-<div data-radar data-label="LLM-as-a-Judge" data-ring="adopt" />
+<div data-radar data-label="LLM-as-a-judge" data-ring="adopt" />
 
-## LLM-as-a-Judge
+## LLM-as-a-judge
 
 We've placed LLM-as-a-judge in the Adopt ring because it has quickly proven itself to be one of the most practical and cost-effective techniques for evaluating AI system outputs. At first glance, it might seem like circular reasoning to have one LLM evaluate another LLM's work. However, the capabilities of today's strongest models are such that they can provide nuanced, multidimensional critique that simpler evaluation methods cannot match, except when using very constrained metrics like exact match or BLEU scores (Bilingual Evaluation Understudy, a method for automatically evaluating machine translations).
 
@@ -49,13 +49,13 @@ This technique has become widely adopted in both offline and online evaluation s
 
 ## BERT variants
 
-[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised Natural Language Processing (NLP) by allowing AI models to process human language by looking at words in relation to their entire context, rather than just left-to-right or right-to-left. Think of it like a reader who can understand a word by looking at all the surrounding words for context, rather than reading sequentially. The original BERT spawned a family tree of variants and new versions are still being developed, most recently [ModernBERT](https://huggingface.co/blog/modernbert), which is too new at the time of writing for us to have independently evaluated.
+[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised Natural Language Processing (NLP) by allowing AI models to process human language by looking at words in relation to their entire context, rather than just left-to-right or right-to-left. Think of it like a reader who can understand a word by looking at all the surrounding words for context, rather than reading sequentially. The original BERT spawned a family tree of variants, with [ModernBERT](https://huggingface.co/blog/modernbert) representing the latest evolution. Released in late 2024, ModernBERT improves legacy BERT through architectural updates which shorten training times and improve accuracy.
 
 BERT-style models serve fundamentally different purposes than generative models like GPT. While GPT models excel at generating text and conversational interactions, BERT models are optimised for understanding and analysis tasks such as classification, named entity recognition, and sentiment analysis. They're particularly valuable for creating semantic vector embeddings that capture text meaning in numerical form, making them essential components in Retrieval Augmented Generation (RAG) systems. In these pipelines, BERT embeddings help retrieve relevant information that is then fed as text to GPT models for generation: the models don't directly share embeddings, but rather work in complementary roles.
 
 We particularly recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for organisations starting new NLP projects. It handles word relationships more effectively using a disentangled attention mechanism and enhanced position encoding. [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) is smaller and faster whilst retaining most of the model's performance, so it is particularly valuable for production deployments where latency requirements are strict or computing resources are limited, such as edge devices or high-throughput API services.
 
-For organisations choosing between BERT and GPT models, consider your specific use case: BERT models require fewer computational resources for inference and excel at precise understanding tasks, while GPT models offer impressive out-of-the-box generation capabilities through accessible APIs. Many sophisticated AI applications today use both types in complementary roles—BERT for understanding and information retrieval, and GPT for generation based on that understanding.
+For organisations choosing between BERT and GPT models, consider your specific use case: BERT models require fewer computational resources for inference and excel at precise understanding tasks, while GPT models offer impressive out-of-the-box generation capabilities through accessible APIs. Many sophisticated AI applications today use both types in complementary roles, BERT for understanding and information retrieval, and GPT for generation based on that understanding.
 
 There are options for specialised domains like biomedical [(BioBERT)](https://github.com/dmis-lab/biobert) or financial text [(FinBERT)](https://huggingface.co/ProsusAI/finbert). While these can outperform general models in their niches, they often require significant expertise to use effectively and may need additional tuning for specific use cases.
 
@@ -81,9 +81,9 @@ Most teams we've observed use this as a two-step process: first, a quick embeddi
 
 The technique has shown consistent improvements across different domains and use cases, often reducing hallucinations in downstream LLM responses by ensuring higher quality context selection. Implementation has also become more straightforward with libraries like [sentence-transformers](https://www.sbert.net/) providing ready-to-use models. However, teams should be mindful of the additional latency introduced by the reranking step and may need to tune the number of candidates passed to the re-ranker based on their specific performance requirements. The computational overhead is generally justified by the marked improvement in retrieval quality, making this a reliable enhancement to any RAG pipeline where response accuracy is a priority.
 
-<div data-radar data-label="Chain of Thought (CoT)" data-ring="trial" />
+<div data-radar data-label="Chain of thought (CoT)" data-ring="trial" />
 
-## Chain of Thought (CoT)
+## Chain of thought (CoT)
 
 [Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) sits in our Trial ring as a proven technique for improving the reasoning capabilities of large language models, where they are required.
 
@@ -127,9 +127,9 @@ The key advantages we're seeing in real-world applications include more consiste
 
 However, implementing structured RAG requires more upfront work in data organisation and schema design than traditional RAG. Teams need to carefully consider their data structures and retrieval patterns. This additional complexity is why we've placed it in Assess rather than Trial: while the benefits are clear, implementation patterns are still evolving.
 
-<div data-radar data-label="Hypothetical Document Embeddings (HyDE)" data-ring="assess" />
+<div data-radar data-label="Hypothetical document embeddings (HyDE)" data-ring="assess" />
 
-## Hypothetical Document Embeddings (HyDE)
+## Hypothetical document embeddings (HyDE)
 
 We've found [HyDE (Hypothetical Document Embeddings)](https://arxiv.org/abs/2212.10496) to be an elegant solution to a common problem in search systems - their tendency to perform poorly when searching content that differs from their training data. HyDE works by first asking a large language model to imagine what an ideal document answering the user's query might look like. This 'hypothetical document' helps bridge the gap between how users naturally ask questions and how information is actually written in documents.
 
@@ -184,9 +184,9 @@ Zero-shot prompting – asking Large Language Models to perform tasks without ex
 
 Our view is that zero-shot prompting should always be combined with input validation, output filtering and clear usage policies. While it can be valuable for prototyping and exploration, moving to few-shot prompting or fine-tuning with careful guardrails is a more robust approach for production systems. The current placement in "Hold" reflects our concern about organisations rushing to deploy unsafe prompt patterns rather than taking the time to implement proper controls.
 
-<div data-radar data-label="AI Pull Request Review" data-ring="hold" />
+<div data-radar data-label="AI pull request review" data-ring="hold" />
 
-## AI Pull Request Review
+## AI pull request review
 
 We've placed AI Pull Request Review in the Hold ring. Whilst AI tools can catch basic issues like style violations and potential bugs, they fall short in the crucial aspects of PR review that maintain code quality and team effectiveness. The key point is that PR review isn't just about finding errors: it's a vital knowledge-sharing mechanism where senior developers mentor juniors, architectural decisions are questioned and refined, and the team maintains a shared understanding of the codebase.
 

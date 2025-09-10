@@ -14,21 +14,19 @@ Software tools and utilities that enhance AI development workflows, from coding 
 These tools represent mature, well-supported technologies that are ready for production use. They offer excellent productivity gains, extensive documentation, and proven track records in real-world development workflows.
 
 {/* data-change='up | down | new' */}
-<div data-radar data-label="Software Engineering Copilots" data-ring="adopt" />
+<div data-radar data-label="Software engineering copilots" data-ring="adopt" />
 
-## Software Engineering Copilots
+## Software engineering copilots
 
-Software Engineering Copilots represent a new category of AI-powered development tools that act as intelligent coding assistants. These tools, including [Cursor](https://www.cursor.com/), [Copilot](https://github.com/features/copilot), [Windsurf](https://codeium.com/windsurf), [Zed](https://zed.dev/), [Traycer](https://traycer.ai/), [Cody](https://sourcegraph.com/demo/cody), [Cline](https://github.com/cline/cline), [Tabnine](https://www.tabnine.com/) and [Aider](https://github.com/Aider-AI/aider) either exist as standalone IDEs or integrate as plugins into existing IDEs, and offer code completion, refactoring suggestions, and automated implementation of routine tasks.
+AI-powered coding assistants have become essential development tools, spanning traditional IDE integrations like [GitHub Copilot](https://github.com/features/copilot) and [Tabnine](https://www.tabnine.com/), standalone environments such as [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf), and [Zed](https://zed.dev/), and command-line tools including [Aider](https://github.com/Aider-AI/aider), [Cline](https://github.com/cline/cline), [Claude Code](https://claude.ai/code), and [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli). [Cody](https://sourcegraph.com/cody) focuses on enterprise-scale codebase understanding, [Traycer](https://traycer.ai/) emphasises upfront planning for complex tasks, and [Kiro](https://kiroai.com/) offers both open-ended coding and structured specification-driven development modes, whilst [Warp](https://www.warp.dev/) reimagines the terminal experience with AI-enhanced command suggestions.
 
-We're seeing a clear pattern emerge in how these tools impact different experience levels. Counter-intuitively, senior engineers are deriving the most value by leveraging AI to accelerate well-understood tasks and automate routine code generation, whilst maintaining strict quality control over the output. Junior developers often struggle to effectively evaluate AI suggestions, sometimes accepting problematic implementations or failing to spot edge cases that weren't properly handled.
+Two distinct approaches have emerged: free-form "vibe coding" and structured development methodologies. [Kiro](https://kiroai.com/) exemplifies this choice by offering both approaches: a conversational coding mode for rapid iteration and a dedicated specs mode where AI assists developers in drafting requirements, design decisions, and task breakdowns through three specification files before code generation. [Cursor](https://www.cursor.com/) enables teams to codify standards through .cursorrules, embedding architectural patterns and guidelines directly into AI assistance.
 
-We've placed Software Engineering Copilots firmly in the Adopt ring. The productivity gains (particularly for experienced developers who can effectively guide and evaluate AI suggestions) are substantial enough to justify this placement. Organisations report significant productivity improvements on routine coding tasks, with some teams achieving even more impressive results through careful integration into their workflows.
+Usage patterns reveal that senior engineers derive greater value by leveraging AI for routine tasks whilst maintaining quality oversight. Junior developers frequently struggle to evaluate AI suggestions, occasionally accepting flawed implementations or overlooking edge cases. This suggests organisational training requirements around effective AI collaboration.
 
-[Cursor](https://www.cursor.com/) has emerged as a current frontrunner with its implementation of .cursorrules, which allows teams to share configuration settings and enforce consistent coding practices across projects. This feature enables organisations to codify their standards, architectural patterns, and security guidelines directly into the AI assistant, addressing many of our previous concerns about inconsistent output and quality control. While other tools will likely implement similar capabilities soon, Cursor's current implementation provides a robust framework for enterprise adoption.
+We've placed Software Engineering Copilots in the Adopt ring based on demonstrable productivity improvements, particularly for experienced developers. Teams report meaningful gains on routine coding tasks, though success correlates with careful workflow integration and rigorous code review practices.
 
-For teams adopting these tools, we still recommend a "trust but verify" approach: use AI assistance for initial implementation and routine tasks, but maintain rigorous code review and testing practices. Organisations should also consider providing structured training for junior developers on effectively collaborating with AI tools, focusing on developing the critical thinking skills needed to evaluate and refine AI-generated code.
-
-The rate of improvement in this space continues to be remarkable, with new capabilities being added regularly. Teams should remain flexible in their tool selection, as today's leader may be surpassed by innovations in competing products tomorrow. Regardless of the specific tool chosen, the fundamental shift towards AI-augmented development appears to be permanent, and organisations delaying adoption risk finding themselves at a competitive disadvantage.
+Organisations should implement a "trust but verify" approach: utilise AI assistance for initial implementation whilst maintaining testing standards. The shift towards AI-augmented development appears permanent, making delayed adoption a competitive risk, though teams should remain adaptable as innovation continues across the ecosystem.
 
 <div data-radar data-label="Provider-agnostic LLM facades" data-ring="adopt" />
 
@@ -52,27 +50,42 @@ Widespread adoption across both industry and academia, plus an extensive plugin 
 
 These tools show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt tools, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
 
-<div data-radar data-label="Agentic Computer Use" data-ring="trial" />
 
-## Agentic Computer Use
+<div data-radar data-label="MLflow" data-ring="trial" />
 
-We're seeing AI agents being developed for increasingly complex and varied environments, such as web agents that can browse and interact with online content like [OpenAI's Operator](https://operator.chatgpt.com/) to systems that interact with a user's whole operating system such as [Claude Computer Use](https://docs.anthropic.com/en/docs/build-with-claude/computer-use). Each agent is designed with specific capabilities and constraints suited to its operational environment: a RAG (Retrieval Augmented Generation) agent might be optimised for searching and synthesising internal documentation, while a development environment agent needs deep understanding of codebases and development workflows.
+## MLflow
 
-A particularly interesting trend is the emergence of agents that operate across entire computing environments such as [Devin](https://devin.ai/), with the ability to execute terminal commands, manipulate files, and interact with development tools. This expanded scope brings both opportunities and challenges: while these agents can potentially automate complex workflows, they require careful consideration around access controls, security boundaries, and failure recovery mechanisms.
+We have placed [MLFlow](https://mlflow.org/) in the Trial ring due to its potential as a lightweight and modular option for teams seeking to manage the machine learning lifecycle. Its open-source nature makes it an attractive alternative to the more monolithic cloud-based MLOps platforms provided by vendors like AWS, Microsoft and Google. A key advantage of MLFlow is its ability to avoid vendor lock-in, offering teams the flexibility to maintain control of their infrastructure and adapt workflows as their needs evolve.
 
-We've placed AI Agents in the Trial ring. While we're seeing promising early applications, particularly in constrained environments like RAG systems, the technology is still evolving rapidly and best practices around security, reliability, and control mechanisms are still emerging. The potential for both value and risk is significant, warranting close attention but careful consideration before widespread adoption.
+That said, realising the benefits of MLFlow requires teams to have a certain level of technical expertise to configure and integrate it into their existing systems effectively. Unlike cloud-native behemoths such as [SageMaker](https://aws.amazon.com/sagemaker/) or [Vertex AI](https://cloud.google.com/vertex-ai), MLFlow does not provide an all-in-one, plug-and-play experience. Instead, it offers modular components that must be tailored to specific use cases. We recommend assessing MLFlow if your organisation values flexibility, has the technical proficiency to manage integrations, and prefers avoiding dependency on proprietary platforms early in your MLOps journey.
 
-We're seeing a clear pattern of successful implementations when agents are given well-defined boundaries and carefully curated tool access. Organisations are reporting meaningful productivity gains, particularly in areas like document processing, customer service, and development workflows. The ability to chain together multiple operations while maintaining context is proving valuable in many scenarios.
+<div data-radar data-label="Vector databases" data-ring="trial" />
 
-However, we're also observing significant challenges around reliability, security, and control. Agents can sometimes get stuck in loops, make incorrect tool selections, or fail to properly handle edge cases. There are also important questions around audit trails, permissions management, and failure recovery that need to be addressed. Until these concerns are more fully resolved, we recommend careful assessment and controlled trials rather than widespread adoption.
+## Vector databases
+
+Vector databases have emerged as specialised tools for managing the high-dimensional data representations (embeddings) required by AI models. They enable efficient similarity search across text, images, and other content types. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus 2.0](https://milvus.io/) and [Weaviate](https://weaviate.io/).
+
+We've generally placed vector databases in the Trial ring, as they have proven valuable for specific use cases such as semantic search and recommendation systems. However, their adoption should be carefully evaluated based on individual requirements. Traditional databases may be sufficient for simpler operations and avoid the data consistency challenges of keeping embeddings synchronized with underlying content changes across databases. Alternative approaches, such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer, bring vector embedding search directly into the Postgres database, ensuring embeddings remain synchronised with underlying content changes.
+
+If a vector database is required for your use case, the choice of provider often depends on factors such as scale requirements, the need for real-time updates, and whether a managed or self-hosted solution is preferred. Pinecone leads in production readiness but comes with the costs of a managed service, while open-source alternatives like Qdrant and Milvus offer greater control but demand more operational expertise.
+
+<div data-radar data-label="Local model execution environments" data-ring="trial" />
+
+## Local model execution environments
+
+Tools like [Ollama](https://ollama.ai/), [LM Studio](https://lmstudio.ai/), and [AnythingLLM](https://anythingllm.com/) provide accessible ways to run open weight models on local hardware. These environments enable rapid experimentation with open weight models from providers including Meta (Llama), Mistral, DeepSeek, Alibaba (Qwen), and OpenAI (gpt-oss) without API costs or sending data to external services. Many now support advanced capabilities including web search, tool calling via Model Context Protocol (MCP), and connections to commercial APIs for hybrid workflows.
+
+These tools serve various evaluation needs: developers testing AI features during development, teams comparing model responses for specific use cases, and organisations exploring AI capabilities with sensitive data that cannot leave their infrastructure. The range spans from command-line interfaces like Ollama to graphical applications like LM Studio, accommodating different technical backgrounds and preferences.
+
+We've placed these in Trial as they offer a valuable alternative approach to model evaluation alongside cloud-based testing. They're particularly useful for privacy-sensitive prototyping, offline development, and scenarios where extensive experimentation would be cost-prohibitive via APIs. Teams should consider these tools as one option among many for model evaluation, weighing their benefits against the overhead of local setup and maintenance.
 
 # Assess
 
 These tools represent emerging or specialized technologies that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.
 
-<div data-radar data-label="AI Application Bootstrappers" data-ring="assess" />
+<div data-radar data-label="AI application bootstrappers" data-ring="assess" />
 
-## AI Application Bootstrappers
+## AI application bootstrappers
 
 We have placed AI Application Bootstrappers like [V0](https://v0.dev/), [Bolt.new](https://bolt.new/) and [Replit Agent](https://replit.com/ai) in the Assess ring of our Tools quadrant. These tools represent an intriguing new approach to rapidly generating complete applications from prompts or designs. While they can dramatically accelerate the creation of demos and proofs of concept, their current limitations lead us to recommend careful assessment before adoption.
 
@@ -82,6 +95,30 @@ While these tools excel at creating initial implementations, the significant eff
 
 Looking ahead, we expect these tools to mature and potentially move into the Trial ring as they develop better guardrails and more maintainable output. For now, we recommend assessing them primarily for simple prototyping and proof-of-concept work, while maintaining careful separation between bootstrapped demos and production codebases.
 
+<div data-radar data-label="Agentic computer use" data-ring="assess" />
+
+## Agentic computer use
+
+AI agents that directly interact with computer interfaces represent an intriguing development in AI tooling. [OpenAI's Operator](https://operator.chatgpt.com/), integrated into ChatGPT as "agent mode," and [Claude Computer Use](https://docs.anthropic.com/en/docs/build-with-claude/computer-use) can control web browsers and desktop applications through visual understanding and automated screen interactions. Development-focused agents like [Devin](https://devin.ai/) take a different approach, working within integrated development environments and specialising in code repositories through programmatic tool interactions.
+
+These systems process screen content through visual analysis, reasoning about current context and task requirements, then execute mouse clicks, keyboard inputs, and application navigation. While organisations express significant interest in deploying AI agents, early adopters are encountering reliability challenges, with success rates declining markedly as task complexity increases and agent workflows become more extended.
+
+We've placed Agentic Computer Use in the Assess ring because whilst the technology demonstrates clear potential for specific use cases, practical implementation remains challenging. Early implementations show promise in constrained environments with well-defined boundaries, but teams report inconsistent results when scaling to more complex workflows or longer chains of automated activity.
+
+For teams evaluating these tools, we recommend focusing on simple, isolated tasks with clear success criteria rather than complex multi-step workflows. Maintain human oversight for all critical operations and establish robust audit trails. The technology merits careful assessment, but organisations should approach deployment conservatively until reliability and control mechanisms mature further.
+
+<div data-radar data-label="Lakera" data-ring="assess" />
+
+## Lakera
+
+[Lakera](https://www.lakera.ai/) is an AI safety and robustness platform designed to detect and mitigate risks in machine learning systems. It provides mechanisms for testing, analysis, and quality assurance to help developers identify weaknesses or vulnerabilities in AI/ML models prior to deployment. This makes it particularly appealing in contexts where reliability and safety are paramount, such as finance, healthcare, or any domain subject to compliance constraints.
+
+We have placed Lakera in the Assess ring because while it addresses an important need for AI safety, the platform has several practical limitations that require careful evaluation. Currently, Lakera supports only text-based scanning, teams using multimodal AI systems with images, audio, or video will find gaps in coverage. Custom scanning capabilities for business-specific terms or PII detection rely on regex patterns rather than context-aware analysis, which can quickly hit limitations in complex scenarios.
+
+Performance considerations vary significantly between deployment options. The SaaS offering may provide adequate performance for many use cases, but has text size limitations that require applications to handle chunking. Self-hosted deployments offer more control but require substantial GPU resources for acceptable performance. Additionally, Lakera's scanning is non-stateful, each prompt and response is scanned in isolation without awareness of the broader conversation context, and only 'user' and 'assistant' message types are recognised.
+
+Given these constraints, Lakera may provide valuable safety assurance for straightforward text-based AI applications, but organisations should carefully assess whether its current capabilities align with their specific AI architectures and safety requirements. We recommend conducting thorough proof-of-concept testing that includes your specific modalities, custom requirements, and performance expectations before determining if Lakera fits your use case.
+
 # Hold
 
 These tools are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.
@@ -90,8 +127,10 @@ These tools are not recommended for new projects due to declining relevance, bet
 
 ## Conversational data analysis
 
-We've placed conversational data analysis tools in the Hold ring as this emerging category shows promise but requires careful evaluation at present. These tools aim to enable data analysis through natural language interactions rather than writing code directly.
+Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/), and [Julius](https://julius.ai/) enable natural language querying of databases and datasets, offering significant productivity benefits for knowledgeable data analysts. Modern database-specific Model Context Protocol (MCP) servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's own XTDB database revealed remarkable moments where models navigated complex table structures with apparent ease, demonstrating genuine potential for accelerating data analysis workflows.
 
-Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/), [Julius](https://julius.ai/), and [Gathr's data engineering](https://www.gathr.ai/data-engineering/) allow analysts to query datasets using plain English, generating code behind the scenes. While this could potentially democratise data analysis and data engineering, we have concerns about the reliability and predictability of the generated code. The AI can sometimes misinterpret requests or misrepresent results. For instance, Uber has documented its internal [QueryGPT tool](https://www.uber.com/en-GB/blog/query-gpt/), highlighting the significant number of example queries and guardrails required to achieve acceptable reliability.
+For experienced analysts, these tools represent a meaningful productivity boost, rapidly converting natural language requests into draft queries that can be refined and optimised. However, our experience also revealed challenges: generated queries can be inefficient or occasionally incorrect despite appearing plausible. The technology sometimes struggles with nuanced requirements and may produce suboptimal approaches that experienced analysts would avoid. Uber's experience with their internal [QueryGPT tool](https://www.uber.com/en-GB/blog/query-gpt/) demonstrates both the potential and the complexity, highlighting the significant number of example queries and guardrails required to achieve reliable results.
 
-We're also monitoring how these tools handle data privacy, given they often require sending queries to external AI services. For teams considering these tools, we recommend starting with non-sensitive datasets and asking analytics questions to which you already know the answers.
+We've placed conversational data analysis in the Hold ring not because the technology lacks value, but because successful deployment requires users capable of understanding and validating generated queries. These tools offer substantial benefits for data teams with appropriate expertise, but should be approached cautiously by those unable to review and debug AI-generated database queries.
+
+For teams with strong analytical capabilities, these tools can meaningfully accelerate exploratory data analysis and routine query generation, treating AI output as sophisticated first drafts requiring expert review.
