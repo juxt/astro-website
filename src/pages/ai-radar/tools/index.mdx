@@ -63,7 +63,7 @@ That said, realising the benefits of MLFlow requires teams to have a certain lev
 
 ## Vector databases
 
-Vector databases have emerged as specialised tools for managing the high-dimensional data representations (embeddings) required by AI models. They enable efficient similarity search across text, images, and other content types. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus 2.0](https://milvus.io/) and [Weaviate](https://weaviate.io/).
+Vector databases have emerged as specialised tools for managing the high-dimensional data representations (embeddings) required by AI models. They enable efficient similarity search across text, images, and other content types. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus](https://milvus.io/) and [Weaviate](https://weaviate.io/).
 
 We've generally placed vector databases in the Trial ring, as they have proven valuable for specific use cases such as semantic search and recommendation systems. However, their adoption should be carefully evaluated based on individual requirements. Traditional databases may be sufficient for simpler operations and avoid the data consistency challenges of keeping embeddings synchronized with underlying content changes across databases. Alternative approaches, such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer, bring vector embedding search directly into the Postgres database, ensuring embeddings remain synchronised with underlying content changes.
 
