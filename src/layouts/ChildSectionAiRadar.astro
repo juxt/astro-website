@@ -1,9 +1,9 @@
 ---
-import { Image } from 'astro:assets'
-import { MarkdownInstance } from 'astro'
 import { Blog } from '@utils/types'
-import Layout from './Layout.astro'
+import { MarkdownInstance } from 'astro'
+import AIRadarDownloadPdf from '../components/AIRadarDownloadPdf.astro'
 import { RADAR_COLORS, getQuadrantColorFromPath } from '../utils/radar-colors'
+import Layout from './Layout.astro'
 
 type Props = MarkdownInstance<Blog>
 
@@ -63,13 +63,15 @@ function inferPathInfo(pathname: string): {
   <main class='transition-colors dark:bg-gray-900'>
     <!-- Full-width Section Banner -->
     <div class='w-full shadow-lg py-8' style={`background: ${bannerColor}`}>
-      <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
-        <div class='flex items-center gap-8'>
+      <div
+        class='flex sm:flex-row flex-col gap-6 justify-between items-center px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'
+      >
+        <div class='flex items-center gap-4'>
           {
             inferredParentSection && (
               <a
                 href={`/${inferredParentSection}`}
-                class='inline-flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium px-4 py-2 rounded-lg hover:bg-white/10'
+                class='inline-flex items-center gap-3 text-sm text-white/90 font-medium px-4 py-2 rounded-lg bg-white/10'
               >
                 <svg
                   class='w-5 h-5'
@@ -93,6 +95,9 @@ function inferPathInfo(pathname: string): {
           >
             {title}
           </h1>
+        </div>
+        <div>
+          <AIRadarDownloadPdf />
         </div>
       </div>
     </div>

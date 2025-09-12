@@ -1,13 +1,13 @@
 ---
-import { Image } from 'astro:assets'
-import { MarkdownInstance } from 'astro'
-import '../blog.css'
 import { Blog } from '@utils/types'
-import Layout from './Layout.astro'
-import AIRadarData from '../components/AIRadarData.astro'
-import { RADAR_COLORS } from '../utils/radar-colors'
-import SocialShare from '../components/SocialShare.astro'
+import { MarkdownInstance } from 'astro'
 import aiRadarImage from '../assets/site/ai-radar.jpg'
+import '../blog.css'
+import AIRadarData from '../components/AIRadarData.astro'
+import AIRadarDownloadPdf from '../components/AIRadarDownloadPdf.astro'
+import SocialShare from '../components/SocialShare.astro'
+import { RADAR_COLORS } from '../utils/radar-colors'
+import Layout from './Layout.astro'
 
 type Props = MarkdownInstance<Blog>
 
@@ -42,6 +42,9 @@ const shareIconStyle =
             {description}
           </p>
         </div>
+      </div>
+      <div class='flex justify-center pt-8'>
+        <AIRadarDownloadPdf />
       </div>
     </div>
 
