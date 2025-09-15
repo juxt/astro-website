@@ -1,49 +1,41 @@
-// AI Radar Colors - Single source of truth for all radar visualizations
 const baseColors = {
   // === QUADRANT COLORS ===
-  platforms: '#F09758',           // green-600
-  tools: '#CA4527',              // cyan-600
-  languagesFrameworks: '#E8AA41', // yellow-600
-  techniques: '#F26A24',          // red-600
+  platforms: '#F09758',           
+  tools: '#CA4527',              
+  languagesFrameworks: '#E8AA41',
+  techniques: '#F26A24',         
   
   // === RADAR STRUCTURE COLORS ===
-  // Grid and background colors
-  radarBackground: '#ffffff',     // white
-  radarGrid: '#7a8397',          // grid lines (used in both light and dark mode)
+  radarBackground: '#ffffff',    
+  radarGrid: '#7a8397',         
   
   
   // === TEXT COLORS ===
-  // Light mode text colors
-  lightRingText: '#6b7280',      // gray-500 - for ring labels
-  lightMainText: '#374151',      // gray-700 - for main text/entries
+  lightRingText: '#6b7280',      
+  lightMainText: '#374151',      
   
-  // Dark mode text colors  
-  darkRingText: '#9ca3af',       // gray-400 - for ring labels
-  darkMainText: '#d1d5db',       // gray-300 - for main text/entries
+  darkRingText: '#9ca3af',       
+  darkMainText: '#d1d5db',      
   
   // === TOOLTIP COLORS ===
-  // Light mode tooltip
-  lightTooltipBg: '#f9fafb',     // gray-50
-  lightTooltipText: '#374151',   // gray-700
-  lightTooltipBorder: '#d1d5db', // gray-300
+  lightTooltipBg: '#f9fafb',    
+  lightTooltipText: '#374151',  
+  lightTooltipBorder: '#d1d5db', 
   
-  // Dark mode tooltip
-  darkTooltipBg: '#374151',      // gray-700
-  darkTooltipText: '#f9fafb',    // gray-50
-  darkTooltipBorder: '#6b7280',  // gray-500
+  darkTooltipBg: '#374151',     
+  darkTooltipText: '#f9fafb',   
+  darkTooltipBorder: '#6b7280', 
   
   // === ENTRY COLORS ===
-  circleEntryText: '#ffffff'     // white text on colored circles
+  circleEntryText: '#ffffff'     
 } as const
 
 export const RADAR_COLORS = {
   ...baseColors,
   
-  // === BANNER GRADIENTS ===
+  // === BANNER GRADIENT ===
   mainRadarBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks}, ${baseColors.techniques})`,
-  
-  // === THEME-AWARE COLOR GETTERS ===
-  // These will be used by helper functions
+
 } as const
 
 // Helper function to get quadrant color based on quadrant name

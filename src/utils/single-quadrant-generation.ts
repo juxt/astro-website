@@ -18,6 +18,7 @@ interface SingleQuadrantEntry {
   x?: number
   y?: number
   color?: string
+  legendNumber?: number
 }
 
 interface SingleQuadrantRing {

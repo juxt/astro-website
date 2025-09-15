@@ -36,13 +36,6 @@ function inferPathInfo(pathname: string): {
     // Use solid quadrant color instead of gradient
     bannerColor = getQuadrantColorFromPath(pathname)
   }
-  // If we're at a ring level (ai-radar/techniques/adopt), go back to quadrant (ai-radar/techniques)
-  else if (pathParts.length === 2) {
-    inferredParentSection = `ai-radar/${pathParts[0]}`
-
-    // Use quadrant color based on the parent quadrant
-    bannerColor = getQuadrantColorFromPath(pathname)
-  }
   // For any deeper levels, go up one level
   else {
     inferredParentSection = `ai-radar/${pathParts.slice(0, -1).join('/')}`
