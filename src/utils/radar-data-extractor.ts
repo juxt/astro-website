@@ -159,6 +159,7 @@ function parseRadarFromMarkdown(
   matches.sort((a, b) => a.index - b.index)
 
   // Process matches in order of appearance
+  let documentOrder = 0
   for (const { match } of matches) {
     const label = match[1]
     const ring = match[2]
@@ -196,7 +197,8 @@ function parseRadarFromMarkdown(
       ring: getRingForAdoptionLevel(ring),
       moved: getMovedValue(change), // Map string values to numeric
       link: `${baseUrl}#${slugify(sectionName.replace('.',''))}`,
-      active: true
+      active: true,
+      documentOrder: documentOrder++ // Preserve document order for consistent numbering
     }
 
     entries.push(entry)
@@ -211,12 +213,12 @@ function assignConsistentIds(allEntries: any[], targetEntries: any[]): any[] {
   const idMap = new Map<string, number>()
   let id = 1
   
-  // Process in the same order as main radar: quadrants [2,3,1,0], then by ring, then alphabetically
+  // Process in the same order as main radar: quadrants [2,3,1,0], then by ring, then by document order
   for (const quadrant of [2, 3, 1, 0]) {
     for (let ring = 0; ring < 4; ring++) {
       const entries = allEntries
         .filter(entry => entry.quadrant === quadrant && entry.ring === ring)
-        .sort((a, b) => a.label.localeCompare(b.label))
+        .sort((a, b) => (a.documentOrder || 0) - (b.documentOrder || 0))
       
       for (const entry of entries) {
         const entryKey = `${entry.label}-${entry.quadrant}-${entry.ring}`

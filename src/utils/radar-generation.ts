@@ -219,7 +219,7 @@ export function radar_visualization(config: RadarConfig): void {
   for (let quadrant of [2,3,1,0]) {
     for (var ring = 0; ring < 4; ring++) {
       var entries = segmented[quadrant][ring];
-      entries.sort(function(a,b) { return a.label.localeCompare(b.label); })
+      entries.sort((a, b) => (a.documentOrder || 0) - (b.documentOrder || 0))
       for (var i=0; i<entries.length; i++) {
         entries[i].id = "" + id++;
       }
