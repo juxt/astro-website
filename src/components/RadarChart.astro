@@ -122,6 +122,13 @@ const radarConfig = {
               element.style.fill = themeColors.ringTextColor
             }
           })
+
+        // Update date text using class selector
+        document.querySelectorAll('.radar-date-text').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = themeColors.mainTextColor
+          }
+        })
       }
 
       // Initialize the radar visualization

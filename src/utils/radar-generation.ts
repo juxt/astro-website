@@ -330,11 +330,12 @@ export function radar_visualization(config: RadarConfig): void {
     // date
     radar
       .append("text")
+      .attr("class", "radar-date-text")
       .attr("transform", translate(config.title_offset.x, config.title_offset.y + 20))
       .text(config.date || "")
       .style("font-family", config.font_family)
       .style("font-size", "14")
-      .style("fill", "#9ca3af") // gray-400 for date text
+      .style("fill", config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText)
 
     // footer
     radar.append("text")
