@@ -205,6 +205,36 @@ function parseRadarFromMarkdown(
   return entries
 }
 
+// Function to assign IDs using the same logic as the main radar
+// This matches the logic in radar-generation.ts lines 217-227
+function assignConsistentIds(allEntries: any[], targetEntries: any[]): any[] {
+  const idMap = new Map<string, number>()
+  let id = 1
+  
+  // Process in the same order as main radar: quadrants [2,3,1,0], then by ring, then alphabetically
+  for (const quadrant of [2, 3, 1, 0]) {
+    for (let ring = 0; ring < 4; ring++) {
+      const entries = allEntries
+        .filter(entry => entry.quadrant === quadrant && entry.ring === ring)
+        .sort((a, b) => a.label.localeCompare(b.label))
+      
+      for (const entry of entries) {
+        const entryKey = `${entry.label}-${entry.quadrant}-${entry.ring}`
+        idMap.set(entryKey, id++)
+      }
+    }
+  }
+
+  // Assign the consistent IDs to the target entries
+  return targetEntries.map(entry => {
+    const entryKey = `${entry.label}-${entry.quadrant}-${entry.ring}`
+    return {
+      ...entry,
+      id: idMap.get(entryKey) || entry.id || 1
+    }
+  })
+}
+
 // Main function to extract all radar data
 export function extractAllRadarData() {
   const aiRadarDir = join(process.cwd(), 'src/pages/ai-radar')
@@ -277,11 +307,9 @@ export function extractQuadrantData(quadrantName: string) {
     (entry) => entry.quadrant === quadrantNumber
   )
 
-  // Re-assign sequential IDs for single quadrant display
-  const entriesWithIds = quadrantEntries.map((entry, index) => ({
-    ...entry,
-    id: index + 1
-  }))
+  // Use the same ID assignment logic as the main radar for consistency
+  // This matches the logic in radar-generation.ts lines 217-227
+  const entriesWithIds = assignConsistentIds(allData.entries, quadrantEntries)
 
   // Get quadrant display name
   const quadrantDisplayName =

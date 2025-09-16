@@ -3,6 +3,7 @@ import { applyCollisionDetection } from './radar-collision'
 import {
   getRadarStructureColors,
   getTooltipColors,
+  getQuadrantColor,
   RADAR_COLORS
 } from './radar-colors'
 
@@ -58,24 +59,13 @@ export function single_quadrant_visualization(
   config.font_family = config.font_family || 'Arial, Helvetica'
   config.scale = config.scale || 1.0
 
-  // Helper function to get the correct quadrant color from radar-colors.ts
-  function getQuadrantColorFromName(quadrantName: string): string {
-    const normalizedName = quadrantName.toLowerCase().replace(/[\s&-]/g, '')
-    switch (normalizedName) {
-      case 'platforms':
-        return RADAR_COLORS.platforms
-      case 'tools':
-        return RADAR_COLORS.tools
-      case 'languagesframeworks':
-        return RADAR_COLORS.languagesFrameworks
-      case 'techniques':
-        return RADAR_COLORS.techniques
-      default:
-        return config.quadrantColor || RADAR_COLORS.platforms
+  const quadrantColor = config.quadrantColor || (() => {
+    try {
+      return getQuadrantColor(config.quadrantName)
+    } catch {
+      return RADAR_COLORS.platforms // Default fallback
     }
-  }
-
-  const quadrantColor = getQuadrantColorFromName(config.quadrantName)
+  })()
 
   const structureColors = getRadarStructureColors()
   config.colors = config.colors || {
@@ -359,22 +349,10 @@ export function single_quadrant_visualization(
     }
   })
 
-  // Add sequential numbers to circles
-  let circleNumber = 1
-  for (let ringIndex = 0; ringIndex < 4; ringIndex++) {
-    const ringEntries = config.entries.filter(
-      (entry) => entry.ring === ringIndex
-    )
-    ringEntries.sort((a, b) => a.id - b.id)
-
-    ringEntries.forEach((entry) => {
-      entry.legendNumber = circleNumber++
-    })
-  }
-
+  // Use the consistent IDs from the data extractor (no need to regenerate)
   blips
     .append('text')
-    .text((d) => d.legendNumber || d.id) // Use sequential number if available
+    .text((d) => d.id) // Use the consistent ID from data extractor
     .attr('x', 0)
     .attr('y', 3) // Slightly adjust for smaller circles
     .attr('text-anchor', 'middle')
@@ -390,21 +368,8 @@ export function single_quadrant_visualization(
   const legendY = 30
   const legendLineHeight = 14 // Smaller line height for compact legend
 
-  // Create ordered list of all entries sorted by ring (Adopt, Trial, Assess, Hold)
-  const allEntries = []
-
-  // Add entries in ring order: Adopt (0), Trial (1), Assess (2), Hold (3)
-  for (let ringIndex = 0; ringIndex < 4; ringIndex++) {
-    const ringEntries = config.entries.filter(
-      (entry) => entry.ring === ringIndex
-    )
-    ringEntries.sort((a, b) => a.id - b.id) // Sort by original ID within ring
-    allEntries.push(...ringEntries)
-  }
-
-  // Draw legend as one continuous vertical list with sequential numbering
+  // Draw legend as one continuous vertical list using consistent IDs
   let currentY = legendY
-  let legendNumber = 1 // Simple sequential counter
 
   // Draw legend for each ring in order
   for (let ringIndex = 0; ringIndex < 4; ringIndex++) {
@@ -413,7 +378,7 @@ export function single_quadrant_visualization(
     )
     if (ringEntries.length === 0) continue
 
-    ringEntries.sort((a, b) => a.id - b.id) // Sort by original ID within ring
+    ringEntries.sort((a, b) => a.id - b.id) // Sort by consistent ID within ring
 
     // Ring title
     radar
@@ -446,7 +411,7 @@ export function single_quadrant_visualization(
       legendGroup
         .append('text')
         .attr('class', 'radar-entry-text')
-        .text(`${legendNumber}. ${entry.label}`) // Use sequential number instead of entry.id
+        .text(`${entry.id}. ${entry.label}`) // Use consistent ID from data extractor
         .attr('x', legendX)
         .attr('y', currentY)
         .style(
@@ -456,7 +421,6 @@ export function single_quadrant_visualization(
         .style('font-family', config.font_family)
         .style('font-size', '11px')
 
-      legendNumber++ // Increment for next entry
       currentY += legendLineHeight // Move to next line
     })
 
