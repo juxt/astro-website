@@ -40,8 +40,9 @@ function generateBaseUrl(filePath: string): string {
 function slugify(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
+    .replace(/\s+&\s+/g, '--')  // Replace " & " with "--"
+    .replace(/[^a-z0-9-]+/g, '-')  // Replace other non-alphanumeric (preserve existing hyphens)
+    .replace(/(^-|-$)/g, '')  // Remove leading/trailing hyphens
 }
 
 // Convert quadrant label to quadrant number (0,1,2,3 counting clockwise from bottom right)
