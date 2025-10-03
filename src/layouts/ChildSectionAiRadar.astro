@@ -3,6 +3,7 @@ import { Blog } from '@utils/types'
 import { MarkdownInstance } from 'astro'
 import AIRadarDownloadPdf from '../components/AIRadarDownloadPdf.astro'
 import { RADAR_COLORS, getQuadrantColorFromPath } from '../utils/radar-colors'
+import aiRadarImage from '../assets/site/ai-radar.jpg'
 import Layout from './Layout.astro'
 
 type Props = MarkdownInstance<Blog>
@@ -49,9 +50,9 @@ function inferPathInfo(pathname: string): {
 <Layout
   navbar
   title={title}
-  ogTitle={`JUXT AI Radar: ${title}`}
+  ogTitle={title}
   ogDescription={description}
-  robots='noindex,follow'
+  ogImage={aiRadarImage.src}
 >
   <main class='transition-colors dark:bg-gray-900'>
     <!-- Full-width Section Banner -->
