@@ -7,7 +7,7 @@ var now = new Date();
 var sixMonthsAgo = new Date(now).setMonth(now.getMonth() - 6);
 
 function isNew(blog: Blog) {
-    return new Date(blog.publishedDate) > sixMonthsAgo;
+    return new Date(blog.publishedDate) > new Date(sixMonthsAgo);
 }
 
 export function ClojureInBlogs({
@@ -51,7 +51,7 @@ export function ClojureInBlogs({
               const [location, title] = blog.title.split(':')
               return (
                 <a
-                  href={`/blog/${blog.href}`}
+                  href={blog.href}
                   className='text-white group cursor-pointer justify-end flex flex-col w-96 mx-auto gap-4'
                 >
                   <div className='flex flex-col justify-between'>

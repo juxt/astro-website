@@ -1,7 +1,7 @@
 import { formatDate } from '@utils/common'
+import { Blog, Person } from '@utils/types'
 import DraftBanner from './DraftBanner'
 import { TagIcon } from './Icons'
-import { Blog, Person } from '@utils/types'
 
 function BlogAuthor({ name, lastName, image, jobTitle }: Person) {
   return (
@@ -39,7 +39,7 @@ export function BlogCard({
 }: Blog) {
   return (
     <a
-      href={`/blog/${href}`}
+      href={href}
       className='h-full group cursor-pointer flex justify-between flex-col w-96 mx-auto bg-gradient-to-b from-white to-neutral-100 dark:from-slate-700 dark:to-slate-800 relative shadow-lg hover:shadow-2xl transition-all'
     >
       <div className='text-black py-4 w-full h-full relative flex flex-col justify-between'>

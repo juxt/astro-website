@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JUXT AI Radar - Complete Documentation</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        line-height: 1.7;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 60px 30px;
+        color: #1f2937;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        min-height: 100vh;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        padding: 60px;
+        border-radius: 24px;
+        box-shadow: 
+          0 25px 50px -12px rgba(0, 0, 0, 0.08),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      h1 {
+        color: #1e40af;
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 40px;
+        font-size: 3em;
+        font-weight: 700;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        color: #1e40af;
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-top: 50px;
+        margin-bottom: 25px;
+        font-size: 2em;
+        font-weight: 600;
+        position: relative;
+      }
+      h2::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        border-radius: 2px;
+      }
+      h3 {
+        color: #374151;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        font-weight: 600;
+      }
+      h4, h5, h6 {
+        color: #4b5563;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
+      p {
+        margin-bottom: 20px;
+        text-align: left;
+        color: #374151;
+        font-size: 1.05em;
+      }
+      code {
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        font-size: 0.9em;
+        color: #1e40af;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+      }
+      pre {
+        background: linear-gradient(135deg, #1e293b, #334155);
+        color: #e2e8f0;
+        padding: 25px;
+        border-radius: 16px;
+        overflow-x: auto;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        margin: 25px 0;
+      }
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+        border: none;
+      }
+      blockquote {
+        border-left: 4px solid #3b82f6;
+        margin: 25px 0;
+        padding: 20px 25px;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+        border-radius: 0 16px 16px 0;
+        color: #374151;
+        position: relative;
+      }
+      blockquote::before {
+        content: '"';
+        font-size: 3em;
+        color: rgba(59, 130, 246, 0.2);
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        font-family: serif;
+      }
+      blockquote p {
+        margin: 0;
+      }
+      a {
+        color: #3b82f6;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      a:hover {
+        border-bottom-color: #3b82f6;
+        transform: translateY(-1px);
+      }
+      ul, ol {
+        margin: 25px 0;
+        padding-left: 30px;
+      }
+      li {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+      li strong {
+        color: #1e40af;
+        font-weight: 600;
+      }
+      strong {
+        color: #1e40af;
+        font-weight: 600;
+      }
+      em {
+        color: #7c3aed;
+        font-style: italic;
+      }
+      hr {
+        border: none;
+        border-top: 2px solid #e5e7eb;
+        margin: 40px 0;
+      }
+
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        font-size: 0.9em;
+        min-width: 800px;
+      }
+      
+      /* Make tables horizontally scrollable on smaller screens */
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      th, td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+      }
+      th {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+        font-weight: 600;
+        color: #1e40af;
+        font-size: 1.05em;
+      }
+      tr:hover {
+        background: rgba(59, 130, 246, 0.02);
+        transform: scale(1.01);
+        transition: all 0.2s ease;
+      }
+      .highlight {
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        padding: 3px 6px;
+        border-radius: 6px;
+        border: 1px solid #f59e0b;
+      }
+      .note {
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        border: 1px solid #93c5fd;
+        border-radius: 16px;
+        padding: 20px;
+        margin: 25px 0;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+      }
+      .note::before {
+        content: "💡 ";
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+      .main-header {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        color: #1e2937;
+        padding: 40px;
+        border-radius: 16px;
+        margin-bottom: 40px;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .main-header h1 {
+        color: #1e40af;
+        border: none;
+        margin: 0;
+        padding: 0;
+        font-size: 2.5em;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .main-header .meta-info {
+        text-align: right;
+        color: #64748b;
+        font-size: 0.95em;
+      }
+      .main-header .meta-info strong {
+        color: #475569;
+        font-weight: 600;
+      }
+
+      /* Folder headers and separators */
+      .folder-header {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+        padding: 30px;
+        border-radius: 20px;
+        margin: 40px 0 30px 0;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .folder-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+      }
+      .folder-title {
+        color: #1e40af;
+        margin: 0;
+        font-size: 2.2em;
+        border: none;
+        padding: 0;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .folder-separator {
+        border: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+        margin: 60px 0;
+        opacity: 0.6;
+      }
+      
+      /* Article section styling */
+      .article-section {
+        margin-bottom: 40px;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 16px;
+        border: 1px solid rgba(59, 130, 246, 0.08);
+        transition: all 0.3s ease;
+      }
+      .article-section:hover {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(59, 130, 246, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+      }
+      .main-heading {
+        color: #1e40af;
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 1.8em;
+        font-weight: 600;
+      }
+      .sub-heading {
+        color: #1e40af;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        border-bottom: none;
+        padding-bottom: 0;
+        font-weight: 600;
+        position: relative;
+      }
+      .sub-heading::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        border-radius: 1px;
+      }
+      
+      /* Make individual technology headings bigger */
+      .sub-heading ~ h2,
+      .sub-heading ~ h3,
+      .sub-heading ~ h4,
+      .sub-heading ~ h5,
+      .sub-heading ~ h6 {
+        font-size: 1.1em !important;
+      }
+      
+      /* Heading links styling */
+      .heading-link {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .heading-link:hover {
+        color: #3b82f6;
+      }
+      .heading-link::before {
+        content: '#';
+        opacity: 0;
+        margin-right: 8px;
+        color: #9ca3af;
+        transition: opacity 0.2s ease;
+      }
+      .heading-link:hover::before {
+        opacity: 1;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+    <div class="main-header">
+      <h1>JUXT AI Technology Radar 2025</h1>
+      <div class="meta-info">
+        <strong>Generated on:</strong> 11/09/2025
+      </div>
+    </div>
+    
+    
+<div class="folder-header">
+<h2 class="folder-title" id="main-ai-radar"><a href="#main-ai-radar" class="heading-link">Main AI Radar</a></h2>
+</div>
+
+
+<section class="article-section index-section">
+
+<h2 id="juxt-ai-radar"><a href="#juxt-ai-radar" class="heading-link">JUXT AI Radar</a></h2>
+<p><strong>An opinionated guide to the AI landscape from JUXT, a Grid Dynamics company</strong></p>
+<p>Welcome to the first edition of the JUXT AI Radar, where we map the landscape of AI tools, technologies, frameworks, and practices based on our collective expertise and client experiences. Our committee of technology experts has carefully evaluated each entry based on real-world applications, industry trends, and practical utility. This radar represents our current viewpoint and will evolve as the rapidly changing AI ecosystem matures.</p>
+<h3 id="radar-overview"><a href="#radar-overview" class="heading-link">Radar Overview</a></h3>
+<p>Our radar is organized into four main categories, each containing technologies evaluated across four adoption levels:</p>
+<ul>
+<li><strong>Adopt</strong>: Technologies we recommend using now</li>
+<li><strong>Trial</strong>: Worth exploring for new projects</li>
+<li><strong>Assess</strong>: Keep under observation</li>
+<li><strong>Hold</strong>: Not recommended for new projects</li>
+</ul>
+<h3 id="categories"><a href="#categories" class="heading-link">Categories</a></h3>
+<h3><a href="#techniques">Techniques</a></h3>
+<p>AI methodologies, approaches, and practices that shape how we build intelligent systems.</p>
+<p><strong><a href="#techniques-adopt">Adopt</a></strong>, <strong><a href="#techniques-trial">Trial</a></strong>, <strong><a href="#techniques-assess">Assess</a></strong>, <strong><a href="#techniques-hold">Hold</a></strong></p>
+<h3><a href="#languages-frameworks">Languages &amp; Frameworks</a></h3>
+<p>Programming languages, libraries, and frameworks that power AI development.</p>
+<p><strong><a href="#languages-frameworks-adopt">Adopt</a></strong>, <strong><a href="#languages-frameworks-trial">Trial</a></strong>, <strong><a href="#languages-frameworks-assess">Assess</a></strong>, <strong><a href="#languages-frameworks-hold">Hold</a></strong></p>
+<h3><a href="#tools">Tools</a></h3>
+<p>Software tools and utilities that enhance AI development workflows.</p>
+<p><strong><a href="#tools-adopt">Adopt</a></strong>, <strong><a href="#tools-trial">Trial</a></strong>, <strong><a href="#tools-assess">Assess</a></strong>, <strong><a href="#tools-hold">Hold</a></strong></p>
+<h3><a href="#platforms">Platforms</a></h3>
+<p>Infrastructure and platform services that support AI applications.</p>
+<p><strong><a href="#platforms-adopt">Adopt</a></strong>, <strong><a href="#platforms-trial">Trial</a></strong>, <strong><a href="#platforms-assess">Assess</a></strong>, <strong><a href="#platforms-hold">Hold</a></strong></p>
+<h3 id="contributing"><a href="#contributing" class="heading-link">Contributing</a></h3>
+<p>This radar represents our current viewpoint and will be updated regularly. We welcome feedback and suggestions from the community. Each technology entry includes detailed reasoning for its placement, helping you make informed decisions for your AI projects.</p>
+
+</section>
+
+
+<hr class="folder-separator">
+
+<div class="folder-header">
+<h2 class="folder-title" id="languages-frameworks"><a href="#languages-frameworks" class="heading-link">languages-frameworks</a></h2>
+</div>
+
+
+<section class="article-section index-section">
+
+<p>Programming languages and frameworks form the backbone of AI development, providing the tools and abstractions needed to build intelligent systems. From established libraries to emerging frameworks, these technologies enable developers to create sophisticated AI applications efficiently.</p>
+<SingleQuadrantData quadrantName='languages-frameworks' />
+<h2 id="languages-frameworks-adopt"><a href="#languages-frameworks-adopt" class="heading-link">Adopt</a></h2>
+<p>These languages and frameworks represent mature, well-supported technologies that are ready for production use. They offer excellent performance, extensive ecosystems, and proven track records in real-world applications.</p>
+<h3 id="languages-frameworks-pytorch"><a href="#languages-frameworks-pytorch" class="heading-link">PyTorch</a></h3>
+<p><a href="https://pytorch.org/">PyTorch</a> has demonstrated consistent maturity and widespread adoption across both research and production environments, earning its place in our Adopt ring. We’re seeing it emerge as the default choice for many machine learning teams, particularly those working on deep learning projects, thanks to its intuitive Python-first approach and dynamic computational graphs that make debugging and prototyping significantly easier.</p>
+<p>The framework’s robust ecosystem, exceptional documentation and strong community support make it a reliable choice for teams at any scale. While TensorFlow remains relevant, particularly in production deployments, PyTorch’s seamless integration with popular machine learning tools, extensive pre-trained model repository and growing deployment options through TorchServe have addressed previous concerns about production readiness. The framework’s adoption by major technology organisations and research institutions, coupled with its regular release cycle and stability, gives us confidence in recommending it as a default choice for new machine learning projects.</p>
+<h3 id="languages-frameworks-dbt"><a href="#languages-frameworks-dbt" class="heading-link">dbt</a></h3>
+<p>We’ve placed <a href="https://www.getdbt.com/">dbt (data build tool)</a> in the Adopt ring because it has proven to be an essential framework for organising and managing the data transformations that feed AI systems. dbt brings software engineering best practices like version control, testing, and documentation to data transformation workflows, which is crucial when preparing data for AI model training and inference.</p>
+<p>The reliability and maintainability of AI systems heavily depend on the quality of their input data, and dbt helps teams achieve this by making data transformations more transparent and trustworthy. We’ve seen teams successfully use dbt to create clean, well-documented data pipelines that connect data warehouses to AI applications, while maintaining the agility to quickly adapt to changing requirements. Its integration with modern data platforms and strong community support make it a solid choice for organisations building out their AI infrastructure.</p>
+<h3 id="languages-frameworks-mcp"><a href="#languages-frameworks-mcp" class="heading-link">MCP</a></h3>
+<p>Anthropic’s <a href="https://docs.anthropic.com/en/docs/agents-and-tools/mcp">Model Context Protocol (MCP)</a> has rapidly gained adoption since its introduction, addressing the critical need for standardised integration between language models and external tools. We’ve placed MCP in the Adopt ring based on its practical utility and straightforward implementation process.</p>
+<p>MCP solves the persistent problem of connecting AI models to organisational data and tools without requiring custom integration work for each connection. The protocol’s popularity stems from how straightforward MCP servers are to create and deploy, our team has successfully built functional MCP servers within a matter of hours. This ease of implementation, combined with the growing ecosystem of community-created servers, significantly reduces development overhead.</p>
+<p>For organisations evaluating MCP, the value proposition is clear: rather than building bespoke integrations between AI assistants and internal systems, teams can leverage existing MCP servers or create new ones following established patterns. The protocol handles context management and tool discovery effectively, enabling models to reason appropriately about available capabilities.</p>
+<p>We recommend starting with existing MCP servers that match your requirements before building custom implementations. The protocol’s design encourages reusability, meaning investments in MCP server development can benefit multiple AI applications across your organisation.</p>
+<h2 id="languages-frameworks-trial"><a href="#languages-frameworks-trial" class="heading-link">Trial</a></h2>
+<p>These languages and frameworks show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt technologies, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.</p>
+<h3 id="languages-frameworks-autogen"><a href="#languages-frameworks-autogen" class="heading-link">AutoGen</a></h3>
+<p>We’ve placed <a href="https://microsoft.github.io/autogen/stable//index.html">AutoGen</a> in the Trial ring based on its promising approach to orchestrating multiple AI agents for complex problem-solving. This Microsoft-developed framework enables developers to create systems where AI agents can collaborate, dividing tasks between specialised roles like coding, testing, and reviewing, similar to how human development teams operate. While still evolving, we’ve seen compelling early results from teams using AutoGen to build more sophisticated AI applications, particularly in scenarios requiring multi-step reasoning or specialised domain knowledge.</p>
+<p>The framework’s ability to handle interaction patterns between agents with built-in error handling and recovery shows particular promise for enterprise applications. However, we recommend carefully evaluating its fit for your specific use case, as the overhead of managing multiple agents may not be justified for simpler applications where a single large language model would suffice. We’re also watching how the framework’s approach to agent coordination evolves as the field matures.</p>
+<h3 id="languages-frameworks-a2a"><a href="#languages-frameworks-a2a" class="heading-link">A2A</a></h3>
+<p>Google’s <a href="https://a2aprotocol.ai/">Agent2Agent (A2A) protocol</a> addresses the emerging need for standardised communication between AI agents in multi-agent systems. Launched in April 2025 and now governed by the Linux Foundation, A2A enables agents from different providers to discover each other’s capabilities, delegate tasks, and collaborate on complex workflows without requiring custom integration work.</p>
+<p>The protocol complements rather than competes with <a href="#languages-frameworks-mcp">Model Context Protocol</a>. Whilst MCP focuses on connecting AI models to tools and data sources, A2A specifically handles agent-to-agent communication. This distinction becomes important as organisations move towards multi-agent architectures where specialised agents collaborate to accomplish complex tasks requiring diverse capabilities.</p>
+<p>A2A’s design centres around “Agent Cards” that advertise capabilities in JSON format, enabling dynamic task delegation between agents. The protocol supports various modalities including text, audio, and video streaming, with built-in security features for enterprise deployment. Industry backing from over 150 organisations, including major hyperscalers, technology providers, and consulting firms, suggests strong momentum for adoption.</p>
+<p>We’ve placed A2A in Trial because whilst the protocol shows clear potential and has impressive industry support, it remains relatively new with limited production deployment patterns. Early implementations suggest promise for organisations building complex multi-agent systems, but teams should evaluate whether their use cases truly require agent-to-agent communication versus simpler architectures. For most organisations, starting with MCP for tool integration before exploring A2A for multi-agent scenarios represents a sensible progression path.</p>
+<h3 id="languages-frameworks-deepeval"><a href="#languages-frameworks-deepeval" class="heading-link">DeepEval</a></h3>
+<p>We’ve placed <a href="https://github.com/confident-ai/deepeval">DeepEval</a> in the Trial ring as it addresses a critical gap in AI application development: the systematic evaluation of Large Language Model outputs. While traditional software testing frameworks focus on deterministic outcomes, DeepEval provides a comprehensive toolkit for assessing the reliability, accuracy and consistency of AI-generated content.</p>
+<p>The framework stands out for its practical approach to testing LLM applications, offering built-in metrics for evaluating responses across dimensions like relevance, toxicity and factual accuracy. What particularly impressed our committee was its ability to handle both unit and integration testing scenarios, making it valuable for teams building production-grade AI systems. However, we recommend starting with smaller, non-critical components first, as best practices around LLM testing are still emerging and the framework itself is relatively new to the ecosystem.</p>
+<h3 id="languages-frameworks-llamaindex"><a href="#languages-frameworks-llamaindex" class="heading-link">LlamaIndex</a></h3>
+<p><a href="https://www.llamaindex.ai/">LlamaIndex</a>, formerly known as GPT Index, is a framework that supports developers in connecting large language models with external data sources in a structured way. It provides tools to build indices, data structures that help LLMs access relevant information efficiently, thereby improving their ability to handle specific tasks requiring contextual or domain-specific data.</p>
+<p>We consider LlamaIndex suitable for teams trialling methods to augment LLM performance, especially in data-centric applications. While its modular design and focus on customisation are appealing, its relative maturity as a toolkit means that teams may encounter challenges around documentation, setup, or adapting it to complex datasets. As with many emerging tools, its value depends on careful experimentation and matching it to the right problem space.</p>
+<h2 id="languages-frameworks-assess"><a href="#languages-frameworks-assess" class="heading-link">Assess</a></h2>
+<p>These languages and frameworks represent emerging or specialized technologies that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.</p>
+<h3 id="languages-frameworks-prolog"><a href="#languages-frameworks-prolog" class="heading-link">Prolog</a></h3>
+<p>We’ve placed <a href="http://www.gprolog.org/">Prolog</a> in the Assess ring of our languages quadrant due to its renewed relevance in AI development, particularly for adding structured logical reasoning capabilities to Large Language Model applications, and decoupling logic from procedure. Prolog (and logic programming in general) may offer significant value due to its ability to extract from and represent knowledge graphs, which have a well-studied symbiotic relationship with LLMs, allowing us to couple the versatility of LLMs with the ability to have a concrete expert knowledge base to prevent hallucinations, reify concrete rules, etc. This also can allow LLMs to produce consumable data for further engineering needs, and allows us to express preferences in our systems in unambiguous ways. The use of such expert systems alongside LLMs has been likened to Kahneman’s system 1 and 2. Finally, the metaprogramming &amp; dynamic capabilities of Prolog are extremely strong.</p>
+<p>While Prolog has been around since the 1970s, we’re seeing interesting experiments where developers combine its powerful symbolic reasoning with modern LLMs to create more robust and explainable AI systems, by leveraging Prolog as a reasoning agent. However there are challenges around performance, as well as some redundancy in knowledge graphs given the existence of semantic web languages such as RDF, OWL, SPARQL, etc. Prolog is also not the only language of its kind– there are many kinds of logic language, which are all fundamentally different from each other (E.G., some are used for induction as in SATs, some don’t use the same kinds of logic), though this does not necessarily discount Prolog’s utility. Since Prolog interoperates extremely well with most other programming languages, it can also be embedded within applications rather easily.</p>
+<p>The renewed interest doesn’t yet warrant a higher ring placement, as adoption patterns are still emerging and the tooling ecosystem needs maturation. However, we believe technical teams should assess Prolog’s potential, especially for projects where transparent logical reasoning needs to be combined with LLM capabilities. Teams working on applications in regulated industries or those requiring auditable decision paths may find particular value in exploring this approach. At the very least, surveying Prolog provides insight into the possibilities of where historical findings might enrich the current space.</p>
+<h3 id="languages-frameworks-jax"><a href="#languages-frameworks-jax" class="heading-link">JAX</a></h3>
+<p>We’ve placed <a href="https://github.com/jax-ml/jax">JAX</a> in our Assess ring as we observe increasing interest in this ML framework that combines NumPy’s familiar API with hardware acceleration and automatic differentiation. While TensorFlow and PyTorch remain dominant in the ML ecosystem, we’re seeing JAX gain traction particularly in research settings and among teams working on custom ML architectures.</p>
+<p>What interests us about JAX is its functional approach to ML computation and its ability to compile to multiple hardware targets through XLA (Accelerated Linear Algebra). The framework shows promise for projects requiring high-performance numerical computing, though we suggest careful evaluation of its relative immaturity in areas like deployment tooling and the smaller ecosystem of pre-built components compared to more established frameworks. We recommend teams experimenting with JAX do so on research projects or contained proofs-of-concept before considering broader adoption.</p>
+<h3 id="languages-frameworks-langchain-amp-langgraph"><a href="#languages-frameworks-langchain-amp-langgraph" class="heading-link">LangChain &amp; LangGraph</a></h3>
+<p>We’ve placed <a href="https://www.langchain.com/">LangChain</a> and its companion <a href="https://www.langchain.com/langgraph">LangGraph</a> in the Assess ring as they represent an emerging approach to building applications with Large Language Models. These frameworks provide structured ways to compose AI capabilities into more complex applications, with LangChain focusing on general-purpose AI interactions and LangGraph extending this to handle more sophisticated multi-step processes.</p>
+<p>While these tools have gained significant adoption and show promise in reducing boilerplate code when working with LLMs, we recommend careful evaluation before widespread use. The rapid pace of change in the underlying AI platforms means that some of LangChain’s abstractions may become outdated or less relevant as the ecosystem evolves. We’ve observed teams successfully using these frameworks for prototypes and smaller production systems, but also encountering challenges when requirements grow more complex or when they need to debug unexpected behaviours. Consider starting with focused experiments that test whether these tools truly simplify your specific use case rather than assuming they’re the right choice for all AI development.</p>
+<h3 id="languages-frameworks-pydanticai"><a href="#languages-frameworks-pydanticai" class="heading-link">PydanticAI</a></h3>
+<p>We’ve placed <a href="https://ai.pydantic.dev/">PydanticAI</a> in the Assess ring of our Languages &amp; Frameworks quadrant because it represents a promising approach to building AI applications that merits closer examination, while not yet being broadly proven in production environments.</p>
+<p>PydanticAI brings the well-regarded developer experience of FastAPI to generative AI application development. Built by the team behind Pydantic (which has become a foundation for many AI frameworks including OpenAI SDK, Anthropic SDK, LangChain, and others), it offers a familiar, Python-centric approach to building LLM-powered applications. The framework provides important features like model-agnostic support across major LLM providers, structured responses through Pydantic validation, and a dependency injection system that facilitates testing.</p>
+<p>What particularly interests us is how PydanticAI leverages existing Python patterns and best practices rather than introducing completely new paradigms. This could significantly lower the learning curve for developers working with AI. However, as a relatively new framework in a rapidly evolving space, we’re placing it in Assess while we watch for broader adoption, community growth, and production-proven implementations across different use cases. Organisations with Python-based stacks and teams familiar with FastAPI or Pydantic should consider evaluating PydanticAI for their AI application development needs.</p>
+<h3 id="languages-frameworks-smolagents"><a href="#languages-frameworks-smolagents" class="heading-link">Smolagents</a></h3>
+<p>We’ve placed <a href="https://github.com/huggingface/smolagents">smolagents</a> in the Assess ring of the Languages &amp; Frameworks quadrant based on our evaluation of its current state and potential.</p>
+<p>This lightweight agent framework takes a minimalist approach with its core codebase of under 1,000 lines. Early feedback suggests it can be effective for quickly prototyping agentic concepts before transitioning to more robust frameworks like <a href="https://opensource.microsoft.com/">AutoGen</a> or <a href="https://www.langchain.com/langgraph">LangGraph</a> for production implementations. The framework’s code-based agent approach, where agents execute actions as Python code snippets, appears to reduce the number of steps and LLM calls in certain scenarios, though this comes with inherent security considerations.</p>
+<p>We’ve positioned smolagents in Assess rather than Trial for several reasons: it lacks extensive production validation, the security implications of code execution require careful evaluation, and while benchmark results with models like DeepSeek-R1 are interesting, we need to see more diverse real-world implementations. Teams exploring agent architectures should evaluate whether SmolaGents’ approach aligns with their specific needs and security requirements, whilst recognising its limitations for production-grade systems.</p>
+<h3 id="languages-frameworks-crewai"><a href="#languages-frameworks-crewai" class="heading-link">CrewAI</a></h3>
+<p>We’ve placed <a href="http://CrewAI.com">CrewAI</a> in the Assess ring of the Languages &amp; Frameworks quadrant because it represents a promising approach to multi-agent orchestration that’s gaining traction among developers building complex AI systems.</p>
+<p><a href="http://Crew.ai">Crew.ai</a> provides a framework for creating teams of specialised AI agents that work together to accomplish tasks through coordinated effort. Our team members report that it offers a well-structured approach to defining agent roles, communication patterns, and task delegation: addressing many of the challenges involved in building effective agentic systems. The framework’s emphasis on human-in-the-loop integration, along with the ability to combine specialised agents with different capabilities, makes it particularly valuable for complex workflows where single-agent solutions fall short.</p>
+<p>While <a href="http://Crew.ai">Crew.ai</a> shows significant promise and has already been used successfully in production environments, we’ve placed it in Assess rather than Trial because the multi-agent paradigm itself is still evolving. Organisations need to carefully evaluate whether the added complexity of managing multiple agents offers sufficient benefits over simpler approaches for their specific use cases. Teams should also be aware that best practices for agent collaboration are still emerging, and implementations may require considerable tuning and oversight to achieve reliable results.</p>
+<h2 id="languages-frameworks-hold"><a href="#languages-frameworks-hold" class="heading-link">Hold</a></h2>
+<p>These languages and frameworks are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.</p>
+<h3 id="languages-frameworks-tensorflow"><a href="#languages-frameworks-tensorflow" class="heading-link">TensorFlow</a></h3>
+<p>We have placed <a href="https://www.tensorflow.org/">TensorFlow</a> in the Hold ring for several reasons. While TensorFlow remains a capable deep learning framework that helped popularise machine learning at scale, we’re seeing teams struggle with its steep learning curve and complex deployment story compared to more modern alternatives. The framework’s verbose syntax and intricate architecture often lead to longer development cycles, particularly for teams new to machine learning.</p>
+<p>PyTorch has emerged as the clear community favourite for both research and production deployments, with a more intuitive programming model and better debugging capabilities. Additionally, with the rise of AI platforms that abstract away much of the underlying complexity, many teams no longer need to work directly with low-level frameworks like TensorFlow. For new projects, we recommend exploring higher-level tools or PyTorch unless there are compelling reasons to use TensorFlow, such as maintaining existing deployments or specific requirements around TensorFlow Extended (TFX) for ML pipelines.</p>
+<h3 id="languages-frameworks-keras"><a href="#languages-frameworks-keras" class="heading-link">Keras</a></h3>
+<p>We have placed <a href="https://keras.io/">Keras</a> in the Hold ring primarily due to its transition from a standalone deep learning framework to becoming more tightly integrated with TensorFlow, along with the emergence of more modern alternatives that offer better developer experiences.</p>
+<p>While Keras served as an excellent entry point for many developers into deep learning, providing an intuitive API that made neural networks more accessible, the landscape has evolved significantly. Frameworks like PyTorch have gained substantial momentum, offering clearer debugging, better documentation and a more Pythonic approach. Additionally, recent high-level frameworks such as Lightning and FastAI provide similar ease-of-use benefits while maintaining closer alignment with current best practices in deep learning development. For new projects, we recommend exploring these alternatives rather than investing in Keras-specific expertise.</p>
+<h3 id="languages-frameworks-r"><a href="#languages-frameworks-r" class="heading-link">R</a></h3>
+<p>Despite <a href="https://www.r-project.org/">R</a>’s historical significance in data science and statistical computing, we’ve placed it in the Hold ring for new projects. While R remains capable for statistical analysis and data visualisation, we’re seeing its adoption declining in favour of Python’s more comprehensive ecosystem for machine learning and AI workflows.</p>
+<p>The key factors driving this recommendation are the overwhelming industry preference for Python-based ML frameworks, the stronger integration of Python with modern AI platforms and tools, and the challenges of hiring R specialists in today’s market. While R retains some advantages for specific statistical applications and academic research, we believe teams starting new AI initiatives will benefit from standardising on Python to maximise their access to cutting-edge AI libraries, tools, and talent.</p>
+<h3 id="languages-frameworks-opencl"><a href="#languages-frameworks-opencl" class="heading-link">OpenCL</a></h3>
+<p>We’ve placed <a href="https://www.khronos.org/opencl/">OpenCL</a> in the Hold ring of our Languages &amp; Frameworks quadrant. While OpenCL (Open Computing Language) was groundbreaking when introduced as a standard for parallel programming across different types of processors, we believe teams should look to alternatives for new projects.</p>
+<p>Despite its promise of write-once-run-anywhere code for GPUs, CPUs, and other accelerators, OpenCL has seen declining industry support and faces significant challenges. Major hardware vendors have shifted their focus to more specialised frameworks like CUDA for NVIDIA hardware, while newer alternatives such as SYCL and modern GPU compute frameworks offer better developer experiences with similar cross-platform benefits. The complexity of the OpenCL programming model, combined with inconsistent tooling support and a fragmented ecosystem, makes it increasingly difficult to justify for new development compared to more actively maintained alternatives.</p>
+
+</section>
+
+
+<hr class="folder-separator">
+
+<div class="folder-header">
+<h2 class="folder-title" id="platforms"><a href="#platforms" class="heading-link">platforms</a></h2>
+</div>
+
+
+<section class="article-section index-section">
+
+<p>Infrastructure and platform services that support AI applications, from model hosting to experiment tracking. These platforms provide the foundation for building, deploying, and managing AI systems at scale.</p>
+<SingleQuadrantData quadrantName='platforms' />
+<h2 id="platforms-adopt"><a href="#platforms-adopt" class="heading-link">Adopt</a></h2>
+<p>These platforms represent established, well-supported services that are ready for production use. They offer excellent reliability, extensive features, and proven track records in real-world AI deployments.</p>
+<h3 id="platforms-weights-amp-biases"><a href="#platforms-weights-amp-biases" class="heading-link">Weights &amp; Biases</a></h3>
+<p><a href="https://wandb.ai/site/">Weights &amp; Biases</a> is a platform designed for tracking and visualising machine learning experiments. In recent projects, we’ve observed that it provides a robust solution for managing machine learning workflows, particularly when dealing with complex models and large datasets. Its user-friendly interface and integration capabilities with popular machine learning libraries make it accessible for teams looking to improve their model development processes.</p>
+<p>We’ve seen how systems such as Weights &amp; Biases can catalyse positive cultural changes in ML teams. By making experiment tracking very light touch, requiring just a few lines of code, they remove the friction that sometimes prevents teams from maintaining good measurement practices. When tracking experiments becomes a natural part of the workflow rather than an extra burden, teams tend to measure more, compare results more frequently, and generally make more data-driven decisions.</p>
+<p>Collaboration features such as shared dashboards and reports amplify these benefits by making results and insights visible to the whole team. Rather than knowledge being siloed in individual notebooks or spreadsheets, experiments become shared assets that everyone can learn from. This visibility often leads to more discussion about results, faster knowledge sharing, and ultimately quicker iteration cycles as teams build upon each other’s work rather than inadvertently duplicating efforts. However, it’s important to note that tool adoption alone isn’t enough, teams need to actively foster a culture that values measurement and experimentation for these benefits to fully materialise.</p>
+<h3 id="platforms-foundation-models"><a href="#platforms-foundation-models" class="heading-link">Foundation models</a></h3>
+<p>Foundation model providers continue to evolve at a rapid pace. Major players like OpenAI, Anthropic, Google, and Meta compete alongside emerging organisations such as DeepSeek, Alibaba, IBM and others. While industry benchmarks help compare these models, they tell only part of the story: different models excel in different areas, and benchmark results should be viewed as indicative rather than definitive.</p>
+<p>A clear trend has emerged in how providers differentiate their offerings across three distinct tiers: smaller, faster models (e.g., Claude Haiku, DeepSeek Coder, Qwen Turbo) optimised for speed and cost; larger, more capable models (e.g., Claude Sonnet, DeepSeek V3, Qwen Max) balancing capabilities with reasonable response times; and specialised reasoning models (e.g., Claude Sonnet Extended, OpenAI o1, DeepSeek R1) designed for complex problem-solving. These reasoning models consume significantly more tokens and command higher per-token costs, but demonstrate remarkable capabilities in solving challenging logical puzzles, mathematics problems, and coding tasks.</p>
+<p>We believe foundation models have evolved sufficiently to warrant adoption for many business applications. When paired with appropriate infrastructure (few-shot prompting, guardrails, retrieval-augmented generation, and evaluation frameworks), they offer compelling solutions to a wide range of problems. Our experience suggests there’s no universal “best model”. We recommend implementing your own benchmarking process focused on your specific use cases. When selecting a model, consider factors beyond raw performance, such as pricing, reliability, data privacy requirements, and whether on-premise deployment is needed. The recent emergence of high-quality open-source models with permissive licensing (such as DeepSeek’s offerings) provides additional options for organisations with specific security or deployment requirements.</p>
+<h4 id="platforms-key-considerations"><a href="#platforms-key-considerations" class="heading-link">Key considerations:</a></h4>
+<ul>
+<li><strong>Performance &amp; capabilities</strong> (accuracy, speed, and domain-specific strengths)</li>
+<li><strong>Total cost of ownership</strong> (API costs, compute resources, and integration)</li>
+<li><strong>Deployment options &amp; technical requirements</strong> (cloud, self-hosted, edge)</li>
+<li><strong>Data privacy &amp; compliance</strong> (regulatory, legal, and security implications)</li>
+<li><strong>Integration &amp; lifecycle management</strong> (context limitations, version control, updates)</li>
+<li><strong>Vendor stability &amp; support</strong> (roadmap alignment, documentation, community)</li>
+</ul>
+<h4 id="platforms-foundation-model-providers-feature-comparison-september-2025"><a href="#platforms-foundation-model-providers-feature-comparison-september-2025" class="heading-link">Foundation model providers feature comparison (September 2025)</a></h4>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Open Weights</th>
+<th>Enterprise Focus</th>
+<th>Reasoning Models</th>
+<th>Edge Deployment</th>
+<th>Long Context</th>
+<th>Embedding API</th>
+<th>Agentic Workflows</th>
+<th>Model Selection Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alibaba</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td><a href="https://www.alibabacloud.com/help/en/model-studio/model-user-guide/">Models</a></td>
+</tr>
+<tr>
+<td>Anthropic</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td><a href="https://docs.anthropic.com/en/docs/about-claude/models/all-models">Models</a></td>
+</tr>
+<tr>
+<td>AWS</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td><a href="https://aws.amazon.com/ai/generative-ai/nova/">Models</a></td>
+</tr>
+<tr>
+<td>Cohere</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td><a href="https://docs.cohere.com/docs/models">Models</a></td>
+</tr>
+<tr>
+<td>DeepSeek</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="https://api-docs.deepseek.com/quick_start/pricing">Models</a></td>
+</tr>
+<tr>
+<td>Google</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/models">Models</a></td>
+</tr>
+<tr>
+<td>IBM</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td><a href="https://www.ibm.com/granite">Models</a></td>
+</tr>
+<tr>
+<td>Meta</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="https://www.llama.com/docs/model-cards-and-prompt-formats/">Models</a></td>
+</tr>
+<tr>
+<td>Mistral AI</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td><a href="https://docs.mistral.ai/getting-started/models/models_overview/">Models</a></td>
+</tr>
+<tr>
+<td>OpenAI</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td><a href="https://platform.openai.com/docs/models">Models</a></td>
+</tr>
+<tr>
+<td>Stability AI</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="https://platform.stability.ai/docs/getting-started">Models</a></td>
+</tr>
+<tr>
+<td>X</td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td></td>
+<td>✓</td>
+<td><a href="https://docs.x.ai/docs/models">Models</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="platforms-feature-definitions"><a href="#platforms-feature-definitions" class="heading-link">Feature definitions</a></h4>
+<ul>
+<li><strong>Open Weights</strong>: Models whose weights are publicly available for download and customisation</li>
+<li><strong>Enterprise Focus</strong>: Strong emphasis on governance, security, and enterprise integration</li>
+<li><strong>Reasoning Models</strong>: Specialised models for complex reasoning tasks like mathematics or step-by-step problem solving</li>
+<li><strong>Edge Deployment</strong>: Optimised for deployment on edge devices or resource-constrained environments</li>
+<li><strong>Long Context</strong>: Support for context windows of 250K tokens or more</li>
+<li><strong>Embedding API</strong>: Dedicated text embedding models and APIs for generating vector representations of text for semantic search and similarity tasks</li>
+<li><strong>Agentic Workflows</strong>: Ability to autonomously plan, execute, and adapt multi-step tasks using tools and external services. Goes beyond basic function calling to include complex workflow orchestration, error handling, dynamic planning based on intermediate results, and completing entire business processes without human intervention at each step</li>
+</ul>
+<h3 id="platforms-data-pipeline-orchestration-tools"><a href="#platforms-data-pipeline-orchestration-tools" class="heading-link">Data pipeline orchestration tools</a></h3>
+<p>Data pipeline orchestration has become essential infrastructure for organisations managing complex data workflows, particularly those supporting AI and machine learning initiatives. Whilst transformation tools like <a href="#languages-frameworks-dbt">dbt</a> handle the “what” of data processing, orchestration platforms manage the “when,” “how,” and “monitoring” of entire pipelines. We’ve placed these tools in the Adopt ring because established organisations require systematic approaches to pipeline scheduling, dependency management, and failure recovery.</p>
+<p><a href="https://airflow.apache.org">Apache Airflow</a> represents the established approach, focusing on task-based workflows with broad integration support across cloud platforms. Its maturity and established ecosystem make it the de facto standard in many enterprises, though teams often find the learning curve steep. <a href="https://prefect.io">Prefect</a> emphasises developer experience and dynamic workflow adaptation, allowing workflows to adapt to changing conditions with minimal code modification. Teams report faster development cycles, though fewer third-party integrations reflect the platform’s relative youth.</p>
+<p><a href="https://dagster.io">Dagster</a> takes an asset-centric approach where data assets become first-class citizens, providing built-in lineage tracking, data quality monitoring, and metadata management. This modern architecture includes comprehensive developer tooling and observability, though the conceptual shift from task-based thinking requires adjustment.</p>
+<p>The choice between platforms typically depends on organisational context rather than technical superiority. Established enterprises with diverse toolchains often gravitate towards Airflow’s ecosystem breadth, whilst teams prioritising developer velocity may prefer Prefect’s flexibility. Organisations with complex data lineage requirements increasingly consider Dagster’s asset-aware approach. We recommend evaluating these tools against your specific integration complexity, team expertise, and governance needs.</p>
+<h3 id="platforms-cloud-model-hosting-platforms"><a href="#platforms-cloud-model-hosting-platforms" class="heading-link">Cloud model hosting platforms</a></h3>
+<p>The model hosting landscape has evolved far beyond simple API access, with distinct platforms serving different organisational needs from rapid prototyping to enterprise production deployments. Each platform’s approach to custom model deployment varies significantly, as organisations increasingly require hosting for their own fine-tuned models alongside foundation model access. We’ve placed these platforms in the Adopt ring because cloud-based model hosting has become the de facto approach for most AI deployments, reducing operational overhead.</p>
+<p><strong>Enterprise production environments</strong> often gravitate towards established cloud providers such as <a href="https://aws.amazon.com/bedrock/">AWS Bedrock</a>, <a href="https://cloud.google.com/vertex-ai">Google Vertex AI</a>, and <a href="https://azure.microsoft.com/en-us/products/ai-services/openai-service/">Azure OpenAI Service</a>. These platforms provide fine-tuning capabilities with enterprise security features and integration with existing cloud infrastructure. Azure’s hub-and-spoke architecture (separating model training from deployment environments) and Google’s “Import Custom Model Weights” feature automate parts of custom model deployment, though the processes often require cloud platform expertise and lengthy setup procedures.</p>
+<p><strong>Performance-critical applications</strong> are increasingly considering specialised providers such as <a href="https://fireworks.ai/">Fireworks AI</a> and <a href="https://www.together.ai/">Together AI</a>, which focus specifically on inference optimisation and support deployment of custom fine-tuned models. These platforms offer API-based deployment workflows, with Together AI supporting trillion-parameter model training and Fireworks providing fine-tuning services. However, teams must evaluate whether simplified deployment compensates for reduced ecosystem integration compared to major cloud providers.</p>
+<p><strong>Development teams and startups</strong> often favour platforms such as <a href="https://replicate.com/">Replicate</a>, <a href="https://modal.com/">Modal</a>, and <a href="https://huggingface.co/inference-endpoints">Hugging Face Inference Endpoints</a>, which emphasise deployment ease alongside flexible pricing. Hugging Face supports deployment of 60,000+ models with minimal configuration, whilst Replicate’s Cog packaging system and Modal’s Python-decorator approach reduce deployment steps. These platforms offer direct paths from trained model to production API, though enterprise governance features remain limited.</p>
+<p>The choice between platforms reflects both organisational priorities and deployment complexity tolerance. Teams requiring sophisticated fine-tuning workflows with enterprise compliance often find major cloud providers necessary despite steeper learning curves. Performance-focused organisations benefit from specialised platforms that balance custom model support with optimisation capabilities. Development teams prioritising rapid iteration prefer platforms with simplified deployment processes, accepting more limited enterprise tooling.</p>
+<h2 id="platforms-trial"><a href="#platforms-trial" class="heading-link">Trial</a></h2>
+<p>These platforms show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt platforms, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.</p>
+<h3 id="platforms-production-ai-monitoring-platforms"><a href="#platforms-production-ai-monitoring-platforms" class="heading-link">Production AI monitoring platforms</a></h3>
+<p>Whilst experiment tracking tools like Weights &amp; Biases and MLflow excel at managing the development lifecycle, a distinct category of platforms has emerged to monitor AI systems in production. These tools detect drift, performance degradation, and unexpected behaviour in deployed models, issues that only surface when models encounter real-world data at scale. We’ve placed these platforms in the Trial ring as organisations continue establishing best practices for production AI monitoring.</p>
+<p><a href="https://arize.com/">Arize AI</a> provides unified observability across traditional ML models and LLM applications, continuously tracking feature and embedding drift from training through to production. The platform helps catch production issues before customer impact, though careful configuration is needed to avoid alert fatigue. <a href="https://www.evidentlyai.com/">Evidently AI</a> offers both an open-source library and cloud platform, with over 100 metrics covering data quality, drift, and bias monitoring. Its flexibility appeals to technical teams, though setup requires more effort than managed alternatives.</p>
+<p><a href="https://whylabs.ai/">WhyLabs</a> takes a privacy-preserving approach, monitoring through statistical profiles rather than raw data access. This enables massive scale monitoring whilst maintaining data security, particularly valuable for regulated industries. The platform claims superior drift detection accuracy, though teams must weigh privacy benefits against reduced debugging visibility.</p>
+<p>Whilst there are many approaches to production AI monitoring, from custom metrics to manual spot checks, these platforms deserve consideration from teams hosting models in production. They integrate with existing SRE workflows through standard alerting channels (PagerDuty, Slack, email) and provide dashboards that fit alongside traditional application monitoring. The key benefit is proactive detection: organisations learn about performance degradation or prediction errors before customer impact, rather than discovering issues through support tickets. For teams already practising observability for their applications, adding AI-specific monitoring represents a natural extension of existing operational practices.</p>
+<h3 id="platforms-open-weight-llms"><a href="#platforms-open-weight-llms" class="heading-link">Open weight LLMs</a></h3>
+<p>2024 was the year when open weight LLMs (which are sometimes incorrectly referred to as ‘open source’) from companies such as <a href="https://www.llama.com/">Meta</a> and <a href="https://www.deepseek.com/">Deepseek</a> reached maturity, with some even surpassing flagship frontier models on certain tasks. We’ve placed open weight LLMs in the Trial ring because they allow organisations to benefit from AI capabilities while maintaining control over their data and deployment. These models have demonstrated impressive performance, particularly in specialised domains when fine-tuned on specific tasks.</p>
+<p>The key benefits include reduced operational costs compared to API-based services, full control over model deployment and customisation, and the ability to run models in air-gapped environments where data privacy is paramount. However, we’ve kept them in Trial because organisations need considerable ML engineering expertise to deploy and maintain these models effectively, and the total cost of ownership isn’t always lower than API-based alternatives when accounting for computational resources and engineering time.</p>
+<p>For certain use cases, the simplicity of a pay-per-use API integration outweighs the benefits and greater control of hosting an open source LLM. Additionally, implementing appropriate security controls, prompt injection protection, and data governance poses significant challenges.</p>
+<h3 id="platforms-ai-powered-workflow-automation-platforms"><a href="#platforms-ai-powered-workflow-automation-platforms" class="heading-link">AI-powered workflow automation platforms</a></h3>
+<p>Visual workflow automation platforms have become increasingly capable orchestrators of AI-powered business processes, allowing teams to build automated workflows through drag-and-drop interfaces rather than traditional coding. We’ve placed these platforms in the Trial ring because whilst they represent a maturing approach to democratising AI automation across organisations, the choice of platform depends heavily on specific technical and organisational requirements.</p>
+<p>Prominent platforms in this space include <a href="https://zapier.com">Zapier</a>, <a href="https://n8n.io">n8n</a>, <a href="https://www.microsoft.com/en-us/power-platform/products/power-automate/">Microsoft Power Automate</a>, and <a href="https://www.make.com">Make.com</a>. Each serves different organisational needs and technical constraints. Zapier focuses on connecting thousands of SaaS applications with AI capabilities, positioning itself towards business users seeking rapid automation deployment. n8n distinguishes itself through flexibility for technical teams, offering self-hosting options, open-source licensing, and extensive customisation through HTTP nodes and JavaScript code injection. Microsoft Power Automate leverages native Office 365 integration and enterprise-grade governance features, whilst <a href="http://Make.com">Make.com</a> emphasises sophisticated visual workflow design with AI agent functionality.</p>
+<p>These platforms attempt to bridge the gap between technical and business teams around AI automation. They allow organisations to prototype AI-enhanced workflows, connect disparate systems, and scale automation efforts without building custom integration layers. We’ve observed common use cases including lead qualification using LLM analysis, automated content generation and distribution, customer support ticket routing and responses, and data processing pipelines that incorporate AI models for classification or enrichment tasks.</p>
+<p>When evaluating these platforms, teams should consider their organisation’s technical capability, data sovereignty requirements, integration ecosystem needs, and long-term scalability plans. Self-hosted solutions like n8n offer maximum control and customisation but require technical expertise, whilst SaaS offerings like Zapier reduce operational overhead but may have cost implications at scale. Teams should also assess the platforms’ capability for error recovery, monitoring, and debugging of AI-enhanced workflows, as AI components can fail in less predictable ways than traditional integrations.</p>
+<h2 id="platforms-assess"><a href="#platforms-assess" class="heading-link">Assess</a></h2>
+<p>These platforms represent emerging or specialized services that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.</p>
+<h3 id="platforms-galileo"><a href="#platforms-galileo" class="heading-link">Galileo</a></h3>
+<p>We’ve placed <a href="http://Galileo.ai">Galileo</a> in the Assess ring of the Platforms radiant because it represents an interesting approach to evaluating and improving AI model performance. It deserves attention but requires careful consideration before being adopted more broadly.</p>
+<p>Galileo offers a comprehensive platform spanning both development evaluation and production monitoring of AI systems. During development, it provides tools for measuring and refining model performance, with specialised capabilities for AI agent evaluation and comprehensive testing frameworks. In production, the platform offers real-time monitoring with low-latency guardrails and hallucination detection. Our committee has noted that teams using the platform report better insights into how their AI systems perform across different scenarios and edge cases, from initial development through to production deployment.</p>
+<p>We recommend assessing this platform, particularly if your organisation is developing custom models or fine-tuning existing ones, as the insights it provides could significantly improve model quality. However, we’ve stopped short of recommending it for trial by all teams, as its value varies depending on your level of AI maturity and your specific use cases. Organisations with simpler AI implementations, or those primarily using out-of-the-box models, may find less immediate benefit. The platform is likely to offer the most value to organisations that are actively developing or fine-tuning models, or deploying AI in high-stakes environments where consistent performance is critical. Teams should also consider whether they have the technical resources required to act effectively on the insights the platform provides.</p>
+<h3 id="platforms-kubeflow"><a href="#platforms-kubeflow" class="heading-link">Kubeflow</a></h3>
+<p>We’ve placed <a href="https://www.kubeflow.org/">Kubeflow</a> in the Assess ring of our Platforms quadrant. This open-source machine learning platform, built on Kubernetes, offers a comprehensive solution for managing ML workflows, but it requires careful evaluation before widespread adoption.</p>
+<p>Kubeflow is gaining traction among data science and MLOps teams looking to standardise their machine learning workflows. Its strength lies in combining Kubernetes’ orchestration capabilities with ML-specific tools: Pipelines for workflow automation, Katib for hyperparameter tuning, and KFServing for model deployment. This integrated approach helps bridge the gap between data scientists and operations teams, addressing one of the core challenges in operationalising ML models.</p>
+<p>However, several factors keep Kubeflow in our Assess ring. First, implementing Kubeflow demands significant expertise in both Kubernetes and ML engineering, a specialised skill set that remains relatively uncommon. Second, while the platform is maturing, we’ve observed that many organisations struggle with its complexity during initial setup and ongoing maintenance. Teams often report a steep learning curve before realising tangible benefits.</p>
+<p>Organisations with established ML practices and existing Kubernetes expertise should consider assessing Kubeflow, particularly if they’re facing challenges with ML model deployment, experiment reproducibility or resource utilisation. The platform is especially suited to enterprises managing multiple ML models in production that require systematic oversight across their lifecycle. Smaller teams, or those earlier in their ML journey, may want to explore simpler alternatives first or consider managed options like <a href="https://cloud.google.com/vertex-ai/docs/pipelines/introduction">Vertex AI Pipelines</a>, which abstract away some of the infrastructure complexity.</p>
+<h2 id="platforms-hold"><a href="#platforms-hold" class="heading-link">Hold</a></h2>
+<p>These platforms are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent approaches that have been superseded by more effective solutions.</p>
+<h3 id="platforms-building-against-vendor-specific-apis"><a href="#platforms-building-against-vendor-specific-apis" class="heading-link">Building against vendor-specific APIs</a></h3>
+<p>We’ve placed “Building against vendor-specific APIs” in the Hold ring of the Platforms quadrant because tightly coupling your applications to vendor-specific LLM APIs poses significant business risks in this rapidly evolving landscape.</p>
+<p>The foundation model ecosystem is changing at breakneck speed, with model capabilities, pricing and even entire companies shifting dramatically from month to month. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges. We’ve seen teams invest substantial engineering effort into rewriting API integrations after discovering their chosen vendor has been outperformed or has significantly increased its pricing.</p>
+<p>Instead, we recommend using abstraction libraries that provide a common interface to multiple LLM providers. Libraries such as <a href="https://github.com/andrewyng/aisuite">AISuite</a> or Simon Willison’s <a href="https://github.com/simonw/llm">LLM CLI</a> let you switch between different models with minimal code changes, sometimes just a configuration update. These libraries handle the nuances of different vendor APIs, managing context windows, token limitations and provider-specific parameters behind a consistent interface. This approach preserves your flexibility to take advantage of new capabilities or improved pricing as the market evolves, while significantly reducing the engineering effort required to switch between models.</p>
+<p>These abstractions do add some complexity and may occasionally limit access to vendor-specific features, but in our view, the protection against vendor lock-in far outweighs these drawbacks in most cases. As the foundation model market continues to consolidate, maintaining the flexibility to adapt quickly will be crucial for both cost management and staying competitive.</p>
+
+</section>
+
+
+<hr class="folder-separator">
+
+<div class="folder-header">
+<h2 class="folder-title" id="techniques"><a href="#techniques" class="heading-link">techniques</a></h2>
+</div>
+
+
+<section class="article-section index-section">
+
+<p>AI methodologies, approaches, and practices that shape how we build intelligent systems.</p>
+<SingleQuadrantData quadrantName='techniques' />
+<h2 id="techniques-adopt"><a href="#techniques-adopt" class="heading-link">Adopt</a></h2>
+<p>These techniques represent mature, well-supported approaches that are ready for production use. They offer excellent performance, extensive documentation, and proven track records in real-world applications.</p>
+<h3 id="techniques-classical-ml"><a href="#techniques-classical-ml" class="heading-link">Classical ML</a></h3>
+<p>We continue to see tremendous value in classical machine learning approaches like random forests, gradient boosting (XGBoost, LightGBM), linear/logistic regression and support vector machines for many business problems. While attention has shifted dramatically towards deep learning and large language models in the last couple of years, these traditional techniques often provide the best balance of explainability, computational efficiency, and performance for structured data problems.</p>
+<p>The key advantages that keep classical ML firmly in our Adopt ring include faster training times, lower computing requirements, and easier deployment compared to deep learning approaches. However, it’s important to recognise that realising these benefits requires both quality training data and staff with appropriate expertise. Unlike the recent wave of LLM-based solutions that have democratised AI capabilities for organisations without extensive data science teams, classical ML continues to demand specialised knowledge in feature engineering, model selection, and evaluation.</p>
+<p>For organisations with the necessary data assets and technical capabilities, these methods work well even with the smaller datasets common in enterprise settings, often matching or exceeding the performance of more complex approaches while remaining more interpretable to stakeholders and easier to maintain. Their lower training costs, smaller carbon footprint, and built-in feature importance metrics provide practical advantages that directly translate to business value, particularly as organisations face increasing pressure to make their ML systems both cost-effective and environmentally sustainable.</p>
+<h3 id="techniques-rag"><a href="#techniques-rag" class="heading-link">RAG</a></h3>
+<p>Retrieval-Augmented Generation (RAG) is an AI approach that combines search and text generation to produce more accurate responses. The approach helps prevent confabulation, cases where AI models generate plausible but incorrect information, by grounding responses in real data.</p>
+<p>We’re placing RAG in the Adopt ring because it addresses key challenges in deploying AI systems in information retrieval contexts. The technique is particularly valuable when accuracy and traceability of information are crucial, such as in customer service, technical documentation, or compliance scenarios. While implementing RAG requires careful attention to document processing and embedding strategies, the widespread availability of tools and frameworks has significantly lowered the barriers to adoption. Teams should consider RAG as a foundational technique when building AI applications that need to leverage organisational knowledge.</p>
+<p>We’re particularly interested in monitoring how this technique develops alongside others improving AI system reliability and truthfulness. For example, by augmenting the approach with <a href="https://arxiv.org/abs/2310.11511">Self-RAG</a> to recognise when more evidence needs to be gathered, conflicting information verified, or responses refined for better accuracy. This ‘self-criticism’ mechanism has shown promising results in improving response quality and reducing hallucinations.</p>
+<p>See also Cross-encoder reranking, Chain of thought, Structured RAG.</p>
+<h3 id="techniques-llm-as-a-judge"><a href="#techniques-llm-as-a-judge" class="heading-link">LLM-as-a-judge</a></h3>
+<p>We’ve placed LLM-as-a-judge in the Adopt ring because it has quickly proven itself to be one of the most practical and cost-effective techniques for evaluating AI system outputs. At first glance, it might seem like circular reasoning to have one LLM evaluate another LLM’s work. However, the capabilities of today’s strongest models are such that they can provide nuanced, multidimensional critique that simpler evaluation methods cannot match, except when using very constrained metrics like exact match or BLEU scores (Bilingual Evaluation Understudy, a method for automatically evaluating machine translations).</p>
+<p>This technique has become widely adopted in both offline and online evaluation scenarios. In offline evaluation, it scales far better than human assessment, allowing teams to test thousands of outputs quickly during development and quality assurance workflows. In online scenarios, an LLM judge can evaluate another LLM’s output in real-time in production, enabling dynamic workflow adjustments or user experience modifications based on quality assessments. This real-time evaluation approach serves as a foundation for more sophisticated agentic workflows, where multiple AI components collaborate to refine outputs before user delivery.</p>
+<p><a href="https://arxiv.org/abs/2306.05685">Recent research demonstrates</a> that the current frontier models can provide judgements that correlate strongly with human preferences across many common evaluation dimensions. For best results, we recommend using a different LLM as the judge than the one being evaluated, and viewing this approach as an augmentation to, not replacement for, human evaluation. The strongest LLMs can identify nuanced issues in reasoning, factuality, and tone that would otherwise require substantial human review time, creating a more efficient evaluation pipeline whilst preserving critical human oversight for final quality assurance.</p>
+<h3 id="techniques-bert-variants"><a href="#techniques-bert-variants" class="heading-link">BERT variants</a></h3>
+<p><a href="https://huggingface.co/docs/transformers/en/model_doc/bert">Bidirectional Encoder Representations from Transformers (BERT)</a> revolutionised Natural Language Processing (NLP) by allowing AI models to process human language by looking at words in relation to their entire context, rather than just left-to-right or right-to-left. Think of it like a reader who can understand a word by looking at all the surrounding words for context, rather than reading sequentially. The original BERT spawned a family tree of variants, with <a href="https://huggingface.co/blog/modernbert">ModernBERT</a> representing the latest evolution. Released in late 2024, ModernBERT improves legacy BERT through architectural updates which shorten training times and improve accuracy.</p>
+<p>BERT-style models serve fundamentally different purposes than generative models like GPT. While GPT models excel at generating text and conversational interactions, BERT models are optimised for understanding and analysis tasks such as classification, named entity recognition, and sentiment analysis. They’re particularly valuable for creating semantic vector embeddings that capture text meaning in numerical form, making them essential components in Retrieval Augmented Generation (RAG) systems. In these pipelines, BERT embeddings help retrieve relevant information that is then fed as text to GPT models for generation: the models don’t directly share embeddings, but rather work in complementary roles.</p>
+<p>We particularly recommend <a href="https://huggingface.co/microsoft/deberta-v3-base">DeBERTa</a> for organisations starting new NLP projects. It handles word relationships more effectively using a disentangled attention mechanism and enhanced position encoding. <a href="https://huggingface.co/docs/transformers/model_doc/distilbert">DistilBERT</a> is smaller and faster whilst retaining most of the model’s performance, so it is particularly valuable for production deployments where latency requirements are strict or computing resources are limited, such as edge devices or high-throughput API services.</p>
+<p>For organisations choosing between BERT and GPT models, consider your specific use case: BERT models require fewer computational resources for inference and excel at precise understanding tasks, while GPT models offer impressive out-of-the-box generation capabilities through accessible APIs. Many sophisticated AI applications today use both types in complementary roles, BERT for understanding and information retrieval, and GPT for generation based on that understanding.</p>
+<p>There are options for specialised domains like biomedical <a href="https://github.com/dmis-lab/biobert">(BioBERT)</a> or financial text <a href="https://huggingface.co/ProsusAI/finbert">(FinBERT)</a>. While these can outperform general models in their niches, they often require significant expertise to use effectively and may need additional tuning for specific use cases.</p>
+<h3 id="techniques-few-shot-prompting"><a href="#techniques-few-shot-prompting" class="heading-link">Few-shot prompting</a></h3>
+<p>The technique of providing examples to guide an AI model’s responses has proven consistently effective across different Large Language Models. By showing the model a few examples of desired input-output pairs, developers can achieve more reliable, consistent, and contextually appropriate responses without resorting to complex prompt engineering or fine-tuning.</p>
+<p>The method’s strength lies in its simplicity and portability across different AI platforms. Our team members report significantly improved results when moving from zero-shot (no examples) to few-shot approaches, particularly for tasks requiring specific formats, technical terminology, or domain expertise. While the optimal number of examples varies by use case, we typically see diminishing returns beyond 3-5 examples. The main trade-off to consider is token consumption, as each example uses up context window space that could be used for other content.</p>
+<h2 id="techniques-trial"><a href="#techniques-trial" class="heading-link">Trial</a></h2>
+<p>These techniques show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt techniques, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.</p>
+<h3 id="techniques-cross-encoder-reranking"><a href="#techniques-cross-encoder-reranking" class="heading-link">Cross-encoder reranking</a></h3>
+<p><a href="https://sbert.net/examples/applications/retrieve_rerank/README.html">Cross-encoder reranking</a> sits in our Trial ring as a promising enhancement for AI search and chat systems. It works alongside traditional embedding-based search (where documents and queries are converted into numbers that represent their meaning) by taking a closer look at the initial search results. While embedding search is fast and good at finding broadly relevant content, cross-encoder reranking excels at understanding subtle relevance signals by looking at the query and potential results together.</p>
+<p>Most teams we’ve observed use this as a two-step process: first, a quick embedding search finds perhaps 50-100 potentially relevant items from their knowledge base. Then, cross-encoder reranking carefully sorts these candidates to bring the most relevant ones to the top. While this additional step does add some processing time, we’re seeing it deliver meaningful improvements in result quality across various use cases.</p>
+<p>The technique has shown consistent improvements across different domains and use cases, often reducing hallucinations in downstream LLM responses by ensuring higher quality context selection. Implementation has also become more straightforward with libraries like <a href="https://www.sbert.net/">sentence-transformers</a> providing ready-to-use models. However, teams should be mindful of the additional latency introduced by the reranking step and may need to tune the number of candidates passed to the re-ranker based on their specific performance requirements. The computational overhead is generally justified by the marked improvement in retrieval quality, making this a reliable enhancement to any RAG pipeline where response accuracy is a priority.</p>
+<h3 id="techniques-chain-of-thought-cot"><a href="#techniques-chain-of-thought-cot" class="heading-link">Chain of thought (CoT)</a></h3>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting">Chain of Thought (CoT)</a> sits in our Trial ring as a proven technique for improving the reasoning capabilities of large language models, where they are required.</p>
+<p>This technique involves prompting an AI model to show its step-by-step reasoning process rather than jumping straight to a conclusion. Think of it like asking a student to show their working when solving a problem, rather than just writing down the final answer. Essentially, CoT encourages models to explain their thought process in a structured manner, rather than jumping directly to a conclusion. This has shown to be especially useful in tasks that require complex reasoning, such as mathematical problem-solving or logical inference.</p>
+<p>We’ve placed CoT in the Trial ring because it has shown promising results in improving the interpretability and accuracy of AI responses when faced with complex tasks. However, it’s worth noting that CoT typically requires more tokens (and thus more cost) than direct prompting, and isn’t always necessary for simple tasks. We recommend using it selectively where the complexity of the task warrants the additional computation and cost. Newer ‘reasoning’ models such as o1 and o3 are specifically built to work with CoT behind the scenes and have very impressive benchmarks at logic/coding tests at the cost of being quite slow and expensive.</p>
+<p>We’re keeping an eye on related techniques such as <a href="https://arxiv.org/abs/2411.05778">LLMs as Method Actors</a>, which achieves similar goals by treating LLMs as actors requiring prompts and cues. However, we caution that this and similar techniques typically require longer, more carefully crafted prompts, which increases token usage and costs. We’re also watching for evidence of whether they consistently outperform simpler prompting approaches in production environments.</p>
+<h3 id="techniques-model-distillation-amp-synthetic-data"><a href="#techniques-model-distillation-amp-synthetic-data" class="heading-link">Model distillation &amp; synthetic data</a></h3>
+<p>We’ve placed <a href="https://platform.openai.com/docs/guides/distillation/model-distillation">Model Distillation</a> in the Trial ring of our Techniques quadrant. Distillation involves training a smaller, more efficient model to mimic a larger one. A common emerging pattern we’re seeing is using LLMs to generate synthetic training data for this smaller model. The larger LLM acts as a “teacher,” creating diverse, high-quality examples that can help the “student” model learn the desired behaviour. For instance, a large model might generate thousands of question-answer pairs that are then used to train a more compact model for a specific domain.</p>
+<p>This creates an interesting synergy: the large LLM’s ability to generate varied, nuanced responses helps create richer training datasets than might otherwise be available, while distillation makes the resulting solutions more practical to deploy. This approach makes AI deployment more practical and cost-effective, especially for edge devices or resource-constrained environments. However, we’re keeping it in trial as the process still requires considerable expertise to execute well. Teams need to carefully validate the quality of generated training data and ensure the distilled model maintains acceptable performance levels. There’s also ongoing debate about potential amplification of biases or errors through this approach.</p>
+<p>Be sure to check the licence of the model you’re using for distillation. Llama forbids the use of its output to train other models. The launch of DeepSeek R1 in January 2025 brought distillation into popular consciousness, as it has been <a href="https://www.theguardian.com/technology/2025/jan/29/openai-chatgpt-deepseek-china-us-ai-models">widely assumed that it represents a distillation of existing Foundation models</a>.</p>
+<h3 id="techniques-umap"><a href="#techniques-umap" class="heading-link">UMAP</a></h3>
+<p><a href="https://umap-learn.readthedocs.io/en/latest/">UMAP (Uniform Manifold Approximation and Projection)</a> enters our Trial ring as a promising dimensionality reduction technique that’s gaining traction in the AI community. While t-SNE has been the go-to choice for visualising high-dimensional data, UMAP offers better preservation of global structure and runs significantly faster, making it particularly valuable for large-scale AI applications like exploring embedding spaces and analysing neural network activations.</p>
+<p>We’re seeing successful applications of UMAP across several AI projects, especially in combination with clustering algorithms for understanding large language model behaviours and exploring semantic relationships in vector spaces. However, we recommend starting with smaller, well-understood datasets when first adopting UMAP, as its parameters can be sensitive and require careful tuning to avoid misleading visualisations. The technique shows enough promise and maturity to warrant serious evaluation, though teams should be prepared to invest time in understanding its mathematical foundations to use it effectively.</p>
+<p>The Python <a href="https://umap-learn.readthedocs.io/en/latest/basic_usage.html">UMAP</a> library provides extensive documentation and explanation. There are also libraries for <a href="https://github.com/eugenehp/fast-umap">Rust</a>, <a href="https://haifengl.github.io/api/java/smile/manifold/UMAP.html">Java</a>, and <a href="https://cran.r-project.org/web/packages/umap/vignettes/umap.html">R</a> among others.</p>
+<h2 id="techniques-assess"><a href="#techniques-assess" class="heading-link">Assess</a></h2>
+<p>These techniques represent emerging or specialized approaches that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.</p>
+<h3 id="techniques-structured-rag"><a href="#techniques-structured-rag" class="heading-link">Structured RAG</a></h3>
+<p><a href="https://techcommunity.microsoft.com/blog/azuredevcommunityblog/rag-on-structured-data-with-postgresql/4164456">Structured RAG</a> extends basic RAG by organising knowledge in a more formal way, rather than just as chunks of text. Think of it like the difference between a filing cabinet (basic RAG) and a well-designed database (structured RAG). Instead of just retrieving text fragments, structured RAG can work with specific fields, relationships, and hierarchies in your data. For example, in a product catalogue, it could separately track and retrieve product names, prices, specifications, and reviews, understanding how these elements relate to each other.</p>
+<p>The key advantages we’re seeing in real-world applications include more consistent outputs, better handling of complex queries, and reduced confabulation rates compared to traditional RAG approaches. While implementations can vary, successful patterns are emerging around using JSON schemas, XML structures, or database-like organisations for retrieved information.</p>
+<p>However, implementing structured RAG requires more upfront work in data organisation and schema design than traditional RAG. Teams need to carefully consider their data structures and retrieval patterns. This additional complexity is why we’ve placed it in Assess rather than Trial: while the benefits are clear, implementation patterns are still evolving.</p>
+<h3 id="techniques-hypothetical-document-embeddings-hyde"><a href="#techniques-hypothetical-document-embeddings-hyde" class="heading-link">Hypothetical document embeddings (HyDE)</a></h3>
+<p>We’ve found <a href="https://arxiv.org/abs/2212.10496">HyDE (Hypothetical Document Embeddings)</a> to be an elegant solution to a common problem in search systems - their tendency to perform poorly when searching content that differs from their training data. HyDE works by first asking a large language model to imagine what an ideal document answering the user’s query might look like. This ‘hypothetical document’ helps bridge the gap between how users naturally ask questions and how information is actually written in documents.</p>
+<p>The system creates several of these imagined documents (typically five) to capture different ways the answer might be expressed. These are converted into numerical representations (embeddings) and averaged together. This averaged representation is then used to find real documents that are mathematically similar, which often leads to more relevant search results than traditional methods. The approach has proven particularly effective as part of larger systems, such as RAG (Retrieval Augmented Generation), where accurate document retrieval is crucial for generating reliable responses. Teams should evaluate HyDE particularly for cases where high-precision retrieval is crucial and the additional latency is acceptable.</p>
+<p>See also: RAG, BERT</p>
+<h3 id="techniques-fine-tuning-with-lora"><a href="#techniques-fine-tuning-with-lora" class="heading-link">Fine-tuning with LoRA</a></h3>
+<p>We have placed <a href="https://huggingface.co/docs/peft/main/en/conceptual_guides/lora">Low-Rank Adaptation (LoRA)</a> in the Assess ring. LoRA represents a significant advancement in making AI model customisation more practical and cost-effective. Rather than adjusting all parameters in a large language model (which can number in the billions), LoRA adds a small set of trainable parameters while keeping the original model unchanged. Think of it like teaching an expert to adapt to your specific needs without having to retrain their entire knowledge base. This approach typically reduces the computing resources needed for customisation by 3-4 orders of magnitude while maintaining most of the performance benefits of full fine-tuning.</p>
+<p>The technique has proven its value across numerous enterprise applications, and robust tools like Lightning AI’s <a href="https://github.com/Lightning-AI/litgpt/tree/main">lit-gpt</a> and <a href="https://github.com/axolotl-ai-cloud/axolotl">axolotl</a> have emerged to support implementation. However, we place it in the Assess ring rather than Trial because successfully applying LoRA still requires significant machine learning expertise and careful consideration of training data quality. Additionally, we caution organisations to view fine-tuning (including with LoRA) as a short-term investment rather than a long-term strategy. Fine-tuning typically ties you to a specific model architecture, and given the rapid pace of AI advancement, tomorrow’s general-purpose models may well outperform your carefully tuned older models with no customisation at all. Migrating fine-tuned weights between different model architectures is particularly challenging and requires a well-curated evaluation corpus. While LoRA is a valuable technique to have in your toolkit, it should only be deployed when the immediate business value clearly outweighs both the technical and opportunity costs.</p>
+<h3 id="techniques-agentic-tool-use"><a href="#techniques-agentic-tool-use" class="heading-link">Agentic tool use</a></h3>
+<p>We’ve placed agentic tool use in the Assess ring. This technique involves Large Language Models using external tools and APIs to augment their capabilities beyond pure language processing.</p>
+<p>The ability of LLMs to use tools represents a significant advancement in AI system architecture. We’re seeing promising applications where LLMs act as orchestrators, calling specialised tools for tasks like web search, code execution, or API interactions. However, current implementations often struggle with reliability and can make unpredictable tool choices. While frameworks like <a href="https://www.langchain.com/">LangChain</a>, <a href="https://platform.openai.com/docs/guides/function-calling?api-mode=chat">OpenAI’s Function Calling</a>, and standards like <a href="#languages-frameworks-model-context-protocol">Model Context Protocol</a> have made tool use more accessible, organisations should carefully evaluate their specific use cases and implement robust validation mechanisms before deploying tool-using LLMs in production environments.</p>
+<p>The decision to place this in Assess reflects both its potential and current limitations. Early adopters are reporting success with contained, well-defined tool sets, particularly in areas like web search and file operations. However, we must emphasise the substantial security risks associated with agentic tool use, especially in environments where malicious actors might attempt to manipulate these systems. It is only a matter of time before poorly secured implementations lead to significant security incidents, with potential for data breaches, unauthorised system access, or service disruption.</p>
+<p>When implementing agentic tool use, several key aspects warrant consideration. Tool selection should be limited to essential, well-tested integrations with comprehensive input validation and output verification in place. Organisations must implement strict access controls, rate limiting, and continuous monitoring of tool usage patterns to detect potential misuse or exploitation attempts. All tool-using agents should operate within sandboxed environments with ‘principle of least privilege’ enforcement. Security considerations should be paramount in design decisions, with regular penetration testing to identify vulnerabilities before they can be exploited. Additionally, organisations should plan for graceful fallbacks when tools are unavailable or return unexpected results, ensuring system resilience even when tool interactions fail.</p>
+<h2 id="techniques-hold"><a href="#techniques-hold" class="heading-link">Hold</a></h2>
+<p>These techniques are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent approaches that have been superseded by more effective solutions.</p>
+<h3 id="techniques-word2vec-amp-glove"><a href="#techniques-word2vec-amp-glove" class="heading-link">Word2Vec &amp; GloVe</a></h3>
+<p>We’ve placed both <a href="https://nlp.stanford.edu/projects/glove/">GloVe (Global Vectors for Word Representation)</a> and <a href="https://www.tensorflow.org/text/tutorials/word2vec">Word2Vec (Word to Vector)</a> in the Hold ring of our techniques quadrant. While these word embedding techniques were groundbreaking when introduced and served as fundamental building blocks for many NLP applications, they have been largely superseded by more advanced approaches.</p>
+<p>These older embedding techniques, though computationally efficient, lack the contextual understanding that modern transformer-based models provide. Modern large language models and contextual embeddings like BERT produce more nuanced representations that capture word meaning based on surrounding context, rather than the static embeddings that GloVe and Word2Vec generate. For new projects, we recommend exploring more recent embedding techniques (see “BERT Variants” in our Adopt ring) unless you have very specific constraints around computational resources or model size that make these older approaches necessary.</p>
+<h3 id="techniques-t-sne"><a href="#techniques-t-sne" class="heading-link">t-SNE</a></h3>
+<p>We’ve placed <a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding">t-SNE (t-distributed Stochastic Neighbor Embedding)</a> in the Hold ring of our techniques quadrant. While t-SNE was groundbreaking when introduced for visualising high-dimensional data in lower dimensions, particularly for understanding the internal representations of neural networks, we’re seeing its limitations become more apparent in modern AI workflows.</p>
+<p>The core issue is that t-SNE can be misleading when interpreting AI model behaviour, as it prioritises preserving local structure at the expense of global relationships. This can lead teams to draw incorrect conclusions about their models’ decision boundaries and feature representations. We’re increasingly recommending alternatives like UMAP (Uniform Manifold Approximation and Projection), which better preserves both local and global structure while offering superior computational performance. For projects requiring dimensionality reduction and visualisation of AI model internals, we suggest exploring these newer techniques rather than defaulting to t-SNE.</p>
+<h3 id="techniques-zero-shot-prompting"><a href="#techniques-zero-shot-prompting" class="heading-link">Zero-shot prompting</a></h3>
+<p>Zero-shot prompting – asking Large Language Models to perform tasks without examples or training – has been a quick way to get started with AI. However, we strongly recommend against using zero-shot prompts in production without appropriate guardrails and safety measures. We’ve heard of multiple incidents where unprotected prompts led to harmful, biased or inappropriate outputs, potentially exposing organisations to significant risks.</p>
+<p>Our view is that zero-shot prompting should always be combined with input validation, output filtering and clear usage policies. While it can be valuable for prototyping and exploration, moving to few-shot prompting or fine-tuning with careful guardrails is a more robust approach for production systems. The current placement in “Hold” reflects our concern about organisations rushing to deploy unsafe prompt patterns rather than taking the time to implement proper controls.</p>
+<h3 id="techniques-ai-pull-request-review"><a href="#techniques-ai-pull-request-review" class="heading-link">AI pull request review</a></h3>
+<p>We’ve placed AI Pull Request Review in the Hold ring. Whilst AI tools can catch basic issues like style violations and potential bugs, they fall short in the crucial aspects of PR review that maintain code quality and team effectiveness. The key point is that PR review isn’t just about finding errors: it’s a vital knowledge-sharing mechanism where senior developers mentor juniors, architectural decisions are questioned and refined, and the team maintains a shared understanding of the codebase.</p>
+<p>Based on our observations across multiple teams, AI review tools tend to focus on surface-level feedback while missing deeper architectural issues, implementation trade-offs, and business logic errors that human reviewers catch. More concerning is that teams who rely heavily on AI reviews often see a decline in collective code ownership and technical knowledge sharing.</p>
+<p>The recent explosion of AI coding assistants has revealed that whilst they are sometimes helpful for tasks like code completion and refactoring, they struggle with higher-level software engineering decisions that require deep context and experience. As one tech lead noted in our research, “AI can tell you if your code follows patterns, but it can’t tell you if you’re using the right patterns in the first place.” Until AI systems can better understand architectural implications and business context, we recommend maintaining human-driven code reviews as a core practice.</p>
+
+</section>
+
+
+<hr class="folder-separator">
+
+<div class="folder-header">
+<h2 class="folder-title" id="tools"><a href="#tools" class="heading-link">tools</a></h2>
+</div>
+
+
+<section class="article-section index-section">
+
+<p>Software tools and utilities that enhance AI development workflows, from coding assistants to data analysis platforms. These tools help developers build, test, and deploy AI applications more efficiently.</p>
+<SingleQuadrantData quadrantName='tools' />
+<h2 id="tools-adopt"><a href="#tools-adopt" class="heading-link">Adopt</a></h2>
+<p>These tools represent mature, well-supported technologies that are ready for production use. They offer excellent productivity gains, extensive documentation, and proven track records in real-world development workflows.</p>
+<p>{/* data-change=‘up | down | new’ */}</p>
+<h3 id="tools-software-engineering-copilots"><a href="#tools-software-engineering-copilots" class="heading-link">Software engineering copilots</a></h3>
+<p>AI-powered coding assistants have become essential development tools, spanning traditional IDE integrations like <a href="https://github.com/features/copilot">GitHub Copilot</a> and <a href="https://www.tabnine.com/">Tabnine</a>, standalone environments such as <a href="https://www.cursor.com/">Cursor</a>, <a href="https://codeium.com/windsurf">Windsurf</a>, and <a href="https://zed.dev/">Zed</a>, and command-line tools including <a href="https://github.com/Aider-AI/aider">Aider</a>, <a href="https://github.com/cline/cline">Cline</a>, <a href="https://claude.ai/code">Claude Code</a>, and <a href="https://ai.google.dev/gemini-api/docs/cli">Gemini CLI</a>. <a href="https://sourcegraph.com/cody">Cody</a> focuses on enterprise-scale codebase understanding, <a href="https://traycer.ai/">Traycer</a> emphasises upfront planning for complex tasks, and <a href="https://kiroai.com/">Kiro</a> offers both open-ended coding and structured specification-driven development modes, whilst <a href="https://www.warp.dev/">Warp</a> reimagines the terminal experience with AI-enhanced command suggestions.</p>
+<p>Two distinct approaches have emerged: free-form “vibe coding” and structured development methodologies. <a href="https://kiroai.com/">Kiro</a> exemplifies this choice by offering both approaches: a conversational coding mode for rapid iteration and a dedicated specs mode where AI assists developers in drafting requirements, design decisions, and task breakdowns through three specification files before code generation. <a href="https://www.cursor.com/">Cursor</a> enables teams to codify standards through .cursorrules, embedding architectural patterns and guidelines directly into AI assistance.</p>
+<p>Usage patterns reveal that senior engineers derive greater value by leveraging AI for routine tasks whilst maintaining quality oversight. Junior developers frequently struggle to evaluate AI suggestions, occasionally accepting flawed implementations or overlooking edge cases. This suggests organisational training requirements around effective AI collaboration.</p>
+<p>We’ve placed Software Engineering Copilots in the Adopt ring based on demonstrable productivity improvements, particularly for experienced developers. Teams report meaningful gains on routine coding tasks, though success correlates with careful workflow integration and rigorous code review practices.</p>
+<p>Organisations should implement a “trust but verify” approach: utilise AI assistance for initial implementation whilst maintaining testing standards. The shift towards AI-augmented development appears permanent, making delayed adoption a competitive risk, though teams should remain adaptable as innovation continues across the ecosystem.</p>
+<h3 id="tools-provider-agnostic-llm-facades"><a href="#tools-provider-agnostic-llm-facades" class="heading-link">Provider-agnostic LLM facades</a></h3>
+<p>The LLM landscape evolves rapidly, making today’s optimal choice potentially outdated within months. We recommend implementing a facade pattern between your application and LLM providers, rather than building directly against specific APIs. This approach reduces vendor lock-in and enables easier testing of alternative models as they emerge. When considering whether to write your own code, be sure to consider tools such as the lightweight <a href="https://github.com/andrewyng/aisuite">AISuite</a>, Simon Willison’s <a href="https://github.com/simonw/llm">LLM</a> library and CLI tool, or heavyweight alternatives such as <a href="https://www.langchain.com/">LangChain</a> and <a href="https://www.llamaindex.ai/">LlamaIndex</a>.</p>
+<p>This recommendation reflects our team’s experience seeing projects hampered by tight coupling to specific LLM providers, and the subsequent maintenance burden when transitioning to newer, more capable models.</p>
+<h3 id="tools-notebooks"><a href="#tools-notebooks" class="heading-link">Notebooks</a></h3>
+<p>We’ve placed Notebooks in the Adopt ring because they have become the de facto standard for data science and machine learning experimentation, prototyping, and documentation. The interactive nature of notebooks, combining code execution with rich text explanations and visualisations, makes them particularly valuable for AI/ML workflows where iterative exploration and clear documentation of model development are essential.</p>
+<p>Widespread adoption across both industry and academia, plus an extensive plugin ecosystem and integration with popular AI frameworks, demonstrates their maturity as a method of interacting with code. We especially value how notebooks facilitate collaboration between technical and non-technical team members, as they can serve as living documents that combine business requirements, technical implementation, and results in a single, shareable format.</p>
+<p><a href="https://jupyter.org/">Jupyter</a> notebooks are the most widely used, supporting multiple languages including Python, R and Julia. The cloud platforms provide their own implementations: <a href="https://colab.research.google.com/">Google Colab</a>, AWS <a href="https://aws.amazon.com/sagemaker-ai/notebooks/">Sagemaker Notebooks</a>, <a href="https://learn.microsoft.com/en-gb/azure/machine-learning/how-to-run-jupyter-notebooks">Azure Notebooks</a>, <a href="https://docs.databricks.com/en/notebooks/index.html">Databricks Notebooks</a>. And there are language specific notebooks, such as Pluto.jl for Julia, <a href="https://github.com/nextjournal/clerk">Clerk</a> for Clojure, <a href="https://github.com/polynote/polynote">Polynote</a> for Scala.</p>
+<h2 id="tools-trial"><a href="#tools-trial" class="heading-link">Trial</a></h2>
+<p>These tools show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt tools, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.</p>
+<h3 id="tools-mlflow"><a href="#tools-mlflow" class="heading-link">MLflow</a></h3>
+<p>We have placed <a href="https://mlflow.org/">MLFlow</a> in the Trial ring due to its potential as a lightweight and modular option for teams seeking to manage the machine learning lifecycle. Its open-source nature makes it an attractive alternative to the more monolithic cloud-based MLOps platforms provided by vendors like AWS, Microsoft and Google. A key advantage of MLFlow is its ability to avoid vendor lock-in, offering teams the flexibility to maintain control of their infrastructure and adapt workflows as their needs evolve.</p>
+<p>That said, realising the benefits of MLFlow requires teams to have a certain level of technical expertise to configure and integrate it into their existing systems effectively. Unlike cloud-native behemoths such as <a href="https://aws.amazon.com/sagemaker/">SageMaker</a> or <a href="https://cloud.google.com/vertex-ai">Vertex AI</a>, MLFlow does not provide an all-in-one, plug-and-play experience. Instead, it offers modular components that must be tailored to specific use cases. We recommend assessing MLFlow if your organisation values flexibility, has the technical proficiency to manage integrations, and prefers avoiding dependency on proprietary platforms early in your MLOps journey.</p>
+<h3 id="tools-vector-databases"><a href="#tools-vector-databases" class="heading-link">Vector databases</a></h3>
+<p>Vector databases have emerged as specialised tools for managing the high-dimensional data representations (embeddings) required by AI models. They enable efficient similarity search across text, images, and other content types. Prominent solutions include <a href="https://www.pinecone.io/">Pinecone</a>, <a href="https://qdrant.tech/">Qdrant</a>, <a href="https://milvus.io/">Milvus</a> and <a href="https://weaviate.io/">Weaviate</a>.</p>
+<p>We’ve generally placed vector databases in the Trial ring, as they have proven valuable for specific use cases such as semantic search and recommendation systems. However, their adoption should be carefully evaluated based on individual requirements. Traditional databases may be sufficient for simpler operations and avoid the data consistency challenges of keeping embeddings synchronized with underlying content changes across databases. Alternative approaches, such as Timescale’s <a href="https://github.com/timescale/pgai">PGAI</a> vectorizer, bring vector embedding search directly into the Postgres database, ensuring embeddings remain synchronised with underlying content changes.</p>
+<p>If a vector database is required for your use case, the choice of provider often depends on factors such as scale requirements, the need for real-time updates, and whether a managed or self-hosted solution is preferred. Pinecone leads in production readiness but comes with the costs of a managed service, while open-source alternatives like Qdrant and Milvus offer greater control but demand more operational expertise.</p>
+<h3 id="tools-local-model-execution-environments"><a href="#tools-local-model-execution-environments" class="heading-link">Local model execution environments</a></h3>
+<p>Tools like <a href="https://ollama.ai/">Ollama</a>, <a href="https://lmstudio.ai/">LM Studio</a>, and <a href="https://anythingllm.com/">AnythingLLM</a> provide accessible ways to run open weight models on local hardware. These environments enable rapid experimentation with open weight models from providers including Meta (Llama), Mistral, DeepSeek, Alibaba (Qwen), and OpenAI (gpt-oss) without API costs or sending data to external services. Many now support advanced capabilities including web search, tool calling via Model Context Protocol (MCP), and connections to commercial APIs for hybrid workflows.</p>
+<p>These tools serve various evaluation needs: developers testing AI features during development, teams comparing model responses for specific use cases, and organisations exploring AI capabilities with sensitive data that cannot leave their infrastructure. The range spans from command-line interfaces like Ollama to graphical applications like LM Studio, accommodating different technical backgrounds and preferences.</p>
+<p>We’ve placed these in Trial as they offer a valuable alternative approach to model evaluation alongside cloud-based testing. They’re particularly useful for privacy-sensitive prototyping, offline development, and scenarios where extensive experimentation would be cost-prohibitive via APIs. Teams should consider these tools as one option among many for model evaluation, weighing their benefits against the overhead of local setup and maintenance.</p>
+<h2 id="tools-assess"><a href="#tools-assess" class="heading-link">Assess</a></h2>
+<p>These tools represent emerging or specialized technologies that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.</p>
+<h3 id="tools-ai-application-bootstrappers"><a href="#tools-ai-application-bootstrappers" class="heading-link">AI application bootstrappers</a></h3>
+<p>We have placed AI Application Bootstrappers like <a href="https://v0.dev/">V0</a>, <a href="https://bolt.new/">Bolt.new</a> and <a href="https://replit.com/ai">Replit Agent</a> in the Assess ring of our Tools quadrant. These tools represent an intriguing new approach to rapidly generating complete applications from prompts or designs. While they can dramatically accelerate the creation of demos and proofs of concept, their current limitations lead us to recommend careful assessment before adoption.</p>
+<p>The primary value proposition is clear: the ability to go from concept to working prototype in hours instead of days or weeks. However, our experience shows that success with these tools correlates strongly with existing software engineering expertise. Senior developers can effectively use them as accelerators, understanding how to refactor the generated code, identify potential issues, and establish proper architectural boundaries. In contrast, junior developers or non-technical users often struggle with maintaining and evolving the generated codebase, finding themselves unable to effectively debug issues or make substantial modifications without creating cascading problems.</p>
+<p>While these tools excel at creating initial implementations, the significant effort required to make applications production-ready still requires substantial engineering knowledge. We’re particularly concerned about teams using bootstrapped code as a foundation for production systems without the expertise to properly evaluate and refactor the generated codebase. The tools are promising but should be approached with clear understanding of their current limitations and best used by teams with strong software engineering fundamentals.</p>
+<p>Looking ahead, we expect these tools to mature and potentially move into the Trial ring as they develop better guardrails and more maintainable output. For now, we recommend assessing them primarily for simple prototyping and proof-of-concept work, while maintaining careful separation between bootstrapped demos and production codebases.</p>
+<h3 id="tools-agentic-computer-use"><a href="#tools-agentic-computer-use" class="heading-link">Agentic computer use</a></h3>
+<p>AI agents that directly interact with computer interfaces represent an intriguing development in AI tooling. <a href="https://operator.chatgpt.com/">OpenAI’s Operator</a>, integrated into ChatGPT as “agent mode,” and <a href="https://docs.anthropic.com/en/docs/build-with-claude/computer-use">Claude Computer Use</a> can control web browsers and desktop applications through visual understanding and automated screen interactions. Development-focused agents like <a href="https://devin.ai/">Devin</a> take a different approach, working within integrated development environments and specialising in code repositories through programmatic tool interactions.</p>
+<p>These systems process screen content through visual analysis, reasoning about current context and task requirements, then execute mouse clicks, keyboard inputs, and application navigation. While organisations express significant interest in deploying AI agents, early adopters are encountering reliability challenges, with success rates declining markedly as task complexity increases and agent workflows become more extended.</p>
+<p>We’ve placed Agentic Computer Use in the Assess ring because whilst the technology demonstrates clear potential for specific use cases, practical implementation remains challenging. Early implementations show promise in constrained environments with well-defined boundaries, but teams report inconsistent results when scaling to more complex workflows or longer chains of automated activity.</p>
+<p>For teams evaluating these tools, we recommend focusing on simple, isolated tasks with clear success criteria rather than complex multi-step workflows. Maintain human oversight for all critical operations and establish robust audit trails. The technology merits careful assessment, but organisations should approach deployment conservatively until reliability and control mechanisms mature further.</p>
+<h3 id="tools-lakera"><a href="#tools-lakera" class="heading-link">Lakera</a></h3>
+<p><a href="https://www.lakera.ai/">Lakera</a> is an AI safety and robustness platform designed to detect and mitigate risks in machine learning systems. It provides mechanisms for testing, analysis, and quality assurance to help developers identify weaknesses or vulnerabilities in AI/ML models prior to deployment. This makes it particularly appealing in contexts where reliability and safety are paramount, such as finance, healthcare, or any domain subject to compliance constraints.</p>
+<p>We have placed Lakera in the Assess ring because while it addresses an important need for AI safety, the platform has several practical limitations that require careful evaluation. Currently, Lakera supports only text-based scanning, teams using multimodal AI systems with images, audio, or video will find gaps in coverage. Custom scanning capabilities for business-specific terms or PII detection rely on regex patterns rather than context-aware analysis, which can quickly hit limitations in complex scenarios.</p>
+<p>Performance considerations vary significantly between deployment options. The SaaS offering may provide adequate performance for many use cases, but has text size limitations that require applications to handle chunking. Self-hosted deployments offer more control but require substantial GPU resources for acceptable performance. Additionally, Lakera’s scanning is non-stateful, each prompt and response is scanned in isolation without awareness of the broader conversation context, and only ‘user’ and ‘assistant’ message types are recognised.</p>
+<p>Given these constraints, Lakera may provide valuable safety assurance for straightforward text-based AI applications, but organisations should carefully assess whether its current capabilities align with their specific AI architectures and safety requirements. We recommend conducting thorough proof-of-concept testing that includes your specific modalities, custom requirements, and performance expectations before determining if Lakera fits your use case.</p>
+<h2 id="tools-hold"><a href="#tools-hold" class="heading-link">Hold</a></h2>
+<p>These tools are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.</p>
+<h3 id="tools-conversational-data-analysis"><a href="#tools-conversational-data-analysis" class="heading-link">Conversational data analysis</a></h3>
+<p>Tools such as <a href="https://github.com/sinaptik-ai/pandas-ai">pandas-ai</a>, <a href="https://github.com/tablegpt/tablegpt-agent">tablegpt</a>, <a href="https://promptql.hasura.io/">promptql</a>, and <a href="https://julius.ai/">Julius</a> enable natural language querying of databases and datasets, offering significant productivity benefits for knowledgeable data analysts. Modern database-specific Model Context Protocol (MCP) servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT’s own <a href="https://xtdb.com/">XTDB database</a> revealed remarkable moments where models navigated complex table structures with apparent ease, demonstrating genuine potential for accelerating data analysis workflows.</p>
+<p>For experienced analysts, these tools represent a meaningful productivity boost, rapidly converting natural language requests into draft queries that can be refined and optimised. However, our experience also reveals challenges: generated queries can be inefficient or occasionally incorrect despite appearing plausible. The technology sometimes struggles with nuanced requirements and may produce suboptimal approaches that experienced analysts would avoid. Uber’s experience with their internal <a href="https://www.uber.com/en-GB/blog/query-gpt/">QueryGPT tool</a> demonstrates both the potential and the complexity, highlighting the significant number of example queries and guardrails required to achieve reliable results.</p>
+<p>We’ve placed conversational data analysis in the Hold ring not because the technology lacks value, but because successful deployment requires users capable of understanding and validating generated queries. These tools offer substantial benefits for data teams with appropriate expertise, but should be approached cautiously by those unable to review and debug AI-generated database queries.</p>
+<p>For teams with strong analytical capabilities, these tools can meaningfully accelerate exploratory data analysis and routine query generation, treating AI output as sophisticated first drafts requiring expert review.</p>
+
+</section>
+
+
+  
+    </div>
+  </body>
+</html>

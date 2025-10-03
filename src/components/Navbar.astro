@@ -1,5 +1,5 @@
 ---
-import Navbar from './Navbar'
+import NavbarElement from './Navbar'
 import AlertBanner from '@components/AlertBanner.astro'
 
 export interface Props {
@@ -33,9 +33,9 @@ const pagesInNavbar = navbar.map((page) => ({
 }))
 ---
 
-<div class="fixed w-full z-50">
+<div class='fixed w-full z-50'>
   <AlertBanner />
-  <Navbar
+  <NavbarElement
     client:visible
     navLinks={pagesInNavbar}
     navbarNoBg={navbarNoBg}

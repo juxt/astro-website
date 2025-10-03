@@ -3,12 +3,11 @@ import { getImage, Image } from 'astro:assets'
 import { MarkdownInstance } from 'astro'
 import '../blog.css'
 import DraftBanner from '@components/DraftBanner'
-import { LinkedInIcon, RedditIcon, TwitterIcon } from '@components/Icons'
+import SocialShare from '../components/SocialShare.astro'
 import { Blog, Person } from '@utils/types'
 import Layout from './Layout.astro'
 import Section from '@components/Section.astro'
 import { parseBlogs, formatDate } from '@utils/common'
-import DarkModeSwitch from '../components/DarkModeSwitch'
 
 const {
   title,
@@ -224,36 +223,12 @@ const clojureInPicture = await getImage({
       <div class='text-white uppercase'>
         {quote}
       </div>
-      <div class='flex gap-2'>
-        <div class='flex justify-around text-sm items-center'>
-          <a
-            class='w-6 h-6'
-            target='_blank'
-            href={`https://twitter.com/intent/tweet?url=${blogHref}&title=${title}`}
-          >
-            {(<TwitterIcon className={shareIconStyle} />)}
-          </a>
-        </div>
-        <div class='flex justify-around text-sm items-center'>
-          <a
-            class='w-6 h-6'
-            target='_blank'
-            href={`https://www.reddit.com/submit?url=${blogHref}&title=${title}`}
-          >
-            {(<RedditIcon className={shareIconStyle} />)}
-          </a>
-        </div>
-        <div class='flex justify-around text-sm items-center'>
-          <a
-            class='w-6 h-6'
-            target='_blank'
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${blogHref}&title=${title}`}
-          >
-            {(<LinkedInIcon className={shareIconStyle} />)}
-          </a>
-        </div>
-        <DarkModeSwitch client:only class={shareIconStyle} />
-      </div>
+      <SocialShare
+        title={title}
+        url={blogHref}
+        shareIconStyle={shareIconStyle}
+        containerClass='flex gap-2'
+      />
       <a href='mailto:info@juxt.pro' class='text-white underline'>
         Contact us to share your story
       </a>
@@ -311,7 +286,7 @@ const clojureInPicture = await getImage({
                 return (
                   <div class='w-80 mx-auto'>
                     <a
-                      href={`/blog/${blog.href}`}
+                      href={blog.href}
                       class='group cursor-pointer justify-end flex flex-col gap-4'
                     >
                       <div class='text-white flex flex-col justify-between'>

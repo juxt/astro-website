@@ -1,0 +1,55 @@
+---
+import DarkModeSwitch from './DarkModeSwitch'
+import { TwitterIcon, RedditIcon, LinkedInIcon } from '@components/Icons'
+
+interface Props {
+  title: string
+  url: string
+  shareIconStyle?: string
+  containerClass?: string
+}
+
+const {
+  title,
+  url,
+  shareIconStyle = 'w-6 h-6',
+  containerClass = 'pb-20 pt-6 flex justify-center items-center gap-4 lg:justify-end'
+} = Astro.props
+---
+
+<div class={containerClass}>
+  <DarkModeSwitch client:only class={shareIconStyle} />
+
+  <div class='flex justify-around text-sm items-center'>
+    <a
+      class='w-6 h-6'
+      target='_blank'
+      href={`https://twitter.com/intent/tweet?url=${url}&title=${title}`}
+      aria-label='Share on Twitter'
+    >
+      <TwitterIcon className={shareIconStyle} />
+    </a>
+  </div>
+
+  <div class='flex justify-around text-sm items-center'>
+    <a
+      class='w-6 h-6'
+      target='_blank'
+      href={`https://www.reddit.com/submit?url=${url}&title=${title}`}
+      aria-label='Share on Reddit'
+    >
+      <RedditIcon className={shareIconStyle} />
+    </a>
+  </div>
+
+  <div class='flex justify-around text-sm items-center'>
+    <a
+      class='w-6 h-6'
+      target='_blank'
+      href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`}
+      aria-label='Share on LinkedIn'
+    >
+      <LinkedInIcon className={shareIconStyle} />
+    </a>
+  </div>
+</div>

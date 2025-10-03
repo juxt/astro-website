@@ -9,7 +9,8 @@
     "build": "astro build && yarn run build:css && yarn run pagefind",
     "preview": "astro preview",
     "prepare": "husky install",
-    "pagefind": "pagefind --site dist"
+    "pagefind": "pagefind --site dist",
+    "generate-ai-radar-docs": "node scripts/generate-ai-radar-docs.mjs"
   },
   "devDependencies": {
     "@astrojs/mdx": "^1.0.0",
@@ -50,6 +51,8 @@
     "@jsdevtools/rehype-url-inspector": "^2.0.2",
     "@preact/compat": "npm:@preact/compat",
     "@tailwindui/react": "^0.1.1",
+    "@types/d3": "^7.4.3",
+    "d3": "^7.9.0",
     "markdown-it": "^13.0.1",
     "markdown-it-front-matter": "^0.2.3",
     "nbb": "^0.7.132",

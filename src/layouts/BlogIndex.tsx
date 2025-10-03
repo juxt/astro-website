@@ -1,6 +1,7 @@
-import { BlogCard } from '@components/BlogCard'
-import { Blog } from '@components/utils/types'
-import { useState, useEffect } from 'preact/hooks';
+import { BlogCard } from '@components/BlogCard';
+import { Blog } from '@components/utils/types';
+import { useEffect, useState } from 'preact/hooks';
+import classNames from 'classnames';
 // @ts-expect-error - Missing types for pagefind
 import * as pagefind from '/pagefind/pagefind.js';
 
@@ -30,7 +31,7 @@ function resultToBlog(result: any): Blog {
     },
     category: result.data.meta.category,
     slug: "",
-    href: result.data.url.replace(/\/blog\//, ''),
+    href: result.data.url,
     heroImage: result.data.meta.heroImage,
   }
 }
@@ -46,20 +47,27 @@ function paginationNumbers(pageNumber: number, totalPages: number) {
 function Pagination({ pageNumber, setPageNumber, totalPages}) {
   return (
     <div class="flex flex-row bg-gradient-to-r from-slate-700 border border-gray-500 divide-x divide-gray-500 rounded-md cursor-pointer select-none">
-      <a class="px-4 py-1 text-white active:bg-slate-600 rounded-l-md"
-         onClick={() => setPageNumber(0)}
-         disabled={pageNumber == 0}
+      <a class={classNames(
+           'px-4 py-1 text-white active:bg-slate-600 rounded-l-md',
+           pageNumber == 0 && 'opacity-50 cursor-not-allowed'
+         )}
+         onClick={() => pageNumber > 0 && setPageNumber(0)}
         >‹‹</a>
-      <a class="px-4 py-1 text-white active:bg-slate-600"
-         onClick={() => setPageNumber(prev => Math.max(prev - 1, 0))}
-         disabled={pageNumber == 0}
+      <a class={classNames(
+           'px-4 py-1 text-white active:bg-slate-600',
+           pageNumber == 0 && 'opacity-50 cursor-not-allowed'
+         )}
+         onClick={() => pageNumber > 0 && setPageNumber(prev => Math.max(prev - 1, 0))}
         >‹</a>
       {
         paginationNumbers(pageNumber, totalPages)
           .map((num) => {
             const selected = num == pageNumber;
             return (
-              <a class={"px-4 py-1 text-white active:bg-slate-600" + (selected ? " bg-slate-500" : "")}
+              <a class={classNames(
+                   'px-4 py-1 text-white active:bg-slate-600',
+                   selected && 'bg-slate-500'
+                 )}
                  onClick={() => setPageNumber(num)}
                 >
                 {num + 1}
@@ -67,13 +75,17 @@ function Pagination({ pageNumber, setPageNumber, totalPages}) {
             )
           })
       }
-      <a class="px-4 py-1 text-white active:bg-slate-600"
-         onClick={() => setPageNumber(prev => Math.min(prev + 1, totalPages - 1))}
-         disabled={pageNumber == totalPages - 1}
+      <a class={classNames(
+           'px-4 py-1 text-white active:bg-slate-600',
+           pageNumber == totalPages - 1 && 'opacity-50 cursor-not-allowed'
+         )}
+         onClick={() => pageNumber < totalPages - 1 && setPageNumber(prev => Math.min(prev + 1, totalPages - 1))}
         >›</a>
-      <a class="px-4 py-1 text-white active:bg-slate-600 rounded-r-md"
-         onClick={() => setPageNumber(totalPages - 1)}
-         disabled={pageNumber == totalPages - 1}
+      <a class={classNames(
+           'px-4 py-1 text-white active:bg-slate-600 rounded-r-md',
+           pageNumber == totalPages - 1 && 'opacity-50 cursor-not-allowed'
+         )}
+         onClick={() => pageNumber < totalPages - 1 && setPageNumber(totalPages - 1)}
         >››</a>
     </div>
   )

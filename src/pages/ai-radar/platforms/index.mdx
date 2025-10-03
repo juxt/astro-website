@@ -1,0 +1,182 @@
+---
+layout: '../../../layouts/ChildSectionAiRadar.astro'
+title: 'Platforms'
+---
+
+import SingleQuadrantData from '../../../components/SingleQuadrantData.astro'
+
+Infrastructure and platform services that support AI applications, from model hosting to experiment tracking. These platforms provide the foundation for building, deploying, and managing AI systems at scale.
+
+<SingleQuadrantData quadrantName='platforms' />
+
+# Adopt
+
+These platforms represent established, well-supported services that are ready for production use. They offer excellent reliability, extensive features, and proven track records in real-world AI deployments.
+
+<div data-radar data-label="Weights & Biases" data-ring="adopt" />
+
+## Weights & Biases
+
+[Weights & Biases](https://wandb.ai/site/) is a platform designed for tracking and visualising machine learning experiments. In recent projects, we've observed that it provides a robust solution for managing machine learning workflows, particularly when dealing with complex models and large datasets. Its user-friendly interface and integration capabilities with popular machine learning libraries make it accessible for teams looking to improve their model development processes.
+
+We've seen how systems such as Weights & Biases can catalyse positive cultural changes in ML teams. By making experiment tracking very light touch, requiring just a few lines of code, they remove the friction that sometimes prevents teams from maintaining good measurement practices. When tracking experiments becomes a natural part of the workflow rather than an extra burden, teams tend to measure more, compare results more frequently, and generally make more data-driven decisions.
+
+Collaboration features such as shared dashboards and reports amplify these benefits by making results and insights visible to the whole team. Rather than knowledge being siloed in individual notebooks or spreadsheets, experiments become shared assets that everyone can learn from. This visibility often leads to more discussion about results, faster knowledge sharing, and ultimately quicker iteration cycles as teams build upon each other's work rather than inadvertently duplicating efforts. However, it's important to note that tool adoption alone isn't enough, teams need to actively foster a culture that values measurement and experimentation for these benefits to fully materialise.
+
+<div data-radar data-label="Foundation models" data-ring="adopt" />
+
+## Foundation models
+
+Foundation model providers continue to evolve at a rapid pace. Major players like OpenAI, Anthropic, Google, and Meta compete alongside emerging organisations such as DeepSeek, Alibaba, IBM and others. While industry benchmarks help compare these models, they tell only part of the story: different models excel in different areas, and benchmark results should be viewed as indicative rather than definitive.
+
+A clear trend has emerged in how providers differentiate their offerings across three distinct tiers: smaller, faster models (e.g., Claude Haiku, DeepSeek Coder, Qwen Turbo) optimised for speed and cost; larger, more capable models (e.g., Claude Sonnet, DeepSeek V3, Qwen Max) balancing capabilities with reasonable response times; and specialised reasoning models (e.g., Claude Sonnet Extended, OpenAI o1, DeepSeek R1) designed for complex problem-solving. These reasoning models consume significantly more tokens and command higher per-token costs, but demonstrate remarkable capabilities in solving challenging logical puzzles, mathematics problems, and coding tasks.
+
+We believe foundation models have evolved sufficiently to warrant adoption for many business applications. When paired with appropriate infrastructure (few-shot prompting, guardrails, retrieval-augmented generation, and evaluation frameworks), they offer compelling solutions to a wide range of problems. Our experience suggests there's no universal "best model". We recommend implementing your own benchmarking process focused on your specific use cases. When selecting a model, consider factors beyond raw performance, such as pricing, reliability, data privacy requirements, and whether on-premise deployment is needed. The recent emergence of high-quality open-source models with permissive licensing (such as DeepSeek's offerings) provides additional options for organisations with specific security or deployment requirements.
+
+### Key considerations:
+
+- **Performance & capabilities** (accuracy, speed, and domain-specific strengths)
+- **Total cost of ownership** (API costs, compute resources, and integration)
+- **Deployment options & technical requirements** (cloud, self-hosted, edge)
+- **Data privacy & compliance** (regulatory, legal, and security implications)
+- **Integration & lifecycle management** (context limitations, version control, updates)
+- **Vendor stability & support** (roadmap alignment, documentation, community)
+
+### Foundation model providers feature comparison (September 2025)
+
+<div className="overflow-x-auto">
+| Provider             | Open Weights | Enterprise Focus | Reasoning Models | Edge Deployment | Long Context | Embedding API | Agentic Workflows | Model Selection Link                                                          |
+| -------------------- | ------------ | ---------------- | ---------------- | --------------- | ------------ | ------------- | ----------------- | ----------------------------------------------------------------------------- |
+| Alibaba              | ✓            |                  |                  | ✓               | ✓            | ✓             |                   | [Models](https://www.alibabacloud.com/help/en/model-studio/model-user-guide/) |
+| Anthropic            |              | ✓                | ✓                |                 | ✓            |               | ✓                 | [Models](https://docs.anthropic.com/en/docs/about-claude/models/all-models)   |
+| AWS                  |              | ✓                |                  |                 | ✓            |               |                   | [Models](https://aws.amazon.com/ai/generative-ai/nova/)                       |
+| Cohere               | ✓            | ✓                | ✓                |                 | ✓            | ✓             |                   | [Models](https://docs.cohere.com/docs/models)                                 |
+| DeepSeek             | ✓            |                  | ✓                | ✓               |              |               |                   | [Models](https://api-docs.deepseek.com/quick_start/pricing)                   |
+| Google               |              | ✓                | ✓                |                 | ✓            | ✓             | ✓                 | [Models](https://ai.google.dev/gemini-api/docs/models)                        |
+| IBM                  | ✓            | ✓                | ✓                | ✓               | ✓            |               |                   | [Models](https://www.ibm.com/granite)                                         |
+| Meta                 | ✓            |                  |                  | ✓               |              |               |                   | [Models](https://www.llama.com/docs/model-cards-and-prompt-formats/)          |
+| Mistral&nbsp;AI      | ✓            | ✓                | ✓                | ✓               |              | ✓             |                   | [Models](https://docs.mistral.ai/getting-started/models/models_overview/)     |
+| OpenAI               | ✓            | ✓                | ✓                | ✓               | ✓            | ✓             | ✓                 | [Models](https://platform.openai.com/docs/models)                             |
+| Stability&nbsp;AI    | ✓            |                  |                  | ✓               |              |               |                   | [Models](https://platform.stability.ai/docs/getting-started)                  |
+| X                    | ✓            |                  | ✓                |                 | ✓            |               | ✓                 | [Models](https://docs.x.ai/docs/models)                                       |
+</div>
+
+### Feature definitions
+
+- **Open Weights**: Models whose weights are publicly available for download and customisation
+- **Enterprise Focus**: Strong emphasis on governance, security, and enterprise integration
+- **Reasoning Models**: Specialised models for complex reasoning tasks like mathematics or step-by-step problem solving
+- **Edge Deployment**: Optimised for deployment on edge devices or resource-constrained environments
+- **Long Context**: Support for context windows of 250K tokens or more
+- **Embedding API**: Dedicated text embedding models and APIs for generating vector representations of text for semantic search and similarity tasks
+- **Agentic Workflows**: Ability to autonomously plan, execute, and adapt multi-step tasks using tools and external services. Goes beyond basic function calling to include complex workflow orchestration, error handling, dynamic planning based on intermediate results, and completing entire business processes without human intervention at each step
+
+<div data-radar data-label="Data pipeline orchestration tools" data-ring="adopt" />
+
+## Data pipeline orchestration tools
+
+Data pipeline orchestration has become essential infrastructure for organisations managing complex data workflows, particularly those supporting AI and machine learning initiatives. Whilst transformation tools like [dbt](/ai-radar/languages-frameworks/#dbt) handle the "what" of data processing, orchestration platforms manage the "when," "how," and "monitoring" of entire pipelines. We've placed these tools in the Adopt ring because established organisations require systematic approaches to pipeline scheduling, dependency management, and failure recovery.
+
+[Apache Airflow](https://airflow.apache.org) represents the established approach, focusing on task-based workflows with broad integration support across cloud platforms. Its maturity and established ecosystem make it the de facto standard in many enterprises, though teams often find the learning curve steep. [Prefect](https://prefect.io) emphasises developer experience and dynamic workflow adaptation, allowing workflows to adapt to changing conditions with minimal code modification. Teams report faster development cycles, though fewer third-party integrations reflect the platform's relative youth.
+
+[Dagster](https://dagster.io) takes an asset-centric approach where data assets become first-class citizens, providing built-in lineage tracking, data quality monitoring, and metadata management. This modern architecture includes comprehensive developer tooling and observability, though the conceptual shift from task-based thinking requires adjustment.
+
+The choice between platforms typically depends on organisational context rather than technical superiority. Established enterprises with diverse toolchains often gravitate towards Airflow's ecosystem breadth, whilst teams prioritising developer velocity may prefer Prefect's flexibility. Organisations with complex data lineage requirements increasingly consider Dagster's asset-aware approach. We recommend evaluating these tools against your specific integration complexity, team expertise, and governance needs.
+
+<div data-radar data-label="Cloud model hosting platforms" data-ring="adopt" />
+
+## Cloud model hosting platforms
+
+The model hosting landscape has evolved far beyond simple API access, with distinct platforms serving different organisational needs from rapid prototyping to enterprise production deployments. Each platform's approach to custom model deployment varies significantly, as organisations increasingly require hosting for their own fine-tuned models alongside foundation model access. We've placed these platforms in the Adopt ring because cloud-based model hosting has become the de facto approach for most AI deployments, reducing operational overhead.
+
+**Enterprise production environments** often gravitate towards established cloud providers such as [AWS Bedrock](https://aws.amazon.com/bedrock/), [Google Vertex AI](https://cloud.google.com/vertex-ai), and [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/). These platforms provide fine-tuning capabilities with enterprise security features and integration with existing cloud infrastructure. Azure's hub-and-spoke architecture (separating model training from deployment environments) and Google's "import custom model weights" feature automate parts of custom model deployment, though the processes often require cloud platform expertise and lengthy setup procedures.
+
+**Performance-critical applications** are increasingly considering specialised providers such as [Fireworks AI](https://fireworks.ai/) and [Together AI](https://www.together.ai/), which focus specifically on inference optimisation and support deployment of custom fine-tuned models. These platforms offer API-based deployment workflows, with Together AI supporting trillion-parameter model training and Fireworks providing fine-tuning services. However, teams must evaluate whether simplified deployment compensates for reduced ecosystem integration compared to major cloud providers.
+
+**Development teams and startups** often favour platforms such as [Replicate](https://replicate.com/), [Modal](https://modal.com/), and [Hugging Face Inference Endpoints](https://huggingface.co/inference-endpoints), which emphasise deployment ease alongside flexible pricing. Hugging Face supports deployment of 60,000+ models with minimal configuration, whilst Replicate's Cog packaging system and Modal's Python-decorator approach reduce deployment steps. These platforms offer direct paths from trained model to production API, though enterprise governance features remain limited.
+
+The choice between platforms reflects both organisational priorities and deployment complexity tolerance. Teams requiring sophisticated fine-tuning workflows with enterprise compliance often find major cloud providers necessary despite steeper learning curves. Performance-focused organisations benefit from specialised platforms that balance custom model support with optimisation capabilities. Development teams prioritising rapid iteration prefer platforms with simplified deployment processes, accepting more limited enterprise tooling.
+
+# Trial
+
+These platforms show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt platforms, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
+
+
+<div data-radar data-label="Production AI monitoring platforms" data-ring="trial" />
+
+## Production AI monitoring platforms
+
+Whilst experiment tracking tools like Weights & Biases and MLflow excel at managing the development lifecycle, a distinct category of platforms has emerged to monitor AI systems in production. These tools detect drift, performance degradation, and unexpected behaviour in deployed models, issues that only surface when models encounter real-world data at scale. We've placed these platforms in the Trial ring as organisations continue establishing best practices for production AI monitoring.
+
+[Arize AI](https://arize.com/) provides unified observability across traditional ML models and LLM applications, continuously tracking feature and embedding drift from training through to production. The platform helps catch production issues before customer impact, though careful configuration is needed to avoid alert fatigue. [Evidently AI](https://www.evidentlyai.com/) offers both an open-source library and cloud platform, with over 100 metrics covering data quality, drift, and bias monitoring. Its flexibility appeals to technical teams, though setup requires more effort than managed alternatives.
+
+[WhyLabs](https://whylabs.ai/) takes a privacy-preserving approach, monitoring through statistical profiles rather than raw data access. This enables massive scale monitoring whilst maintaining data security, particularly valuable for regulated industries. The platform claims superior drift detection accuracy, though teams must weigh privacy benefits against reduced debugging visibility.
+
+Whilst there are many approaches to production AI monitoring, from custom metrics to manual spot checks, these platforms deserve consideration from teams hosting models in production. They integrate with existing SRE workflows through standard alerting channels (PagerDuty, Slack, email) and provide dashboards that fit alongside traditional application monitoring. The key benefit is proactive detection: organisations learn about performance degradation or prediction errors before customer impact, rather than discovering issues through support tickets. For teams already practising observability for their applications, adding AI-specific monitoring represents a natural extension of existing operational practices.
+
+<div data-radar data-label="Open weight LLMs" data-ring="trial" />
+
+## Open weight LLMs
+
+2025 was the year when open weight LLMs (which are sometimes incorrectly referred to as 'open source') from companies such as [Meta](https://www.llama.com/) and [Deepseek](https://www.deepseek.com/) reached maturity, with some even surpassing flagship frontier models on certain tasks. We've placed open weight LLMs in the Trial ring because they allow organisations to benefit from AI capabilities while maintaining control over their data and deployment. These models have demonstrated impressive performance, particularly in specialised domains when fine-tuned on specific tasks.
+
+The key benefits include reduced operational costs compared to API-based services, full control over model deployment and customisation, and the ability to run models in air-gapped environments where data privacy is paramount. However, we've kept them in Trial because organisations need considerable ML engineering expertise to deploy and maintain these models effectively, and the total cost of ownership isn't always lower than API-based alternatives when accounting for computational resources and engineering time.
+
+For certain use cases, the simplicity of a pay-per-use API integration outweighs the benefits and greater control of hosting an open source LLM. Additionally, implementing appropriate security controls, prompt injection protection, and data governance poses significant challenges.
+
+
+<div data-radar data-label="AI-powered workflow automation platforms" data-ring="trial" />
+
+## AI-powered workflow automation platforms
+
+Visual workflow automation platforms have become increasingly capable orchestrators of AI-powered business processes, allowing teams to build automated workflows through drag-and-drop interfaces rather than traditional coding. We've placed these platforms in the Trial ring because whilst they represent a maturing approach to democratising AI automation across organisations, the choice of platform depends heavily on specific technical and organisational requirements.
+
+Prominent platforms in this space include [Zapier](https://zapier.com), [n8n](https://n8n.io), [Microsoft Power Automate](https://www.microsoft.com/en-us/power-platform/products/power-automate/), and [Make.com](https://www.make.com). Each serves different organisational needs and technical constraints. Zapier focuses on connecting SaaS applications with AI capabilities, positioning itself towards business users seeking rapid automation deployment. n8n distinguishes itself through flexibility for technical teams, offering self-hosting options, open-source licensing, and extensive customisation through HTTP nodes and JavaScript code injection. Microsoft Power Automate leverages native Office 365 integration and enterprise-grade governance features, whilst Make.com emphasises sophisticated visual workflow design with AI agent functionality.
+
+These platforms attempt to bridge the gap between technical and business teams around AI automation. They allow organisations to prototype AI-enhanced workflows, connect disparate systems, and scale automation efforts without building custom integration layers. We've observed common use cases including lead qualification using LLM analysis, automated content generation and distribution, customer support ticket routing and responses, and data processing pipelines that incorporate AI models for classification or enrichment tasks.
+
+When evaluating these platforms, teams should consider their organisation's technical capability, data sovereignty requirements, integration ecosystem needs, and long-term scalability plans. Self-hosted solutions like n8n offer maximum control and customisation but require technical expertise, whilst SaaS offerings like Zapier reduce operational overhead but may have cost implications at scale. Teams should also assess the platforms' capability for error recovery, monitoring, and debugging of AI-enhanced workflows, as AI components can fail in less predictable ways than traditional integrations.
+
+# Assess
+
+These platforms represent emerging or specialized services that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.
+
+
+<div data-radar data-label="Galileo" data-ring="assess" />
+
+## Galileo
+
+We've placed [Galileo](http://Galileo.ai) in the Assess ring of the Platforms radiant because it represents an interesting approach to evaluating and improving AI model performance. It deserves attention but requires careful consideration before being adopted more broadly.
+
+Galileo offers a comprehensive platform spanning both development evaluation and production monitoring of AI systems. During development, it provides tools for measuring and refining model performance, with specialised capabilities for AI agent evaluation and comprehensive testing frameworks. In production, the platform offers real-time monitoring with low-latency guardrails and hallucination detection. Our committee has noted that teams using the platform report better insights into how their AI systems perform across different scenarios and edge cases, from initial development through to production deployment.
+
+We recommend assessing this platform, particularly if your organisation is developing custom models or fine-tuning existing ones, as the insights it provides could significantly improve model quality. However, we've stopped short of recommending it for trial by all teams, as its value varies depending on your level of AI maturity and your specific use cases. Organisations with simpler AI implementations, or those primarily using out-of-the-box models, may find less immediate benefit. The platform is likely to offer the most value to organisations that are actively developing or fine-tuning models, or deploying AI in high-stakes environments where consistent performance is critical. Teams should also consider whether they have the technical resources required to act effectively on the insights the platform provides.
+
+
+<div data-radar data-label="Kubeflow" data-ring="assess" />
+
+## Kubeflow
+
+We've placed [Kubeflow](https://www.kubeflow.org/) in the Assess ring of our Platforms quadrant. This open-source machine learning platform, built on Kubernetes, offers a comprehensive solution for managing ML workflows, but it requires careful evaluation before widespread adoption.
+
+Kubeflow is gaining traction among data science and MLOps teams looking to standardise their machine learning workflows. Its strength lies in combining Kubernetes' orchestration capabilities with ML-specific tools: Pipelines for workflow automation, Katib for hyperparameter tuning, and KFServing for model deployment. This integrated approach helps bridge the gap between data scientists and operations teams, addressing one of the core challenges in operationalising ML models.
+
+However, several factors keep Kubeflow in our Assess ring. First, implementing Kubeflow demands significant expertise in both Kubernetes and ML engineering, a specialised skill set that remains relatively uncommon. Second, while the platform is maturing, we've observed that many organisations struggle with its complexity during initial setup and ongoing maintenance. Teams often report a steep learning curve before realising tangible benefits.
+
+Organisations with established ML practices and existing Kubernetes expertise should consider assessing Kubeflow, particularly if they're facing challenges with ML model deployment, experiment reproducibility or resource utilisation. The platform is especially suited to enterprises managing multiple ML models in production that require systematic oversight across their lifecycle. Smaller teams, or those earlier in their ML journey, may want to explore simpler alternatives first or consider managed options like [Vertex AI Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction), which abstract away some of the infrastructure complexity.
+
+# Hold
+
+These platforms are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent approaches that have been superseded by more effective solutions.
+
+<div data-radar data-label="Building against vendor-specific APIs" data-ring="hold" />
+
+## Building against vendor-specific APIs
+
+We've placed "Building against vendor-specific APIs" in the Hold ring of the Platforms quadrant because tightly coupling your applications to vendor-specific LLM APIs poses significant business risks in this rapidly evolving landscape.
+
+The foundation model ecosystem is changing at breakneck speed, with model capabilities, pricing and even entire companies shifting dramatically from month to month. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges. We've seen teams invest substantial engineering effort into rewriting API integrations after discovering their chosen vendor has been outperformed or has significantly increased its pricing.
+
+Instead, we recommend using abstraction libraries that provide a common interface to multiple LLM providers. Libraries such as [AISuite](https://github.com/andrewyng/aisuite) or Simon Willison's [LLM CLI](https://github.com/simonw/llm) let you switch between different models with minimal code changes, sometimes just a configuration update. These libraries handle the nuances of different vendor APIs, managing context windows, token limitations and provider-specific parameters behind a consistent interface. This approach preserves your flexibility to take advantage of new capabilities or improved pricing as the market evolves, while significantly reducing the engineering effort required to switch between models.
+
+These abstractions do add some complexity and may occasionally limit access to vendor-specific features, but in our view, the protection against vendor lock-in far outweighs these drawbacks in most cases. As the foundation model market continues to consolidate, maintaining the flexibility to adapt quickly will be crucial for both cost management and staying competitive.

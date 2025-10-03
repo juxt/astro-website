@@ -22,7 +22,7 @@ export default defineConfig({
       }
     })
   ],
-  site: 'https://juxt.pro/',
+  site: process.env.DEPLOY_URL || process.env.URL,
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
