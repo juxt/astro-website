@@ -2,7 +2,7 @@
 author: 'juxt'
 layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast: Model Risk and the Trust Paradox with David Kelly'
-description: 'Governance strategies for model risk in finance and AI. [video].'
+description: 'Governance strategies for model risk in finance and AI [video].'
 category: 'podcast'
 publishedDate: '2025-10-03'
 tags:
@@ -13,7 +13,7 @@ tags:
 heroImage: 'JuxtCast-dark.jpg'
 ---
 
-**What happens when the models running our financial system fail? And how do we govern AI systems we don't fully understand?**
+_What happens when the models running our financial system fail? And how do we govern AI systems we don't fully understand?_
 
 Ahead of the [FINOS (Fintech Open Source Foundation)](https://www.finos.org/) conference in New York on 21st-22nd October, JUXT CTO Henry Garner speaks with David Kelly, Chief Scientific Officer at [MKM Labs](https://www.mkmresearchlabs.com/), model risk governance expert and recipient of the FINOS "Best Newcomer" award.
 
