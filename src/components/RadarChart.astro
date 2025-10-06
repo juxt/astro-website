@@ -24,6 +24,7 @@ interface Props {
   fontFamily?: string
   printLayout?: boolean
   linksInNewTabs?: boolean
+  showFooterLegend?: boolean
 }
 
 const structureColors = getRadarStructureColors()
@@ -37,7 +38,8 @@ const {
   },
   fontFamily = 'Arial, Helvetica',
   printLayout = true,
-  linksInNewTabs = false
+  linksInNewTabs = false,
+  showFooterLegend = true
 } = Astro.props
 
 // Prepare radar configuration
@@ -51,7 +53,8 @@ const radarConfig = {
   rings: data.rings,
   print_layout: printLayout,
   links_in_new_tabs: linksInNewTabs,
-  entries: data.entries
+  entries: data.entries,
+  show_footer_legend: showFooterLegend
 }
 ---
 
@@ -138,7 +141,8 @@ const radarConfig = {
 
           const config = {
             ...radarConfig,
-            themeColors: getThemeColorsForMode()
+            themeColors: getThemeColorsForMode(),
+            show_footer_legend: radarConfig.show_footer_legend
           }
 
           radar_visualization(config)

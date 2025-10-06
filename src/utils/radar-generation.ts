@@ -49,11 +49,12 @@ export interface RadarConfig {
   font_family?: string;
   title?: string;
   date?: string;
+  show_footer_legend?: boolean;
   quadrants: RadarQuadrant[];
   rings: RadarRing[];
   entries: RadarEntry[];
   zoomed_quadrant?: number;
-  themeColors?: {
+  themeColors?: {   
     ringTextColor: string;
     mainTextColor: string;
   };
@@ -84,6 +85,7 @@ export function radar_visualization(config: RadarConfig): void {
   config.footer_offset = config.footer_offset || { x: -155, y: 450 };
   config.legend_column_width = config.legend_column_width || 140
   config.legend_line_height = config.legend_line_height || 14
+  config.show_footer_legend = ("show_footer_legend" in config) ? config.show_footer_legend : true;
 
   // custom random number generator, to make random sequence reproducible
   // source: https://stackoverflow.com/questions/521295
@@ -337,15 +339,17 @@ export function radar_visualization(config: RadarConfig): void {
       .style("font-size", "14")
       .style("fill", config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText)
 
-    // footer
-    radar.append("text")
-      .attr("class", "radar-footer-legend")
-      .attr("transform", translate(config.footer_offset.x, config.footer_offset.y))
-      .text("▲ moved up     ▼ moved down     ★ new     ⬤ no change")
-      .attr("xml:space", "preserve")
-      .style("font-family", config.font_family)
-      .style("font-size", "12px")
-      .style("fill", config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText);
+    // footer (optional)
+    if (config.show_footer_legend) {
+      radar.append("text")
+        .attr("class", "radar-footer-legend")
+        .attr("transform", translate(config.footer_offset.x, config.footer_offset.y))
+        .text("▲ moved up     ▼ moved down     ★ new     ⬤ no change")
+        .attr("xml:space", "preserve")
+        .style("font-family", config.font_family)
+        .style("font-size", "12px")
+        .style("fill", config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText);
+    }
 
     // legend
     const legend = radar.append("g");

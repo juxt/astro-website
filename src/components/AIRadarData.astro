@@ -9,7 +9,7 @@ const radarData = extractAllRadarData()
 
 <!-- Show radar on desktop/tablet, cards on mobile -->
 <div class='hidden md:block'>
-  <RadarChart data={radarData} />
+  <RadarChart data={radarData} showFooterLegend={false} />
 </div>
 
 <!-- Show cards on mobile -->
