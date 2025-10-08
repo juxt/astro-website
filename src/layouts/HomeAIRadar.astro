@@ -1,0 +1,72 @@
+---
+import { Blog } from '@utils/types'
+import { MarkdownInstance } from 'astro'
+import aiRadarImage from '../assets/site/ai-radar.jpg'
+import '../blog.css'
+import AIRadarData from '../components/AIRadarData.astro'
+import AIRadarDownloadPdf from '../components/AIRadarDownloadPdf.astro'
+import SocialShare from '../components/SocialShare.astro'
+import { RADAR_COLORS } from '../utils/radar-colors'
+import Layout from './Layout.astro'
+
+type Props = MarkdownInstance<Blog> & {
+  frontmatter: { bannerTitle: string; tabTitle: string }
+}
+
+const { frontmatter } = Astro.props
+const { bannerTitle, tabTitle } = frontmatter
+const { description } = frontmatter
+
+const shareIconStyle =
+  'fill-zinc-800 dark:fill-zinc-300 hover:fill-juxt dark:hover:fill-juxt transition-colors'
+---
+
+<Layout
+  navbar
+  title={tabTitle}
+  ogTitle={tabTitle}
+  ogDescription={description}
+  ogImage={aiRadarImage.src}
+>
+  <main class='transition-colors dark:bg-gray-900'>
+    <div
+      class='w-full shadow-lg py-12'
+      style={`background: ${RADAR_COLORS.mainRadarBanner}`}
+    >
+      <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto flex justify-center'>
+        <div class='text-center flex flex-col items-center'>
+          <h1
+            class='text-4xl md:text-5xl font-bold text-white tracking-wide mb-4'
+          >
+            {bannerTitle}
+          </h1>
+          <p class='text-xl text-white/90 max-w-3xl mx-auto'>
+            {description}
+          </p>
+        </div>
+      </div>
+      <div class='flex justify-center pt-8'>
+        <AIRadarDownloadPdf />
+      </div>
+    </div>
+
+    <AIRadarData />
+
+    <!-- Social Sharing -->
+    <div class='px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
+      <SocialShare
+        title={tabTitle}
+        url={Astro.url.href}
+        shareIconStyle={shareIconStyle}
+        containerClass='pb-20 pt-6 flex justify-end items-center gap-4'
+      />
+    </div>
+
+    <!-- AI Radar Content -->
+    <div class='ai-radar-container px-4 sm:px-12 2xl:px-0 max-w-6xl mx-auto'>
+      <article class='py-12 prose prose-lg dark:prose-invert max-w-none'>
+        <slot />
+      </article>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,178 @@
+---
+import { getRadarStructureColors } from '../utils/radar-colors'
+
+interface Props {
+  data: {
+    title?: string
+    quadrants: Array<{ name: string; color: string }>
+    rings: Array<{ name: string }>
+    entries: Array<{
+      label: string
+      quadrant: number
+      ring: number
+      moved?: number
+      url?: string
+      active?: boolean
+      description?: string
+    }>
+  }
+  scale?: number
+  colors?: {
+    background: string
+    grid: string
+  }
+  fontFamily?: string
+  printLayout?: boolean
+  linksInNewTabs?: boolean
+  showFooterLegend?: boolean
+}
+
+const structureColors = getRadarStructureColors()
+
+const {
+  data,
+  scale = 1.0,
+  colors = {
+    background: 'transparent',
+    grid: structureColors.grid
+  },
+  fontFamily = 'Arial, Helvetica',
+  printLayout = true,
+  linksInNewTabs = false,
+  showFooterLegend = true
+} = Astro.props
+
+// Prepare radar configuration
+const radarConfig = {
+  svg_id: 'radar',
+  scale,
+  colors,
+  font_family: fontFamily,
+  title: data.title,
+  quadrants: data.quadrants,
+  rings: data.rings,
+  print_layout: printLayout,
+  links_in_new_tabs: linksInNewTabs,
+  entries: data.entries,
+  show_footer_legend: showFooterLegend
+}
+---
+
+<astro-radar-config data-config={JSON.stringify(radarConfig)}>
+  <div class='w-11/12 mx-auto overflow-hidden flex justify-center items-center'>
+    <svg viewBox='0 0 1450 1000' id='radar' class='block max-w-full'></svg>
+  </div>
+</astro-radar-config>
+
+<script>
+  import { radar_visualization } from '../utils/radar-generation'
+  import { getThemeColors } from '../utils/radar-colors'
+
+  class AstroRadarConfig extends HTMLElement {
+    connectedCallback() {
+      // Read the config from the data attribute
+      const configData = this.dataset.config
+      if (!configData) {
+        console.error('No radar config found')
+        return
+      }
+
+      const radarConfig = JSON.parse(configData)
+
+      const lightThemeColors = getThemeColors(false)
+      const darkThemeColors = getThemeColors(true)
+
+      let radarInitialized = false
+
+      // Function to get theme colors based on current mode
+      function getThemeColorsForMode() {
+        const isDarkMode = document.documentElement.classList.contains('dark')
+        return isDarkMode ? darkThemeColors : lightThemeColors
+      }
+
+      // Function to update colors when theme changes
+      function updateRadarColors() {
+        if (!radarInitialized) return
+
+        const themeColors = getThemeColorsForMode()
+
+        // Update ring labels in legend using class selector
+        document.querySelectorAll('.radar-ring-label').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = themeColors.ringTextColor
+          }
+        })
+
+        // Update entry text using class selector
+        document.querySelectorAll('.radar-entry-text').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = themeColors.mainTextColor
+          }
+        })
+
+        // Update footer legend using class selector
+        document.querySelectorAll('.radar-footer-legend').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = themeColors.mainTextColor
+          }
+        })
+
+        // Update background ring text using class selector
+        document
+          .querySelectorAll('.radar-background-ring-text')
+          .forEach((element) => {
+            if (element instanceof SVGElement) {
+              element.style.fill = themeColors.ringTextColor
+            }
+          })
+
+        // Update date text using class selector
+        document.querySelectorAll('.radar-date-text').forEach((element) => {
+          if (element instanceof SVGElement) {
+            element.style.fill = themeColors.mainTextColor
+          }
+        })
+      }
+
+      // Initialize the radar visualization
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          // Load the radar visualization function
+
+          const config = {
+            ...radarConfig,
+            themeColors: getThemeColorsForMode(),
+            show_footer_legend: radarConfig.show_footer_legend
+          }
+
+          radar_visualization(config)
+          radarInitialized = true
+
+          // Set up observer to watch for theme changes
+          const observer = new MutationObserver(
+            (mutations: MutationRecord[]) => {
+              mutations.forEach((mutation) => {
+                if (
+                  mutation.type === 'attributes' &&
+                  mutation.attributeName === 'class'
+                ) {
+                  updateRadarColors()
+                }
+              })
+            }
+          )
+
+          // Start observing the document element for class changes
+          observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+          })
+        } catch (error) {
+          console.error('Failed to load radar visualization:', error)
+        }
+      })
+    }
+  }
+
+  customElements.define('astro-radar-config', AstroRadarConfig)
+</script>

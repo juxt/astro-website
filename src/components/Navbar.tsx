@@ -34,7 +34,7 @@ function NavLink({ label, href, target, active, style }: NavLinkProp) {
   )
 }
 
-export default function Navbar({ navLinks, navbarNoBg }) {
+export default function Navbar({ navLinks, navbarNoBg }: { navLinks: NavLinkProp[], navbarNoBg: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const ref = useOutsideClick(() => setIsMenuOpen(false))
   const linkClasses = 'items-center gap-8 uppercase tracking-widest text-xs'

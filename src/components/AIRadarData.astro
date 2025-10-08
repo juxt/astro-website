@@ -1,0 +1,18 @@
+---
+import RadarChart from './RadarChart.astro'
+import QuadrantCards from './QuadrantCards.astro'
+import { extractAllRadarData } from '../utils/radar-data-extractor'
+
+// Extract all radar data using the common utility
+const radarData = extractAllRadarData()
+---
+
+<!-- Show radar on desktop/tablet, cards on mobile -->
+<div class='hidden md:block'>
+  <RadarChart data={radarData} showFooterLegend={false} />
+</div>
+
+<!-- Show cards on mobile -->
+<div class='md:hidden'>
+  <QuadrantCards data={radarData} />
+</div>

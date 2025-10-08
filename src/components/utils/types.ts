@@ -15,6 +15,8 @@ export type Person = {
 
 export type Blog = {
   draft?: boolean
+  childArticle?: boolean
+  parentArticle?: string
   token?: string
   title: string
   description: string
@@ -27,4 +29,5 @@ export type Blog = {
   href: string
   heroImage: string
   clojureIn?: { season: string; industry: string; quote: string }
+  hideAuthor?: boolean
 }

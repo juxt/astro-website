@@ -1,12 +1,12 @@
 ---
-import { getImage } from 'astro:assets'
-import { MarkdownInstance } from 'astro'
-import { parseBlogs } from '@utils/common'
 import Banner from '@components/Banner.astro'
-import { Blog, Person } from '@utils/types'
-import { BlogIndex } from '@layouts/BlogIndex.tsx'
 import { BlogCard } from '@components/BlogCard'
+import { BlogIndex } from '@layouts/BlogIndex'
 import Layout from '@layouts/Layout.astro'
+import { parseBlogs } from '@utils/common'
+import { Blog, Person } from '@utils/types'
+import { MarkdownInstance } from 'astro'
+import { getImage } from 'astro:assets'
 
 const isDev = import.meta.env.DEV;
 
@@ -16,13 +16,13 @@ const authorImageImport = {
 }
 
 const unfilteredBlogs = await parseBlogs({
-  rawBlogs: await Astro.glob<MarkdownInstance<Blog>>('/src/pages/blog/{*.mdx,*.md}'),
+  rawBlogs: await Astro.glob<MarkdownInstance<Blog>>('/src/pages/blog/**/*.{mdx,md}'),
   rawPeople: await Astro.glob<MarkdownInstance<Person>>('/src/data/people/{*.mdx,*.md}'),
   isDev: isDev,
   getImage,
   ...authorImageImport
 });
-const blogs = unfilteredBlogs.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+const blogs = unfilteredBlogs.sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
 
 const blogBannerPicture = await getImage({
   src: import('../../assets/site/blog-banner.jpeg'),
