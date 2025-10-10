@@ -10,6 +10,8 @@ import remarkMath from 'remark-math'
 import remarkGfm from 'remark-gfm'
 import inspectUrls from '@jsdevtools/rehype-url-inspector'
 
+const PRODUCTION_SITE_URL = 'https://juxt.pro'
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -22,7 +24,12 @@ export default defineConfig({
       }
     })
   ],
-  site: process.env.DEPLOY_URL || process.env.URL,
+  site:
+    process.env.NODE_ENV === 'development' ||
+    process.env.CONTEXT === 'deploy-preview' ||
+    process.env.CONTEXT === 'branch-deploy'
+      ? process.env.DEPLOY_URL || process.env.URL
+      : PRODUCTION_SITE_URL,
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
@@ -71,7 +78,7 @@ export default defineConfig({
             if (url.node.properties.href.startsWith('#')) {
               return
             }
-            var href = new URL(url.node.properties.href, 'https://juxt.pro/')
+            var href = new URL(url.node.properties.href, PRODUCTION_SITE_URL)
             // Add target blank to external links
             if (href.host !== 'juxt.pro') {
               url.node.properties.target = '_blank'
