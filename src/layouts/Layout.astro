@@ -102,9 +102,7 @@ const metaTitle = ogTitle ?? title ?? currentPageName
 
     {Astro.site && <link
       rel='canonical'
-      href={Astro.url.pathname.endsWith('/')
-        ? `${Astro.site}${Astro.url.pathname}`
-        : `${Astro.site}${Astro.url.pathname}/`}
+      href={`${Astro.site.href.replace(/\/$/, '')}${Astro.url.pathname}`}
     />}
 
     <link
