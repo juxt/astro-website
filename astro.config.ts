@@ -25,11 +25,11 @@ export default defineConfig({
     })
   ],
   site:
-    process.env.NODE_ENV === 'development' ||
+    (process.env.NODE_ENV === 'development' ||
     process.env.CONTEXT === 'deploy-preview' ||
     process.env.CONTEXT === 'branch-deploy'
       ? process.env.DEPLOY_URL || process.env.URL
-      : PRODUCTION_SITE_URL,
+      : PRODUCTION_SITE_URL)?.replace(/\/$/, ''),
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
