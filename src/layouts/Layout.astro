@@ -5,6 +5,8 @@ import { capitalizeFirstLetter, currentPage } from '@utils/common'
 
 import { getImage } from 'astro:assets'
 
+const siteOrigin = Astro.site.origin
+
 type LayoutProps = {
   title?: string
   navbar?: boolean
@@ -41,17 +43,6 @@ const {
   noFooter,
   robots
 } = Astro.props as LayoutProps
-
-console.log(
-  '-------------------------------- Environment variables --------------------------------'
-)
-console.log('url -> new URL(Astro.request.url)', url)
-console.log('Astro.site', Astro.site)
-
-console.log('process.env.NODE_ENV', process.env.NODE_ENV)
-console.log('process.env.CONTEXT', process.env.CONTEXT)
-console.log('process.env.DEPLOY_URL', process.env.DEPLOY_URL)
-console.log('process.env.URL', process.env.URL)
 const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
 
 const currentDescription =
@@ -67,13 +58,11 @@ if (seo[currentPageName] && seo[currentPageName].image) {
     alt: 'background',
     quality: 90
   }).then((img) => img.src)
-  imageForShare = Astro.site ? `${Astro.site}${importedPic}` : importedPic
-  console.log('imageForShare old url', `${url.origin}${importedPic}`)
-  console.log('imageForShare new url', `${Astro.site}${importedPic}`)
+  imageForShare = `${siteOrigin}${importedPic}`
 } else if (ogImage) {
   if (ogImage.startsWith('/')) {
     // Direct path, no dynamic import needed
-    imageForShare = Astro.site ? `${Astro.site}${ogImage}` : ogImage
+    imageForShare = `${siteOrigin}${ogImage}`
   } else {
     // would be nice not to hardcode blog here, but then vite can't do the dynamic import...
     // this whole dynamic import thing is nasty anyway, probably its better to
@@ -86,12 +75,9 @@ if (seo[currentPageName] && seo[currentPageName].image) {
       alt: 'blog background',
       height: 630
     })
-    imageForShare = Astro.site ? `${Astro.site}${src}` : src
+    imageForShare = `${siteOrigin}${src}`
   }
 }
-
-console.log('url.href', url.href)
-console.log('Astro.url.pathname', `${Astro.site}${Astro.url.pathname}`)
 
 const metaTitle = ogTitle ?? title ?? currentPageName
 ---
@@ -106,14 +92,9 @@ const metaTitle = ogTitle ?? title ?? currentPageName
       )
     }
     <!-- Meta Tags -->
-    {
-      Astro.site && (
-        <meta
-          property='og:url'
-          content={`${Astro.site}${Astro.url.pathname}`}
-        />
-      )
-    }
+
+    <meta property='og:url' content={Astro.site.href} />
+
     <meta property='og:type' content='website' />
     <meta property='og:title' content={ogTitle} />
     <meta property='og:description' content={ogDescription} />
@@ -124,14 +105,8 @@ const metaTitle = ogTitle ?? title ?? currentPageName
       )
     }
 
-    {
-      Astro.site && (
-        <link
-          rel='canonical'
-          href={`${Astro.site.href.replace(/\/$/, '')}${Astro.url.pathname}`}
-        />
-      )
-    }
+    <!-- we want the canonical URL to always be production, so we use the netlify process.env.URL -->
+    <link rel='canonical' href={`${process.env.URL}${Astro.url.pathname}`} />
 
     <link
       rel='alternate'
@@ -141,23 +116,8 @@ const metaTitle = ogTitle ?? title ?? currentPageName
     />
 
     <!-- Twitter Meta Tags -->
+    <!-- https://developer.x.com/en/docs/x-for-websites/cards/overview/markup -->
     <meta name='twitter:card' content='summary_large_image' />
-    {
-      Astro.site && (
-        <meta
-          property='twitter:domain'
-          content={new URL(Astro.site).hostname}
-        />
-      )
-    }
-    {
-      Astro.site && (
-        <meta
-          property='twitter:url'
-          content={`${Astro.site}${Astro.url.pathname}`}
-        />
-      )
-    }
     <meta name='twitter:title' content={metaTitle} />
     {
       currentDescription && (

@@ -10,20 +10,24 @@ import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
+// netlify - build vars https://docs.netlify.com/build/configure-builds/environment-variables/
 const PRODUCTION_SITE_URL = 'https://juxt.pro'
 
-console.log(
-  '-------------------------------- CONFIG SITE --------------------------------',
-  process.env.DEPLOY_URL || process.env.URL
-)
-console.log(
-  'CONFIG SITE:',
-  process.env.NODE_ENV === 'development' ||
-    process.env.CONTEXT === 'deploy-preview' ||
-    process.env.CONTEXT === 'branch-deploy'
-    ? process.env.DEPLOY_URL || process.env.URL
-    : PRODUCTION_SITE_URL
-)
+function getSiteUrl() {
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:4321'
+  }
+  if (process.env.CONTEXT === 'deploy-preview') {
+    return process.env.DEPLOY_URL
+  }
+
+  if (process.env.CONTEXT === 'production') {
+    // https://juxt.pro
+    return process.env.URL
+  }
+
+  return PRODUCTION_SITE_URL
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,12 +41,7 @@ export default defineConfig({
       }
     })
   ],
-  site:
-    process.env.NODE_ENV === 'development' ||
-    process.env.CONTEXT === 'deploy-preview' ||
-    process.env.CONTEXT === 'branch-deploy'
-      ? process.env.DEPLOY_URL || process.env.URL
-      : PRODUCTION_SITE_URL,
+  site: getSiteUrl(),
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
