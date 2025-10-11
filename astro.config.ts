@@ -1,16 +1,29 @@
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
+import inspectUrls from '@jsdevtools/rehype-url-inspector'
 import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
 import rehypeKatex from 'rehype-katex'
-import remarkMath from 'remark-math'
+import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-import inspectUrls from '@jsdevtools/rehype-url-inspector'
+import remarkMath from 'remark-math'
 
 const PRODUCTION_SITE_URL = 'https://juxt.pro'
+
+console.log(
+  '-------------------------------- CONFIG SITE --------------------------------',
+  process.env.DEPLOY_URL || process.env.URL
+)
+console.log(
+  'CONFIG SITE:',
+  process.env.NODE_ENV === 'development' ||
+    process.env.CONTEXT === 'deploy-preview' ||
+    process.env.CONTEXT === 'branch-deploy'
+    ? process.env.DEPLOY_URL || process.env.URL
+    : PRODUCTION_SITE_URL
+)
 
 // https://astro.build/config
 export default defineConfig({
