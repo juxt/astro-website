@@ -1,0 +1,579 @@
+/* ========================================
+   BASE STYLES & TYPOGRAPHY
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --margin-top: 20mm;
+  --margin-right: 20mm;
+  --margin-bottom: 25mm;
+  --margin-left: 20mm;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #333;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 48pt;
+  margin-bottom: 0.5em;
+}
+h2 {
+  font-size: 24pt;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+h3 {
+  font-size: 14pt;
+  margin-bottom: 0.3em;
+  margin-top: 1em;
+  color: #d97706;
+}
+
+p {
+  margin-bottom: 0.8em;
+}
+
+/* ========================================
+   PAGED MEDIA - DEFAULT PAGE
+   ======================================== */
+
+@page {
+  size: A4;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom)
+    var(--margin-left);
+}
+
+@page mostly-text {
+  margin: 14mm var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+
+/* Running footer for default pages */
+@page {
+  @bottom-center {
+    content: 'JUXT | A GRID DYNAMICS COMPANY';
+    font-size: 9pt;
+    color: #666;
+    font-weight: 600;
+  }
+  @bottom-right {
+    content: counter(page);
+    font-size: 9pt;
+    color: #666;
+  }
+}
+
+/* ========================================
+   PAGED MEDIA - COVER PAGE
+   ======================================== */
+
+@page cover {
+  margin: 0;
+  @bottom-center {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.cover-page {
+  page: cover;
+  height: 297mm; /* A4 height */
+  width: 210mm; /* A4 width */
+  padding: 24mm 40mm 24mm 40mm;
+  background: #fef3c7; /* Cream/beige background */
+  position: relative;
+  page-break-after: always;
+}
+
+.cover-title {
+  font-size: 64pt;
+  font-weight: 700;
+  margin-bottom: 10mm;
+  line-height: 1;
+}
+
+.cover-subtitle {
+  font-size: 18pt;
+  line-height: 1.4;
+  margin-bottom: 10mm;
+  max-width: 500pt;
+}
+
+.cover-date {
+  font-size: 18pt;
+  font-weight: 700;
+  position: absolute;
+  top: 24mm;
+  right: 40mm;
+}
+
+/* Large decorative circle */
+.cover-circle {
+  position: absolute;
+  width: 400pt;
+  height: 400pt;
+  background: #d97706; /* Orange */
+  border-radius: 50%;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  z-index: 0; /* sit behind footer/logo */
+}
+
+.cover-footer {
+  position: absolute;
+  bottom: 4mm;
+  left: 40mm;
+  right: 40mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6mm;
+  z-index: 1; /* ensure above decorative elements */
+}
+
+.cover-footer .company-name {
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.company-name {
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+/* ========================================
+   PAGED MEDIA - SECTION DIVIDER PAGE
+   ======================================== */
+
+@page section-divider {
+  margin: 0;
+  @bottom-center {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.section-divider {
+  page: section-divider;
+  height: 297mm;
+  width: 210mm;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-divider.languages {
+  background: #ea580c; /* Orange */
+  color: white;
+}
+
+.section-title {
+  font-size: 48pt;
+  margin-bottom: 20mm;
+  color: white;
+}
+
+.section-description {
+  font-size: 14pt;
+  line-height: 1.6;
+  max-width: 500pt;
+  color: white;
+}
+
+/* ========================================
+   PAGED MEDIA - CONTENT PAGES
+   ======================================== */
+
+@page content {
+  @top-center {
+    content: element(category-label);
+  }
+}
+
+.content-page {
+  page: content;
+  page-break-before: always;
+}
+
+/* Simple running label for categories (no background) */
+.category-top-label-run {
+  position: running(category-label);
+  font-weight: 700;
+  font-size: 12pt;
+  margin: 0;
+  padding: 0;
+}
+
+/* Clear the running label (used before non-category sections) */
+.category-top-label-clear {
+  position: running(category-label);
+  height: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+}
+
+/* Avoid breaking inside paragraphs and after headings */
+h2,
+h3 {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+p {
+  orphans: 3;
+  widows: 3;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.page-break {
+  page-break-before: always;
+}
+
+.avoid-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* ========================================
+   CATEGORY COVER TEMPLATE
+   ======================================== */
+
+@page category-cover {
+  margin: 0;
+  margin-bottom: 20mm;
+
+  @bottom-right {
+    margin-right: var(--margin-right);
+  }
+}
+
+.category-cover-page {
+  page: category-cover;
+  page-break-before: always;
+  /* Ensure the page occupies a full A4 sheet so columns can stretch */
+  display: flex;
+  flex-direction: column;
+}
+
+.category-cover-header {
+  background: var(--category-color, #ea580c); /* set per section */
+  color: #ffffff;
+  padding: 10mm var(--margin-right) 10mm var(--margin-left);
+  border-radius: 0;
+}
+
+.category-cover-title {
+  margin: 0 0 4mm 0;
+}
+
+.category-cover-description {
+  line-height: 1.6;
+}
+
+.category-cover-split {
+  display: flex;
+  /* Stretch columns to equal height so backgrounds fill the page */
+  align-items: stretch;
+  gap: 0mm;
+}
+
+.category-cover-left,
+.category-cover-right {
+  width: 50%;
+  flex-shrink: 0;
+  padding-top: 10mm;
+  min-height: 0; /* prevent flex overflow */
+}
+
+.category-cover-left {
+  background: #f3f4f6; /* light gray */
+  padding: 10mm var(--margin-right) 10mm var(--margin-left);
+}
+
+.category-cover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+}
+
+.category-cover-list-section h3 {
+  margin: 0 0 4mm 0;
+}
+
+.category-cover-list-section h2,
+.category-cover-list-section h3,
+.category-cover-list-section h4 {
+  font-weight: 700;
+}
+
+.category-cover-list-item {
+  margin-bottom: 1mm;
+}
+
+.category-cover-right {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.category-cover-radar svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* ========================================
+   CONTRIBUTORS PAGE
+   ======================================== */
+
+.contributors.content-page {
+  page: mostly-text;
+}
+
+.contributors-title {
+  margin-top: 0mm;
+}
+
+.contributors-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+  margin-top: 6mm;
+}
+
+.contributor-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6mm;
+}
+
+.contributor-photo {
+  width: 24mm;
+  height: 24mm;
+  object-fit: cover;
+  background: #e5e7eb; /* gray placeholder */
+  flex-shrink: 0;
+}
+
+.contributor-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.contributor-name {
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 1mm;
+  color: #d97706; /* orange */
+}
+
+.contributor-description {
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #666;
+}
+
+/* ========================================
+   INTRODUCTION PAGE
+   ======================================== */
+
+.introduction.content-page {
+  page: mostly-text;
+  line-height: 1.4;
+}
+
+.introduction-title {
+  margin-top: 0mm;
+}
+
+.introduction-category {
+  font-weight: 700;
+  margin-bottom: 0.5mm;
+}
+
+/* ========================================
+   AT-A-GLANCE PAGES
+   ======================================== */
+
+.glance-page.content-page {
+}
+
+.glance-split {
+  display: flex;
+  flex-direction: row;
+}
+
+.glance-col {
+  width: 50%;
+  flex-shrink: 0;
+  min-height: 0;
+  padding: 3mm;
+}
+
+.glance-col-right {
+  background: #f3f4f6;
+}
+.glance-category-header {
+  color: #ffffff;
+  padding: 3mm;
+  margin-bottom: 6mm;
+}
+
+.glance-category-title {
+  margin: 0;
+  font-size: 12pt;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.glance-category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+  margin-top: 3mm;
+}
+
+.glance-list-section h3 {
+  margin: 0 0 2mm 0;
+  font-size: 10pt;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.glance-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.glance-item {
+  margin-bottom: 1mm;
+  padding-left: 0;
+}
+
+/* Full radar page styles */
+.full-radar-page.content-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: visible;
+}
+
+.full-radar-title {
+  margin-top: 0mm;
+}
+
+.full-radar-container {
+  width: 300mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10mm;
+  overflow: visible;
+}
+
+.full-radar-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ========================================
+   THANK YOU PAGE
+   ======================================== */
+
+@page thank-you {
+  margin: 0;
+  @bottom-center {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.thank-you-page {
+  page: thank-you;
+  height: 297mm; /* A4 height */
+  width: 210mm; /* A4 width */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20mm 30mm 20mm 24mm; /* top right bottom left */
+  border-left: 20mm solid #d97706; /* Orange left border */
+  box-sizing: border-box;
+}
+
+.thank-you-title {
+  font-size: 48pt;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 10mm 0;
+  line-height: 1.2;
+}
+
+.thank-you-content {
+  flex: 0 0 auto;
+  margin-bottom: auto;
+}
+
+.thank-you-section-heading {
+  font-size: 24pt;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 4mm 0;
+  line-height: 1.2;
+}
+
+.thank-you-text {
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+.thank-you-footer {
+  margin-top: 120mm;
+}
+
+.thank-you-disclaimer {
+  font-size: 9pt;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
