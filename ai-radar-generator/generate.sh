@@ -14,7 +14,19 @@ if command -v bun >/dev/null 2>&1; then
   echo "🧩 Building radar.html from MDX (bun)"
   bun run build:html || { echo "❌ Failed to build radar.html"; exit 1; }
 else
-  echo "⚠️  bun not found on PATH; skipping HTML build step"
+  echo ""
+  echo "❌ Error: bun is not installed"
+  echo ""
+  echo "   Bun is required to build the radar HTML from MDX files."
+  echo ""
+  echo "   Install bun:"
+  echo "     • macOS/Linux: curl -fsSL https://bun.sh/install | bash"
+  echo "     • Homebrew:    brew install oven-sh/bun/bun"
+  echo "     • Windows:     powershell -c \"irm bun.sh/install.ps1|iex\""
+  echo ""
+  echo "   Or visit: https://bun.sh"
+  echo ""
+  exit 1
 fi
 source venv/bin/activate
 python generate.py

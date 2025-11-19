@@ -7,20 +7,30 @@ Generates the quarterly AI Radar PDF. The flow is:
 
 ## Setup
 
-1. **Install system dependencies (macOS with Homebrew):**
+1. **Install Bun (for HTML generation):**
+
+   ```bash
+   # macOS/Linux
+   curl -fsSL https://bun.sh/install | bash
+
+   # Or via Homebrew
+   brew install oven-sh/bun/bun
+   ```
+
+2. **Install system dependencies (macOS with Homebrew):**
 
    ```bash
    brew install pango gdk-pixbuf libffi
    ```
 
-2. **Create a virtual environment:**
+3. **Create a virtual environment:**
 
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install Python dependencies:**
+4. **Install Python dependencies:**
    ```bash
    pip install --upgrade pip
    pip install weasyprint
