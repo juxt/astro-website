@@ -198,7 +198,7 @@ p {
   height: 400pt;
   background: var(--color-accent); /* Orange */
   border-radius: 50%;
-  top: 55%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -25%);
   z-index: 0; /* sit behind footer/logo */
