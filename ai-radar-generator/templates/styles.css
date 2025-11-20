@@ -11,7 +11,7 @@
 :root {
   --margin-top: 20mm;
   --margin-right: 20mm;
-  --margin-bottom: 25mm;
+  --margin-bottom: 18mm;
   --margin-left: 20mm;
 
   /* Colors */
@@ -23,8 +23,14 @@
 
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   font-size: 11pt;
   line-height: 1.6;
   color: var(--color-text-main);
@@ -65,26 +71,54 @@ p {
   size: A4;
   margin: var(--margin-top) var(--margin-right) var(--margin-bottom)
     var(--margin-left);
+
+  @bottom-left {
+    content: counter(page);
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--color-text-main);
+    border-top: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    margin-top: 4mm;
+    vertical-align: top;
+    padding-top: 2mm;
+    width: 100%;
+  }
+
+  @bottom-right {
+    content: 'JUXT | A GRID DYNAMICS COMPANY';
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--color-text-main);
+    border-top: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    margin-top: 4mm;
+    vertical-align: top;
+    padding-top: 2mm;
+    width: 100%;
+  }
+
+  @bottom-center {
+    content: '';
+    border-top: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    margin-top: 4mm;
+    vertical-align: top;
+    padding-top: 2mm;
+    width: 100%;
+  }
 }
 
 @page mostly-text {
   margin: 14mm var(--margin-right) var(--margin-bottom) var(--margin-left);
 }
 
-/* Running footer for default pages */
-@page {
-  @bottom-center {
-    content: 'JUXT | A GRID DYNAMICS COMPANY';
-    font-size: 9pt;
-    color: #666;
-    font-weight: 600;
-  }
-  @bottom-right {
-    content: counter(page);
-    font-size: 9pt;
-    color: #666;
-  }
-}
+/* Remove old running footer block since it's now in the main @page block */
 
 /* ========================================
    PAGED MEDIA - COVER PAGE
@@ -92,6 +126,11 @@ p {
 
 @page cover {
   margin: 0;
+  border-top: none; /* Cover page border handled manually or via class */
+
+  @bottom-left {
+    content: none;
+  }
   @bottom-center {
     content: none;
   }
@@ -104,10 +143,11 @@ p {
   page: cover;
   height: 297mm; /* A4 height */
   width: 210mm; /* A4 width */
-  padding: 24mm 20mm 24mm 20mm; /* Reduced side padding */
+  padding: 14mm 20mm 24mm 20mm; /* Reduced top padding to compensate for border */
   background: var(--color-bg-cover); /* Cream/beige background */
   position: relative;
   page-break-after: always;
+  /* Border was moved to page footer area */
 }
 
 .cover-title {
@@ -176,7 +216,7 @@ p {
   justify-content: space-between;
   align-items: center;
   gap: 6mm;
-  z-index: 1; /* ensure above decorative elements */
+  z-index: 1;
 }
 
 .cover-footer .company-name {
@@ -199,6 +239,10 @@ p {
 
 @page section-divider {
   margin: 0;
+  /* No footer border on section divider as it has no footer content */
+  @bottom-left {
+    content: none;
+  }
   @bottom-center {
     content: none;
   }
@@ -300,10 +344,6 @@ p {
 @page category-cover {
   margin: 0;
   margin-bottom: 20mm;
-
-  @bottom-right {
-    margin-right: var(--margin-right);
-  }
 }
 
 .category-cover-page {
@@ -547,6 +587,9 @@ p {
 
 @page thank-you {
   margin: 0;
+  @bottom-left {
+    content: none;
+  }
   @bottom-center {
     content: none;
   }
