@@ -118,15 +118,12 @@ p {
   margin: 14mm var(--margin-right) var(--margin-bottom) var(--margin-left);
 }
 
-/* Remove old running footer block since it's now in the main @page block */
-
 /* ========================================
    PAGED MEDIA - COVER PAGE
    ======================================== */
 
 @page cover {
   margin: 0;
-  border-top: none; /* Cover page border handled manually or via class */
 
   @bottom-left {
     content: none;
@@ -496,34 +493,70 @@ p {
    ======================================== */
 
 .glance-page.content-page {
+  page: mostly-text;
+}
+
+.glance-page-title {
+  font-size: 24pt;
+  font-weight: 700;
+  margin-bottom: 4mm;
 }
 
 .glance-split {
   display: flex;
   flex-direction: row;
+  width: 210mm;
+  margin-left: -20mm;
 }
 
 .glance-col {
   width: 50%;
   flex-shrink: 0;
   min-height: 0;
-  padding: 3mm;
+  padding-left: var(--margin-left);
 }
 
+/* Right column gets its own padding settings */
 .glance-col-right {
   background: #f3f4f6;
 }
+
+/* Page-specific heights for glance pages */
+.glance-page .glance-col-right {
+  height: 246mm;
+}
+
 .glance-category-header {
-  color: #ffffff;
-  padding: 3mm;
   margin-bottom: 6mm;
+  color: #ffffff;
+  padding-left: var(--margin-left);
+}
+
+.glance-col {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.glance-col > .glance-category-list {
+  padding-left: var(--margin-left);
+  padding-right: 3mm;
+  padding-bottom: var(--margin-bottom);
+  flex: 1;
+}
+
+.glance-col-right > .glance-category-list {
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
 }
 
 .glance-category-title {
   margin: 0;
-  font-size: 12pt;
+  font-size: 18pt;
   white-space: nowrap;
   font-weight: 700;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
 }
 
 .glance-category-list {
