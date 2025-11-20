@@ -338,13 +338,10 @@ p {
    CATEGORY COVER TEMPLATE
    ======================================== */
 
-@page category-cover {
-  margin: 0;
-  margin-bottom: 20mm;
-}
-
 .category-cover-page {
-  page: category-cover;
+  margin-top: -20mm;
+  margin-left: -20mm;
+  width: 210mm;
   page-break-before: always;
   /* Ensure the page occupies a full A4 sheet so columns can stretch */
   display: flex;
@@ -381,8 +378,19 @@ p {
   min-height: 0; /* prevent flex overflow */
 }
 
+.category-absolute-left-split {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: -20mm;
+  margin-top: -20mm;
+  width: 105mm;
+  height: 283mm;
+  background: #f3f4f6;
+  z-index: -1;
+}
+
 .category-cover-left {
-  background: #f3f4f6; /* light gray */
   padding: 10mm var(--margin-right) 10mm var(--margin-left);
 }
 
@@ -516,9 +524,16 @@ p {
   padding-left: var(--margin-left);
 }
 
-/* Right column gets its own padding settings */
-.glance-col-right {
+.glance-absolute-right-split {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: -20mm;
+  margin-top: 19mm;
+  width: 105mm;
+  height: 250mm;
   background: #f3f4f6;
+  z-index: -1;
 }
 
 /* Page-specific heights for glance pages */
