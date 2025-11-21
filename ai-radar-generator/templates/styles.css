@@ -686,8 +686,14 @@ p {
   margin: 0;
 }
 
+.thank-you-qr-code {
+  width: 40mm;
+  height: 40mm;
+  margin-top: 10mm;
+}
+
 .thank-you-footer {
-  margin-top: 120mm;
+  margin-top: 90mm;
 }
 
 .thank-you-disclaimer {
