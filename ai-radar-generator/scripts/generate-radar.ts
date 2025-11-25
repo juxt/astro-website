@@ -623,6 +623,46 @@ async function buildCategoryCoverFromTemplate(
   return html
 }
 
+// Shared shape generation helpers for consistent blip rendering
+function generateTriangleUp(size: number): string {
+  return `M 0 ${-size} L ${size} ${size} L ${-size} ${size} Z`
+}
+
+function generateTriangleDown(size: number): string {
+  return `M 0 ${size} L ${size} ${-size} L ${-size} ${-size} Z`
+}
+
+function generateStar(circleRadius: number): string {
+  const outer = circleRadius + 3
+  const inner = Math.max(2, circleRadius - 6)
+  const points: Array<[number, number]> = []
+  for (let i = 0; i < 10; i++) {
+    const angle = -Math.PI / 2 + (i * Math.PI) / 5 // start at top
+    const r = i % 2 === 0 ? outer : inner
+    points.push([r * Math.cos(angle), r * Math.sin(angle)])
+  }
+  return `M ${points.map(([x, y]) => `${x} ${y}`).join(' L ')} Z`
+}
+
+function getTextYOffset(moved: number | undefined, circleRadius: number): number {
+  // Shift number towards base edge for triangles so it looks optically centered
+  if (moved === 1) {
+    return Math.round(circleRadius * 0.3) // up: move down towards base
+  } else if (moved === -1) {
+    return -Math.round(circleRadius * 0.3) // down: move up towards base
+  }
+  return 0 // circles and stars: centered
+}
+
+function getTextFontSize(id: number, circleRadius: number): string {
+  // For smaller circles (full radar), use smaller dynamic font size
+  if (circleRadius <= 12) {
+    return id.toString().length > 2 ? '8px' : '9px'
+  }
+  // For larger circles (single quadrant), use fixed larger font
+  return '14px'
+}
+
 function generateQuadrantSvg(
   sectionLabel: string,
   ringEntries: RingEntries,
@@ -773,35 +813,22 @@ function generateQuadrantSvg(
     if (e.moved === 1) {
       // Triangle up
       const s = circleRadius + 2
-      svg += `<path d="M 0 ${-s} L ${s} ${s} L ${-s} ${s} Z" fill="${quadrantColor}"/>`
+      svg += `<path d="${generateTriangleUp(s)}" fill="${quadrantColor}"/>`
     } else if (e.moved === -1) {
       // Triangle down
       const s = circleRadius + 2
-      svg += `<path d="M 0 ${s} L ${s} ${-s} L ${-s} ${-s} Z" fill="${quadrantColor}"/>`
+      svg += `<path d="${generateTriangleDown(s)}" fill="${quadrantColor}"/>`
     } else if (e.moved === 2) {
       // Star for 'new'
-      const outer = circleRadius + 3
-      const inner = Math.max(2, circleRadius - 6)
-      const points: Array<[number, number]> = []
-      for (let i = 0; i < 10; i++) {
-        const angle = -Math.PI / 2 + (i * Math.PI) / 5 // start at top
-        const r = i % 2 === 0 ? outer : inner
-        points.push([r * Math.cos(angle), r * Math.sin(angle)])
-      }
-      const d = `M ${points.map(([x, y]) => `${x} ${y}`).join(' L ')} Z`
-      svg += `<path d="${d}" fill="${quadrantColor}"/>`
+      svg += `<path d="${generateStar(circleRadius)}" fill="${quadrantColor}"/>`
     } else {
       // Default circle
       svg += `<circle cx="0" cy="0" r="${circleRadius}" fill="${quadrantColor}"/>`
     }
-    // Shift number towards base edge for triangles so it looks optically centered
-    const textY =
-      e.moved === 1
-        ? Math.round(circleRadius * 0.3) // up: move down towards base
-        : e.moved === -1
-          ? -Math.round(circleRadius * 0.3) // down: move up towards base
-          : 0
-    svg += `<text x="0" y="${textY}" text-anchor="middle" dominant-baseline="middle" fill="${RADAR_COLORS.circleEntryText}" font-family="Arial, Helvetica" font-size="14" font-weight="bold">${e.id}</text>`
+    // Text with consistent positioning
+    const textY = getTextYOffset(e.moved, circleRadius)
+    const fontSize = getTextFontSize(e.id, circleRadius)
+    svg += `<text x="0" y="${textY}" text-anchor="middle" dominant-baseline="middle" fill="${RADAR_COLORS.circleEntryText}" font-family="Arial, Helvetica" font-size="${fontSize}" font-weight="bold">${e.id}</text>`
     svg += `</g>`
   }
 
@@ -1080,26 +1107,25 @@ function generateFullRadarSvg(
   for (const e of entries) {
     svg += `<g class="blip" transform="translate(${e.x}, ${e.y})">`
     if (e.moved === 1) {
-      // Triangle up: M -11,5 11,5 0,-13 z
-      svg += `<path d="M -11,5 L 11,5 L 0,-13 Z" fill="${e.color}"/>`
+      // Triangle up
+      const s = circleRadius + 2
+      svg += `<path d="${generateTriangleUp(s)}" fill="${e.color}"/>`
     } else if (e.moved === -1) {
-      // Triangle down: M -11,-5 11,-5 0,13 z
-      svg += `<path d="M -11,-5 L 11,-5 L 0,13 Z" fill="${e.color}"/>`
+      // Triangle down
+      const s = circleRadius + 2
+      svg += `<path d="${generateTriangleDown(s)}" fill="${e.color}"/>`
     } else if (e.moved === 2) {
-      // Star: D3 symbolStar size 200 approximation
-      const starPath =
-        'M 0,-11.227 L 2.939,-3.695 L 10.676,-3.695 L 4.416,0.853 L 6.807,8.227 L 0,3.695 L -6.807,8.227 L -4.416,0.853 L -10.676,-3.695 L -2.939,-3.695 Z'
-      svg += `<path d="${starPath}" fill="${e.color}"/>`
+      // Star for 'new'
+      svg += `<path d="${generateStar(circleRadius)}" fill="${e.color}"/>`
     } else {
       // Default circle
       svg += `<circle cx="0" cy="0" r="${circleRadius}" fill="${e.color}"/>`
     }
 
-    // Number text
-    const blipText = e.id.toString()
-    const fontSize = blipText.length > 2 ? '8px' : '9px'
-    // radar-generation.ts uses y=3 for all shapes
-    svg += `<text x="0" y="3" text-anchor="middle" fill="${RADAR_COLORS.circleEntryText}" font-family="Arial, Helvetica" font-size="${fontSize}" font-weight="bold" pointer-events="none" user-select="none">${blipText}</text>`
+    // Text with consistent positioning
+    const textY = getTextYOffset(e.moved, circleRadius)
+    const fontSize = getTextFontSize(e.id, circleRadius)
+    svg += `<text x="0" y="${textY}" text-anchor="middle" dominant-baseline="middle" fill="${RADAR_COLORS.circleEntryText}" font-family="Arial, Helvetica" font-size="${fontSize}" font-weight="bold" pointer-events="none" user-select="none">${e.id}</text>`
     svg += `</g>`
   }
 
