@@ -1,6 +1,6 @@
 ---
 layout: '../../layouts/CareerPost.astro'
-location: 'London / Remote'
+location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Junior Kotlin Engineer'
@@ -8,7 +8,7 @@ draft: true
 weight: 2
 googleJobs:
   {
-    location: 'London',
+    location: 'London / Hybrid',
     position: 'Junior Kotlin Engineer',
     publishedDate: '2022-11-05'
   }

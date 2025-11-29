@@ -1,16 +1,16 @@
 ---
 layout: '../../layouts/CareerPost.astro'
-location: 'London / Hybrid Remote'
+location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Delivery Manager'
-draft: true
+draft: false
 weight: 1
 googleJobs:
   {
-    location: 'London / Hybrid Remote',
+    location: 'London / Hybrid',
     position: 'Delivery Manager',
-    publishedDate: '2024-12-10'
+    publishedDate: '2025-11-29'
   }
 ---
 

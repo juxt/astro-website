@@ -1,6 +1,6 @@
 ---
 layout: '../../layouts/CareerPost.astro'
-location: 'London / NYC / Hybrid'
+location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Java Engineer (All levels)'
@@ -8,7 +8,7 @@ draft: false
 weight: 2
 googleJobs:
   {
-    location: 'London / NYC',
+    location: 'London / Hybrid',
     position: 'Java Engineer',
     publishedDate: '2025-10-10'
   }
