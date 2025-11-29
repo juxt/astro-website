@@ -1,6 +1,6 @@
 ---
 layout: '../../layouts/CareerPost.astro'
-location: 'London / Remote'
+location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Senior / Principal Kotlin Engineer'
@@ -8,7 +8,7 @@ draft: false
 weight: 2
 googleJobs:
   {
-    location: 'London',
+    location: 'London / Hybrid',
     position: 'Senior / Principal Kotlin Engineer',
     publishedDate: '2025-10-10'
   }
@@ -56,4 +56,3 @@ We can only consider candidates who have the right to work in the UK and do not 
 ## Interested?
 
 Email careers@juxt.pro with your CV and a brief introduction. Even if you’re not sure you tick every box, we’d still love to hear from you - we’re always keen to meet passionate, technically curious developers and can keep you in mind for future projects if this one isn’t the right fit.
-
