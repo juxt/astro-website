@@ -4,7 +4,7 @@ location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'C# Engineer (Mid / Senior)'
-draft: false
+draft: true
 weight: 2
 googleJobs:
   {
@@ -16,7 +16,7 @@ googleJobs:
 
 ## Job Description
 
-We’re looking for several .NET developers, from mid-level through to senior engineers, to join us on a long-term project with one of our key clients within the asset management space. 
+We’re looking for several .NET developers, from mid-level through to senior engineers, to join us on a long-term project with one of our key clients within the asset management space.
 
 This is a chance to work in a genuinely high-performing engineering team, helping to maintain and evolve core systems across a core asset management platform. You’ll get involved in everything from upgrading libraries and adding new features in WPF UIs, to preparing applications for a major migration of services into Azure cloud.
 
@@ -37,7 +37,7 @@ At JUXT, we take pride in partnering with clients who value engineering excellen
 * Exposure to large-scale cloud migrations
 
 ## WFH?
-These roles are hybrid — typically three days per week in the office, working closely with the team in Central London. 
+These roles are hybrid — typically three days per week in the office, working closely with the team in Central London.
 
 ## Contract type
 We’re open to both permanent employees and inside IR35 contractors.
