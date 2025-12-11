@@ -93,11 +93,11 @@ const metaTitle = ogTitle ?? title ?? currentPageName
     }
     <!-- Meta Tags -->
 
-    <meta property='og:url' content={Astro.site.href} />
+    <meta property='og:url' content={Astro.url.href} />
 
     <meta property='og:type' content='website' />
-    <meta property='og:title' content={ogTitle} />
-    <meta property='og:description' content={ogDescription} />
+    {metaTitle && <meta property='og:title' content={metaTitle} />}
+    {currentDescription && <meta property='og:description' content={currentDescription} />}
     {imageForShare && <meta property='og:image' content={imageForShare} />}
     {
       imageForShare && (
