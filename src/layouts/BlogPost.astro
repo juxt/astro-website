@@ -181,6 +181,8 @@ const categoryHref = `/blog?${encodeURI(
   ogTitle={`JUXT Blog: ${title}`}
   ogDescription={description}
   ogImage={heroImageFilename}
+  ogPublishedDate={publishedDate}
+  ogAuthor={`${name} ${lastName}`}
 >
   <DraftBanner draft={draft} pageName='Blog' />
   <main
