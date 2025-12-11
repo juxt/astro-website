@@ -111,7 +111,7 @@ const metaTitle = ogTitle ?? title ?? currentPageName
       )
     }
 
-    <!-- we want the canonical URL to always be production, so we use the netlify process.env.URL -->
+    <!-- canonical URL uses process.env.URL (Netlify's prod URL) to prevent duplicate content across deploy previews -->
     <link rel='canonical' href={`${process.env.URL}${Astro.url.pathname}`} />
 
     <link

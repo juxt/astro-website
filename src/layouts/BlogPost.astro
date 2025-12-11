@@ -182,7 +182,7 @@ const categoryHref = `/blog?${encodeURI(
   ogDescription={description}
   ogImage={heroImageFilename}
   ogPublishedDate={publishedDate}
-  ogAuthor={`${name} ${lastName}`}
+  ogAuthor={name && lastName ? `${name} ${lastName}` : undefined}
 >
   <DraftBanner draft={draft} pageName='Blog' />
   <main
