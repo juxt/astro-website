@@ -14,6 +14,8 @@ type LayoutProps = {
   ogImage?: string
   ogTitle?: string
   ogDescription?: string
+  ogPublishedDate?: string
+  ogAuthor?: string
   noFooter?: boolean
   robots?: string
 }
@@ -40,6 +42,8 @@ const {
   ogImage,
   ogTitle,
   ogDescription,
+  ogPublishedDate,
+  ogAuthor,
   noFooter,
   robots
 } = Astro.props as LayoutProps
@@ -95,9 +99,11 @@ const metaTitle = ogTitle ?? title ?? currentPageName
 
     <meta property='og:url' content={Astro.url.href} />
 
-    <meta property='og:type' content='website' />
+    <meta property='og:type' content={ogPublishedDate ? 'article' : 'website'} />
     {metaTitle && <meta property='og:title' content={metaTitle} />}
     {currentDescription && <meta property='og:description' content={currentDescription} />}
+    {ogPublishedDate && <meta property='article:published_time' content={ogPublishedDate} />}
+    {ogAuthor && <meta property='article:author' content={ogAuthor} />}
     {imageForShare && <meta property='og:image' content={imageForShare} />}
     {
       imageForShare && (
