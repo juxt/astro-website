@@ -11,7 +11,8 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
 // netlify - build vars https://docs.netlify.com/build/configure-builds/environment-variables/
-const PRODUCTION_SITE_URL = 'https://juxt.pro'
+// Use www subdomain to match Netlify's primary domain and avoid redirect chains
+const PRODUCTION_SITE_URL = 'https://www.juxt.pro'
 
 function getSiteUrl() {
   if (process.env.NODE_ENV === 'development') {
@@ -92,7 +93,7 @@ export default defineConfig({
             }
             var href = new URL(url.node.properties.href, PRODUCTION_SITE_URL)
             // Add target blank to external links
-            if (href.host !== 'juxt.pro') {
+            if (href.host !== 'www.juxt.pro' && href.host !== 'juxt.pro') {
               url.node.properties.target = '_blank'
               url.node.properties.rel = 'noopener noreferrer'
             }
