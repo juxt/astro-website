@@ -15,6 +15,8 @@ heroImage: 'JuxtCast-dark.jpg'
 
 In this episode of the JUXTCast, JUXT CTO Malcolm Sparks sits down with Henry Garner (Principal Engineer), Denis Lobanov (Senior Software Engineer), and Joe Littlejohn (Chief Delivery Officer) to explore the soon-to-be-released JUXT AI Radar.
 
+**(UPDATE: the AI Radar was released, and you can find it [here.](https://www.juxt.pro/ai-radar/))**
+
 Led by Henry, this initiative aims to help the team and wider tech community understand the rapidly evolving AI ecosystem. From frameworks and tools to languages and platforms, the AI Radar offers structured insight and recommendations into what’s worth exploring and why.
 
 📺 Watch the full episode here:
