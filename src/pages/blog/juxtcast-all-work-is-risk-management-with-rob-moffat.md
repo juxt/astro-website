@@ -2,9 +2,9 @@
 author: 'juxt'
 layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast: All Work Is Risk Management with Rob Moffat'
-description: 'Governance strategies for model risk in finance and AI [video].'
+description: 'From Agile to AI: Managing Risk in Modern Software Systems [video].'
 category: 'podcast'
-publishedDate: '2025-12-24'
+publishedDate: '2025-12-23'
 tags:
   - fintech
   - AI
