@@ -23,8 +23,8 @@ The discussion also explores the cultural challenge of promoting open source in 
 
 Watch the full episode on YouTube:
 
-<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/4AUPUnOQaoA?si=47wo5IAa3ScULy2P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/xu3_l_8YYSM?si=sK0OxbDD1auBHYp0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Listen to the episode on all your favourite platforms [here](https://pnc.st/s/juxt-cast/adc7eb9d/juxtcast-s6e3-model-risk-and-the-trust-paradox-with-david-kelly).
+Listen to the episode on all your favourite platforms [here](https://pnc.st/s/juxt-cast/ca898126/juxtcast-s6e4-all-work-is-risk-management-with-rob-moffat).
 
 Stay tuned for more conversations in Season 6 and don’t forget to subscribe to our [YouTube channel](https://youtube.com/@juxt4112?si=FyHZrYQ2Y7LdYpY3)!
