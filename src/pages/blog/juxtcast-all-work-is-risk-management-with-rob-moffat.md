@@ -4,13 +4,13 @@ layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast: All Work Is Risk Management with Rob Moffat'
 description: 'From Agile to AI: Managing Risk in Modern Software Systems [video].'
 category: 'podcast'
-publishedDate: '2025-12-23'
+publishedDate: '2025-12-24'
 tags:
   - fintech
   - AI
   - podcast
 
-heroImage: 'JuxtCast-dark.jpg'
+heroImage: 'JuxtCast jon-joe-hga-fuz (1).jpg'
 ---
 
 Your backlog isn't just a list of tasks: it's a list of risks you're choosing to address. Could this reframing change how you think about trade-offs & priorities? Do your engineers know which specific risks your development methodology is designed to mitigate, and how?
