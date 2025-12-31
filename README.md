@@ -250,3 +250,29 @@ To see a single job you can visit the `/careers/*jobName*` url.
 The Algolia indexing code is written in nbb. The script runs in netlify to make sure the index is always up to date with the latest changes. The script is located in `algolia/index.cljs`.
 
 To manually rebuild the index, run `yarn run algolia`.
+
+## AI Radar PDF Generator
+
+The `ai-radar-generator/` directory contains tooling to generate a PDF version of the AI Radar from the MDX content in `src/pages/ai-radar/`.
+
+### Quick Start
+
+```bash
+cd ai-radar-generator
+
+# Install JS dependencies
+bun install
+
+# Set up Python environment (first time only)
+python3 -m venv venv
+source venv/bin/activate
+pip install weasyprint
+
+# Generate the PDF (macOS requires the library path)
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+./generate.sh
+```
+
+The PDF will be created at `ai-radar-generator/output/ai-radar.pdf`.
+
+See `ai-radar-generator/README.md` for detailed configuration options and project structure.

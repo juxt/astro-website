@@ -80,35 +80,45 @@ async function loadConfig(projectRoot: string): Promise<Config> {
 function stripMdxAndAdjustHeadings(tree: MdAst): MdAst {
   // Remove frontmatter (yaml), MDX ESM imports/exports, and specific MDX JSX components
   // Then increment heading levels by 1: h1 -> h2, h2 -> h3, etc.
-  const nodes: MdNode[] = []
-  for (const node of tree.children as MdNode[]) {
-    if (node.type === 'yaml') continue
-    if (node.type === 'mdxjsEsm') continue
-    if (node.type === 'mdxFlowExpression' || node.type === 'mdxTextExpression')
-      continue
-    if (
-      node.type === 'mdxJsxFlowElement' ||
-      node.type === 'mdxJsxTextElement'
-    ) {
-      // Drop known components and data-radar placeholders
-      const name = node.name as string | undefined
-      if (name === 'SingleQuadrantData') continue
-      // Also drop <div data-radar ... />
-      if (name === 'div' && Array.isArray(node.attributes)) {
-        const hasDataRadar = node.attributes.some(
-          (a: any) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-radar'
-        )
-        if (hasDataRadar) continue
+  // For generic JSX wrappers (like <div className="...">), extract their children
+
+  function processNodes(inputNodes: MdNode[]): MdNode[] {
+    const result: MdNode[] = []
+    for (const node of inputNodes) {
+      if (node.type === 'yaml') continue
+      if (node.type === 'mdxjsEsm') continue
+      if (node.type === 'mdxFlowExpression' || node.type === 'mdxTextExpression')
+        continue
+      if (
+        node.type === 'mdxJsxFlowElement' ||
+        node.type === 'mdxJsxTextElement'
+      ) {
+        // Drop known components with no useful content
+        const name = node.name as string | undefined
+        if (name === 'SingleQuadrantData') continue
+        // Drop <div data-radar ... /> placeholders
+        if (name === 'div' && Array.isArray(node.attributes)) {
+          const hasDataRadar = node.attributes.some(
+            (a: any) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-radar'
+          )
+          if (hasDataRadar) continue
+        }
+        // For other JSX elements (like wrapper divs), extract and process their children
+        if (Array.isArray(node.children) && node.children.length > 0) {
+          const extractedChildren = processNodes(node.children as MdNode[])
+          result.push(...extractedChildren)
+        }
+        continue
       }
-      // Keep unknown JSX elements? For PDF we generally don't want JSX; drop by default.
-      continue
+      if (node.type === 'heading') {
+        node.depth = Math.min((node.depth ?? 1) + 1, 6)
+      }
+      result.push(node)
     }
-    if (node.type === 'heading') {
-      node.depth = Math.min((node.depth ?? 1) + 1, 6)
-    }
-    nodes.push(node)
+    return result
   }
-  return { ...tree, children: nodes }
+
+  return { ...tree, children: processNodes(tree.children as MdNode[]) }
 }
 
 function extractIntroParagraph(tree: MdAst): MdNode[] {
@@ -291,15 +301,14 @@ async function renderNodesToHtml(nodes: MdNode[]): Promise<string> {
   return html
 }
 
-async function renderNodesToHtmlWithHeadingColor(
-  nodes: MdNode[],
-  headingColor: string
+async function renderNodesToHtml(
+  nodes: MdNode[]
 ): Promise<string> {
   const root: MdAst = { type: 'root', children: nodes }
   const hast = await unified()
     .use(remarkRehype)
     .run(root as any)
-  // Strip lingering radar placeholders and color headings inline
+  // Strip lingering radar placeholders
   visit(
     hast as any,
     'element',
@@ -313,21 +322,6 @@ async function renderNodesToHtmlWithHeadingColor(
         parent.children.splice(index, 1)
         return
       }
-      if (node.tagName === 'h2' || node.tagName === 'h3') {
-        node.properties = node.properties || {}
-        const existingStyle: string = node.properties.style || ''
-        const styleMap: Record<string, string> = {}
-        if (existingStyle) {
-          existingStyle.split(';').forEach((p) => {
-            const [k, v] = p.split(':')
-            if (k && v) styleMap[k.trim()] = v.trim()
-          })
-        }
-        styleMap.color = headingColor
-        node.properties.style = Object.entries(styleMap)
-          .map(([k, v]) => `${k}: ${v}`)
-          .join('; ')
-      }
     }
   )
   const html = unified()
@@ -336,8 +330,9 @@ async function renderNodesToHtmlWithHeadingColor(
   return html
 }
 
-function wrapContentPage(innerHtml: string, bannerHtml?: string): string {
-  return `<section class="content-page">
+function wrapContentPage(innerHtml: string, bannerHtml?: string, categoryClass?: string): string {
+  const classes = ['content-page', categoryClass].filter(Boolean).join(' ')
+  return `<section class="${classes}">
 ${bannerHtml ?? ''}
 ${innerHtml}
 </section>`
@@ -390,8 +385,7 @@ async function generateForSection(
     pageTargetWordCount: number
     smallSubsectionMaxWords: number
     minWordsOnCurrentPageForLongSubsection: number
-  },
-  headingColor: string
+  }
 ): Promise<{ dividerHtml: string; pagesHtml: string[] }> {
   if (!('dir' in section)) {
     // For raw HTML sections this function shouldn't be called
@@ -415,7 +409,7 @@ async function generateForSection(
   const cleaned = stripMdxAndAdjustHeadings(mdast)
   const introNodes = extractIntroParagraph(cleaned)
   const introHtml = introNodes.length
-    ? await renderNodesToHtmlWithHeadingColor(introNodes, headingColor)
+    ? await renderNodesToHtml(introNodes)
     : ''
   const dividerHtml = buildDividerHtml(section.label, introHtml)
 
@@ -424,7 +418,7 @@ async function generateForSection(
   // Page packing (no manual splitting - let the PDF engine paginate)
   const pagesHtml: string[] = []
   // Insert a simple running label once; CSS will repeat it on every page
-  const runLabelHtml = `<div class="category-top-label-run" style="color: ${headingColor};">${section.label}</div>`
+  const runLabelHtml = `<div class="category-top-label-run">${section.label}</div>`
   let hasInsertedRunLabel = false
   // One content-page per category: Adopt, Trial, Assess, Hold
   for (const category of categories) {
@@ -432,13 +426,10 @@ async function generateForSection(
     for (const block of category.blocks) {
       nodesForCategory.push(...(block.nodes as MdNode[]))
     }
-    const catHtml = await renderNodesToHtmlWithHeadingColor(
-      nodesForCategory,
-      headingColor
-    )
+    const catHtml = await renderNodesToHtml(nodesForCategory)
     const pageHtml = !hasInsertedRunLabel ? runLabelHtml + catHtml : catHtml
     hasInsertedRunLabel = true
-    pagesHtml.push(wrapContentPage(pageHtml))
+    pagesHtml.push(wrapContentPage(pageHtml, undefined, section.dir))
   }
 
   return {
@@ -573,22 +564,12 @@ async function buildCategoryCoverFromTemplate(
   projectRoot: string,
   templatePath: string,
   sectionLabel: string,
+  categorySlug: string,
   descriptionHtml: string,
   ringEntries: RingEntries,
   startingId: number
 ): Promise<string> {
   const quadrantSvg = generateQuadrantSvg(sectionLabel, ringEntries, startingId)
-  // Derive quadrant color for this section
-  let categoryColor = '#999999'
-  try {
-    categoryColor = getQuadrantColor(sectionLabel)
-  } catch {}
-  // Compute a stable slug for variable names and data attributes
-  const slug = sectionLabel
-    .toLowerCase()
-    .replace(/\s*&\s*/g, '-and-')
-    .replace(/[^a-z0-9-]+/g, '-')
-    .replace(/(^-|-$)/g, '')
   const templateAbs = resolve(join(projectRoot, templatePath))
   const template = await readFile(templateAbs, 'utf8')
   // Replace placeholders; handle {adpot entries} typo and {adopt entries}
@@ -613,13 +594,11 @@ async function buildCategoryCoverFromTemplate(
     .replaceAll('{assess entries}', renderList(ringEntries.assess, assessStart))
     .replaceAll('{hold entries}', renderList(ringEntries.hold, holdStart))
     .replaceAll('{quadrant svg}', quadrantSvg)
-  // Add inline background to header
+  // Add category class to section for CSS-based styling
   html = html.replace(
-    '<div class="category-cover-header">',
-    `<div class="category-cover-header" style="background: ${categoryColor}; color: #ffffff;">`
+    '<section class="category-cover-page">',
+    `<section class="category-cover-page ${categorySlug}">`
   )
-  // Color left list headings inline
-  html = html.replaceAll('<h3>', `<h3 style="color: ${categoryColor}">`)
   return html
 }
 
@@ -1362,18 +1341,12 @@ async function main() {
     const introHtml = introNodes.length
       ? await renderNodesToHtml(introNodes)
       : ''
-    // Resolve the section/quadrant color for heading styling
-    let sectionColor = '#d97706'
-    try {
-      sectionColor = getQuadrantColor(section.label)
-    } catch {}
 
     const { dividerHtml, pagesHtml } = await generateForSection(
       projectRoot,
       fromRoot,
       section,
-      pagination,
-      sectionColor
+      pagination
     )
 
     // Insert radar-at-a-glance before the first category cover
@@ -1394,6 +1367,7 @@ async function main() {
         projectRoot,
         cfg.categoryCoverTemplatePath,
         section.label,
+        section.dir,
         introHtml,
         ringEntries,
         startingId
