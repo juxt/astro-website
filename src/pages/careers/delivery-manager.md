@@ -18,7 +18,7 @@ googleJobs:
 
 JUXT is seeking a Delivery Manager to join our growing engineering function, working across banking and finance. We are a software consultancy specialising in high quality software delivery, data-centric architectures, and building ambitious new bespoke software systems. We're looking for Delivery Managers that can help us maintain highly-effective engineering teams and build excellent client relationships.
 
-JUXT has a strong engineering-first culture and as a manager supporting our projects you must have at least some experience working as a software engineer. We are looking to grow our existing delivery management function to ensure our projects run smoothly and that new clients get what they need from JUXT.
+JUXT has a strong engineering-first culture and as a manager supporting our projects you must have an excellent understanding of the work of a software engineer. We are looking to grow our existing delivery management function to ensure our projects run smoothly and that new clients get what they need from JUXT.
 
 About this role:
 
@@ -38,7 +38,7 @@ The ideal candidate,
 - is adept at communicating with both technical and non-technical client stakeholders,
 - has spent significant parts of their career working in large financial institutions e.g. banks.
 
-We're looking for Delivery Managers that can work alongside software engineers at all levels, having engineers as peers and as direct reports, and play a key role in making sure that JUXT projects are executed well.
+We're looking for a Delivery Manager that can work alongside software engineers at all levels, having engineers as peers and as direct reports, and play a key role in making sure that JUXT projects are executed well.
 
 If you have experience as a Delivery Manager, Account Manager, or Software Engineering Manager in a business with high technical standards and excellent modern engineering, we want to speak with you. Alternatively, if you're a software engineer with a talent for leading, building relationships, unblocking teams, and thinking about the bigger picture, and you're looking to move into the management track, this role could be for you
 
@@ -57,11 +57,11 @@ Essential:
 
 - Highly organised, self-motivated, and able to operate independently.
 - Adept at applying agile thinking to minimise risk and deliver successful projects.
-- Experience working as a software engineer.
 - Excellent communication skills.
 
 Useful but not essential:
 
+- Experience working as a software engineer.
 - Experience working in a software consultancy.
 
 ## Location
