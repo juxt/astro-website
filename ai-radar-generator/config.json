@@ -1,0 +1,31 @@
+{
+  "title": "JUXT AI Radar – Q1 2026",
+  "cover": {
+    "title": "JUXT AI Radar",
+    "subtitle": "An engineer's guide to the AI landscape\nfrom JUXT's CTO & AI chapter members",
+    "date": "Q1 2026",
+    "companyName": "JUXT | A GRID DYNAMICS COMPANY"
+  },
+  "sourceRoot": "../src/pages/ai-radar",
+  "sections": [
+    { "label": "Introduction", "htmlFile": "templates/pages/introduction.html", "divider": true },
+    { "label": "Contributors", "htmlFile": "templates/pages/contributors.html", "divider": true },
+    { "label": "Languages & frameworks", "dir": "languages-frameworks", "divider": true },
+    { "label": "Techniques", "dir": "techniques", "divider": true },
+    { "label": "Tools", "dir": "tools", "divider": true },
+    { "label": "Platforms", "dir": "platforms", "divider": true },
+    { "label": "Thank You", "htmlFile": "templates/pages/thank-you.html", "divider": false }
+  ],
+  "pagination": {
+    "pageTargetWordCount": 300,
+    "smallSubsectionMaxWords": 100,
+    "minWordsOnCurrentPageForLongSubsection": 50
+  },
+  "coverTemplatePath": "templates/cover.html",
+  "categoryCoverTemplatePath": "templates/category-cover.html",
+  "output": {
+    "radarHtmlPath": "output/radar.html",
+    "stylesHref": "styles.css"
+  }
+}
+

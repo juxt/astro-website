@@ -13,7 +13,7 @@ Programming languages and frameworks form the backbone of AI development, provid
 
 These languages and frameworks represent mature, well-supported technologies that are ready for production use. They offer excellent performance, extensive ecosystems, and proven track records in real-world applications.
 
-<div data-radar data-label="PyTorch" data-ring="adopt" />
+<div data-radar data-label='PyTorch' data-ring='adopt' />
 
 ## PyTorch
 
@@ -21,7 +21,7 @@ These languages and frameworks represent mature, well-supported technologies tha
 
 The framework's robust ecosystem, exceptional documentation and strong community support make it a reliable choice for teams at any scale. While TensorFlow remains relevant, particularly in production deployments, PyTorch's seamless integration with popular machine learning tools, extensive pre-trained model repository and growing deployment options through TorchServe have addressed previous concerns about production readiness. The framework's adoption by major technology organisations and research institutions, coupled with its regular release cycle and stability, gives us confidence in recommending it as a default choice for new machine learning projects.
 
-<div data-radar data-label="dbt" data-ring="adopt" />
+<div data-radar data-label='dbt' data-ring='adopt' />
 
 ## dbt
 
@@ -29,7 +29,7 @@ We've placed [dbt (data build tool)](https://www.getdbt.com/) in the Adopt ring 
 
 The reliability and maintainability of AI systems heavily depend on the quality of their input data, and dbt helps teams achieve this by making data transformations more transparent and trustworthy. We've seen teams successfully use dbt to create clean, well-documented data pipelines that connect data warehouses to AI applications, while maintaining the agility to quickly adapt to changing requirements. Its integration with modern data platforms and strong community support make it a solid choice for organisations building out their AI infrastructure.
 
-<div data-radar data-label="MCP" data-ring="adopt" />
+<div data-radar data-label='MCP' data-ring='adopt' data-change='down' />
 
 ## MCP
 
@@ -45,7 +45,7 @@ We recommend starting with existing MCP servers that match your requirements bef
 
 These languages and frameworks show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt technologies, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
 
-<div data-radar data-label="AutoGen" data-ring="trial" />
+<div data-radar data-label='AutoGen' data-ring='trial' data-change='up' />
 
 ## AutoGen
 
@@ -53,7 +53,7 @@ We've placed [AutoGen](https://microsoft.github.io/autogen/stable//index.html) i
 
 The framework's ability to handle interaction patterns between agents with built-in error handling and recovery shows particular promise for enterprise applications. However, we recommend carefully evaluating its fit for your specific use case, as the overhead of managing multiple agents may not be justified for simpler applications where a single large language model would suffice. We're also watching how the framework's approach to agent coordination evolves as the field matures.
 
-<div data-radar data-label="A2A" data-ring="trial" />
+<div data-radar data-label='A2A' data-ring='trial' data-change='new' />
 
 ## A2A
 
@@ -65,7 +65,7 @@ A2A's design centres around "Agent Cards" that advertise capabilities in JSON fo
 
 We've placed A2A in Trial because whilst the protocol shows clear potential and has impressive industry support, it remains relatively new with limited production deployment patterns. Early implementations suggest promise for organisations building complex multi-agent systems, but teams should evaluate whether their use cases truly require agent-to-agent communication versus simpler architectures. For most organisations, starting with MCP for tool integration before exploring A2A for multi-agent scenarios represents a sensible progression path.
 
-<div data-radar data-label="DeepEval" data-ring="trial" />
+<div data-radar data-label='DeepEval' data-ring='trial' />
 
 ## DeepEval
 
@@ -73,7 +73,7 @@ We've placed [DeepEval](https://github.com/confident-ai/deepeval) in the Trial r
 
 The framework stands out for its practical approach to testing LLM applications, offering built-in metrics for evaluating responses across dimensions like relevance, toxicity and factual accuracy. What particularly impressed our committee was its ability to handle both unit and integration testing scenarios, making it valuable for teams building production-grade AI systems. However, we recommend starting with smaller, non-critical components first, as best practices around LLM testing are still emerging and the framework itself is relatively new to the ecosystem.
 
-<div data-radar data-label="LlamaIndex" data-ring="trial" />
+<div data-radar data-label='LlamaIndex' data-ring='trial' />
 
 ## LlamaIndex
 
@@ -85,7 +85,7 @@ We consider LlamaIndex suitable for teams trialling methods to augment LLM perfo
 
 These languages and frameworks represent emerging or specialized technologies that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption, specialized requirements, or uncertain long-term viability.
 
-<div data-radar data-label="Prolog" data-ring="assess" />
+<div data-radar data-label='Prolog' data-ring='assess' />
 
 ## Prolog
 
@@ -93,7 +93,7 @@ We've placed [Prolog](http://www.gprolog.org/) in the Assess ring of our languag
 
 While Prolog has been around since the 1970s, we're seeing interesting experiments where developers combine its powerful symbolic reasoning with modern LLMs to create more robust and explainable AI systems, by leveraging Prolog as a reasoning agent. However there are challenges around performance, as well as some redundancy in knowledge graphs given the existence of semantic web languages such as RDF, OWL, SPARQL, etc. The renewed interest doesn't yet warrant a higher ring placement, as adoption patterns are still emerging and the tooling ecosystem needs maturation. However, we believe technical teams should assess Prolog's potential, especially for projects where transparent logical reasoning needs to be combined with LLM capabilities. Teams working on applications in regulated industries or those requiring auditable decision paths may find particular value in exploring this approach. At the very least, surveying Prolog provides insight into the possibilities of where historical findings might enrich the current space.
 
-<div data-radar data-label="JAX" data-ring="assess" />
+<div data-radar data-label='JAX' data-ring='assess' />
 
 ## JAX
 
@@ -101,7 +101,7 @@ We've placed [JAX](https://github.com/jax-ml/jax) in our Assess ring as we obser
 
 What interests us about JAX is its functional approach to ML computation and its ability to compile to multiple hardware targets through XLA (Accelerated Linear Algebra). The framework shows promise for projects requiring high-performance numerical computing, though we suggest careful evaluation of its relative immaturity in areas like deployment tooling and the smaller ecosystem of pre-built components compared to more established frameworks. We recommend teams experimenting with JAX do so on research projects or contained proofs-of-concept before considering broader adoption.
 
-<div data-radar data-label="LangChain & LangGraph" data-ring="assess" />
+<div data-radar data-label='LangChain & LangGraph' data-ring='assess' />
 
 ## LangChain & LangGraph
 
@@ -109,7 +109,7 @@ We've placed [LangChain](https://www.langchain.com/) and its companion [LangGrap
 
 While these tools have gained significant adoption and show promise in reducing boilerplate code when working with LLMs, we recommend careful evaluation before widespread use. The rapid pace of change in the underlying AI platforms means that some of LangChain's abstractions may become outdated or less relevant as the ecosystem evolves. We've observed teams successfully using these frameworks for prototypes and smaller production systems, but also encountering challenges when requirements grow more complex or when they need to debug unexpected behaviours. Consider starting with focused experiments that test whether these tools truly simplify your specific use case rather than assuming they're the right choice for all AI development.
 
-<div data-radar data-label="PydanticAI" data-ring="assess" />
+<div data-radar data-label='PydanticAI' data-ring='assess' />
 
 ## PydanticAI
 
@@ -119,7 +119,7 @@ PydanticAI brings the well-regarded developer experience of FastAPI to generativ
 
 What particularly interests us is how PydanticAI leverages existing Python patterns and best practices rather than introducing completely new paradigms. This could significantly lower the learning curve for developers working with AI. However, as a relatively new framework in a rapidly evolving space, we're placing it in Assess while we watch for broader adoption, community growth, and production-proven implementations across different use cases. Organisations with Python-based stacks and teams familiar with FastAPI or Pydantic should consider evaluating PydanticAI for their AI application development needs.
 
-<div data-radar data-label="Smolagents" data-ring="assess" />
+<div data-radar data-label='Smolagents' data-ring='assess' />
 
 ## Smolagents
 
@@ -129,7 +129,7 @@ This lightweight agent framework takes a minimalist approach with its core codeb
 
 We've positioned smolagents in Assess rather than Trial for several reasons: it lacks extensive production validation, the security implications of code execution require careful evaluation, and while benchmark results with models like DeepSeek-R1 are interesting, we need to see more diverse real-world implementations. Teams exploring agent architectures should evaluate whether Smolagents' approach aligns with their specific needs and security requirements, whilst recognising its limitations for production-grade systems.
 
-<div data-radar data-label="CrewAI" data-ring="assess" />
+<div data-radar data-label='CrewAI' data-ring='assess' />
 
 ## CrewAI
 
@@ -143,7 +143,7 @@ While CrewAI shows significant promise and has already been used successfully in
 
 These languages and frameworks are not recommended for new projects due to declining relevance, better alternatives, or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.
 
-<div data-radar data-label="TensorFlow" data-ring="hold" />
+<div data-radar data-label='TensorFlow' data-ring='hold' />
 
 ## TensorFlow
 
@@ -151,7 +151,7 @@ We have placed [TensorFlow](https://www.tensorflow.org/) in the Hold ring for se
 
 PyTorch has emerged as the clear community favourite for both research and production deployments, with arguably a more intuitive programming model and better debugging capabilities. For new projects we recommend exploring higher-level tools or PyTorch unless there are compelling reasons to use TensorFlow, such as maintaining existing deployments or specific requirements around TensorFlow Extended (TFX) for ML pipelines.
 
-<div data-radar data-label="Keras" data-ring="hold" />
+<div data-radar data-label='Keras' data-ring='hold' />
 
 ## Keras
 
@@ -159,7 +159,7 @@ We have placed [Keras](https://keras.io/) in the Hold ring primarily due to its 
 
 While Keras served as an excellent entry point for many developers into deep learning, providing an intuitive API that made neural networks more accessible, the landscape has evolved significantly. Frameworks like PyTorch have gained substantial momentum, offering clearer debugging, better documentation and a more Pythonic approach. Additionally, recent high-level frameworks such as Lightning and FastAI provide similar ease-of-use benefits while maintaining closer alignment with current best practices in deep learning development. For new projects, we recommend exploring these alternatives rather than investing in Keras-specific expertise.
 
-<div data-radar data-label="R" data-ring="hold" />
+<div data-radar data-label='R' data-ring='hold' />
 
 ## R
 
@@ -167,7 +167,7 @@ Despite [R](https://www.r-project.org/)'s historical significance in data scienc
 
 The key factors driving this recommendation are the overwhelming industry preference for Python-based ML frameworks, the stronger integration of Python with modern AI platforms and tools, and the challenges of hiring R specialists in today's market. While R retains some advantages for specific statistical applications and academic research, we believe teams starting new AI initiatives will benefit from standardising on Python to maximise their access to cutting-edge AI libraries, tools, and talent.
 
-<div data-radar data-label="OpenCL" data-ring="hold" />
+<div data-radar data-label='OpenCL' data-ring='hold' />
 
 ## OpenCL
 
