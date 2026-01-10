@@ -1,41 +1,43 @@
 const baseColors = {
   // === QUADRANT COLORS ===
-  platforms: '#F09758',           
-  tools: '#CA4527',              
+  platforms: '#F09758',
+  tools: '#CA4527',
   languagesFrameworks: '#E8AA41',
-  techniques: '#F26A24',         
-  
+  techniques: '#F26A24',
+
   // === RADAR STRUCTURE COLORS ===
-  radarBackground: '#ffffff',    
-  radarGrid: '#7a8397',         
-  
-  
+  radarBackground: '#ffffff',
+  radarGrid: '#7a8397',
+
   // === TEXT COLORS ===
-  lightRingText: '#6b7280',      
-  lightMainText: '#374151',      
-  
-  darkRingText: '#9ca3af',       
-  darkMainText: '#d1d5db',      
-  
+  lightRingText: '#6b7280',
+  lightMainText: '#374151',
+
+  darkRingText: '#9ca3af',
+  darkMainText: '#d1d5db',
+
   // === TOOLTIP COLORS ===
-  lightTooltipBg: '#f9fafb',    
-  lightTooltipText: '#374151',  
-  lightTooltipBorder: '#d1d5db', 
-  
-  darkTooltipBg: '#374151',     
-  darkTooltipText: '#f9fafb',   
-  darkTooltipBorder: '#6b7280', 
-  
+  lightTooltipBg: '#f9fafb',
+  lightTooltipText: '#374151',
+  lightTooltipBorder: '#d1d5db',
+
+  darkTooltipBg: '#374151',
+  darkTooltipText: '#f9fafb',
+  darkTooltipBorder: '#6b7280',
+
+  // === LEGEND COLORS ===
+  lightLegendIcon: '#6b7280', // Dark grey for light mode
+  darkLegendIcon: '#d1d5db', // Light grey for dark mode
+
   // === ENTRY COLORS ===
-  circleEntryText: '#ffffff'     
+  circleEntryText: '#ffffff'
 } as const
 
 export const RADAR_COLORS = {
   ...baseColors,
-  
-  // === BANNER GRADIENT ===
-  mainRadarBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks}, ${baseColors.techniques})`,
 
+  // === BANNER GRADIENT ===
+  mainRadarBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks}, ${baseColors.techniques})`
 } as const
 
 // Helper function to get quadrant color based on quadrant name
@@ -60,30 +62,43 @@ export function getQuadrantColor(quadrantName: string): string {
 export function getQuadrantColorFromPath(pathname: string): string {
   const pathWithoutPrefix = pathname.replace(/^\/ai-radar\//, '')
   const pathParts = pathWithoutPrefix.split('/')
-  
+
   if (pathParts.length >= 1) {
     const quadrantName = pathParts[0]
     return getQuadrantColor(quadrantName)
   }
-  
+
   throw new Error(`Cannot determine quadrant from path: ${pathname}`)
 }
-
 
 // Theme-aware color helpers (simplified - only used server-side)
 export function getThemeColors(isDarkMode: boolean) {
   return {
-    ringTextColor: isDarkMode ? RADAR_COLORS.darkRingText : RADAR_COLORS.lightRingText,
-    mainTextColor: isDarkMode ? RADAR_COLORS.darkMainText : RADAR_COLORS.lightMainText
+    ringTextColor: isDarkMode
+      ? RADAR_COLORS.darkRingText
+      : RADAR_COLORS.lightRingText,
+    mainTextColor: isDarkMode
+      ? RADAR_COLORS.darkMainText
+      : RADAR_COLORS.lightMainText
   }
 }
 
 export function getTooltipColors(isDarkMode: boolean) {
   return {
-    background: isDarkMode ? RADAR_COLORS.darkTooltipBg : RADAR_COLORS.lightTooltipBg,
-    text: isDarkMode ? RADAR_COLORS.darkTooltipText : RADAR_COLORS.lightTooltipText,
-    border: isDarkMode ? RADAR_COLORS.darkTooltipBorder : RADAR_COLORS.lightTooltipBorder
+    background: isDarkMode
+      ? RADAR_COLORS.darkTooltipBg
+      : RADAR_COLORS.lightTooltipBg,
+    text: isDarkMode
+      ? RADAR_COLORS.darkTooltipText
+      : RADAR_COLORS.lightTooltipText,
+    border: isDarkMode
+      ? RADAR_COLORS.darkTooltipBorder
+      : RADAR_COLORS.lightTooltipBorder
   }
+}
+
+export function getLegendIconColor(isDarkMode: boolean) {
+  return isDarkMode ? RADAR_COLORS.darkLegendIcon : RADAR_COLORS.lightLegendIcon
 }
 
 export function getRadarStructureColors() {
@@ -92,5 +107,3 @@ export function getRadarStructureColors() {
     grid: RADAR_COLORS.radarGrid
   }
 }
-
-

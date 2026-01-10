@@ -1,0 +1,807 @@
+/* ========================================
+   BASE STYLES & TYPOGRAPHY
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --margin-top: 20mm;
+  --margin-right: 20mm;
+  --margin-bottom: 18mm;
+  --margin-left: 20mm;
+
+  /* Colors */
+  --color-accent: #ea580c;
+  --color-bg-cover: #fffbeb;
+  --color-text-main: #333333;
+  --color-text-muted: #666666;
+}
+
+body {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: var(--color-text-main);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 48pt;
+  margin-bottom: 0.5em;
+}
+h2 {
+  font-size: 24pt;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+h3 {
+  font-size: 14pt;
+  margin-bottom: 0.3em;
+  margin-top: 1em;
+  color: var(--color-accent);
+}
+
+p {
+  margin-bottom: 0.8em;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 8pt;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 4pt 6pt;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f5f5f5;
+  font-weight: 700;
+}
+
+tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Category-specific colors */
+.languages-frameworks a,
+.languages-frameworks h2,
+.languages-frameworks h3,
+.languages-frameworks .category-top-label-run {
+  color: #E8AA41;
+}
+
+.languages-frameworks .category-cover-header {
+  background: #E8AA41;
+  color: #ffffff;
+}
+
+.languages-frameworks .category-cover-header h2 {
+  color: #ffffff;
+}
+
+.techniques a,
+.techniques h2,
+.techniques h3,
+.techniques .category-top-label-run {
+  color: #F26A24;
+}
+
+.techniques .category-cover-header {
+  background: #F26A24;
+  color: #ffffff;
+}
+
+.techniques .category-cover-header h2 {
+  color: #ffffff;
+}
+
+.tools a,
+.tools h2,
+.tools h3,
+.tools .category-top-label-run {
+  color: #CA4527;
+}
+
+.tools .category-cover-header {
+  background: #CA4527;
+  color: #ffffff;
+}
+
+.tools .category-cover-header h2 {
+  color: #ffffff;
+}
+
+.platforms a,
+.platforms h2,
+.platforms h3,
+.platforms .category-top-label-run {
+  color: #F09758;
+}
+
+.platforms .category-cover-header {
+  background: #F09758;
+  color: #ffffff;
+}
+
+.platforms .category-cover-header h2 {
+  color: #ffffff;
+}
+
+/* ========================================
+   PAGED MEDIA - DEFAULT PAGE
+   ======================================== */
+
+@page {
+  size: A4;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom)
+    var(--margin-left);
+
+  @bottom-left {
+    content: counter(page);
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--color-text-main);
+    border-top: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    margin-top: 4mm;
+    vertical-align: top;
+    padding-top: 2mm;
+    width: 100%;
+  }
+
+  @bottom-right {
+    content: 'JUXT | A GRID DYNAMICS COMPANY';
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--color-text-main);
+    border-top: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    margin-top: 4mm;
+    vertical-align: top;
+    padding-top: 2mm;
+    width: 100%;
+  }
+
+  @bottom-center {
+    content: '';
+    border-top: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    margin-top: 4mm;
+    vertical-align: top;
+    padding-top: 2mm;
+    width: 100%;
+  }
+}
+
+@page mostly-text {
+  margin: 14mm var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+
+/* ========================================
+   PAGED MEDIA - COVER PAGE
+   ======================================== */
+
+@page cover {
+  margin: 0;
+
+  @bottom-left {
+    content: none;
+  }
+  @bottom-center {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.cover-page {
+  page: cover;
+  height: 297mm; /* A4 height */
+  width: 210mm; /* A4 width */
+  padding: 14mm 20mm 24mm 20mm; /* Reduced top padding to compensate for border */
+  background: var(--color-bg-cover); /* Cream/beige background */
+  position: relative;
+  page-break-after: always;
+  /* Border was moved to page footer area */
+}
+
+.cover-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 52pt;
+  font-weight: 700;
+  margin-bottom: 4mm;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.cover-line {
+  border: 0;
+  height: 2mm;
+  background: var(--color-accent);
+  width: 100%;
+  margin-top: 4mm;
+  margin-bottom: 10mm;
+}
+
+.cover-subtitle-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  gap: 4mm;
+}
+
+.cover-subtitle {
+  font-size: 18pt;
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-text-main);
+  flex: 1;
+}
+
+.cover-date {
+  font-size: 18pt;
+  font-weight: 700;
+  white-space: nowrap;
+  margin: 0;
+  padding-bottom: 1mm; /* Slight visual alignment adjustment */
+}
+
+/* Large decorative circle */
+.cover-circle {
+  position: absolute;
+  width: 400pt;
+  height: 400pt;
+  background: var(--color-accent); /* Orange */
+  border-radius: 50%;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  z-index: 0; /* sit behind footer/logo */
+}
+
+.cover-footer {
+  position: absolute;
+  bottom: 4mm;
+  left: 20mm;
+  right: 20mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6mm;
+  z-index: 1;
+}
+
+.cover-footer .company-name {
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.company-name {
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+/* ========================================
+   PAGED MEDIA - SECTION DIVIDER PAGE
+   ======================================== */
+
+@page section-divider {
+  margin: 0;
+  /* No footer border on section divider as it has no footer content */
+  @bottom-left {
+    content: none;
+  }
+  @bottom-center {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.section-divider {
+  page: section-divider;
+  height: 297mm;
+  width: 210mm;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-divider.languages {
+  background: var(--color-accent); /* Orange */
+  color: white;
+}
+
+.section-title {
+  font-size: 48pt;
+  margin-bottom: 20mm;
+  color: white;
+}
+
+.section-description {
+  font-size: 14pt;
+  line-height: 1.6;
+  max-width: 500pt;
+  color: white;
+}
+
+/* ========================================
+   PAGED MEDIA - CONTENT PAGES
+   ======================================== */
+
+@page content {
+  @top-center {
+    content: element(category-label);
+  }
+}
+
+.content-page {
+  page: content;
+  page-break-before: always;
+}
+
+/* Simple running label for categories (no background) */
+.category-top-label-run {
+  position: running(category-label);
+  font-weight: 700;
+  font-size: 12pt;
+  margin: 0;
+  padding: 0;
+}
+
+/* Clear the running label (used before non-category sections) */
+.category-top-label-clear {
+  position: running(category-label);
+  height: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+}
+
+/* Avoid breaking inside paragraphs and after headings */
+h2,
+h3 {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+p {
+  orphans: 3;
+  widows: 3;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.page-break {
+  page-break-before: always;
+}
+
+.avoid-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* ========================================
+   CATEGORY COVER TEMPLATE
+   ======================================== */
+
+.category-cover-page {
+  margin-top: -20mm;
+  margin-left: -20mm;
+  width: 210mm;
+  page-break-before: always;
+  /* Ensure the page occupies a full A4 sheet so columns can stretch */
+  display: flex;
+  flex-direction: column;
+}
+
+.category-cover-header {
+  background: var(--category-color, var(--color-accent)); /* set per section */
+  color: #ffffff;
+  padding: 10mm var(--margin-right) 10mm var(--margin-left);
+  border-radius: 0;
+}
+
+.category-cover-title {
+  margin: 0 0 4mm 0;
+}
+
+.category-cover-description {
+  font-size: 10pt;
+  line-height: 1.5;
+}
+
+.category-cover-split {
+  display: flex;
+  /* Stretch columns to equal height so backgrounds fill the page */
+  align-items: stretch;
+  gap: 0mm;
+}
+
+.category-cover-left,
+.category-cover-right {
+  width: 50%;
+  flex-shrink: 0;
+  padding-top: 10mm;
+  min-height: 0; /* prevent flex overflow */
+}
+
+.category-absolute-left-split {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: -20mm;
+  margin-top: -20mm;
+  width: 105mm;
+  height: 283mm;
+  background: #f3f4f6;
+  z-index: -1;
+}
+
+.category-cover-left {
+  padding: 10mm var(--margin-right) 10mm var(--margin-left);
+}
+
+.category-cover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+}
+
+.category-cover-list-section h3 {
+  font-size: 11pt;
+  margin: 0 0 2mm 0;
+}
+
+.category-cover-list-section h2,
+.category-cover-list-section h3,
+.category-cover-list-section h4 {
+  font-weight: 700;
+}
+
+.category-cover-list-item {
+  font-size: 10pt;
+  margin-bottom: 1mm;
+}
+
+.category-cover-right {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.category-cover-radar svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* ========================================
+   CONTRIBUTORS PAGE
+   ======================================== */
+
+.contributors.content-page {
+  page: mostly-text;
+}
+
+.contributors-title {
+  margin-top: 0mm;
+}
+
+.contributors-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+  margin-top: 6mm;
+}
+
+.contributor-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6mm;
+}
+
+.contributor-photo {
+  width: 24mm;
+  height: 24mm;
+  object-fit: cover;
+  background: #e5e7eb; /* gray placeholder */
+  flex-shrink: 0;
+}
+
+.contributor-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.contributor-name {
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 1mm;
+  color: var(--color-accent); /* orange */
+}
+
+.contributor-description {
+  font-size: 9pt;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   INTRODUCTION PAGE
+   ======================================== */
+
+.introduction.content-page {
+  page: mostly-text;
+  line-height: 1.4;
+}
+
+.introduction-title {
+  margin-top: 0mm;
+}
+
+.introduction-category {
+  font-weight: 700;
+  margin-bottom: 0.5mm;
+}
+
+/* ========================================
+   AT-A-GLANCE PAGES
+   ======================================== */
+
+.glance-page.content-page {
+  page: mostly-text;
+}
+
+.glance-page-title {
+  font-size: 24pt;
+  font-weight: 700;
+  margin-bottom: 4mm;
+}
+
+.glance-split {
+  display: flex;
+  flex-direction: row;
+  width: 210mm;
+  margin-left: -20mm;
+}
+
+.glance-col {
+  width: 50%;
+  flex-shrink: 0;
+  min-height: 0;
+  padding-left: var(--margin-left);
+}
+
+.glance-absolute-right-split {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: -20mm;
+  margin-top: 19mm;
+  width: 105mm;
+  height: 250mm;
+  background: #f3f4f6;
+  z-index: -1;
+}
+
+/* Page-specific heights for glance pages */
+.glance-page .glance-col-right {
+  height: 246mm;
+}
+
+.glance-category-header {
+  margin-bottom: 6mm;
+  color: #ffffff;
+  padding-left: var(--margin-left);
+}
+
+.glance-col {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.glance-col > .glance-category-list {
+  padding-left: var(--margin-left);
+  padding-right: 3mm;
+  padding-bottom: var(--margin-bottom);
+  flex: 1;
+}
+
+.glance-col-right > .glance-category-list {
+  padding-left: var(--margin-left);
+  padding-right: var(--margin-right);
+}
+
+.glance-category-title {
+  margin: 0;
+  font-size: 18pt;
+  white-space: nowrap;
+  font-weight: 700;
+  padding-top: 3mm;
+  padding-bottom: 3mm;
+}
+
+.glance-category-list {
+  display: block;
+  margin-top: 3mm;
+}
+
+.glance-list-section {
+  margin-bottom: 5mm;
+}
+
+.glance-list-section h3 {
+  margin: 0 0 2mm 0;
+  font-size: 10pt;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.glance-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.glance-item {
+  margin-bottom: 1mm;
+  padding-left: 0;
+}
+
+/* Full radar page styles */
+.full-radar-page.content-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: visible;
+}
+
+.full-radar-title {
+  margin-top: 0mm;
+}
+
+.full-radar-container {
+  width: 300mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10mm;
+  overflow: visible;
+}
+
+.full-radar-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ========================================
+   THANK YOU PAGE
+   ======================================== */
+
+@page thank-you {
+  margin: 0;
+  @bottom-left {
+    content: none;
+  }
+  @bottom-center {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.thank-you-page {
+  page: thank-you;
+  height: 297mm; /* A4 height */
+  width: 210mm; /* A4 width */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20mm 30mm 20mm 24mm; /* top right bottom left */
+  border-left: 20mm solid var(--color-accent); /* Orange left border */
+  box-sizing: border-box;
+}
+
+.thank-you-title {
+  font-size: 48pt;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 10mm 0;
+  line-height: 1.2;
+}
+
+.thank-you-content {
+  flex: 0 0 auto;
+  margin-bottom: auto;
+}
+
+.thank-you-section-heading {
+  font-size: 24pt;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 4mm 0;
+  line-height: 1.2;
+}
+
+.thank-you-text {
+  font-size: 11pt;
+  line-height: 1.6;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.thank-you-qr-code {
+  width: 40mm;
+  height: 40mm;
+  margin-top: 10mm;
+}
+
+.thank-you-footer {
+  margin-top: 90mm;
+}
+
+.thank-you-disclaimer {
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0;
+}

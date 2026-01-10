@@ -1,0 +1,26 @@
+{
+  "name": "ai-radar-generator",
+  "private": true,
+  "type": "module",
+  "version": "0.2.0",
+  "description": "Builds radar.html from MDX content for WeasyPrint PDF generation",
+  "scripts": {
+    "build:html": "bun run scripts/generate-radar.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.7",
+    "d3-force": "^3.0.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-mdx": "^3.1.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
+  },
+  "engines": {
+    "bun": ">=1.1.0"
+  }
+}
+
