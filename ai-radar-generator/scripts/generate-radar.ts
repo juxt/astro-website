@@ -294,36 +294,25 @@ async function renderNodesToHtml(nodes: MdNode[]): Promise<string> {
       }
     }
   )
-  // hast -> html
-  const html = unified()
-    .use(rehypeStringify)
-    .stringify(hast as any) as unknown as string
-  return html
-}
-
-async function renderNodesToHtml(
-  nodes: MdNode[]
-): Promise<string> {
-  const root: MdAst = { type: 'root', children: nodes }
-  const hast = await unified()
-    .use(remarkRehype)
-    .run(root as any)
-  // Strip lingering radar placeholders
+  // Convert relative links to plain text (they don't work in PDFs)
   visit(
     hast as any,
     'element',
     (node: any, index: number | undefined, parent: any) => {
       if (!parent || index == null) return
-      if (
-        node.tagName === 'div' &&
-        node.properties &&
-        'data-radar' in node.properties
-      ) {
-        parent.children.splice(index, 1)
-        return
+      if (node.tagName === 'a' && node.properties?.href) {
+        const href = node.properties.href as string
+        // Check if it's a relative link (starts with / but not //)
+        if (href.startsWith('/') && !href.startsWith('//')) {
+          // Replace <a> with <span> containing the same children
+          node.tagName = 'span'
+          delete node.properties.href
+          delete node.properties.target
+        }
       }
     }
   )
+  // hast -> html
   const html = unified()
     .use(rehypeStringify)
     .stringify(hast as any) as unknown as string
