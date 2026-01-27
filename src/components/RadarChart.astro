@@ -150,7 +150,7 @@ const radarConfig = {
 
           // Set up observer to watch for theme changes
           const observer = new MutationObserver(
-            (mutations: MutationRecord[]) => {
+            (mutations) => {
               mutations.forEach((mutation) => {
                 if (
                   mutation.type === 'attributes' &&

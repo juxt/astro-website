@@ -82,10 +82,10 @@ export function radar_visualization(config: RadarConfig): void {
     'links_in_new_tabs' in config ? config.links_in_new_tabs : true
   config.repo_url = config.repo_url || '#'
   config.legend_offset = config.legend_offset || [
-    { x: 450, y: 90 },
-    { x: -675, y: 90 },
-    { x: -675, y: -310 },
-    { x: 450, y: -310 }
+    { x: 450, y: 110 },
+    { x: -675, y: 110 },
+    { x: -675, y: -330 },
+    { x: 450, y: -330 }
   ]
   config.title_offset = config.title_offset || { x: -675, y: -420 }
   config.footer_offset = config.footer_offset || { x: -155, y: 450 }
@@ -457,7 +457,7 @@ export function radar_visualization(config: RadarConfig): void {
       })
 
       // Use the maximum height for both bottom sections, plus breathing space
-      const maxTopSectionHeight = Math.max(adoptHeight, assessHeight) + 4
+      const maxTopSectionHeight = Math.max(adoptHeight, assessHeight) + 20
 
       let previousLegendHeight = 0
       for (let ring = 0; ring < 4; ring++) {
