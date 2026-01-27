@@ -432,113 +432,89 @@ export function radar_visualization(config: RadarConfig): void {
         .style('font-size', '18px')
         .style('font-weight', 'bold')
         .style('fill', config.quadrants[quadrant].color)
-      // Pre-calculate heights for adopt (ring 0) and assess (ring 2) sections
-      let adoptHeight = 0
-      let assessHeight = 0
 
-      // Calculate adopt section height (ring 0)
-      segmented[quadrant][0].forEach((entry) => {
-        // Estimate height based on text wrapping
-        const words = entry.label.split(' ')
-        const estimatedLines = Math.ceil(
-          words.join(' ').length / (config.legend_column_width / 8)
-        ) // rough estimate
-        adoptHeight += Math.max(1, estimatedLines) * config.legend_line_height
-      })
+      // Two-column layout: Left (Adopt→Trial), Right (Assess→Hold)
+      // Render items one at a time so we can measure actual heights
+      const columnRings = [[0, 1], [2, 3]]
 
-      // Calculate assess section height (ring 2)
-      segmented[quadrant][2].forEach((entry) => {
-        // Estimate height based on text wrapping
-        const words = entry.label.split(' ')
-        const estimatedLines = Math.ceil(
-          words.join(' ').length / (config.legend_column_width / 8)
-        ) // rough estimate
-        assessHeight += Math.max(1, estimatedLines) * config.legend_line_height
-      })
+      for (const [topRing, bottomRing] of columnRings) {
+        let y = 0
+        const dx = topRing < 2 ? 0 : config.legend_column_width
 
-      // Use the maximum height for both bottom sections, plus breathing space
-      const maxTopSectionHeight = Math.max(adoptHeight, assessHeight) + 20
+        for (const ring of [topRing, bottomRing]) {
+          const isBottomSection = ring === bottomRing
 
-      let previousLegendHeight = 0
-      for (let ring = 0; ring < 4; ring++) {
-        if (ring % 2 === 0) {
-          previousLegendHeight = 0
-        } else {
-          // For trial (ring 1) and hold (ring 3), use the same baseline height
-          previousLegendHeight = maxTopSectionHeight
-        }
-        legend
-          .append('text')
-          .attr('class', 'radar-ring-label')
-          .attr(
-            'transform',
-            legend_transform(
-              quadrant,
-              ring,
-              config.legend_column_width,
-              null,
-              previousLegendHeight
+          // Add spacing before bottom section
+          if (isBottomSection) {
+            y += 20
+          }
+
+          // Draw ring heading
+          legend
+            .append('text')
+            .attr('class', 'radar-ring-label')
+            .attr(
+              'transform',
+              translate(
+                config.legend_offset[quadrant].x + dx,
+                config.legend_offset[quadrant].y + y
+              )
             )
-          )
-          .text(config.rings[ring].name)
-          .style('font-family', config.font_family)
-          .style('font-size', '12px')
-          .style('font-weight', 'bold')
-          .style(
-            'fill',
-            config.themeColors?.ringTextColor || RADAR_COLORS.lightRingText
-          )
-        legend
-          .selectAll('.legend' + quadrant + ring)
-          .data(segmented[quadrant][ring])
-          .enter()
-          .append('a')
-          .attr('href', function (d: RadarEntry, i) {
-            return d.link ? d.link : '#' // stay on same page if no link was provided
-          })
-          // Add a target if (and only if) there is a link and we want new tabs
-          .attr('target', function (d: RadarEntry, i) {
-            return d.link && config.links_in_new_tabs ? '_blank' : null
-          })
-          .append('text')
-          .attr('transform', function (d, i) {
-            return legend_transform(
-              quadrant,
-              ring,
-              config.legend_column_width,
-              i,
-              previousLegendHeight
+            .text(config.rings[ring].name)
+            .style('font-family', config.font_family)
+            .style('font-size', '12px')
+            .style('font-weight', 'bold')
+            .style(
+              'fill',
+              config.themeColors?.ringTextColor || RADAR_COLORS.lightRingText
             )
-          })
-          .attr('class', 'radar-entry-text')
-          .attr('id', function (d: RadarEntry, i) {
-            return 'legendItem' + d.id
-          })
-          .text(function (d: RadarEntry) {
-            return d.id + '. ' + d.label
-          })
-          .style('font-family', config.font_family)
-          .style('font-size', '11px')
-          .style(
-            'fill',
-            config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText
-          )
-          .on('mouseover', function (event, d) {
-            highlightLegendItem(d)
-          })
-          .on('mouseout', function (event, d) {
-            unhighlightLegendItem(d)
-          })
-          .call(wrap_text)
-          .each(function () {
-            const node = d3.select(this).node() as SVGTextElement
+
+          y += 18 // space after heading
+
+          // Draw entries one at a time, measuring each
+          const entries = segmented[quadrant][ring]
+          for (const entry of entries) {
+            const link = legend
+              .append('a')
+              .attr('href', entry.link || '#')
+              .attr('target', entry.link && config.links_in_new_tabs ? '_blank' : null)
+
+            const textEl = link
+              .append('text')
+              .attr(
+                'transform',
+                translate(
+                  config.legend_offset[quadrant].x + dx,
+                  config.legend_offset[quadrant].y + y
+                )
+              )
+              .attr('class', 'radar-entry-text')
+              .attr('id', 'legendItem' + entry.id)
+              .text(entry.id + '. ' + entry.label)
+              .style('font-family', config.font_family)
+              .style('font-size', '11px')
+              .style(
+                'fill',
+                config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText
+              )
+              .on('mouseover', function () {
+                highlightLegendItem(entry)
+              })
+              .on('mouseout', function () {
+                unhighlightLegendItem(entry)
+              })
+
+            // Apply text wrapping
+            wrap_text(textEl)
+
+            // Measure actual height and advance y
+            const node = textEl.node() as SVGTextElement
             if (node) {
-              // Only accumulate height for the current section (not used for bottom alignment)
-              if (ring % 2 === 0) {
-                previousLegendHeight += node.getBBox().height
-              }
+              const bbox = node.getBBox()
+              y += bbox.height + 5 // gap between entries
             }
-          })
+          }
+        }
       }
     }
   }
