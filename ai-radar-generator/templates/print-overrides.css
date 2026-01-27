@@ -1,0 +1,195 @@
+/* ========================================
+   PRINT PDF OVERRIDES
+
+   Key insight: Use background-image with linear-gradient
+   and PERCENTAGES (not absolute lengths) for @page
+   backgrounds to properly extend into bleed areas.
+   ======================================== */
+
+/* ========================================
+   BASE - Add bleed and marks to all pages
+   ======================================== */
+
+@page {
+  bleed: 3mm;
+  marks: crop cross;
+}
+
+/* ----------------------------------------
+   COVER PAGE
+   Full bleed duck egg blue background
+   ---------------------------------------- */
+@page cover {
+  bleed: 3mm;
+  marks: crop cross;
+  background-color: #dbefef;
+}
+
+.cover-page {
+  background: transparent !important;
+}
+
+/* ----------------------------------------
+   THANK YOU PAGE
+   Full bleed duck egg blue background (same as cover)
+   QR code centered, disclaimer at bottom
+   ---------------------------------------- */
+@page thank-you {
+  bleed: 3mm;
+  marks: crop cross;
+  background-color: #dbefef;
+}
+
+.thank-you-page {
+  background: transparent !important;
+  border-left: none !important;
+  padding: 20mm !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.thank-you-qr-container {
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.thank-you-footer {
+  position: absolute !important;
+  bottom: 20mm !important;
+  left: 20mm !important;
+  right: 20mm !important;
+  margin-top: 0 !important;
+}
+
+/* ----------------------------------------
+   MOSTLY-TEXT PAGES (Introduction, Contributors, Glance, etc.)
+   ---------------------------------------- */
+@page mostly-text {
+  bleed: 3mm;
+  marks: crop cross;
+}
+
+/* ----------------------------------------
+   GLANCE PAGES (Radar at a glance)
+
+   Extending elements into bleed:
+   - Grey right column extends to right bleed edge
+   - Left header extends to left bleed edge
+   - Right header extends to right bleed edge
+   ---------------------------------------- */
+
+/* Extend grey background to right bleed edge */
+.glance-absolute-right-split {
+  /* Original: margin-right: -20mm, width: 105mm */
+  /* Add 3mm to extend into right bleed */
+  margin-right: -23mm !important;
+  width: 108mm !important;
+}
+
+/* Left column header - extend to left bleed edge */
+/* Original padding-left is 20mm, add 23mm for the extension = 43mm total */
+.glance-col:first-child .glance-category-header {
+  margin-left: -23mm !important;
+  padding-left: 43mm !important;
+}
+
+/* Right column header - extend to right bleed edge */
+.glance-col-right .glance-category-header {
+  margin-right: -23mm !important;
+  padding-right: 23mm !important;
+}
+
+/* ----------------------------------------
+   CATEGORY COVER PAGES
+
+   Layout:
+   - Colored header at top (extends into bleed on top, left, right)
+   - Grey left column (extends into bleed on left only - stops at footer)
+
+   Using layered @page backgrounds for BOTH header and grey.
+   This keeps them in the same coordinate system so they align perfectly.
+
+   Calculations (total page height with bleed = 303mm, width = 216mm):
+   - Header ends at: 17% from top
+   - Grey column: left 50% of page, from 17% to 93% vertically
+   - Footer starts at: ~93% from top
+   ---------------------------------------- */
+
+/* Each category needs its own @page rule with the correct header color */
+/* Header via @page gradient - fixed at 29mm for background color */
+/* Header element height is 45mm to push content down */
+@page category-cover-languages {
+  bleed: 3mm;
+  marks: crop cross;
+  background-image: linear-gradient(to bottom, #E8AA41 0mm, #E8AA41 29mm, transparent 29mm);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@page category-cover-techniques {
+  bleed: 3mm;
+  marks: crop cross;
+  background-image: linear-gradient(to bottom, #F26A24 0mm, #F26A24 29mm, transparent 29mm);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@page category-cover-tools {
+  bleed: 3mm;
+  marks: crop cross;
+  background-image: linear-gradient(to bottom, #CA4527 0mm, #CA4527 29mm, transparent 29mm);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@page category-cover-platforms {
+  bleed: 3mm;
+  marks: crop cross;
+  background-image: linear-gradient(to bottom, #F09758 0mm, #F09758 29mm, transparent 29mm);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Assign page names to each category cover */
+/* Note: both classes are on the same element, not parent/child */
+.category-cover-page.languages-frameworks {
+  page: category-cover-languages;
+}
+
+.category-cover-page.techniques {
+  page: category-cover-techniques;
+}
+
+.category-cover-page.tools {
+  page: category-cover-tools;
+}
+
+.category-cover-page.platforms {
+  page: category-cover-platforms;
+}
+
+/* Make the element header transparent so @page background shows through */
+/* Fixed height ensures content below starts at consistent position */
+.category-cover-header {
+  background: transparent !important;
+  height: 48mm;
+  overflow: visible;
+}
+
+/* Grey left column - element-based, extend into left bleed, start below header */
+.category-absolute-left-split {
+  margin-left: -23mm !important;
+  width: 108mm !important;
+  top: 49mm !important;
+  height: 234mm !important;
+}
+
+/* ----------------------------------------
+   CONTENT PAGES - just bleed and marks
+   ---------------------------------------- */
+@page content {
+  bleed: 3mm;
+  marks: crop cross;
+}

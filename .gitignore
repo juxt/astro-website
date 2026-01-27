@@ -16,6 +16,7 @@ pnpm-debug.log*
 .DS_Store
 
 .calva/
+.claude/
 .nrepl-port
 /public/styles/global.css
 
