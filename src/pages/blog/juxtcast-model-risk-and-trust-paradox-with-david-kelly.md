@@ -10,7 +10,7 @@ tags:
   - AI
   - podcast
 
-heroImage: 'JuxtCast-dark.jpg'
+heroImage: 'juxtcast-logo-2026.jpg'
 ---
 
 _What happens when the models running our financial system fail? And how do we govern AI systems we don't fully understand?_
