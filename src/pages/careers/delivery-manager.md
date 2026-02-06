@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'London / Hybrid',
     position: 'Delivery Manager',
-    publishedDate: '2025-11-29'
+    publishedDate: '2025-11-29',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 

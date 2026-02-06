@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'Milton Keynes',
     position: 'CEO/CTO',
-    publishedDate: '2024-02-27'
+    publishedDate: '2024-02-27',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 

@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'London / Hybrid Remote',
     position: 'Senior/Principal Java Engineer - Low Latency',
-    publishedDate: '2025-10-17'
+    publishedDate: '2025-10-17',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 

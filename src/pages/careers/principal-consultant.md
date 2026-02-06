@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'London / Hybrid Remote',
     position: 'Principal Consultant',
-    publishedDate: '2026-02-02'
+    publishedDate: '2026-02-02',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 
