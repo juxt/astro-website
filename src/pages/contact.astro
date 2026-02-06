@@ -4,7 +4,7 @@ import Banner from '@components/Banner.astro'
 import { LinkIcon } from '@components/Icons'
 import Section from '@components/Section.astro'
 import Layout from '@layouts/Layout.astro'
-import ContactUsForm from '@components/ContactUsForm.tsx'
+import { ContactUsForm } from '@components/ContactUsForm'
 
 const bannerPicture = await getImage({
   src: import('../assets/site/firepit.jpg'),

@@ -1,0 +1,563 @@
+---
+import { ContactUsForm } from '@components/ContactUsForm'
+import Layout from '@layouts/Layout.astro'
+
+const subject = 'XT26 Speaker Enquiry'
+
+const organizations = [
+  'Bank of America',
+  'Citi',
+  'HSBC',
+  'UBS / Credit Suisse',
+  'Revolut',
+  'Santander',
+  'Lloyds',
+  'RBC',
+  'Barclays',
+  'JP Morgan',
+  'NYSE',
+  'Morgan Stanley',
+  'NatWest',
+  'Meta',
+  'FINOS',
+  'Griffin Bank'
+]
+---
+
+<Layout
+  title='XT26 Fintech Conference'
+  ogImage='/images/XT26/XT26-thumbnail.webp'
+  ogTitle='XT26 Fintech Conference - June 18, 2026 - London'
+  ogDescription='An invite-only event for 250 senior engineering leaders from banking and fintech. No sales pitches, no vendor theatre. Just real-world experience shared by peers.'
+>
+  <!-- Hero Section -->
+  <section
+    class='relative w-full h-[100dvh] flex items-center justify-center bg-cover bg-center'
+    style="background-image: url('/images/XT25/london-bridge.jpg');"
+  >
+    <div
+      class='absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90'
+    >
+    </div>
+    <div
+      class='relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-5xl mx-auto'
+    >
+      <p
+        class='text-juxt text-sm md:text-base font-semibold tracking-[0.4em] uppercase mb-8'
+      >
+        Fintech Conference
+      </p>
+      <h1
+        class='text-white text-8xl sm:text-9xl md:text-[12rem] font-light tracking-tight mb-10'
+        style='text-shadow: 0 4px 60px rgba(0,0,0,0.5);'
+      >
+        XT26
+      </h1>
+      <div
+        class='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 text-white/90 mb-14'
+      >
+        <span class='text-xl md:text-2xl font-light tracking-wide'
+          >June 18, 2026</span
+        >
+        <span class='hidden sm:block w-px h-8 bg-white/30'></span>
+        <span class='text-xl md:text-2xl font-light tracking-wide'
+          >Central London</span
+        >
+      </div>
+      <a
+        href='#speak'
+        class='inline-block border border-white/40 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300'
+      >
+        Apply to Speak
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div
+      class='absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/60'
+    >
+      <span class='text-xs tracking-[0.3em] uppercase'>Scroll</span>
+      <div
+        class='w-px h-12 bg-gradient-to-b from-white/60 to-transparent animate-pulse'
+      >
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class='bg-white'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='grid lg:grid-cols-12 gap-12 lg:gap-16 items-center'>
+        <!-- Image - takes 7 cols on desktop, shows first -->
+        <div class='lg:col-span-7 lg:order-1 order-2 relative'>
+          <div
+            class='absolute -inset-6 bg-gradient-to-br from-juxt/5 to-transparent -z-10'
+          >
+          </div>
+          <img
+            src='/images/XT26/Juxt-2025-267.jpg'
+            alt='XT25 Conference - speaker presenting to packed audience'
+            class='w-full aspect-[4/3] object-cover'
+          />
+        </div>
+        <!-- Text - takes 5 cols on desktop -->
+        <div class='lg:col-span-5 lg:order-2 order-1'>
+          <p
+            class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+          >
+            About the Conference
+          </p>
+          <h2
+            class='text-4xl md:text-5xl font-extralight text-gray-900 leading-tight mb-8'
+          >
+            An Invite-only Event for Engineering Leaders
+          </h2>
+          <div
+            class='space-y-5 text-gray-500 text-base leading-relaxed font-light'
+          >
+            <p>
+              XT26 is our third year running this conference in central London,
+              bringing together around 250 senior engineering leaders across
+              banking, hedge funds, and financial services.
+            </p>
+            <p>
+              This is pure thought leadership: <span
+                class='text-gray-800 font-normal'
+                >no sales pitches, no vendor theatre, and no sponsors</span
+              >. Just real-world experience shared by peers who are actually
+              doing engineering at scale.
+            </p>
+            <p>
+              The conference has grown organically each year, building a
+              community of practitioners focused on solving hard technical
+              problems in financial services.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Strip -->
+  <section class='bg-white'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12'>
+      <div class='grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4'>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-324.jpg'
+            alt='Networking at XT25'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-521.jpg'
+            alt='Fireside chat with Dave Morris and Jon Pither at XT25'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-910.jpg'
+            alt='Evening reception at XT25'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-109.jpg'
+            alt='Engaged audience at XT25'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Expect Section -->
+  <section class='bg-gray-50'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          The Experience
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900'
+        >
+          What to Expect
+        </h2>
+      </div>
+
+      <div class='grid md:grid-cols-3 gap-6 lg:gap-8'>
+        <!-- Card with gradient border effect -->
+        <div
+          class='relative p-px bg-gradient-to-b from-juxt/40 via-juxt/10 to-transparent'
+        >
+          <div class='bg-white p-10 md:p-12 h-full'>
+            <div class='w-16 h-px bg-gradient-to-r from-juxt to-juxt/20 mb-8'>
+            </div>
+            <h3 class='text-xl font-medium text-gray-900 mb-4'>
+              25-Minute Talks
+            </h3>
+            <p class='text-gray-500 leading-relaxed font-light'>
+              Share real-world experience with a room of peers on topics
+              including platform engineering, banking technology, and system
+              architecture.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class='relative p-px bg-gradient-to-b from-juxt/40 via-juxt/10 to-transparent'
+        >
+          <div class='bg-white p-10 md:p-12 h-full'>
+            <div class='w-16 h-px bg-gradient-to-r from-juxt to-juxt/20 mb-8'>
+            </div>
+            <h3 class='text-xl font-medium text-gray-900 mb-4'>
+              Expert Panels
+            </h3>
+            <p class='text-gray-500 leading-relaxed font-light'>
+              Join panel discussions with leaders who are deploying technology
+              at scale in production financial systems.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class='relative p-px bg-gradient-to-b from-juxt/40 via-juxt/10 to-transparent'
+        >
+          <div class='bg-white p-10 md:p-12 h-full'>
+            <div class='w-16 h-px bg-gradient-to-r from-juxt to-juxt/20 mb-8'>
+            </div>
+            <h3 class='text-xl font-medium text-gray-900 mb-4'>Networking</h3>
+            <p class='text-gray-500 leading-relaxed font-light'>
+              Connect with senior technologists from top-tier banks and fintechs
+              during coffee breaks, lunch, and an evening reception.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Organizations Section -->
+  <section class='bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='grid lg:grid-cols-5 gap-12 lg:gap-16 items-center'>
+        <div class='lg:col-span-2'>
+          <p
+            class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+          >
+            Our Community
+          </p>
+          <h2
+            class='text-4xl md:text-5xl font-extralight text-white leading-tight mb-6'
+          >
+            A Track Record of Excellence
+          </h2>
+          <p class='text-gray-400 text-lg leading-relaxed font-light'>
+            Over the past two years, we've welcomed speakers and delegates from
+            leading organisations including:
+          </p>
+        </div>
+
+        <div class='lg:col-span-3 relative'>
+          <!-- Liquid glass container with inset - dark variant -->
+          <div
+            class='absolute inset-0 bg-black/60 backdrop-blur-xl rounded-3xl shadow-[inset_0_4px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1),0_4px_20px_rgba(0,0,0,0.3)] border border-white/10'
+          >
+          </div>
+          <div
+            class='absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent rounded-3xl pointer-events-none'
+          >
+          </div>
+          <!-- Bottom inner subtle light -->
+          <div
+            class='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white/5 to-transparent rounded-b-3xl pointer-events-none'
+          >
+          </div>
+
+          <!-- Content -->
+          <div class='relative p-10 md:p-20'>
+            <p
+              class='text-center text-xs font-semibold tracking-[0.2em] uppercase text-white/60 mb-8'
+            >
+              Trusted by leaders from
+            </p>
+            <div class='flex flex-wrap gap-2.5 justify-center'>
+              {
+                organizations.map((org) => (
+                  <span class='group relative'>
+                    <span class='absolute inset-0 rounded-md bg-gradient-to-b from-white/10 to-transparent opacity-100 group-hover:from-juxt/40 transition-all duration-300' />
+                    <span class='relative block bg-white/10 backdrop-blur-sm text-white/90 px-4 py-2 text-[11px] font-medium tracking-[0.15em] uppercase rounded-md border border-white/10 group-hover:text-white group-hover:bg-white/15 group-hover:border-juxt/30 transition-all duration-300'>
+                      {org}
+                    </span>
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Subtle glow effect -->
+          <div
+            class='absolute -inset-6 bg-gradient-to-r from-juxt/10 via-white/5 to-juxt/10 rounded-[2rem] blur-3xl -z-10'
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Talks Section -->
+  <section class='bg-white'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          Past Highlights
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-6'
+        >
+          Featured Talks from XT25
+        </h2>
+        <p class='text-gray-500 text-lg max-w-2xl font-light'>
+          Get a sense of the calibre and depth of talks at our conferences
+        </p>
+      </div>
+
+      <div class='grid lg:grid-cols-2 gap-12 lg:gap-16 items-start'>
+        <!-- Featured Video -->
+        <div>
+          <div class='aspect-video w-full bg-gray-100'>
+            <iframe
+              class='w-full h-full'
+              src='https://www.youtube.com/embed/A3yR4OlEBCA'
+              title='Taking Control of Your Trading System - Peter Windle, HSBC'
+              frameborder='0'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+              referrerpolicy='strict-origin-when-cross-origin'
+              allowfullscreen></iframe>
+          </div>
+          <p class='text-sm text-gray-500 mt-4'>
+            Peter Windle, Distinguished Engineer at HSBC, on replacing a legacy
+            vendor monolith with an in-house trading system
+          </p>
+        </div>
+
+        <!-- More Talks Links -->
+        <div class='space-y-0'>
+          <h3
+            class='text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-8'
+          >
+            More from XT25
+          </h3>
+
+          <a
+            href='/blog/xt25-fintech-taming-complexity-in-distributed-systems/'
+            class='group block border-b border-gray-200 py-6 hover:border-juxt transition-colors'
+          >
+            <span
+              class='block text-lg font-medium text-gray-900 group-hover:text-juxt transition-colors mb-1'
+            >
+              Taming Complexity in Distributed Systems
+            </span>
+            <span class='text-gray-500 text-sm'>Donato Lucia, Revolut</span>
+          </a>
+
+          <a
+            href='/blog/xt25-fintech-becoming-a-digital-retail-bank/'
+            class='group block border-b border-gray-200 py-6 hover:border-juxt transition-colors'
+          >
+            <span
+              class='block text-lg font-medium text-gray-900 group-hover:text-juxt transition-colors mb-1'
+            >
+              Becoming a Digital Retail Bank: What We've Learned
+            </span>
+            <span class='text-gray-500 text-sm'
+              >Alexey Gabsatarov, Kroo Bank</span
+            >
+          </a>
+
+          <a
+            href='/blog/xt25-fintech-pragmatic-solutions-to-current-challenges/'
+            class='group block border-b border-gray-200 py-6 hover:border-juxt transition-colors'
+          >
+            <span
+              class='block text-lg font-medium text-gray-900 group-hover:text-juxt transition-colors mb-1'
+            >
+              Expert Panel: Pragmatic Solutions to Current Challenges
+            </span>
+            <span class='text-gray-500 text-sm'
+              >Leaders from Citi, HSBC, QRT</span
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Previous Years Section -->
+  <section class='bg-moonlight'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          Looking Back
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-white mb-6'
+        >
+          Previous Conference Agendas
+        </h2>
+        <p class='text-gray-400 text-lg mb-12 max-w-xl font-light'>
+          Explore the full agendas and speaker lineups from previous years
+        </p>
+
+        <div class='flex flex-col sm:flex-row gap-4'>
+          <a
+            href='/xt25/'
+            class='inline-block bg-juxt text-black px-10 py-4 text-sm font-semibold tracking-widest uppercase hover:bg-juxt/90 transition-colors'
+          >
+            XT25 Agenda
+          </a>
+          <a
+            href='/xt24/'
+            class='inline-block border border-white/30 text-white px-10 py-4 text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300'
+          >
+            XT24 Agenda
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gradient Divider -->
+  <div class='bg-moonlight'>
+    <div class='max-w-4xl mx-auto px-6'>
+      <div
+        class='h-px bg-gradient-to-r from-transparent via-juxt/50 to-transparent'
+      >
+      </div>
+    </div>
+  </div>
+
+  <!-- Speaker Form Section -->
+  <section id='speak' class='bg-moonlight'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='max-w-2xl mx-auto'>
+        <div class='flex flex-col items-center text-center mb-16'>
+          <p
+            class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+          >
+            Get Involved
+          </p>
+          <h2 class='text-4xl md:text-5xl font-extralight text-white mb-6'>
+            Interested in Speaking?
+          </h2>
+          <p class='text-gray-400 text-lg font-light max-w-md'>
+            We're looking for speakers to share real-world experience on AI,
+            platform engineering, banking technology, and more.
+          </p>
+        </div>
+
+        <ContactUsForm
+          client:only
+          subject={subject}
+          eventName='XT26'
+          variant='dark'
+          transparentInputs
+          submitLabelColor='#0b0e14'
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class='bg-white'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          Gallery
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900'
+        >
+          Highlights from XT25
+        </h2>
+      </div>
+
+      <div class='grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4'>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-133.jpg'
+            alt='Engaged audience members'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-813.jpg'
+            alt='FINOS speaker addressing the audience'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-164.jpg'
+            alt='Panel discussion with audience'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-902.jpg'
+            alt='Networking conversation'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-189.jpg'
+            alt='Speaker presenting on platform engineering'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-782.jpg'
+            alt='Fireside chat discussion'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-153.jpg'
+            alt='Speaker taking questions'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-892.jpg'
+            alt='Champagne service at reception'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+        <div class='aspect-[4/3] overflow-hidden'>
+          <img
+            src='/images/XT26/Juxt-2025-312.jpg'
+            alt='Speaker presenting'
+            class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

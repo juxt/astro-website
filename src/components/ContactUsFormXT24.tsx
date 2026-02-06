@@ -8,7 +8,7 @@ const inputProps = {
 }
 
 export default function ContactUsFormXT24(props) {
-  const { id = 'form', subject = 'New Contact Us Submission' } = props
+  const { id = 'form', subject = 'New Contact Us Submission', eventName = 'XT25' } = props
 
   const {
     register,
@@ -40,7 +40,7 @@ export default function ContactUsFormXT24(props) {
 
   const isSubmitSuccessfulComponent = (
     <div className='pt-10 text-center text-xl md:text-xl text-black'>
-      Thank you for your interest in XT25!
+      Thank you for your interest in {eventName}!
       <br />
       We'll reach out if spots become available.
       <br />
