@@ -18,6 +18,8 @@ export type CareerPostProps = {
     location: string
     position: string
     publishedDate: string
+    validThrough: string
+    employmentType: 'FULL_TIME' | 'PART_TIME' | 'CONTRACTOR' | 'TEMPORARY' | 'INTERN' | 'VOLUNTEER' | 'PER_DIEM' | 'OTHER'
   }
 }
 
@@ -33,19 +35,21 @@ const bannerPicture = await getImage({
 
 const slug = slugifyPath(Astro.props.frontmatter.url)
 
+const jobDescription = Astro.props.compiledContent()
+
 const schema = JSON.stringify({
-  context: 'https://schema.org/',
+  '@context': 'https://schema.org/',
   '@type': 'JobPosting',
   title: googleJobs.position,
-  description:
-    '<p>We are a unique software engineering firm, with a track record of rapidly delivering high-quality IT systems to meet challenging business objectives.</p>',
+  description: jobDescription,
   identifier: {
     '@type': 'PropertyValue',
     name: 'JUXT',
     value: slug
   },
   datePosted: googleJobs.publishedDate,
-  employmentType: '',
+  validThrough: googleJobs.validThrough,
+  employmentType: googleJobs.employmentType,
   hiringOrganization: {
     '@type': 'Organization',
     name: 'JUXT',
@@ -62,7 +66,7 @@ const schema = JSON.stringify({
     address: {
       '@type': 'PostalAddress',
       addressLocality: googleJobs.location,
-      AddressCountry: 'GB'
+      addressCountry: 'GB'
     }
   }
 })

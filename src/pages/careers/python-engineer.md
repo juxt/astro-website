@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'Milton Keynes',
     position: 'Software Engineer',
-    publishedDate: '2024-03-16'
+    publishedDate: '2024-03-16',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 

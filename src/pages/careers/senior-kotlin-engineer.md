@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'London / Hybrid',
     position: 'Senior / Principal Kotlin Engineer',
-    publishedDate: '2025-10-10'
+    publishedDate: '2025-10-10',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 

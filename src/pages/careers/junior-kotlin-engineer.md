@@ -10,7 +10,9 @@ googleJobs:
   {
     location: 'London / Hybrid',
     position: 'Junior Kotlin Engineer',
-    publishedDate: '2022-11-05'
+    publishedDate: '2022-11-05',
+    validThrough: '2026-08-06',
+    employmentType: 'FULL_TIME'
   }
 ---
 
