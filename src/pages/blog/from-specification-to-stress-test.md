@@ -16,7 +16,7 @@ Here is a prompt that produced 4,749 lines of Kotlin and 103 passing unit tests 
 
 > Review the specs in the `specs/` directory and implement the system they describe. Follow the guidance blocks for implementation choices. Start with the core components (Usher, Arbiter, Clerk, Registrar, Ledger, Warden), then add the REST API, Kafka integration and Docker Compose configuration.
 
-That's it. No pseudocode, no design discussion, no worked examples. The prompt is short because the specifications are not. Three thousand lines of Allium behavioural specification preceded this moment, and those specs are why it worked.
+That's it. No pseudocode, no worked examples. The prompt is short because the specifications are not. Three thousand lines of Allium behavioural specification preceded this moment, and those specs are why it worked.
 
 ## What Allium looks like
 
@@ -47,9 +47,9 @@ rule ClerkAttemptsDeduplicate {
 }
 ```
 
-The mapping to Kotlin is mechanical. `requires:` becomes a guard clause. `ensures:` becomes the method body. `let` bindings become local variables. Entities become data classes. An LLM reading this can write the corresponding method without ambiguity, and when I review the output I can check it against the spec line by line.
+The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation and enough for me to review it against.
 
-But a rule only describes what happens. Allium has two other constructs that matter for code generation. Guidance blocks carry implementation hints:
+Allium has two other constructs that matter. Guidance blocks carry implementation hints:
 
 ```
 rule ArbiterPartitionsBatch {
@@ -82,7 +82,7 @@ And resolved-question blocks preempt design debates:
 -- for deployments that want stricter guarantees.
 ```
 
-These blocks narrow the design space without mandating a solution. An LLM that follows the guidance tends to reach for the right data structure on the first pass. An LLM that reads the resolved questions doesn't waste rounds asking about decisions already made.
+These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass. Resolved questions prevent it from relitigating decisions already made.
 
 ## How the specs emerged
 
@@ -116,7 +116,7 @@ Then I ran the load tests and every request failed.
 
 ## The spec described the what but not the where
 
-The Clerk was configured for `required_copies=2`, needing consensus from two instances, but the federation protocol connecting them hadn't been wired. Events waited forever for a second copy. The spec described what the federation protocol should do. The code had the types and methods. The wire connecting two instances at runtime was absent.
+The Clerk was configured for `required_copies=2`, needing consensus from two instances, but the federation protocol connecting them hadn't been wired. Events waited forever for a second copy that would never arrive. The spec described what the federation protocol should do, and the code had the types and methods, but the wire connecting two instances at runtime was absent.
 
 > You said that federation wasn't implemented yet, but you previously claimed that the code was in alignment with the specification. Isn't federation a key part of the specification?
 
@@ -138,7 +138,7 @@ The biggest single improvement came from a different approach. I asked Claude to
 
 > You're going to create some personas in an agent team representing distributed systems and low latency engineers of different specialisms. Some of the engineers will be thinking about bytecode efficiency, some about algorithmic complexity...
 
-Five agents audited the codebase in parallel. A memory allocation specialist found hot-path object creation. A lock contention specialist found `synchronized` blocks pinning virtual threads. An algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list of findings with file and line references.
+Five agents audited the codebase in parallel. A memory allocation specialist found hot-path object creation, a lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
 
 The fixes from that audit dropped the p99 from 154ms to 25ms. Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
 
@@ -156,10 +156,10 @@ A deeper issue surfaced in fast-forward recovery. With fast-forward disabled, al
 
 ## What the specs bought
 
-The specifications didn't prevent every bug. They missed the federation wiring. They couldn't anticipate timing-dependent batching differences that broke fast-forward recovery. Claude didn't always follow the guidance blocks.
+The specifications didn't prevent every bug. They missed the federation wiring, couldn't anticipate timing-dependent batching differences that broke fast-forward recovery, and Claude didn't always follow the guidance blocks.
 
 But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
-The Allium specs evolved alongside the code across all 64 commits. When the Arbiter shifted from sequential to parallel processing, the spec was updated first. When implementation revealed that data fields should be `ByteArray` rather than `String`, the spec was corrected. The specs were a living document, not a handed-down tablet.
+The Allium specs evolved alongside the code across all 64 commits. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When implementation revealed that data fields should be `ByteArray` rather than `String`, the spec was corrected. The specs kept pace with the code because they were written to.
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
