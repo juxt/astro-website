@@ -86,25 +86,9 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## How the specs emerged
 
-The specifications arose through conversation, not upfront design. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, a BFT layer compares outputs across instances and only publishes once they agree, failover is passive via priority-based publish delays. Those conversations produced a 3,000-line architecture document and a mission statement with targets (tens of thousands of transactions per second, tail latencies below 100 milliseconds, recovery to a consistent state after arbitrary crashes).
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, a BFT layer compares outputs across instances and only publishes once they agree, failover is passive via priority-based publish delays. I had targets in mind (tens of thousands of transactions per second, tail latencies below 100 milliseconds, recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
 
-I then asked Claude to translate the architecture into Allium:
-
-> Review the ARCHITECTURE.md document, and produce an Allium specification for the system as described.
-
-The first pass produced a monolith. I set Claude running in iterative loops, each pass cross-referencing the spec against the architecture document and tightening the language, while I reviewed the output between iterations. By the next morning, the monolith had been decomposed into ten files.
-
-The decomposition surfaced a question I hadn't anticipated:
-
-> Some things about the specification that I don't like. I'm not a fan of the term "crunch loop". Can you suggest something better? We've got good names for several of the components, but "receiver" doesn't seem aligned with the others.
-
-A judicial theme emerged through the conversation. The processing engine became the Arbiter (it evaluates whether events succeed or fail). The consensus layer became the Clerk. I rejected Herald ("a bit biblical") and Bailiff ("has other connotations") before Claude suggested the Usher for the event intake component, which stuck immediately. Each name carried enough metaphorical weight that its role was obvious from the word alone.
-
-Later, the last holdout:
-
-> All the other components have names which suggest their role by analogy to a court setting. The idempotency filter sticks out.
-
-We settled on the Warden.
+The first pass produced a monolith. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could the monolith split naturally along component boundaries? What about cross-file references? Where should the files live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
 
 ## Fifty minutes and a cup of tea
 
