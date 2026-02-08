@@ -5,7 +5,7 @@ description: 'Building a distributed event processing framework with Claude Code
 category: 'architecture'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-08'
-heroImage: 'from-specification-to-stress-test.jpg'
+heroImage: 'abstract-clojure.jpg'
 tags:
   - 'ai'
   - 'distributed systems'
