@@ -8,8 +8,11 @@ publishedDate: '2026-02-08'
 heroImage: 'abstract-clojure.jpg'
 tags:
   - 'ai'
-  - 'distributed systems'
+  - 'agentic coding'
+  - 'claude code'
   - 'allium'
+  - 'spec-driven development'
+  - 'distributed systems'
 ---
 
 I spent an afternoon writing three thousand lines of behavioural specification. Claude Code turned them into a distributed event processing framework over a weekend, while I reviewed the test results and hung out with my kids.
@@ -32,13 +35,13 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
   </div>
 </div>
 
-That's it. The prompt is short because the specifications are not. Three thousand lines of Allium behavioural specification preceded this moment, and those specs are why it worked.
+That's it. The prompt is short because the specifications are not. Three thousand lines of [Allium](https://juxt.github.io/allium) behavioural specification preceded this moment, and those specs are why it worked.
 
-Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds and zero failures.
+Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
 
-## What Allium looks like
+## Intent, independent of implementation
 
-Allium is a behavioural specification language we've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice):
+Allium is a behavioural specification language we've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice within a time window):
 
 ```
 rule EntryExpires {
@@ -99,23 +102,25 @@ And resolved-question blocks preempt design debates:
 
 These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass, whether that's a ConcurrentHashMap sized by throughput or union-find with path compression for event partitioning. Resolved questions prevent it from relitigating decisions already made.
 
-## How the specs emerged
+## Designing through conversation
 
 The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
 
-The first pass produced a single monolithic spec. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could it split naturally along component boundaries? Where should cross-file references live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
+The first pass produced a single monolithic spec. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could it split naturally along component boundaries? Where should cross-file references live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning.
+
+A judicial theme emerged through the naming, and the metaphors became useful shorthand for what each component actually needed to do.
 
 ## The hard problem
 
-The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 movements per second with sub-100ms tail latency. Most systems that need this kind of throughput give up on strong consistency (where the system behaves as if there's a single copy of the data, even when there isn't). Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for. I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
+The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 movements per second with sub-100ms tail latency.
 
-## Fifty minutes and a cup of tea
+Most systems that need this kind of throughput give up on strong consistency (where the system behaves as if there's a single copy of the data, even when there isn't). Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for. I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
 
-With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs.
+## Autonomous from the first commit
 
-Over the next ninety minutes, recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in seven commits. Claude was running autonomously through the specs, component by component, and commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; Detekt, a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
+With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs. I pointed Claude at the remaining specs and recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in another seven commits over the next ninety minutes. Commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; [Detekt](https://detekt.dev), a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
 
-<span class="pullquote" text-content="When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first."></span>The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running and it would fan out, either iterating on a single challenge or dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
+<span class="pullquote" text-content="When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first."></span>The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running, sometimes iterating on a single challenge, sometimes dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
 
 Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I was able to add value, and the framework's domain interface is a good example.
 
@@ -123,7 +128,7 @@ The system is domain-agnostic: a separate `DomainRegistry` plugs in entity defin
 
 Then I ran the load tests and every request failed.
 
-## The spec described the what but not the where
+## Complexity at the boundaries
 
 The Clerk needed consensus from two instances before publishing any output, but nothing connected the instances at runtime. The federation protocol was specified, the code had the types and methods, but the wire between running instances was absent. Every request hung forever waiting for a second copy that would never arrive.
 
@@ -150,7 +155,7 @@ Fred Brooks argued in 1986 that software's essential complexity can be controlle
 
 After wiring federation, 1,000 RPS worked with a p99 under 100ms. Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
 
-## Getting fast
+## From seconds to milliseconds
 
 I gave Claude a target and let it run:
 
@@ -198,7 +203,7 @@ The fixes from that audit dropped the p99 from 157ms to 25ms.
 
 Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
 
-## The real bottleneck
+## Measuring the right thing
 
 With the 5,000 RPS target met, we doubled the ambition to 10,000.
 
@@ -208,7 +213,7 @@ The turning point came from comparing two sets of numbers. Server-side instrumen
 
 Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms. As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will reach 50,000 RPS.
 
-## Resilience
+## Proving correctness
 
 A fast system that loses data is worthless. The inventory domain gives us a natural correctness check: stock levels can't go below zero. Move all the stock from one warehouse to another and confirm the totals balance. If a stock level goes negative, a request has been applied twice. If the totals don't match, entity state has diverged between instances. This invariant is the basis of the resilience tests: 400,000 events across four scenarios, each designed to break things. Kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
 
