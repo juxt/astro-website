@@ -51,7 +51,7 @@ rule EntryExpires {
 }
 ```
 
-Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation, and I have enough to verify the result.
+Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
 
 Allium has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
 
@@ -99,9 +99,9 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## How the specs emerged
 
-The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, a BFT layer compares outputs across instances and only publishes once they agree, failover is passive via priority-based publish delays. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, and a BFT layer compares outputs across instances before anything is published. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
 
-The first pass produced a monolith. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could the monolith split naturally along component boundaries? What about cross-file references? Where should the files live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
+The first pass produced a monolith. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could the monolith split naturally along component boundaries? Where should cross-file references live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
 
 ## The hard problem
 
@@ -186,7 +186,7 @@ The biggest single improvement came from a different approach. I asked Claude to
   </div>
 </div>
 
-Five agents audited the codebase in parallel. A memory allocation specialist found hot-path object creation, a lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
+Five agents audited the codebase in parallel. A lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
 
 The fixes from that audit dropped the p99 from 154ms to 25ms. Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
 
@@ -196,26 +196,26 @@ At 10,000 RPS the p99 sat stubbornly at 208ms. Claude iterated for hours, testin
 
 ## Resilience
 
-A fast system that loses data is worthless. The inventory domain has a useful property: stock levels can't go below zero. If a stock movement is double-applied, or an event lost, or entity state diverges between instances, the final counts won't match the expected model. The resilience test submits 400,000 events across four scenarios: kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
+A fast system that loses data is worthless. The inventory domain has a useful property: stock levels can't go below zero. If a stock movement is double-applied or entity state diverges between instances, the final counts won't match the expected model. The resilience test submits 400,000 events across four scenarios: kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
 
-The simultaneous kill exposed a real bug. A recovering instance was broadcasting its pre-crash watermark (how far through the event stream it has durably processed) before recovery completed. Other instances trusted stale progress information. The fix was an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
+The simultaneous kill exposed a bug. A recovering instance was broadcasting its pre-crash watermark (how far through the event stream it has durably processed) before recovery completed. Other instances trusted stale progress information. The fix was an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
 
 A deeper issue surfaced in fast-forward recovery. With fast-forward disabled, all four scenarios pass. The bug is documented and the fix deferred. Correctness over optimisation.
 
 ## What the specs bought
 
-The specifications didn't prevent every bug. They missed the federation wiring, couldn't anticipate timing-dependent batching differences that broke fast-forward recovery, and Claude didn't always follow the guidance blocks.
+The specifications didn't prevent every bug. They missed the federation wiring, and Claude didn't always follow the guidance blocks.
 
 But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
-The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The Allium specs evolved alongside the code across all 64 commits because they were the design tool, not the documentation.
+The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The Allium specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
 ## What this means
 
-The skills of software engineering have always been fluid. We went from punch cards to terminals, from assembly to managed runtimes, from writing servers to configuring them. Each shift retired one set of skills and elevated another. The constant across every transition was that the people who understood what the system needed to do adapted faster than those who only knew how to type it.
+The skills of software engineering have always been fluid. We went from punch cards to high-level languages, from writing servers to configuring them. Each shift retired one set of skills and elevated another. The constant across every transition was that the people who understood what the system needed to do adapted faster than those who only knew how to type it.
 
-This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology: the tools are changing, learn new skills, embrace the disruption. Now the disruption is coming for our own working practices.
+This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology: the tools are changing, you need to adapt. Now the disruption is coming for our own working practices.
 
-The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. The specifications evolved through every phase of the build as my understanding deepened through conversation, testing and debugging. Iterative, incremental development didn't go away. It moved up a level of abstraction. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
+The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. The specifications evolved through every phase of the build as my understanding deepened through conversation and testing. Iterative, incremental development didn't go away. It moved up a level of abstraction. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
