@@ -36,53 +36,50 @@ That's it. No pseudocode, no worked examples. The prompt is short because the sp
 
 ## What Allium looks like
 
-Allium is a behavioural specification language I've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Clerk, the component that handles Byzantine fault tolerance across redundant instances:
+Allium is a behavioural specification language I've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component that handles input deduplication:
 
 ```
-rule ClerkAttemptsDeduplicate {
-    when: ClerkAttemptsDeduplicate(state)
-    requires: state.status = awaiting_copies
+rule EntryExpires {
+    -- After the TTL elapses, the entry is removed. Any subsequent
+    -- reuse of the idempotency key is treated as a new event.
+    when: entry: WardenEntry
 
-    let grouped = state.received_copies.grouped_by(r => r.output_payloads)
-    let reaching_threshold = grouped.filter(g =>
-        g.count >= required_copies
-    )
+    requires: stream_time - entry.recorded_at >= idempotency_ttl
 
     ensures:
-        if reaching_threshold.count = 1:
-            let consensus = reaching_threshold.first
-            state.consensus_record = consensus
-            state.status = consensus_reached
-            ClerkValidatesLocalRecord(state)
-
-        else if reaching_threshold.count > 1:
-            -- SPLIT BRAIN: Two different values both reached threshold.
-            SplitBrainDetected(state)
-
-        -- else: not enough copies yet; remain awaiting_copies
+        Warden.entries.remove(entry.idempotency_key)
 }
 ```
 
-The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation, and I have enough to verify the result.
+Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation, and I have enough to verify the result.
 
-Allium has two other constructs that matter. Guidance blocks carry implementation hints:
+Allium has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
 
 ```
-rule ArbiterPartitionsBatch {
-    when: cycle: ArbiterCycle.status becomes partitioning
+rule UsherChecksIdempotency {
+    -- Before delivering an event to the Arbiter, the Usher checks
+    -- the Warden. If the key is absent, the event proceeds and the
+    -- key is recorded as pending.
+    when: event: InputEvent.created
 
-    let all_events = cycle.pending_from_prior + cycle.batch_events
+    requires: not Warden.entries.contains(event.idempotency_key)
 
     ensures:
-        cycle.groups = PartitionIntoCausalGroups(all_events)
-        cycle.status = processing
+        WardenEntry.created(
+            idempotency_key: event.idempotency_key,
+            original_offset: event.offset,
+            status: pending,
+            recorded_at: stream_time,
+            materialised_response: null
+        )
+        -- Event proceeds to pre-warming and Arbiter delivery
 
     guidance:
-        -- Union-find with path compression and union by rank. Build a
-        -- map from entity key to the first event referencing that key.
-        -- For each subsequent event sharing a key, union it with the
-        -- first. Collect events by component root, sorted by offset
-        -- within each group.
+        -- The Warden is a single ConcurrentHashMap per node, global
+        -- across all shards. Idempotency keys have no shard affinity.
+        -- The check is a single map lookup. At 10,000 events/sec with
+        -- 5-minute TTL, the map holds approximately 3,000,000 entries.
+        -- Memory footprint is bounded by throughput * TTL.
 }
 ```
 
