@@ -15,7 +15,7 @@ tags:
   - 'distributed systems'
 ---
 
-<p class="lede">I spent an afternoon writing three thousand lines of behavioural specification. Claude Code turned them into a distributed event processing framework over a weekend, while I reviewed the test results and hung out with my kids.</p>
+<p class="lede">I spent an afternoon writing three thousand lines of behavioural specification. Then Claude Code turned them into a distributed event processing framework over a weekend while I reviewed the test results and hung out with my kids.</p>
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
