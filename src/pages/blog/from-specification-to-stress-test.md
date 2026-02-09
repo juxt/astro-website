@@ -2,7 +2,7 @@
 author: 'hga'
 title: 'From specification to stress test in 48 hours'
 description: 'Building a distributed event processing framework with Claude Code and the Allium behavioural specification language.'
-category: 'architecture'
+category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-08'
 heroImage: 'abstract-clojure.jpg'
@@ -15,7 +15,7 @@ tags:
   - 'distributed systems'
 ---
 
-I spent an afternoon writing three thousand lines of behavioural specification. Claude Code turned them into a distributed event processing framework over a weekend, while I reviewed the test results and hung out with my kids.
+<p class="lede">I spent an afternoon writing three thousand lines of behavioural specification. Claude Code turned them into a distributed event processing framework over a weekend, while I reviewed the test results and hung out with my kids.</p>
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
