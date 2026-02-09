@@ -12,7 +12,9 @@ tags:
   - 'allium'
 ---
 
-I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and ran the stress tests. Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds and zero failures.
+I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and reviewed the stress and correctness test results.
+
+Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds and zero failures.
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
@@ -36,7 +38,7 @@ That's it. No pseudocode, no worked examples. The prompt is short because the sp
 
 ## What Allium looks like
 
-Allium is a behavioural specification language I've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice):
+Allium is a behavioural specification language we've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice):
 
 ```
 rule EntryExpires {
@@ -51,7 +53,7 @@ rule EntryExpires {
 }
 ```
 
-Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
+<span class="pullquote" text-content="The spec is where we iterate on a design unencumbered by code, library and framework constraints."></span>Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
 
 Allium has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
 
@@ -113,15 +115,15 @@ With the specs committed and a CLAUDE.md file (a project-level instruction file 
 
 Over the next ninety minutes, recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in seven commits. Claude was running autonomously through the specs, component by component, and commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; Detekt, a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
 
-The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running and it would fan out, either iterating on a single challenge or dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
+<span class="pullquote" text-content="When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first."></span>The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running and it would fan out, either iterating on a single challenge or dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
 
-Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I added the most value, and the framework's domain interface is a good example. The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating what mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like single responsibility. Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
+Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I added the most value, and the framework's domain interface is a good example. The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating the design goals I thought mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like single responsibility. Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
 
 Then I ran the load tests and every request failed.
 
 ## The spec described the what but not the where
 
-The Clerk was configured for `required_copies=2`, needing consensus from two instances, but the federation protocol connecting them hadn't been wired. Events waited forever for a second copy that would never arrive. The spec described what the federation protocol should do, and the code had the types and methods, but the wire connecting two instances at runtime was absent.
+The Clerk needed consensus from two instances before publishing any output, but nothing connected the instances at runtime. The federation protocol was specified, the code had the types and methods, but the wire between running instances was absent. Every request hung forever waiting for a second copy that would never arrive.
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -141,6 +143,8 @@ The Clerk was configured for `required_copies=2`, needing consensus from two ins
     </div>
   </div>
 </div>
+
+Fred Brooks argued in 1986 that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We discovered a specific instance of this. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
 
 After wiring federation, 1,000 RPS worked. Then I tried 5,000 RPS and the p99 was 31 seconds.
 
@@ -164,11 +168,11 @@ I gave Claude a target and let it run:
   </div>
 </div>
 
-Claude ran in an iterative loop for hours: profile, hypothesise, change, run Gatling, measure, repeat. I wasn't prompting. The p99 over the course of that session:
+Claude ran in an iterative loop for hours: profile, hypothesise, change, run Gatling, measure, repeat. I wasn't prompting. The p99 fell fast at first:
 
-31,154ms. 1,520ms. 907ms. 234ms. 157ms. 117ms. 98ms. **25ms.**
+31,154ms. 1,520ms. 907ms. 234ms. 157ms.
 
-Each change was shaving milliseconds where the early fixes had shaved seconds. The biggest single improvement came from a different approach. I asked Claude to spin up specialist agents:
+Then the gains started flattening. Each change was shaving milliseconds where the early fixes had shaved seconds. Claude was still finding improvements, but the iterative approach was exhausting the easy wins. I stepped in and changed the strategy, asking Claude to spin up specialist agents:
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -188,7 +192,7 @@ Each change was shaving milliseconds where the early fixes had shaved seconds. T
 
 Five agents audited the codebase in parallel. A lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
 
-The fixes from that audit dropped the p99 from 154ms to 25ms. Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
+The fixes from that audit dropped the p99 from 157ms to 25ms. Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
 
 ## The latency that wasn't ours
 
@@ -209,6 +213,8 @@ The specifications didn't prevent every bug. They missed the federation wiring, 
 But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
 The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The Allium specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
+
+The federation bug showed us where the approach needs to evolve. Decomposing specs along component boundaries made each component precise, but pushed complexity to the interfaces between them. We're exploring boundary specs that explicitly describe how components wire together at runtime, and integration scenarios that test the connections rather than the components. The specifications aren't finished. Neither is the language.
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
