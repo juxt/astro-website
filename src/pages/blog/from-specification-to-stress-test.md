@@ -36,7 +36,7 @@ That's it. No pseudocode, no worked examples. The prompt is short because the sp
 
 ## What Allium looks like
 
-Allium is a behavioural specification language I've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component that handles input deduplication:
+Allium is a behavioural specification language I've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice):
 
 ```
 rule EntryExpires {
@@ -99,13 +99,13 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## How the specs emerged
 
-The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, and a BFT layer compares outputs across instances before anything is published. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
 
-The first pass produced a monolith. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could the monolith split naturally along component boundaries? Where should cross-file references live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
+The first pass produced a single monolithic spec. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could it split naturally along component boundaries? Where should cross-file references live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
 
 ## The hard problem
 
-The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 movements per second with sub-100ms tail latency. Most systems that need this kind of throughput give up on strong consistency. Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for. I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
+The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 movements per second with sub-100ms tail latency. Most systems that need this kind of throughput give up on strong consistency (the guarantee that every read reflects the latest write). Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for. I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
 
 ## Fifty minutes and a cup of tea
 
