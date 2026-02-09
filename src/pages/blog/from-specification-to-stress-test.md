@@ -16,7 +16,21 @@ I spent a weekend building a distributed event processing framework with Claude 
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
-> Review the specs in the `specs/` directory and implement the system they describe. Follow the guidance blocks for implementation choices. Start with the core components (Usher, Arbiter, Clerk, Registrar, Ledger, Warden), then add the REST API, Kafka integration and Docker Compose configuration.
+<div class="not-prose terminal">
+  <div class="terminal-titlebar">
+    <div class="terminal-dots">
+      <span class="terminal-dot red"></span>
+      <span class="terminal-dot yellow"></span>
+      <span class="terminal-dot green"></span>
+    </div>
+    <span class="terminal-title">Claude Code</span>
+  </div>
+  <div class="terminal-body">
+    <div class="turn user">
+      <span class="prompt">&gt;</span> Review the specs in the <code>specs/</code> directory and implement the system they describe. Follow the guidance blocks for implementation choices. Start with the core components (Usher, Arbiter, Clerk, Registrar, Ledger, Warden), then add the REST API, Kafka integration and Docker Compose configuration.
+    </div>
+  </div>
+</div>
 
 That's it. No pseudocode, no worked examples. The prompt is short because the specifications are not. Three thousand lines of Allium behavioural specification preceded this moment, and those specs are why it worked.
 
@@ -112,9 +126,24 @@ Then I ran the load tests and every request failed.
 
 The Clerk was configured for `required_copies=2`, needing consensus from two instances, but the federation protocol connecting them hadn't been wired. Events waited forever for a second copy that would never arrive. The spec described what the federation protocol should do, and the code had the types and methods, but the wire connecting two instances at runtime was absent.
 
-> You said that federation wasn't implemented yet, but you previously claimed that the code was in alignment with the specification. Isn't federation a key part of the specification?
-
-It was. Component-level specs describe behaviour within a boundary. The gaps live at the boundaries between components.
+<div class="not-prose terminal">
+  <div class="terminal-titlebar">
+    <div class="terminal-dots">
+      <span class="terminal-dot red"></span>
+      <span class="terminal-dot yellow"></span>
+      <span class="terminal-dot green"></span>
+    </div>
+    <span class="terminal-title">Claude Code</span>
+  </div>
+  <div class="terminal-body">
+    <div class="turn user">
+      <span class="prompt">&gt;</span> You said that federation wasn't implemented yet, but you previously claimed that the code was in alignment with the specification. Isn't federation a key part of the specification?
+    </div>
+    <div class="turn llm">
+      <span class="marker">✻</span> It was. Component-level specs describe behaviour within a boundary. The gaps live at the boundaries between components.
+    </div>
+  </div>
+</div>
 
 After wiring federation, 1,000 RPS worked. Then I tried 5,000 RPS and the p99 was 31 seconds.
 
@@ -122,7 +151,21 @@ After wiring federation, 1,000 RPS worked. Then I tried 5,000 RPS and the p99 wa
 
 I gave Claude a target and let it run:
 
-> Your objective is to make such changes to this code as necessary so that when you run the Gatling load test for one minute at 5,000 requests a second, the p99 is less than 100 milliseconds.
+<div class="not-prose terminal">
+  <div class="terminal-titlebar">
+    <div class="terminal-dots">
+      <span class="terminal-dot red"></span>
+      <span class="terminal-dot yellow"></span>
+      <span class="terminal-dot green"></span>
+    </div>
+    <span class="terminal-title">Claude Code</span>
+  </div>
+  <div class="terminal-body">
+    <div class="turn user">
+      <span class="prompt">&gt;</span> Your objective is to make such changes to this code as necessary so that when you run the Gatling load test for one minute at 5,000 requests a second, the p99 is less than 100 milliseconds.
+    </div>
+  </div>
+</div>
 
 Claude ran in an iterative loop for hours: profile, hypothesise, change, run Gatling, measure, repeat. I wasn't prompting. The p99 over the course of that session:
 
@@ -130,7 +173,21 @@ Claude ran in an iterative loop for hours: profile, hypothesise, change, run Gat
 
 The biggest single improvement came from a different approach. I asked Claude to spin up specialist agents:
 
-> You're going to create some personas in an agent team representing distributed systems and low latency engineers of different specialisms. Some of the engineers will be thinking about bytecode efficiency, some about algorithmic complexity...
+<div class="not-prose terminal">
+  <div class="terminal-titlebar">
+    <div class="terminal-dots">
+      <span class="terminal-dot red"></span>
+      <span class="terminal-dot yellow"></span>
+      <span class="terminal-dot green"></span>
+    </div>
+    <span class="terminal-title">Claude Code</span>
+  </div>
+  <div class="terminal-body">
+    <div class="turn user">
+      <span class="prompt">&gt;</span> You're going to create some personas in an agent team representing distributed systems and low latency engineers of different specialisms. Some of the engineers will be thinking about bytecode efficiency, some about algorithmic complexity...
+    </div>
+  </div>
+</div>
 
 Five agents audited the codebase in parallel. A memory allocation specialist found hot-path object creation, a lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
 

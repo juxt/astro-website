@@ -58,6 +58,89 @@ pre.astro-code code {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true'><path d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z' fill='white'/></svg>");
 }
 
+/* Terminal conversation styling (Claude Code prompts) */
+.terminal {
+  background: #1e1e2e;
+  border-radius: 8px;
+  margin: 1.5rem 0 2rem;
+  overflow: hidden;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.terminal-titlebar {
+  background: #313244;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-dot.red { background: #f38ba8; }
+.terminal-dot.yellow { background: #f9e2af; }
+.terminal-dot.green { background: #a6e3a1; }
+
+.terminal-body {
+  padding: 0;
+}
+
+.terminal .turn {
+  padding: 0.75rem 1.25rem 0.75rem calc(1.25rem + 2ch);
+  text-indent: -2ch;
+}
+
+.terminal .user {
+  background: #2a2a3d;
+  color: #cdd6f4;
+}
+
+.terminal .user .prompt {
+  color: #a6e3a1;
+  font-weight: 600;
+}
+
+.terminal .llm {
+  background: #1e1e2e;
+  color: #bac2de;
+  padding-left: calc(2.5rem + 2ch);
+}
+
+.terminal .llm .marker {
+  color: #e07858;
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.terminal .llm code,
+.terminal .user code {
+  color: #f9e2af;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
 pre.astro-code.css-variables {
   position: relative;
   margin: 5px 0;
