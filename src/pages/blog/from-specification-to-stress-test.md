@@ -37,14 +37,13 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
 
 That's it. The prompt is short because the specifications are not. Three thousand lines of [Allium](https://juxt.github.io/allium) behavioural specification preceded this moment, and those specs are why it worked.
 
-Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
+Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request. Here's how we got there.
 
 ## Intent, independent of implementation
 
 Allium is a behavioural specification language we've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice within a time window):
 
-```
-rule EntryExpires {
+<pre><code class="language-allium">rule EntryExpires {
     -- After the TTL elapses, the entry is removed. Any subsequent
     -- reuse of the idempotency key is treated as a new event.
     when: entry: WardenEntry
@@ -53,15 +52,13 @@ rule EntryExpires {
 
     ensures:
         Warden.entries.remove(entry.idempotency_key)
-}
-```
+}</code></pre>
 
 <span class="pullquote" text-content="The spec is where we iterate on a design unencumbered by code, library and framework constraints."></span>Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
 
 Allium has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
 
-```
-rule UsherChecksIdempotency {
+<pre><code class="language-allium">rule UsherChecksIdempotency {
     -- Before delivering an event to the Arbiter, the Usher checks
     -- the Warden. If the key is absent, the event proceeds and the
     -- key is recorded as pending.
@@ -85,20 +82,17 @@ rule UsherChecksIdempotency {
         -- The check is a single map lookup. At 10,000 events/sec with
         -- 5-minute TTL, the map holds approximately 3,000,000 entries.
         -- Memory footprint is bounded by throughput * TTL.
-}
-```
+}</code></pre>
 
 And resolved-question blocks preempt design debates:
 
-```
--- RESOLVED: Expected copies threshold. The default of 2 is
+<pre><code class="language-allium">-- RESOLVED: Expected copies threshold. The default of 2 is
 -- deliberate. The system's goal is Byzantine fault *detection*,
 -- not classical BFT consensus requiring a majority. Two matching
 -- copies provide high confidence of correctness (bit-flip
 -- probability ~1 in 10^9 per copy; two independent copies matching
 -- by chance is vanishingly unlikely). The threshold is configurable
--- for deployments that want stricter guarantees.
-```
+-- for deployments that want stricter guarantees.</code></pre>
 
 These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass, whether that's a ConcurrentHashMap sized by throughput or union-find with path compression for event partitioning. Resolved questions prevent it from relitigating decisions already made.
 
@@ -242,3 +236,78 @@ This shift is no different, except that it's ours. We've been telling other indu
 The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When the Arbiter's guidance block recommended union-find and the initial implementation ignored it, the spec told us what to fix. When the Clerk's watermark advancement needed rethinking under load, we revised the spec before touching the code.
 
 Iterative, incremental development didn't go away. It moved up a level of abstraction. The specifications gave engineering judgement a place to live.
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var keywords = /^(rule|entity|when|requires|ensures|default|deferred|use|if|let|in|with|for|as|this|not|guidance)$/;
+  var builtins = /^(now|true|false|none|null|pending)$/;
+  document.querySelectorAll('code.language-allium').forEach(function(block) {
+    var text = block.textContent;
+    var result = [];
+    var i = 0;
+    while (i < text.length) {
+      if (text[i] === '-' && text[i + 1] === '-') {
+        var end = text.indexOf('\n', i);
+        if (end === -1) end = text.length;
+        result.push(span('comment', text.slice(i, end)));
+        i = end;
+        continue;
+      }
+      if (text[i] === '"') {
+        var j = i + 1;
+        while (j < text.length && text[j] !== '"') j++;
+        j++;
+        result.push(span('string', text.slice(i, j)));
+        i = j;
+        continue;
+      }
+      if (text[i] === '.' && i + 1 < text.length && /[a-z_]/.test(text[i + 1])) {
+        var j = i + 1;
+        while (j < text.length && /[a-zA-Z0-9_]/.test(text[j])) j++;
+        result.push(span('punctuation', '.'));
+        result.push(span('property', text.slice(i + 1, j)));
+        i = j;
+        continue;
+      }
+      if (/[A-Za-z_]/.test(text[i])) {
+        var j = i;
+        while (j < text.length && /[A-Za-z0-9_]/.test(text[j])) j++;
+        var word = text.slice(i, j);
+        var afterWord = j;
+        while (afterWord < text.length && text[afterWord] === ' ') afterWord++;
+        if (keywords.test(word)) result.push(span('keyword', word));
+        else if (builtins.test(word)) result.push(span('builtin', word));
+        else if (/^[A-Z]/.test(word)) result.push(span('type', word));
+        else if (text[afterWord] === ':') result.push(span('field', word));
+        else result.push(esc(word));
+        i = j;
+        continue;
+      }
+      if (/[0-9]/.test(text[i])) {
+        var j = i;
+        while (j < text.length && /[0-9.,]/.test(text[j])) j++;
+        result.push(span('number', text.slice(i, j)));
+        i = j;
+        continue;
+      }
+      if (/[=!<>+|]/.test(text[i])) {
+        var op = text[i];
+        if (i + 1 < text.length && text[i + 1] === '=') op += '=';
+        result.push(span('operator', op));
+        i += op.length;
+        continue;
+      }
+      if (/[{}()\[\]:,?\/]/.test(text[i])) {
+        result.push(span('punctuation', text[i]));
+        i++;
+        continue;
+      }
+      result.push(esc(text[i]));
+      i++;
+    }
+    block.innerHTML = result.join('');
+  });
+  function span(cls, s) { return '<span class="allium-' + cls + '">' + esc(s) + '</span>'; }
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+});
+</script>
