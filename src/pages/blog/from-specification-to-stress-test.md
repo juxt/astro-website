@@ -218,4 +218,4 @@ The skills of software engineering have always been fluid. We went from punch ca
 
 This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology: the tools are changing, learn new skills, embrace the disruption. Now the disruption is coming for our own working practices.
 
-The skill that mattered most in this project was formalising intent: specifying what the system should do clearly enough that an LLM could build it, and precisely enough that I could verify the result. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
+The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
