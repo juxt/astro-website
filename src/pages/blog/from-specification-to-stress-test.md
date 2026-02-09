@@ -37,7 +37,7 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
 
 That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt, and those specs are why it worked.
 
-64 commits later, the system was sustaining 10,000 requests per second (RPS) against our strongly consistent datastore with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
+A few days and 64 commits later, the system was sustaining 10,000 requests per second (RPS) against our strongly consistent datastore with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
 
 Here's how we got there.
 
