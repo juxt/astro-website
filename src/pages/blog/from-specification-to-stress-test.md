@@ -12,7 +12,9 @@ tags:
   - 'allium'
 ---
 
-Here is a prompt that produced 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
+I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and ran the stress tests. Sixty-four commits later, the system was sustaining over 6,000 requests per second with a p99 latency (the response time that 99% of requests beat) of 29 milliseconds and zero failures.
+
+Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
 > Review the specs in the `specs/` directory and implement the system they describe. Follow the guidance blocks for implementation choices. Start with the core components (Usher, Arbiter, Clerk, Registrar, Ledger, Warden), then add the REST API, Kafka integration and Docker Compose configuration.
 
@@ -47,7 +49,7 @@ rule ClerkAttemptsDeduplicate {
 }
 ```
 
-The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation and enough for me to review it against.
+The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation, and I have enough to verify the result.
 
 Allium has two other constructs that matter. Guidance blocks carry implementation hints:
 
@@ -86,15 +88,23 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## How the specs emerged
 
-The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, a BFT layer compares outputs across instances and only publishes once they agree, failover is passive via priority-based publish delays. I had targets in mind (tens of thousands of transactions per second, tail latencies below 100 milliseconds, recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework: every instance processes every event deterministically, a BFT layer compares outputs across instances and only publishes once they agree, failover is passive via priority-based publish delays. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
 
 The first pass produced a monolith. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could the monolith split naturally along component boundaries? What about cross-file references? Where should the files live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning. A judicial theme emerged through the naming, and each name carried enough metaphorical weight that its role was obvious from the word alone.
 
+## The hard problem
+
+The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 movements per second with sub-100ms tail latency. Most systems that need this kind of throughput give up on strong consistency. Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for. I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
+
 ## Fifty minutes and a cup of tea
 
-With the specs committed and a CLAUDE.md file establishing the architecture and naming conventions, I pointed Claude at the specs and went to put the kettle on. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs.
+With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to put the kettle on. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs.
 
-Over the next ninety minutes, recovery logic, an inventory tracking domain module, REST API, Docker Compose configuration and Kafka integration followed in seven commits. Claude was running autonomously through the specs, component by component. I was reviewing commits as they landed.
+Over the next ninety minutes, recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in seven commits. Claude was running autonomously through the specs, component by component, and commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; Detekt, a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
+
+The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running and it would fan out, either iterating on a single challenge or dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
+
+Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I added the most value, and the framework's domain interface is a good example. The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. When I reviewed this interface design, I asked Claude to consider trade-offs against principles like single responsibility. Expressing those design priorities helped Claude weigh competing options before making suggestions. I exerted influence by articulating what mattered rather than writing the code.
 
 Then I ran the load tests and every request failed.
 
@@ -106,7 +116,7 @@ The Clerk was configured for `required_copies=2`, needing consensus from two ins
 
 It was. Component-level specs describe behaviour within a boundary. The gaps live at the boundaries between components.
 
-After wiring federation, 1,000 RPS worked. Then I tried 5,000 RPS and the p99 (the response time that 99% of requests beat) was 31 seconds.
+After wiring federation, 1,000 RPS worked. Then I tried 5,000 RPS and the p99 was 31 seconds.
 
 ## Getting fast
 
@@ -126,9 +136,9 @@ Five agents audited the codebase in parallel. A memory allocation specialist fou
 
 The fixes from that audit dropped the p99 from 154ms to 25ms. Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
 
-## The 200-millisecond ghost
+## The latency that wasn't ours
 
-At 10,000 RPS the p99 sat at 208ms. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency was in Docker Desktop's userspace port forwarding proxy, `gvproxy`. Moving Gatling inside the Docker network: p99 of 29ms at over 6,000 sustained RPS. Zero failures across 302,662 requests.
+At 10,000 RPS the p99 sat stubbornly at 208ms. Claude iterated for hours, testing hypothesis after hypothesis: federation delays and garbage collection pauses. Every change to the application code made no difference. Then the breakthrough came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all. It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers. Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests.
 
 ## Resilience
 
@@ -147,3 +157,5 @@ But the specs made finding and fixing bugs systematic. When the fast-forward bug
 The Allium specs evolved alongside the code across all 64 commits. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When implementation revealed that data fields should be `ByteArray` rather than `String`, the spec was corrected. The specs kept pace with the code because they were written to.
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
+
+I don't know what this means for the future of software development. The skill that mattered most in this project was formalising intent: specifying what the system should do clearly enough that an LLM could build it, and precisely enough that I could verify the result. That skill has always been valuable. It's just that the medium is shifting. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
