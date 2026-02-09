@@ -95,7 +95,7 @@ And resolved-question blocks preempt design debates:
 -- for deployments that want stricter guarantees.
 ```
 
-These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass. Resolved questions prevent it from relitigating decisions already made.
+These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass, whether that's a ConcurrentHashMap sized by throughput or union-find with path compression for event partitioning. Resolved questions prevent it from relitigating decisions already made.
 
 ## How the specs emerged
 
@@ -109,13 +109,13 @@ The system I had in mind processes inventory movements at scale: stock transfers
 
 ## Fifty minutes and a cup of tea
 
-With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to put the kettle on. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs.
+With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs.
 
 Over the next ninety minutes, recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in seven commits. Claude was running autonomously through the specs, component by component, and commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; Detekt, a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
 
 The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running and it would fan out, either iterating on a single challenge or dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
 
-Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I added the most value, and the framework's domain interface is a good example. The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. When I reviewed this interface design, I asked Claude to consider trade-offs against principles like single responsibility. Expressing those design priorities helped Claude weigh competing options before making suggestions. I exerted influence by articulating what mattered rather than writing the code.
+Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I added the most value, and the framework's domain interface is a good example. The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating what mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like single responsibility. Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
 
 Then I ran the load tests and every request failed.
 
@@ -168,7 +168,7 @@ Claude ran in an iterative loop for hours: profile, hypothesise, change, run Gat
 
 31,154ms. 1,520ms. 907ms. 234ms. 157ms. 117ms. 98ms. **25ms.**
 
-The biggest single improvement came from a different approach. I asked Claude to spin up specialist agents:
+Each change was shaving milliseconds where the early fixes had shaved seconds. The biggest single improvement came from a different approach. I asked Claude to spin up specialist agents:
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -218,4 +218,4 @@ The skills of software engineering have always been fluid. We went from punch ca
 
 This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology: the tools are changing, you need to adapt. Now the disruption is coming for our own working practices.
 
-The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. The specifications evolved through every phase of the build as my understanding deepened through conversation and testing. Iterative, incremental development didn't go away. It moved up a level of abstraction. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
+The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When the Arbiter's guidance block recommended union-find and the initial implementation ignored it, the spec told us what to fix. When the Clerk's watermark advancement needed rethinking under load, we revised the spec before touching the code. Iterative, incremental development didn't go away. It moved up a level of abstraction. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
