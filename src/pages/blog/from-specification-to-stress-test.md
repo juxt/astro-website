@@ -212,4 +212,10 @@ The Allium specs evolved alongside the code across all 64 commits. When the Arbi
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
-I don't know what this means for the future of software development. The skill that mattered most in this project was formalising intent: specifying what the system should do clearly enough that an LLM could build it, and precisely enough that I could verify the result. That skill has always been valuable. It's just that the medium is shifting. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
+## What this means
+
+The skills of software engineering have always been fluid. We went from punch cards to terminals, from assembly to managed runtimes, from writing servers to configuring them. Each shift retired one set of skills and elevated another. The constant across every transition was that the people who understood what the system needed to do adapted faster than those who only knew how to type it.
+
+This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology: the tools are changing, learn new skills, embrace the disruption. Now the disruption is coming for our own working practices.
+
+The skill that mattered most in this project was formalising intent: specifying what the system should do clearly enough that an LLM could build it, and precisely enough that I could verify the result. The specifications didn't replace the need for engineering judgement. They gave that judgement a place to live that outlasted any single conversation.
