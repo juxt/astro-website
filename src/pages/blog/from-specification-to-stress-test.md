@@ -197,7 +197,7 @@ Five agents audited the codebase in parallel, looking for anything holding back 
 
 The fixes from that audit dropped the p99 from 157ms to 25ms.
 
-Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find with path compression replaced naive partitioning of events into causal groups (sets of events sharing entities that must run sequentially, while independent groups run in parallel). The spec's guidance block had recommended union-find, but the initial implementation hadn't followed it. Twenty-seven optimisations, all conforming to spec behaviour, all beneath the spec level.
+The agents identified twenty-seven optimisations: replacing heavyweight data structures with compact alternatives, swapping naive algorithms for the faster ones the spec's guidance blocks had recommended but the initial implementation hadn't followed. Every fix conformed to the spec's behaviour. They were all beneath the spec level, in the implementation choices the spec had left open.
 
 ## Measuring the right thing
 
@@ -213,9 +213,11 @@ Claude recognised the implication immediately: move the load test inside the Doc
 
 With the performance targets met, we turned to the harder question: does the system produce correct results under failure? A fast system that loses data is worthless. The inventory domain gives us a natural correctness check: stock levels can't go below zero. Move all the stock from one warehouse to another and confirm the totals balance. If a stock level goes negative, a request has been applied twice. If the totals don't match, entity state has diverged between instances. This invariant is the basis of the resilience tests: 400,000 events across four scenarios, each designed to break things. Kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
 
-The simultaneous kill exposed a bug. A recovering instance was broadcasting its pre-crash watermark (how far through the event stream it has durably processed) before recovery completed. Other instances trusted stale progress information. The fix was an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
+Three of the four scenarios passed on the first run. The simultaneous kill, both instances crashing at once, exposed a bug. Each instance tracks a watermark: how far through the event stream it has durably processed. When an instance recovers after a crash, it broadcasts this watermark so its peers know where it got to. The problem was that the recovering instance was broadcasting its pre-crash watermark before recovery had actually completed. Other instances trusted this stale progress information and skipped events they shouldn't have.
 
-A deeper issue surfaced in fast-forward recovery. With fast-forward disabled, all four scenarios pass. The bug is documented and the fix deferred. Correctness over optimisation.
+The fix was straightforward: an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
+
+A deeper issue surfaced in fast-forward recovery, an optimisation that lets a recovering instance skip ahead by trusting its healthy peers rather than replaying every event from scratch. With fast-forward disabled, all four scenarios pass. With it enabled, there's a subtlety we haven't fully resolved. For now, the system runs without fast-forward. We'd rather be correct and slow to recover than fast and wrong.
 
 ## What the specs bought
 

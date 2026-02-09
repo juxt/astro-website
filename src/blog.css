@@ -45,6 +45,13 @@ pre.astro-code code {
 }
 
 /* Allium syntax highlighting */
+code.language-allium,
+code.language-allium span {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
 .allium-keyword { color: #cba6f7; }
 .allium-type { color: #89b4fa; }
 .allium-field { color: #f9e2af; }
