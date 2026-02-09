@@ -45,11 +45,17 @@ pre.astro-code code {
 }
 
 /* Allium syntax highlighting */
+pre:has(code.language-allium) {
+  background: #1e1e2e !important;
+  color: #cdd6f4 !important;
+}
+
 code.language-allium,
 code.language-allium span {
   background: none !important;
   padding: 0 !important;
   border-radius: 0 !important;
+  color: inherit;
 }
 
 .allium-keyword { color: #cba6f7; }
