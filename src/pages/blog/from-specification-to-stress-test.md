@@ -112,7 +112,9 @@ Most systems that need this kind of throughput give up on strong consistency (wh
 
 ## Autonomous from the first commit
 
-With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used. Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs. I pointed Claude at the remaining specs and recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in another seven commits over the next ninety minutes. Commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; [Detekt](https://detekt.dev), a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
+With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used.
+
+Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs. I pointed Claude at the remaining specs and recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in another seven commits over the next ninety minutes. Commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; [Detekt](https://detekt.dev), a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
 
 <span class="pullquote" text-content="When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first."></span>The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running, sometimes iterating on a single challenge, sometimes dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
 
@@ -147,11 +149,11 @@ The Clerk needed consensus from two instances before publishing any output, but 
 
 Fred Brooks argued in 1986 that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We discovered a specific instance of this. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
 
-After wiring federation, 1,000 RPS worked with a p99 under 100ms. Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
+Our target was 10,000 RPS. After wiring federation, 1,000 RPS worked with a p99 under 100ms. Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
 
 ## From seconds to milliseconds
 
-I gave Claude a target and let it run:
+We started with a stepping stone: 5,000 RPS with a p99 under 100ms. I gave Claude the target and let it run:
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -191,7 +193,7 @@ Then the gains started flattening. Each change was shaving milliseconds where th
   </div>
 </div>
 
-Five agents audited the codebase in parallel. A lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
+Five agents audited the codebase in parallel, looking for anything holding back the 5,000 RPS target. A lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the Clerk's watermark advancement. Each returned a prioritised list with file and line references.
 
 The fixes from that audit dropped the p99 from 157ms to 25ms.
 
@@ -201,7 +203,7 @@ Output ACK tracking moved from `HashSet<Int>` to a long bitfield. Union-find wit
 
 With the 5,000 RPS target met, we doubled the ambition to 10,000.
 
-The p99 sat stubbornly at 208ms. Claude iterated for hours, testing hypothesis after hypothesis: federation delays and garbage collection pauses. Every change to the application code made no difference. Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break.
+At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testing hypothesis after hypothesis: federation delays and garbage collection pauses. Every change to the application code made no difference. Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break.
 
 The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all! It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
@@ -209,7 +211,7 @@ Claude recognised the implication immediately: move the load test inside the Doc
 
 ## Proving correctness
 
-A fast system that loses data is worthless. The inventory domain gives us a natural correctness check: stock levels can't go below zero. Move all the stock from one warehouse to another and confirm the totals balance. If a stock level goes negative, a request has been applied twice. If the totals don't match, entity state has diverged between instances. This invariant is the basis of the resilience tests: 400,000 events across four scenarios, each designed to break things. Kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
+With the performance targets met, we turned to the harder question: does the system produce correct results under failure? A fast system that loses data is worthless. The inventory domain gives us a natural correctness check: stock levels can't go below zero. Move all the stock from one warehouse to another and confirm the totals balance. If a stock level goes negative, a request has been applied twice. If the totals don't match, entity state has diverged between instances. This invariant is the basis of the resilience tests: 400,000 events across four scenarios, each designed to break things. Kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
 
 The simultaneous kill exposed a bug. A recovering instance was broadcasting its pre-crash watermark (how far through the event stream it has durably processed) before recovery completed. Other instances trusted stale progress information. The fix was an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
 
@@ -217,7 +219,7 @@ A deeper issue surfaced in fast-forward recovery. With fast-forward disabled, al
 
 ## What the specs bought
 
-The specifications didn't prevent every bug. They missed the federation wiring, and Claude didn't always follow the guidance blocks.
+The specifications are why the system worked. They didn't prevent every bug. They missed the federation wiring, and Claude didn't always follow the guidance blocks.
 
 But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
