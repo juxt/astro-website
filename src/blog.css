@@ -55,7 +55,6 @@ code.language-allium span {
   background: none !important;
   padding: 0 !important;
   border-radius: 0 !important;
-  color: inherit;
 }
 
 .allium-keyword { color: #cba6f7; }

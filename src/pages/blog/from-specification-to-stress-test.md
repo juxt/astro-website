@@ -1,6 +1,6 @@
 ---
 author: 'hga'
-title: 'From vibe coding to stress test in 48 hours'
+title: 'From specification to stress test in 48 hours'
 description: 'Building a distributed event processing framework with Claude Code and the Allium behavioural specification language.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
@@ -15,7 +15,7 @@ tags:
   - 'distributed systems'
 ---
 
-<p class="lede">Over a weekend, I vibe coded a distributed event processing framework. Across 64 commits, I didn't look at a single line of code, but I did create a highly resilient system with industry-beating throughput and latency.</p>
+<p class="lede">Over a weekend, I vibe coded a strongly consistent distributed event processing framework. Across 64 commits, I didn't look at a single line of code, but together Claude and I did create a highly resilient system with industry-beating throughput and latency.</p>
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in 50 minutes:
 
@@ -37,7 +37,7 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
 
 That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt, and those specs are why it worked.
 
-64 commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
+64 commits later, the system was sustaining 10,000 requests per second (RPS) against our strongly consistent datastore with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
 
 Here's how we got there.
 
@@ -96,7 +96,7 @@ And resolved-question blocks preempt design debates:
 -- by chance is vanishingly unlikely). The threshold is configurable
 -- for deployments that want stricter guarantees.</code></pre>
 
-These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass, whether that's a ConcurrentHashMap sized by throughput or union-find with path compression for event partitioning. Resolved questions prevent it from relitigating decisions already made.
+These blocks narrow the design space without mandating a solution. Guidance steers an LLM towards the right data structure on the first pass (although as you'll see, it doesn't guarantee it), whether that's a ConcurrentHashMap sized by throughput or union-find with path compression for event partitioning. Resolved questions prevent it from relitigating decisions already made.
 
 ## Designing through conversation
 
@@ -108,7 +108,7 @@ A judicial theme emerged through the naming, and the metaphors became useful sho
 
 ## The hard problem
 
-The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 movements per second with sub-100ms tail latency.
+The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 inventory transfer requests per second with sub-100ms tail latency.
 
 Most systems that need this kind of throughput give up on strong consistency (where the system behaves as if there's a single copy of the data, even when there isn't). Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for.
 
@@ -116,7 +116,7 @@ I wanted to see if Claude could build one, and whether I could direct it there t
 
 ## Autonomous from the first commit
 
-With the specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used.
+With the initial specs committed and a CLAUDE.md file (a project-level instruction file that Claude Code reads automatically) establishing the architecture and naming conventions, I pointed Claude at the specs and went to hang out with my kids. The prompt at the top of this post is close to what I used.
 
 50 minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Usher, Arbiter, Clerk, Registrar, Ledger and Warden were all implemented with the threading model and entity lifecycle described in the specs. I pointed Claude at the remaining specs and recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in another 7 commits over the next 90 minutes. Commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; [Detekt](https://detekt.dev), a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
 
@@ -153,7 +153,9 @@ The Clerk needed consensus from two instances before publishing any output, but 
   </div>
 </div>
 
-Fred Brooks [argued in 1986](https://en.wikipedia.org/wiki/No_Silver_Bullet) that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We discovered a specific instance of this. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
+Fred Brooks [argued in 1986](https://en.wikipedia.org/wiki/No_Silver_Bullet) that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We had discovered a specific instance of this in our failing load tests. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
+
+I asked Claude to wire the federation and update the spec to prevent this class of gap from recurring. A single commit connected the TCP layer, added thread safety to the Clerk and set the BFT threshold to 2 copies. The spec gained guidance on federation startup sequencing.
 
 Our target was 10,000 RPS. After wiring federation, 1,000 RPS worked with a p99 under 100ms. Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
 
@@ -181,7 +183,9 @@ Claude ran in an iterative loop for 3 hours: profile, hypothesise, change, run G
 
 31,154ms → 1,520ms → 907ms → 234ms → 157ms.
 
-Then the gains started flattening. Each change was shaving milliseconds where the early fixes had shaved seconds. Claude was still finding improvements, but the iterative approach was exhausting the easy wins. I stepped in and changed the strategy, asking Claude to spin up specialist agents:
+Then the gains started flattening. Each change was shaving milliseconds where the early fixes had shaved seconds. Claude was still finding improvements, but the iterative approach was exhausting the easy wins.
+
+I could see Claude thrashing. The same profile-change-measure loop was producing diminishing returns because it was optimising one bottleneck at a time without stepping back to see the whole picture. What we needed was to consider the codebase from several angles simultaneously, and Claude Code's new [agent teams](https://code.claude.com/docs/en/agent-teams) feature lets you do exactly that:
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -215,7 +219,9 @@ At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testi
 
 The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all! It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
-Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms. As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will reach 50,000 RPS.
+Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
+
+As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will reach 50,000 RPS.
 
 ## Proving correctness
 
@@ -233,19 +239,21 @@ Claude built these resilience tests, ran them, and when a scenario failed, diagn
 
 The specifications are why the system worked. They didn't prevent every bug. They missed the federation wiring, and Claude didn't always follow the guidance blocks.
 
-But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
+But the specs made finding and fixing bugs systematic. When the watermark bug surfaced during resilience testing, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
 <span class="pullquote" text-content="My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications."></span>
 
 The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The [Allium](https://juxt.github.io/allium) specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
 
-The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new. But specifications might give us a way to address it that code alone can't. Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries. Integration specs could describe the connections between them. Failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
+The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new.
+
+But specifications might give us a way to address it that code alone can't. Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries. Integration specs could describe the connections between them. Failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
 
 3,000 lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly 2 lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
 ## What this means
 
-The skills of software engineering have always been fluid. We went from punch cards to high-level languages, from writing servers to configuring them. Each shift retired one set of skills and elevated another. The constant across every transition was that the people who understood what the system needed to do adapted faster than those who only knew how to write it.
+The skills of software engineering have always been fluid. We went from punch cards to high-level languages, from writing servers to configuring them. Each shift retired one set of skills and elevated another.
 
 <span class="pullquote" text-content="We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices."></span>
 
@@ -253,7 +261,7 @@ This shift is no different, except that it's ours. We've been telling other indu
 
 The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the Clerk's watermark advancement was a bottleneck, we rethought the design in the spec first.
 
-Iterative, incremental development didn't go away. It moved up a level of abstraction. Now specifications give engineering judgement a place to live.
+Iterative, incremental development didn't go away. It moved up a level of abstraction. When the code is written by Claude, formal specifications give engineering judgement a place to live.
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function() {
