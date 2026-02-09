@@ -12,7 +12,7 @@ tags:
   - 'allium'
 ---
 
-I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and ran the stress tests. Sixty-four commits later, the system was sustaining over 6,000 requests per second with a p99 latency (the response time that 99% of requests beat) of 29 milliseconds and zero failures.
+I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and ran the stress tests. Sixty-four commits later, the system was sustaining 10,000 requests per second with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds and zero failures.
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
@@ -192,7 +192,7 @@ The fixes from that audit dropped the p99 from 154ms to 25ms. Output ACK trackin
 
 ## The latency that wasn't ours
 
-At 10,000 RPS the p99 sat stubbornly at 208ms. Claude iterated for hours, testing hypothesis after hypothesis: federation delays and garbage collection pauses. Every change to the application code made no difference. Then the breakthrough came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all. It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers. Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests.
+At 10,000 RPS the p99 sat stubbornly at 208ms. Claude iterated for hours, testing hypothesis after hypothesis: federation delays and garbage collection pauses. Every change to the application code made no difference. Then the breakthrough came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all. It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers. Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms. The system is currently on track for 50,000.
 
 ## Resilience
 
