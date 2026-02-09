@@ -208,7 +208,7 @@ The specifications didn't prevent every bug. They missed the federation wiring, 
 
 But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
-The Allium specs evolved alongside the code across all 64 commits. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When implementation revealed that data fields should be `ByteArray` rather than `String`, the spec was corrected. The specs kept pace with the code because they were written to.
+The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The Allium specs evolved alongside the code across all 64 commits because they were the design tool, not the documentation.
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
