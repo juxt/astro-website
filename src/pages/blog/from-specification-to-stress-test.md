@@ -37,11 +37,13 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
 
 That's it. The prompt is short because the specifications are not. Three thousand lines of [Allium](https://juxt.github.io/allium) behavioural specification preceded this moment, and those specs are why it worked.
 
-Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request. Here's how we got there.
+Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
+
+Here's how we got there.
 
 ## Intent, independent of implementation
 
-Allium is a behavioural specification language we've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice within a time window):
+[Allium](https://juxt.github.io/allium) is a behavioural specification language we've been developing for LLM-driven code generation. It sits between TLA+ and structured prose. Here's a rule from the Warden, the component responsible for idempotency (ensuring the same request is never processed twice within a time window):
 
 <pre><code class="language-allium">rule EntryExpires {
     -- After the TTL elapses, the entry is removed. Any subsequent
@@ -56,7 +58,7 @@ Allium is a behavioural specification language we've been developing for LLM-dri
 
 <span class="pullquote" text-content="The spec is where we iterate on a design unencumbered by code, library and framework constraints."></span>Nobody reads these specs directly. They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by code, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
 
-Allium has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
+[Allium](https://juxt.github.io/allium) has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
 
 <pre><code class="language-allium">rule UsherChecksIdempotency {
     -- Before delivering an event to the Arbiter, the Usher checks
@@ -98,7 +100,7 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## Designing through conversation
 
-The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in Allium, as we went.
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in [Allium](https://juxt.github.io/allium), as we went.
 
 The first pass produced a single monolithic spec. I set Claude running in iterative loops to tighten the language and resolve open questions, reviewing the output between iterations. Then we talked through the decomposition: could it split naturally along component boundaries? Where should cross-file references live? By the next morning we had ten files: the Clerk (BFT consensus), the Arbiter (event evaluation), the Registrar (entity caching), the Usher (Kafka consumption), the Ledger (persistence), the Warden (input deduplication), and cross-cutting specs for recovery and live versioning.
 
@@ -120,7 +122,7 @@ Fifty minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The Ush
 
 Could Claude have done this sequencing itself? Probably. The prioritisation decisions were rarely surprising. But the dialogue was where I was able to add value, and the framework's domain interface is a good example.
 
-The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating the design goals I thought mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like single responsibility. Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
+The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating the design goals I thought mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle). Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
 
 Then I ran the load tests and every request failed.
 
@@ -139,7 +141,7 @@ The Clerk needed consensus from two instances before publishing any output, but 
   </div>
   <div class="terminal-body">
     <div class="turn user">
-      <span class="prompt">&gt;</span> You said that federation wasn't implemented yet, but you previously claimed that the code was in alignment with the specification. Isn't federation a key part of the specification?
+      <span class="prompt">&gt;</span> You just said federation wasn't implemented, but you previously claimed the code was in alignment with the specification. Isn't federation a key part of the specification?
     </div>
     <div class="turn llm">
       <span class="marker">✻</span> You're right, federation is part of the spec. The protocol types and message handling are all implemented, but I didn't wire the TCP connections between running instances. Each component's spec was implemented within its own boundary. The integration between them fell through the gaps.
@@ -147,7 +149,7 @@ The Clerk needed consensus from two instances before publishing any output, but 
   </div>
 </div>
 
-Fred Brooks argued in 1986 that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We discovered a specific instance of this. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
+Fred Brooks [argued in 1986](https://en.wikipedia.org/wiki/No_Silver_Bullet) that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We discovered a specific instance of this. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
 
 Our target was 10,000 RPS. After wiring federation, 1,000 RPS worked with a p99 under 100ms. Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
 
@@ -225,9 +227,9 @@ The specifications are why the system worked. They didn't prevent every bug. The
 
 But the specs made finding and fixing bugs systematic. When the fast-forward bug surfaced, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
-The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The Allium specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
+The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications. When the Arbiter shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the Clerk's watermark advancement needed rethinking, we revised the spec before touching the implementation. The [Allium](https://juxt.github.io/allium) specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
 
-The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new. But specifications might give us a way to address it that code alone can't. Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries. Integration specs could describe the connections between them. Failure-mode specs could cut across both. We're exploring what this looks like in Allium. The specifications aren't finished. Neither is the language.
+The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new. But specifications might give us a way to address it that code alone can't. Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries. Integration specs could describe the connections between them. Failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
 
 Three thousand lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly two lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
@@ -237,9 +239,9 @@ The skills of software engineering have always been fluid. We went from punch ca
 
 This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology: the tools are changing, you need to adapt. Now the disruption is coming for our own working practices.
 
-The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When the Arbiter's guidance block recommended union-find and the initial implementation ignored it, the spec told us what to fix. When the Clerk's watermark advancement needed rethinking under load, we revised the spec before touching the code.
+The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the Clerk's watermark advancement was a bottleneck, we rethought the design in the spec first.
 
-Iterative, incremental development didn't go away. It moved up a level of abstraction. The specifications gave engineering judgement a place to live.
+Iterative, incremental development didn't go away. It moved up a level of abstraction. Now specifications give engineering judgement a place to live.
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
