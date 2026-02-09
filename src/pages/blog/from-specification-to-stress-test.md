@@ -12,7 +12,7 @@ tags:
   - 'allium'
 ---
 
-I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and ran the stress tests. Sixty-four commits later, the system was sustaining 10,000 requests per second with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds and zero failures.
+I spent a weekend building a distributed event processing framework with Claude Code. I didn't write a line of code. I wrote specifications and ran the stress tests. Sixty-four commits later, the system was sustaining 10,000 requests per second (RPS) with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds and zero failures.
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in fifty minutes:
 
