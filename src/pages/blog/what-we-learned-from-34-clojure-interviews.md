@@ -103,5 +103,3 @@ To be clear about what happened here: Claude wrote this article. It read 34 inte
 That is not a hypothetical demonstration of AI-assisted work. It is what you just read. The quality of the analysis, the coherence of the structure, the selection of supporting evidence from across eight years of interviews - that was Claude. The editorial judgement about what to emphasise, what felt right, and when to say "make it more honest" - that was us.
 
 This is the workflow we help engineering teams adopt. Not AI replacing humans, but AI making certain kinds of work tractable that were previously too time-consuming to attempt. We had the interviews. We had the intent. What we lacked was the hours to synthesise them. Claude closed that gap in minutes.
-
-If that sounds like a useful capability for your engineering team, [we can help with that too](/ai-engineering).
