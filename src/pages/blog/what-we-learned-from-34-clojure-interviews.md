@@ -98,7 +98,7 @@ The 34 companies did not agree on everything. But they agreed on this: choosing 
 
 ## A Note on the Process
 
-To be clear about what happened here: Claude wrote this article. It read 34 interviews, identified the themes, chose the quotes, structured the argument, and produced the prose. We reviewed it, pushed back on a few points, asked for changes in tone and framing, and fact-checked the claims. The whole process took about an hour.
+To be clear about what happened here: Claude wrote this article. It read 34 interviews, identified the themes, chose the quotes, structured the argument, and produced the prose. We reviewed it, pushed back on a few points, asked for changes in tone and framing, and fact-checked the claims. The whole process took about twenty minutes.
 
 That is not a hypothetical demonstration of AI-assisted work. It is what you just read. The quality of the analysis, the coherence of the structure, the selection of supporting evidence from across eight years of interviews - that was Claude. The editorial judgement about what to emphasise, what felt right, and when to say "make it more honest" - that was us.
 
