@@ -96,8 +96,8 @@ The 34 companies did not agree on everything. But they agreed on this: choosing 
 
 ## A Note on the Process
 
-This post exists because of AI. Not in the sense that Claude wrote it - I edited, curated, and fact-checked everything above. But the task of reading 34 long-form interviews, extracting themes, cross-referencing which companies said what, and organising it into a coherent structure would have taken me days. Claude did the initial analysis in minutes.
+This post was written with Claude. The AI read all 34 interviews, extracted the themes, cross-referenced which companies said what, and produced the first draft. I then edited, reshaped, and fact-checked the result. The whole process - from "analyse these interviews" to publishable draft - took about an hour, compared to the days it would have taken me to do manually.
 
-That is a concrete example of what AI-assisted work looks like in practice. Not replacing the human, but making certain kinds of work tractable that were previously too tedious to attempt. I had the interviews. I had the intent. What I lacked was the time to synthesise them. AI closed that gap.
+That is what AI-assisted work actually looks like in practice. Not the AI replacing the human, but making certain kinds of work tractable that were previously too tedious to attempt. I had the interviews. I had the intent. What I lacked was the time to synthesise them. Claude closed that gap.
 
 If that sounds like a useful capability for your engineering team, [we can help with that too](/ai-engineering).
