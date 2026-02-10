@@ -1,6 +1,6 @@
 ---
 author: 'jon'
-draft: true
+draft: false
 title: 'I Used Claude to Mine 34 Clojure Adoption Interviews. Here is What It Found.'
 description: 'I pointed Claude at eight years of case study interviews and asked it to find the patterns. The results were more consistent - and more interesting - than I expected.'
 category: 'analysis'
