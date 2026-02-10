@@ -217,7 +217,7 @@ The turning point came from comparing two sets of numbers. Server-side instrumen
 
 <span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
 
-As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will reach 50,000 RPS.
+As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will exceed 20,000 RPS on better hardware.
 
 ## Proving correctness
 
