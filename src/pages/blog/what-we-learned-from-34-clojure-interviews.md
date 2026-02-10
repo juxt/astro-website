@@ -6,7 +6,7 @@ description: 'Eight years and 34 case studies later, the patterns are remarkably
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-10'
-heroImage: 'clojure-conj-banner.jpg'
+heroImage: 'clojure-in-default.jpg'
 tags:
   - clojure
 ---
