@@ -12,15 +12,13 @@ tags:
   - ai
 ---
 
-Between 2016 and 2024, we interviewed 34 companies about their experience adopting Clojure for production systems. Two seasons, eight years, companies ranging from 2-person startups to 11,000-employee enterprises, spanning industries from fashion to banking, healthcare to AI, and geographies from Athens to Melbourne to Oslo.
+Over the years we've interviewed 34 companies about using Clojure in production. Two seasons, eight years, everything from 2-person startups to Zalando's 11,000 engineers. We always meant to write something pulling out the common threads, but honestly, who has time to re-read 34 long interviews and figure out what they all have in common?
 
-We always meant to write a retrospective pulling out the common threads. But 34 long-form interviews is a lot of material to synthesise, and the task kept slipping down the list.
+So we got Claude to do it. We pointed it at the full archive and said "find the patterns." It read everything, pulled out the themes, cross-referenced which companies said what, and wrote this article.
 
-Then we pointed Claude at the full archive and asked it to find the patterns. Claude read all 34 interviews, extracted the themes, cross-referenced which companies said what, and wrote this article. The entire piece - from analysis to draft - was produced by AI.
+We then went back and forth with it - tweaking the tone, checking the quotes, pushing back where something felt off. That's the bit that's hard to explain until you've done it: it's less like editing a document and more like working with a very fast colleague who's just read everything you haven't had time to.
 
-We then reviewed the output, fact-checked claims against the original interviews, and worked with Claude iteratively to reshape the framing and tone. That back-and-forth is the real workflow: AI produces a strong first draft from source material that would take a human days to process, and the human steers, corrects, and refines.
-
-What follows is the result of that collaboration. The themes and structure came from Claude. The editorial judgement came from us.
+So yes, Claude wrote this. We steered it. Here's what it found.
 
 ## It Always Starts with One Person
 
