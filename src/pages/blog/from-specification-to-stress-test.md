@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'From specification to stress test in 48 hours'
-description: 'Building a distributed event processing framework with Claude Code and the Allium behavioural specification language.'
+description: 'Building a strongly-consistent distributed event processing framework with Claude Code and the Allium behavioural specification language.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-08'
@@ -35,7 +35,7 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
   </div>
 </div>
 
-That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt, and those specs are why it worked.
+That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt containing the collective wisdom of [András Gerlits](https://andrasgerlits.medium.com/), [Martin Kleppmann](https://martin.kleppmann.com/) and [Mark Burgess](https://markburgess.org/). Those specs are why it worked.
 
 A few days and 64 commits later, the system was sustaining 10,000 requests per second (RPS) against its strongly consistent datastore with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
 
@@ -124,9 +124,7 @@ With the initial specs committed and a CLAUDE.md file (a project-level instructi
 
 Could Claude have done this sequencing itself? Probably. The prioritisation decisions were never surprising. But the dialogue was where I was able to add value, and the framework's domain interface is a good example.
 
-<span class="pullquote" text-content="I exerted influence by articulating the design goals I thought mattered rather than writing the code."></span>
-
-The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating the design goals I thought mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle). Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
+<span class="pullquote" text-content="I exerted influence by articulating the design goals I thought mattered rather than writing the code."></span>The system is domain-agnostic: a separate `DomainRegistry` plugs in entity definitions and evaluation logic. The inventory tracking domain defines stock items across warehouses, where a stock movement event touches a source and destination entity, checks available quantities and updates balances. The same framework could handle IoT telemetry or logistics tracking. I exerted influence by articulating the design goals I thought mattered rather than writing the code: when I reviewed the interface design, I asked Claude to consider trade-offs against principles like [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle). Expressing those design priorities helped Claude weigh competing options before making suggestions. By the end of the first day, the system compiled, the tests passed and the Docker containers were running.
 
 Then I ran the load tests and every request failed.
 
@@ -217,9 +215,7 @@ At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testi
 
 The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all! It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
-<span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>
-
-Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
+<span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
 
 As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will reach 50,000 RPS.
 
@@ -229,9 +225,7 @@ With the performance targets met, we turned to an even harder question: does the
 
 A fast system that loses data is worthless. The inventory domain gives us a natural correctness check: stock levels can't go below zero. Move all the stock from one warehouse to another and confirm the totals balance. If a stock level goes negative, a request has been applied twice. If the totals don't match, entity state has diverged between instances. This invariant is the basis of the resilience tests: 400,000 events across 4 scenarios, each designed to break things. Kill the primary instance, kill the backup, kill both simultaneously, kill during recovery.
 
-<span class="pullquote" text-content="Claude built these resilience tests, ran them, and when a scenario failed, diagnosed the root cause and fixed it without any intervention from me."></span>
-
-3 of the 4 scenarios passed on the first run. The simultaneous kill, both instances crashing at once, exposed a bug. Each instance tracks a watermark: how far through the event stream it has durably processed. When an instance recovers after a crash, it broadcasts this watermark so its peers know where it got to. The problem was that the recovering instance was broadcasting its pre-crash watermark before recovery had actually completed. Other instances trusted this stale progress information and skipped events they shouldn't have.
+<span class="pullquote" text-content="Claude built these resilience tests, ran them, and when a scenario failed, diagnosed the root cause and fixed it without any intervention from me."></span>3 of the 4 scenarios passed on the first run. The simultaneous kill, both instances crashing at once, exposed a bug. Each instance tracks a watermark: how far through the event stream it has durably processed. When an instance recovers after a crash, it broadcasts this watermark so its peers know where it got to. The problem was that the recovering instance was broadcasting its pre-crash watermark before recovery had actually completed. Other instances trusted this stale progress information and skipped events they shouldn't have.
 
 The fix was straightforward: an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
 
@@ -243,9 +237,7 @@ The specifications are why the system worked. They didn't prevent every bug. The
 
 But the specs made finding and fixing bugs systematic. When the watermark bug surfaced during resilience testing, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
-<span class="pullquote" text-content="My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications."></span>
-
-The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications.
+<span class="pullquote" text-content="My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications."></span>The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications.
 
 When the `Arbiter` shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the `Clerk`'s watermark advancement needed rethinking, we revised the spec before touching the implementation. The [Allium](https://juxt.github.io/allium) specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
 
@@ -259,9 +251,7 @@ The federation bug pointed to a perennial problem in software engineering: any d
 
 The skills of software engineering have always been fluid. We went from punch cards to high-level languages, from writing servers to configuring them. Each shift retired one set of skills and elevated another.
 
-<span class="pullquote" text-content="We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices."></span>
-
-This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices.
+<span class="pullquote" text-content="We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices."></span>This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices.
 
 The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the `Clerk`'s watermark advancement was a bottleneck, we rethought the design in the spec first.
 
