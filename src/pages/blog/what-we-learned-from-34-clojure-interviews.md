@@ -12,13 +12,13 @@ tags:
   - ai
 ---
 
-Between 2016 and 2024, I interviewed 34 companies about their experience adopting Clojure for production systems. Two seasons, eight years, companies ranging from 2-person startups to 11,000-employee enterprises, spanning industries from fashion to banking, healthcare to AI, and geographies from Athens to Melbourne to Oslo.
+Between 2016 and 2024, we interviewed 34 companies about their experience adopting Clojure for production systems. Two seasons, eight years, companies ranging from 2-person startups to 11,000-employee enterprises, spanning industries from fashion to banking, healthcare to AI, and geographies from Athens to Melbourne to Oslo.
 
-I always meant to write a retrospective pulling out the common threads. But 34 long-form interviews is a lot of material to synthesise, and the task kept slipping down the list.
+We always meant to write a retrospective pulling out the common threads. But 34 long-form interviews is a lot of material to synthesise, and the task kept slipping down the list.
 
-Then I pointed Claude at the full archive and asked it to find the patterns.
+Then we pointed Claude at the full archive and asked it to find the patterns.
 
-What came back surprised me - not because the themes were unexpected, but because of how consistent they were. The same narrative arc repeated again and again, regardless of company size, industry, or geography. Claude surfaced connections I had not consciously registered, and organised them more cleanly than I would have managed manually. What follows is my edit of that analysis - the AI did the mining, I did the curation and fact-checking.
+What came back surprised us - not because the themes were unexpected, but because of how consistent they were. The same narrative arc repeated again and again, regardless of company size, industry, or geography. Claude surfaced connections we had not consciously registered, and organised them more cleanly than we would have managed manually. What follows is our edit of that analysis - the AI did the mining, we did the curation and fact-checking.
 
 ## It Always Starts with One Person
 
@@ -48,7 +48,7 @@ Telenor's Erik said teaching people REPL fluency was the key to successful onboa
 
 ## The Hiring Question
 
-"Can you hire Clojure developers?" was the question I heard most from sceptics. The answer from 34 companies was nuanced but consistent: the pool is smaller, but the quality is higher.
+"Can you hire Clojure developers?" was the question we heard most from sceptics. The answer from 34 companies was nuanced but consistent: the pool is smaller, but the quality is higher.
 
 The winning strategy, used by companies from Telenor to Funding Circle to AppsFlyer (who built a team of 200+), was simple: hire for aptitude, train for Clojure. Telenor put it plainly: "We look for good developers, not necessarily Clojure developers."
 
@@ -86,7 +86,7 @@ The "can Clojure handle serious work?" question from Season One was comprehensiv
 
 ## The Pattern
 
-If I had to distil eight years and 34 interviews into a single observation, it would be this: adoption follows a consistent arc.
+If we had to distil eight years and 34 interviews into a single observation, it would be this: adoption follows a consistent arc.
 
 A champion introduces Clojure on something small. The team is initially sceptical. Productivity gains become obvious within weeks. The codebase proves stable and maintainable over years. Hiring is harder but candidate quality is higher. And the team never goes back.
 
@@ -96,8 +96,8 @@ The 34 companies did not agree on everything. But they agreed on this: choosing 
 
 ## A Note on the Process
 
-This post was written with Claude. The AI read all 34 interviews, extracted the themes, cross-referenced which companies said what, and produced the first draft. I then edited, reshaped, and fact-checked the result. The whole process - from "analyse these interviews" to publishable draft - took about an hour, compared to the days it would have taken me to do manually.
+This post was written with Claude. The AI read all 34 interviews, extracted the themes, cross-referenced which companies said what, and produced the first draft. We then edited, reshaped, and fact-checked the result. The whole process - from "analyse these interviews" to publishable draft - took about an hour, compared to the days it would have taken us to do manually.
 
-That is what AI-assisted work actually looks like in practice. Not the AI replacing the human, but making certain kinds of work tractable that were previously too tedious to attempt. I had the interviews. I had the intent. What I lacked was the time to synthesise them. Claude closed that gap.
+That is what AI-assisted work actually looks like in practice. Not the AI replacing the human, but making certain kinds of work tractable that were previously too tedious to attempt. We had the interviews. We had the intent. What we lacked was the time to synthesise them. Claude closed that gap.
 
 If that sounds like a useful capability for your engineering team, [we can help with that too](/ai-engineering).
