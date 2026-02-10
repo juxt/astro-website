@@ -51,6 +51,10 @@ pre:has(code.language-allium) {
   color: #cdd6f4 !important;
 }
 
+code.language-allium {
+  color: inherit !important;
+}
+
 code.language-allium,
 code.language-allium span {
   background: none !important;
