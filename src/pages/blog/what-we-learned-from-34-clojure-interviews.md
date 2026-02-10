@@ -12,7 +12,7 @@ tags:
   - ai
 ---
 
-Over the years we've interviewed 34 companies about using Clojure in production. Two seasons, eight years, everything from 2-person startups to Zalando's 11,000 engineers. We always meant to write something pulling out the common threads, but honestly, who has time to re-read 34 long interviews and figure out what they all have in common?
+Over the years we've interviewed 34 companies about using Clojure in production as part of our [Clojure In](/blog/clojure-in) series. Two seasons, eight years, everything from 2-person startups to Zalando's 11,000 engineers. We always meant to write something pulling out the common threads, but honestly, who has time to re-read 34 long interviews and figure out what they all have in common?
 
 So we got Claude to do it. We pointed it at the full archive and said "find the patterns." It read everything, pulled out the themes, cross-referenced which companies said what, and wrote this article.
 
