@@ -16,9 +16,11 @@ Between 2016 and 2024, we interviewed 34 companies about their experience adopti
 
 We always meant to write a retrospective pulling out the common threads. But 34 long-form interviews is a lot of material to synthesise, and the task kept slipping down the list.
 
-Then we pointed Claude at the full archive and asked it to find the patterns.
+Then we pointed Claude at the full archive and asked it to find the patterns. Claude read all 34 interviews, extracted the themes, cross-referenced which companies said what, and wrote this article. The entire piece - from analysis to draft - was produced by AI.
 
-What came back surprised us - not because the themes were unexpected, but because of how consistent they were. The same narrative arc repeated again and again, regardless of company size, industry, or geography. Claude surfaced connections we had not consciously registered, and organised them more cleanly than we would have managed manually. What follows is our edit of that analysis - the AI did the mining, we did the curation and fact-checking.
+We then reviewed the output, fact-checked claims against the original interviews, and worked with Claude iteratively to reshape the framing and tone. That back-and-forth is the real workflow: AI produces a strong first draft from source material that would take a human days to process, and the human steers, corrects, and refines.
+
+What follows is the result of that collaboration. The themes and structure came from Claude. The editorial judgement came from us.
 
 ## It Always Starts with One Person
 
@@ -96,8 +98,10 @@ The 34 companies did not agree on everything. But they agreed on this: choosing 
 
 ## A Note on the Process
 
-This post was written with Claude. The AI read all 34 interviews, extracted the themes, cross-referenced which companies said what, and produced the first draft. We then edited, reshaped, and fact-checked the result. The whole process - from "analyse these interviews" to publishable draft - took about an hour, compared to the days it would have taken us to do manually.
+To be clear about what happened here: Claude wrote this article. It read 34 interviews, identified the themes, chose the quotes, structured the argument, and produced the prose. We reviewed it, pushed back on a few points, asked for changes in tone and framing, and fact-checked the claims. The whole process took about an hour.
 
-That is what AI-assisted work actually looks like in practice. Not the AI replacing the human, but making certain kinds of work tractable that were previously too tedious to attempt. We had the interviews. We had the intent. What we lacked was the time to synthesise them. Claude closed that gap.
+That is not a hypothetical demonstration of AI-assisted work. It is what you just read. The quality of the analysis, the coherence of the structure, the selection of supporting evidence from across eight years of interviews - that was Claude. The editorial judgement about what to emphasise, what felt right, and when to say "make it more honest" - that was us.
+
+This is the workflow we help engineering teams adopt. Not AI replacing humans, but AI making certain kinds of work tractable that were previously too time-consuming to attempt. We had the interviews. We had the intent. What we lacked was the hours to synthesise them. Claude closed that gap in minutes.
 
 If that sounds like a useful capability for your engineering team, [we can help with that too](/ai-engineering).
