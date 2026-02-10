@@ -1,19 +1,24 @@
 ---
 author: 'jon'
 draft: true
-title: 'What We Learned from 34 Clojure Adoption Interviews'
-description: 'Eight years and 34 case studies later, the patterns are remarkably consistent. Here is what companies actually experience when they adopt Clojure.'
+title: 'I Used Claude to Mine 34 Clojure Adoption Interviews. Here is What It Found.'
+description: 'I pointed Claude at eight years of case study interviews and asked it to find the patterns. The results were more consistent - and more interesting - than I expected.'
 category: 'analysis'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-10'
 heroImage: 'clojure-in-default.jpg'
 tags:
   - clojure
+  - ai
 ---
 
-Between 2016 and 2024, I interviewed 34 companies about their experience adopting Clojure for production systems. The companies ranged from 2-person startups to 11,000-employee enterprises. They spanned industries from fashion to banking, healthcare to AI, and geographies from Athens to Melbourne to Oslo.
+Between 2016 and 2024, I interviewed 34 companies about their experience adopting Clojure for production systems. Two seasons, eight years, companies ranging from 2-person startups to 11,000-employee enterprises, spanning industries from fashion to banking, healthcare to AI, and geographies from Athens to Melbourne to Oslo.
 
-What surprised me most was the consistency. The same narrative arc repeated again and again, regardless of company size, industry, or geography. Here are the themes.
+I always meant to write a retrospective pulling out the common threads. But 34 long-form interviews is a lot of material to synthesise, and the task kept slipping down the list.
+
+Then I pointed Claude at the full archive and asked it to find the patterns.
+
+What came back surprised me - not because the themes were unexpected, but because of how consistent they were. The same narrative arc repeated again and again, regardless of company size, industry, or geography. Claude surfaced connections I had not consciously registered, and organised them more cleanly than I would have managed manually. What follows is my edit of that analysis - the AI did the mining, I did the curation and fact-checking.
 
 ## It Always Starts with One Person
 
@@ -88,3 +93,11 @@ A champion introduces Clojure on something small. The team is initially sceptica
 That arc repeated with remarkable uniformity across companies of vastly different sizes, industries, and geographies, over an eight-year period. It suggests something fundamental about the language and its community rather than something situational.
 
 The 34 companies did not agree on everything. But they agreed on this: choosing Clojure was a decision they would make again.
+
+## A Note on the Process
+
+This post exists because of AI. Not in the sense that Claude wrote it - I edited, curated, and fact-checked everything above. But the task of reading 34 long-form interviews, extracting themes, cross-referencing which companies said what, and organising it into a coherent structure would have taken me days. Claude did the initial analysis in minutes.
+
+That is a concrete example of what AI-assisted work looks like in practice. Not replacing the human, but making certain kinds of work tractable that were previously too tedious to attempt. I had the interviews. I had the intent. What I lacked was the time to synthesise them. AI closed that gap.
+
+If that sounds like a useful capability for your engineering team, [we can help with that too](/ai-engineering).
