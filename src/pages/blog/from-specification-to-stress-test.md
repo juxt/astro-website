@@ -153,11 +153,13 @@ Fred Brooks [argued in 1986](https://en.wikipedia.org/wiki/No_Silver_Bullet) tha
 
 I asked Claude to wire the federation and update the spec to prevent this class of gap from recurring. A single commit connected the TCP layer, added thread safety to the `Clerk` and set the BFT threshold to 2 copies. The spec gained guidance on federation startup sequencing.
 
-Our target was 10,000 RPS. After wiring federation, 1,000 RPS worked with a p99 under 100ms. Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
+After wiring federation, 1,000 RPS worked with a p99 under 100ms.
+
+Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
 
 ## From seconds to milliseconds
 
-We started with a stepping stone: 5,000 RPS with a p99 under 100ms. I gave Claude the target and let it run:
+The specs constrained Claude's implementation within the behaviours I cared about, and the load tests could be run on demand to measure progress. I set an audacious goal and told Claude to let me know when it was done:
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -181,7 +183,7 @@ Claude ran in an iterative loop for 3 hours: profile, hypothesise, change, run G
 
 Then the gains started flattening. Each change was shaving milliseconds where the early fixes had shaved seconds. Claude was still finding improvements, but the iterative approach was exhausting the easy wins.
 
-I could see Claude thrashing. The same profile-change-measure loop was producing diminishing returns because it was optimising one bottleneck at a time without stepping back to see the whole picture. What we needed was to consider the codebase from several angles simultaneously, and Claude Code's new [agent teams](https://code.claude.com/docs/en/agent-teams) feature lets you do exactly that:
+I checked in periodically and could see Claude thrashing. The same profile-change-measure loop was producing diminishing returns because it was optimising one bottleneck at a time without stepping back to see the whole picture. What we needed was to consider the codebase from several angles simultaneously, and Claude Code's new [agent teams](https://code.claude.com/docs/en/agent-teams) feature lets you do exactly that:
 
 <div class="not-prose terminal">
   <div class="terminal-titlebar">
@@ -201,9 +203,9 @@ I could see Claude thrashing. The same profile-change-measure loop was producing
 
 5 agents audited the codebase in parallel, looking for anything holding back the 5,000 RPS target. A lock contention specialist found `synchronized` blocks pinning virtual threads, and an algorithm complexity specialist found O(n) scans in the `Clerk`'s watermark advancement. Each returned a prioritised list with file and line references.
 
-The fixes from that audit dropped the p99 from 157ms to 25ms.
-
 The agents identified 27 optimisations: replacing heavyweight data structures with compact alternatives, swapping naive algorithms for the faster ones the spec's guidance blocks had recommended but the initial implementation hadn't followed. Every fix conformed to the spec's behaviour. They were all beneath the spec level, in the implementation choices the spec had left open.
+
+The fixes from that audit dropped the p99 from 157ms to 25ms.
 
 ## Measuring the right thing
 
@@ -213,7 +215,9 @@ At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testi
 
 <span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all, it was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
-Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
+Claude recognised the implication immediately and acted on it: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests.
+
+Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
 
 ## Proving correctness
 
@@ -227,7 +231,7 @@ The fix was straightforward: an `instanceReady` gate that holds back watermark a
 
 Claude built these resilience tests, ran them, and when a scenario failed, diagnosed the root cause and fixed it without any intervention from me. The watermark bug is a subtle distributed systems problem: a race condition between recovery and federation that only manifests under simultaneous failure. Claude identified the exact mechanism, implemented the fix and re-ran all 4 scenarios to confirm correctness. An AI agent tested a distributed system to destruction and repaired what it found.
 
-## What the specs bought
+## The value of formal intent
 
 The specifications are why the system worked. They didn't prevent every bug. They missed the federation wiring, and Claude didn't always follow the guidance blocks.
 
@@ -247,11 +251,11 @@ The federation bug pointed to a perennial problem in software engineering: any d
 
 The skills of software engineering have always been fluid. We went from punch cards to high-level languages, from writing servers to configuring them. Each shift retired one set of skills and elevated another.
 
-<span class="pullquote" text-content="We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices."></span>This shift is no different, except that it's ours. We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices.
+<span class="pullquote" text-content="We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices."></span>This is a bigger jump than previous ones, but it's a jump along the same trajectory. We've been telling other industries for decades that they need to adapt to technology. Now the disruption is coming for our own working practices.
 
-The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the `Clerk`'s watermark advancement was a bottleneck, we rethought the design in the spec first.
+The skill that mattered most in this project was formalising intent. The specs evolved with the code throughout. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the `Clerk`'s watermark advancement was a bottleneck, we rethought the design in the spec first.
 
-I don't think iterative and incremental development has gone away. It's moved up a level of abstraction. Formal specifications, even ones arrived at conversationally, give engineering judgement a place to live.
+Iterative and incremental development hasn't gone away: it's just moved up a level of abstraction. Formal specifications, even ones arrived at conversationally, give engineering judgement a place to live.
 
 ---
 
