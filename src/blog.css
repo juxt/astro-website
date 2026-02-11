@@ -45,6 +45,11 @@ pre.astro-code code {
   max-width: 50%;
 }
 
+.prose span.pullquote.left:after {
+  float: left;
+  padding: 1em 2em 1em 0em;
+}
+
 /* Allium syntax highlighting */
 pre:has(code.language-allium) {
   background: #1e1e2e !important;

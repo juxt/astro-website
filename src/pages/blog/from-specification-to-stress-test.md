@@ -35,7 +35,7 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
   </div>
 </div>
 
-That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt containing the collective wisdom of [András Gerlits](https://andrasgerlits.medium.com/), [Martin Kleppmann](https://martin.kleppmann.com/) and [Mark Burgess](https://markburgess.org/). Those specs are why it worked.
+That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt, drawing on the distributed systems expertise of [András Gerlits](https://andrasgerlits.medium.com/), [Martin Kleppmann](https://martin.kleppmann.com/) and [Mark Burgess](https://markburgess.org/). Those specs are why it worked.
 
 A few days and 64 commits later, the system was sustaining thousands of requests per second (RPS) against its strongly consistent datastore with sub-100ms tail latency and zero dropped requests. More importantly, crash-recovery scenarios were exposing subtle distributed systems bugs, and we were fixing them through the specs.
 
@@ -118,7 +118,7 @@ With the initial specs committed and a CLAUDE.md file (a project-level instructi
 
 50 minutes later: 44 files, 4,749 lines of Kotlin, 103 passing tests. The `Usher`, `Arbiter`, `Clerk`, `Registrar`, `Ledger` and `Warden` were all implemented with the threading model and entity lifecycle described in the specs. I pointed Claude at the remaining specs and recovery logic, a domain module, REST API, Docker Compose configuration and Kafka integration followed in another 7 commits over the next 90 minutes. Commits were landing while I followed along. I wasn't reviewing the code in any meaningful sense; [Detekt](https://detekt.dev), a static analysis tool, was handling code quality. When Claude chose to `@Suppress` a warning, I didn't question it.
 
-<span class="pullquote" text-content="When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first."></span>The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running, sometimes iterating on a single challenge, sometimes dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
+<span class="pullquote left" text-content="When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first."></span>The work fell into a rhythm. We would ideate together, sometimes for an extended stretch: working through a design decision, debating trade-offs, refining the specs. Then I would set Claude running, sometimes iterating on a single challenge, sometimes dispatching multiple workers in parallel. When it finished, we would reconvene and I would set the direction for the next phase. When should we start load testing? When should we build the framework abstractions for different domains? When I had a list of items, I would ask Claude whether there was any opportunity for parallelism and which groups to tackle first.
 
 Could Claude have done this sequencing itself? Probably. The prioritisation decisions were never surprising. But the dialogue was where I was able to add value, and the framework's domain interface is a good example.
 
@@ -213,7 +213,7 @@ At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testi
 
 The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all, it was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
-<span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
+<span class="pullquote left" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
 
 ## Proving correctness
 
@@ -233,7 +233,7 @@ The specifications are why the system worked. They didn't prevent every bug. The
 
 But the specs made finding and fixing bugs systematic. When the watermark bug surfaced during resilience testing, the spec was the reference point for whether the code was wrong or the design needed revising. Without it, investigation would have meant reconstructing intended behaviour from thousands of lines of generated code.
 
-<span class="pullquote" text-content="My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications."></span>The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications.
+<span class="pullquote left" text-content="My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications."></span>The specs weren't finished before coding started. My understanding of the system grew through conversation with Claude as we built it, and each phase surfaced trade-offs and constraints that fed back into the specifications.
 
 When the `Arbiter` shifted from sequential to parallel processing, the spec was updated first and the code followed. When load testing revealed that the `Clerk`'s watermark advancement needed rethinking, we revised the spec before touching the implementation. The [Allium](https://juxt.github.io/allium) specs evolved alongside the code across all 64 commits because I was designing in them, not just documenting.
 
@@ -251,7 +251,7 @@ The skills of software engineering have always been fluid. We went from punch ca
 
 The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the `Clerk`'s watermark advancement was a bottleneck, we rethought the design in the spec first.
 
-Iterative, incremental development didn't go away. It moved up a level of abstraction. Formal specifications, even ones arrived at conversationally, give engineering judgement a place to live.
+I don't think iterative and incremental development has gone away. It's moved up a level of abstraction. Formal specifications, even ones arrived at conversationally, give engineering judgement a place to live.
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function() {
