@@ -239,7 +239,7 @@ When the `Arbiter` shifted from sequential to parallel processing, the spec was 
 
 The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new.
 
-**But specifications might give us a way to address it that code alone can't.** Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries, but integration specs could describe the connections between them, and failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
+**Specifications address this in ways that code alone can't.** Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries, but integration specs could describe the connections between them, and failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
 
 3,000 lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly 2 lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
@@ -252,6 +252,8 @@ The skills of software engineering have always been fluid. We went from punch ca
 The skill that mattered most in this project was formalising intent: describing what the system should do precisely enough that the description itself became the reference point for everything that followed. That doesn't mean writing specs upfront and generating code. When crash testing revealed that a recovering instance needed to account for the gap between what it had persisted and what its peers had published, we revised the recovery spec before changing the code. When load testing showed the `Clerk`'s watermark advancement was a bottleneck, we rethought the design in the spec first.
 
 I don't think iterative and incremental development has gone away. It's moved up a level of abstraction. Formal specifications, even ones arrived at conversationally, give engineering judgement a place to live.
+
+If you're interested in building new systems with Allium and Claude, you can [install Allium](https://juxt.github.io/allium/installation) today from the [juxt/claude-plugins](https://github.com/juxt/claude-plugins) marketplace.
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function() {
