@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'From specification to stress test in 48 hours'
-description: 'Building a strongly-consistent distributed event processing framework with Claude Code and the Allium behavioural specification language.'
+description: 'A behavioural specification language, an AI, and a Byzantine fault-tolerant distributed system built over a weekend.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-08'
@@ -15,7 +15,7 @@ tags:
   - 'distributed systems'
 ---
 
-<p class="lede">Over a weekend, I vibe coded a strongly consistent distributed event processing framework. Across 64 commits, I didn't look at a single line of code, but together Claude and I created a highly resilient system with industry-beating throughput and latency.</p>
+<p class="lede">Over a weekend, between board games and hanging out with my kids, I built a distributed system that handles multithreaded race conditions, sharded databases with batched writes, Byzantine fault tolerance across federated instances and crash recovery that preserves strong consistency. I described the behaviour I wanted in Allium, worked through the bugs conversationally and didn't write a line of implementation code.</p>
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in 50 minutes:
 
@@ -37,7 +37,7 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
 
 That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt containing the collective wisdom of [András Gerlits](https://andrasgerlits.medium.com/), [Martin Kleppmann](https://martin.kleppmann.com/) and [Mark Burgess](https://markburgess.org/). Those specs are why it worked.
 
-A few days and 64 commits later, the system was sustaining 10,000 requests per second (RPS) against its strongly consistent datastore with a p99 latency (the response time that 99% of requests beat) well under 100 milliseconds, without dropping a single request.
+A few days and 64 commits later, the system was sustaining 10,000 requests per second (RPS) against its strongly consistent datastore with sub-100ms tail latency and zero dropped requests. More importantly, it was surviving crash-recovery scenarios that exposed subtle distributed systems bugs, and we were fixing them.
 
 Here's how we got there.
 
@@ -100,7 +100,7 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## Designing through conversation
 
-The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (tens of thousands of transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in [Allium](https://juxt.github.io/allium), as we went.
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (10,000 transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in [Allium](https://juxt.github.io/allium), as we went.
 
 The first pass produced a single monolithic spec. I set Claude running in iterative loops to tighten the language and resolve the open questions with me, reviewing the output between iterations. Then we talked through the decomposition: could it split naturally along component boundaries? Where should cross-file references live? By the next morning we had 10 files: the `Clerk` (BFT consensus), the `Arbiter` (event evaluation), the `Registrar` (entity caching), the `Usher` (Kafka consumption), the `Ledger` (persistence), the `Warden` (input deduplication), and cross-cutting specs for recovery and live versioning.
 
@@ -108,9 +108,7 @@ A judicial theme emerged through the naming, and the metaphors became useful sho
 
 ## The hard problem
 
-The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 inventory transfer requests per second with sub-100ms tail latency.
-
-Most systems that need this kind of throughput give up on strong consistency (where every instance agrees on the result of every event, even under failure). Amazon handles comparable volumes of inventory movements at Prime Day peak, but distributed across thousands of eventually-consistent microservices. A single PostgreSQL instance tops out around 4,000-5,000 write transactions per second. The combination of high throughput, strong consistency, Byzantine fault tolerance and crash recovery is a problem the industry doesn't have a good off-the-shelf answer for.
+The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 inventory transfer requests per second with sub-100ms tail latency. But throughput was only part of the challenge. The system needed strong consistency (every instance agreeing on every event's outcome), Byzantine fault tolerance (detecting silent data corruption), and crash recovery that restores a correct state after arbitrary failures.
 
 I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
 
@@ -213,11 +211,9 @@ With the 5,000 RPS target met, I doubled the ambition to 10,000.
 
 At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testing hypothesis after hypothesis: federation delays and garbage collection pauses. Every change to the application code made no difference. Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break.
 
-The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all! It was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
+The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all, it was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
 <span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>Claude recognised the implication immediately: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests. Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
-
-As I write this post, Claude has removed the Docker requirement entirely and is running bare-metal load tests in another terminal. Early results suggest the system will exceed 20,000 RPS on better hardware.
 
 ## Proving correctness
 
@@ -229,7 +225,7 @@ A fast system that loses data is worthless. The inventory domain gives us a natu
 
 The fix was straightforward: an `instanceReady` gate that holds back watermark advertisement until recovery finishes.
 
-Claude built these resilience tests, ran them, and when a scenario failed, diagnosed the root cause and fixed it without any intervention from me. The watermark bug is a subtle distributed systems problem: a race condition between recovery and federation that only manifests under simultaneous failure. Claude identified the exact mechanism, implemented the fix and re-ran all 4 scenarios to confirm correctness. An AI agent proved a distributed system correct by systematically breaking it and repairing what it found.
+Claude built these resilience tests, ran them, and when a scenario failed, diagnosed the root cause and fixed it without any intervention from me. The watermark bug is a subtle distributed systems problem: a race condition between recovery and federation that only manifests under simultaneous failure. Claude identified the exact mechanism, implemented the fix and re-ran all 4 scenarios to confirm correctness. An AI agent tested a distributed system to destruction and repaired what it found.
 
 ## What the specs bought
 
@@ -243,7 +239,7 @@ When the `Arbiter` shifted from sequential to parallel processing, the spec was 
 
 The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new.
 
-**But specifications might give us a way to address it that code alone can't.** Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries. Integration specs could describe the connections between them. Failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
+**But specifications might give us a way to address it that code alone can't.** Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries, but integration specs could describe the connections between them, and failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
 
 3,000 lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly 2 lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
