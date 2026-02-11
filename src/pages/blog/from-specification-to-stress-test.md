@@ -15,7 +15,7 @@ tags:
   - 'distributed systems'
 ---
 
-<p class="lede">Over a weekend, between board games and time with my kids, Claude and I built a distributed system with Byzantine fault tolerance, strong consistency and crash recovery. I described the behaviour I wanted in Allium, worked through the bugs conversationally and didn't write a line of implementation code.</p>
+<p class="lede">Over a weekend, between board games and time with my kids, Claude and I built a distributed system with Byzantine fault tolerance, strong consistency and crash recovery under arbitrary failures. I described the behaviour I wanted in Allium, worked through the bugs conversationally and didn't write a line of implementation code.</p>
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in 50 minutes:
 

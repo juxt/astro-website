@@ -48,6 +48,7 @@ pre.astro-code code {
 .prose span.pullquote.left:after {
   float: left;
   padding: 1em 2em 1em 0em;
+  background-position-y: 0.8em;
 }
 
 /* Allium syntax highlighting */
