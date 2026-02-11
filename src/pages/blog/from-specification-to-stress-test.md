@@ -37,7 +37,7 @@ Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing
 
 That's it. The prompt is short because the specifications are not. 3,000 lines of [Allium](https://juxt.github.io/allium) behavioural specification sat behind that prompt containing the collective wisdom of [András Gerlits](https://andrasgerlits.medium.com/), [Martin Kleppmann](https://martin.kleppmann.com/) and [Mark Burgess](https://markburgess.org/). Those specs are why it worked.
 
-A few days and 64 commits later, the system was sustaining 10,000 requests per second (RPS) against its strongly consistent datastore with sub-100ms tail latency and zero dropped requests. More importantly, it was surviving crash-recovery scenarios that exposed subtle distributed systems bugs, and we were fixing them.
+A few days and 64 commits later, the system was sustaining thousands of requests per second (RPS) against its strongly consistent datastore with sub-100ms tail latency and zero dropped requests. More importantly, crash-recovery scenarios were exposing subtle distributed systems bugs, and we were fixing them through the specs.
 
 Here's how we got there.
 
@@ -56,7 +56,7 @@ Here's how we got there.
         Warden.entries.remove(entry.idempotency_key)
 }</code></pre>
 
-<span class="pullquote" text-content="The spec is where we iterate on a design unencumbered by coding language, library and framework constraints."></span>**Nobody is expected to read these specs directly.** They're for the LLM to refer to, grounding conversations about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by coding language, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
+<span class="pullquote" text-content="The spec is where we iterate on a design unencumbered by coding language, library and framework constraints."></span>**Nobody writes these specs by hand.** They emerge through conversation, and they're for the LLM to refer to: grounding discussions about behaviour in something precise enough to build from and concrete enough to verify against. The spec operates at whatever level of granularity makes sense for the idea. A rule might describe a high-level escalation policy that touches dozens of classes, or low-level caching semantics that constrain a single data structure. The coupling between spec and code is loose: the spec is where we iterate on a design unencumbered by coding language, library and framework constraints, and an LLM reading a rule like this one has enough to write the implementation. I have enough to tell whether it got it right.
 
 [Allium](https://juxt.github.io/allium) has two other constructs that matter. Guidance blocks carry implementation hints that steer the LLM towards specific choices:
 
