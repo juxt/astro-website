@@ -1,7 +1,7 @@
 ---
 author: 'hga'
-title: 'From specification to stress test in 48 hours'
-description: 'A behavioural specification language, an AI, and a Byzantine fault-tolerant distributed system built over a weekend.'
+title: 'From specification to stress test: a weekend with Claude'
+description: 'A behavioural specification language, AI agent teams, and a Byzantine fault-tolerant distributed system built over a weekend.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-08'
@@ -15,7 +15,7 @@ tags:
   - 'distributed systems'
 ---
 
-<p class="lede">Over a weekend, between board games and hanging out with my kids, I built a distributed system that handles multithreaded race conditions, sharded databases with batched writes, Byzantine fault tolerance across federated instances and crash recovery that preserves strong consistency. I described the behaviour I wanted in Allium, worked through the bugs conversationally and didn't write a line of implementation code.</p>
+<p class="lede">Over a weekend, between board games and hanging out with my kids, Claude and I built a distributed system that handles multithreaded race conditions, sharded databases with batched writes, Byzantine fault tolerance across federated instances and crash recovery that preserves strong consistency. I described the behaviour I wanted in Allium, worked through the bugs conversationally and didn't write a line of implementation code.</p>
 
 Here is the prompt that produced the first 4,749 lines of Kotlin and 103 passing unit tests in 50 minutes:
 
