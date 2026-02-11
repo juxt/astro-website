@@ -151,9 +151,7 @@ The `Clerk` needed consensus from two instances before publishing any output, bu
 
 Fred Brooks [argued in 1986](https://en.wikipedia.org/wiki/No_Silver_Bullet) that software's essential complexity can be controlled but never eliminated. How we decompose a problem determines where that complexity concentrates, and it tends to concentrate at the boundaries. We had discovered a specific instance of this in our failing load tests. Each component spec was thorough and the implementation matched it. What fell through was the integration: where and when the TCP connections get established wasn't any single component's responsibility.
 
-I asked Claude to wire the federation and update the spec to prevent this class of gap from recurring. A single commit connected the TCP layer, added thread safety to the `Clerk` and set the BFT threshold to 2 copies. The spec gained guidance on federation startup sequencing.
-
-After wiring federation, 1,000 RPS worked with a p99 under 100ms.
+I asked Claude to wire the federation and update the spec to prevent this class of gap from recurring. A single commit connected the TCP layer, added thread safety to the `Clerk` and set the BFT threshold to 2 copies. The spec gained guidance on federation startup sequencing. After wiring federation, 1,000 RPS worked with a p99 under 100ms.
 
 Then I tried 5,000 RPS and the p99 jumped to 31 seconds.
 
@@ -215,7 +213,7 @@ At 10,000 RPS, the p99 sat stubbornly at 208ms. Claude iterated for hours, testi
 
 <span class="pullquote" text-content="Claude kept going, diligently trying every avenue long after I would have become frustrated and taken a break."></span>The turning point came from comparing two sets of numbers. Server-side instrumentation showed 99.998% of requests completing under 100ms. Gatling reported a p99 of 209ms. The latency wasn't in our code at all, it was in Docker Desktop's userspace port forwarding proxy, `gvproxy`, which sits between Gatling and the containers.
 
-Claude recognised the implication immediately and acted on it: move the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests.
+Claude recognised the implication immediately and acted on it: moving the load test inside the Docker network. With Gatling running alongside the application containers, the real numbers emerged: p99 of 29ms at over 6,000 sustained RPS, zero failures across 302,662 requests.
 
 Subsequent runs hit the 10,000 RPS target with the p99 still under 100ms.
 
@@ -243,7 +241,7 @@ When the `Arbiter` shifted from sequential to parallel processing, the spec was 
 
 The federation bug pointed to a perennial problem in software engineering: any decomposition controls for one kind of complexity but introduces another at the boundaries. This isn't new.
 
-**Specifications address this in ways that code alone can't.** Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries, but integration specs could describe the connections between them, and failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
+**But specifications address this in ways that code alone can't.** Just as we used multiple agent personas to analyse the codebase from different angles simultaneously, there's no reason specifications have to decompose along a single set of fault lines. Component specs describe behaviour within boundaries, but integration specs could describe the connections between them, and failure-mode specs could cut across both. We're exploring what this looks like in [Allium](https://juxt.github.io/allium). The specifications aren't finished. Neither is the language.
 
 3,000 lines of specification produced about 5,500 lines of production Kotlin and 5,000 lines of tests. Roughly 2 lines of working code for every line of spec, much of it generated while I was playing board games with my kids.
 
