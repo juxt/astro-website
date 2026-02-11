@@ -253,6 +253,8 @@ The skill that mattered most in this project was formalising intent: describing 
 
 I don't think iterative and incremental development has gone away. It's moved up a level of abstraction. Formal specifications, even ones arrived at conversationally, give engineering judgement a place to live.
 
+---
+
 If you're interested in building new systems with Allium and Claude, you can [install Allium](https://juxt.github.io/allium/installation) today from the [juxt/claude-plugins](https://github.com/juxt/claude-plugins) marketplace.
 
 <script is:inline>
