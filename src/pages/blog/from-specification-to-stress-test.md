@@ -4,7 +4,7 @@ title: 'From specification to stress test: a weekend with Claude'
 description: 'A behavioural specification language, AI agent teams, and a Byzantine fault-tolerant distributed system built in 48 hours.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-08'
+publishedDate: '2026-02-11'
 heroImage: 'from-specification-to-stress-test.jpg'
 tags:
   - 'ai'
