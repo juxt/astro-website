@@ -1,3 +1,9 @@
+.prose .lede {
+  font-size: 1.375rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
 .dark .prose :where(img):not(:where([class~='not-prose'])) {
   background: white;
 }
@@ -24,12 +30,6 @@ pre.astro-code code {
   content: '';
 }
 
-@media (max-width: 110ch) {
-  span.pullquote {
-    display: none;
-  }
-}
-
 .prose a {
   word-break: break-word;
 }
@@ -37,25 +37,135 @@ pre.astro-code code {
 .prose span.pullquote:after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true'><path d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z' fill='black'/></svg>");
   content: attr(text-content);
-  display: inline-block;
+  display: block;
   float: right;
   font-size: 1.2em;
   font-style: italic;
-  left: 1em;
-  margin-top: 1.5em;
-  padding: 2em 0em 1em 0em;
-  position: relative;
-  max-width: 40%;
+  padding: 1em 0em 1em 2em;
+  max-width: 50%;
 }
 
 .prose span.pullquote.left:after {
   float: left;
-  left: -1em;
-  padding: 2em 0em 1em 0em;
+  padding: 1em 2em 1em 0em;
+  background-size: 24px 18px;
+  background-repeat: no-repeat;
+  padding-top: 2em;
 }
+
+/* Allium syntax highlighting */
+pre:has(code.language-allium) {
+  background: #1e1e2e !important;
+  color: #cdd6f4 !important;
+}
+
+code.language-allium {
+  color: inherit !important;
+}
+
+code.language-allium,
+code.language-allium span {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.allium-keyword { color: #cba6f7; }
+.allium-type { color: #89b4fa; }
+.allium-field { color: #f9e2af; }
+.allium-string { color: #a6e3a1; }
+.allium-comment { color: #6c7086; font-style: italic; }
+.allium-operator { color: #f38ba8; }
+.allium-number { color: #fab387; }
+.allium-property { color: #94e2d5; }
+.allium-punctuation { color: #9399b2; }
+.allium-builtin { color: #f5c2e7; }
 
 .dark .prose span.pullquote:after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true'><path d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z' fill='white'/></svg>");
+}
+
+/* Terminal conversation styling (Claude Code prompts) */
+.terminal {
+  background: #1e1e2e;
+  border-radius: 8px;
+  margin: 1.5rem 0 2rem;
+  overflow: hidden;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.terminal-titlebar {
+  background: #313244;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-dot.red { background: #f38ba8; }
+.terminal-dot.yellow { background: #f9e2af; }
+.terminal-dot.green { background: #a6e3a1; }
+
+.terminal-body {
+  padding: 0;
+}
+
+.terminal .turn {
+  padding: 0.75rem 1.25rem 0.75rem calc(1.25rem + 2ch);
+  text-indent: -2ch;
+}
+
+.terminal .user {
+  background: #2a2a3d;
+  color: #cdd6f4;
+}
+
+.terminal .user .prompt {
+  color: #a6e3a1;
+  font-weight: 600;
+}
+
+.terminal .llm {
+  background: #1e1e2e;
+  color: #bac2de;
+  padding-left: calc(2.5rem + 2ch);
+}
+
+.terminal .llm .marker {
+  color: #e07858;
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.terminal .llm code,
+.terminal .user code {
+  color: #f9e2af;
+  background: none;
+  padding: 0;
+  font-size: inherit;
 }
 
 pre.astro-code.css-variables {
