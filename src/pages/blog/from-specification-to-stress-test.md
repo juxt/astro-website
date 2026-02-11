@@ -100,7 +100,7 @@ These blocks narrow the design space without mandating a solution. Guidance stee
 
 ## Designing through conversation
 
-The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had targets in mind (10,000 transactions per second at sub-100ms tail latency, and recovery to a consistent state after arbitrary crashes) and we worked through the design decisions iteratively, in [Allium](https://juxt.github.io/allium), as we went.
+The specifications arose through conversation. Over several hours of talking with Claude, I worked through the architecture of a distributed event sourcing framework, where every state change is captured as an immutable event. Multiple redundant instances process every event independently and compare their outputs before publishing, a technique called Byzantine fault tolerance (BFT) that catches hardware faults and silent data corruption. I had ambitious throughput and latency targets in mind, alongside recovery to a consistent state after arbitrary crashes, and we worked through the design decisions iteratively, in [Allium](https://juxt.github.io/allium), as we went.
 
 The first pass produced a single monolithic spec. I set Claude running in iterative loops to tighten the language and resolve the open questions with me, reviewing the output between iterations. Then we talked through the decomposition: could it split naturally along component boundaries? Where should cross-file references live? By the next morning we had 10 files: the `Clerk` (BFT consensus), the `Arbiter` (event evaluation), the `Registrar` (entity caching), the `Usher` (Kafka consumption), the `Ledger` (persistence), the `Warden` (input deduplication), and cross-cutting specs for recovery and live versioning.
 
@@ -108,7 +108,7 @@ A judicial theme emerged through the naming, and the metaphors became useful sho
 
 ## The hard problem
 
-The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was 10,000 inventory transfer requests per second with sub-100ms tail latency. But throughput was only part of the challenge. The system needed strong consistency (every instance agreeing on every event's outcome), Byzantine fault tolerance (detecting silent data corruption), and crash recovery that restores a correct state after arbitrary failures.
+The system I had in mind processes inventory movements at scale: stock transfers between warehouses and quantity adjustments. The target was high throughput with sub-100ms tail latency. But throughput was only part of the challenge. The system needed strong consistency (every instance agreeing on every event's outcome), Byzantine fault tolerance (detecting silent data corruption), and crash recovery that restores a correct state after arbitrary failures.
 
 I wanted to see if Claude could build one, and whether I could direct it there through specifications alone.
 
