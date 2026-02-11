@@ -130,9 +130,7 @@ const shareIconStyle =
 
 const heroImageFilename = `${heroImage.split('.').slice(0, -1)}`
 const personImageFilename = image.split('.').slice(0, -1)
-const categoryHref = `/blog?${encodeURI(
-  `blog[refinementList][category][0]=${category}`
-)}`
+const categoryHref = `/blog?category=${encodeURIComponent(category)}`
 ---
 
 <!-- Script to dynamically add a margin to account for the alert banner on blog pages -->
@@ -203,6 +201,7 @@ const categoryHref = `/blog?${encodeURI(
               href={categoryHref}
               class='text-juxt hover:underline font-medium font-mono dark:text-zinc-300 uppercase text-sm'
               data-pagefind-meta='category'
+              data-pagefind-filter='category'
             >
               {category}
             </a>
