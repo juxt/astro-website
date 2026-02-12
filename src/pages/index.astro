@@ -147,210 +147,112 @@ const featuredBlogs = await parseBlogs({
         ))
       }
     </div>
-    <Section className='bg-juxt py-12 text-white'>
-      <h2 class='pb-4 text-3xl md:text-4xl'>
-        Complexity limits your organization’s potential
+    <Section className='bg-juxt py-6 text-white'>
+      <h2 class='pb-2 text-2xl md:text-3xl'>
+        Complexity limits your organization's potential
       </h2>
-      <p class='text-xl md:text-2xl font-extralight'>
-        For over a decade, we’ve built high-quality, scalable, and resilient
+      <p class='text-base md:text-lg font-extralight'>
+        For over a decade, we've built high-quality, scalable, and resilient
         software systems for the world's largest companies, without fail.
       </p>
     </Section>
 
-    <Section className={'bg-zinc-900 py-20 text-white'}>
-      <div>
-        <div class='lg:w-2/3'>
-          <h2 class='text-4xl lg:text-5xl pb-10 font-bold'>Our Services</h2>
-        </div>
+    <Section className={'bg-zinc-900 py-16 text-white'}>
+      <div class='flex justify-center pb-10'>
+        <h2 class='text-2xl lg:text-3xl font-bold'>Our Services</h2>
       </div>
 
-      <div class='flex flex-col gap-24'>
-        <div
-          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
-        >
-          <div class='w-full h-96'>
+      <div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
+        <div class='flex gap-5'>
+          <div class='w-1/3 shrink-0'>
             <Image
-              alt='image'
-              width={500}
+              alt='Software engineering at JUXT'
+              width={250}
               quality={80}
-              class='w-full h-full object-cover'
+              class='w-full aspect-square object-cover'
               src={import('../assets/site/jon-conj2023.png')}
             />
           </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+          <div>
+            <h3 class='text-lg lg:text-xl font-semibold pb-2'>
               Software Engineering
-            </div>
-            <div class='font-extralight flex flex-col gap-6'>
-              <p>
-                Delivery-focused software engineers that build high-quality,
-                adaptable systems:
-              </p>
-              <div>
-                <div class='flex items-center'>
-                  <div class='w-8 h-8 shrink-0'>
-                    <ChevronRightIcon className={'fill-white'} />
-                  </div>
-                  <p>
-                    Elegant solutions based on research and creative
-                    problem-solving
-                  </p>
-                </div>
-                <div class='flex items-center'>
-                  <div class='w-8 h-8 shrink-0'>
-                    <ChevronRightIcon className={'fill-white'} />
-                  </div>
-                  <p>Well-tested, robust, efficient applications</p>
-                </div>
-                <div class='flex items-center'>
-                  <div class='w-8 h-8 shrink-0'>
-                    <ChevronRightIcon className={'fill-white'} />
-                  </div>
-                  <p>
-                    Cloud-native backend engineering, with modern frontend UX
-                  </p>
-                </div>
-              </div>
-              <p>
-                We can join your existing engineering staff or run dedicated
-                JUXT teams. Our projects succeed because we work hard to
-                understand the mission deeply and our engineers take ownership.
-              </p>
-            </div>
+            </h3>
+            <p class='font-extralight text-sm'>
+              We build production systems alongside your engineers, using
+              AI-assisted development where it accelerates delivery and stepping
+              back to craft where it doesn't. The result is software that ships
+              faster without sacrificing quality, backed by metrics that prove it.
+            </p>
           </div>
         </div>
 
-        <div
-          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
-        >
-          <div class='w-full h-96'>
+        <div class='flex gap-5'>
+          <div class='w-1/3 shrink-0'>
             <Image
-              alt='image'
-              width={500}
+              alt='Architecture design at JUXT'
+              width={250}
               quality={80}
-              class='w-full h-full object-cover'
+              class='w-full aspect-square object-cover'
               src={import('../assets/site/JUXT-10thBday-Wiltons-2230.png')}
             />
           </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+          <div>
+            <h3 class='text-lg lg:text-xl font-semibold pb-2'>
               Architecture Design & Review
-            </div>
-            <div
-              class='font-extralight flex flex-col gap-6 w-full sm:w-[550px]'
-            >
-              <p>
-                We've designed data-intensive, realtime systems, solving tough
-                architectural problems in finance and many other domains. We
-                bring the philosophies of functional programming to the
-                architecture - treating time as a first-class concern; treating
-                data as immutable at all levels of the stack; promoting
-                stateless systems and operations.
-              </p>
-              <p>
-                We've designed and delivered event-driven and API-driven
-                systems, taking careful advantage of the capabilities of the
-                modern cloud.
-              </p>
-              <p>
-                We consult on existing systems to provide short and long-term
-                recommendations for increasing scale and evolving towards new
-                use-cases.
-              </p>
-            </div>
+            </h3>
+            <p class='font-extralight text-sm'>
+              Systems that integrate AI components need different architectural
+              thinking: clear boundaries between deterministic and probabilistic
+              behaviour, observability built in from the start, and data pipelines
+              that serve both human and machine consumers. We design for that
+              reality.
+            </p>
           </div>
         </div>
 
-        <div
-          class='flex justify-center gap-14 items-center md:items-start lg:items-center flex-col-reverse lg:flex-row'
-        >
-          <div class='w-full h-96'>
+        <div class='flex gap-5'>
+          <div class='w-1/3 shrink-0'>
             <Image
-              alt='image'
-              width={500}
+              alt='Platform engineering at JUXT'
+              width={250}
               quality={80}
-              class='w-full h-full object-cover'
+              class='w-full aspect-square object-cover'
               src={import('../assets/site/fjb.jpg')}
             />
           </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+          <div>
+            <h3 class='text-lg lg:text-xl font-semibold pb-2'>
               Platform Engineering
-            </div>
-            <div class='font-extralight flex flex-col gap-6'>
-              <p>
-                JUXT has helped Fortune 500 companies get developer tooling
-                right. We deliver cutting-edge Internal Developer Platform
-                projects, allowing organisations to improve the efficiency of
-                engineering at scale.
-              </p>
-              <p>
-                Platform engineering done right can give your software teams:
-              </p>
-              <div>
-                <div class='flex items-center'>
-                  <div class='w-8 h-8 shrink-0'>
-                    <ChevronRightIcon className={'fill-white'} />
-                  </div>
-                  <p>
-                    Compliance, security, and other non-functional guarantees,
-                    at scale
-                  </p>
-                </div>
-                <div class='flex items-center'>
-                  <div class='w-8 h-8 shrink-0'>
-                    <ChevronRightIcon className={'fill-white'} />
-                  </div>
-                  <p>
-                    Delightful internal developer experiences and documentation.
-                  </p>
-                </div>
-                <div class='flex items-center'>
-                  <div class='w-8 h-8 shrink-0'>
-                    <ChevronRightIcon className={'fill-white'} />
-                  </div>
-                  <p>
-                    An internal 'open source' culture and a thriving community
-                    of contributors.
-                  </p>
-                </div>
-              </div>
-            </div>
+            </h3>
+            <p class='font-extralight text-sm'>
+              AI-assisted development amplifies the value of a good developer
+              platform and exposes the cost of a bad one. We build internal
+              platforms that give engineering teams fast, safe paths to production,
+              with the tooling and guardrails to adopt AI confidently at scale.
+            </p>
           </div>
         </div>
 
-        <div
-          class='flex justify-center items-center md:items-start lg:items-center gap-14 flex-col-reverse lg:flex-row-reverse'
-        >
-          <div class='w-full h-96'>
+        <div class='flex gap-5'>
+          <div class='w-1/3 shrink-0'>
             <Image
-              alt='image'
-              width={500}
+              alt='Cloud infrastructure at JUXT'
+              width={250}
               quality={80}
-              class='w-full h-full object-cover'
+              class='w-full aspect-square object-cover'
               src={import('../assets/site/mal-teaching.jpeg')}
             />
           </div>
-          <div class='flex flex-col gap-4'>
-            <div class='text-2xl lg:text-3xl font-semibold py-10'>
+          <div>
+            <h3 class='text-lg lg:text-xl font-semibold pb-2'>
               Cloud Infrastructure
-            </div>
-            <div
-              class='font-extralight flex flex-col gap-6 w-full sm:w-[550px]'
-            >
-              <p>
-                We’ve been building systems on AWS since early 2014, over that
-                time we’ve accumulated first-hand knowledge and expertise of
-                managing and automating AWS infrastructure through code.
-              </p>
-              <p>
-                Our AWS systems have been successfully audited for PCI DSS
-                compliance and won praise for their operational stability,
-                information security and regulatory compliance. We have
-                experience in meeting GDPR requirements and protecting data
-                privacy.
-              </p>
-            </div>
+            </h3>
+            <p class='font-extralight text-sm'>
+              We've run production workloads on AWS since 2014, including PCI
+              DSS-audited environments. As AI workloads introduce new
+              infrastructure demands, we help teams extend what they have rather
+              than rearchitect from scratch.
+            </p>
           </div>
         </div>
       </div>
