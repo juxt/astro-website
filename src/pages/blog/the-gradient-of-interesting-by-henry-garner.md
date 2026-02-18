@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'The Gradient of Interesting'
-description: "Watch Henry Garner's tech talk  [video]."
+description: 'Watch Henry Garner discuss why intelligent systems often optimise the wrong objective [video].'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-03'
