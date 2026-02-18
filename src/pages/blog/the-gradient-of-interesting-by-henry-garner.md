@@ -13,13 +13,23 @@ tags:
   - 'tech talks'
 ---
 
-This talk grew out of a question I keep coming back to: why do smart systems, human or machine, so often get stuck on the wrong things?
+Filing cabinets and lightbulbs aren't the obvious route into software engineering.
 
-We tend to move in the direction that feels most interesting right now. That works surprisingly well, until it doesn’t. In science, in technology, and in machine learning, progress often looks like hill-climbing. You follow the slope in front of you, not knowing whether there’s a higher peak somewhere else.
+As the year winds down, I've been thinking about my somewhat unconventional path into the industry. At JUXT, we take any in-person get-together as an opportunity for a tech conference, and this includes our Christmas Party.
 
-I touch on examples from the history of science, early skepticism toward new tools, and modern machine learning systems that optimise confidently while missing the point. These failures aren’t accidents. They’re a natural outcome of learning in complex spaces where checking whether you’re right is expensive or unclear.
+Inspired by our venue (the Quantum Untangled exhibition at the Science Gallery London) I used my talk to share some of my personal story, and the Big Ideas I was wrestling with as an arts undergraduate.
 
-The talk isn’t an argument against optimisation or curiosity. It’s more a reminder that “interesting” is a local signal, not a guarantee of truth. Knowing that can change how we build systems, and how much confidence we place in their outputs.
+Some of the biggest ideas came to me via the books of David Deutsch. For example, his thesis behind The Beginning of Infinity is that the scientific revolution wasn't just a significant cultural moment for humanity; it was a significant moment in the universe itself. Once humans became focused on identifying good explanations, the world entered a period of potentially unbounded progress.
+
+Why do we see such polarisation between those who wield AI despite its flaws and those who are fervently anti-AI despite its extraordinary successes? I wonder if it has to do with intuitions about the quality of explanations. Human progress is full of incredibly useful models that turned out to be absolutely wrong: the geocentric model of the universe, for example. Seasoned technical people, especially, have a deep aesthetic objection to anything that seems predicated on flawed explanations.
+
+I share some of my own disappointments and concerns about the current state of the AI industry, but above all my excitement that we simply can't know where the next stepping stones will come from. Whether current AI models turn out to be an evolutionary dead-end or the basis of ever more powerful intelligence, we can only connect the dots in hindsight.
+
+We didn't know that the technology for making reading glasses would lead to Galileo's telescopes and the end of the geocentric model, or that the valves for amplifying telephone signals would enable the first electronic computers.
+
+We're still early, and there will always be problems to solve.
+
+As Alan Kay said, the best way to predict the future is to invent it.
 
 My full talk is now available on YouTube:
 

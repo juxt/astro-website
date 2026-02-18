@@ -13,23 +13,11 @@ tags:
   - 'tech talks'
 ---
 
-I built this presentation as a bit of an experiment.
+Oliver Marshall built his own interactive presentation environment in just a few hours using AI, capturing user input via mobile phones over WiFi. His aim was to demonstrate the 'wisdom of the crowd': the phenomenon where groups can accurately predict obscure facts and unknowable quantities even when no individual knows the answer. The theory goes that errors cancel out, biases balance, and truth emerges from the aggregate. Spoiler: it did not.
 
-The idea was simple. Could I recreate a “wisdom of the crowd” demo live, using nothing more than a few hours of AI-assisted development and everyone’s mobile phones over WiFi?
+What we discovered instead was that our colleagues are surprisingly united in their diversity (which is to say, united in their determination to disagree). The ability to broadcast emoji opened up avenues for mayhem that the wisdom-of-crowds literature had failed to anticipate. One question secretly nominated a participant to seed an answer, testing whether a confident early response could sway the group toward the truth. It could not: developers will form their own opinions, thank you very much, and your "hints" only make them more suspicious.
 
-The theory is familiar. If you ask a large group to estimate something obscure, their errors cancel out. Biases balance. The average converges toward the truth. It’s elegant. It’s reassuring. It makes us feel that collectives are smarter than individuals.
-
-So I built a small interactive system where everyone could submit answers in real time. The tech came together surprisingly quickly. AI helped scaffold the environment, wire up the inputs, and get something usable running in an afternoon. From a tooling perspective, it was smooth.
-
-What followed was not.
-
-Instead of a calm statistical convergence, we discovered something else: our colleagues are united in their diversity. Which is to say, united in their determination to disagree. The ability to broadcast emoji added a layer of chaos that the original wisdom-of-crowds papers did not quite prepare us for.
-
-At one point, I quietly seeded an early answer to see whether a confident signal would steer the group toward the truth. It did not. If anything, it made people more suspicious. Developers, it turns out, prefer to form their own opinions.
-
-The people misbehaved. The system did not.
-
-That was probably the most interesting outcome of all. AI made it easy to build the platform. Human behaviour made it impossible to predict.
+The people misbehaved, but the technology was rock solid: a testament to what AI-assisted development can achieve in an afternoon, and a vivid reminder of what your colleagues will do with it.
 
 You can watch the full talk here:
 

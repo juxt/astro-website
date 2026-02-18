@@ -17,9 +17,7 @@ This talk comes from a feeling I could not ignore.
 
 We say we want fast feedback from production. We talk about ownership and DevOps. Yet with the rise of cloud platforms and Infrastructure as Code, production can feel further away than ever.
 
-I start with a story about being on pager duty in the middle of the night, clicking into a perfectly observable system and debugging with confidence. Then I admit that I made it up.
-
-The gap between developers and production is real. And I believe it affects how we troubleshoot, how we verify our assumptions, and how confident we feel about what we ship.
+I believe the gap between developers and production affects how we troubleshoot, how we verify our assumptions, and how confident we feel about what we ship.
 
 In this short talk, I invite developers to question that distance and to think about what they can do, from their own position, to close it.
 
