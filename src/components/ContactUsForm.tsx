@@ -11,9 +11,9 @@ type ContactUsFormProps = {
 }
 
 export function ContactUsForm(props: ContactUsFormProps) {
-  const { 
-    id = 'form', 
-    subject = 'New Contact Us Submission', 
+  const {
+    id = 'form',
+    subject = 'New Contact Us Submission',
     eventName = 'XT26',
     variant = 'light',
     transparentInputs = false,
@@ -49,7 +49,7 @@ export function ContactUsForm(props: ContactUsFormProps) {
   const hasErrors = Object.keys(errors).length > 0
 
   const baseInputClasses = 'w-full px-4 py-3 text-sm border border-juxt/40 focus:outline-none focus:border-juxt transition-colors'
-  
+
   const inputClasses = transparentInputs
     ? `${baseInputClasses} bg-transparent ${isDark ? 'text-white placeholder:text-gray-400' : 'text-gray-900 placeholder:text-gray-400'}`
     : isDark
@@ -64,14 +64,11 @@ export function ContactUsForm(props: ContactUsFormProps) {
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
           </svg>
         </div>
-        <h3 className={`text-2xl font-light mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        <h3 className={`text-2xl font-light mb-3 justify-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
           Thank you for your interest
         </h3>
         <p className={`font-light mb-6 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-          We'll reach out if spots become available for {eventName}.
-        </p>
-        <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-          Please note: This is not a ticket confirmation
+          We'll reach out if spots become available.
         </p>
       </div>
     )
@@ -170,9 +167,9 @@ export function ContactUsForm(props: ContactUsFormProps) {
         </button>
         <p className={`text-xs font-light text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
           By submitting you agree to our{' '}
-          <a 
-            href='/privacy-policy' 
-            target='_blank' 
+          <a
+            href='/privacy-policy'
+            target='_blank'
             className={`underline transition-colors ${isDark ? 'hover:text-gray-300' : 'hover:text-gray-600'}`}
           >
             Privacy Policy
