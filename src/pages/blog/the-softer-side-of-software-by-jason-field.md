@@ -19,7 +19,7 @@ In this talk, I focus on soft skills as an essential part of delivering great sy
 
 I highlight five areas that have consistently helped me get the most out of interactions. These aren’t abstract leadership bullet points. They are lessons I’ve learned by being in the room, by missing opportunities, and by intentionally improving over time.
 
-Something that surprised many people when I started talking about it was how much I enjoy being involved in recruitment. Helping to spot and attract talented engineers isn’t just about scaling a team. It’s a chance to practise empathy, to ask better questions, to reflect on how we communicate what we value. Every interview becomes another way to sharpen the very skills we want to see in our teams.
+I also highlight some of the subtle extra value of being part of the recruitment process. Helping to spot and attract talented engineers isn’t just about scaling a team. It’s a chance to practise empathy, to ask better questions, to reflect on how we communicate what we value. Every interview becomes another way to sharpen the very skills we want to see in our teams.
 
 Soft skills matter because software is ultimately a human endeavour. Paying attention to how we collaborate makes our work better and our teams stronger.
 
