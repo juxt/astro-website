@@ -17,7 +17,7 @@ tags:
 
 Something similar is happening in software engineering right now, and almost nobody is using the right language to describe it. The conversation about AI tools is dominated by [Jevons' Paradox](https://en.wikipedia.org/wiki/Jevons_paradox): make a resource cheaper and people use more of it. Fine for token costs and compute demand, but it doesn't explain why markets are [convulsing over AI investment](https://techcrunch.com/2025/11/08/is-wall-street-losing-faith-in-ai/) returns, why research into AI coding tools keeps [contradicting itself](https://cmr.berkeley.edu/2025/10/seven-myths-about-ai-and-productivity-what-the-evidence-really-says/) or why engineers who adopt these tools sometimes feel like they're working harder than before.
 
-Three older ideas explain what happens when you push efficiency into complex systems, each at a different scale: the economy, the team, the individual. Each one reveals problems that the scale above can't see, but each also points toward a clear response.
+Three less fashionable ideas explain what happens when you push efficiency into complex systems, each at a different scale: the economy, the team, the individual. Each one reveals problems that the scale above can't see, but each also points toward a clear response.
 
 ## The twenty-year wait
 
