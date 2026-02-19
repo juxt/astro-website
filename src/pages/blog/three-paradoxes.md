@@ -5,7 +5,7 @@ description: 'Everyone is talking about Jevons'' Paradox. Here are three that ma
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-19'
-heroImage: 'from-specification-to-stress-test.jpg'
+heroImage: 'three-paradoxes.jpg'
 tags:
   - 'ai'
   - 'agentic coding'
