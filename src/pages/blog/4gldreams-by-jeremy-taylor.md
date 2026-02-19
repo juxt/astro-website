@@ -4,7 +4,7 @@ title: '4GL Dreams'
 description: 'Watch Jeremy Taylor explore the enduring dream of 4GLs in the age of LLMs [video].'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-18'
+publishedDate: '2026-02-19'
 heroImage: '4gl-dreams.jpg'
 tags:
   - 'sql'

@@ -4,7 +4,7 @@ title: 'Wisdom of the Crowd'
 description: 'Watch Oliver Marshall test the wisdom of the crowd with an AI-built interactive presentation [video].'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-18'
+publishedDate: '2026-02-19'
 heroImage: 'wisdom-of-the-crowd.jpg'
 tags:
   - 'AI'

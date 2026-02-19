@@ -4,7 +4,7 @@ title: 'Chasing Races: Deterministic Simulation Testing in XTDB'
 description: 'Watch James Henderson demonstrate how deterministic simulation testing helps chase down race conditions [video].'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-18'
+publishedDate: '2026-02-19'
 heroImage: 'chasing-races.jpg'
 tags:
   - 'concurrency'

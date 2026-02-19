@@ -4,7 +4,7 @@ title: 'HellOps'
 description: 'Watch Ernesto Garcia Garcia challenge developers to reconnect with production [video].'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-18'
+publishedDate: '2026-02-19'
 heroImage: 'hellops.jpg'
 tags:
   - 'devops'

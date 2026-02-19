@@ -4,7 +4,7 @@ title: 'The Softer Side of Software'
 description: 'Watch Jason explain why soft skills matter in engineering and how they strengthen teams [video].'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-18'
+publishedDate: '2026-02-19'
 heroImage: 'the-softer-side-of-software.jpg'
 tags:
   - 'soft skills'
