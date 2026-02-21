@@ -1,0 +1,62 @@
+---
+author: 'hga'
+title: 'How do swarms invent?'
+description: 'The committee is agents now. Conway''s Law still applies.'
+category: 'ai'
+layout: '../../layouts/BlogPost.astro'
+publishedDate: '2026-02-21'
+heroImage: 'how-do-swarms-invent.jpg'
+tags:
+  - 'ai'
+  - 'agentic coding'
+  - 'engineering'
+  - 'architecture'
+---
+
+<p class="lede">In 1967, <a href="https://www.melconway.com/Home/Conways_Law.html" target="_blank">Melvin Conway</a> submitted a paper to the <em>Harvard Business Review</em> arguing that any organisation designing a system will produce a design that mirrors its own communication structure. The paper was called "How Do Committees Invent?" The committee <a href="https://www.melconway.com/Home/pdf/committees.pdf" target="_blank">rejected it</a>.</p>
+
+[Fred Brooks](https://en.wikipedia.org/wiki/The_Mythical_Man-Month), author of *The Mythical Man-Month*, named it Conway's Law a few years later, and six decades of evidence have made it hard to dispute. The structures that committees leave behind tend to outlast the committees themselves. What matters now is that the committee isn't what it was. We're not talking about adding an AI to a team of humans. Increasingly, the team is a [swarm of agents](/blog/from-specification-to-stress-test) with a single human operator, if that. The committee is agents.
+
+**Conway's Law says systems mirror their creators.** What happens when the creators are LLMs?
+
+## Good fences make good neighbours
+
+<span class="pullquote" text-content="Conway's Law says systems mirror their creators. What happens when the creators are LLMs?"></span>LLMs write good code. By most measures, better than many humans. The quality of individual functions isn't the problem. The problem is where the boundaries fall.
+
+Ask an LLM to build a feature and it will break the work into components. It has to. But the decomposition it chooses depends on the context in the prompt, not on your architectural intentions. Does your system communicate through [synchronous request/response](https://en.wikipedia.org/wiki/Request%E2%80%93response), [events pushed to subscribers](https://en.wikipedia.org/wiki/Event-driven_architecture), or [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) where consumers ask for changes on their own schedule? Each produces different runtime behaviours, different failure modes, different coupling between components, and there are further choices within each.
+
+These choices shape what couples to what, and coupling is where the real damage accumulates. An LLM will happily generate a module that handles authentication, logging and billing in one place, because nothing in its training penalises that. Conway's Law would predict as much: a model whose own neurons are [polysemantic by nature](https://transformer-circuits.pub/2023/monosemantic-features), each one responding to a [tangle of unrelated concepts](https://arxiv.org/abs/2505.11581), is not going to lose sleep over a component that does six things.
+
+**The LLM's communication structure is the context window.** The prompt becomes one undifferentiated conversation, regardless of whether your architecture draws a boundary through the middle of it. If you haven't made your bounded contexts explicit, the LLM will invent its own. And if you haven't decided what yours should be, you won't even notice. The coupling will be subtle enough to survive [review](https://link.springer.com/article/10.1007/s10664-022-10123-8), especially when the reviewer didn't write the code.
+
+And once it's in the codebase, the next agent builds on top of it. In 1965, [Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) added null references to ALGOL W "simply because it was so easy to implement". He later called it his [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/). Sixty years on, every language still carries it. One committee member's shortcut, embedded across the entire discipline. Domain modelling becomes more important with AI, not less.
+
+## Thereafter they shape us
+
+<span class="pullquote left" text-content="The LLM produces at machine speed. The organisation absorbs at human speed. Conway's Law says the slower structure wins."></span>The same pattern plays out beyond the codebase. In 1891, a Kansas City undertaker named [Almon Strowger](https://en.wikipedia.org/wiki/Almon_Brown_Strowger) patented the automatic telephone switch, [convinced that a rival's wife was routing his calls](https://www.sparkmuseum.org/almon-b-strowger-the-undertaker-who-revolutionized-telephone-technology/) to the competition. He removed the operator entirely. But when the GPO rolled out [subscriber trunk dialling](https://en.wikipedia.org/wiki/History_of_telephone_numbers_in_the_United_Kingdom) in 1958, it carved Britain into area codes derived from the letters on a rotary dial: [Aylesbury became 0296](https://en.wikipedia.org/wiki/Telephone_numbers_in_the_United_Kingdom#History) because A maps to 2 and Y to 9. The operators and the rotary dials are long gone. The area codes remain.
+
+The examples compound. Paul David [documented the same pattern](https://www.researchgate.net/publication/4724731_The_Dynamo_and_the_Computer_An_Historical_Perspective_On_the_Modern_Productivity_Paradox) in factory electrification: manufacturers swapped steam engines for electric dynamos but kept the old multi-storey layout, and productivity barely changed until factories were redesigned from scratch decades later. The [QWERTY keyboard](https://en.wikipedia.org/wiki/QWERTY) was designed in the 1870s to prevent typewriter jams; the jams are 150 years gone, the layout is on every touchscreen. [Standard railroad gauge](https://en.wikipedia.org/wiki/Standard-gauge_railway) was set by English colliery tramways, adopted by Stephenson, locked in when the Union Army needed logistics to work. Organisational structure outlives the decisions that created it.
+
+When the committee was all human, architectural decisions were made at the speed of meetings and code review. There was time to challenge them. Now a swarm of agents can lay down a system's worth of structural decisions in hours, and your org chart determines which of those decisions get scrutinised and which ones slip through. [Steve Yegge](https://steve-yegge.medium.com/the-ai-vampire-eda6e4f07163) puts it bluntly: downstream systems all operate at human-speed cadences. The agents produce the fossil record. The organisation decides how much of it gets examined before it [hardens](/blog/three-paradoxes).
+
+## The committee is agents
+
+<span class="pullquote" text-content="If you don't design the exchange, the LLM's context window becomes the exchange."></span>The [Inverse Conway Manoeuvre](https://www.thoughtworks.com/radar/techniques/inverse-conway-maneuver) is the countermeasure: design your organisation to produce the architecture you want, rather than accepting the one your current org chart yields. With a committee of agents, this becomes urgent. You can't change their structural habits, but you can constrain them. The tools exist across a spectrum.
+
+At the lightest end, [project instruction files](https://code.claude.com/docs/en/memory) like CLAUDE.md and .cursorrules encode your team's conventions in a file the agent reads on every invocation: naming patterns, architectural constraints, things not to do. These are Conway's Law in miniature, your communication structure rendered as text. [Architectural decision records](https://adr.github.io/) go further, capturing not just conventions but the reasoning behind specific choices, so the agent knows *why* the system is shaped the way it is and doesn't relitigate settled questions. At the most formal end, [behavioural specifications](/blog/from-specification-to-stress-test) make your bounded contexts machine-readable, declaring where domain boundaries are before the agent starts generating code.
+
+Each of these constrains the agent's decomposition choices. But Conway's Law operates at the organisational level too. Deliberate agent decomposition, which agent handles which domain, with what interfaces between them, is organisational design in Conway's sense, even when the committee members are processes. The emerging [protocol ecosystem](https://modelcontextprotocol.io/) for agent communication is solving the same problem that [telephone exchanges](https://en.wikipedia.org/wiki/Erlang_%28programming_language%29) solved decades ago: how to route work through heterogeneous nodes that don't share internal state.
+
+If you don't design the exchange, the LLM's context window becomes the exchange.
+
+## What this means
+
+Conway submitted his paper about committees to a committee, and they rejected it. Six decades later, the evidence is overwhelming. The question isn't whether the law holds. It's what it means when the committee is a swarm of agents with a human somewhere in the loop.
+
+The original committee had meetings, org charts, hallway conversations. The new one has context windows, protocol handshakes and token limits. Its communication structure is the prompt. And it will produce a design that mirrors all of this, faithfully, at scale, whether you intended that design or not. That design will fossilise. The next swarm will build on top of it, each generation inheriting the communication structure of the one before.
+
+There's a popular thesis that AI will make code disposable, single-use plastic that you generate for a purpose and throw away. Perhaps, for ephemeral tooling. But Hoare didn't leave behind sixty years of code. He left behind sixty years of an *idea*. Strowger's operators vanished; his area codes lasted a century. QWERTY outlived the typewriter jams by 150 years. You can rewrite the implementation from scratch and the new version will still carry the communication structure of the committee that designed it. Conway's Law doesn't fossilise code. It fossilises ideas, and those survive any rewrite.
+
+We're building new exchanges now, and the committees building them are mostly agents. The structures they leave behind will outlast them too. The question is whether yours is deliberate.
+
+This is how we approach AI-assisted engineering at JUXT: [specifications that constrain](/blog/from-specification-to-stress-test), architecture that's chosen rather than inherited. If you're seeing Conway's fingerprints in your AI-generated code and want help taking control of the structure, [we'd welcome a conversation](mailto:info@juxt.pro?subject=AI-assisted%20engineering).
