@@ -21,7 +21,7 @@ tags:
 
 ## Good fences make good neighbours
 
-<span class="pullquote" text-content="Conway's Law says systems mirror their creators. What happens when the creators are LLMs?"></span>LLMs write good code. By most measures, better than many humans. The quality of individual functions isn't the problem. The problem is where the boundaries fall.
+<span class="pullquote" text-content="The coupling will be subtle enough to survive review, especially when the reviewer didn't write the code."></span>LLMs write good code. By most measures, better than many humans. The quality of individual functions isn't the problem. The problem is where the boundaries fall.
 
 Ask an LLM to build a feature and it will break the work into components. It has to. But the decomposition it chooses depends on the context in the prompt, not on your architectural intentions. Does your system communicate through [synchronous request/response](https://en.wikipedia.org/wiki/Request%E2%80%93response), [events pushed to subscribers](https://en.wikipedia.org/wiki/Event-driven_architecture), or [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) where consumers ask for changes on their own schedule? Each produces different runtime behaviours, different failure modes, different coupling between components, and there are further choices within each.
 
@@ -29,7 +29,13 @@ These choices shape what couples to what, and coupling is where the real damage 
 
 **The LLM's communication structure is the context window.** The prompt becomes one undifferentiated conversation, regardless of whether your architecture draws a boundary through the middle of it. If you haven't made your bounded contexts explicit, the LLM will invent its own. And if you haven't decided what yours should be, you won't even notice. The coupling will be subtle enough to survive [review](https://link.springer.com/article/10.1007/s10664-022-10123-8), especially when the reviewer didn't write the code.
 
-And once it's in the codebase, the next agent builds on top of it. In 1965, [Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) added null references to ALGOL W "simply because it was so easy to implement". He later called it his [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/). Sixty years on, every language still carries it. One committee member's shortcut, embedded across the entire discipline. Domain modelling becomes more important with AI, not less.
+## The sorcerer's apprentice
+
+<span class="pullquote" text-content="Simplicity compounds and so does complexity. A swarm will accelerate whichever one your codebase already has."></span>Simplicity compounds and so does complexity. A swarm will accelerate whichever one your codebase already has.
+
+Cursor's [FastRender](https://github.com/nickelcat/nickelcat-fast-render) experiment showed what happens at scale: two thousand agents produced three million lines of entangled Rust that a Servo maintainer [called](https://simonwillison.net/2026/Jan/23/fastrender/) "a tangle of spaghetti", three times the size of [Servo](https://servo.org/) for a fraction of its capability. Brooks identified the constraint in the book that named Conway's Law: communication channels [scale as n(n-1)/2](https://en.wikipedia.org/wiki/Brooks%27s_law), and two thousand agents create nearly two million pairs. Not because any agent wrote badly, but because nobody owned the boundaries.
+
+In 1965, [Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) added null references to ALGOL W "simply because it was so easy to implement". He later called it his [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/). Sixty years on, every language still carries it. One committee member's shortcut, embedded across the entire discipline. Domain modelling becomes more important with AI, not less.
 
 ## Thereafter they shape us
 
@@ -41,7 +47,7 @@ When the committee was all human, architectural decisions were made at the speed
 
 ## The committee is agents
 
-<span class="pullquote" text-content="If you don't design the exchange, the LLM's context window becomes the exchange."></span>The [Inverse Conway Manoeuvre](https://www.thoughtworks.com/radar/techniques/inverse-conway-maneuver) is the countermeasure: design your organisation to produce the architecture you want, rather than accepting the one your current org chart yields. With a committee of agents, this becomes urgent. You can't change their structural habits, but you can constrain them. The tools exist across a spectrum.
+<span class="pullquote" text-content="If you don't design the exchange, the LLM's context window becomes the exchange."></span>The [Inverse Conway Manoeuvre](https://www.thoughtworks.com/radar/techniques/inverse-conway-maneuver) is the countermeasure: design your organisation to produce the architecture you want, rather than accepting the one your current org chart yields. With a committee of agents, this becomes urgent. You can't change their structural habits, but you can constrain them. [David Parnas](https://dl.acm.org/doi/10.1145/361598.361623) made the case in 1972: decompose systems along the design decisions most likely to change, and hide each one behind a boundary. The tools for communicating those boundaries to agents exist across a spectrum.
 
 At the lightest end, [project instruction files](https://code.claude.com/docs/en/memory) like CLAUDE.md and .cursorrules encode your team's conventions in a file the agent reads on every invocation: naming patterns, architectural constraints, things not to do. These are Conway's Law in miniature, your communication structure rendered as text. [Architectural decision records](https://adr.github.io/) go further, capturing not just conventions but the reasoning behind specific choices, so the agent knows *why* the system is shaped the way it is and doesn't relitigate settled questions. At the most formal end, [behavioural specifications](/blog/from-specification-to-stress-test) make your bounded contexts machine-readable, declaring where domain boundaries are before the agent starts generating code.
 
