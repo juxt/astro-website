@@ -21,15 +21,13 @@ Conway's Law says designs mirror their creators. What happens when the creators 
 
 ## Good fences make good neighbours
 
-<span class="pullquote" text-content="The coupling will be subtle enough to survive review, especially when the reviewer didn't write the code."></span>LLMs write good code. By most measures, better than many humans. The quality of individual functions isn't the problem. The problem is where the boundaries fall.
+<span class="pullquote" text-content="The quality of individual functions isn't the problem. The problem is where the boundaries fall."></span>LLMs write good code. By most measures, better than many humans. The quality of individual functions isn't the problem. The problem is where the boundaries fall.
 
 It turns out humans aren't great at architecture. Controlled experiments find [cognitive biases](https://www.researchgate.net/publication/317433924_On_Cognitive_Biases_in_Architecture_Decision_Making) in architectural decision-making, from anchoring on familiar solutions to optimism about preferred approaches, and experienced practitioners are [more susceptible than students](https://arxiv.org/html/2502.04011v1). Whether LLMs will prove better at navigating these trade-offs is an open question at the moment.
 
-But the decomposition an LLM chooses will depends on the context in the prompt and its training data, not on your architectural intentions. Does your system communicate through [synchronous request/response](https://en.wikipedia.org/wiki/Request%E2%80%93response), [events pushed to subscribers](https://en.wikipedia.org/wiki/Event-driven_architecture), or [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) where consumers ask for changes on their own schedule? Each shapes runtime behaviour and coupling differently.
+But the decomposition an LLM chooses will depend on the context in the prompt and its training data, not on your architectural intentions. Does your system communicate through [synchronous request/response](https://en.wikipedia.org/wiki/Request%E2%80%93response), [events pushed to subscribers](https://en.wikipedia.org/wiki/Event-driven_architecture), or [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) where consumers ask for changes on their own schedule? Each shapes runtime behaviour and coupling differently.
 
 These choices shape what couples to what. An LLM will happily generate a module that handles authentication, logging and billing in one place. Conway's Law would predict as much: a model whose own neurons are [polysemantic by nature](https://transformer-circuits.pub/2023/monosemantic-features), each one responding to a [tangle of unrelated concepts](https://arxiv.org/abs/2505.11581), is not going to lose sleep over a component that does six things.
-
-**The LLM's communication structure is the context window.** The prompt becomes one undifferentiated conversation, regardless of whether your architecture draws a boundary through the middle of it. If you haven't made your bounded contexts explicit, the LLM will invent its own. And if you haven't decided what yours should be, you won't even notice. The coupling will be subtle enough to survive [review](https://link.springer.com/article/10.1007/s10664-022-10123-8), especially when the reviewer didn't write the code.
 
 ## The sorcerer's apprentice
 
