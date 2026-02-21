@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Martin Trojer",
+    "role": "Software Engineer",
+    "company": "Meta",
+    "image": "/src/assets/xt26/xt26-martintrojer.jpg"
+  },
+  {
+    "name": "Simone Steel",
+    "role": "CIO, Central Data and AI",
+    "company": "Deutsche Bank, Corporate Bank",
+    "image": "/src/assets/xt26/xt26-simonesteel.jpg"
+  },
+  {
+    "name": "Sam Newman",
+    "role": "Independent Consultant",
+    "company": "Sam Newman & Associates",
+    "image": "/src/assets/xt26/xt26-samnewman.jpg"
+  },
+  {
+    "name": "Tom Dellman",
+    "role": "Director of Engineering",
+    "company": "Chronicle Software",
+    "image": "/src/assets/xt26/xt26-tomdellman.jpg"
+  },
+  {
+    "name": "Abby Bangser",
+    "role": "Principal Engineer",
+    "company": "Syntasso",
+    "image": "/src/assets/xt26/xt26-abbybangser.jpg"
+  },
+  {
+    "name": "Michael Jones",
+    "role": "CTO",
+    "company": "loveholidays",
+    "image": "/src/assets/xt26/xt26-michaeljones.jpg",
+    "linkedin": "mikedjones"
+  },
+  {
+    "name": "Prof Paula Buttery",
+    "role": "Professor of Language and Machine Learning",
+    "company": "Cambridge University",
+    "image": "/src/assets/xt26/xt26-paulabuttery.jpg"
+  },
+  {
+    "name": "Henry Garner",
+    "role": "CTO",
+    "company": "JUXT",
+    "image": "/src/assets/xt26/xt26-henrygarner.jpg"
+  },
+  {
+    "name": "Ben Collins",
+    "role": "VP of Engineering",
+    "company": "Antithesis",
+    "image": "/src/assets/xt26/xt26-bencollins.jpg"
+  }
+]
