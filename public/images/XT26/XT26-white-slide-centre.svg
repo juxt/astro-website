@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 450 231">
+  <defs>
+    <style>
+      .st1 { fill: #f7941e; }
+      .st2 { fill: #dadbdc; }
+
+      /* XT starts centered (shifted right 109px) and slides left to final position */
+      .xt-group {
+        animation: slideLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+      }
+      @keyframes slideLeft {
+        from { transform: translateX(109px); }
+        to   { transform: translateX(0); }
+      }
+
+      /* 26 starts hidden behind the XT and slides right to final position */
+      .num-group {
+        animation: slideRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+      }
+      @keyframes slideRight {
+        from { transform: translateX(-225px); }
+        to   { transform: translateX(0); }
+      }
+    </style>
+    <!-- Clip tracks the XT's right edge as it moves left, revealing the 26 -->
+    <clipPath id="reveal-clip">
+      <rect x="341" y="0" width="109" height="231">
+        <animate attributeName="x" from="341" to="232" dur="1.2s" begin="0.3s" fill="freeze"
+                 calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1"/>
+        <animate attributeName="width" from="109" to="218" dur="1.2s" begin="0.3s" fill="freeze"
+                 calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1"/>
+      </rect>
+    </clipPath>
+  </defs>
+
+  <!-- XT + orange slash (slides left from center) -->
+  <g class="xt-group">
+    <path class="st2" d="M113,70.9l14.9-22.6h104v22.6h-42.2v107.1h-28.3v-107.1s-48.4,0-48.4,0ZM1.5,48.3l43.8,65L0,178.1h32.2l29-45,27.4,45h31.2L31,48.3H1.5Z"/>
+    <path class="st1" d="M63.2,84.8l15.8,21.3,39.3-57.7h-31.5s-23.6,36.4-23.6,36.4Z"/>
+  </g>
+
+  <!-- 26 (slides right from behind XT, clip tracks XT edge) -->
+  <g clip-path="url(#reveal-clip)">
+    <g class="num-group">
+      <path class="st2" d="M241,178.1v-22.2l46.7-40.9c3.5-3.2,6.5-6.1,8.9-8.8,2.5-2.6,4.3-5.3,5.6-8,1.3-2.7,1.9-5.6,1.9-8.8s-.8-6.5-2.3-9-3.7-4.5-6.3-5.8c-2.7-1.4-5.7-2.1-9.2-2.1s-6.7.7-9.4,2.1c-2.7,1.4-4.8,3.5-6.2,6.2-1.5,2.7-2.2,6-2.2,9.9h-29.4c0-8.7,2-16.2,5.9-22.5s9.4-11.2,16.5-14.6c7.1-3.5,15.4-5.2,24.8-5.2s18.1,1.6,25.3,4.9c7.2,3.2,12.7,7.8,16.7,13.6s5.9,12.6,5.9,20.3-1,9.7-3,14.4c-2,4.8-5.5,10-10.5,15.8s-12.2,12.8-21.6,20.8l-15.3,14.1v.9h51.9v24.9h-94.9.2Z"/>
+      <path class="st2" d="M396.6,181.8c-6.7,0-13.2-1.2-19.5-3.4-6.2-2.2-11.8-5.8-16.8-10.8-4.9-5-8.9-11.6-11.7-19.8-2.9-8.2-4.3-18.3-4.3-30.3,0-11,1.3-20.8,3.8-29.5,2.5-8.7,6.1-16,10.7-22.1s10.3-10.7,16.8-13.8c6.5-3.2,13.8-4.8,21.9-4.8s16.4,1.7,23.1,5.1c6.7,3.4,12.1,8,16.1,13.8,4.1,5.8,6.5,12.3,7.4,19.5h-27.3c-1.1-4.6-3.3-8.1-6.7-10.7-3.4-2.6-7.6-3.9-12.7-3.9-8.5,0-15,3.7-19.4,11.1s-6.7,17.5-6.7,30.2h.9c2-3.9,4.6-7.2,8-9.9,3.3-2.7,7.2-4.9,11.4-6.3,4.3-1.5,8.8-2.2,13.6-2.2,7.8,0,14.7,1.8,20.7,5.5,6.1,3.6,10.8,8.6,14.3,15,3.5,6.4,5.2,13.6,5.2,21.8s-2.1,16.7-6.2,23.7c-4.1,6.9-9.8,12.3-17.2,16.2-7.4,3.9-15.9,5.8-25.6,5.8ZM396.4,160.1c4.3,0,8.1-1,11.4-3.1,3.4-2,6-4.8,7.9-8.3,1.9-3.5,2.9-7.4,2.9-11.8s-.9-8.2-2.8-11.7c-1.9-3.5-4.5-6.2-7.8-8.2-3.3-2-7.1-3.1-11.4-3.1s-6.1.6-8.9,1.8c-2.7,1.2-5.1,2.9-7.1,5-2,2.1-3.6,4.6-4.8,7.4-1.2,2.8-1.7,5.8-1.7,8.9s1,8.1,2.9,11.6c1.9,3.5,4.6,6.3,7.9,8.4,3.3,2.1,7.1,3.1,11.4,3.1Z"/>
+    </g>
+  </g>
+</svg>
