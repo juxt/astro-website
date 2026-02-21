@@ -1,27 +1,10 @@
 ---
 import { ContactUsForm } from '@components/ContactUsForm'
+import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
+import speakers from '../data/xt26/speakers.json'
 
 const subject = 'XT26 Request for Invite'
-
-const organizations = [
-  'Bank of America',
-  'Citi',
-  'HSBC',
-  'UBS / Credit Suisse',
-  'Revolut',
-  'Santander',
-  'Lloyds',
-  'RBC',
-  'Barclays',
-  'JP Morgan',
-  'NYSE',
-  'Morgan Stanley',
-  'NatWest',
-  'Meta',
-  'FINOS',
-  'Griffin Bank'
-]
 ---
 
 <Layout
@@ -241,70 +224,64 @@ const organizations = [
     </div>
   </section>
 
-  <!-- Organizations Section -->
+  <!-- Speakers Section -->
   <section class='bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900'>
     <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
-      <div class='grid lg:grid-cols-5 gap-12 lg:gap-16 items-center'>
-        <div class='lg:col-span-2'>
-          <p
-            class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
-          >
-            Our Community
-          </p>
-          <h2
-            class='text-4xl md:text-5xl font-extralight text-white leading-tight mb-6'
-          >
-            A Track Record of Excellence
-          </h2>
-          <p class='text-gray-400 text-lg leading-relaxed font-light'>
-            Over the past two years, we've welcomed speakers and delegates from
-            leading organisations including:
-          </p>
-        </div>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          Speakers
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-white'
+        >
+          Who's Speaking
+        </h2>
+      </div>
 
-        <div class='lg:col-span-3 relative'>
-          <!-- Liquid glass container with inset - dark variant -->
-          <div
-            class='absolute inset-0 bg-black/60 backdrop-blur-xl rounded-3xl shadow-[inset_0_4px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1),0_4px_20px_rgba(0,0,0,0.3)] border border-white/10'
-          >
-          </div>
-          <div
-            class='absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent rounded-3xl pointer-events-none'
-          >
-          </div>
-          <!-- Bottom inner subtle light -->
-          <div
-            class='absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white/5 to-transparent rounded-b-3xl pointer-events-none'
-          >
-          </div>
-
-          <!-- Content -->
-          <div class='relative p-10 md:p-20'>
-            <p
-              class='text-center text-xs font-semibold tracking-[0.2em] uppercase text-white/60 mb-8'
+      <div
+        class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 w-full'
+      >
+        {
+          speakers.map(({ name, role, company, image, linkedin }) => (
+            <a
+              href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
+              target='_blank'
+              class={`speaker-card flex flex-col items-center text-center ${
+                linkedin ? 'cursor-pointer' : 'cursor-default'
+              }`}
             >
-              Trusted by leaders from
-            </p>
-            <div class='flex flex-wrap gap-2.5 justify-center'>
-              {
-                organizations.map((org) => (
-                  <span class='group relative'>
-                    <span class='absolute inset-0 rounded-md bg-gradient-to-b from-white/10 to-transparent opacity-100 group-hover:from-juxt/40 transition-all duration-300' />
-                    <span class='relative block bg-white/10 backdrop-blur-sm text-white/90 px-4 py-2 text-[11px] font-medium tracking-[0.15em] uppercase rounded-md border border-white/10 group-hover:text-white group-hover:bg-white/15 group-hover:border-juxt/30 transition-all duration-300'>
-                      {org}
-                    </span>
-                  </span>
+              <div class='relative mb-2 w-56 h-56'>
+                <div
+                  class='w-56 h-56 border-[5px] border-juxt rounded-full overflow-hidden bg-blue-300'
+                >
+                  <AssetImage
+                    src={image}
+                    alt={`Headshot of ${name}`}
+                    class='w-full h-full object-cover'
+                  />
+                </div>
+                <div class='absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-full pointer-events-none' />
+                <div class='absolute bottom-0.5 left-0 right-0 flex justify-center pointer-events-none'>
+                  <h3 class='font-bold text-lg text-white leading-tight'>
+                    {name}
+                  </h3>
+                </div>
+              </div>
+              {Array.isArray(role) ? (
+                role.map((line) => (
+                  <p class='text-sm text-gray-400 mb-0'>{line}</p>
                 ))
-              }
-            </div>
-          </div>
-
-          <!-- Subtle glow effect -->
-          <div
-            class='absolute -inset-6 bg-gradient-to-r from-juxt/10 via-white/5 to-juxt/10 rounded-[2rem] blur-3xl -z-10'
-          >
-          </div>
-        </div>
+              ) : (
+                <p class='text-sm text-gray-400'>{role}</p>
+              )}
+              {company && (
+                <p class='text-sm font-medium text-gray-300'>{company}</p>
+              )}
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
