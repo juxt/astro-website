@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Martin Trojer",
+    "role": "Software Engineer",
+    "company": "Meta",
+    "image": "/src/assets/xt26/xt26-mat.png"
+  },
+  {
+    "name": "Tom Dellman",
+    "role": "Director of Engineering",
+    "company": "Chronicle Software",
+    "image": "/src/assets/xt26/xt26-tod.png"
+  },
+  {
+    "name": "Payal Jain",
+    "role": "Head of Application Engineering & Platforms",
+    "company": "Citibank",
+    "image": "/src/assets/xt26/xt26-paj.png"
+  },
+  {
+    "name": "Simone Steel",
+    "role": "Chief Data Architect and interim CTO",
+    "company": "Deutsche Bank",
+    "image": "/src/assets/xt26/xt26-sis.png"
+  },
+  {
+    "name": "Abby Bangser",
+    "role": "Principal Engineer",
+    "company": "Syntasso",
+    "image": "/src/assets/xt26/xt26-abb.png"
+  },
+  {
+    "name": "Ben Collins",
+    "role": "VP of Engineering",
+    "company": "Antithesis",
+    "image": "/src/assets/xt26/xt26-bec.png"
+  },
+  {
+    "name": "Prof Paula Buttery",
+    "role": "Professor of Language and Machine Learning",
+    "company": "Cambridge University",
+    "image": "/src/assets/xt26/xt26-pab.png"
+  },
+  {
+    "name": "Henry Garner",
+    "role": "CTO",
+    "company": "JUXT",
+    "image": "/src/assets/xt26/xt26-heg.png"
+  }
+]
