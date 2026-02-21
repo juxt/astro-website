@@ -397,9 +397,9 @@ const benefitsPicture = await getImage({
                   }
                 }) => {
                   return (
-                    <button
-                      onclick={`window.location.href='${url}'`}
-                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group'
+                    <a
+                      href={url}
+                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group no-underline'
                     >
                       <span class='absolute top-5 right-5 uppercase text-juxt text-xs'>
                         {department}
@@ -437,7 +437,7 @@ const benefitsPicture = await getImage({
                           Full Job Profile
                         </Button>
                       </div>
-                    </button>
+                    </a>
                   )
                 }
               )}

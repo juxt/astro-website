@@ -207,6 +207,7 @@ const metaTitle = ogTitle ?? title ?? currentPageName
       data-website-id='4a088aa2-1e6f-4f97-9e95-9619983468de'
       src='https://bunseki.juxt.pro/t.js'></script>
     {robots && <meta name='robots' content={robots} />}
+    <slot name='head' />
   </head>
   <body class='bg-gray-50 transition-colors'>
     {navbar && <Navbar navbarNoBg={navbarNoBg} />}

@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
@@ -29,6 +31,21 @@ function getSiteUrl() {
   return PRODUCTION_SITE_URL
 }
 
+// Build a set of draft career page slugs to exclude from the sitemap
+const draftCareerSlugs = new Set<string>()
+const careersDir = path.resolve('src/pages/careers')
+if (fs.existsSync(careersDir)) {
+  for (const file of fs.readdirSync(careersDir)) {
+    if (file.endsWith('.md') || file.endsWith('.mdx')) {
+      const content = fs.readFileSync(path.join(careersDir, file), 'utf-8')
+      if (/^draft:\s*true/m.test(content)) {
+        const slug = file.replace(/\.mdx?$/, '')
+        draftCareerSlugs.add(`/careers/${slug}/`)
+      }
+    }
+  }
+}
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -36,8 +53,11 @@ export default defineConfig({
     preact(),
     sitemap({
       filter: (page) => {
-        // Exclude any pages we don't want in the sitemap, like search pages
-        return !page.includes('?')
+        if (page.includes('?')) return false
+        // Exclude draft career pages
+        const url = new URL(page)
+        if (draftCareerSlugs.has(url.pathname)) return false
+        return true
       }
     })
   ],

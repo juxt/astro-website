@@ -12,6 +12,7 @@ export type CareerPostProps = {
   department: string
   contract: string
   position: string
+  description?: string
   draft: boolean
   weight: number
   googleJobs: {
@@ -23,7 +24,7 @@ export type CareerPostProps = {
   }
 }
 
-const { location, department, contract, position, draft, googleJobs } = Astro
+const { location, department, contract, position, description, draft, googleJobs } = Astro
   .props.content as CareerPostProps
 
 const bannerPicture = await getImage({
@@ -72,7 +73,8 @@ const schema = JSON.stringify({
 })
 ---
 
-<Layout navbar title={position}>
+<Layout navbar title={position} ogDescription={description}>
+  <script slot='head' type='application/ld+json' set:html={schema}></script>
   <main class='transition-colors bg-white'>
     <Banner
       text='Job Profile'
@@ -122,7 +124,3 @@ const schema = JSON.stringify({
     </Section>
   </main>
 </Layout>
-{/* eslint-disable-next-line */}
-<script type='application/ld+json' set:html={schema}>
-
-</script>
