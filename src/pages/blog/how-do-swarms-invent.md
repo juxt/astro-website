@@ -25,9 +25,9 @@ LLMs write good code. By most measures, better than many humans. Give one overar
 
 An LLM working on its piece will happily generate a module that handles authentication, logging and billing in one place. Conway's Law would predict as much: a model whose neurons are [polysemantic by nature](https://transformer-circuits.pub/2023/monosemantic-features), each one responding to a [tangle of unrelated concepts](https://arxiv.org/abs/2505.11581), is not going to lose sleep over a component that does six things. Simplification is hard, lonely work, and it doesn't parallelise.
 
-## The sorcerer's apprentice
+## The primrose path
 
-Rich Hickey makes the case that [easy and simple are not the same thing](https://www.infoq.com/presentations/Simple-Made-Easy/). Easy is whatever produces working output fastest, whatever you're used to doing. Simple is whatever keeps concerns separated. Simple might be very hard. [Dijkstra](https://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD896.html) put it bluntly: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."
+Rich Hickey makes the case that [easy and simple are not the same thing](https://www.infoq.com/presentations/Simple-Made-Easy/). Easy is whatever produces working output fastest, whatever you're used to doing. Simple is whatever keeps concerns separated. Simple might be very hard. Hickey's "easy" is Shakespeare's [primrose path](https://en.wikipedia.org/wiki/Primrose_path): the pleasant road to somewhere you'd rather not arrive. [Dijkstra](https://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD896.html) put it bluntly: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."
 
 [Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) made a complementary observation in his [1980 Turing Award lecture](https://dl.acm.org/doi/10.1145/358549.358561): "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies."
 
@@ -35,7 +35,7 @@ Rich Hickey makes the case that [easy and simple are not the same thing](https:/
 
 Does code quality still matter? If an LLM can always generate more code to manage the complexity it creates, perhaps simplicity was always a concession to human limitations.
 
-## Thereafter they shape us
+## The water we swim in
 
 "[We shape our tools and thereafter they shape us](https://quoteinvestigator.com/2016/06/26/shape/)," wrote [John Culkin](https://en.wikipedia.org/wiki/John_Culkin) in 1967, explaining McLuhan. Conway's Law says the committee's structure shapes the system it builds. But the law also runs in reverse: the system reshapes the next committee that inherits it. How, concretely, do the structural decisions of an LLM shape the people who inherit its output?
 
@@ -43,13 +43,15 @@ Some persistence is benign. The [QWERTY keyboard](https://en.wikipedia.org/wiki/
 
 Paul David [documented](https://www.researchgate.net/publication/4724731_The_Dynamo_and_the_Computer_An_Historical_Perspective_On_the_Modern_Productivity_Paradox) a different kind of persistence in factory electrification. Steam-era plants used multi-storey layouts because power came from a single engine distributing force through shafts and belts; the building was shaped by the engine. When electricity arrived, managers replaced the steam engine with an electric dynamo but kept the multi-storey layout and the belt system. They overlaid the new technology on the old structure, and productivity barely changed. The surge came only in the 1920s, four decades after electrification, when factories were redesigned from scratch for "unit drive": individual motors on individual machines, enabling single-storey layouts where work could flow in a line. Did the managers know they were constrained? David's research suggests it wasn't pure cognitive blindness. They were partly captured by existing patterns, weighted by sunk costs, lacking a mental model for how the new technology could reshape the work itself. Not blind, but constrained in their seeing.
 
+## As the twig is bent, so grows the tree
+
 In 1965, Hoare added null references to ALGOL W "simply because it was so easy to implement". He later called it his [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/). Languages without null exist: Rust, Kotlin, Haskell and Swift all prove it can be done differently. But the discipline's communication structures, from shared libraries and interop boundaries to hiring pipelines and developer habits, have null baked in at every layer. Coordinated change across an ecosystem that large costs more than living with the damage. One committee member's shortcut, embedded across the entire profession for sixty years.
 
 <span class="pullquote" text-content="The blast radius of an architectural idea can escape any single project and echo for generations."></span>A year before Hoare introduced null, [Doug McIlroy](https://en.wikipedia.org/wiki/Douglas_McIlroy) wrote a [memo proposing](https://en.wikipedia.org/wiki/Pipeline_(Unix)) that programs should connect "like garden hose". [Ken Thompson](https://en.wikipedia.org/wiki/Ken_Thompson) implemented them in Unix [overnight](https://www.princeton.edu/~hos/mike/transcripts/thompson.htm). Pipes created the philosophy of small, composable tools: each program does one thing and connects to anything that follows the same interface. Sixty years on, the pipeline metaphor runs through everything from functional programming to data engineering.
 
 Both were pragmatic decisions by individuals who couldn't have known their choices would still be shaping the discipline six decades later. Hoare wasn't trying to sabotage future generations. McIlroy wasn't trying to found a philosophy. **The blast radius of an architectural idea can escape any single project and echo for generations.** You almost certainly can't tell in the moment whether you're creating null or pipes.
 
-## What committees leave behind
+## How committees invent
 
 Conway submitted [his paper](https://www.melconway.com/Home/pdf/committees.pdf) about committees to a committee, and they rejected it. Six decades of evidence have settled the law. What does it mean when the committee is a swarm of agents?
 
