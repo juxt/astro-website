@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'How do swarms invent?'
-description: 'Conway''s Law doesn''t fossilise code. It fossilises ideas.'
+description: 'We''re forming our AIs into committees. Conway''s Law still applies.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-21'
