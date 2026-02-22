@@ -27,7 +27,7 @@ That edge depends on the plan existing. [Research into agentic software architec
 
 ## The primrose path
 
-Rich Hickey makes the case that [easy and simple are not the same thing](https://www.infoq.com/presentations/Simple-Made-Easy/). Easy is whatever produces working output fastest, whatever you're used to doing. Simple is whatever keeps concerns separated. Simple might be very hard. Hickey's "easy" is Shakespeare's [primrose path](https://en.wikipedia.org/wiki/Primrose_path): the pleasant road to somewhere you'd rather not arrive. [Dijkstra](https://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD896.html) put it bluntly: "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it. And to make matters worse: complexity sells better."
+Rich Hickey makes the case that [easy and simple are not the same thing](https://www.infoq.com/presentations/Simple-Made-Easy/). Easy is whatever produces working output fastest, whatever you're used to doing. Simple is whatever keeps concerns separated. Simple might be very hard. Hickey's "easy" is Shakespeare's [primrose path](https://en.wikipedia.org/wiki/Primrose_path): the pleasant road to somewhere you'd rather not arrive.
 
 [Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) made a complementary observation in his [1980 Turing Award lecture](https://dl.acm.org/doi/10.1145/358549.358561): "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies."
 
