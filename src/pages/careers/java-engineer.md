@@ -5,7 +5,7 @@ department: 'Engineering'
 contract: 'Full Time'
 position: 'Java Engineer (All levels)'
 description: 'Join JUXT as a Java Engineer at any level, working on ambitious software projects for leading financial institutions. Full-time, hybrid role in London.'
-draft: false
+draft: true
 weight: 2
 googleJobs:
   {
