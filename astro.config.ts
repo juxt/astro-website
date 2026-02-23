@@ -3,7 +3,6 @@ import path from 'node:path'
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
-import inspectUrls from '@jsdevtools/rehype-url-inspector'
 import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -42,6 +41,28 @@ if (fs.existsSync(careersDir)) {
         draftCareerSlugs.add(`/careers/${slug}/`)
       }
     }
+  }
+}
+
+// Inline rehype plugin: add target="_blank" to external links
+function rehypeExternalLinks() {
+  return (tree) => {
+    function visit(node) {
+      if (node.type === 'element' && node.tagName === 'a' && node.properties?.href) {
+        const href = node.properties.href
+        if (typeof href === 'string' && !href.startsWith('#')) {
+          try {
+            const url = new URL(href, PRODUCTION_SITE_URL)
+            if (url.host !== 'juxt.pro') {
+              node.properties.target = '_blank'
+              node.properties.rel = 'noopener noreferrer'
+            }
+          } catch {}
+        }
+      }
+      if (node.children) node.children.forEach(visit)
+    }
+    visit(tree)
   }
 }
 
@@ -100,24 +121,7 @@ export default defineConfig({
           ]
         }
       ],
-      [
-        inspectUrls,
-        {
-          selectors: ['a[href]'],
-          inspectEach: (url) => {
-            // Ignore hash links
-            if (url.node.properties.href.startsWith('#')) {
-              return
-            }
-            var href = new URL(url.node.properties.href, PRODUCTION_SITE_URL)
-            // Add target blank to external links
-            if (href.host !== 'juxt.pro') {
-              url.node.properties.target = '_blank'
-              url.node.properties.rel = 'noopener noreferrer'
-            }
-          }
-        }
-      ]
+      rehypeExternalLinks
     ]
   },
   vite: {
