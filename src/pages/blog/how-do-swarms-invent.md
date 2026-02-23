@@ -4,7 +4,7 @@ title: 'How do swarms invent?'
 description: 'Architectural ideas outlast the code they''re embedded in. Now they propagate at LLM speed.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-21'
+publishedDate: '2026-02-24'
 heroImage: 'how-do-swarms-invent.jpg'
 tags:
   - 'ai'
