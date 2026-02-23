@@ -3,7 +3,6 @@ author: 'rkb'
 title: 'Deep Learning (DL)'
 description: 'The Mariana Trench of Learning'
 category: 'AI'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-04-19'
 heroImage: 'deep-learning.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'deep-learning'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Previously ... on Machine Learning
 [here](https://juxt.pro/blog/posts/machine-learning.html)
 
@@ -334,3 +336,4 @@ Mobile device may have the ability to conduct machine learning tasks
 locally, opening up a wide range of opportunities for object
 recognition, speech, face detection, and other innovations for mobile
 platforms.
+</BlogPostLayout>

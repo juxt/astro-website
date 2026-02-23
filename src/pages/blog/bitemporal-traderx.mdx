@@ -3,7 +3,6 @@ author: 'mpi'
 title: 'Bitemporal TraderX - augmenting a sample trading system'
 description: 'Adding XTDB and Clojure into a sample microservices trading application for the FINOS 2024 Tech Sprint'
 category: 'database'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-12-09'
 heroImage: 'bitemporal-traderx.jpg'
 tags:
@@ -13,8 +12,11 @@ tags:
   - 'FINOS'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 ## Joining FINOS: The Fintech Open Source Foundation
 
 In case you missed the news, JUXT is now a member of [FINOS](https://www.finos.org/)! The Fintech Open Source Foundation (FINOS) is an umbrella organization under the Linux Foundation, whose purpose is to accelerate collaboration and innovation in financial services through the adoption of open source software, standards and best practices.
@@ -86,4 +88,4 @@ Overall the project was quite straightforward as all the pieces fit together nic
 The XTDB team is running a webinar in conjunction with FINOS on 11th December, you can learn more and register for that [here](https://zoom.us/webinar/register/4617283986911/WN_3b4DvHhvQbCtt98DOvjbDQ).
 
 Finally, JUXT is collaborating with several Design Partners who are using XTDB and helping us discover missing features - we cannot responsibly take on too many partners (as we do need to support those features!), but if you feel like XTDB is the right fit for your problems, please do get in touch: [hello@xtdb.com](mailto://hello@xtdb.com)
-
+</BlogPostLayout>

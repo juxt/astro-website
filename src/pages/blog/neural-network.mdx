@@ -3,15 +3,17 @@ author: 'rkb'
 title: 'Writing a Neural Network'
 description: 'A Neural Network writes a Neural Network - Netception'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-08-11'
 heroImage: 'neural-network.jpg'
 tags:
   - 'machine-learning'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 My previous blog covered the mathematics involved in the neural network
 that we are going to write. You can find it
 [here](https://juxt.pro/blog/posts/neural-maths.html). The ideas covered
@@ -311,3 +313,4 @@ Also, please note that future versions of the code may vary in order to
 optimize performance. However, this blog contains the core ideas.
 
 I appreciate any feedback, questions or improvements that you may have.
+</BlogPostLayout>

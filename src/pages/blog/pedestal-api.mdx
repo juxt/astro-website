@@ -3,15 +3,17 @@ author: 'oly'
 title: 'Introducing pedestal-api'
 description: 'A batteries-included Swagger API for Pedestal'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-03-12'
 heroImage: 'pedestal.jpg'
 tags:
   - 'open source'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # Swagger and Schema
 
 A couple of years ago I watched a [EuroClojure talk by Tommi
@@ -165,3 +167,4 @@ it's used in [real](https://github.com/oliyh/slacky)
 pedestal-swagger it provides a good upgrade path, and if you're starting
 a new project it's worth considering. As always feedback, suggestions
 and pull requests are very welcome.
+</BlogPostLayout>

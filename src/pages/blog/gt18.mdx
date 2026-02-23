@@ -3,13 +3,15 @@ author: 'jon'
 title: 'GT18 - Internal Conference'
 description: 'Reflections on our company journey, insights gained over the past five years, and our vision for the future ahead.'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-07-26'
 heroImage: 'internal-conference.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 import fo from '../../assets/blog/food.jpg'
 
 <Image alt='image' src={fo} />
@@ -67,3 +69,4 @@ Instagram](https://www.instagram.com/juxtpro)
 import di from '../../assets/blog/dinner.jpg'
 
 <Image alt='image' src={di} />
+</BlogPostLayout>

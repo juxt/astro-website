@@ -14,7 +14,7 @@ type PhaseProps = {
   content: string
 }
 
-const phases = await Astro.glob<PhaseProps>('../data/ai-engineering/*.md')
+const phases = Object.values(import.meta.glob<PhaseProps>('../data/ai-engineering/*.md', { eager: true }))
 
 const phasesParsed = phases
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)

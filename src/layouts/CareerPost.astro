@@ -24,8 +24,8 @@ export type CareerPostProps = {
   }
 }
 
-const { location, department, contract, position, description, draft, googleJobs } = Astro
-  .props.content as CareerPostProps
+const { location, department, contract, position, description, draft, googleJobs } = (Astro
+  .props.frontmatter || Astro.props.content) as CareerPostProps
 
 const bannerPicture = await getImage({
   src: import('../assets/site/job-profile-banner.jpeg'),

@@ -3,7 +3,6 @@ author: 'oly'
 title: 'Testable Clojurescript apps'
 description: 'Using re-frame, devcards and convention to build web apps on solid ground'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-11-22'
 heroImage: 'roots.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'reagent'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # The world needs enlightenment
 
 I was asked recently by a colleague - let's call him Stathis S for
@@ -98,15 +100,15 @@ get 20% off.
 
 You might think of your application being used as follows:
 
-import user from '../../assets/blog/user.svg'
+import user from '../../assets/blog/user.svg?url'
 
-<Image src={user} alt="" />
+<img src={user} alt="" />
 
 And you could test it like this:
 
-import bbt from '../../assets/blog/blackbox-testing.svg'
+import bbt from '../../assets/blog/blackbox-testing.svg?url'
 
-<Image src={bbt} alt="" />
+<img src={bbt} alt="" />
 
 There are problems here:
 
@@ -138,9 +140,9 @@ data. Let's split the UI into two parts - the data model (mmmm, fresh!)
 and the view (full of the sticky goo found in eyeballs) which has only
 one job - _representing_ the data to the user.
 
-import splitting from '../../assets/blog/splitting-ui.svg'
+import splitting from '../../assets/blog/splitting-ui.svg?url'
 
-<Image src={splitting} alt="" />
+<img src={splitting} alt="" />
 
 # The spec
 
@@ -151,9 +153,9 @@ therefore makes sense to introduce checks at the boundary between these
 two, where the output of the model is consumed by the view. I can define
 this as a spec:
 
-import uiSpec from '../../assets/blog/ui-spec.svg'
+import uiSpec from '../../assets/blog/ui-spec.svg?url'
 
-<Image src={uiSpec} alt="" />
+<img src={uiSpec} alt="" />
 
 Which will look something like this:
 
@@ -330,9 +332,9 @@ Tests don't need to run asynchronously with complicated locking or
 suffer from race conditions because with re-frame we've separated the
 what from the when. Now we have covered the following parts in testing:
 
-import modelTesting from '../../assets/blog/model-testing.svg'
+import modelTesting from '../../assets/blog/model-testing.svg?url'
 
-<Image src={modelTesting} alt="" />
+<img src={modelTesting} alt="" />
 
 # The goo
 
@@ -450,9 +452,9 @@ With some fixes in place for that, I now know that
 
 - my view can properly display any data that conforms to the spec
 
-import dCardsTesting from '../../assets/blog/devcards-testing.svg'
+import dCardsTesting from '../../assets/blog/devcards-testing.svg?url'
 
-<Image src={dCardsTesting} alt="" />
+<img src={dCardsTesting} alt="" />
 
 ## Automatic for the people
 
@@ -464,9 +466,9 @@ screenshots and diff devcards against reference versions. I have written
 a library to do this called [kamera](https://github.com/oliyh/kamera),
 which I introduce in [my next post here](visual-testing.html).
 
-import modelView from '../../assets/blog/model-view-testing.svg'
+import modelView from '../../assets/blog/model-view-testing.svg?url'
 
-<Image src={modelView} alt="" />
+<img src={modelView} alt="" />
 
 # 998... 999...
 
@@ -496,9 +498,9 @@ The transitive property of our tests proves that we can render
 everything properly, our application works as expected and we can add
 \"full stack testing\" to our CV.
 
-import fStackTesting from '../../assets/blog/full-stack-testing.svg'
+import fStackTesting from '../../assets/blog/full-stack-testing.svg?url'
 
-<Image src={fStackTesting} alt="" />
+<img src={fStackTesting} alt="" />
 
 As a bonus, we also know that:
 
@@ -549,3 +551,4 @@ the libraries and tools used:
 The code examples are from a toy project called
 [re-partee](https://github.com/oliyh/re-partee) that I created to
 demonstrate the principles in this blog post.
+</BlogPostLayout>

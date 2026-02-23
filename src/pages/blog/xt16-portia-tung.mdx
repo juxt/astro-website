@@ -3,13 +3,15 @@ author: 'mal'
 title: 'XT16 - Portia Tung'
 description: 'Play for Your Life'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-01-13'
 heroImage: 'play.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 > \"If creativity is intelligence having fun, what's behind that
 > intelligence?\"
 
@@ -51,3 +53,4 @@ our Disqus forum below.
   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
   allowfullscreen
 ></iframe>
+</BlogPostLayout>

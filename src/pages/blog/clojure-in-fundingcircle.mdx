@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Funding Circle'
 description: 'Lending some Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-10-04'
 heroImage: 'funding-circle-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Peer to Peer
 
 import fc from '../../assets/blog/fclogo2.png'
@@ -260,3 +262,4 @@ we're not going down that road anytime soon at Funding Circle!
 Check out the Funding Circle [engineering
 blog](https://engineering.fundingcircle.com/) and
 [careers](https://www.fundingcircle.com/uk/careers/).
+</BlogPostClojureInLayout>

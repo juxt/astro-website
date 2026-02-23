@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Ireland: Aviso Novate'
 description: 'A Clojure heavyweight'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-09-22'
 heroImage: 'aviso-logo.jpg'
 clojureIn:
@@ -14,6 +13,10 @@ clojureIn:
   }
 ---
 
+
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # A Clojure Power User
 
 import { Image } from 'astro:assets'
@@ -159,3 +162,4 @@ and describing it, and looks like really elegant solution.
 Generally with Clojure we value a slow evolution. The core is stable and
 the scope is contained; it's the opposite of Scala where a lot gets
 thrown in.
+</BlogPostClojureInLayout>

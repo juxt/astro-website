@@ -3,7 +3,6 @@ author: 'jan'
 title: 'Flattening Legacy C++ APIs for Rust Integration'
 description: 'A comprehensive guide detailing the process of integrating and utilizing an existing C++ API within a Rust application.'
 category: 'programming'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-12-17'
 heroImage: 'cpp-rust-flattening.jpg'
 tags:
@@ -13,6 +12,10 @@ tags:
   - 'MQTT'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 ## Introduction
 
 This blog post presents a solution for integrating Rust with legacy C++ APIs,
@@ -151,7 +154,7 @@ upfront work, it results in more maintainable and reliable bindings.
 
 API flattening introduces a C-compatible intermediate layer that bridges these incompatibilities:
 
-```ascii
+```plaintext
 ┌────────────┐     ┌────────────┐     ┌────────────┐
 │   C++ API  │ --> │    C API   │ --> │  Rust API  │
 │ (Original) │     │(Flattened) │     │ (Binding)  │
@@ -504,3 +507,4 @@ The complete implementation of the patterns discussed in this post can be found 
 - [Virtual Method Tables](https://en.wikipedia.org/wiki/Virtual_method_table)
 - [RAII Pattern](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)
 - [thiserror Documentation](https://crates.io/crates/thiserror)
+</BlogPostLayout>

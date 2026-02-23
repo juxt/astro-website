@@ -3,20 +3,22 @@ author: 'oly'
 title: 'Superlifter: A DataLoader for Clojure'
 description: 'Efficient fetching from decomplected code'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2020-03-26'
 heroImage: 'superlifter.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 No beating around the bush here, you’re going to have to give up whatever job you have and plough your life savings into a pet store. This is convenient for me, because it will help you understand this blog post. Hope you like animals!
 
 Naturally you are going to computerise everything you can. You’ve heard that graphs are cool, and that cool means good. GraphQL gives you an abstraction over your data. This must also be cool! The information about your pet store could look like this:
 
-import sg from '../../assets/blog/superlifter-graph.svg'
+import sg from '../../assets/blog/superlifter-graph.svg?url'
 
-<Image src={sg} alt="" />
+<img src={sg} alt="" />
 
 Each node in the graph is a bit of data you have, and the edges are how you access it. Most GraphQL implementations take care of the edges for you so your only job is to write resolvers that can return the data for each node. Let’s tell a story.
 
@@ -83,9 +85,9 @@ You have _n_ pets (your pet store is very successful) but that means the
 query is taking quite a long time to resolve. You are making 1+n calls
 to PetDB and paying the overhead of a call 1+n times in serial.
 
-import ns from '../../assets/blog/naive-sequence.svg'
+import ns from '../../assets/blog/naive-sequence.svg?url'
 
-<Image src={ns} alt="" />
+<img src={ns} alt="" />
 
 If you queried for both kind and name of the pets you would make 1+2n
 calls and the performance would be twice as bad.
@@ -144,9 +146,9 @@ each one. Then, usually after a given time interval, the fetches are
 coalesced (deduplicated and combined) and performed, delivering the
 individual results back to the promises.
 
-import sd from '../../assets/blog/dataloader-sequence.svg'
+import sd from '../../assets/blog/dataloader-sequence.svg?url'
 
-<Image src={sd} alt="" />
+<img src={sd} alt="" />
 
 # superlifter
 
@@ -262,9 +264,9 @@ query is many layers deep, but making it smaller may mean your fetches
 span multiple buckets and you lose some efficiency. One of the
 worst-case scenarios is shown below, with yellow indicating wasted time.
 
-import sb from '../../assets/blog/time-bucket.svg'
+import sb from '../../assets/blog/time-bucket.svg?url'
 
-<Image src={sb} alt="" />
+<img src={sb} alt="" />
 
 ## Size buckets
 
@@ -303,9 +305,9 @@ The `resolve-pet-details` resolver then puts all its fetches into the
 combined fetch will be performed immediately. No time lost and maximum
 efficiency!
 
-import ssb from '../../assets/blog/size-bucket.svg'
+import ssb from '../../assets/blog/size-bucket.svg?url'
 
-<Image src={ssb} alt="" />
+<img src={ssb} alt="" />
 
 # More features
 
@@ -334,3 +336,4 @@ Feedback is very welcome, along with any features you'd like to see or
 issues. I have future plans to support Clojurescript, add a \"debounced
 time\" bucket (which triggers after a fixed quiet period) and improve
 the API around creating buckets dynamically.
+</BlogPostLayout>

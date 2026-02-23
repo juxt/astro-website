@@ -1,6 +1,5 @@
 ---
 author: 'juxt'
-layout: '../../layouts/BlogPost.astro'
 title: 'Get Ready to Elevate Your Fintech Experience and Networking at XT24'
 description: 'Engineering leaders from global banks, fintech companies and hedge funds are meeting in Milton Keynes for XT24 Fintech Conf'
 category: 'conference'
@@ -12,6 +11,10 @@ tags:
 heroImage: 'xt24-og-image.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 For over a decade, JUXT has been synonymous with first-class engineering and unforgettable conferences.
 
 This year's conference, XT24, will take place in Milton Keynes on May 9th and is dedicated to technical innovation in Fintech.
@@ -35,3 +38,4 @@ With a lineup of [distinguished speakers](https://www.juxt.pro/xt24/#speakers) a
 ></iframe>
 
 **Bonus content:** Click [here](https://www.juxt.pro/blog/juxt-10-year-party/) to watch the tech talks from our 2023 Tech Conference at London’s Wilton’s Music Hall.
+</BlogPostLayout>

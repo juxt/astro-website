@@ -15,7 +15,7 @@ import Layout from '@layouts/Layout.astro'
 
 const isDev = import.meta.env.DEV
 const jobPosts =
-  await Astro.glob<MarkdownInstance<CareerPostProps>>('./{*.mdx,*.md}')
+  Object.values(import.meta.glob<MarkdownInstance<CareerPostProps>>('./{*.mdx,*.md}', { eager: true }))
 
 const jobPostsParsed = jobPosts
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)

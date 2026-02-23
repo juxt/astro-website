@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Signal Media'
 description: 'Obtaining knowledge with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-02-03'
 heroImage: 'signal-ai-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Generating Understanding
 
 import si from '../../assets/blog/signal-team.jpg'
@@ -263,3 +265,4 @@ have discovered it were already in a sense looking for it.
 _Miguel:_ Python and Java are known in the universities whereas Clojure
 is still relatively obscure. Advertising Clojure at the universities
 might give it an extra push.
+</BlogPostClojureInLayout>

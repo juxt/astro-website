@@ -3,7 +3,6 @@ author: 'oly'
 title: 'Rule-Driven Webserver Middleware'
 description: 'When scope and order collide'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-12-08'
 heroImage: 'rule-driven-dev.jpg'
 tags:
@@ -11,9 +10,12 @@ tags:
   - 'ring'
 ---
 
+
 import { Image } from 'astro:assets'
 import handlersRealisation from '../../assets/blog/handlers-realisation.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 Much of the code I write involves a webserver - whether delivering a UI,
 a public API, just some simple stats and health checks, or all three -
 which means that I often rely on middleware for a lot of non-functional
@@ -145,3 +147,4 @@ scope and the relative ordering of any given interceptor.
 
 [Angel Interceptor is on Github](https://github.com/oliyh/angel-interceptor), feedback and
 contributions are very welcome.
+</BlogPostLayout>

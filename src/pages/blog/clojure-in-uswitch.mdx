@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure In London: uSwitch'
 description: 'An early adopter targets big data'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-09-22'
 heroImage: 'u-switch-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 import us from '../../assets/blog/uswitch-logo.png'
 
 <Image alt='image' width={300} src={us} />
@@ -208,3 +210,4 @@ intended to solve that problem and we realized it once we tried.
 ​
 We really value pragmatism: solve our problems and move on. We can get a
 lot done which helps the business to move faster.
+</BlogPostClojureInLayout>

@@ -3,16 +3,18 @@ author: 'lda'
 title: 'A ClojureScript form library for Reagent and Re-frame'
 description: '100% customizable, 0% boilerplate'
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2019-12-22'
 heroImage: 'forms.jpg'
 tags:
   - 'forms'
 ---
 
+
 import { Image } from 'astro:assets'
 import '../../assets/style/clojurescript-form-library.css'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 # Why did I build a new form tool?
 
 For the past year, I have been leading the frontend development of a
@@ -282,3 +284,4 @@ validation, as well. Feel free to experiment and play with it.
   <div id='register'></div>
 </div>
 <script src='/scripts/clojurescript-form-library.js'></script>
+</BlogPostLayout>

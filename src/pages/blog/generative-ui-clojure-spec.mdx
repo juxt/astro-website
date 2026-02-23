@@ -3,13 +3,15 @@ author: 'fky'
 title: 'Explore UI states with clojure.spec and devcards'
 description: 'Leverage the power of generators'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-09-07'
 heroImage: 'explore-ui.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # TL;DR
 
 _Annotating you render functions with clojure.spec lets you generate
@@ -183,3 +185,4 @@ the full list of generated states (and
 [here](https://github.com/frankiesardo/speccards/blob/master/src/speccards/app.cljs)
 is the source code). As you develop or change your renderer this is
 another useful tab to keep open to see the impact of you changes.
+</BlogPostLayout>

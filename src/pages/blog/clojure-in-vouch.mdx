@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Identity: Vouch'
 description: 'Vouching for Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-04-11'
 heroImage: 'vouch-logo.jpg'
 clojureIn:
@@ -18,8 +17,11 @@ tags:
   - 'clojure-in'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Vouch.io](https://vouch.io/) is a platform providing verifiable trust for people and their devices. Their engineers include some of the most prolific contributors to the Clojure ecosystem to date. I caught up with the CEO Anthony Maley to learn about the technical journey.
 
 import ra from '../../assets/blog/tonyvouch.jpg'
@@ -153,3 +155,4 @@ We're always looking for opportunities to find a way to educate and enable those
 Open source will also be huge for Vouch.io. [Krell](https://github.com/vouch-opensource/krell) is out there and doing well and we will be sharing more at the right time, all with the view of enabling others.
 
 **Jon: Brilliant. Thank you so much for your time Anthony, looking forward to seeing you at the next Clojure Conj!**
+</BlogPostClojureInLayout>

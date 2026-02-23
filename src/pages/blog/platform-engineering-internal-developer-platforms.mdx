@@ -1,6 +1,5 @@
 ---
 author: 'joe'
-layout: '../../layouts/BlogPost.astro'
 title: 'Platform Engineering and Internal Developer Platforms'
 description: "In this episode of JUXTCast, Joe Littlejohn was joined by JUXT engineers Aaron Knauf and Mariusz Saternus to talk Platform Engineering, and delivering effective developer platforms in large organizations."
 category: 'platform engineering'
@@ -12,6 +11,10 @@ tags:
 heroImage: 'JuxtCast-square.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 "You build it, you run it!" is still a great mantra, but how do we reduce the cognitive load on teams? We need to keep a strong sense of ownership but avoid placing the burden to understand everything (including networking, auth, compliance, database administration, and much more) on every application developer.
 
 This is where platform engineering can help.
@@ -34,3 +37,4 @@ Watch it here:
 This JUXT Cast episode is also available as a podcast across <a href="https://pnc.st/s/juxt-cast/850ccf77/platform-engineering-and-internal-developer-platforms" target="_blank">all your favourite platforms</a>.
 
 Happy listening!
+</BlogPostLayout>

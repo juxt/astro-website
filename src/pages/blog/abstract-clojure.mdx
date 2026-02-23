@@ -3,13 +3,15 @@ author: 'ajk'
 title: 'Abstract Clojure'
 description: 'Depend on abstractions, not on concretions'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2021-11-25'
 heroImage: 'abstract-clojure.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 A great deal can be achieved in the first few years of a software
 project, with a small team and the right tools we can quickly deliver
 features to appease both businesses and their clients. In the early
@@ -483,3 +485,4 @@ Generative art crafted in Clojure!
   Design](https://www.goodreads.com/book/show/179133.Domain_Driven_Design)
 
 - [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
+</BlogPostLayout>

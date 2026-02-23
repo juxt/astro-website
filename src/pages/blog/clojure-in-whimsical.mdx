@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Collaboration: Whimsical'
 description: 'Discover how Whimsical leverages Clojure to revolutionize remote collaboration through intuitive visual tools, from whiteboards to docs'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2024-04-22'
 heroImage: 'whimsical-clojurein.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Whimsical](https://whimsical.com/) is a popular online tool to help teams collaborate and express ideas. The Whimsical hub combines whiteboards, flowcharts, docs, wireframes and more.
 
 The platform is built on Clojure and ClojureScript. I wanted to meet them to learn about life on the cutting edge of ClojureScript, and what the modern-day pros and cons are.
@@ -173,3 +175,4 @@ Seeing what [Clojurists Together](https://www.clojuriststogether.org/) have been
 **Jānis:** Thank you for putting this together and thank you for the series. It was really a lot of fun reading back on the previous episodes that you folks have done and seeing well-known and some lesser-known names. It's been great.
 
 **Jon: It's been great to chat with you. It's a really cool, awesome project. You are exactly what a small/medium-sized Clojure team should be doing, punching above its weight and delivering lots of cool stuff.**
+</BlogPostClojureInLayout>

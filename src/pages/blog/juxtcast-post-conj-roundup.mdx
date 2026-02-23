@@ -1,6 +1,5 @@
 ---
 author: 'jdt'
-layout: '../../layouts/BlogPost.astro'
 title: 'JUXTCast S5 E1: Post-Conj Roundup, Databases, and the LLM era'
 description: "JUXT CTO Malcolm Sparks, Lead Engineer Alex Davis, and XTDB Head of Product Jeremy Taylor talk about Clojure/Conj 2023, news and announcements, and ChatGPT"
 category: 'clojure'
@@ -12,6 +11,10 @@ tags:
 heroImage: 'JuxtCast-new-heads-1200.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In this JUXT Cast episode — the first of the Series 5 — Malcolm Sparks (CTO), Alex Davis (Lead Engineer), and Jeremy Taylor (Head of Product — XTDB) discuss [Clojure/Conj 2023](https://2023.clojure-conj.org/), the impact & potential of AI/ LLMs, and trends in software architectures.
 Milton Keynes — the "City of the Future" and home to both JUXT and Alan Turing's wartime efforts — also gets an honourable mention.
 
@@ -27,3 +30,4 @@ Milton Keynes — the "City of the Future" and home to both JUXT and Alan Turing
 This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/dc20b264/post-conj-roundup-databases-and-the-llm-era).
 
 Happy listening!
+</BlogPostLayout>

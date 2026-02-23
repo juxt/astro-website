@@ -3,13 +3,15 @@ author: 'jam'
 title: 'The Big Acquisition'
 description: "Exploring the implications of Nubank's acquisition of Cognitect and its potential impact on the Clojure programming community."
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-08-09'
 heroImage: 'the-big-acquisition.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 A technological revolution is going on in Brazil. In 2011, [only 56% of
 Brazilians had a bank
 account](https://www.statista.com/statistics/898974/population-bank-account-type-brazil/).
@@ -123,3 +125,4 @@ earlier, [dominates the OCaml ecosystem](https://github.com/janestreet).
 A company the size of Nubank could do something similar for Clojure,
 especially given it is a fast-growing force that shows no signs of
 slowing. Who knows what in the future will be powered by Clojure?
+</BlogPostLayout>

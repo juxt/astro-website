@@ -3,13 +3,16 @@ author: 'tom'
 title: 'Two new medley partition functions'
 description: 'Introducing partition-after & partition-before to the Clojure medley library'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-12-23'
 heroImage: 'green-and-brown-train-rail.jpg'
 tags:
   - 'clojure'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 ## Two new ways to partition collections
 
 Clojure's core library has provided `partition`, `partition-all` and `partition-by` since the early days, and recently added more performant functions `partitionv` and `partitionv-all`. However, partitioning every `n` items, or partitioning when a predicate's truthiness flips can be limiting. In this article, we look at two new functions in [medley](https://github.com/weavejester/medley) – `partition-after` and `partition-before` – which address an aspect of these limitations.
@@ -194,3 +197,4 @@ Hopefully you have found this interesting, and hopefully you will find some use-
 
 - The PR: https://github.com/weavejester/medley/pull/67
 - Railway picture at the top from [Eugene Zh](https://unsplash.com/@eugene_zh)
+</BlogPostLayout>

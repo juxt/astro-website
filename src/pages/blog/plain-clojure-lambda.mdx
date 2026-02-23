@@ -1,6 +1,5 @@
 ---
 author: 'osm'
-layout: '../../layouts/BlogPost.astro'
 title: 'A Recipe for Plain Clojure Lambdas'
 description: 'Learn how to build resilient and efficient AWS Lambdas using Clojure, ensuring a fast, familiar, and straightforward setup process for your applications.'
 category: 'clojure'
@@ -12,8 +11,11 @@ tags:
 heroImage: 'clojure_lambda_guide.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In order to prevent [xt-play](https://play.xtdb.com) from having downtime due
 to [traffic spikes](https://www.atomic14.com/2022/12/15/the-hacker-news-effect.html),
 I converted the backend to run on AWS Lambda (previously it was running on AWS
@@ -191,3 +193,4 @@ that might be useful. And if you don't require a JVM you can always:
 - [Use your own native image](https://github.com/cnuernber/cljs-lambda-gateway-example)
 
 Happy hacking!
+</BlogPostLayout>

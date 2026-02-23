@@ -1,6 +1,5 @@
 ---
 author: 'mal'
-layout: '../../layouts/BlogPost.astro'
 title: 'JUXTCast: Rama and its Clojure API — with special guest Nathan Marz'
 description: "Malcolm Sparks, Jeremy Taylor, and James Henderson sat with Nathan Marz to talk about Rama, and the influence the Clojure language has had on its design."
 category: 'clojure'
@@ -14,6 +13,10 @@ tags:
 heroImage: 'JuxtCast-new-heads-1200.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In October 2023, Nathan Marz announced the Clojure API to Rama, a new programming platform for building distributed applications that was released last August.
 
 Red Planet Labs revealed Rama for the first time by building and operating a Twitter-scale Mastodon instance that’s 100x less code than Twitter wrote to build the equivalent.
@@ -34,3 +37,4 @@ For more information about Rama and it's Clojure API, you can read this post on 
 This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/0e44ab18/rama-and-its-clojure-api-with-nathan-marz-founder-ceo-of-red-planet-labs).
 
 Happy listening!
+</BlogPostLayout>

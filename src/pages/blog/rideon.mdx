@@ -3,15 +3,17 @@ author: 'juxt'
 title: 'Clojure and Electric Bikes'
 description: 'A case study of building the infrastructure for an electric powered bikes scheme'
 category: 'case studies'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-10-29'
 heroImage: 'electric-bike.jpg'
 tags:
   - 'clojure'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # Electric Bikes
 
 [Ride On](http://www.ride-on.es/en/) is a public bikes scheme with a
@@ -130,3 +132,4 @@ The timescale was tight, and there were many moving parts that all had
 to land together. The project has been successful and is ready to power
 Ride On's electric bikes going forward. Look out for Ride On bikes in a
 city near you!
+</BlogPostLayout>

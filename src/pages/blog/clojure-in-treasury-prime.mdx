@@ -3,7 +3,6 @@ author: 'joe'
 title: 'Clojure in Banking: Treasury Prime'
 description: 'Treasury Prime connects Fintechs to the largest network of US Banks through a single API, enabling seamless financial service integration'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2024-02-27'
 heroImage: 'tp-logo.jpg'
 clojureIn:
@@ -14,21 +13,21 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Treasury Prime](https://www.treasuryprime.com/) is a US-based banking technology provider. They help developers embed financial services in their applications and provide API-driven, automated banking. They are focused on developer experience and offering the widest-available range of features for banking products at any scale. Originally funded by Y Combinator in 2018, Treasury Prime has raised over $70M in investment to date.
 
 We caught up with Mike Clarke, VP Engineering, to discuss a lineage of Banking API startups going back a decade, and how Clojure has played a key role in the execution of Treasury Prime.
 
-import tplogo from '../../assets/blog/treasuryprime.svg'
+import tplogo from '../../assets/blog/treasuryprime.svg?url'
 
-<Image
-  class='not-prose dark:invert'
+<img src={tplogo} class='not-prose dark:invert'
   alt='Treasury Prime'
   width={350}
-  height={50}
-  src={tplogo}
-/>
+  height={50} />
 
 **Joe: So, tell me about Treasury Prime, Mike. What do you do?**
 
@@ -298,3 +297,4 @@ We're a remote company, but we're focused primarily on US time zones. Our engine
 ---
 
 _If you're looking to kick-off a project with Clojure and you're interested in some help or advice, don't hesitate to reach out to JUXT. Drop a call into [the calendar](https://calendar.google.com/calendar/appointments/schedules/AcZssZ2cJ8bzj8OAv43p7Su3vJ_bjPO4wr_2wJVvXxTL_oPq0xeNPEG_iSYGT8of7HX-ldS3DUAMaWFP) now or reach out via <a href="mailto:info@juxt.pro">info@juxt.pro</a>._
+</BlogPostClojureInLayout>

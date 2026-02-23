@@ -3,13 +3,15 @@ author: 'dmc'
 title: 'Overview of the nREPL'
 description: ''
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-02-20'
 heroImage: 'nrepl.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In this post I'm going to explain in a rough high level about how the
 nREPL you use every day actually works. This isn't intended to be 100%
 accurate, but close enough that you can build a mental model for
@@ -249,3 +251,4 @@ the version already in your project.
 The open design of CIDER-nrepl has allowed unexpected clients such as
 vim-fireplace to have a number of additional features with only
 integration effort.
+</BlogPostLayout>

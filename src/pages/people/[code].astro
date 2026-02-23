@@ -1,15 +1,17 @@
 ---
 import { Image } from 'astro:assets'
-import { MarkdownInstance } from 'astro'
+import type { MarkdownInstance } from 'astro'
 import DraftBanner from '@components/DraftBanner'
 import { GithubIcon, LinkedInIcon, TwitterIcon } from '@components/Icons'
 import { Person } from '@utils/types'
 import Layout from '@layouts/Layout.astro'
 
-export async function getStaticPaths() {
-  const people = await Astro.glob<MarkdownInstance<Person>>(
-    '../../data/people/{*.mdx,*.md}'
+export function getStaticPaths() {
+  const peopleModules = import.meta.glob<MarkdownInstance<Person>>(
+    '../../data/people/{*.mdx,*.md}',
+    { eager: true }
   )
+  const people = Object.values(peopleModules)
 
   const isDev = import.meta.env.DEV
 

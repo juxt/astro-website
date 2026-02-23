@@ -3,7 +3,6 @@ author: 'osm'
 title: 'Calling AWS Lambda over HTTP'
 description: 'A comprehensive exploration of various methods to invoke AWS Lambda functions over HTTP, including their quirks and behaviors.'
 category: 'architecture'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-07-29'
 heroImage: 'http-lambda-blog-osm.jpg'
 tags:
@@ -14,6 +13,10 @@ tags:
   - 'cloudfront'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 {/*
 
 The requirement that this blog post fulfils is:
@@ -335,3 +338,4 @@ it's fairly obvious that each of them would have different setup instructions I
 found that the variance in their behaviours was enough to trip me up many
 times. Hopefully the above information will be useful to avoid the gotchas in
 your chosen option the next time either of us wants to call a Lambda over HTTP.
+</BlogPostLayout>

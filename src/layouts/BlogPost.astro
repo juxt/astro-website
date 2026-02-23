@@ -19,14 +19,14 @@ const {
   author,
   draft,
   publishedDate
-} = Astro.props.content as Blog
+} = (Astro.props.frontmatter || Astro.props.content) as Blog
 
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-)
+const people = Object.values(import.meta.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}', { eager: true }
+))
 
 const blogs = (
-  await Astro.glob<MarkdownInstance<Blog>>('../pages/blog/{*.mdx,*.md}')
+  Object.values(import.meta.glob<MarkdownInstance<Blog>>('../pages/blog/{*.mdx,*.md}', { eager: true }))
 ).filter((blog) => !blog.frontmatter.draft)
 
 const blogsWithoutCurrent = blogs.filter(

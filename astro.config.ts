@@ -9,7 +9,6 @@ import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeKatex from 'rehype-katex'
 import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
 // netlify - build vars https://docs.netlify.com/build/configure-builds/environment-variables/
@@ -66,7 +65,7 @@ export default defineConfig({
     shikiConfig: {
       theme: 'css-variables'
     },
-    remarkPlugins: [remarkMath, remarkGfm],
+    remarkPlugins: [remarkMath],
     rehypePlugins: [
       rehypeSlug,
       rehypeKatex,

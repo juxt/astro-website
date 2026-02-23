@@ -3,15 +3,17 @@ author: 'hug'
 title: 'Load testing with Gatling and Clojure'
 description: 'DDOS for fun and profit'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-10-23'
 heroImage: 'loadtesting.jpg'
 tags:
   - 'AWS'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 > Yes, it works, but will it scale?
 
 I've gotten so used to the reliability of Amazon autoscaling groups and
@@ -130,3 +132,4 @@ At JUXT, we've yet to tackle a project that has to scale as much as a
 Twitter or an Uber - but we're slowly moving in that direction and are
 starting to feel a need for this sort of testing. We don't have the
 tools for it but we're investigating options.
+</BlogPostLayout>
