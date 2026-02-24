@@ -13,7 +13,7 @@ tags:
   - 'architecture'
 ---
 
-<p class="lede">Steam-era factories were <a href="https://www.researchgate.net/publication/4724731_The_Dynamo_and_the_Computer_An_Historical_Perspective_On_the_Modern_Productivity_Paradox" target="_blank">shaped by their engines</a>. Power came from a single <a href="https://en.wikipedia.org/wiki/Line_shaft" target="_blank">shaft</a> turning on every floor; leather belts distributed force outward, and machines clustered near the shaft because every foot of belt lost energy. The whole building, several storeys tall, was an expression of the engine's constraints.</p>
+<p class="lede">Steam-era factories were <a href="https://www.researchgate.net/publication/4724731_The_Dynamo_and_the_Computer_An_Historical_Perspective_On_the_Modern_Productivity_Paradox" target="_blank">shaped by their engines</a>. Power came from a single <a href="https://en.wikipedia.org/wiki/Line_shaft" target="_blank">shaft</a> turning on every floor; leather belts distributed force outward, and machines clustered close because every foot of belt lost energy. The whole building, several storeys tall, was an expression of the engine's constraints.</p>
 
 When electricity arrived in the 1890s, owners bolted an electric motor where the steam engine had stood, changing little else. They kept the multi-storey buildings with their overhead shafts and belt drives and productivity barely moved. The gains came four decades later, when manufacturers redesigned from scratch for individual motors on individual machines: single-storey plants with floor plans dictated by workflow. The steam engine had gone, but its effect on the architecture persisted for forty years.
 
@@ -41,7 +41,7 @@ LLMs write good code, by most measures better than many humans. They bring fewer
 
 Rich Hickey makes the case that [easy and simple are not the same thing](https://www.infoq.com/presentations/Simple-Made-Easy/). Easy is whatever produces working output fastest, which is usually whatever you're used to doing. Hickey's "easy" is Shakespeare's [primrose path](https://en.wikipedia.org/wiki/Primrose_path): the pleasant road to somewhere you'd rather not go.
 
-Simple keeps concerns separated, and untangling complexity might be very hard indeed. Simplification is hard work, and it doesn't parallelise. No amount of parallel horsepower can rescue a bad design, and complexity doesn't care who's struggling with it.
+Simple keeps concerns separated, and untangling them once they've been coupled is painstaking work that can't be brute-forced. No amount of horsepower can rescue a bad design, and complexity doesn't care who's struggling with it.
 
 ## As the twig is bent, so grows the tree
 
