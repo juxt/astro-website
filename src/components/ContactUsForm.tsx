@@ -8,6 +8,8 @@ type ContactUsFormProps = {
   variant?: 'light' | 'dark'
   transparentInputs?: boolean
   submitLabelColor?: string
+  successTitle?: string
+  successMessage?: string
 }
 
 export function ContactUsForm(props: ContactUsFormProps) {
@@ -17,7 +19,9 @@ export function ContactUsForm(props: ContactUsFormProps) {
     eventName = 'XT26',
     variant = 'light',
     transparentInputs = false,
-    submitLabelColor
+    submitLabelColor,
+    successTitle = 'Thank you for getting in touch',
+    successMessage = "We'll get back to you shortly."
   } = props
 
   const isDark = variant === 'dark'
@@ -65,10 +69,10 @@ export function ContactUsForm(props: ContactUsFormProps) {
           </svg>
         </div>
         <h3 className={`text-2xl font-light mb-3 justify-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
-          Thank you for your interest
+          {successTitle}
         </h3>
         <p className={`font-light mb-6 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-          We'll reach out if spots become available.
+          {successMessage}
         </p>
       </div>
     )
