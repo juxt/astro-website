@@ -74,6 +74,8 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         if (page.includes('?')) return false
+        // Exclude draft blog posts
+        if (page.includes('/blog/drafts/')) return false
         // Exclude draft career pages
         const url = new URL(page)
         if (draftCareerSlugs.has(url.pathname)) return false
