@@ -24,9 +24,7 @@ type Navigation = {
   items: NavigationItem[]
 }
 
-const navigation = await Astro.glob<{ footer: Navigation[] }>(
-  '../data/metadata.json'
-)
+const navigation = Object.values(import.meta.glob('../data/metadata.json', { eager: true })) as any[]
 
 const [{ footer }] = navigation
 

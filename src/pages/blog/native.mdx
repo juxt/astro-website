@@ -3,7 +3,6 @@ author: 'fky'
 title: 'Writing ClojureScript native apps is easy'
 description: 'If you know how to do it'
 category: 'apps'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-04-20'
 heroImage: 'native-apps.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'clojurescript'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # _What is wrong with native app development?_
 
 I've always enjoyed writing mobile apps (although I considered it being
@@ -174,3 +176,4 @@ import m from '../../assets/blog/monks.jpg'
 every other person hanging around in the `#cljsrn` channel for this
 massive achievement. It's incredible how much has been done by the
 community with small, incremental contributions.
+</BlogPostLayout>

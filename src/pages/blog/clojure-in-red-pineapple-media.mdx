@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Berlin: Red Pineapple Media'
 description: 'A PHP shop adopts Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-01-13'
 heroImage: 'red-pineapple-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 import red from '../../assets/blog/redpineapplemedia-startsite.jpg'
 
 <Image alt='image' src={red} />
@@ -211,9 +213,9 @@ Joy of Clojure.
 We also participate in local Clojure meet ups and tech talks in
 companies. We go to conferences such as EuroClojure.
 
-import spc from '../../assets/blog/spaceemacs.svg'
+import spc from '../../assets/blog/spaceemacs.svg?url'
 
-<Image width={200} src={spc} alt="" />
+<img src={spc} width={200}  alt="" />
 
 # IDE wars
 
@@ -288,3 +290,4 @@ start seeing and playing with Spec.
 Check out the brand new [Red Pineapple Media engineering
 blog](http://engineering.redpineapplemedia.com/). Luis also maintains a
 [blog](https://decomputed.com/).
+</BlogPostClojureInLayout>

@@ -13,9 +13,7 @@ export type Navigation = {
   style?: { active: string; normal: string }
 }
 
-const navigation = await Astro.glob<{ navbar: Navigation[] }>(
-  '../data/metadata.json'
-)
+const navigation = Object.values(import.meta.glob('../data/metadata.json', { eager: true })) as any[]
 
 const [{ navbar }] = navigation
 

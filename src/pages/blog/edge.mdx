@@ -3,15 +3,17 @@ author: 'mal'
 title: 'Edge'
 description: 'A complete Clojure project you can leap from'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-07-05'
 heroImage: 'edge-02.jpg'
 tags:
   - 'open source'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 The best way to learn any programming language is to start a project to
 solve some problem. The problem drives you forward, getting you to think
 about how to apply your new-found knowledge, and you automatically learn
@@ -200,3 +202,4 @@ There's a [README](https://github.com/juxt/edge/blob/master/README.adoc)
 to explain how to launch Edge with CIDER or other IDE. If you're not
 using those, you can always connect a REPL to port 5600. Either way, you
 can type (reset) to get quick code refresh.
+</BlogPostLayout>

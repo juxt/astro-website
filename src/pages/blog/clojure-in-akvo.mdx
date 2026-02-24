@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Europe: Akvo'
 description: 'Helping to deliver aid'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-09-27'
 heroImage: 'akvo-logo.jpg'
 clojureIn:
@@ -14,6 +13,10 @@ clojureIn:
   }
 ---
 
+
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # A Multi-National Delivering Aid
 
 import { Image } from 'astro:assets'
@@ -233,3 +236,4 @@ _Jon:_ Any particular technologies you'd like to give a shout out to?
 _Iván:_ [OpenID Connect](http://openid.net/connect/) and
 [Keycloak](http://www.keycloak.org/) as an implementation of that. I
 have written an [example Ring web app served with Immutant secured with Keycloak](https://github.com/iperdomo/immutant-keycloak).
+</BlogPostClojureInLayout>

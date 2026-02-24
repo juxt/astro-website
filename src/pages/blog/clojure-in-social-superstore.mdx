@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Social Superstore'
 description: 'Social Reselling with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-02-17'
 heroImage: 'clojure-in-default.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Social Reselling
 
 [Social Superstore](https://socialsuperstore.com) allows people to setup
@@ -296,3 +298,4 @@ _Dave:_ Thank heavens we're not using Java.
 
 _James:_ Clojure has helped us to focus on delivering business value, to
 help us get to the core of our business requirements.
+</BlogPostClojureInLayout>

@@ -22,7 +22,7 @@ const threadsPicture = await getImage({
   alt: 'threads'
 }).then((img) => img.src)
 
-const siteMetadata = await Astro.glob('../data/metadata.json')
+const siteMetadata = Object.values(import.meta.glob('../data/metadata.json', { eager: true })) as any[]
 
 const homepageBannerPicture = await getImage({
   src: import('../assets/site/homepage-banner.jpg'),
@@ -84,13 +84,13 @@ const clientLogos = [
   'gresham.svg'
 ]
 
-const blogs = await Astro.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}')
+const blogs = Object.values(import.meta.glob<MarkdownInstance<Blog>>('./blog/{*.md,*.mdx}', { eager: true }))
 
 const isDev = import.meta.env.DEV
 
-const caseStudies = await Astro.glob<CaseStudyProps>(
-  '../data/case-studies/*.md'
-)
+const caseStudies = Object.values(import.meta.glob<CaseStudyProps>(
+  '../data/case-studies/*.md', { eager: true }
+))
 
 const featuredCaseStudiesMetadata = siteMetadata[0].homepage.featuredCaseStudies
 
@@ -98,9 +98,9 @@ const featuredCaseStudies = featuredCaseStudiesMetadata.map((slug) => {
   return caseStudies.find((caseStudy) => slugifyPath(caseStudy.file) === slug)
 })
 
-const people = await Astro.glob<MarkdownInstance<Person>>(
-  '../data/people/{*.mdx,*.md}'
-)
+const people = Object.values(import.meta.glob<MarkdownInstance<Person>>(
+  '../data/people/{*.mdx,*.md}', { eager: true }
+))
 
 const peopleByCode = new Map(
   people.map((person) => [person.frontmatter.code, person.frontmatter])
@@ -120,7 +120,7 @@ type PhaseProps = {
   content: string
 }
 
-const phases = await Astro.glob<PhaseProps>('../data/ai-engineering/*.md')
+const phases = Object.values(import.meta.glob<PhaseProps>('../data/ai-engineering/*.md', { eager: true }))
 
 const phasesParsed = phases
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)

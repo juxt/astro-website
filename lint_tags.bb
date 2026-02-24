@@ -4,31 +4,43 @@
    [clj-yaml.core :as y]
    [clojure.java.io :as io]))
 
-(def required-tags
-  #{:author :title :category :layout :publishedDate :heroImage})
+(def mdx-required-tags
+  #{:author :title :category :publishedDate :heroImage})
 
-(def optional-tags
+(def mdx-optional-tags
+  #{:tags :clojureIn :description})
+
+(def md-required-tags
+  (conj mdx-required-tags :layout))
+
+(def md-optional-tags
   #{:draft :tags :clojureIn :description :metaTitle})
 
-(def all-tags
-  (set/union required-tags optional-tags))
+(def md-all-tags
+  (set/union md-required-tags md-optional-tags))
+
+(def mdx-all-tags
+  (set/union mdx-required-tags mdx-optional-tags))
 
 (defn validate-tags [f]
-  (let [parsed (->> f
-                    slurp
-                    (re-find #"(?is)---(.*?)---")
-                    last)
-        tags   (-> parsed
-                   y/parse-string
-                   keys
-                   set)]
+  (let [name    (.getName f)
+        mdx?    (.endsWith name ".mdx")
+        required (if mdx? mdx-required-tags md-required-tags)
+        all      (if mdx? mdx-all-tags md-all-tags)
+        parsed  (->> f
+                     slurp
+                     (re-find #"(?is)---(.*?)---")
+                     last)
+        tags    (-> parsed
+                    y/parse-string
+                    keys
+                    set)]
     (assert (and
-             (set/subset? required-tags tags)
-             (set/subset? tags all-tags))
-            {:required    required-tags
-             :file        (.getName f)
+             (set/subset? required tags)
+             (set/subset? tags all))
+            {:required    required
+             :file        name
              :actual-tags tags})))
-
 
 (defn validate-all []
   (doseq [f (file-seq (io/file "src/pages/blog"))

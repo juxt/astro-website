@@ -3,15 +3,17 @@ author: 'mal'
 title: 'Building a chat system using core.async and server-sent-events'
 description: 'Notes from a training course'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-04-24'
 heroImage: 'chat-system.jpg'
 tags:
   - 'training'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Last week I spent an exhausting yet enjoyable two days Clojure training
 with some experienced Clojure pros.
 
@@ -187,3 +189,4 @@ If you'd like to receive this kind of training from JUXT, just let us
 know, we'd be happy to help. Whether you'd like a course for beginners,
 or something to challenge seasoned Clojure devs, don't hesitate to get
 in touch (info@juxt.pro).
+</BlogPostLayout>

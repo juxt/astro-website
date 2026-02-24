@@ -3,14 +3,16 @@ author: 'jon'
 title: 'Clojure and the Curve'
 description: 'Where is Clojure on the technology adoption curve?'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-11-10'
 heroImage: 'curve.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import tal from '../../assets/blog/Technology-Adoption-Lifecycle.png'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 <Image alt='image' src={tal} />
 
 Has Clojure crossed the Chasm? Is the technology adoption curve even
@@ -172,3 +174,4 @@ A Moore.
 
 Discuss below or [join the discussion](https://news.ycombinator.com/item?id=10539029) on Hacker
 News.
+</BlogPostLayout>

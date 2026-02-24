@@ -6,13 +6,30 @@ const { src } = Astro.props;
 var props = Astro.props;
 delete props.src;
 
-// Images
-const img_assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif,svg}');
+const isSvg = src.endsWith('.svg');
+
+// Images (exclude SVGs - Astro v5 can't process SVG metadata)
+const img_assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
+const svg_assets = import.meta.glob<string>('/src/assets/**/*.svg', { query: '?url', import: 'default' });
+
 function importImage(path) {
     if (!img_assets[path]) {
         throw new Error(`Image ${path} not found.`);
     }
     return img_assets[path]();
 }
+
+async function importSvg(path) {
+    if (!svg_assets[path]) {
+        throw new Error(`SVG ${path} not found.`);
+    }
+    return svg_assets[path]();
+}
+
+const svgUrl = isSvg ? await importSvg(src) : null;
 ---
-<Image src={importImage(src)} {...props} />
+{isSvg ? (
+  <img src={svgUrl} {...props} />
+) : (
+  <Image src={importImage(src)} {...props} />
+)}

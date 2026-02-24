@@ -3,7 +3,6 @@ author: 'rro'
 title: 'Bridging the Blockchain / Database Divide'
 description: 'Do we want a blockchain, a database, or both?'
 category: 'db'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2021-07-30'
 heroImage: 'bridging-blockchain.jpg'
 tags:
@@ -11,12 +10,15 @@ tags:
   - 'blockchain'
 ---
 
+
 import { Image } from 'astro:assets'
 import cordaLedgerVenn from '../../assets/blog/corda-ledger-venn.png'
 import cordaVaultSimple from '../../assets/blog/corda-vault-simple.png'
-import cruxVsCorda from '../../assets/blog/crux-vs-corda.svg'
-import cruxCordaDiag from '../../assets/blog/crux-corda-diag.svg'
+import cruxVsCorda from '../../assets/blog/crux-vs-corda.svg?url'
+import cruxCordaDiag from '../../assets/blog/crux-corda-diag.svg?url'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 ## Crux is now XTDB
 
 September 2021 Update: Crux has recently been renamed XTDB.
@@ -244,7 +246,7 @@ Queries in XTDB can place the observer at any arbitrary point in time.
 Corda's time model is quite different, capturing a fact's linear
 evolution rather than its validity.
 
-<Image src={cruxVsCorda} alt="" />
+<img src={cruxVsCorda} alt="" />
 
 The following examples assume we have data about movies and people (cast
 members, directors, etc.), each modeled and inserted separately. We are
@@ -301,7 +303,7 @@ enables Corda State data to be piped into XTDB. By querying XTDB instead
 of the Corda node we can express temporal queries over historical and
 current States.
 
-<Image src={cruxCordaDiag} alt="" />
+<img src={cruxCordaDiag} alt="" />
 
 The simplest way to use the library is by specifying a mapping from
 Corda States to XTDB documents, which can be done automatically by
@@ -421,3 +423,4 @@ you're building: [XTDB+Blockchain,I am building...](mailto:hello@xtdb.com)
 
 [Empress Elisabeth Chain Bridge in 1910, connected Tetschen (now Děčín) to the major railroad from Dresden to Prague.](https://commons.wikimedia.org/wiki/File:Empress_Elisabeth_Bridge_in_1910.jpg) -
 Brück & Sohn, CC0 1.0 Public Domain.
+</BlogPostLayout>

@@ -20,7 +20,7 @@ type LayoutProps = {
   robots?: string
 }
 
-const url = new URL(Astro.request.url)
+const url = Astro.url
 
 const currentPageName =
   currentPage(url.pathname) || (url.pathname === '/' && 'home')
@@ -47,7 +47,7 @@ const {
   noFooter,
   robots
 } = Astro.props as LayoutProps
-const [{ seo }] = await Astro.glob<Metadata>('../data/metadata.json')
+const [{ seo }] = Object.values(import.meta.glob('../data/metadata.json', { eager: true })) as any[]
 
 const currentDescription =
   ogDescription ?? (seo[currentPageName] && seo[currentPageName].description)

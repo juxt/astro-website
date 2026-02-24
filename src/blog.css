@@ -10,7 +10,7 @@
 
 .prose :where(code):not(:where([class~='not-prose'] *)) {
   color: var(--astro-code-token-string);
-  background-color: var(--astro-code-color-background);
+  background-color: var(--astro-code-background);
   padding-top: 0.3em;
   padding-right: 0.3em;
   padding-bottom: 0.2em;

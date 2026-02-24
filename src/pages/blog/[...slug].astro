@@ -1,11 +1,12 @@
 ---
-import { MarkdownInstance } from 'astro'
-import { AstroComponentFactory } from 'astro/dist/runtime/server'
+import type { MarkdownInstance } from 'astro'
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js'
 import { slugifyPath } from '@utils/common'
 import { Blog } from '@utils/types'
 
-export async function getStaticPaths() {
-  const pages = await Astro.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}')
+export function getStaticPaths() {
+  const pageModules = import.meta.glob<MarkdownInstance<Blog>>('./{*.mdx,*.md}', { eager: true })
+  const pages = Object.values(pageModules)
 
   const onlyDrafts = pages
     .filter((page) => page.frontmatter.draft)

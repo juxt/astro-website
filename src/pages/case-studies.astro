@@ -6,9 +6,9 @@ import type { CaseStudyProps } from '@layouts/CaseStudy.astro'
 import CaseStudy from '@layouts/CaseStudy.astro'
 import Layout from '@layouts/Layout.astro'
 
-const caseStudies = await Astro.glob<CaseStudyProps>(
-  '../data/case-studies/*.md'
-)
+const caseStudies = Object.values(import.meta.glob<CaseStudyProps>(
+  '../data/case-studies/*.md', { eager: true }
+))
 
 const caseStudiesParsed = caseStudies.sort(
   (a, b) => a.frontmatter.weight - b.frontmatter.weight

@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Belfast: Puppet'
 description: 'A diverse global open source company orchestrates with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-11-11'
 heroImage: 'puppet-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 import pu from '../../assets/blog/puppet-workflow.png'
 
 <Image alt='image' src={pu} />
@@ -223,3 +225,4 @@ _Scott Walker:_ I'd also say have a look at
 [PuppetDB](https://github.com/puppetlabs/puppetdb) as an example of a
 fairly long lived and mature Clojure project. There should be lots of
 idiomatic, well-composed Clojure code in there!
+</BlogPostClojureInLayout>

@@ -3,15 +3,17 @@ author: 'lda'
 title: 'Speed up your ClojureScript Webapp'
 description: 'Some useful tools and tips to improve your app performance'
 category: 'clojurescript'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2021-10-21'
 heroImage: 'speedup-cljs.jpg'
 tags:
   - 'performance'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 From October 2020 until July 2021, I had the chance to work on an
 exciting greenfield project in the investment sector. The goal was to
 develop a data-intensive webapp able to handle hundreds of UI changes
@@ -630,3 +632,4 @@ alternative ClojureScript library like
 [Helix](https://github.com/lilactown/helix), or importing components
 from tsx/jsx files. We think libraries like Helix could allow us to take
 ClojureScript + React web applications to the next performance frontier.
+</BlogPostLayout>

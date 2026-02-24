@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Workflow Automation and AI: Motiva AI'
 description: 'Exploring Workflow Orchestration through the powerful capabilities of Clojure, enhanced by innovative AI technologies.'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-11-15'
 heroImage: 'motiva-ai-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Paul Lam](https://github.com/Quantisan) is a serial entrepreneur, using Clojure for an array of successful start-ups, contributing to open-source tooling along the way. He's been a financial trader and a data-scientist, and now he's running [Motiva AI](https://www.motiva.ai/), a generative AI platform for enterprise marketing.
 
 I caught up with Paul to learn about his story, where Clojure fits in, and what he's doing with AI and workflow orchestration.
@@ -207,3 +209,4 @@ This applies to the libraries too. Clojure doesn't operate in a vacuum, it keeps
 **Paul:** I've been to a few meet ups, there's a few prominent Clojurians in Japan. In general the tech scene in Japan and East Asia is a few years behind the EU.
 
 **Jon: Thank you Paul. It's been great talking to you and I've enjoyed the wonderful conversation!**
+</BlogPostClojureInLayout>

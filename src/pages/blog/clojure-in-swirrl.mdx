@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Manchester: Swirrl'
 description: 'Crunching with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-11-04'
 heroImage: 'swirrl-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 import im from '../../assets/blog/IMG_7358.jpg'
 
 <Image alt='image' src={im} />
@@ -181,3 +183,4 @@ The Clojure tools and environments these days are really good too.
 # Resources
 
 Check out the [Swirrl blog](http://medium.swirrl.com/).
+</BlogPostClojureInLayout>

@@ -1,6 +1,5 @@
 ---
 author: 'jam'
-layout: '../../layouts/BlogPost.astro'
 title: 'A Primer on Logic Programming'
 description: 'Getting a kickstart in the logic programming world with Prolog'
 category: 'logic programming'
@@ -11,9 +10,12 @@ tags:
 heroImage: 'wam.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import bijection from '../../assets/blog/bijection.png'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 The first time you learn about formal logic, you may experience a bout of cynicism. For many, formal logic is typical of the impractical rigor of academia and its obsession with formalisms; an exercise in pure semantics- _surely, simply messing around with statements about what **is**, can never tell us what it is that we can **do**_-. I believe this attitude contributes to the now-esoteric state of logic programming as a whole.
 
 When I first learned logic programming, I felt it was stale, pointless, and dull - but now I understand that it is as much a paradigm shift as going from imperative to functional. It's not intuitive, but I began to realise that logical and relational languages allow me to express ideas in a concise declarative manner, and that I can take the knowledge and insights I gained from my studies _back_ to the functional world to power my abstractions.
@@ -140,3 +142,4 @@ In ordinary programming paradigms we might ask ourselves 'How do I explain to th
 I hope that in giving you this new perspective, you can apply it in your own abstractions. It can at least give you a deeper understanding about technologies you already use, like SQL and XT Datalog. More importantly, I believe logic programming's greatest value is to help us realise how often we overestimate our own understanding of concepts we use on a daily basis.
 
 If you're interested in more, check out extensions to Prolog such as [Mercury](https://mercurylang.org/about/motivation.html) and [Lambda Prolog](https://www.lix.polytechnique.fr/~dale/lProlog/)!
+</BlogPostLayout>

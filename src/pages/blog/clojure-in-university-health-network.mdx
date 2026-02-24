@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Toronto: University Health Network'
 description: 'Powering health with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-10-06'
 heroImage: 'uhn-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Researching Health
 
 import uhn from '../../assets/blog/uhn.jpg'
@@ -379,3 +381,4 @@ Checkout Dmitri's [twitter](https://twitter.com/yogthos), his
 [book](https://www.amazon.com/Web-Development-Clojure-Build-Bulletproof/dp/1680500821),
 his [blog](http://yogthos.net/), and the [University Health
 Network](http://www.uhn.ca/corporate/Careers/Pages/career_opportunities.aspx).
+</BlogPostClojureInLayout>

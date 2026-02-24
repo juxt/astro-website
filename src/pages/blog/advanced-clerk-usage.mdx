@@ -3,7 +3,6 @@ author: 'lkn'
 title: 'Advancedvent of Clerkjure'
 description: 'Exploring advanced Clerk usage patterns and custom viewers through interactive visualizations of Advent of Code solutions in Clojure'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-12-19'
 heroImage: 'clerk.jpg'
 tags:
@@ -12,13 +11,16 @@ tags:
   - 'clojure'
 ---
 
+
 import { Image } from 'astro:assets'
 import demo1 from '../../assets/blog/advanced-clerk-demo-1.png'
 import demo2 from '../../assets/blog/advanced-clerk-demo-2.png'
 import demo3 from '../../assets/blog/advanced-clerk-demo-3.png'
 import demo4 from '../../assets/blog/advanced-clerk-demo-4.png'
 import demo5 from '../../assets/blog/advanced-clerk-demo-5.png'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 ## Intro
 
 _Just a heads-up, this will contain spoilers for Day 5 of Advent of Code 2022._
@@ -185,3 +187,4 @@ The completed version has a couple of extra bits, such as setting the scroll sta
 I must admit that having some of these viewers available for debugging does add a whole new dimension to problem solving.
 
 Happy hacking!
+</BlogPostLayout>

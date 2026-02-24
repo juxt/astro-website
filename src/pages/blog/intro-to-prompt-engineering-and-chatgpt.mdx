@@ -1,6 +1,5 @@
 ---
 author: 'cwi'
-layout: '../../layouts/BlogPost.astro'
 title: 'An Introduction to Prompt Engineering and ChatGPT'
 description: "Watch Chris Williams, as he shows how to optimize ChatGPT performance using specific Prompt Engineering techniques"
 category: 'ai'
@@ -11,6 +10,10 @@ tags:
 heroImage: 'intro-to-prompt-engineering.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 New tools like ChatGPT can revolutionise the way that we work. They can be our partner through problem solving, they can be our personal tutor  or they can automate boring tasks giving us the time to focus on what's interesting and what's next.
 
 In this presentation, I'll take you on a deep dive into the fascinating world of ChatGPT and 'Prompt Engineering'. I'll help you understand how ChatGPT works, its strengths and weaknesses, and how we can optimise its performance using specific Prompt Engineering techniques. 
@@ -62,3 +65,4 @@ The AI adapts to the task at hand.
 
 The AI landscape is rapidly evolving, and it's a thrill to navigate through these advancements together.
 Stay tuned, and let's harness these updates to elevate our ChatGPT experiences from great to extraordinary!
+</BlogPostLayout>

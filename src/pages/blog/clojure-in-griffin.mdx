@@ -3,7 +3,6 @@ author: 'joe'
 title: 'Clojure in Banking: Griffin'
 description: 'A fully-regulated, API-driven bank built with Clojure, enabling fintech companies to integrate banking features quickly and securely'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-08-29'
 heroImage: 'griffin-logo-clojurein-new.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Griffin](https://griffin.com/) is a banking-as-a-service platform and part of the new wave of API-driven banking. Their services allow Fintech businesses to integrate banking features quickly and securely. In March 2023, Griffin was granted their UK banking license by the Financial Conduct Authority, making them a fully-regulated UK bank.
 
 We caught up with Allen Rohner, Griffin Co-founder and CTO (also Co-founder of CircleCI), to discuss how they’ve built a bank, from the ground up, using Clojure.
@@ -234,3 +236,4 @@ The difference, if you have this environment where you have total control, is th
 **Joe: Thanks a lot for speaking with us Allen. Finally, are you hiring?**
 
 **Allen**: We tend to go into a bit of a lull on interviewing during the summer due to holiday, but yes we’re hiring. Check out the [Griffin careers page](https://griffin.com/careers) for info.
+</BlogPostClojureInLayout>

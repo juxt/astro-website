@@ -1,6 +1,5 @@
 ---
 author: 'jdt'
-layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast S5 E2: Data Sovereignty and SaaS Overuse'
 description: "JUXT's leadership team discusses data sovereignty challenges, SaaS overuse concerns, and central datastore solutions."
 category: 'clojure'
@@ -13,6 +12,10 @@ tags:
 heroImage: 'JuxtCast-new-heads-1200.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 What is the relationship between SaaS, schema management and Codd's dream of central datastores ("[shared data banks](https://dl.acm.org/doi/10.1145/362384.362685)")?
 
 In this JUXT Cast episode, Malcolm Sparks (CTO), Alex Davis (Lead Engineer), and Jeremy Taylor (Head of Product — XTDB) discuss the history of databases, the rise of SaaS, and the combined challenges of data sovereignty and security.
@@ -29,3 +32,4 @@ In this JUXT Cast episode, Malcolm Sparks (CTO), Alex Davis (Lead Engineer), and
 This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/c823d675/data-sovereignty-saas-overuse-and-central-datastores).
 
 Happy listening!
+</BlogPostLayout>

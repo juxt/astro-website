@@ -1,6 +1,5 @@
 ---
 author: 'mtf'
-layout: '../../layouts/BlogPost.astro'
 title: 'Classifying Event Driven Architecture'
 description: 'Explore the diverse landscape of Event Driven Architecture through a practical classification system to better understand its many forms.'
 category: 'architecture'
@@ -13,10 +12,13 @@ tags:
 heroImage: 'taxonomy.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import eda from '../../assets/blog/event-driven-architecture.jpg'
 import kafka from '../../assets/blog/eda-kafka.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 ## Understanding an Organisation's Event Driven Architecture
 
 During the discovery or design of an Event Driven Architecture (EDA), it's important to understand what EDA means to those involved. In the [introduction](../eventing), we alluded to the large scope of EDA being a socio-technical problem to overcome. Within a single large organisation, the term EDA can mean significantly different things - knowing which aspect of EDA is in play will help all involved.
@@ -186,3 +188,4 @@ You can read Matt's follow-up post "Simple, Tactical Domain Driven Design in Clo
 1. [Event Sourcing][19]
 1. [What's the difference between a command and an event][20]
 1. [Event Sourcing vs Command Sourcing][21]
+</BlogPostLayout>

@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure In the UK: Yapster'
 description: 'Helping organizations to chat'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-08-29'
 heroImage: 'yapster-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Corporate Chat
 
 import yb from '../../assets/blog/yapster-banner.png'
@@ -240,3 +242,4 @@ _Jon:_ Sounds significant. Any last words?
 
 _Craig:_ I'm maybe a bit jaded with Clojure now, but I wouldn't have
 done things any differently.
+</BlogPostClojureInLayout>

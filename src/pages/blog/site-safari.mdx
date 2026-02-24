@@ -3,7 +3,6 @@ author: 'mal'
 title: 'API development, quickly and securely'
 description: 'A review of the current status of our Site'
 category: 'site'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-01-26'
 heroImage: 'site-safari-000001.png'
 tags:
@@ -11,6 +10,10 @@ tags:
   - 'site'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Many of our projects at JUXT require the development of REST and GraphQL APIs.
 Customers want these delivered _quickly_, so separate front-end teams (whether from JUXT or not) can start iterating, and an integrated end-to-end system can take shape.
 But customers also want APIs in production to be secure, and there are some established standards today that can make this faster, and easier too.
@@ -77,3 +80,4 @@ Finally, if you're embarking on a new system development and APIs are important 
   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
   allowfullscreen
 ></iframe>
+</BlogPostLayout>

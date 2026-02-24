@@ -3,7 +3,6 @@ author: 'rkb'
 title: 'Deep Learning Conference'
 description: 'Deep Learning is infiltrating the world around us!'
 category: 'AI'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-10-16'
 heroImage: 'deep-learning-conf.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'deep-learning'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Recently I attended the two-day Deep Learning Summit in London, hosted
 by [Re-Work](https://www.re-work.co/). As someone who is still
 relatively new to the deep learning community, I felt a little
@@ -475,3 +477,4 @@ Equation](http://clean.energyscience.ca/publications/032.html) is used
 to apply machine learning systems on physical systems. In quantum
 mechanics, states relate to vectors which can then be input into the
 machine learning system.
+</BlogPostLayout>

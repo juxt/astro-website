@@ -3,7 +3,6 @@ author: 'and'
 title: 'Clojure in Seattle: World Singles Networks'
 description: 'Clojure in the dating scene'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2018-10-10'
 heroImage: 'world-singles-network-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 ## Connecting People
 
 import si from '../../assets/blog/world-singles-networks-we-make-love.png'
@@ -330,3 +332,4 @@ came up to speed straight away and is building amazing systems for us.
 It's a very exciting, fast moving kind of environment and people seem
 very keen to come into Clojure and get involved with interesting
 problems to solve.
+</BlogPostClojureInLayout>

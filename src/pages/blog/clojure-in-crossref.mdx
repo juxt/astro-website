@@ -3,7 +3,6 @@ author: 'mrk'
 title: 'Clojure in Oxford: Crossref'
 description: 'Improving scholarly communications'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2018-11-01'
 heroImage: 'crossref-logo-clojurein.jpg'
 clojureIn:
@@ -14,6 +13,10 @@ clojureIn:
   }
 ---
 
+
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Love metadata, love technology
 
 Crossref makes research outputs easy to find, cite, link, and assess.
@@ -207,3 +210,4 @@ place.
 
 I do attend and speak at conferences, but they're mostly about science
 communication and scholarly infrastructure!
+</BlogPostClojureInLayout>

@@ -3,7 +3,6 @@ author: 'rkb'
 title: 'Machine Learning With Clojure'
 description: 'Hello Machine Learning World!'
 category: 'AI'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-03-27'
 heroImage: 'machine-learning.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'clojure'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 From the past 3 blog posts on Artificial Intelligence
 ([AI](https://juxt.pro/blog/posts/artificial-intelligence.html)),
 Machine Learning
@@ -370,3 +372,4 @@ article are by no means an exhaustive list. They have their own subtle
 differences, enough for you to make your own personal choice. However,
 it is important to say that there are many other examples out there, but
 I feel these are some great choices to get you going.
+</BlogPostLayout>

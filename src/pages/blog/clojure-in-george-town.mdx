@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Spreadsheets: Georgetown'
 description: 'Exploring the intricacies of traversing complex graphs in the Cloud for enhanced data processing and analysis.'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2024-01-10'
 heroImage: 'georgetown-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 Years ago, before I found Clojure, I wrote a bespoke Ruby program to parse a binary Microsoft Spreadsheet file. The reason for doing so escapes me now, but it was a fun and fascinating journey nonetheless.
 
 I was therefore intrigued to sit down with Bediako George, the CEO of [Georgetown Software House](https://www.georgetownsoftware.house), that builds cloud-based spreadsheet engines, reproducing complex spreadsheet configurations and executing them as a set of headless distributed processes. The processes make calculations against large amounts of graph-like nested accounting/financial data, and need to do so in a fast and efficient way.
@@ -162,3 +164,4 @@ I was able to leverage Clojure to improve my own state of being; the way I think
 Software just works once you get it running; you can write software that scales and doesn't break so often. I'm very grateful for the work that Rich Hickey did to introduce this technology to the world. For many years I struggled with programming and was thinking there had to be a better way. Clojure is certainly one way that is better than what I was experiencing before.
 
 **Jon: Thanks for taking the time! Meet you at the next Conj!**
+</BlogPostClojureInLayout>

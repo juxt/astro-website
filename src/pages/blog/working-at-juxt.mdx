@@ -3,15 +3,17 @@ author: 'joa'
 title: 'Working at JUXT'
 description: 'What I did on my summer holiday'
 category: 'culture'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-10-12'
 heroImage: 'working-at-juxt.jpg'
 tags:
   - 'internship'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 As my internship at JUXT is drawing to a close, I thought I would write
 a post about what I have been doing with my time here. In so doing, I
 hope to give you some insight as to what it's like to actually work
@@ -155,3 +157,4 @@ software development.
 import alx from '../../assets/blog/badminton-alx-pat.jpg'
 
 <Image alt='image' src={alx} />
+</BlogPostLayout>

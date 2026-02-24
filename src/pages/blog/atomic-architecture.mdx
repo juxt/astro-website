@@ -3,7 +3,6 @@ author: 'mal'
 title: 'Atomic Architecture'
 description: 'Seven principles for building better data systems'
 category: 'site'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-03-01'
 heroImage: 'tesla-sphere-inverted.png'
 tags:
@@ -11,9 +10,12 @@ tags:
   - 'atomic architecture'
 ---
 
+
 import { Image } from 'astro:assets'
 import diagram from '../../assets/blog/atomic-architecture.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 Software is an ever-increasing part of our lives, and yet it is difficult and expensive to build systems that work accurately, reliably, and securely.
 
 As part of our drive to building better data systems for our customers, we've identified a number of architectural principles we believe can yield better software systems.
@@ -191,3 +193,4 @@ Write to me at mal@juxt.pro!
 ## Notes
 
 "Keeping your app-state in one place" -- https://news.ycombinator.com/item?id=34951014
+</BlogPostLayout>

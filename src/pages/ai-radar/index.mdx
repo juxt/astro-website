@@ -1,10 +1,13 @@
 ---
-layout: ../../layouts/HomeAIRadar.astro
 tabTitle: JUXT AI Radar
 bannerTitle: JUXT AI Radar – Q1 2026
 description: "An engineer's guide to the AI landscape from JUXT's CTO & AI Chapter members"
 ---
 
+
+import HomeAIRadarLayout from '../../layouts/HomeAIRadar.astro'
+
+<HomeAIRadarLayout frontmatter={frontmatter}>
 # JUXT AI Radar
 
 ### Introduction
@@ -61,3 +64,4 @@ Infrastructure and platform services that support AI applications.
 ## Contributing
 
 This radar represents our current viewpoint and will be updated regularly. We welcome feedback and suggestions from the community, you can reach us on [LinkedIn](https://www.linkedin.com/company/juxt-juxt-pro-/posts/?), [BlueSky](https://bsky.app/profile/juxt.pro) and via [email](mailto:info@juxt.pro). Each technology entry includes detailed reasoning for its placement, helping you make informed decisions for your AI projects.
+</HomeAIRadarLayout>

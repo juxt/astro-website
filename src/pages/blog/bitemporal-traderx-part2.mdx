@@ -3,7 +3,6 @@ author: 'mpi'
 title: 'Bitemporal TraderX - XTDB Reflections'
 description: 'Exploring the use of XTDB within a microservices trading application developed for the FINOS 2024 Tech Sprint event (part 2)'
 category: 'database'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2025-02-06'
 heroImage: 'bitemporal-traderx2.jpg'
 tags:
@@ -13,8 +12,11 @@ tags:
   - 'FINOS'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In the [previous blog post](/blog/bitemporal-traderx/) on this topic I wrote about my work as a lead engineer on a small team taking part in the [FINOS](https://www.finos.org/) 2024 Tech Sprint - a multi-week hackathon centered around the [TraderX](https://github.com/finos/traderx) project, which is essentially an example system (think ’Pet Store’) that is intended purely for educational and training purposes. TraderX was initially developed by Morgan Stanley.
 
 In this follow-up post I will share some thoughts about [XTDB](https://xtdb.com) (a 'bitemporal' database created by JUXT) and discuss a few potential future directions for the codebase. As a recap, here is a short video we put together that provides an overview of the system and some of the changes we made:
@@ -88,3 +90,4 @@ It would also be interesting to expand TraderX with semi-structured data (e.g. e
 ## The XTDB team are looking for Design Partners
 
 JUXT is currently collaborating with several Design Partners using XTDB who help us identify and implement missing features - we cannot responsibly take on too many partners (as we do need to support those features!), but if you feel like XTDB could be the right fit for your problem, please do get in touch: [hello@xtdb.com](mailto://hello@xtdb.com)
+</BlogPostLayout>

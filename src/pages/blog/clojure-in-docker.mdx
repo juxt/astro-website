@@ -3,7 +3,6 @@ author: 'joe'
 title: 'Clojure in Security: Docker'
 description: 'Securing the software supply chain with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-05-10'
 heroImage: 'docker-logo-clojurein.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 Founded in 2010 as part of the Y Combinator Summer startup incubator that year, Docker revolutionised application packaging and deployment by popularising the use of lightweight containers. Docker now offers a wide range of services to help engineering teams build, share, and run their applications quickly and securely.
 
 In June 2022, [Docker acquired Atomist](https://www.docker.com/blog/docker-acquires-atomist/), a container security and automation platform implemented in Clojure.
@@ -352,3 +354,4 @@ I want that to be even better. I think the ideal development experience is: I'm 
 **Ben**: We've hired more engineers into our team since the acquisition and we've had engineers from elsewhere in Docker join us. Mainly based across Europe, with some East Coast US.
 
 **James:** Some of the original Atomist team has split up, but we've got a lot more people working on Atomist now (and not just engineering roles). [We're hiring!](https://www.docker.com/career-openings/)
+</BlogPostClojureInLayout>

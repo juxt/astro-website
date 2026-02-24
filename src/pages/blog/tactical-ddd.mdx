@@ -1,6 +1,5 @@
 ---
 author: 'mtf'
-layout: '../../layouts/BlogPost.astro'
 title: 'Simple, Tactical Domain Driven Design in Clojure'
 description: 'This article provides a comprehensive introduction to the concepts of Aggregates and Repositories in Domain Driven Design.'
 publishedDate: '2023-08-01'
@@ -13,10 +12,13 @@ tags:
 heroImage: 'honda-p1.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import eda from '../../assets/blog/event-driven-architecture.jpg'
 import plo from '../../assets/blog/pattern-language-overview.png'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 In the [previous](../event-driven-architecture) blog post, we attempted to map out aspects of Event Driven Architecture (EDA).
 
 <Image alt='Event Driven Architecture' src={eda} />
@@ -414,3 +416,4 @@ We can pivot out the underpinnings to show the impact of using message-driven ar
 10. [Uniqueness in aggregate root][10]
 11. [DDD - the rule that Entities can't access Repositories][11]
 12. [What I've learned about DDD since the book][12] - Eric Evans
+</BlogPostLayout>

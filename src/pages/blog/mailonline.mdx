@@ -3,13 +3,15 @@ author: 'jon'
 title: 'Clojure and the MailOnline'
 description: 'Rewriting the MailOnline'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-03-25'
 heroImage: 'clojure-mailonline.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In 2013 the worlds busiest newspaper website was rewritten in Clojure.
 The incumbent CTO Clifton Cunningham had the technology vision of a
 replacement front-end system written using a functional programming
@@ -53,3 +55,4 @@ going on a number of modern content authoring tools were built using
 Node.js, and the CTO describes the overall journey
 [here](https://www.youtube.com/watch?v=HGH66JhUkis), at a Node
 conference.
+</BlogPostLayout>

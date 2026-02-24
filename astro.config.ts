@@ -3,13 +3,11 @@ import path from 'node:path'
 import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
-import inspectUrls from '@jsdevtools/rehype-url-inspector'
 import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeKatex from 'rehype-katex'
 import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
 // netlify - build vars https://docs.netlify.com/build/configure-builds/environment-variables/
@@ -46,6 +44,28 @@ if (fs.existsSync(careersDir)) {
   }
 }
 
+// Inline rehype plugin: add target="_blank" to external links
+function rehypeExternalLinks() {
+  return (tree) => {
+    function visit(node) {
+      if (node.type === 'element' && node.tagName === 'a' && node.properties?.href) {
+        const href = node.properties.href
+        if (typeof href === 'string' && !href.startsWith('#')) {
+          try {
+            const url = new URL(href, PRODUCTION_SITE_URL)
+            if (url.host !== 'juxt.pro') {
+              node.properties.target = '_blank'
+              node.properties.rel = 'noopener noreferrer'
+            }
+          } catch {}
+        }
+      }
+      if (node.children) node.children.forEach(visit)
+    }
+    visit(tree)
+  }
+}
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -54,6 +74,8 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         if (page.includes('?')) return false
+        // Exclude draft blog posts
+        if (page.includes('/blog/drafts/')) return false
         // Exclude draft career pages
         const url = new URL(page)
         if (draftCareerSlugs.has(url.pathname)) return false
@@ -66,7 +88,7 @@ export default defineConfig({
     shikiConfig: {
       theme: 'css-variables'
     },
-    remarkPlugins: [remarkMath, remarkGfm],
+    remarkPlugins: [remarkMath],
     rehypePlugins: [
       rehypeSlug,
       rehypeKatex,
@@ -101,24 +123,7 @@ export default defineConfig({
           ]
         }
       ],
-      [
-        inspectUrls,
-        {
-          selectors: ['a[href]'],
-          inspectEach: (url) => {
-            // Ignore hash links
-            if (url.node.properties.href.startsWith('#')) {
-              return
-            }
-            var href = new URL(url.node.properties.href, PRODUCTION_SITE_URL)
-            // Add target blank to external links
-            if (href.host !== 'juxt.pro') {
-              url.node.properties.target = '_blank'
-              url.node.properties.rel = 'noopener noreferrer'
-            }
-          }
-        }
-      ]
+      rehypeExternalLinks
     ]
   },
   vite: {

@@ -1,6 +1,5 @@
 ---
 author: 'daj'
-layout: '../../layouts/BlogPost.astro'
 title: 'Designing 3D Printable Objects with Clojure and OpenSCAD'
 description: "Combine creativity with algorithmic generation to create beautiful and precise physical objects"
 publishedDate: '2023-10-25'
@@ -8,8 +7,11 @@ category: 'clojure'
 heroImage: 'ducks.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In this blog post, we dive into the fusion of art, technology, and code, exploring the endless possibilities and efficiency of using Clojure for 3D design. Through 3D printing with code, we can bring complex geometries into the real world with intricate precision.
 
 So let's dive in to the world of 3D modeling together, and create our first 3D object with Clojure.
@@ -704,3 +706,4 @@ With Mr Duck, we wish you luck! :)
 import jl30 from '../../assets/blog/mrduck.jpg'
 
 <Image alt='image' src={jl30} width='400' height='600'/>
+</BlogPostLayout>

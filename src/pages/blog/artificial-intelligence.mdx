@@ -3,7 +3,6 @@ author: 'rkb'
 title: 'Artificial Intelligence (AI)'
 description: 'How Close are Humans to building a Terminator? Do we want to?'
 category: 'ai'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-04-12'
 heroImage: 'terminator.jpg'
 tags:
@@ -11,12 +10,15 @@ tags:
   - 'deep-learning'
 ---
 
+
 import { Image } from 'astro:assets'
 import plato from '../../assets/blog/plato-and-his-gang.jpg'
 import turingMachine from '../../assets/blog/turing-machine.png'
 import alanTuring from '../../assets/blog/alan-turing.jpg'
 import cyborg from '../../assets/blog/cyborg.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 Welcome to the first part of a series of articles based around
 Artificial Intelligence and Machine Learning. Together, we are going to
 embark on a journey surrounding the history of Artificial Intelligence
@@ -229,3 +231,4 @@ caused. No wonder in most movies the robots rise up against us.
 Continue the journey
 [here](https://juxt.pro/blog/posts/machine-learning.html), to Machine
 Learning.
+</BlogPostLayout>

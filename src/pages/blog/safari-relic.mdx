@@ -1,6 +1,5 @@
 ---
 author: 'wot'
-layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Safari: Relic, a Functional Relational Library for Clojure and ClojureScript'
 description: "Delve into incremental view maintenance with Relic — a powerful Clojure tool; and learn to streamline data modelling and queries."
 category: 'clojure'
@@ -10,6 +9,10 @@ tags:
 heroImage: 'safari-x-white.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In this tech talk, I dive into the world of incremental view maintenance with Relic, one of the most ambitious relational programming tools in the Clojure ecosystem. 
 
 Discover how minimising the amount of state in your application can streamline your data modelling and queries, and see a small demo of how Relic could be applied in real-life scenarios. 
@@ -24,3 +27,4 @@ Whether you're a seasoned tech professional looking for a way out of the tar pit
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowfullscreen
 ></iframe>
+</BlogPostLayout>

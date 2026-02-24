@@ -1,6 +1,5 @@
 ---
 author: 'mal'
-layout: '../../layouts/BlogPost.astro'
 title: 'Backends, Databases, Clojure, Frontends, Bitemporality, Design, and Algorithmic Art — Five Innovative Tech Talks by JUXT Engineers'
 description: "On May 25, JUXT celebrated its 10-year anniversary in London. Long-standing company tradition is to hold an internal tech conference with presentations by JUXT engineers"
 category: 'culture'
@@ -10,6 +9,10 @@ tags:
 heroImage: '10-year-party-hero-image.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Greetings, fellow tech enthusiasts!
 
 As we look back at a decade of code, camaraderie, and continuous innovation at JUXT, I’m thrilled to share the technological feast that unfolded during our 10-year anniversary celebration.
@@ -128,3 +131,4 @@ In her talk, software engineer Frances Jackson-Barry looks at some of the ways a
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowfullscreen
 ></iframe>
+</BlogPostLayout>
