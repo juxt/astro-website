@@ -1,11 +1,11 @@
 ---
 author: 'hga'
-title: 'The architecture outlasts the tools'
+title: 'What outlasts the code'
 description: 'Code is fluid. The thinking it teaches is not.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-25'
-heroImage: 'the-architecture-outlasts-the-tools.jpg'
+heroImage: 'what-outlasts-the-code.jpg'
 tags:
   - 'ai'
   - 'agentic coding'
