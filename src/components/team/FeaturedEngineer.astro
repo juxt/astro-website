@@ -42,7 +42,7 @@ var external = link
         <div class="text-sm text-white flex flex-col items-center">
             <p class="font-bold text-lg">{fullName}</p>
             <p class="font-extralight">
-              {feature.jobTitle ? jobTitle : "Engineering"}
+              {jobTitle || "Engineering"}
             </p>
         </div>
     </div>

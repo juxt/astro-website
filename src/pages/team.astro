@@ -69,9 +69,9 @@ var people = (
             img='/src/assets/team/action/jon.png'
           />
           <FeaturedEngineer
-            {...people['mal']}
+            {...people['hga']}
             square={false}
-            img='/src/assets/team/action/mal.png'
+            img='/src/assets/team/action/hga.png'
           />
         </div>
 
@@ -111,10 +111,6 @@ var people = (
             img='/src/assets/team/action/fcb.png'
           />
           <FeaturedEngineer
-            {...people['fin']}
-            img='/src/assets/team/action/fin.png'
-          />
-          <FeaturedEngineer
             {...people['mat']}
             img='/src/assets/team/action/mat.png'
           />
@@ -127,24 +123,12 @@ var people = (
             img='/src/assets/team/action/zyx.png'
           />
           <FeaturedEngineer
-            {...people['mic']}
-            img='/src/assets/team/action/mic.png'
-          />
-          <FeaturedEngineer
-            {...people['fjb']}
-            img='/src/assets/team/action/fjb.png'
-          />
-          <FeaturedEngineer
             {...people['lda']}
             img='/src/assets/team/action/lda.png'
           />
           <FeaturedEngineer
             {...people['daj']}
             img='/src/assets/team/action/daj.png'
-          />
-          <FeaturedEngineer
-            {...people['alx']}
-            img='/src/assets/team/action/alx.png'
           />
           <FeaturedEngineer
             {...people['joa']}
@@ -165,7 +149,7 @@ var people = (
 
         <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
           {
-            ['kth', 'aby', 'emt'].map((code, idx) => (
+            ['aby', 'emt'].map((code, idx) => (
               <FeaturedSupport idx={idx} {...people[code]} />
             ))
           }
