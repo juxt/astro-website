@@ -61,7 +61,7 @@ In late 2025, Peter Steinberger build a [WhatsApp relay script](https://fortune.
 
 Moonshot AI's Kimi Claw [brought the full architecture to a cloud-native platform](https://www.marktechpost.com/2026/02/15/moonshot-ai-launches-kimi-claw-native-openclaw-on-kimi-com-with-5000-community-skills-and-40gb-cloud-storage-now/): the centralised hub with its [skill registry](https://github.com/VoltAgent/awesome-openclaw-skills) and its trust-by-default model. Developers adopted the template because it worked, and its design decisions came with it. Within weeks, the skill registry contained [over 800 malicious entries](https://www.theregister.com/2026/02/03/openclaw_security_problems), [over 40,000 instances](https://www.bitsight.com/blog/openclaw-ai-security-risks-exposed-instances) running with authentication disabled. When the creator of NanoClaw [tried to harden the original](https://venturebeat.com/orchestration/nanoclaw-solves-one-of-openclaws-biggest-security-issues-and-its-already), he found 400,000 lines with choices so deeply ingrained that patching wasn't viable. He rewrote the core to 500 lines, the equivalent of redesigning the factory for individual motors.
 
-## The architecture outlasts the tools
+## What persists
 
 The factory owners needed four decades to shed the steam engine's layout. OpenClaw compressed the same cycle into weeks. NanoClaw's creator could rewrite one core to 500 lines, but the template had already shaped thousands of systems downstream. You can always rewrite code. You cannot recall an architectural idea once it has been adopted as a pattern.
 
