@@ -4,7 +4,7 @@ title: 'The architecture outlasts the tools'
 description: 'Code is fluid. The thinking it teaches is not.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-24'
+publishedDate: '2026-02-25'
 heroImage: 'the-architecture-outlasts-the-tools.jpg'
 tags:
   - 'ai'
