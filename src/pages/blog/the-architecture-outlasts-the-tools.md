@@ -13,7 +13,7 @@ tags:
   - 'architecture'
 ---
 
-<p class="lede">Steam-era factories were <a href="https://www.researchgate.net/publication/4724731_The_Dynamo_and_the_Computer_An_Historical_Perspective_On_the_Modern_Productivity_Paradox" target="_blank">shaped by their engines</a>. Power came from a single <a href="https://en.wikipedia.org/wiki/Line_shaft" target="_blank">shaft</a> turning on every floor; leather belts distributed force outward, and machines clustered close because every foot of belt lost energy. The whole building, several storeys tall, was an expression of the engine's constraints.</p>
+<p class="lede">Steam-era factories were <a href="https://www.researchgate.net/publication/4724731_The_Dynamo_and_the_Computer_An_Historical_Perspective_On_the_Modern_Productivity_Paradox" target="_blank">shaped by their engines</a>. Power came from a single <a href="https://en.wikipedia.org/wiki/Line_shaft" target="_blank">shaft</a> turning on every floor; leather belts distributed force outward, and machines clustered near the shaft because every foot of belt lost energy. The whole building, several storeys tall, was an expression of the engine's constraints.</p>
 
 When electricity arrived in the 1890s, owners bolted an electric motor where the steam engine had stood, changing little else. They kept the multi-storey buildings with their overhead shafts and belt drives and productivity barely moved. The gains came four decades later, when manufacturers redesigned from scratch for individual motors on individual machines: single-storey plants with floor plans dictated by workflow. The steam engine had gone, but its effect on the architecture persisted for forty years.
 
@@ -51,7 +51,7 @@ In 1965, Hoare added null references to ALGOL W "simply because it was so easy t
 
 As [John Culkin](https://en.wikiquote.org/wiki/John_M._Culkin) [put it](https://quoteinvestigator.com/2016/06/26/shape/): "We shape our tools and thereafter our tools shape us." Ford's [Highland Park](https://en.wikipedia.org/wiki/Highland_Park_Ford_Plant) plant was fully electrified when it opened in 1910, but [Albert Kahn](https://en.wikipedia.org/wiki/Albert_Kahn_(architect)) still designed it as a four-storey building with overhead line shafts, because that was what a factory looked like. Ford saw the problem within seven years and began building the single-storey [River Rouge](https://en.wikipedia.org/wiki/Ford_River_Rouge_complex) complex. The rest of the industry needed four decades.
 
-The engine shaped the building, the building shaped the thinking, and the thinking persisted longest of all. Code carries the same pattern. Simple code leads to clear thinking, and clear thinking makes the next design decision easier. Complex code constrains the thinking of everyone who touches it next, human and AI alike.
+**The engine shaped the building, the building shaped the thinking, and the thinking persisted longest of all.** Code carries the same pattern. Simple code leads to clear thinking, and clear thinking makes the next design decision easier. Complex code constrains the thinking of everyone who touches it next, human and AI alike.
 
 ## Four decades to four weeks
 
@@ -65,6 +65,6 @@ Moonshot AI's Kimi Claw [brought the full architecture to a cloud-native platfor
 
 The factory owners needed four decades to shed the steam engine's layout. OpenClaw compressed the same cycle into weeks. NanoClaw's creator could rewrite one core to 500 lines, but the template had already shaped thousands of systems downstream. You can always rewrite code. You cannot recall an architectural idea once it has been adopted as a pattern.
 
-Speed makes design more urgent. [Cerf and Kahn's](https://en.wikipedia.org/wiki/Internet_protocol_suite) simple protocol composed with every use case that followed. [OpenClaw's](https://github.com/nickelcat/openclaw) centralised template couldn't be hardened without a rewrite. At AI speed, the thinking your architecture embeds will shape its successors before anyone has time to question it.
+Speed makes design more urgent. [Cerf and Kahn's](https://en.wikipedia.org/wiki/Internet_protocol_suite) simple protocol composed with every use case that followed. [OpenClaw's](https://github.com/nickelcat/openclaw) centralised template couldn't be hardened without a rewrite. At AI speed, the thinking your architecture embeds will shape its successors before anyone has time to question it. AI makes code easier to change than ever. Code was never the hardest thing to change.
 
 This is [how we approach AI-assisted engineering at JUXT](/). If you'd like to think through the architecture before it propagates, [we'd welcome a conversation](mailto:info@juxt.pro?subject=AI-assisted%20engineering).
