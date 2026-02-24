@@ -58,7 +58,7 @@ languages and the raised level of confidence in the correctness of our
 code (if-it-compiles-it-works) afforded to strongly typed languages. The
 type annotations also serves as in-line documentation of the functions
 which is very helpful when the codebase (and team working with it)
-grows. Typed Clojure provides a interesting alternative to the
+grows. Typed Clojure provides an interesting alternative to the
 discipline of writing lots of tests and adding run-time-checked
 contracts in your Clojure code in order to gain similar confidence of
 code quality.

@@ -243,7 +243,7 @@ unsurprisingly causing the application to grind to a halt. To protect
 ourselves the subscription is now debounced to fire no more than once
 every 2.5 seconds and I [proposed this change to
 lacinia](https://github.com/walmartlabs/lacinia-pedestal/pull/56) to
-stop unlimited threads being created and to drop superceded interim
+stop unlimited threads being created and to drop superseded interim
 values. The hard lesson is lacinia doesn't protect you from your own
 performance issues - that part is up to you.
 
