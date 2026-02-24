@@ -14,3 +14,7 @@ Thanks for stopping by. In the coming weeks we will be posting a series
 of Clojure and consulting related articles here.
 
 _\"In the beginning there was bootstrap and a LISP.\"_
+
+---
+
+Published: March 24, 2015
