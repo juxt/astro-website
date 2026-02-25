@@ -3,7 +3,7 @@ code: 'fuz'
 name: 'Farzad'
 lastName: 'Pezeshkpour'
 fullName: 'Farzad Pezeshkpour'
-jobTitle: 'Principal Consultant'
+jobTitle: 'Principal Engineer'
 image: 'fuz.jpg'
 
 feature:
