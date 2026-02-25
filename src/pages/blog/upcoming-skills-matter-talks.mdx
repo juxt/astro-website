@@ -3,13 +3,15 @@ author: 'mal'
 title: 'Upcoming talks at Skills Matter'
 description: 'Next Monday at CodeNode'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-10-08'
 heroImage: 'skills-matter.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 [CodeNode](https://skillsmatter.com/locations/264-skills-matter-codenode)
 is a wonderful facility in London set up by our friends over at Skills
 Matter, and opened its doors for the first time just last August.
@@ -61,3 +63,4 @@ will be great to meet you.
 import cd from '../../assets/blog/codenode2.jpg'
 
 <Image alt='image' src={cd} />
+</BlogPostLayout>

@@ -3,13 +3,15 @@ author: 'mal'
 title: "'Live' programming, server-side"
 description: 'Using instant feedback to develop server-driven websites'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-01-27'
 heroImage: 'live-programming.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 For a number of years now I've been thinking about reflecting something
 Dick Gabriel remarked about Lisp [during an
 interview](http://www.se-radio.net/2008/01/episode-84-dick-gabriel-on-lisp/)
@@ -159,9 +161,9 @@ The app state that a website has to represent may span multiple sources,
 such as files, databases and other systems. Our approach is to model
 this distribution of state as a dependency tree.
 
-import ss from '../../assets/blog/skip-state.svg'
+import ss from '../../assets/blog/skip-state.svg?url'
 
-<Image src={ss} alt="" />
+<img src={ss} alt="" />
 
 How can we avoid the expense of refreshing our state affecting the
 performance off each request? The answer lies in the combination of two
@@ -279,3 +281,4 @@ mechanics and the perceived flow of time. Hope you enjoy it!
   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
   allowfullscreen
 ></iframe>
+</BlogPostLayout>

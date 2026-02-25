@@ -20,7 +20,7 @@ const bannerPicture = await getImage({
 }).then((img) => img.src)
 
 const teamPages = new Set(
-  (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
+  (Object.values(import.meta.glob<MarkdownInstance<Person>>('./team/*.astro', { eager: true })))
     .map((p) => p.url)
     .map((p) => p.split('/'))
     .map((p) => p.pop())
@@ -28,7 +28,7 @@ const teamPages = new Set(
 
 // {"code": Person}
 var people = (
-  await Astro.glob<MarkdownInstance<Person>>('../data/people/{*.mdx,*.md}')
+  Object.values(import.meta.glob<MarkdownInstance<Person>>('../data/people/{*.mdx,*.md}', { eager: true }))
 ).reduce((acc, person) => {
   acc[person.frontmatter.code] = person.frontmatter
   acc[person.frontmatter.code].expert = teamPages.has(person.frontmatter.code)
@@ -307,9 +307,6 @@ var people = (
               Call us at: <span class='whitespace-nowrap'
                 >+44 (0) 333 93 98 309</span
               >
-            </p>
-            <p class='font-light'>
-              or <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
             </p>
           </div>
         </div>

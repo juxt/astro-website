@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Signal Media'
 description: 'Obtaining knowledge with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-02-03'
 heroImage: 'signal-ai-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Generating Understanding
 
 import si from '../../assets/blog/signal-team.jpg'
@@ -220,7 +222,7 @@ _Miguel_: If someone is interested in Clojure, chances are they are a
 good developer because it's not mainstream.
 
 _Tom_: If you're looking for people that know Clojure then it's obvious
-where to look, but its a small pool. If you look for people that can
+where to look, but it's a small pool. If you look for people that can
 learn Clojure then it's a much wider pool.
 
 _Luca_: We get people very interested to learn Clojure. There's
@@ -263,3 +265,4 @@ have discovered it were already in a sense looking for it.
 _Miguel:_ Python and Java are known in the universities whereas Clojure
 is still relatively obscure. Advertising Clojure at the universities
 might give it an extra push.
+</BlogPostClojureInLayout>

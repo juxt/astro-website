@@ -3,15 +3,17 @@ author: 'oly'
 title: 'Evolving user interfaces'
 description: 'Educate users with re-learn'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-01-10'
 heroImage: 'user-interface.jpg'
 tags:
   - 'open source'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 We've all said it while using a website, immediately realized we sound
 like our parents and recoiled slightly in horror as the full implication
 sinks in:
@@ -86,7 +88,7 @@ use Material in your product.
 > and open to imagination and magic. Surfaces and edges of the material
 > provide visual cues that are grounded in reality. The use of familiar
 > tactile attributes helps users quickly understand affordances. Yet the
-> flexibility of the material creates new affordances that supercede
+> flexibility of the material creates new affordances that supersede
 > those in the physical world, without breaking the rules of physics.
 
 One of the original aims was to provide a more consistent experience for
@@ -259,3 +261,4 @@ alienating your users.
 
 [re-learn is on Github](https://github.com/oliyh/re-learn), feedback and
 contributions are very welcome.
+</BlogPostLayout>

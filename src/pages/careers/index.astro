@@ -15,7 +15,7 @@ import Layout from '@layouts/Layout.astro'
 
 const isDev = import.meta.env.DEV
 const jobPosts =
-  await Astro.glob<MarkdownInstance<CareerPostProps>>('./{*.mdx,*.md}')
+  Object.values(import.meta.glob<MarkdownInstance<CareerPostProps>>('./{*.mdx,*.md}', { eager: true }))
 
 const jobPostsParsed = jobPosts
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
@@ -371,9 +371,6 @@ const benefitsPicture = await getImage({
             >+44 (0) 333 93 98 309</span
           >
         </p>
-        <p class='font-light'>
-          or <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
-        </p>
       </div>
     </div>
   </Section>
@@ -400,9 +397,9 @@ const benefitsPicture = await getImage({
                   }
                 }) => {
                   return (
-                    <button
-                      onclick={`window.location.href='${url}'`}
-                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group'
+                    <a
+                      href={url}
+                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group no-underline'
                     >
                       <span class='absolute top-5 right-5 uppercase text-juxt text-xs'>
                         {department}
@@ -440,7 +437,7 @@ const benefitsPicture = await getImage({
                           Full Job Profile
                         </Button>
                       </div>
-                    </button>
+                    </a>
                   )
                 }
               )}

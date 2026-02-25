@@ -6,14 +6,16 @@ tags:
   - 'clojure'
   - 'case studies'
 category: 'case studies'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-10-27'
 heroImage: 'threads.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import p360 from '../../assets/blog/360.png'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 JUXT have collaborated with Mastodon C a few times to help produce
 solutions for clients.
 
@@ -59,3 +61,4 @@ If you are looking to develop a custom system, but want the rapid
 development associated with an _off the shelf_ data integration tool,
 you should consider building on the Clojure language using developers
 who know how to wield it.
+</BlogPostLayout>

@@ -3,13 +3,15 @@ author: 'joe'
 title: 'Cutting software waste'
 description: 'Exploring the most impactful sources of waste in software development, from strategic missteps to execution inefficiencies, and how to eliminate them.'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-01-16'
 heroImage: 'overflow-plughole.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Software projects are tough. They have a habit of teaching hard lessons. Move too fast, without solid foundations and care, and the results can be [messy](https://www.bbc.com/news/business-64036529). Move too slowly, without urgency, ruthless prioritisation and pragmatism, and you'll be amazed at how much can be spent to achieve very little.
 
 There's a phenomenon that lurks across all parts of the industry. It kills the motivation of individuals, and costs business dearly in money spent and missed opportunity. That phenomenon is _waste_.
@@ -61,27 +63,23 @@ Another scenario in which we should be careful about misascribing work as 'waste
 
 We've all seen the graph showing how the cost to fix defects grows exponentially the later those defects are found, and hey, [it's probably true](https://www.theregister.com/2021/07/22/bugs_expense_bs/).
 
-import cd1 from '../../assets/blog/cost-of-defects-1.svg'
+import cd1 from '../../assets/blog/cost-of-defects-1.svg?url'
 
-<Image
-  alt='Graph showing the cost to fix defects rises exponentially over time.'
+<img src={cd1} alt='Graph showing the cost to fix defects rises exponentially over time.'
   width={500}
-  src={cd1}
-  class='mx-auto'
-/>
+  
+  class='mx-auto' />
 
 Modern software engineering, though, has flattened this curve considerably. Agile planning and engineering practices, cloud computing and SaaS, Continuous Delivery - these have pushed down the cost to release and the cost of change. Of course fundamental flaws in the early understanding of a system can be costly to fix later, but as an industry we've brought down the cost to fix defects drastically since the first research on which this graph is based was published by IEEE nearly 5 decades ago. Let's conclude then, that getting definitive specifications right early is far less important now than it once was.
 
 I'd like to propose a similar graph as we look at the impact of waste from strategy through to execution.
 
-import cd2 from '../../assets/blog/cost-of-defects-2.svg'
+import cd2 from '../../assets/blog/cost-of-defects-2.svg?url'
 
-<Image
-  alt='Graph showing the cost of waste, and hence opportunity for optimisation, reduces as we move from strategy to execution.'
+<img src={cd2} alt='Graph showing the cost of waste, and hence opportunity for optimisation, reduces as we move from strategy to execution.'
   width={500}
-  src={cd2}
-  class='mx-auto'
-/>
+  
+  class='mx-auto' />
 
 Modern software engineering has _steepened_ this curve. Version control, continuous integration, automated testing, automated deployment, cloud computing, have all eliminated waste in our execution and many of these practices are not just commonplace but ubiquitous.
 
@@ -136,3 +134,4 @@ A common way to lose consensus is to fail to retain key technical staff - those 
 When it comes to waste, it's easy to focus on execution, and work hard to optimise the ways we work to eliminate inefficiencies. However, if we're dedicated to truly doing more with less, and cutting out the biggest wastes, we need to start by examining the strategy.
 
 Too often, teams are drawn into long discussions about whether the WIP limit for a column on their kanban board should change, rather than examining whether the last 6 months of work delivered by the team has brought real value. If the latter question is hard to answer, solve this problem first. Only once all teams are working towards a credible and high-priority goal, and validating their path against the bottom line, can we find impactful wastes elsewhere.
+</BlogPostLayout>

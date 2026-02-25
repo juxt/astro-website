@@ -17,7 +17,7 @@ type StartUpsProps = {
   weight: number
 }
 
-const startUps = await Astro.glob<StartUpsProps>('../data/startups/*.md')
+const startUps = Object.values(import.meta.glob<StartUpsProps>('../data/startups/*.md', { eager: true }))
 
 const startUpsParsed = startUps
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)

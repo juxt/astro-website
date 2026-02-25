@@ -1,6 +1,5 @@
 ---
 author: 'osm'
-layout: '../../layouts/BlogPost.astro'
 title: 'A Recipe for Plain Clojure Lambdas'
 description: 'Learn how to build resilient and efficient AWS Lambdas using Clojure, ensuring a fast, familiar, and straightforward setup process for your applications.'
 category: 'clojure'
@@ -12,8 +11,11 @@ tags:
 heroImage: 'clojure_lambda_guide.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In order to prevent [xt-play](https://play.xtdb.com) from having downtime due
 to [traffic spikes](https://www.atomic14.com/2022/12/15/the-hacker-news-effect.html),
 I converted the backend to run on AWS Lambda (previously it was running on AWS
@@ -101,7 +103,7 @@ classes
 lambda-0.1.1-standalone.jar
 ```
 
-Finally with our jar in hand it's a easy as following [these instructions](https://docs.aws.amazon.com/lambda/latest/dg/java-package.html#java-package-console)
+Finally with our jar in hand it's as easy as following [these instructions](https://docs.aws.amazon.com/lambda/latest/dg/java-package.html#java-package-console)
 to create your new Lambda!
 
 All of this code can be found in [this repo](https://github.com/juxt/plain-clojure-lambda).
@@ -191,3 +193,4 @@ that might be useful. And if you don't require a JVM you can always:
 - [Use your own native image](https://github.com/cnuernber/cljs-lambda-gateway-example)
 
 Happy hacking!
+</BlogPostLayout>

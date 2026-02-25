@@ -1,6 +1,5 @@
 ---
 author: 'lkn'
-layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Safari: The State of Doom Emacs with Ellis Kenyo'
 description: "Discover Doom Emacs — an opinionated, highly-customizable Emacs configuration, providing a streamlined and efficient workflow"
 category: 'tools'
@@ -11,6 +10,10 @@ tags:
 heroImage: 'safari-x-white.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In this episode of JUXT Safari we dive into the world of Doom Emacs; an opinionated, highly-customizable Emacs configuration that aims to provide a streamlined and efficient workflow for developers.
 
 I’m a long-time Emacs user and contributor to the Doom Emacs project and in this talk, I explore the current state of Doom Emacs, its key features and benefits, and some tips and tricks for getting the most out of it.
@@ -42,3 +45,4 @@ To find out more on Doom itself I recommend the following resources:
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowfullscreen
 ></iframe>
+</BlogPostLayout>

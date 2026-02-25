@@ -3,7 +3,6 @@ author: 'mal'
 title: 'URI Template Syntax'
 description: 'Learn how URIs can be used to embed state in hypertext applications, and how to use the URI Template syntax to construct and consume URIs.'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-02-14'
 heroImage: 'the-uri-is-the-thing.jpg'
 tags:
@@ -12,9 +11,12 @@ tags:
   - 'routing'
 ---
 
+
 import { Image } from 'astro:assets'
 import winking from '../../assets/blog/winking_babushka.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 ## The URI is the Thing
 
 If there's one invention in the 20th Century that gets overlooked, it's the URI.
@@ -295,3 +297,4 @@ I hope you enjoyed this tour of URI Templates and have gained an understanding o
 If you have any questions or points of feedback, please email me at mal@juxt.pro and I'll do my best to answer them.
 
 Image attribution: https://www.flickr.com/photos/nickwebb/2918883446
+</BlogPostLayout>

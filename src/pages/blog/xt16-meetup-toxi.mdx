@@ -3,13 +3,15 @@ author: 'mal'
 title: 'Meet up with Karsten Schmidt'
 description: 'If you go down to the woods today...'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-07-21'
 heroImage: 'meet-karsten.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 The Clojure language draws together a diverse set of talents that makes
 for a great community full of inspiring developers.
 
@@ -160,3 +162,4 @@ ticketbooth](https://juxt.pro/XT16.html#xt16-ticketbooth). Sadly it
 doesn't yet use Karsten's _geom_ library, but who knows, coming to the
 conference might be the first step in your own ClojureScript 3D
 adventures!
+</BlogPostLayout>

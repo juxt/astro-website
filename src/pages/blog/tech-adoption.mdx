@@ -3,7 +3,6 @@ author: 'jon'
 title: '5 obstacles to technology adoption'
 description: 'Exploring the key obstacles to technology adoption and providing effective strategies to successfully navigate them'
 category: 'leadership'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-02-09'
 heroImage: 'california-nebula.jpg'
 tags:
@@ -12,6 +11,10 @@ tags:
   - 'agile'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Helping an organization to adopt new technologies is hard, as I've discovered to my peril on multiple occasions. I've summed up a few obstacles below, along with thoughts on how to navigate.
 
 ## 1) Cultural Norms
@@ -73,3 +76,4 @@ Empowerment rather than control.
 ## Conclusion
 
 Helping companies to adopt new technologies is not easy. Make sure it's not a hospital pass by ensuring that a) there exists a culture of trying new technologies and continuous improvement, b) you're aligning with the business early, c) play the long game and remain discrete, d) think carefully before triggering a revolution, and e) it's all about support/empowerment.
+</BlogPostLayout>

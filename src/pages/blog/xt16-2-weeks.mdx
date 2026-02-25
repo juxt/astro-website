@@ -3,15 +3,17 @@ author: 'jon'
 title: 'XT16: Two weeks to go!'
 description: 'Not long to go before our conference'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-09-23'
 heroImage: 'two-weeks.jpg'
 tags:
   - 'xtdb'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 It's less than two weeks to go until XT16 - our one day conference on
 Thursday, 6th October.
 
@@ -54,3 +56,4 @@ We're very nearly sold out - we have but a handful of tickets left
 before we meet our strict ceiling. If you'd like to come then please
 [see our ticket page here](https://juxt.pro/XT16.html#xt16-ticketbooth).
 See you in two weeks!
+</BlogPostLayout>

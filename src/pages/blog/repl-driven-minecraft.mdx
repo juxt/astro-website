@@ -3,13 +3,15 @@ author: 'fwc'
 title: 'REPL Driven Minecraft'
 description: 'A tale of optimization during the ClojureD Minecraft workshop'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-08-30'
 heroImage: 'repl-driven-minecraft.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In June, JUXT attended ClojureD, the fantastic annual Clojure conference
 in Berlin. In the middle of the day, a number of workshops were run to
 teach you about a specific idea or tool, and get you working with it. A
@@ -55,9 +57,9 @@ value the `nearest-material` function calculates the color distance to
 every prominent color, and selects the material for which this value is
 lowest, and is therefore closest to in color space.
 
-import nmd from '../../assets/blog/nearest-material-diag.svg'
+import nmd from '../../assets/blog/nearest-material-diag.svg?url'
 
-<Image src={nmd} alt="" />
+<img src={nmd} alt="" />
 
 [Will Caine](https://github.com/djwillcaine) had the brilliant idea of
 reading the pixels of an image and mapping them into the Minecraft
@@ -267,3 +269,4 @@ to help you get inspired.
 Thank you to Arne, Ariel, and Felipe for the brilliant workshop, to the
 organizers of ClojureD for running such a great conference, and to JUXT
 for taking us to the event.
+</BlogPostLayout>

@@ -3,7 +3,6 @@ author: 'joe'
 title: 'Clojure in Cloud Hosting: Exoscale'
 description: 'Exoscale is a European cloud infrastructure provider that leverages Clojure, Go, and an open source mindset for innovative solutions.'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-09-26'
 heroImage: 'exoscale-logo-clojurein-new.jpg'
 clojureIn:
@@ -14,29 +13,26 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Exoscale](https://www.exoscale.com/) is a European cloud hosting service with a specialism in data security, GDPR compliance and data privacy. Their services cover fundamental cloud infrastructure as well as managed Kubernetes and database services, and an extensive catalogue of marketplace apps.
 
 We caught up with Pierre-Yves Ritschard, a.k.a [pyr](https://github.com/pyr), to chat about the Exoscale platform architecture, what differentiates Exoscale from the competition, and how Clojure fits in.
 
-import exolight from '../../assets/blog/exoscale-logo-on-light.svg'
-import exodark from '../../assets/blog/exoscale-logo-on-dark.svg'
+import exolight from '../../assets/blog/exoscale-logo-on-light.svg?url'
+import exodark from '../../assets/blog/exoscale-logo-on-dark.svg?url'
 
-<Image
-  class='not-prose dark:hidden'
+<img src={exolight} class='not-prose dark:hidden'
   alt='Exoscale'
   width={350}
-  height={50}
-  src={exolight}
-/>
-<Image
-  class='not-prose hidden dark:block'
+  height={50} />
+<img src={exodark} class='not-prose hidden dark:block'
   alt='Exoscale'
   width={350}
-  height={50}
-  src={exodark}
-/>
+  height={50} />
 
 **Joe: Great to meet you Pierre-Yves. So what does Exoscale do?**
 
@@ -208,3 +204,4 @@ We are always looking for that rare breed of person, someone wanting to get into
 **Joe: Thank you very much for your time Pierre-Yves, lovely to speak with you.**
 
 **Pierre-Yves:** Likewise, cheers. Have a nice day!
+</BlogPostClojureInLayout>

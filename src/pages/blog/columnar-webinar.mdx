@@ -3,7 +3,6 @@ author: 'jdt'
 title: 'On-demand webinar: Columnar Data — The Future of Efficient Data Analytics'
 description: 'Learn how to optimize system design and performance by understanding columnar data and the underlying mechanics that make it effective.'
 category: 'database'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-12-04'
 heroImage: 'columnar-webinar.jpg'
 tags:
@@ -12,8 +11,11 @@ tags:
   - 'xtdb'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In the context of big data, columnar storage & processing has emerged as a central theme for software engineers and data professionals. Columnar data is not just a trend; it's a response to the increasing need for efficient data analytics.
 
 Watch Jeremy Taylor as he delves into the world of columnar systems. In this session, Jeremy will:
@@ -66,3 +68,4 @@ Before joining JUXT in 2019, Jeremy held a sales engineering position within IBM
 **James Henderson — XTDB Engineering Lead at JUXT** <br/>
 James has been working on XTDB since 2019. James is an experienced software engineer, and has held leadership positions in companies ranging from an international investment bank to small startups. He writes Clojure, Java and Kotlin, and has been responsible for wider software architecture, data engineering and system administration. <br/>
 **Connect with James on [LinkedIn](https://www.linkedin.com/in/jarohen/)**
+</BlogPostLayout>

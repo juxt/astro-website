@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Paris: BandSquare'
 description: 'Digital fanbases and Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-02-24'
 heroImage: 'bandsquare-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Managing a Fanbase
 
 [BandSquare](https://www.bandsquare.com/) is a general purpose marketing
@@ -188,3 +190,4 @@ reluctant right now to change, but the culture itself is shifting.
 See [Val's Blog](http://vvvvalvalval.github.io/), and in particular this
 post where [he discusses Datomic techniques such as speculative
 writes](http://vvvvalvalval.github.io/posts/2016-07-24-datomic-web-app-a-practical-guide.html).
+</BlogPostClojureInLayout>

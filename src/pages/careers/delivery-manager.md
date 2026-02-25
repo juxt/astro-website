@@ -4,7 +4,8 @@ location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Delivery Manager'
-draft: false
+description: 'Join JUXT as a Delivery Manager working across banking and finance. Full-time, hybrid role based in London.'
+draft: true
 weight: 1
 googleJobs:
   {

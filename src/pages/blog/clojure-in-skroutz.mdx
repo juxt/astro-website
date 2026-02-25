@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Athens: Skroutz'
 description: 'Comparisons and Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-11-18'
 heroImage: 'skroutz-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 import sk from '../../assets/blog/skroutz-team.jpg'
 
 <Image alt='image' src={sk} />
@@ -214,3 +216,4 @@ yet.
 
 Check out the [Skroutz engineering
 blog](https://engineering.skroutz.gr/).
+</BlogPostClojureInLayout>

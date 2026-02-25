@@ -1,6 +1,5 @@
 ---
 author: 'mat'
-layout: '../../layouts/BlogPost.astro'
 title: 'Dealing with Mutable Fields in deftype'
 description: "Read this post to discover what they are, how they work and some guidance on their use"
 category: 'clojure'
@@ -10,6 +9,10 @@ tags:
 heroImage: 'mutable-deftypes.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 tl:dr; `deftype` can be used in Clojure to give you access to the mutable fields of its host language (e.g. Java Object Fields). When referencing mutable fields inside a deftype method body, be aware:
 * Interop field access (i.e. using `(.-fieldName this)`) will always return the current value of the field when the interop expression itself is evaluated
 * Ordinary variable references to a field (i.e. simply using `fieldName` from the method scope) are a copy of that field's value in the local scope, and if closed over will return the value at that point in time and *not* the current value held by the field.
@@ -132,3 +135,4 @@ That being said, my tentative suggestion if you were to find yourself using deft
 [^5]: (https://clojure.org/reference/atoms)
 [^6]: (https://clojure.org/reference/refs)
 [^7]: (https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/deref)
+</BlogPostLayout>

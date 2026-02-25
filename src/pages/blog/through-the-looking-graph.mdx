@@ -3,13 +3,15 @@ author: 'oly'
 title: 'Through the looking graph'
 description: 'Experiences adopting GraphQL on a Clojure/script project'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-03-02'
 heroImage: 'looking-graph.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # The journey
 
 This is a short yet rambling tale of my experiences adopting GraphQL on
@@ -35,9 +37,9 @@ The domain is quite complicated, so let's use an analogy and say that
 our tree represents a sport, comprising of divisions, teams and players.
 Here's how it looks:
 
-import tg from '../../assets/blog/the-graph.svg'
+import tg from '../../assets/blog/the-graph.svg?url'
 
-<Image src={tg} alt="" />
+<img src={tg} alt="" />
 
 The vast majority of data in the graph resides in the lower layers
 
@@ -62,9 +64,9 @@ best and worst statistics for the most recent game. There's no need to
 drown the user in data! The relevant facts are a tiny fraction of the
 total:
 
-import thg from '../../assets/blog/the-highlighted-graph.svg'
+import thg from '../../assets/blog/the-highlighted-graph.svg?url'
 
-<Image src={thg} alt="" />
+<img src={thg} alt="" />
 
 Highlighting the bits of data that
 are actually relevant to the user: a tiny fraction of the total
@@ -89,9 +91,9 @@ We are lucky that browsers have come far enough that tens of megabytes
 of data can be consumed at a canter, making this approach possible. It
 allowed us to think of the application using this very simple model:
 
-import dt from '../../assets/blog/data-to-views.svg'
+import dt from '../../assets/blog/data-to-views.svg?url'
 
-<Image src={dt} alt="" />
+<img src={dt} alt="" />
 
 All we had to think about on the server side was how to populate the
 graph, and on the client side what and how to render _that same graph_.
@@ -241,7 +243,7 @@ unsurprisingly causing the application to grind to a halt. To protect
 ourselves the subscription is now debounced to fire no more than once
 every 2.5 seconds and I [proposed this change to
 lacinia](https://github.com/walmartlabs/lacinia-pedestal/pull/56) to
-stop unlimited threads being created and to drop superceded interim
+stop unlimited threads being created and to drop superseded interim
 values. The hard lesson is lacinia doesn't protect you from your own
 performance issues - that part is up to you.
 
@@ -266,9 +268,9 @@ the best player you'd have to transfer data about all the players and
 sort them on the client side - but it breaks our adherence to the one
 canonical form.
 
-import dl from '../../assets/blog/data-vs-logic.svg'
+import dl from '../../assets/blog/data-vs-logic.svg?url'
 
-<Image src={dl} alt="" />
+<img src={dl} alt="" />
 
 Hidden logic or verbosity? The GraphQLer's
 dilemma
@@ -339,3 +341,4 @@ The libraries I wrote for our GraphQL journey -
 [lacinia-gen](https://github.com/oliyh/lacinia-gen) - are all in active
 use on our project and have served us well. All are on GitHub, and as
 always feedback and contributions are very welcome.
+</BlogPostLayout>

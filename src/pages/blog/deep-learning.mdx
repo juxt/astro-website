@@ -3,7 +3,6 @@ author: 'rkb'
 title: 'Deep Learning (DL)'
 description: 'The Mariana Trench of Learning'
 category: 'AI'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-04-19'
 heroImage: 'deep-learning.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'deep-learning'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Previously ... on Machine Learning
 [here](https://juxt.pro/blog/posts/machine-learning.html)
 
@@ -150,7 +152,7 @@ defined below,
 In ANN, values change very slowly with each iteration and input.
 Observing how a small change in the bias value or the weights
 (associated with the artificial neurons) affects the overall value of
-the output of the the neuron is very important. A
+the output of the neuron is very important. A
 [Perceptron](https://appliedgo.net/perceptron/) may have its outputs
 flipped suddenly with a small change in the input value. To observe the
 tiny changes in the output to arrive at the correct value of input, we
@@ -334,3 +336,4 @@ Mobile device may have the ability to conduct machine learning tasks
 locally, opening up a wide range of opportunities for object
 recognition, speech, face detection, and other innovations for mobile
 platforms.
+</BlogPostLayout>

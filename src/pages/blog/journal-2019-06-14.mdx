@@ -3,15 +3,17 @@ author: 'dmc'
 title: 'JUXT Journal 2019-06-14'
 description: ''
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2019-06-14'
 heroImage: 'journal.jpg'
 tags:
   - 'journal'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # Crux
 
 - We've released a new version: \"19.06-1.1.0-alpha\", the changes are
@@ -147,3 +149,4 @@ namespacing the tagged literals in Aero. Namespacing will be an
 opportunity to avoid breaking changes while improving behavior. For
 example `#include` does not throw if the file being included does not
 exist, but `#aero/include` may do so.
+</BlogPostLayout>

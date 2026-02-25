@@ -3,13 +3,15 @@ author: 'oly'
 title: 'Visual testing'
 description: "When there's something strange and it don't look good"
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2019-05-02'
 heroImage: 'visual-testing.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # A cautionary tale
 
 So you've written your code and Everything Works. You have tests in many
@@ -200,3 +202,4 @@ dappling through the trees overhead and the quiet hum of your tyres
 calming your mind. The sharp crack of on acorn hitting your helmet
 startles you momentarily. Looking up, distracted, you fail to see the
 small figure waiting for you on the path ahead...
+</BlogPostLayout>

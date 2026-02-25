@@ -3,13 +3,15 @@ author: 'deo'
 title: 'Prefer the MIT License'
 description: 'The EPL is not a Sensible Default'
 category: 'open source'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2021-05-14'
 heroImage: 'mit-license.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 <details>
   <summary>Click for tl;dr.</summary>
 If you want to give anyone permission to use your code for any purpose,
@@ -105,9 +107,9 @@ license, a project author would be wise to consider these costs. Thus,
 for project authors who invest little energy in their license choices,
 the EPL makes a very poor default choice.
 
-import le from '../../assets/blog/license-epl-gpl-compat.svg'
+import le from '../../assets/blog/license-epl-gpl-compat.svg?url'
 
-<Image src={le} alt="EPL & GPL compatibility chart" />
+<img src={le} alt="EPL & GPL compatibility chart" />
 
 ## The MIT License is a sensible default
 
@@ -115,9 +117,9 @@ Code licensed under MIT can go just about anywhere. You can use it in an
 EPL codebase or GPL codebase without hesitation because it has only the
 bare minimum limitations, of liability and warranty, on its use.
 
-import lmc from '../../assets/blog/license-mit-compat.svg'
+import lmc from '../../assets/blog/license-mit-compat.svg?url'
 
-<Image src={lmc} alt="MIT compatibility chart"/>
+<img src={lmc} alt="MIT compatibility chart" />
 
 Code licensed under MIT also retains flexibility for its _author_. Most F/OSS projects
 do not ask external contributors to sign a Contributor Agreement. As a result, if
@@ -183,3 +185,4 @@ import tr from '../../assets/blog/license-mit-epl-gpl-triangle.png'
 This work by [Steven Deobald](https://deobald.ca) for [JUXT
 Ltd.](https://juxt.pro) is licensed under [CC BY-SA
 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+</BlogPostLayout>

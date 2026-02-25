@@ -17,9 +17,9 @@ type FinancialServicesProps = {
   weight: number
 }
 
-const financialServices = await Astro.glob<FinancialServicesProps>(
-  '../data/financial/*.md'
-)
+const financialServices = Object.values(import.meta.glob<FinancialServicesProps>(
+  '../data/financial/*.md', { eager: true }
+))
 
 const financialServicesParsed = financialServices
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)

@@ -5,8 +5,8 @@
 /* shiki-theme */
 :root,
 :root.light {
-  --astro-code-color-text: theme(colors.stone.500);
-  --astro-code-color-background: theme(colors.white);
+  --astro-code-foreground: theme(colors.stone.500);
+  --astro-code-background: theme(colors.white);
   --astro-code-token-constant: theme(colors.gray.600);
   --astro-code-token-parameter: theme(colors.yellow.600);
   --astro-code-token-string: theme(colors.gray.600);
@@ -18,8 +18,8 @@
   --astro-code-token-link: theme(colors.red.500);
 }
 :root.dark {
-  --astro-code-color-text: theme(colors.sky.100);
-  --astro-code-color-background: theme(colors.moonlight);
+  --astro-code-foreground: theme(colors.sky.100);
+  --astro-code-background: theme(colors.moonlight);
   --astro-code-token-constant: theme(colors.gray.300);
   --astro-code-token-parameter: theme(colors.gray.50);
   --astro-code-token-string: theme(colors.gray.200);

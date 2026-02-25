@@ -3,7 +3,6 @@ author: 'joe'
 title: 'Clojure/conj 10 years on, 2013 and 2023'
 description: 'Reflecting on the 2013 Conj and looking forward to the 2023 event.'
 category: 'conference'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-04-25'
 heroImage: 'conj-10-years.jpg'
 tags:
@@ -11,10 +10,13 @@ tags:
   - 'conference'
 ---
 
+
 import { Image } from 'astro:assets'
 import conj_2013_tee from '../../assets/blog/conj-2013-tee.jpg'
 import juxt_conj_2023_tee from '../../assets/blog/juxt-conj-2023-tee.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 10 years ago I attended Clojure/conj with colleagues from MixRadio. The conference was far from home, but we knew 'The Conj' was the centre of gravity for the Clojure community and the most prestigious Clojure event in the calendar. The single-track conference took place during a chilly November, in the imposing [George Washington Masonic National Memorial](https://en.wikipedia.org/wiki/George_Washington_Masonic_National_Memorial) in Virginia, a fantastic, atmospheric venue, towering above the boutiques and cafes of Alexandria's delightful old town.
 
 JUXT are Gold Sponsors of Clojure/conj in 2023, which means that I have the privilege of returning to the conference 10 years on. Taking place in Durham, North Carolina this year (the home of Cognitect and host city to many previous Conj events) this is a special one since it's the first Clojure/conj after a long pandemic-related hiatus.
@@ -69,3 +71,4 @@ If you're at the Conj this year, then come and see us in Durham and pick one up!
     4.0](https://creativecommons.org/licenses/by/4.0/deed.en)*
   </sub>
 </p>
+</BlogPostLayout>

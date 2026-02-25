@@ -3,7 +3,6 @@ author: 'oly'
 title: 'Advanced Martian'
 description: 'Extraterrestrial intelligence'
 category: 'technology'
-layout: '../../layouts/BlogPost.astro'
 tags:
   - 'tech'
   - 'clojure'
@@ -12,9 +11,12 @@ publishedDate: '2016-11-08'
 heroImage: 'advanced-martian.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import hereBeDragons from '../../assets/blog/here-be-dragons.png'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 My [introduction to Martian](martian.html) demonstrated its use in
 simplifying code used to talk to HTTP APIs. Before reading this article
 it is suggested you read that and/or [watch the ClojureX Bytes talk](https://skillsmatter.com/skillscasts/8843-clojure-bytes#video) for
@@ -203,3 +205,4 @@ interfaces from implementations and inspired you to try Martian.
 
 [Martian is on Github](https://github.com/oliyh/martian), feedback and
 contributions are very welcome.
+</BlogPostLayout>

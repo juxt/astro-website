@@ -3,13 +3,15 @@ author: 'mal'
 title: 'We need to talk about JSON'
 description: 'Explore the challenges of JSON as a configuration format and discover alternatives that offer better readability and maintainability'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2019-08-15'
 heroImage: 'json.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Like many in the Clojure community, I've considered JSON as a rather
 horrible syntax (compared to the obvious superiority of
 [EDN](https://github.com/edn-format/edn)).
@@ -177,3 +179,4 @@ https://github.com/juxt/jinx.
 - https://revelry.co/json-configuration-file-format/
 
 - https://dzone.com/articles/why-json-isnt-a-good-configuration-language
+</BlogPostLayout>

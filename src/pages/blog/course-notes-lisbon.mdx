@@ -3,15 +3,17 @@ author: 'jon'
 title: 'Delivering our full stack training course'
 description: 'Detailed notes and reflections from our engaging full stack training course held in the vibrant city of Lisbon.'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-07-27'
 heroImage: 'training-course.jpg'
 tags:
   - 'training'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 The two of us - Malcolm Sparks and Jon Pither - have just spent a
 thoroughly enjoyable week in Lisbon providing full stack Clojure
 training. It was a pleasure to see the start of a promising Clojure
@@ -90,3 +92,4 @@ we would love to return. If you're thinking of a trip to Lisbon - go
 there.
 
 {/* We have training courses available to book, please [see our training page for details](/training) */}
+</BlogPostLayout>

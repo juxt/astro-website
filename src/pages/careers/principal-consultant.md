@@ -4,6 +4,7 @@ location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Principal Consultant'
+description: 'Join JUXT as a Principal Consultant, leading software delivery and architecture for financial services clients. Full-time, hybrid role in London.'
 draft: false
 weight: 2
 googleJobs:

@@ -3,7 +3,6 @@ author: 'andrasgerlits'
 title: 'DORA, the Infra Exploder'
 description: 'The EU wants to disrupt your IT infrastructure. Tech your way out.'
 category: 'compliance'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-02-22'
 heroImage: 'dora_eu_flags.jpg'
 tags:
@@ -14,9 +13,12 @@ tags:
   - 'distributed'
 ---
 
+
 import { Image } from 'astro:assets'
 import winking from '../../assets/blog/winking_babushka.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 _In this guest post by Andras Gerlits, creator of [omniledger.io](https://omniledger.io), we’ll look at what the UK and EU operational resilience legislations mandate and how they try to steer financial institutions towards less exposure to 3rd-party ICT-provider risk. We’ll talk about how we can turn legal problems into technical ones using advances in computer science and software engineering, and how these challenges can be turned into opportunities._
 
 _Except when specifically discussing the text of the EU legislation, we'll use ‘DORA’ to refer to requirements present in both (current and upcoming) UK guidelines and EU regulations._
@@ -207,3 +209,4 @@ The following two sections are the most important, Articles 11 and 12, from the 
 ### Article 3, Definitions
 
 > (17\) ‘critical or important function’ means a function whose discontinued, defective or failed performance would materially impair the continuing compliance of a financial entity with the conditions and obligations of its authorisation, or with its other obligations under applicable financial services legislation, or its financial performance or the soundness or continuity of its services and activities;
+</BlogPostLayout>

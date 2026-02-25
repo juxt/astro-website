@@ -2,7 +2,6 @@
 author: 'mal'
 title: 'FuncMK Report: Building a twitter clone with Edge'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2018-03-27'
 heroImage: 'twitter-clone.jpg'
 tags:
@@ -10,8 +9,11 @@ tags:
   - 'case studies'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 JUXT have a developer centre in Milton Keynes, which is a town north of
 London, UK. We're very close to where Alan Turing worked in the 1940s.
 As a group of tech enthusiasts, we enjoy being part of and contributing
@@ -54,3 +56,4 @@ get on!
 And if you've caught the Clojure bug and want to work with Clojure
 professionally, why not come and work for us? We have open positions in
 both Milton Keynes and East London.
+</BlogPostLayout>

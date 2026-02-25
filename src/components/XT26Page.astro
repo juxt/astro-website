@@ -2,7 +2,7 @@
 import { ContactUsForm } from '@components/ContactUsForm'
 import Layout from '@layouts/Layout.astro'
 
-const subject = 'XT26 Speaker Enquiry'
+const subject = 'XT26 Request for Invite'
 
 const organizations = [
   'Bank of America',
@@ -27,13 +27,13 @@ const organizations = [
 <Layout
   title='XT26 Fintech Conference'
   ogImage='/images/XT26/XT26-thumbnail.webp'
-  ogTitle='XT26 Fintech Conference - June 18, 2026 - London'
+  ogTitle='XT26 Fintech Conference - June 18th, 2026 - London'
   ogDescription='An invite-only event for 250 senior engineering leaders from banking and fintech. No sales pitches, no vendor theatre. Just real-world experience shared by peers.'
 >
   <!-- Hero Section -->
   <section
     class='relative w-full h-[100dvh] flex items-center justify-center bg-cover bg-center'
-    style="background-image: url('/images/XT25/london-bridge.jpg');"
+    style="background-image: url('/images/XT26/london-city.jpg');"
   >
     <div
       class='absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90'
@@ -43,21 +43,20 @@ const organizations = [
       class='relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-5xl mx-auto'
     >
       <p
-        class='text-juxt text-sm md:text-base font-semibold tracking-[0.4em] uppercase mb-8'
+        class='text-juxt text-sm md:text-xl font-semibold tracking-[0.4em] uppercase mb-8'
       >
         Fintech Conference
       </p>
-      <h1
-        class='text-white text-8xl sm:text-9xl md:text-[12rem] font-light tracking-tight mb-10'
-        style='text-shadow: 0 4px 60px rgba(0,0,0,0.5);'
-      >
-        XT26
-      </h1>
+      <img
+        src='/images/XT26/XT26-white-slide-centre.svg'
+        alt='XT26 Logo'
+        class='w-60 md:w-96 mb-8'
+      />
       <div
         class='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 text-white/90 mb-14'
       >
         <span class='text-xl md:text-2xl font-light tracking-wide'
-          >June 18, 2026</span
+          >June 18th, 2026</span
         >
         <span class='hidden sm:block w-px h-8 bg-white/30'></span>
         <span class='text-xl md:text-2xl font-light tracking-wide'
@@ -68,7 +67,7 @@ const organizations = [
         href='#speak'
         class='inline-block border border-white/40 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300'
       >
-        Apply to Speak
+        Apply for an Invite
       </a>
     </div>
 
@@ -121,11 +120,9 @@ const organizations = [
               banking, hedge funds, and financial services.
             </p>
             <p>
-              This is pure thought leadership: <span
-                class='text-gray-800 font-normal'
-                >no sales pitches, no vendor theatre, and no sponsors</span
-              >. Just real-world experience shared by peers who are actually
-              doing engineering at scale.
+              This is pure thought leadership:
+              <span class='text-gray-800 font-normal'>no sales pitches and no vendor theatre, </span>
+              just real-world experience shared by peers who are actually doing engineering at scale.
             </p>
             <p>
               The conference has grown organically each year, building a
@@ -199,7 +196,7 @@ const organizations = [
             <div class='w-16 h-px bg-gradient-to-r from-juxt to-juxt/20 mb-8'>
             </div>
             <h3 class='text-xl font-medium text-gray-900 mb-4'>
-              25-Minute Talks
+              Technical Talks
             </h3>
             <p class='text-gray-500 leading-relaxed font-light'>
               Share real-world experience with a room of peers on topics
@@ -457,11 +454,12 @@ const organizations = [
             Get Involved
           </p>
           <h2 class='text-4xl md:text-5xl font-extralight text-white mb-6'>
-            Interested in Speaking?
+            Interested in coming along?
           </h2>
           <p class='text-gray-400 text-lg font-light max-w-md'>
-            We're looking for speakers to share real-world experience on AI,
-            platform engineering, banking technology, and more.
+            This event is invite-only and free for attendees.<br />
+             If you're interested in receiving an invite leave us your details,
+            and we'll get back to you.
           </p>
         </div>
 
@@ -472,6 +470,8 @@ const organizations = [
           variant='dark'
           transparentInputs
           submitLabelColor='#0b0e14'
+          successTitle='Thank you for your interest'
+          successMessage="We'll reach out if spots become available."
         />
       </div>
     </div>

@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Funding Circle'
 description: 'Lending some Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-10-04'
 heroImage: 'funding-circle-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Peer to Peer
 
 import fc from '../../assets/blog/fclogo2.png'
@@ -202,7 +204,7 @@ _Jon:_ Have you thought about adopting ClojureScript?
 We are in places. The Clojure team building back end services is also
 building back-end administrative tools using ClojureScript.
 
-We are trying to answer this question: can we have truely vertical
+We are trying to answer this question: can we have truly vertical
 teams, with Clojure developers doing both the front and back end?
 
 ClojureScript and Om.Next are still very Clojure like, and this reduces
@@ -260,3 +262,4 @@ we're not going down that road anytime soon at Funding Circle!
 Check out the Funding Circle [engineering
 blog](https://engineering.fundingcircle.com/) and
 [careers](https://www.fundingcircle.com/uk/careers/).
+</BlogPostClojureInLayout>

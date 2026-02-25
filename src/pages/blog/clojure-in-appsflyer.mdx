@@ -3,14 +3,16 @@ author: 'and'
 title: 'Clojure in Israel: AppsFlyer'
 description: 'Clojure in mobile attribution'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2019-07-01'
 heroImage: 'appsflyer-logo.jpg'
 clojureIn: { season: 'one', industry: 'mobile', quote: '"Clojure won easily."' }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [AppsFlyer](https://www.appsflyer.com/) is one of the world's
 leading mobile attribution & marketing analytics platforms. We had the
 recent pleasure of chatting with [Nir Rubinstein](https://twitter.com/nirrubinstein), [Morri Feldman](https://twitter.com/morrifeldman)
@@ -344,3 +346,4 @@ Processes More than 70 Billion Events Daily"_**
   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
   allowfullscreen
 ></iframe>
+</BlogPostClojureInLayout>

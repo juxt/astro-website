@@ -3,17 +3,19 @@ author: 'jon'
 title: 'ThoughtWorks Meetup: Time Travel Databases'
 description: 'What if your database could retain every piece of information indefinitely, allowing for endless historical queries and insights?'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
 tags:
   - 'xtdb'
 publishedDate: '2020-12-18'
 heroImage: 'timetravel.jpg'
 ---
 
+
 import { Image } from 'astro:assets'
 import twTmp from '../../assets/blog/crux-tw-tmp-dbs2.png'
 import cruxTwDoc from '../../assets/blog/crux-tw-doc-put2.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 We recently attended a virtual meetup on the subject of temporality in
 databases, titled _\"What if your databases never forgot\"_, presented
 by Rahul Dé - aka [`@lispyclouds`](https://twitter.com/lispyclouds) - a
@@ -43,3 +45,4 @@ eviction, data migration, SQL 2011, schema(less) design and more. We
 hope you enjoy it!
 
 <Image alt='image' src={cruxTwDoc} />
+</BlogPostLayout>

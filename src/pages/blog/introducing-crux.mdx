@@ -3,13 +3,15 @@ author: 'jon'
 title: 'Introducing XTDB'
 description: 'Discover XTDB, an open source bitemporal database that combines document storage with graph querying capabilities and flexible time-based data models'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2019-05-15'
 heroImage: 'xtdb-intro.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 **_Crux is now XTDB
 September 2021 Update: Crux has recently been renamed XTDB. The official home for XTDB is now https://xtdb.com._**
 
@@ -147,6 +149,7 @@ Have a [play with XTDB](https://docs.xtdb.com/guides/quickstart/) - add
 the JAR to your project and scale up from there. Crux is Alpha. Please
 raise any issues on our [GitHub](https://github.com/juxt/crux).
 
-import cl from '../../assets/blog/crux-logo.svg'
+import cl from '../../assets/blog/crux-logo.svg?url'
 
-<Image width={300} src={cl} alt='' />
+<img src={cl} width={300}  alt='' />
+</BlogPostLayout>

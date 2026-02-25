@@ -3,13 +3,15 @@ author: 'fky'
 title: 'Logging: change your mind'
 description: 'The ultimate guide on modern logging'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-11-16'
 heroImage: 'logging.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Most people consider logging something nice to have; a supplement to the
 code that matters or something you add in order to debug a problem.
 
@@ -468,3 +470,4 @@ to reason about.
     (handle-user-request logger 123)
     (is (= [[::profile.update 123]] (map (juxt :service :user-id) @logs)))))
 ```
+</BlogPostLayout>

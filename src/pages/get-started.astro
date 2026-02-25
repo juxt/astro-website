@@ -15,7 +15,7 @@ type ServicesProps = {
   content: string
 }
 
-const services = await Astro.glob<ServicesProps>('../data/get-started/*.md')
+const services = Object.values(import.meta.glob<ServicesProps>('../data/get-started/*.md', { eager: true }))
 
 const servicesParsed = services
   .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)

@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Entrepreneur First'
 description: 'Boosting ideas with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2018-01-18'
 heroImage: 'entrepreneur-first-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Bringing outliers together.
 
 import ef from '../../assets/blog/ef-vr-demo-day.jpg'
@@ -230,3 +232,4 @@ use?_**
 bindings for the kernel. I use this as my terminal to run tests etc and
 to do terminally things such as SSH. I run Intellj with
 [Cursive](https://cursive-ide.com/) natively in Windows.
+</BlogPostClojureInLayout>

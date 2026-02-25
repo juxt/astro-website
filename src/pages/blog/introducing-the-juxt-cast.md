@@ -27,7 +27,7 @@ episode, check out the links below.
 ## Why do we even need a podcast?
 
 Now you may be thinking, \"but you already have a blog, why do you need
-a podcast?\" and its a good point. However there are still many more
+a podcast?\" and it's a good point. However there are still many more
 interesting ideas and conversations that we have, during lunch, or at
 the pub, which aren't quite right for the blog format but we still think
 _more people should have access to this_.

@@ -3,16 +3,18 @@ author: 'mal'
 title: 'Babashka: A quick example'
 description: 'Learn how to use Babashka to enhance your build processes and document generation with a practical example using Make and Asciidoctor'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2020-02-21'
 heroImage: 'babushkas.jpg'
 tags:
   - 'babashka'
 ---
 
+
 import { Image } from 'astro:assets'
 import winking from '../../assets/blog/winking_babushka.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 At JUXT, we try to reduce the number of tools we use to the bare
 minimum.
 
@@ -148,3 +150,4 @@ each with their own syntactic idiosyncrasies.
 
 For many many years, I've wished for a Clojure-like replacement for
 classic shell-scripting. This may just be it.
+</BlogPostLayout>
