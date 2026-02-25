@@ -69,6 +69,6 @@ The factory owners needed four decades to shed the steam engine's layout. OpenCl
 
 Speed makes design more urgent. Cerf and Kahn's [simple protocol](https://en.wikipedia.org/wiki/Internet_protocol_suite) composed with every use case that followed. [OpenClaw's](https://github.com/openclaw/openclaw) centralised template couldn't be hardened without a rewrite. At AI speed, the thinking your architecture embeds will shape its successors before anyone has time to question it.
 
-**AI makes code easier to change. Code was never the hardest thing to change.**
+AI makes code easier to change. Code has never been the hardest thing to change.
 
 This is how we approach [AI-assisted engineering at JUXT](/). If you'd like to think through the architecture before it propagates, we'd welcome [a conversation](mailto:info@juxt.pro?subject=AI-assisted%20engineering).
