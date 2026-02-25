@@ -1,0 +1,10 @@
+---
+code: 'daj'
+name: 'Dajana'
+lastName: 'Herichova'
+jobTitle: 'Software Engineer'
+image: 'daj.jpg'
+linkedin: 'herichovadajana'
+twitter: ''
+github: 'herichovadajana'
+---
