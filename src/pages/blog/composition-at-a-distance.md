@@ -4,7 +4,7 @@ title: 'Composition at a distance'
 description: 'The agile movement bet on code as the fastest feedback medium. The constraints have changed.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-02-25'
+publishedDate: '2026-03-02'
 heroImage: 'composition-at-a-distance.jpg'
 tags:
   - 'ai'
