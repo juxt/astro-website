@@ -27,7 +27,7 @@ In 2001, code genuinely was the fastest way to learn whether a design held toget
 
 The evidence is in what they built next. Test-Driven Development was specification by another name: write the behaviour you want, then make it pass. Dan North [introduced BDD](https://dannorth.net/introducing-bdd/) by replacing "test" with "behaviour" and found "a whole category of coaching questions magically dissolved". The vocabulary shifted because "test" implied verification after the fact, while "behaviour" implied intent before implementation. The confusion had never been about what engineers wanted to do: it was about the language available for doing it.
 
-The movement worked to separate *what* from *how* within the only medium fast enough. Their diagnosis pointed further, but the tools to take it there didn't exist. The price of that coupling was that you could only revise your understanding of the problem by also revising the solution, and since building is how you discover what the problem actually is, that discovery never stops. A specification medium that can't keep pace will always lose to code. In 2001 every alternative was slower still, and the longer teams built around code as the single medium, the harder it became to imagine working differently.
+The movement worked to separate *what* from *how* within the only medium fast enough. They recognised the two needed separate mediums, but no alternative could keep pace. Expressing both in code meant you could only revise your understanding of the problem by also revising the solution, and since building is how you discover what the problem actually is, that discovery never stops. A specification medium that can't keep pace will always lose to code. In 2001 every alternative was slower still, and the longer teams built around code as the single medium, the harder it became to imagine working differently.
 
 ## What the light reveals
 
@@ -41,7 +41,7 @@ Ward Cunningham's [technical debt metaphor](https://c2.com/doc/oopsla92.html), w
 
 There is no intermediate layer where you can think about composition independent of construction. Kent Beck's [Canon TDD](https://tidyfirst.substack.com/p/canon-tdd) explicitly warns against "mixing in implementation design decisions" during what he calls "test listing", the phase where you enumerate the behaviours a system should exhibit before writing any code.
 
-The movement's own builders diagnosed the conflation. But the tools to give intent its own medium didn't yet exist.
+The diagnosis was shared across traditions. But the tools to give intent its own medium didn't yet exist.
 
 ## The new instrument
 
@@ -63,6 +63,6 @@ In 1925, [Cecilia Payne](https://en.wikipedia.org/wiki/Cecilia_Payne-Gaposchkin)
 
 The same pattern appears when specification becomes a working tool rather than an upfront phase. Answers arrive from an unfamiliar medium, and the instinct is to doubt them.
 
-Allium is our attempt at that spectroscope: a language for reading composition at a distance from the code. Precise enough that a team can reason about behaviour before committing to construction, fluid enough that an LLM can translate intent into implementation. The distance between the two, which the agile founders worked to collapse, turns out to be the space worth iterating in.
+Allium is our attempt at that spectroscope: a language for reading composition at a distance from the code. Precise enough that a team can reason about behaviour before committing to construction, close enough to natural language that an LLM can translate between the two. The distance between intent and implementation, which the agile founders diagnosed but couldn't sustain, turns out to be the space worth iterating in.
 
 If you're interested in what that looks like in practice, [we'd welcome a conversation](mailto:info@juxt.pro?subject=Spec-driven%20development).
