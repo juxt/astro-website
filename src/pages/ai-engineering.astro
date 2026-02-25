@@ -1,0 +1,104 @@
+---
+import { getImage } from 'astro:assets'
+import Banner from '@components/Banner.astro'
+import Clickable from '@components/Clickable.astro'
+import ContactUsMini from '@components/ContactUsMini'
+import Section from '@components/Section.astro'
+import Layout from '@layouts/Layout.astro'
+
+type PhaseProps = {
+  title: string
+  image: string
+  direction?: 'left' | 'right' | 'center'
+  weight: number
+  content: string
+}
+
+const phases = Object.values(import.meta.glob<PhaseProps>('../data/ai-engineering/*.md', { eager: true }))
+
+const phasesParsed = phases
+  .sort((a, b) => a.frontmatter.weight - b.frontmatter.weight)
+  .map((phase) => ({
+    ...phase.frontmatter,
+    content: phase.compiledContent()
+  }))
+
+const bannerPicture = await getImage({
+  src: import('../assets/site/services-banner.jpg'),
+  width: 1700,
+  quality: 90,
+  alt: 'AI engineering banner'
+}).then((img) => img.src)
+---
+
+<Layout navbar title='AI Engineering'>
+  <main>
+    <Banner
+      text='AI Engineering'
+      style={{
+        backgroundPosition: 'center',
+        backgroundImage: `url(${bannerPicture})`
+      }}
+    />
+    <Section className='bg-gray-900 py-12 text-white'>
+      <h2 class='text-xl md:text-2xl font-extralight'>
+        AI-assisted development is moving from experimentation to enterprise
+        adoption. We help engineering teams introduce it with rigour, measure its
+        impact with credible metrics, and scale it to deliver concrete outcomes.
+      </h2>
+      <div
+        class='pt-16 flex flex-col items-center sm:items-start sm:flex-row flex-wrap gap-6'
+      >
+        {
+          phasesParsed.map((phase, idx) => (
+            <Clickable>
+              <a
+                href={`#${idx}`}
+                class='capitalize block py-1.5 px-1.5 text-2xl'
+              >
+                {phase.title}
+              </a>
+            </Clickable>
+          ))
+        }
+      </div>
+    </Section>
+    <div class='flex flex-col text-black'>
+      {
+        phasesParsed.map((phase, idx) => {
+          const isDark = idx % 2 !== 0
+          const isLeft = phase.direction === 'left' || !phase.direction
+
+          const sectionStyle = isLeft
+            ? 'flex-col-reverse xl:flex-row-reverse'
+            : 'flex-col-reverse xl:flex-row'
+
+          return (
+            <Section
+              id={`${idx}`}
+              className={`${isDark ? 'bg-black text-white' : ''} py-28`}
+            >
+              <div
+                class={`flex items-center xl:items-start gap-16 ${sectionStyle}`}
+              >
+                <div class='md:w-2/3 xl:w-1/2'>
+                  <h2 class='text-5xl font-light pb-8'>{phase.title}</h2>
+                  <div class='flex flex-col gap-8'>
+                    <div
+                      class='flex [&_li]:list-disc flex-col gap-6 text-lg font-extralight'
+                      {/* eslint-disable-next-line */}
+                      set:html={phase.content}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Section>
+          )
+        })
+      }
+    </div>
+    <Section className='pt-28'>
+      <ContactUsMini />
+    </Section>
+  </main>
+</Layout>

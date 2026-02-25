@@ -21,9 +21,12 @@ const authorImageImport = {
   authorImageImport: (authorImage) => import(`../../assets/people/${authorImage}.jpg`)
 }
 
+const rawBlogs = Object.values(import.meta.glob<MarkdownInstance<Blog>>('/src/pages/blog/{*.mdx,*.md}', { eager: true }));
+const rawPeople = Object.values(import.meta.glob<MarkdownInstance<Person>>('/src/data/people/{*.mdx,*.md}', { eager: true }));
+
 const unfilteredBlogs = await parseBlogs({
-  rawBlogs: await Astro.glob<MarkdownInstance<Blog>>('/src/pages/blog/{*.mdx,*.md}'),
-  rawPeople: await Astro.glob<MarkdownInstance<Person>>('/src/data/people/{*.mdx,*.md}'),
+  rawBlogs,
+  rawPeople,
   isDev: isDev,
   getImage,
   ...authorImageImport

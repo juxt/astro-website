@@ -1,10 +1,12 @@
 ---
-layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Tools'
 ---
 
-import SingleQuadrantData from '../../../components/SingleQuadrantData.astro'
 
+import SingleQuadrantData from '../../../components/SingleQuadrantData.astro'
+import ChildSectionAiRadarLayout from '../../../layouts/ChildSectionAiRadar.astro'
+
+<ChildSectionAiRadarLayout frontmatter={frontmatter}>
 Software that enhances AI development workflows without being embedded in your application code: IDE extensions, CLI utilities, testing frameworks and observability solutions.
 
 <SingleQuadrantData quadrantName='tools' />
@@ -161,3 +163,4 @@ For experienced analysts, these tools represent a meaningful productivity boost,
 We've placed conversational data analysis in the Hold ring not because the technology lacks value, but because successful deployment requires users capable of understanding and validating generated queries. These tools offer substantial benefits for data teams with appropriate expertise, but should be approached cautiously by those unable to review and debug AI-generated database queries.
 
 For teams with strong analytical capabilities, these tools can meaningfully accelerate exploratory data analysis and routine query generation, treating AI output as sophisticated first drafts requiring expert review.
+</ChildSectionAiRadarLayout>

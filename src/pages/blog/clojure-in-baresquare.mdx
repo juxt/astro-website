@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Greece: Baresquare'
 description: 'Piping Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-10-21'
 heroImage: 'baresquare-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # Introduction
 
 [Baresquare](http://www.baresquare.com/) is a digital analytics company.
@@ -187,3 +189,4 @@ use in the Clojuresphere such as Onyx. The future is good.
 Baresquare are hiring, check out their [careers
 page](http://www.baresquare.com/careers/) and the company's [linked-in
 page](https://www.linkedin.com/company/bare-square).
+</BlogPostClojureInLayout>

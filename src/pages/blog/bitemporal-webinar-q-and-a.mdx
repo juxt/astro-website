@@ -3,7 +3,6 @@ author: 'jdt'
 title: 'FAQs on Bitemporality'
 description: 'An edited transcript capturing the insightful questions and answers from our recent live webinar attendees on bitemporality.'
 category: 'bitemporality'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-09-05'
 heroImage: 'bitemporal-webinar-q-and-a.jpg'
 tags:
@@ -12,8 +11,11 @@ tags:
   - 'xtdb'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Following last month’s webinar on the broad concept of ‘bitemporality’—now available on-demand <a href='https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/'>here</a>—we have written-up some of the excellent audience Q&A below. Note: <a href='https://www.xtdb.com/' target='_blank'>XTDB</a> is a bitemporal database product by JUXT for solving complex problems with dynamic and time-related data.
 
 We have also since released a <a href='https://www.juxt.pro/blog/kent-beck-podcast/'>new JUXT Cast episode</a> where we interviewed <a href='https://en.wikipedia.org/wiki/Kent_Beck' target='_blank'>Kent Beck</a> prompted by his recent <a href='https://tidyfirst.substack.com/p/eventual-business-consistency' target='_blank'>series</a> of articles and examples that briefly featured in the webinar.
@@ -154,3 +156,4 @@ We’ve always been conscious that in many companies you might get some develope
 ### That’s a wrap!
 
 We hope you have found this transcript insightful. Be sure to [check out the webinar](https://www.juxt.pro/blog/bitemporality-and-the-art-of-maintaining-accurate-databases/) and other links for more information and discussion. Finally, the [XTDB team](https://www.xtdb.com/team) is always interested to hear from practitioners and people working in this space - please do get in touch: [hello@xtdb.com](mailto:hello@xtdb.com)
+</BlogPostLayout>

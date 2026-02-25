@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: HealthUnlocked'
 description: 'A health network powered by Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-07-06'
 heroImage: 'health-unlocked-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [HealthUnlocked](https://healthunlocked.com/) is a social network for
 people with healthcare conditions. It is a network built on communities,
 operated by partner groups such as charities and patient groups;
@@ -247,9 +249,9 @@ _Alex:_ Our culture here is very important, we do social activities as
 well as write code. Experience in Clojure is very useful, but if you
 don't have it then you can pick it up quickly.
 
-import sp from '../../assets/blog/spaceemacs.svg'
+import sp from '../../assets/blog/spaceemacs.svg?url'
 
-<Image width={200} src={sp} alt="" />
+<img src={sp} width={200}  alt="" />
 
 _Russell:_ We're good at hiring for diversity also. We strive for
 diversity and we see dividends from it. Diversity makes our company
@@ -305,3 +307,4 @@ _Alex:_ [Midje](https://github.com/marick/Midje),
 # Last word?
 
 _Alex:_ We're always hiring.
+</BlogPostClojureInLayout>

@@ -3,7 +3,6 @@ author: 'alx'
 title: 'Local-first Software Development — Real-world Applications'
 description: 'Looking at local-first frontend development, available tools and libraries, and how to get started'
 category: 'tools'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2024-03-04'
 heroImage: 'alx-Local-first-software-development.jpg'
 tags:
@@ -11,6 +10,10 @@ tags:
   - 'frontend'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Local-first isn’t just about making your apps work offline (though that’s a huge plus); it’s also about keeping code simple and sleek. Imagine your app reading and writing directly to a data store without fussing over network calls or the huge complexities that arise when optimistic updates get involved.
 
 In this talk, I explore the current reality of local-first development with real app demos, showing off how it can make code simpler by diving into the latest tools and libraries in 2024 that are making this magic happen. If you’ve ever thought about using a library, such as:
@@ -36,3 +39,4 @@ or even running full SQLite in the browser with automatic replication, then you 
   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
   allowfullscreen
 ></iframe>
+</BlogPostLayout>

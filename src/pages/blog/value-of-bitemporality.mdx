@@ -3,15 +3,17 @@ author: 'jon'
 title: 'The Value of Bitemporality'
 description: 'Learn about the benefits of bitemporal data models for reporting and compliance, and discover common pitfalls in implementing these systems.'
 category: 'analysis'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2019-04-03'
 heroImage: 'value-of-bitemp.jpg'
 tags:
   - 'clojure'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 **_Crux is now XTDB_**
 
 September 2021 Update: Crux has recently been renamed XTDB. This post
@@ -222,3 +224,4 @@ JUXT is releasing a new open-source bitemporal database called
 
 - [Temporal Database Management - Christian S.
   Jensen](http://people.cs.aau.dk/~csj/Thesis/)
+</BlogPostLayout>

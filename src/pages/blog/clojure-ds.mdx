@@ -3,13 +3,16 @@ author: 'fin'
 title: 'Building persistent data structures in Clojure'
 description: 'How to build your custom data structures in Clojure'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-12-01'
 heroImage: 'fjord.jpg'
 tags:
   - 'clojure'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 Clojure ships by default with a really good set of data structures,
 so it's worth thinking hard before building your own. There are however cases when
 doing so is warranted. Let's look at two approaches that can be taken when
@@ -215,3 +218,4 @@ We hope this post has been useful to you and that you will be hacking on your ow
 - [https://www.brainonfire.net/files/seqs-and-colls/main.html](https://www.brainonfire.net/files/seqs-and-colls/main.html)
 - [https://clojure.org/reference/sequences](https://clojure.org/reference/sequences)
 - Fjord picture at the top from [Robert Bye](https://unsplash.com/@robertbye)
+</BlogPostLayout>

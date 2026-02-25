@@ -4,6 +4,7 @@ location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
 position: 'Senior/Principal Java Engineer - Low Latency'
+description: 'Join JUXT as a Senior or Principal Java Engineer specialising in low latency systems for financial services. Full-time, hybrid role in London.'
 draft: false
 weight: 2
 googleJobs:

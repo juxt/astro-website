@@ -1,6 +1,5 @@
 ---
 author: 'jon'
-layout: '../../layouts/BlogPost.astro'
 title: 'JUXT Cast S5 E3: Babashka Conf 2023, XTDB Update, and Post-Agile'
 description: "JUXT CEO Jon Pither, CTO Malcolm Sparks, Lead Software Engineer Alex Davis, and Senior Software Engineer Harry Percival talk about Babashka Conf, the latest XTDB update, and Post-Agile."
 category: 'clojure'
@@ -13,6 +12,10 @@ tags:
 heroImage: 'JuxtCast-new-heads-1200.jpg'
 ---
 
+
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 In this JUXT Cast episode, I am joined by Malcolm Sparks (CTO), Alex Davis (Lead Engineer), and Harry Percival (Senior Software Engineer) to discuss the memorable JUXT 10-Year Anniversary party at Wilton's Music Hall in London, the [Babashka Conf 2023](https://babashka.org/conf/) in Berlin (where Malcolm was a keynote speaker), the London to Brighton Cycle Ride, the latest XTDB update, and Post-Agile.
 
 The episode ends with 'ParcLife', one of the songs performed live at JUXT anniversary party by Malcolm Sparks, Alex Davis, and Jeremy Taylor.
@@ -29,3 +32,4 @@ The episode ends with 'ParcLife', one of the songs performed live at JUXT annive
 This JUXT Cast episode is also available as a podcast across [all your favourite platforms](https://pnc.st/s/juxt-cast/0785c176/juxt-10-year-anniversary-babashka-conf-2023-xtdb-update-and-post-agile).
 
 Happy listening!
+</BlogPostLayout>

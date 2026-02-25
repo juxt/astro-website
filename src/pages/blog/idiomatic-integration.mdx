@@ -3,13 +3,15 @@ author: 'oly'
 title: 'Idiomatic integration'
 description: 'Talk pretty with external systems'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-04-25'
 heroImage: 'idiomatic-integration.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # Camels, snakes and kebabs
 
 Clojure's idiom of map keys being keywords where parts are separated by
@@ -129,3 +131,4 @@ moment:
 ```
 
 You never even have to see camels or snakes again!
+</BlogPostLayout>

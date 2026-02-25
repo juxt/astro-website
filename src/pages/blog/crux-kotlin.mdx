@@ -3,13 +3,15 @@ author: 'aon'
 title: 'Kotlin Adventures With XTDB'
 description: 'Fluid interfaces for happy databases'
 category: 'xtdb'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2021-07-02'
 heroImage: 'kotlin-adventures.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 I recently had the opportunity to participate in a XTDB workshop run by
 Jeremy Taylor. This opened my eyes to the power and flexibility of XTDB.
 
@@ -678,3 +680,4 @@ Stay tuned!
 import k from '../../assets/blog/kotlin-crux-pacman2.png'
 
 <Image alt='image' src={k} />
+</BlogPostLayout>

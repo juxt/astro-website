@@ -3,7 +3,6 @@ author: 'mal'
 title: 'Atomic Architecture'
 description: 'Seven principles for building better data systems'
 category: 'site'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-03-01'
 heroImage: 'tesla-sphere-inverted.png'
 tags:
@@ -11,9 +10,12 @@ tags:
   - 'atomic architecture'
 ---
 
+
 import { Image } from 'astro:assets'
 import diagram from '../../assets/blog/atomic-architecture.jpg'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
 
+<BlogPostLayout frontmatter={frontmatter}>
 Software is an ever-increasing part of our lives, and yet it is difficult and expensive to build systems that work accurately, reliably, and securely.
 
 As part of our drive to building better data systems for our customers, we've identified a number of architectural principles we believe can yield better software systems.
@@ -131,10 +133,10 @@ Yet, so many IT processes rely on copying data from one place to another.
 
 In Atomic Architecture, we recognise that data needs to be made available to multiple systems.
 However, we carefully segregate the changeable data of the present (that a domain's operations act upon) with the immutable data of the past (that can be safely shared with downstream consumers).
-This is the key to preserving consistency and re-esablishing trustworthiness as a guarenteed property of the systems we deliver to our users.
+This is the key to preserving consistency and re-establishing trustworthiness as a guaranteed property of the systems we deliver to our users.
 
 Technically, we want our operations to be applied to the domain's state in a linear ordered sequence.
-For a given domain, there is only one official order of operations, and one 'truth' about how the state of the domain's universe has occured.
+For a given domain, there is only one official order of operations, and one 'truth' about how the state of the domain's universe has occurred.
 This is in stark contrast to architectures where multiple services all have their own 'version' of the facts.
 
 For many implementations, processing a queue of operations using a single thread, provides sufficient performance.
@@ -159,9 +161,9 @@ We don't prescribe how this is done, but recommend that access control policies 
 
 Our system has established the order of operations that have been successfully applied to the domain's state.
 It is important to publish this 'operation log' downstream to consumers.
-Since each entry in the log indicates that a particualr operation has been applied at a certain time, we call this a log of _events_, or simply, an _event log_.
+Since each entry in the log indicates that a particular operation has been applied at a certain time, we call this a log of _events_, or simply, an _event log_.
 
-Consumers of these events may be looking for notification that a particular operation has occured.
+Consumers of these events may be looking for notification that a particular operation has occurred.
 For example, an emailer may be triggered to send an email based on a send-email operation.
 This emailer may report the success or failure of the email via the remote API, yielding a further change to the domain's state and yielding another event, for instance, 'successfully-sent-email'.
 
@@ -174,7 +176,7 @@ This is the last and perhaps most ambitious principle.
 In order to support our users well, we need to be able to understand our data systems.
 Subject to the necessary privileges, authorized parties should be able to gather as much accurate data about the system as possible, where necessary.
 
-Ideally, this should include the ability to ask questions about the history of interactions with a system, not just the current state. We often need to understand how the current state occured.
+Ideally, this should include the ability to ask questions about the history of interactions with a system, not just the current state. We often need to understand how the current state occurred.
 
 Fortunately, there are an increasing number of enabling technologies to make this possible.
 The first is logs with infinite retention, like [Kafka](https://kafka.apache.org/).
@@ -191,3 +193,4 @@ Write to me at mal@juxt.pro!
 ## Notes
 
 "Keeping your app-state in one place" -- https://news.ycombinator.com/item?id=34951014
+</BlogPostLayout>

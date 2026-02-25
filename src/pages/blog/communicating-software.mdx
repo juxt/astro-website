@@ -3,13 +3,15 @@ author: 'wrk'
 title: 'Communicating Software'
 description: 'A lightweight approach for effective software communication'
 category: 'architecture'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2022-01-05'
 heroImage: 'communicating-software.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 # Introduction
 
 When a developer joins the team on an established project, they
@@ -509,3 +511,4 @@ available.
 Having the essential high-level diagrams at hand, in a consistent and
 reproducible manner, should help make the task of talking about our
 software that little bit easier, less ambiguous, and maybe even fun!
+</BlogPostLayout>

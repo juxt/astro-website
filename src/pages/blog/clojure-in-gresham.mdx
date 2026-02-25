@@ -3,7 +3,6 @@ author: 'joe'
 title: 'Clojure in Finance: Gresham'
 description: 'Immutability and event-sourcing with Clojure, for cash management and virtual ledgers'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-06-20'
 heroImage: 'gresham-logo-clojurein-new.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 [Gresham](https://www.greshamtech.com/) is a financial technology business, with headquarters in London and offices across the UK, North America and Asia. In 2019, Gresham announced a partnership with a major bank to deliver a new dynamic cash management solution and banking platform.
 
 We caught up with Colin Reid (Development Manager) and Mark Tinsley (Principal Engineer) at Gresham, in their delightful office in Bristol’s Brew House, to discuss why Clojure, Kafka, and event-sourcing are key ingredients of their new product.
@@ -281,3 +283,4 @@ If you break functions up so that they just do one very small thing, you can run
 import grc from '../../assets/blog/gresham-mark-colin.jpg'
 
 <Image alt='Mark and Colin' width={600} src={grc} class='mx-auto' />
+</BlogPostClojureInLayout>

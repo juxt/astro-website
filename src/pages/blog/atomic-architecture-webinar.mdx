@@ -3,7 +3,6 @@ author: 'mal'
 title: 'On-demand webinar: Atomic Architecture — An Architectural Vision for Better Information Systems'
 description: 'In this webinar, JUXT CTO & co-founder — Malcolm Sparks — explained the principles behind Atomic Architecture, an architectural blueprint for building reliable information systems.'
 category: 'atomic architecture'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2023-10-11'
 heroImage: 'atomic-architecture-webinar.jpg'
 tags:
@@ -11,8 +10,11 @@ tags:
   - 'atomic architecture'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 As part of our drive to design better data systems for our customers, we’ve identified seven architectural principles that yield exceptional results.
 
 In this webinar, I explained the principles behind Atomic Architecture, an architectural blueprint for building reliable information systems.
@@ -38,3 +40,4 @@ Key takeaways from this session:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sf3QZ-HBNFk?si=xSo8SnuUBtMy7kwn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **You can access the PDF version of the slides <a href='/slides/juxt-atomic-architecture-webinar-20231004.pdf' target='_blank'> here</a>**.
+</BlogPostLayout>

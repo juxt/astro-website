@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in London: Gower Street'
 description: 'Clojure in the movie business'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-12-15'
 heroImage: 'gower-street-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 ## Distributing Movies
 
 import go from '../../assets/blog/gower-st-web.png'
@@ -169,3 +171,4 @@ valuable experience to contribute and a willingness to learn and be open
 to new things. We've found that Clojure is a big draw for us - it
 attracts the kind of people who are more likely to see things as a
 holistic system rather than a collection of classes.
+</BlogPostClojureInLayout>

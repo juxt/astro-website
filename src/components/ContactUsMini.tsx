@@ -127,7 +127,7 @@ export default function ContactUsMini() {
           <div>
             <div class='text-2xl md:text-3xl font-light'>info@juxt.pro</div>
             <div class='text-2xl md:text-3xl font-light'>
-              +44 (0) 333 93 98 309 <br /> +1 (332) 867 0718
+              +44 (0) 333 93 98 309
             </div>
           </div>
           <img

@@ -3,13 +3,15 @@ author: 'jon'
 title: 'ClojuTre Report'
 description: 'Attending the ClojuTre conference'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2015-09-18'
 heroImage: 'clojutre-report.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 This was my first time at [ClojuTre](http://clojutre.org/2015/), a
 Clojure conference in Finland organized by
 [Metosin](http://www.metosin.fi). This conference is entirely free for
@@ -178,3 +180,4 @@ flowed.
 import dr from '../../assets/blog/drinks.jpg'
 
 <Image alt='image' src={dr} />
+</BlogPostLayout>

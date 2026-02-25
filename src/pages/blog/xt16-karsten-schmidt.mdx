@@ -3,13 +3,15 @@ author: 'mal'
 title: 'XT16 - Karsten Schmidt'
 description: 'Low fat computing'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2016-12-22'
 heroImage: 'low-fat-computing.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 For the past 28 years, Karsten Schmit
 ([\@toxi](https://twitter.com/toxi)) has been at the forefront of
 computer-generated design. We were very pleased he took time out to
@@ -83,3 +85,4 @@ to gradually increase complexity.
 > Then processes which operate on data.
 
 If you have any feedback on this talk, feel free to comment below.
+</BlogPostLayout>

@@ -5,9 +5,9 @@ import SmallTitle from '@components/team/SmallTitle.astro'
 import { MarkdownInstance } from 'astro'
 import { Person } from '@utils/types'
 
-var people = (await Astro.glob<MarkdownInstance<Person>>(
-  '../../data/people/{*.mdx,*.md}'
-))
+var people = (Object.values(import.meta.glob<MarkdownInstance<Person>>(
+  '../../data/people/{*.mdx,*.md}', { eager: true }
+)))
     .reduce((acc, person) => {
         acc[person.frontmatter.code] = person.frontmatter;
         return acc;

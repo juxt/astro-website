@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Oslo: Telenor Digital'
 description: 'Communicating with Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-12-09'
 heroImage: 'telenor-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # A communications giant
 
 import tt from '../../assets/blog/telenor-team.jpg'
@@ -312,3 +314,4 @@ Telenor Digital [has a website](http://www.telenordigital.com/) and
 [recently started a
 podcast](https://soundcloud.com/telenordigitalpodcast/). Joel also
 [maintains a blog](https://wjoel.com).
+</BlogPostClojureInLayout>

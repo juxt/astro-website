@@ -2,7 +2,7 @@
 code: 'tom'
 name: 'Tom'
 lastName: 'Dalziel'
-jobTitle: 'Technical Delivery Manager — Banking'
+jobTitle: 'Software Engineer'
 image: 'tom.jpg'
 linkedin: 'thomas-dalziel'
 twitter: ''

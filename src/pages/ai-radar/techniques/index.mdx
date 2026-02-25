@@ -1,10 +1,12 @@
 ---
-layout: '../../../layouts/ChildSectionAiRadar.astro'
 title: 'Techniques'
 ---
 
-import SingleQuadrantData from '../../../components/SingleQuadrantData.astro'
 
+import SingleQuadrantData from '../../../components/SingleQuadrantData.astro'
+import ChildSectionAiRadarLayout from '../../../layouts/ChildSectionAiRadar.astro'
+
+<ChildSectionAiRadarLayout frontmatter={frontmatter}>
 Methodologies and practices for building AI systems: approaches such as RAG, prompt engineering, agent design patterns and evaluation methodologies. The "how" of AI development.
 
 <SingleQuadrantData quadrantName='techniques' />
@@ -295,3 +297,4 @@ AI's code review capabilities have improved substantially. Developers who are ac
 Yet we've kept AI Pull Request Review in Hold, and the reason is organisational rather than technical. PR review isn't just about finding errors; it's a vital knowledge-sharing mechanism where senior developers mentor juniors and the team maintains situational awareness of how the codebase is evolving. Teams who delegate review to AI often see a decline in collective code ownership and shared understanding.
 
 The deeper question is how teams remain informed as AI handles more of the development workflow. Pull requests remain an excellent forum for this, perhaps more important than ever. We recommend using AI as a first-pass reviewer to catch issues before human review, but preserving the human review step as a deliberate practice for team alignment and knowledge transfer.
+</ChildSectionAiRadarLayout>

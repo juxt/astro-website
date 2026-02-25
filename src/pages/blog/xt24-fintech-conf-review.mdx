@@ -1,6 +1,5 @@
 ---
 author: 'jon'
-layout: '../../layouts/BlogPost.astro'
 title: 'XT24 Fintech Conf - In Review'
 description: 'Engineering leaders from banks, fintechs and hedge funds gathered to explore how emerging technologies are transforming financial services'
 category: 'conference'
@@ -12,8 +11,11 @@ tags:
 heroImage: 'xt24-stage.jpg'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 [XT24](https://www.juxt.pro/xt24/) happened last week, and it was a blast.
 
 Sunkissed in Santanders' UK headquarters -- [Unity Place](https://www.unityplace.co.uk/) -- in Milton Keynes, the audience were treated to a diverse set of talks, ranging from the technical to the philosophical, each giving different perspectives on how to solve today's problems in Fintech, whilst discussing what the future holds.
@@ -112,3 +114,4 @@ The wonderfully entertaining final talk of the day was entitled "Not So Clever: 
 import drinks from '../../assets/blog/xt24/Drinks.jpg'
 
 <Image alt='Reception drinks' src={drinks} />
+</BlogPostLayout>

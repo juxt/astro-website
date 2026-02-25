@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Berlin: Zalando'
 description: 'Using Clojure to power a fashion platform'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2016-11-30'
 heroImage: 'zalando-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # A growing fashion company
 
 import z from '../../assets/blog/zalando-logo.png'
@@ -225,3 +227,4 @@ possible way; very convenient.
 # Resources
 
 Check out the [Zalando tech blog](https://tech.zalando.com/blog/).
+</BlogPostClojureInLayout>

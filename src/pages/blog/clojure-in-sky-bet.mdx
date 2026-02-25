@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Sheffield: Sky Betting and Gaming'
 description: 'Betting on Clojure'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2017-03-16'
 heroImage: 'sky-betting-gaming-logo.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 # International Betting
 
 import sb from '../../assets/blog/skybetteam.jpg'
@@ -294,3 +296,4 @@ helpful!
 _Ed:_ There is _[(def shef)](https://defshef.github.io/)_, a monthly
 Sheffield functional programming meetup. Clojure has featured a number
 of times.
+</BlogPostClojureInLayout>

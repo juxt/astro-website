@@ -3,7 +3,6 @@ author: 'jon'
 title: 'Clojure in Kafka: Kpow'
 description: 'Building a Kafka toolkit'
 category: 'clojure-in'
-layout: '../../layouts/BlogPostClojureIn.astro'
 publishedDate: '2023-03-29'
 heroImage: 'kpow-heroimage.jpg'
 clojureIn:
@@ -14,8 +13,11 @@ clojureIn:
   }
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostClojureInLayout from '../../layouts/BlogPostClojureIn.astro'
+
+<BlogPostClojureInLayout frontmatter={frontmatter}>
 ## Kpow
 
 import si from '../../assets/blog/factor-team.jpeg'
@@ -123,3 +125,4 @@ But in terms of the state of Clojure, I believe it gives us the tooling we need 
 **Jon: Is there anything that you feel we haven’t covered, anything you’d like to add?**
 
 **Derek:** No, I think we’ve covered everything, thanks for taking the time to listen!
+</BlogPostClojureInLayout>

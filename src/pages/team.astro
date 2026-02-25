@@ -20,7 +20,7 @@ const bannerPicture = await getImage({
 }).then((img) => img.src)
 
 const teamPages = new Set(
-  (await Astro.glob<MarkdownInstance<Person>>('./team/*.astro'))
+  (Object.values(import.meta.glob<MarkdownInstance<Person>>('./team/*.astro', { eager: true })))
     .map((p) => p.url)
     .map((p) => p.split('/'))
     .map((p) => p.pop())
@@ -28,7 +28,7 @@ const teamPages = new Set(
 
 // {"code": Person}
 var people = (
-  await Astro.glob<MarkdownInstance<Person>>('../data/people/{*.mdx,*.md}')
+  Object.values(import.meta.glob<MarkdownInstance<Person>>('../data/people/{*.mdx,*.md}', { eager: true }))
 ).reduce((acc, person) => {
   acc[person.frontmatter.code] = person.frontmatter
   acc[person.frontmatter.code].expert = teamPages.has(person.frontmatter.code)
@@ -108,10 +108,6 @@ var people = (
             img='/src/assets/team/action/jss.png'
           />
           <FeaturedEngineer
-            {...people['fcb']}
-            img='/src/assets/team/action/fcb.png'
-          />
-          <FeaturedEngineer
             {...people['mat']}
             img='/src/assets/team/action/mat.png'
           />
@@ -128,20 +124,16 @@ var people = (
             img='/src/assets/team/action/lda.png'
           />
           <FeaturedEngineer
-            {...people['daj']}
-            img='/src/assets/team/action/daj.png'
-          />
-          <FeaturedEngineer
             {...people['joa']}
             img='/src/assets/team/action/joa.png'
           />
           <FeaturedEngineer
-            {...people['fuz']}
-            img='/src/assets/team/action/fuz.png'
-          />
-          <FeaturedEngineer
             {...people['asl']}
             img='/src/assets/team/action/asl.png'
+          />
+          <FeaturedEngineer
+            {...people['fuz']}
+            img='/src/assets/team/action/fuz.png'
           />
           <FeaturedEngineer
             {...people['vio']}
@@ -154,6 +146,30 @@ var people = (
           <FeaturedEngineer
             {...people['dcm']}
             img='/src/assets/team/action/dcm.png'
+          />
+          <FeaturedEngineer
+            {...people['pbk']}
+            img='/src/assets/team/action/pbk.png'
+          />
+          <FeaturedEngineer
+            {...people['erk']}
+            img='/src/assets/team/action/erk.png'
+          />
+          <FeaturedEngineer
+            {...people['hjy']}
+            img='/src/assets/team/action/hjy.png'
+          />
+          <FeaturedEngineer
+            {...people['swn']}
+            img='/src/assets/team/action/swn.png'
+          />
+          <FeaturedEngineer
+            {...people['cor']}
+            img='/src/assets/team/action/cor.png'
+          />
+          <FeaturedEngineer
+            {...people['bcs']}
+            img='/src/assets/team/action/bcs.png'
           />
         </div>
 
@@ -170,7 +186,7 @@ var people = (
 
         <div class='px-32 grid grid-cols-1 md:grid-cols-3 gap-12'>
           {
-            ['aby', 'emt'].map((code, idx) => (
+            ['aby', 'emt', 'sop'].map((code, idx) => (
               <FeaturedSupport idx={idx} {...people[code]} />
             ))
           }
@@ -291,9 +307,6 @@ var people = (
               Call us at: <span class='whitespace-nowrap'
                 >+44 (0) 333 93 98 309</span
               >
-            </p>
-            <p class='font-light'>
-              or <span class='whitespace-nowrap'>+1 (332) 867 0718</span>
             </p>
           </div>
         </div>

@@ -3,15 +3,17 @@ author: 'rkb'
 title: 'Writing a Neural Network'
 description: 'A Neural Network writes a Neural Network - Netception'
 category: 'clojure'
-layout: '../../layouts/BlogPost.astro'
 publishedDate: '2017-08-11'
 heroImage: 'neural-network.jpg'
 tags:
   - 'machine-learning'
 ---
 
-import { Image } from 'astro:assets'
 
+import { Image } from 'astro:assets'
+import BlogPostLayout from '../../layouts/BlogPost.astro'
+
+<BlogPostLayout frontmatter={frontmatter}>
 My previous blog covered the mathematics involved in the neural network
 that we are going to write. You can find it
 [here](https://juxt.pro/blog/posts/neural-maths.html). The ideas covered
@@ -176,7 +178,7 @@ and _h11_ is \[1 0\] The index of _w2_ in weights is \[0 0 1\]. The _i1_
 in values is \[0 0\] and _h12_ is \[1 1\] ...
 
 Therefore using the index of the weight, if we say the index of _w1_,
-\[0 0 0\] = \[a b c\], the the index of _i1_ is \[0 0\] = \[a b\]
+\[0 0 0\] = \[a b c\], the index of _i1_ is \[0 0\] = \[a b\]
 
 and the index of _h11_ is \[1 0\] = \[(+ a 1) c\].
 
@@ -311,3 +313,4 @@ Also, please note that future versions of the code may vary in order to
 optimize performance. However, this blog contains the core ideas.
 
 I appreciate any feedback, questions or improvements that you may have.
+</BlogPostLayout>
