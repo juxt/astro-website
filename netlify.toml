@@ -5,6 +5,12 @@
   command = "yarn build"
 
 [[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
+  force = false
+
+[[redirects]]
   from = "/startups"
   to = "/delivery"
   status = 301

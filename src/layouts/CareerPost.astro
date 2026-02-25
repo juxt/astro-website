@@ -36,7 +36,7 @@ const bannerPicture = await getImage({
 
 const slug = slugifyPath(Astro.props.frontmatter.url)
 
-const jobDescription = Astro.props.compiledContent()
+const jobDescription = await Astro.slots.render('default')
 
 const schema = JSON.stringify({
   '@context': 'https://schema.org/',
