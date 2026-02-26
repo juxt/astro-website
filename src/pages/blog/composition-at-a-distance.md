@@ -17,8 +17,6 @@ tags:
 
 Within three years of Comte's death, Kirchhoff and Bunsen demonstrated that [light itself carries the answer](https://en.wikipedia.org/wiki/History_of_spectroscopy): spectral lines are chemical fingerprints readable from any distance. By 1864, William Huggins was [identifying elements in Sirius](https://en.wikipedia.org/wiki/William_Huggins) from an observatory in South London. The physical sample turned out to be unnecessary. What mattered was having an instrument that could read composition from a different medium.
 
-Software engineering made the same bet for the same reason, and has held onto it for even longer.
-
 ## The physical sample
 
 In 2001, code genuinely was the fastest way to learn whether a design held together. No spectroscope existed for software composition, so you worked with physical samples: running code. The alternatives were slow and expensive. Formal specification tools like [Z](https://en.wikipedia.org/wiki/Z_notation) and [VDM](https://en.wikipedia.org/wiki/Vienna_Development_Method) required specialist training and months of upfront modelling with elaborate toolchains before you got any feedback about whether the thing you were specifying made sense. [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) promised a middle path but delivered specification by committee: walls of diagrams that froze design decisions long before anyone had learned enough to make them well. The [Agile Manifesto](https://agilemanifesto.org/)'s preference for "working software over comprehensive documentation" was a pragmatic response to this constraint, not a philosophical rejection of specification.
