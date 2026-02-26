@@ -36,7 +36,8 @@ const bannerPicture = await getImage({
 
 const slug = slugifyPath(Astro.props.frontmatter.url)
 
-const jobDescription = await Astro.slots.render('default')
+const jobDescriptionHtml = await Astro.slots.render('default')
+const jobDescription = jobDescriptionHtml.replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<a[^>]*class="slug-a"[^>]*>\s*<\/a>/g, '')
 
 const schema = JSON.stringify({
   '@context': 'https://schema.org/',
@@ -55,7 +56,7 @@ const schema = JSON.stringify({
     '@type': 'Organization',
     name: 'JUXT',
     sameAs: 'https://www.juxt.pro',
-    logo: 'https://juxt.pro/images/adv-juxt-logo.png'
+    logo: 'https://www.juxt.pro/images/logo-square.svg'
   },
   applicantLocationRequirements: {
     '@type': 'Country',
