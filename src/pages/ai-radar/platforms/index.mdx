@@ -21,7 +21,7 @@ These platforms represent established, well-supported services that are ready fo
 
 Foundation model providers continue to evolve at a rapid pace. Major players such as OpenAI, Anthropic, Google and Meta compete alongside emerging organisations including DeepSeek, Alibaba and IBM. While industry benchmarks help compare these models, they tell only part of the story: different models excel in different areas, and benchmark results should be viewed as indicative rather than definitive.
 
-A clear trend has emerged in how providers differentiate their offerings across three distinct tiers: smaller, faster models (e.g., Claude Haiku, DeepSeek Coder, Qwen Turbo) optimised for speed and cost; larger, more capable models (e.g., Claude Sonnet, DeepSeek V3, Qwen Max) balancing capabilities with reasonable response times; and specialised reasoning models (e.g., Claude Sonnet Extended, OpenAI o1, DeepSeek R1) designed for complex problem-solving. These reasoning models consume significantly more tokens and command higher per-token costs, but demonstrate remarkable capabilities in solving challenging mathematical and coding tasks.
+A clear trend has emerged in how providers differentiate their offerings across three distinct tiers: smaller, faster models (e.g., Claude Haiku, DeepSeek Coder, Qwen Turbo) optimised for speed and cost; larger, more capable models (e.g., Claude Opus, GPT-5.2, Qwen Max) balancing capabilities with reasonable response times; and specialised reasoning models (e.g., OpenAI o3, o4-mini, DeepSeek R1) designed for complex problem-solving. The distinction between general and reasoning models is blurring, with GPT-5.2 and Claude Opus 4.6 integrating extended reasoning natively rather than through separate model variants. These reasoning-capable models consume significantly more tokens and command higher per-token costs, but demonstrate remarkable capabilities in solving challenging mathematical and coding tasks.
 
 We believe foundation models have evolved sufficiently to warrant adoption for many business applications. When paired with appropriate infrastructure (few-shot prompting, guardrails, retrieval-augmented generation and evaluation frameworks), they offer compelling solutions to a wide range of problems. Our experience suggests there's no universal "best model". We recommend implementing your own benchmarking process focused on your specific use cases. When selecting a model, consider factors beyond raw performance, such as pricing, reliability, data privacy requirements, and whether on-premise deployment is needed. The recent emergence of high-quality open-source models with permissive licensing (such as DeepSeek's offerings) provides additional options for organisations with specific security or deployment requirements.
 
@@ -34,7 +34,7 @@ We believe foundation models have evolved sufficiently to warrant adoption for m
 - **Integration & lifecycle management** (context limitations, version control, updates)
 - **Vendor stability & support** (roadmap alignment, documentation, community)
 
-### Foundation model providers feature comparison (January 2026)
+### Foundation model providers feature comparison (February 2026)
 
 <div className="overflow-x-auto">
 | Provider             | Open Weights | Enterprise Focus | Reasoning Models | Edge Deployment | Long Context | Embedding API | Agentic Workflows | Model Selection Link                                                          |
