@@ -50,7 +50,7 @@ If you enjoy solving complex problems, learning new technologies, and contributi
 * Great benefits, including full medical, 10% matched pension and regular premium events.
 
 ## WFH?
-These roles are hybrid - typically 1–3 office days **per quarter**, with most work done remotely. You’ll need to be UK-based and within a commutable distance to London for occasional on-site collaboration.
+These roles are hybrid - typically one office day **per month**, with most work done remotely. You’ll need to be UK-based and within a commutable distance to London for occasional on-site collaboration.
 
 ## Contract type
 Permanent only.
