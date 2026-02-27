@@ -58,7 +58,7 @@ I want to be careful here, because there's a lazy version of this story where AI
 
 You still need to *hear* when the output is wrong. You still need taste, judgement, and the hard-won instinct that comes from years of doing it yourself. The domain knowledge doesn't become less important — it becomes *more* important, because you're making higher-level decisions faster, and bad judgement at that altitude compounds quickly.
 
-The difference is that your expertise is no longer bottlenecked by your typing speed.
+The difference is that your expertise is no longer trapped behind the time it takes to implement it.
 
 ## A Letter to the Disillusioned
 
