@@ -14,7 +14,7 @@ tags:
 
 <p class="lede">For years, I carried a secret that felt almost heretical for a software developer: I was falling out of love with coding.</p>
 
-Not with *building things* — that spark never left. The idea of solving a problem, of turning nothing into something, still lit me up in the shower, on a walk, in that half-awake space before the alarm. But somewhere between the idea and the finished product lay a vast, draining middle. The boilerplate. The dependency hell. The three hours lost to a missing semicolon's spiritual equivalent. The gap between what I could *imagine* and what I could *ship* had become a swamp, and I was wading through it with heavy boots.
+Not with *building things* — that spark never left. The idea of solving a problem, of turning nothing into something, still got me out of bed. But somewhere between the idea and the finished product lay a vast, draining middle. The boilerplate. The dependency hell. The three hours lost to a missing semicolon's spiritual equivalent. The gap between what I could *imagine* and what I could *ship* had become a swamp, and I was wading through it with heavy boots.
 
 Then something changed.
 
