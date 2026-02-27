@@ -1,7 +1,7 @@
 ---
 author: 'dcm'
 title: "The Conductor's Baton: How AI Gave Me Back the Joy of Building"
-description: 'The gap between what I could imagine and what I could ship had become a swamp. Then AI tooling changed the ratio.'
+description: 'Building software had become a swamp. Then the swamp dried up.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-02-27'
