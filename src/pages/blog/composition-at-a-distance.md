@@ -13,7 +13,7 @@ tags:
   - 'agile'
 ---
 
-<p class="lede">In 1835, Auguste Comte <a href="https://en.wikipedia.org/wiki/Auguste_Comte" target="_blank">declared</a> that humanity would never know the chemical composition of the stars. "We shall never be able by any means to study their chemical composition or their mineralogical structure", he said. It was a reasonable claim given the technology available at the time: knowing what something is made of requires a physical sample, and the stars are too far away.</p>
+<p class="lede">In 1835, Auguste Comte <a href="https://en.wikipedia.org/wiki/Auguste_Comte" target="_blank">declared</a> that humanity would never know the chemical composition of the stars. "We shall never be able by any means to study their chemical composition or their mineralogical structure", he said. It was a reasonable claim given the technology available at the time. Knowing what something is made of requires a physical sample, and the stars are too far away.</p>
 
 Within three years of Comte's death, Kirchhoff and Bunsen demonstrated that [light itself carries the answer](https://en.wikipedia.org/wiki/History_of_spectroscopy): spectral lines are chemical fingerprints readable from any distance. By 1864, William Huggins was [identifying elements in Sirius](https://en.wikipedia.org/wiki/William_Huggins) from an observatory in South London. The physical sample turned out to be unnecessary. What mattered was having an instrument that could read composition via a different medium.
 
