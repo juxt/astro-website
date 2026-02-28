@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Composition at a distance'
-description: 'The agile movement bet on code as the fastest feedback medium. The constraints have changed.'
+description: "Agile's founders wanted to separate intent from implementation. They just didn't have a medium to hold them apart."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-02'
