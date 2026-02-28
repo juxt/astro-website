@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'What the code remembers'
-description: 'Every legacy system is an archaeological site. The hard part was never the digging.'
+description: 'Which of the bugs in your system are you obligated to keep?'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-06'
