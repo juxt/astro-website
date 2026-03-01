@@ -4,7 +4,7 @@ title: 'Composition at a distance'
 description: "Agile's founders wanted to separate intent from implementation, but the tools to hold them apart didn't exist. Now they do."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-03-02'
+publishedDate: '2026-03-01'
 heroImage: 'composition-at-a-distance.jpg'
 tags:
   - 'ai'
@@ -13,9 +13,9 @@ tags:
   - 'agile'
 ---
 
-<p class="lede">In 1835, Auguste Comte <a href="https://en.wikipedia.org/wiki/Auguste_Comte" target="_blank">declared</a> that humanity would never know the chemical composition of the stars. "We shall never be able by any means to study their chemical composition or their mineralogical structure", he said. It was a reasonable claim given the technology available at the time. Knowing what something is made of requires a physical sample, and the stars are too far away.</p>
+<p class="lede">In 1835, Auguste Comte <a href="https://en.wikipedia.org/wiki/Auguste_Comte#Predictions" target="_blank">declared</a> that humanity would never know the chemical composition of the stars. "We shall never be able by any means to study their chemical composition or their mineralogical structure", he said. It was a reasonable claim given the technology available at the time. Knowing what something is made of requires a physical sample, and the stars are too far away.</p>
 
-Within three years of Comte's death, Kirchhoff and Bunsen demonstrated that [light itself carries the answer](https://en.wikipedia.org/wiki/History_of_spectroscopy): spectral lines are chemical fingerprints readable from any distance. By 1864, William Huggins was [identifying elements in Sirius](https://en.wikipedia.org/wiki/William_Huggins) from an observatory in South London. The physical sample turned out to be unnecessary. What mattered was having an instrument that could read composition via a different medium.
+Within three years of Comte's death, Kirchhoff and Bunsen demonstrated that [light itself carries the answer](https://en.wikipedia.org/wiki/History_of_spectroscopy#Mid-19th_century_(1830%E2%80%931869)): spectral lines are chemical fingerprints readable from any distance. By 1864, William Huggins was [identifying elements in Sirius](https://en.wikipedia.org/wiki/William_Huggins) from an observatory in South London. The physical sample turned out to be unnecessary. What mattered was having an instrument that could read composition via a different medium.
 
 ## The physical sample
 
@@ -57,7 +57,7 @@ This changes the relationship between *what* and *how* that the agile founders w
 
 ## Helium in the sun
 
-When a new instrument reveals something the old method missed, the first instinct is [to doubt the instrument](https://en.wikipedia.org/wiki/Cesare_Cremonini_%28philosopher%29).
+When a new instrument reveals something the old method missed, the first instinct is [to doubt the instrument](https://en.wikipedia.org/wiki/Cesare_Cremonini_%28philosopher%29#Cremonini_and_Galileo).
 
 In 1925, [Cecilia Payne](https://en.wikipedia.org/wiki/Cecilia_Payne-Gaposchkin) used stellar spectroscopy to establish that stars are composed primarily of hydrogen and helium. [Henry Norris Russell](https://en.wikipedia.org/wiki/Henry_Norris_Russell), the most prominent astronomer of the day, told her the result couldn't be right. She inserted a disclaimer into her thesis: "The enormous abundance derived for these elements in the stellar atmosphere is almost certainly not real". Four years later Russell published his own paper confirming exactly what Payne had found.
 
