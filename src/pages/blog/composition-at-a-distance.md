@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Composition at a distance'
-description: "Agile's founders wanted to separate intent from implementation, they just didn't have a medium to hold them apart."
+description: "Agile's founders wanted to separate intent from implementation, but the tools to hold them apart didn't exist. Now they do."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-02'
