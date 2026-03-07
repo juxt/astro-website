@@ -1,6 +1,6 @@
 ---
 author: 'hga'
-title: 'What the code remembers'
+title: 'Technical debt was never technical'
 description: "Ward Cunningham wasn't talking about sloppy code."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
