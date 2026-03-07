@@ -17,13 +17,11 @@ tags:
 
 TSMC is the most sophisticated semiconductor manufacturer on earth. They document obsessively. The problem was not carelessness. It was that a modern chip fab involves hundreds of process steps, each with parameters tuned through experiments conducted over years, and no single person holds enough of the picture to see where a subtle fault will land.
 
-In 2019, a team of industrial engineers [gave this pattern a name](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. They'd been [studying smart factory development](https://journals.openedition.org/reset/3389?lang=en), not semiconductor fabs, but they kept finding the same thing: systems that worked for reasons nobody on the team fully understood. When developers couldn't solve a problem in software, they worked around it physically. They hardcoded robot positions to eight decimal places because the software couldn't track objects in real time. They cut the legs off a component because the gripper couldn't grip it precisely enough. The systems worked. Why they worked was never written down in a form anyone could question.
+In 2019, a team of industrial engineers [gave this pattern a name](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. They'd been [studying smart factory development](https://journals.openedition.org/reset/3389?lang=en), not semiconductor fabs, but they kept finding the same dynamic. When developers couldn't solve a problem in software, they worked around it physically. They hardcoded robot positions to eight decimal places because the software couldn't track objects in real time. They cut the legs off a component because the gripper couldn't grip it precisely enough. Each workaround solved the immediate problem. None addressed the underlying one. And once the engineer who made the fix moved on, the workaround remained but the reasoning behind it was gone.
 
 <span class="pullquote" text-content="We called it technical debt because we were looking at the code. The debt was always in the understanding."></span>
 
 [Ward Cunningham](https://en.wikipedia.org/wiki/Ward_Cunningham) [described](https://cmdev.com/papers/debt-metaphor/) the same thing in 1992. He used a financial metaphor: code written to your current understanding carries a hidden debt, because that understanding will change. Within a decade, [technical debt](https://en.wikipedia.org/wiki/Technical_debt) had become shorthand for sloppy code. But Cunningham was explicit: "I'm never in favour of writing code poorly, but I am in favour of writing code to reflect your current understanding of a problem even if that understanding is partial." The debt was never in the code. It was in the understanding. We just didn't notice because the code was where we were looking.
-
-When that understanding decays, observed behaviour becomes the only contract.
 
 ## The implicit contract
 
