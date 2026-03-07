@@ -33,6 +33,8 @@ Hyrum Wright, a software engineer at Google, [formulated a law](https://www.hyru
 
 Every system has behaviour somebody intended. It also has bugs: race conditions, edge cases nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature simultaneously, and no amount of reading the code will tell you which. To tell them apart, you need to know what the system was *for*, not just what it does.
 
+Epistemic debt means the gap between what a system does and what anyone understands about it is never zero. Hyrum's Law means someone is already depending on whatever lives in that gap.
+
 ## Roots beneath the surface
 
 In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance two ways: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds.
