@@ -17,7 +17,7 @@ tags:
 
 TSMC is the most sophisticated semiconductor manufacturer on earth. They document obsessively. The problem was not carelessness. It was that a modern chip fab involves hundreds of process steps, each with parameters tuned through experiments conducted over years, and no single person holds enough of the picture to see where a subtle fault will land.
 
-In 2019, a team of industrial engineers [gave this pattern a name](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. They'd been [studying smart factory development](https://journals.openedition.org/reset/3389?lang=en), not semiconductor fabs, but they kept finding the same dynamic. When developers couldn't solve a problem in software, they worked around it physically. They hardcoded robot positions to eight decimal places because the software couldn't track objects in real time. They cut the legs off a component because the gripper couldn't grip it precisely enough. Each workaround solved the immediate problem. None addressed the underlying one. And once the engineer who made the fix moved on, the workaround remained but the reasoning behind it was gone.
+In 2019, a team of industrial engineers [studying automated manufacturing](https://journals.openedition.org/reset/3389?lang=en) [named it](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. Not a failure of documentation or diligence, but the inevitable result of systems too complex for any one person to hold in their head.
 
 <span class="pullquote" text-content="We called it technical debt because we were looking at the code. The debt was always in the understanding."></span>
 
