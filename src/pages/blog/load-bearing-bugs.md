@@ -63,7 +63,7 @@ The popular narrative is that AI will flood codebases with unreviewed code. The 
 
 ## The wrong debt
 
-TSMC's contaminated photoresist passed every incoming inspection. The knowledge that would have caught it existed across the organisation, but no single person held enough to see the risk. Half a billion dollars turned on a gap in understanding.
+TSMC's contaminated photoresist passed every incoming inspection. The expertise to trace the causal chain from contamination to yield failure existed across the organisation, but it was distributed across teams and process steps, and no single person could connect them. Half a billion dollars turned on a gap in understanding.
 
 Every codebase carries the same kind of gap. For thirty years we called it technical debt and tried to pay it down by rewriting code. Cunningham knew better: **the debt accrues in the understanding, and that is where it has to be repaid.**
 
