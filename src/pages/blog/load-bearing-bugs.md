@@ -19,9 +19,9 @@ TSMC is the most sophisticated semiconductor manufacturer on earth. They documen
 
 In 2019, a team of industrial engineers [studying automated manufacturing](https://journals.openedition.org/reset/3389?lang=en) [named it](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. Not a failure of documentation or diligence, but the inevitable result of systems too complex for any one person to hold in their head.
 
-<span class="pullquote" text-content="We called it technical debt because we were looking at the code. The debt was always in the understanding."></span>
+<span class="pullquote" text-content="The debt was never in the code. It was in the understanding."></span>
 
-[Ward Cunningham](https://en.wikipedia.org/wiki/Ward_Cunningham) [described](https://cmdev.com/papers/debt-metaphor/) the same thing in 1992. He used a financial metaphor: code written to your current understanding carries a hidden debt, because that understanding will change. Within a decade, [technical debt](https://en.wikipedia.org/wiki/Technical_debt) had become shorthand for sloppy code. But Cunningham was explicit: "I'm never in favour of writing code poorly, but I am in favour of writing code to reflect your current understanding of a problem even if that understanding is partial." The debt was never in the code. It was in the understanding. We just didn't notice because the code was where we were looking.
+[Ward Cunningham](https://en.wikipedia.org/wiki/Ward_Cunningham) [described](https://cmdev.com/papers/debt-metaphor/) the same thing in 1992. He used a financial metaphor: code written to your current understanding carries a hidden debt, because that understanding will change. Within a decade, [technical debt](https://en.wikipedia.org/wiki/Technical_debt) had become shorthand for sloppy code. But Cunningham was explicit: "I'm never in favour of writing code poorly, but I am in favour of writing code to reflect your current understanding of a problem even if that understanding is partial." The debt was never in the code. It was in the understanding. We called it technical debt because the code was where we were looking.
 
 ## The implicit contract
 
@@ -31,7 +31,7 @@ Hyrum Wright, a software engineer at Google, [formulated a law](https://www.hyru
 
 <span class="pullquote left" text-content="An accidentally intentional behaviour is both a bug and a feature simultaneously, and no amount of reading the code will tell you which."></span>
 
-Every system has behaviour somebody intended. It also has bugs: race conditions, edge cases, things nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature simultaneously, and no amount of reading the code will tell you which. To tell them apart, you need to know what the system was *for*, not just what it does.
+Every system has behaviour somebody intended. It also has bugs: race conditions, edge cases nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature simultaneously, and no amount of reading the code will tell you which. To tell them apart, you need to know what the system was *for*, not just what it does.
 
 ## Roots beneath the surface
 
@@ -43,7 +43,7 @@ Everyone expected the Himalayas to pull the plumb bob sideways. So [Archdeacon P
 
 [George Airy](https://en.wikipedia.org/wiki/George_Biddell_Airy), the Astronomer Royal, proposed an explanation. Mountains have deep roots of lighter rock extending into denser material below, like icebergs floating in the sea. The visible mass is only part of the structure. The hidden roots explain the weaker pull. The theory that emerged, [isostasy](https://en.wikipedia.org/wiki/Isostasy), reshaped geology. Airy didn't add a third measurement. He proposed a structural model that explained why the first two diverged.
 
-Code and tests are two measurements of the same intent. Code says what the system does. Tests say what it should do. When they agree, everything looks correct. But two measurements can agree and both miss the point, the same way the Survey's readings might have been accepted if nobody had calculated the expected pull.
+Code and tests are two measurements of the same intent. Code says what the system does. Tests say what it should do. But both emerge from the same understanding, and their agreement can confirm a shared assumption rather than the underlying intent. The Survey's two methods were genuinely independent, and they still needed a structural model to explain what both had missed.
 
 A behavioural specification is not a third measurement. It is a model of what the system is *for*: its rules and constraints, stated separately from how they're implemented. Where the spec and the tests disagree, one of them is wrong. Where the spec shows a simple rule producing tangled code, the system is working around something it shouldn't have to. We use [Allium](https://juxt.github.io/allium/) for this, a specification language [built for exactly this kind of work](/blog/from-specification-to-stress-test). The Survey measured distance by triangulation: independent observations from different angles. Code, tests and specification triangulate intent.
 
@@ -61,9 +61,9 @@ The popular narrative is that AI will flood codebases with unreviewed code. The 
 
 ## The wrong debt
 
-TSMC's fab carries its epistemic debt in process recipes that nobody can question. Every codebase carries it in logic that nobody can explain. For thirty years we called it technical debt and tried to pay it down in the code. Cunningham knew better.
+TSMC's contaminated photoresist passed every incoming inspection. The knowledge that would have caught it existed across the organisation, but no single person held enough to see the risk. Half a billion dollars turned on a gap in understanding.
 
-Code, tests and specification can triangulate intent from independent directions. Stating what a system is *for*, separately from how it works, turns epistemic debt into something visible and addressable. **The debt was never technical. The fix isn't either.**
+Every codebase carries the same kind of gap. For thirty years we called it technical debt and tried to pay it down by rewriting code. Cunningham knew better: **the debt accrues in the understanding, and that is where it has to be repaid.**
 
 ---
 
