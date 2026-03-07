@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Load-bearing bugs'
-description: 'Ward Cunningham wasn't talking about sloppy code.'
+description: "Ward Cunningham wasn't talking about sloppy code."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-06'
