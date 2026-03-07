@@ -13,9 +13,11 @@ tags:
   - 'specification'
 ---
 
-<p class="lede">No single person understands how a modern semiconductor chip is made. The manufacturing process involves hundreds of steps, each with parameters calibrated through experiments whose results were logged but whose reasoning was not. The engineers who ran those experiments have moved on. The recipes work. The chips pass testing. But when output drops unexpectedly, diagnosis can take weeks, because the knowledge that produced each recipe has separated from the recipe itself.</p>
+<p class="lede">No single person understands how a modern semiconductor chip is made. The manufacturing process involves hundreds of steps, each with parameters calibrated through experiments whose results were logged but whose reasoning was not. The engineers who ran those experiments have moved on. The recipes work. The chips pass testing. But when a batch starts failing, diagnosis can take weeks, because with thousands of parameters across hundreds of steps, no single measurement points cleanly to cause.</p>
 
-In 2019, a team of industrial engineers [gave this a name](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. Systems that produce correct outputs without anyone understanding their internals carry an implied cost, and it compounds every time someone who holds a piece of the understanding moves on or a parameter is tuned without recording why.
+A single yield excursion [can cost $21 million](https://sst.semiconductor-digest.com/2014/12/the-most-expensive-defect/) if it reaches end-of-line testing before anyone catches it. The quiet excursions are worse: too small to trigger alarms, they persist for weeks, exposing tens of thousands of wafers to a fault nobody can isolate.
+
+In 2019, a team of industrial engineers [gave this kind of problem a name](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. They'd been [studying smart factory development](https://journals.openedition.org/reset/3389?lang=en) and finding a pattern: when developers couldn't solve a problem at the software level, they displaced it to the physical level instead, hardcoding robot positions to eight decimal places because the architecture couldn't track objects dynamically, or cutting the legs off a component because the gripper couldn't achieve the precision the original design required. This wasn't technical debt. Refactoring couldn't touch it. The debt lived in what nobody on the team understood, and it could neither be hidden from the stakeholders nor fixed through technical means alone.
 
 <span class="pullquote" text-content="We called it technical debt because we were looking at the code. The debt was always in the understanding."></span>
 
