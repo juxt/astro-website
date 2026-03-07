@@ -59,11 +59,11 @@ The industry's response has been to front-load intent. GitHub [open-sourced Spec
 
 The popular narrative is that AI will flood codebases with unreviewed code. The concern is legitimate. But the same economic pressure is pushing organisations to do what most never managed when humans wrote every line: specify what the system is for, then check the code against it. **AI didn't create the need for semantic triangulation. It made ignoring it expensive enough to act on.**
 
-## Beyond the recipe
+## The wrong debt
 
-Cunningham's debt was always about understanding: the gap between what a system does and what anyone knows it should do. TSMC carries that gap in its process recipes. Every codebase carries it in its logic.
+TSMC's fab carries its epistemic debt in process recipes that nobody can question. Every codebase carries it in logic that nobody can explain. For thirty years we called it technical debt and tried to pay it down in the code. Cunningham knew better.
 
-The fab has no choice. The knowledge behind each recipe was never written in a form anyone could question. Software can be different. Code, tests and behavioural specifications can triangulate intent. Few organisations found the effort worthwhile when humans wrote every line. The economics of AI-generated code are changing that. What separates a recipe nobody can explain from a system anyone can reason about is the willingness to spell out what the system is for.
+Code, tests and specification can triangulate intent from independent directions. Stating what a system is *for*, separately from how it works, turns epistemic debt into something visible and addressable. **The debt was never technical. The fix isn't either.**
 
 ---
 
