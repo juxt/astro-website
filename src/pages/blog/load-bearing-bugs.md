@@ -65,7 +65,7 @@ The popular narrative is that AI will flood codebases with unreviewed code. The 
 
 TSMC's contaminated photoresist passed every incoming inspection. The expertise to trace the causal chain from contamination to yield failure existed across the organisation, but it was distributed across teams and process steps, and no single person could connect them. Half a billion dollars turned on a gap in understanding.
 
-Every codebase carries the same kind of gap. For thirty years we called it technical debt and tried to pay it down by rewriting code. Repaying it in the understanding means stating what the system is for, separately from how it works, then checking whether code, tests and specification tell the same story. Where they diverge, you've found the debt. Cunningham knew better: **the debt accrues in the understanding, and that is where it has to be repaid.**
+Every codebase carries the same kind of gap. For thirty years we called it technical debt and tried to pay it down by rewriting code. Repaying it in the understanding means stating what the system is for, separately from how it works, then checking whether code, tests and specification tell the same story. Where they diverge, you've found the debt. Cunningham knew better: **the debt accrues in the understanding, and that is where it has to be repaid.** Epistemic debt is the problem: the inevitable gap between what a system does and what anyone understands about why. Semantic triangulation is the practice that makes the gap visible: stating what the system is for, then checking code, tests and specification against each other until the three agree.
 
 ---
 
