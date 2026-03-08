@@ -25,7 +25,7 @@ In 2019, a team of industrial engineers [studying automated manufacturing](https
 
 [Ward Cunningham](https://en.wikipedia.org/wiki/Ward_Cunningham) [arrived at the same insight](https://cmdev.com/papers/debt-metaphor/) from a different direction in 1992. He used a financial metaphor: code written to your current understanding carries a hidden debt, because no developer holds the full picture either. Within a decade, [technical debt](https://en.wikipedia.org/wiki/Technical_debt) had become [shorthand for sloppy code](https://martinfowler.com/bliki/TechnicalDebtQuadrant.html). But Cunningham was explicit: "I'm never in favour of writing code poorly, but I am in favour of writing code to reflect your current understanding of a problem even if that understanding is partial." The word "technical" pointed everyone at the code. The debt was never in the code. It was in the understanding.
 
-## The implicit contract
+## The erratics
 
 Windows 95 [shipped with code](https://www.pcgamer.com/windows-95-had-dedicated-code-to-nix-an-og-sim-city-bug/) that detected SimCity and silently altered the memory allocator, because the game read freed memory that older versions of Windows had tolerated by accident. [Raymond Chen](https://en.wikipedia.org/wiki/Raymond_Chen_(Microsoft)) has [catalogued](https://devblogs.microsoft.com/oldnewthing/20031224-00/?p=41363) dozens of similar cases across two decades at Microsoft: programs that parsed error message strings, applications that [relied on undocumented behaviour](https://www.joelonsoftware.com/2004/06/13/how-microsoft-lost-the-api-war/) including outright bugs. Rather than break them, the [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) team shipped [compatibility shims](https://en.wikipedia.org/wiki/Shim_(computing)) to reproduce the old, broken behaviour. The bugs had become load-bearing. Remove them, and the ecosystem collapses.
 
@@ -37,7 +37,7 @@ Every system has behaviour somebody intended. It also has bugs: race conditions,
 
 Put these together. The distance between what a system does and what anyone understands about it is never zero, and in any system with enough users, someone is probably already depending on whatever lives in that space.
 
-## Roots beneath the surface
+## Ground truth
 
 In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance by two independent methods: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds, a sliver of a degree, about 160 metres on the ground, but well outside the Survey's margin of error.
 
@@ -53,7 +53,7 @@ A behavioural specification is not a third measurement. It is a model of what th
 
 Where the spec describes a simple rule but the code is tangled, the divergence tells you where to look. Where tests pass but the spec disagrees, the implementation may be handling complexity the spec didn't anticipate. Each divergence is a signal about where to probe. Checking all three against each other systematically has a name: *semantic triangulation*.
 
-## Where rigour lives
+## Terracing
 
 [Legacy code](https://www.oreilly.com/library/view/working-effectively-with/0131177052/) is code where the gap between what it does and what anyone understands about it has grown too wide to safely change. By that measure, code shipped in an afternoon with an AI pair programmer, where the code is the only description of what the system should do, is legacy the moment it's merged. The system runs. The tests pass. But the reasoning behind each decision was [made by a model with no memory of making it](https://failingfast.io/ai-epistemic-debt/).
 
@@ -65,7 +65,7 @@ The industry's response has been to front-load intent. GitHub [open-sourced Spec
 
 The popular narrative is that AI will flood codebases with unreviewed code. The fear may be proving self-correcting: because so many organisations take the risk seriously, the same economic pressure is pushing them to do what most never managed when humans wrote every line. Specify what the system is for, then check the code against it. **AI didn't create the need for semantic triangulation. It made ignoring it expensive enough to act on.**
 
-## The wrong debt
+## The deeper map
 
 TSMC's contaminated photoresist passed incoming inspection, one check from one angle. The expertise to triangulate across the full process existed across the organisation, but it was distributed across teams, and no single person could connect the steps. It took weeks of engineers cross-referencing from different angles before the fault surfaced. Half a billion dollars turned on a shortfall in understanding.
 
