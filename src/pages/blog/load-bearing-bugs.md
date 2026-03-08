@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'New vocabulary for an old problem'
-description: 'Two recent terms that describe an engineering problem as old as the hills.'
+description: 'Two recent terms that describe an engineering challenge as old as the hills.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-06'
