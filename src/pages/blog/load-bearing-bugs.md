@@ -51,7 +51,7 @@ In software, code and tests are two measurements of the same intent. Code says w
 
 A behavioural specification is not a third measurement. It is a model of what the system is *for*: its rules and constraints, stated independently of how they're implemented. Code, tests and specification each describe the same intent from a different angle, the way the Survey's methods each measured the same distance. Where any two disagree, something is wrong.
 
-Where the spec describes a simple rule but the code is tangled, the divergence tells you where to look. Where tests pass but the spec disagrees, the implementation may be handling complexity the spec didn't anticipate. Each divergence is a signal about where to probe. Checking all three against each other systematically has a name: *semantic triangulation*.
+Where the spec describes a simple rule but the code implementing it is complex, a question surfaces: is the spec naive, or has the code grown beyond what the problem requires? Where tests pass but verify different behaviour from what the spec describes, another: are the tests checking the right thing, or has the spec not kept pace? Each divergence is a question you wouldn't know to ask without the third angle. Checking all three against each other systematically has a name: *semantic triangulation*.
 
 ## Terracing
 
