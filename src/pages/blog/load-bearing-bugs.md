@@ -39,7 +39,7 @@ Epistemic debt means the gap between what a system does and what anyone understa
 
 ## Roots beneath the surface
 
-In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance two ways: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds.
+In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance two ways: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds, a sliver of a degree, about 160 metres on the ground, but well outside the Survey's margin of error.
 
 Everyone expected the Himalayas to pull the plumb bob sideways. So [Archdeacon Pratt](https://en.wikipedia.org/wiki/John_Henry_Pratt) calculated how much pull the mountains should exert, based on their visible mass. His result made things worse. The mountains were pulling only a third as hard as expected.
 
