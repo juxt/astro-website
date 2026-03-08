@@ -39,9 +39,9 @@ Put these together. The distance between what a system does and what anyone unde
 
 ## Roots beneath the surface
 
-In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance two ways: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds, a sliver of a degree, about 160 metres on the ground, but well outside the Survey's margin of error.
+In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance two ways, each as a check on the other: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds, a sliver of a degree, about 160 metres on the ground, but well outside the Survey's margin of error.
 
-Everyone expected the Himalayas to deflect the plumb bob sideways, so [John Henry Pratt](https://en.wikipedia.org/wiki/John_Henry_Pratt) calculated how much pull the mountains should exert based on their visible mass. His result deepened the puzzle: they were pulling only a third as hard as expected.
+Everyone expected the Himalayas to deflect the plumb bob sideways, so [John Henry Pratt](https://en.wikipedia.org/wiki/John_Henry_Pratt), a mathematician who took up the problem independently, calculated how much pull the mountains should exert based on their visible mass. His result deepened the puzzle: they were pulling only a third as hard as expected.
 
 <span class="pullquote" text-content="Airy didn't add a third measurement. He proposed a structural model that explained why the first two diverged."></span>
 
