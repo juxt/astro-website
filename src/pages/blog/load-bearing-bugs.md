@@ -35,7 +35,7 @@ Hyrum Wright [codified the principle](https://www.hyrumslaw.com/): with enough u
 
 Every system has behaviour somebody intended. It also has bugs: race conditions, edge cases nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature, and no amount of reading the code will tell you which. You need to know what the system was *for*, not just what it does.
 
-Put these together. The distance between what a system does and what anyone understands about it is never zero, and someone is already depending on whatever lives in that space.
+Put these together. The distance between what a system does and what anyone understands about it is never zero, and in any system with enough users, someone is probably already depending on whatever lives in that space.
 
 ## Roots beneath the surface
 
