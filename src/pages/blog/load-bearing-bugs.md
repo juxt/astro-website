@@ -47,7 +47,7 @@ Everyone expected the Himalayas to pull the plumb bob sideways. So [Archdeacon P
 
 Code and tests are two measurements of the same intent. Code says what the system does. Tests say what it should do. But both emerge from the same understanding, and their agreement can confirm a shared assumption rather than the underlying intent. The Survey's two methods were genuinely independent, and they still needed a structural model to explain what both had missed.
 
-A behavioural specification is not a third measurement. It is a model of what the system is *for*: its rules and constraints, stated separately from how they're implemented. Where the spec and the tests disagree, one of them is wrong. Where the spec shows a simple rule producing tangled code, the system is working around something it shouldn't have to. We use [Allium](https://juxt.github.io/allium/) for this, a specification language [built for exactly this kind of work](/blog/from-specification-to-stress-test). The Survey measured distance by triangulation: independent observations from different angles. Code, tests and specification triangulate intent.
+A behavioural specification is not a third measurement. It is a structural model of what the system is *for*: its rules and constraints, stated independently of how they're implemented. Code, tests and specification each describe the same intent from a different angle, the way the Survey's methods each measured the same distance. Where any two disagree, something is wrong. Where the spec describes a simple rule but the code is tangled, the implementation is working around something it shouldn't have to. Checking coherence between the three is semantic triangulation. We use [Allium](https://juxt.github.io/allium/) for this, a specification language [built for exactly this kind of work](/blog/from-specification-to-stress-test).
 
 ## Where rigour lives
 
@@ -65,7 +65,7 @@ The popular narrative is that AI will flood codebases with unreviewed code. The 
 
 TSMC's contaminated photoresist passed every incoming inspection. The expertise to trace the causal chain from contamination to yield failure existed across the organisation, but it was distributed across teams and process steps, and no single person could connect them. Half a billion dollars turned on a gap in understanding.
 
-Every codebase carries the same kind of gap. For thirty years we called it technical debt and tried to pay it down by rewriting code. Cunningham knew better: **the debt accrues in the understanding, and that is where it has to be repaid.**
+Every codebase carries the same kind of gap. For thirty years we called it technical debt and tried to pay it down by rewriting code. Repaying it in the understanding means stating what the system is for, separately from how it works, then checking whether code, tests and specification tell the same story. Where they diverge, you've found the debt. Cunningham knew better: **the debt accrues in the understanding, and that is where it has to be repaid.**
 
 ---
 
