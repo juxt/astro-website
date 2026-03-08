@@ -67,11 +67,11 @@ AI didn't create the need for semantic triangulation. It made ignoring it expens
 
 ## The deeper map
 
-TSMC's contaminated photoresist passed incoming inspection, one check from one angle. The expertise to triangulate across the full process existed across the organisation, but it was distributed across teams, and no single person could connect the steps. It took weeks of engineers cross-referencing from different angles before the fault surfaced. Half a billion dollars, lost to a gap in understanding.
+TSMC's contaminated photoresist passed incoming inspection, one check from one angle. The expertise to triangulate across the full process existed across the organisation, but it was distributed across teams, and no single person could connect the steps. It took weeks of engineers cross-referencing from different angles before the fault surfaced. Half a billion dollars lost to a gap in understanding.
 
-Every codebase carries this debt. For three decades we called it technical debt and tried to pay it down by rewriting code. *Epistemic debt* is the more honest name. *Semantic triangulation* is the practice that makes it visible. Where code, tests and specification diverge, you've found the debt.
+Every codebase carries this debt. For three decades we called it technical debt and tried to pay it down by rewriting code. *Epistemic debt* is the more honest name. *Semantic triangulation* is the practice that makes it visible.
 
-Cunningham knew where to repay it: the debt accrues in the understanding, and that is where it has to be repaid.
+Where code, tests and specification diverge, you've found the debt. Cunningham knew where to repay it: the debt accrues in the understanding, and that is where it has to be repaid.
 
 ---
 
