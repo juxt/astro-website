@@ -31,7 +31,7 @@ Windows 95 [shipped with code](https://www.pcgamer.com/windows-95-had-dedicated-
 
 <span class="pullquote left" text-content="An accidentally intentional behaviour is both a bug and a feature, and no amount of reading the code will tell you which."></span>
 
-Every system has behaviour somebody intended. It also has bugs: race conditions, edge cases nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature, and no amount of reading the code will tell you which. You need to know what the system was *for*, not just what it does.
+Every system has behaviour that was intended. It also has bugs: race conditions, edge cases nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature, and no amount of reading the code will tell you which. You need to know what the system was *for*, not just what it does.
 
 The distance between what a system does and what anyone understands about it is never zero, and in any system with enough users, someone is probably already depending on whatever lives in that space.
 
