@@ -17,9 +17,7 @@ tags:
 
 TSMC is the most sophisticated semiconductor manufacturer on earth, building what [Chris Miller](https://en.wikipedia.org/wiki/Chris_Miller_(academic)), author of [*Chip War*](https://en.wikipedia.org/wiki/Chip_War), [calls](https://www.theatlantic.com/technology/archive/2022/10/semiconductor-chips-technology-geopolitics/671793/) the most complex devices in human history. A leading-edge chip passes through thousands of process steps with tolerances measured in atoms, and TSMC documents every step. The problem was not carelessness. It was that no single person held enough of the picture to trace a falling yield back to its cause.
 
-This is not a new problem. In his 1972 Turing Award lecture, [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra) [observed](https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html) that "the competent programmer is fully aware of the strictly limited size of his own skull". The skull hasn't grown, but the systems have.
-
-In 2019, a team of industrial engineers [studying automated manufacturing](https://journals.openedition.org/reset/3389?lang=en) [named the resulting gap](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): *epistemic debt*. Not a failure of documentation or diligence, but the inevitable result of systems too complex for any one person to hold in their head.
+This is not a new problem. In his 1972 Turing Award lecture, [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra) [observed](https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html) that "the competent programmer is fully aware of the strictly limited size of his own skull". The skull hasn't grown, but the systems have. In 2019, a team of industrial engineers [studying automated manufacturing](https://journals.openedition.org/reset/3389?lang=en) [named the resulting gap](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): *epistemic debt*. Not a failure of documentation or diligence, but the inevitable result of systems too complex for any one person to hold in their head.
 
 <span class="pullquote" text-content="The debt was always in the understanding, not the code."></span>
 
@@ -35,13 +33,13 @@ Windows 95 [shipped with code](https://www.pcgamer.com/windows-95-had-dedicated-
 
 Every system has behaviour somebody intended. It also has bugs: race conditions, edge cases nobody anticipated. The third kind is the dangerous one: a bug that has been running long enough that other systems now depend on it. An accidentally intentional behaviour is both a bug and a feature, and no amount of reading the code will tell you which. You need to know what the system was *for*, not just what it does.
 
-Put these together. The distance between what a system does and what anyone understands about it is never zero, and in any system with enough users, someone is probably already depending on whatever lives in that space.
+The distance between what a system does and what anyone understands about it is never zero, and in any system with enough users, someone is probably already depending on whatever lives in that space.
 
 ## Ground truth
 
 In the 1850s, the [Great Trigonometrical Survey](https://en.wikipedia.org/wiki/Great_Trigonometrical_Survey) of India measured the same distance by two independent methods: [triangulation](https://en.wikipedia.org/wiki/Triangulation_(surveying)) across the land, and astronomical observation using a [plumb bob](https://en.wikipedia.org/wiki/Plumb_bob). The results should have agreed. They differed by 5.236 arc seconds, a sliver of a degree, about 160 metres on the ground, but well outside the Survey's margin of error.
 
-Everyone expected the Himalayas to deflect the plumb bob sideways, so [John Henry Pratt](https://en.wikipedia.org/wiki/John_Henry_Pratt), a mathematician who took up the problem on his own, calculated how much pull the mountains should exert based on their visible mass. His result deepened the puzzle: they were pulling only about a third as much as his calculation suggested they should.
+Everyone expected the gravitational pull of the Himalayas to deflect the plumb bob sideways, so [John Henry Pratt](https://en.wikipedia.org/wiki/John_Henry_Pratt), a mathematician who took up the problem on his own, calculated how much pull the mountains should exert based on their visible mass. His result deepened the puzzle: they were pulling only about a third as much as his calculation suggested they should.
 
 <span class="pullquote" text-content="Airy didn't add a third measurement. He proposed a structural model that explained why the first two diverged."></span>
 
