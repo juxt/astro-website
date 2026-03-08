@@ -29,7 +29,7 @@ In 2019, a team of industrial engineers [studying automated manufacturing](https
 
 Windows 95 [shipped with code](https://www.pcgamer.com/windows-95-had-dedicated-code-to-nix-an-og-sim-city-bug/) that detected SimCity and silently altered the memory allocator, because the game read freed memory that older versions of Windows had tolerated by accident. [Raymond Chen](https://en.wikipedia.org/wiki/Raymond_Chen_(Microsoft)) has [catalogued](https://devblogs.microsoft.com/oldnewthing/20031224-00/?p=41363) dozens of similar cases across two decades at Microsoft: programs that parsed error message strings, applications that [relied on undocumented behaviour](https://www.joelonsoftware.com/2004/06/13/how-microsoft-lost-the-api-war/) including outright bugs. Rather than break them, the [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) team shipped [compatibility shims](https://en.wikipedia.org/wiki/Shim_(computing)) to reproduce the old, broken behaviour. The bugs had become load-bearing. Remove them, and the ecosystem collapses.
 
-Hyrum Wright [codified the principle](https://www.hyrumslaw.com/): with enough users of an API, it does not matter what you promise in the contract. All observable behaviours of your system will be depended on by somebody.
+[Hyrum's Law](https://www.hyrumslaw.com/) generalises the pattern: with enough users of an API, it does not matter what you promise in the contract. All observable behaviours of your system will be depended on by somebody.
 
 <span class="pullquote left" text-content="An accidentally intentional behaviour is both a bug and a feature, and no amount of reading the code will tell you which."></span>
 
