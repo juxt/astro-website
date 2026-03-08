@@ -19,7 +19,7 @@ TSMC is the most sophisticated semiconductor manufacturer on earth, building wha
 
 This is not a new problem. In his 1972 Turing Award lecture, [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra) [observed](https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html) that "the competent programmer is fully aware of the strictly limited size of his own skull". The skull hasn't grown. The systems have.
 
-In 2019, a team of industrial engineers [studying automated manufacturing](https://journals.openedition.org/reset/3389?lang=en) [named the resulting gap](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): epistemic debt. Not a failure of documentation or diligence, but the inevitable result of systems too complex for any one person to hold in their head.
+In 2019, a team of industrial engineers [studying automated manufacturing](https://journals.openedition.org/reset/3389?lang=en) [named the resulting gap](https://link.springer.com/chapter/10.1007/978-3-030-20040-4_8): *epistemic debt*. Not a failure of documentation or diligence, but the inevitable result of systems too complex for any one person to hold in their head.
 
 <span class="pullquote" text-content="The debt was never in the code. It was in the understanding."></span>
 
@@ -51,7 +51,7 @@ In software, code and tests are two measurements of the same intent. Code says w
 
 A behavioural specification is not a third measurement. It is a model of what the system is *for*: its rules and constraints, stated independently of how they're implemented. Code, tests and specification each describe the same intent from a different angle, the way the Survey's methods each measured the same distance. Where any two disagree, something is wrong.
 
-Where the spec describes a simple rule but the code is tangled, the code is working around something it shouldn't need to. Where tests pass but contradict the spec, you've found a bug that someone is depending on. Checking coherence between the three is semantic triangulation. We use [Allium](https://juxt.github.io/allium/) for this, a specification language [built for exactly this kind of work](/blog/from-specification-to-stress-test).
+Where the spec describes a simple rule but the code is tangled, the code is working around something it shouldn't need to. Where tests pass but contradict the spec, you've found a bug that someone is depending on. Checking coherence between the three is *semantic triangulation*. We use [Allium](https://juxt.github.io/allium/) for this, a specification language [built for exactly this kind of work](/blog/from-specification-to-stress-test).
 
 ## Where rigour lives
 
