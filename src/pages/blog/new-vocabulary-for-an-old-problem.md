@@ -5,7 +5,7 @@ description: 'Two recent terms that describe an engineering challenge as old as 
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-06'
-heroImage: 'load-bearing-bugs.jpg'
+heroImage: 'new-vocabulary-for-an-old-problem.jpg'
 tags:
   - 'ai'
   - 'legacy'
