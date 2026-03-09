@@ -71,7 +71,7 @@ TSMC's contaminated photoresist passed incoming inspection: one check from one a
 
 Every codebase carries this debt. For three decades we called it technical debt and tried to pay it down by rewriting code. *Epistemic debt* is the more honest name. *Semantic triangulation* is the practice that makes it visible.
 
-Where code, tests and specification diverge, you've found the debt. Cunningham knew where to repay it: the debt accrues in the understanding, and that is where it has to be repaid.
+Where code, tests and specification diverge, you've found the debt. Cunningham knew where to look: the debt accrues in the understanding, and that is where it has to be repaid.
 
 ---
 
