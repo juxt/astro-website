@@ -45,7 +45,7 @@ Everyone expected the gravitational pull of the Himalayas to deflect the plumb b
 
 [George Airy](https://en.wikipedia.org/wiki/George_Biddell_Airy), the [Astronomer Royal](https://en.wikipedia.org/wiki/Astronomer_Royal), proposed an explanation. Mountains have deep roots of lighter rock extending into the denser mantle below, like icebergs floating in the sea. This lighter rock displaces heavier material beneath, so the mountains exert less pull than their bulk suggests. The theory that emerged, [isostasy](https://en.wikipedia.org/wiki/Isostasy), reshaped geology. Airy didn't add a third measurement. He proposed a structural model that explained why the first two diverged.
 
-In software, code and tests are two measurements of the same intent. Code says what the system does; tests say what it should do. But both emerge from the same understanding, and their agreement can [confirm a shared assumption](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter) rather than the underlying intent. The Survey's two methods were independent, and they still needed a deeper theory to explain what both had missed.
+In software, code and tests are two measurements of the same intent. Code says what the system does; tests say what it should do. But both emerge from the same understanding, and their agreement can [confirm a shared assumption](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter#Cause_of_failure) rather than the underlying intent. The Survey's two methods were independent, and they still needed a deeper theory to explain what both had missed.
 
 A behavioural specification is not a third measurement. It is a model of what the system is *for*: its rules and constraints, stated independently of how they're implemented. Code, tests and specification each describe the same intent from a different angle, the way the Survey's methods each measured the same distance. Where any two disagree, something is wrong.
 
@@ -53,7 +53,7 @@ Where the spec describes a simple rule but the code implementing it is complex, 
 
 ## Terracing
 
-[Legacy code](https://www.oreilly.com/library/view/working-effectively-with/0131177052/) is code where the gap between what it does and what anyone understands about it has grown too wide to safely change. By that measure, code shipped in an afternoon with an AI pair programmer, where the code is the only description of what the system should do, is legacy the moment it's merged. The system runs. The tests pass. But the reasoning behind each decision was [made by a model with no memory of making it](https://failingfast.io/ai-epistemic-debt/).
+[Legacy code](https://michaelfeathers.silvrback.com/functional-code-is-honest-code) is code where the gap between what it does and what anyone understands about it has grown too wide to safely change. By that measure, code shipped in an afternoon with an AI pair programmer, where the code is the only description of what the system should do, is legacy the moment it's merged. The system runs. The tests pass. But the reasoning behind each decision was [made by a model with no memory of making it](https://failingfast.io/ai-epistemic-debt/).
 
 [Sonar's 2026 State of Code survey](https://www.sonarsource.com/company/press-releases/sonar-data-reveals-critical-verification-gap-in-ai-coding/) found that AI already accounts for 42% of committed code, and 96% of developers don't fully trust it. The [2025 Stack Overflow Developer Survey](https://stackoverflow.blog/2025/12/29/developers-remain-willing-but-reluctant-to-use-ai-the-2025-developer-survey-results-are-here/) reported trust in AI accuracy falling to 29%, with two thirds of developers spending more time fixing "almost right" code than writing it themselves would have taken. The bottleneck in software delivery has moved from writing to verification.
 
@@ -63,7 +63,7 @@ The industry's response has been to front-load intent. GitHub [open-sourced Spec
 
 The popular narrative is that AI will flood codebases with unreviewed code, but the fear may be proving [self-correcting](https://en.wikipedia.org/wiki/Self-defeating_prophecy). Because so many organisations take the risk seriously, the same economic pressure is pushing them to do what most never managed when humans wrote every line: specify what the system is for, then check the code against it.
 
-AI didn't create the need for semantic triangulation. It made ignoring it expensive enough to act on.
+**AI didn't create the need for semantic triangulation, but it may be the reason it finally happens.**
 
 ## The deeper map
 
