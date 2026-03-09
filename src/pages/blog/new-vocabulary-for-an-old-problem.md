@@ -4,7 +4,7 @@ title: 'New vocabulary for an old problem'
 description: 'Two recent terms that describe an engineering challenge as old as the hills.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-03-06'
+publishedDate: '2026-03-09'
 heroImage: 'new-vocabulary-for-an-old-problem.jpg'
 tags:
   - 'ai'
