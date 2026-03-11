@@ -9,10 +9,10 @@ draft: false
 weight: 2
 googleJobs:
   {
-    location: 'London / Hybrid',
+    location: 'London',
     position: 'Senior Go Engineer',
     publishedDate: '2026-02-23',
-    validThrough: '2026-08-06',
+    validThrough: '2026-08-06T00:00',
     employmentType: 'FULL_TIME'
   }
 ---
