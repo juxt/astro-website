@@ -5,7 +5,7 @@ description: 'What happens when your roadmap is priced in depreciating units.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-02'
-heroImage: 'job-market.jpg'
+heroImage: 'capability-hyperinflation.jpg'
 tags:
   - 'ai'
   - 'engineering'
