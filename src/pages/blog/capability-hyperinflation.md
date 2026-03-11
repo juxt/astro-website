@@ -12,7 +12,7 @@ tags:
   - 'productivity'
 ---
 
-<p class="lede">In 2023, Argentine workers collected their salaries and <a href="https://rethinkq.adp.com/payroll-during-hyperinflation/" target="_blank">ran to the supermarket</a>, because prices changed day by day. The country operated with <a href="https://buenosairesherald.com/economics/dollar-peso/all-argentinas-dollar-exchange-rates-explained" target="_blank">twelve simultaneous dollar exchange rates</a>, tracked across WhatsApp groups and recalculated by the hour. An entire parallel financial infrastructure of <a href="https://buenosairesherald.com/economics/caves-and-the-blue-dollar-informal-market-this-is-how-it-works" target="_blank"><em>cuevas</em></a> (informal exchange houses) and <em>arbolitos</em> (street dealers, named for the way they stand on corners like little trees) had sprung up because the formal banking system couldn't keep pace.</p>
+<p class="lede">In 2023, Argentine workers collected their salaries and <a href="https://rethinkq.adp.com/payroll-during-hyperinflation/" target="_blank">ran to the supermarket</a>, because prices changed by the hour. The country operated with <a href="https://buenosairesherald.com/economics/dollar-peso/all-argentinas-dollar-exchange-rates-explained" target="_blank">twelve simultaneous dollar exchange rates</a>, tracked across WhatsApp groups. An entire parallel financial infrastructure of <a href="https://buenosairesherald.com/economics/caves-and-the-blue-dollar-informal-market-this-is-how-it-works" target="_blank"><em>cuevas</em></a> (informal exchange houses) and <em>arbolitos</em> (street dealers, named for the way they stand on corners like little trees) had sprung up because the formal banking system couldn't keep pace.</p>
 
 Something structurally similar is happening to the cost of building software. Every time someone calls a ceiling on AI capabilities, the next benchmark comes through it. Your twelve-month roadmap is priced in a unit that depreciates faster than you can plan against.
 
@@ -52,23 +52,25 @@ Banning AI and mandating it are opposite impulses, but they fail for the same re
 
 ## The official rate and the real one
 
-<span class="pullquote left" text-content="Seventy-eight percent of AI users are bringing their own tools to work. That's a parallel economy, not a policy failure."></span>
+<span class="pullquote left" text-content="Seventy-eight percent of AI users are bringing their own tools to work."></span>
 
-In every hyperinflationary economy, two exchange rates coexist: the official one and the one everyone actually uses. The gap between them is never a mystery. But formal institutions, banks and supermarkets required to accept the local currency at the mandated price, are bound by rules that the *cuevas* and the *arbolitos* are not. The informal operators price in dollars because dollars reflect what things cost, and the spread between the two rates measures how far the formal system has drifted from reality.
+In every hyperinflationary economy, two exchange rates coexist: the official one and the one everyone actually uses. Banks and supermarkets are bound to the official rate. The *cuevas* and the *arbolitos* price in dollars, because dollars reflect what things actually cost. The wider the spread, the further the formal system has drifted from reality.
 
-Most large organisations now have the same split. The "official" cost of building something, the one that flows through procurement cycles, six-month estimates and traditional staffing models, bears less and less resemblance to the real cost with AI tools. A [Microsoft survey of 31,000 knowledge workers](https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part) found that 78% of AI users are bringing their own tools to work. That's a parallel economy, not a policy failure.
+Most large organisations now have the same split. The "official" cost of building something, the one that flows through procurement cycles, six-month estimates and traditional staffing models, bears less and less resemblance to the real cost with AI tools. A [Microsoft survey of 31,000 knowledge workers](https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part) found that 78% of AI users are bringing their own tools to work.
 
-Inside the same company, AI-enabled teams ship at one velocity while teams bound by the official process ship at another. A developer prototypes in a weekend what the enterprise process quoted at six months.
+Inside the same company, a developer prototypes in a weekend what the enterprise process quoted at six months. The [bottleneck is no longer the technology](/blog/three-paradoxes#the-twenty-year-wait); it's the procurement cycles, staffing models and sign-off chains that haven't restructured around it.
 
 In February 2026, [$285 billion was wiped](https://www.cnbc.com/2026/02/06/ai-anthropic-tools-saas-software-stocks-selloff.html) from application software stocks in days, because investors could see the spread. Per-seat pricing collapses when one person with an AI agent does the work that justified five seats. The street rate has moved, but the official price list hasn't.
 
-## The diaspora divide
+## The arbitrage
 
 <span class="pullquote" text-content="Thirty to fifty percent of developers said they'd rather skip the task entirely than do it without AI."></span>
 
-In Zimbabwe, the people who survived hyperinflation were the ones with relatives abroad. Diaspora remittances in US dollars meant you could buy property, stock up on essentials, even start a business while your neighbours watched their savings halve overnight. In Argentina, tech workers earning in pesos found a way out through [stablecoin payroll](https://nearshoreamericas.com/argentinas-tech-workers-prefer-payments-in-stablecoins/); public sector workers couldn't. The currency gap became a class gap, and it compounded: dollar-earners bought assets at fire-sale prices while peso-earners fell further behind each month.
+Not everyone loses in a hyperinflationary economy. Argentine tech workers [found ways to earn in dollars](https://nearshoreamericas.com/argentinas-tech-workers-prefer-payments-in-stablecoins/) while their costs stayed in pesos, capturing the spread between the parallel rate and the official one. In Weimar Germany, the industrialist [Hugo Stinnes](https://en.wikipedia.org/wiki/Hugo_Stinnes) borrowed in marks to buy factories and shipping lines, then repaid the loans in worthless currency. The mechanism was the same: make the collapsing currency work for you rather than against you.
 
-AI fluency compounds the same way. A developer who learns to direct an agent well gets more done, which frees time to learn to direct it better, which makes them faster again. Within the same organisation, teams that have integrated AI into their workflow pull ahead of teams that haven't, and the distance between them grows each quarter. Between organisations, a three-person AI-native startup ships what used to require fifty.
+AI fluency creates the same arbitrage. A developer who learns to direct an agent well converts routine implementation — the devaluing currency — into capacity for higher-value work. That conversion compounds: more output frees time to learn to direct the tools better, which makes them faster again.
+
+Within the same organisation, teams that have integrated AI into their workflow pull ahead of teams that haven't, and the distance grows each quarter. Between organisations, a three-person AI-native startup ships what used to require fifty.
 
 The capability divide becomes a career divide, and the compounding works in one direction.
 
