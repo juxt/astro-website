@@ -16,7 +16,7 @@ tags:
 
 Something similar is happening to the cost of building software. Every time someone calls a ceiling on AI capabilities, the next model breaks through it. Your twelve-month roadmap is out of date before it's finished.
 
-## Twelve exchange rates
+## The queue
 
 <span class="pullquote" text-content="She couldn't buy groceries, couldn't afford the return fare and had to walk three hours back home."></span>
 
@@ -28,9 +28,9 @@ A year-long roadmap was always directional at best. What's changed is the size o
 
 Some teams have abandoned the sprint entirely, because two weeks feels too long. They run "[bolts](https://aws.amazon.com/blogs/devops/ai-driven-development-life-cycle/)" instead: intense four-hour sessions where stand-ups happen twice a day.
 
-Capability gains arrive in discontinuous jumps. Through late 2024 and into 2025, credible voices kept calling a top. Marc Andreessen said models were "[hitting the same ceiling](https://officechai.com/stories/ai-models-seem-to-be-hitting-a-ceiling-of-capabilities-marc-andreessen/)"; Ilya Sutskever declared at NeurIPS that pre-training would "[unquestionably end](https://dlyog.com/papers/one_internet_v1)". Each predicted ceiling became the floor for the next jump. The pessimistic scenario, the one your conservative roadmap is built on, is denominated in the same weakening terms.
+Capability gains arrive in discontinuous jumps. Through late 2024 and into 2025, credible voices kept calling a top. Marc Andreessen said models were "[hitting the same ceiling](https://officechai.com/stories/ai-models-seem-to-be-hitting-a-ceiling-of-capabilities-marc-andreessen/)". That ceiling became the floor for the next jump. Ilya Sutskever made a subtler claim at NeurIPS: pre-training as we know it would "[unquestionably end](https://dlyog.com/papers/one_internet_v1)" because "we have but one internet". He was right. Pre-training gave way to inference-time compute, synthetic data and new training approaches, and capability kept climbing. The pessimistic scenario, the one your conservative roadmap is built on, is denominated in the same weakening terms.
 
-## Operation Reduce Prices
+## The decree
 
 <span class="pullquote" text-content="Mandating the old rate by decree doesn't preserve it; it creates a black market."></span>
 
@@ -50,7 +50,7 @@ The mandates echo the price controls. Forcing the new rate by decree destroys th
 
 Banning AI and mandating it are opposite impulses, but they fail for the same reason: both try to use policy to pin down a cost that the technology keeps shifting.
 
-## The official rate and the real one
+## The spread
 
 <span class="pullquote left" text-content="Seventy-eight percent of AI users are bringing their own tools to work."></span>
 
