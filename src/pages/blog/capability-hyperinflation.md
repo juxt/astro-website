@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Capability hyperinflation'
-description: 'What happens when your roadmap is priced in depreciating units?'
+description: 'What happens when your roadmap is priced in rapidly depreciating units?'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-02'
@@ -14,7 +14,7 @@ tags:
 
 <p class="lede">In 2023, Argentine workers collected their salaries and <a href="https://rethinkq.adp.com/payroll-during-hyperinflation/" target="_blank">ran to the supermarket</a>, because prices changed by the hour. The country operated with <a href="https://buenosairesherald.com/economics/dollar-peso/all-argentinas-dollar-exchange-rates-explained" target="_blank">twelve simultaneous dollar exchange rates</a>, tracked across WhatsApp groups. An entire parallel financial infrastructure of <a href="https://buenosairesherald.com/economics/caves-and-the-blue-dollar-informal-market-this-is-how-it-works" target="_blank"><em>cuevas</em></a> (informal exchange houses) and <a href="https://www.france24.com/en/live-news/20220701-argentina-s-black-market-dollar-trade-illegal-but-part-of-life" target="_blank"><em>arbolitos</em></a> (street dealers, named for the way they stand on corners like little trees) had sprung up because the formal banking system couldn't keep pace.</p>
 
-Something similar is happening to the cost of building software. Every time someone calls a ceiling on AI capabilities, the next model breaks through it. Your twelve-month roadmap is out of date before it's finished.
+Something similar is happening to the cost of building software. Every time someone calls a ceiling on AI capabilities, the next model breaks through it. Your quarterly roadmap is out of date before it's finished.
 
 ## The queue
 
@@ -24,7 +24,7 @@ What hyperinflation does first is collapse the planning horizon. Consider the st
 
 In Lebanon, [checking the exchange rate](https://foreignpolicy.com/2021/04/05/lebanon-currency-inflation-exchange-rates/) on dedicated apps became "as regular as drinking a cup of coffee", with at least three simultaneous rates in play. Argentina had twelve. Adam Fergusson's [*When Money Dies*](https://en.wikipedia.org/wiki/When_Money_Dies) documents how ordinary Germans in the Weimar Republic watched the same pattern unfold in 1923, holding their savings in marks while the mark lost value by the hour.
 
-A year-long roadmap was always directional at best. What's changed is the size of the error bars: every engineering estimate is implicitly priced in units of "current capability", and those units depreciate faster than the estimate can be executed. A task that would have taken a week six months ago takes an afternoon today and may take ten minutes in six months' time.
+Even precise engineering estimates are implicitly priced in units of "current capability", and those units depreciate faster than the estimate can be executed. A task that would have taken a week six months ago takes an afternoon today and may take ten minutes in six months' time.
 
 Some teams have abandoned the sprint entirely, because two weeks feels too long. They run "[bolts](https://aws.amazon.com/blogs/devops/ai-driven-development-life-cycle/)" instead: intense four-hour sessions where stand-ups happen twice a day.
 
@@ -72,11 +72,9 @@ AI fluency creates the same arbitrage. A developer who learns to direct an agent
 
 Within the same organisation, teams that have integrated AI into their workflow pull ahead of teams that haven't. BCG found that firms leveraging AI effectively are [widening the gap](https://www.bcg.com/publications/2025/are-you-generating-value-from-ai-the-widening-gap) over those that aren't, and the advantage compounds because they reinvest the gains into further adoption. Between organisations, a three-person AI-native startup ships what used to require fifty.
 
-The capability divide becomes a career divide, and the compounding works in one direction.
+The same dynamic plays out at the level of individual careers. Almost every developer now uses AI tools, but [some report 3-5x gains while others see none at all](https://www.docker.com/blog/ai-productivity-divide-developers-5x-faster/). The dividing line isn't adoption. Over half of developers [still stick to simpler AI tools or don't use agents at all](https://survey.stackoverflow.co/2025/ai). The developer who learns to direct agents well gets assigned more ambitious work, builds more experience directing agents, and becomes more effective still. Google's [2025 DORA report](https://dora.dev/research/2025/dora-report/) found that AI acts as an amplifier of existing capability: the same tools that accelerate strong teams leave weaker ones no better off.
 
-In February 2026, the AI evaluation organisation [METR tried to measure](https://metr.org/blog/2026-02-24-uplift-update/) whether AI makes developers more productive. Thirty to fifty percent of developers said they'd rather skip the task entirely than do it without AI. One participant noted that tasks AI could finish in two hours would take twenty without it, and they weren't willing to pretend otherwise.
-
-With [93% of developers](https://philippdubach.com/posts/93-of-developers-use-ai-coding-tools.-productivity-hasnt-moved./) now using AI coding tools monthly, METR couldn't maintain a reliable baseline. The control group, the non-AI-using developer, had functionally ceased to exist.
+In February 2026, METR, the same organisation whose mid-2025 study found that experienced developers were [19% slower with AI](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) despite believing they were faster, [tried to run a follow-up](https://metr.org/blog/2026-02-24-uplift-update/). Thirty to fifty percent of developers said they'd rather skip the task entirely than do it without AI. One participant noted that tasks AI could finish in two hours would take twenty without it, and they weren't willing to pretend otherwise. With [93% of developers](https://philippdubach.com/posts/93-of-developers-use-ai-coding-tools.-productivity-hasnt-moved./) now using AI coding tools monthly, METR couldn't maintain a reliable baseline. The control group had functionally ceased to exist.
 
 In Caracas, almost nobody transacts exclusively in bolívars any more. The old currency didn't disappear by decree; people just stopped using it.
 
