@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Capability hyperinflation'
-description: 'What happens when your roadmap is priced in depreciating units.'
+description: 'What happens when your roadmap is priced in depreciating units?'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-02'
@@ -18,9 +18,9 @@ Something similar is happening to the cost of building software. Every time some
 
 ## Twelve exchange rates
 
-<span class="pullquote" text-content="She couldn't buy groceries, couldn't afford the bus home and had to walk three hours back."></span>
+<span class="pullquote" text-content="She couldn't buy groceries, couldn't afford the return fare and had to walk three hours back home."></span>
 
-What hyperinflation does first is collapse the planning horizon. Consider the story of [Epiphnia Mudehwe](https://newlinesmag.com/reportage/zimbabwes-seemingly-endless-currency-crisis/), a Zimbabwean midwife. Her first salary in 1980 was enough to buy gifts for her parents. By 1992 she'd bought a four-room house. By 2008, prices were [doubling every 24 hours](https://en.wikipedia.org/wiki/Hyperinflation_in_Zimbabwe). She boarded a bus to withdraw her salary of one billion Zimbabwe dollars. The notes devalued while she stood in the supermarket queue, and by the time she reached the till she couldn't buy groceries, couldn't afford the bus home and had to walk three hours back.
+What hyperinflation does first is collapse the planning horizon. Consider the story of [Epiphnia Mudehwe](https://newlinesmag.com/reportage/zimbabwes-seemingly-endless-currency-crisis/), a Zimbabwean midwife. Her first salary in 1980 was enough to buy gifts for her parents. By 1992 she'd bought a four-room house. By 2008, prices were [doubling every 24 hours](https://en.wikipedia.org/wiki/Hyperinflation_in_Zimbabwe). She boarded a bus to withdraw her salary of one billion Zimbabwe dollars. The notes devalued while she stood in the supermarket queue, and by the time she reached the till she couldn't buy groceries, couldn't afford the return fare and had to walk three hours back home.
 
 In Lebanon, [checking the exchange rate](https://foreignpolicy.com/2021/04/05/lebanon-currency-inflation-exchange-rates/) on dedicated apps became "as regular as drinking a cup of coffee", with at least three simultaneous rates in play. Argentina had twelve. Adam Fergusson's [*When Money Dies*](https://en.wikipedia.org/wiki/When_Money_Dies) documents how ordinary Germans in the Weimar Republic watched the same pattern unfold in 1923, holding their savings in marks while the mark lost value by the hour.
 
@@ -36,9 +36,9 @@ Capability gains arrive in discontinuous jumps. Through late 2024 and into 2025,
 
 When prices spiral, governments reach for the lever closest to hand: make the new prices illegal. Zimbabwe's [Operation Reduce Prices](https://reliefweb.int/report/zimbabwe/zimbabwe-price-controls-devastating-rural-economy) in 2007 ordered businesses to slash prices by half and [arrested thousands of shop owners](https://www.thenewhumanitarian.org/news/2007/07/24/price-controls-devastating-rural-economy) who refused to comply. Shelves emptied within days. Goods reappeared on the informal market at prices higher than before the operation began. Mandating the old rate by decree doesn't preserve it; it creates a black market.
 
-Organisations tried banning AI first. In 2023, Samsung [prohibited ChatGPT](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/) after engineers pasted proprietary source code into it. JPMorgan, Goldman Sachs, Citigroup and Deutsche Bank all [banned external AI tools](https://www.americanbanker.com/news/banks-navigate-workers-use-of-chatgpt-set-ai-policies). Employees moved to unsanctioned tools on personal devices, beyond any governance.
+Organisations initially tried banning AI. In 2023, Samsung [prohibited ChatGPT](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/) after engineers pasted proprietary source code into it. JPMorgan, Goldman Sachs, Citigroup and Deutsche Bank all [banned external AI tools](https://www.americanbanker.com/news/banks-navigate-workers-use-of-chatgpt-set-ai-policies). Employees moved to unsanctioned tools on personal devices, beyond any governance.
 
-By 2025, every major bank had reversed course. JPMorgan [built an internal AI tool](https://www.cnbc.com/2025/09/30/jpmorgan-chase-fully-ai-connected-megabank.html) and rolled it out to 250,000 employees. Samsung [reinstated access](https://www.sammobile.com/news/samsung-lets-employees-use-chatgpt-again-after-secret-data-leak-in-2023/) under new security rules.
+Even by early 2025, every major bank had reversed course. JPMorgan [built an internal AI tool](https://www.cnbc.com/2025/09/30/jpmorgan-chase-fully-ai-connected-megabank.html) and rolled it out to 250,000 employees. Samsung [reinstated access](https://www.sammobile.com/news/samsung-lets-employees-use-chatgpt-again-after-secret-data-leak-in-2023/) under new security rules.
 
 The ban didn't stop usage; it prevented oversight.
 
@@ -66,11 +66,11 @@ In February 2026, [$285 billion was wiped](https://www.cnbc.com/2026/02/06/ai-an
 
 <span class="pullquote" text-content="Thirty to fifty percent of developers said they'd rather skip the task entirely than do it without AI."></span>
 
-Not everyone loses in a hyperinflationary economy. Argentine tech workers [found ways to earn in dollars](https://nearshoreamericas.com/argentinas-tech-workers-prefer-payments-in-stablecoins/) while their costs stayed in pesos, capturing the spread between the parallel rate and the official one. In Weimar Germany, the industrialist [Hugo Stinnes](https://en.wikipedia.org/wiki/Hugo_Stinnes) borrowed in marks to buy factories and shipping lines, then repaid the loans in worthless currency. The mechanism was the same: make the collapsing currency work for you rather than against you.
+Not everyone loses in a hyperinflationary economy. Argentine tech workers [found ways to earn in dollars](https://nearshoreamericas.com/argentinas-tech-workers-prefer-payments-in-stablecoins/) while their costs stayed in pesos, capturing the spread between the parallel rate and the official one. Weimar industrialists borrowed in marks to buy hard assets, then repaid the loans in worthless currency. The mechanism was the same: make the collapsing currency work for you rather than against you.
 
 AI fluency creates the same arbitrage. A developer who learns to direct an agent well converts implementation (the devaluing currency) into capacity for higher-value work. That conversion compounds: more output frees time to learn to direct the tools better, which makes them faster again.
 
-Within the same organisation, teams that have integrated AI into their workflow pull ahead of teams that haven't. BCG found that the top 5% of AI-adopting firms achieve [1.7x higher revenue growth and 3.6x greater shareholder return](https://www.bcg.com/publications/2025/are-you-generating-value-from-ai-the-widening-gap), and the gap is widening because they reinvest the gains into further adoption. Between organisations, a three-person AI-native startup ships what used to require fifty.
+Within the same organisation, teams that have integrated AI into their workflow pull ahead of teams that haven't. BCG found that firms leveraging AI effectively are [widening the gap](https://www.bcg.com/publications/2025/are-you-generating-value-from-ai-the-widening-gap) over those that aren't, and the advantage compounds because they reinvest the gains into further adoption. Between organisations, a three-person AI-native startup ships what used to require fifty.
 
 The capability divide becomes a career divide, and the compounding works in one direction.
 
@@ -88,13 +88,13 @@ In German, there is a word for what people do when the currency is collapsing: [
 
 Implementation is the shrinking currency. Not because it's worthless, but because supply is exploding.
 
-What holds stable or appreciates: the judgement to look at a backlog of forty items and know which three matter, the domain knowledge that a reconciliation engine can't just "retry on failure" because the retry changes the result in the downstream ledger, the architectural instinct to choose a boring solution over a clever one and the ability to specify intent precisely enough to direct an autonomous agent. AI makes each of these more consequential, not less. The more capable the agent, the more the outcome depends on the person directing it.
+What holds stable or appreciates: knowing [which operations are irreversible](https://www.tomshardware.com/tech-industry/artificial-intelligence/claude-code-deletes-developers-production-setup-including-its-database-and-snapshots-2-5-years-of-records-were-nuked-in-an-instant), the judgement to [stop rather than improvise under pressure](https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/), the precision to [specify scope so it can't be misread](https://www.tomshardware.com/tech-industry/artificial-intelligence/googles-agentic-ai-wipes-users-entire-hard-drive-without-permission-after-misinterpreting-instructions-to-clear-a-cache-i-am-deeply-deeply-sorry-this-is-a-critical-failure-on-my-part), the instinct to [choose a boring incremental change over an ambitious destructive one](https://www.theregister.com/2026/02/20/amazon_denies_kiro_agentic_ai_behind_outage/) and the awareness to [notice when a system is doing something it shouldn't](https://www.axios.com/2026/03/07/ai-agents-rome-model-cryptocurrency). AI makes each of these more consequential, not less. The more capable the agent, the more the outcome depends on the person directing it.
 
 How long senior engineers keep that edge is an open question. Every previous claim about what AI can't do has [aged poorly](https://en.wikipedia.org/wiki/AI_effect), and experienced practitioners bring their own [cognitive biases to architectural decisions](https://arxiv.org/pdf/2502.04011v1) that AI may not share. But in every hyperinflationary episode, the people who converted to hard assets outperformed those who held the collapsing currency, even when the hard assets proved imperfect. The bet doesn't have to be permanent to be correct.
 
-[Innscor](https://equityaxis.net/post/18596/2025/9/innscor-makes-history-again-first-zim-firm-to-hit-us-1-billion-revenue-twice-fuelled-by-decades-of-strategic-mastery) in Zimbabwe survived by vertically integrating, controlling 20,000 hectares of farmland, securing inputs against currency volatility rather than trying to predict it. The engineering equivalent: invest in capabilities above the layer being commoditised. If implementation is the peso, domain expertise and judgement are the hard currency.
+Fergusson's most vivid character is [Hugo Stinnes](https://en.wikipedia.org/wiki/Hugo_Stinnes), an industrialist who borrowed heavily in depreciating marks and converted them into factories, mines, shipping lines and newspapers. By 1923 he controlled over 1,500 enterprises and was the richest man in Germany, while those who held their savings in marks lost everything. The engineering equivalent: invest in capabilities above the layer being commoditised. If implementation is the peso, domain expertise and judgement are the hard currency.
 
-Fergusson documents how many Germans assumed things would revert to normal. They held their savings in marks, waited for stability to return and lost everything. The Argentine workers who adapted walked to the *cuevas* and changed what they were denominated in.
+Many Germans assumed things would revert to normal. They waited for stability to return, and the marks they held became wallpaper. The Argentine workers who adapted walked to the *cuevas* and changed what they were denominated in.
 
 The separating variable was speed of adaptation. In every hyperinflationary episode, the people who waited for the old conditions to return discovered that they never did.
 
