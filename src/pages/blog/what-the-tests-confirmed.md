@@ -42,7 +42,7 @@ Then I checked the specs against the code. They were wrong in thirty places.
 
 <span class="pullquote" text-content="Getting the spec wrong and being corrected was itself a form of investigation."></span>
 
-Enum values that didn't match stored data, a quality check described as continuous that actually ran on demand. Each discrepancy forced a more precise understanding. A spec that says "calculate the [Z-score](https://en.wikipedia.org/wiki/Standard_score) across entities for the latest date" makes a different claim from "calculate the Z-score across dates for each entity's change series". The code can only be doing one. Getting the spec wrong and being corrected was itself a form of investigation, each one marking a place where a first reading of the code had been plausible but wrong.
+Enum values that didn't match stored data, a quality check described as continuous that actually ran on demand. Each discrepancy forced a more precise understanding. Two descriptions of the same calculation can sound interchangeable and mean completely different things; the code can only be doing one. Getting the spec wrong and being corrected was itself a form of investigation, each one marking a place where a first reading of the code had been plausible but wrong.
 
 I ran the verification more than once. The second pass caught things the first had missed. Then I expanded the specifications to cover areas the first round hadn't reached, including API contracts and analytics pipelines. Ten specification files in total, checked and rechecked.
 
@@ -52,38 +52,38 @@ Knowing when to push for another pass, where to redirect attention and when to s
 
 [Isaac Asimov](https://en.wikipedia.org/wiki/Isaac_Asimov) once observed that the most exciting phrase in science is not "Eureka!" but ["That's funny..."](https://quoteinvestigator.com/2015/03/02/eureka-funny/) The corrections had been routine calibration. What followed was a series of "that's funny" moments.
 
-One function built a summary of stale data points and another consumed that summary to generate alert tickets. The consumer iterated over a list stored under a specific key, but the producer never populated it. The loop body ran zero iterations on every invocation. An entire alerting subsystem was dead on arrival, and nothing in the system behaved differently because of it.
+One part of the system compiled a summary of problems. Another part was supposed to read that summary and raise alerts. But the handoff between them was broken: the alerts ran on every invocation, found nothing, and moved on quietly. An entire alerting pipeline, dead on arrival, and nothing in the system behaved differently because of it.
 
-The specification made this visible because it described both sides of the contract in the same place. On the purpose map, the alerting pipeline was a connected flow: produce a summary, iterate over it, generate tickets. On the implementation map, the connection was missing.
+The specification made this visible because it described both sides of the contract in the same place. On the purpose map, the alerting pipeline was a connected flow: compile a summary, read it, generate tickets. On the implementation map, the connection was missing.
 
-<span class="pullquote left" text-content="The code had the right intent but lost the value between two adjacent lines."></span>
+<span class="pullquote left" text-content="Every ticket said 'Unknown'."></span>
 
-Another function iterated over rows to create tickets for statistical outliers. Each ticket needed an identifier for the entity it flagged. The identifier lived in the table's index, but the iteration pattern discarded the index, then looked for the value inside the row data. It wasn't there. Every ticket fell back to "Unknown". The code had the right intent but lost the value between two adjacent lines.
+Another part of the system generated tickets for statistical outliers, each naming the entity it flagged. The name was in the data, but the code reached for it in the wrong place, like opening a letter to find the sender's address instead of checking the envelope. Every ticket said "Unknown".
 
 Six bugs in total, all following the same shape: ordinary logic errors, the kind [unit tests](https://en.wikipedia.org/wiki/Unit_testing) exist to catch. They survived a thousand passing tests because nobody had drawn the map that would make them visible.
 
 ## The confirmed reading
 
-Then I found something more unsettling: tests that confirmed the wrong answer.
+Then I found something more unsettling: tests that endorsed the wrong answer.
 
-A function calculates the proportion of days where a metric exceeded a movement threshold. It [differences](https://en.wikipedia.org/wiki/Finite_difference) consecutive values, which produces a leading [null](https://en.wikipedia.org/wiki/NaN) for the first entry since there's no prior value to compare against. That null evaluates to false in the threshold comparison, correctly excluded from the count of exceedances. But when the function averages the boolean result, the null inflates the denominator. For four observations where every genuine change exceeds the threshold, the function reports 75% instead of 100%.
+A function asks: what proportion of daily changes exceeded a threshold? To find changes, it [compares each day's value to the previous day's](https://en.wikipedia.org/wiki/Finite_difference). But the first day has no predecessor, producing a phantom, a [placeholder](https://en.wikipedia.org/wiki/NaN) that was never a real measurement. When the function counts large changes, the phantom is correctly ignored. But when it calculates the proportion, the phantom is included in the total, silently diluting the result. For five observations where every genuine change exceeds the threshold, the function reports 80% instead of 100%.
 
 ```python
-def pct_exceeding(values, threshold):
-    changes = diff(values)         # [null, 150, -70, 120]
-    exceeds = abs(changes) > threshold
-    return exceeds.mean()
+def volatile_ratio(series, limit):
+    moves = diff(series)           # [null, 30, -25, 40, 15]
+    large = abs(moves) > limit
+    return large.mean()
 
-assert pct_exceeding([100, 250, 180, 300], 50) == 0.75  # passes
+assert volatile_ratio([200, 230, 205, 245, 260], 10) == 0.8  # passes
 ```
 
-<span class="pullquote" text-content="The developer saw 75%, judged it plausible, and wrote a test that agreed."></span>
+<span class="pullquote" text-content="The developer saw 80%, judged it plausible, and wrote a test that agreed."></span>
 
-The developer saw 75%, judged it plausible, and wrote a test that agreed. The test has passed on every run since. Two more tests elsewhere in the suite exhibited the same phenomenon: the test didn't miss the bug, it endorsed it.
+The developer saw 80%, judged it plausible, and wrote a test that agreed. The test has passed on every run since. Two more tests elsewhere in the suite exhibited the same phenomenon: the test didn't miss the bug, it endorsed it.
 
-The developer's domain model said "calculate the proportion of large moves". The code introduced a null from the differencing step, and somewhere in the translation the denominator quietly changed meaning. From the developer's perspective, 75% looked right. Code and test, drawn from that same vantage point, reinforced each other.
+The developer wanted the proportion of large moves. The phantom changed what "proportion" meant without anyone noticing. From the developer's perspective, 80% looked right. Code and test, drawn from that same vantage point, reinforced each other.
 
-The ozone instruments over Antarctica did the same thing. The readings were accurate, but the software designed to validate them reclassified the anomaly as noise. Testing researchers call this the [oracle problem](https://en.wikipedia.org/wiki/Test_oracle): the test's oracle is the developer's own [mental model](https://en.wikipedia.org/wiki/Mental_model), and that model is exactly what's incomplete. **The checking system detected the anomaly and filed it as expected behaviour.**
+The ozone instruments over Antarctica were the mirror image. Their software rejected a genuine reading as a measurement error; these tests accepted a measurement error as a genuine reading. Testing researchers call this the [oracle problem](https://en.wikipedia.org/wiki/Test_oracle): the test's oracle is the developer's own [mental model](https://en.wikipedia.org/wiki/Mental_model), and that model is exactly what's incomplete. **The checking system detected the anomaly and filed it as expected behaviour.**
 
 ## A different vantage point
 
@@ -95,7 +95,7 @@ The hypothesis held. Six bugs in a few hours, three endorsed by passing tests, f
 
 Areas of the system remain unexamined, and the approach is untested at scales larger than a single context window. But the mechanism is clear: draw a different map, overlay it on the existing one, and the places where the readings diverge from intent become visible.
 
-Every codebase has instruments designed to check its readings, drawn from the same vantage point as the code they verify.
+Every codebase has instruments designed to check its readings, but few have a map drawn from a different vantage point.
 
 ---
 
