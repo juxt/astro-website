@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'What the tests confirmed'
-description: 'A thousand passing tests, and a hypothesis about what they couldn''t see.'
+description: 'A thousand passing tests, every one encoding the same assumption.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-03-24'
