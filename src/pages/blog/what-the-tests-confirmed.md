@@ -16,13 +16,15 @@ tags:
 
 <p class="lede">In 1985, <a href="https://en.wikipedia.org/wiki/Ozone_depletion#Observations_on_ozone_layer_depletion" target="_blank">satellite instruments measuring ozone over Antarctica</a> registered readings so low that the processing software <a href="https://earthobservatory.nasa.gov/features/RemoteSensingAtmosphere/remote_sensing5.php" target="_blank">flagged them as instrument errors</a> and filtered them out. The hole in the ozone layer was in the data for years before anyone saw it, hidden by the very system designed to check the readings.</p>
 
-Code has its own checking systems. A thousand passing tests can confirm a developer's understanding so thoroughly that nobody questions whether that understanding was complete. The anomaly doesn't register as a failure. It becomes part of the record.
+Code has its own checking systems. A thousand passing tests can confirm a developer's understanding so thoroughly that nobody questions whether that understanding was correct. The anomaly doesn't register as a failure. It becomes part of the record.
 
 ## A different map
 
 Rewind 130 years. In 1854, [cholera was killing hundreds in London's Soho](https://en.wikipedia.org/wiki/1854_Broad_Street_cholera_outbreak) and nobody could identify the source. The prevailing theory blamed [bad air](https://en.wikipedia.org/wiki/Miasma_theory).
 
 [John Snow](https://en.wikipedia.org/wiki/John_Snow) took the same data everyone else had, deaths and addresses, and drew a different map: plotting cases by location instead of charting streets and buildings. He didn't discover new facts about the city. He represented existing information from a different vantage point, and the overlay made explicit what was latent in the original data: cases clustering around a single contaminated pump on Broad Street. The street maps weren't wrong, they just couldn't show what they weren't designed to measure.
+
+Two ways for information to hide in plain sight: nobody looks at it from the right angle, or the system designed to check it filters it out. Snow's London had the first problem. The ozone data had the second. Software has both.
 
 Code is a map. It charts implementation: how to calculate this value, where to store that result. Tests are a second map: given this input, produce that output. Both are accurate as far as they go. Neither asks the question that reveals the pattern underneath.
 
