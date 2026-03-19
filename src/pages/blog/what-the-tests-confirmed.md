@@ -14,19 +14,25 @@ tags:
   - 'testing'
 ---
 
-<p class="lede">In 1854, London had detailed maps of its streets. <a href="https://en.wikipedia.org/wiki/John_Snow" target="_blank">John Snow</a> drew a <a href="https://en.wikipedia.org/wiki/1854_Broad_Street_cholera_outbreak" target="_blank">different map of the same city</a>, plotting cholera deaths instead of buildings, and saw what the street maps could never show: cases clustering around a single contaminated pump on Broad Street. The street maps weren't wrong. They were answering a different question.</p>
+<p class="lede">In 1985, <a href="https://en.wikipedia.org/wiki/Ozone_depletion#Observations_on_ozone_layer_depletion" target="_blank">satellite instruments measuring ozone over Antarctica</a> registered readings so low that the processing software <a href="https://earthobservatory.nasa.gov/features/RemoteSensingAtmosphere/remote_sensing5.php" target="_blank">flagged them as instrument errors</a> and filtered them out. The hole was in the data for years before anyone saw it, hidden by the very system designed to check the readings.</p>
 
-Code is a map too. It charts implementation: how to calculate this value, where to store that result. Tests are a second map, charting expected values: given this input, produce that output. Both are accurate as far as they go. But like London's street maps, both answer a specific question, and the question they don't ask is the one that reveals the pattern underneath.
+Code has its own checking systems. A thousand passing tests can confirm a developer's understanding so thoroughly that nobody questions whether that understanding was complete. The anomaly doesn't register as a failure. It becomes part of the record.
 
-## The same vantage point
+## A different map
+
+In 1854, [John Snow](https://en.wikipedia.org/wiki/John_Snow) drew a [map of London](https://en.wikipedia.org/wiki/1854_Broad_Street_cholera_outbreak) that plotted cholera deaths instead of buildings. He didn't discover new facts about the city. He represented existing information from a different vantage point, and the overlay made explicit what was latent in the original data: cases clustering around a single contaminated pump on Broad Street. The street maps weren't wrong. They just couldn't show what they weren't designed to measure.
+
+Code is a map of the same kind. It charts implementation: how to calculate this value, where to store that result. Tests are a second map, charting expected values: given this input, produce that output. Both are accurate as far as they go, and both answer a specific question. The question they don't ask is the one that reveals the pattern underneath.
+
+<span class="pullquote" text-content="The gap between the two models is where bugs live."></span>
 
 Every developer holds two models simultaneously: what the business needs the system to do, and what the code actually does. They translate between these so fluently that the translation becomes invisible. A developer reads `row.get("fund_code", "Unknown")` and thinks "this gets the fund code", because their domain model says tickets identify entities. They don't notice that the fund code isn't in the row data, because the domain model fills in what the code doesn't provide. The gap between the two models is where bugs live, and the developer can't see it precisely because they're so practised at bridging it.
 
-Code and tests are both drawn from this same vantage point: the developer's understanding. I'd [argued recently](/blog/new-vocabulary-for-an-old-problem) that their agreement can confirm a shared assumption rather than the underlying truth. A behavioural specification, I'd suggested, could serve as a different kind of map: a chart of purpose, drawn from a vantage point neither code nor tests occupy.
-
-I wanted to test the theory against production code I'd never read. The codebase was fifty thousand lines of Python, a thousand tests, all passing, built by a single developer over hundreds of commits for a financial services firm. The tool was [Allium](https://juxt.github.io/allium), a specification language we've been developing for LLM-driven work. I'd [used it before](/blog/from-specification-to-stress-test) to design systems from scratch. This was the opposite direction: distilling specifications from existing code, then overlaying the purpose map on the implementation map to see where they disagreed.
+Code and tests are both drawn from this same vantage point: the developer's understanding. I'd [argued recently](/blog/new-vocabulary-for-an-old-problem) that their agreement can confirm a shared assumption rather than the underlying truth. A behavioural specification, I'd suggested, could serve as a different kind of map: a chart of purpose, drawn from a vantage point neither code nor tests occupy. Not new information, but a new representation of what the code already contains, making explicit what was latent.
 
 ## Calibrating the map
+
+I wanted to test the theory against production code I'd never read. The codebase was fifty thousand lines of Python, a thousand tests, all passing, built by a single developer over hundreds of commits for a financial services firm. The tool was [Allium](https://juxt.github.io/allium), a specification language we've been developing for LLM-driven work. I'd [used it before](/blog/from-specification-to-stress-test) to design systems from scratch, but this was the opposite direction: distilling specifications from existing code, then overlaying the purpose map on the implementation map to see where they disagreed.
 
 The process starts by reading the codebase and inferring its behavioural contracts: what each component promises and what it expects from the components around it. [Claude](https://code.claude.com) wrote the first five specification files in about twenty minutes, covering the domain model, data pipeline, quality checks, workflows and analytics.
 
@@ -71,7 +77,7 @@ assert pct_exceeding([100, 250, 180, 300], 50) == 0.75  # passes
 
 The developer saw 75%, judged it plausible, and wrote a test that agreed. The test has passed on every run since. Two more tests elsewhere in the suite exhibited the same phenomenon: the test didn't miss the bug, it endorsed it. The developer's domain model said "calculate the proportion of large moves". The code introduced a null from the differencing step, and somewhere in the translation the denominator quietly changed meaning. From the developer's vantage point, 75% looked right. Code and test, drawn from that same vantage point, reinforced each other.
 
-In 1985, [satellite instruments measuring ozone over Antarctica](https://en.wikipedia.org/wiki/Ozone_depletion#Observations_on_ozone_layer_depletion) registered readings so low that the processing software [flagged them as instrument errors](https://earthobservatory.nasa.gov/features/RemoteSensingAtmosphere/remote_sensing5.php) and filtered them out. The hole was in the data for years before anyone saw it, hidden by the very system designed to check the readings. **Tests can work the same way. When the developer's understanding is partial, the test encodes that partial understanding, and the anomaly gets filed as a confirmed reading rather than a failing one.** Testing researchers call this the [oracle problem](https://en.wikipedia.org/wiki/Test_oracle): the test's oracle is the developer's own mental model, and that model is exactly what's incomplete.
+The ozone instruments over Antarctica did the same thing. The readings were accurate, but the software designed to validate them reclassified the anomaly as noise. Testing researchers call this the [oracle problem](https://en.wikipedia.org/wiki/Test_oracle): the test's oracle is the developer's own mental model, and that model is exactly what's incomplete. **The checking system detected the anomaly and filed it as expected behaviour.**
 
 ## A different vantage point
 
@@ -79,12 +85,10 @@ A senior engineer reviewing unfamiliar code doesn't just trace execution paths. 
 
 Distilling a specification externalises exactly this process. You read the system, infer its purpose and state that purpose in its own language, separate from the code, precise enough to verify. The specification says "report the proportion of real changes exceeding the threshold". The code says something subtly different. The gap between those two statements is where the bug lives, and the test can't see it because the test was drawn from the same vantage point as the code.
 
-Snow's cholera map didn't add new streets to London. He drew the same city from a different vantage point, asking "where is disease concentrated?" instead of "where are the streets?", and the overlay of the two maps revealed what neither could show alone. The specification asks its own question of code that already contains the answer: what is this system *for*? The overlay of purpose against implementation reveals the gaps.
+The hypothesis held. Six bugs in a few hours, three endorsed by passing tests, from a codebase I'd never seen, with no documentation and no access to the developer. Like Snow's cholera map, the specification didn't add new information to the city. It made explicit what was latent in the code, then showed where the implementation fell short of its own intent. Areas of the system remain unexamined, and the approach is untested at scales larger than a single context window. But the mechanism is clear: draw a different map, overlay it on the existing one, and the places where the readings diverge from intent become visible.
 
-The hypothesis held. Six bugs in a few hours, three endorsed by passing tests, from a codebase I'd never seen, with no documentation and no access to the developer. The specification didn't introduce new requirements. It articulated what the code was already trying to do, then showed where the implementation fell short of its own intent. Areas of the system remain unexamined, and the approach is untested at scales larger than a single context window. But the mechanism is clear: draw a different map, overlay it on the existing one, and the places where the territory diverges from intent become visible.
-
-Every codebase has detailed maps of its implementation, but few have one drawn from a different vantage point.
+Every codebase has instruments designed to check its readings, drawn from the same vantage point as the code they verify.
 
 ---
 
-If you'd like to explore what specification-driven development looks like for your systems, we'd welcome [a conversation](mailto:info@juxt.pro?subject=Specification-driven%20development).
+If you'd like to see your systems from a different vantage point, we'd welcome [a conversation](mailto:info@juxt.pro?subject=Specification-driven%20development).
