@@ -1,0 +1,383 @@
+---
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout
+  title='Meridian - Equity Derivatives Post-Trade Risk Management'
+  ogTitle='Meridian by JUXT - Post-Trade Risk Management, Accelerated'
+  ogDescription='An equity derivatives post-trade risk management system built agentically from decades of investment banking experience. Immutable. Deterministic. Reproducible.'
+>
+  <style>
+    @keyframes meridian-line-draw {
+      from { stroke-dashoffset: 1000; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes meridian-fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes meridian-fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes meridian-pulse-line {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes meridian-count-line {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    .meridian-stagger-1 { animation: meridian-fade-up 0.8s ease-out 0.1s both; }
+    .meridian-stagger-2 { animation: meridian-fade-up 0.8s ease-out 0.25s both; }
+    .meridian-stagger-3 { animation: meridian-fade-up 0.8s ease-out 0.4s both; }
+    .meridian-stagger-4 { animation: meridian-fade-up 0.8s ease-out 0.55s both; }
+    .meridian-stagger-5 { animation: meridian-fade-up 0.8s ease-out 0.7s both; }
+    .meridian-fade-in { animation: meridian-fade-in 1.2s ease-out 0.3s both; }
+
+    .meridian-grid-bg {
+      background-image:
+        linear-gradient(rgba(244, 144, 29, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 144, 29, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .meridian-principle-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .meridian-principle-card:hover {
+      border-color: rgba(244, 144, 29, 0.3);
+      background: linear-gradient(135deg, rgba(244, 144, 29, 0.04) 0%, rgba(255,255,255,0.01) 100%);
+      transform: translateY(-2px);
+    }
+    .meridian-principle-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(244, 144, 29, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .meridian-principle-card:hover::before {
+      opacity: 1;
+    }
+
+    .meridian-video-container {
+      position: relative;
+      background: linear-gradient(135deg, #0a0d12 0%, #0f1319 100%);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .meridian-video-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(11, 14, 20, 0.8));
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+
+  <!-- Hero Section -->
+  <section class='relative w-full min-h-[100dvh] flex items-center justify-center bg-moonlight overflow-hidden'>
+    <!-- Subtle grid background -->
+    <div class='absolute inset-0 meridian-grid-bg'></div>
+
+    <!-- Geometric accent lines -->
+    <svg class='absolute inset-0 w-full h-full pointer-events-none' xmlns='http://www.w3.org/2000/svg'>
+      <line x1='0' y1='30%' x2='100%' y2='30%'
+        stroke='rgba(244,144,29,0.06)' stroke-width='1'
+        style='animation: meridian-pulse-line 6s ease-in-out infinite;' />
+      <line x1='0' y1='70%' x2='100%' y2='70%'
+        stroke='rgba(244,144,29,0.06)' stroke-width='1'
+        style='animation: meridian-pulse-line 6s ease-in-out 2s infinite;' />
+      <line x1='20%' y1='0' x2='20%' y2='100%'
+        stroke='rgba(255,255,255,0.02)' stroke-width='1' />
+      <line x1='80%' y1='0' x2='80%' y2='100%'
+        stroke='rgba(255,255,255,0.02)' stroke-width='1' />
+    </svg>
+
+    <div class='relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-5xl mx-auto'>
+      <!-- Early Access Badge -->
+      <div class='meridian-stagger-1 inline-flex items-center gap-3 mb-10'>
+        <div class='h-px w-8 bg-juxt/50'></div>
+        <span class='text-juxt text-xs font-semibold tracking-[0.3em] uppercase'>Early Access Preview</span>
+        <div class='h-px w-8 bg-juxt/50'></div>
+      </div>
+
+      <!-- Logo -->
+      <div class='meridian-stagger-2 mb-10'>
+        <img
+          src='/images/meridian/meridian-logo.svg'
+          alt='Meridian Logo'
+          class='w-48 md:w-72 lg:w-80'
+        />
+      </div>
+
+      <!-- Headline -->
+      <h1 class='meridian-stagger-3 text-4xl md:text-5xl lg:text-6xl font-extralight text-white leading-tight mb-6 tracking-tight'>
+        Post-Trade Risk Management,<br />
+        <span class='text-juxt'>Accelerated</span>
+      </h1>
+
+      <!-- Sub-headline -->
+      <p class='meridian-stagger-4 text-lg md:text-xl text-gray-400 font-light max-w-2xl leading-relaxed mb-4'>
+        An equity derivatives post-trade risk management system built from decades of investment banking experience.
+      </p>
+
+      <!-- Tagline -->
+      <div class='meridian-stagger-5 flex items-center gap-6 text-xs tracking-[0.25em] uppercase text-gray-500 font-medium mt-6'>
+        <span>Immutable</span>
+        <span class='w-1 h-1 rounded-full bg-juxt/60'></span>
+        <span>Deterministic</span>
+        <span class='w-1 h-1 rounded-full bg-juxt/60'></span>
+        <span>Reproducible</span>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class='absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/40 meridian-fade-in'>
+      <span class='text-xs tracking-[0.3em] uppercase'>Scroll</span>
+      <div class='w-px h-12 bg-gradient-to-b from-white/40 to-transparent animate-pulse'></div>
+    </div>
+  </section>
+
+  <!-- What is Meridian -->
+  <section class='bg-white'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='grid lg:grid-cols-12 gap-12 lg:gap-20 items-start'>
+        <div class='lg:col-span-5'>
+          <p class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'>The Accelerator</p>
+          <h2 class='text-4xl md:text-5xl font-extralight text-gray-900 leading-tight'>
+            What is Meridian?
+          </h2>
+        </div>
+        <div class='lg:col-span-7 space-y-6 text-gray-500 text-lg leading-relaxed font-light'>
+          <p>
+            Meridian is JUXT's accelerator for equity derivatives post-trade risk management.
+            It's not a blank-slate build and it's not an off-the-shelf product.
+            It's a <span class='text-gray-800 font-normal'>deeply opinionated head start</span>,
+            shaped by our collective decades of building highly scalable, performant systems
+            inside investment banks.
+          </p>
+          <p>
+            Its modular architecture is designed to plug directly into an existing banking ecosystem,
+            integrating with your settlement, clearing and regulatory reporting workflows
+            without demanding you rip out what already works.
+          </p>
+          <p>
+            Meridian was built agentically, encoding our engineering judgement into a system
+            that reflects the patterns we know work at scale in production:
+            <span class='text-gray-800 font-normal'>immutable data, deterministic computation, and full reproducibility</span>
+            of every risk calculation, every position, every trade lifecycle event.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class='bg-moonlight'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20'>
+      <div class='h-px bg-gradient-to-r from-transparent via-juxt/30 to-transparent'></div>
+    </div>
+  </div>
+
+  <!-- Core Principles -->
+  <section class='bg-moonlight meridian-grid-bg'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'>Foundations</p>
+        <h2 class='text-4xl md:text-5xl lg:text-6xl font-extralight text-white'>
+          Built on First Principles
+        </h2>
+      </div>
+
+      <div class='grid sm:grid-cols-2 gap-6 lg:gap-8'>
+        <!-- Immutability -->
+        <div class='meridian-principle-card p-8 md:p-10'>
+          <div class='flex items-start gap-5'>
+            <div class='flex-shrink-0 w-10 h-10 flex items-center justify-center border border-juxt/30 text-juxt'>
+              <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='1.5'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z' />
+              </svg>
+            </div>
+            <div>
+              <h3 class='text-xl font-medium text-white mb-3'>Immutability</h3>
+              <p class='text-gray-400 font-light leading-relaxed'>
+                Every state transition is preserved. Data is never overwritten, only appended.
+                The complete history of every position and risk calculation is always available,
+                making audits trivial and regulatory queries a matter of query, not archaeology.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Determinism -->
+        <div class='meridian-principle-card p-8 md:p-10'>
+          <div class='flex items-start gap-5'>
+            <div class='flex-shrink-0 w-10 h-10 flex items-center justify-center border border-juxt/30 text-juxt'>
+              <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='1.5'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.105.401l1.444-.889' />
+              </svg>
+            </div>
+            <div>
+              <h3 class='text-xl font-medium text-white mb-3'>Determinism</h3>
+              <p class='text-gray-400 font-light leading-relaxed'>
+                Given the same inputs, Meridian produces the same outputs. Always. No hidden state,
+                no order-dependent side effects, no "it works on my machine".
+                Risk numbers you can explain to regulators with confidence.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reproducibility -->
+        <div class='meridian-principle-card p-8 md:p-10'>
+          <div class='flex items-start gap-5'>
+            <div class='flex-shrink-0 w-10 h-10 flex items-center justify-center border border-juxt/30 text-juxt'>
+              <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='1.5'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3' />
+              </svg>
+            </div>
+            <div>
+              <h3 class='text-xl font-medium text-white mb-3'>Reproducibility</h3>
+              <p class='text-gray-400 font-light leading-relaxed'>
+                Rewind to any point in time and replay. Reproduce yesterday's P&L.
+                Rerun last quarter's risk with today's models.
+                Time-travel is a feature, not a fantasy.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modularity -->
+        <div class='meridian-principle-card p-8 md:p-10'>
+          <div class='flex items-start gap-5'>
+            <div class='flex-shrink-0 w-10 h-10 flex items-center justify-center border border-juxt/30 text-juxt'>
+              <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='1.5'>
+                <path stroke-linecap='round' stroke-linejoin='round' d='M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.421 48.421 0 01-4.163-.3c-1.228-.148-2.38.738-2.38 1.99v0c0 .803.427 1.544 1.13 1.907a3.094 3.094 0 011.58 3.22v0c-.11.863-.823 1.535-1.692 1.535H4.5m16.5-9.5h-1.818c-.869 0-1.582.672-1.692 1.535v0a3.094 3.094 0 001.58 3.22c.703.363 1.13 1.104 1.13 1.907v0c0 1.252-1.152 2.138-2.38 1.99a48.464 48.464 0 01-4.163-.3.64.64 0 01-.657-.643v0c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.035-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0' />
+              </svg>
+            </div>
+            <div>
+              <h3 class='text-xl font-medium text-white mb-3'>Modularity</h3>
+              <p class='text-gray-400 font-light leading-relaxed'>
+                Meridian doesn't ask you to replace your infrastructure. Its modular design
+                slots into your existing ecosystem: your OMS, your market data feeds,
+                your clearing and settlement pipelines. Adopt what you need, leave what you don't.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video / Demo Section -->
+  <section class='bg-gradient-to-b from-moonlight to-gray-900'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-12 md:mb-16'>
+        <p class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'>See it in Action</p>
+        <h2 class='text-4xl md:text-5xl font-extralight text-white'>
+          Meridian in Motion
+        </h2>
+      </div>
+
+      <div class='max-w-5xl mx-auto'>
+        <div class='meridian-video-container aspect-video w-full overflow-hidden'>
+          <video
+            class='w-full h-full object-cover'
+            controls
+            poster='/images/meridian/meridian-poster.jpg'
+            preload='metadata'
+          >
+            <source src='/videos/meridian/meridian-demo.mp4' type='video/mp4' />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise Section -->
+  <section class='bg-white'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='grid lg:grid-cols-12 gap-12 lg:gap-20 items-start'>
+        <div class='lg:col-span-7 order-2 lg:order-1'>
+          <div class='space-y-6 text-gray-500 text-lg leading-relaxed font-light'>
+            <p>
+              JUXT has spent years embedded in Tier 1 investment banks, building the systems
+              that underpin trading desks, risk engines, and post-trade infrastructure.
+              We know what breaks at scale and what survives.
+            </p>
+            <p>
+              Meridian encodes that experience. It's not a theoretical exercise.
+              Every architectural decision reflects
+              <span class='text-gray-800 font-normal'>real lessons learned from real production systems</span>
+              handling real volumes in real regulatory environments.
+            </p>
+            <p>
+              Built agentically, Meridian represents a new approach to accelerator development:
+              our senior engineers' experience and judgement,
+              amplified by AI, producing a system with the depth and rigour of a multi-year build
+              in a fraction of the time.
+            </p>
+          </div>
+
+          <!-- Experience indicators -->
+          <div class='grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-gray-200'>
+            <div>
+              <div class='text-3xl md:text-4xl font-extralight text-gray-900'>20+</div>
+              <div class='text-sm text-gray-400 font-light mt-1'>Years in Banking</div>
+            </div>
+            <div>
+              <div class='text-3xl md:text-4xl font-extralight text-gray-900'>Tier 1</div>
+              <div class='text-sm text-gray-400 font-light mt-1'>Bank Experience</div>
+            </div>
+            <div>
+              <div class='text-3xl md:text-4xl font-extralight text-juxt'>Agentic</div>
+              <div class='text-sm text-gray-400 font-light mt-1'>Build Methodology</div>
+            </div>
+          </div>
+        </div>
+
+        <div class='lg:col-span-5 order-1 lg:order-2'>
+          <p class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'>Built by Practitioners</p>
+          <h2 class='text-4xl md:text-5xl font-extralight text-gray-900 leading-tight'>
+            Decades of Experience, Encoded
+          </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class='bg-moonlight'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20'>
+      <div class='h-px bg-gradient-to-r from-transparent via-juxt/30 to-transparent'></div>
+    </div>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='max-w-2xl mx-auto text-center'>
+        <p class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'>Early Access</p>
+        <h2 class='text-4xl md:text-5xl font-extralight text-white mb-6'>
+          Interested in Meridian?
+        </h2>
+        <p class='text-gray-400 text-lg font-light max-w-lg mx-auto mb-12'>
+          Meridian is currently in early access. If you're working in post-trade risk
+          and want to see what we're building, we'd like to hear from you.
+        </p>
+        <a
+          href='/contact'
+          class='inline-block border border-white/30 text-white px-12 py-5 text-sm tracking-[0.2em] uppercase hover:bg-juxt hover:border-juxt hover:text-moonlight transition-all duration-300'
+        >
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

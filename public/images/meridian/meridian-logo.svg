@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200">
+  <defs>
+    <linearGradient id="arc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F4C81"/>
+      <stop offset="100%" stop-color="#2E86AB"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2E86AB"/>
+      <stop offset="100%" stop-color="#0F4C81"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mark: meridian arc with pulse node -->
+  <g transform="translate(65, 100)">
+    <!-- Outer meridian arc -->
+    <path d="M -38 -42 A 56 56 0 0 1 38 -42" fill="none" stroke="url(#arc-grad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Inner meridian arc -->
+    <path d="M -24 -42 A 36 36 0 0 1 24 -42" fill="none" stroke="url(#arc-grad)" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <!-- Vertical meridian line -->
+    <line x1="0" y1="-52" x2="0" y2="52" stroke="url(#accent-grad)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Horizontal equator -->
+    <line x1="-52" y1="0" x2="52" y2="0" stroke="url(#arc-grad)" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+    <!-- Lower meridian arc -->
+    <path d="M -38 42 A 56 56 0 0 0 38 42" fill="none" stroke="url(#arc-grad)" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M -24 42 A 36 36 0 0 0 24 42" fill="none" stroke="url(#arc-grad)" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <!-- Node at intersection -->
+    <circle cx="0" cy="0" r="6" fill="#0F4C81"/>
+    <circle cx="0" cy="0" r="3" fill="#2E86AB"/>
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="52" fill="none" stroke="url(#arc-grad)" stroke-width="2.5"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="135" y="112" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="52" font-weight="600" letter-spacing="4" fill="#0F4C81">MERIDIAN</text>
+
+  <!-- Tagline -->
+  <text x="137" y="138" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" letter-spacing="5" fill="#2E86AB">RISK SYSTEM ACCELERATOR</text>
+</svg>
