@@ -14,47 +14,43 @@ tags:
   - 'testing'
 ---
 
-<p class="lede">In 1985, <a href="https://en.wikipedia.org/wiki/Ozone_depletion#Observations_on_ozone_layer_depletion" target="_blank">satellite instruments measuring ozone over Antarctica</a> registered readings so low that the processing software <a href="https://earthobservatory.nasa.gov/features/RemoteSensingAtmosphere/remote_sensing5.php" target="_blank">flagged them as instrument errors</a> and filtered them out. The hole was in the data for years before anyone saw it, hidden by the very system designed to check the readings.</p>
+<p class="lede">In 1985, <a href="https://en.wikipedia.org/wiki/Ozone_depletion#Observations_on_ozone_layer_depletion" target="_blank">satellite instruments measuring ozone over Antarctica</a> registered readings so low that the processing software <a href="https://earthobservatory.nasa.gov/features/RemoteSensingAtmosphere/remote_sensing5.php" target="_blank">flagged them as instrument errors</a> and filtered them out. The hole in the ozone layer was in the data for years before anyone saw it, hidden by the very system designed to check the readings.</p>
 
 Code has its own checking systems. A thousand passing tests can confirm a developer's understanding so thoroughly that nobody questions whether that understanding was complete. The anomaly doesn't register as a failure. It becomes part of the record.
 
 ## A different map
 
-In 1854, [cholera was killing hundreds in London's Soho](https://en.wikipedia.org/wiki/1854_Broad_Street_cholera_outbreak) and nobody could identify the source. The prevailing theory blamed [bad air](https://en.wikipedia.org/wiki/Miasma_theory).
+Rewind 130 years. In 1854, [cholera was killing hundreds in London's Soho](https://en.wikipedia.org/wiki/1854_Broad_Street_cholera_outbreak) and nobody could identify the source. The prevailing theory blamed [bad air](https://en.wikipedia.org/wiki/Miasma_theory).
 
 [John Snow](https://en.wikipedia.org/wiki/John_Snow) took the same data everyone else had, deaths and addresses, and drew a different map: plotting cases by location instead of charting streets and buildings. He didn't discover new facts about the city. He represented existing information from a different vantage point, and the overlay made explicit what was latent in the original data: cases clustering around a single contaminated pump on Broad Street. The street maps weren't wrong, they just couldn't show what they weren't designed to measure.
 
-Code is a map of the same kind. It charts implementation: how to calculate this value, where to store that result. Tests are a second map of expected values: given this input, produce that output. Both are accurate as far as they go, and both answer a specific question. The question they don't ask is the one that reveals the pattern underneath.
+Code is a map. It charts implementation: how to calculate this value, where to store that result. Tests are a second map: given this input, produce that output. Both are accurate as far as they go. Neither asks the question that reveals the pattern underneath.
 
 <span class="pullquote" text-content="The gap between the two models is where bugs live."></span>
 
-Every developer holds two models simultaneously: what the business needs the system to do, and what the code actually does. They translate between these so fluently that the translation becomes invisible. A developer reads `row.get("fund_code", "Unknown")` and thinks "this gets the fund code", because their [domain model](https://en.wikipedia.org/wiki/Domain_model) says tickets identify entities. They don't notice that the fund code isn't in the row data, because the domain model fills in what the code doesn't provide. The gap between the two models is where bugs live, and the developer can't see it precisely because they're so practised at bridging it.
+A developer reads `row.get("fund_code", "Unknown")` and thinks "this gets the fund code". Their [domain model](https://en.wikipedia.org/wiki/Domain_model) says tickets identify entities, so of course the fund code is in the row. It isn't. Every developer carries two models simultaneously, what the business needs and what the code does, and translates between them so fluently that the gap becomes invisible. The gap between the two models is where bugs live.
 
-Code and tests are both drawn from this same vantage point: the developer's understanding. I'd [argued recently](/blog/new-vocabulary-for-an-old-problem) that their agreement can confirm a shared assumption rather than the underlying truth. A behavioural specification, I'd suggested, could serve as a different kind of map: a chart of purpose drawn from a vantage point neither code nor tests occupy, articulating what the code already contains. It builds a model of what the system should do, then checks whether the code delivers.
+Code and tests are both drawn from this same vantage point: the developer's understanding. When they [agree](/blog/new-vocabulary-for-an-old-problem), they can confirm a shared assumption rather than the underlying truth. A behavioural specification can serve as a different kind of map: a chart of purpose drawn from a vantage point neither code nor tests occupy, articulating what the code already contains. It builds a model of what the system should do, then checks whether the code delivers.
 
 ## Calibrating the map
 
-I wanted to test the theory against production code I'd never read. The codebase was fifty thousand lines of Python, a thousand tests, all passing, built by a single developer over hundreds of commits for a financial services firm. The tool was [Allium](https://juxt.github.io/allium), a specification language we've been developing for LLM-driven work. I'd [used it before](/blog/from-specification-to-stress-test) to design systems from scratch, but this was the opposite direction: distilling specifications from existing code, then overlaying the purpose map on the implementation map to see where they disagreed.
+I wanted to test the theory against production code I'd never seen. The codebase was fifty thousand lines of Python, a thousand tests, all passing, built by a single developer over hundreds of commits for a financial services firm. The tool was [Allium](https://juxt.github.io/allium), a specification language we've been developing for LLM-driven work. I've [used it before](/blog/from-specification-to-stress-test) to design systems from scratch, but this was the opposite direction: distilling specifications from existing code, then overlaying the purpose map on the implementation map to see where they disagreed.
 
-The process starts by reading the codebase and inferring its [behavioural contracts](https://en.wikipedia.org/wiki/Design_by_contract): what each component promises and what it expects from the components around it. [Claude](https://code.claude.com) wrote the first five specification files in about twenty minutes, covering the domain model, data pipeline, quality checks, workflows and analytics.
+The process started by reading the codebase and inferring its [behavioural contracts](https://en.wikipedia.org/wiki/Design_by_contract): what each component promises and what it expects from the components around it. [Claude](https://code.claude.com) wrote the first five specification files in about twenty minutes, covering the domain model, data pipeline, quality checks, workflows and analytics.
 
 Then I checked the specs against the code. They were wrong in thirty places.
 
 <span class="pullquote" text-content="Getting the spec wrong and being corrected was itself a form of investigation."></span>
 
-Enum values that didn't match stored data, a quality check described as continuous that actually ran on demand. Each discrepancy forced a more precise understanding. Two descriptions of the same calculation can sound interchangeable and mean completely different things; the code can only be doing one. Getting the spec wrong and being corrected was itself a form of investigation, each one marking a place where a first reading of the code had been plausible but wrong.
+Enum values that didn't match stored data. Quality checks described as continuous that actually ran on demand. Two descriptions of the same calculation that sounded interchangeable but meant completely different things. Getting the spec wrong and being corrected was itself a form of investigation, each discrepancy marking a place where a first reading had been plausible but wrong.
 
-I ran the verification more than once. The second pass caught things the first had missed. Then I expanded the specifications to cover areas the first round hadn't reached, including API contracts and analytics pipelines. Ten specification files in total, checked and rechecked.
-
-Knowing when to push for another pass, where to redirect attention and when to stop was the judgement the process depended on. The codebase fit within the model's context window; larger systems would need decomposition, and the approach remains untested at that scale. But within this codebase, the two maps were now aligned enough to overlay.
+I ran the verification more than once. The second pass caught things the first had missed. Ten specification files in total, checked and rechecked, until the two maps were aligned enough to overlay.
 
 ## What the overlay showed
 
-[Isaac Asimov](https://en.wikipedia.org/wiki/Isaac_Asimov) once observed that the most exciting phrase in science is not "Eureka!" but ["That's funny..."](https://quoteinvestigator.com/2015/03/02/eureka-funny/) The corrections had been routine calibration. What followed was a series of "that's funny" moments.
+[Isaac Asimov](https://en.wikipedia.org/wiki/Isaac_Asimov) called ["That's funny..."](https://quoteinvestigator.com/2015/03/02/eureka-funny/) the most exciting phrase in science. The corrections had been routine calibration. What came next was a series of "that's funny" moments.
 
-One part of the system compiled a summary of problems. Another part was supposed to read that summary and raise alerts. But the handoff between them was broken: the alerts ran on every invocation, found nothing, and moved on quietly. An entire alerting pipeline, dead on arrival, and nothing in the system behaved differently because of it.
-
-The specification made this visible because it described both sides of the contract in the same place. On the purpose map, the alerting pipeline was a connected flow: compile a summary, read it, generate tickets. On the implementation map, the connection was missing.
+One part of the system compiled a summary of problems. Another part was supposed to read that summary and raise alerts. On the specification's map, a connected flow: compile, read, generate tickets. On the code's map, the connection was missing. The alerts ran on every invocation, found nothing, and moved on quietly. Dead on arrival.
 
 <span class="pullquote left" text-content="Every ticket said 'Unknown'."></span>
 
@@ -87,9 +83,9 @@ The ozone instruments over Antarctica were the mirror image. Their software reje
 
 ## A different vantage point
 
-A senior engineer reviewing unfamiliar code doesn't just trace execution paths. They build a model of what the system is trying to accomplish, then test the code against it. "This looks like an alerting system. Alerts should carry identifiers. Where's the identifier?" That's not [pattern matching](https://en.wikipedia.org/wiki/Pattern_matching_(computer_science)). It's model-based reasoning: inferring purpose and measuring the code against it.
+"This looks like an alerting system. Alerts should carry identifiers. Where's the identifier?" A senior engineer reviewing unfamiliar code builds a model of purpose and measures the code against it. It's model-based reasoning, and distilling a specification externalises exactly this process.
 
-Distilling a specification externalises exactly this process. You read the system, infer its purpose and state that purpose in its own language, separate from the code, precise enough to verify. The specification says "report the proportion of real changes exceeding the threshold". The code says something subtly different. The gap between those two statements is where the bug lives, and the test can't see it because the test was drawn from the same vantage point as the code.
+You read the system, infer its purpose and state that purpose in its own language, separate from the code, precise enough to verify. The specification says "report the proportion of real changes exceeding the threshold". The code says something subtly different. The gap between those two statements is where the bug lives, and the test can't see it because the test was drawn from the same vantage point as the code.
 
 The hypothesis held. Six bugs in a few hours, three endorsed by passing tests, from a codebase I'd never seen, with no documentation and no access to the developer. Like Snow's cholera map, the specification didn't add new information to the city. It made explicit what was latent in the code, then showed where the implementation fell short of its own intent.
 
