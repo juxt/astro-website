@@ -53,5 +53,17 @@
     "role": "VP of Engineering",
     "company": "Antithesis",
     "image": "/src/assets/xt26/xt26-bencollins.jpg"
+  },
+  {
+    "name": "Jon Pither",
+    "role": "CEO",
+    "company": "JUXT",
+    "image": "/src/assets/xt26/xt26-jonpither.jpg"
+  },
+  {
+    "name": "Will Bassett",
+    "role": "CIO, Equities and Cross Asset Financing Technology",
+    "company": "HSBC",
+    "image": "/src/assets/xt26/xt26-willbassett.jpg"
   }
 ]
