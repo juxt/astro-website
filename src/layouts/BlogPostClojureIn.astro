@@ -179,7 +179,7 @@ const clojureInPicture = await getImage({
   ogImage={heroImageFilename}
 >
   <div
-    class='blog-container flex items-end w-full min-h-[30vh] bg-cover bg-[50%_55%]'
+    class='blog-container relative flex items-end w-full min-h-[50vh] bg-cover bg-[50%_55%]'
     style={{ backgroundImage: `url(${clojureInPicture})` }}
     data-pagefind-filter='blog:true'
     data-category={category}
@@ -191,6 +191,7 @@ const clojureInPicture = await getImage({
     data-pagefind-filter='personName[data-person-name], personLastName[data-person-last-name]'
     data-pagefind-sort='publishedDate[data-published-date]'
   >
+    <div class='absolute inset-0 bg-black/40'></div>
     <Image
       width={200}
       quality={80}
@@ -199,7 +200,7 @@ const clojureInPicture = await getImage({
       src={import(`../assets/people/${personImageFilename}.jpg`)}
       data-pagefind-meta='personImage[src]'
     />
-    <div class='flex justify-center w-full'>
+    <div class='relative z-10 flex justify-center w-full'>
       <div class='flex flex-col gap-2 w-2/3'>
         <h1
           class='text-white font-extrabold drop-shadow-lg shadow-black tracking-widest font-sans text-4xl md:text-5xl xl:text-6xl'
@@ -218,7 +219,7 @@ const clojureInPicture = await getImage({
       </div>
     </div>
   </div>
-  <div class='bg-gradient-to-b from-black to-blue-300 pb-2 flex justify-center'>
+  <div class='bg-gradient-to-b from-black to-blue-950 pb-2 flex justify-center'>
     <div class='flex flex-col w-2/3 pt-8 gap-2'>
       <div class='text-white uppercase'>
         {quote}
