@@ -3,22 +3,22 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior / Principal Kotlin Engineer'
-description: 'Join JUXT as a Senior or Principal Kotlin Engineer, building greenfield projects for leading financial institutions. Full-time, hybrid role in London.'
+position: 'Kotlin Engineer (All levels)'
+description: 'Join JUXT as a Kotlin Engineer at any level, building greenfield projects for leading financial institutions. Full-time, hybrid role in London.'
 draft: false
 weight: 2
 googleJobs:
   {
     location: 'London',
-    position: 'Senior / Principal Kotlin Engineer',
-    publishedDate: '2025-10-10',
-    validThrough: '2026-08-06T00:00',
+    position: 'Kotlin Engineer (All levels)',
+    publishedDate: '2026-03-28',
+    validThrough: '2026-12-06T00:00',
     employmentType: 'FULL_TIME'
   }
 ---
 
 ## Job Description
-We’re looking for several Kotlin developers, from experienced seniors to hands-on principal engineers, to join long-term greenfield projects with leading financial institutions in London.
+We’re looking for Kotlin developers at all levels to join long-term greenfield projects with leading financial institutions in London.
 
 You’ll be part of small, high-calibre engineering teams delivering strategic rebuilds and modernisation projects, replacing legacy systems with clean, cloud-aligned solutions built on Kotlin and modern engineering practices. These are not maintenance roles - they’re about writing great code, solving challenging problems, and shaping architecture from the ground up.
 
@@ -31,6 +31,8 @@ This is a collaborative, trust-based environment where developers have real auto
 Support work is minimal and usually voluntary; if you choose to assist, you’ll receive time off in lieu.
 
 ## Core skills
+
+Core skills depend on your level of experience, but generally include:
 
 * Strong Kotlin skills, with depth in modern engineering practices (TDD, clean code, SOLID principles)
 * Demonstrated knowledge and hands-on experience in designing scalable, mission-critical systems
