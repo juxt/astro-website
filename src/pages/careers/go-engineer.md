@@ -3,14 +3,14 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior Go Engineer'
-description: 'Join JUXT as a Senior Go Engineer, building secure platforms and AI tooling for a global financial leader. Full-time, mostly remote role based in London.'
+position: 'Senior / Principal Go Engineer'
+description: 'Join JUXT as a Senior / Principal Go Engineer, building secure platforms and AI tooling for a global financial leader. Full-time, mostly remote role based in London.'
 draft: false
 weight: 2
 googleJobs:
   {
     location: 'London',
-    position: 'Senior Go Engineer',
+    position: 'Senior / Principal Go Engineer',
     publishedDate: '2026-02-23',
     validThrough: '2026-08-06T00:00',
     employmentType: 'FULL_TIME'

@@ -5,14 +5,14 @@ department: 'Engineering'
 contract: 'Full Time'
 position: 'Java Engineer (All levels)'
 description: 'Join JUXT as a Java Engineer at any level, working on ambitious software projects for leading financial institutions. Full-time, hybrid role in London.'
-draft: true
+draft: false
 weight: 2
 googleJobs:
   {
     location: 'London',
     position: 'Java Engineer',
-    publishedDate: '2025-10-10',
-    validThrough: '2026-08-06T00:00',
+    publishedDate: '2026-03-28',
+    validThrough: '2026-12-06T00:00',
     employmentType: 'FULL_TIME'
   }
 ---
@@ -23,7 +23,7 @@ We’re looking for Java developers at all levels, ranging from Junior (2+ years
 
 You’ll work on mission-critical systems bringing the best modern software engineering to client projects across banking and finance. If you’re new to banking, it’s also a great way to break into the domain and build deep industry knowledge.
 
-This role will include hands-on work to bring improvements to new and existing systems, bringing fast builds and feedback, TDD, CI/CD, clean code, automation, and good taste software engineering. Experience with microservice and cloud architecture is beneficial, particularly with AWS.
+This role will include hands-on work to bring improvements to new and existing systems, bringing fast builds and feedback, TDD, CI/CD, clean code, automation, and good taste software engineering. Experience with microservice and cloud architecture is beneficial.
 
 Our work ranges from greenfield builds on core trading and payments platforms for key areas of the bank, to bringing radical improvements to existing systems, re-writing legacy applications, or rescuing struggling projects. What’s consistent across all of our work is our commitment to good coding hygiene - best practices, clean design, and building elegant, robust software.
 
@@ -34,27 +34,29 @@ We’re looking for developers who are passionate, enthusiastic, technically cur
 ## Core skills
 
 * Strong Java skills
-* Solid experience with Spring Boot
 * Good understanding of TDD, XP and Agile principles
 * Exposure to cloud architecture and CI/CD pipelines
 * Experience building large-scale systems
 * Engineers with great technical taste who can improve existing projects
+* AI-assisted engineering e.g. Copilot, Claude Code, etc.
 
 ## Nice to have
 
 * Experience working on high-throughput or low-latency systems
-* Experience with AWS
 * Experience in investment banking, financial services, or fintech
 * Consultancy or client-facing experience
-* Knowledge of Docker and Kubernetes
+* Knowledge of Terraform, Docker, Kubernetes, and other cloud-native infrastructure tools.
 
 ## WFH?
+
 These roles are hybrid - a mix of working from home and on-site collaboration with clients (Central London or Canary Wharf).
 
 ## Contract type
+
 Both permanent and contract arrangements considered.
 
 ## Eligibility
+
 We can only consider candidates who have the right to work in the UK and do not require visa sponsorship. Applicants must be UK-based and within a commutable distance to London.
 
 ## Interested?

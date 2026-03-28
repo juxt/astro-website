@@ -43,7 +43,7 @@ The ideal candidate,
 
 We're looking for a Delivery Manager that can work alongside software engineers at all levels, having engineers as peers and as direct reports, and play a key role in making sure that JUXT projects are executed well.
 
-If you have experience as a Delivery Manager, Account Manager, or Software Engineering Manager in a business with high technical standards and excellent modern engineering, we want to speak with you. Alternatively, if you're a software engineer with a talent for leading, building relationships, unblocking teams, and thinking about the bigger picture, and you're looking to move into the management track, this role could be for you
+If you have experience as a Delivery Manager, Account Manager, or Software Engineering Manager in a business with high technical standards and excellent modern engineering, we want to speak with you. Alternatively, if you're a software engineer with a talent for leading, building relationships, unblocking teams, and thinking about the bigger picture, and you're looking to move into the management track, this role could be for you.
 
 ## Responsibilities
 
