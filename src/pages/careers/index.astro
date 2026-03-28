@@ -54,6 +54,99 @@ const benefitsPicture = await getImage({
     </p>
   </Section>
 
+  <Section className='py-20 bg-zinc-800'>
+    <div class='flex flex-col gap-10'>
+      <div class='flex justify-center'>
+        <Title id='job-openings'>Open Positions</Title>
+      </div>
+
+      {
+        jobPostsParsed.length > 0 ? (
+          <>
+            <div class='flex flex-col items-center justify-center lg:flex-row lg:flex-wrap gap-[15px]'>
+              {jobPostsParsed.map(
+                ({
+                  url,
+                  frontmatter: {
+                    department,
+                    draft,
+                    position,
+                    location,
+                    contract
+                  }
+                }) => {
+                  return (
+                    <a
+                      href={url}
+                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group no-underline'
+                    >
+                      <span class='absolute top-5 right-5 uppercase text-juxt text-xs'>
+                        {department}
+                      </span>
+                      <h2 class='text-lg font-bold pt-10'>
+                        {position + (draft ? ' (draft)' : '')}
+                      </h2>
+                      <div class='pt-10'>
+                        <div class='flex gap-3'>
+                          <AssetImage
+                            alt='Map pin'
+                            class='w-3'
+                            width={100}
+                            quality={80}
+                            src='/src/assets/site/careers/icons/pin-dark.svg'
+                          />
+                          <p>{location}</p>
+                        </div>
+                        <div class='flex gap-2'>
+                          <AssetImage
+                            alt='Clock'
+                            class='w-4'
+                            width={100}
+                            quality={80}
+                            src='/src/assets/site/careers/icons/clock-dark.svg'
+                          />
+                          <p>{contract}</p>
+                        </div>
+                      </div>
+                      <div class='flex flex-wrap gap-4 pt-16'>
+                        <Button
+                          theme='dark'
+                          class='group-hover:bg-juxt group-hover:text-white pointer-events-none'
+                        >
+                          Full Job Profile
+                        </Button>
+                      </div>
+                    </a>
+                  )
+                }
+              )}
+            </div>
+
+            <div class='flex flex-col items-center justify-center gap-4'>
+              <Title>Can&#39;t find the perfect position?</Title>
+              <a href='mailto:careers@juxt.pro?subject=OPEN APPLICATION'>
+                <Button>Contact Us Anyway</Button>
+              </a>
+            </div>
+          </>
+        ) : (
+          <div class='flex flex-col items-center justify-center gap-4'>
+            <Paragraph>
+              We have a few Engineering Positions open at the moment for
+              undisclosed tier-1 finance projects.
+            </Paragraph>
+            <Paragraph>
+              Please click below to contact us for more details.
+            </Paragraph>
+            <a href='mailto:careers@juxt.pro?subject=OPEN APPLICATION'>
+              <Button>Contact Us</Button>
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </Section>
+
   <Section className='bg-zinc-800'>
     <div class='py-20 flex flex-col gap-4'>
       <Title>Why JUXT?</Title>
@@ -375,96 +468,4 @@ const benefitsPicture = await getImage({
     </div>
   </Section>
 
-  <Section className='py-20 bg-zinc-800'>
-    <div class='flex flex-col gap-10'>
-      <div class='flex justify-center'>
-        <Title id='job-openings'>Open Positions</Title>
-      </div>
-
-      {
-        jobPostsParsed.length > 0 ? (
-          <>
-            <div class='flex flex-col items-center justify-center lg:flex-row lg:flex-wrap gap-[15px]'>
-              {jobPostsParsed.map(
-                ({
-                  url,
-                  frontmatter: {
-                    department,
-                    draft,
-                    position,
-                    location,
-                    contract
-                  }
-                }) => {
-                  return (
-                    <a
-                      href={url}
-                      class='relative bg-white rounded-sm p-10 w-96 lg:w-[calc(33.333%_-_10px)] text-left hover:cursor-pointer group no-underline'
-                    >
-                      <span class='absolute top-5 right-5 uppercase text-juxt text-xs'>
-                        {department}
-                      </span>
-                      <h2 class='text-lg font-bold pt-10'>
-                        {position + (draft ? ' (draft)' : '')}
-                      </h2>
-                      <div class='pt-10'>
-                        <div class='flex gap-3'>
-                          <AssetImage
-                            alt='Map pin'
-                            class='w-3'
-                            width={100}
-                            quality={80}
-                            src='/src/assets/site/careers/icons/pin-dark.svg'
-                          />
-                          <p>{location}</p>
-                        </div>
-                        <div class='flex gap-2'>
-                          <AssetImage
-                            alt='Clock'
-                            class='w-4'
-                            width={100}
-                            quality={80}
-                            src='/src/assets/site/careers/icons/clock-dark.svg'
-                          />
-                          <p>{contract}</p>
-                        </div>
-                      </div>
-                      <div class='flex flex-wrap gap-4 pt-16'>
-                        <Button
-                          theme='dark'
-                          class='group-hover:bg-juxt group-hover:text-white pointer-events-none'
-                        >
-                          Full Job Profile
-                        </Button>
-                      </div>
-                    </a>
-                  )
-                }
-              )}
-            </div>
-
-            <div class='flex flex-col items-center justify-center gap-4'>
-              <Title>Can&#39;t find the perfect position?</Title>
-              <a href='mailto:careers@juxt.pro?subject=OPEN APPLICATION'>
-                <Button>Contact Us Anyway</Button>
-              </a>
-            </div>
-          </>
-        ) : (
-          <div class='flex flex-col items-center justify-center gap-4'>
-            <Paragraph>
-              We have a few Engineering Positions open at the moment for
-              undisclosed tier-1 finance projects.
-            </Paragraph>
-            <Paragraph>
-              Please click below to contact us for more details.
-            </Paragraph>
-            <a href='mailto:careers@juxt.pro?subject=OPEN APPLICATION'>
-              <Button>Contact Us</Button>
-            </a>
-          </div>
-        )
-      }
-    </div>
-  </Section>
 </Layout>
