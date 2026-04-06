@@ -11,6 +11,7 @@
 .prose :where(code):not(:where([class~='not-prose'] *)) {
   color: var(--astro-code-token-string);
   background-color: var(--astro-code-background);
+  font-weight: normal;
   padding-top: 0.3em;
   padding-right: 0.3em;
   padding-bottom: 0.2em;
@@ -20,6 +21,11 @@
 
 pre.astro-code code {
   padding: 0;
+}
+
+.prose a code {
+  color: inherit !important;
+  background-color: transparent !important;
 }
 
 .prose :where(code):not(:where([class~='not-prose'] *))::before {
@@ -53,8 +59,13 @@ pre.astro-code code {
   padding-top: 2em;
 }
 
-/* Allium syntax highlighting */
+/* Allium syntax highlighting — container */
 pre:has(code.language-allium) {
+  background: #f8f8f8 !important;
+  color: #2d3748 !important;
+}
+
+.dark pre:has(code.language-allium) {
   background: #1e1e2e !important;
   color: #cdd6f4 !important;
 }
@@ -70,16 +81,29 @@ code.language-allium span {
   border-radius: 0 !important;
 }
 
-.allium-keyword { color: #cba6f7; }
-.allium-type { color: #89b4fa; }
-.allium-field { color: #f9e2af; }
-.allium-string { color: #a6e3a1; }
-.allium-comment { color: #6c7086; font-style: italic; }
-.allium-operator { color: #f38ba8; }
-.allium-number { color: #fab387; }
-.allium-property { color: #94e2d5; }
-.allium-punctuation { color: #9399b2; }
-.allium-builtin { color: #f5c2e7; }
+/* Allium syntax highlighting — light mode */
+.allium-keyword { color: #c57200; font-weight: 600; }
+.allium-type { color: #2a7a3b; }
+.allium-field { color: #4a5568; }
+.allium-string { color: #2a7a3b; }
+.allium-comment { color: #8899a6; font-style: italic; }
+.allium-operator { color: #4a5568; }
+.allium-number { color: #7c3aed; }
+.allium-property { color: #4a5568; }
+.allium-punctuation { color: #4a5568; }
+.allium-builtin { color: #7c3aed; }
+
+/* Allium syntax highlighting — dark mode */
+.dark .allium-keyword { color: #f0a050; font-weight: 600; }
+.dark .allium-type { color: #6cc87e; }
+.dark .allium-field { color: #c8ccd4; }
+.dark .allium-string { color: #6cc87e; }
+.dark .allium-comment { color: #6c7086; font-style: italic; }
+.dark .allium-operator { color: #c8ccd4; }
+.dark .allium-number { color: #c4a0f5; }
+.dark .allium-property { color: #c8ccd4; }
+.dark .allium-punctuation { color: #8890a0; }
+.dark .allium-builtin { color: #c4a0f5; }
 
 .dark .prose span.pullquote:after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' aria-hidden='true'><path d='M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z' fill='white'/></svg>");
