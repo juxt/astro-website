@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'A bug on the dark side of the Moon'
-description: 'How a specification found what fifty-seven years of scrutiny missed.'
+description: 'How a specification surfaced a defect in the Apollo flight code.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-04-07'
@@ -12,7 +12,7 @@ tags:
   - 'allium'
 ---
 
-<p class="lede">The Apollo Guidance Computer (AGC) is one of the most scrutinised codebases in history. Thousands of developers have read it. Academics have <a href="https://ntrs.nasa.gov/citations/19750004273">published papers on its reliability</a>. Emulators run it instruction by instruction. We found a bug in it that had been missed for fifty-seven years: a resource lock in the gyro control code that leaks on an error path, silently disabling the guidance platform's ability to realign.</p>
+<p class="lede">The Apollo Guidance Computer (AGC) is one of the most scrutinised codebases in history. Thousands of developers have read it. Academics have <a href="https://ntrs.nasa.gov/citations/19750004273">published papers on its reliability</a>. Emulators run it instruction by instruction. We found a bug in it: a resource lock in the gyro control code that leaks on an error path.<sup><a href="#fn-dagger">†</a></sup></p>
 
 We used Claude and [Allium](https://juxt.github.io/allium), our open-source behavioural specification language, to distil 130,000 lines of AGC assembly into 12,500 lines of specs. The specs were derived from the code itself, and the process signposted us directly to the defect.
 
@@ -20,13 +20,13 @@ We used Claude and [Allium](https://juxt.github.io/allium), our open-source beha
 
 The source code has been publicly available since 2003, when Ron Burkey and a team of volunteers began painstakingly [transcribing it by hand](http://www.ibiblio.org/apollo/) from printed listings at the [MIT Instrumentation Laboratory](https://en.wikipedia.org/wiki/MIT_Instrumentation_Laboratory). In 2016, former NASA intern Chris Garry's [GitHub repository](https://github.com/chrislgarry/Apollo-11) went viral, topping the trending page. Thousands of developers scrolled through the assembly language of a machine with 2K of erasable RAM and a 1MHz clock.
 
-The AGC's programs were stored in 74KB of [core rope](https://en.wikipedia.org/wiki/Core_rope_memory): copper wire threaded by hand through tiny magnetic cores in a factory (a wire passing through a core was a 1; a wire bypassing it was a 0). The women who wove it were known internally as the "Little Old Ladies", and the memory itself was called LOL memory. The program was physically woven into the hardware. Ken Shirriff has analysed it down to [individual gates](https://www.righto.com/), and the [Virtual AGC project](https://www.ibiblio.org/apollo/index.html) runs the software in emulation, having confirmed the recovered source byte-for-byte against the original core rope dumps.
+The AGC's programs were stored in 74KB of [core rope](https://en.wikipedia.org/wiki/Core_rope_memory): copper wire threaded by hand through tiny magnetic cores in a factory (a wire passing through a core was a 1; a wire bypassing it was a 0). The women who wove it were known internally as the "Little Old Ladies", and the memory itself was called LOL memory. The program was physically woven into the hardware. Mike Stewart has analysed it down to [individual gates](https://www.youtube.com/@mikestewart8928), and the [Virtual AGC project](https://www.ibiblio.org/apollo/index.html) runs the software in emulation. The sole source for the Apollo 11 flight programs is a pair of printouts in the [MIT Museum's collection](https://news.mit.edu/2019/behind-scenes-apollo-mission-0718).
 
 As far as we can determine, no formal verification, model checking or static analysis has been published against the flight code. The scrutiny has been deep, but it has been a particular kind of scrutiny: reading the code, emulating the code, verifying the transcription.
 
 We took a different approach. We used [Allium](https://juxt.github.io/allium) to distil a behavioural specification from the [Inertial Measurement Unit](https://airandspace.si.edu/collection-objects/computer-controllerinertial-measurement-unit-apollo-guidancenavigation-system/nasm_A20010305004) (IMU) subsystem, the gyroscope-based platform that tells the spacecraft which way it is pointing. The specification models the lifecycle of every shared resource: when it is acquired, when it must be released, and on which paths.
 
-It surfaced a flaw that reading and emulation had missed.
+It surfaced a flaw.
 
 ## Losing the reference
 
@@ -47,15 +47,13 @@ When the torque completes normally, the routine exits via `STRTGYR2` and the `LG
 
 Four bytes.
 
-Once `LGYRO` is stuck, every subsequent attempt to torque the gyros finds the lock held, sleeps waiting for a wake signal that will never come, and hangs. Fine alignment, drift compensation, manual gyro torque: all blocked.
-
 On 21 July 1969, while Neil Armstrong and Buzz Aldrin walked on the lunar surface, [Michael Collins](https://en.wikipedia.org/wiki/Michael_Collins_(astronaut)) orbited alone in the Command Module [*Columbia*](https://en.wikipedia.org/wiki/Apollo_11). Every two hours he disappeared behind the Moon, out of radio contact with Earth. "I am alone now, truly alone, and absolutely isolated from any known life. I am it," he wrote in [*Carrying the Fire*](https://en.wikipedia.org/wiki/Carrying_the_Fire). "If a count were taken, the score would be three billion plus two over on the other side of the moon, and one plus God knows what on this side."
 
 During each pass he ran [Program 52](https://en.wikipedia.org/wiki/Apollo_PGNCS), a star-sighting alignment that kept the guidance platform pointed in the right direction. If the platform drifted, the engine burn to bring him home would point the wrong way.
 
 ## Radio silence
 
-Here's how the bug might have manifested.
+Here's how we imagine the bug might have manifested.<sup><a href="#fn-ddagger">‡</a></sup>
 
 Collins has just finished his star sightings at the optics station in the lower equipment bay and keyed in the final commands. The computer is torquing the gyroscopes to apply the correction across all three axes.
 
@@ -77,21 +75,21 @@ Behind the Moon, alone, with a computer that was accepting commands and doing no
 
 ## The known landmarks
 
-Margaret Hamilton (as ["rope mother"](https://airandspace.si.edu/stories/editorial/rope-mother-margaret-hamilton) for LUMINARY) approved the final flight programs before they were woven into core rope memory. Her team at the MIT Instrumentation Laboratory pioneered concepts we now [take for granted](https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)#Legacy): priority scheduling, asynchronous multitasking, restart protection and software-based error recovery. Even the term 'software engineering' is hers.
+Margaret Hamilton (as ["rope mother"](https://airandspace.si.edu/stories/editorial/rope-mother-margaret-hamilton) for COMANCHE) approved the final flight programs before they were woven into core rope memory. Her team at the MIT Instrumentation Laboratory pioneered concepts we now [take for granted](https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)#Legacy): priority scheduling, asynchronous multitasking, restart protection and software-based error recovery. Even the term 'software engineering' is attributed to her.
 
-Their priority scheduling saved the Apollo 11 landing when the 1202 alarms fired during descent, shedding low-priority tasks under load exactly as designed. Most modern systems don’t handle overload that gracefully.
+Their restart protection saved the Apollo 11 landing when the 1202 alarms fired during descent, clearing the backlog of stalled jobs and restarting only those the programmers had marked as essential. Most modern systems don’t handle overload that gracefully.
 
-The most serious bugs that did surface were specification errors, not coding mistakes. Don Eyles, who wrote the lunar landing guidance code, [documented several](https://www.doneyles.com/LM/Tales.html). For example, the ICD for the [rendezvous radar](https://en.wikipedia.org/wiki/Apollo_Lunar_Module#Rendezvous_radar) specified that two 800 Hz power supplies would be frequency-locked but said nothing about phase synchronisation. The resulting phase drift made the antenna appear to dither, generating roughly 6,400 spurious interrupts per second per angle and consuming roughly 13% of the computer's capacity during Apollo 11's descent. This was the underlying cause of the 1202 alarms.
+The most serious bugs that did surface were specification errors, not coding mistakes. Don Eyles, who wrote the lunar landing guidance code, [documented several](https://www.doneyles.com/LM/Tales.html). For example, the ICD for the [rendezvous radar](https://en.wikipedia.org/wiki/Apollo_Lunar_Module#Rendezvous_radar) specified that two 800 Hz power supplies would be frequency-locked but said nothing about their voltage levels or phase relationship. The conventional explanation blamed an arbitrary phase offset between the supplies. But recent experimental work by [Mike Stewart](https://www.youtube.com/watch?v=dT33c70EIYk) on Apollo hardware has reproduced the exact oscillation seen in the Apollo 11 telemetry without any phase shift at all. The voltage difference between the two references was enough on its own to drive the system manic. This appears to be the underlying cause of the 1202 alarms.
 
-This defect has the same shape. [`BADEND`](https://github.com/chrislgarry/Apollo-11/blob/master/Luminary099/IMU_MODE_SWITCHING_ROUTINES.agc#L717) is a general-purpose termination routine shared by all IMU mode-switching operations. It clears `MODECADR` (the stall register), wakes sleeping jobs, and exits. But `LGYRO` is a gyro-specific lock, acquired only by the pulse-torquing code and released only by the normal completion path in `STRTGYR2`. When the error path routes through `BADEND`, it handles the general resources correctly, but not the gyro-specific lock.
+[`BADEND`](https://github.com/chrislgarry/Apollo-11/blob/master/Luminary099/IMU_MODE_SWITCHING_ROUTINES.agc#L717) is a general-purpose termination routine shared by all IMU mode-switching operations. It clears `MODECADR` (the stall register), wakes sleeping jobs, and exits. But `LGYRO` is a gyro-specific lock, acquired only by the pulse-torquing code and released only by the normal completion path in `STRTGYR2`. When the error path routes through `BADEND`, it handles the general resources correctly, but not the gyro-specific lock.
 
-The AGC was written so defensively that latent faults like this would be silently corrected by the [restart logic](https://www.ibiblio.org/apollo/hrst/archive/1029.pdf), which clears `LGYRO` as a side effect of full erasable-memory initialisation. Any test that happened to trigger a restart after the bug would see the system recover seamlessly.
+The AGC was written so defensively that `LGYRO` would be cleared by any [restart](https://www.ibiblio.org/apollo/hrst/archive/1029.pdf) or major program change. Normal recovery procedure after a failed alignment would begin with a program change, clearing the lock automatically. Partly because of this, [the issue](https://www.ibiblio.org/apollo/Documents/contents_of_luminary_1d.pdf#page=52) was only identified after the Apollo 11 mission.
 
-The defensive coding hid the problem, but it didn't eliminate it. A cage event without a subsequent restart would still leave the gyros locked. Collins would have no way to realign the guidance platform and no diagnostic clue pointing to the fix.
+In the narrow circumstances where the bug could persist, automatic gyro compensation would repeatedly attempt to torque, stacking up jobs until the computer alarmed.
 
 ## Star sighting
 
-We found this defect by distilling a behavioural specification of the IMU subsystem using [Allium](https://juxt.github.io/allium), an AI-native behavioural specification language. The specification models each shared resource as an entity with a lifecycle: acquired, held, released.
+We found the issue by distilling a behavioural specification of the IMU subsystem using [Allium](https://juxt.github.io/allium), an AI-native behavioural specification language. The specification models each shared resource as an entity with a lifecycle: acquired, held, released.
 
 The IMU entity declares a `gyros_busy` field modelling `LGYRO`. Two rules govern it:
 
@@ -132,7 +130,7 @@ The specification approaches from the other direction: starting from `LGYRO` and
 
 **Tests verify the code as written; a behavioural specification asks what the code is for.**
 
-A specification distilled by Allium models resource lifecycles across all paths, including the ones nobody thought to test. You can view the [Allium specifications](https://github.com/juxt/Apollo-11/tree/master/specs) and [reproduction of the bug](https://github.com/juxt/agc-lgyro-lock-leak-bug) on GitHub.
+A specification distilled by Allium models resource lifecycles across all paths, including the ones that are hardest to test. You can view the [Allium specifications](https://github.com/juxt/Apollo-11/tree/master/specs) and [reproduction of the bug](https://github.com/juxt/agc-lgyro-lock-leak-bug) on GitHub.
 
 ## Course correction
 
@@ -144,13 +142,17 @@ Modern languages have tried to make lock leaks structurally impossible: Go has [
 
 Nevertheless, lock leaks persist. MITRE classifies the pattern as [CWE-772](https://cwe.mitre.org/data/definitions/772.html): "Missing Release of Resource after Effective Lifetime", and rates its likelihood of exploitation as high. Not all resources are managed by a language runtime. Database connections, distributed locks, file handles in shell scripts, infrastructure that must be torn down in the right order: these are still often the programmer's responsibility. Anywhere the programmer is responsible for writing the cleanup, the same bug is waiting.
 
-Every Apollo crew came home safely. But the IMU mode-switching routines were carried forward across [missions](https://www.ibiblio.org/apollo/Luminary.html) in both the Command Module software (COMANCHE) and the Lunar Module software (LUMINARY). The fault was never noticed and never fixed.
+Every Apollo crew came home safely. The defect was present across [missions](https://www.ibiblio.org/apollo/Luminary.html) in both the Command Module software (COMANCHE) and the Lunar Module software (LUMINARY) from Apollo 11 to 14.
 
 ---
 
-A fifty-seven-year-old bug hid in flight-proven assembly. What's hiding in yours? [Let's talk](https://www.juxt.pro/contact/).
+A latent issue sat in flight-proven assembly. What's hiding in yours? [Let's talk](https://www.juxt.pro/contact/).
 
 *Thanks to [Farzad "Fuzz" Pezeshkpour](https://www.linkedin.com/in/dazraf) for independently [reproducing the bug](https://github.com/juxt/agc-lgyro-lock-leak-bug), and to [Danny Smith](https://www.linkedin.com/in/dansmithy/) and [Prashant Gandhi](https://www.linkedin.com/in/pmgandhi/) for reviewing early drafts of this article.*
+
+*<span id="fn-dagger">†</span> 8 April 2026. This article has been revised to correct factual errors. As [Ron Burkey](https://sandroid.org/) put it: "it's often dangerous to assert that just because a given AGC issue hadn't been fixed that it hadn't been noticed". We are grateful to him and [Mike Stewart](https://www.youtube.com/@mikestewart8928) for sharing their deep knowledge of the Apollo programme and for taking the time to set the record straight.*
+
+*<span id="fn-ddagger">‡</span> 8 April 2026. The scenario described above could not have played out as written. As [Mike Stewart](https://github.com/thewonderidiot) pointed out, `LGYRO` is also zeroed in `STARTSB2`, which is executed via `GOPROG2` on any major program change. Starting a new P52 would itself clear the lock before the torque began. Hitting `BADEND` while actively pulse-torquing is rare, and avoided by normal procedure. In the very specific scenarios where the bug can be triggered and persist, it does not fail silently: multiple jobs stack up attempting to torque the gyros until the computer runs out of space and a program alarm is triggered. The issue was found before the flight of Apollo 14, and a description of how it might occur along with a recovery procedure was added to the [Apollo 14 Program Notes](https://www.ibiblio.org/apollo/Documents/LUM159_text.pdf).*
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function() {

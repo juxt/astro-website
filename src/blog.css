@@ -1,3 +1,7 @@
+.prose sup a {
+  text-decoration: none;
+}
+
 .prose .lede {
   font-size: 1.375rem;
   line-height: 1.5;
