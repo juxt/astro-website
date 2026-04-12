@@ -9,8 +9,4 @@ image: 'mal.jpg'
 linkedin: 'malcolmsparks'
 twitter: 'malcolmsparks'
 github: 'malcolmsparks'
-
-feature:
-  jobTitle: true
-  link: /team/mal
 ---
