@@ -86,7 +86,9 @@ export default defineConfig({
   site: getSiteUrl(),
   redirects: {
     '/careers/senior-kotlin-engineer': '/careers/kotlin-engineer/',
-    '/careers/senior-kotlin-engineer/': '/careers/kotlin-engineer/'
+    '/careers/senior-kotlin-engineer/': '/careers/kotlin-engineer/',
+    '/team/mal': '/team/hga',
+    '/team/mal/': '/team/hga'
   },
   markdown: {
     shikiConfig: {

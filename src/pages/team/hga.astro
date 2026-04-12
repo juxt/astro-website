@@ -1,0 +1,120 @@
+---
+import * as myData from '../../data/people/hga.md'
+
+const { code, jobTitle, fullName } = myData.frontmatter
+
+import { getImage, Image } from 'astro:assets'
+import ProfilePage from '@components/team/ProfilePage.astro'
+
+import Section from '@components/team/Section.astro'
+import TwoColumnSection from '@components/team/TwoColumnSection.astro'
+import GreetingSection from '@components/team/GreetingSection.astro'
+import QuoteSection from '@components/team/QuoteSection.astro'
+import LatestBlogsSection from '@components/team/LatestBlogsSection.astro'
+import ResourceCollectionSection from '@components/team/ResourceCollectionSection.astro'
+import GitHubRepositoriesSection from '@components/team/GitHubRepositoriesSection.astro'
+import GitHubRepositoryItem from '@components/team/GitHubRepositoryItem.astro'
+import ContactSection from '@components/team/ContactSection.astro'
+import ResourceItem from '@components/team/ResourceItem.astro'
+import SmallTitle from '@components/team/SmallTitle.astro'
+import SimpleColumn from '@components/team/SimpleColumn.astro'
+import FeatureSection from '@components/team/FeatureSection.astro'
+import FeatureText from '@components/team/FeatureText.astro'
+import FeatureYouTube from '@components/team/FeatureYouTube.astro'
+import GallerySection from '@components/team/GallerySection.astro'
+import GalleryImage from '@components/team/GalleryImage.astro'
+import MeetOtherExecs from '@components/team/MeetOtherExecs.astro'
+
+description: "Meet Henry Garner, CTO at JUXT. Learn about his expertise in AI-assisted engineering, data science and functional programming."
+---
+
+<ProfilePage title={fullName + ' - ' + jobTitle}>
+  <GreetingSection {...myData.frontmatter}>
+    <Fragment slot='expert-in'>
+      <li>AI-assisted Engineering</li>
+      <li>Data Science</li>
+      <li>Functional Programming</li>
+      <li>Technical Leadership</li>
+    </Fragment>
+    <Fragment slot='bio'>
+      As JUXT's CTO, I lead our technical strategy and help clients build
+      better software systems. I'm particularly interested in how AI is
+      reshaping the practice of software engineering, and how teams can
+      adopt these tools effectively.
+    </Fragment>
+  </GreetingSection>
+
+  <FeatureSection flip={true}>
+    <FeatureText
+      title='From Unstructured to Actionable: AI-Powered Regulatory Intelligence'
+      subtitle="Henry's talk at XT25 Fintech Conference, London, June 2025"
+      bgColor='yellow'
+    >
+      <SimpleColumn>
+        <p>
+          AI research has always had two goals: building systems that replace
+          human judgment (AI), and building systems that extend it. William
+          Ross Ashby called the second one Intelligence Amplification (IA) back
+          in 1956. We're fixated on the first, but the commercial successes
+          keep coming from the second.
+        </p>
+        <p>
+          Aristotle had a word for the judgment we need to preserve:
+          phronesis, practical wisdom. This talk draws on medicine and ethics
+          to ask how we hold onto it. When AI suggests solutions, do we
+          evaluate them thoughtfully, or do we gradually lose the situational
+          awareness needed for proper oversight?
+        </p>
+      </SimpleColumn>
+    </FeatureText>
+
+    <FeatureYouTube
+      slot='image'
+      title='From Unstructured to Actionable: AI-Powered Regulatory Intelligence'
+      embedUrl='https://www.youtube.com/embed/CUp70_daGjo'
+    />
+  </FeatureSection>
+
+  <FeatureSection>
+    <FeatureText
+      title='The Gradient of Interesting'
+      subtitle="Henry's talk at JUXT Christmas Party, Science Gallery London, December 2025"
+      bgColor='yellow'
+    >
+      <SimpleColumn>
+        <p>
+          Filing cabinets and lightbulbs aren't the obvious route into software
+          engineering. Inspired by the Quantum Untangled exhibition at the
+          Science Gallery London, this talk traces an unconventional path into
+          the industry through the Big Ideas of David Deutsch and the
+          philosophy of good explanations.
+        </p>
+        <p>
+          Why do we see such polarisation between those who wield AI despite
+          its flaws and those who are fervently anti-AI despite its
+          extraordinary successes? Human progress is full of incredibly useful
+          models that turned out to be absolutely wrong. We didn't know that
+          reading glasses would lead to Galileo's telescopes, or that telephone
+          valve amplifiers would enable the first electronic computers. We
+          simply can't know where the next stepping stones will come from.
+        </p>
+      </SimpleColumn>
+    </FeatureText>
+
+    <FeatureYouTube
+      slot='image'
+      title='The Gradient of Interesting'
+      embedUrl='https://www.youtube.com/embed/ZONNfszeHyM'
+    />
+  </FeatureSection>
+
+  <MeetOtherExecs {...myData.frontmatter} />
+
+  <ContactSection {...myData.frontmatter} />
+
+  <LatestBlogsSection
+    bgColor='yellow'
+    title="Henry's Recent Blogs and Articles"
+    {...myData.frontmatter}
+  />
+</ProfilePage>
