@@ -1,5 +1,4 @@
 ---
-draft: true
 author: 'ceb'
 layout: '../../layouts/BlogPost.astro'
 title: 'Building Meridian: a risk system in weeks'
