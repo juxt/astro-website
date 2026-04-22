@@ -2,6 +2,7 @@
 import { ContactUsForm } from '@components/ContactUsForm'
 import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
+import XT26Agenda from '@components/XT26Agenda.astro'
 import speakers from '../data/xt26/speakers.json'
 
 const subject = 'XT26 Request for Invite'
@@ -60,10 +61,10 @@ const subject = 'XT26 Request for Invite'
         >
       </div>
       <a
-        href='#apply'
+        href='#attend'
         class='inline-block border border-white/40 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300'
       >
-        Apply for an Invite
+        Apply to Attend
       </a>
     </div>
 
@@ -116,8 +117,7 @@ const subject = 'XT26 Request for Invite'
               banking, hedge funds, and financial services.
             </p>
             <p>
-              <span class='text-gray-800 font-normal'>No sales pitches, </span>
-              just real-world experience shared by peers who are actually doing engineering at scale.
+              This is <span class='text-gray-800 font-normal'>pure thought leadership</span>. Real-world experience shared by peers who are actually doing engineering at scale.
             </p>
             <p>
               The conference has grown organically each year, building a
@@ -206,6 +206,38 @@ const subject = 'XT26 Request for Invite'
     </div>
   </section>
 
+  <!-- Agenda Section -->
+  <section id='agenda' class='bg-gray-50'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          The Day
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-6'
+        >
+          Agenda
+        </h2>
+        <p class='text-gray-500 text-lg max-w-2xl font-light'>
+          Nine talks, an expert panel, and an evening reception.
+        </p>
+      </div>
+
+      <div
+        class='w-full bg-white rounded-lg overflow-hidden p-6 sm:p-10 md:p-14 shadow-sm'
+      >
+        <XT26Agenda />
+      </div>
+      <div class='w-full flex justify-end'>
+        <p class='text-sm text-gray-500 pt-4'>
+          *Agenda and speakers are subject to change
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Gradient Divider -->
   <div class='bg-moonlight'>
     <div class='max-w-4xl mx-auto px-6'>
@@ -217,17 +249,15 @@ const subject = 'XT26 Request for Invite'
   </div>
 
   <!-- Speaker Form Section -->
-  <section id='apply' class='bg-moonlight'>
+  <section id='attend' class='bg-moonlight'>
     <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
       <div class='max-w-2xl mx-auto'>
         <div class='flex flex-col items-center text-center mb-16'>
           <h2 class='text-4xl md:text-5xl font-extralight text-white mb-6'>
-            Interested in coming along?
+            Interested in Attending?
           </h2>
           <p class='text-gray-400 text-lg font-light max-w-md'>
-            This event is invite-only and free for attendees.<br />
-             If you're interested in receiving an invite leave us your details,
-            and we'll get back to you.
+            XT26 is an invite-only event. If you're interested in attending please fill out the form below.
           </p>
         </div>
 
