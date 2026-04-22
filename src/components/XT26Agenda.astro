@@ -1,0 +1,136 @@
+---
+const agenda = [
+  {
+    time: '08:30',
+    title: 'Registration and Morning Refreshments',
+    isSpecialEvent: true
+  },
+  {
+    time: '09:00',
+    title: 'Housekeeping',
+    isSpecialEvent: true
+  },
+  {
+    time: '09:05',
+    title: 'Opening Remarks',
+    subTitle: 'Jon Pither | JUXT | CEO & Founder',
+    isSpecialEvent: true
+  },
+  {
+    time: '09:15',
+    title: 'How to Survive the Claudpocalypse',
+    subTitle: 'Martin Trojer | Meta | Distinguished Engineer'
+  },
+  {
+    time: '09:50',
+    title:
+      'Data Cartography: From Static Blueprints to Navigable Maps for Data-Driven Organisations',
+    subTitle:
+      'Simone Steel | Deutsche Bank | Managing Director, CIO Data & AI, Corporate Bank'
+  },
+  {
+    time: '10:20',
+    title: 'Coffee and Networking',
+    isSpecialEvent: true
+  },
+  {
+    time: '10:50',
+    title: 'TBD',
+    subTitle:
+      'Will Bassett | HSBC | CIO, Equities and Cross Asset Financing Technology'
+  },
+  {
+    time: '11:25',
+    title: 'Platform as a Product in a 50-Year-Old Bank',
+    subTitle: 'Abby Bangser | Syntasso | Founding Principal Engineer'
+  },
+  {
+    time: '12:00',
+    title: 'Close to the Metal: Modern Low-Latency Development',
+    subTitle: 'Tom Dellman | Chronicle Software | Director of Engineering'
+  },
+  {
+    time: '12:30',
+    title: 'Lunch',
+    isSpecialEvent: true
+  },
+  {
+    time: '13:30',
+    title: 'Spectroscopy for Software: Measuring Legacy Code with AI',
+    subTitle: 'Henry Garner | JUXT | Principal Engineer & AI Chapter Lead'
+  },
+  {
+    time: '14:05',
+    title: 'Why Coding Agents Fail to Boost Productivity',
+    subTitle: 'Nik Tkachev | JetBrains'
+  },
+  {
+    time: '14:40',
+    title: 'TBD',
+    subTitle:
+      'Prof Paula Buttery | University of Cambridge | Professor of Language and Machine Learning'
+  },
+  {
+    time: '15:10',
+    title: 'Coffee and Networking',
+    isSpecialEvent: true
+  },
+  {
+    time: '15:30',
+    title: 'Expert Panel: How Far Can We Accelerate with AI?',
+    subTitle: [
+      'Michael Jones | loveholidays | CTO',
+      'Payal Jain | Citibank | Managing Director',
+      'And more to be announced'
+    ]
+  },
+  {
+    time: '16:35',
+    title: 'AI for Architects',
+    subTitle: 'Sam Newman | Independent | Author, Building Microservices'
+  },
+  {
+    time: '17:05',
+    title: 'Closing Remarks',
+    isSpecialEvent: true
+  },
+  {
+    time: '17:20',
+    title: 'Evening Reception',
+    subTitle: 'Canapés, Drinks, Networking',
+    isSpecialEvent: true
+  }
+]
+---
+
+{
+  agenda.map(({ time, title, subTitle, isSpecialEvent }, index) => {
+    const nextItem = index < agenda.length - 1 ? agenda[index + 1] : null
+    const isConsecutiveSpecialEvent = isSpecialEvent && nextItem?.isSpecialEvent
+
+    return (
+      <div>
+        <div
+          class:list={[
+            'grid grid-cols-1 sm:grid-cols-5',
+            { 'bg-white': !isSpecialEvent }
+          ]}
+          style={isSpecialEvent ? 'background-color: #c7e5b8;' : ''}
+        >
+          <p class='px-5 pt-5 sm:p-5 font-semibold text-lg align-text-top text-center text-gray-800 sm:border-r-2 sm:border-black'>
+            {time}
+          </p>
+          <div class='px-5 pb-5 sm:p-5 sm:col-span-4'>
+            <h2 class='font-bold text-xl text-black'>{title}</h2>
+            {subTitle &&
+              (Array.isArray(subTitle) ? subTitle : [subTitle]).map((s) => (
+                <p class='font-light text-sm text-gray-700'>{s}</p>
+              ))}
+          </div>
+        </div>
+
+        {isConsecutiveSpecialEvent && <div class='h-4' />}
+      </div>
+    )
+  })
+}

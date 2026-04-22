@@ -2,6 +2,7 @@
 import { ContactUsForm } from '@components/ContactUsForm'
 import AssetImage from '@components/team/AssetImage.astro'
 import Layout from '@layouts/Layout.astro'
+import XT26Agenda from '@components/XT26Agenda.astro'
 import speakers from '../data/xt26/speakers.json'
 
 const subject = 'XT26 Request for Invite'
@@ -202,6 +203,38 @@ const subject = 'XT26 Request for Invite'
           </div>
           <p class='text-sm text-juxt font-semibold tracking-[0.1em] uppercase'>And more to be<br/>announced...</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda Section -->
+  <section id='agenda' class='bg-gray-50'>
+    <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
+      <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
+        <p
+          class='text-juxt text-xs font-semibold tracking-[0.2em] uppercase mb-4'
+        >
+          The Day
+        </p>
+        <h2
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-6'
+        >
+          Agenda
+        </h2>
+        <p class='text-gray-500 text-lg max-w-2xl font-light'>
+          Nine talks, an expert panel, and an evening reception.
+        </p>
+      </div>
+
+      <div
+        class='w-full bg-white rounded-lg overflow-hidden p-6 sm:p-10 md:p-14 shadow-sm'
+      >
+        <XT26Agenda />
+      </div>
+      <div class='w-full flex justify-end'>
+        <p class='text-sm text-gray-500 pt-4'>
+          *Agenda and speakers are subject to change
+        </p>
       </div>
     </div>
   </section>
