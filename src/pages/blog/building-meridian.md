@@ -84,7 +84,9 @@ Between Allium and `CLAUDE.md`, there's very little room for Claude to drift off
 
 ---
 
-## Why this isn't AI-generated software
+## The code I'd have written, given the time
+
+Let me be direct about what this is. Meridian is AI-generated software — Claude typed every line — and I'm comfortable with that. It's my code. I designed it, I architected it, I reviewed every commit for adherence to the engineering rigour I'd apply to any serious system. I understand every part of how it works, because I shaped all of it. The difference between this code and the version I'd have hand-typed isn't quality or correctness — it's keystrokes and time. Given the time to bash out every character myself, this is what I'd have written.
 
 Two concerns come up every time I describe this workflow — first, that code quality degrades under AI authorship, and second, that systems built this way are impossible to maintain or reason about. Both concerns are legitimate when the workflow is unstructured; neither survives contact with a disciplined one, and I've been watching both closely.
 
