@@ -60,11 +60,13 @@ My workflow has four stages.
 
 **4. Implementation.** By the time I reach this stage, all the hard thinking is done. The implementation plan itself gets reviewed line by line — the approach, the sequence, the specific files to touch, whether it adheres to the principles in `CLAUDE.md`. What remains is mechanical: going over the plan and implementing the things that need implementing to get the feature complete. Features land in a single session, tests passing first time. All of Meridian was built this way.
 
-The discipline is held together by two tools that live with the code across every session and every change — a specification language for capturing what the software must do, and a principles file for how it must be built. Together with the ADRs that accumulate from every elicitation, they mean Meridian is completely documented: every domain behaviour formally specified, every architectural decision captured along with the options I considered and rejected and why. If you joined the project tomorrow, you wouldn't need to reconstruct the design from the code. The design is written down, along with its entire history. For a system intended to run in regulated finance, that's the whole point.
+Between the ADRs that accumulate from every elicitation and the Allium specifications that capture every behavioural contract, Meridian ends up completely documented — every architectural decision recorded along with the options I considered and rejected and why, every piece of domain behaviour formally specified. If you joined the project tomorrow, you wouldn't need to reconstruct the design from the code. The design is written down, along with its entire history. For a system intended to run in regulated finance, that's the whole point.
+
+Across every session and every change, the discipline itself rests on two tools that live with the code: a specification language for capturing what the software must do, and a principles file for how it must be built. Here they are.
 
 ### Allium: the specification language that makes this tractable
 
-The first is **[Allium](https://juxt.github.io/allium/)** — JUXT's open-source specification language — and I'm going to talk about it at some length because it's genuinely the thing that makes this workflow work.
+The first is **[Allium](https://juxt.github.io/allium/)**, JUXT's open-source specification language — genuinely the thing that makes this workflow work.
 
 The existing options don't fit the way agentic development actually happens. Prose is too ambiguous — AI will happily interpret it, but different sessions will interpret it differently, and you'll find yourself litigating the same design questions over and over. Code is too premature — it commits to an implementation before the design is settled. Traditional formal methods are too heavy — they interrupt the flow of a design conversation rather than carrying it forward.
 
