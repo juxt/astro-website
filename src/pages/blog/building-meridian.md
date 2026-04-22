@@ -1,5 +1,6 @@
 ---
 author: 'ceb'
+category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 title: 'Building Meridian: a risk system in weeks'
 description: 'Decades of engineering discipline meets agentic delivery. How I built a post-trade risk management system in weeks, with Claude Code as my collaborator.'
