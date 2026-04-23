@@ -65,5 +65,11 @@
     "role": "CIO, Equities and Cross Asset Financing Technology",
     "company": "HSBC",
     "image": "/src/assets/xt26/xt26-willbassett.jpg"
+  },
+  {
+    "name": "Joel King",
+    "role": "Principal Engineer",
+    "company": "NatWest Group",
+    "image": "/src/assets/xt26/xt26-joelking.jpg"
   }
 ]
