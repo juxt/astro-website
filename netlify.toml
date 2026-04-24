@@ -4,6 +4,10 @@
 [context.production]
   command = "yarn build"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap-index.xml"

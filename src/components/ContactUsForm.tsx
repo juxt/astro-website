@@ -37,6 +37,20 @@ export function ContactUsForm(props: ContactUsFormProps) {
   function submitContactForm(data: Record<string, unknown>) {
     const json = JSON.stringify(data)
 
+    // Secondary path (XT26 only): forward into Orbit via Netlify function.
+    // Fire-and-forget — never affects the user-visible submit result, which
+    // is driven entirely by the primary web3forms response below.
+    if (eventName === 'XT26') {
+      fetch('/.netlify/functions/xt26-register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json
+      }).catch((err) => {
+        console.warn('orbit sync failed (non-fatal)', err)
+      })
+    }
+
+    // Primary: web3forms (email notification + audit trail).
     return fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
