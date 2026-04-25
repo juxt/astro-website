@@ -15,7 +15,7 @@ tags:
 
 [Teller](https://en.wikipedia.org/wiki/Edward_Teller) interrupted: the approach violated the exclusion principle. Dirac kept asking "Is it unitary?" Bohr strode to the stage and lectured Feynman on the uncertainty principle, having mistaken the diagrams for literal pictures of particle paths. The presentation was a disaster.
 
-Within eighteen months, [Freeman Dyson](https://en.wikipedia.org/wiki/Freeman_Dyson) had [proved the approaches equivalent](https://en.wikipedia.org/wiki/Feynman_diagram), and the cartoons were doing in hours what formal methods took months to achieve.
+The diagrams were a notation: straight lines for particles, wavy lines for forces, vertices for interactions. Each element mapped to a term in the mathematics, but physicists could reason through the spatial arrangement of the picture instead of grinding through pages of algebra. Within eighteen months, [Freeman Dyson](https://en.wikipedia.org/wiki/Freeman_Dyson) had [proved the approaches equivalent](https://en.wikipedia.org/wiki/Feynman_diagram), and the cartoons were doing in hours what formal methods took months to achieve.
 
 Feynman's [Nobel lecture](https://www.nobelprize.org/prizes/physics/1965/feynman/lecture/) seventeen years later was unusually candid. "We have a habit in writing articles published in scientific journals to make the work as finished as possible, to cover all the tracks, to not worry about the blind alleys or to describe how you had the wrong idea first." The audience at Pocono saw the absence of formalism and concluded the physics was absent too.
 
@@ -31,9 +31,7 @@ The audience at Pocono were pattern matching too. They had a pattern for what se
 
 This is a pattern we have all absorbed. Institutions reinforce it because the formal version is the part they can freeze and transmit: taught in classrooms, examined, audited, passed between people who have never met. [James C. Scott](https://en.wikipedia.org/wiki/James_C._Scott) called the practical knowledge that resists this codification *metis*: the living part, the part that can't survive the freezing.
 
-Professions reinforce the same hierarchy because a formal body of knowledge is what justifies their authority and gatekeeping. Formal reasoning is associated with intellectual seriousness, intuition with craft. The boundary between knowledge work and skilled trades follows the same line.
-
-[Judea Pearl's](https://en.wikipedia.org/wiki/Judea_Pearl) [ladder of causation](https://en.wikipedia.org/wiki/Causal_model) is a recent and rigorous version of this hierarchy: association at the bottom, intervention in the middle, counterfactual reasoning at the top. A useful taxonomy, but a ranking that assumes the formal end is where understanding lives.
+Professions reinforce the same hierarchy because a formal body of knowledge is what justifies their authority and gatekeeping. Formal reasoning is associated with intellectual seriousness, intuition with craft. The boundary between knowledge work and skilled trades follows the same line. [Lagrange](https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange) boasted in 1788 that his [*Mécanique analytique*](https://en.wikipedia.org/wiki/M%C3%A9canique_analytique) contained "no diagrams": algebraic method had superseded geometric intuition. Two centuries later, the room at Pocono was still operating on the same assumption.
 
 ## Reasoning backwards
 
@@ -49,19 +47,21 @@ Working mathematicians [surveyed in the 1940s](https://en.wikipedia.org/wiki/Jac
 
 [Hubert Dreyfus](https://en.wikipedia.org/wiki/Hubert_Dreyfus) spent decades arguing this point: formal reasoning is what novices do while the pattern library is sparse. Once the library is rich enough, the expert perceives rather than derives. Asking them to show their working is asking them to operate at a lower level of skill.
 
+[Kahneman](https://en.wikipedia.org/wiki/Daniel_Kahneman) [reached the same conclusion](https://pubmed.ncbi.nlm.nih.gov/19739881/) after a six-year collaboration with Klein: in regular environments with adequate feedback, the expert's [fast, intuitive judgement](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow) outperforms deliberate analysis.
+
 ## Pattern matching forwards
 
 Even granting that experts recognise situations they've seen before, what about new ideas? Surely the creative act requires more than matching against a library of known patterns?
 
 Einstein is the test case, because no one's creative process has been more carefully studied. [Hofstadter](https://en.wikipedia.org/wiki/Douglas_Hofstadter) and Sander devote a chapter of [*Surfaces and Essences*](https://www.basicbooks.com/titles/douglas-hofstadter/surfaces-and-essences/9780465018475/) to it. In 1905, Einstein noticed that [Wien's law](https://en.wikipedia.org/wiki/Wien%27s_radiation_law) for the entropy of radiation at low density had the same mathematical form as the entropy of an ideal gas. The equations looked alike. He concluded the physics must be alike too, and proposed that light comes in discrete packets, [quanta](https://en.wikipedia.org/wiki/Photon), by analogy with gas molecules. That paper [won him the Nobel Prize](https://www.nobelprize.org/prizes/physics/1921/einstein/facts/).
 
-Two years later, the [equivalence principle](https://en.wikipedia.org/wiki/Equivalence_principle) began with a man falling from a roof: Einstein realised that a person in freefall would feel weightless, and identified that feeling with the absence of gravity. The analogy between two physical sensations became the foundation of [general relativity](https://en.wikipedia.org/wiki/General_relativity). He then spent eight years working out the mathematics.
+Two years later, the [equivalence principle](https://en.wikipedia.org/wiki/Equivalence_principle) began with a man falling from a roof: Einstein realised that a person in freefall would feel weightless, and identified that feeling with the absence of gravity. He was pattern matching a causal relationship: acceleration produces felt weight, and so does gravity, so perhaps they are the same phenomenon. The analogy between two physical causes became the foundation of [general relativity](https://en.wikipedia.org/wiki/General_relativity). He then spent eight years working out the mathematics.
 
 <span class="pullquote left" text-content="The creative act was perceiving a resemblance between two situations that nobody had previously connected."></span>
 
 In each case the analogy preceded the formalism, often by years. The creative act was perceiving a resemblance between two situations that nobody had previously connected. The formal derivation was what happened afterwards, to verify, extend and communicate. [Poincaré](https://en.wikipedia.org/wiki/Henri_Poincar%C3%A9) described his own breakthrough on [Fuchsian functions](https://en.wikipedia.org/wiki/Fuchsian_group) arriving unbidden as he [stepped onto a bus](https://en.wikipedia.org/wiki/Henri_Poincar%C3%A9#Philosophy), after weeks of failed formal effort. It gave the unconscious pattern matching room to surface.
 
-"Every concept we have is essentially nothing but a tightly packaged bundle of analogies," Hofstadter writes. What we call a causal mechanism is itself a stabilised analogy: "force" borrowed from muscular pushing, "current" from rivers, "selection pressure" from engineering. These began as metaphors. They became mechanisms by being good enough analogies to predict and intervene with, tested and refined until they earned the status of formal knowledge.
+"Every concept we have is essentially nothing but a tightly packaged bundle of analogies," Hofstadter writes. What we call a causal mechanism is itself a stabilised analogy: "force" borrowed from muscular pushing, "current" from rivers, "selection pressure" from engineering. [Cognitive scientists](https://en.wikipedia.org/wiki/Force_dynamics) have shown that our causal vocabulary itself runs on physical schemas learned from the body: pushing, blocking, enabling, containing. Causation is a repertoire of patterns we match to situations, not a single logical operation. These began as metaphors. They became mechanisms by being good enough to predict and intervene with, tested and refined until they earned the status of formal knowledge.
 
 ## Metapatterns and reinforcement
 
