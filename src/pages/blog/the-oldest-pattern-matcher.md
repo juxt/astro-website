@@ -41,6 +41,8 @@ In the 1940s, the Dutch psychologist [Adriaan de Groot](https://en.wikipedia.org
 
 Then de Groot scrambled the pieces into positions that couldn't arise in a real game, and the masters' advantage vanished. They weren't remembering better or thinking harder: they were recognising patterns that only exist in meaningful play.
 
+<span class="pullquote" text-content="The law looks like formal reasoning from the outside. From the inside, it is pattern matching with a formal audit trail."></span>
+
 Judges do something similar. The [legal realist](https://en.wikipedia.org/wiki/Legal_realism) tradition, running from [Oliver Wendell Holmes](https://en.wikipedia.org/wiki/Oliver_Wendell_Holmes_Jr.) through [Jerome Frank](https://en.wikipedia.org/wiki/Jerome_Frank), holds that judges typically reach a verdict through intuitive recognition of the situation and then reason backwards through case law to construct the justification. The formal opinion reads as though the conclusion followed from the precedents. In practice, the precedents were selected to support a conclusion already reached. The law looks like formal reasoning from the outside. From the inside, it is pattern matching with a formal audit trail.
 
 Working mathematicians [surveyed in the 1940s](https://en.wikipedia.org/wiki/Jacques_Hadamard) reported the same shape: results arrived through sudden recognition, often after periods of unconscious incubation, with formal proofs constructed afterwards. The proof was a way of showing others what the mathematician already knew. Feynman, in his Nobel lecture, described publishing results he couldn't yet prove. He covered the tracks, and so did every mathematician in the survey.
@@ -55,6 +57,8 @@ Einstein is the test case, because no one's creative process has been more caref
 
 Two years later, the [equivalence principle](https://en.wikipedia.org/wiki/Equivalence_principle) began with a man falling from a roof: Einstein realised that a person in freefall would feel weightless, and identified that feeling with the absence of gravity. The analogy between two physical sensations became the foundation of [general relativity](https://en.wikipedia.org/wiki/General_relativity). He then spent eight years working out the mathematics.
 
+<span class="pullquote left" text-content="The creative act was perceiving a resemblance between two situations that nobody had previously connected."></span>
+
 In each case the analogy preceded the formalism, often by years. The creative act was perceiving a resemblance between two situations that nobody had previously connected. The formal derivation was what happened afterwards, to verify, extend and communicate. [Poincaré](https://en.wikipedia.org/wiki/Henri_Poincar%C3%A9) described his own breakthrough on [Fuchsian functions](https://en.wikipedia.org/wiki/Fuchsian_group) arriving unbidden as he [stepped onto a bus](https://en.wikipedia.org/wiki/Henri_Poincar%C3%A9#Philosophy), after weeks of failed formal effort. It gave the unconscious pattern matching room to surface.
 
 "Every concept we have is essentially nothing but a tightly packaged bundle of analogies," Hofstadter writes. What we call a causal mechanism is itself a stabilised analogy: "force" borrowed from muscular pushing, "current" from rivers, "selection pressure" from engineering. These began as metaphors. They became mechanisms by being good enough analogies to predict and intervene with, tested and refined until they earned the status of formal knowledge.
@@ -66,6 +70,8 @@ But Hofstadter and Sander also present pairs of proverbs that assert contradicto
 This is the gap between having patterns and having expertise. Feynman didn't just accumulate a library of physical intuitions. He built each one himself, refusing to accept results he hadn't rederived from scratch. Each rederivation was an act of reconstruction that connected the result to everything else he knew, forging links that a passively received result would lack. His eclectic interests, the [lockpicking](https://en.wikipedia.org/wiki/Surely_You%27re_Joking,_Mr._Feynman!), the Mayan codices, the drawing, weren't distractions from physics. They were breadth, and breadth is what fuels analogy. The wider the library, the more unexpected the connections it can make.
 
 What separates a useful pattern library from a contradictory heap of proverbs is continuous refinement against reality. Patterns that survive contact with the world get strengthened. Patterns that fail get pruned or reshaped. The expert's library is alive, constantly being trued up against consequences. The textbook's library is frozen.
+
+<span class="pullquote" text-content="LLMs are doing a kind of forensics on those covered tracks, recovering the pattern-matching residue that the formal presentation tried to hide."></span>
 
 LLMs have inherited enormous pattern libraries from the serialised outputs of human minds. Experts covered the tracks, as Feynman described: they did the intuitive, analogical work and then wrote up the formal reconstruction. But the tracks are still there in the text, encoded in the causal language, the mechanism descriptions, the "because" and "led to" and "if... then" that saturate human writing. LLMs are doing a kind of forensics on those covered tracks, recovering the pattern-matching residue that the formal presentation tried to hide.
 
