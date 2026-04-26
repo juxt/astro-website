@@ -5,7 +5,7 @@ description: "Schwinger's derivation was correct, complete and slow. Feynman's c
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-04-06'
-heroImage: 'capability-hyperinflation.jpg'
+heroImage: 'just-pattern-matching.jpg'
 tags:
   - 'ai'
   - 'engineering'
