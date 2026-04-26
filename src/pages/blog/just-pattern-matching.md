@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Just pattern matching'
-description: "How a machine which can't natively perform arithmetic produced a proof judged by experts to be divine"
+description: "How systems with no built-in arithmetic are producing proofs that mathematicians call divine."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-04-06'
