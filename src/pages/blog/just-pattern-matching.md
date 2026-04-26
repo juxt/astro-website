@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Just pattern matching'
-description: "Schwinger's derivation was correct, complete and slow; Feynman's cartoons were correct, complete and fast. We're making the same mistake with AI."
+description: "How a machine which can't natively perform arithmetic produced a proof judged by experts to be divine"
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-04-06'
