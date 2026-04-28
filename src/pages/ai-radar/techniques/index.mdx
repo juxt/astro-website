@@ -95,7 +95,7 @@ These techniques show promising potential with growing adoption and active devel
 
 Most teams we've observed use this as a two-step process: first, a quick embedding search finds perhaps 50-100 potentially relevant items from their knowledge base. Then, cross-encoder reranking carefully sorts these candidates to bring the most relevant ones to the top. While this additional step does add some processing time, we're seeing it deliver meaningful improvements in result quality across various use cases.
 
-The technique has shown consistent improvements across different domains and use cases, often reducing confabulations in downstream LLM responses by ensuring higher quality context selection. Implementation has also become more straightforward with libraries such as [sentence-transformers](https://www.sbert.net/) providing ready-to-use models. However, teams should be mindful of the additional latency introduced by the reranking step and may need to tune the number of candidates passed to the re-ranker based on their specific performance requirements.
+The technique often reduces confabulations in downstream LLM responses by ensuring higher quality context selection. Implementation has also become more straightforward with libraries such as [sentence-transformers](https://www.sbert.net/) providing ready-to-use models. However, teams should be mindful of the additional latency introduced by the reranking step and may need to tune the number of candidates passed to the re-ranker based on their specific performance requirements.
 
 <div data-radar data-label="Ontologies for AI grounding" data-ring="trial" data-change="new" />
 
@@ -278,7 +278,7 @@ Our view is that zero-shot prompting should always be combined with input valida
 
 ## Chain of thought (CoT)
 
-[Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) has moved to our Hold ring. While CoT was a genuinely useful technique when it emerged, [recent research from Wharton's Generative AI Labs](https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/) demonstrates diminishing returns: gains are rarely worth the time cost, and for reasoning models such as o1 and o3, CoT prompting can actually decrease performance since step-by-step reasoning is already internalised at the architecture level.
+[Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) has moved to our Hold ring. While CoT was a genuinely useful technique when it emerged, [recent research from Wharton's Generative AI Labs](https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/) demonstrates diminishing returns: gains are rarely worth the time cost, and for reasoning models such as o3 and GPT-5.2, CoT prompting can actually decrease performance since step-by-step reasoning is already internalised at the architecture level.
 
 For non-reasoning models, CoT still shows modest benefits on mathematical and symbolic reasoning tasks. However, these are precisely the domains where better alternatives are emerging. Dedicated reasoning models handle these tasks natively, while neurosymbolic architectures offer more reliable solutions by coupling LLMs with explicit symbolic reasoning engines rather than prompting models to simulate reasoning. CoT's remaining niche is being squeezed from both directions.
 
