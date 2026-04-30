@@ -50,8 +50,13 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     return json(400, { error: 'firstName, lastName, email required' })
   }
 
+  // Orbit's POST /api/people hard-cut the legacy `name` field on
+  // 2026-04-29; firstName + lastName are first-class slots now.
+  // Pass them through directly rather than joining and re-splitting
+  // at the orbit boundary. The form already collects them split.
   const payload = {
-    name: `${firstName} ${lastName}`,
+    firstName,
+    lastName,
     email,
     company: (body.company ?? '').trim(),
     role: (body.jobTitle ?? '').trim(),
