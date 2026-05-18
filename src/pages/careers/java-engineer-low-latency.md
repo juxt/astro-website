@@ -3,14 +3,14 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior/Principal Java Engineer - Low Latency'
-description: 'Join JUXT as a Senior or Principal Java Engineer specialising in low latency systems for financial services. Full-time, hybrid role in London.'
+position: 'Java Engineer - Low Latency'
+description: 'Join JUXT as an Engineer specialising in low latency systems for financial services. Full-time, hybrid role in London.'
 draft: false
 weight: 2
 googleJobs:
   {
     location: 'London',
-    position: 'Senior/Principal Java Engineer - Low Latency',
+    position: 'Java Engineer - Low Latency',
     publishedDate: '2025-10-17',
     validThrough: '2026-08-06T00:00',
     employmentType: 'FULL_TIME'
@@ -19,7 +19,7 @@ googleJobs:
 
 ## Job Description
 
-We’re looking for Senior and Principal Java Developers with a strong background in low-latency systems to join us on a high-performance trading and real-time data project, for a major financial institution.
+We’re looking for Java Developers with experience building low-latency systems to join us on a high-performance trading and real-time data project, for a major financial institution.
 
 You’ll work on mission-critical applications where performance, scalability, and reliability truly matter — the kind of systems that power global trading platforms and require a deep understanding of how the JVM and Linux really work. This is an opportunity to bring world-class engineering principles to projects at the very heart of modern finance.
 
@@ -36,7 +36,7 @@ We’re looking for developers who are technically exceptional, but also pragmat
 * Familiarity with performance tuning and profiling tools (e.g. JMH, async-profiler, Flight Recorder)
 * Solid understanding of multithreading, concurrency, and memory management
 * Experience with microservice architectures and event-driven systems
-* Strong Linux fundamentals and comfort with performance diagnostics
+* Linux fundamentals and comfort with performance diagnostics
 * Clear communication skills and ability to articulate design and performance decisions
 
 ## Nice to have
