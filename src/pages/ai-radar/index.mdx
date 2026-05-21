@@ -1,6 +1,6 @@
 ---
 tabTitle: JUXT AI Radar
-bannerTitle: JUXT AI Radar – Q1 2026
+bannerTitle: JUXT AI Radar – Q2 2026
 description: "An engineer's guide to the AI landscape from JUXT's CTO & AI Chapter members"
 ---
 
@@ -12,23 +12,23 @@ import HomeAIRadarLayout from '../../layouts/HomeAIRadar.astro'
 
 ### Introduction
 
-2025 delivered on the promise of agentic AI. After years of bold predictions, we're now seeing genuine production value, and the impact is profound.
+Frontier models and AI coding assistants have continued to improve at a relentless pace since our last update, and many software engineering teams are now working almost entirely within an agentic coding harness. In our work on agentic AI platforms for large enterprises, we see first-hand the same transition gradually being rolled out to other knowledge workers. The friction has shifted to the engineering and security work needed to turn their capabilities into reliable human-AI "centaur" systems. Most of this quarter's updates are in this area.
 
-For software engineering, this represents the most significant transition since compilers changed what it meant to write code, but the implications reach even further. Agentic AI provides a co-intelligence that puts capabilities once requiring technical specialists within everyone's reach, much as spreadsheets did a generation ago: transformative business value and new categories of risk to manage. We're still early in understanding the full scope of this change, and this quarter's radar captures both the areas that are maturing and the emerging frontiers that point to what comes next.
+In the Adopt ring, MCP and RAG picked up substantial new security guidance covering authentication, least-privilege tool grants, audit logging and defences against indirect prompt injection. CaMeL enters our radar in Assess as a research-level answer to the same problem. We've seen public failure modes this quarter: for example when Claude Code's own source code was accidentally exposed, or headlines relating to agents with broad permissions destroying production data. We expect to be hearing many more stories along these lines this year.
 
-On the maturity side, we've added Temporal to our Adopt ring, recognising that durable workflow orchestration has become essential infrastructure for agents that need to survive failures and run reliably over days rather than seconds. Organisations are moving beyond prototypes to ask harder questions: how do we understand our processes before automating them? How do we monitor agents in production? The new entries for process mining and LLM observability reflect this shift from experimentation to operation.
+The fastest-growing category is also the one we're most cautious about. OpenClaw, NVIDIA's NemoClaw and Moonshot's KimiClaw are persistent agent runtimes built around the same idea: always-on autonomous agents that can control computers. The security models do not hold up to the breadth of access these systems require, and we put all three in Hold. Where they're already in use, sandboxing and human oversight for sensitive actions are the only reasonable mitigations.
 
-On the frontier side, we're seeing growing interest in approaches that extend beyond what LLMs alone can achieve. Ontologies provide grounded semantics, giving AI systems authoritative definitions and relationships rather than statistical associations. Neurosymbolic AI couples neural networks with symbolic reasoning, enabling explainable decisions and guaranteed rule compliance. World models build internal representations that simulate how environments behave, enabling systems to predict consequences rather than merely paraphrase scenarios from training data. Together, these approaches point toward AI architectures that combine LLM flexibility with the formal semantics that regulated industries require.
+On the other hand, practices for agentic engineering are beginning to catch up. Spec-driven development enters Adopt: in our experience, structured specs shape and constrain AI implementations more reliably than ad-hoc prompts. Formal specification languages provide rigour; informal ones add little. AI-assisted code migration, LLM API gateways, red teaming and governance platforms enter Trial.
 
-AI is also escaping the screen. Foundation models purpose-built for robotics and physical systems are maturing rapidly, and digital twin platforms such as NVIDIA Omniverse are enabling organisations to train and test AI in simulation before deployment. We've added coverage of both areas for teams working at the intersection of AI and the physical world.
+Considerations around sovereignty are coming into focus. The argument for running open weight models on your own infrastructure has shifted: EU AI Act compliance requirements and the shift from flat-rate to usage-based AI billing both reward moving inference inside the organisation. For workloads handling regulated or sensitive data, hosted APIs are no longer the obvious default.
 
-As we enter 2026, this radar captures where the landscape stands today. We're still in the early stages of this transformation, one we're following with professional and personal interest.
+We're still early in this transformation, and follow it with professional and personal interest.
 
-_— Henry Garner (CTO, JUXT), January 2026_
+_Henry Garner (CTO, JUXT), May 2026_
 
 ## Radar Overview
 
-Our radar is organized into four main categories, each containing technologies evaluated across four adoption levels:
+Our radar is organised into four main categories, each containing technologies evaluated across four adoption levels:
 
 - **Adopt**: Technologies we recommend using now
 - **Trial**: Worth exploring for new projects

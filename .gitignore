@@ -28,3 +28,5 @@ auto-save-list
 .\#*
 # Local Netlify folder
 .netlify
+
+package-lock.json

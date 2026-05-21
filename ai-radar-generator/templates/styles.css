@@ -2,7 +2,7 @@
    BASE STYLES & TYPOGRAPHY
    ======================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;700&display=swap');
 
 * {
   margin: 0;
@@ -21,15 +21,15 @@
 
   /* Colors */
   --color-accent: #ea580c;
-  --color-bg-cover: #dbefef; /* Pale duck egg blue */
-  --color-cover-accent: #2a9d8f; /* Teal */
+  --color-bg-cover: #ffffff; /* White */
+  --color-cover-accent: #F6C343; /* Grid Dynamics yellow */
   --color-text-main: #333333;
   --color-text-muted: #666666;
 }
 
 body {
   font-family:
-    'Inter',
+    'Fira Sans',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -37,6 +37,7 @@ body {
     'Helvetica Neue',
     Arial,
     sans-serif;
+  font-weight: 300;
   font-size: 11pt;
   line-height: 1.6;
   color: var(--color-text-main);
@@ -182,7 +183,7 @@ tr:nth-child(even) {
 
   @bottom-left {
     content: counter(page);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 11pt;
     font-weight: 700;
     color: var(--color-text-main);
@@ -197,7 +198,7 @@ tr:nth-child(even) {
 
   @bottom-right {
     content: 'JUXT | A GRID DYNAMICS COMPANY';
-    font-family: 'Inter', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 11pt;
     font-weight: 700;
     color: var(--color-text-main);
@@ -256,7 +257,7 @@ tr:nth-child(even) {
 }
 
 .cover-title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 52pt;
   font-weight: 700;
   margin-bottom: 4mm;
@@ -287,7 +288,7 @@ tr:nth-child(even) {
   font-size: 18pt;
   line-height: 1.4;
   margin: 0;
-  font-weight: 700;
+  font-weight: 200;
   color: var(--color-text-main);
   flex: 1;
 }
@@ -756,7 +757,7 @@ p {
 
 @page thank-you {
   margin: 0;
-  background-color: #dbefef;
+  background-color: #ffffff;
   @bottom-left {
     content: none;
   }
