@@ -32,7 +32,7 @@ The ideal candidate is a seasoned Python developer with hands-on experience in e
 
 ## Experience required
 
-- 3+ years’ Python programming experience
+- 2+ years’ Python programming experience
 - Familiar with AI-assisted engineering, e.g Copilot, Claude Code, etc.
 - DevOps technologies like Docker and Kubernetes, preferred but not necessary
 - Commercial experience working with systems at scale, handling large data sets across multiple regions

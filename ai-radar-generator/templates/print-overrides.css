@@ -22,7 +22,7 @@
 @page cover {
   bleed: 3mm;
   marks: crop cross;
-  background-color: #dbefef;
+  background-color: #ffffff;
 }
 
 .cover-page {
@@ -37,7 +37,7 @@
 @page thank-you {
   bleed: 3mm;
   marks: crop cross;
-  background-color: #dbefef;
+  background-color: #ffffff;
 }
 
 .thank-you-page {

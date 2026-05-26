@@ -13,25 +13,25 @@ Software that enhances AI development workflows without being embedded in your a
 
 # Adopt
 
-These tools represent mature, well-supported technologies that are ready for production use. They offer excellent productivity gains and proven track records in real-world development workflows.
+Mature, well-supported tools with proven track records in production development workflows.
 
 <div data-radar data-label="Software engineering copilots" data-ring="adopt" />
 
 ## Software engineering copilots
 
-AI-augmented development represents the most significant shift in software engineering since the introduction of compilers. This transition is permanent, and teams that are not actively building capability in this area are already falling behind. We've placed Software Engineering Copilots firmly in the Adopt ring.
+AI-augmented development represents a permanent shift in software engineering. Teams not actively building capability here are falling behind.
 
-The tooling landscape offers two broad categories. Model-agnostic interfaces let teams choose and switch between LLM providers: [OpenCode](https://opencode.ai/) stands out for its polished terminal experience and breadth of integration, supporting 75+ model providers including local models for privacy-sensitive teams. [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf) and [Zed](https://zed.dev/) are standalone editors supporting multiple models. CLI tools such as [Aider](https://github.com/Aider-AI/aider) and [Cline](https://github.com/cline/cline) work with various providers, [Warp](https://www.warp.dev/) reimagines the terminal with AI-enhanced command suggestions, and [Cody](https://sourcegraph.com/cody) focuses on enterprise-scale codebase understanding. Provider-specific tools such as [Claude Code](https://claude.ai/code), [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli) and [OpenAI Codex](https://openai.com/codex/) are optimised for their respective models. Claude Code has become extremely popular, reflecting the underlying model's capability; its interface has inspired several imitations. [GitHub Copilot](https://github.com/features/copilot) and [Tabnine](https://www.tabnine.com/) offer traditional IDE integrations with their own model stacks.
+The tooling falls into two categories. Model-agnostic interfaces let teams switch between providers: [OpenCode](https://opencode.ai/) stands out for its terminal experience and breadth of integration, [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf) and [Zed](https://zed.dev/) are standalone editors, and CLI tools such as [Aider](https://github.com/Aider-AI/aider) and [Cline](https://github.com/cline/cline) work across providers. Provider-specific tools such as [Claude Code](https://claude.ai/code), [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli) and [OpenAI Codex](https://openai.com/codex/) are optimised for their respective models. [GitHub Copilot](https://github.com/features/copilot) and [Tabnine](https://www.tabnine.com/) offer traditional IDE integrations.
 
-Two distinct approaches have emerged: free-form "vibe coding" and structured development methodologies. [Kiro](https://kiroai.com/) exemplifies this choice by offering both: a conversational coding mode for rapid iteration and a dedicated specs mode where AI assists developers in drafting requirements and design decisions through specification files before code generation. [Traycer](https://traycer.ai/) similarly emphasises upfront planning for complex tasks. [Cursor](https://www.cursor.com/) enables teams to codify standards through .cursorrules, embedding architectural patterns and guidelines directly into AI assistance.
+Two approaches have emerged: free-form "vibe coding" and structured methodologies. [Kiro](https://kiroai.com/) offers both, with a conversational mode and a dedicated specs mode for drafting requirements before code generation. [Cursor](https://www.cursor.com/) enables teams to codify standards through .cursorrules.
 
-Senior engineers derive the greatest value, leveraging AI for routine tasks whilst maintaining quality oversight. Junior developers often struggle to evaluate AI suggestions, occasionally accepting flawed implementations or overlooking edge cases. This points to a clear organisational priority: intentional training around effective AI collaboration. Success correlates with careful workflow integration and a "trust but verify" mindset. The gap between teams that embrace these tools effectively and those that don't will only widen as the tooling continues to improve.
+Senior engineers derive the greatest value, using AI for routine tasks whilst maintaining quality oversight. Junior developers often struggle to evaluate AI suggestions. Success correlates with intentional training around effective AI collaboration and a "trust but verify" mindset.
 
 <div data-radar data-label="Provider-agnostic LLM facades" data-ring="adopt" />
 
 ## Provider-agnostic LLM facades
 
-The LLM landscape evolves rapidly, making today's optimal choice potentially outdated within months. We recommend implementing a facade pattern between your application and LLM providers, rather than building directly against specific APIs. This approach reduces vendor lock-in and enables easier testing of alternative models as they emerge. When considering whether to write your own code, be sure to consider tools such as the lightweight [AISuite](https://github.com/andrewyng/aisuite), Simon Willison's [LLM](https://github.com/simonw/llm) library and CLI tool, or heavyweight alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/).
+The LLM market evolves rapidly, making today's optimal choice potentially outdated within months. We recommend implementing a facade pattern between your application and LLM providers, rather than building directly against specific APIs. This approach reduces vendor lock-in and enables easier testing of alternative models as they emerge. When considering whether to write your own code, be sure to consider tools such as the lightweight [AISuite](https://github.com/andrewyng/aisuite), Simon Willison's [LLM](https://github.com/simonw/llm) library and CLI tool, or heavyweight alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/).
 
 This recommendation reflects our team's experience seeing projects hampered by tight coupling to specific LLM providers, and the subsequent maintenance burden when transitioning to newer, more capable models.
 
@@ -39,88 +39,116 @@ This recommendation reflects our team's experience seeing projects hampered by t
 
 ## Notebooks
 
-We've placed Notebooks in the Adopt ring because they have become the de facto standard for data science and machine learning experimentation and prototyping. The interactive nature of notebooks, combining code execution with rich text explanations and visualisations, makes them particularly valuable for AI/ML workflows where iterative exploration and clear documentation of model development are essential.
+Notebooks are the de facto standard for data science and ML experimentation. Combining code execution with rich text and visualisations, they're particularly valuable for AI/ML workflows where iterative exploration and documentation of model development are essential. We especially value how notebooks facilitate collaboration between technical and non-technical team members.
 
-Widespread adoption across both industry and academia, plus an extensive plugin ecosystem and integration with popular AI frameworks, demonstrates their maturity as a method of interacting with code. We especially value how notebooks facilitate collaboration between technical and non-technical team members, as they can serve as living documents that combine business requirements and technical implementation in a single, shareable format.
-
-[Jupyter](https://jupyter.org/) notebooks are the most widely used, supporting multiple languages including Python and Julia. The cloud platforms provide their own implementations: [Google Colab](https://colab.research.google.com/), AWS [Sagemaker Notebooks](https://aws.amazon.com/sagemaker-ai/notebooks/), [Azure Notebooks](https://learn.microsoft.com/en-gb/azure/machine-learning/how-to-run-jupyter-notebooks), [Databricks Notebooks](https://docs.databricks.com/en/notebooks/index.html). And there are language specific notebooks, such as Pluto.jl for Julia, [Clerk](https://github.com/nextjournal/clerk) for Clojure, [Polynote](https://github.com/polynote/polynote) for Scala.
+[Jupyter](https://jupyter.org/) is the most widely used, supporting multiple languages including Python and Julia. Cloud platforms provide their own implementations: [Google Colab](https://colab.research.google.com/), AWS [Sagemaker Notebooks](https://aws.amazon.com/sagemaker-ai/notebooks/), [Azure Notebooks](https://learn.microsoft.com/en-gb/azure/machine-learning/how-to-run-jupyter-notebooks), [Databricks Notebooks](https://docs.databricks.com/en/notebooks/index.html). Language-specific options include Pluto.jl for Julia, [Clerk](https://github.com/nextjournal/clerk) for Clojure and [Polynote](https://github.com/polynote/polynote) for Scala.
 
 # Trial
 
-These tools show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt tools, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
+Promising tools with growing adoption that are worth exploring for teams building AI systems.
 
 
 <div data-radar data-label="MLflow" data-ring="trial" />
 
 ## MLflow
 
-We have placed [MLFlow](https://mlflow.org/) in the Trial ring due to its potential as a lightweight and modular option for teams seeking to manage the machine learning lifecycle. Its open-source nature makes it an attractive alternative to the more monolithic cloud-based MLOps platforms provided by vendors such as AWS, Microsoft and Google. A key advantage of MLFlow is its ability to avoid vendor lock-in, offering teams the flexibility to maintain control of their infrastructure and adapt workflows as their needs evolve.
+[MLFlow](https://mlflow.org/) is a lightweight, modular open-source option for managing the machine learning lifecycle. It avoids the vendor lock-in of monolithic cloud-based MLOps platforms from AWS, Microsoft and Google, offering teams flexibility to maintain infrastructure control and adapt workflows as needs evolve.
 
-That said, realising the benefits of MLFlow requires teams to have a certain level of technical expertise to configure and integrate it into their existing systems effectively. Unlike cloud-native behemoths such as [SageMaker](https://aws.amazon.com/sagemaker/) or [Vertex AI](https://cloud.google.com/vertex-ai), MLFlow does not provide an all-in-one, plug-and-play experience. Instead, it offers modular components that must be tailored to specific use cases. We recommend assessing MLFlow if your organisation values flexibility, has the technical proficiency to manage integrations, and prefers avoiding dependency on proprietary platforms early in your MLOps journey.
+Realising the benefits requires technical expertise to configure and integrate effectively. Unlike [SageMaker](https://aws.amazon.com/sagemaker/) or [Vertex AI](https://cloud.google.com/vertex-ai), MLFlow does not provide a plug-and-play experience; it offers modular components that must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
 
 <div data-radar data-label="Vector databases" data-ring="trial" />
 
 ## Vector databases
 
-Vector databases have emerged as specialised tools for managing the high-dimensional data representations (embeddings) required by AI models. They enable efficient similarity search across text and images. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus](https://milvus.io/) and [Weaviate](https://weaviate.io/).
+Vector databases have emerged as specialised tools for managing the high-dimensional embeddings required by AI models. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus](https://milvus.io/) and [Weaviate](https://weaviate.io/).
 
-We've generally placed vector databases in the Trial ring, as they have proven valuable for specific use cases such as semantic search and recommendation systems. However, their adoption should be carefully evaluated based on individual requirements. Traditional databases may be sufficient for simpler operations and avoid the data consistency challenges of keeping embeddings synchronized with underlying content changes across databases. Alternative approaches, such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer, bring vector embedding search directly into the Postgres database, ensuring embeddings remain synchronised with underlying content changes.
+Their adoption should be carefully evaluated. Traditional databases may suffice for simpler operations, and alternative approaches such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer bring vector search directly into Postgres, avoiding the data consistency challenges of keeping embeddings synchronised across databases. If a dedicated vector database is required, Pinecone leads in production readiness but comes with managed service costs, while open-source alternatives such as Qdrant and Milvus offer greater control but demand more operational expertise.
 
-If a vector database is required for your use case, the choice of provider often depends on factors such as scale requirements and whether a managed or self-hosted solution is preferred. Pinecone leads in production readiness but comes with the costs of a managed service, while open-source alternatives such as Qdrant and Milvus offer greater control but demand more operational expertise.
-
-For teams prioritising rapid prototyping and developer experience, [Chroma](https://www.trychroma.com/) has emerged as a popular choice. Its Python-first approach, minimal configuration requirements, and intuitive API make it accessible for developers without extensive database expertise. A 2025 Rust rewrite delivered significant performance improvements, and a new cloud offering extends its reach. However, Chroma remains best suited for prototyping and small-to-medium scale applications rather than enterprise workloads requiring SLAs and role-based access control.
-
-[LanceDB](https://lancedb.com/) takes a different approach as an embedded vector database, similar in philosophy to SQLite. Rather than running a separate server, LanceDB operates as a library within your application, using Apache Arrow's columnar format to query vectors directly from disk at near-memory speeds. This makes it particularly compelling for local AI assistants, edge deployments, and scenarios where data must remain on-device. LanceDB is the only embedded vector database option in the Node.js ecosystem. The trade-off is that embedded architectures have inherent limits for high-concurrency workloads and can suffer cold-start latency in serverless environments.
+For prototyping, [Chroma](https://www.trychroma.com/) offers a Python-first approach with minimal configuration. A 2025 Rust rewrite improved performance, though it remains best suited for small-to-medium scale applications. [LanceDB](https://lancedb.com/) takes a different approach as an embedded vector database, similar in philosophy to SQLite. It operates as a library within your application using Apache Arrow's columnar format, making it compelling for local AI assistants and edge deployments where data must remain on-device. The trade-off is limited high-concurrency support.
 
 <div data-radar data-label="Local model execution environments" data-ring="trial" />
 
 ## Local model execution environments
 
-Tools such as [Ollama](https://ollama.ai/), [LM Studio](https://lmstudio.ai/) and [AnythingLLM](https://anythingllm.com/) provide accessible ways to run open weight models on local hardware. These environments enable rapid experimentation with open weight models from providers including Meta (Llama), Mistral, DeepSeek, Alibaba (Qwen), and OpenAI (gpt-oss) without API costs or sending data to external services. Many now support advanced capabilities including web search, tool calling via Model Context Protocol (MCP), and connections to commercial APIs for hybrid workflows.
+Tools such as [Ollama](https://ollama.ai/), [LM Studio](https://lmstudio.ai/) and [AnythingLLM](https://anythingllm.com/) provide accessible ways to run open weight models on local hardware. These enable experimentation with models from Meta, Mistral, DeepSeek, Alibaba and OpenAI without API costs or sending data to external services. Many now support tool calling via MCP and connections to commercial APIs for hybrid workflows.
 
-These tools serve various evaluation needs: developers testing AI features during development, teams comparing model responses for specific use cases, and organisations exploring AI capabilities with sensitive data that cannot leave their infrastructure. The range spans from command-line interfaces such as Ollama to graphical applications such as LM Studio, accommodating different technical backgrounds and preferences.
+These tools serve developers testing AI features, teams comparing model responses and organisations exploring capabilities with sensitive data that cannot leave their infrastructure. They range from CLI tools such as Ollama to graphical applications such as LM Studio.
 
-We've placed these in Trial as they offer a valuable alternative approach to model evaluation alongside cloud-based testing. They're particularly useful for privacy-sensitive prototyping and scenarios where extensive experimentation would be cost-prohibitive via APIs. Teams should consider these tools as one option among many for model evaluation, weighing their benefits against the overhead of local setup and maintenance.
+We've placed these in Trial as they're particularly useful for privacy-sensitive prototyping and scenarios where extensive experimentation would be cost-prohibitive via APIs.
 
-<div data-radar data-label="LLM observability tools" data-ring="trial" data-change="new" />
+<div data-radar data-label="LLM observability tools" data-ring="trial" />
 
 ## LLM observability tools
 
-The increasing complexity of agentic systems has created a need for development-time observability that goes beyond traditional production monitoring. When LLM applications involved simple API calls, understanding system behaviour was straightforward. Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retrieval and chains of LLM calls where a single user request might trigger dozens of internal operations. Debugging why an agent produced an unexpected result requires visibility into every step of that chain.
+Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retrieval and chains of LLM calls where a single user request might trigger dozens of internal operations. Debugging why an agent produced an unexpected result requires visibility into every step of that chain. This is distinct from [production AI monitoring](/ai-radar/platforms/#production-ai-monitoring-platforms), which focuses on drift detection in deployed systems.
 
-We've created this section as distinct from [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms), which focus on drift detection and performance degradation in deployed systems. LLM observability tools address a different need: understanding what happened inside your application during development and debugging. As agentic architectures become more prevalent, this visibility becomes essential rather than optional.
+[Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-[Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option in this space. Built on OpenTelemetry, it avoids vendor lock-in whilst providing tracing and evaluation capabilities. Phoenix offers auto-instrumentation for popular frameworks including LangChain, LlamaIndex and DSPy, as well as direct integrations with OpenAI, Anthropic and AWS Bedrock. Teams can self-host for free or use Arize's cloud offering.
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. Since these tools capture prompt and response data, data sovereignty matters. Phoenix and Langfuse both offer self-hosting for teams with data residency requirements.
 
-[Langfuse](https://langfuse.com/) is the most popular fully open-source alternative, available under MIT licence with no restrictions on self-hosting. It combines tracing and evaluation capabilities with strong support for multi-turn conversations. Langfuse integrates well with existing workflows and offers a generous free cloud tier for teams not ready to self-host.
+<div data-radar data-label="LLM API gateways" data-ring="trial" data-change="new" />
 
-For teams already committed to the LangChain ecosystem, [LangSmith](https://smith.langchain.com/) provides native integration that understands LangChain's internals and surfaces them in debugging views designed for that framework. [Helicone](https://helicone.ai/) takes a different approach as a lightweight proxy: route your API calls through Helicone's endpoint and gain observability without SDK changes, whilst also benefiting from gateway features such as caching and rate limiting.
+## LLM API gateways
+
+As organisations adopt multiple model providers, an infrastructure layer emerges between applications and providers. LLM API gateways handle routing, caching, failover, rate limiting and cost tracking at the proxy level, complementing code-level abstraction from libraries such as AISuite. A facade is a developer choice about how to call models; a gateway is a platform decision about how to manage model traffic across the organisation.
+
+[LiteLLM](https://github.com/BerriAI/litellm) is the most widely adopted open-source option, with SOC-2 Type 2 and ISO 27001 certification. It provides an OpenAI-compatible proxy with spend tracking, budget controls and key management. [Portkey](https://portkey.ai/) offers a managed alternative with semantic caching and conditional routing. [Kong](https://konghq.com/) brings enterprise API management experience to LLM traffic.
+
+The operational value for multi-provider deployments is clear: centralised audit logging, per-team budget enforcement and automatic failover. LiteLLM can be self-hosted; Portkey's managed service routes traffic through its infrastructure. Teams running multi-provider deployments should evaluate whether a gateway simplifies their operational story before building equivalent functionality in-house.
+
+See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools)
+
+<div data-radar data-label="AI red teaming tools" data-ring="trial" data-change="new" />
+
+## AI red teaming tools
+
+The radar's security coverage has grown this quarter, with guidance on prompt injection in our [MCP](/ai-radar/languages-frameworks/#mcp) and [RAG](/ai-radar/techniques/#rag) entries and architectural defences such as [CaMeL](/ai-radar/techniques/#camel). What has been missing is offensive testing: tools that systematically probe AI systems for vulnerabilities before attackers do.
+
+[Promptfoo](https://www.promptfoo.dev/) is the standout, evolving from a prompt evaluation CLI into a comprehensive red teaming platform. OpenAI [acquired Promptfoo](https://www.promptfoo.dev/blog/openai/) in March 2026, though it remains open-source under MIT. It ships [dedicated financial services plugins](https://www.promptfoo.dev/docs/red-team/plugins/financial/) for PCI DSS and banking regulation testing. Microsoft's [PyRIT](https://github.com/Azure/PyRIT) focuses on multi-turn attack orchestration with Azure AI Foundry integration. NVIDIA's [Garak](https://github.com/NVIDIA/garak) takes an agentic approach, autonomously probing for prompt injection, data leakage and toxicity.
+
+The EU AI Act will require adversarial testing for high-risk systems by August 2026. We recommend starting with Promptfoo for breadth and CI/CD integration. The OpenAI acquisition raises questions about neutrality, but the MIT licence provides a backstop.
+
+See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools)
+
+<div data-radar data-label="AI-assisted code migration" data-ring="trial" data-change="new" />
+
+## AI-assisted code migration
+
+Large-scale code migration sits in a gap between what copilots do (assist line-by-line) and what bootstrappers do (generate new projects). Migration tools operate at codebase scale, applying thousands of coordinated changes to upgrade language versions, swap frameworks or modernise APIs. The pattern that works best combines deterministic code transformations with AI for edge cases that rules alone cannot handle.
+
+[Moderne](https://www.moderne.ai/) is the leading platform, built on the open-source [OpenRewrite](https://docs.openrewrite.org/) engine. OpenRewrite provides deterministic "recipes" for common transformations (Java version upgrades, Spring Boot migrations, Jakarta EE transitions), while Moderne adds AI-assisted handling of non-standard patterns and enterprise-scale orchestration. AWS has integrated OpenRewrite into [Q Code Transformation](https://aws.amazon.com/q/developer/) for Java modernisation, and GitHub Copilot uses it for automated dependency upgrades.
+
+Java 8 reached end of public updates in 2022, Java 11 follows in 2026 and Spring Boot 2.x is end-of-life. These migrations are well-understood but labour-intensive, exactly where deterministic transformation augmented by AI pays off. We recommend trialling OpenRewrite on a representative repository before committing to the Moderne platform.
+
+See also: [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [Spec-driven development](/ai-radar/techniques/#spec-driven-development)
 
 # Assess
 
-These tools represent emerging or specialized technologies that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption or uncertain long-term viability.
+Emerging tools that require careful evaluation before adoption.
 
 <div data-radar data-label="AI application bootstrappers" data-ring="assess" />
 
 ## AI application bootstrappers
 
-AI application bootstrappers generate complete applications from prompts or designs. The market has matured rapidly, with [Lovable](https://lovable.dev/) (formerly GPT Engineer) emerging as a leader alongside established tools such as [V0](https://v0.dev/), [Bolt.new](https://bolt.new/) and [Replit Agent](https://replit.com/ai). Google entered the space in 2025 with [Firebase Studio](https://firebase.google.com/products/studio). These tools can dramatically accelerate the creation of demos and prototypes, taking projects from concept to working application in hours rather than days.
+AI application bootstrappers generate complete applications from prompts or designs. [Lovable](https://lovable.dev/) (formerly GPT Engineer) has emerged as a leader alongside [V0](https://v0.dev/), [Bolt.new](https://bolt.new/) and [Replit Agent](https://replit.com/ai). Google entered the space with [Firebase Studio](https://firebase.google.com/products/studio). These tools can take projects from concept to working application in hours.
 
-The capabilities are improving at a remarkable pace. Lovable's visual editor now allows Figma-like manipulation with automatic code updates. V0 excels at generating production-ready React components. Bolt.new runs full-stack development entirely in the browser. Enterprise adoption is growing, with major companies using these tools for internal tooling and rapid prototyping.
+Capabilities are improving rapidly. Lovable's visual editor allows Figma-like manipulation with automatic code updates. V0 excels at production-ready React components. Bolt.new runs full-stack development in the browser.
 
-However, we remain cautious about production use. Success with these tools still correlates strongly with existing software engineering expertise. Senior developers can effectively use them as accelerators, understanding how to refactor generated code and establish proper architectural boundaries. Teams without this expertise risk shipping code they cannot maintain, debug, or evolve. The gap between "working demo" and "production-ready system" remains substantial, and we're particularly concerned about organisations building on bootstrapped foundations without the capability to evaluate what they've built.
+However, success still correlates strongly with existing engineering expertise. Senior developers use them as accelerators, understanding how to refactor generated code. Teams without this expertise risk shipping code they cannot maintain or debug. The gap between "working demo" and "production-ready system" remains substantial.
 
-We're watching this space with great interest. The pace of improvement suggests these tools may move toward Trial in future radars. For now, we recommend them primarily for prototyping and proof-of-concept work, with clear separation from production codebases unless your team has the engineering depth to take full ownership of the generated code.
+We recommend these primarily for prototyping and proof-of-concept work, with clear separation from production codebases unless your team has the engineering depth to take ownership of generated code.
 
 <div data-radar data-label="Visual computer use agents" data-ring="assess" />
 
 ## Visual computer use agents
 
-AI agents that interact with computers through visual understanding, controlling screens via mouse clicks and keyboard inputs as a human would, have matured but remain risky. [Claude Computer Use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) allows Claude to control desktops and browsers by seeing the screen and reasoning about interface elements. [OpenAI Operator](https://openai.com/index/computer-using-agent/), powered by their Computer-Using Agent (CUA) model, focuses on web browser automation through a managed environment. [Browser Use](https://github.com/browser-use/browser-use) offers an open-source alternative with flexibility across multiple model providers.
+AI agents that interact with computers through visual understanding have matured but remain risky. [Claude Computer Use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) controls desktops and browsers by seeing the screen and reasoning about interface elements. [OpenAI Operator](https://openai.com/index/computer-using-agent/) focuses on web browser automation through a managed environment. [Browser Use](https://github.com/browser-use/browser-use) offers an open-source alternative across multiple providers.
 
-Reliability for bounded tasks has improved significantly, with standard office workflows now seeing success rates in the high 80s. However, serious security concerns temper any enthusiasm. Prompt injection attacks, where malicious instructions hidden on web pages hijack agent behaviour, represent a systemic vulnerability across all visual browser agents. OpenAI has [publicly acknowledged](https://openai.com/index/hardening-atlas-against-prompt-injection/) that this problem "may never be fully solved," and security researchers warn that these agents "don't yet deliver enough value to justify their current risk profile" given their access to sensitive data like email and payment information.
+Reliability for bounded tasks has improved, with standard office workflows seeing success rates in the high 80s. However, prompt injection attacks, where malicious instructions hidden on web pages hijack agent behaviour, represent a systemic vulnerability. OpenAI has [acknowledged](https://openai.com/index/hardening-atlas-against-prompt-injection/) this problem "may never be fully solved".
 
-We've kept visual computer use in the Assess ring. For many automation needs, programmatic approaches via APIs and [workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) remain both more reliable and more secure than visual interaction. Visual computer use is best suited to isolated environments where the agent cannot access sensitive data or navigate to untrusted websites. Teams considering these tools should grant minimal permissions, avoid broad instructions like "do whatever is needed," and maintain human oversight for any high-stakes actions.
+For many automation needs, programmatic approaches via APIs and [workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) remain more reliable and secure. Visual computer use is best suited to isolated environments where the agent cannot access sensitive data. Teams should grant minimal permissions and maintain human oversight for high-stakes actions.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use)
 
 This section was previously titled "Agentic computer use".
 
@@ -128,39 +156,45 @@ This section was previously titled "Agentic computer use".
 
 ## Lakera
 
-[Lakera](https://www.lakera.ai/) is an AI safety and robustness platform designed to detect and mitigate risks in machine learning systems. It provides mechanisms for testing and analysis to help developers identify weaknesses or vulnerabilities in AI/ML models prior to deployment. This makes it particularly appealing in contexts where reliability and safety are paramount, such as finance, healthcare, or any domain subject to compliance constraints.
+[Lakera](https://www.lakera.ai/) was acquired by [Check Point Software](https://www.checkpoint.com/) for approximately $300M in November 2025. Lakera Guard, its core AI safety scanning product, is being integrated into Check Point's CloudGuard WAF as part of a broader application security offering. The underlying capability of scanning LLM inputs and outputs for prompt injection, toxic content and data leakage remains relevant, but the product context has changed substantially.
 
-We have placed Lakera in the Assess ring because while it addresses an important need for AI safety, the platform has several practical limitations that require careful evaluation. Currently, Lakera supports only text-based scanning, teams using multimodal AI systems with images, audio, or video will find gaps in coverage. Custom scanning capabilities for business-specific terms or PII detection rely on regex patterns rather than context-aware analysis, which can quickly hit limitations in complex scenarios.
-
-Performance considerations vary significantly between deployment options. The SaaS offering may provide adequate performance for many use cases, but has text size limitations that require applications to handle chunking. Self-hosted deployments offer more control but require substantial GPU resources for acceptable performance. Additionally, Lakera's scanning is non-stateful, each prompt and response is scanned in isolation without awareness of the broader conversation context, and only 'user' and 'assistant' message types are recognised.
-
-Given these constraints, Lakera may provide valuable safety assurance for straightforward text-based AI applications, but organisations should carefully assess whether its current capabilities align with their specific AI architectures and safety requirements. We recommend conducting thorough proof-of-concept testing that includes your specific modalities and performance expectations before determining if Lakera fits your use case.
+Technical limitations from our earlier evaluation still apply: scanning is text-only with no multimodal support, custom rules rely on regex patterns rather than context-aware analysis, and scanning is non-stateful with no awareness of conversation history. Teams evaluating Lakera should now assess it as part of the Check Point ecosystem rather than as a standalone product.
 
 <div data-radar data-label="Structured output libraries" data-ring="assess" />
 
 ## Structured output libraries
 
-We've placed structured output libraries in the Assess ring as increasingly important tooling for production AI applications that need reliable, typed responses from LLMs.
+Libraries such as [Instructor](https://python.useinstructor.com/), [Outlines](https://github.com/outlines-dev/outlines) and [Marvin](https://www.askmarvin.ai/) address a common challenge: LLMs naturally produce freeform text, but applications need structured data. These libraries constrain outputs to match specified structures through prompting, logit manipulation or grammar-based generation. Instead of hoping an LLM produces valid JSON, developers specify Pydantic models and receive guaranteed-valid objects. For agentic systems this is essential, as agents need to produce function calls and decision objects that downstream code can reliably process.
 
-Libraries such as [Instructor](https://python.useinstructor.com/), [Outlines](https://github.com/outlines-dev/outlines) and [Marvin](https://www.askmarvin.ai/) address a common challenge. LLMs naturally produce freeform text, but applications typically need structured data: JSON matching a schema or selections from valid options. These libraries constrain LLM outputs to match specified structures, either through clever prompting, logit manipulation, or grammar-based generation.
+The space is evolving quickly. Instructor has gained traction for its simplicity and Pydantic integration, while Outlines offers more sophisticated constrained generation. Native structured output features from model providers (OpenAI's JSON mode, Anthropic's tool use) may reduce the need for external libraries in some scenarios.
 
-The practical value is significant. Instead of hoping an LLM produces valid JSON and writing brittle parsing code, developers can specify Pydantic models and receive guaranteed-valid objects. This reduces error handling complexity and makes LLM outputs composable with traditional software. For agentic systems, structured outputs are essential. Agents need to produce function calls and decision objects that downstream code can reliably process.
+A broader category of runtime guardrails has grown up alongside these libraries. NVIDIA's [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://www.guardrailsai.com/) go beyond schema conformance to include prompt injection scanning, content filtering and hallucination checks. Teams building production LLM applications should evaluate both levels: structured outputs for type safety and guardrails for content safety.
 
-We've placed these in Assess rather than Trial because the space is rapidly evolving and best practices are still emerging. Instructor has gained significant traction for its simplicity and Pydantic integration, while Outlines offers more sophisticated constrained generation for teams needing fine-grained control. Teams should evaluate which approach matches their reliability requirements and performance constraints. The native structured output features increasingly offered by model providers (OpenAI's JSON mode, Anthropic's tool use) may reduce the need for external libraries in some scenarios.
+See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [Lakera](/ai-radar/tools/#lakera), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools)
 
 # Hold
 
-These tools are not recommended for new projects due to better alternatives or limited long-term viability. While some may still have niche applications, they generally represent technologies that have been superseded by more effective solutions.
+Not recommended for new projects due to better alternatives or limited long-term viability.
+
+<div data-radar data-label="OpenClaw" data-ring="hold" data-change="new" />
+
+## OpenClaw
+
+[OpenClaw](https://github.com/openclaw/openclaw) is an open-source agent runtime created by Peter Steinberger, who later joined OpenAI. It runs persistent, always-on AI agents that execute multi-step tasks by controlling computers: clicking, typing, navigating applications, browsing the web. OpenClaw supports Claude, DeepSeek and OpenAI as backends, and has spawned a wave of imitators. [NVIDIA's NemoClaw](https://github.com/NVIDIA/NemoClaw) wraps OpenClaw in the NVIDIA Agent Toolkit with sandboxed execution against Nemotron 3 Super models. [Moonshot's KimiClaw](https://kimi-claw.com/) runs natively on kimi.com with a community skill marketplace and persistent cloud memory.
+
+The security model has not been figured out across any of these variants. Persistent agent runtimes grant broad computer access to AI agents processing potentially untrusted instructions. The same prompt injection vulnerabilities that affect all visual computer use agents apply here, amplified by the breadth of access and the always-on character of the deployment. An agent with permission to control your browser, email and file system has an enormous blast radius if compromised.
+
+We do not recommend OpenClaw or its variants for new projects until the security model matures. Teams already using one should enforce strict sandboxing, limit accessible applications and maintain human oversight for actions involving sensitive data.
+
+See also: [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots)
 
 <div data-radar data-label="Conversational data analysis" data-ring="hold" />
 
 ## Conversational data analysis
 
-Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/), and [Julius](https://julius.ai/) enable natural language querying of databases and datasets, offering significant productivity benefits for knowledgeable data analysts. Modern database-specific Model Context Protocol (MCP) servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's own [XTDB database](https://xtdb.com/) revealed remarkable moments where models navigated complex table structures with apparent ease, demonstrating genuine potential for accelerating data analysis workflows.
+Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/) and [Julius](https://julius.ai/) enable natural language querying of databases. Modern MCP servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's [XTDB](https://xtdb.com/) revealed remarkable moments where models traversed complex table structures with apparent ease.
 
-For experienced analysts, these tools represent a meaningful productivity boost, rapidly converting natural language requests into draft queries that can be refined and optimised. However, our experience also reveals challenges: generated queries can be inefficient or occasionally incorrect despite appearing plausible. The technology sometimes struggles with nuanced requirements and may produce suboptimal approaches that experienced analysts would avoid. Uber's experience with their internal [QueryGPT tool](https://www.uber.com/en-GB/blog/query-gpt/) demonstrates both the potential and the complexity, highlighting the significant number of example queries and guardrails required to achieve reliable results.
+For experienced analysts, these tools represent a meaningful productivity boost, converting natural language into draft queries that can be refined. However, generated queries can be inefficient or incorrect despite appearing plausible. Uber's [QueryGPT](https://www.uber.com/en-GB/blog/query-gpt/) demonstrates both the potential and complexity, highlighting the guardrails required for reliable results.
 
-We've placed conversational data analysis in the Hold ring not because the technology lacks value, but because successful deployment requires users capable of understanding and validating generated queries. These tools offer substantial benefits for data teams with appropriate expertise, but should be approached cautiously by those unable to review and debug AI-generated database queries.
-
-For teams with strong analytical capabilities, these tools can meaningfully accelerate exploratory data analysis and routine query generation, treating AI output as sophisticated first drafts requiring expert review.
+We've placed this in Hold because successful deployment requires users capable of understanding and validating generated queries. These tools offer substantial benefits for data teams with appropriate expertise, but should be approached cautiously by those unable to review AI-generated database queries.
 </ChildSectionAiRadarLayout>

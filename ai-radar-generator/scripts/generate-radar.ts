@@ -134,6 +134,77 @@ function extractIntroParagraph(tree: MdAst): MdNode[] {
 type Ring = 'adopt' | 'trial' | 'assess' | 'hold'
 type RingEntries = Record<Ring, Array<{ label: string; moved: number }>>
 
+function extractUnpublishedLabels(tree: MdAst): Set<string> {
+  const labels = new Set<string>()
+  function walk(nodes: MdNode[]) {
+    for (const node of nodes) {
+      if (
+        (node.type === 'mdxJsxFlowElement' ||
+          node.type === 'mdxJsxTextElement') &&
+        node.name === 'div' &&
+        Array.isArray(node.attributes)
+      ) {
+        const attrs = node.attributes as any[]
+        const hasDataRadar = attrs.some(
+          (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-radar'
+        )
+        if (hasDataRadar) {
+          const publishedAttr = attrs.find(
+            (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-published'
+          )
+          if (publishedAttr?.value === 'false') {
+            const labelAttr = attrs.find(
+              (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-label'
+            )
+            if (labelAttr?.value) labels.add(labelAttr.value.toString())
+          }
+          continue
+        }
+      }
+      if (Array.isArray((node as any).children)) {
+        walk((node as any).children)
+      }
+    }
+  }
+  walk(tree.children as MdNode[])
+  return labels
+}
+
+function stripUnpublishedSections(tree: MdAst, unpublished: Set<string>): MdAst {
+  if (unpublished.size === 0) return tree
+  const children = tree.children as MdNode[]
+  const result: MdNode[] = []
+  let skipping = false
+  let skipDepth = 0
+  for (const node of children) {
+    if (node.type === 'heading') {
+      if (skipping && node.depth <= skipDepth) {
+        skipping = false
+      }
+      if (!skipping) {
+        // Check if this heading matches an unpublished label
+        const text = extractTextFromNode(node)
+        if (unpublished.has(text.trim())) {
+          skipping = true
+          skipDepth = node.depth
+          continue
+        }
+      }
+    }
+    if (skipping) continue
+    result.push(node)
+  }
+  return { ...tree, children: result }
+}
+
+function extractTextFromNode(node: MdNode): string {
+  if (node.type === 'text') return (node as any).value ?? ''
+  if (Array.isArray((node as any).children)) {
+    return ((node as any).children as MdNode[]).map(extractTextFromNode).join('')
+  }
+  return ''
+}
+
 function extractRingEntries(tree: MdAst): RingEntries {
   const entries: RingEntries = { adopt: [], trial: [], assess: [], hold: [] }
   const moveMap = (v: string | null | undefined): number => {
@@ -144,43 +215,57 @@ function extractRingEntries(tree: MdAst): RingEntries {
     if (s === 'new') return 2
     return 0
   }
-  for (const node of tree.children as MdNode[]) {
-    if (
-      (node.type === 'mdxJsxFlowElement' ||
-        node.type === 'mdxJsxTextElement') &&
-      node.name === 'div' &&
-      Array.isArray(node.attributes)
-    ) {
-      const attrs = node.attributes as any[]
-      const hasDataRadar = attrs.some(
-        (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-radar'
-      )
-      if (!hasDataRadar) continue
-      const ringAttr = attrs.find(
-        (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-ring'
-      )
-      const labelAttr = attrs.find(
-        (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-label'
-      )
-      const changeAttr = attrs.find(
-        (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-change'
-      )
-      const ringValue = (ringAttr?.value ?? '').toString().toLowerCase()
-      const labelValue = (labelAttr?.value ?? '').toString()
-      const moved = moveMap(
-        typeof changeAttr?.value === 'string' ? changeAttr?.value : undefined
-      )
+  function walk(nodes: MdNode[]) {
+    for (const node of nodes) {
       if (
-        labelValue &&
-        (ringValue === 'adopt' ||
-          ringValue === 'trial' ||
-          ringValue === 'assess' ||
-          ringValue === 'hold')
+        (node.type === 'mdxJsxFlowElement' ||
+          node.type === 'mdxJsxTextElement') &&
+        node.name === 'div' &&
+        Array.isArray(node.attributes)
       ) {
-        entries[ringValue as Ring].push({ label: labelValue, moved })
+        const attrs = node.attributes as any[]
+        const hasDataRadar = attrs.some(
+          (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-radar'
+        )
+        if (hasDataRadar) {
+          // Skip unpublished blips
+          const publishedAttr = attrs.find(
+            (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-published'
+          )
+          if (publishedAttr?.value === 'false') continue
+          const ringAttr = attrs.find(
+            (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-ring'
+          )
+          const labelAttr = attrs.find(
+            (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-label'
+          )
+          const changeAttr = attrs.find(
+            (a) => a?.type === 'mdxJsxAttribute' && a?.name === 'data-change'
+          )
+          const ringValue = (ringAttr?.value ?? '').toString().toLowerCase()
+          const labelValue = (labelAttr?.value ?? '').toString()
+          const moved = moveMap(
+            typeof changeAttr?.value === 'string' ? changeAttr?.value : undefined
+          )
+          if (
+            labelValue &&
+            (ringValue === 'adopt' ||
+              ringValue === 'trial' ||
+              ringValue === 'assess' ||
+              ringValue === 'hold')
+          ) {
+            entries[ringValue as Ring].push({ label: labelValue, moved })
+          }
+          continue
+        }
+      }
+      // Recurse into children
+      if (Array.isArray((node as any).children)) {
+        walk((node as any).children)
       }
     }
   }
+  walk(tree.children as MdNode[])
   return entries
 }
 
@@ -395,7 +480,9 @@ async function generateForSection(
 
   // Collect ring entries before cleaning drops mdx JSX
   const ringEntries = extractRingEntries(mdast)
-  const cleaned = stripMdxAndAdjustHeadings(mdast)
+  const unpublished = extractUnpublishedLabels(mdast)
+  const stripped = stripMdxAndAdjustHeadings(mdast)
+  const cleaned = stripUnpublishedSections(stripped, unpublished)
   const introNodes = extractIntroParagraph(cleaned)
   const introHtml = introNodes.length
     ? await renderNodesToHtml(introNodes)
@@ -1325,7 +1412,9 @@ async function main() {
       .use(remarkGfm)
       .parse(raw)
     const ringEntries = ringEntriesByLabel[section.label]
-    const cleaned = stripMdxAndAdjustHeadings(mdast)
+    const unpublished = extractUnpublishedLabels(mdast)
+    const stripped = stripMdxAndAdjustHeadings(mdast)
+    const cleaned = stripUnpublishedSections(stripped, unpublished)
     const introNodes = extractIntroParagraph(cleaned)
     const introHtml = introNodes.length
       ? await renderNodesToHtml(introNodes)

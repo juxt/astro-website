@@ -13,101 +13,105 @@ Methodologies and practices for building AI systems: approaches such as RAG, pro
 
 # Adopt
 
-These techniques represent mature, well-supported approaches that are ready for production use. They offer excellent performance and proven track records in real-world applications.
+Mature, well-supported approaches ready for production use.
 
 <div data-radar data-label="Classical ML" data-ring="adopt" />
 
 ## Classical ML
 
-We continue to see tremendous value in classical machine learning approaches such as random forests, gradient boosting (XGBoost, LightGBM), linear/logistic regression and support vector machines for many business problems. While attention has shifted dramatically towards deep learning and large language models in the last couple of years, these traditional techniques often provide the best balance of explainability and computational efficiency for structured data problems.
+Classical machine learning approaches such as random forests, gradient boosting (XGBoost, LightGBM), linear/logistic regression and support vector machines remain the best balance of explainability and efficiency for structured data problems. These techniques routinely outperform more complex approaches on tabular data while training faster and costing less to run.
 
-The key advantages that keep classical ML firmly in our Adopt ring include faster training times and lower computing requirements compared to deep learning approaches. However, it's important to recognise that realising these benefits requires both quality training data and staff with appropriate expertise. Unlike the recent wave of LLM-based solutions that have democratised AI capabilities for organisations without extensive data science teams, classical ML continues to demand specialised knowledge in feature engineering and model selection.
-
-For organisations with the necessary data assets and technical capabilities, these methods work well even with the smaller datasets common in enterprise settings, often matching or exceeding the performance of more complex approaches while remaining more interpretable to stakeholders and easier to maintain. Their lower training costs and built-in feature importance metrics provide practical advantages that directly translate to business value, particularly as organisations face increasing pressure to make their ML systems both cost-effective and environmentally sustainable.
+Realising these benefits requires quality training data and staff with appropriate expertise. Unlike LLM-based solutions that have democratised AI for organisations without data science teams, classical ML demands specialised knowledge in feature engineering and model selection. For organisations with the necessary capabilities, these methods work well even with smaller enterprise datasets, matching or exceeding the performance of more complex approaches while remaining more interpretable and easier to maintain.
 
 <div data-radar data-label="RAG" data-ring="adopt" />
 
 ## RAG
 
-Retrieval-Augmented Generation (RAG) is an AI approach that combines search and text generation to produce more accurate responses. The approach helps prevent 'hallucination', cases where AI models confabulate plausible but incorrect information, by grounding responses in real data.
+Retrieval-Augmented Generation (RAG) combines search and text generation to produce more accurate responses, helping prevent confabulation by grounding responses in real data. The technique is particularly valuable when accuracy and traceability are crucial, such as in customer service or compliance scenarios. While implementing RAG requires attention to document processing and embedding strategies, widespread tooling has lowered the barriers to adoption.
 
-We're placing RAG in the Adopt ring because it addresses key challenges in deploying AI systems in information retrieval contexts. The technique is particularly valuable when accuracy and traceability of information are crucial, such as in customer service or compliance scenarios. While implementing RAG requires careful attention to document processing and embedding strategies, the widespread availability of tools and frameworks has significantly lowered the barriers to adoption. Teams should consider RAG as a foundational technique when building AI applications that need to leverage organisational knowledge.
+We're monitoring how RAG develops alongside techniques such as [Self-RAG](https://arxiv.org/abs/2310.11511), which recognises when more evidence needs to be gathered or responses refined. This self-criticism mechanism has shown promising results in reducing confabulations.
 
-We're particularly interested in monitoring how this technique develops alongside others improving AI system reliability and truthfulness. For example, by augmenting the approach with [Self-RAG](https://arxiv.org/abs/2310.11511) to recognise when more evidence needs to be gathered or responses refined for better accuracy. This 'self-criticism' mechanism has shown promising results in improving response quality and reducing confabulations.
+RAG introduces an indirect prompt injection attack surface. Retrieved documents are injected into model context, so adversarial content in any document reaches the prompt via the retrieval step. Retrieval access controls and provenance tracking for ingested documents help mitigate this risk.
 
-See also Cross-encoder reranking, Structured RAG.
+See also Cross-encoder reranking, Structured RAG, Hypothetical document embeddings (HyDE).
 
 <div data-radar data-label="LLM-as-a-judge" data-ring="adopt" />
 
 ## LLM-as-a-judge
 
-We've placed LLM-as-a-judge in the Adopt ring because it has quickly proven itself to be one of the most practical and cost-effective techniques for evaluating AI system outputs. At first glance, it might seem like circular reasoning to have one LLM evaluate another LLM's work. However, the capabilities of today's strongest models are such that they can provide nuanced, multidimensional critique that simpler evaluation methods cannot match, except when using very constrained metrics such as exact match or BLEU scores (Bilingual Evaluation Understudy, a method for automatically evaluating machine translations).
+LLM-as-a-judge has proven one of the most practical techniques for evaluating AI system outputs. Today's strongest models provide nuanced, multidimensional critique that simpler evaluation methods cannot match, except for very constrained metrics such as exact match or BLEU scores.
 
-This technique has become widely adopted in both offline and online evaluation scenarios. In offline evaluation, it scales far better than human assessment, allowing teams to test thousands of outputs quickly during development and quality assurance workflows. In online scenarios, an LLM judge can evaluate another LLM's output in real-time in production, enabling dynamic workflow adjustments or user experience modifications based on quality assessments. This real-time evaluation approach serves as a foundation for more sophisticated agentic workflows, where multiple AI components collaborate to refine outputs before user delivery.
+The technique is widely adopted in both offline and online evaluation. Offline, it scales far better than human assessment, allowing teams to test thousands of outputs quickly. Online, an LLM judge can evaluate another LLM's output in real-time, enabling dynamic workflow adjustments based on quality assessments.
 
-[Recent research demonstrates](https://arxiv.org/abs/2306.05685) that the current frontier models can provide judgements that correlate strongly with human preferences across many common evaluation dimensions. For best results, we recommend using a different LLM as the judge than the one being evaluated, and viewing this approach as an augmentation to, not replacement for, human evaluation. The strongest LLMs can identify nuanced issues in reasoning and factuality that would otherwise require substantial human review time, creating a more efficient evaluation pipeline whilst preserving critical human oversight for final quality assurance.
+[Research demonstrates](https://arxiv.org/abs/2306.05685) that frontier models provide judgements correlating strongly with human preferences across many evaluation dimensions. We recommend using a different LLM as the judge than the one being evaluated, and viewing this as an augmentation to human evaluation rather than a replacement. The strongest LLMs can identify nuanced issues in reasoning and factuality that would otherwise require substantial human review time.
+
+See also: DeepEval
 
 <div data-radar data-label="BERT variants" data-ring="adopt" />
 
 ## BERT variants
 
-[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised Natural Language Processing (NLP) by allowing AI models to process human language by looking at words in relation to their entire context, rather than just left-to-right or right-to-left. Think of it like a reader who can understand a word by looking at all the surrounding words for context, rather than reading sequentially. The original BERT spawned a family tree of variants, with [ModernBERT](https://huggingface.co/blog/modernbert) representing the latest evolution. Released in late 2024, ModernBERT improves legacy BERT through architectural updates which shorten training times and improve accuracy.
+[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised NLP by processing words in relation to their entire context rather than sequentially. The original BERT spawned a family of variants, with [ModernBERT](https://huggingface.co/blog/modernbert) representing the latest evolution, improving training times and accuracy through architectural updates.
 
-BERT-style models serve fundamentally different purposes than generative models such as GPT. While GPT models excel at generating text and conversational interactions, BERT models are optimised for understanding and analysis tasks such as classification and sentiment analysis. They're particularly valuable for creating semantic vector embeddings that capture text meaning in numerical form, making them essential components in Retrieval Augmented Generation (RAG) systems. In these pipelines, BERT embeddings help retrieve relevant information that is then fed as text to GPT models for generation: the models don't directly share embeddings, but rather work in complementary roles.
+BERT-style models serve fundamentally different purposes than generative models such as GPT. Where GPT models excel at generating text, BERT models are optimised for understanding and analysis tasks such as classification and sentiment analysis. They're particularly valuable for creating semantic vector embeddings, making them essential components in RAG systems where BERT embeddings retrieve relevant information that generative models then use for output.
 
-We particularly recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for organisations starting new NLP projects. It handles word relationships more effectively using a disentangled attention mechanism and enhanced position encoding. [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) is smaller and faster whilst retaining most of the model's performance, so it is particularly valuable for production deployments where latency requirements are strict or computing resources are limited, such as edge devices or high-throughput API services.
-
-For organisations choosing between BERT and GPT models, consider your specific use case: BERT models require fewer computational resources for inference and excel at precise understanding tasks, while GPT models offer impressive out-of-the-box generation capabilities through accessible APIs. Many sophisticated AI applications today use both types in complementary roles, BERT for understanding and information retrieval, and GPT for generation based on that understanding.
-
-There are options for specialised domains such as biomedical [(BioBERT)](https://github.com/dmis-lab/biobert) or financial text [(FinBERT)](https://huggingface.co/ProsusAI/finbert). While these can outperform general models in their niches, they often require significant expertise to use effectively and may need additional tuning for specific use cases.
+We recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for new NLP projects, as it handles word relationships more effectively using a disentangled attention mechanism. [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) is smaller and faster whilst retaining most performance, valuable for production deployments with strict latency requirements. Domain-specific variants exist for biomedical [(BioBERT)](https://github.com/dmis-lab/biobert) and financial text [(FinBERT)](https://huggingface.co/ProsusAI/finbert), though these require expertise to use effectively.
 
 <div data-radar data-label="Few-shot prompting" data-ring="adopt" />
 
 ## Few-shot prompting
 
-The technique of providing examples to guide an AI model's responses has proven consistently effective across different Large Language Models. By showing the model a few examples of desired input-output pairs, developers can achieve more reliable and contextually appropriate responses without resorting to complex prompt engineering or fine-tuning.
+Providing examples to guide an AI model's responses has proven consistently effective across Large Language Models.
 
-The landscape is shifting. As models become more capable, interactive multi-turn approaches are gaining favour for complex tasks: rather than providing examples upfront, practitioners increasingly prompt models to ask clarifying questions and iterate toward a solution. This collaborative pattern often produces better results than static few-shot prompts, particularly in agentic workflows where the model can refine its approach based on feedback.
+This is shifting. As models become more capable, interactive multi-turn approaches are gaining favour: rather than providing examples upfront, practitioners prompt models to ask clarifying questions and iterate toward a solution. This collaborative pattern often produces better results, particularly in agentic workflows where the model can refine its approach based on feedback.
 
-However, few-shot prompting retains an important role in non-interactive contexts. System prompts and automated pipelines don't afford the opportunity for clarifying dialogue. Here, well-chosen examples remain the most effective way to establish output format and domain conventions. We typically see diminishing returns beyond 3-5 examples, and the main trade-off remains token consumption.
+However, few-shot prompting retains an important role in non-interactive contexts. System prompts and automated pipelines don't afford clarifying dialogue. Here, well-chosen examples remain the most effective way to establish output format and domain conventions. We typically see diminishing returns beyond 3-5 examples, and the main trade-off remains token consumption.
 
-<div data-radar data-label="Agentic tool use" data-ring="adopt" data-change="up" />
+<div data-radar data-label="Agentic tool use" data-ring="adopt" />
 
 ## Agentic tool use
 
-We've moved agentic tool use to the Adopt ring for local, sandboxed environments. AI coding assistants that can edit files, run tests, execute shell commands and perform web searches deliver considerably more value than those limited to conversation, and the productivity gains we're seeing are substantial.
+We've moved agentic tool use to the Adopt ring for local, sandboxed environments. AI coding assistants that can edit files, run tests, execute shell commands and perform web searches deliver considerably more value than those limited to conversation.
 
-The ecosystem has matured to support this. Standards such as [Model Context Protocol](/ai-radar/languages-frameworks/#model-context-protocol) and [OpenAI's Function Calling](https://platform.openai.com/docs/guides/function-calling?api-mode=chat) provide reliable integration patterns, while improved [observability tooling](/ai-radar/tools/#llm-observability-tools) means teams can monitor what their agents are actually doing. The [Development Containers specification](https://containers.dev/) and tools such as [devcontainer.ai](https://devcontainer.ai/) make it straightforward to isolate agent execution, limiting the blast radius should anything go wrong.
+The ecosystem has matured to support this. Standards such as [MCP](/ai-radar/languages-frameworks/#mcp) and [OpenAI's Function Calling](https://platform.openai.com/docs/guides/function-calling?api-mode=chat) provide reliable integration patterns, while improved [observability tooling](/ai-radar/tools/#llm-observability-tools) lets teams monitor what agents are doing. The [Development Containers specification](https://containers.dev/) makes it straightforward to isolate agent execution.
 
-The risks magnify significantly for applications that accept input from external users. Prompt injection attacks, where malicious content manipulates an agent into misusing its tools, remain an unsolved problem. An agent that can safely edit files for a developer becomes a serious liability when processing untrusted input from the internet. Bridging trusted and untrusted contexts requires careful security architecture: strict input validation, output verification, rate limiting and sandboxed execution with principle of least privilege.
+The risks magnify for applications accepting external user input. Prompt injection attacks remain an unsolved problem. An agent that safely edits files for a developer becomes a liability when processing untrusted input. Our recommendation: adopt for local developer tooling and internal workflows, but proceed with caution for customer-facing systems, treating each tool permission as a potential attack vector.
 
-Our recommendation is nuanced: adopt agentic tool use for local developer tooling and internal workflows where inputs are trusted, but proceed with caution for customer-facing systems, treating each tool permission as a potential attack vector.
+See also: Visual computer use agents, Model Context Protocol, Temporal
+
+<div data-radar data-label="Spec-driven development" data-ring="adopt" data-change="new" />
+
+## Spec-driven development
+
+Spec-driven development inverts the traditional workflow: specifications become the source of truth, and code is generated or verified against them. AI coding assistants work dramatically better with structured specifications than vague instructions. Without specifications, "vibe coding" works for prototypes but falls apart for production systems. Specifications constrain the AI, reduce confabulation, save tokens and produce more maintainable code.
+
+The ecosystem is growing fast. [GitHub Spec Kit](https://github.com/github/spec-kit) supports 22+ AI agent platforms. [Kiro](https://kiro.dev/) offers a dedicated specs mode alongside conversational coding. We're seeing this pattern emerge organically in teams using Claude Skills to codify project requirements as structured markdown that the AI references during generation.
+
+There is a spectrum of formality, from informal markdown specifications through structured specification languages to full formal methods. The right level depends on what you need to assert about your software. The point is to give the AI an unambiguous reference rather than relying on conversational context that drifts with each interaction.
+
+See also: [Formal specification languages](/ai-radar/languages-frameworks/#formal-specification-languages), [Claude Skills](/ai-radar/techniques/#claude-skills)
 
 # Trial
 
-These techniques show promising potential with growing adoption and active development. While they may not yet have the same maturity as Adopt techniques, they offer innovative approaches and capabilities that make them worth exploring for forward-thinking teams.
+Promising approaches with growing adoption, worth exploring for teams ready to invest in emerging patterns.
 
 <div data-radar data-label="Cross-encoder reranking" data-ring="trial" />
 
 ## Cross-encoder reranking
 
-[Cross-encoder reranking](https://sbert.net/examples/applications/retrieve_rerank/README.html) sits in our Trial ring as a promising enhancement for AI search and chat systems. It works alongside traditional embedding-based search (where documents and queries are converted into numbers that represent their meaning) by taking a closer look at the initial search results. While embedding search is fast and good at finding broadly relevant content, cross-encoder reranking excels at understanding subtle relevance signals by looking at the query and potential results together.
+[Cross-encoder reranking](https://sbert.net/examples/applications/retrieve_rerank/README.html) enhances AI search and chat systems by examining initial search results more carefully. While embedding search is fast and good at finding broadly relevant content, cross-encoder reranking excels at understanding subtle relevance signals by examining the query and potential results together.
 
-Most teams we've observed use this as a two-step process: first, a quick embedding search finds perhaps 50-100 potentially relevant items from their knowledge base. Then, cross-encoder reranking carefully sorts these candidates to bring the most relevant ones to the top. While this additional step does add some processing time, we're seeing it deliver meaningful improvements in result quality across various use cases.
+Most teams use a two-step process: embedding search finds 50-100 potentially relevant items, then cross-encoder reranking sorts these candidates to surface the most relevant. The technique often reduces confabulations in downstream LLM responses by ensuring higher quality context selection. Implementation has become straightforward with libraries such as [sentence-transformers](https://www.sbert.net/) providing ready-to-use models. Teams should be mindful of the additional latency and may need to tune the number of candidates based on performance requirements.
 
-The technique has shown consistent improvements across different domains and use cases, often reducing confabulations in downstream LLM responses by ensuring higher quality context selection. Implementation has also become more straightforward with libraries such as [sentence-transformers](https://www.sbert.net/) providing ready-to-use models. However, teams should be mindful of the additional latency introduced by the reranking step and may need to tune the number of candidates passed to the re-ranker based on their specific performance requirements.
-
-<div data-radar data-label="Ontologies for AI grounding" data-ring="trial" data-change="new" />
+<div data-radar data-label="Ontologies for AI grounding" data-ring="trial" />
 
 ## Ontologies for AI grounding
 
-As AI systems scale beyond isolated experiments, organisations are discovering that shared meaning becomes critical infrastructure. Ontologies provide what LLMs lack: authoritative definitions of entities and relationships that don't shift with statistical probability. They improve accuracy by grounding responses in agreed definitions. They enable knowledge graph traversal that pure RAG cannot achieve, following relationships between concepts rather than just retrieving similar text. And they support the structured outputs and tool definitions that agentic systems require.
+As AI systems scale beyond isolated experiments, shared meaning becomes critical infrastructure. Ontologies provide what LLMs lack: authoritative definitions of entities and relationships that don't shift with statistical probability. They ground responses in agreed definitions, enable knowledge graph traversal that pure RAG cannot achieve and support the structured outputs that agentic systems require.
 
-Traditional ontology development tends toward two failure modes. Academic approaches aim for formal completeness using description logic and OWL, often spending years modelling before delivering value. Pragmatic approaches create spreadsheet taxonomies that grow organically but become unmaintainable as teams drift into inconsistent terminology. The key is to start lightweight and formalise selectively: begin with the core concepts that matter most and add formal semantics only where reasoning provides demonstrable value.
+Traditional ontology development tends toward two failure modes: academic approaches aiming for formal completeness using OWL, and pragmatic approaches creating spreadsheets that grow unmaintainable. The key is to start lightweight and formalise selectively. Mark Burgess [argues](https://arxiv.org/abs/2512.19084) that traditional ontologies impose rigid hierarchies that don't match how language models represent meaning, proposing alternative graph structures designed to work with vector embeddings. For organisations needing to ground AI in domain knowledge today, ontologies offer a practical path with mature tooling.
 
-Not everyone agrees ontologies are the right grounding mechanism for the LLM era. Mark Burgess, creator of CFEngine and Promise Theory, [argues](https://arxiv.org/abs/2512.19084) that traditional ontologies impose rigid hierarchies that don't match how language models represent meaning, and proposes alternative graph structures designed to work with vector embeddings rather than impose categories on top of them. We're watching this debate with interest, but for organisations needing to ground AI in existing domain knowledge today, ontologies offer a practical path with mature tooling.
-
-Graph databases such as [Neo4j](https://neo4j.com/) provide accessible implementation options, while [LinkML](https://linkml.io/) offers a YAML-based modelling approach that maintains formalism without requiring deep ontology expertise. We recommend starting with a painful, high-value domain rather than attempting to model the entire organisation.
+Graph databases such as [Neo4j](https://neo4j.com/) provide accessible implementation options, while [LinkML](https://linkml.io/) offers YAML-based modelling without deep ontology expertise. Start with a painful, high-value domain rather than attempting to model the entire organisation.
 
 See also: LinkML, Neurosymbolic AI, Prolog
 
@@ -115,11 +119,11 @@ See also: LinkML, Neurosymbolic AI, Prolog
 
 ## Model distillation & synthetic data
 
-We've placed [Model Distillation](https://platform.openai.com/docs/guides/distillation/model-distillation) in the Trial ring of our Techniques quadrant. Distillation involves training a smaller, more efficient model to mimic a larger one. A common emerging pattern we're seeing is using LLMs to generate synthetic training data for this smaller model. The larger LLM acts as a "teacher," creating diverse, high-quality examples that can help the "student" model learn the desired behaviour. For instance, a large model might generate thousands of question-answer pairs that are then used to train a more compact model for a specific domain.
+[Model distillation](https://platform.openai.com/docs/guides/distillation/model-distillation) involves training a smaller, more efficient model to mimic a larger one. A common pattern uses LLMs to generate synthetic training data for the smaller model: the large LLM acts as a "teacher", creating diverse examples that help the "student" learn desired behaviour. This makes AI deployment more practical for edge devices or resource-constrained environments.
 
-This creates an interesting synergy: the large LLM's ability to generate varied, nuanced responses helps create richer training datasets than might otherwise be available, while distillation makes the resulting solutions more practical to deploy. This approach makes AI deployment more practical and cost-effective, especially for edge devices or resource-constrained environments. However, we're keeping it in Trial as the process still requires considerable expertise to execute well. Teams need to carefully validate the quality of generated training data and ensure the distilled model maintains acceptable performance levels. There's also ongoing debate about potential amplification of biases or errors through this approach.
+We're keeping it in Trial because the process requires considerable expertise. Teams need to validate the quality of generated training data and ensure the distilled model maintains acceptable performance. There is ongoing debate about amplification of biases through this approach.
 
-Be sure to check the licence of the model you're using for distillation. Llama forbids the use of its output to train other models. The launch of DeepSeek R1 in January 2025 brought distillation into popular consciousness, as it has been [widely assumed that it represents a distillation of existing foundation models](https://www.theguardian.com/technology/2025/jan/29/openai-chatgpt-deepseek-china-us-ai-models).
+Check the licence of models used for distillation. Llama forbids using its output to train other models. DeepSeek R1's launch in January 2025 brought distillation into popular consciousness, as it has been [widely assumed to represent a distillation of existing foundation models](https://www.theguardian.com/technology/2025/jan/29/openai-chatgpt-deepseek-china-us-ai-models).
 
 <div data-radar data-label="UMAP" data-ring="trial" />
 
@@ -131,87 +135,71 @@ We're seeing successful applications across AI projects, especially for understa
 
 The Python [UMAP](https://umap-learn.readthedocs.io/en/latest/basic_usage.html) library provides extensive documentation and explanation, with implementations also available for [Rust](https://github.com/eugenehp/fast-umap), [Java](https://haifengl.github.io/api/java/smile/manifold/UMAP.html) and [R](https://cran.r-project.org/web/packages/umap/vignettes/umap.html).
 
-<div data-radar data-label="Claude Skills" data-ring="trial" data-change="new" />
+<div data-radar data-label="Claude Skills" data-ring="trial" />
 
 ## Claude Skills
 
-We've placed Claude Skills in the Trial ring based on our positive experiences using them to bring structure and consistency to a variety of AI-assisted tasks. Skills are reusable prompt templates that codify workflows and domain expertise into repeatable patterns that AI coding assistants can follow.
+Claude Skills are reusable prompt templates that codify workflows and domain expertise into repeatable patterns for AI coding assistants. Our teams have found them valuable for drafting proposals, structured debugging, generating commit messages and writing PR descriptions. The common thread is tasks that benefit from consistent approach and structured output.
 
-Our teams have found Skills particularly valuable for drafting proposals, structured debugging workflows, generating commit messages and writing PR descriptions. The common thread is tasks that benefit from a consistent approach and structured output, but don't require access to external data or systems.
-
-Skills provide a much simpler solution than [MCP servers](/ai-radar/languages-frameworks/#mcp) for many problems. Where MCP requires implementing a server and managing the protocol lifecycle, Skills are essentially markdown files that encode expertise directly. For teams wanting to standardise how AI assists with internal processes or ensure consistent output formats, Skills offer immediate value with minimal setup.
-
-However, Skills don't replace MCP servers when integration with external services is required. If your workflow needs to query live databases or make authenticated API calls to internal services, MCP remains the appropriate choice. Skills work well with data that exists as files in your project or filesystem, since the AI assistant can already read those. MCP extends reach to running services and systems beyond what filesystem access provides.
+Skills provide a simpler solution than [MCP servers](/ai-radar/languages-frameworks/#mcp) for many problems. Where MCP requires implementing a server and managing the protocol lifecycle, Skills are markdown files that encode expertise directly. Skills work well with data that exists as files in your project, since the AI assistant can already read those. MCP extends reach to running services and systems beyond filesystem access.
 
 We recommend teams start by identifying repetitive tasks where consistency matters, then experiment with Skills before investing in MCP server development.
 
-# Assess
-
-These techniques represent emerging or specialized approaches that may be worth considering for specific use cases. While they offer interesting capabilities, they require careful evaluation due to limited adoption or uncertain long-term viability.
-
-<div data-radar data-label="Structured RAG" data-ring="assess" />
+<div data-radar data-label="Structured RAG" data-ring="trial" data-change="up" />
 
 ## Structured RAG
 
-[Structured RAG](https://techcommunity.microsoft.com/blog/azuredevcommunityblog/rag-on-structured-data-with-postgresql/4164456) extends basic RAG by organising knowledge in a more formal way, rather than just as chunks of text. Think of it like the difference between a filing cabinet (basic RAG) and a well-designed database (structured RAG). Instead of just retrieving text fragments, structured RAG can work with specific fields and relationships in your data. For example, in a product catalogue, it could separately track and retrieve product names, prices, specifications and reviews, understanding how these elements relate to each other.
+Structured RAG extends basic RAG by organising retrieved knowledge as graphs, schemas or typed records rather than flat text chunks. Microsoft's [GraphRAG](https://microsoft.github.io/graphrag/) uses an LLM to build a knowledge graph from source documents during indexing, then queries that graph at retrieval time. This addresses a weakness in standard RAG: questions requiring synthesis across many documents rather than finding a single relevant passage.
 
-The key advantages we're seeing in real-world applications include more consistent outputs and reduced confabulation rates compared to traditional RAG approaches. While implementations can vary, successful patterns are emerging around using JSON schemas or database-like organisations for retrieved information.
+GraphRAG has matured since our last radar. [LazyGraphRAG](https://microsoft.github.io/graphrag/posts/lazyGraphRAG/) reduced indexing costs to a fraction of the original, removing the biggest barrier to adoption. [Neo4j](https://neo4j.com/) provides [dedicated examples](https://github.com/neo4j-product-examples/graphrag-finserv) combining graph-based retrieval with LLM generation.
 
-However, implementing structured RAG requires more upfront work in data organisation and schema design than traditional RAG. Teams need to carefully consider their data structures and retrieval patterns. This additional complexity is why we've placed it in Assess rather than Trial: while the benefits are clear, implementation patterns are still evolving.
+The trade-off remains upfront investment. Graph-based indexing requires more compute and design than vector-based RAG, and the knowledge graph must be maintained as source documents change. If your queries are primarily about finding relevant passages, standard RAG with [cross-encoder reranking](/ai-radar/techniques/#cross-encoder-reranking) may suffice. If they require reasoning across documents, structured approaches earn their cost.
 
-<div data-radar data-label="Neurosymbolic AI" data-ring="assess" data-change="new" />
+See also: [RAG](/ai-radar/techniques/#rag), [Ontologies for AI grounding](/ai-radar/techniques/#ontologies-for-ai-grounding), [Cross-encoder reranking](/ai-radar/techniques/#cross-encoder-reranking)
+
+# Assess
+
+Emerging or specialised approaches that warrant investigation for specific use cases, but require careful evaluation before adoption.
+
+<div data-radar data-label="Neurosymbolic AI" data-ring="assess" />
 
 ## Neurosymbolic AI
 
-We've placed neurosymbolic AI in the Assess ring because it represents an architectural pattern that addresses fundamental limitations of pure large language model approaches. This is particularly relevant for regulated industries where explainability and rule compliance are non-negotiable.
+Neurosymbolic AI combines neural networks with symbolic reasoning to address fundamental limitations of pure LLM approaches. Neural networks excel at pattern recognition and handling ambiguity, while symbolic AI provides logical reasoning and explainable inference. LLMs understand natural language well but cannot guarantee rule compliance or explain their reasoning in auditable ways.
 
-The core idea combines neural networks with symbolic AI: neural networks excel at pattern recognition and handling ambiguity, while symbolic AI provides logical reasoning and explainable inference. LLMs understand natural language and recognise patterns well, but they cannot guarantee rule compliance or explain their reasoning in auditable ways.
+The root issue is architectural. LLMs operate through probabilistic pattern matching over language, not causal modelling. As Mark Burgess argues in his [work on semantic spacetime](https://arxiv.org/abs/2512.19084), language models "paraphrase intentional knowledge" rather than tracing actual causal chains. Precise answers to precise questions require systems that explicitly encode what causes what.
 
-The root issue is architectural. LLMs operate through probabilistic pattern matching over language, not causal modelling. They can reproduce explanations they have encountered but cannot reason about novel causal relationships. As Mark Burgess argues in his [work on semantic spacetime](https://arxiv.org/abs/2512.19084), language models can only "paraphrase intentional knowledge": they predict what words typically follow a question about causes, rather than tracing actual causal chains. To get precise answers to precise questions requires systems that explicitly encode what causes what.
+This matters most in regulated sectors. Regulatory rules are non-negotiable constraints, not suggestions a model can approximate. Risk models need to know what entities are and how they relate, and compliance requires explainable decision trails. Similar pressures apply across financial services, healthcare and insurance.
 
-Neurosymbolic approaches couple LLMs with explicit knowledge structures and reasoning engines to address these gaps.
+Practical implementations range from lightweight to sophisticated. On the simpler end, teams constrain LLM outputs to valid ontology terms or use knowledge graphs to ground RAG retrieval. More advanced implementations use symbolic reasoning engines to validate LLM-generated conclusions. Renewed interest in [Prolog](/ai-radar/languages-frameworks/#prolog) reflects exploration of logic programming alongside LLMs.
 
-Financial services organisations find particular value in this pattern. Regulatory rules are non-negotiable constraints, not suggestions a model can approximate. Risk models need to know what entities are and how they relate, not just what words appear near each other. Compliance requires explainable decision trails that cannot be satisfied by asserting that the model produced a particular output. Similar pressures apply across regulated sectors including healthcare and insurance.
-
-Practical implementations range from lightweight approaches through to sophisticated architectures. On the simpler end, teams constrain LLM outputs to valid ontology terms or use knowledge graphs to ground RAG retrieval. More advanced implementations use symbolic reasoning engines to validate or guide LLM-generated conclusions. [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/) provides orchestration capabilities in this direction. Renewed interest in [Prolog](/ai-radar/languages-frameworks/#prolog) reflects exploration of logic programming alongside LLMs.
-
-We've placed this in Assess rather than Trial because production patterns are still emerging and the tooling remains immature. However, forward-thinking organisations in regulated sectors should be experimenting now. The combination of LLM flexibility with symbolic rigour is increasingly necessary as AI moves from assistive tools to autonomous decision-making, where approximate correctness is insufficient.
+We've placed this in Assess because production patterns are still emerging, but organisations in regulated sectors should be experimenting now.
 
 See also: Prolog, Ontologies for AI grounding, Agentic tool use, World models
 
-<div data-radar data-label="World models" data-ring="assess" data-change="new" />
+<div data-radar data-label="World models" data-ring="assess" />
 
 ## World models
 
-We've placed world models in the Assess ring because they represent an emerging alternative to pure language model architectures for tasks requiring causal reasoning and planning. Where LLMs predict the next token based on statistical patterns in text, world models build internal representations of how environments behave, enabling systems to simulate outcomes before acting.
+World models sit in the Assess ring as an emerging alternative to pure language model architectures for tasks requiring causal reasoning and planning. Where LLMs predict the next token based on statistical patterns in text, world models build internal representations of how environments behave, enabling systems to simulate outcomes before acting.
 
-The field is developing along several distinct paths. [Yann LeCun's Joint Embedding Predictive Architecture (JEPA)](https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/) learns by predicting missing information in an abstract embedding space rather than reconstructing raw pixels or tokens. Meta's V-JEPA and the recently released [VL-JEPA](https://arxiv.org/abs/2512.10942) extend this to video and vision-language tasks, achieving strong performance with significantly fewer parameters than autoregressive alternatives. LeCun's new venture, Advanced Machine Intelligence Labs, signals substantial investment in this direction.
+The field is developing along several paths. [Yann LeCun's Joint Embedding Predictive Architecture (JEPA)](https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/) learns by predicting missing information in an abstract embedding space rather than reconstructing raw pixels or tokens. Meta's V-JEPA and [VL-JEPA](https://arxiv.org/abs/2512.10942) extend this to video and vision-language tasks with significantly fewer parameters than autoregressive alternatives. [Karl Friston's active inference framework](https://www.verses.ai/), implemented by Verses AI in their AXIOM system, takes a different approach rooted in how biological systems model their environments. Rather than chasing reward signals, active inference agents build generative models and act to minimise prediction error, with Verses reporting 60% performance improvement using only 3% of comparable deep learning compute. Generative world models form a third strand, with [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) and Google DeepMind's Genie 3 creating physically plausible simulated environments for training robots and autonomous systems.
 
-[Karl Friston's active inference framework](https://www.verses.ai/), implemented by Verses AI in their AXIOM system, takes a different approach rooted in how biological systems model and interact with their environments. Rather than chasing reward signals, active inference agents build generative models of their world and act to minimise prediction error. Verses reports significant efficiency gains: a recent demonstration showed 60% performance improvement while using only 3% of the compute required by comparable deep learning approaches.
+For financial services, [MarS](https://github.com/microsoft/MarS/) from Microsoft Research demonstrates the pattern applied to market simulation, generating realistic interactive market scenarios for forecasting and anomaly detection without real capital at risk. The paper was accepted at ICLR 2025.
 
-Generative world models form a third strand, with [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) and Google DeepMind's Genie 3 creating physically plausible simulated environments for training robots and autonomous systems. These overlap with the World Foundation Models discussed in our Physical AI entry.
-
-For financial services, [MarS](https://github.com/microsoft/MarS/) from Microsoft Research demonstrates the pattern applied to market simulation. MarS uses a Large Market Model trained on order-level data to generate realistic, interactive market scenarios for forecasting, anomaly detection, market impact analysis and training trading agents without real capital at risk. The paper was accepted at ICLR 2025 and represents a concrete example of world models addressing problems that statistical approaches struggle with: simulating how markets respond to interventions rather than merely predicting price movements from historical patterns.
-
-The relevance to enterprise AI lies in what these approaches offer that LLMs cannot: genuine causal modelling rather than statistical pattern matching over language. An LLM asked "what happens if I do X?" can only paraphrase similar scenarios from its training data. A world model can simulate the consequences. For applications in robotics and decision support where actions have real-world consequences, this distinction matters.
-
-For teams wanting to experiment, several options are freely available. Meta's [V-JEPA 2](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256) and [I-JEPA](https://huggingface.co/docs/transformers/en/model_doc/ijepa) models are on HuggingFace under permissive licenses, with straightforward integration via the Transformers library. [NVIDIA Cosmos](https://huggingface.co/nvidia/Cosmos-1.0-Diffusion-7B-Text2World) models are openly available under the NVIDIA Open Model License, which permits commercial use. Verses AI publishes [AXIOM code](https://github.com/VersesTech/axiom) under an academic license, with their commercial Genius platform available for enterprise deployment. This remains an emerging area, and teams pursuing production implementations should be prepared for the additional engineering effort that comes with adopting less mature technology. That said, the barrier to experimentation is now low enough that forward-looking organisations can begin building practical familiarity with the paradigm.
+The enterprise value: these approaches offer causal modelling rather than statistical pattern matching. An LLM asked "what happens if I do X?" can only paraphrase similar scenarios from its training data. A world model can simulate the consequences. For teams wanting to experiment, Meta's [V-JEPA 2](https://huggingface.co/facebook/vjepa2-vitl-fpc64-256) and [NVIDIA Cosmos](https://huggingface.co/nvidia/Cosmos-1.0-Diffusion-7B-Text2World) models are available on HuggingFace under permissive licences.
 
 See also: Neurosymbolic AI, Physical AI and robotics foundation models
 
-<div data-radar data-label="LLM reproducibility" data-ring="assess" data-change="new" />
+<div data-radar data-label="LLM reproducibility" data-ring="assess" />
 
 ## LLM reproducibility
 
-Large language models are non-deterministic even when configured for greedy sampling at temperature zero. This presents a fundamental challenge for regulated industries where Model Risk Management (MRM) frameworks require reproducible, auditable decision-making. The Financial Stability Board requires "consistent and traceable decision-making," while banking regulations such as OCC/SR 11-7 assume a level of model stability that generative AI does not provide.
+Large language models are non-deterministic even at temperature zero. This presents a fundamental challenge for regulated industries where Model Risk Management frameworks require reproducible, auditable decision-making. Banking regulations such as OCC/SR 11-7 assume a level of model stability that generative AI does not provide.
 
-The root cause extends beyond floating-point arithmetic. [Recent research](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/) demonstrates that batch-dependent kernel operations cause outputs to vary with server load rather than input alone. Studies of cross-provider consistency found larger models showed as low as 12.5% consistency across identical requests, described as "fundamental architectural incompatibility with financial compliance requirements".
+The root cause extends beyond floating-point arithmetic. [Research](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/) demonstrates that batch-dependent kernel operations cause outputs to vary with server load rather than input alone. Smaller open weight models on controlled infrastructure tend to achieve more reproducible outputs than larger models served via shared APIs. Where stochastic behaviour is acceptable, the variation must be well-characterised so it can be explained to regulators as a designed property rather than an infrastructure artefact. Prompts and model versions should be treated as versioned code with change control and rollback procedures.
 
-Organisations in regulated sectors have several options. For determinism-critical applications, smaller open weight models deployed on controlled infrastructure tend to achieve more reproducible outputs than larger models served via shared APIs. Where stochastic behaviour is acceptable, the variation must be well-characterised and bounded so it can be explained to regulators as a designed property rather than an infrastructure artefact. Regardless of approach, prompts and model versions should be treated as versioned code with change control and rollback procedures. Material changes should trigger revalidation against golden test sets.
-
-For teams requiring determinism from larger models, [SGLang](https://lmsys.org/blog/2025-09-22-sglang-deterministic/) now offers deterministic inference building on batch-invariant operators, reducing performance overhead to around 34% with CUDA graph optimisations. The [underlying research](https://arxiv.org/abs/2506.09501) was selected for oral presentation at NeurIPS 2025, signalling growing confidence that determinism is an engineering challenge rather than an inherent hardware limitation.
-
-We've placed this in Assess because adoption of these techniques in production remains early. The tooling exists, but integrating deterministic inference into existing MLOps pipelines and explaining the approach to regulators require organisational investment. Teams subject to MRM requirements should be actively evaluating their options now rather than waiting for the ecosystem to mature further.
+For teams requiring determinism from larger models, [SGLang](https://lmsys.org/blog/2025-09-22-sglang-deterministic/) now offers deterministic inference building on batch-invariant operators, with the [underlying research](https://arxiv.org/abs/2506.09501) selected for oral presentation at NeurIPS 2025. Teams subject to MRM requirements should be actively evaluating their options now.
 
 See also: Neurosymbolic AI, LLM-as-a-judge
 
@@ -219,39 +207,49 @@ See also: Neurosymbolic AI, LLM-as-a-judge
 
 ## Hypothetical document embeddings (HyDE)
 
-We've found [HyDE (Hypothetical Document Embeddings)](https://arxiv.org/abs/2212.10496) to be an elegant solution to a common problem in search systems: their tendency to perform poorly when searching content that differs from their training data. HyDE works by first asking a large language model to imagine what an ideal document answering the user's query might look like. This 'hypothetical document' helps bridge the gap between how users naturally ask questions and how information is actually written in documents.
+[HyDE (Hypothetical Document Embeddings)](https://arxiv.org/abs/2212.10496) addresses a common problem in search systems: poor performance when searching content that differs from training data. HyDE asks a large language model to imagine what an ideal document answering the query might look like, bridging the gap between how users ask questions and how information is written.
 
-The system creates several of these imagined documents to capture different ways the answer might be expressed. These are converted into numerical representations (embeddings) and blended together. This averaged representation is then used to find real documents that are mathematically similar, which often leads to more relevant search results than traditional methods. The approach has proven particularly effective as part of larger systems, such as RAG (Retrieval Augmented Generation), where accurate document retrieval is crucial for generating reliable responses. Teams should evaluate HyDE particularly for cases where high-precision retrieval is crucial and the additional latency is acceptable.
+The system creates several hypothetical documents, converts them into embeddings and blends them together. This averaged representation finds real documents that are mathematically similar, often leading to more relevant results than traditional methods. The approach is particularly effective within RAG systems where accurate retrieval is crucial. Teams should evaluate HyDE for cases where high-precision retrieval is needed and the additional latency is acceptable.
 
-See also: RAG, BERT
+See also: RAG, BERT variants, Cross-encoder reranking
 
 <div data-radar data-label="Fine-tuning with LoRA" data-ring="assess" />
 
 ## Fine-tuning with LoRA
 
-We have placed [Low-Rank Adaptation (LoRA)](https://huggingface.co/docs/peft/main/en/conceptual_guides/lora) in the Assess ring. LoRA represents a significant advancement in making AI model customisation more practical and cost-effective. Rather than adjusting all parameters in a large language model (which can number in the billions), LoRA adds a small set of trainable parameters while keeping the original model unchanged. Think of it like teaching an expert to adapt to your specific needs without having to retrain their entire knowledge base. This approach typically reduces the computing resources needed for customisation by 3-4 orders of magnitude while maintaining most of the performance benefits of full fine-tuning.
+[Low-Rank Adaptation (LoRA)](https://huggingface.co/docs/peft/main/en/conceptual_guides/lora) makes model customisation more practical by adding a small set of trainable parameters while keeping the original model unchanged, reducing computing requirements by 3-4 orders of magnitude while maintaining most of the performance of full fine-tuning.
 
-The technique has proven its value across numerous enterprise applications, and robust tools such as Lightning AI's [lit-gpt](https://github.com/Lightning-AI/litgpt/tree/main) and [axolotl](https://github.com/axolotl-ai-cloud/axolotl) have emerged to support implementation. However, we place it in the Assess ring rather than Trial because successfully applying LoRA still requires significant machine learning expertise and careful consideration of training data quality. Additionally, we recommend organisations view fine-tuning (including with LoRA) as a long-term strategy rather than a short-term investment. Fine-tuning typically ties you to a specific model architecture, and given the rapid pace of AI advancement, tomorrow's general-purpose models may well outperform your carefully tuned older models with no customisation at all. Migrating fine-tuned weights between different model architectures is particularly challenging and requires a well-curated evaluation corpus. While LoRA is a valuable technique to have in your toolkit, it should only be deployed when the immediate business value clearly outweighs both the technical and opportunity costs.
+Tools such as Lightning AI's [lit-gpt](https://github.com/Lightning-AI/litgpt/tree/main) and [axolotl](https://github.com/axolotl-ai-cloud/axolotl) support implementation. We place it in Assess rather than Trial because successfully applying LoRA still requires significant ML expertise and careful attention to training data quality. Fine-tuning ties you to a specific model architecture, and given the pace of AI advancement, tomorrow's general-purpose models may outperform your carefully tuned older models. Migrating fine-tuned weights between architectures is particularly challenging. LoRA should only be deployed when the immediate business value clearly outweighs the technical and opportunity costs.
 
-<div data-radar data-label="Physical AI and robotics foundation models" data-ring="assess" data-change="new" />
+<div data-radar data-label="Physical AI and robotics foundation models" data-ring="assess" />
 
 ## Physical AI and robotics foundation models
 
-Physical AI represents the convergence of foundation model capabilities with robotics and the physical world. Where traditional robotics relied on brittle, task-specific programming, robotics foundation models enable machines to generalise across tasks and adapt to novel situations. The investment signals are substantial: over $6 billion flowed into robotics companies in the first seven months of 2025, with individual raises including Figure AI ($1 billion), Physical Intelligence ($600 million), and Project Prometheus ($6.2 billion).
+Physical AI represents the convergence of foundation model capabilities with robotics. Where traditional robotics relied on brittle, task-specific programming, robotics foundation models enable machines to generalise across tasks and adapt to novel situations.
 
-The technical breakthrough driving this shift is the emergence of Vision-Language-Action (VLA) models. These architectures extend the pattern established by vision-language models to include physical action outputs, enabling robots to interpret visual scenes and execute appropriate physical responses. [NVIDIA's Isaac GR00T N1](https://developer.nvidia.com/isaac/foundation-models) represents the first open humanoid robot foundation model, using a dual-system architecture inspired by human cognition that separates deliberate planning from rapid reactive control. [Google's Gemini Robotics](https://deepmind.google/discover/blog/gemini-robotics-brings-ai-into-the-physical-world/) models and the Genie 3 world model are advancing similar capabilities.
+The technical breakthrough is Vision-Language-Action (VLA) models, which extend vision-language models to include physical action outputs. [NVIDIA's Isaac GR00T N1](https://developer.nvidia.com/isaac/foundation-models) represents the first open humanoid robot foundation model, using a dual-system architecture that separates deliberate planning from rapid reactive control. [Google's Gemini Robotics](https://deepmind.google/discover/blog/gemini-robotics-brings-ai-into-the-physical-world/) is advancing similar capabilities. World Foundation Models complement these by enabling simulation-based training: [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) generates physically plausible synthetic environments that can train robots on scenarios too dangerous or rare to capture in the real world.
 
-World Foundation Models (WFMs) complement robotics foundation models by enabling synthetic data generation and simulation-based training. [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) generates physically plausible synthetic environments that can train robots on scenarios too dangerous or rare to capture in the real world. This simulation-first approach dramatically reduces the cost and risk of developing physical AI systems.
-
-We've placed this in Assess because whilst the technology is advancing rapidly, production deployments remain concentrated in well-resourced organisations with significant robotics expertise. The gap between research demonstrations and reliable industrial deployment is substantial. Hardware costs have decreased significantly, with capable platforms now available in the $2,000-$20,000 range compared to $75,000+ three years ago, but the integration challenges of perception and control in unstructured environments remain formidable. Organisations with physical AI ambitions should be actively experimenting and building capability, but should approach production timelines with appropriate caution.
+Production deployments remain concentrated in well-resourced organisations. The gap between research demonstrations and reliable industrial deployment is substantial. Hardware costs have decreased (capable platforms now available from $2,000 compared to $75,000+ three years ago), but perception and control challenges in unstructured environments remain formidable. Organisations with physical AI ambitions should be experimenting, but should approach production timelines with caution.
 
 See also: Digital twin platforms, World models
 
+<div data-radar data-label="CaMeL" data-ring="assess" data-change="new" />
+
+## CaMeL
+
+[CaMeL (CApabilities for MachinE Learning)](https://arxiv.org/abs/2503.18813) is a defence architecture from Google DeepMind for mitigating prompt injection in agentic systems. It splits responsibilities across two models: a privileged P-model processes only user instructions and outputs a program defining execution steps, while a quarantined Q-model handles external data but cannot call tools directly. A custom interpreter tracks data provenance, enforcing capability-based security so untrusted data cannot escalate privileges.
+
+CaMeL solves 77% of tasks with provable security guarantees in the AgentDojo benchmark. There are limitations: users must define security policies (fatigue risk), running two models adds latency and cost, and it hasn't been battle-tested in production.
+
+We've placed CaMeL in Assess because it addresses prompt injection more rigorously than anything else we've seen, but production patterns haven't emerged. Teams building agentic systems for regulated industries should study this paper.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [OpenClaw](/ai-radar/tools/#openclaw)
+
 # Hold
 
-These techniques are not recommended for new projects due to better alternatives or limited long-term viability. While some may still have niche applications, they generally represent approaches that have been superseded by more effective solutions.
+Not recommended for new projects; better alternatives exist.
 
-<div data-radar data-label="Word2Vec & GloVe" data-ring="hold" />
+<div data-radar data-label="Word2Vec & GloVe" data-ring="hold" data-published="false" />
 
 ## Word2Vec & GloVe
 
@@ -259,7 +257,7 @@ We've placed both [GloVe (Global Vectors for Word Representation)](https://nlp.s
 
 These older embedding techniques, though computationally efficient, lack the contextual understanding that modern transformer-based models provide. Modern large language models and contextual embeddings such as BERT produce more nuanced representations that capture word meaning based on surrounding context, rather than the static embeddings that GloVe and Word2Vec generate. For new projects, we recommend exploring more recent embedding techniques (see "BERT Variants" in our Adopt ring) unless you have very specific constraints around computational resources or model size that make these older approaches necessary.
 
-<div data-radar data-label="t-SNE" data-ring="hold" />
+<div data-radar data-label="t-SNE" data-ring="hold" data-published="false" />
 ## t-SNE
 
 We've placed [t-SNE (t-distributed Stochastic Neighbor Embedding)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding) in the Hold ring of our techniques quadrant. While t-SNE was groundbreaking when introduced for visualising high-dimensional data in lower dimensions, particularly for understanding the internal representations of neural networks, we're seeing its limitations become more apparent in modern AI workflows.
@@ -274,17 +272,15 @@ Zero-shot prompting, the practice of asking Large Language Models to perform tas
 
 Our view is that zero-shot prompting should always be combined with input validation and output filtering. While it can be valuable for prototyping and exploration, moving to few-shot prompting or fine-tuning with careful guardrails is a more robust approach for production systems. The current placement in Hold reflects our concern about organisations rushing to deploy unsafe prompt patterns rather than taking the time to implement proper controls.
 
-<div data-radar data-label="Chain of thought (CoT)" data-ring="hold" data-change="down" />
+<div data-radar data-label="Chain of thought (CoT)" data-ring="hold" />
 
 ## Chain of thought (CoT)
 
-[Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) has moved to our Hold ring. While CoT was a genuinely useful technique when it emerged, [recent research from Wharton's Generative AI Labs](https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/) demonstrates diminishing returns: gains are rarely worth the time cost, and for reasoning models such as o1 and o3, CoT prompting can actually decrease performance since step-by-step reasoning is already internalised at the architecture level.
+[Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) has moved to Hold. While useful when it emerged, [research from Wharton's Generative AI Labs](https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/) demonstrates diminishing returns: gains are rarely worth the time cost, and for reasoning models such as o3 and GPT-5.2, CoT prompting can decrease performance since step-by-step reasoning is already internalised at the architecture level.
 
-For non-reasoning models, CoT still shows modest benefits on mathematical and symbolic reasoning tasks. However, these are precisely the domains where better alternatives are emerging. Dedicated reasoning models handle these tasks natively, while neurosymbolic architectures offer more reliable solutions by coupling LLMs with explicit symbolic reasoning engines rather than prompting models to simulate reasoning. CoT's remaining niche is being squeezed from both directions.
+For non-reasoning models, CoT still shows modest benefits on mathematical and symbolic reasoning tasks, but these are precisely the domains where better alternatives are emerging. Dedicated reasoning models handle them natively, while neurosymbolic architectures offer more reliable solutions by coupling LLMs with explicit reasoning engines.
 
-The frontier of prompt engineering has moved beyond eliciting reasoning to structuring problems effectively. Frameworks such as the 5 Whys and inversion ("what would guarantee failure?") now offer more value than CoT prompting. Resources such as [taches-cc-resources](https://github.com/glittercowboy/taches-cc-resources) catalogue these evolved approaches, focusing on problem framing and workflow orchestration rather than reasoning elicitation.
-
-We're not suggesting that step-by-step reasoning is unimportant; quite the opposite. It's now so fundamental that it's handled by the models and architectures rather than the prompts.
+The frontier of prompt engineering has moved to structuring problems effectively. Frameworks such as the 5 Whys and inversion now offer more value than CoT prompting. Step-by-step reasoning is now handled by the models and architectures rather than the prompts.
 
 See also: Neurosymbolic AI
 
@@ -292,9 +288,9 @@ See also: Neurosymbolic AI
 
 ## AI pull request review
 
-AI's code review capabilities have improved substantially. Developers who are accomplished at multi-turn conversations with AI can now get valuable feedback across the full spectrum: from syntax issues and style violations through architectural patterns to subtle runtime concerns such as race conditions. The days of AI only catching surface-level issues are behind us.
+AI's code review capabilities have improved substantially. Developers accomplished at multi-turn AI conversations can now get valuable feedback across the full spectrum, from syntax issues through architectural patterns to subtle runtime concerns such as race conditions.
 
-Yet we've kept AI Pull Request Review in Hold, and the reason is organisational rather than technical. PR review isn't just about finding errors; it's a vital knowledge-sharing mechanism where senior developers mentor juniors and the team maintains situational awareness of how the codebase is evolving. Teams who delegate review to AI often see a decline in collective code ownership and shared understanding.
+Yet we've kept AI Pull Request Review in Hold, for organisational rather than technical reasons. PR review isn't just about finding errors; it's a knowledge-sharing mechanism where senior developers mentor juniors and the team maintains awareness of how the codebase evolves. Teams who delegate review to AI often see a decline in collective code ownership.
 
-The deeper question is how teams remain informed as AI handles more of the development workflow. Pull requests remain an excellent forum for this, perhaps more important than ever. We recommend using AI as a first-pass reviewer to catch issues before human review, but preserving the human review step as a deliberate practice for team alignment and knowledge transfer.
+We recommend using AI as a first-pass reviewer to catch issues before human review, but preserving the human step as deliberate practice for team alignment and knowledge transfer.
 </ChildSectionAiRadarLayout>
