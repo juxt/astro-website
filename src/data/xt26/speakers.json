@@ -49,7 +49,8 @@
     "name": "River Keefer",
     "role": "Principal Engineer",
     "company": "Antithesis",
-    "image": "/src/assets/xt26/xt26-riverkeefer.jpg"
+    "image": "/src/assets/xt26/xt26-riverkeefer.jpg",
+    "talkTitle": "Extracting Reliable Software from the Slop Factory"
   },
   {
     "name": "Jon Pither",
