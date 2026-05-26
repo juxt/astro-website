@@ -152,7 +152,7 @@ const subject = 'XT26 Request for Invite'
         class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 w-full'
       >
         {
-          speakers.map(({ name, role, company, image, linkedin }) => (
+          speakers.map(({ name, role, company, image, linkedin, talkTitle }) => (
             <a
               href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
               target='_blank'
@@ -186,6 +186,9 @@ const subject = 'XT26 Request for Invite'
               )}
               {company && (
                 <p class='text-sm font-medium text-gray-300'>{company}</p>
+              )}
+              {talkTitle && (
+                <p class='text-sm text-gray-400 italic mt-2'>{talkTitle}</p>
               )}
             </a>
           ))
