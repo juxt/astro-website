@@ -111,7 +111,7 @@ The "just pattern matching" dismissal is produced by the same hierarchy. It is w
 
 <span class="pullquote" text-content="The room at Pocono didn't just fail to see Feynman's physics. It would have funded Schwinger."></span>
 
-And the architectural alternative the discipline is reaching for, with billions of dollars behind it, comes from the same place. The dismissal and the proposed correction are not independent assessments of the evidence but the same bias expressed in both directions: suspicion toward what doesn't fit the format, and confidence in whatever does. The room at Pocono didn't just fail to see Feynman's physics. It would have funded Schwinger.
+And the architectural alternative the discipline is funding, the world-model camp, comes from the same place. The dismissal and the proposed correction are not independent assessments of the evidence but the same bias expressed in both directions: suspicion toward what doesn't fit the format, and confidence in whatever does. What practitioners actually build, meanwhile, is harness engineering: agent loops, retrieval, verifiers, tool use, all wrapped around the pattern-matching core rather than replacing it. The room at Pocono didn't just fail to see Feynman's physics. It would have funded Schwinger.
 
 The world-model camp may turn out to be right, where the corpus is thin and environmental feedback is what matters. Nobody knows. But the confidence with which the alternative is held, and the speed with which capital has followed, are partly explained by a bias the discipline has carried for two centuries. Formalism looks like serious cognitive work, and pattern matching doesn't. That assessment feels like technical judgement, but it is also inheritance.
 
