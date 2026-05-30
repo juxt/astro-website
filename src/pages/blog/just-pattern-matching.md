@@ -11,9 +11,11 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede"><a href="https://en.wikipedia.org/wiki/Julian_Schwinger" target="_blank">Schwinger</a> had spent hours at the blackboard the day before, deriving quantum electrodynamics through pages of formal mathematics. The twenty-eight physicists assembled at the Pocono Conference in the spring of 1948, <a href="https://en.wikipedia.org/wiki/Paul_Dirac" target="_blank">Dirac</a> and <a href="https://en.wikipedia.org/wiki/Niels_Bohr" target="_blank">Bohr</a> and <a href="https://en.wikipedia.org/wiki/J._Robert_Oppenheimer" target="_blank">Oppenheimer</a> among them, were impressed. Then <a href="https://en.wikipedia.org/wiki/Richard_Feynman" target="_blank">Feynman</a> got up and drew what looked like cartoons. He himself called it "that crazy language".</p>
+<p class="lede"><a href="https://en.wikipedia.org/wiki/Julian_Schwinger" target="_blank">Schwinger</a> had spent hours at the blackboard the day before, deriving quantum electrodynamics through pages of formal mathematics. The twenty-eight physicists assembled at the Pocono Conference in the spring of 1948, <a href="https://en.wikipedia.org/wiki/Paul_Dirac" target="_blank">Dirac</a> and <a href="https://en.wikipedia.org/wiki/Niels_Bohr" target="_blank">Bohr</a> and <a href="https://en.wikipedia.org/wiki/J._Robert_Oppenheimer" target="_blank">Oppenheimer</a> among them, were impressed. Then <a href="https://en.wikipedia.org/wiki/Richard_Feynman" target="_blank">Feynman</a> got up and drew what looked like cartoons.</p>
 
 [Teller](https://en.wikipedia.org/wiki/Edward_Teller) interrupted, objecting that the approach violated the exclusion principle. Dirac kept asking "Is it unitary?" Bohr strode to the stage and lectured Feynman on the uncertainty principle, having mistaken the diagrams for literal pictures of particle paths. The presentation was an absolute disaster.
+
+Feynman said later: "My machines came from too far away."
 
 Had the attendees been more receptive, they'd have heard that the diagrams were a tool for reasoning through quantum interactions: straight lines for particles, wavy lines for forces and vertices for interactions. Each element mapped to a term in the mathematics, and the spatial arrangement of the picture let scientists see relationships instead of grinding through pages of algebra. Within six months, Freeman Dyson had [proved the approaches equivalent](https://en.wikipedia.org/wiki/Feynman_diagram), and the cartoons were doing in hours what formal methods took months to achieve.
 
@@ -99,9 +101,9 @@ Since late 2025, mathematicians working with LLMs have been [solving open proble
 
 A system whose underlying network has no arithmetic produced a proof that an expert in the field called divine.
 
-## That crazy language
+## Machines from too far away
 
-Feynman called the diagrams "that crazy language". The room at Pocono agreed it was crazy and missed that it was a language. Their confidence was the predictable output of two centuries of disciplinary selection.
+"My machines came from too far away," Feynman said of his presentation. The room saw the machines and missed how far they had come. Their confidence was the predictable output of two centuries of disciplinary selection.
 
 Institutions select for what can travel. What travels is what gets filed, and what gets filed becomes synonymous with what counts. Within a generation, the *metis* falls out of the institutional record and stops being recognised as work at all. The room at Pocono had inherited a discipline that could not, structurally, see what Feynman was showing them. The tracks had been covered so thoroughly that the audience had forgotten there were tracks.
 
@@ -115,7 +117,7 @@ The world-model camp may turn out to be right, where the corpus is thin and envi
 
 The cost of operating at scale is that the *metis* gets lost. The cost of a hierarchy that selects against intuition is that we keep failing to recognise it when we encounter it again, in the experts whose tracks we covered and in the systems that follow their stepping stones, while reaching for whatever alternative the discipline was trained to call serious.
 
-The room at Pocono is still in session, and the crazy language is still what it can't read.
+The room at Pocono is still in session, and the machines still come from too far away.
 
 ---
 
