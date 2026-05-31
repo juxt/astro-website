@@ -33,9 +33,13 @@ The same selection runs through professional life, where formalism becomes the m
 
 <span class="pullquote" text-content="There is tragedy in it but no villain."></span>
 
-[James C. Scott](https://en.wikipedia.org/wiki/James_C._Scott) called the practical knowledge that resists this codification [*metis*](https://en.wikipedia.org/wiki/Seeing_Like_a_State): the living part, the part that can't survive the freezing. Legibility, making knowledge formal enough to govern, is what allows coordination at scale, and there is tragedy in it but no villain. The price of operating beyond face-to-face scale is that whatever can't be made legible falls out of the institutional record. Across generations the formal record becomes synonymous with the discipline, and the *metis* becomes invisible, then forgotten, then suspect.
+[James C. Scott](https://en.wikipedia.org/wiki/James_C._Scott) called the practical knowledge that resists this codification [*metis*](https://en.wikipedia.org/wiki/Seeing_Like_a_State): the living part, the part that can't survive the freezing. Legibility, making knowledge formal enough to govern, is what allows coordination at scale, and there is tragedy in it but no villain. The price of operating beyond face-to-face scale is that whatever can't be made legible falls out of the institutional record. Across generations the formal record becomes synonymous with the discipline. To anyone reading it that way, the *metis* is invisible, then forgotten, then suspect.
 
-Seventeen years after the Pocono disaster, accepting the [Nobel Prize](https://www.nobelprize.org/prizes/physics/1965/feynman/lecture/), Feynman observed that scientific writing is designed to cover the tracks: the dead ends, the wrong ideas, the blind alleys nobody describes. The audience at Pocono had seen the absence of formalism and concluded the physics was absent too. The same erasure runs through every profession that writes itself down. The recipe captures the steps, not the chef's taste; the curriculum doesn't teach the heuristics the practitioner actually uses. The *metis* persists, but only in the doing.
+Seventeen years after the Pocono disaster, accepting the [Nobel Prize](https://www.nobelprize.org/prizes/physics/1965/feynman/lecture/), Feynman observed that scientific writing is designed to cover the tracks: the dead ends, the wrong ideas, the blind alleys nobody describes. The audience at Pocono had seen the absence of formalism and concluded the physics was absent too. The same erasure runs through every profession that writes itself down. The recipe captures the steps, not the chef's taste; the curriculum doesn't teach the heuristics the practitioner actually uses.
+
+But none of this means the *metis* disappears. It travels person to person, through apprenticeship and bench-work and stories told between problems. What gets tested is the formalism; what gets handed down indirectly is the *metis*. Every generation reinherits it the same way.
+
+The discipline celebrates its most striking practitioners, the ones whose outputs make the gap most visible. [Ramanujan's](https://en.wikipedia.org/wiki/Srinivasa_Ramanujan) notebooks were filed; the way he saw mathematics wasn't. Feynman's diagrams were filed; the way he saw them wasn't. The genius is the dramatic case, not a separate category. The same gap runs through every working day in every profession. The *metis* stays where it always was, in the doing.
 
 Over time, formalism becomes the marker of seriousness and the proof of skill, even in domains where the intuition is doing most of the work and the formalism is reconstruction after the fact. By the time the room at Pocono saw Feynman's diagrams, the discipline's formal record contained no trace of how the intuitions were reached, and they were responding to its absence the way any expert responds to an unfamiliar pattern: with suspicion. Institutions trained to recognise serious work in one form will keep mistaking that form for the work itself.
 
@@ -59,9 +63,11 @@ Asking them to show their working is asking them to operate at a lower level of 
 
 ## Pattern matching forwards
 
-The most common dismissal of LLMs is that they are "[stochastic parrots](https://en.wikipedia.org/wiki/Stochastic_parrot)": statistical machines that regurgitate patterns from training data without understanding. Bender's 2021 coinage has hardened since. [Kambhampati](https://arxiv.org/abs/2402.01817) argues that what looks like planning in LLMs is retrieval of plan-shaped text, not reasoning about world states. [Mitchell](https://arxiv.org/abs/2311.09247) finds them unable to abstract reliably from surface patterns to the structures underneath. [Marcus](https://en.wikipedia.org/wiki/Gary_Marcus) argues that without a model of the world, they cannot reason causally or check themselves. The strongest versions of the critique agree on the boundary: LLMs can recognise and recombine patterns, but they cannot plan, abstract, verify or update.
+The most common dismissal of LLMs is that they are "[stochastic parrots](https://en.wikipedia.org/wiki/Stochastic_parrot)": statistical machines that recombine training data without genuine understanding. The phrase has stuck. The strongest versions of the critique have grown more specific.
 
-The accusation underneath is that pattern matching can recognise what already exists but cannot produce anything new.
+[Mitchell](https://arxiv.org/abs/2311.09247) finds LLMs unable to abstract reliably from surface patterns to the structures beneath. Stable metaphor requires stable abstraction. A system that cannot tell a deep structural correspondence from a superficial one will recombine surface patterns indefinitely and never reach the kind of analogy Einstein was making.
+
+[Marcus](https://en.wikipedia.org/wiki/Gary_Marcus) argues that without a model of the world, LLMs cannot reason causally. A system that has only the surface form of causal language, the "because" and the "led to", has read about the world without learning how it works. It produces the right next sentence but never the right next move.
 
 In their book Surfaces and Essences, Hofstadter and Sander [walk through Einstein's analogies one by one](https://www.basicbooks.com/titles/douglas-hofstadter/surfaces-and-essences/9780465018475/).
 
@@ -107,7 +113,7 @@ And the core keeps doing what the critics said it couldn't.
 
 Institutions select for what can travel. What travels is what gets filed, and what gets filed becomes synonymous with what counts. Within a generation, the *metis* falls out of the institutional record and stops being recognised as work at all. The room at Pocono had inherited a discipline that could not, structurally, see what Feynman was showing them. The tracks had been covered so thoroughly that the audience had forgotten there were tracks.
 
-The "just pattern matching" dismissal is produced by the same hierarchy. It is what two centuries of selecting for formalism will reach for when it encounters cognitive work that doesn't fit the format.
+The instinct to call this "just pattern matching" is produced by the same hierarchy. It is what two centuries of selecting for formalism will reach for when it encounters cognitive work that doesn't fit the format.
 
 <span class="pullquote" text-content="The room at Pocono didn't just fail to see Feynman's physics. It would have funded Schwinger."></span>
 
