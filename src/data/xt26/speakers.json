@@ -69,5 +69,11 @@
     "role": "Principal Engineer",
     "company": "NatWest Group",
     "image": "/src/assets/xt26/xt26-joelking.jpg"
+  },
+  {
+    "name": "Nik Tkachev",
+    "role": "Head of Product",
+    "company": "JetBrains",
+    "image": "/src/assets/xt26/xt26-niktkachev.jpg"
   }
 ]
