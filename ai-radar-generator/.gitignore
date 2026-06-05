@@ -12,6 +12,12 @@ ENV/
 output/*
 !output/.gitkeep
 
+# ICC profiles (licensed downloads, not for committing)
+profiles/*.icc
+
+# Large cover source images (regenerate locally)
+public/Cover-*.tif
+
 # IDE
 .vscode/
 .idea/

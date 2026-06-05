@@ -31,17 +31,13 @@ Senior engineers derive the greatest value, using AI for routine tasks whilst ma
 
 ## Provider-agnostic LLM facades
 
-The LLM market evolves rapidly, making today's optimal choice potentially outdated within months. We recommend implementing a facade pattern between your application and LLM providers, rather than building directly against specific APIs. This approach reduces vendor lock-in and enables easier testing of alternative models as they emerge. When considering whether to write your own code, be sure to consider tools such as the lightweight [AISuite](https://github.com/andrewyng/aisuite), Simon Willison's [LLM](https://github.com/simonw/llm) library and CLI tool, or heavyweight alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/).
-
-This recommendation reflects our team's experience seeing projects hampered by tight coupling to specific LLM providers, and the subsequent maintenance burden when transitioning to newer, more capable models.
+The LLM market moves quickly enough that today's best choice may be displaced within months. A facade between your application and the underlying provider keeps that switching cost manageable. Options range from the lightweight [AISuite](https://github.com/andrewyng/aisuite) and Simon Willison's [LLM](https://github.com/simonw/llm) library to heavier alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/). A thin in-house wrapper is also a reasonable choice for teams that prefer to minimise dependencies. We have seen enough projects hampered by tight coupling to a single provider to consider some form of abstraction a default.
 
 <div data-radar data-label="Notebooks" data-ring="adopt" />
 
 ## Notebooks
 
-Notebooks are the de facto standard for data science and ML experimentation. Combining code execution with rich text and visualisations, they're particularly valuable for AI/ML workflows where iterative exploration and documentation of model development are essential. We especially value how notebooks facilitate collaboration between technical and non-technical team members.
-
-[Jupyter](https://jupyter.org/) is the most widely used, supporting multiple languages including Python and Julia. Cloud platforms provide their own implementations: [Google Colab](https://colab.research.google.com/), AWS [Sagemaker Notebooks](https://aws.amazon.com/sagemaker-ai/notebooks/), [Azure Notebooks](https://learn.microsoft.com/en-gb/azure/machine-learning/how-to-run-jupyter-notebooks), [Databricks Notebooks](https://docs.databricks.com/en/notebooks/index.html). Language-specific options include Pluto.jl for Julia, [Clerk](https://github.com/nextjournal/clerk) for Clojure and [Polynote](https://github.com/polynote/polynote) for Scala.
+Notebooks remain the de facto standard for data science and ML experimentation. Code, prose and visualisations live alongside each other, which suits the iterative work of model development and gives technical and non-technical collaborators something concrete to discuss. [Jupyter](https://jupyter.org/) is the most widely used, with cloud-hosted equivalents from [Google Colab](https://colab.research.google.com/), [AWS Sagemaker](https://aws.amazon.com/sagemaker-ai/notebooks/), [Azure](https://learn.microsoft.com/en-gb/azure/machine-learning/how-to-run-jupyter-notebooks) and [Databricks](https://docs.databricks.com/en/notebooks/index.html). Language-specific alternatives include Pluto.jl for Julia, [Clerk](https://github.com/nextjournal/clerk) for Clojure and [Polynote](https://github.com/polynote/polynote) for Scala.
 
 # Trial
 
