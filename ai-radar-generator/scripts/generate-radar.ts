@@ -1305,6 +1305,7 @@ async function main() {
 `
 
   const parts: string[] = []
+  const blankPageHtml = '<section class="blank-page">&nbsp;</section>'
   // Cover (template is required)
   parts.push(
     await buildCoverFromTemplate(
@@ -1313,6 +1314,8 @@ async function main() {
       cfg
     )
   )
+  // Blank page after front cover
+  parts.push(blankPageHtml)
 
   // First pass: Collect all ring entries from MDX sections
   const fromRoot = cfg.sourceRoot
@@ -1386,6 +1389,14 @@ async function main() {
     // Raw HTML section injection support
     if ('htmlFile' in section) {
       const html = await maybeReadExtraHtml(projectRoot, section.htmlFile)
+      // Blank page before Contributors
+      if (section.htmlFile.includes('contributors')) {
+        parts.push(blankPageHtml)
+      }
+      // Blank page before the back cover (thank-you)
+      if (section.htmlFile.includes('thank-you')) {
+        parts.push(blankPageHtml)
+      }
       // Clear running label inline at the start of the next wrapped page to avoid blank pages
       parts.push(
         wrapContentPage(`<div class="category-top-label-clear"></div>\n${html}`)
@@ -1431,11 +1442,15 @@ async function main() {
     if (glanceHtml && !hasInsertedGlance && cfg.categoryCoverTemplatePath) {
       parts.push(glanceHtml)
       hasInsertedGlance = true
+      // Blank page between radar-at-a-glance and the full radar
+      parts.push(blankPageHtml)
       // Insert full radar page right after radar-at-a-glance
       if (fullRadarHtml && !hasInsertedFullRadar) {
         parts.push(fullRadarHtml)
         hasInsertedFullRadar = true
       }
+      // Blank page before the first category cover
+      parts.push(blankPageHtml)
     }
 
     // If a category cover template is configured, prefer it over the default divider
@@ -1459,7 +1474,14 @@ async function main() {
     parts.push(...pagesHtml)
   }
 
-  const html = head + parts.join('\n') + tail
+  let html = head + parts.join('\n') + tail
+
+  // Force a page break before the foundation-model providers comparison table
+  // so the heading and table stay together on a fresh page.
+  html = html.replace(
+    /<h4([^>]*)>Foundation model providers feature comparison/,
+    '<div class="page-break"></div><h4$1>Foundation model providers feature comparison'
+  )
 
   // Ensure output directory exists
   const outDir = dirname(outPath)
