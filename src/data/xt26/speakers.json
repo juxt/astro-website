@@ -75,5 +75,17 @@
     "role": "Head of Product",
     "company": "JetBrains",
     "image": "/src/assets/xt26/xt26-niktkachev.jpg"
+  },
+  {
+    "name": "James Brown",
+    "role": "Enterprise Engineering Lead",
+    "company": "Schroders",
+    "image": "/src/assets/xt26/xt26-jamesbrown.png"
+  },
+  {
+    "name": "Kris Jenkins",
+    "role": "Lead Developer Advocate, EMEA",
+    "company": "Snowflake",
+    "image": "/src/assets/xt26/xt26-krisjenkins.jpg"
   }
 ]
