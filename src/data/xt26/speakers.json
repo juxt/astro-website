@@ -87,5 +87,11 @@
     "role": "Lead Developer Advocate, EMEA",
     "company": "Snowflake",
     "image": "/src/assets/xt26/xt26-krisjenkins.jpg"
+  },
+  {
+    "name": "Farzad Pezeshkpour",
+    "role": "Principal Engineer",
+    "company": "JUXT",
+    "image": "/src/assets/xt26/xt26-farzadpezeshkpour.jpg"
   }
 ]
