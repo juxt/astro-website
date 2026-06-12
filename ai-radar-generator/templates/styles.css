@@ -37,7 +37,7 @@ body {
     'Helvetica Neue',
     Arial,
     sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 11pt;
   line-height: 1.6;
   color: var(--color-text-main);
@@ -288,7 +288,7 @@ tr:nth-child(even) {
   font-size: 18pt;
   line-height: 1.4;
   margin: 0;
-  font-weight: 200;
+  font-weight: 400;
   color: var(--color-text-main);
   flex: 1;
 }
@@ -484,8 +484,9 @@ p {
 }
 
 .category-cover-description {
-  font-size: 10pt;
+  font-size: 12pt;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .category-cover-split {
@@ -610,6 +611,10 @@ p {
   line-height: 1.4;
   color: var(--color-text-main);
   margin-top: 8mm;
+}
+
+.acknowledgments strong {
+  color: var(--color-accent);
 }
 
 /* ========================================
