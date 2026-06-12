@@ -12,7 +12,7 @@ export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 cd "$SCRIPT_DIR"
 if command -v bun >/dev/null 2>&1; then
   echo "🧩 Building radar.html from MDX (bun)"
-  bun run build:html || { echo "❌ Failed to build radar.html"; exit 1; }
+  bun run build:html -- "$@" || { echo "❌ Failed to build radar.html"; exit 1; }
 else
   echo ""
   echo "❌ Error: bun is not installed"

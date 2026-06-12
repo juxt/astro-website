@@ -39,6 +39,8 @@ type Config = {
     date?: string
     logoPath?: string
     companyName?: string
+    imagePath?: string
+    printImagePath?: string
   }
   // Optional HTML template path for the first (cover) page
   coverTemplatePath?: string
@@ -417,7 +419,8 @@ ${innerHtml}
 async function buildCoverFromTemplate(
   projectRoot: string,
   templatePath: string,
-  cfg: Config
+  cfg: Config,
+  printMode: boolean
 ): Promise<string> {
   const c = cfg.cover ?? {}
   const title = c.title ?? 'JUXT AI Radar'
@@ -429,6 +432,10 @@ async function buildCoverFromTemplate(
   const logoSvg = COVER_LOGO_SVG
   const templateAbs = resolve(join(projectRoot, templatePath))
   const company = c.companyName ?? 'JUXT | A GRID DYNAMICS COMPANY'
+  const coverImage =
+    (printMode ? c.printImagePath : c.imagePath) ??
+    c.imagePath ??
+    '../public/Cover-RGB.jpg'
   let tpl = await readFile(templateAbs, 'utf8')
   tpl = tpl
     .replaceAll('{title}', title)
@@ -437,6 +444,7 @@ async function buildCoverFromTemplate(
     .replaceAll('{logoPath}', '') // backward-compat: now unused
     .replaceAll('{logoSvg}', logoSvg)
     .replaceAll('{companyName}', company)
+    .replaceAll('{coverImage}', coverImage)
   return tpl
 }
 
@@ -1283,6 +1291,7 @@ function generateFullRadarSvg(
 
 async function main() {
   const projectRoot = process.cwd()
+  const printMode = process.argv.includes('--print')
   const cfg = await loadConfig(projectRoot)
   const outPath = resolve(
     join(projectRoot, cfg.output?.radarHtmlPath ?? 'templates/radar.html')
@@ -1305,13 +1314,16 @@ async function main() {
 `
 
   const parts: string[] = []
-  const blankPageHtml = '<section class="blank-page">&nbsp;</section>'
+  const blankPageHtml = printMode
+    ? '<section class="blank-page">&nbsp;</section>'
+    : ''
   // Cover (template is required)
   parts.push(
     await buildCoverFromTemplate(
       projectRoot,
       cfg.coverTemplatePath as string,
-      cfg
+      cfg,
+      printMode
     )
   )
   // Blank page after front cover
@@ -1475,6 +1487,14 @@ async function main() {
   }
 
   let html = head + parts.join('\n') + tail
+
+  // Blank pages exist only for print pagination; strip them in softcopy mode.
+  if (!printMode) {
+    html = html.replace(
+      /<section class="blank-page">[\s\S]*?<\/section>\s*/g,
+      ''
+    )
+  }
 
   // Force a page break before the foundation-model providers comparison table
   // so the heading and table stay together on a fresh page.
