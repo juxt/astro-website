@@ -7,7 +7,7 @@ import SingleQuadrantData from '../../../components/SingleQuadrantData.astro'
 import ChildSectionAiRadarLayout from '../../../layouts/ChildSectionAiRadar.astro'
 
 <ChildSectionAiRadarLayout frontmatter={frontmatter}>
-Software that enhances AI development workflows without being embedded in your application code: IDE extensions, CLI utilities, testing frameworks and observability solutions.
+Software that enhances AI development workflows without being embedded in your application code: IDE extensions, CLI utilities, testing frameworks and observability.
 
 <SingleQuadrantData quadrantName='tools' />
 
@@ -48,9 +48,11 @@ Promising tools with growing adoption that are worth exploring for teams buildin
 
 ## MLflow
 
-[MLFlow](https://mlflow.org/) is a lightweight, modular open-source option for managing the machine learning lifecycle. It avoids the vendor lock-in of monolithic cloud-based MLOps platforms from AWS, Microsoft and Google, offering teams flexibility to maintain infrastructure control and adapt workflows as needs evolve.
+[MLflow](https://mlflow.org/) is an open-source platform for managing the machine learning lifecycle. The 3.0 release expanded it to cover generative AI: alongside the classical experiment tracking, model registry and deployment tooling, MLflow now offers OpenTelemetry-based tracing for LLMs and agents, capturing prompt construction, tool calls, memory retrievals, latency and token costs. This puts it in direct overlap with [LLM observability tools](/ai-radar/tools/#llm-observability-tools) such as Phoenix, Langfuse and LangSmith.
 
-Realising the benefits requires technical expertise to configure and integrate effectively. Unlike [SageMaker](https://aws.amazon.com/sagemaker/) or [Vertex AI](https://cloud.google.com/vertex-ai), MLFlow does not provide a plug-and-play experience; it offers modular components that must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
+MLflow runs self-hosted or as a managed service on Databricks, SageMaker, Azure ML, Red Hat OpenShift AI and Nebius. That breadth is part of the appeal: teams avoid the lock-in of monolithic MLOps platforms while still being able to pick a managed offering where one fits.
+
+Realising the benefits self-hosted requires technical expertise to configure and integrate. Unlike a turnkey platform such as [Vertex AI](https://cloud.google.com/vertex-ai), MLflow does not provide a plug-and-play experience; its modular components must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
 
 <div data-radar data-label="Vector databases" data-ring="trial" />
 
@@ -58,7 +60,7 @@ Realising the benefits requires technical expertise to configure and integrate e
 
 Vector databases have emerged as specialised tools for managing the high-dimensional embeddings required by AI models. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus](https://milvus.io/) and [Weaviate](https://weaviate.io/).
 
-Their adoption should be carefully evaluated. Traditional databases may suffice for simpler operations, and alternative approaches such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer bring vector search directly into Postgres, avoiding the data consistency challenges of keeping embeddings synchronised across databases. If a dedicated vector database is required, Pinecone leads in production readiness but comes with managed service costs, while open-source alternatives such as Qdrant and Milvus offer greater control but demand more operational expertise.
+Traditional databases may suffice for simpler operations, and alternative approaches such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer bring vector search directly into Postgres, avoiding the data consistency challenges of keeping embeddings synchronised across databases. If a dedicated vector database is required, Pinecone leads in production readiness but comes with managed service costs, while open-source alternatives such as Qdrant and Milvus offer greater control but demand more operational expertise.
 
 For prototyping, [Chroma](https://www.trychroma.com/) offers a Python-first approach with minimal configuration. A 2025 Rust rewrite improved performance, though it remains best suited for small-to-medium scale applications. [LanceDB](https://lancedb.com/) takes a different approach as an embedded vector database, similar in philosophy to SQLite. It operates as a library within your application using Apache Arrow's columnar format, making it compelling for local AI assistants and edge deployments where data must remain on-device. The trade-off is limited high-concurrency support.
 
@@ -68,9 +70,7 @@ For prototyping, [Chroma](https://www.trychroma.com/) offers a Python-first appr
 
 Tools such as [Ollama](https://ollama.ai/), [LM Studio](https://lmstudio.ai/) and [AnythingLLM](https://anythingllm.com/) provide accessible ways to run open weight models on local hardware. These enable experimentation with models from Meta, Mistral, DeepSeek, Alibaba and OpenAI without API costs or sending data to external services. Many now support tool calling via MCP and connections to commercial APIs for hybrid workflows.
 
-These tools serve developers testing AI features, teams comparing model responses and organisations exploring capabilities with sensitive data that cannot leave their infrastructure. They range from CLI tools such as Ollama to graphical applications such as LM Studio.
-
-We've placed these in Trial as they're particularly useful for privacy-sensitive prototyping and scenarios where extensive experimentation would be cost-prohibitive via APIs.
+These tools serve developers testing AI features, teams comparing model responses and organisations exploring capabilities with sensitive data that cannot leave their infrastructure.
 
 <div data-radar data-label="LLM observability tools" data-ring="trial" />
 
@@ -80,7 +80,7 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 [Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. Since these tools capture prompt and response data, data sovereignty matters. Phoenix and Langfuse both offer self-hosting for teams with data residency requirements.
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements.
 
 <div data-radar data-label="LLM API gateways" data-ring="trial" data-change="new" />
 
@@ -88,23 +88,23 @@ For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provide
 
 As organisations adopt multiple model providers, an infrastructure layer emerges between applications and providers. LLM API gateways handle routing, caching, failover, rate limiting and cost tracking at the proxy level, complementing code-level abstraction from libraries such as AISuite. A facade is a developer choice about how to call models; a gateway is a platform decision about how to manage model traffic across the organisation.
 
-[LiteLLM](https://github.com/BerriAI/litellm) is the most widely adopted open-source option, with SOC-2 Type 2 and ISO 27001 certification. It provides an OpenAI-compatible proxy with spend tracking, budget controls and key management. [Portkey](https://portkey.ai/) offers a managed alternative with semantic caching and conditional routing. [Kong](https://konghq.com/) brings enterprise API management experience to LLM traffic.
+[LiteLLM](https://github.com/BerriAI/litellm) is the most widely adopted open-source option, providing an OpenAI-compatible proxy with spend tracking, budget controls and key management. [Portkey](https://portkey.ai/) offers a managed alternative with semantic caching and conditional routing. [Kong](https://konghq.com/) brings enterprise API management experience to LLM traffic.
 
-The operational value for multi-provider deployments is clear: centralised audit logging, per-team budget enforcement and automatic failover. LiteLLM can be self-hosted; Portkey's managed service routes traffic through its infrastructure. Teams running multi-provider deployments should evaluate whether a gateway simplifies their operational story before building equivalent functionality in-house.
+The operational value for multi-provider deployments is clear: centralised audit logging, per-team budget enforcement and automatic failover. Worth evaluating whether a gateway simplifies the operational story before building equivalent functionality in-house.
 
-See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools)
+See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
 
 <div data-radar data-label="AI red teaming tools" data-ring="trial" data-change="new" />
 
 ## AI red teaming tools
 
-The radar's security coverage has grown this quarter, with guidance on prompt injection in our [MCP](/ai-radar/languages-frameworks/#mcp) and [RAG](/ai-radar/techniques/#rag) entries and architectural defences such as [CaMeL](/ai-radar/techniques/#camel). What has been missing is offensive testing: tools that systematically probe AI systems for vulnerabilities before attackers do.
+Our security coverage has grown this quarter, with guidance on prompt injection in [MCP](/ai-radar/languages-frameworks/#mcp) and [RAG](/ai-radar/techniques/#rag) and architectural defences such as [CaMeL](/ai-radar/techniques/#camel). Missing has been offensive testing: tools that systematically probe AI systems for vulnerabilities before attackers do.
 
-[Promptfoo](https://www.promptfoo.dev/) is the standout, evolving from a prompt evaluation CLI into a comprehensive red teaming platform. OpenAI [acquired Promptfoo](https://www.promptfoo.dev/blog/openai/) in March 2026, though it remains open-source under MIT. It ships [dedicated financial services plugins](https://www.promptfoo.dev/docs/red-team/plugins/financial/) for PCI DSS and banking regulation testing. Microsoft's [PyRIT](https://github.com/Azure/PyRIT) focuses on multi-turn attack orchestration with Azure AI Foundry integration. NVIDIA's [Garak](https://github.com/NVIDIA/garak) takes an agentic approach, autonomously probing for prompt injection, data leakage and toxicity.
+[Promptfoo](https://www.promptfoo.dev/) is the standout, evolving from a prompt evaluation CLI into a comprehensive red teaming platform. OpenAI [acquired it](https://www.promptfoo.dev/blog/openai/) in March 2026 but the MIT licence remains. It ships [financial services plugins](https://www.promptfoo.dev/docs/red-team/plugins/financial/) for PCI DSS and banking regulation testing. Microsoft's [PyRIT](https://github.com/Azure/PyRIT) focuses on multi-turn attack orchestration with Azure AI Foundry integration. NVIDIA's [Garak](https://github.com/NVIDIA/garak) takes an agentic approach, autonomously probing for prompt injection, data leakage and toxicity.
 
-The EU AI Act will require adversarial testing for high-risk systems by August 2026. We recommend starting with Promptfoo for breadth and CI/CD integration. The OpenAI acquisition raises questions about neutrality, but the MIT licence provides a backstop.
+The EU AI Act will require adversarial testing for high-risk systems by August 2026. We recommend starting with Promptfoo for breadth and CI/CD integration.
 
-See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools)
+See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
 
 <div data-radar data-label="AI-assisted code migration" data-ring="trial" data-change="new" />
 
@@ -112,11 +112,11 @@ See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/tec
 
 Large-scale code migration sits in a gap between what copilots do (assist line-by-line) and what bootstrappers do (generate new projects). Migration tools operate at codebase scale, applying thousands of coordinated changes to upgrade language versions, swap frameworks or modernise APIs. The pattern that works best combines deterministic code transformations with AI for edge cases that rules alone cannot handle.
 
-[Moderne](https://www.moderne.ai/) is the leading platform, built on the open-source [OpenRewrite](https://docs.openrewrite.org/) engine. OpenRewrite provides deterministic "recipes" for common transformations (Java version upgrades, Spring Boot migrations, Jakarta EE transitions), while Moderne adds AI-assisted handling of non-standard patterns and enterprise-scale orchestration. AWS has integrated OpenRewrite into [Q Code Transformation](https://aws.amazon.com/q/developer/) for Java modernisation, and GitHub Copilot uses it for automated dependency upgrades.
+[Moderne](https://www.moderne.ai/) is the leading platform, built on the open-source [OpenRewrite](https://docs.openrewrite.org/) engine. OpenRewrite provides deterministic "recipes" for common transformations such as Java version upgrades, Spring Boot migrations and Jakarta EE transitions, while Moderne adds AI-assisted handling of non-standard patterns and enterprise-scale orchestration.
 
-Java 8 reached end of public updates in 2022, Java 11 follows in 2026 and Spring Boot 2.x is end-of-life. These migrations are well-understood but labour-intensive, exactly where deterministic transformation augmented by AI pays off. We recommend trialling OpenRewrite on a representative repository before committing to the Moderne platform.
+These migrations are well-understood but labour-intensive, exactly where deterministic transformation augmented by AI pays off. We recommend trialling OpenRewrite on a representative repository before committing to the Moderne platform.
 
-See also: [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [Spec-driven development](/ai-radar/techniques/#spec-driven-development)
+See also: [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [Spec-driven development](/ai-radar/techniques/#spec-driven-development).
 
 # Assess
 
@@ -144,7 +144,7 @@ Reliability for bounded tasks has improved, with standard office workflows seein
 
 For many automation needs, programmatic approaches via APIs and [workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) remain more reliable and secure. Visual computer use is best suited to isolated environments where the agent cannot access sensitive data. Teams should grant minimal permissions and maintain human oversight for high-stakes actions.
 
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use)
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [CaMeL](/ai-radar/techniques/#camel).
 
 This section was previously titled "Agentic computer use".
 
@@ -166,7 +166,7 @@ The space is evolving quickly. Instructor has gained traction for its simplicity
 
 A broader category of runtime guardrails has grown up alongside these libraries. NVIDIA's [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://www.guardrailsai.com/) go beyond schema conformance to include prompt injection scanning, content filtering and hallucination checks. Teams building production LLM applications should evaluate both levels: structured outputs for type safety and guardrails for content safety.
 
-See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [Lakera](/ai-radar/tools/#lakera), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools)
+See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [Lakera](/ai-radar/tools/#lakera), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
 
 # Hold
 
@@ -182,7 +182,7 @@ The security model has not been figured out across any of these variants. Persis
 
 We do not recommend OpenClaw or its variants for new projects until the security model matures. Teams already using one should enforce strict sandboxing, limit accessible applications and maintain human oversight for actions involving sensitive data.
 
-See also: [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots)
+See also: [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [CaMeL](/ai-radar/techniques/#camel).
 
 <div data-radar data-label="Conversational data analysis" data-ring="hold" />
 
