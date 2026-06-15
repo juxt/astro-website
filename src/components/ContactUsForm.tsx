@@ -8,6 +8,9 @@ type ContactUsFormProps = {
   variant?: 'light' | 'dark'
   transparentInputs?: boolean
   submitLabelColor?: string
+  // Overrides the submit button text (default "Submit"). e.g.
+  // "Join Waitlist" on the sold-out XT26 attend form.
+  submitLabel?: string
   successTitle?: string
   successMessage?: string
 }
@@ -20,6 +23,7 @@ export function ContactUsForm(props: ContactUsFormProps) {
     variant = 'light',
     transparentInputs = false,
     submitLabelColor,
+    submitLabel = 'Submit',
     successTitle = 'Thank you for getting in touch',
     successMessage = "We'll get back to you shortly."
   } = props
@@ -181,7 +185,7 @@ export function ContactUsForm(props: ContactUsFormProps) {
           className='w-full bg-juxt px-10 py-3 text-sm font-semibold tracking-widest uppercase hover:bg-juxt/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
           style={submitLabelColor ? { color: submitLabelColor } : undefined}
         >
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+          {isSubmitting ? 'Submitting...' : submitLabel}
         </button>
         <p className={`text-xs font-light text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
           By submitting you agree to our{' '}
