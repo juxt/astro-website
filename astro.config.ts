@@ -88,7 +88,9 @@ export default defineConfig({
     '/careers/senior-kotlin-engineer': '/careers/kotlin-engineer/',
     '/careers/senior-kotlin-engineer/': '/careers/kotlin-engineer/',
     '/team/mal': '/team/hga',
-    '/team/mal/': '/team/hga'
+    '/team/mal/': '/team/hga',
+    '/knowb4ugoxt26': '/documents/xt26-delegate-guide.pdf',
+    '/knowb4ugoxt26/': '/documents/xt26-delegate-guide.pdf'
   },
   markdown: {
     shikiConfig: {
