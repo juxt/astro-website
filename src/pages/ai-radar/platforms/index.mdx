@@ -93,7 +93,7 @@ We recommend Temporal for organisations moving beyond prototype agents toward pr
 
 Data pipeline orchestration has become essential infrastructure for managing complex data workflows, particularly those supporting AI initiatives. Whilst transformation tools such as [dbt](/ai-radar/languages-frameworks/#dbt) handle the "what" of data processing, orchestration platforms manage the scheduling, execution and monitoring of entire pipelines.
 
-[Apache Airflow](https://airflow.apache.org) is the established standard, with broad integration support across cloud platforms, though teams often find the learning curve steep. [Prefect](https://prefect.io) emphasises developer experience and dynamic workflow adaptation, with faster development cycles but fewer third-party integrations. [Dagster](https://dagster.io) takes an asset-centric approach where data assets become first-class citizens, providing built-in lineage tracking and data quality monitoring.
+[Apache Airflow](https://airflow.apache.org) is the established standard, with broad integration support across cloud platforms, though operating it well takes deliberate investment in DAG conventions and tooling. [Prefect](https://prefect.io) emphasises developer experience and dynamic workflow adaptation, with faster development cycles but fewer third-party integrations. [Dagster](https://dagster.io) takes an asset-centric approach where data assets become first-class citizens, providing built-in lineage tracking and data quality monitoring.
 
 The choice depends on organisational context. Established enterprises with diverse toolchains often gravitate towards Airflow's ecosystem breadth, teams prioritising developer velocity prefer Prefect, and organisations with complex lineage requirements consider Dagster's asset-aware approach.
 
@@ -132,11 +132,26 @@ The key benefit is proactive detection: organisations learn about performance de
 
 Open weight LLMs (sometimes incorrectly called "open source") reached maturity in 2025, with some surpassing frontier models on specific tasks. [MiniMax M2.7](https://www.minimax.io/news/minimax-m2), [Moonshot's Kimi K2.5](https://moonshotai.github.io/Kimi-K2/), [Zhipu's GLM-5](https://open.bigmodel.cn/) and [DeepSeek V3.2](https://www.deepseek.com/) compete directly with closed models on coding and reasoning benchmarks. Smaller models such as Microsoft's [Phi-4](https://huggingface.co/microsoft/phi-4) and Google's [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4) run on consumer hardware, making self-hosted inference practical for local coding assistants, on-device processing and latency-sensitive applications.
 
-This quarter, source code was accidentally exposed through AI provider tooling, and autonomous agents with broad permissions destroyed production data. A self-hosted deployment puts data flow and model versioning under the operator's control. Prompts, outputs and proprietary code stay within the organisation, and the model only changes when the operator changes it.
+This quarter, source code was accidentally exposed through AI provider tooling, and autonomous agents with broad permissions destroyed production data. A self-hosted deployment puts data flow and model versioning under the operator's control. Prompts, outputs and proprietary code stay within the organisation, and the model only changes when the operator changes it. The pull, in short, is towards organisations retaining ownership of their data and the models that act on it.
 
 Regulation is heading the same way. The EU AI Act, financial services rules and healthcare frameworks all want organisations to show where data flowed and how models behaved, not take a vendor's word for it. GLM-5 was trained entirely on Huawei Ascend chips with no NVIDIA dependency, a reminder that supply chain sovereignty extends down to the silicon.
 
 Self-hosting still needs considerable ML engineering expertise, and total cost of ownership isn't always lower than API alternatives once compute and engineering time are factored in. For routine work, pay-per-use APIs still win. For regulated or sensitive data, the calculation has changed.
+
+
+<div data-radar data-label="Small language models" data-ring="trial" data-change="new" />
+
+## Small language models
+
+Small language models (SLMs) are the smaller cousins of the open weight LLMs above. The current crop sits in the 1B–7B parameter range and runs comfortably on a single GPU, a modern laptop or in some cases a phone. Microsoft's [Phi-4-Mini](https://azure.microsoft.com/en-us/products/phi) (3.8B), Google's [Gemma 4 E2B and E4B](https://deepmind.google/models/gemma/gemma-4/) (2–4B effective parameters), [Meta's Llama 3.2 1B and 3B](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/) and Mistral's Ministral variants now perform at a level that was out of reach at this size two years ago.
+
+In our experience, the case for SLMs comes down to using your own data. A few thousand labelled examples and a fine-tuning run produce a model that has the organisation's terminology and edge cases built in. Hosted in-house, the data stays within the organisation, and the resulting model is small enough to deploy on the infrastructure that team already operates rather than something purpose-built.
+
+The natural fit is classification work where the language is nuanced and the cost of getting it wrong is real: routing customer messages by intent, triaging support tickets, tagging documents against a controlled vocabulary or extracting structured fields from free text. These are jobs that traditional keyword and feature-engineered approaches have never handled well, and where reaching for a frontier API on every request is overkill on both cost and latency. A fine-tuned SLM responds in the low hundreds of milliseconds on commodity hardware, faster on a GPU, and improves as more of the organisation's examples are added.
+
+The trade-off is scope and discipline. SLMs will not match frontier models on open-ended reasoning or breadth of world knowledge, and getting them to behave reliably means taking the task definition, the labelling pipeline and evaluation seriously rather than leaning on clever prompting. For teams prepared to do that work, the result is a model that is cheap to run, fits the infrastructure they already have and is trained on the data they already own.
+
+See also: [Open weight LLMs](/ai-radar/platforms/#open-weight-llms), [Local model execution environments](/ai-radar/tools/#local-model-execution-environments).
 
 
 <div data-radar data-label="AI-powered workflow automation platforms" data-ring="trial" />
@@ -176,7 +191,7 @@ The Luna-2 approach is a differentiator. Most evaluation platforms use frontier 
 
 The trade-off is vendor dependency. Teams wanting open-source flexibility should consider [Langfuse](https://langfuse.com/) for tracing or [Phoenix](https://phoenix.arize.com/) for observability. The evaluation tooling space remains competitive, and we want to see how it settles before moving Galileo beyond Assess.
 
-See also: LLM observability tools, Production AI monitoring platforms
+See also: LLM observability tools, Production AI monitoring platforms.
 
 
 <div data-radar data-label="Kubeflow" data-ring="assess" />
@@ -185,7 +200,7 @@ See also: LLM observability tools, Production AI monitoring platforms
 
 [Kubeflow](https://www.kubeflow.org/) is an open-source ML platform built on Kubernetes, combining orchestration capabilities with ML-specific tools: Pipelines for workflow automation and KFServing for model deployment. This integrated approach helps bridge the gap between data scientists and operations teams.
 
-Several factors keep Kubeflow in Assess. Implementing it demands expertise in both Kubernetes and ML engineering. Many organisations struggle with complexity during setup and ongoing maintenance, reporting a steep learning curve before seeing tangible benefits.
+Several factors keep Kubeflow in Assess. Implementing it demands expertise in both Kubernetes and ML engineering. Many organisations struggle with setup and ongoing maintenance, and report long timelines before seeing tangible benefits.
 
 Organisations with established ML practices and Kubernetes expertise should consider it, particularly for challenges around model deployment, experiment reproducibility or resource utilisation. Smaller teams or those earlier in their ML journey may prefer managed options such as [Vertex AI Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction).
 
@@ -207,9 +222,9 @@ We recommend starting with process discovery in a contained domain rather than a
 
 The trade-off is radical inflexibility. Each chip runs exactly one model. When that model is superseded, the chip becomes electronic waste. This makes Taalas most compelling for scenarios where a specific model will be deployed at scale for an extended period: edge inference, embedded systems or dedicated infrastructure for a known workload. For regulated industries, a model baked into silicon is inherently versioned and immutable, simplifying reproducibility concerns. Teams subject to Model Risk Management requirements may find this appealing.
 
-We've placed Taalas in Assess because the technology is early and the economics only work at significant scale. The assumption that a single model will remain useful long enough to justify dedicated silicon runs counter to how fast the field moves.
+We've placed Taalas in Assess because the technology is early and the economics only work at significant scale. The assumption that a single model will remain useful long enough to justify dedicated silicon runs counter to how fast the field is moving.
 
-See also: [Open weight LLMs](/ai-radar/platforms/#open-weight-llms), [Local model execution environments](/ai-radar/tools/#local-model-execution-environments)
+See also: [Open weight LLMs](/ai-radar/platforms/#open-weight-llms), [Local model execution environments](/ai-radar/tools/#local-model-execution-environments).
 
 <div data-radar data-label="AI governance platforms" data-ring="assess" data-change="new" />
 
@@ -221,7 +236,7 @@ The EU AI Act reaches full enforcement in August 2026. High-risk AI systems must
 
 The space is young and consolidating fast. Financial services organisations should be evaluating now, particularly those with EU AI Act obligations, but should expect the vendor landscape to shift.
 
-See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms)
+See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
 
 <div data-radar data-label="Agent memory architectures" data-ring="assess" data-change="new" />
 
@@ -233,7 +248,7 @@ Stateless agents hit a wall quickly. An AI coding assistant that forgets what it
 
 For regulated industries, agent memory introduces governance questions your existing data policies may not cover. Where does the memory reside? How do you audit what an agent "knows" about a customer? How do you comply with deletion requests? Involve compliance and data protection teams early.
 
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework)
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework).
 
 # Hold
 
