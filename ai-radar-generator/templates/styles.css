@@ -37,7 +37,7 @@ body {
     'Helvetica Neue',
     Arial,
     sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 11pt;
   line-height: 1.6;
   color: var(--color-text-main);
@@ -269,7 +269,7 @@ tr:nth-child(even) {
 .cover-line {
   border: 0;
   height: 2mm;
-  background: var(--color-cover-accent);
+  background: #E06535;
   width: 100%;
   margin-top: 4mm;
   margin-bottom: 10mm;
@@ -288,7 +288,7 @@ tr:nth-child(even) {
   font-size: 18pt;
   line-height: 1.4;
   margin: 0;
-  font-weight: 200;
+  font-weight: 400;
   color: var(--color-text-main);
   flex: 1;
 }
@@ -301,13 +301,12 @@ tr:nth-child(even) {
   padding-bottom: 1mm; /* Slight visual alignment adjustment */
 }
 
-/* Large decorative circle */
-.cover-circle {
+/* Large decorative cover image (square, replaces previous circle) */
+.cover-image {
   position: absolute;
   width: 400pt;
   height: 400pt;
-  background: var(--color-cover-accent); /* Teal */
-  border-radius: 50%;
+  object-fit: cover;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -25%);
@@ -439,6 +438,21 @@ p {
   page-break-before: always;
 }
 
+@page blank {
+  @top-left { content: none; }
+  @top-center { content: none; }
+  @top-right { content: none; }
+  @bottom-left { content: none; }
+  @bottom-center { content: none; }
+  @bottom-right { content: none; }
+}
+.blank-page {
+  page: blank;
+  page-break-before: always;
+  page-break-after: always;
+  height: 100%;
+}
+
 .avoid-break {
   page-break-inside: avoid;
   break-inside: avoid;
@@ -470,8 +484,9 @@ p {
 }
 
 .category-cover-description {
-  font-size: 10pt;
+  font-size: 12pt;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .category-cover-split {
@@ -596,6 +611,10 @@ p {
   line-height: 1.4;
   color: var(--color-text-main);
   margin-top: 8mm;
+}
+
+.acknowledgments strong {
+  color: var(--color-accent);
 }
 
 /* ========================================

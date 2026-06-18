@@ -120,37 +120,27 @@
 /* Each category needs its own @page rule with the correct header color */
 /* Header via @page gradient - fixed at 29mm for background color */
 /* Header element height is 45mm to push content down */
-@page category-cover-languages {
-  bleed: 3mm;
-  marks: crop cross;
-  background-image: linear-gradient(to bottom, #E8AA41 0mm, #E8AA41 29mm, transparent 29mm);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
+/* Solid white page background; the coloured header is a real element
+   (.category-absolute-top-band) so it stays vector after CMYK conversion. */
+@page category-cover-languages { bleed: 3mm; marks: crop cross; background-color: #ffffff; }
+@page category-cover-techniques { bleed: 3mm; marks: crop cross; background-color: #ffffff; }
+@page category-cover-tools { bleed: 3mm; marks: crop cross; background-color: #ffffff; }
+@page category-cover-platforms { bleed: 3mm; marks: crop cross; background-color: #ffffff; }
 
-@page category-cover-techniques {
-  bleed: 3mm;
-  marks: crop cross;
-  background-image: linear-gradient(to bottom, #F26A24 0mm, #F26A24 29mm, transparent 29mm);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+/* Coloured top band: vector rectangle extending into the top/left/right bleed
+   but not past it, so crop marks remain visible. */
+.category-absolute-top-band {
+  position: absolute;
+  top: -23mm;       /* -20mm page margin - 3mm bleed */
+  left: -23mm;
+  right: -23mm;
+  height: 52mm;     /* 49mm visible (matches old gradient band) + 3mm top bleed */
+  z-index: -1;
 }
-
-@page category-cover-tools {
-  bleed: 3mm;
-  marks: crop cross;
-  background-image: linear-gradient(to bottom, #CA4527 0mm, #CA4527 29mm, transparent 29mm);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-@page category-cover-platforms {
-  bleed: 3mm;
-  marks: crop cross;
-  background-image: linear-gradient(to bottom, #F09758 0mm, #F09758 29mm, transparent 29mm);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
+.category-cover-page.languages-frameworks .category-absolute-top-band { background-color: #E8AA41; }
+.category-cover-page.techniques .category-absolute-top-band { background-color: #F26A24; }
+.category-cover-page.tools .category-absolute-top-band { background-color: #CA4527; }
+.category-cover-page.platforms .category-absolute-top-band { background-color: #F09758; }
 
 /* Assign page names to each category cover */
 /* Note: both classes are on the same element, not parent/child */
