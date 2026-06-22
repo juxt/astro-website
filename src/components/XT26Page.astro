@@ -5,7 +5,7 @@ import Layout from '@layouts/Layout.astro'
 import XT26Agenda from '@components/XT26Agenda.astro'
 import speakers from '../data/xt26/speakers.json'
 
-const subject = 'XT26 Request for Invite'
+const subject = 'XT26 Talks Recording Request'
 ---
 
 <Layout
@@ -64,7 +64,7 @@ const subject = 'XT26 Request for Invite'
         href='#attend'
         class='inline-block border border-white/40 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300'
       >
-        Apply to Attend
+        Watch the Talks
       </a>
     </div>
 
@@ -190,10 +190,10 @@ const subject = 'XT26 Request for Invite'
       <div class='max-w-2xl mx-auto'>
         <div class='flex flex-col items-center text-center mb-16'>
           <h2 class='text-4xl md:text-5xl font-extralight text-white mb-6'>
-            XT26 is now sold out
+            XT26 Talks – On-Demand
           </h2>
           <p class='text-gray-400 text-lg font-light max-w-md'>
-            Fill in the form to join the waitlist. We'll let you know if a spot opens up.
+            We're currently editing all the talks. Fill in the form below, and we'll send you a link to the recordings as soon as they're ready.
           </p>
         </div>
 
@@ -204,9 +204,9 @@ const subject = 'XT26 Request for Invite'
           variant='dark'
           transparentInputs
           submitLabelColor='#0b0e14'
-          submitLabel='Join Waitlist'
-          successTitle="You're on the waitlist"
-          successMessage="We'll let you know if a spot opens up."
+          submitLabel='Send me the link'
+          successTitle="You're on the list"
+          successMessage="We'll email you when the recordings are ready."
         />
       </div>
     </div>
