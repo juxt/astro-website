@@ -130,6 +130,22 @@ export function ContactUsForm(props: ContactUsFormProps) {
         value='c2bf653a-2baa-466d-bbcc-390272663918'
       />
 
+      {/* Honeypot. Off-screen (not display:none — sophisticated bots
+          skip hidden fields) and removed from the tab order, so a
+          human never sees or focuses it and it stays empty. A bot
+          that auto-fills every input trips it; the Netlify function
+          and Orbit both silently discard any submission where it's
+          non-empty. Plausible-but-unused field name so bots target
+          it. See juxt/orbit docs/notes/website-form-spam.md. */}
+      <input
+        type='text'
+        tabIndex={-1}
+        autoComplete='off'
+        aria-hidden='true'
+        {...register('website')}
+        style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+      />
+
       {/* Row 1: Name fields */}
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
         <input
