@@ -54,6 +54,16 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
   // 2026-04-29; firstName + lastName are first-class slots now.
   // Pass them through directly rather than joining and re-splitting
   // at the orbit boundary. The form already collects them split.
+  // Source attribution. The form may pass orbitSource to distinguish
+  // variants (e.g. the on-demand recordings form, which Orbit tags
+  // `video-signup` + drops in the follow-up queue). Whitelisted so the
+  // public endpoint can't inject an arbitrary source; anything else
+  // (incl. omitted) falls back to the generic website form.
+  const ALLOWED_SOURCES = ['xt26_website_form', 'xt26_recording_request']
+  const source = ALLOWED_SOURCES.includes(body.orbitSource)
+    ? body.orbitSource
+    : 'xt26_website_form'
+
   const payload = {
     firstName,
     lastName,
@@ -61,7 +71,7 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     company: (body.company ?? '').trim(),
     role: (body.jobTitle ?? '').trim(),
     location: (body.country ?? '').trim(),
-    source: 'xt26_website_form',
+    source,
   }
 
   const r = await fetch(`${ORBIT_URL}/api/people?upsert=true`, {

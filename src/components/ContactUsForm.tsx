@@ -5,6 +5,12 @@ type ContactUsFormProps = {
   id?: string
   subject?: string
   eventName?: string
+  // Orbit source attribution for the XT26 forward (see the xt26-register
+  // Netlify function). Distinguishes form variants — e.g.
+  // 'xt26_recording_request' for the on-demand recordings form, which
+  // Orbit tags `video-signup` and drops into the follow-up queue. Omitted
+  // → Orbit defaults to the generic 'xt26_website_form'.
+  orbitSource?: string
   variant?: 'light' | 'dark'
   transparentInputs?: boolean
   submitLabelColor?: string
@@ -20,6 +26,7 @@ export function ContactUsForm(props: ContactUsFormProps) {
     id = 'form',
     subject = 'New Contact Us Submission',
     eventName = 'XT26',
+    orbitSource,
     variant = 'light',
     transparentInputs = false,
     submitLabelColor,
@@ -45,10 +52,13 @@ export function ContactUsForm(props: ContactUsFormProps) {
     // Fire-and-forget — never affects the user-visible submit result, which
     // is driven entirely by the primary web3forms response below.
     if (eventName === 'XT26') {
+      // Carry the orbit source attribution alongside the form fields so
+      // Orbit can tag / route the lead (web3forms above ignores the extra
+      // key).
       fetch('/.netlify/functions/xt26-register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: json
+        body: orbitSource ? JSON.stringify({ ...data, orbitSource }) : json
       }).catch((err) => {
         console.warn('orbit sync failed (non-fatal)', err)
       })
