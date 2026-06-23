@@ -1,4 +1,11 @@
 ---
+import speakers from '../data/xt26/speakers.json'
+import AssetImage from '@components/team/AssetImage.astro'
+
+const speakerByName = Object.fromEntries(
+  speakers.map((s) => [s.name, s])
+)
+
 const agenda = [
   {
     time: '08:30',
@@ -102,10 +109,23 @@ const agenda = [
     isSpecialEvent: true
   }
 ]
+
+const resolveLines = (subTitle) =>
+  (subTitle == null
+    ? []
+    : Array.isArray(subTitle)
+      ? subTitle
+      : [subTitle]
+  ).map((line) => {
+    const name = line.split('|')[0].trim()
+    return { line, speaker: speakerByName[name] }
+  })
 ---
 
 {
   agenda.map(({ time, title, subTitle, isSpecialEvent }, index) => {
+    const lines = resolveLines(subTitle)
+    const hasAnySpeaker = lines.some((l) => l.speaker)
     const nextItem = index < agenda.length - 1 ? agenda[index + 1] : null
     const isConsecutiveSpecialEvent = isSpecialEvent && nextItem?.isSpecialEvent
 
@@ -123,10 +143,23 @@ const agenda = [
           </p>
           <div class='px-5 pb-5 sm:p-5 sm:col-span-4'>
             <h2 class='font-bold text-xl text-black'>{title}</h2>
-            {subTitle &&
-              (Array.isArray(subTitle) ? subTitle : [subTitle]).map((s) => (
-                <p class='font-light text-sm text-gray-700'>{s}</p>
-              ))}
+            {lines.map(({ line, speaker }) => (
+              <div class='flex items-center gap-3 mt-2'>
+                {hasAnySpeaker &&
+                  (speaker?.image ? (
+                    <div class='shrink-0 w-10 h-10 rounded-full overflow-hidden border-2 border-juxt bg-blue-300'>
+                      <AssetImage
+                        src={speaker.image}
+                        alt={`Headshot of ${speaker.name}`}
+                        class='w-full h-full object-cover'
+                      />
+                    </div>
+                  ) : (
+                    <div class='shrink-0 w-10 h-10' />
+                  ))}
+                <p class='font-light text-sm text-gray-700'>{line}</p>
+              </div>
+            ))}
           </div>
         </div>
 
