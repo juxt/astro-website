@@ -62,7 +62,7 @@ const subject = 'XT26 Talks Recording Request'
       </div>
       <a
         href='#attend'
-        class='inline-block border border-white/40 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300'
+        class='inline-block bg-juxt text-black px-10 py-5 text-sm font-semibold tracking-[0.2em] uppercase hover:bg-white transition-all duration-300'
       >
         Watch the Talks
       </a>
@@ -97,34 +97,27 @@ const subject = 'XT26 Talks Recording Request'
       </div>
 
       <div
-        class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 w-full'
+        class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14 w-full'
       >
         {
           speakers.map(({ name, role, company, image, linkedin }) => (
             <a
               href={linkedin && `https://www.linkedin.com/in/${linkedin}`}
               target='_blank'
-              class={`speaker-card flex flex-col items-center text-center ${
+              class={`speaker-card group flex flex-col items-center text-center ${
                 linkedin ? 'cursor-pointer' : 'cursor-default'
               }`}
             >
-              <div class='relative mb-2 w-56 h-56'>
-                <div
-                  class='w-56 h-56 border-[5px] border-juxt rounded-full overflow-hidden bg-blue-300'
-                >
-                  <AssetImage
-                    src={image}
-                    alt={`Headshot of ${name}`}
-                    class='w-full h-full object-cover'
-                  />
-                </div>
-                <div class='absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent rounded-full pointer-events-none' />
-                <div class='absolute bottom-0.5 left-0 right-0 flex justify-center pointer-events-none'>
-                  <h3 class='font-bold text-lg text-white leading-tight'>
-                    {name}
-                  </h3>
-                </div>
+              <div class='relative mb-5 w-full aspect-square overflow-hidden bg-gray-800'>
+                <AssetImage
+                  src={image}
+                  alt={`Headshot of ${name}`}
+                  class='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'
+                />
               </div>
+              <h3 class='font-semibold text-lg text-white leading-tight mb-1'>
+                {name}
+              </h3>
               {Array.isArray(role) ? (
                 role.map((line) => (
                   <p class='text-sm text-gray-400 mb-0'>{line}</p>
@@ -143,7 +136,7 @@ const subject = 'XT26 Talks Recording Request'
   </section>
 
   <!-- Agenda Section -->
-  <section id='agenda' class='bg-gray-50'>
+  <section id='agenda' class='bg-zinc-800 text-white'>
     <div class='max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32'>
       <div class='flex flex-col items-center text-center mb-16 md:mb-20'>
         <p
@@ -152,18 +145,16 @@ const subject = 'XT26 Talks Recording Request'
           The Day
         </p>
         <h2
-          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-gray-900 mb-6'
+          class='text-4xl md:text-5xl lg:text-6xl font-extralight text-white mb-6'
         >
           Agenda
         </h2>
-        <p class='text-gray-500 text-lg max-w-2xl font-light'>
+        <p class='text-gray-400 text-lg max-w-2xl font-light'>
           Nine talks, an expert panel, and an evening reception.
         </p>
       </div>
 
-      <div
-        class='w-full bg-white rounded-lg overflow-hidden p-6 sm:p-10 md:p-14 shadow-sm'
-      >
+      <div class='w-full'>
         <XT26Agenda />
       </div>
       <div class='w-full flex justify-end'>
