@@ -13,6 +13,8 @@ tags:
   - 'tech talks'
 ---
 
+<iframe class='aspect-video w-full mb-8 -mt-10' src="https://www.youtube.com/embed/7dXX3WvWu6A?si=NoVXsil1jXRKvYuw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 Martin Trojer’s talk was the one whose title had caught my eye in the XT26 line-up, and I'm glad I got to sit in for it, because Martin's session was one of the least doom-y takes on AI and dev work I've heard in a while.
 
 For quick context: a year ago Martin (Meta) was telling people to lean into coding agents, much to the continued dismissal of others. Now, with a year having passed, he's very much looking vindicated. Giving his honest answer to the question "Where is this all actually going?", he says nobody really knows yet, we're still in the middle of that storm, but there's an undeniable truth that "the Rubicon has been crossed, and the Genie will not go back in the bottle."
@@ -26,8 +28,6 @@ His framing for what devs are actually for now really sticks out to me: agents d
 He ended with an excellent quote: "you can outsource your thinking, but you can't outsource your understanding."
 
 I walked out more optimistic than I went in. Personal taste, judgement, experience, and a willingness to say no will be going up in value, not down.
-
-<iframe class='aspect-video w-full' src="https://www.youtube.com/embed/7dXX3WvWu6A?si=NoVXsil1jXRKvYuw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Download Martin's slides <a href="/xt26/martin-trojer.pdf" target="_blank">here.</a>
 
