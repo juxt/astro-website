@@ -18,7 +18,8 @@ const agenda = [
   },
   {
     time: '09:15',
-    title: 'How to Survive the Claudpocalypse',
+    title: 'How to Survive the Claudepocalypse',
+    titleLink: 'https://www.youtube.com/watch?v=7dXX3WvWu6A',
     subTitle: 'Martin Trojer | Meta | Staff Engineer'
   },
   {
@@ -105,7 +106,7 @@ const agenda = [
 ---
 
 {
-  agenda.map(({ time, title, subTitle, isSpecialEvent }, index) => {
+  agenda.map(({ time, title, titleLink, subTitle, isSpecialEvent }, index) => {
     const nextItem = index < agenda.length - 1 ? agenda[index + 1] : null
     const isConsecutiveSpecialEvent = isSpecialEvent && nextItem?.isSpecialEvent
 
@@ -122,7 +123,28 @@ const agenda = [
             {time}
           </p>
           <div class='px-5 pb-5 sm:p-5 sm:col-span-4'>
-            <h2 class='font-bold text-xl text-black'>{title}</h2>
+            <h2 class='font-bold text-xl text-black'>
+              {titleLink ? (
+                <a
+                  href={titleLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='text-juxt hover:underline'
+                >
+                  {title}
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 512 512'
+                    aria-hidden='true'
+                    class='inline-block w-4 h-4 ml-1 align-baseline fill-current'
+                  >
+                    <path d='M432 320h-32a16 16 0 0 0-16 16v112H64V128h160a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-16.97 41l35.71 35.71L135.4 320.4a24 24 0 0 0 0 33.94L157.66 376.6a24 24 0 0 0 33.94 0L435.29 132.7 471 168.4c15.09 15.09 41 4.41 41-17V24a24 24 0 0 0-24-24z' />
+                  </svg>
+                </a>
+              ) : (
+                title
+              )}
+            </h2>
             {subTitle &&
               (Array.isArray(subTitle) ? subTitle : [subTitle]).map((s) => (
                 <p class='font-light text-sm text-gray-700'>{s}</p>
