@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'On co-specs and tri-checks'
-description: 'Spec-driven development cares about the document. The process that produces and checks it matters more, and now has two names.'
+description: 'The case for a third kind of specification'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-06-25'
@@ -12,31 +12,73 @@ tags:
   - 'testing'
 ---
 
-<p class="lede"><a href="https://github.com/github/spec-kit" target="_blank">Spec-driven development</a> is organised around the specification as a deliverable: write it, hand it to a model, generate the code. The document is the thing you produce and the thing you keep. In our own work we have found that the document is the easy part. How you arrive at it, and what keeps it honest afterwards, matter more.</p>
+<p class="lede">There's a disagreement playing out around spec-driven development (SDD). One side says the hard part is no longer writing the code. Models can do that. The skill that matters now is describing precisely what you want. Sean Grove of OpenAI has <a href="https://www.youtube.com/watch?v=8rABwKRsec4" target="_blank">argued</a> that soon "the person who communicates most effectively is the most valuable programmer". The other side says this is just waterfall again. You cannot specify everything up front, because you <a href="https://www.linkedin.com/feed/update/urn:li:activity:7413956151144542208/" target="_blank">only learn what you are building by building it</a>, so a spec fixed in advance will always be wrong.</p>
 
-Software has usually known this. [Code review](https://en.wikipedia.org/wiki/Code_review) is not really about the diff. The same diff, scrutinised or waved through, leaves you in a different place, because the value is in the act of reviewing rather than the artefact reviewed. [Test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) was never about the test files either. Its point was the pressure of stating behaviour before writing the code that satisfies it, which is why writing the tests afterwards gives you the files and misses what they were for. In both cases the artefact is a residue of a process, and the process is the part that does the work.
+We think both are right. The two positions are reconcilable, but we need new language to express how. We've started using new names for process-shaped practices that agentic software development needs but doesn't yet have language for.
 
-So we have started using two words for process-shaped practices that specifications need and don't yet have names for. Neither idea is new. Naming them just makes them easier to ask for.
+## No silver specifications
+
+Push SDD to its limit and you get a radical conclusion: the code barely matters at all. The [Phoenix Architecture](https://jasongoecke.substack.com/p/the-ashes-have-intent-phoenix-architecture) is its clearest incarnation: code is merely a reification of a sufficiently detailed specification, disposable and regenerated rather than maintained. Its proponents put it vividly, that "the most durable systems of the AI era will be built from code that is meant to die".
+
+But we've been here before.
+
+The [fourth-generation languages](https://en.wikipedia.org/wiki/Fourth-generation_programming_language) promised it. So did the [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) tools that turned diagrams into running code, and the [model-driven approaches](https://modeling-languages.com/low-code-vs-model-driven/) that followed, each holding out a model so complete that the code became a redundant by-product, generated at the press of a button.
+
+TDD and BDD nudged against the same idea, treating the tests as the artefact that mattered most and the code as the thing that merely had to satisfy them. It was not true then and it is not true now.
+
+What was true, though, is older than either tool. Peter Naur argued in 1985 that programming is really [the building of a theory](https://gwern.net/doc/cs/algorithm/1985-naur.pdf) of the matters at hand, one held in the programmers' heads and only imperfectly captured by the code and documents they produce. TDD and BDD were two ways of doing that building. BDD did it by forcing business and engineers into one conversation and a shared vocabulary, so the scenarios were the residue of two camps reaching the same understanding. TDD did it by making you state, before writing a line, how the code would be used and what counted as correct, so the suite was the residue of a design argument rather than a regression net.
+
+So despite the name implying that one artefact (namely, the behaviours or the tests) had primacy, in practice this was never really the case.
+
+There will always be enthusiasts keen to tear down the past to make room for the future. NoSQL was going to retire the relational database; microservices were going to dissolve the monolith; no-code was going to end programming. Each time, the thing declared obsolete turned out to have a job after all, and the pendulum swung back.
+
+We think there is still a place for code, and still a place for tests. What has genuinely changed are the economics. Specifying system behaviour rigorously used to be reserved for systems where the cost of failure was high enough to justify the overhead. With AI agents now both authoring specifications and producing implementations against them, behavioural specification is more cost-effective than it was, and more necessary, given how readily models resolve ambiguity in directions you did not intend. Alongside code and tests, there is a place for specifications too.
 
 ## Co-specs
 
-A co-spec is a specification arrived at through conversation, where the model is free to push back. You describe what you want, and it questions the parts that contradict each other, names the cases you have not decided, and makes you settle the things you were quietly leaving implicit. The specification that comes out has been stress-tested by the act of producing it.
+So specifications are worth making. But spec-driven development, as it is currently practised, treats the spec as a document to produce and hand over. That is the same error the model-driven tools made.
 
-This is not how a spec usually comes out of an AI, and the two common alternatives both produce a perfectly good-looking artefact. In the first, you dictate and the model transcribes: it writes down what you say without challenging any of it, so every gap in your thinking survives intact. In the second, you give it a one-line prompt and it invents a whole specification, plausible and confident and full of assumptions nobody has examined. What makes a co-spec different is that somewhere in its history, something disagreed with you and you had to resolve it.
+The lesson of TDD and BDD, and of Naur before them, is that the artefact was never the point. What mattered was the understanding a team reached in making it, and that understanding comes from a process of discovery. You learn what you are building by building it. You also learn what you meant to build by trying to specify it.
+
+How a spec is made, then, matters as much as what it says, and there is further to go than the field has yet gone. We think three attributes separate a weak specification from a strong one, the kind you can confidently build against, and we reserve the term co-spec for one that has all three. Together they turn SDD from a repeat of old mistakes into a way to build iteratively and incrementally, shipping code you understand and can own.
+
+### Contested
+
+The first, and the most important, is that it is *contested*. We don't see our own ambiguities until they are held up to us, and a spec is only as good as the argument that made it, from as many angles as you can. Most specs never get one. Either you dictate and the model transcribes, leaving every gap in your thinking intact, or you hand it a line and it invents the rest, assured and full of assumptions no one has examined. A co-spec is one that, somewhere in its history, disagreed with you and made you resolve it. This is the attribute the better SDD tools have started to build: GitHub's Spec Kit runs a [clarify step](https://github.com/github/spec-kit) that quizzes a draft for gaps, and others put an [adversarial reviewer](https://earezki.com/ai-news/2026-02-12-adversarial-planning-for-spec-driven-development/) in front of it. It is a good instinct. The other two are where it stops.
+
+### Codified
+
+The second is that it is *codified*. Most people picture spec-driven development as requirements written in English, or dressed up as structured prose. But the history of software engineering is littered with attempts to program in human language, and each one meets the same wall: [prose is too loose](https://cs.uwaterloo.ca/~dberry/ambiguity.res.html) to pin meaning down. "add login" means four different things to four people, so a spec the model implements perfectly can still be the wrong spec. We invented programming languages to escape exactly this, so we could say what we mean precisely, and only what we mean. A formal specification does the same for behaviour: its semantics are fixed, so whole classes of ambiguity and contradiction are ruled out by the language itself, before anyone checks anything. One reading, and no second to discover later.
+
+### Corroborated
+
+The third is that it is *corroborated*: something other than the model confirms it holds together. A model can produce a fluent, formal-looking spec that is internally contradictory, or that no implementation could satisfy, and it cannot reliably tell when it has. Precise is not the same as sound: a spec can read cleanly and still describe an impossibility, the way code can type-check and still be wrong.
+
+Being codified is what lets something else do the checking. A formal spec is a basis for inference: from what it says, you can work out what must follow and what must never happen. A [symbolic oracle](https://en.wikipedia.org/wiki/Neuro-symbolic_AI) does that reasoning robustly, where a model could only guess at it, and then hands the model precise instructions: write a test for this case, judge whether that obligation is met. The sharper the instruction, the less is left to the model's judgement, and the cheaper and faster the model you need to carry it out.
+
+Three properties, and three different failures they guard against. The unexamined gap in your own intent, which you brought. Ambiguity, which lives in the medium. The plausible-but-unsound artefact, which the model produced. Each guard catches what the others let through. And all three, you may have noticed, begin the way co-spec does.
 
 ## Tri-checks
 
+Corroboration need not stop at the spec. Once AI is writing the code and the tests too, it is worth giving up the idea that any one of the three is the source of truth. The specification, the tests and the code each capture part of what you meant, and none is reliably right. When nothing has primacy, the natural move is to check them against one another.
+
+Engineering has leaned on this before. A surveyor fixes a point by [triangulation](https://en.wikipedia.org/wiki/Triangulation), taking bearings from several known positions rather than trusting one. A flight computer runs in [triple modular redundancy](https://en.wikipedia.org/wiki/Triple_modular_redundancy), three units computing the same result so a majority can overrule a faulty one. Philosophers of science call it [consilience](https://en.wikipedia.org/wiki/Consilience): a claim gains confidence when independent lines of evidence, none decisive alone, agree. A tri-check does the same with the three artefacts of AI-assisted development.
+
 <span class="pullquote" text-content="Any two of the three can quietly agree and still be wrong together."></span>
 
-A tri-check keeps three artefacts honest against each other: the behavioural specification, the tests and the code. Most practice only checks two. [TDD](https://en.wikipedia.org/wiki/Test-driven_development) and [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) bind tests to code and assume the behaviour they encode is the behaviour you wanted. But tests and code can agree with each other perfectly while both have drifted from what the spec says, and a specification can describe behaviour that no test ever exercises.
+Most practice checks only two. [TDD](https://en.wikipedia.org/wiki/Test-driven_development) and [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) bind tests to code and trust that the behaviour they encode is the behaviour you wanted. But tests and code can agree while both have drifted from the spec, and a spec can describe behaviour no test exercises. Check all three and each edge tells you something: spec against code exposes drift, spec against tests exposes behaviour you never covered, tests against code catches the ordinary bug. Any two of the three can quietly agree and still be wrong together, and the edge that breaks is where to look.
 
-Checking all three corners tells you more than checking any two. If the spec and the code disagree, you have drift. If the spec and the tests disagree, you have behaviour you described but never covered. If the tests and the code disagree, you have the ordinary kind of failure tests are there to catch. Any two of the three can quietly agree and still be wrong together, and the edge that breaks is what tells you where to look.
+The checks come in two kinds. Some are symbolic: run the tests against the code, or the spec against its oracle, and the verdict is mechanical. Others are judged: ask a model whether the tests really cover the obligations the spec implies, a question no symbolic check can settle. Run once, at sign-off, a tri-check is a gate. Run whenever a corner moves, it is the [feedback loop the critics were asking for](https://martinfowler.com/fragments/2026-01-08.html), and every disagreement it surfaces is something building has taught you that the spec did not yet know.
 
-## Why the words
+## And thereafter they shape us
 
-We are not claiming to have invented either practice, and neither one needs new tooling. What the names give you is something to ask for. "Spec" tells you a document exists; it says nothing about whether anyone interrogated it. "The tests pass" tells you two corners agree; it says nothing about the third. Once you can say co-spec, you can ask whether a specification was argued with or merely written down. Once you can say tri-check, you can ask what the spec, the tests and the code are being held against, and notice when the honest answer is only each other.
+We shape our tools, and then our tools shape us. The language we have for AI-assisted development is still loose, and the work is looser for it.
 
-The two words are small, and neither asks anything of your tools. They just let you ask for the better version of each: a spec that was argued with, code that has been held against more than itself.
+We hope these names give you is something to ask for. "Spec" tells you a document exists; it says nothing about whether anyone interrogated it, or whether anything but the model has vouched for it. "The tests pass" tells you two corners agree; it says nothing about the third. Once you can say co-spec, you can ask whether a specification was codified, contested and corroborated, or merely written down. Once you can say tri-check, you can ask what the spec, the tests and the code are being held against, and notice when the honest answer is only each other.
+
+The critics' worry is that spec-driven development freezes the specification into a document you stop learning from. Both words are ways of keeping it alive: argued into being rather than dictated, and held against more than itself for as long as the code keeps changing. That is the path between the two camps.
+
+Specify, because the model needs something exact to build against. Keep specifying, because you are still learning what you meant.
 
 ---
 
