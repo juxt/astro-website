@@ -4,7 +4,7 @@ title: 'On co-specs and tri-checks'
 description: 'A specification worth building against is contested, codified and corroborated. Most are just written down.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-06-25'
+publishedDate: '2026-07-02'
 heroImage: 'on-co-specs-and-tri-checks.jpg'
 tags:
   - 'ai'
