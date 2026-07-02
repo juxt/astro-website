@@ -18,6 +18,10 @@ tags:
 
 I think both are right, but reconciling them means being more precise about what we mean by 'spec-driven development'.
 
+TDD and BDD each had an author. Kent Beck codified [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development); Dan North coined [behaviour-driven development](https://en.wikipedia.org/wiki/Behavior-driven_development). Spec-driven development has neither a founding figure nor an agreed definition. It has surfaced bottom-up, in many places at once, and it means different things to different people.
+
+At one end sit fully automated, hands-off pipelines, where behaviour is expressed in a custom DSL or an existing specification language and the code regenerated from it. At the other, someone writes down what they want in a requirements.md and hands it to an agent. Both go by the same name, and the practice is spreading faster than any agreed vocabulary for it.
+
 ## No silver specifications
 
 First, let's talk about what we don't mean.
@@ -28,7 +32,7 @@ But we've been here before.
 
 The [fourth-generation languages](https://en.wikipedia.org/wiki/Fourth-generation_programming_language) promised it. So did the [UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language) tools that turned diagrams into running code, and the [model-driven approaches](https://modeling-languages.com/low-code-vs-model-driven/) that followed, each one chasing a spec complete that the code became a redundant by-product, generated at the press of a button.
 
-[TDD](https://en.wikipedia.org/wiki/Test-driven_development) and [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) are often cast the same way, as if the tests were the artefact that mattered most and the code as the thing that merely had to satisfy them.
+TDD and BDD are often cast the same way, as if the tests were the artefact that mattered most and the code merely the thing that had to satisfy them.
 
 It was not true then and it is not true now.
 
