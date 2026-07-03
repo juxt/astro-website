@@ -14,7 +14,7 @@ tags:
   - 'testing'
 ---
 
-<p class="lede">The agent finished, printed a green check, and told me the tests passed. They did. The tests had even come first, red before green, the way I'd have worked myself. But there was no spec anywhere in sight: the agent had generated those tests from a two-line ticket, so what they pinned down was its best guess at what I wanted. The discipline held, and everything downstream of it converged beautifully on the wrong target. The agent wasn't lying. It had faithfully closed a loop; the loop just had nothing real at the other end of it.</p>
+<p class="lede">The agent finished, printed a green check, and told me the tests passed. They did. The tests had even come first, red before green, the way I'd designed it to work. But there was no spec anywhere in sight: the agent had generated those tests from a two-line ticket, so what they pinned down was its best guess at what I wanted. The discipline held, and everything downstream of it converged beautifully on the wrong target. The agent wasn't lying. It had faithfully closed a loop; the loop just had nothing real at the other end of it.</p>
 
 That is the quiet failure mode of agentic engineering, and contrary to most of the noise, it has little to do with how fast the model writes code. What matters is what the loop checks its own work against. Get that wrong and speed makes things worse: you converge faster on the wrong thing. Get it right and the loop becomes the most useful structure in the whole endeavour.
 
