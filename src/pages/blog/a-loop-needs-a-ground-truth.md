@@ -134,7 +134,7 @@ Isolation keeps the verdicts honest too, because nobody marks their own homework
 
 **Degrade loudly.** If the loop can't actually verify (the project has no way to run its tests yet, or the Allium CLI isn't installed), it drops to an assisted mode and *says so*. It never narrates a pass it didn't execute. This is the principle that gives the green check its meaning back: a report of success is only ever a report of something that actually ran. That felt less like a nicety and more like the whole point.
 
-## What changed, and what it's honest about
+## What changed, and what it guarantees
 
 Before, running the full cycle meant being the conductor: five skills, the right order, and rerunning the checks yourself after every change to decide whether the cycle needed another turn. Now it's one goal. The loop drives the cycle itself, resumes if interrupted, and doesn't stop until the checks agree.
 
@@ -144,4 +144,4 @@ The autonomy also comes with guarantees. The loop won't spin forever. An iterati
 
 Henry ends his piece with a line I keep returning to: "velocity only counts when you ship something that solves more problems than it creates". A loop doesn't buy velocity by going faster; it buys velocity by making the fast parts trustworthy, because the thing it converges against is intent, made durable and checkable.
 
-Which is really Allium's whole idea, now on a loop. Allium's tagline is "the specification language that *talks back*", and this is what talking back sounds like when it's automated: when the code and the spec disagree, the disagreement is the loop's most useful signal. The green check I started with is worth something again. It traces back to what someone actually wanted, written down on purpose, and held to.
+Which is really Allium's whole idea, now on a loop. Allium's tagline is "the specification language that *talks back*", and this is what talking back sounds like when it's automated: when the code and the spec disagree, the disagreement is the loop's most useful signal. The green check I started with, the one the agent printed against its own guess, is worth something again. It traces back to what someone actually wanted, written down on purpose, and held to.
