@@ -138,7 +138,7 @@ Isolation keeps the verdicts honest too, because nobody marks their own homework
 
 Before, running the full cycle meant being the conductor: five skills, the right order, and rerunning the checks yourself after every change to decide whether the cycle needed another turn. Now it's one goal. The loop drives the cycle itself, resumes if interrupted, and doesn't stop until the checks agree.
 
-It has limits, and stating them plainly is part of the point. An essay about honest signals shouldn't oversell its own. The loop has hard stops (an iteration cap, and a no-progress cap that catches it thrashing against a test it can't satisfy), so it can't spin forever. The human still owns direction; the loop escalates the decisions that genuinely need a person. And its verification is only as real as the project makes available, hence degrading loudly rather than pretending. It doesn't remove judgment from the process; it concentrates your judgment on the decisions that need it and automates the mechanical grind in between.
+The autonomy also comes with guarantees. The loop won't spin forever. An iteration cap and a no-progress cap catch it thrashing against a test it can't satisfy, and when it hits either it stops and reports. It won't take direction out of your hands. The human owns where the work is going, and the loop interrupts for the decisions that genuinely need a person. And it won't claim verification it doesn't have. Where the project's signal is weak, it degrades loudly rather than pretending. It doesn't remove judgment from the process; it concentrates your judgment on the decisions that need it and automates the mechanical grind in between.
 
 ## Closing the loop
 
