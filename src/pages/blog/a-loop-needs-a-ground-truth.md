@@ -46,7 +46,7 @@ The two hardest phases of a trustworthy loop, durable context and behavioural ve
 
 Allium is a language for writing down what a system should *do*, independent of how it does it. That spec is the durable context. It persists across sessions, so the understanding you build doesn't evaporate the moment the conversation ends. This is a direct, structural answer to Bainbridge: the mental model isn't lost when you stop writing code by hand, because it's been externalised into an artefact that survives.
 
-And the spec gives you a behavioural verification signal. From the spec, Allium projects tests (the executable contract) and reconciles the spec against the code (a step we call `weed`). Crucially, that signal traces back to *intent*, not to the agent's output. It's the ground truth the previous section said was missing.
+And the spec gives you a behavioural verification signal. From the spec, Allium projects tests (the executable contract) and reconciles the spec against the code (a step we call `weed`). Crucially, that signal traces back to *intent*, not to the agent's guess at it. It's the ground truth the previous section said was missing.
 
 A small example makes this concrete. Here is a rule in a spec, a password-reset token that expires:
 
