@@ -140,6 +140,8 @@ Before, running the full cycle meant being the conductor: five skills, the right
 
 The autonomy also comes with guarantees. The loop won't spin forever. An iteration cap and a no-progress cap catch it thrashing against a test it can't satisfy, and when it hits either it stops and reports. It won't take direction out of your hands. The human owns where the work is going, and the loop interrupts for the decisions that genuinely need a person. And it won't claim verification it doesn't have. Where the project's signal is weak, it degrades loudly rather than pretending. It doesn't remove judgment from the process; it concentrates your judgment on the decisions that need it and automates the mechanical grind in between.
 
+There's more the loop makes possible than it currently does. A large goal can already be decomposed into sub-goals and run as a sequence of loops, and running those in parallel is a natural next step. Every escalation a human resolves is also knowledge the system could keep, as precedent to consult before asking the same question twice, with a falling escalation rate as a sign the loop is absorbing a team's intent rather than just processing questions. Those are stories for another post.
+
 ## Closing the loop
 
 Henry ends his piece with a line I keep returning to: "velocity only counts when you ship something that solves more problems than it creates". A loop doesn't buy velocity by going faster; it buys velocity by making the fast parts trustworthy, because the thing it converges against is intent, made durable and checkable.
