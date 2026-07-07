@@ -30,6 +30,62 @@ Now run the same break through the second kind. The agent gathers the same conte
 
 Same model in both loops. The difference is entirely in what they closed against. The first closed against itself. The second closed against the bank's own written intent, and produced, as a by-product, the evidence trail a supervisor will one day ask for.
 
+<figure style="margin:2.5rem 0;">
+<div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+<div style="flex:1 1 300px;max-width:420px;">
+<p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against itself</p>
+<svg viewBox="0 0 368 268" role="img" aria-label="Diagram of an agent loop that verifies against its own output" style="width:100%;height:auto;">
+<defs><marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
+<rect x="72" y="6" width="224" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="184" y="26" text-anchor="middle" font-size="12" fill="currentColor">A break lands on the queue</text>
+<line x1="184" y1="38" x2="184" y2="52" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<rect x="72" y="56" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="184" y="75" text-anchor="middle" font-size="12" fill="currentColor">The agent reads context</text>
+<text x="184" y="91" text-anchor="middle" font-size="12" fill="currentColor">and drafts a narrative</text>
+<line x1="184" y1="102" x2="184" y2="116" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<rect x="72" y="120" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="184" y="139" text-anchor="middle" font-size="12" fill="currentColor">Recommend closure,</text>
+<text x="184" y="155" text-anchor="middle" font-size="12" fill="currentColor">confidence 0.91</text>
+<line x1="184" y1="166" x2="184" y2="188" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<text x="192" y="181" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.75">verifies against</text>
+<rect x="72" y="192" width="224" height="34" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="4 3"/>
+<text x="184" y="213" text-anchor="middle" font-size="12" font-style="italic" fill="currentColor">its own output</text>
+<path d="M72,209 C36,209 36,79 68,79" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<text x="184" y="248" text-anchor="middle" font-size="11" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the model felt good about it.</text>
+</svg>
+</div>
+<div style="flex:1 1 300px;max-width:420px;">
+<p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against written policy</p>
+<svg viewBox="0 0 368 268" role="img" aria-label="Diagram of an agent loop that verifies against the bank's written policy and escalates breaches to a person" style="width:100%;height:auto;">
+<defs><marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
+<rect x="24" y="6" width="224" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="136" y="26" text-anchor="middle" font-size="12" fill="currentColor">The same break, same queue</text>
+<line x1="136" y1="38" x2="136" y2="52" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<rect x="24" y="56" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="136" y="75" text-anchor="middle" font-size="12" fill="currentColor">The agent reads context</text>
+<text x="136" y="91" text-anchor="middle" font-size="12" fill="currentColor">and retrieves the rules</text>
+<line x1="136" y1="102" x2="136" y2="116" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<rect x="24" y="120" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="136" y="139" text-anchor="middle" font-size="12" fill="currentColor">Checks the difference</text>
+<text x="136" y="155" text-anchor="middle" font-size="12" fill="currentColor">against the tolerance</text>
+<line x1="248" y1="143" x2="280" y2="143" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwB)"/>
+<text x="264" y="135" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.75">breach</text>
+<rect x="284" y="121" width="76" height="44" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="322" y="139" text-anchor="middle" font-size="11" fill="currentColor">a person</text>
+<text x="322" y="155" text-anchor="middle" font-size="11" fill="currentColor">decides</text>
+<line x1="136" y1="166" x2="136" y2="188" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<text x="144" y="181" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.75">verifies against</text>
+<rect x="24" y="192" width="224" height="48" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="136" y="212" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">the bank's written policy</text>
+<text x="136" y="228" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity="0.8">tolerances · matching rules · precedents</text>
+<path d="M24,216 C0,216 0,79 20,79" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<text x="136" y="248" text-anchor="middle" font-size="11" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the rule, the evidence, the click.</text>
+</svg>
+</div>
+</div>
+<figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.75rem;">One settlement break, two loops. The difference is what the verify step points at.</figcaption>
+</figure>
+
 Notice what did and did not change from the system I opened with. The machinery is the same machinery. Work items, routing, escalation, resumption, audit. What changed is the boundary of the automated set. In our system, that boundary was wherever we had written code, and everything beyond it was human by default. An agent verified against written policy moves the boundary into the cases that need judgment about context, while keeping the property that made the old system trustworthy. Every action traces to a rule, and every deviation reaches a person.
 
 <span class="pullquote" text-content="A verification signal is only worth something if it cannot be gamed."></span>The pattern is not specific to post-trade either. Consider the lending side of a bank. An approved credit facility carries terms that live on after the approval: documents to be delivered by a due date, obligations the borrower must keep meeting while the facility runs, collateral coverage that must hold through market moves. Watching those written terms over the life of the facility, and raising the work they demand when reality drifts from them, is exactly the machine I described at the start, built for loans instead of structured trades. And the verification signal itself sometimes needs designing with adversaries in mind. On the market risk platform where I later spent a decade, we ran limits monitoring across every configured trading book at randomised times during the day, and the randomisation was the point. A check that runs on a schedule is a check a trader can plan around, running high risk intraday and booking a few trades before the close to trim the exposure snapshot. A verification signal is only worth something if it cannot be gamed, a lesson banks learned about humans long before anyone applied it to agents.
