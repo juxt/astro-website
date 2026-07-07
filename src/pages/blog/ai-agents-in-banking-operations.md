@@ -34,52 +34,63 @@ Same model in both loops. The difference is entirely in what they closed against
 <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against itself</p>
-<svg viewBox="0 0 368 268" role="img" aria-label="Diagram of an agent loop that verifies against its own output" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that verifies its recommendation against its own output and closes the break with no person involved" style="width:100%;height:auto;">
 <defs><marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
-<rect x="72" y="6" width="224" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="184" y="26" text-anchor="middle" font-size="12" fill="currentColor">A break lands on the queue</text>
-<line x1="184" y1="38" x2="184" y2="52" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
-<rect x="72" y="56" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="184" y="75" text-anchor="middle" font-size="12" fill="currentColor">The agent reads context</text>
-<text x="184" y="91" text-anchor="middle" font-size="12" fill="currentColor">and drafts a narrative</text>
-<line x1="184" y1="102" x2="184" y2="116" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
-<rect x="72" y="120" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="184" y="139" text-anchor="middle" font-size="12" fill="currentColor">Recommend closure,</text>
-<text x="184" y="155" text-anchor="middle" font-size="12" fill="currentColor">confidence 0.91</text>
-<line x1="184" y1="166" x2="184" y2="188" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
-<text x="192" y="181" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.75">verifies against</text>
-<rect x="72" y="192" width="224" height="34" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="4 3"/>
-<text x="184" y="213" text-anchor="middle" font-size="12" font-style="italic" fill="currentColor">its own output</text>
-<path d="M72,209 C36,209 36,79 68,79" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
-<text x="184" y="248" text-anchor="middle" font-size="11" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the model felt good about it.</text>
+<rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">A break lands on the queue</text>
+<line x1="109" y1="40" x2="109" y2="52" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<rect x="20" y="54" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="73" text-anchor="middle" font-size="11.5" fill="currentColor">The agent reads context</text>
+<text x="109" y="89" text-anchor="middle" font-size="11.5" fill="currentColor">and drafts a narrative</text>
+<line x1="109" y1="100" x2="109" y2="112" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<rect x="20" y="114" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="133" text-anchor="middle" font-size="11.5" fill="currentColor">Recommends closure,</text>
+<text x="109" y="149" text-anchor="middle" font-size="11.5" fill="currentColor">confidence 0.91</text>
+<line x1="198" y1="137" x2="236" y2="137" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<text x="217" y="127" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">verifies</text>
+<text x="217" y="152" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">against</text>
+<rect x="238" y="114" width="132" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-dasharray="4 3"/>
+<text x="304" y="140" text-anchor="middle" font-size="11" font-style="italic" fill="currentColor">its own output</text>
+<line x1="109" y1="160" x2="109" y2="172" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<rect x="20" y="174" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Closes the break</text>
+<text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">and moves on</text>
+<path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
+<text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the model felt good about it.</text>
 </svg>
 </div>
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against written policy</p>
-<svg viewBox="0 0 368 268" role="img" aria-label="Diagram of an agent loop that verifies against the bank's written policy and escalates breaches to a person" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that checks the break against the bank's written policy, has an analyst confirm within tolerance, and hands breaches to a person" style="width:100%;height:auto;">
 <defs><marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
-<rect x="24" y="6" width="224" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="136" y="26" text-anchor="middle" font-size="12" fill="currentColor">The same break, same queue</text>
-<line x1="136" y1="38" x2="136" y2="52" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
-<rect x="24" y="56" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="136" y="75" text-anchor="middle" font-size="12" fill="currentColor">The agent reads context</text>
-<text x="136" y="91" text-anchor="middle" font-size="12" fill="currentColor">and retrieves the rules</text>
-<line x1="136" y1="102" x2="136" y2="116" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
-<rect x="24" y="120" width="224" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="136" y="139" text-anchor="middle" font-size="12" fill="currentColor">Checks the difference</text>
-<text x="136" y="155" text-anchor="middle" font-size="12" fill="currentColor">against the tolerance</text>
-<line x1="248" y1="143" x2="280" y2="143" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwB)"/>
-<text x="264" y="135" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.75">breach</text>
-<rect x="284" y="121" width="76" height="44" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="322" y="139" text-anchor="middle" font-size="11" fill="currentColor">a person</text>
-<text x="322" y="155" text-anchor="middle" font-size="11" fill="currentColor">decides</text>
-<line x1="136" y1="166" x2="136" y2="188" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
-<text x="144" y="181" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.75">verifies against</text>
-<rect x="24" y="192" width="224" height="48" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
-<text x="136" y="212" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">the bank's written policy</text>
-<text x="136" y="228" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity="0.8">tolerances · matching rules · precedents</text>
-<path d="M24,216 C0,216 0,79 20,79" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
-<text x="136" y="248" text-anchor="middle" font-size="11" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the rule, the evidence, the click.</text>
+<rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">The same break, same queue</text>
+<line x1="109" y1="40" x2="109" y2="52" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<rect x="20" y="54" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="73" text-anchor="middle" font-size="11.5" fill="currentColor">The agent reads context</text>
+<text x="109" y="89" text-anchor="middle" font-size="11.5" fill="currentColor">and retrieves the rules</text>
+<line x1="109" y1="100" x2="109" y2="112" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<rect x="20" y="114" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="133" text-anchor="middle" font-size="11.5" fill="currentColor">Checks the difference</text>
+<text x="109" y="149" text-anchor="middle" font-size="11.5" fill="currentColor">against the tolerance</text>
+<line x1="198" y1="137" x2="236" y2="137" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<text x="217" y="127" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">verifies</text>
+<text x="217" y="152" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">against</text>
+<rect x="238" y="106" width="132" height="62" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="304" y="126" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">the bank's written policy</text>
+<text x="304" y="141" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">tolerances · matching rules</text>
+<text x="304" y="156" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">precedents · case history</text>
+<line x1="109" y1="160" x2="109" y2="172" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<text x="117" y="170" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">within band</text>
+<rect x="20" y="174" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Proposes with evidence,</text>
+<text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">analyst confirms in a click</text>
+<line x1="198" y1="152" x2="234" y2="188" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwB)"/>
+<text x="304" y="178" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">breach</text>
+<rect x="238" y="184" width="132" height="40" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="304" y="208" text-anchor="middle" font-size="10.5" fill="currentColor">a person decides</text>
+<path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
+<text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the rule, the evidence, the click.</text>
 </svg>
 </div>
 </div>
