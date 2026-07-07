@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="a-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="a-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
+    </marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d97706"/>
+    </marker>
+  </defs>
+
+  <!-- outer arc: code -> spec -->
+  <path d="M 760 164 C 760 72, 320 72, 320 164" fill="none" stroke="#d97706" stroke-width="2.2" marker-end="url(#a-orange)"/>
+  <text x="540" y="62" text-anchor="middle" font-size="13" fill="#b45309">outer arc &#183; weed finds drift, tend the spec, re-propagate</text>
+
+  <!-- escalate: spec -> intent -->
+  <path d="M 285 166 C 250 122, 150 122, 108 166" fill="none" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#a-slate)"/>
+  <text x="196" y="114" text-anchor="middle" font-size="12" fill="#64748b">escalate ambiguity</text>
+
+  <!-- nodes -->
+  <rect x="30" y="170" width="140" height="56" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="100" y="203" text-anchor="middle" font-size="15" font-weight="600" fill="#1e293b">intent (human)</text>
+
+  <rect x="250" y="170" width="140" height="56" rx="10" fill="#f1f5f9" stroke="#334155" stroke-width="1.8"/>
+  <text x="320" y="203" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">spec</text>
+
+  <rect x="470" y="170" width="140" height="56" rx="10" fill="#f1f5f9" stroke="#334155" stroke-width="1.8"/>
+  <text x="540" y="203" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">tests</text>
+
+  <rect x="690" y="170" width="140" height="56" rx="10" fill="#f1f5f9" stroke="#334155" stroke-width="1.8"/>
+  <text x="760" y="203" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">code</text>
+
+  <!-- forward arrows -->
+  <line x1="170" y1="198" x2="245" y2="198" stroke="#475569" stroke-width="2" marker-end="url(#a-slate)"/>
+  <text x="210" y="186" text-anchor="middle" font-size="13" fill="#475569">elicit, ratify</text>
+
+  <line x1="390" y1="198" x2="465" y2="198" stroke="#475569" stroke-width="2" marker-end="url(#a-slate)"/>
+  <text x="430" y="186" text-anchor="middle" font-size="13" fill="#475569">propagate</text>
+
+  <line x1="610" y1="198" x2="685" y2="198" stroke="#475569" stroke-width="2" marker-end="url(#a-slate)"/>
+  <text x="650" y="186" text-anchor="middle" font-size="13" fill="#475569">implement</text>
+
+  <!-- inner arc: code -> tests -->
+  <path d="M 760 230 C 760 298, 540 298, 540 234" fill="none" stroke="#0d9488" stroke-width="2.2" marker-end="url(#a-teal)"/>
+  <text x="650" y="304" text-anchor="middle" font-size="13" fill="#0f766e">inner arc &#183; run the tests, fix the code</text>
+
+  <!-- exit condition -->
+  <text x="480" y="356" text-anchor="middle" font-size="13.5" fill="#334155">the loop stops when: tests pass &#183; weed clean &#183; no blocking questions</text>
+</svg>
