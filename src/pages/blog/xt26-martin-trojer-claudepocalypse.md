@@ -29,7 +29,7 @@ He ended with an excellent quote: "you can outsource your thinking, but you can'
 
 I walked out more optimistic than I went in. Personal taste, judgement, experience, and a willingness to say no will be going up in value, not down.
 
-Download Martin's slides <a href="/xt26/martin-trojer.pdf" target="_blank">here.</a>
+Download Martin's slides <a href="/xt26/xt26-martin-trojer-claudepocalypse.pdf" target="_blank">here.</a>
 
 Want to be the first to know when the XT26 talks drop? [Register here](/xt26/) and we'll send the link straight to your inbox.
 

@@ -15,7 +15,7 @@ tags:
 
 <iframe class='aspect-video w-full mb-8 -mt-10' src="https://www.youtube.com/embed/qKEw-0DxAIE?si=kpaCPsTv-N6iqPsf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Download Sam's slides <a href="/xt26/sam-newman.pdf" target="_blank">here.</a>
+Download Sam's slides <a href="/xt26/xt26-sam-newman-cobots-and-dark-factories.pdf" target="_blank">here.</a>
 
 Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.
 

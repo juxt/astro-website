@@ -15,7 +15,7 @@ tags:
 
 <iframe class='aspect-video w-full' src="https://www.youtube.com/embed/HsyTW33qCjY?si=8iR-TebBtbjuRyuI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Download Simone's slides <a href="/xt26/simone-steel.pdf" target="_blank">here.</a>
+Download Simone's slides <a href="/xt26/xt26-simone-steel-data-cartography.pdf" target="_blank">here.</a>
 
 Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.
 
