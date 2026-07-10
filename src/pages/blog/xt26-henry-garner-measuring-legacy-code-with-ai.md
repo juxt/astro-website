@@ -15,9 +15,9 @@ tags:
 
 <iframe class='aspect-video w-full mb-8 -mt-10' src="https://www.youtube.com/embed/8dIZHe8_uVI?si=9--k1UMv7xwP6Cis" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Download Henry's slides <a href="/xt26/xt26-henry-garner-spectroscopy-for-software.pdf" target="_blank">here.</a>
+*Download Henry's slides <a href="/xt26/xt26-henry-garner-spectroscopy-for-software.pdf" target="_blank">here.</a>*
 
-Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.
+*Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.*
 
 I’ve been building complex software with disciplined agentic engineering for a while now, so Henry Garner’s XT26 talk, Spectroscopy for Software, rang loud and true. Three ideas from it have stayed with me since.
 
