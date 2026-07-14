@@ -107,17 +107,49 @@ This is also why the last attempt to push the automation boundary disappointed. 
 
 ## Regulators wrote the design principles first
 
-Banking's oldest controls really are old. Double-entry bookkeeping, and the maker-checker rule, where the person who prepares a transaction is never the person who approves it. But the regime that matters here is recent, and written intent was never even its goal. The Basel accords, the international banking rules that began in 1988, are at heart about a cushion. A bank must hold enough of its own capital that when loans go bad or markets fall, it absorbs the loss instead of collapsing. Nothing in that demands writing intent down. The documentation arrived through a side door. Later versions of the rules let banks calculate the size of their own cushion using their own models. A supervisor who permits that will demand to see how the model works, what data feeds it, who may change it, who checked it, etc.
+Banking's oldest controls really are old. Double-entry bookkeeping, and the maker-checker rule, where the person who prepares a transaction is never the person who approves it. But the regime that matters here is recent, and written intent was never even its goal. The Basel accords, the international banking rules that began in 1988, are at heart about a cushion. A bank must hold enough of its own capital that when loans go bad or markets fall, it absorbs the loss instead of collapsing. Nothing in that demands writing intent down. The documentation arrived through a side door. Later versions of the rules let banks calculate the size of their own cushion using their own risk models. A supervisor who permits that will demand to see how the model works, what data feeds it, who may change it, who checked it, etc.
 
 Then came 2008. Banks that looked comfortable on paper nearly went under. When a major counterparty collapsed, some needed days to answer the most basic question of all. How much do we stand to lose here? The answer lived scattered across systems that had never been made to agree. The rulebook written after the crisis went after exactly those gaps. Much of my career has been spent inside the systems it produced, and read with today's eyes, it is a curious document.
 
-The Federal Reserve's SR 11-7 guidance on model risk, from 2011, sets the expectation that models are validated independently of the people who built them. The validators, in its own words, "do not have a stake in whether a model is determined to be valid". That is maker-checker applied to software, or, in the language of agent design, nobody marks their own homework. BCBS 239, from 2013, answers the aggregation failure directly. It requires the world's systemically important banks to demonstrate the lineage of their risk data, the traceability of a number from its origin to its final use. Agent builders call the same idea provenance, and treat it as an advanced feature. Escalation matrices and approval authorities define, in writing, which decisions may be delegated and which must reach a person.
+The Federal Reserve's SR 11-7 guidance on model risk, from 2011, sets the expectation that models are validated independently of the people who built them. The validators, in its own words, "do not have a stake in whether a model is determined to be valid". That is maker-checker applied to software, or, in the language of agent design, nobody marks their own homework. Its definition of a model, incidentally, comfortably covers the agent itself. BCBS 239, from 2013, answers the aggregation failure directly. It requires the world's systemically important banks to demonstrate the lineage of their risk data, the traceability of a number from its origin to its final use. Agent builders call the same idea provenance, and treat it as an advanced feature. Escalation matrices and approval authorities define, in writing, which decisions may be delegated and which must reach a person.
+
+<figure style="margin:2.5rem 0;">
+<div style="max-width:480px;margin:0 auto;">
+<svg viewBox="0 0 376 186" role="img" aria-label="Mapping of regulatory requirements to agent design concepts: SR 11-7 independent validation maps to independent verification, BCBS 239 risk data lineage maps to provenance, escalation matrices map to human authority" style="width:100%;height:auto;">
+<defs><marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
+<text x="86" y="14" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.7">the regulator wrote</text>
+<text x="290" y="14" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.7">agent builders call it</text>
+<rect x="4" y="26" width="164" height="46" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="86" y="45" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">SR 11-7 &#183; 2011</text>
+<text x="86" y="60" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">independent model validation</text>
+<line x1="172" y1="49" x2="202" y2="49" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwC)"/>
+<rect x="208" y="26" width="164" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="290" y="45" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">independent verification</text>
+<text x="290" y="60" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">nobody marks their own homework</text>
+<rect x="4" y="80" width="164" height="46" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="86" y="99" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">BCBS 239 &#183; 2013</text>
+<text x="86" y="114" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">risk data lineage, origin to use</text>
+<line x1="172" y1="103" x2="202" y2="103" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwC)"/>
+<rect x="208" y="80" width="164" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="290" y="99" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">provenance</text>
+<text x="290" y="114" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">every number traces to a source</text>
+<rect x="4" y="134" width="164" height="46" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="86" y="153" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">escalation matrices</text>
+<text x="86" y="168" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">approval authorities</text>
+<line x1="172" y1="157" x2="202" y2="157" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwC)"/>
+<rect x="208" y="134" width="164" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="290" y="153" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">human authority</text>
+<text x="290" y="168" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">defined decisions reach a person</text>
+</svg>
+</div>
+<figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.75rem;">The post-crisis rulebook, read as an agent design document.</figcaption>
+</figure>
 
 <span class="pullquote" text-content="Regulators specified the architecture fifteen years before there was anything to run it."></span>None of this was written with AI in mind. Read it today and it is difficult to see it as anything other than a design document for trustworthy agent loops. Independent verification, data lineage, explicit escalation, human authority over defined decision classes. Regulators specified the architecture fifteen years before there was anything to run it. A bank adopting agents already has a governance philosophy. The work is noticing that, and wiring the loop into it.
 
 One engineering consequence hides in that sentence. If the ground truth is the bank's written policy, the policy must be legible to the system. Thresholds, taxonomies and templates maintained as configuration the bank's own experts can change, not prose buried in a prompt or rules hard-coded by a vendor. This is where a fair objection lands. Much of that policy lives today as prose in documents, and making it legible is real work, the same in kind as writing any specification. In coding, the ground truth had to be discovered. In a bank, the intent has already been argued over, approved and versioned. What remains is transcription, not discovery. The institution is not deciding what it means. It is moving what it means into a form a loop can check against.
 
-Banks have learned this lesson. It is why rules engines took root in them years before anyone said "agent". Systems got built in a way so that the business could change production behaviour themselves, in some cases even offering an impact preview before those changes were applied to the production system. The deterministic layer owns the thresholds and the taxonomy, and the model owns what models are good at, reading messy context, drafting the narrative, noticing that this case rhymes with an earlier one. Tangle those concerns and every policy change becomes a vendor change request, which is precisely the failure mode that made banks distrust the last generation of automation.
+Banks have learned this lesson. It is why rules engines took root in them years before anyone said "agent". Systems got built in a way so that the business could change production behaviour themselves, in some cases even offering an impact preview before those changes were applied to the production system. The same properties matter for policy an agent will verify against. Declarative enough that a machine can check two rules for contradiction, versioned like code, testable against history before going live. What form that policy should actually take is a question that warrants a post of its own. The deterministic layer owns the thresholds and the taxonomy, and the model owns what models are good at, reading messy context, drafting the narrative, noticing that this case rhymes with an earlier one. Tangle those concerns and every policy change becomes a vendor change request, which is precisely the failure mode that made banks distrust the last generation of automation.
 
 ## How you would know it is working
 
@@ -129,6 +161,72 @@ A monitoring loop is only as good as its worst day. If the agent quietly stalls,
 
 Picture a busy kitchen. Every order is split among the cooks, and the dishes are dealt out in strict turn, so each cook gets an equal share. Now let one cook be slightly slow. Every big enough order has a dish waiting on that cook, so every table eats late. Tables stay occupied longer, so the queue at the door grows too. A potential fix is to keep dealing the dishes in turn, but have every cook glance at the other stations from time to time and step in wherever someone is falling behind. Waiting until your own dishes are done is not enough, because in a kitchen this busy that moment may never come.
 
+<figure style="margin:2.5rem 0;">
+<div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+<div style="flex:1 1 300px;max-width:420px;">
+<p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Dealt in strict turn</p>
+<svg viewBox="0 0 376 212" role="img" aria-label="Diagram of dishes dealt in strict turn to three cooks, where the slow cook's queue of waiting dishes grows and every table eats late" style="width:100%;height:auto;">
+<defs><marker id="arwD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
+<rect x="98" y="6" width="180" height="30" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="188" y="25" text-anchor="middle" font-size="11" fill="currentColor">dishes dealt out in strict turn</text>
+<line x1="160" y1="36" x2="82" y2="62" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwD)"/>
+<line x1="188" y1="36" x2="188" y2="62" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwD)"/>
+<line x1="216" y1="36" x2="294" y2="62" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwD)"/>
+<rect x="33" y="66" width="90" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="78" y="86" text-anchor="middle" font-size="11" fill="currentColor">cook A</text>
+<rect x="143" y="66" width="90" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.55"/>
+<text x="188" y="80" text-anchor="middle" font-size="11" fill="currentColor">cook B</text>
+<text x="188" y="92" text-anchor="middle" font-size="9" font-style="italic" fill="currentColor" fill-opacity="0.7">slow</text>
+<rect x="263" y="66" width="90" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="308" y="86" text-anchor="middle" font-size="11" fill="currentColor">cook C</text>
+<rect x="61" y="106" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="61" y="119" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="106" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="119" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="132" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="145" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="158" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="291" y="106" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="291" y="119" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<text x="188" y="182" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">the queue only grows</text>
+<text x="188" y="204" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">Every table eats late.</text>
+</svg>
+</div>
+<div style="flex:1 1 300px;max-width:420px;">
+<p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Strict turn, cooks step in</p>
+<svg viewBox="0 0 376 212" role="img" aria-label="Diagram of the same kitchen where cooks A and C periodically check the other stations and step in on the slow cook's queue, so no queue runs away" style="width:100%;height:auto;">
+<defs><marker id="arwE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
+<rect x="98" y="6" width="180" height="30" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="188" y="25" text-anchor="middle" font-size="11" fill="currentColor">dishes dealt out in strict turn</text>
+<line x1="160" y1="36" x2="82" y2="62" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwE)"/>
+<line x1="188" y1="36" x2="188" y2="62" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwE)"/>
+<line x1="216" y1="36" x2="294" y2="62" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwE)"/>
+<rect x="33" y="66" width="90" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="78" y="86" text-anchor="middle" font-size="11" fill="currentColor">cook A</text>
+<rect x="143" y="66" width="90" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.55"/>
+<text x="188" y="80" text-anchor="middle" font-size="11" fill="currentColor">cook B</text>
+<text x="188" y="92" text-anchor="middle" font-size="9" font-style="italic" fill="currentColor" fill-opacity="0.7">slow</text>
+<rect x="263" y="66" width="90" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="308" y="86" text-anchor="middle" font-size="11" fill="currentColor">cook C</text>
+<rect x="61" y="106" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="61" y="119" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="106" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="119" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="171" y="132" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="291" y="106" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<rect x="291" y="119" width="34" height="9" rx="2" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-opacity="0.35"/>
+<path d="M95,98 C120,118 140,124 164,124" fill="none" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwE)"/>
+<path d="M281,98 C256,118 236,124 212,124" fill="none" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwE)"/>
+<text x="120" y="112" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">steps in</text>
+<text x="256" y="112" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">steps in</text>
+<text x="188" y="182" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">no queue runs away</text>
+<text x="188" y="204" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">Every table eats on time.</text>
+</svg>
+</div>
+</div>
+<figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.75rem;">One slow cook sets the pace for every table, until the others check the stations periodically and step in.</figcaption>
+</figure>
+
 We operated that kitchen at scale. Risk calculation jobs arrived in their thousands, each split into tens of thousands of tasks, dealt out in strict turn through a cluster of messaging nodes to a huge pool of machines. Dealing in strict turn kept the load fairly distributed, and while every node kept pace it was exactly right. The trouble was the odd node whose performance drifted, perhaps a machine running on an oversubscribed VM cluster. Queueing theory is blunt about what happens next. A node that keeps receiving its equal share of work but serves it more slowly than it arrives does not fall behind by a fixed amount. Its queue grows without limit, and because every job had tasks waiting on that node, every job finished late. Nothing had failed, so nothing alerted. The first symptom anyone saw was the delay itself. The lasting fix was the one from the kitchen. The grid kept dealing in strict turn, and the nodes now checked periodically whether a peer was falling behind and pulled work from its queue. Periodically, not on running dry, because a node that waits until it is idle before helping may, on a busy grid, never help at all. Fair distribution was preserved on the healthy days, drift was absorbed on the bad ones, and a slow node could no longer hold up the run. Out-of-sync nodes were now flagged for a person to investigate later, and the system coped in the meantime.
 
 Continuous operation needs boringly durable machinery underneath. Scheduled runs, persisted state, resumption after failure, and a loop that reports "I could not verify" as loudly as it reports a breach. And a loop that watches its own health, because slower is a failure mode too. My old lifecycle system got this right with no intelligence at all. A failed step became a work item, a human resolved it, and the flow resumed. Any agentic system that cannot match that bar has not earned the intelligence it adds.
@@ -137,4 +235,4 @@ Continuous operation needs boringly durable machinery underneath. Scheduled runs
 
 If your institution is evaluating agentic systems this year, the model demos will all look impressive, because the models are genuinely impressive. The separation happens on questions the demo does not answer. What does the agent verify against, and can you trace a specific decision back to a specific rule and data point? Is the component that judges "done" independent of the one that did the work? What can our own experts change without a code release? What happens on the worst day, and how would we know? And what will you measure from day one, so that six months in, trust is a curve on a chart rather than a feeling?
 
-Banks are in a stronger position to ask these questions than they tend to believe, because the hard asset is already theirs. Models will keep improving on their own schedule, and they are the interchangeable part. The written intent is the part nobody else has, the policies, thresholds, tolerances and approval rules that took decades of regulatory pressure to accumulate. Treat that archive as the ground truth your agents close against. It has been sitting in the policy repository all along, waiting for something that could read it.
+Banks are in a stronger position to ask these questions than they tend to believe, because the hard asset is already theirs. The AI models will keep improving on their own schedule, and they are the interchangeable part. The written intent is the part nobody else has, the policies, thresholds, tolerances and approval rules that took decades of regulatory pressure to accumulate. Treat that archive as the ground truth your agents close against. It has been sitting in the policy repository all along, waiting for something that could read it.
