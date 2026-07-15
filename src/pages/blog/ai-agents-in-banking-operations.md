@@ -117,7 +117,7 @@ The Federal Reserve's SR 11-7 guidance on model risk, the risk of a financial mo
 <div style="max-width:480px;margin:0 auto;">
 <svg viewBox="0 0 376 186" role="img" aria-label="Mapping of regulatory requirements to agent design concepts: SR 11-7 independent validation maps to independent verification, BCBS 239 risk data lineage maps to provenance, escalation matrices map to human authority" style="width:100%;height:auto;">
 <defs><marker id="arwC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
-<text x="86" y="14" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.7">the regulator wrote</text>
+<text x="86" y="14" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.7">regulation demanded</text>
 <text x="290" y="14" text-anchor="middle" font-size="10" font-style="italic" fill="currentColor" fill-opacity="0.7">agent builders call it</text>
 <rect x="4" y="26" width="164" height="46" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
 <text x="86" y="45" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">SR 11-7 &#183; 2011</text>
