@@ -24,7 +24,7 @@ That missing intelligence is what AI agents actually offer banking operations, a
 
 Take one of those deviations that used to land on a human queue. A salesperson agrees a derivatives trade and books it. A little later they spot a mistyped detail and amend it. The amendment takes its time flowing through the chain of systems, and meanwhile the original booking has already travelled ahead. Downstream, the trade and its confirmation no longer line up. Quantities agree, but the settlement amounts differ. Operations call that a break. In the old system, no automation covered it, so it sat in a department queue until someone with the rules in their head picked it up.
 
-Run it through the first kind of agent, the kind that demos deceptively well. The agent reads the break, pulls some context, and writes a fluent paragraph. The counterparty has a long history of clean settlement, the difference is small, similar breaks last week self-resolved, recommend closure. It attaches a confidence of 0.91 and moves to the next one. Everything in that paragraph is plausible, and an analyst pressed for time might well agree. But what did the loop verify against? Nothing. The narrative came from the model, and the confidence is a number that model produced about its own output. No tolerance was checked. No matching rule was consulted. If an auditor later asks why this break was closed, the answer on file is, in effect, that the model felt good about it. In the coding context I called this an echo. In a bank, such an echo can break the bank's own rules without anyone noticing.
+Run it through the first kind of agent, the kind that demos deceptively well. The agent reads the break, pulls some context, and writes a fluent paragraph. The counterparty has a long history of clean settlement, the difference is small, similar breaks last week self-resolved, recommend closure. It attaches a confidence of 0.91 and moves to the next one. Everything in that paragraph is plausible, and an analyst pressed for time might well agree. But what did the loop verify against? Nothing. The narrative came from the model, and the confidence is a number that model produced about its own output. No tolerance was checked. No matching rule was consulted. Deployments like this usually route the model's least confident cases to a person, but the gate on that path is the model's own number, another echo. If an auditor later asks why this break was closed, the answer on file is, in effect, that the model felt good about it. In the coding context I called this an echo. In a bank, such an echo can break the bank's own rules without anyone noticing.
 
 Now run the same break through the second kind. The agent gathers the same context, and this time also retrieves the bank's written reconciliation rules for this product and the tolerance policy for this break type. It checks the difference against the actual threshold. It looks at what the rules say matters here. Is an amendment in flight upstream? Did the counterparty confirm on the previous version? Does this account have an open dispute? It drafts the same kind of narrative, but every claim in it now points at a source. This figure from the booking system. This tolerance from the policy. This precedent from case history. The break sits inside the band where policy permits agent-proposed closure, so the agent proposes exactly that, evidence attached, and the analyst confirms it in one click. The click, the evidence, and the rule that fired join the same kind of trace my old system kept, the full history of the case. Had the difference breached the tolerance, the agent would not have proposed anything. It would have escalated, handing over the case and everything it had gathered, with no recommendation attached. Inside the tolerance band, the person confirms what the agent proposes. Past the line, the agent offers no verdict, and the decision belongs to a person.
 
@@ -34,7 +34,7 @@ Same model in both loops. The difference is entirely in what they closed against
 <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against itself</p>
-<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that verifies its recommendation against its own output and closes every break with no threshold, no breach path and no person involved" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that verifies its recommendation against its own output and closes the break, with human review gated only by the model's own confidence number" style="width:100%;height:auto;">
 <defs><marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">A break lands on the queue</text>
@@ -55,8 +55,11 @@ Same model in both loops. The difference is entirely in what they closed against
 <rect x="20" y="174" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Closes the break</text>
 <text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">and moves on</text>
-<text x="304" y="190" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">no threshold, no breach,</text>
-<text x="304" y="204" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">no path to a person</text>
+<line x1="198" y1="152" x2="234" y2="188" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwA)"/>
+<text x="304" y="178" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">low confidence</text>
+<rect x="238" y="184" width="132" height="40" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="304" y="200" text-anchor="middle" font-size="10.5" fill="currentColor">a person reviews</text>
+<text x="304" y="215" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">the gate is its own number</text>
 <path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
 <text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the model felt good about it.</text>
 </svg>
@@ -91,7 +94,7 @@ Same model in both loops. The difference is entirely in what they closed against
 <text x="304" y="178" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">breach</text>
 <rect x="238" y="184" width="132" height="40" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="304" y="200" text-anchor="middle" font-size="10.5" fill="currentColor">a person decides</text>
-<text x="304" y="215" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">all findings attached, no verdict</text>
+<text x="304" y="215" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">all findings, no verdict</text>
 <path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
 <text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the rule, the evidence, the click.</text>
 </svg>
