@@ -34,7 +34,7 @@ Same model in both loops. The difference is entirely in what they closed against
 <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against itself</p>
-<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that verifies its recommendation against its own output and closes the break with no person involved" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that verifies its recommendation against its own output and closes every break with no threshold, no breach path and no person involved" style="width:100%;height:auto;">
 <defs><marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">A break lands on the queue</text>
@@ -55,13 +55,15 @@ Same model in both loops. The difference is entirely in what they closed against
 <rect x="20" y="174" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Closes the break</text>
 <text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">and moves on</text>
+<text x="304" y="190" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">no threshold, no breach,</text>
+<text x="304" y="204" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">no path to a person</text>
 <path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
 <text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the model felt good about it.</text>
 </svg>
 </div>
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against written policy</p>
-<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that checks the break against the bank's written policy, has an analyst confirm within tolerance, and hands breaches to a person" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that checks the break against the bank's written policy, has an analyst confirm within tolerance, and on a breach hands the person all findings with no verdict" style="width:100%;height:auto;">
 <defs><marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">The same break, same queue</text>
@@ -88,7 +90,8 @@ Same model in both loops. The difference is entirely in what they closed against
 <line x1="198" y1="152" x2="234" y2="188" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwB)"/>
 <text x="304" y="178" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">breach</text>
 <rect x="238" y="184" width="132" height="40" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="304" y="208" text-anchor="middle" font-size="10.5" fill="currentColor">a person decides</text>
+<text x="304" y="200" text-anchor="middle" font-size="10.5" fill="currentColor">a person decides</text>
+<text x="304" y="215" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">all findings attached, no verdict</text>
 <path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
 <text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the rule, the evidence, the click.</text>
 </svg>
