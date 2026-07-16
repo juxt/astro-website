@@ -14,7 +14,7 @@ tags:
 
 <iframe class='aspect-video w-full mb-8 -mt-10' src="https://www.youtube.com/embed/HCYSwVgH0Ss?si=9x-0lI8RlwE0psj0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-*Download River's slides <a href="/xt26/xt26-river-keefer-reliable-software-llm-code.pdf" target="_blank">here.</a>*
+<p class="text-center"><em>Download River's slides <a href="/xt26/xt26-river-keefer-reliable-software-llm-code.pdf" target="_blank">here.</a></em></p>
 
 Property-based testing is a subject near and dear to me. Where a normal example-based test asserts that one specific input produces one specific output, a property-based test asserts something about the behaviour of the system - an invariant that must hold for all inputs - and then lets an adversarial generator go hunting for the inputs that break it.
 
