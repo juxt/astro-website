@@ -15,9 +15,7 @@ tags:
 
 <iframe class='aspect-video w-full mb-8 -mt-10' src="https://www.youtube.com/embed/8dIZHe8_uVI?si=9--k1UMv7xwP6Cis" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-*Download Henry's slides <a href="/xt26/xt26-henry-garner-spectroscopy-for-software.pdf" target="_blank">here.</a>*
-
-*Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.*
+<p class="text-center"><em>Download Henry's slides <a href="/xt26/xt26-henry-garner-spectroscopy-for-software.pdf" target="_blank">here.</a></em></p>
 
 I’ve been building complex software with disciplined agentic engineering for a while now, so Henry Garner’s XT26 talk, Spectroscopy for Software, rang loud and true. Three ideas from it have stayed with me since.
 
@@ -36,3 +34,7 @@ What I’d add from my own experience is that the LLM is strong at pattern match
 Henry made the whole argument concrete with one story. He pointed Allium at the Apollo 11 guidance code, 130,000 lines of assembly written by the team that coined the term software engineering, and it surfaced a genuine lock-handling bug that flew on Apollo missions 11 through 14. NASA had logged the same anomaly decades earlier, on a report signed by Margaret Hamilton. The bug had always been there in the assembly, but as Henry put it, the signal was too faint to read. It only became legible once the behaviour was projected into a new representation, the way a hidden pattern jumps out of a spectrum of light.
 
 That’s the idea I keep coming back to. Henry closed by redefining legacy code as code about which no one holds a theory. The code does what it does, so in one sense it is the source of truth. But it was never the whole story, and it can’t be the only thing we trust if agentic engineering is going to work. There has to be a shared theory alongside it, and building that theory with discipline is where the real work now lives.
+
+<br>
+
+*Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.*
