@@ -67,7 +67,7 @@ Same model in both loops. The difference is entirely in what they closed against
 </div>
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against written policy</p>
-<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop that checks the break against the bank's written policy, has an analyst confirm within tolerance, and on a breach hands the person all findings with no verdict" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of an agent loop where deterministic code checks the break against the bank's written policy, an analyst confirms within tolerance, and on a breach the person receives all findings with no verdict" style="width:100%;height:auto;">
 <defs><marker id="arwB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">The same break, same queue</text>
@@ -77,7 +77,7 @@ Same model in both loops. The difference is entirely in what they closed against
 <text x="109" y="89" text-anchor="middle" font-size="11.5" fill="currentColor">and retrieves the rules</text>
 <line x1="109" y1="100" x2="109" y2="112" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
 <rect x="20" y="114" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="109" y="133" text-anchor="middle" font-size="11.5" fill="currentColor">Checks the difference</text>
+<text x="109" y="133" text-anchor="middle" font-size="11.5" fill="currentColor">Code checks the difference</text>
 <text x="109" y="149" text-anchor="middle" font-size="11.5" fill="currentColor">against the tolerance</text>
 <line x1="198" y1="137" x2="236" y2="137" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
 <text x="217" y="127" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">verifies</text>
