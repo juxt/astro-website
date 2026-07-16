@@ -14,9 +14,7 @@ tags:
 
 <iframe class='aspect-video w-full mb-8 -mt-10' src="https://www.youtube.com/embed/X8T1dXaJyAA?si=isTuUJeh3ELTWW3R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-*Download Abby's and Joel's slides <a href="/xt26/xt26-abby-bangser-joel-king-platform-as-a-product.pdf" target="_blank">here.</a>*
-
-*Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.*
+<p class="text-center"><em>Download Abby's and Joel's slides <a href="/xt26/xt26-abby-bangser-joel-king-platform-as-a-product.pdf" target="_blank">here.</a></em></p>
 
 “At NatWest, Scale and Complexity Collide”
 
@@ -25,3 +23,7 @@ Fantastic talk from [Joel King](https://www.linkedin.com/in/joel-k-93a5a99/) of 
 Abby is leading open source research into defining platforms and processes that are focused on outcomes, while Joel is putting this into practice at NatWest through their Platform as a Product.
 
 This really highlighted the importance of supporting engineering with core platform capabilities, providing a balance between managed devops, freedom, and flexibility. As an engineer working in large organisations myself, this is something that addresses many pain points we feel on the ground day-to-day. I look forward to the continued research and hope it helps shape better platforms across the industry.
+
+<br>
+
+*Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.*
