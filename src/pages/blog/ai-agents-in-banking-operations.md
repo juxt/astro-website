@@ -33,7 +33,7 @@ Same model in both loops. The difference is entirely in what they closed against
 <figure style="margin:2.5rem 0;">
 <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
 <div style="flex:1 1 300px;max-width:420px;">
-<p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against itself</p>
+<p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against its own reading</p>
 <svg viewBox="0 0 376 262" role="img" aria-label="Diagram of a retrieval agent loop that quotes the policy but verifies its recommendation only against its own reading of the rules and closes the break, with human review gated by the model's own confidence number" style="width:100%;height:auto;">
 <defs><marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
