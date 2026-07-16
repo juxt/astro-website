@@ -16,6 +16,8 @@ tags:
 
 <p class="text-center"><em>Download River's slides <a href="/xt26/xt26-river-keefer-reliable-software-llm-code.pdf" target="_blank">here.</a></em></p>
 
+<br>
+
 Property-based testing is a subject near and dear to me. Where a normal example-based test asserts that one specific input produces one specific output, a property-based test asserts something about the behaviour of the system - an invariant that must hold for all inputs - and then lets an adversarial generator go hunting for the inputs that break it.
 
 I’ve leaned on this frequently in my work on XTDB. So much of a database is long sequences of stateful operations that can interact in surprising ways, and our polymorphic type system fans out into far more combinations of cases than anyone could sit down and enumerate by hand. Properties let us test enormous amounts of that ground quickly and cheaply, in a way that example tests never could.
