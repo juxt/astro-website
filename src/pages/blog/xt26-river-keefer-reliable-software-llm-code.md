@@ -1,6 +1,6 @@
 ---
 author: 'dan'
-title: 'XT26 Talks: Extracting Reliable Software From Unreliable Machines – River Keefer, Principal Engineer @ Antithesis'
+title: 'XT26 Talks: Extracting Reliable Software From Unreliable Machines'
 description: 'Reflecting on River Keefer’s XT26 talk on property-based testing, and what reliability looks like when the unreliable component is the one writing your code.'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
