@@ -22,9 +22,9 @@ Intelligence for the deviations is what AI agents actually offer banking operati
 
 ## One work item, two loops
 
-Take one of those deviations that used to land on a human queue. A salesperson agrees a derivatives trade and books it. A little later they spot a mistyped detail and amend it. The amendment takes its time flowing through the chain of systems, and meanwhile the original booking has already travelled ahead. Downstream, the reconciliation platform that compares trades with their confirmations finds these two no longer line up. Quantities agree, but the settlement amounts differ. Operations call that a break. In the old system, no automation covered it, so it sat in a department queue until someone with the rules in their head picked it up. Two kinds of agent are on offer for a case like this, and they differ in one thing, what they verify against.
+Take one of those deviations that used to land on a human queue. A salesperson agrees a derivatives trade and books it. A little later they spot a mistyped detail and amend it. The amendment takes its time flowing through the chain of systems, and meanwhile the original booking has already travelled ahead. Downstream, the reconciliation platform that compares trades with their confirmations finds these two no longer line up. Quantities agree, but the settlement amounts differ. Operations call that a break. In the old system, no automation covered it, so it sat in a department queue until someone with the rules in their head picked it up. Two kinds of agent are on offer for a case like this. Both do no more than suggest, a closure or an escalation, with a person actioning either. They differ in one thing, what they verify against.
 
-Run it through the first kind, the kind most deployments already look like. The agent reads the break, pulls some context, retrieves the bank's reconciliation policy, and writes a fluent paragraph. The counterparty has a long history of clean settlement, the difference is small, similar breaks self-resolved last week, and the policy permits closure within tolerance, recommend closure. It attaches a confidence of 0.91 and moves to the next one. Everything in that paragraph is plausible and even carries citations, and an analyst pressed for time might well agree. But what did the loop verify against? Its own reading. The tolerance was quoted, not checked. The rule was retrieved, not executed. Deployments like this usually route the model's least confident cases to a person, but the gate on that path is the model's own number, another echo. If an auditor later asks why this break was closed, the answer on file is, in effect, that the model felt good about it. In the coding context I called this an echo. In a bank, such an echo can break the bank's own rules without anyone noticing.
+Run it through the first kind, the kind most deployments already look like. The agent reads the break, pulls some context, retrieves the bank's reconciliation policy, and writes a fluent paragraph. The counterparty has a long history of clean settlement, the difference is small, similar breaks self-resolved last week, and the policy permits closure within tolerance, recommend closure, confidence 0.91. It queues the suggestion for an analyst and moves to the next break. Everything in that paragraph is plausible and even carries citations, and an analyst pressed for time will click confirm. But what was the recommendation verified against? The model's own reading. The tolerance was quoted, not checked. The rule was retrieved, not executed. The person in the loop is real, but everything they see was assembled by the thing they are checking, and the confidence number came from the same place. If an auditor later asks why this break was closed, the answer on file is a click on a narrative the model felt good about. In the coding context I called this an echo. In a bank, such an echo can break the bank's own rules without anyone noticing.
 
 Now run the same break through the second kind. Same context, same retrieval, one structural difference. The tolerance policy is no longer just a document the model reads but configuration that runs. When the agent needs to know whether the difference is acceptable, it does not reason its way to an answer. It calls a check that code executes against the configured threshold, and what comes back is a verdict it cannot override, along with the rule that fired and the policy version it fired under. The check itself is ordinary software, written and tested in advance and owned by the bank, not something the model composes when it needs one. Nor does the check take the model's word for the numbers. It reads the amounts from the break record the reconciliation platform raised, so the agent brings the case to the check, never the figures.
 
@@ -32,13 +32,13 @@ The agent then looks at what the rules say matters here. Is an amendment in flig
 
 Had the difference breached the tolerance, the agent would not have proposed anything. It would have escalated, handing over the case and everything it had gathered, with no recommendation attached. Inside the tolerance band, the person confirms what the agent proposes. Past the line, the agent offers no verdict, and the decision belongs to a person. In both paths a person stays in the loop. The agent closes nothing on its own, not because it never could, but because that autonomy has to be earned first.
 
-Same model in both loops. The difference is entirely in what they closed against. The first checked its answer against its own reading of the rules. The second checked it against the bank's own written intent, and produced, as a by-product, the evidence trail an auditor will one day ask for.
+Same model in both loops, and the same click at the end. The difference is entirely in what they closed against. The first checked its answer against its own reading of the rules. The second checked it against the bank's own written intent, and produced, as a by-product, the evidence trail an auditor will one day ask for.
 
 <figure style="margin:2.5rem 0;">
 <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
 <div style="flex:1 1 300px;max-width:420px;">
 <p style="text-align:center;font-size:0.9rem;font-weight:600;margin:0 0 0.25rem;">Closes against its own reading</p>
-<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of a retrieval agent loop that quotes the policy but verifies its recommendation only against its own reading of the rules and closes the break, with human review gated by the model's own confidence number" style="width:100%;height:auto;">
+<svg viewBox="0 0 376 262" role="img" aria-label="Diagram of a retrieval agent loop that quotes the policy, verifies its recommendation only against its own reading of the rules, and has an analyst confirm the proposed closure, with escalation suggested only when the model's own confidence number is low" style="width:100%;height:auto;">
 <defs><marker id="arwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="20" y="8" width="178" height="32" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="109" y="28" text-anchor="middle" font-size="11.5" fill="currentColor">A break lands on the queue</text>
@@ -58,15 +58,15 @@ Same model in both loops. The difference is entirely in what they closed against
 <text x="304" y="148" text-anchor="middle" font-size="11" font-style="italic" fill="currentColor">of the rules</text>
 <line x1="109" y1="160" x2="109" y2="172" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
 <rect x="20" y="174" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Closes the break</text>
-<text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">and moves on</text>
+<text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Proposes closure,</text>
+<text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">analyst confirms in a click</text>
 <line x1="198" y1="152" x2="234" y2="188" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwA)"/>
 <text x="304" y="178" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">low confidence</text>
 <rect x="238" y="184" width="132" height="40" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
-<text x="304" y="200" text-anchor="middle" font-size="10.5" fill="currentColor">a person reviews</text>
+<text x="304" y="200" text-anchor="middle" font-size="10.5" fill="currentColor">Suggests escalation</text>
 <text x="304" y="215" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">the gate is its own number</text>
 <path d="M20,197 C4,197 4,77 16,77" fill="none" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwA)"/>
-<text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: the model felt good about it.</text>
+<text x="188" y="248" text-anchor="middle" font-size="10.5" font-style="italic" fill="currentColor" fill-opacity="0.8">On file: a click on what the model felt good about.</text>
 </svg>
 </div>
 <div style="flex:1 1 300px;max-width:420px;">
