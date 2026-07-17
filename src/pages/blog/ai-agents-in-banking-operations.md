@@ -98,7 +98,7 @@ Same model in both loops, and the same click at the end. The difference is entir
 <text x="109" y="193" text-anchor="middle" font-size="11.5" fill="currentColor">Proposes with evidence,</text>
 <text x="109" y="209" text-anchor="middle" font-size="11.5" fill="currentColor">analyst confirms in a click</text>
 <line x1="198" y1="152" x2="234" y2="188" stroke="currentColor" stroke-opacity="0.55" stroke-dasharray="4 3" marker-end="url(#arwB)"/>
-<text x="304" y="178" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">breach</text>
+<text x="210" y="180" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">breach</text>
 <rect x="238" y="184" width="132" height="40" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="304" y="200" text-anchor="middle" font-size="10.5" fill="currentColor">a person decides</text>
 <text x="304" y="215" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">all findings, no verdict</text>
