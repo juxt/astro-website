@@ -32,7 +32,7 @@ The agent then looks at what the rules say matters here. Is an amendment in flig
 
 Had the difference breached the tolerance, the agent would not have proposed anything. It would have escalated, handing over the case and everything it had gathered, with no recommendation attached. Inside the tolerance band, the person confirms what the agent proposes. Past the line, the agent offers no verdict, and the decision belongs to a person. In both paths a person stays in the loop. The agent closes nothing on its own, not because it never could, but because that autonomy has to be earned first.
 
-Same model in both loops, and the same click at the end. The difference is entirely in what they closed against. The first checked its answer against its own reading of the rules. The second checked it against the bank's own written intent, and produced, as a by-product, the evidence trail an auditor will one day ask for.
+Same model in both loops, and the same click at the end. The difference is entirely in what they closed against. The first checked its answer against its own reading of the rules. The second checked it against the bank's own written intent. Both leave a trail on file. The first files a well-written story. The second files the rule that fired, the version it ran under and the verdict it returned, the kind of trail an auditor will actually accept.
 
 <figure style="margin:2.5rem 0;">
 <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
