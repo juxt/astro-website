@@ -87,10 +87,11 @@ Same model in both loops, and the same click at the end. The difference is entir
 <line x1="198" y1="137" x2="236" y2="137" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
 <text x="217" y="127" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">verifies</text>
 <text x="217" y="152" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">against</text>
-<rect x="238" y="106" width="132" height="62" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
-<text x="304" y="126" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">the bank's written policy</text>
-<text x="304" y="141" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">tolerances · matching rules</text>
-<text x="304" y="156" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">precedents · case history</text>
+<rect x="238" y="102" width="132" height="70" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="304" y="117" text-anchor="middle" font-size="10" font-weight="600" fill="currentColor">the bank's written policy</text>
+<text x="304" y="131" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">tolerances · matching rules</text>
+<text x="304" y="144" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.8">precedents · case history</text>
+<text x="304" y="159" text-anchor="middle" font-size="9" font-style="italic" fill="currentColor" fill-opacity="0.75">configuration that runs</text>
 <line x1="109" y1="160" x2="109" y2="172" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwB)"/>
 <text x="117" y="170" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">within band</text>
 <rect x="20" y="174" width="178" height="46" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
