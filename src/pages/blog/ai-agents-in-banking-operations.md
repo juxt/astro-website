@@ -4,7 +4,7 @@ title: 'AI agents in banking operations: the ground truth already exists'
 description: 'A loop is only as trustworthy as what it verifies against. Banks wrote that down years ago.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-07-14'
+publishedDate: '2026-07-17'
 heroImage: 'ai-agents-in-banking-operations.jpg'
 tags:
   - 'ai'
