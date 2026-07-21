@@ -1,6 +1,6 @@
 ---
 author: 'wac'
-title: 'XT26 Talks: Platform as a Product in a 300-Year-Old Bank'
+title: 'XT26 Talks: Platform as a Product in a 300-Year-Old Bank – Abby Bangser, Syntasso & Joel King, NatWest Group'
 description: "The industry is moving toward composable, self-service platforms. NatWest shows it's buildable today with golden paths, reconciled state, and capabilities consumed as products."
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
