@@ -1,6 +1,6 @@
 ---
 author: 'bcs'
-title: 'XT26 Talks: How to Survive the Claudepocalypse'
+title: 'XT26 Talks: How to Survive the Claudepocalypse – Martin Trojer, Meta'
 description: "Reflecting on what Martin Trojer's XT26 talk means for software engineers navigating an AI-first world"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
