@@ -1,6 +1,6 @@
 ---
 author: 'jdt'
-title: 'XT26 Talks: Data Cartography: From Static Blueprints to Navigable Maps for Data-Driven Organisations'
+title: 'XT26 Talks: Data Cartography: From Static Blueprints to Navigable Maps for Data-Driven Organisations – Simone Steel, Deutsche Bank'
 description: 'How Data Cartography provides the shared visual grammar needed for meaningful conversations in a complex world'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
