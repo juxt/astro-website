@@ -1,6 +1,6 @@
 ---
 author: 'ceb'
-title: 'XT26 Talks: Spectroscopy for Software: Measuring Legacy Code with AI'
+title: 'XT26 Talks: Spectroscopy for Software: Measuring Legacy Code with AI – Henry Garner, JUXT'
 description: 'The work lives before the code – JUXT CTO gives clear language to the way I’ve been building software all year: the real work happens before a line of code exists.'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
