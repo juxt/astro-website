@@ -25,11 +25,9 @@ While individuals may feel faster, the aggregate data shows that some teams are 
 
 To highlight a few:
 
-Context switching and design‑decision fatigue, because multiple‑step agent loops take time to execute, developers are running multiple parallel tasks to avoid watching the loading screen. Tracking this content across concurrent windows quickly drains cognitive energy.
-
-The velocity trap, because moving faster on features simply creates a bottleneck further down. Putting out more code without changing the review process just floods the team with unmanageable pull requests.
-
-Ecosystem isolation: We expect agents to automate workflows, but we isolate them from the environment. Human developers have elevated access to internal tools, which the agents lack, and that stores the true automation.
+- Context switching and design‑decision fatigue, because multiple‑step agent loops take time to execute, developers are running multiple parallel tasks to avoid watching the loading screen. Tracking this content across concurrent windows quickly drains cognitive energy.
+- The velocity trap, because moving faster on features simply creates a bottleneck further down. Putting out more code without changing the review process just floods the team with unmanageable pull requests.
+- Ecosystem isolation: We expect agents to automate workflows, but we isolate them from the environment. Human developers have elevated access to internal tools, which the agents lack, and that stores the true automation.
 
 To bridge this gap, Nik doesn't just diagnose the problem, he offers a roadmap out of the velocity trap. He outlines several strategies for unlocking true productivity, hinting at a necessary shift away from individual, prompt-based hacking and toward collaborative, shared systems. The solutions require a fundamental rethinking of how organizations integrate AI. For a deeper dive into these strategies I highly recommend watching his full presentation.
 
