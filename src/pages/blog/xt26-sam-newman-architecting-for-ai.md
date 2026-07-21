@@ -1,6 +1,6 @@
 ---
 author: 'dny'
-title: 'XT26 Talks: Dark Modules, Cobots, and Architecting for AI'
+title: 'XT26 Talks: Dark Modules, Cobots, and Architecting for AI – Sam Newman'
 description: "AI was supposed to free us. So where's our goddamn jetpack?"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
