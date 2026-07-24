@@ -53,21 +53,27 @@ Solving one problem with the data model sets up the next. Customers choosing sea
 
 Somewhere between READ COMMITTED and the payment gateway, the work changed character. You are no longer configuring a database; you are designing a small distributed protocol, with holds, expiries, payment callbacks and refunds. Each fix so far answered the previous question and left the next one open, which is the argument for asking the questions up front, in writing, all of them. That is what writing a specification is. The immediate question is what such a description should look like.
 
-## Three ways to model one system
+## Entities and relationships
 
-The traditions of formal methods differ first in how they view a system, and the choice of view determines which bugs you can find.
+The traditions of formal methods differ first in how they view a system, and the natural place to start is a view you already draw. Through an entity-and-relationship lens, the booking site is customers, orders, seats and holds, joined by relationships: an order belongs to a customer, a hold references a seat. A specification in this tradition is a set of laws about shape: no seat belongs to two confirmed orders, no confirmed order references an expired hold. The first law is the invariant your unique constraint enforces, restated as a rule of the design rather than a property of one table.
 
-One tradition sees entities and relationships. Through this lens the booking site is customers, orders, seats and holds, and the invariants are about shape: no seat belongs to two confirmed orders, no confirmed order references an expired hold. [Alloy](https://alloytools.org) works this way. You describe the shapes and their laws, and it searches for a small counterexample world in which a law breaks, which is a direct route to discovering that seat 14B can be sold twice. What this view cannot express is time. A payment that arrives too late looks identical to one that arrives on time, because a relation has no clock.
+Checking means searching for a shape that breaks a law. [Alloy](https://alloytools.org) does this directly: describe the entities, the relationships and the laws, give it a bound, say four customers, five seats and a handful of orders, and it enumerates every configuration that can exist within the bound, testing every law against each. When a law fails, you get the offending world back as a diagram small enough to read: two confirmed orders, one shared seat. A counterexample, in this tradition, is a picture.
 
-A second tradition sees events. The site becomes a vocabulary of occurrences, reserve, pay, expire and release, with rules about which sequences are legal: no payment lands on a hold that has expired, no release without a preceding hold. This is the territory of [process calculi](https://en.wikipedia.org/wiki/Communicating_sequential_processes) and the [B method](https://en.wikipedia.org/wiki/B-Method), and it catches the payment that arrives for a hold that no longer exists. It is less natural for questions about the overall shape of the data.
+What the shape view cannot express is change. Its worlds are snapshots, each law is checked against each snapshot in isolation, and nothing in a snapshot records how it came about. The failures we are most worried about are failures of becoming, a hold that was valid when payment began and expired before it completed, and to catch those the model needs motion.
 
-A third tradition sees a state machine unfolding over time. The system is the set of every behaviour it could ever exhibit, and properties quantify over all of them. [TLA+](https://lamport.azurewebsites.net/tla/tla.html) works here, and this is the lens built for the question the other two struggle with: what happens if a hold expires while its payment is in flight, the seat is resold, and both charges succeed?
+## Events and sequences
 
-One small system, three views, and each view catches a bug the other two cannot express. Learning one formal method does not protect you from everything. It chooses which errors you are equipped to find.
+A second tradition finds its subject in occurrences rather than things. Through this lens the site is a vocabulary of events, reserve, pay, expire and release, and the specification says which sequences are legal: no payment lands on a hold that has expired, no release without a preceding hold. This is the home ground of [process calculi](https://en.wikipedia.org/wiki/Communicating_sequential_processes) and the [B method](https://en.wikipedia.org/wiki/B-Method).
 
-## What a model checker does
+The search space has changed shape accordingly. A checker here explores sequences: starting from an empty history, it asks which events could legally occur next, extends the history by each in turn, and keeps going, hunting for a path that arrives at something forbidden. The counterexample this time is a story rather than a picture: reserve, then expire, then pay, and that payment should have been refused. This view catches the charge that lands on a dead hold, and it catches it as what it is, an ordering problem.
 
-Take the temporal view and make it concrete, using the smallest slice of the system: the original purchase path, before seats and holds. A *model* here means the design restated as a state machine. Between database round trips, each customer's transaction does exactly two things: read the count, then insert a row. So the model is two customers, each a two-step program, and a *state* is small enough to write on an index card: how far each of Alice and Bob has progressed, plus what is committed in the table. A *step* moves one customer forward by one action. The specification is the invariant we have had from the start, never more than 500 sold, and *checking* means asking one question of every state the system can reach: does the invariant hold here?
+A single customer's story, though, is not where this article's trouble started. The write skew needed two customers, each behaving legally on their own terms, whose steps interleaved. To catch that, a model has to hold the whole system's state in view while everyone acts at once.
+
+## Time and interleaving
+
+The third tradition does exactly this. The system is a state machine unfolding over time, its possible histories are the set of every behaviour it could exhibit, and the specification quantifies over all of them. [TLA+](https://lamport.azurewebsites.net/tla/tla.html) works here, and this is the lens built for the 9am questions: what happens if a hold expires while its payment is in flight, the seat is resold, and both charges succeed?
+
+To make checking concrete in this tradition, take the smallest slice of the system: the original purchase path, before seats and holds. A *model* here means the design restated as a state machine. Between database round trips, each customer's transaction does exactly two things: read the count, then insert a row. So the model is two customers, each a two-step program, and a *state* is small enough to write on an index card: how far each of Alice and Bob has progressed, plus what is committed in the table. A *step* moves one customer forward by one action. The specification is the invariant we have had from the start, never more than 500 sold, and *checking* means asking one question of every state the system can reach: does the invariant hold here?
 
 One requirement keeps the model honest. Each step must correspond to something the code does atomically. Our two steps are two database round trips, and between any two round trips the scheduler is free to run anyone else. Model the read and the insert as a single atomic step and you have verified a system you are not running.
 
@@ -85,6 +91,8 @@ A [model checker](https://en.wikipedia.org/wiki/Model_checking) explores this sp
 <span class="pullquote left" text-content="Production traffic is a scheduler that eventually runs the interleavings your tests did not."></span>
 
 Compare the test suite. Each test run executes one schedule, and usually the same one, because the four violating orders all require Bob's read to land in the few microseconds between Alice's read and her commit. On a laptop, that window is almost never hit. At 9am on a Friday with thousands of customers in the queue, it is hit constantly. The defect was in the design from the beginning; production traffic is a scheduler that eventually runs the interleavings your tests did not.
+
+One small system, three traditions, and three kinds of counterexample: the picture, the story and the schedule. Each tradition catches a bug the other two cannot express, which is why learning one formal method does not protect you from everything. It chooses which errors you are equipped to find.
 
 ## Counting the interleavings
 
