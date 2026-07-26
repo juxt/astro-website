@@ -396,29 +396,39 @@ The second case is the one the whole design exists for. Break B-1002 is another 
 The transcript below is a real run of the finished system on B-1002.
 
 ```
-SHOW-BREAK  B-1002  ->  difference 180.00 USD · Ardsley Partners
-   note: sales amended a mistyped rate shortly after booking; still flowing.
+./recon show-break B-1002
+  difference 180.00 USD · Ardsley Partners
+  note: sales amended a mistyped rate shortly after booking; the
+  amendment is still flowing through the chain
 
-FIND-SIMILAR-CASES  B-1002  ->  3 resolved cases for Ardsley Partners
-   H-2258  205.00  CLOSED    H-2231  140.00  CLOSED    H-2207  88.00  CLOSED
+./recon check B-1002
+  ESCALATE_REQUIRED · rule ESC-AMEND-IN-FLIGHT
+  policy 2026.07.v1 · verdict v_e153e052b7563c91
 
-CHECK  B-1002  ->  ESCALATE_REQUIRED
-   rule = ESC-AMEND-IN-FLIGHT   policy = 2026.07.v1   verdict = v_e153e052b7563c91
+./recon history B-1002
+  H-2258 205.00 CLOSED · H-2231 140.00 CLOSED · H-2207 88.00 CLOSED
 
-ESCALATE  B-1002  ->  ESCALATED
-   Check verdict v_e153e052b7563c91 (policy 2026.07.v1, s.4.3) returned
-   ESCALATE_REQUIRED on rule ESC-AMEND-IN-FLIGHT. USD settlement-amount break on
-   an interest rate swap with Ardsley Partners, difference 180.00, within the
-   TOLERANCE-USD threshold of 250.00. Similar breaks with this counterparty have all
-   reconciled cleanly and closed within tolerance (H-2207, H-2231, H-2258), so on
-   its face this looks closeable. But the note records an amendment in flight and
-   the check returned ESCALATE_REQUIRED, and the trigger takes precedence: the
-   break may re-match on the next cycle and must not be closed in the meantime.
+./recon escalate B-1002 --findings "Check verdict v_e153e052b7563c91
+  (policy 2026.07.v1, Settlement Reconciliation Policy s.4.3) returned
+  ESCALATE_REQUIRED under rule ESC-AMEND-IN-FLIGHT: an amendment is in
+  flight upstream and the break must not be closed while it may re-match
+  on the next cycle. Break record: 180.00 USD difference on an interest
+  rate swap with Ardsley Partners (CP-2210), raised 2026-07-16; the note
+  states sales amended a mistyped rate shortly after booking and the
+  amendment is still flowing through the chain. The verdict also notes
+  the difference is within the 250.00 USD tolerance (TOLERANCE-USD), but
+  the escalation trigger takes precedence. Counterparty history: three
+  prior USD IRS breaks with CP-2210 (H-2258 205.00, H-2231 140.00,
+  H-2207 88.00) all closed within tolerance on analyst confirmation;
+  none of those cases involved an in-flight amendment per their
+  summaries."
+
+  Escalated B-1002 to a person (audit seq 2). No recommendation attached.
 ```
 
-The agent saw a difference inside the tolerance and a history of clean closures, called the check, and was told to escalate. It handed the case to a person with everything it had gathered and no recommended disposition, exactly as clause 4.3.4 requires. And every claim in its findings names a source, whether the verdict id, the policy version, the difference or note from the break record, the resolved cases from the history, or the rule that fired.
+The check told the agent to escalate before it had even read the history. It read the history anyway, folded it into its findings, and handed the case to a person with everything it had gathered and no recommended disposition, exactly as clause 4.3.4 requires. Then it read the trail back to confirm both records had landed. Every claim in its findings names a source, whether the verdict id, the policy version, the figures and note from the break record, the resolved cases from the history, or the rule that fired.
 
-The clean history made the break look safer and moved nothing. What it bought was an escalation with context, the reason the case looked safe next to the reason it was pulled out. The context informs, and the check decides.
+The history moved nothing. The agent cited the three clean closures and noted itself that none of them involved an amendment in flight, an escalation with context rather than a bare verdict. The context informs, and the check decides.
 
 This is the break the precedence question was about. Answered the other way, tolerance before triggers, B-1002 comes back `WITHIN_BAND` and the amendment is ignored. The break closes while its trade is still changing, the failure the last article proposed this very flow to prevent. And no check would have caught it, because a specification with the wrong answer in it is still a consistent specification. What stood in the way was the question itself, put to the people who own the policy before any code existed.
 
