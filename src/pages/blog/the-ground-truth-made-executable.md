@@ -231,10 +231,13 @@ The four branches follow the guidance block's resolution order, step for step. T
 The rule that fired, the threshold it applied, the policy version it ran under. This is the object the agent will later reach through a tool, and it is the object that will land on file. Before any agent touches it, though, the check is tested, and the tests satisfy the obligations derived from the specification. The cases the policy describes become assertions, written down before anything intelligent goes near them.
 
 ```kotlin
-@Test fun `an amendment in flight escalates even inside the tolerance`() {
-    val verdict = check(breakWithAmendmentInFlight)   // difference 180, threshold 250
-    assertEquals(ESCALATE_REQUIRED, verdict.status)
+@Test
+fun `an amendment in flight escalates even inside the tolerance`() {
+    val verdict = verdictFor("B-1002")
+    assertEquals(VerdictStatus.ESCALATE_REQUIRED, verdict.status)
     assertEquals("ESC-AMEND-IN-FLIGHT", verdict.ruleId)
+    assertFalse(verdict.permitsProposedClosure)
+    assertTrue(verdict.difference < verdict.thresholdApplied!!)
 }
 ```
 
