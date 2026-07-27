@@ -70,17 +70,17 @@ Three parts of that flow are deterministic. They are ordinary code with no model
 
 ## The policy, as prose
 
-For the purposes of this demo, I will use a shortened Settlement Reconciliation Policy, the kind of document that lives in a bank's operations department. It is not lifted from any real bank, but its shape is the shape of the real thing, a numbered section approved by a committee and written for analysts to read. Two clauses carry most of the weight of what follows, so I will quote those in full and paraphrase the rest.
+For the purposes of this demo, I will use a shortened Settlement Reconciliation Policy, the kind of document that lives in a bank's operations department. It is not lifted from any real bank, but its shape is the shape of the real thing, a numbered section approved by a committee and written for analysts to read. Its first clause, 4.3.1, defines the break itself, the mismatch we met earlier. The next two carry most of the weight of what follows, so I will quote them in full and paraphrase the rest.
 
 > **4.3.2** A break may be closed where the difference between the two amounts does not exceed the closure tolerance. The closure tolerance is USD 250.
 >
 > **4.3.3** A case must be escalated to an authorised analyst where an amendment to the trade is in flight upstream, or the counterparty has not confirmed the current version of the trade, or the account carries an open dispute.
 
-Clause 4.3.1 defines the break itself, the mismatch we met earlier. The rest of the section is operational. A break over the tolerance is escalated with the investigation's findings and no recommended disposition (4.3.4). A closure within tolerance may be proposed automatically, but it takes effect only when an authorised analyst confirms it, and the analyst does not delegate that decision back (4.3.5). And every closure and every escalation records the rule applied, the tolerance in force, the policy version it was evaluated under, and the confirming analyst, in a record that cannot be altered afterwards (4.3.6).
+The rest of the section is operational. A break over the tolerance is escalated with the investigation's findings and no recommended disposition (4.3.4). A closure within tolerance may be proposed automatically, but it takes effect only when an authorised analyst confirms it, and the analyst does not delegate that decision back (4.3.5). And every closure and every escalation records the rule applied, the tolerance in force, the policy version it was evaluated under, and the confirming analyst, in a record that cannot be altered afterwards (4.3.6).
 
 A **tolerance** is the largest difference the bank is willing to write off without a person looking. To **escalate** is to hand the case to a person, with the findings gathered so far and no recommendation attached. A break is **within band** when its difference sits inside the tolerance, and a **breach** when it does not.
 
-Read those six clauses again. They are already a threshold, a closed list of conditions that force a human decision, and an explicit statement of who may decide and what must be recorded. None of that is vague. It is a specification written in English, by people who argued over every clause. The work ahead is not to invent what the bank means. It is to move what it already means into a form a loop can execute.
+Those six clauses are already a threshold, a closed list of conditions that force a human decision, and an explicit statement of who may decide and what must be recorded. None of that is vague. It is a specification written in English, by people who argued over every clause. The work ahead is not to invent what the bank means. It is to move what it already means into a form a loop can execute.
 
 I chose a simple policy on purpose. Turning a policy into a specification surfaces both the questions it left open and the places it contradicts itself, and a real one can raise many of each. This one raises a couple of questions and no contradictions, which keeps the post on the translation and off untangling a messy policy first. Those questions I answer as I go.
 
