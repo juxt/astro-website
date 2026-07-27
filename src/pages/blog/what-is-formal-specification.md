@@ -1,7 +1,7 @@
 ---
 author: 'hga'
-title: 'What is formal specification?'
-description: 'A booking site oversells by one ticket while the test suite stays green. What would it take to know it couldn''t?'
+title: 'What are formal methods?'
+description: 'AI is ushering formal verification out of academia into the working lives of software engineers. What is it?'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-07-24'
@@ -13,11 +13,9 @@ tags:
   - 'ai'
 ---
 
-<p class="lede">Here is a system you already know how to build. A venue that holds 500 people, general admission, one Postgres database. A tickets table and a purchase endpoint: count what's sold, and if there's room, insert a row inside a transaction. You could have it live by Friday.</p>
+<p class="lede">AI is ushering formal methods out of academia into the working lives of software engineers. What is it all about?</p>
 
-Before Friday arrives, one question deserves an answer. Capacity is 500. What stops you selling ticket 501?
-
-In this design, the answer is a count:
+It's always useful to have an example in mind. Let's use this one of a ticketing system for an event with capacity 500.
 
 ```sql
 BEGIN;
@@ -27,7 +25,9 @@ INSERT INTO tickets (gig_id, customer) VALUES (42, 'alice');
 COMMIT;
 ```
 
-Suppose Alice and Bob both want the last ticket, and two copies of this transaction run concurrently. Each counts 499 rows, each concludes there is room, each inserts, and both commits succeed. The venue has sold 501 tickets. No error was raised at any point, and the test suite stays green, because each test run executes one schedule of events, and none of them is this one.
+How can you be sure that your system will never accidentally sell 501 tickets?
+
+One instinct is to offload the job of checking this onto the database.
 
 If your instinct is that the transaction should have prevented this, the relevant fine print is the [isolation level](https://www.postgresql.org/docs/current/transaction-iso.html). Postgres defaults to READ COMMITTED, which permits the schedule above. Raising it to REPEATABLE READ does not help: each transaction reads from its own consistent snapshot, the two inserts touch different rows, and neither transaction ever sees a conflict. I ran both against Postgres 17 while writing this, and both sold the 501st ticket. The anomaly is called [write skew](https://en.wikipedia.org/wiki/Snapshot_isolation), and it was catalogued in 1995 in a [critique of the SQL standard's isolation levels](https://dl.acm.org/doi/10.1145/223784.223785). Only SERIALIZABLE catches it, by aborting one of the two transactions with an error most application code is not written to retry: "could not serialize access due to read/write dependencies among transactions".
 
@@ -155,6 +155,10 @@ The difficulty is that finding the invariant is a creative act. It is rarely the
 This is also why the serious proof assistants, [Lean](https://lean-lang.org), [Rocq](https://rocq-prover.org) and [Isabelle](https://isabelle.in.tum.de), are interactive, and the reason is not ergonomics. In a logic expressive enough to state facts about arbitrary systems, proof search is [undecidable](https://en.wikipedia.org/wiki/Undecidable_problem): no algorithm is guaranteed to find a proof even when one exists. Checking a completed proof, by contrast, is mechanical. The tools divide the work along exactly that line. The human supplies the creative steps, an invariant or a missing lemma, and the machine verifies every inference without fatigue. Through the [Curry-Howard correspondence](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence), the proofs are themselves programs and the checker is a type checker, the same species of tool that has been proving properties of your code on every compile.
 
 The proofs are large. [seL4](https://sel4.systems), the operating system kernel that serves as formal verification's most complete demonstration, is under 10,000 lines of C; the proof of its functional correctness runs to roughly 200,000 lines of Isabelle and took on the order of twenty person-years. Tooling has improved since, and AI assistance is beginning to reduce the cost of proof engineering, but the ratio is worth carrying with you when someone forecasts a fully verified system by the end of the quarter.
+
+That arithmetic shapes the tools industry reaches for, and two of the most telling are domain-specific in a way the general-purpose proof assistants are not. [Ivy](https://microsoft.github.io/ivy/), built for distributed protocols, narrows the logic: its specification language is confined to a fragment of first-order logic in which every proof obligation is decidable, so the solver always terminates, either agreeing that an invariant is preserved by every action or returning a small concrete state that breaks it. The human keeps exactly one job, the creative one, proposing and repairing the invariant. The price is expressive power, paid deliberately; the reward is unbounded proof without a proof engineer, for as long as the protocol fits the fragment.
+
+[P](https://p-org.github.io/P/) narrows the ambition instead. A P specification is an executable program, the participants of a protocol written as communicating state machines in a language that reads like the code engineers already write, and its checker explores interleavings and failure schedules just as our six orderings were explored, exhaustively within a bound. P gives up the unbounded claim entirely, stepping back down the spectrum to systematic exploration, and in exchange it gets adopted: Microsoft wrote the core of the Windows 8 USB driver stack in P, compiling the model into the shipping driver, and AWS uses it across its largest services, including the work that moved S3 to strong consistency. Between them, Ivy and P read the spectrum as a menu: pick the position that fits your problem, and give up nothing you didn't choose to.
 
 ## What the proof is about
 
