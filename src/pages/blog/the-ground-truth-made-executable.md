@@ -436,7 +436,7 @@ This is the break the precedence question was about. Answered the other way, tol
 
 ## Running it yourself
 
-Everything above is in a repository you can clone and run, and there are two ways to drive it, matching the two ways most people will actually reach for an agent.
+Everything above is in a [repository you can clone and run](https://github.com/juxt/recon-agent-demo), and there are two ways to drive it, matching the two ways most people will actually reach for an agent.
 
 The first is a **subscription**, the path you can try with nothing more than a coding agent. On a subscription there is no direct line to the model. You reach it through the coding agent, and the coding agent brings its own outer program, so the loop that runs each `./recon` call and feeds the output back is the one it ships with. Open the repository in it, and a short instructions file hands it the tools and the rules of engagement. It reads the break, runs the check, investigates, then proposes or escalates. Whether a break may close is never its call. The transcript in the previous section is a real run of exactly this. The agent gets no privileged knowledge of which breaks may be closed, because that is the check's job.
 
