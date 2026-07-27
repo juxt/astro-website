@@ -158,7 +158,7 @@ Clean means the specification agrees with itself. Whether it says what the commi
 
 ## The numbers are configuration
 
-The specification put the actual number, the USD 250 closure tolerance, in a separate place from the code. I did not ask for that. The policy says the committee sets the cap and reviews it every year, so the number is likely to change. A number that can change belongs in configuration. That separation is what keeps the policy in the business's hands rather than a vendor's. If changing the cap means a code release, the decision takes effect when the release ships, on a delivery timetable rather than the committee's. And if the code belongs to a vendor, every threshold change becomes a change request to that vendor, the lock-in the second article argued against. So the numbers live in configuration, versioned like code, changed without a release.
+The specification put the actual number, the USD 250 closure tolerance, in a separate place from the code. I did not ask for that. The policy says the committee sets the cap and reviews it every year, so the number is likely to change. A number that can change belongs in configuration. That separation is what keeps the policy in the business's hands rather than a vendor's. If changing the cap means a code release, the decision takes effect when the release ships, on a delivery timetable rather than the committee's. And if the code belongs to a vendor, every threshold change becomes a change request to that vendor, the lock-in the second article argued against. So the numbers live in configuration, versioned like code, changed without a code release.
 
 ```yaml
 policy_version: "2026.07.v1"
