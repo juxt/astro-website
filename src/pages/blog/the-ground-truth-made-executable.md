@@ -142,7 +142,7 @@ invariant NoClosureWithoutAPerson {
 
 The first invariant is the whole design in one sentence. A break can only close if the check permitted it, regardless of anything the agent said. The second is clause 4.3.5, that a person confirms.
 
-This specification arrives already checked. With every draft, the loop validated the structure and looked past it to the process, whether every rule's inputs are produced somewhere, whether an entity can reach the states it declares, and whether two rules can fire on the same event and disagree. It ran those checks until they came back clean. And you do not have to take my word for that. The checks are ordinary commands, and anyone can rerun them against the specification.
+This specification arrives already checked. With every draft, the loop validated the structure and looked past it to the process. Is every rule's input produced somewhere? Can an entity reach the states it declares? Can two rules fire on the same event and disagree? It ran those checks until they came back clean. And you do not have to take my word for that. The checks are ordinary commands, and anyone can rerun them against the specification.
 
 ```
 $ allium check policy/recon.allium
