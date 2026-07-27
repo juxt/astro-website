@@ -92,7 +92,7 @@ And it is not written by hand. Deriving it from the policy is the loop from the 
 
 The policy is not perfect, and policies written for people rarely are. Someone working a case fills its gaps with judgement on the spot, and on the spot they can be filled wrong. Even worse, two analysts can fill the same gap two different ways. Filling them right takes real understanding of the domain, sometimes spread across several people. So anything the prose leaves unclear goes back to the people who own the policy, to be answered before a line of code is written. This is requirements engineering, and none of it is optional. Everything downstream is built on the specification, so the requirements in it have to be right first. Guessing is not an option. The model can guess better than any of us, and the whole point of the design is that it should not have to. The loop put both questions to me, and I answered as the policy owner and amended the policy to match. Both answers became policy the starting prose did not have. A cap is set per currency, in the currency it applies to, and an unmatched currency is escalated rather than converted at a floating rate. A trigger outranks the tolerance, so a case escalates even inside the band. What the loop adds is not speed. It is that the ambiguities in the prose become questions on the record.
 
-At the centre of the specification sits CheckBreak, the rule that turns a break into a verdict. Note the guidance block at the end of the rule. The answer to the precedence question is written there, before any code exists to depend on it.
+At the centre of the specification sits CheckBreak, the rule that turns a break into a verdict. The guidance block at the end of the rule carries the answer to the precedence question, written down before any code exists to depend on it.
 
 ```allium
 rule CheckBreak {
@@ -208,7 +208,7 @@ when {
 }
 ```
 
-Read it against the guidance block in the specification. The four branches follow the resolution order, step for step. The tests hold the alignment, and moving a branch turns one red. The verdict it returns is a structured record, and every field in it is something an auditor might ask for.
+The four branches follow the guidance block's resolution order, step for step. The tests hold the alignment, and moving a branch turns one red. The verdict it returns is a structured record, and every field in it is something an auditor might ask for.
 
 ```json
 {
