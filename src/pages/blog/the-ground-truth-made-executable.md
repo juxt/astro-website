@@ -18,13 +18,9 @@ tags:
 
 The worked example, as in the last article, is a settlement break. A trade is booked, a detail is amended, and downstream the trade and its confirmation no longer agree on the amount due. The reconciliation platform that compares the two raises the mismatch as a break, and it lands on an operations queue. The question the loop must answer is the one an analyst answers today. May this break be closed, or must a person look at it? We will build the machinery that answers it from the policy, and nowhere else.
 
-The flow is worth repeating, because the rest of this post is an account of building each part of it. A break lands on the queue. An agent reads the case, the record the reconciliation platform raised and whatever context bears on it, and calls a check that runs the bank's policy against the figures. The check returns a verdict. Inside the tolerance the agent proposes a closure and a person confirms it. Outside the tolerance, or where the policy demands a person regardless, the agent escalates the case with its findings and offers no recommendation. Every step lands in a trail that pins each decision to the version of the policy it was made under.
-
-Three parts of that flow are deterministic. They are ordinary code with no model in them. The check runs the policy, configuration holds the numbers it checks against, and an append-only trail records what happened. This is by design. The model reads the messy case and drafts the narrative, which is what models are good at. The policy is executed against the figures, returning a verdict the model cannot talk its way around.
-
 <figure style="margin:2.5rem 0;">
 <div style="max-width:420px;margin:0 auto;">
-<svg viewBox="0 0 380 336" role="img" aria-label="The flow this article builds. A break lands on the queue. An agent reads the case from the record, note and history. A deterministic check runs the policy against the versioned config and returns a verdict. Within band the agent proposes a closure and an analyst confirms it. Otherwise the agent escalates with no recommendation and a person decides. Every step lands in an append-only trail pinned to the policy version." style="width:100%;height:auto;">
+<svg viewBox="0 0 380 336" role="img" aria-label="The flow this article builds. A break lands on the queue. An agent reads the case from the record, note and history. The versioned configuration feeds a deterministic check that runs the policy and returns a verdict. Within band the agent proposes a closure and an analyst confirms it. Otherwise the agent escalates with no recommendation and a person decides. Every step lands in an append-only trail pinned to the policy version." style="width:100%;height:auto;">
 <defs><marker id="arwF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="currentColor" opacity="0.55"/></marker></defs>
 <rect x="110" y="8" width="160" height="30" rx="6" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
 <text x="190" y="27" text-anchor="middle" font-size="11.5" fill="currentColor">A break lands on the queue</text>
@@ -33,9 +29,12 @@ Three parts of that flow are deterministic. They are ordinary code with no model
 <text x="190" y="69" text-anchor="middle" font-size="11.5" fill="currentColor">The agent reads the case</text>
 <text x="190" y="85" text-anchor="middle" font-size="9" font-style="italic" fill="currentColor" fill-opacity="0.7">record, note, history</text>
 <line x1="190" y1="96" x2="190" y2="108" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwF)"/>
+<rect x="4" y="108" width="86" height="46" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
+<text x="47" y="127" text-anchor="middle" font-size="9.5" font-weight="600" fill="currentColor">the config</text>
+<text x="47" y="141" text-anchor="middle" font-size="8.5" font-style="italic" fill="currentColor" fill-opacity="0.75">versioned numbers</text>
+<line x1="90" y1="131" x2="103" y2="131" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwF)"/>
 <rect x="105" y="108" width="170" height="46" rx="6" fill="rgba(244,144,29,0.07)" stroke="#f4901d" stroke-width="1.5"/>
-<text x="190" y="127" text-anchor="middle" font-size="11.5" font-weight="600" fill="currentColor">The check runs the policy</text>
-<text x="190" y="143" text-anchor="middle" font-size="9" font-style="italic" fill="currentColor" fill-opacity="0.75">against the versioned config</text>
+<text x="190" y="135" text-anchor="middle" font-size="11.5" font-weight="600" fill="currentColor">The check runs the policy</text>
 <line x1="190" y1="154" x2="190" y2="166" stroke="currentColor" stroke-opacity="0.55"/>
 <text x="216" y="163" text-anchor="middle" font-size="9.5" font-style="italic" fill="currentColor" fill-opacity="0.7">a verdict</text>
 <line x1="190" y1="166" x2="108" y2="178" stroke="currentColor" stroke-opacity="0.55" marker-end="url(#arwF)"/>
@@ -63,8 +62,11 @@ Three parts of that flow are deterministic. They are ordinary code with no model
 <text x="190" y="325" text-anchor="middle" font-size="8.5" font-style="italic" fill="currentColor" fill-opacity="0.75">pinned to the policy version</text>
 </svg>
 </div>
-<figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.75rem;">The flow this article builds. The check owns the verdict, a person owns the decision, and every step lands in the trail. The two parts in orange are deterministic.</figcaption>
+<figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.75rem;">The flow this article builds. The check owns the verdict, a person owns the decision, and every step lands in the trail. The deterministic parts are in orange.</figcaption>
 </figure>
+
+Three parts of that flow are deterministic. They are ordinary code with no model in them. The check runs the policy, configuration holds the numbers it checks against, and an append-only trail records what happened. This is by design. The model reads the messy case and drafts the narrative, which is what models are good at. The policy is executed against the figures, returning a verdict the model cannot talk its way around.
+
 
 ## The policy, as prose
 
