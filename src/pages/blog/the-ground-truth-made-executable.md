@@ -466,7 +466,7 @@ One more property shows the policy really is in charge. Operations Risk tightens
 
 The cases already closed do not move. Each verdict pinned the version it ran under, so a break closed under the old tolerance stays closed against the old tolerance, by a named analyst, whatever the policy says now. This is clause 4.3.6 doing its work. An auditor asking why a break was closed gets the policy it was closed under.
 
-Not every policy change is a number. A new trigger or a new rule reaches beyond the configuration, into the specification and the check. The path for that change is the one this post already walked. The policy is amended, the loop re-derives the specification, asks whatever new questions the amendment leaves open, and reimplements against it. And because the bank ran that loop itself the first time, it owns every artefact in the chain and needs no vendor to run it again.
+Not every policy change is a number. A new trigger or a new rule reaches beyond the configuration, into the specification and the check. The path for that change is the one this post already walked. The policy is amended, the loop carries the change through the specification, asks whatever new questions the amendment leaves open, and updates the check and its tests to match. And because the bank ran that loop itself the first time, it owns every artefact in the chain and needs no vendor to run it again.
 
 
 ## What the policy became
