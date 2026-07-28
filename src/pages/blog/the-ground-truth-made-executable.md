@@ -296,7 +296,7 @@ find_similar_cases(B-1001)  ->
 ]
 ```
 
-A case rhyming with an earlier one carries that precedent into its narrative. The library is nowhere in the specification. The specification governs what the check does, and the check never reads history. The library is the model's context and only the model's, which is precisely why it can never turn into a verdict.
+A case rhyming with an earlier one carries that precedent into its narrative. The history is nowhere in the specification. The specification governs what the check does, and the check never reads it. The history is the model's context and only the model's, which is precisely why it can never turn into a verdict.
 
 And that is the whole reading list. Neither tool returns the policy.
 
