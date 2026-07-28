@@ -437,7 +437,7 @@ The transcript below is a real run of the finished system on B-1002.
   Escalated B-1002 to a person (audit seq 2). No recommendation attached.
 ```
 
-The check told the agent to escalate before it had even read the history. It read the history anyway, folded it into its findings, and handed the case to a person with everything it had gathered and no recommended disposition, exactly as clause 4.3.4 requires. Then it read the trail back to confirm both records had landed. Every claim in its findings names a source, whether the verdict id, the policy version, the figures and note from the break record, the resolved cases from the history, or the rule that fired.
+The check told the agent to escalate before it had even read the history. It read the history anyway, folded it into its findings, and handed the case to a person with everything it had gathered and no recommended disposition, exactly as clause 4.3.4 requires. Then it read the trail back to confirm both records had landed. Every claim in its findings names a source. The verdict id, the rule and the policy version come from the check, the difference and the note from the break record, and the precedents from the history.
 
 The history moved nothing. The agent cited the three clean closures and noted itself that none of them involved an amendment in flight, an escalation with context rather than a bare verdict. The context informs, and the check decides.
 
