@@ -247,7 +247,7 @@ fun `an amendment in flight escalates even inside the tolerance`() {
 
 That test is the precedence question made executable. The difference is inside the tolerance, and the verdict is still escalate, because the trigger wins. The specification fixed that order the moment the loop's question was answered. This test is what holds the code to it, and it goes red if the code ever drifts.
 
-The two `/allium` commands, derive a spec from the policy and implement the spec, could have been one. Pointing the loop straight at the policy, `/allium implement this policy`, would have combined the two loops, questions and all. I split them to better show what happens underneath.
+The two `/allium` commands, derive a spec from the policy and implement the spec, could have been one. Pointing the loop straight at the policy, `/allium implement this policy`, would have combined the two loops, questions and all. I split them only to show what happens underneath.
 
 ## The agent's two halves
 
