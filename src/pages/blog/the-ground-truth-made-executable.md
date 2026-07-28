@@ -4,7 +4,7 @@ title: 'The ground truth, made executable'
 description: 'In banking operations the ground truth is written policy. Here is how one becomes a specification, then deterministic code, then a tool an agent can call but not argue with.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-07-27'
+publishedDate: '2026-07-28'
 heroImage: 'the-ground-truth-made-executable.jpg'
 tags:
   - 'ai'
