@@ -70,7 +70,7 @@ Three parts of that flow are deterministic. They are ordinary code with no model
 
 ## The policy, as prose
 
-For the purposes of this demo, I will use a shortened Settlement Reconciliation Policy, the kind of document that lives in a bank's operations department. It is not lifted from any real bank, but its shape is the shape of the real thing, a numbered section approved by a committee and written for analysts to read. Its first clause, 4.3.1, defines the break itself, the mismatch we met earlier. The next two carry most of the weight of what follows, so I will quote them in full and paraphrase the rest.
+For the purposes of this demo, I will use a shortened Settlement Reconciliation Policy, the kind of document that lives in a bank's operations department. It is not lifted from any real bank, but its shape is the shape of the real thing, a numbered section approved by a committee and written for analysts to read. Its first clause, 4.3.1, defines the break itself, the mismatch we met earlier. The next two carry most of the weight of what follows.
 
 > **4.3.2** A break may be closed where the difference between the two amounts does not exceed the closure tolerance. The closure tolerance is USD 250.
 >
