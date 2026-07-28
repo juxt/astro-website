@@ -251,7 +251,7 @@ The two `/allium` commands, derive a spec from the policy and implement the spec
 
 ## The agent's two halves
 
-Everything so far is the deterministic spine. A model helped build it, held to the specification throughout, and no model runs in any of it. The policy, the specification, the configuration, the check and the trail are all ordinary artefacts that a bank owns and tests. That is deliberate, because the intelligence is the last thing to add and the least trusted, and it sits on top of a spine that already works.
+Everything so far is the deterministic spine. A model helped build it, held to the specification throughout, and no model runs in any of it. The policy, the specification, the configuration, the check and the trail are all ordinary artefacts that a bank owns and tests. That is deliberate, because the intelligence is the last thing to add and the least trusted, and it sits on top of machinery that already works.
 
 Now the agent. It does the part of an analyst's job that comes before any decision. It takes a break and understands it. It then either proposes that it be closed or escalates it. This agent has two halves, and keeping them separate is the whole trick.
 
