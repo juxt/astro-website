@@ -78,7 +78,11 @@ For the purposes of this demo, I will use a shortened Settlement Reconciliation 
 
 The rest of the section is operational. A break over the tolerance is escalated with the investigation's findings and no recommended disposition (4.3.4). A closure within tolerance may be proposed automatically, but it takes effect only when an authorised analyst confirms it, and the analyst does not delegate that decision back (4.3.5). And every closure and every escalation records the rule applied, the tolerance in force, the policy version it was evaluated under, and the confirming analyst, in a record that cannot be altered afterwards (4.3.6).
 
-A **tolerance** is the largest difference the bank is willing to write off without a person looking. To **escalate** is to hand the case to a person, with the findings gathered so far and no recommendation attached. A break is **within band** when its difference sits inside the tolerance, and a **breach** when it does not.
+A **tolerance** is the largest difference the bank is willing to write off without a person looking.
+
+To **escalate** is to hand the case to a person, with the findings gathered so far and no recommendation attached.
+
+A break is **within band** when its difference sits inside the tolerance, and a **breach** when it does not.
 
 Those six clauses are already a threshold, a closed list of conditions that force a human decision, and an explicit statement of who may decide and what must be recorded. None of that is vague. It is a specification written in English, by people who argued over every clause. The work ahead is not to invent what the bank means. It is to move what it already means into a form a loop can execute.
 
