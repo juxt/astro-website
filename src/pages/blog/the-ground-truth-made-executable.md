@@ -86,7 +86,7 @@ A break is **within band** when its difference sits inside the tolerance, and a 
 
 Those six clauses are already a threshold, a closed list of conditions that force a human decision, and an explicit statement of who may decide and what must be recorded. None of that is vague. It is a specification written in English, by people who argued over every clause. The work ahead is not to invent what the bank means. It is to move what it already means into a form a loop can execute.
 
-I chose a simple policy on purpose. Turning a policy into a specification surfaces both the questions it left open and the places it contradicts itself, and a real one can raise many of each. This one raises a couple of questions and no contradictions, which keeps the post on the translation and off untangling a messy policy first. Those questions I answer as I go.
+I chose a simple policy on purpose. Turning a policy into a specification surfaces both the questions it left open and the places it contradicts itself, and a real one can raise many of each. This one raises two open questions and no contradictions, which keeps the post on the translation and off untangling a messy policy first. I answer both when the translation reaches them.
 
 ## The specification
 
