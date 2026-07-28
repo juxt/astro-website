@@ -129,7 +129,7 @@ rule CheckBreak {
 
 Every branch carries the clause it came from, so the specification and the policy can be read side by side. And the resolution order is stated outright. A fired trigger is checked before the tolerance, because the answer to the precedence question was that escalation applies regardless of the tolerance. That single ordered list is the answer, pinned down where the code will have to match it. The `s4.3.2a` in the first branch did not exist in the policy I quoted. It is the currency answer, written back into the policy as a new clause once the loop had forced the question.
 
-Alongside the rules sit the invariants, the properties that must hold no matter what. The two here say what must never be true of the system.
+Alongside the rules sit the invariants, the properties that must hold no matter what. The two here say what must never be true of this system.
 
 ```allium
 invariant NoClosureWithoutAPermittingVerdict {
