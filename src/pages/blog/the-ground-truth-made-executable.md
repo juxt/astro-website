@@ -275,7 +275,7 @@ show_break(B-1001)  ->
 
 That is a deliberate view of the break, and what it leaves out matters more than what it carries. The view is not the tool author's taste. The specification declares it, field by field, in the same document that defines the check, and the tool implements what it declares. The two raw amounts behind the difference are absent. So are the inputs to the escalation triggers of clause 4.3.3, whether an amendment is in flight, whether the counterparty has confirmed the current version of the trade, and whether the account carries an open dispute. Those are inputs to the check, the agent's other half, and it is the check that will report whether one of them fired. The agent sees enough to understand the case and to cite its sources, and no more.
 
-A second tool, `find_similar_cases`, takes the same break id. It looks up the break's counterparty itself, so the agent never supplies a name. What comes back is the resolved-case library for that counterparty, past breaks and how each one ended. A verdict is never among them. For B-1001 it returns two resolved cases, the earlier one folded here.
+A second tool, `find_similar_cases`, takes the same break id. It looks up the break's counterparty itself, so the agent never supplies a name. What comes back is the resolved-case library for that counterparty, past breaks and how each one ended. A verdict is never among them. For B-1001 it returns two resolved cases, the earlier folded to a single line.
 
 ```
 find_similar_cases(B-1001)  ->
