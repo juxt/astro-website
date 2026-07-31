@@ -8,6 +8,7 @@ publishedDate: '2026-07-31'
 heroImage: 'xt26-expert-panel.jpg'
 tags:
   - 'XT26'
+  - 'AI'
   - 'conference'
   - 'tech talks'
 ---
@@ -29,7 +30,3 @@ They later emphasise that the complexity involved naturally makes cause and effe
 Simone contributes a useful way of approaching those questions: measure AI at the level of the wider system, rather than judging a tool only by the speed or quality of its immediate output. That means examining where value appears across the organisation, where complexity has been shifted elsewhere and which new costs or constraints have quietly been introduced. This felt especially valuable because it challenges the comforting simplicity of many AI success stories. A faster output is easy to celebrate; understanding what changed around it is much harder.
 
 What I ultimately took away from XT26 was not a neat answer, but a clearer sense of the questions that matter: how we measure progress, how organisations must evolve alongside AI, and how easily intuition can be mistaken for evidence. Left with a richer context, but still an open-ended inquiry, this was amongst my favourite thought-provoking parts of the conference.
-
-<br>
-
-*Want to be the first to know when the XT26 talks drop? [Register here](/xt26/#attend) and we'll send the link straight to your inbox.*
