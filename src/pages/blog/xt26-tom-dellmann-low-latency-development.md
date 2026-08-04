@@ -4,7 +4,7 @@ title: 'XT26 Talks: Close to the Metal: Modern Low-Latency Development – Tom D
 description: "The microsecond tax: the learnings I took from Tom Dellmann's talk at XT26"
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-07-17'
+publishedDate: '2026-08-04'
 heroImage: 'xt26-tom-dellmann.jpg'
 tags:
   - 'XT26'
