@@ -4,7 +4,7 @@ title: 'XT26 Talks: How Far Can We Accelerate with AI? (Expert Panel)'
 description: 'Will AI transform the system, or be absorbed by it?'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-07-31'
+publishedDate: '2026-08-03'
 heroImage: 'xt26-expert-panel.jpg'
 tags:
   - 'XT26'
