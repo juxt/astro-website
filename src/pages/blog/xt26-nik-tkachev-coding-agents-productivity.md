@@ -4,7 +4,7 @@ title: 'XT26 Talks: Why Coding Agents Fail to Boost Productivity – Nik Tkachev
 description: "Why AI agents aren't delivering on their promise, and pragmatic strategies for closing the gap."
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-07-21'
+publishedDate: '2026-08-04'
 heroImage: 'xt26-nik-tkachev.jpg'
 tags:
   - 'XT26'
