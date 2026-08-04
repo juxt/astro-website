@@ -19,7 +19,7 @@ tags:
 
 “Data can be tortured to say what you want.”
 
-That was one of the lines that stayed with me after attending the AI panel at #XT26, particularly because of how consequential that becomes when data is used to shape AI strategy. If the wrong metrics are chosen, or the evidence is interpreted too conveniently, organisations may end up scaling the wrong ideas with remarkable efficiency.
+That was one of the lines that stayed with me after attending the AI panel at XT26, particularly because of how consequential that becomes when data is used to shape AI strategy. If the wrong metrics are chosen, or the evidence is interpreted too conveniently, organisations may end up scaling the wrong ideas with remarkable efficiency.
 
 What I appreciated about the panel was its balance of sober critiques of AI adoption with genuine optimism about its potential, without collapsing into either hype or cynicism. One of the most pivotal questions was this repeated inquiry into how its value can, and ultimately should, be measured. That concern flowed into a broader theme in the discussion: AI adoption cannot be treated as a straightforward technology rollout.
 
