@@ -4,7 +4,7 @@ title: 'XT26 Talks: Extracting Reliable Software From Unreliable Machines – Ri
 description: 'Reflecting on River Keefer’s XT26 talk on property-based testing, and what reliability looks like when the unreliable component is the one writing your code.'
 category: 'conference'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-07-16'
+publishedDate: '2026-08-02'
 heroImage: 'xt26-river-keefer.jpg'
 tags:
   - 'XT26'
