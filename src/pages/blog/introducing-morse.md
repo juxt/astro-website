@@ -12,7 +12,7 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede">A vulnerability used to have a shelf life. In 2021, the median time between a security flaw being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today it is <a href="https://zerodayclock.com" target="_blank">just over a day</a>.</p>
+<p class="lede">A vulnerability used to have a shelf life. In 2021, the median time between a security flaw being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today the median exploit arrives <a href="https://zerodayclock.com" target="_blank">hours before its disclosure</a>.</p>
 
 The window shrank because models learned to find bugs at scale. In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
 
@@ -24,7 +24,7 @@ Historically, defence has meant static analysis against databases of known probl
 
 The only way to keep pace with discovery at that speed is to automate the patching too. Even then, two problems remain.
 
-The first problem is timing: by the time a CVE is published, attackers have it too, and with exploitation following disclosure within a day, a database of known flaws gives you no head start.
+The first problem is timing: with the median exploit arriving before its disclosure, a CVE database describes where attackers have already been, and patching from it can only chase them.
 
 <span class="pullquote" text-content="The exploit lives in their composition, in the gap between what the code does and what its authors intended."></span>
 
