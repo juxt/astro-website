@@ -11,11 +11,11 @@
     .l { font-size: 15px; font-weight: 600; }
     .m { font-size: 14px; }
   </style>
-  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
 
   <rect x="55" y="115" width="185" height="70" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
   <text x="148" y="144" class="l" text-anchor="middle">Fix applied</text>
-  <text x="148" y="164" class="n" text-anchor="middle" font-size="12">regression test included</text>
+  <text x="148" y="164" class="n" text-anchor="middle" font-size="12">Regression test included</text>
 
   <g stroke="#6b7280" stroke-width="1.5">
     <line x1="245" y1="150" x2="296" y2="66" marker-end="url(#a)"/>
@@ -23,13 +23,13 @@
     <line x1="245" y1="150" x2="296" y2="204" marker-end="url(#a)"/>
   </g>
 
-  <rect x="300" y="40" width="150" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="300" y="40" width="150" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="375" y="67" class="m" text-anchor="middle">Snyk</text>
-  <rect x="300" y="112" width="150" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="300" y="112" width="150" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="375" y="139" class="m" text-anchor="middle">SonarQube</text>
-  <rect x="300" y="184" width="150" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="300" y="184" width="150" height="44" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="375" y="211" class="m" text-anchor="middle">CI tests</text>
-  <text x="375" y="256" class="n" text-anchor="middle">re-scan the change</text>
+  <text x="375" y="256" class="n" text-anchor="middle">Re-scan the change</text>
 
   <g stroke="#6b7280" stroke-width="1.5">
     <line x1="450" y1="62" x2="526" y2="142" marker-end="url(#a)"/>
@@ -42,12 +42,12 @@
 
   <line x1="635" y1="146" x2="686" y2="114" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
 
-  <rect x="690" y="88" width="150" height="44" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="690" y="88" width="150" height="44" rx="22" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="765" y="115" class="m" text-anchor="middle">Likely fixed</text>
 
   <line x1="765" y1="136" x2="765" y2="184" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
 
   <rect x="690" y="190" width="150" height="44" rx="22" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
   <text x="765" y="217" class="m" text-anchor="middle" font-weight="600">Confirmed fixed</text>
-  <text x="730" y="266" class="n" text-anchor="middle">once every tool comes back clean</text>
+  <text x="730" y="266" class="n" text-anchor="middle">Once every tool comes back clean</text>
 </svg>

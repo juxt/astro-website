@@ -7,11 +7,13 @@
     .note { fill: #6b7280; font-size: 13px; }
   </style>
 
-  <rect x="0" y="0" width="860" height="480" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="0" y="0" width="860" height="480" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
 
   <!-- title -->
-  <text x="80" y="38" font-size="17" font-weight="600">Cumulative cost over five releases</text>
-  <text x="80" y="58" class="note">$ thousands, illustrative</text>
+  <text x="80" y="40" font-size="20" font-weight="600">Cumulative cost over five releases</text>
+
+  <!-- y axis label -->
+  <text x="30" y="232" class="note" text-anchor="middle" transform="rotate(-90 30 232)">$ thousands, illustrative</text>
 
   <!-- gridlines and y labels -->
   <g stroke="#e5e7eb" stroke-width="1">
@@ -29,12 +31,12 @@
 
   <!-- x labels -->
   <g class="axis" text-anchor="middle">
-    <text x="80" y="426">start</text>
-    <text x="208" y="426">release 1</text>
-    <text x="336" y="426">release 2</text>
-    <text x="464" y="426">release 3</text>
-    <text x="592" y="426">release 4</text>
-    <text x="720" y="426">release 5</text>
+    <text x="80" y="426">Start</text>
+    <text x="208" y="426">Release 1</text>
+    <text x="336" y="426">Release 2</text>
+    <text x="464" y="426">Release 3</text>
+    <text x="592" y="426">Release 4</text>
+    <text x="720" y="426">Release 5</text>
   </g>
 
   <!-- savings band between the curves, from break-even to release 5 -->
@@ -42,7 +44,7 @@
            L 336 264 L 464 196 L 592 128 L 720 60
            L 720 278.2 L 592 283.8 L 464 289.5 L 336 298 Z"
         fill="#f4901d" opacity="0.12"/>
-  <text x="560" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#c97417">compounding savings</text>
+  <text x="560" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#c97417">Compounding savings</text>
 
   <!-- red teaming line -->
   <polyline points="80,400 208,332 336,264 464,196 592,128 720,60"
@@ -65,10 +67,10 @@
   <text x="732" y="282.2" class="label" fill="#c97417">Morse</text>
 
   <!-- front-loaded cost annotation -->
-  <text x="150" y="320" class="note" text-anchor="end">spec and tests,</text>
+  <text x="150" y="320" class="note" text-anchor="end">Spec and tests,</text>
   <text x="150" y="336" class="note" text-anchor="end">front-loaded</text>
 
   <!-- break-even marker -->
   <circle cx="259.2" cy="304.8" r="5.5" fill="#ffffff" stroke="#0b0e14" stroke-width="2"/>
-  <text x="266" y="330" class="note">break even</text>
+  <text x="266" y="330" class="note">Break even</text>
 </svg>

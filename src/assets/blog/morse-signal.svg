@@ -11,18 +11,18 @@
     .l { font-size: 15px; font-weight: 600; }
     .m { font-size: 14px; }
   </style>
-  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
 
   <!-- sources -->
-  <rect x="70" y="40" width="150" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="70" y="40" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="145" y="65" class="m" text-anchor="middle">Snyk</text>
-  <rect x="70" y="92" width="150" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="70" y="92" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="145" y="117" class="m" text-anchor="middle">SonarQube</text>
-  <rect x="70" y="144" width="150" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="70" y="144" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="145" y="169" class="m" text-anchor="middle">CI tests</text>
   <rect x="70" y="196" width="150" height="40" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
-  <text x="145" y="221" class="m" text-anchor="middle">Morse analysis</text>
-  <text x="145" y="268" class="n" text-anchor="middle">thousands of raw alerts</text>
+  <text x="145" y="221" class="m" text-anchor="middle">Specification</text>
+  <text x="145" y="268" class="n" text-anchor="middle">Thousands of raw alerts</text>
 
   <!-- converge to lewis -->
   <g stroke="#6b7280" stroke-width="1.5">
@@ -45,7 +45,7 @@
   <line x1="655" y1="148" x2="692" y2="148" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
 
   <!-- findings -->
-  <rect x="700" y="88" width="130" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="700" y="88" width="130" height="120" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
   <text x="765" y="112" class="l" text-anchor="middle">Findings</text>
   <g stroke="#9ca3af" stroke-width="2" stroke-linecap="round">
     <line x1="730" y1="134" x2="812" y2="134"/>
@@ -55,5 +55,5 @@
   <text x="716" y="139" class="n">1</text>
   <text x="716" y="163" class="n">2</text>
   <text x="716" y="187" class="n">3</text>
-  <text x="765" y="238" class="n" text-anchor="middle">a short list, ranked by risk</text>
+  <text x="765" y="238" class="n" text-anchor="middle">A short list, ranked by risk</text>
 </svg>
