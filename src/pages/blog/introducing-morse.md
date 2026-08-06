@@ -14,11 +14,13 @@ tags:
 
 <p class="lede">A vulnerability used to have a shelf life. In 2021, the median time between a security flaw being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today it is <a href="https://zerodayclock.com" target="_blank">just over a day</a>.</p>
 
-The window shrank because models learned to find flaws at scale. In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades. Anthropic keeps the model gated because safeguards against its offensive use [do not yet exist](https://www.anthropic.com/news/claude-fable-5-mythos-5): the same search that finds flaws for defenders finds them for attackers.
+The window shrank because models learned to find bugs at scale. In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
+
+Outside Glasswing, the model stays gated, because safeguards against its offensive use [do not yet exist](https://www.anthropic.com/news/claude-fable-5-mythos-5). The same search serves attacker and defender alike.
 
 ## The patch reflex
 
-Security tooling has relied on databases of known problems. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns, and the catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
+Historically, defence has meant static analysis against databases of known problems. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
 
 The only way to keep pace with discovery at that speed is to automate the patching too. Even then, two problems remain.
 
@@ -104,9 +106,11 @@ The artefacts belong to you, and they live in your repository: the specification
 
 They also change how the team works. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing. Test quality rises, the backlog of latent bugs shrinks, and fixes start from a failing test rather than from archaeology.
 
-And they guard the future, because every change, whether from your developers or their AI assistants, is checked against the specification and its tests. The rate at which new vulnerabilities enter the codebase falls along with the count of old ones, and fewer flaws ever get a shelf life.
+## From reactive to proactive
 
-That is the difference between patching and hardening. Patching is reactive work that, done well, keeps pace with the rate at which new flaws are catalogued. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with. An engagement ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
+The artefacts do more than record the past. Every change, whether from your developers or their AI assistants, is checked against the specification and its tests, so the rate at which new vulnerabilities enter the codebase falls along with the count of old ones. Fewer flaws ever get a shelf life.
+
+That is the difference between patching and hardening. Patching is reactive work that, done well, keeps pace with the rate at which the catalogues grow. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with. An engagement ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
 
 ---
 
