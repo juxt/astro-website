@@ -12,9 +12,9 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede">A vulnerability used to have a shelf life. In 2021, the median gap between a security flaw being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today that gap is <a href="https://zerodayclock.com" target="_blank">just over a day</a>.</p>
+<p class="lede">A vulnerability used to have a shelf life. In 2021, the median time between a security flaw being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today it is <a href="https://zerodayclock.com" target="_blank">just over a day</a>.</p>
 
-The gap closed because models learned to find flaws at scale. In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades. Anthropic keeps the model gated because safeguards against its offensive use [do not yet exist](https://www.anthropic.com/news/claude-fable-5-mythos-5): the same search that finds flaws for defenders finds them for attackers.
+The window shrank because models learned to find flaws at scale. In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades. Anthropic keeps the model gated because safeguards against its offensive use [do not yet exist](https://www.anthropic.com/news/claude-fable-5-mythos-5): the same search that finds flaws for defenders finds them for attackers.
 
 ## The patch reflex
 
@@ -28,9 +28,9 @@ The first problem is timing: by the time a CVE is published, attackers have it t
 
 The second is coverage: CVE databases describe known issues in dependencies, but they have far less to say about the weaknesses in your own code, and an attacker doesn't care where the weakness lies. A parser slightly too permissive, a cache that trusts its inputs, an error path that leaves a session half open: none of these is a problem on its own, but by chaining them together an attacker gains a foothold. The exploit lives in their composition, in the gap between what the code does and what its authors intended.
 
-Weaknesses like these can't be patched in the traditional sense, because finding them means knowing what the code is meant to do and noticing where it does more than it should. Secure code does everything it needs to do and nothing else: no side effects its authors didn't intend, no edge cases where its behaviour is anyone's guess.
+Weaknesses like these can't be patched in the traditional sense, because finding them means knowing what the code is meant to do and noticing where it does more than it should. Secure code does everything it needs to do and nothing else: no side effects its authors didn't intend, no edge cases where its behaviour is loosely defined.
 
-## Renting the search
+## Attacking your own code
 
 The obvious response, and the one much of the industry has settled on, is AI red teaming: point the same frontier models at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
 
