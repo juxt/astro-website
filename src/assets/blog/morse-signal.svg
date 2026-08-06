@@ -33,20 +33,20 @@
   </g>
 
   <rect x="330" y="118" width="110" height="60" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
-  <text x="385" y="154" class="l" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace">lewis</text>
+  <text x="385" y="154" class="l" text-anchor="middle">Lewis</text>
 
   <line x1="445" y1="148" x2="492" y2="148" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
 
   <!-- journal -->
   <rect x="500" y="118" width="150" height="60" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
-  <text x="575" y="142" class="l" text-anchor="middle">journal</text>
+  <text x="575" y="142" class="l" text-anchor="middle">Journal</text>
   <text x="575" y="162" class="n" text-anchor="middle">.morse/ in your repo</text>
 
   <line x1="655" y1="148" x2="692" y2="148" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
 
   <!-- findings -->
   <rect x="700" y="88" width="130" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="765" y="112" class="l" text-anchor="middle">findings</text>
+  <text x="765" y="112" class="l" text-anchor="middle">Findings</text>
   <g stroke="#9ca3af" stroke-width="2" stroke-linecap="round">
     <line x1="730" y1="134" x2="812" y2="134"/>
     <line x1="730" y1="158" x2="812" y2="158"/>

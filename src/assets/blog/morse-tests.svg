@@ -13,10 +13,10 @@
   <rect x="0" y="0" width="860" height="260" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
 
   <rect x="70" y="35" width="180" height="70" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
-  <text x="160" y="76" class="l" text-anchor="middle">specification</text>
+  <text x="160" y="76" class="l" text-anchor="middle">Specification</text>
 
   <rect x="70" y="145" width="180" height="70" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="160" y="186" class="l" text-anchor="middle">code</text>
+  <text x="160" y="186" class="l" text-anchor="middle">Code</text>
 
   <g stroke="#6b7280" stroke-width="1.5">
     <line x1="255" y1="70" x2="346" y2="116" marker-end="url(#a)"/>
@@ -32,11 +32,7 @@
   <text x="536" y="118" class="n" text-anchor="middle">derives</text>
 
   <rect x="605" y="65" width="185" height="130" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="697" y="92" class="l" text-anchor="middle">proposed test</text>
-  <g stroke="#9ca3af" stroke-width="2" stroke-linecap="round">
-    <line x1="622" y1="112" x2="772" y2="112"/>
-    <line x1="622" y1="128" x2="742" y2="128"/>
-  </g>
-  <text x="697" y="168" text-anchor="middle" font-size="14" font-weight="600">✗ fails on first run</text>
+  <text x="697" y="118" class="l" text-anchor="middle">Proposed test</text>
+  <text x="697" y="152" class="n" text-anchor="middle" font-size="14">✗ fails on first run</text>
   <text x="697" y="228" class="n" text-anchor="middle">the bug, made concrete</text>
 </svg>

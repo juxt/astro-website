@@ -16,22 +16,22 @@
   <!-- repo grid -->
   <g>
     <rect x="70" y="40" width="95" height="54" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="117" y="63" font-size="13" text-anchor="middle">repo</text>
+    <text x="117" y="63" font-size="13" text-anchor="middle">Repo</text>
     <circle cx="117" cy="78" r="4" fill="#f4901d"/>
     <rect x="185" y="40" width="95" height="54" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="232" y="63" font-size="13" text-anchor="middle">repo</text>
+    <text x="232" y="63" font-size="13" text-anchor="middle">Repo</text>
     <circle cx="232" cy="78" r="4" fill="#f4901d"/>
     <rect x="70" y="110" width="95" height="54" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="117" y="133" font-size="13" text-anchor="middle">repo</text>
+    <text x="117" y="133" font-size="13" text-anchor="middle">Repo</text>
     <circle cx="117" cy="148" r="4" fill="#f4901d"/>
     <rect x="185" y="110" width="95" height="54" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="232" y="133" font-size="13" text-anchor="middle">repo</text>
+    <text x="232" y="133" font-size="13" text-anchor="middle">Repo</text>
     <circle cx="232" cy="148" r="4" fill="#f4901d"/>
     <rect x="70" y="180" width="95" height="54" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="117" y="203" font-size="13" text-anchor="middle">repo</text>
+    <text x="117" y="203" font-size="13" text-anchor="middle">Repo</text>
     <circle cx="117" cy="218" r="4" fill="#f4901d"/>
     <rect x="185" y="180" width="95" height="54" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
-    <text x="232" y="203" font-size="13" text-anchor="middle">repo</text>
+    <text x="232" y="203" font-size="13" text-anchor="middle">Repo</text>
     <circle cx="232" cy="218" r="4" fill="#f4901d"/>
   </g>
   <text x="175" y="266" class="n" text-anchor="middle">a journal in every repo</text>
@@ -41,7 +41,7 @@
     <line x1="284" y1="137" x2="376" y2="148" marker-end="url(#a)"/>
     <line x1="284" y1="207" x2="376" y2="158" marker-end="url(#a)"/>
   </g>
-  <text x="330" y="98" class="n" text-anchor="middle">aggregates</text>
+  <text x="330" y="54" class="n" text-anchor="middle">aggregates</text>
 
   <rect x="380" y="118" width="170" height="64" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
   <text x="465" y="144" class="l" text-anchor="middle">Morse</text>

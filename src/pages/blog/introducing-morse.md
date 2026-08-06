@@ -4,7 +4,7 @@ title: 'Morse: code, decoded'
 description: 'Security tools hand you bugs one alert at a time. Morse turns detective and helps you work out what your code should do so that quality rises with every commit.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-08-03'
+publishedDate: '2026-08-07'
 heroImage: 'morse.jpg'
 tags:
   - 'ai'
