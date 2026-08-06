@@ -1,0 +1,59 @@
+<svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t">
+  <title id="t">lewis ingests scanner reports and Morse's analysis into a journal, grouped into a short list of findings</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, system-ui, sans-serif; fill: #0b0e14; }
+    .n { fill: #6b7280; font-size: 13px; }
+    .l { font-size: 15px; font-weight: 600; }
+    .m { font-size: 14px; }
+  </style>
+  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+
+  <!-- sources -->
+  <rect x="70" y="40" width="150" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="145" y="65" class="m" text-anchor="middle">Snyk</text>
+  <rect x="70" y="92" width="150" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="145" y="117" class="m" text-anchor="middle">SonarQube</text>
+  <rect x="70" y="144" width="150" height="40" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="145" y="169" class="m" text-anchor="middle">CI tests</text>
+  <rect x="70" y="196" width="150" height="40" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="145" y="221" class="m" text-anchor="middle">Morse analysis</text>
+  <text x="145" y="268" class="n" text-anchor="middle">thousands of raw alerts</text>
+
+  <!-- converge to lewis -->
+  <g stroke="#6b7280" stroke-width="1.5">
+    <line x1="220" y1="60" x2="326" y2="140" marker-end="url(#a)"/>
+    <line x1="220" y1="112" x2="326" y2="146" marker-end="url(#a)"/>
+    <line x1="220" y1="164" x2="326" y2="152" marker-end="url(#a)"/>
+    <line x1="220" y1="216" x2="326" y2="158" marker-end="url(#a)"/>
+  </g>
+
+  <rect x="330" y="118" width="110" height="60" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="385" y="154" class="l" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace">lewis</text>
+
+  <line x1="445" y1="148" x2="492" y2="148" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- journal -->
+  <rect x="500" y="118" width="150" height="60" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="575" y="142" class="l" text-anchor="middle">journal</text>
+  <text x="575" y="162" class="n" text-anchor="middle">.morse/ in your repo</text>
+
+  <line x1="655" y1="148" x2="692" y2="148" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- findings -->
+  <rect x="700" y="88" width="130" height="120" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="765" y="112" class="l" text-anchor="middle">findings</text>
+  <g stroke="#9ca3af" stroke-width="2" stroke-linecap="round">
+    <line x1="730" y1="134" x2="812" y2="134"/>
+    <line x1="730" y1="158" x2="812" y2="158"/>
+    <line x1="730" y1="182" x2="812" y2="182"/>
+  </g>
+  <text x="716" y="139" class="n">1</text>
+  <text x="716" y="163" class="n">2</text>
+  <text x="716" y="187" class="n">3</text>
+  <text x="765" y="238" class="n" text-anchor="middle">a short list, ranked by risk</text>
+</svg>

@@ -62,15 +62,21 @@ Everything downstream, from the findings to the fixes, depends on an artefact th
 
 Morse begins by reading the codebase and distilling a behavioural specification: a statement of what the code is evidently meant to do, in the language of your domain. Recovering specifications from programs is a research problem with a long history, but where earlier techniques could only surface machine-level invariants, current models produce [formally verifiable specifications](https://dl.acm.org/doi/10.1109/ICSE55347.2025.00129) for most benchmark programs. The distillation is itself diagnostic: where a tangle of rules governs a small area of code, there is usually something worth a closer look.
 
+![Diagram: Morse reads your codebase and distils it into a behavioural specification.](../../assets/blog/morse-distil.svg)
+
 ### The signal in the noise
 
 Morse runs alongside the tools you already have. CI keeps building, Snyk and SonarQube keep scanning, and `lewis` ingests their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format. There is no external database and no account to provision; state is shared the way code is shared, by push and pull.
 
 Observations are grouped into a short list of findings. Duplicate reports of one flaw collapse into one finding; a dependency upgrade that clears twelve CVEs appears as one action. Ranking combines [CISA's known-exploited catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) and [EPSS](https://www.first.org/epss/) probabilities with Morse's own severity assessment, so the list is ordered by risk. What reaches your team is the shape of the problem, in a handful of findings instead of thousands of raw alerts.
 
+![Diagram: reports from Snyk, SonarQube and CI, together with Morse's own analysis, are ingested by lewis into a journal in your repository, then grouped into a short list of findings ranked by risk.](../../assets/blog/morse-signal.svg)
+
 ### Spec-anchored tests
 
 Morse won't touch code it can't test. Before any fix, it asks whether the existing tests can be trusted, and coverage alone doesn't make them trustworthy. Because the specification says how the code should behave, Morse can judge whether the tests check the right things, and where they are missing or weak it proposes new ones, drawn from the specification. Each proposed test fails on first run, which is the point: a failing test is the bug made concrete, in a form your engineers can run and inspect.
+
+![Diagram: the specification, showing how the code should behave, and the code, showing how it behaves, both feed Morse, which derives a test that fails on first run.](../../assets/blog/morse-tests.svg)
 
 Sometimes the analysis finds the reverse: a test that has asserted the buggy behaviour for years, protecting the defect as behaviour every future change must preserve. Morse flags these findings as entrenched and rewrites the test to fail in the right way, with the same rigour as a change to the code itself.
 
@@ -80,9 +86,13 @@ With the intended behaviour pinned down in failing tests, Morse writes an implem
 
 A fix is reported as likely fixed on the first clean scan, and as confirmed once the other tools have independently re-scanned and agree. The distinction is visible at a glance, so nobody chases scanners or keeps a spreadsheet in step, and nothing merges without your team's sign-off.
 
+![Diagram: an applied fix is re-scanned by Snyk, SonarQube and CI; lewis ingests their reports and the finding moves from likely fixed to confirmed fixed once every tool re-scans clean.](../../assets/blog/morse-fixes.svg)
+
 ### From one repository to a fleet
 
 The analysis is the same for one repository or a thousand; what changes is the shell around it. Locally, `lewis` is all a developer needs: point it at a repository and it scans, ingests and reports there and then. At estate scale, Morse runs as a managed service that schedules scans across the fleet and aggregates what it finds, so one vulnerable dependency in forty services becomes one finding with one remediation. It works through the systems your teams already use, raising tickets in Jira, publishing summaries to Confluence and opening pull requests in GitHub or Bitbucket, so visibility lands where people already look rather than on another dashboard nobody remembers to check. Both modes share the journal format, so a team that starts with one repository keeps everything when it grows.
+
+![Diagram: six repositories, each with its own journal, are aggregated by Morse running as a managed service, which raises Jira tickets, Confluence summaries and pull requests in GitHub or Bitbucket.](../../assets/blog/morse-fleet.svg)
 
 ## Why this is the right approach
 
