@@ -5,7 +5,7 @@ description: 'Security tools hand you bugs one alert at a time. Morse turns dete
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-08-03'
-heroImage: 'a-bug-on-the-dark-side-of-the-moon.jpg'
+heroImage: 'morse.jpg'
 tags:
   - 'ai'
   - 'security'
