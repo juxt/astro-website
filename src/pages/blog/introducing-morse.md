@@ -26,9 +26,9 @@ The first problem is timing: by the time a CVE is published, attackers have it t
 
 <span class="pullquote" text-content="The exploit lives in their composition, in the gap between what the code does and what its authors intended."></span>
 
-The second is coverage: CVE databases describe known issues in dependencies, but attackers also work in your own code, chaining flaws that look innocuous alone. A parser slightly too permissive, a cache that trusts its inputs, an error path that leaves a session half open: none of them matches a known-bad pattern, and the exploit lives in their composition, in the gap between what the code does and what its authors intended.
+The second is coverage: CVE databases describe known issues in dependencies, but they have far less to say about the weaknesses in your own code, and an attacker doesn't care where the weakness lies. A parser slightly too permissive, a cache that trusts its inputs, an error path that leaves a session half open: none of these is a problem on its own, but by chaining them together an attacker gains a foothold. The exploit lives in their composition, in the gap between what the code does and what its authors intended.
 
-Finding an exploit like that means reasoning about what the authors intended, which is not recorded in any database.
+Weaknesses like these can't be patched in the traditional sense, because finding them means knowing what the code is meant to do and noticing where it does more than it should. Secure code does everything it needs to do and nothing else: no side effects its authors didn't intend, no edge cases where its behaviour is anyone's guess.
 
 ## Renting the search
 
@@ -38,11 +38,11 @@ The obvious response, and the one much of the industry has settled on, is AI red
 
 But red teaming is an open-ended search, and it ends when the budget ends, not when the code is safe. Across millions of lines a thorough sweep runs into millions of dollars, and a clean run proves only that one model on one budget found nothing this time.
 
-What the money buys is a point-in-time report: findings for your team to work through, with no change to the code itself. Every commit after the report lands moves the code away from what was checked, and nothing carries forward, so the same search is bought again, in full, at the next release.
+The money buys a report. Your team still has to fix everything it lists, and while they do, the code moves on: every commit takes the codebase a little further from the one that was checked. By the next release the report describes a system you no longer run, and the search has to be paid for all over again.
 
 ## Introducing Morse
 
-At the root of almost any exploit sits one of two things: brittle logic that works only for the inputs its author imagined, or a missing guard whose assumption was never written down. Both are symptoms of one weakness: the codebase nowhere states what it is supposed to do. Wherever intent is weakly expressed, the implementation admits alternatives, inputs and sequences of events under which the code does something its authors never considered. Every alternative behaviour reachable from the outside is a potential exploit, and alternatives are exactly what an attacking model hunts for.
+Wherever intent is weakly expressed, an implementation admits alternatives: inputs and sequences of events under which the code does something its authors never considered. Every alternative behaviour reachable from the outside is a potential exploit, and alternatives are exactly what an attacking model hunts for.
 
 **Morse** is our answer, and it inverts the search. Rather than paying a model to find exploits one at a time, it works out what the code is trying to achieve, marks every place the implementation admits behaviour the author never intended, and hardens the code until only intended behaviour remains. A scanner can tell you that a function ignores a return code; Morse reasons about your code in the terms of your domain. Code hardened this way withstands exploits nobody has invented yet, because the ambiguity they would be built from is gone.
 
@@ -60,21 +60,21 @@ Everything downstream, from the findings to the fixes, depends on an artefact th
 
 ### Distilling the specification
 
-Morse begins by reading the codebase and distilling a behavioural specification: a statement of what the code is evidently meant to do, in the language of your domain. Recovering specifications from programs is an [old research problem](https://dl.acm.org/doi/10.1145/503272.503275), but where earlier techniques could only surface machine-level invariants, current models produce [formally verifiable specifications](https://dl.acm.org/doi/10.1109/ICSE55347.2025.00129) for most benchmark programs and catch bugs that [older inference methods miss](https://arxiv.org/abs/2310.01831). The distillation is itself diagnostic: where a tangle of rules governs a small area of code, there is usually something worth a closer look.
+Morse begins by reading the codebase and distilling a behavioural specification: a statement of what the code is evidently meant to do, in the language of your domain. Recovering specifications from programs is a research problem with a long history, but where earlier techniques could only surface machine-level invariants, current models produce [formally verifiable specifications](https://dl.acm.org/doi/10.1109/ICSE55347.2025.00129) for most benchmark programs. The distillation is itself diagnostic: where a tangle of rules governs a small area of code, there is usually something worth a closer look.
 
-### Findings, not alerts
+### The signal in the noise
 
 Morse runs alongside the tools you already have. CI keeps building, Snyk and SonarQube keep scanning, and `lewis` ingests their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format. There is no external database and no account to provision; state is shared the way code is shared, by push and pull.
 
 Observations are grouped into a short list of findings. Duplicate reports of one flaw collapse into one finding; a dependency upgrade that clears twelve CVEs appears as one action. Ranking combines [CISA's known-exploited catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) and [EPSS](https://www.first.org/epss/) probabilities with Morse's own severity assessment, so the list is ordered by risk. What reaches your team is the shape of the problem, in a handful of findings instead of thousands of raw alerts.
 
-### Tests before fixes
+### Spec-anchored tests
 
-Morse applies no fix to code that lacks trustworthy tests, and coverage alone does not make a test trustworthy. The specification says how the code should behave, so Morse can judge whether the existing tests check the right things, and where they are missing or weak it proposes new ones drawn from the specification. Each proposed test fails on first run, which is the point: a failing test is the bug made concrete, in a form your engineers can run and inspect.
+Morse won't touch code it can't test. Before any fix, it asks whether the existing tests can be trusted, and coverage alone doesn't make them trustworthy. Because the specification says how the code should behave, Morse can judge whether the tests check the right things, and where they are missing or weak it proposes new ones, drawn from the specification. Each proposed test fails on first run, which is the point: a failing test is the bug made concrete, in a form your engineers can run and inspect.
 
 Sometimes the analysis finds the reverse: a test that has asserted the buggy behaviour for years, protecting the defect as behaviour every future change must preserve. Morse flags these findings as entrenched and rewrites the test to fail in the right way, with the same rigour as a change to the code itself.
 
-### Fixing under guard
+### Fixing without breaking things
 
 With the intended behaviour pinned down in failing tests, Morse writes an implementation that satisfies them in the most secure way available, then checks the change against the specification to confirm nothing your systems depend on has moved. An accepted finding merges with its regression guard already written, while a rejected one corrects the specification, so review improves the analysis rather than merely filtering it.
 
@@ -82,21 +82,21 @@ A fix is reported as likely fixed on the first clean scan, and as confirmed once
 
 ### From one repository to a fleet
 
-The analysis is the same for one repository or a thousand; what changes is the shell around it. Locally, `lewis` is all a developer needs: point it at a repository and it scans, ingests and reports there and then. At estate scale, Morse runs as a managed service that schedules scans across the fleet, projects findings into your issue tracker, raises fixes as pull requests and aggregates across repositories, so one vulnerable dependency in forty services becomes one finding with one remediation. Both modes share the journal format, so a team that starts with one repository keeps everything when it grows.
+The analysis is the same for one repository or a thousand; what changes is the shell around it. Locally, `lewis` is all a developer needs: point it at a repository and it scans, ingests and reports there and then. At estate scale, Morse runs as a managed service that schedules scans across the fleet and aggregates what it finds, so one vulnerable dependency in forty services becomes one finding with one remediation. It works through the systems your teams already use, raising tickets in Jira, publishing summaries to Confluence and opening pull requests in GitHub or Bitbucket, so visibility lands where people already look rather than on another dashboard nobody remembers to check. Both modes share the journal format, so a team that starts with one repository keeps everything when it grows.
 
 ## Why this is the right approach
 
-Where a sweep buys a search, Morse spends a comparable budget on two durable artefacts: the behavioural specification and the test suite that encodes it. The cost is front-loaded and bounded by the size of the codebase; after that, keeping pace with change is marginal, because each new commit is assessed against a specification that already exists.
+Red teaming has no economy of scale: the next sweep costs what the last one did and delivers another report. Morse, adopted as part of the development process, puts the same budget into artefacts that last. The behavioural specification and its test suite are built once, at a cost bounded by the size of the codebase, and every commit after that is checked against them for a marginal cost. Quality and security become sustainable habits of the development process itself, secure by construction rather than by periodic inspection.
 
 ![Line chart of cumulative cost over five releases. AI red teaming climbs linearly to 600 thousand dollars. Morse rises steeply to 160 thousand while the spec and tests are built, then flattens near 215 thousand. The lines cross before release 2, and the widening gap after the break-even point is labelled compounding savings.](../../assets/blog/morse-economics.svg)
 
-The artefacts belong to you, and they live in your repository: the specification, the tests and the journal of every observation, decision and fix, all in an open format. There is no vendor database to depend on, and the whole history is inspectable in git by your team or your auditors.
+**The artefacts belong to you**, and they live in your repository: the specification, the tests and the journal of every observation, decision and fix, all in an open format. There is no vendor database to depend on, and the whole history is inspectable in git by your team or your auditors.
 
-They also change how the team works. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing. Test quality rises, the backlog of latent bugs shrinks, and fixes start from a failing test rather than from archaeology.
+They also change how the team works. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing. **Test quality rises**, the backlog of latent bugs shrinks, and fixes start from a failing test rather than from archaeology.
 
-And they guard the future, because every change, whether from your developers or their AI assistants, is checked against the specification and its tests. The rate at which new vulnerabilities enter the codebase falls along with the count of old ones, and fewer flaws ever get a shelf life.
+And they guard the future, because every change, whether from your developers or their AI assistants, is checked against the specification and its tests. **The rate at which new vulnerabilities enter the codebase falls** along with the count of old ones, and fewer flaws ever get a shelf life.
 
-That is the difference between patching and hardening. Patching keeps you level with the flaws you already know about; hardening changes the ground they grow in. An engagement with Morse ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
+That is the difference between patching and hardening. Patching is reactive work that, done well, keeps pace with the rate at which new flaws are catalogued. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with. An engagement ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
 
 ---
 
