@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Morse: code, decoded'
-description: 'Security tools hand you bugs one alert at a time. Morse turns detective, assembling the evidence into a picture of what your code was meant to do.'
+description: 'Security tools hand you bugs one alert at a time. Morse turns detective, works out what your code is meant to do, and builds that understanding into your workflow, so quality rises with every commit.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-08-03'
@@ -90,11 +90,11 @@ Red teaming has no economy of scale: the next sweep costs what the last one did 
 
 ![Line chart of cumulative cost over five releases. AI red teaming climbs linearly to 600 thousand dollars. Morse rises steeply to 160 thousand while the spec and tests are built, then flattens near 215 thousand. The lines cross before release 2, and the widening gap after the break-even point is labelled compounding savings.](../../assets/blog/morse-economics.svg)
 
-**The artefacts belong to you**, and they live in your repository: the specification, the tests and the journal of every observation, decision and fix, all in an open format. There is no vendor database to depend on, and the whole history is inspectable in git by your team or your auditors.
+The artefacts belong to you, and they live in your repository: the specification, the tests and the journal of every observation, decision and fix, all in an open format. There is no vendor database to depend on, and the whole history is inspectable in git by your team or your auditors.
 
-They also change how the team works. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing. **Test quality rises**, the backlog of latent bugs shrinks, and fixes start from a failing test rather than from archaeology.
+They also change how the team works. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing. Test quality rises, the backlog of latent bugs shrinks, and fixes start from a failing test rather than from archaeology.
 
-And they guard the future, because every change, whether from your developers or their AI assistants, is checked against the specification and its tests. **The rate at which new vulnerabilities enter the codebase falls** along with the count of old ones, and fewer flaws ever get a shelf life.
+And they guard the future, because every change, whether from your developers or their AI assistants, is checked against the specification and its tests. The rate at which new vulnerabilities enter the codebase falls along with the count of old ones, and fewer flaws ever get a shelf life.
 
 That is the difference between patching and hardening. Patching is reactive work that, done well, keeps pace with the rate at which new flaws are catalogued. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with. An engagement ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
 
