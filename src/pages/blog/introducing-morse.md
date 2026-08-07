@@ -112,7 +112,7 @@ The artefacts belong to you, and they live in your repository: the specification
 
 ## From reactive to proactive
 
-The specification and its tests are then checked against every change, whether from your developers or their AI assistants. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing, and fixes start from a failing test rather than from archaeology. The backlog of latent bugs shrinks and new vulnerabilities enter more slowly, so fewer flaws ever get a shelf life.
+Those artefacts do more than record the past. The specification and its tests are checked against every change, whether from your developers or their AI assistants. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing, and fixes start from a failing test rather than from archaeology. The backlog of latent bugs shrinks and new vulnerabilities enter more slowly, so fewer flaws ever get a shelf life.
 
 That is the difference between patching and hardening. Patching is reactive work that, done well, keeps pace with the rate at which the catalogues grow. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with. An engagement ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
 
