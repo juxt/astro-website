@@ -36,7 +36,7 @@ Weaknesses like these can't be patched in the traditional sense, because finding
 
 The obvious response, and the one much of the industry has settled on, is AI red teaming: point the same frontier models at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
 
-<span class="pullquote left" text-content="Red teaming ends when the budget ends, not when the code is safe."></span>
+<span class="pullquote left" text-content="Red teaming ends when the budget ends, not when the code is proven safe."></span>
 
 But red teaming is an open-ended search. It ends when the budget ends, not when the code is proven safe. Across millions of lines a thorough sweep can runs into the millions of dollars, and a clean run proves only that *this model* used *this budget* and found nothing *this time*.
 
