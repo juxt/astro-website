@@ -30,7 +30,7 @@ For a single unhedged position the formula and the risk measure agree, so both n
 
 ## Capital should track risk
 
-The FRTB standardised approach is a hundred-odd pages of prose and formulas. I ran one slice of it, general interest rate risk, through allium, which extracted it as a formal specification. Most of it translated directly, tables of numbers and the formulas that combine them into a capital charge. The text, however, does not state the property all those numbers are meant to deliver. FRTB's stated objective is risk sensitivity. In plain terms, the capital a bank must hold should rise when its risk rises and fall when its risk falls. Here is that property, written down in checkable form:
+The FRTB standardised approach is a hundred-odd pages of prose and formulas. I ran one slice of it, general interest rate risk, through [allium](https://github.com/juxt/allium), which extracted it as a formal specification. Most of it translated directly, tables of numbers and the formulas that combine them into a capital charge. The text, however, does not state the property all those numbers are meant to deliver. FRTB's stated objective is risk sensitivity. In plain terms, the capital a bank must hold should rise when its risk rises and fall when its risk falls. Here is that property, written down in checkable form:
 
 ```
 invariant RiskSensitivity {
