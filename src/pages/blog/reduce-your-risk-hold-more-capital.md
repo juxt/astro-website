@@ -30,7 +30,7 @@ For a single unhedged position the formula and the risk measure agree, so both n
 
 ## Capital should track risk
 
-The FRTB standardised approach is a hundred-odd pages of prose and formulas. I ran one slice of it, general interest rate risk, through [allium](https://github.com/juxt/allium), which extracted it as a formal specification. Most of it translated directly, tables of numbers and the formulas that combine them into a capital charge. The text, however, does not state the property all those numbers are meant to deliver. FRTB's stated objective is risk sensitivity. In plain terms, the capital a bank must hold should rise when its risk rises and fall when its risk falls. Here is that property, written down in checkable form:
+The FRTB standardised approach is a hundred-odd pages of prose and formulas. I ran one slice of it, general interest rate risk, through [allium](https://github.com/juxt/allium), which extracted it as a formal specification. Most of it translated directly, tables of numbers and the formulas that combine them into a capital charge. The text, however, does not explicitly state the property all those numbers are meant to deliver. FRTB's stated objective is risk sensitivity. In plain terms, the capital a bank must hold should rise when its risk rises and fall when its risk falls. Here is that property, written down in checkable form:
 
 ```
 invariant RiskSensitivity {
@@ -62,7 +62,7 @@ A hole this size, I assumed, must already be known, so I went digging.
 
 It is. ISDA, the International Swaps and Derivatives Association, [reported it in February 2015](https://www.isda.org/a/eTiDE/1b.pdf), ten weeks after the draft was published. Their letter called it a "methodological flaw" producing "unrealistically large capital charges for well-hedged basis positions", and warned of "a perverse incentive created to leave risk unhedged". The Basel Committee itself [acknowledged the problem in writing in 2018](https://www.bis.org/bcbs/publ/d436.pdf), saying parts of the aggregation are "not commensurate with the actual risk". In 2019 it softened the offending formula and finalised the framework.
 
-The counterexample in this post runs on the softened formula. Under the 2016 text the surcharge on a hedge like this could exceed 30%. The 2019 change more than halved it. It did not remove it, and the industry still says so. In [October 2025](https://www.isda.org/a/XlBgE/The-Impact-of-the-FRTB-on-Correlation-Trading.pdf), six years after the fix, ISDA wrote that parts of the standardised approach act "as a disincentive for risk-reducing hedging activities".
+The counterexample in this post runs on the softened formula. Under the 2016 text the surcharge on a hedge like this could exceed 30%. The 2019 change more than halved it. It did not completely remove it, and the industry still says so. In [October 2025](https://www.isda.org/a/XlBgE/The-Impact-of-the-FRTB-on-Correlation-Trading.pdf), six years after the fix, ISDA wrote that parts of the standardised approach act "as a disincentive for risk-reducing hedging activities".
 
 ## Why it is still there
 
