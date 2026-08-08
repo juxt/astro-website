@@ -1,0 +1,38 @@
+<svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t">
+  <title id="t">The specification and the code both feed Morse, which derives a test that fails on first run</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, system-ui, sans-serif; fill: #0b0e14; }
+    .n { fill: #6b7280; font-size: 13px; }
+    .l { font-size: 15px; font-weight: 600; }
+  </style>
+  <rect x="0" y="0" width="860" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect x="70" y="35" width="180" height="70" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="160" y="76" class="l" text-anchor="middle">Specification</text>
+
+  <rect x="70" y="145" width="180" height="70" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="160" y="186" class="l" text-anchor="middle">Code</text>
+
+  <g stroke="#6b7280" stroke-width="1.5">
+    <line x1="255" y1="70" x2="346" y2="116" marker-end="url(#a)"/>
+    <line x1="255" y1="180" x2="346" y2="144" marker-end="url(#a)"/>
+  </g>
+  <text x="270" y="55" class="n">How it should behave</text>
+  <text x="270" y="226" class="n">How it behaves</text>
+
+  <rect x="350" y="100" width="120" height="60" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="410" y="136" class="l" text-anchor="middle">Morse</text>
+
+  <line x1="475" y1="130" x2="597" y2="130" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="536" y="118" class="n" text-anchor="middle">Derives</text>
+
+  <rect x="605" y="65" width="185" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="697" y="118" class="l" text-anchor="middle">Proposed test</text>
+  <text x="697" y="152" class="n" text-anchor="middle" font-size="14">✗ Fails on first run</text>
+  <text x="697" y="228" class="n" text-anchor="middle">The bug, made concrete</text>
+</svg>
