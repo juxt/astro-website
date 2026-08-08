@@ -12,7 +12,7 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede">A security flaw used to have a shelf life. Back in 2021, the median time between a vulnerability being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today the median exploit arrives <a href="https://zerodayclock.com" target="_blank">hours before its disclosure</a>. The window has been shrinking for years, and now AI is able to find exploits at scale.</p>
+<p class="lede">Back in 2021, the median time between a vulnerability being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today the median exploit arrives <a href="https://zerodayclock.com" target="_blank">hours before its disclosure</a>. That window has been shrinking for years, and now AI has made finding exploits something you can automate.</p>
 
 In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
 
@@ -112,7 +112,7 @@ The artefacts belong to you, and they live in your repository: the specification
 
 ## From reactive to proactive
 
-Those artefacts do more than record the past. The specification and its tests are checked against every change, whether from your developers or their AI assistants. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing, and fixes start from a failing test rather than from archaeology. The backlog of latent bugs shrinks and new vulnerabilities enter more slowly, so fewer flaws ever get a shelf life.
+Those artefacts do more than record the past. The specification and its tests are checked against every change, whether from your developers or their AI assistants. With the system's intended behaviour written down at last, instead of living only in the heads of a few long-tenured engineers, developers understand the code they are changing, and fixes start from a failing test rather than from archaeology. The backlog of latent bugs shrinks and new vulnerabilities enter more slowly, so there is less for an attacker to find in the first place.
 
 That is the difference between patching and hardening. Patching is reactive work that, done well, keeps pace with the rate at which the catalogues grow. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with. An engagement ends with your team owning a codebase in better shape than we found it, and equipped to keep it that way.
 
