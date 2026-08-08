@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Morse: code, decoded'
-description: 'Security tools hand you bugs one alert at a time. Morse turns detective and helps you work out what your code should do so that quality rises with every commit.'
+description: "Patching security vulnerabilities reactively, but wondering if there's a better way? We think there is, and we've called it Morse."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-08-07'
