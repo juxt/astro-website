@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'Morse: code, decoded'
-description: "Patching security vulnerabilities reactively, but wondering if there's a better way? We think there is, and we've called it Morse."
+description: "Patching security vulnerabilities reactively but wondering if there's a better way? We think there is."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-08-07'
