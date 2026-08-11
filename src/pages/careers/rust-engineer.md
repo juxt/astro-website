@@ -53,14 +53,13 @@ If you enjoy solving hard problems, measuring rather than guessing, and building
 * Great benefits, including full medical, 10% matched pension and regular premium events.
 
 ## WFH?
-These roles are hybrid, a mix of remote work and on-site collaboration. You’ll need to be UK-based and within a commutable distance of London.
+These roles are hybrid, a mix of remote work and on-site collaboration. You’ll need to be UK-based and within a commutable distance of London and able to attend the office at least 3 times per week if required.
 
 ## Contract type
-Permanent only.
+Permanent and contract roles available.
 
 ## Eligibility
 Applicants should have a permanent right to work in the UK.
 
 ## Interested?
-
 Email careers@juxt.pro with your CV and a brief introduction. Even if you’re not sure you tick every box, we’d still love to hear from you - we’re always keen to meet passionate, technically curious developers and can keep you in mind for future projects if this one isn’t the right fit.
