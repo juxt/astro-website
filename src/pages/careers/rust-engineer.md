@@ -29,10 +29,10 @@ If you enjoy solving hard problems, measuring rather than guessing, and building
 
 ## Core skills
 
-* Deep, hot-path Rust is essential: allocation-free code on the critical path, lock-free or wait-free data structures, and careful control of memory layout and cache behaviour
+* Deep, hot-path Rust is essential: writing allocation-free, contention-aware code on the critical path, with careful control of memory layout and data structures
 * A firm understanding of latency distributions and how to minimise tail latency (p99.9 and beyond) is essential, along with proven experience building ultra-low-latency, low-jitter systems
-* Mechanical sympathy: CPU cache hierarchy, NUMA and false sharing, plus core isolation, CPU pinning and huge pages
-* Kernel-bypass networking and busy-polling I/O, for example DPDK or Solarflare Onload
+* Mechanical sympathy: a real feel for how CPU caches, memory layout and contention shape latency, and the techniques used to control them (CPU affinity, NUMA awareness and the like)
+* Familiarity with the techniques used to squeeze latency out of the network and OS path, such as kernel bypass and busy-polling I/O
 * Rigorous measurement: latency histograms, tail-latency analysis and an awareness of coordinated omission
 * Strong automated testing discipline, treated as essential: property-based tests, deterministic replay and simulation
 * AI-assisted engineering e.g. Claude Code, etc.
