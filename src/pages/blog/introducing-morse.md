@@ -12,7 +12,7 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede">Back in 2020, the median time between a vulnerability being disclosed and first being exploited was over 6 months. This year, for the first time, that median has gone negative. <a href="https://zerodayclock.com" target="_blank">hours before its disclosure</a>. This means that greater than half of new CVEs are reported after their first confirmed in-the-wild exploitation.</p>
+<p class="lede">Back in 2020, the median time between a vulnerability being disclosed and first being exploited was over 6 months. This year, for the first time, that median has <a href="https://zerodayclock.com" target="_blank">gone negative</a>. This means that greater than half of new CVEs are reported after their first confirmed in-the-wild exploitation.</p>
 
 The same capability serves both attackers and defenders alike.
 
@@ -46,11 +46,9 @@ The money buys a report, but the code is a moving target. Every subsequent commi
 
 ## Introducing Morse
 
-Wherever intent is weakly expressed, an implementation admits alternatives: inputs and sequences of events under which the code does something its authors didn't consider. Every alternative behaviour reachable from the outside is a potential exploit, and alternatives are exactly what an attacking model hunts for.
+**Morse** is our answer. Rather than patching CVEs retrospectively, or asking AIs to sweep your codebase for issues, Morse works out what the code you write is trying to achieve, and expresses that in a precise, formal specification. The specification is a durable representation of the intended behaviour, and provides the necessary grounding for an AI to harden the code until only that intended behaviour remains.
 
-**Morse** is our answer. Rather than paying a model to find exploits one at a time, it works out what the code you write is trying to achieve, and expresses that in a precise-formal specification. The specification is a durable representation of the intended behaviour, and provides the necessary grounding for an AI to harden the code until only that intended behaviour remains.
-
-This is a radically different approach to CVE fixing. A scanner can tell you that a function ignores a return code; Morse reasons about your code in the terms of your domain. Code hardened this way withstands exploits nobody has invented yet.
+This is a radically different approach. A scanner can tell you that a function ignores a return code; Morse reasons about your code in the terms of your domain. Code hardened this way withstands exploits nobody has invented yet.
 
 We've called it Morse for two reasons.
 
@@ -58,7 +56,6 @@ We've called it Morse for two reasons.
 * Morse is the Oxford detective who worked patiently from evidence and preferred corroboration to confidence.
 
 Inspector Morse never worked alone; he had his faithful assistant Lewis. Our Morse has the same: the command line tool that does the legwork, scanning, ingesting and raising tickets from your terminal or your CI, is called `lewis`.
-
 
 ## How Morse works
 
