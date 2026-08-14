@@ -12,7 +12,7 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede">Back in 2020, the median time between a vulnerability being disclosed and first being exploited was over 6 months. This year, for the first time, that median has <a href="https://zerodayclock.com" target="_blank">gone negative</a>. This means that greater than half of new CVEs are reported after their first confirmed in-the-wild exploitation.</p>
+<p class="lede">Back in 2020, the median time between a vulnerability being disclosed and first being exploited was over 6 months. This year, for the first time, that median has <a href="https://zerodayclock.com" target="_blank">gone negative</a>. This means that more than half of new CVEs are reported after their first confirmed in-the-wild exploitation.</p>
 
 The same capability serves both attackers and defenders alike.
 
