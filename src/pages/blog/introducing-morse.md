@@ -67,13 +67,13 @@ Recovering specifications from programs is a research problem with a long histor
 
 ### It extracts signal from noise
 
-Morse runs alongside the tools you already have. If you already use scanners such as Snyk or SonarQube, and `lewis` can injest their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format. There is no external database and no account to provision; state is shared the way code is shared, by push and pull.
+Morse runs alongside the tools you already have. If you already use scanners such as Snyk or SonarQube, and `lewis` can injest their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format.
 
 Observations are grouped into a short list of findings, so duplicate reports of a single flaw collapse into a single finding no matter how many tools flagged it. Ranking combines [CISA's known-exploited catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) and [EPSS](https://www.first.org/epss/) probabilities with Morse's own severity assessment, so the list is ordered by risk. What reaches your team is the shape of the problem, in a handful of findings instead of thousands of raw alerts.
 
 ![Diagram: reports from Snyk, SonarQube and CI, together with Morse's own analysis, are ingested by lewis into a journal in your repository, then grouped into a short list of findings ranked by risk.](../../assets/blog/morse-signal.svg)
 
-### It anchors to what the code *should* so
+### It anchors to what the code *should* do
 
 Good tests offer the best proof that code behaves the way it should. Before any fix, Morse asks whether the existing tests can be trusted.
 
