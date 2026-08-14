@@ -18,7 +18,7 @@ In April 2026, Anthropic gave around fifty operators of critical infrastructure 
 
 ## The problem with CVEs
 
-Historically, defence has meant static analysis against databases of known problems: Critical Vulnerability and Exposures, or CVEs. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
+Historically, defence has meant static analysis against databases of known problems: Common Vulnerabilities and Exposures, or CVEs. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
 
 There are now two problems with this approach.
 
@@ -38,7 +38,7 @@ The obvious response, and the one much of the industry has settled on, is AI red
 
 <span class="pullquote left" text-content="Red teaming ends when the budget ends, not when the code is proven safe."></span>
 
-But red teaming is an open-ended search. It ends when the budget ends, not when the code is proven safe. Across millions of lines a thorough sweep can runs into the many thousands of dollars, and a clean run proves only that *this model* used *this budget* and found nothing *this time*.
+But red teaming is an open-ended search. It ends when the budget ends, not when the code is proven safe. Across millions of lines a thorough sweep can run into the many thousands of dollars, and a clean run proves only that *this model* used *this budget* and found nothing *this time*.
 
 The money buys a report, but the code is a moving target. Every subsequent commit takes the codebase a little further from the one that was checked.
 
@@ -61,11 +61,11 @@ Morse begins by reading the codebase and distilling a behavioural specification:
 
 Recovering specifications from programs is a research problem with a long history, but where earlier techniques could only surface machine-level invariants, current models produce [formally verifiable specifications](https://dl.acm.org/doi/10.1109/ICSE55347.2025.00129) for most benchmark programs. The distillation is itself diagnostic: where a tangle of rules governs a small area of code, there is usually something worth a closer look.
 
-![Diagram: Morse reads your codebase and distills it into a behavioural specification.](../../assets/blog/morse-distil.svg)
+![Diagram: Morse reads your codebase and distils it into a behavioural specification.](../../assets/blog/morse-distil.svg)
 
 ### It extracts signal from noise
 
-Morse runs alongside the tools you already have. If you already use scanners such as Snyk or SonarQube, and `lewis` can injest their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format.
+Morse runs alongside the tools you already have. If you already use scanners such as Snyk or SonarQube, `lewis` can ingest their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format.
 
 Observations are grouped into a short list of findings, so duplicate reports of a single flaw collapse into a single finding no matter how many tools flagged it. Ranking combines [CISA's known-exploited catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) and [EPSS](https://www.first.org/epss/) probabilities with Morse's own severity assessment, so the list is ordered by risk. What reaches your team is the shape of the problem, in a handful of findings instead of thousands of raw alerts.
 
@@ -75,17 +75,17 @@ Observations are grouped into a short list of findings, so duplicate reports of 
 
 Good tests offer the best proof that code behaves the way it should. Before any fix, Morse asks whether the existing tests can be trusted.
 
-Coverage alone doesn't make tests trustworthy. Because the specification says how the code should behave, Morse can judge whether the tests check the right things. Where they are missing or weak it implements new ones, grounded in the specification. Since the specification descibes properties of the system that must be true for all inputs, Morse can create hundreds or thousands of adversarial scenarios that exhaustively test and confirm correct edge case behaviour.
+Coverage alone doesn't make tests trustworthy. Because the specification says how the code should behave, Morse can judge whether the tests check the right things. Where they are missing or weak it implements new ones, grounded in the specification. Since the specification describes properties of the system that must be true for all inputs, Morse can create hundreds or thousands of adversarial scenarios that exhaustively test and confirm correct edge case behaviour.
 
 ![Diagram: the specification, showing how the code should behave, and the code, showing how it behaves, both feed Morse, which derives a test that fails on first run.](../../assets/blog/morse-tests.svg)
 
-Sometimes the analysis finds that existing tests are passing when they shouldn't, because both the test and the code are wrong in the same way. Morse flags these findings too. Updates to tests are proposed which cause the tests to fail correct, so your engineers can see the issues which were masked by a green test suite and yet latent in the code all along.
+Sometimes the analysis finds that existing tests are passing when they shouldn't, because both the test and the code are wrong in the same way. Morse flags these findings too. Updates to tests are proposed which cause the tests to fail correctly, so your engineers can see the issues which were masked by a green test suite and yet latent in the code all along.
 
 ### It fixes without breaking things
 
 With the intended behaviour pinned down in failing tests, Morse writes an implementation that satisfies them in the most secure way available.
 
-A fix is reported as 'likely fixed' on the first clean scan, and as 'confirmed' once the other tools have independently re-scanned and agree. Morse is designed to make rigourous software development accessible and effective. Your team have the information they need in order to confirm and sign-off the fixes as successful.
+A fix is reported as 'likely fixed' on the first clean scan, and as 'confirmed' once the other tools have independently re-scanned and agree. Morse is designed to make rigorous software development accessible and effective. Your team have the information they need in order to confirm and sign-off the fixes as successful.
 
 ![Diagram: an applied fix is re-scanned by Snyk, SonarQube and CI; lewis ingests their reports and the finding moves from likely fixed to confirmed fixed once every tool re-scans clean.](../../assets/blog/morse-fixes.svg)
 
