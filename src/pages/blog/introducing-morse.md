@@ -73,7 +73,7 @@ Observations are grouped into a short list of findings, so duplicate reports of 
 
 ![Diagram: reports from Snyk, SonarQube and CI, together with Morse's own analysis, are ingested by lewis into a journal in your repository, then grouped into a short list of findings ranked by risk.](../../assets/blog/morse-signal.svg)
 
-### It anchors to what the code *should* do
+### It anchors to what the code should do
 
 Good tests offer the best proof that code behaves the way it should. Before any fix, Morse asks whether the existing tests can be trusted.
 
