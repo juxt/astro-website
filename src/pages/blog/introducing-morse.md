@@ -65,7 +65,7 @@ Recovering specifications from programs is a research problem with a long histor
 
 ![Diagram: Morse reads your codebase and distills it into a behavioural specification.](../../assets/blog/morse-distil.svg)
 
-### The signal in the noise
+### It extracts signal from noise
 
 Morse runs alongside the tools you already have. If you already use scanners such as Snyk or SonarQube, and `lewis` can injest their reports next to Morse's own analysis. Every observation, from a CVE match to a behavioural divergence, is recorded in a journal committed to your repository in a documented open format. There is no external database and no account to provision; state is shared the way code is shared, by push and pull.
 
@@ -73,7 +73,7 @@ Observations are grouped into a short list of findings, so duplicate reports of 
 
 ![Diagram: reports from Snyk, SonarQube and CI, together with Morse's own analysis, are ingested by lewis into a journal in your repository, then grouped into a short list of findings ranked by risk.](../../assets/blog/morse-signal.svg)
 
-### Spec-anchored tests
+### It anchors to what the code *should* so
 
 Good tests offer the best proof that code behaves the way it should. Before any fix, Morse asks whether the existing tests can be trusted.
 
@@ -83,7 +83,7 @@ Coverage alone doesn't make tests trustworthy. Because the specification says ho
 
 Sometimes the analysis finds that existing tests are passing when they shouldn't, because both the test and the code are wrong in the same way. Morse flags these findings too. Updates to tests are proposed which cause the tests to fail correct, so your engineers can see the issues which were masked by a green test suite and yet latent in the code all along.
 
-### Fixing without breaking things
+### It fixes without breaking things
 
 With the intended behaviour pinned down in failing tests, Morse writes an implementation that satisfies them in the most secure way available.
 
@@ -91,7 +91,7 @@ A fix is reported as 'likely fixed' on the first clean scan, and as 'confirmed' 
 
 ![Diagram: an applied fix is re-scanned by Snyk, SonarQube and CI; lewis ingests their reports and the finding moves from likely fixed to confirmed fixed once every tool re-scans clean.](../../assets/blog/morse-fixes.svg)
 
-### From one repository to a fleet
+### It scales from one repository to a fleet
 
 The analysis is the same for one repository or a thousand; what changes is the shell around it.
 
@@ -109,7 +109,7 @@ Red teaming has no economies of scale: the next sweep costs what the last one di
 
 The artefacts belong to you, and they live in your repository: the specification, the tests and the journal of every observation, decision and fix, all in an open format. There is no vendor database to depend on, and the whole history is inspectable in git by your team or your auditors.
 
-## From reactive to proactive
+### From reactive to proactive
 
 This is the difference between patching and hardening. Patching is reactive work that, at best, keeps pace with the rate at which vulnerabilities grow. Hardening with Morse is proactive work that sets up a virtuous cycle: the specification and its tests make change safer, safer change raises quality, and higher quality leaves attackers less to work with.
 
