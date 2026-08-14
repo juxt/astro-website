@@ -12,17 +12,17 @@ tags:
   - 'engineering'
 ---
 
-<p class="lede">Back in 2021, the median time between a vulnerability being disclosed and first being exploited was close to a year, long enough to schedule a fix into an ordinary release. Today the median exploit arrives <a href="https://zerodayclock.com" target="_blank">hours before its disclosure</a>. That window has been shrinking for years, and now AI has made finding exploits something you can automate.</p>
+<p class="lede">Back in 2020, the median time between a vulnerability being disclosed and first being exploited was over 6 months. This year, for the first time, that median has gone negative. <a href="https://zerodayclock.com" target="_blank">hours before its disclosure</a>. This means that greater than half of new CVEs are reported after their first confirmed in-the-wild exploitation.</p>
+
+The same capability serves both attackers and defenders alike.
 
 In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
 
-Outside Glasswing, the model stays restricted, because safeguards against its offensive use [do not yet exist](https://www.anthropic.com/news/claude-fable-5-mythos-5). The same capability serves both attackers and defenders alike.
+## The problem with CVEs
 
-## The patch reflex
+Historically, defence has meant static analysis against databases of known problems: Critical Vulnerability and Exposures, or CVEs. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
 
-Historically, defence has meant static analysis against databases of known problems. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
-
-The only way to keep pace with discovery at that speed is to automate the patching too. Even then, two problems remain.
+There are now two problems with this approach.
 
 The first problem is timing: with the median exploit arriving before its disclosure, a CVE database describes where attackers have already been, and patching from it can only chase them.
 
@@ -32,7 +32,7 @@ The second is coverage: CVE databases describe known issues in dependencies, but
 
 Weaknesses like these can't be patched in the traditional sense, because finding them means knowing what the code is _meant to do_ and noticing where it does more than it should. Secure code does everything it needs to do and nothing else: no side effects its authors didn't intend, no edge cases where its behaviour is loosely defined.
 
-## Attacking your own code
+## The problem with AI red-teaming
 
 The obvious response, and the one much of the industry has settled on, is AI red teaming: point the same frontier models at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
 
