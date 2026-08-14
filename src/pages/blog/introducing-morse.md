@@ -4,7 +4,7 @@ title: 'Morse: code, decoded'
 description: "Patching security vulnerabilities reactively but wondering if there's a better way? There is."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
-publishedDate: '2026-08-07'
+publishedDate: '2026-08-14'
 heroImage: 'morse.jpg'
 tags:
   - 'ai'
