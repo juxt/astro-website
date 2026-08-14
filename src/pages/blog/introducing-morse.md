@@ -61,7 +61,7 @@ Morse begins by reading the codebase and distilling a behavioural specification:
 
 Recovering specifications from programs is a research problem with a long history, but where earlier techniques could only surface machine-level invariants, current models produce [formally verifiable specifications](https://dl.acm.org/doi/10.1109/ICSE55347.2025.00129) for most benchmark programs. The distillation is itself diagnostic: where a tangle of rules governs a small area of code, there is usually something worth a closer look.
 
-![Diagram: Morse reads your codebase and distils it into a behavioural specification.](../../assets/blog/morse-distil.svg)
+![Diagram: Morse reads your codebase and distills it into a behavioural specification.](../../assets/blog/morse-distil.svg)
 
 ### It extracts signal from noise
 
