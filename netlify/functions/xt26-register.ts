@@ -59,7 +59,11 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
   // `video-signup` + drops in the follow-up queue). Whitelisted so the
   // public endpoint can't inject an arbitrary source; anything else
   // (incl. omitted) falls back to the generic website form.
-  const ALLOWED_SOURCES = ['xt26_website_form', 'xt26_recording_request']
+  const ALLOWED_SOURCES = [
+    'xt26_website_form',
+    'xt26_recording_request',
+    'xt27_interest',
+  ]
   const source = ALLOWED_SOURCES.includes(body.orbitSource)
     ? body.orbitSource
     : 'xt26_website_form'

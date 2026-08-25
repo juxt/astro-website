@@ -5,7 +5,7 @@ import Layout from '@layouts/Layout.astro'
 import XT26Agenda from '@components/XT26Agenda.astro'
 import speakers from '../data/xt26/speakers.json'
 
-const subject = 'XT26 Talks Recording Request'
+const subject = 'XT27 Interest Registration'
 ---
 
 <Layout
@@ -61,7 +61,7 @@ const subject = 'XT26 Talks Recording Request'
         >
       </div>
       <a
-        href='#attend'
+        href='#agenda'
         class='inline-block border border-white/40 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300'
       >
         Watch the Talks
@@ -190,10 +190,10 @@ const subject = 'XT26 Talks Recording Request'
       <div class='max-w-2xl mx-auto'>
         <div class='flex flex-col items-center text-center mb-16'>
           <h2 class='text-4xl md:text-5xl font-extralight text-white mb-6'>
-            XT26 Talks – On-Demand
+            Register Your Interest in XT27
           </h2>
           <p class='text-gray-400 text-lg font-light max-w-md'>
-            We're currently editing all the talks. Fill in the form below, and we'll send you a link to the recordings as soon as they're ready.
+            XT27 will be invite-only and free for senior engineering leaders in banking and fintech. Leave your details and we'll be in touch when registration opens.
           </p>
         </div>
 
@@ -201,13 +201,13 @@ const subject = 'XT26 Talks Recording Request'
           client:only
           subject={subject}
           eventName='XT26'
-          orbitSource='xt26_recording_request'
+          orbitSource='xt27_interest'
           variant='dark'
           transparentInputs
           submitLabelColor='#0b0e14'
-          submitLabel='Send me the link'
+          submitLabel='Register interest'
           successTitle="You're on the list"
-          successMessage="We'll email you when the recordings are ready."
+          successMessage="We'll be in touch when XT27 registration opens."
         />
       </div>
     </div>
