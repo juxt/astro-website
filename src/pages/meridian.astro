@@ -104,10 +104,10 @@ import Layout from '@layouts/Layout.astro'
 
     <div class='relative z-10 flex flex-col items-center justify-center text-center px-6 w-full max-w-5xl mx-auto'>
       <!-- Early Access Badge -->
-      <div class='meridian-stagger-1 inline-flex items-center gap-3 mb-10'>
-        <div class='h-px w-8 bg-juxt/50'></div>
-        <span class='text-juxt text-xs font-semibold tracking-[0.3em] uppercase'>Early Access Preview</span>
-        <div class='h-px w-8 bg-juxt/50'></div>
+      <div class='meridian-stagger-1 inline-flex items-center gap-2 sm:gap-3 mb-10'>
+        <div class='h-px w-4 sm:w-8 bg-juxt/50'></div>
+        <span class='text-juxt text-[10px] sm:text-xs font-semibold tracking-[0.3em] uppercase'>Early Access Preview</span>
+        <div class='h-px w-4 sm:w-8 bg-juxt/50'></div>
       </div>
 
       <!-- Logo -->
@@ -120,18 +120,18 @@ import Layout from '@layouts/Layout.astro'
       </div>
 
       <!-- Headline -->
-      <h1 class='meridian-stagger-3 text-4xl md:text-5xl lg:text-6xl font-extralight text-white leading-tight mb-6 tracking-tight'>
-        Post-Trade Risk Management,<br />
+      <h1 class='meridian-stagger-3 w-full flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight leading-tight mb-6 tracking-tight'>
+        <span class='text-white'>Post-Trade Risk Management</span>
         <span class='text-juxt'>Accelerated</span>
       </h1>
 
       <!-- Sub-headline -->
-      <p class='meridian-stagger-4 text-lg md:text-xl text-gray-400 font-light max-w-2xl leading-relaxed mb-4'>
-        Decades of banking expertise, amplified by agentic development.<br />Same calibre. New velocity.
+      <p class='meridian-stagger-4 text-base sm:text-lg md:text-xl text-gray-400 font-light max-w-2xl leading-relaxed mb-4'>
+        Decades of banking expertise, amplified by agentic development.<br  /> Same calibre. New velocity.
       </p>
 
       <!-- Tagline -->
-      <div class='meridian-stagger-5 flex items-center gap-6 text-xs tracking-[0.25em] uppercase text-gray-500 font-medium mt-6'>
+      <div class='meridian-stagger-5 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs tracking-[0.25em] uppercase text-gray-500 font-medium mt-6'>
         <span>Immutable</span>
         <span class='w-1 h-1 rounded-full bg-juxt/60'></span>
         <span>Deterministic</span>
