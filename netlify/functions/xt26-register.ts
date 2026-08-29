@@ -43,6 +43,19 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     return json(400, { error: 'invalid json' })
   }
 
+  // Honeypot. The form renders a hidden, off-screen `website` input
+  // that humans never fill. A non-empty value means the submission is
+  // almost certainly a bot — discard it WITHOUT forwarding to Orbit,
+  // and return 200 so the bot can't tell its submission was dropped
+  // (a 4xx would let it detect the trap and tune around it). This is
+  // the primary gate: bots POST straight to this public function
+  // endpoint, so rejecting here stops the spam at the edge. Orbit's
+  // POST /api/people carries the same check as a backstop.
+  if ((body.website ?? '').trim() !== '') {
+    console.warn('xt26-register: honeypot tripped, dropping submission')
+    return json(200, { ok: true })
+  }
+
   const firstName = (body.firstName ?? '').trim()
   const lastName = (body.lastName ?? '').trim()
   const email = (body.email ?? '').trim().toLowerCase()
