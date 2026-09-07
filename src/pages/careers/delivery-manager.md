@@ -12,7 +12,7 @@ googleJobs:
     location: 'London',
     position: 'Delivery Manager',
     publishedDate: '2026-07-06',
-    validThrough: '2026-10-06T00:00',
+    validThrough: '2027-12-31T00:00',
     employmentType: 'FULL_TIME'
   }
 ---

@@ -12,7 +12,7 @@ googleJobs:
     location: 'London',
     position: 'Kotlin Engineer (All levels)',
     publishedDate: '2026-03-28',
-    validThrough: '2026-12-06T00:00',
+    validThrough: '2027-12-31T00:00',
     employmentType: 'FULL_TIME'
   }
 ---

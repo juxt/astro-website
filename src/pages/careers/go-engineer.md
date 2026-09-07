@@ -12,7 +12,7 @@ googleJobs:
     location: 'London',
     position: 'Senior / Principal Go Engineer',
     publishedDate: '2026-02-23',
-    validThrough: '2026-08-06T00:00',
+    validThrough: '2027-12-31T00:00',
     employmentType: 'FULL_TIME',
     salary:
       {

@@ -12,7 +12,7 @@ googleJobs:
     location: 'London',
     position: 'Java Engineer - Low Latency',
     publishedDate: '2025-10-17',
-    validThrough: '2026-08-06T00:00',
+    validThrough: '2027-12-31T00:00',
     employmentType: 'FULL_TIME'
   }
 ---

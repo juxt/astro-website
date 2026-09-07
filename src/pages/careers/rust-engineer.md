@@ -12,7 +12,7 @@ googleJobs:
     location: 'London',
     position: 'Senior / Principal Rust Engineer',
     publishedDate: '2026-08-11',
-    validThrough: '2027-02-11T00:00',
+    validThrough: '2027-12-31T00:00',
     employmentType: 'FULL_TIME'
   }
 ---
