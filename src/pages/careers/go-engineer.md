@@ -13,7 +13,14 @@ googleJobs:
     position: 'Senior / Principal Go Engineer',
     publishedDate: '2026-02-23',
     validThrough: '2026-08-06T00:00',
-    employmentType: 'FULL_TIME'
+    employmentType: 'FULL_TIME',
+    salary:
+      {
+        currency: 'GBP',
+        minValue: 120000,
+        maxValue: 160000,
+        unitText: 'YEAR'
+      }
   }
 ---
 

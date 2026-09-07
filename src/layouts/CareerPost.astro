@@ -21,6 +21,12 @@ export type CareerPostProps = {
     publishedDate: string
     validThrough: string
     employmentType: 'FULL_TIME' | 'PART_TIME' | 'CONTRACTOR' | 'TEMPORARY' | 'INTERN' | 'VOLUNTEER' | 'PER_DIEM' | 'OTHER'
+    salary?: {
+      currency: string
+      minValue: number
+      maxValue: number
+      unitText: 'HOUR' | 'DAY' | 'WEEK' | 'MONTH' | 'YEAR'
+    }
   }
 }
 
@@ -62,6 +68,18 @@ const schema = JSON.stringify({
     '@type': 'Country',
     name: 'United Kingdom'
   },
+  ...(googleJobs.salary && {
+    baseSalary: {
+      '@type': 'MonetaryAmount',
+      currency: googleJobs.salary.currency,
+      value: {
+        '@type': 'QuantitativeValue',
+        minValue: googleJobs.salary.minValue,
+        maxValue: googleJobs.salary.maxValue,
+        unitText: googleJobs.salary.unitText
+      }
+    }
+  }),
   jobLocationType: 'TELECOMMUTE',
   jobLocation: {
     '@type': 'Place',
