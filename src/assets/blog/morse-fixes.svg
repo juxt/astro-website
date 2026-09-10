@@ -1,0 +1,57 @@
+<svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t">
+  <title id="t">An applied fix is re-scanned by every tool, lewis ingests the results and the finding moves from likely fixed to confirmed</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, system-ui, sans-serif; fill: #0b0e14; }
+    .n { fill: #6b7280; font-size: 13px; }
+    .l { font-size: 15px; font-weight: 600; }
+    .m { font-size: 14px; }
+  </style>
+  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect x="40" y="115" width="185" height="70" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="132" y="144" class="l" text-anchor="middle">Fix applied</text>
+  <text x="132" y="164" class="n" text-anchor="middle" font-size="12">regression test included</text>
+
+  <g stroke="#6b7280" stroke-width="1.5">
+    <line x1="230" y1="150" x2="296" y2="66" marker-end="url(#a)"/>
+    <line x1="230" y1="150" x2="296" y2="122" marker-end="url(#a)"/>
+    <line x1="230" y1="150" x2="296" y2="178" marker-end="url(#a)"/>
+    <line x1="230" y1="150" x2="296" y2="234" marker-end="url(#a)"/>
+  </g>
+
+  <rect x="300" y="46" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="375" y="71" class="m" text-anchor="middle">Snyk</text>
+  <rect x="300" y="102" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="375" y="127" class="m" text-anchor="middle">SonarQube</text>
+  <rect x="300" y="158" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="375" y="183" class="n" text-anchor="middle">Other analysers</text>
+  <rect x="300" y="214" width="150" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="375" y="239" class="m" text-anchor="middle">CI tests</text>
+  <text x="375" y="276" class="n" text-anchor="middle">Re-scan the change</text>
+
+  <g stroke="#6b7280" stroke-width="1.5">
+    <line x1="450" y1="66" x2="526" y2="143" marker-end="url(#a)"/>
+    <line x1="450" y1="122" x2="526" y2="148" marker-end="url(#a)"/>
+    <line x1="450" y1="178" x2="526" y2="152" marker-end="url(#a)"/>
+    <line x1="450" y1="234" x2="526" y2="157" marker-end="url(#a)"/>
+  </g>
+
+  <rect x="530" y="120" width="100" height="60" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="580" y="155" class="l" text-anchor="middle">Lewis</text>
+
+  <line x1="635" y1="146" x2="686" y2="116" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="690" y="88" width="150" height="44" rx="22" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="765" y="115" class="m" text-anchor="middle">Likely fixed</text>
+
+  <line x1="765" y1="136" x2="765" y2="184" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="690" y="190" width="150" height="44" rx="22" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="765" y="217" class="m" text-anchor="middle" font-weight="600">Confirmed fixed</text>
+  <text x="730" y="266" class="n" text-anchor="middle">Once every tool comes back clean</text>
+</svg>

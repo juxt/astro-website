@@ -1,0 +1,76 @@
+<svg viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Cumulative cost over five releases: AI red teaming against Morse</title>
+  <style>
+    text { font-family: Inter, system-ui, sans-serif; fill: #0b0e14; }
+    .axis { fill: #6b7280; font-size: 14px; }
+    .label { font-size: 15px; font-weight: 600; }
+    .note { fill: #6b7280; font-size: 13px; }
+  </style>
+
+  <rect x="0" y="0" width="860" height="480" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <!-- title -->
+  <text x="80" y="40" font-size="20" font-weight="600">Cumulative cost over five releases</text>
+
+  <!-- y axis label -->
+  <text x="30" y="232" class="note" text-anchor="middle" transform="rotate(-90 30 232)">$ thousands, illustrative</text>
+
+  <!-- gridlines and y labels -->
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="80" y1="400" x2="720" y2="400"/>
+    <line x1="80" y1="286.7" x2="720" y2="286.7"/>
+    <line x1="80" y1="173.3" x2="720" y2="173.3"/>
+    <line x1="80" y1="60" x2="720" y2="60"/>
+  </g>
+  <g class="axis" text-anchor="end">
+    <text x="70" y="404">0</text>
+    <text x="70" y="290.7">200</text>
+    <text x="70" y="177.3">400</text>
+    <text x="70" y="64">600</text>
+  </g>
+
+  <!-- x labels -->
+  <g class="axis" text-anchor="middle">
+    <text x="80" y="426">Start</text>
+    <text x="208" y="426">Release 1</text>
+    <text x="336" y="426">Release 2</text>
+    <text x="464" y="426">Release 3</text>
+    <text x="592" y="426">Release 4</text>
+    <text x="720" y="426">Release 5</text>
+  </g>
+
+  <!-- savings band between the curves, from break-even to release 5 -->
+  <path d="M 259.2 304.8
+           L 336 264 L 464 196 L 592 128 L 720 60
+           L 720 278.2 L 592 283.8 L 464 289.5 L 336 298 Z"
+        fill="#f4901d" opacity="0.12"/>
+  <text x="560" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#c97417">Compounding savings</text>
+
+  <!-- red teaming line -->
+  <polyline points="80,400 208,332 336,264 464,196 592,128 720,60"
+            fill="none" stroke="#0b0e14" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#0b0e14">
+    <circle cx="80" cy="400" r="4"/><circle cx="208" cy="332" r="4"/>
+    <circle cx="336" cy="264" r="4"/><circle cx="464" cy="196" r="4"/>
+    <circle cx="592" cy="128" r="4"/><circle cx="720" cy="60" r="4"/>
+  </g>
+  <text x="732" y="64" class="label">AI red teaming</text>
+
+  <!-- Morse line -->
+  <polyline points="80,400 208,309.3 336,298 464,289.5 592,283.8 720,278.2"
+            fill="none" stroke="#f4901d" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="#f4901d" stroke="#ffffff" stroke-width="1.5">
+    <circle cx="80" cy="400" r="4.5"/><circle cx="208" cy="309.3" r="4.5"/>
+    <circle cx="336" cy="298" r="4.5"/><circle cx="464" cy="289.5" r="4.5"/>
+    <circle cx="592" cy="283.8" r="4.5"/><circle cx="720" cy="278.2" r="4.5"/>
+  </g>
+  <text x="732" y="282.2" class="label" fill="#c97417">Morse</text>
+
+  <!-- front-loaded cost annotation -->
+  <text x="150" y="320" class="note" text-anchor="end">Spec and tests,</text>
+  <text x="150" y="336" class="note" text-anchor="end">front-loaded</text>
+
+  <!-- break-even marker -->
+  <circle cx="259.2" cy="304.8" r="5.5" fill="#ffffff" stroke="#0b0e14" stroke-width="2"/>
+  <text x="266" y="330" class="note">Break even</text>
+</svg>
