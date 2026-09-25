@@ -19,11 +19,11 @@ Established, well-supported services ready for production AI deployments.
 
 ## Foundation models
 
-Foundation model providers continue to evolve rapidly. Major players such as OpenAI, Anthropic, Google and Meta compete alongside emerging organisations including DeepSeek, Alibaba and IBM.
+Foundation model providers continue to evolve rapidly. Major players such as OpenAI, Anthropic, Google, Microsoft and Meta compete alongside a fast-growing open-weight field including DeepSeek, Alibaba, Moonshot AI and NVIDIA. Consolidation has begun as well: Cohere and Aleph Alpha signed a definitive agreement in September 2026 to combine as a transatlantic sovereign-AI provider, subject to regulatory approval.
 
-Providers differentiate across three tiers: smaller, faster models optimised for speed and cost; larger, more capable models balancing capabilities with response times; and specialised reasoning models for complex problem-solving. The distinction between general and reasoning models is blurring, with GPT-5.4 and Claude Opus 4.6 integrating extended reasoning natively rather than through separate variants.
+Providers differentiate across three tiers: smaller, faster models optimised for speed and cost; larger, more capable models balancing capabilities with response times; and specialised reasoning models for complex problem-solving. The distinction between general and reasoning models has largely dissolved, with the current flagships from OpenAI, Anthropic and Google integrating extended reasoning natively rather than exposing it through separate variants.
 
-Foundation models warrant adoption for many business applications when paired with appropriate infrastructure (few-shot prompting, guardrails, RAG and evaluation frameworks). There is no universal "best model". We recommend benchmarking against your specific use cases, considering factors beyond raw performance: pricing, reliability, data privacy requirements and deployment options. High-quality open weight models with permissive licensing provide additional options for organisations with specific security or deployment requirements.
+Foundation models warrant adoption for many business applications when paired with appropriate infrastructure (few-shot prompting, guardrails, RAG and evaluation frameworks). There is no universal "best model". We recommend benchmarking against your specific use cases, considering factors beyond raw performance: pricing, reliability, data privacy requirements and deployment options. High-quality open weight models provide additional options for organisations with specific security or deployment requirements, though licensing increasingly varies: several 2026 flagships ship under custom, revenue-gated terms rather than permissive open-source licences.
 
 ### Key considerations
 
@@ -34,25 +34,31 @@ Foundation models warrant adoption for many business applications when paired wi
 - **Integration & lifecycle management** (context limitations, version control, updates)
 - **Vendor stability & support** (roadmap alignment, documentation, community)
 
-### Foundation model providers feature comparison (April 2026)
+### Foundation model providers feature comparison (September 2026)
 
 <div className="overflow-x-auto">
-| Provider             | Open Weights | Enterprise Focus | Reasoning Models | Edge Deployment | Long Context | Embedding API | Agentic Workflows | Model Selection Link                                                          |
-| -------------------- | ------------ | ---------------- | ---------------- | --------------- | ------------ | ------------- | ----------------- | ----------------------------------------------------------------------------- |
-| Alibaba              | ✓            |                  |                  | ✓               | ✓            | ✓             |                   | [Models](https://www.alibabacloud.com/help/en/model-studio/model-user-guide/) |
-| Anthropic            |              | ✓                | ✓                |                 | ✓            |               | ✓                 | [Models](https://docs.anthropic.com/en/docs/about-claude/models/all-models)   |
-| AWS                  |              | ✓                | ✓                |                 | ✓            |               |                   | [Models](https://aws.amazon.com/ai/generative-ai/nova/)                       |
-| Cohere               | ✓            | ✓                | ✓                |                 | ✓            | ✓             |                   | [Models](https://docs.cohere.com/docs/models)                                 |
-| DeepSeek             | ✓            |                  | ✓                | ✓               |              |               |                   | [Models](https://api-docs.deepseek.com/quick_start/pricing)                   |
-| Google               |              | ✓                | ✓                |                 | ✓            | ✓             | ✓                 | [Models](https://ai.google.dev/gemini-api/docs/models)                        |
-| IBM                  | ✓            | ✓                | ✓                | ✓               | ✓            |               |                   | [Models](https://www.ibm.com/granite)                                         |
-| Meta                 | ✓            |                  |                  | ✓               | ✓            |               |                   | [Models](https://www.llama.com/docs/model-cards-and-prompt-formats/)          |
-| MiniMax              | ✓            |                  |                  | ✓               | ✓            |               | ✓                 | [Models](https://www.minimax.io/)                                             |
-| Mistral&nbsp;AI      | ✓            | ✓                | ✓                | ✓               |              | ✓             |                   | [Models](https://docs.mistral.ai/getting-started/models/models_overview/)     |
-| OpenAI               | ✓            | ✓                | ✓                | ✓               | ✓            | ✓             | ✓                 | [Models](https://platform.openai.com/docs/models)                             |
-| Stability&nbsp;AI    | ✓            |                  |                  | ✓               |              |               |                   | [Models](https://platform.stability.ai/docs/getting-started)                  |
-| X                    | ✓            |                  | ✓                |                 | ✓            |               | ✓                 | [Models](https://docs.x.ai/docs/models)                                       |
-| Zhipu&nbsp;AI        | ✓            | ✓                | ✓                |                 | ✓            |               |                   | [Models](https://open.bigmodel.cn/)                                           |
+| Provider | Open Weights | Enterprise Focus | Reasoning Models | Edge Deployment | Long Context | Embedding API | Agentic Workflows | Model Selection Link |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Ai2 | ✓ |  | ✓ |  |  |  |  | [Models](https://allenai.org/language-models) |
+| Alibaba | ✓ |  | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://www.alibabacloud.com/help/en/model-studio/model-user-guide/) |
+| Anthropic |  | ✓ | ✓ |  | ✓ |  | ✓ | [Models](https://docs.anthropic.com/en/docs/about-claude/models/all-models) |
+| AWS |  | ✓ | ✓ |  | ✓ |  |  | [Models](https://aws.amazon.com/ai/generative-ai/nova/) |
+| Cohere | ✓ | ✓ | ✓ |  | ✓ | ✓ |  | [Models](https://docs.cohere.com/docs/models) |
+| DeepSeek | ✓ |  | ✓ | ✓ | ✓ |  | ✓ | [Models](https://api-docs.deepseek.com/quick_start/pricing) |
+| Google |  | ✓ | ✓ |  | ✓ | ✓ | ✓ | [Models](https://ai.google.dev/gemini-api/docs/models) |
+| IBM | ✓ | ✓ | ✓ | ✓ | ✓ |  |  | [Models](https://www.ibm.com/granite) |
+| Liquid&nbsp;AI | ✓ |  | ✓ | ✓ |  |  | ✓ | [Models](https://www.liquid.ai/models) |
+| Meta | ✓ |  |  | ✓ | ✓ |  | ✓ | [Models](https://www.llama.com/docs/model-cards-and-prompt-formats/) |
+| Microsoft |  | ✓ | ✓ |  | ✓ |  | ✓ | [Models](https://ai.azure.com/catalog/models) |
+| MiniMax | ✓ |  |  | ✓ | ✓ |  | ✓ | [Models](https://www.minimax.io/) |
+| Mistral&nbsp;AI | ✓ | ✓ | ✓ | ✓ |  | ✓ |  | [Models](https://docs.mistral.ai/getting-started/models/models_overview/) |
+| Moonshot&nbsp;AI | ✓ | ✓ | ✓ |  | ✓ |  | ✓ | [Models](https://huggingface.co/moonshotai) |
+| NVIDIA | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://build.nvidia.com/models) |
+| OpenAI | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://platform.openai.com/docs/models) |
+| Stability&nbsp;AI | ✓ |  |  | ✓ |  |  |  | [Models](https://platform.stability.ai/docs/getting-started) |
+| Tencent | ✓ |  | ✓ |  | ✓ |  | ✓ | [Models](https://github.com/Tencent-Hunyuan) |
+| X | ✓ |  | ✓ |  | ✓ |  | ✓ | [Models](https://docs.x.ai/docs/models) |
+| Zhipu&nbsp;AI | ✓ | ✓ | ✓ |  | ✓ |  |  | [Models](https://open.bigmodel.cn/) |
 </div>
 
 ### Feature definitions
@@ -130,7 +136,7 @@ The key benefit is proactive detection: organisations learn about performance de
 
 ## Open weight LLMs
 
-Open weight LLMs (sometimes incorrectly called "open source") reached maturity in 2025, with some surpassing frontier models on specific tasks. [MiniMax M2.7](https://www.minimax.io/news/minimax-m2), [Moonshot's Kimi K2.5](https://moonshotai.github.io/Kimi-K2/), [Zhipu's GLM-5](https://open.bigmodel.cn/) and [DeepSeek V3.2](https://www.deepseek.com/) compete directly with closed models on coding and reasoning benchmarks. Smaller models such as Microsoft's [Phi-4](https://huggingface.co/microsoft/phi-4) and Google's [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4) run on consumer hardware, making self-hosted inference practical for local coding assistants, on-device processing and latency-sensitive applications.
+Open weight LLMs (sometimes incorrectly called "open source") reached maturity in 2025, with some surpassing frontier models on specific tasks. [MiniMax M2.7](https://www.minimax.io/news/minimax-m2), [Moonshot's Kimi K3](https://huggingface.co/moonshotai/Kimi-K3), [Zhipu's GLM-5](https://open.bigmodel.cn/) and [DeepSeek V4](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) compete directly with closed models on coding and reasoning benchmarks. Meta has returned to open weights for local use with [Muse Glimmer](https://huggingface.co/meta-models/Muse-Glimmer-30B), a 30B model distilled from its closed Muse Spark flagship, released under Apache 2.0 and built to run as an on-device agent on a single consumer GPU. Smaller models such as Microsoft's [Phi-4](https://huggingface.co/microsoft/phi-4) and Google's [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4) run on consumer hardware, making self-hosted inference practical for local coding assistants, on-device processing and latency-sensitive applications.
 
 This quarter, source code was accidentally exposed through AI provider tooling, and autonomous agents with broad permissions destroyed production data. A self-hosted deployment puts data flow and model versioning under the operator's control. Prompts, outputs and proprietary code stay within the organisation, and the model only changes when the operator changes it. The pull, in short, is towards organisations retaining ownership of their data and the models that act on it.
 
@@ -143,7 +149,7 @@ Self-hosting still needs considerable ML engineering expertise, and total cost o
 
 ## Small language models
 
-Small language models (SLMs) are the smaller cousins of the open weight LLMs above. The current crop sits in the 1B–7B parameter range and runs comfortably on a single GPU, a modern laptop or in some cases a phone. Microsoft's [Phi-4-Mini](https://azure.microsoft.com/en-us/products/phi) (3.8B), Google's [Gemma 4 E2B and E4B](https://deepmind.google/models/gemma/gemma-4/) (2–4B effective parameters), [Meta's Llama 3.2 1B and 3B](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/) and Mistral's Ministral variants now perform at a level that was out of reach at this size two years ago.
+Small language models (SLMs) are the smaller cousins of the open weight LLMs above. The current crop sits in the 1B–7B parameter range and runs comfortably on a single GPU, a modern laptop or in some cases a phone. Microsoft's [Phi-4-Mini](https://azure.microsoft.com/en-us/products/phi) (3.8B), Google's [Gemma 4 E2B and E4B](https://deepmind.google/models/gemma/gemma-4/) (2–4B effective parameters), [Meta's Llama 3.2 1B and 3B](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/) and Mistral's Ministral variants, joined by [Liquid AI's LFM2.5 series](https://www.liquid.ai/models) engineered specifically for on-device inference, now perform at a level that was out of reach at this size two years ago.
 
 In our experience, the case for SLMs comes down to using your own data. A few thousand labelled examples and a fine-tuning run produce a model that has the organisation's terminology and edge cases built in. Hosted in-house, the data stays within the organisation, and the resulting model is small enough to deploy on the infrastructure that team already operates rather than something purpose-built.
 
