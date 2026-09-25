@@ -86,7 +86,7 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
 
-<div data-radar data-label="LLM API gateways" data-ring="trial" data-change="new" />
+<div data-radar data-label="LLM API gateways" data-ring="trial" />
 
 ## LLM API gateways
 
@@ -98,7 +98,7 @@ The operational value for multi-provider deployments is clear: centralised audit
 
 See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
 
-<div data-radar data-label="AI red teaming tools" data-ring="trial" data-change="new" />
+<div data-radar data-label="AI red teaming tools" data-ring="trial" />
 
 ## AI red teaming tools
 
@@ -110,7 +110,7 @@ The EU AI Act will require adversarial testing for high-risk systems by August 2
 
 See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
 
-<div data-radar data-label="AI-assisted code migration" data-ring="trial" data-change="new" />
+<div data-radar data-label="AI-assisted code migration" data-ring="trial" />
 
 ## AI-assisted code migration
 
@@ -224,7 +224,7 @@ See also: [Agentic vulnerability discovery](/ai-radar/tools/#agentic-vulnerabili
 
 Not recommended for new projects due to better alternatives or limited long-term viability.
 
-<div data-radar data-label="OpenClaw" data-ring="hold" data-change="new" />
+<div data-radar data-label="OpenClaw" data-ring="hold" />
 
 ## OpenClaw
 
