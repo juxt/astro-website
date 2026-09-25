@@ -84,7 +84,7 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 [Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate). [Galileo](https://www.galileo.ai/) takes a distinct angle, using purpose-built small models (its Luna family) for low-latency evaluation rather than frontier-model judges, with cloud and on-prem deployment for regulated teams.
 
 <div data-radar data-label="LLM API gateways" data-ring="trial" />
 
@@ -164,7 +164,7 @@ See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [CaMeL](/a
 
 This section was previously titled "Agentic computer use".
 
-<div data-radar data-label="Lakera" data-ring="assess" />
+<div data-radar data-label="Lakera" data-ring="assess" data-published="false" />
 
 ## Lakera
 
@@ -180,9 +180,9 @@ Libraries such as [Instructor](https://python.useinstructor.com/), [Outlines](ht
 
 The space is evolving quickly. Instructor has gained traction for its simplicity and Pydantic integration, while Outlines offers more sophisticated constrained generation. Native structured output features from model providers (OpenAI's JSON mode, Anthropic's tool use) may reduce the need for external libraries in some scenarios.
 
-A broader category of runtime guardrails has grown up alongside these libraries. NVIDIA's [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://www.guardrailsai.com/) go beyond schema conformance to include prompt injection scanning, content filtering and hallucination checks. Teams building production LLM applications should evaluate both levels: structured outputs for type safety and guardrails for content safety.
+A broader category of runtime guardrails has grown up alongside these libraries. NVIDIA's [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://www.guardrailsai.com/) go beyond schema conformance to include prompt injection scanning, content filtering and hallucination checks. [Lakera](https://www.lakera.ai/) Guard scans inputs and outputs for prompt injection, toxic content and data leakage; following its acquisition by Check Point it is best assessed as part of that stack rather than as a standalone product. Teams building production LLM applications should evaluate both levels: structured outputs for type safety and guardrails for content safety.
 
-See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [Lakera](/ai-radar/tools/#lakera), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
+See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
 
 <div data-radar data-label="MCP gateways" data-ring="assess" data-change="new" />
 
@@ -236,7 +236,7 @@ We do not recommend OpenClaw or its variants for new projects until the security
 
 See also: [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [CaMeL](/ai-radar/techniques/#camel).
 
-<div data-radar data-label="Conversational data analysis" data-ring="hold" />
+<div data-radar data-label="Conversational data analysis" data-ring="hold" data-published="false" />
 
 ## Conversational data analysis
 
