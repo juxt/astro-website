@@ -75,6 +75,18 @@ We've placed A2A in Trial because it remains relatively new with limited product
 
 Inside a single runtime, simpler options usually suffice. A single orchestrating agent can call tools directly through [MCP](/ai-radar/languages-frameworks/#mcp). A workflow engine such as [Temporal](/ai-radar/platforms/#temporal) or an [AI-powered workflow automation platform](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) coordinates LLM steps deterministically. A multi-agent framework such as [LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) handles orchestration in-process. Reach for A2A when none of these fit your topology.
 
+<div data-radar data-label='AGENTS.md and steering files' data-ring='trial' data-change="new" />
+
+## AGENTS.md and steering files
+
+[AGENTS.md](https://agents.md/) is a plain markdown file that tells a coding agent how to work in a repository: how to build and test, the conventions to follow, the architecture to respect, the things not to touch. It began as an OpenAI Codex convention and is now a vendor-neutral standard stewarded under the Linux Foundation, read by more than twenty agents including Claude Code, Cursor, Gemini CLI and Copilot. One file, understood everywhere, is a good deal better than a different dotfile for each tool.
+
+The wider practice is steering: keeping the instructions an agent needs in version-controlled files rather than in a prompt or a colleague's head. Larger projects tend to split these by concern (product, architecture, code style) and reference them from the root file. The main pitfall is auto-generation. Asking an agent to write its own AGENTS.md from a quick scan of the codebase produces confident, plausible and partly wrong instructions, which then steer every future session. Treat these files as code: written deliberately, reviewed, and corrected when the agent acts on something that turns out to be untrue.
+
+We place this in Trial. Adoption is broad and the cost of starting is a single file, but conventions for structuring and sharing steering files across teams are still forming. It pairs naturally with [harness engineering](/ai-radar/techniques/#harness-engineering) and [spec-driven development](/ai-radar/techniques/#spec-driven-development), which supply the intent these files carry.
+
+See also: [Harness engineering](/ai-radar/techniques/#harness-engineering), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Claude Skills](/ai-radar/techniques/#claude-skills), [MCP](/ai-radar/languages-frameworks/#mcp).
+
 <div data-radar data-label='LLM testing frameworks' data-ring='trial' />
 
 ## LLM testing frameworks
