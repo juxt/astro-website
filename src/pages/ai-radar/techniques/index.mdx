@@ -31,6 +31,8 @@ Retrieval-Augmented Generation (RAG) combines search and text generation to prod
 
 We're watching techniques such as [Self-RAG](https://arxiv.org/abs/2310.11511), which prompts the model to gather more evidence or refine its responses; early results suggest it reduces confabulations further.
 
+For coding agents working over a live codebase, the calculus has changed. Anthropic's Claude Code team [found](https://github.com/nibzard/awesome-agentic-patterns/blob/main/patterns/agentic-search-over-vector-embeddings.md) that agentic search, grep, glob and reading files directly, outperformed a pre-built embedding index, and Claude Code deliberately does not embed the codebase: an index goes stale as code changes, and conceptually similar matches without a shared token are usually noise. The lesson is scoped. For grounding over document corpora, RAG remains the right tool; for navigating code, direct search often beats retrieval.
+
 RAG introduces an indirect prompt injection attack surface. Retrieved documents are injected into model context, so adversarial content in any document reaches the prompt via the retrieval step. Retrieval access controls and provenance tracking for ingested documents help mitigate this risk.
 
 See also: Cross-encoder reranking, Structured RAG, Hypothetical document embeddings (HyDE).
@@ -64,6 +66,8 @@ We recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for new
 Providing examples to guide model responses has proven consistently effective across Large Language Models.
 
 This is shifting. As models become more capable, interactive multi-turn approaches are gaining favour: rather than providing examples upfront, practitioners prompt models to ask clarifying questions and iterate toward a solution. The pattern often produces better results, particularly in agentic workflows where the model can refine its approach.
+
+Reasoning models shift the balance further. OpenAI and Anthropic both advise defaulting to zero-shot for them and stating explicit success criteria the model can check its output against, rather than supplying worked examples, which can even degrade reasoning-model performance. Persona framing has weakened too: research finds that "act as an expert" prompts do not reliably improve factual accuracy, though they still help steer tone and format.
 
 Few-shot prompting retains an important role in non-interactive contexts. System prompts and automated pipelines do not afford clarifying dialogue, and well-chosen examples remain the most effective way to establish output format and domain conventions. We typically see diminishing returns beyond 3-5 examples, with token consumption as the main trade-off.
 
