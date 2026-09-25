@@ -47,7 +47,7 @@ The technique is widely adopted in both offline and online evaluation. Offline, 
 
 [Research demonstrates](https://arxiv.org/abs/2306.05685) that frontier models provide judgements correlating strongly with human preferences across many evaluation dimensions. We recommend using a different LLM as the judge than the one being evaluated, and viewing this as an augmentation to human evaluation rather than a replacement. The strongest LLMs can identify nuanced issues in reasoning and factuality that would otherwise require substantial human review time.
 
-See also: DeepEval.
+See also: [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
 
 <div data-radar data-label="BERT variants" data-ring="adopt" />
 
@@ -162,6 +162,20 @@ It is tempting to go further and build teams whose workers collaborate directly 
 The approach is also expensive: running several agents in parallel, each with its own context, consumes far more tokens than a single one. Anthropic notes it is a poor fit for tightly interdependent work such as writing code, where one change depends on the next. Some practitioners find that a well-structured [AGENTS.md](https://agents.md/) and the orchestration primitives already in their coding tool cover most needs, with dedicated frameworks worth adding only for cross-tool or long-running workflows. We reserve orchestration for tasks that decompose cleanly, such as parallel research or breadth-first search across a large codebase, which is why it sits in Trial rather than Adopt.
 
 See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures).
+
+<div data-radar data-label="Evals as a release gate" data-ring="trial" data-change="new" />
+
+## Evals as a release gate
+
+An AI system has no compile error to catch a regression. A prompt tweak, a model upgrade or a new tool can quietly make outputs worse, and the first sign is often a user complaint. The response that has taken hold is to treat evaluations as regression tests and run them in the pipeline: score a fixed set of cases on every change, and block the release when a score falls below an absolute threshold or drops against the last known-good baseline. As Simon Willison [puts it](https://simonwillison.net/2026/Jul/31/smevals/), evals are regression tests for non-deterministic systems, there to catch the day the model gets worse at the specific thing you depend on.
+
+What to gate on depends on the system, but a workable set is task accuracy against a labelled suite, cost per request, latency, and safety or jailbreak resistance, each judged against a baseline rather than in absolute terms alone. Agents add tool-call correctness and plan adherence; structured outputs add schema validity; RAG adds faithfulness to the retrieved context. [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge) supplies the scores the subjective dimensions need.
+
+The tooling has matured to make this routine. [Promptfoo](https://www.promptfoo.dev/) and [DeepEval](https://deepeval.com/) run assertions that fail a build directly, [Langfuse](https://langfuse.com/) and [LangSmith](https://www.langchain.com/langsmith) ship regression gates as CI actions, and the [observability tools](/ai-radar/tools/#llm-observability-tools) have added gates of their own, so the eval that debugs a run can also block a deploy.
+
+We place this in Trial: the gate is well supported and worth adopting wherever a quality regression is expensive, and for regulated teams it gives Model Risk Management an auditable quality bar. The stronger claim, that you should write evals first in the manner of test-driven development, is contested; [Hamel Husain](https://hamel.dev/blog/posts/evals-faq/should-i-practice-eval-driven-development.html) argues you should write evaluators for the failures you observe, not the ones you imagine. Start by gating the handful of cases you already know are critical, and grow the suite from the incidents you hit in production.
+
+See also: [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
 
 # Assess
 

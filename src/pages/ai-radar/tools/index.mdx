@@ -80,7 +80,7 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 [Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements.
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
 
 <div data-radar data-label="LLM API gateways" data-ring="trial" data-change="new" />
 
@@ -104,7 +104,7 @@ Our security coverage has grown this quarter, with guidance on prompt injection 
 
 The EU AI Act will require adversarial testing for high-risk systems by August 2026. We recommend starting with Promptfoo for breadth and CI/CD integration.
 
-See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
+See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
 
 <div data-radar data-label="AI-assisted code migration" data-ring="trial" data-change="new" />
 

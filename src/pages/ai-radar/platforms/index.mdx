@@ -134,9 +134,9 @@ Platforms with growing adoption that offer innovative approaches worth exploring
 
 Whilst experiment tracking tools such as Weights & Biases and MLflow excel at managing the development lifecycle, a distinct category has emerged to monitor AI systems in production. These tools detect drift and unexpected behaviour in deployed models that only surface when models encounter real-world data at scale.
 
-[Arize AI](https://arize.com/) provides unified observability across traditional ML and LLM applications, continuously tracking feature and embedding drift. [Evidently AI](https://www.evidentlyai.com/) offers both an open-source library and cloud platform, with over 100 metrics covering data quality and drift monitoring.
+[Arize AI](https://arize.com/) provides unified observability across traditional ML and LLM applications, continuously tracking feature and embedding drift (its open-source [Phoenix](/ai-radar/tools/#llm-observability-tools) handles run-level tracing; the platform here adds drift monitoring at scale). [Evidently AI](https://www.evidentlyai.com/) offers both an open-source library and cloud platform, with over 100 metrics covering data quality and drift monitoring.
 
-The key benefit is proactive detection: organisations learn about performance degradation before customer impact rather than discovering issues through support tickets. For teams already practising observability, AI-specific monitoring represents a natural extension of existing practices.
+The key benefit is proactive detection: organisations learn about performance degradation before customer impact rather than discovering issues through support tickets. For teams already practising observability, AI-specific monitoring represents a natural extension of existing practices. This is the post-deployment counterpart to [gating a release on evals](/ai-radar/techniques/#evals-as-a-release-gate): the gate catches regressions before they ship, monitoring catches the drift that only appears once live traffic arrives.
 
 <div data-radar data-label="Open weight LLMs" data-ring="trial" />
 
@@ -205,7 +205,7 @@ The Luna-2 approach is a differentiator. Most evaluation platforms use frontier 
 
 The trade-off is vendor dependency. Teams wanting open-source flexibility should consider [Langfuse](https://langfuse.com/) for tracing or [Phoenix](https://phoenix.arize.com/) for observability. The evaluation tooling space remains competitive, and we want to see how it settles before moving Galileo beyond Assess.
 
-See also: LLM observability tools, Production AI monitoring platforms.
+See also: LLM observability tools, Production AI monitoring platforms, Evals as a release gate.
 
 
 <div data-radar data-label="Kubeflow" data-ring="assess" />
