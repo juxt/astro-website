@@ -245,6 +245,18 @@ We've placed GEPA in Assess. It is already available through [DSPy](/ai-radar/la
 
 See also: [DSPy](/ai-radar/languages-frameworks/#dspy), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge).
 
+<div data-radar data-label="Purpose-built classifiers" data-ring="assess" data-change="new" />
+
+## Purpose-built classifiers
+
+Not every decision needs a generative model. For classification, routing, intent detection and scoring, a small model that returns a label, often with a calibrated probability, is faster, cheaper and more predictable than prompting a frontier LLM, and it keeps the easy decisions away from the expensive model. Used as a prefilter in front of an agent, it can cut token spend sharply.
+
+This is well-trodden ground. Encoder classifiers have done exactly this for years: [GLiNER](https://github.com/urchade/GLiNER) and [GLiClass](https://github.com/Knowledgator/GLiClass) handle zero-shot classification over arbitrary labels, are open-weight and self-hostable, and belong to the same [BERT-variant](/ai-radar/techniques/#bert-variants) lineage already in our Adopt ring. A small encoder fine-tuned on a few thousand of your own examples usually wins on cost, latency and control.
+
+The attention this quarter has gone to [TypeSafe's Jev](https://typesafe.ai/), a proprietary hosted "decision" model that returns a calibrated distribution over a fixed answer set, reached through its own API or OpenRouter's beta decisions endpoint. Independent testing puts its speed and price where you would expect for the task, but the "cannot hallucinate" positioning is oversold and the headline benchmark numbers are louder than the results underneath. We place the category in Assess: the pattern is sound and worth having in the toolbox, but there is little reason to reach for a closed, hosted option when open encoder classifiers cover the same work on infrastructure you control and data that never leaves it. Evaluate the mature open models first, and treat the new proprietary entrants as a convenience rather than a breakthrough.
+
+See also: [BERT variants](/ai-radar/techniques/#bert-variants), [Small language models](/ai-radar/platforms/#small-language-models), [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
+
 <div data-radar data-label="Fine-tuning with LoRA" data-ring="assess" />
 
 ## Fine-tuning with LoRA
