@@ -188,6 +188,20 @@ A digital twin is a virtual representation of a physical system that maintains b
 
 Digital twin platforms remain in Trial because successful deployment requires significant organisational investment beyond the platform itself. The challenge lies in data integration, maintaining synchronisation between physical and virtual systems and building capability to act on simulation insights. These are most relevant for organisations operating complex physical infrastructure: manufacturing plants, logistics networks, energy systems or robotics deployments. Organisations earlier in their data maturity journey should ensure foundational sensor instrumentation and data pipelines are in place before investing.
 
+<div data-radar data-label="Agent memory architectures" data-ring="trial" data-change="up" />
+
+## Agent memory architectures
+
+Stateless agents hit a wall quickly. An AI coding assistant that forgets what it learned yesterday, or a customer service agent that can't recall a conversation from last week, forces users to re-establish context on every interaction. Agent memory architectures address this with tiered storage: working context for the current session, long-term memory for persistent knowledge and episodic recall for past interactions. Over the past year memory has moved from a nice-to-have to a first-order design decision for anyone running agents beyond a single session, which is why we move it into Trial.
+
+[Mem0](https://mem0.ai/) has gained the most traction, serving as the exclusive memory provider for the AWS Agent SDK. It sits alongside your agent framework, automatically extracting and retrieving memories without changes to orchestration logic. [Letta](https://letta.com/) (formerly MemGPT) pioneered treating context management like virtual memory, paging information in and out as needed. [Zep](https://www.getzep.com/) differentiates on temporal accuracy, maintaining a knowledge graph that tracks how facts change over time. A theme this year is the move away from pure vector recall towards schema- and graph-grounded memory, which retrieves by structure rather than similarity alone and tends to be easier to audit.
+
+The frontier is memory that improves the agent. Systems such as Google's [ReasoningBank](https://research.google/blog/reasoningbank-enabling-agents-to-learn-from-experience/) turn an agent's own successes, and more usefully its failures, into reusable lessons retrieved on later tasks, so the agent gets better at the work it repeats. It is early, but it points at where memory is heading: not just recall, but steady improvement from experience.
+
+For regulated industries, agent memory introduces governance questions your existing data policies may not cover. Where does the memory reside? How do you audit what an agent "knows" about a customer? How do you comply with deletion requests? Involve compliance and data protection teams early.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Harness engineering](/ai-radar/techniques/#harness-engineering), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework).
+
 # Assess
 
 Emerging or specialised services that require careful evaluation before adoption.
@@ -252,17 +266,17 @@ The space is young and consolidating fast. Financial services organisations shou
 
 See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
 
-<div data-radar data-label="Agent memory architectures" data-ring="assess" data-change="new" />
+<div data-radar data-label="Managed agent platforms" data-ring="assess" data-change="new" />
 
-## Agent memory architectures
+## Managed agent platforms
 
-Stateless agents hit a wall quickly. An AI coding assistant that forgets what it learned yesterday, or a customer service agent that can't recall a conversation from last week, forces users to re-establish context on every interaction. Agent memory architectures address this with tiered storage: working context for the current session, long-term memory for persistent knowledge and episodic recall for past interactions.
+The counterpart to building your own [harness](/ai-radar/techniques/#harness-engineering) is renting one. Managed agent platforms run the agent for you, offering a hosted harness with sandboxed code execution, persistent memory, scoped permissions and durable long-running sessions behind an API. [AWS Bedrock AgentCore](https://aws.amazon.com/bedrock/agentcore/) is the clearest example, a serverless, framework-agnostic runtime that hosts an agent built in any stack on isolated microVMs. [Anthropic's Managed Agents](https://claude.com/blog/claude-managed-agents) and [Google's Managed Agents](https://ai.google.dev/gemini-api/docs/agents) take a more opinionated line, provisioning a sandbox where their own agent reasons, runs code and browses, while [Vercel's Agent Stack](https://vercel.com/blog/agent-stack) assembles the same pieces from durable functions and sandboxes. Coding-specific services such as Cursor's cloud agents sit alongside, and [Temporal](/ai-radar/platforms/#temporal) provides the durable-execution layer several of these build on.
 
-[Mem0](https://mem0.ai/) has gained the most traction, serving as the exclusive memory provider for the AWS Agent SDK. It sits alongside your agent framework, automatically extracting and retrieving memories without changes to orchestration logic. [Letta](https://letta.com/) (formerly MemGPT) pioneered treating context management like virtual memory, paging information in and out as needed. [Zep](https://www.getzep.com/) differentiates on temporal accuracy, maintaining a knowledge graph that tracks how facts change over time.
+The trade is the familiar one: time-to-production against control and portability. A managed platform removes the undifferentiated work of running sandboxes, memory and retries, at the cost of tying your agent to a vendor's runtime and pricing, typically billed per token plus a session-hour fee.
 
-For regulated industries, agent memory introduces governance questions your existing data policies may not cover. Where does the memory reside? How do you audit what an agent "knows" about a customer? How do you comply with deletion requests? Involve compliance and data protection teams early.
+We place managed agent platforms in Assess. The category is real and moving quickly, but most offerings reached preview or general availability only this quarter, pricing is unsettled, and portability between them is unproven. AgentCore is the most production-ready for teams that want to move sooner. Self-hosted, single-user runtimes such as [OpenClaw](/ai-radar/tools/#openclaw) sit at the opposite end and stay in Hold.
 
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework).
+See also: [Harness engineering](/ai-radar/techniques/#harness-engineering), [Temporal](/ai-radar/platforms/#temporal), [Agent code sandboxes](/ai-radar/tools/#agent-code-sandboxes), [AI-powered workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation-platforms).
 
 # Hold
 
