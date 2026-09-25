@@ -125,11 +125,11 @@ We're keeping it in Trial because the process requires considerable expertise. T
 
 Check the licence of models used for distillation. Llama forbids using its output to train other models.
 
-<div data-radar data-label="Claude Skills" data-ring="trial" />
+<div data-radar data-label="Claude Skills" data-ring="adopt" data-change="up" />
 
 ## Claude Skills
 
-Claude Skills are reusable prompt templates that codify workflows and domain expertise into repeatable patterns for AI coding assistants. Our teams have found them valuable for drafting proposals, structured debugging, generating commit messages and writing PR descriptions. The common thread is tasks that benefit from consistent approach and structured output.
+Claude Skills are reusable prompt templates that codify workflows and domain expertise into repeatable patterns for AI coding assistants. Our teams have found them valuable for drafting proposals, structured debugging, generating commit messages and writing PR descriptions. The common thread is tasks that benefit from consistent approach and structured output. The pattern is no longer specific to Claude: reusable, file-based skill definitions are becoming a common way to package expertise across coding assistants, and in our own work they are now a default.
 
 Skills provide a simpler solution than [MCP servers](/ai-radar/languages-frameworks/#mcp) for many problems. Where MCP requires implementing a server and managing the protocol lifecycle, Skills are markdown files that encode expertise directly. Skills work well with data that exists as files in your project, since the AI assistant can already read those. MCP extends reach to running services and systems beyond filesystem access.
 
