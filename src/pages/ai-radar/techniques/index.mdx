@@ -91,9 +91,19 @@ Software engineers working agentically are finding that natural-language prompts
 
 The practice has moved into the mainstream of agentic engineering over the past year. [GitHub Spec Kit](https://github.com/github/spec-kit) and Amazon's [Kiro](https://kiro.dev/) are the most visible tools: Spec Kit is agent-agnostic, while Kiro ships a dedicated specs mode that generates [EARS notation](https://alistairmavin.com/ears/) by default. Both treat structured markdown as the source of truth, with code generated or verified against it. A parallel revival of [Gherkin](https://cucumber.io/docs/gherkin/) and behaviour-driven development sits in the same middle ground between prose and formal language.
 
+The same discipline shows up as an execution loop inside agentic IDEs: plan, implement, then verify, with the agent producing a plan for review before it writes code and evidence of its own checks afterwards. Google's [Antigravity](https://antigravity.google/) makes this loop the default. Spec-driven development pushes the idea one step earlier, anchoring the loop to a specification rather than a plan the agent drafts per task.
+
 The direction we find most exciting goes further. A specification written in natural-language markdown, even one structured in EARS or Gherkin form, only moves the ambiguity problem one step back. The prose may be richer than a prompt, but it still relies on the model to disambiguate it. We are following formal specification languages instead, including our own [Allium](https://github.com/juxt/allium), an open-source language that captures system behaviour in a structured, machine-readable form. Allium is early in its life and external uptake remains nascent, but in our own work it gives AI agents an unambiguous reference and lets engineers detect contradictions before any code is written.
 
 See also: [Formal specification languages](/ai-radar/languages-frameworks/#formal-specification-languages), [Claude Skills](/ai-radar/techniques/#claude-skills).
+
+<div data-radar data-label="Claude Skills" data-ring="adopt" data-change="up" />
+
+## Claude Skills
+
+Claude Skills are reusable prompt templates that codify workflows and domain expertise into repeatable patterns for AI coding assistants. Our teams have found them valuable for drafting proposals, structured debugging, generating commit messages and writing PR descriptions. The common thread is tasks that benefit from consistent approach and structured output. The pattern is no longer specific to Claude: reusable, file-based skill definitions are becoming a common way to package expertise across coding assistants, and in our own work they are now a default.
+
+Skills provide a simpler solution than [MCP servers](/ai-radar/languages-frameworks/#mcp) for many problems. Where MCP requires implementing a server and managing the protocol lifecycle, Skills are markdown files that encode expertise directly. Skills work well with data that exists as files in your project, since the AI assistant can already read those. MCP extends reach to running services and systems beyond filesystem access.
 
 # Trial
 
@@ -129,14 +139,6 @@ We're keeping it in Trial because the process requires considerable expertise. T
 
 Check the licence of models used for distillation. Llama forbids using its output to train other models.
 
-<div data-radar data-label="Claude Skills" data-ring="adopt" data-change="up" />
-
-## Claude Skills
-
-Claude Skills are reusable prompt templates that codify workflows and domain expertise into repeatable patterns for AI coding assistants. Our teams have found them valuable for drafting proposals, structured debugging, generating commit messages and writing PR descriptions. The common thread is tasks that benefit from consistent approach and structured output. The pattern is no longer specific to Claude: reusable, file-based skill definitions are becoming a common way to package expertise across coding assistants, and in our own work they are now a default.
-
-Skills provide a simpler solution than [MCP servers](/ai-radar/languages-frameworks/#mcp) for many problems. Where MCP requires implementing a server and managing the protocol lifecycle, Skills are markdown files that encode expertise directly. Skills work well with data that exists as files in your project, since the AI assistant can already read those. MCP extends reach to running services and systems beyond filesystem access.
-
 <div data-radar data-label="Structured RAG" data-ring="trial" data-change="up" />
 
 ## Structured RAG
@@ -148,6 +150,18 @@ GraphRAG has matured since our last radar. [LazyGraphRAG](https://microsoft.gith
 The trade-off remains upfront investment. Graph-based indexing requires more compute and design than vector-based RAG, and the knowledge graph must be maintained as source documents change. If your queries are primarily about finding relevant passages, standard RAG with [cross-encoder reranking](/ai-radar/techniques/#cross-encoder-reranking) may suffice. If they require reasoning across documents, structured approaches justify their cost.
 
 See also: [RAG](/ai-radar/techniques/#rag), [Ontologies for AI grounding](/ai-radar/techniques/#ontologies-for-ai-grounding), [Cross-encoder reranking](/ai-radar/techniques/#cross-encoder-reranking).
+
+<div data-radar data-label="Orchestrator-worker agents" data-ring="trial" data-change="new" />
+
+## Orchestrator-worker agents
+
+Breaking a task across several agents works best with a clear division of labour: a single orchestrator holds the wider context and delegates self-contained subtasks to worker agents, each with its own context window, which report their findings back to the orchestrator. [Anthropic's multi-agent research](https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them) describes this hierarchy, and the pattern is now built into tools such as Claude Code's agent teams.
+
+The failure mode is letting workers talk to each other. Peer-to-peer chatter spends tokens re-establishing context and, as [Cognition argues](https://cognition.com/blog/dont-build-multi-agents), lets agents take conflicting actions the orchestrator would otherwise reconcile. The working rule is a single writer: keep decisions and edits on one thread, and let extra agents contribute read-only intelligence rather than actions.
+
+Multi-agent runs also cost more. They consume substantially more tokens than a single agent, and Anthropic notes the pattern is a poor fit for tightly interdependent work such as writing code, where one change depends on the next. Some practitioners find that a well-structured [AGENTS.md](https://agents.md/) and the orchestration primitives already in their coding tool cover most needs, with dedicated frameworks worth adding only for cross-tool or long-running workflows. We reserve orchestration for tasks that decompose cleanly, such as parallel research or breadth-first search across a large codebase, which is why it sits in Trial rather than Adopt.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures).
 
 # Assess
 
