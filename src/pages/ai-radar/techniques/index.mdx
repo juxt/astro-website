@@ -125,16 +125,6 @@ We're keeping it in Trial because the process requires considerable expertise. T
 
 Check the licence of models used for distillation. Llama forbids using its output to train other models.
 
-<div data-radar data-label="UMAP" data-ring="trial" />
-
-## UMAP
-
-[UMAP (Uniform Manifold Approximation and Projection)](https://umap-learn.readthedocs.io/en/latest/) is a dimensionality reduction technique that has gained substantial traction in the AI community. While t-SNE has been the go-to choice for visualising high-dimensional data, UMAP offers better preservation of global structure and runs significantly faster, making it valuable for large-scale AI applications such as exploring embedding spaces and analysing neural network activations.
-
-UMAP's parameters need careful tuning to avoid misleading visualisations.
-
-The Python [UMAP](https://umap-learn.readthedocs.io/en/latest/basic_usage.html) library provides extensive documentation and explanation, with implementations also available for [Rust](https://github.com/eugenehp/fast-umap), [Java](https://haifengl.github.io/api/java/smile/manifold/UMAP.html) and [R](https://cran.r-project.org/web/packages/umap/vignettes/umap.html).
-
 <div data-radar data-label="Claude Skills" data-ring="trial" />
 
 ## Claude Skills
@@ -211,6 +201,18 @@ The system creates several hypothetical documents, converts them into embeddings
 
 See also: RAG, BERT variants, Cross-encoder reranking.
 
+<div data-radar data-label="GEPA" data-ring="assess" data-change="new" />
+
+## GEPA
+
+[GEPA (Genetic-Pareto)](https://github.com/gepa-ai/gepa) optimises the prompts in an AI system automatically, by reflecting on what went wrong rather than by trial and error. It runs the system, reads the traces (reasoning, tool calls, errors) and asks an LLM to diagnose the failures in plain language and propose prompt edits, keeping a Pareto frontier of candidates that do well on different parts of the task. The [paper](https://arxiv.org/abs/2507.19457), accepted at ICLR 2026, reports that it beats reinforcement-learning tuning by up to 20% while using far fewer rollouts, and improves on the previous best prompt optimiser, MIPROv2, by more than 10%.
+
+The appeal for regulated teams is that GEPA works on API-only models without touching weights, and it produces prompts a human can read and review rather than an opaque set of fine-tuned parameters. It depends on a measurable objective, so it fits tasks with a clear evaluation signal better than open-ended generation.
+
+We've placed GEPA in Assess. It is already available through [DSPy](/ai-radar/languages-frameworks/#dspy) as `dspy.GEPA`, but it is early, and the quality of the optimised prompt depends heavily on the evaluation metric you give it. Teams already investing in prompt optimisation should be trying it now.
+
+See also: [DSPy](/ai-radar/languages-frameworks/#dspy), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge).
+
 <div data-radar data-label="Fine-tuning with LoRA" data-ring="assess" />
 
 ## Fine-tuning with LoRA
@@ -254,13 +256,6 @@ Not recommended for new projects; better alternatives exist.
 We've placed both [GloVe (Global Vectors for Word Representation)](https://nlp.stanford.edu/projects/glove/) and [Word2Vec (Word to Vector)](https://www.tensorflow.org/text/tutorials/word2vec) in the Hold ring of our techniques quadrant. While these word embedding techniques were groundbreaking when introduced and served as fundamental building blocks for many NLP applications, they have been largely superseded by more advanced approaches.
 
 These older embedding techniques, though computationally efficient, lack the contextual understanding that modern transformer-based models provide. Modern large language models and contextual embeddings such as BERT produce more nuanced representations that capture word meaning based on surrounding context, rather than the static embeddings that GloVe and Word2Vec generate. For new projects, we recommend exploring more recent embedding techniques (see "BERT Variants" in our Adopt ring) unless you have very specific constraints around computational resources or model size that make these older approaches necessary.
-
-<div data-radar data-label="t-SNE" data-ring="hold" data-published="false" />
-## t-SNE
-
-We've placed [t-SNE (t-distributed Stochastic Neighbor Embedding)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding) in the Hold ring of our techniques quadrant. While t-SNE was groundbreaking when introduced for visualising high-dimensional data in lower dimensions, particularly for understanding the internal representations of neural networks, we're seeing its limitations become more apparent in modern AI workflows.
-
-The core issue is that t-SNE can be misleading when interpreting AI model behaviour, as it prioritises preserving local structure at the expense of global relationships. This can lead teams to draw incorrect conclusions about their models' decision boundaries and feature representations. We're increasingly recommending alternatives such as UMAP (Uniform Manifold Approximation and Projection), which better preserves both local and global structure while offering superior computational performance. For projects requiring dimensionality reduction and visualisation of AI model internals, we suggest exploring these newer techniques rather than defaulting to t-SNE.
 
 <div data-radar data-label="Zero-shot prompting" data-ring="hold" data-published="false" />
 
