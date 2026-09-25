@@ -177,6 +177,18 @@ We put it in Trial. The gate is well supported and pays for itself wherever a qu
 
 See also: [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge), [LLM testing frameworks](/ai-radar/languages-frameworks/#llm-testing-frameworks), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
 
+<div data-radar data-label="Harness engineering" data-ring="trial" data-change="new" />
+
+## Harness engineering
+
+An agent is a model plus a harness: the code around the model that assembles its context, chooses and prunes its tools, runs its loop, holds its memory and checks its work. As frontier models converge, the harness is where a system's reliability is won or lost. A capable model wrapped in a poor harness flails, while a modest one inside a good harness gets useful work done. The discipline was named only this year, by [Mitchell Hashimoto](https://mitchellh.com/writing/my-ai-adoption-journey) and then by both major labs ([Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps), [OpenAI](https://openai.com/index/harness-engineering/)), and it has quickly become the centre of gravity for teams building agents.
+
+Much of the craft is subtraction and structure. Vercel [removed 80% of an agent's tools](https://vercel.com/blog/we-removed-80-percent-of-our-agents-tools) and accuracy rose: a smaller, more focused toolset leaves less room for the model to go wrong. Tool design is only half of it. Choosing the right loop for the task, and giving it a stop condition the model cannot simply declare met, is what separates an agent that finishes from one that calls the job done too early. For long-running work, context is reset rather than left to grow, with a compact handoff rebuilding a fresh session so quality does not decay as the window fills.
+
+We put harness engineering in Trial. The vocabulary is only months old and the patterns are still settling, with no agreed tooling or measurement, but the practices pay off today and we already apply them in our own work. Teams standing up agents should treat the harness, not the model, as the thing they are building.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [AGENTS.md and steering files](/ai-radar/languages-frameworks/#agentsmd-and-steering-files), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures).
+
 # Assess
 
 Emerging or specialised approaches that warrant investigation for specific use cases, but require careful evaluation before adoption.
@@ -244,6 +256,18 @@ The appeal for regulated teams is that GEPA works on API-only models without tou
 We've placed GEPA in Assess. It is already available through [DSPy](/ai-radar/languages-frameworks/#dspy) as `dspy.GEPA`, but it is early, and the quality of the optimised prompt depends heavily on the evaluation metric you give it. Teams already investing in prompt optimisation should be trying it now.
 
 See also: [DSPy](/ai-radar/languages-frameworks/#dspy), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge).
+
+<div data-radar data-label="Recursive language models" data-ring="assess" data-change="new" />
+
+## Recursive language models
+
+[Recursive language models (RLMs)](https://arxiv.org/abs/2512.24601), from a team at MIT CSAIL, address a familiar problem: model quality degrades as a prompt grows, well before the context window is technically full. Rather than feed a large context to the model, an RLM keeps it as a variable in a code environment and gives the model only the query. The model then writes code to inspect, slice and filter that context, calling itself or cheaper sub-models over the slices it needs, and never holds the whole thing in its own window at once. [Alex Zhang's write-up](https://alexzhang13.github.io/blog/2025/rlm/) reports processing context far beyond any single model's window this way.
+
+The idea generalises the code-execution pattern (CodeAct), the difference being the recursive calls and the treatment of context as a programmable object rather than text to be read in one pass. That also sets it apart from [orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), which split a task along a plan; here it is the context that is split, and the model decides how.
+
+We place RLMs in Assess. The research is credible and there is an active open-source implementation, but the results are largely author-reported, latency is unpredictable, and we have seen no production use yet. Worth experimenting with where context length is the binding constraint.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), [RAG](/ai-radar/techniques/#rag).
 
 <div data-radar data-label="Purpose-built classifiers" data-ring="assess" data-change="new" />
 
