@@ -51,7 +51,7 @@ See also: [Claude Skills](/ai-radar/techniques/#claude-skills), [Agentic tool us
 
 Promising technologies with growing adoption that are worth exploring in production-adjacent settings.
 
-<div data-radar data-label='Microsoft Agent Framework' data-ring='trial' data-change="new" />
+<div data-radar data-label='Microsoft Agent Framework' data-ring='trial' />
 
 ## Microsoft Agent Framework
 
@@ -75,6 +75,18 @@ We've placed A2A in Trial because it remains relatively new with limited product
 
 Inside a single runtime, simpler options usually suffice. A single orchestrating agent can call tools directly through [MCP](/ai-radar/languages-frameworks/#mcp). A workflow engine such as [Temporal](/ai-radar/platforms/#temporal) or an [AI-powered workflow automation platform](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) coordinates LLM steps deterministically. A multi-agent framework such as [LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) handles orchestration in-process. Reach for A2A when none of these fit your topology.
 
+<div data-radar data-label='AGENTS.md and steering files' data-ring='trial' data-change="new" />
+
+## AGENTS.md and steering files
+
+[AGENTS.md](https://agents.md/) is a plain markdown file that tells a coding agent how to work in a repository: how to build and test, the conventions to follow, the architecture to respect, the things not to touch. It began as an OpenAI Codex convention and is now a vendor-neutral standard stewarded under the Linux Foundation, read by more than twenty agents including Claude Code, Cursor, Gemini CLI and Copilot. One file, understood everywhere, is a good deal better than a different dotfile for each tool.
+
+The wider practice is steering: keeping the instructions an agent needs in version-controlled files rather than in a prompt or a colleague's head. Larger projects tend to split these by concern (product, architecture, code style) and reference them from the root file. The main pitfall is auto-generation. Asking an agent to write its own AGENTS.md from a quick scan of the codebase produces confident, plausible and partly wrong instructions, which then steer every future session. Treat these files as code: written deliberately, reviewed, and corrected when the agent acts on something that turns out to be untrue.
+
+We place this in Trial. Adoption is broad and the cost of starting is a single file, but conventions for structuring and sharing steering files across teams are still forming. It pairs naturally with [harness engineering](/ai-radar/techniques/#harness-engineering) and [spec-driven development](/ai-radar/techniques/#spec-driven-development), which supply the intent these files carry.
+
+See also: [Harness engineering](/ai-radar/techniques/#harness-engineering), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Claude Skills](/ai-radar/techniques/#claude-skills), [MCP](/ai-radar/languages-frameworks/#mcp).
+
 <div data-radar data-label='LLM testing frameworks' data-ring='trial' />
 
 ## LLM testing frameworks
@@ -95,7 +107,7 @@ See also: [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge), [AI red teamin
 
 We keep it in Trial because LlamaIndex's strongest case is narrower than its scope suggests: retrieval-heavy systems that benefit from its 100+ data connectors and fine-grained indexing controls. For RAG over large corpora or enterprise knowledge bases, it is the framework we would recommend looking at first. For general LLM orchestration, [LangChain & LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) tend to be a better fit.
 
-<div data-radar data-label='LangChain & LangGraph' data-ring='trial' data-change="up" />
+<div data-radar data-label='LangChain & LangGraph' data-ring='trial' />
 
 ## LangChain & LangGraph
 
@@ -105,7 +117,7 @@ LangChain handles general-purpose LLM interactions while LangGraph extends this 
 
 See also: [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), [AutoGen](/ai-radar/languages-frameworks/#autogen).
 
-<div data-radar data-label="Formal specification languages" data-ring="trial" data-change="new" />
+<div data-radar data-label="Formal specification languages" data-ring="trial" />
 
 ## Formal specification languages
 
@@ -168,7 +180,7 @@ PydanticAI reached v1 in September 2025 and has since added durable execution, s
 
 [Smolagents](https://github.com/huggingface/smolagents) is Hugging Face's minimalist agent framework. The core fits inside a thousand lines of code. Its distinguishing feature is the code agent pattern: rather than calling tools through structured tool-call protocols, agents write Python snippets that run against the tool catalogue. This typically reduces LLM calls per task by around a third and produces more transparent reasoning traces.
 
-The natural concern is that letting an agent run arbitrary Python is a security risk. Smolagents addresses this through sandboxed execution backends, including Blaxel, E2B, Modal and Docker, which the framework expects to be enabled outside local development. We keep it in Assess because adoption outside Hugging Face's own examples is still limited, and the code-agent pattern is more opinionated than standard tool-calling. For teams in the Hugging Face stack who want a lighter alternative to LangGraph or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), it is worth a look.
+The natural concern is that letting an agent run arbitrary Python is a security risk. Smolagents addresses this through sandboxed execution backends, including Blaxel, E2B, Modal and Docker, which the framework expects to be enabled outside local development. For teams unwilling to execute model-written code at all, smolagents also offers a ToolCallingAgent mode that emits standard JSON tool calls rather than Python, trading some of the code agent's efficiency for a smaller attack surface. We keep it in Assess because adoption outside Hugging Face's own examples is still limited, and the code-agent pattern is more opinionated than standard tool-calling. For teams in the Hugging Face stack who want a lighter alternative to LangGraph or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), it is worth a look.
 
 <div data-radar data-label='CrewAI' data-ring='assess' />
 
@@ -198,13 +210,13 @@ The framework emerged from biomedical informatics but applies broadly. For AI ap
 
 Not recommended for new projects; better alternatives exist.
 
-<div data-radar data-label='AutoGen' data-ring='hold' data-change="down" data-published="false" />
+<div data-radar data-label='AutoGen' data-ring='hold' data-published="false" />
 
 ## AutoGen
 
 [AutoGen](https://microsoft.github.io/autogen/stable//index.html) is now in maintenance mode, receiving bug fixes only. In October 2025 Microsoft merged AutoGen and Semantic Kernel into the [Microsoft Agent Framework (MAF)](/ai-radar/languages-frameworks/#microsoft-agent-framework), which consolidates both projects' capabilities into a single platform. Semantic Kernel is likewise in maintenance mode. Teams currently using either framework should plan their migration to MAF; new projects should start there directly.
 
-<div data-radar data-label='TensorFlow' data-ring='hold' />
+<div data-radar data-label='TensorFlow' data-ring='hold' data-published="false" />
 
 ## TensorFlow
 
