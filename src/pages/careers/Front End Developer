@@ -1,0 +1,67 @@
+---
+layout: '../../layouts/CareerPost.astro'
+location: 'London / Hybrid'
+department: 'Engineering'
+contract: 'Full Time'
+position: 'Front End Developer (All levels)'
+description: 
+draft: false
+weight: 2
+googleJobs:
+  {
+    location: 'London',
+    position: 'Front End Developer (All levels)',
+    publishedDate: '2026-03-28',
+    validThrough: '2026-12-06T00:00',
+    employmentType: 'FULL_TIME'
+  }
+---
+
+## Job Description
+
+We’re looking for Front End Developers at all levels to join long-term greenfield projects with leading financial institutions in London.
+
+We are partnering with a Tier 1 investment bank to modernise the frontend estate within an area of capital markets. The trading desks rely on a mix of legacy thick-client and Angular 4 / AngularJS tooling that are being progressively consolidated and replaced with modern, high-performance React apps.
+You will be embedded in a high-performing engineering team working on production trading surfaces used by traders across the world. The work is technically demanding: low-latency UIs over realtime feeds, large streaming grids, custom binary protocols, and a focus on quality, stability and performance.
+
+What you’ll work on
+
+Building new React applications for pricing, execution and post-trade analytics, deployed both as standalone web apps and inside the bank’s container-based.
+Wiring UIs directly to real-time messaging infrastructure and working with binary message formats, to minimise latency.
+Working with large, fast-moving data sets in the browser (ag-grid blotters, streaming pricing tiles, depth views) where rendering performance and memory behaviour matter.
+Contributing to shared component libraries, app templates and standards so new apps have a consistent foundation.
+Migrating legacy Angular 4 / AngularJS applications onto a modern React stack.
+Building automated UI tests, to reduce reliance on manual QA.
+Owning deployment via the bank’s CI/CD into containerised production environments.
+
+## Core skills
+
+Strong React and TypeScript experience with a track record of shipping production frontends - ideally in trading, market data, or another low-latency, high-throughput domain.
+Deep understanding of browser performance: rendering pipelines, virtualisation, memory pressure, profiling, and what it takes to keep a streaming UI responsive under load.
+Comfortable consuming realtime feeds in the browser (WebSocket, RSocket, or pub/sub messaging) and reasoning about backpressure, reconnection, snapshots and recovery.
+Pragmatic full-stack instincts - you can read and reason about the Java service feeding your UI even if you do not write it day to day.
+Strong testing discipline and experience with Playright, Cypress, Selenium, or similar.
+
+## Nice to have
+
+Experience migrating Angular or AngularJS applications to React.
+Direct experience with Solace or comparable messaging infrastructure (Tibco EMS, Kafka in low-latency configurations, Aeron).
+Familiarity with binary wire formats - Simple Binary Encoding (SBE), FlatBuffers, Protobuf - and an appetite for pushing decoding into the browser.
+Exposure to ag-grid or equivalent enterprise data-grid libraries at scale.
+FX domain knowledge - spot, forwards, options, pricing, market-making, TCA - or a strong appetite to learn.
+Experience with single-dealer platforms, RFQ / RFS workflows or order management UIs.
+Container-based deployment.
+
+## WFH?
+These roles are hybrid, typically 2-3 days per week for team collaboration, with the rest of the time remote.
+
+## Contract type
+Permanent employees preferred, but contractor arrangements will also be considered.
+
+## Eligibility
+
+We can only consider candidates who have the right to work in the UK and do not require visa sponsorship. Applicants must be UK-based and within a commutable distance to London.
+
+## Interested?
+
+Email careers@juxt.pro with your CV and a brief introduction. Even if you’re not sure you tick every box, we’d still love to hear from you - we’re always keen to meet passionate, technically curious developers and can keep you in mind for future projects if this one isn’t the right fit.
