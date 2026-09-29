@@ -45,9 +45,9 @@ The harness reproduces what a person does with one of these tools, and nothing m
 
 Every process runs as its real self. There are no paraphrases standing in for the genuine article. The single-file skills are installed verbatim, byte for byte, with their source commits and checksums recorded so you can verify them against upstream. The ones that are agents rather than instructions, BMAD-METHOD, Spec Kit and the AI Unified Process, are installed the way a user installs them and run live, invoking their own skills and running their own scripts. Whatever a tool does when you use it for real, it does here.
 
-<span class="pullquote left" text-content="The credibility is in the source, not in our say-so."></span>
+<span class="pullquote left" text-content="The credibility lives in the source, open for anyone to check."></span>
 
-And all of it is open. The harness, the tasks, the hidden answer keys and every scored transcript are published. You do not have to trust our summary of what happened: you can read the exact conversation each tool had, see which questions it asked and which it skipped, and check the auditor's reasoning on all fourteen decisions. The credibility is in the source, not in our say-so.
+And all of it is open. The harness, the tasks, the hidden answer keys and every scored transcript are published. You do not have to trust our summary of what happened: you can read the exact conversation each tool had, see which questions it asked and which it skipped, and check the auditor's reasoning on all fourteen decisions. The credibility lives in the source, open for anyone to check.
 
 ## The tool built for the job
 
@@ -122,9 +122,9 @@ None of this is an argument for big design up front. That was the original mista
 
 <span class="pullquote left" text-content="One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not."></span>
 
-That partner is what Allium is for. It does not transcribe passively, and it does not demand a finished plan before it will engage. It asks the awkward question early, thinks a step further through the implications of your design, and hands back an intent sharper than the one you arrived with. Requirements capture is hard, and worth taking seriously because the payoff for doing so is large.
+That partner is what Allium is for. It asks the awkward question early, thinks a step further through the implications of your design, and hands back an intent sharper than the one you arrived with. Requirements capture is hard, and worth taking seriously because the payoff for doing so is large.
 
-The Vasa did not sink because the shipwrights were careless. It sank because the questions that decided its fate went unpressed while there was still time to change the answer. Your AI, handed a thin brief and eager to please, makes the same class of mistake every day: it takes the plausible default, builds on it, and never mentions it, until the money comes out wrong. The cheapest question is the one you ask before the keel is laid.
+The Vasa was lost to questions no one pressed while there was still time to change the answer. Your AI, handed a thin brief and eager to please, makes the same class of mistake every day: it takes the plausible default, builds on it, and never mentions it, until the money comes out wrong. The cheapest question is the one you ask before the keel is laid.
 
 ---
 
