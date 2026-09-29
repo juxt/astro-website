@@ -54,7 +54,7 @@ And all of it is open. The harness, the tasks, the hidden answer keys and every 
 Here is what the harness found.
 
 <figure style="margin: 2.5rem 0;">
-<svg viewBox="0 0 640 352" role="img" aria-label="Horizontal bar chart of requirements captured, mean of nine runs per tool out of fourteen hidden decisions. Allium 91.3 percent, well ahead. AI Unified Process 70.6, BMAD 68.3, Spec Kit 65.9, plain prose 65.1, Kiro 63.5, Superpowers 62.7, Tessl 61.9, all clustered together around the plain-prose baseline." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
+<svg viewBox="0 0 700 352" role="img" aria-label="Requirements captured against questions asked, mean of nine runs per tool out of fourteen hidden decisions. Allium 91.3 percent from about 22 questions, well ahead. The rest ask 7 to 14 questions and land between 61.9 and 70.6 percent: AI Unified Process 70.6 from 14, BMAD 68.3 from 14, Spec Kit 65.9 from 13, plain prose 65.1 from 9, Kiro 63.5 from 10, Superpowers 62.7 from 10, Tessl 61.9 from 7." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
   <!-- gridlines -->
   <line x1="148" y1="38" x2="148" y2="316" stroke="currentColor" stroke-opacity="0.25"/>
   <line x1="363" y1="38" x2="363" y2="316" stroke="currentColor" stroke-opacity="0.1"/>
@@ -65,41 +65,41 @@ Here is what the harness found.
   <!-- Allium -->
   <text x="140" y="58" text-anchor="end" font-size="13" font-weight="700" fill="currentColor">Allium</text>
   <rect x="148" y="44" width="392.6" height="20" rx="2" fill="currentColor"/>
-  <text x="546.6" y="58" font-size="12" font-weight="700" fill="currentColor">91.3%</text>
+  <text x="546.6" y="58" font-size="12" font-weight="700" fill="currentColor">91.3% · 22q</text>
   <!-- AIUP -->
   <text x="140" y="94" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">AI Unified Process</text>
   <rect x="148" y="80" width="303.6" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="457.6" y="94" font-size="12" fill="currentColor" fill-opacity="0.6">70.6%</text>
+  <text x="457.6" y="94" font-size="12" fill="currentColor" fill-opacity="0.6">70.6% · 14q</text>
   <!-- BMAD -->
   <text x="140" y="130" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">BMAD-METHOD</text>
   <rect x="148" y="116" width="293.7" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="447.7" y="130" font-size="12" fill="currentColor" fill-opacity="0.6">68.3%</text>
+  <text x="447.7" y="130" font-size="12" fill="currentColor" fill-opacity="0.6">68.3% · 14q</text>
   <!-- Spec Kit -->
   <text x="140" y="166" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Spec Kit</text>
   <rect x="148" y="152" width="283.4" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="437.4" y="166" font-size="12" fill="currentColor" fill-opacity="0.6">65.9%</text>
+  <text x="437.4" y="166" font-size="12" fill="currentColor" fill-opacity="0.6">65.9% · 13q</text>
   <!-- prose -->
   <text x="140" y="202" text-anchor="end" font-size="13" font-style="italic" fill="currentColor" fill-opacity="0.85">plain prose</text>
   <rect x="148" y="188" width="279.9" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="433.9" y="202" font-size="12" fill="currentColor" fill-opacity="0.6">65.1%</text>
+  <text x="433.9" y="202" font-size="12" fill="currentColor" fill-opacity="0.6">65.1% · 9q</text>
   <!-- Kiro -->
   <text x="140" y="238" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Kiro</text>
   <rect x="148" y="224" width="273.05" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="427.05" y="238" font-size="12" fill="currentColor" fill-opacity="0.6">63.5%</text>
+  <text x="427.05" y="238" font-size="12" fill="currentColor" fill-opacity="0.6">63.5% · 10q</text>
   <!-- Superpowers -->
   <text x="140" y="274" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Superpowers</text>
   <rect x="148" y="260" width="269.6" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="423.6" y="274" font-size="12" fill="currentColor" fill-opacity="0.6">62.7%</text>
+  <text x="423.6" y="274" font-size="12" fill="currentColor" fill-opacity="0.6">62.7% · 10q</text>
   <!-- Tessl -->
   <text x="140" y="310" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Tessl</text>
   <rect x="148" y="296" width="266.2" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="420.2" y="310" font-size="12" fill="currentColor" fill-opacity="0.6">61.9%</text>
+  <text x="420.2" y="310" font-size="12" fill="currentColor" fill-opacity="0.6">61.9% · 7q</text>
   <!-- axis -->
   <text x="148" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">0</text>
   <text x="363" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">50</text>
   <text x="578" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">100%</text>
 </svg>
-<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, mean of nine runs per tool across three loan-servicing tasks, out of fourteen hidden decisions each. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured (of fourteen hidden decisions, mean of nine runs per tool across three loan-servicing tasks), with the mean number of questions each tool asked. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
 Allium captures nine in ten of the hidden decisions. Everything else is huddled together between three-fifths and seven-tenths, straddling the line drawn by plain prose. Read that again with the control in mind. A capable engineer with no requirements tool, no method, no ambiguity taxonomy, just the instinct to ask a few questions, scores as well as most of the tools built specifically to capture requirements, and better than some. Narrow the measure to the decisions that can only be got by asking, the ones no model can guess, and the picture holds: the dedicated tools and the bare baseline are indistinguishable, and Allium is alone out in front.
@@ -112,7 +112,9 @@ The tools that lose are not lazy. Most of them do something on receiving the bri
 
 <span class="pullquote" text-content="A gap filled with a plausible default is a decision made silently."></span>
 
-Allium wins because it treats the silence as the work. It asks, on average, more than twenty questions, and they are the right questions: the ones whose answers change the money. It does not assume the bank rounds to two places, it asks how the bank rounds. Then it records the answer where it cannot be lost. The cost is a few minutes of conversation. The return is a specification that matches the institution rather than the industry average, before a line of code exists to be unpicked.
+Allium wins because it treats the silence as the work, and it would be dishonest to dress that up as anything cleverer than it is. It asks about twenty-two questions where the nearest rival asks fourteen and the lightest tools ask seven, roughly double the field. That is the trade-off, stated plainly: a specification that fits costs you more of your time at the keyboard.
+
+What makes it worth paying is that the return on those questions is not linear. Look along the chart. Every tool that asks between seven and fourteen questions lands within a few points of two-thirds, so asking half as many again buys almost nothing. The coverage that matters lives further out, past the point where the others stop, and it comes from spending the extra questions on the decisions that change the money: not assuming the bank rounds to two places, but asking how it rounds, and recording the answer where it cannot be lost. The cost is a few more minutes of conversation. The return is a specification that fits the institution rather than the industry average, before a line of code exists to be unpicked.
 
 ## The lie in the middle
 
