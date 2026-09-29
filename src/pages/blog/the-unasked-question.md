@@ -51,10 +51,10 @@ And all of it is open. The harness, the tasks, the hidden answer keys and every 
 
 ## The results
 
-The chart below shows each tool's mean coverage across the three tasks, with the mean number of questions it asked.
+The chart below shows each tool's mean coverage across the three tasks.
 
 <figure style="margin: 2.5rem 0;">
-<svg viewBox="0 0 700 352" role="img" aria-label="Requirements captured against questions asked, mean of nine runs per tool out of fourteen hidden decisions. Allium 91.3 percent from about 22 questions, well ahead. The rest ask 7 to 14 questions and land between 61.9 and 70.6 percent: AI Unified Process 70.6 from 14, BMAD 68.3 from 14, Spec Kit 65.9 from 13, plain prose 65.1 from 9, Kiro 63.5 from 10, Superpowers 62.7 from 10, Tessl 61.9 from 7." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
+<svg viewBox="0 0 640 352" role="img" aria-label="Horizontal bar chart of requirements captured, mean of nine runs per tool out of fourteen hidden decisions. Allium 91.3 percent, well ahead. AI Unified Process 70.6, BMAD 68.3, Spec Kit 65.9, plain prose 65.1, Kiro 63.5, Superpowers 62.7, Tessl 61.9, all clustered around the plain-prose baseline." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
   <!-- gridlines -->
   <line x1="148" y1="38" x2="148" y2="316" stroke="currentColor" stroke-opacity="0.25"/>
   <line x1="363" y1="38" x2="363" y2="316" stroke="currentColor" stroke-opacity="0.1"/>
@@ -65,41 +65,41 @@ The chart below shows each tool's mean coverage across the three tasks, with the
   <!-- Allium -->
   <text x="140" y="58" text-anchor="end" font-size="13" font-weight="700" fill="currentColor">Allium</text>
   <rect x="148" y="44" width="392.6" height="20" rx="2" fill="currentColor"/>
-  <text x="546.6" y="58" font-size="12" font-weight="700" fill="currentColor">91.3% · 22q</text>
+  <text x="546.6" y="58" font-size="12" font-weight="700" fill="currentColor">91.3%</text>
   <!-- AIUP -->
   <text x="140" y="94" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">AI Unified Process</text>
   <rect x="148" y="80" width="303.6" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="457.6" y="94" font-size="12" fill="currentColor" fill-opacity="0.6">70.6% · 14q</text>
+  <text x="457.6" y="94" font-size="12" fill="currentColor" fill-opacity="0.6">70.6%</text>
   <!-- BMAD -->
   <text x="140" y="130" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">BMAD-METHOD</text>
   <rect x="148" y="116" width="293.7" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="447.7" y="130" font-size="12" fill="currentColor" fill-opacity="0.6">68.3% · 14q</text>
+  <text x="447.7" y="130" font-size="12" fill="currentColor" fill-opacity="0.6">68.3%</text>
   <!-- Spec Kit -->
   <text x="140" y="166" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Spec Kit</text>
   <rect x="148" y="152" width="283.4" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="437.4" y="166" font-size="12" fill="currentColor" fill-opacity="0.6">65.9% · 13q</text>
+  <text x="437.4" y="166" font-size="12" fill="currentColor" fill-opacity="0.6">65.9%</text>
   <!-- prose -->
   <text x="140" y="202" text-anchor="end" font-size="13" font-style="italic" fill="currentColor" fill-opacity="0.85">plain prose</text>
   <rect x="148" y="188" width="279.9" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="433.9" y="202" font-size="12" fill="currentColor" fill-opacity="0.6">65.1% · 9q</text>
+  <text x="433.9" y="202" font-size="12" fill="currentColor" fill-opacity="0.6">65.1%</text>
   <!-- Kiro -->
   <text x="140" y="238" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Kiro</text>
   <rect x="148" y="224" width="273.05" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="427.05" y="238" font-size="12" fill="currentColor" fill-opacity="0.6">63.5% · 10q</text>
+  <text x="427.05" y="238" font-size="12" fill="currentColor" fill-opacity="0.6">63.5%</text>
   <!-- Superpowers -->
   <text x="140" y="274" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Superpowers</text>
   <rect x="148" y="260" width="269.6" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="423.6" y="274" font-size="12" fill="currentColor" fill-opacity="0.6">62.7% · 10q</text>
+  <text x="423.6" y="274" font-size="12" fill="currentColor" fill-opacity="0.6">62.7%</text>
   <!-- Tessl -->
   <text x="140" y="310" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.75">Tessl</text>
   <rect x="148" y="296" width="266.2" height="20" rx="2" fill="currentColor" fill-opacity="0.28"/>
-  <text x="420.2" y="310" font-size="12" fill="currentColor" fill-opacity="0.6">61.9% · 7q</text>
+  <text x="420.2" y="310" font-size="12" fill="currentColor" fill-opacity="0.6">61.9%</text>
   <!-- axis -->
   <text x="148" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">0</text>
   <text x="363" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">50</text>
   <text x="578" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">100%</text>
 </svg>
-<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured (of fourteen hidden decisions, mean of nine runs per tool across three loan-servicing tasks), with the mean number of questions each tool asked. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three loan-servicing tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
 Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them. If you narrow the measure to the decisions that can only be reached by asking, the ones no model can guess, nothing changes: the dedicated tools and the bare baseline remain indistinguishable, and Allium remains alone at the front.
@@ -113,6 +113,39 @@ The tools that lose are not lazy. On receiving the brief most of them get to wor
 <span class="pullquote" text-content="A gap filled with a default is a decision taken in silence."></span>
 
 Allium wins because it treats the silence as the work, and it would be dishonest to dress that up as anything cleverer than it is. It asks around twenty-two questions where the nearest rival asks fourteen and the lightest tools ask seven, close to double the field. That is the trade-off: a specification that fits costs you more of your time at the keyboard.
+
+<figure style="margin: 2.5rem 0;">
+<svg viewBox="0 0 640 380" role="img" aria-label="Scatter chart of requirements captured against questions asked, one point per tool. Seven tools cluster between 7 and 14 questions at 62 to 71 percent captured, a nearly flat band. Allium sits apart at 22 questions and 91 percent, far above and to the right, so the gains come only from asking well beyond where the others stop." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
+  <line x1="60" y1="60" x2="60" y2="330" stroke="currentColor" stroke-opacity="0.35"/>
+  <line x1="60" y1="330" x2="610" y2="330" stroke="currentColor" stroke-opacity="0.35"/>
+  <line x1="60" y1="195" x2="610" y2="195" stroke="currentColor" stroke-opacity="0.1"/>
+  <text x="52" y="334" text-anchor="end" font-size="11" fill="currentColor" fill-opacity="0.5">0</text>
+  <text x="52" y="199" text-anchor="end" font-size="11" fill="currentColor" fill-opacity="0.5">50</text>
+  <text x="52" y="64" text-anchor="end" font-size="11" fill="currentColor" fill-opacity="0.5">100%</text>
+  <text x="60" y="348" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">0</text>
+  <text x="289.2" y="348" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">10</text>
+  <text x="518.3" y="348" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">20</text>
+  <text x="335" y="368" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6">questions asked</text>
+  <text x="20" y="195" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6" transform="rotate(-90 20 195)">requirements captured</text>
+  <circle cx="218.1" cy="162.9" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="212" y="166" text-anchor="end" font-size="11" fill="currentColor" fill-opacity="0.7">Tessl</text>
+  <circle cx="264.0" cy="154.2" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="264" y="145" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.7">prose</text>
+  <circle cx="280.0" cy="160.7" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="280" y="176" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.7">Superpowers</text>
+  <circle cx="284.6" cy="158.5" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="293" y="151" text-anchor="start" font-size="11" fill="currentColor" fill-opacity="0.7">Kiro</text>
+  <circle cx="367.1" cy="152.1" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="366" y="165" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.7">Spec Kit</text>
+  <circle cx="374.0" cy="139.4" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="374" y="131" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.7">AIUP</text>
+  <circle cx="380.8" cy="145.6" r="4" fill="currentColor" fill-opacity="0.5"/>
+  <text x="389" y="149" text-anchor="start" font-size="11" fill="currentColor" fill-opacity="0.7">BMAD</text>
+  <circle cx="564.2" cy="83.5" r="5.5" fill="currentColor"/>
+  <text x="556" y="87" text-anchor="end" font-size="12" font-weight="700" fill="currentColor">Allium</text>
+</svg>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured against questions asked, one point per tool (means across the three tasks). The field clusters between seven and fourteen questions; only Allium, at around twenty-two, breaks away.</figcaption>
+</figure>
 
 What makes it worth paying is that the return on those questions is not linear. Every tool that asks between seven and fourteen questions lands within a few points of two-thirds, so asking half as many again buys almost nothing. The coverage worth having lies further out, past the point where the others stop, and it comes from spending the extra questions on the decisions that move the money. Allium asks how the bank rounds instead of assuming, then records the answer where it cannot be lost. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before a line of code exists to be unpicked.
 
