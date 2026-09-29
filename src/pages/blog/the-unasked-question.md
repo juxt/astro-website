@@ -15,9 +15,9 @@ tags:
   - 'requirements'
 ---
 
-<p class="lede">In September 1999, NASA's <a href="https://en.wikipedia.org/wiki/Mars_Climate_Orbiter" target="_blank">Mars Climate Orbiter</a> fired its engine to slip into orbit and was never heard from again. The spacecraft was sound. One team had worked in pound-force seconds, another expected newton-seconds, and nobody had asked which. The thrust was out by a factor of 4.45, the probe dipped too low, and burned up in the Martian atmosphere.</p>
+<p class="lede">In August 1628 the warship <a href="https://en.wikipedia.org/wiki/Vasa_(ship)" target="_blank">Vasa</a> sailed barely a thousand metres into Stockholm harbour, caught a gust, heeled over and sank, in full view of the crowd that had come to cheer it. It was the most powerful ship Sweden had ever built, lost on its maiden voyage. The shipwrights had built exactly what the king ordered. A stability test had already failed on the quay, and nobody had been able to make that warning outrank a king impatient for his fleet.</p>
 
-Nobody chose to lose the orbiter. The unit was an assumption so obvious to each team that it never surfaced as a question. That is how the most expensive mistakes are made. Not in the work, but in the silence around it, the things everyone took to be settled and no one thought to say aloud.
+Nobody chose to sink the Vasa. The carpentry was superb, the guns were cast, the oak was sound. The ship was lost in the decisions taken long before any of that: how tall, how heavily armed, how much ballast, and whether it would still float once you had it all. Those were the questions that decided everything, and they were the ones no one managed to press before the keel was laid. That is where the expensive mistakes live. Not in the building, but in what you chose to build, and everything you assumed while choosing it.
 
 Agentic engineering has a version of this problem, and it sits right at the centre of the field. We can now describe what we want and have a capable model build it. The grand challenge that remains is intent formalisation: turning the loose, half-formed picture in your head into something precise enough to act on. And here software engineering has a hard-won lesson to offer, one we seem determined to relearn.
 
@@ -124,7 +124,7 @@ None of this is an argument for big design up front. That was the original mista
 
 That partner is what Allium is for. Not a scribe that writes down whatever you say, and not a planner that demands you know everything first, but the pair you always wanted: one who asks the awkward question early, thinks a step further through the implications of your design, and hands you back an intent that is sharper than the one you arrived with. Requirements capture is hard, and it deserves to be taken seriously precisely because the payoff for taking it seriously is so large.
 
-The orbiter did not fail because the engineers were careless. It failed because a question that mattered never got asked. Your AI, handed a thin brief and an eagerness to please, will make the same class of mistake every day, confidently, in decimal places and defaults you will not notice until the money is wrong. The fix is not a longer document. It is a better conversation.
+The Vasa did not sink because the shipwrights were careless. It sank because the questions that decided its fate were never pressed while there was still time to change the answer. Your AI, handed a thin brief and eager to please, makes the same class of mistake every day. It takes the plausible default, builds on it, and never mentions it, until the money comes out wrong. The fix is not a longer brief. It is a better conversation.
 
 ---
 
