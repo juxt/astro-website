@@ -19,7 +19,7 @@ tags:
 
 Nobody chose to sink the Vasa. The carpentry was superb and the oak was sound. The ship was lost in the decisions taken long before the first timber was cut: how tall it should stand, how heavily it should be armed, how much ballast it needed, and whether it would still float once it carried all of that. Those were the questions that decided everything, and they were the ones no one managed to press while there was still time. The expensive mistake had already been made, in what they chose to build and everything they assumed while choosing it.
 
-Agentic engineering has its own version of this, and it sits at the centre of the field. We can now describe what we want and have a capable model build it, which leaves intent formalisation as the grand remaining challenge: turning the loose, half-formed picture in your head into something precise enough to act on. Software engineering learned a good deal about that problem the hard way, and we seem determined to learn it again.
+We now brief our AIs much as the king briefed his shipwrights. We describe what we want, and a capable model builds it, faithfully and without argument. That obedience is the risk: handed a brief, the model builds what the brief says, and like the shipwrights it will not stop to warn you when the design is wrong. The hard part of agentic engineering is intent formalisation, turning the loose, half-formed picture in your head into something precise enough to hand over. Software engineering learned how hard that is the slow way, and we are on course to learn it again.
 
 ## The hardest thing has always been knowing what to build
 
@@ -29,11 +29,11 @@ Anyone who has shipped software for a living knows the difficult part is rarely 
 
 <span class="pullquote" text-content="People do not know what they want until they see it."></span>
 
-You would expect all of this to be front of mind as we hand more of the building over to AI, and mostly it is not. The centre of gravity in spec-driven development is the quiet assumption that the hard part is finished once you have written your intentions down and the model takes over. Write the spec, get the software. It is a tidy picture, and it is the waterfall dream in new clothing: decide everything up front, in prose, and hand it off. We know how that story ends.
+You would expect all of this to be front of mind as we hand more of the building over to AI, and mostly it is not. The centre of gravity in spec-driven development is the quiet assumption that the hard part is finished once you have written your intentions down and the model takes over. Write the spec, get the software. It is a tidy picture, and it is the waterfall dream in new clothing: decide everything up front, in prose, and hand it off. Decades of software projects record how poorly that tends to work.
 
-## Write it down and hope
+## Putting the tools to the test
 
-The more promising move is to have the AI push back before it builds, interrogating the brief and surfacing the decisions you have not realised you are making. Done well, this is the closest thing yet to a pair partner who improves your thinking rather than one who simply types faster than you. But "done well" is carrying a great deal of weight in that sentence, and I wanted to know how well the current tools manage it. So we built a way to measure it.
+The more promising move is to have the AI push back before it builds, interrogating the brief and surfacing the decisions you have not realised you are making. Done well, this is the closest thing yet to a pair partner who improves your thinking rather than one who simply types faster than you. That qualifier does a lot of work, so we built a way to measure how well the current tools manage it.
 
 The setup is a small, inspectable harness. Every tool starts from the same deliberately thin brief, something like "add payment allocation to our loan servicing system", and nothing more. Behind that brief sits a hidden answer key of fourteen decisions that change the result and cannot be guessed. This is a Bahraini bank, so amounts run to three decimal places rather than two; fees are paid before penalties rather than the common other way round; a residual under 0.005 dinar is written off; same-day payments settle in timestamp order. A neutral auditor then scores how many of the fourteen each tool's finished specification got right. The only way to score well is to ask.
 
@@ -49,9 +49,9 @@ Every process runs as its real self. There are no paraphrases standing in for th
 
 And all of it is open. The harness, the tasks, the hidden answer keys and every scored transcript are published. You do not have to trust our summary of what happened: you can read the exact conversation each tool had, see which questions it asked and which it skipped, and check the auditor's reasoning on all fourteen decisions. The credibility lives in the source, open for anyone to check.
 
-## The tool built for the job
+## The results
 
-Here is what the harness found.
+The chart below shows each tool's mean coverage across the three tasks, with the mean number of questions it asked.
 
 <figure style="margin: 2.5rem 0;">
 <svg viewBox="0 0 700 352" role="img" aria-label="Requirements captured against questions asked, mean of nine runs per tool out of fourteen hidden decisions. Allium 91.3 percent from about 22 questions, well ahead. The rest ask 7 to 14 questions and land between 61.9 and 70.6 percent: AI Unified Process 70.6 from 14, BMAD 68.3 from 14, Spec Kit 65.9 from 13, plain prose 65.1 from 9, Kiro 63.5 from 10, Superpowers 62.7 from 10, Tessl 61.9 from 7." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
@@ -102,7 +102,7 @@ Here is what the harness found.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured (of fourteen hidden decisions, mean of nine runs per tool across three loan-servicing tasks), with the mean number of questions each tool asked. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
-Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. That control deserves a second look. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them. If you narrow the measure to the decisions that can only be reached by asking, the ones no model can guess, nothing changes: the dedicated tools and the bare baseline remain indistinguishable, and Allium remains alone at the front.
+Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them. If you narrow the measure to the decisions that can only be reached by asking, the ones no model can guess, nothing changes: the dedicated tools and the bare baseline remain indistinguishable, and Allium remains alone at the front.
 
 That is an indictment. A tool that exists to help you capture requirements, and does no better than typing your thoughts into an empty box, has not justified a place in your workflow. Several of them ask for more of your time and give nothing back for it.
 
@@ -110,9 +110,9 @@ That is an indictment. A tool that exists to help you capture requirements, and 
 
 The tools that lose are not lazy. On receiving the brief most of them get to work: they propose a structure, draft a specification, and fill the remaining gaps with sensible industry defaults. That last habit is the whole problem. A gap filled with a default is a decision taken in silence, and it is the plausible defaults that trap you. Faced with our loan, the confident guess is penalties first and two decimal places, and both are wrong for this bank. A tool that fills the silence with an assumption is a faster way to build the wrong thing.
 
-<span class="pullquote" text-content="A gap filled with a plausible default is a decision made silently."></span>
+<span class="pullquote" text-content="A gap filled with a default is a decision taken in silence."></span>
 
-Allium wins because it treats the silence as the work, and it would be dishonest to dress that up as anything cleverer than it is. It asks around twenty-two questions where the nearest rival asks fourteen and the lightest tools ask seven, close to double the field. There is the trade-off: a specification that fits costs you more of your time at the keyboard.
+Allium wins because it treats the silence as the work, and it would be dishonest to dress that up as anything cleverer than it is. It asks around twenty-two questions where the nearest rival asks fourteen and the lightest tools ask seven, close to double the field. That is the trade-off: a specification that fits costs you more of your time at the keyboard.
 
 What makes it worth paying is that the return on those questions is not linear. Every tool that asks between seven and fourteen questions lands within a few points of two-thirds, so asking half as many again buys almost nothing. The coverage worth having lies further out, past the point where the others stop, and it comes from spending the extra questions on the decisions that move the money. Allium asks how the bank rounds instead of assuming, then records the answer where it cannot be lost. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before a line of code exists to be unpicked.
 
@@ -122,9 +122,9 @@ None of this is an argument for big design up front. That was the original mista
 
 <span class="pullquote left" text-content="One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not."></span>
 
-That partner is what Allium is for. It asks the awkward question early, thinks a step further through the implications of your design, and hands back an intent sharper than the one you arrived with. Requirements capture is hard, and worth taking seriously because the payoff for doing so is large.
+The Vasa lacked anyone able to question the king in time. That is the role Allium plays. It asks the awkward question early, thinks a step further through the implications of your design, and hands back an intent sharper than the one you arrived with. Requirements capture is hard, and worth taking seriously because the payoff for doing so is large.
 
-The Vasa was lost to questions no one pressed while there was still time to change the answer. Your AI, handed a thin brief and eager to please, makes the same class of mistake every day: it takes the plausible default, builds on it, and never mentions it, until the money comes out wrong. The cheapest question is the one you ask before the keel is laid.
+You are the king now, and your AI is the shipwright. It will build whatever you specify, and it will not tell you the ship will not float. That is why the Vasa is worth remembering: it was lost to questions no one pressed while there was still time to change the answer, and a model handed a thin brief makes the same mistake every day, taking the plausible default, building on it, and never mentioning it, until the money comes out wrong. The cheapest question is the one you ask before the keel is laid.
 
 ---
 
