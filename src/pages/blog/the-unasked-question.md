@@ -128,7 +128,6 @@ Allium wins because it treats the silence as the work, and it would be dishonest
   <text x="335" y="368" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6">Questions asked</text>
   <text x="20" y="195" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6" transform="rotate(-90 20 195)">Requirements captured</text>
   <line x1="174.6" y1="168.7" x2="587.1" y2="121.8" stroke="currentColor" stroke-opacity="0.4" stroke-dasharray="2 3"/>
-  <text x="470" y="151" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity="0.5">field trend</text>
   <circle cx="218.1" cy="162.9" r="4" fill="currentColor" fill-opacity="0.5"/>
   <text x="212" y="166" text-anchor="end" font-size="11" fill="currentColor" fill-opacity="0.7">Tessl</text>
   <circle cx="264.0" cy="154.2" r="4" fill="currentColor" fill-opacity="0.5"/>
