@@ -17,13 +17,13 @@ tags:
 
 <p class="lede">In August 1628 the warship <a href="https://en.wikipedia.org/wiki/Vasa_(ship)" target="_blank">Vasa</a> sailed barely a thousand metres into Stockholm harbour, caught a gust, heeled over and sank, in full view of the crowd that had come to cheer it. It was the most powerful ship Sweden had ever built, lost on its maiden voyage. The shipwrights had built exactly what the king ordered. A stability test had already failed on the quay, and nobody had been able to make that warning outrank a king impatient for his fleet.</p>
 
-Nobody chose to sink the Vasa. The carpentry was superb and the oak was sound. The ship was lost in the decisions taken long before the first timber was cut: how tall it should stand, how heavily it should be armed, how much ballast it needed, and whether it would still float once it carried all of that. Those were the questions that decided everything, and they were the ones no one managed to press while there was still time. The expensive mistake had already been made, in what they chose to build and everything they assumed while choosing it.
+Nobody chose to sink the Vasa. The carpentry was superb and the oak was sound. The ship was lost in the decisions taken long before the first timber was cut: how tall it should stand, how heavily it should be armed, how much ballast it needed, and whether it would still float once it carried all of that. Those were the questions that decided everything, and they were the ones no one managed to press while there was still time. The mistake was one of reasoning: a taller, more heavily armed ship is a less stable one, and no one carried that trade-off through to its conclusion.
 
 We now brief our AIs much as the king briefed his shipwrights. We describe what we want, and a capable model builds it, faithfully and without argument. That obedience is the risk: handed a brief, the model builds what the brief says, and like the shipwrights it will not stop to warn you when the design is wrong. The hard part of agentic engineering is intent formalisation, turning the loose, half-formed picture in your head into something precise enough to hand over. Software engineering learned how hard that is the slow way, and we are on course to learn it again.
 
-## The hardest thing has always been knowing what to build
+## The hard part is thinking it through
 
-Anyone who has shipped software for a living knows the difficult part is rarely the writing of code; it is deciding what the code should do. People do not know what they want until they see it. They tell you one thing, watch you build it, and only then discover they meant something else. Two decades of [agile practice](https://agilemanifesto.org/) were a long argument with that fact, an insistence on shortening the loop and putting something real in front of the user, so that reality could correct the plan before the plan grew expensive.
+Anyone who has shipped software for a living knows the difficult part is rarely the writing of code; it is working out what to build, and thinking through the trade-offs each choice implies. People do not know what they want until they see it. They tell you one thing, watch you build it, and only then discover they meant something else. Two decades of [agile practice](https://agilemanifesto.org/) were a long argument with that fact, an insistence on shortening the loop and putting something real in front of the user, so that reality could correct the plan before the plan grew expensive.
 
 [Bret Victor](https://worrydream.com/) made the same point from the other direction. Give a creator an immediate connection to what they are making, and ideas they could never have specified in advance begin to appear. The interface itself becomes a medium for thought, and fast feedback becomes the mechanism by which a rough idea turns into a good one.
 
@@ -125,8 +125,10 @@ Allium wins because it treats the silence as the work, and it would be dishonest
   <text x="60" y="348" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">0</text>
   <text x="289.2" y="348" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">10</text>
   <text x="518.3" y="348" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">20</text>
-  <text x="335" y="368" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6">questions asked</text>
-  <text x="20" y="195" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6" transform="rotate(-90 20 195)">requirements captured</text>
+  <text x="335" y="368" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6">Questions asked</text>
+  <text x="20" y="195" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.6" transform="rotate(-90 20 195)">Requirements captured</text>
+  <line x1="174.6" y1="168.7" x2="587.1" y2="121.8" stroke="currentColor" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+  <text x="470" y="151" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity="0.5">field trend</text>
   <circle cx="218.1" cy="162.9" r="4" fill="currentColor" fill-opacity="0.5"/>
   <text x="212" y="166" text-anchor="end" font-size="11" fill="currentColor" fill-opacity="0.7">Tessl</text>
   <circle cx="264.0" cy="154.2" r="4" fill="currentColor" fill-opacity="0.5"/>
@@ -144,10 +146,10 @@ Allium wins because it treats the silence as the work, and it would be dishonest
   <circle cx="564.2" cy="83.5" r="5.5" fill="currentColor"/>
   <text x="556" y="87" text-anchor="end" font-size="12" font-weight="700" fill="currentColor">Allium</text>
 </svg>
-<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured against questions asked, one point per tool (means across the three tasks). The field clusters between seven and fourteen questions; only Allium, at around twenty-two, breaks away.</figcaption>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured against questions asked, one point per tool (means across the three tasks). The dotted line is the trend across the other tools; Allium sits well above it, capturing more for each question it asks.</figcaption>
 </figure>
 
-What makes it worth paying is that the return on those questions is not linear. Every tool that asks between seven and fourteen questions lands within a few points of two-thirds, so asking half as many again buys almost nothing. The coverage worth having lies further out, past the point where the others stop, and it comes from spending the extra questions on the decisions that move the money. Allium asks how the bank rounds instead of assuming, then records the answer where it cannot be lost. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before a line of code exists to be unpicked.
+There is more to it than volume. Across the other tools the dotted line traces a shallow upward trend, so asking more does capture a little more. Allium sits well above that line. At twenty-two questions the trend would predict a result in the mid-seventies, and Allium reaches ninety-one, so it draws more from each question it asks. That efficiency comes from spending questions on the decisions that move the money: it asks how the bank rounds instead of assuming, then records the answer where it cannot be lost. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before a line of code exists to be unpicked.
 
 ## The lie in the middle
 
