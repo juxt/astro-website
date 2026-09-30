@@ -114,6 +114,54 @@ The chart below shows each tool's mean coverage across the three tasks.
 
 Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them.
 
+The headline number hides where the real work happens. About two fifths of the answer key is inferable, the decisions a model can guess from the brief, and every tool captures most of them. What separates the tools is the rest: the non-inferable decisions that only asking can reach. On those, Allium captures around five in six. Every other tool, the ones built for the job included, lands between a half and three fifths.
+
+<figure style="margin:2.5rem 0;overflow-x:auto;">
+<svg viewBox="0 0 640 372" role="img" aria-label="Stacked bar chart splitting each skill's coverage into inferable decisions a model can guess from the brief and non-inferable decisions that require asking. Every skill captures most inferable decisions; on the non-inferable ones Allium reaches about five in six while every other tool lands between a half and three fifths." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
+  <rect x="196" y="14" width="12" height="12" fill="currentColor" fill-opacity="0.28"/>
+  <text x="214" y="24" font-size="11" fill="currentColor" fill-opacity="0.75">inferable (guessable from the brief)</text>
+  <rect x="420" y="14" width="12" height="12" fill="currentColor" fill-opacity="0.62"/>
+  <text x="438" y="24" font-size="11" fill="currentColor" fill-opacity="0.75">non-inferable (only by asking)</text>
+  <text x="188" y="66" text-anchor="end" font-size="13" font-weight="700" fill="currentColor">Allium</text>
+  <rect x="196" y="52" width="154.3" height="20" fill="currentColor" fill-opacity="0.42"/>
+  <rect x="350.3" y="52" width="174.3" height="20" fill="currentColor" fill-opacity="1"/>
+  <text x="530.6" y="66" font-size="12" font-weight="700" fill="currentColor">91.3%</text>
+  <text x="188" y="104" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">AI Unified Process</text>
+  <rect x="196" y="90" width="128.6" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="324.6" y="90" width="125.7" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="456.3" y="104" font-size="12" fill="currentColor" fill-opacity="0.8">70.6%</text>
+  <text x="188" y="142" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">BMAD-METHOD</text>
+  <rect x="196" y="128" width="131.4" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="327.4" y="128" width="114.3" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="447.7" y="142" font-size="12" fill="currentColor" fill-opacity="0.8">68.3%</text>
+  <text x="188" y="180" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">Spec Kit</text>
+  <rect x="196" y="166" width="125.7" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="321.7" y="166" width="111.4" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="439.1" y="180" font-size="12" fill="currentColor" fill-opacity="0.8">65.9%</text>
+  <text x="188" y="218" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">Plain prose</text>
+  <rect x="196" y="204" width="122.9" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="318.9" y="204" width="111.4" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="436.3" y="218" font-size="12" fill="currentColor" fill-opacity="0.8">65.1%</text>
+  <text x="188" y="256" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">Kiro</text>
+  <rect x="196" y="242" width="122.9" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="318.9" y="242" width="105.7" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="430.6" y="256" font-size="12" fill="currentColor" fill-opacity="0.8">63.5%</text>
+  <text x="188" y="294" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">Superpowers</text>
+  <rect x="196" y="280" width="117.1" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="313.1" y="280" width="108.6" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="427.7" y="294" font-size="12" fill="currentColor" fill-opacity="0.8">62.7%</text>
+  <text x="188" y="332" text-anchor="end" font-size="13" fill="currentColor" fill-opacity="0.8">Tessl</text>
+  <rect x="196" y="318" width="111.4" height="20" fill="currentColor" fill-opacity="0.24"/>
+  <rect x="307.4" y="318" width="111.4" height="20" fill="currentColor" fill-opacity="0.55"/>
+  <text x="424.9" y="332" font-size="12" fill="currentColor" fill-opacity="0.8">61.9%</text>
+  <line x1="196" y1="46" x2="196" y2="358" stroke="currentColor" stroke-opacity="0.2"/>
+  <text x="196.0" y="374" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">0</text>
+  <text x="376.0" y="374" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">50</text>
+  <text x="556.0" y="374" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">100%</text>
+</svg>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Each skill's coverage split by decision type. About two fifths of the answer key is inferable, guessable from the brief, and every tool captures most of it. The difference is the non-inferable decisions, the ones only asking reaches: Allium earns most of them, the rest little more than half.</figcaption>
+</figure>
+
 That is an indictment. A tool that exists to help you capture requirements, and does no better than typing your thoughts into an empty box, has not justified a place in your workflow. Several of them ask for more of your time and give nothing back for it.
 
 The full run is below, every task and each of its three repeats.
