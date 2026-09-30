@@ -45,6 +45,8 @@ The more promising move is to have the AI push back before it builds, interrogat
 
 The setup is a small, inspectable harness. Every tool starts from the same deliberately thin brief, something like "add payment allocation to our loan servicing system", and nothing more. Behind that brief sits a hidden answer key of fourteen decisions that change the result and cannot be guessed. This is a Bahraini bank, so amounts run to three decimal places rather than two; fees are paid before penalties rather than the common other way round; a residual under 0.005 dinar is written off; same-day payments settle in timestamp order. A neutral auditor then scores how many of the fourteen each tool's finished specification got right. The only way to score well is to ask.
 
+Two things make those fourteen decisions fair. Each is a real option a production loan system exposes, drawn from [Apache Fineract](https://fineract.apache.org/), which lets an institution configure its allocation order, credit-balance handling, currency precision and write-off tolerance. And each is plausible without being the obvious default, which we verified directly: given only the brief and no one to ask, capable models recovered between a fifth and two fifths of the answer key, and chose the common default for the others, penalties before fees and two decimal places, both wrong for this bank. These are answers a model cannot know in advance; it has to ask.
+
 We put eight processes through the identical loop: [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process, the [Superpowers](https://github.com/obra/superpowers) brainstorming skill, and, as a control, plain prose: a capable engineer with no tool and no discipline at all.
 
 ## Driven like a human
@@ -110,7 +112,7 @@ The chart below shows each tool's mean coverage across the three tasks.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three loan-servicing tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
-Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them. If you narrow the measure to the decisions that can only be reached by asking, the ones no model can guess, nothing changes: the dedicated tools and the bare baseline remain indistinguishable, and Allium remains alone at the front.
+Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them.
 
 That is an indictment. A tool that exists to help you capture requirements, and does no better than typing your thoughts into an empty box, has not justified a place in your workflow. Several of them ask for more of your time and give nothing back for it.
 
