@@ -60,6 +60,14 @@ export default function Navbar({ navLinks, navbarNoBg }: { navLinks: NavLinkProp
         'bg-black': !navbarNoBg
       })}
       ref={ref}
+      /* Fix for a bug that only @joa was able to reproduce.
+       * For reference:
+       * - MacOS
+       * - Chrome: Version 118.0.5993.117 (Official Build) (arm64)
+       * - No specific window size
+       * On scrolling down and then back up the navbar would go an opaque off white.
+      */
+      style="padding-top: 1px;"
     >
       <div className='container mx-auto px-4 sm:px-12 2xl:px-0 max-w-7xl flex flex-wrap items-center justify-between h-full'>
         <a href='/' class='flex items-center w-40 z-10'>
