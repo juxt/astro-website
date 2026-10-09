@@ -16,13 +16,15 @@ tags:
 
 ## The problem with CVEs
 
-Historically, defence has meant static analysis against databases of known problems: Common Vulnerabilities and Exposures, or CVEs. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
+CVEs, Common Vulnerabilities and Exposures, have historically been a strong defence: static analysis against a database of known problems. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
 
-That inversion is the first problem, and it is decisive: a database of disclosed flaws describes where attackers have already been, so patching from it can only chase them.
+There are now two problems with this approach.
+
+The first problem is timing: with the median exploit arriving before its disclosure, a CVE database describes where attackers have already been, and patching from it can only chase them.
 
 <span class="pullquote" text-content="The exploit lives in their composition, in the gap between what the code does and what its authors intended."></span>
 
-The second problem is coverage. CVE databases describe known issues in dependencies, but they have far less to say about the weaknesses in your own code, and an attacker doesn't care where the weakness lies.
+The second is coverage: CVE databases describe known issues in dependencies, but they have far less to say about the weaknesses in your own code, and an attacker doesn't care where the weakness lies.
 
 For example, [EchoLeak](https://checkmarx.com/zero-post/echoleak-cve-2025-32711-show-us-that-ai-security-is-challenging/), the zero-click flaw disclosed in Microsoft 365 Copilot in 2025, chained behaviours that were each harmless on their own. A reference-style Markdown image slipped the filter meant to redact links; its source pointed at a Microsoft domain the content-security policy already trusted, so the browser fetched it automatically and carried a user's private data out to an attacker. The exploit was possible because of the gap between what the code did and what its authors intended it to do.
 
