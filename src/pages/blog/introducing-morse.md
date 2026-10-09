@@ -34,7 +34,7 @@ Weaknesses like these can't be patched in the traditional sense, because finding
 
 In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
 
-The obvious response, and the one much of the industry has settled on, is AI red teaming: point these same frontier models at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
+Glasswing gave a handful of operators early access, but the capability no longer depends on it. Frontier models able to do this kind of analysis are now widely available, and the obvious use, the one much of the industry has settled on, is AI red teaming: point one at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
 
 <span class="pullquote left" text-content="Red teaming ends when the budget ends, not when the code is proven safe."></span>
 
