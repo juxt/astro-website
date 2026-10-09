@@ -14,8 +14,6 @@ tags:
 
 <p class="lede">Back in 2020, the median time between a vulnerability being disclosed and first being exploited was over 6 months. This year, for the first time, that median has <a href="https://zerodayclock.com" target="_blank">gone negative</a>. This means that more than half of new CVEs are reported after their first confirmed in-the-wild exploitation.</p>
 
-In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
-
 ## The problem with CVEs
 
 Historically, defence has meant static analysis against databases of known problems: Common Vulnerabilities and Exposures, or CVEs. Dependency tools like [Snyk](https://snyk.io) match your inventory against feeds of known-vulnerable packages; code analysers like [SonarQube](https://www.sonarsource.com/products/sonarqube/) match your source against catalogued weakness patterns. The catalogues keep growing: more than [48,000 CVEs](https://www.infosecurity-magazine.com/news/first-forecasts-record-50000-cve/) were published last year.
@@ -34,7 +32,9 @@ Weaknesses like these can't be patched in the traditional sense, because finding
 
 ## The problem with AI red-teaming
 
-The obvious response, and the one much of the industry has settled on, is AI red teaming: point the same frontier models at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
+In April 2026, Anthropic gave around fifty operators of critical infrastructure access to a gated model under [Project Glasswing](https://www.anthropic.com/news/expanding-project-glasswing). Within two months, roughly two hundred organisations had reported [more than ten thousand](https://blog.cloudflare.com/cyber-frontier-models/) high- and critical-severity flaws, some of which had sat unnoticed in major operating systems and browsers for decades.
+
+The obvious response, and the one much of the industry has settled on, is AI red teaming: point these same frontier models at your own code before an adversary does. It works: last year a researcher used one to [find a remote zero-day](https://sean.heelan.io/2025/05/22/how-i-used-o3-to-find-cve-2025-37899-a-remote-zeroday-vulnerability-in-the-linux-kernels-smb-implementation/) in the Linux kernel's SMB implementation.
 
 <span class="pullquote left" text-content="Red teaming ends when the budget ends, not when the code is proven safe."></span>
 
