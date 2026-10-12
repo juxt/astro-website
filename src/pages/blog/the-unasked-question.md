@@ -205,11 +205,11 @@ None of this argues for big design up front. One of the lies of agile is that yo
 
 <span class="pullquote left" text-content="One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not."></span>
 
-The laser can look like a vote for agile: if a document is never enough, build the thing. But those scientists did not need the finished laser, only something that behaved like it and showed them when they were wrong.
+The laser can look like a vote for agile: if a document is never enough, build the thing. But those scientists did not need to build the finished laser. They needed time beside one that already worked, fixing their attempts while that was cheap.
 
-A specification can do that, once you can run it. Allium's model checking is for another article, but it rests on the eliciting: a model is only worth checking if it captures the decisions that count, and you get there by building it as you elicit. A half-built model is a demanding interviewer, and will not go on until those decisions are settled.
+Your AI has no working example to stand beside, but a specification it can run is the next best thing. Allium's model checking does the running, and that is for another article, but it rests on the eliciting: a model is only worth checking if it captures the decisions that count, and you get there by building it as you elicit. A half-built model is a demanding interviewer, and will not go on until those decisions are settled.
 
-Those labs did not escape their wasted months by writing better papers. They escaped by standing beside a working laser, and fixing their mistakes while that was cheap. Your AI cannot visit your lab, but a specification it can run is the next best thing. Make it behave like the laser rather than the paper, and it will tell you what the paper never could.
+Make your specification behave like the laser rather than the paper, and it will tell you what the paper never could.
 
 ---
 
