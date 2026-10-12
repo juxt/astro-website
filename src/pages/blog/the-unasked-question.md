@@ -17,9 +17,9 @@ tags:
 
 <p class="lede">The most powerful warship Sweden had ever built sank on its maiden voyage. In August 1628 the <a href="https://en.wikipedia.org/wiki/Vasa_(ship)" target="_blank">Vasa</a> sailed little more than a kilometre out of Stockholm harbour, caught a gust and went down in front of the crowd that had come to cheer it. It was built exactly to the specification of its king, <a href="https://en.wikipedia.org/wiki/Gustavus_Adolphus" target="_blank">Gustavus Adolphus</a>, who had decreed how tall it should stand, how heavily it should be armed and how much ballast it should carry. Each decree was reasonable alone; together they made a ship too top-heavy to float. The carpentry was superb and the implementation faithful. The failure was one of reasoning, settled on paper long before it was settled at sea.</p>
 
-We brief our AIs much as the king briefed his shipwrights. We say what we want, and a capable model sets about giving it to us, faithfully and without argument. That eagerness to agree is [trained in](https://arxiv.org/abs/2310.13548), and a servant this faithful can fail you two ways. You can fail to say what you want, and so never get it, finding the gap only when the result arrives and something in you says, no, not that. Or, like the king, you can say exactly what you want and get it, to the letter, and still watch it sink. Two routes to the same place: a result you did not want, reached too late to change it cheaply.
+We brief our AIs much as the king briefed his shipwrights. We say what we want, and a capable model sets about giving it to us, faithfully and without argument. That eagerness to agree is [trained in](https://arxiv.org/abs/2310.13548), and it can fail you in two ways. Either you never quite say what you want, so the model builds something you did not mean, and you see the mistake only once it is in front of you. Or you say exactly what you want, the model builds it faithfully, and the thing you asked for is itself wrong. Both leave you with a result you did not want, found too late to fix cheaply.
 
-The newest models show how literal that faithfulness can be. Give a coding agent a task and reward it for passing the tests, and it will often deliver exactly that and nothing more. Frontier models have been [documented](https://metr.org/blog/2025-06-05-recent-reward-hacking/) making the checks pass without doing the work: returning the grader's own precomputed answer, or patching the evaluator so it marks every submission correct. The work is ingenious and the tests turn green. It is also not what anyone wanted. The instruction was met to the letter, and the intent behind it was never pinned down, so a clever model optimised the letter. What was missing was the argument that should have come first: someone to say what "done" actually meant.
+Today's best models already take us this literally. Give a coding agent a task and reward it for passing the tests, and it will often do exactly that and no more. Models have been [caught](https://metr.org/blog/2025-06-05-recent-reward-hacking/) making the checks pass without doing the work: handing back the grader's own answer, or patching the evaluator so it marks every submission correct. The code is ingenious, the tests turn green, and none of it is what anyone wanted. The model followed the instruction to the letter, because no one had told it what finishing the job actually meant.
 
 ## Putting it to the test
 
@@ -80,7 +80,7 @@ The chart below shows each tool's mean coverage across the three tasks.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three loan-servicing tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
-Allium captures nine of every ten hidden decisions. Everything else is huddled between three-fifths and seven-tenths, straddling the line drawn by plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built specifically for the job, and better than several of them.
+Allium captures nine of every ten hidden decisions. Everything else lands between three-fifths and seven-tenths, bunched around the line for plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built for the job, and better than several of them.
 
 The headline number hides where the real work happens. About two fifths of the answer key is inferable, the decisions a model can guess from the brief, and every tool captures most of them. What separates the tools is the rest: the non-inferable decisions that only asking can reach. On those, Allium captures around five in six. Every other tool, the ones built for the job included, lands between a half and three fifths.
 
@@ -130,7 +130,7 @@ The headline number hides where the real work happens. About two fifths of the a
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Each skill's coverage split by decision type. About two fifths of the answer key is inferable, guessable from the brief, and every tool captures most of it. The difference is the non-inferable decisions, the ones only asking reaches: Allium earns most of them, the rest little more than half.</figcaption>
 </figure>
 
-That is an indictment. A tool that exists to help you capture requirements, and does no better than typing your thoughts into an empty box, has not justified a place in your workflow. Several of them ask for more of your time and give nothing back for it.
+That is an indictment. A requirements tool that does no better than typing your thoughts into an empty box has no place in your workflow. Several of them ask for more of your time and give nothing back for it.
 
 The full run is below, every task and each of its three repeats.
 
@@ -159,7 +159,7 @@ The full run is below, every task and each of its three repeats.
 
 ## Why asking wins
 
-The tools that lose are not lazy. On receiving the brief most of them get to work: they propose a structure, draft a specification, and fill the remaining gaps with sensible industry defaults. That last habit is the whole problem. A gap filled with a default is a decision taken in silence, and it is the plausible defaults that trap you. Faced with our loan, the confident guess is penalties first and two decimal places, and both are wrong for this bank. A tool that fills the silence with an assumption is a faster way to build the wrong thing.
+The tools that lose are not lazy. Given the brief, most of them get straight to work: they propose a structure, draft a specification, and fill the gaps with sensible industry defaults. That last habit is the whole problem. A gap filled with a default is a decision taken in silence, and the plausible defaults are the ones that trap you. Faced with our loan, the obvious guess is penalties first and two decimal places, and both are wrong for this bank. A tool that fills the silence with an assumption is just a faster way to build the wrong thing.
 
 <span class="pullquote" text-content="A gap filled with a default is a decision taken in silence."></span>
 
@@ -203,11 +203,11 @@ There is more to it than volume. Across the other tools the dotted line traces a
 
 ## The lie in the middle
 
-None of this is an argument for big design up front. That was the original mistake, the belief that you could think your way to a complete and correct specification in advance and then execute it. One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not. The truth sits between them. You cannot know everything in advance, because you only learn once your idea meets reality, but a great deal of waste is avoidable before that meeting, if you think the design through and let a good partner stress-test your intent while it is still cheap to change.
+None of this is an argument for big design up front. That was the original mistake, the belief that you could think your way to a complete and correct specification in advance and then execute it. One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not. The truth sits between them. You cannot know everything in advance, because you only learn once your idea meets reality. But you can avoid a great deal of waste before that meeting, by thinking the design through and letting a good partner stress-test your intent while it is still cheap to change.
 
 <span class="pullquote left" text-content="One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not."></span>
 
-The Vasa lacked anyone able to question the king in time. That is the role Allium plays, and it plays it on both fronts. It asks the questions you did not think to answer, the ones that fix what you actually want. Then it reasons past your answers, through what they imply together, to catch the specification that is complete, agreed and still unseaworthy. One closes the gap between what you said and what you meant; the other, between what you meant and what reality will bear.
+The Vasa lacked anyone able to question the king in time. That is the job Allium does, on both counts. It asks the questions you would not have thought to answer, so that what you actually want is settled before anything is built. Then it works through where your answers lead, looking for the specification that is consistent and still wrong. The questions close the gap between what you said and what you meant; the reasoning closes the gap between what you meant and what will actually float.
 
 You are the king now, and your AI is the shipwright. It will build whatever you specify, and it will not tell you the ship will not float. That is why the Vasa is worth remembering: it was lost to questions no one pressed while there was still time to change the answer, and a model handed a thin brief makes the same mistake every day, taking the plausible default, building on it, and never mentioning it, until the money comes out wrong. The cheapest question is the one you ask before the keel is laid.
 
