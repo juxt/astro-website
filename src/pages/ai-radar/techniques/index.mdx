@@ -35,7 +35,7 @@ For coding agents working over a live codebase, the calculus has changed. Anthro
 
 RAG introduces an indirect prompt injection attack surface. Retrieved documents are injected into model context, so adversarial content in any document reaches the prompt via the retrieval step. Retrieval access controls and provenance tracking for ingested documents help mitigate this risk.
 
-See also: Cross-encoder reranking, Structured RAG, Hypothetical document embeddings (HyDE).
+See also: Cross-encoder reranking, Structured RAG.
 
 <div data-radar data-label="LLM-as-a-judge" data-ring="adopt" />
 
@@ -107,6 +107,8 @@ Skills provide a simpler solution than [MCP servers](/ai-radar/languages-framewo
 
 Because a Skill can carry scripts, installing one means running someone else's code: an untrusted Skill is an untrusted program, with the usual supply-chain and data-exfiltration risks. The trust boundary differs by host. Skills in Claude Code run with full access to the local machine and network, whereas the API's code-execution container is sandboxed with no network by default. We audit third-party Skills before installing them, prefer first-party or self-authored ones, and scope what the agent can reach while a Skill runs.
 
+See also: [MCP](/ai-radar/languages-frameworks/#mcp), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Harness engineering](/ai-radar/techniques/#harness-engineering).
+
 # Trial
 
 Promising approaches with growing adoption, worth exploring for teams ready to invest in emerging patterns.
@@ -173,7 +175,7 @@ An AI system has no compiler to flag a regression. A reworded prompt, a model up
 
 What you gate on depends on the system. A sensible core is task accuracy against a labelled set, cost per request, latency, and resistance to jailbreaks, each read against a baseline rather than as a bare number. Agents need more: whether the model chose the right tool and stuck to its plan. Structured outputs need their schema checked, and retrieval needs its answers traced back to the source. The judgements too nuanced for a simple assertion are where [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge) does the work.
 
-The tooling makes this routine. [Promptfoo](https://www.promptfoo.dev/) and [DeepEval](https://deepeval.com/) run assertions that fail a build outright; [Langfuse](https://langfuse.com/) and [LangSmith](https://www.langchain.com/langsmith) ship regression gates as ready-made CI actions. Even the [observability tools](/ai-radar/tools/#llm-observability-tools) have added gates of their own, so the same eval that helps you debug a run can also stop a bad one reaching users.
+The tooling makes this routine. [Promptfoo](https://www.promptfoo.dev/) and [DeepEval](https://deepeval.com/) run assertions that fail a build outright, and [Langfuse](https://langfuse.com/) ships a ready-made CI action for regression gates. Even the [observability tools](/ai-radar/tools/#llm-observability-tools) have added gates of their own, so the same eval that helps you debug a run can also stop a bad one reaching users.
 
 We put it in Trial. The gate is well supported and pays for itself wherever a quiet regression would be costly to find in production, and for regulated teams it gives Model Risk Management an auditable quality bar. The stronger claim, that you should write the evals first in the style of test-driven development, is contested: [Hamel Husain](https://hamel.dev/blog/posts/evals-faq/should-i-practice-eval-driven-development.html) argues for writing evaluators against the failures you have already seen, rather than ones you imagine up front. Begin with the few cases you know are critical, and let the suite grow from the incidents you hit in production.
 
@@ -279,7 +281,7 @@ See also: RAG, BERT variants, Cross-encoder reranking.
 
 ## GEPA
 
-[GEPA (Genetic-Pareto)](https://github.com/gepa-ai/gepa) optimises the prompts in an AI system automatically, by reflecting on what went wrong rather than by trial and error. It runs the system, reads the traces (reasoning, tool calls, errors) and asks an LLM to diagnose the failures in plain language and propose prompt edits, keeping a Pareto frontier of candidates that do well on different parts of the task. The [paper](https://arxiv.org/abs/2507.19457), accepted at ICLR 2026, reports that it beats reinforcement-learning tuning by up to 20% while using far fewer rollouts, and improves on the previous best prompt optimiser, MIPROv2, by more than 10%.
+[GEPA (Genetic-Pareto)](https://github.com/gepa-ai/gepa) optimises the prompts in an AI system automatically. It runs the system, reads the traces (reasoning, tool calls, errors) and asks an LLM to diagnose the failures in plain language and propose prompt edits, evolving a Pareto frontier of candidates that do well on different parts of the task. The [paper](https://arxiv.org/abs/2507.19457), accepted at ICLR 2026, reports that it outperforms reinforcement-learning tuning while using far fewer rollouts, and improves on the previous best prompt optimiser, MIPROv2.
 
 The appeal for regulated teams is that GEPA works on API-only models without touching weights, and it produces prompts a human can read and review rather than an opaque set of fine-tuned parameters. It depends on a measurable objective, so it fits tasks with a clear evaluation signal better than open-ended generation.
 
@@ -309,7 +311,7 @@ Not every decision needs a generative model. So much of what we hand to an LLM i
 
 None of this is new. Encoder classifiers have done the same work for years. [GLiNER](https://github.com/urchade/GLiNER) and [GLiClass](https://github.com/Knowledgator/GLiClass) classify against arbitrary labels with no task-specific training, run on your own hardware, and descend from the same [BERT family](/ai-radar/techniques/#bert-variants) that already sits in our Adopt ring. A small encoder fine-tuned on a few thousand of your own examples will usually beat a hosted alternative on cost and latency, and it keeps the data in house.
 
-The noise this quarter has been about [TypeSafe's Jev](https://typesafe.ai/), a proprietary hosted model that returns a calibrated distribution over a fixed set of answers, reached through its own API or OpenRouter's beta decisions endpoint. Independent testing bears out the speed and the price, but the claim that it cannot hallucinate is overstated, and its benchmark headlines flatter the results underneath. We put the category in Assess. The idea is sound and worth a place in the toolbox, yet there is little reason to hand a closed service work that open encoder models already do on infrastructure you control. Start with the mature open options, and see the proprietary newcomers for what they are: a convenience, not a breakthrough.
+The noise this quarter has been about [TypeSafe's Jev](https://typesafe.ai/), a proprietary hosted model that returns a calibrated distribution over a fixed set of answers, reached through its own API or OpenRouter's experimental decisions endpoint. Independent testing bears out the speed and the price, but the claim that it cannot hallucinate is overstated, and its benchmark headlines flatter the results underneath. We put the category in Assess. The idea is sound and worth a place in the toolbox, yet there is little reason to hand a closed service work that open encoder models already do on infrastructure you control. Start with the mature open options, and treat the proprietary newcomers as the convenience they are.
 
 See also: [BERT variants](/ai-radar/techniques/#bert-variants), [Small language models](/ai-radar/platforms/#small-language-models), [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
 
