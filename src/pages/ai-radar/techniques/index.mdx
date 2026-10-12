@@ -189,7 +189,33 @@ Much of the craft is subtraction and structure. Vercel [removed 80% of an agent'
 
 We put harness engineering in Trial. The vocabulary is only months old and the patterns are still settling, with no agreed tooling or measurement, but the practices pay off today and we already apply them in our own work. Teams standing up agents should treat the harness, not the model, as the thing they are building.
 
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [AGENTS.md and steering files](/ai-radar/languages-frameworks/#agentsmd-and-steering-files), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures).
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [AGENTS.md and steering files](/ai-radar/languages-frameworks/#agentsmd-and-steering-files), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures), [Context engineering](/ai-radar/techniques/#context-engineering).
+
+<div data-radar data-label="Context engineering" data-ring="trial" data-change="new" />
+
+## Context engineering
+
+A long-running agent rarely fails because it runs out of context window. It fails because the window fills with noise and the model's reasoning degrades, the effect Anthropic calls [context rot](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents): as the token count climbs, recall and judgement fall away. Deciding what stays in the window, and what is summarised, offloaded or dropped, has become a discipline of its own.
+
+It sits next to [harness engineering](/ai-radar/techniques/#harness-engineering) but solves a different problem. The harness is the scaffolding around the agent; context engineering is the token budget inside a single trajectory. A handful of techniques do most of the work. Compaction summarises a conversation as it nears the limit and restarts from the summary. Structured note-taking offloads state to memory outside the window, such as a running file the agent reads back. Sub-agent isolation hands a subtask a clean window and returns only its result. Tool-result clearing replaces re-fetchable tool outputs with placeholders once they are spent.
+
+This is no longer bespoke prompt plumbing. Anthropic now exposes compaction, tool-result clearing and a memory tool as first-class API primitives, so teams apply them without hand-rolling the mechanics. Compaction is an API capability available across current models rather than a feature of any one release, with a configurable trigger that defaults to around 150,000 tokens.
+
+The trade-off deserves naming, particularly for regulated teams. Compaction buys continuity by discarding detail: the summary keeps the high-level thread, but specific figures and the step-by-step trail can be lost silently. If an agent's reasoning has to be reconstructed for model risk management or audit, lossy compaction works against you, so keep the raw trace where attribution matters. We place this in Trial: the primitives are young and still in beta, and the patterns for when to compact rather than offload are unsettled, but the problem is universal for anyone running agents past a single window and the mitigations are available today.
+
+See also: [Harness engineering](/ai-radar/techniques/#harness-engineering), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents).
+
+<div data-radar data-label="AI content provenance" data-ring="trial" data-change="new" />
+
+## AI content provenance
+
+Marking AI-generated content is now a legal obligation, not a nicety. Under Article 50 of the EU AI Act, transparency duties apply from 2 August 2026: systems that generate synthetic audio, image, video or text must mark their output in a machine-readable form, chatbots must disclose that a user is talking to a machine, and AI-generated text published to inform the public has to be labelled. The duty binds providers and deployers alike, and a breach sits in the Act's middle penalty tier, up to €15M or 3% of worldwide annual turnover.
+
+The Act mandates the outcome without naming a standard. The European Commission's voluntary Code of Practice on marking and labelling AI-generated content, finalised in June 2026, points to a two-layer approach: cryptographically secured metadata plus invisible watermarking. In practice the metadata layer means [C2PA](https://c2pa.org/) Content Credentials, the signed-provenance standard backed by Adobe, Google, Microsoft, OpenAI, the BBC and others, with watermarking as the fallback when metadata is lost.
+
+We place this in Trial because the compliance driver is live and the tooling is production-usable, but neither layer is robust alone. C2PA metadata is easily stripped: a screenshot, a re-encode or an upload that discards metadata breaks the chain, and cross-platform survival is poor. Watermarks travel better through transformations but remain imperfect, and Google's SynthID is probabilistic and removable, with 2026 research both stripping and forging such marks. Evaluate each pipeline on its own terms rather than adopting one mechanism and assuming the obligation is met.
+
+See also: [Foundation models](/ai-radar/platforms/#foundation-models), [AI governance platforms](/ai-radar/platforms/#ai-governance-platforms).
 
 # Assess
 
@@ -314,6 +340,20 @@ Prompt injection is the dominant unsolved problem for agentic systems, and it ap
 We've placed CaMeL in Assess because it addresses prompt injection more rigorously than anything else we have seen, but production patterns have not yet emerged. The limitations are real: users must define security policies, which carries fatigue risk; running two models adds latency and cost; and the approach has not been battle-tested at scale. For teams building agentic systems for regulated industries, this paper is required reading.
 
 See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [OpenClaw](/ai-radar/tools/#openclaw).
+
+<div data-radar data-label="Agent identity" data-ring="assess" />
+
+## Agent identity
+
+When an agent acts, whose authority is it acting under? Most production systems cannot answer cleanly. Agents read and write through a shared service account or a long-lived API key, so there is no record of which agent took an action, let alone which human authorised it. Over-permissioned, shared credentials are among the most common and hardest-to-retrofit failures in agent deployments, and they are exactly what least privilege and clear trust boundaries exist to prevent.
+
+The fix borrows from non-human identity practice rather than inventing something new. Give each agent its own scoped, short-lived credential instead of a shared secret. [SPIFFE](https://spiffe.io/) issues cryptographically attested workload identities on this model, OAuth 2.1 with PKCE covers browser-driven agents, and signed delegation tokens carry the chain of authority end to end, from the human who triggered the work through each agent that acted on it. Bind every action to that identity, so it can be attributed and the credential revoked when the agent is retired.
+
+Attention is catching up to the risk. OWASP's [Top 10 for Agentic Applications](https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/) puts identity and privilege abuse among its leading risks, and NIST opened an AI agent identity and authorisation initiative in early 2026. For regulated teams the driver is sharper still: HIPAA's unique-user-identification rule, GDPR's accountability principle and SOX audit trails all assume you can say who did what, which a shared agent account cannot support.
+
+We place this in Assess. The underlying primitives are production-proven outside AI, but the agent-specific patterns and tooling are young and still settling, so experiment now rather than retrofit attribution later.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [MCP gateways](/ai-radar/tools/#mcp-gateways), [CaMeL](/ai-radar/techniques/#camel), [Agent memory architectures](/ai-radar/platforms/#agent-memory-architectures).
 
 # Hold
 
