@@ -1,7 +1,7 @@
 ---
 author: 'hga'
-title: 'The unasked question'
-description: 'Eight ways to gather requirements from an AI, one hidden answer key. The tools built for the job often lost to no tool at all.'
+title: 'The cost of being helpful'
+description: 'I gave eight AI requirements tools the same thin brief, hiding fourteen decisions you would only get by asking. Several did no better than going without one.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-09-29'
@@ -19,7 +19,7 @@ tags:
 
 We brief our AIs the same way, from a document. You are the lab with the working laser: you know your domain so well that much of it has gone tacit, more than you could ever write down. The model has only your words, and it is eager to please, [a habit trained into it](https://arxiv.org/abs/2310.13548). So it fails you two ways. Leave something unsaid and it guesses. Say everything and it can do exactly what you asked and still miss what you meant, the way a coding agent rewarded for passing the tests will [make them pass without doing the work](https://metr.org/blog/2025-06-05-recent-reward-hacking/).
 
-## Putting it to the test
+## The experiment
 
 The first of those two failures is the one you can measure. Does making the AI interrogate you before it builds actually close the gap? We built a small, open harness to find out. Every process starts from the same thin brief, "add payment allocation to our loan servicing system", and behind it is a hidden answer key of fourteen decisions that only asking can settle: this is a Bahraini bank, so three decimal places rather than two, fees before penalties, a residual under 0.005 dinar written off. These are real options a production system exposes, drawn from [Apache Fineract](https://fineract.apache.org/), and not defaults a model would reach for: given only the brief and no one to ask, capable models guessed no more than a fifth to two fifths of them. A stakeholder answers only what it is asked, a neutral auditor scores what each finished specification got right, and the only way to score well is to ask.
 
@@ -155,7 +155,7 @@ The full run is below, every task and each of its three repeats.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Every run in full. Each cell is the number of fourteen hidden decisions captured on that run of that task (three repeats per task). Coverage is the mean across all nine runs; Questions is the mean number asked.</figcaption>
 </figure>
 
-## The cost of being helpful
+## Why asking captures more
 
 The other tools make a deliberate trade-off. Given the brief, most get straight to work: they draft a specification and fill the gaps with sensible industry defaults. If your requirements are common, that is just what you want, since you do not have to spell everything out and the defaults are usually right. But faced with our loan, the obvious defaults are penalties first and two decimal places, and both are wrong for this bank. A default is a decision made without asking you, and when your case is unusual, that is a fast way to build the wrong thing.
 
@@ -199,7 +199,7 @@ Allium makes the opposite trade-off: it asks instead of assuming. That means aro
 
 There is more to it than volume. Across the other tools the dotted line slopes gently upward, so asking more does capture a little more. Allium sits well above that line. At twenty-two questions the trend would predict a result in the mid-seventies, and Allium reaches ninety-one, so it draws more from each one. The difference is which questions it asks: it spends them on the decisions that move the money, like how the bank rounds. How it finds those is for a later article. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before any code exists to unpick.
 
-## The lie in the middle
+## Before you build
 
 None of this argues for big design up front. One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not. You only learn some things once your idea meets reality, but you can spare yourself a lot of waste before then.
 
