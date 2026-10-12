@@ -23,7 +23,7 @@ We brief our AIs the same way, from a document. You are the lab with the working
 
 The first of those two failures is the one you can measure. Does making the AI interrogate you before it builds actually close the gap? We built a small, open harness to find out. Every process starts from the same thin brief, "add payment allocation to our loan servicing system", and behind it is a hidden answer key of fourteen decisions that only asking can settle: this is a Bahraini bank, so three decimal places rather than two, fees before penalties, a residual under 0.005 dinar written off. These are real options a production system exposes, drawn from [Apache Fineract](https://fineract.apache.org/), and not defaults a model would reach for: given only the brief and no one to ask, capable models guessed no more than a fifth to two fifths of them. A stakeholder answers only what it is asked, a neutral auditor scores what each finished specification got right, and the only way to score well is to ask.
 
-Every tool runs as its real self, installed the way a user installs it and interviewed live, with nothing we wrote fed to any model, and every transcript is published. We put eight through the identical loop: [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process, the [Superpowers](https://github.com/obra/superpowers) brainstorming skill, and, as a control, plain prose: a capable engineer with no tool at all.
+Each tool is installed as a user would and run live, with nothing we wrote fed to any model, and every transcript is published. We put eight through the identical loop: [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process, the [Superpowers](https://github.com/obra/superpowers) brainstorming skill, and, as a control, plain prose: a capable engineer with no tool at all.
 
 ## The results
 
@@ -125,7 +125,7 @@ The headline number hides where the real work happens. About two fifths of the a
   <text x="376.0" y="374" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">50</text>
   <text x="556.0" y="374" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">100%</text>
 </svg>
-<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Each skill's coverage split by decision type. About two fifths of the answer key is inferable, guessable from the brief, and every tool captures most of it. The difference is the non-inferable decisions, the ones only asking reaches: Allium earns most of them, the rest little more than half.</figcaption>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Each skill's coverage split by decision type. About two fifths of the answer key is inferable, guessable from the brief, and every tool captures most of it. The difference is the non-inferable decisions, the ones only asking reaches: Allium gets most of them, the rest little more than half.</figcaption>
 </figure>
 
 That is an indictment. A requirements tool that does no better than typing your thoughts into an empty box has no place in your workflow. Several of them ask for more of your time and give nothing back for it.
@@ -207,7 +207,7 @@ None of this argues for big design up front. One of the lies of agile is that yo
 
 The laser can look like a vote for agile: if a document is never enough, build the thing. But those scientists did not need to build the finished laser. They needed time beside one that already worked, fixing their attempts while that was cheap.
 
-Your AI has no working example to stand beside, but a specification it can run is the next best thing. Allium's model checking does the running, and that is for another article, but it rests on the eliciting: a model is only worth checking if it captures the decisions that count, and you get there by building it as you elicit. A half-built model is a demanding interviewer, and will not go on until those decisions are settled.
+Your AI has no working example to stand beside, but a specification it can run is the next best thing. Allium's model checking does the running, and that is for another article, but it rests on the eliciting: a model is only worth checking if it captures the decisions that count, and you get there by building it as you elicit. A half-built model cannot be finished while those decisions are open.
 
 You will never write down everything you know. A specification you can run will show you where your design goes wrong before you build on it.
 
