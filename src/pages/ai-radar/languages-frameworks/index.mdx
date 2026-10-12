@@ -63,6 +63,20 @@ As with any agent framework granting tool access, apply least-privilege scoping 
 
 See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [MCP](/ai-radar/languages-frameworks/#mcp), [A2A](/ai-radar/languages-frameworks/#a2a).
 
+<div data-radar data-label='Vendor agent SDKs' data-ring='trial' data-change="new" />
+
+## Vendor agent SDKs
+
+The frontier labs now ship their own SDKs for building agents directly against their models: Anthropic's [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview), [OpenAI's Agents SDK](https://openai.github.io/openai-agents-python/) and Google's [Agent Development Kit](https://adk.dev/). Each hands you the agent loop, tool calling, sessions and context management as a library you drive from your own code, so you write less orchestration yourself.
+
+Their heritage shows. The Claude Agent SDK runs the same harness that powers Claude Code as a library, carrying its built-in tools, subagents, hooks and permissions; renamed from the Claude Code SDK, it no longer loads local settings or Claude Code's system prompt unless you opt in, which is the right default for CI and multi-tenant isolation. OpenAI's Agents SDK is the production-ready successor to its Swarm experiment, code-first by design: your server owns the tools, state and approval decisions while the SDK runs the loop. OpenAI also sells a visual layer, Agent Builder, but it is being retired at the end of November 2026, so the SDK underneath is the durable primitive. Google's ADK is the most enterprise-oriented of the three, model-agnostic through LiteLLM though tuned for Gemini, and the build-time half of a pair whose managed runtime is Vertex AI's Agent Engine.
+
+The trade-off against provider-agnostic frameworks such as [LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) and [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) is the familiar one. A vendor SDK tracks its own model's newest capabilities closely, at the cost of coupling you to one provider, most tightly through the managed runtimes rather than the open-source SDKs themselves. Reach for a first-party SDK when you are committed to a model and want its full capability surface, and for an agnostic framework when portability matters more.
+
+All of these run tool-calling agents that act on files, shells, APIs and MCP connectors, so prompt injection is a live concern: content returned by a tool can steer the agent into actions you did not intend. Scope tool permissions tightly, keep a human approval step for anything that changes state, sandbox execution and treat everything a tool returns as untrusted input.
+
+See also: [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), [MCP](/ai-radar/languages-frameworks/#mcp), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Managed agent platforms](/ai-radar/platforms/#managed-agent-platforms).
+
 <div data-radar data-label='A2A' data-ring='trial' />
 
 ## A2A
@@ -154,17 +168,6 @@ See also: Neurosymbolic AI, Ontologies for AI grounding.
 [JAX](https://github.com/jax-ml/jax) sits in our Assess ring as we observe increasing interest in this ML framework that combines NumPy's familiar API with hardware acceleration and automatic differentiation. While TensorFlow and PyTorch remain dominant in the ML ecosystem, we're seeing JAX gain traction particularly in research settings and among teams working on custom ML architectures.
 
 JAX's functional approach to ML computation and its ability to compile to multiple hardware targets through XLA (Accelerated Linear Algebra) set it apart from more established frameworks. It shows promise for projects requiring high-performance numerical computing, though teams should weigh its relative immaturity in deployment tooling and a smaller ecosystem of pre-built components. We recommend teams experimenting with JAX do so on research projects or contained proofs-of-concept before considering broader adoption.
-
-
-<div data-radar data-label="OpenAI AgentKit" data-ring="assess" />
-
-## OpenAI AgentKit
-
-OpenAI launched [AgentKit](https://openai.com/index/introducing-agentkit/) at DevDay in October 2025, comprising Agent Builder for visual workflow design, ChatKit for embeddable interfaces, integrated evals and a Connector Registry for tool integration. ChatKit and the evals capabilities are generally available; Agent Builder and the Connector Registry are still in beta.
-
-AgentKit sits in Assess because adopting it represents a substantial commitment to the OpenAI ecosystem. Unlike framework-agnostic alternatives such as LangChain or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), teams using AgentKit tie their agent infrastructure to a single provider's roadmap. There is no separate AgentKit fee, since usage rolls into standard API pricing, but agentic workloads consume tokens unpredictably and the cost trajectory needs modelling up front.
-
-For organisations already invested in OpenAI's platform, AgentKit offers a streamlined path from prototype to production. Teams that need vendor flexibility will want to evaluate open alternatives first.
 
 <div data-radar data-label="PydanticAI" data-ring="assess" />
 
