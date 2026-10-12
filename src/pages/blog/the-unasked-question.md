@@ -209,7 +209,7 @@ The laser can look like a vote for agile: if a document is never enough, build t
 
 Your AI has no working example to stand beside, but a specification it can run is the next best thing. Allium's model checking does the running, and that is for another article, but it rests on the eliciting: a model is only worth checking if it captures the decisions that count, and you get there by building it as you elicit. A half-built model is a demanding interviewer, and will not go on until those decisions are settled.
 
-Make your specification behave like the laser rather than the paper, and it will tell you what the paper never could.
+You will never write down everything you know. A specification you can run will show you where your design goes wrong before you build on it.
 
 ---
 
