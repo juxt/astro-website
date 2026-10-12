@@ -155,7 +155,7 @@ The full run is below, every task and each of its three repeats.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Every run in full. Each cell is the number of fourteen hidden decisions captured on that run of that task (three repeats per task). Coverage is the mean across all nine runs; Questions is the mean number asked.</figcaption>
 </figure>
 
-## What asking buys
+## The cost of being helpful
 
 The other tools make a deliberate trade-off. Given the brief, most get straight to work: they draft a specification and fill the gaps with sensible industry defaults. If your requirements are common, that is just what you want, since you do not have to spell everything out and the defaults are usually right. But faced with our loan, the obvious defaults are penalties first and two decimal places, and both are wrong for this bank. A default is a decision made without asking you, and when your case is unusual, that is a fast way to build the wrong thing.
 
