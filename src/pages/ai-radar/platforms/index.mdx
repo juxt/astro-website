@@ -274,6 +274,8 @@ The counterpart to building your own [harness](/ai-radar/techniques/#harness-eng
 
 The trade is the familiar one: time-to-production against control and portability. A managed platform removes the undifferentiated work of running sandboxes, memory and retries, at the cost of tying your agent to a vendor's runtime and pricing, typically billed per token plus a session-hour fee.
 
+Off-premise does not mean off the hook. A hosted agent that runs code and browses still inherits the unsolved problem of prompt injection; the managed sandbox contains the blast radius but does not close the vector, and the trust boundary now runs through a third party's runtime. Least privilege still applies, and is harder to see from the outside: what credentials does the sandbox hold, and what can it reach on your behalf? For regulated teams there is a data-sovereignty question on top, since prompts, retrieved context and tool traffic all cross into the vendor's infrastructure, which bears on where regulated data is allowed to go.
+
 We place managed agent platforms in Assess. The category is real and moving quickly, but most offerings reached preview or general availability only this quarter, pricing is unsettled, and portability between them is unproven. AgentCore is the most production-ready for teams that want to move sooner. Self-hosted, single-user runtimes such as [OpenClaw](/ai-radar/tools/#openclaw) sit at the opposite end and stay in Hold.
 
 See also: [Harness engineering](/ai-radar/techniques/#harness-engineering), [Temporal](/ai-radar/platforms/#temporal), [Agent code sandboxes](/ai-radar/tools/#agent-code-sandboxes), [AI-powered workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation-platforms).

@@ -204,7 +204,7 @@ The other side of AI security is offence in service of defence: using agents to 
 
 The appeal is coverage. An agent that reasons over source can catch classes of bug that pattern-based scanners and fuzzers do not, and can carry a finding through to a candidate fix rather than stopping at a ticket. This is distinct from [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools), which probe a model's behaviour for jailbreaks and unsafe outputs; here the target is defects in conventional code.
 
-We place this in Assess. The results so far are real, but the strongest tooling is gated or in preview and the patterns for folding it into a security programme are still forming. Regulated teams should be watching closely, and running the generally available pieces such as Copilot Autofix where they already have code scanning in place.
+We place this in Assess. The results so far are real, but the strongest tooling is gated or in preview and the patterns for folding it into a security programme are still forming. Regulated teams should be watching closely, and running the generally available pieces such as Copilot Autofix where they already have code scanning in place. Two cautions for regulated code: sending proprietary source to a hosted model means it leaves your boundary, so weigh self-hosted or on-premise options; and an agent-authored security fix is a proposal, not a merge, so keep a human in the loop rather than auto-applying patches.
 
 See also: [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools), [AI supply-chain security](/ai-radar/tools/#ai-supply-chain-security), [AI-assisted code migration](/ai-radar/tools/#ai-assisted-code-migration).
 
