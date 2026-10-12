@@ -157,11 +157,11 @@ The full run is below, every task and each of its three repeats.
 
 ## Why asking wins
 
-The tools that lose are not lazy. Given the brief, most of them get straight to work: they propose a structure, draft a specification, and fill the gaps with sensible industry defaults. That last habit is the whole problem. A gap filled with a default is a decision taken in silence, and the plausible defaults are the ones that trap you. Faced with our loan, the obvious guess is penalties first and two decimal places, and both are wrong for this bank. A tool that fills the silence with an assumption is just a faster way to build the wrong thing.
+The other tools make a deliberate trade-off. Given the brief, most get straight to work: they draft a specification and fill the gaps with sensible industry defaults. If your requirements are common, that is just what you want, since you do not have to spell everything out and the defaults are usually right. But faced with our loan, the obvious defaults are penalties first and two decimal places, and both are wrong for this bank. A default is a decision made without asking you, and when your case is unusual, that is a fast way to build the wrong thing.
 
-<span class="pullquote" text-content="A gap filled with a default is a decision taken in silence."></span>
+<span class="pullquote" text-content="A default is a decision made without asking you."></span>
 
-Allium wins because it treats the silence as the work, and it would be dishonest to dress that up as anything cleverer than it is. It asks around twenty-two questions where the nearest rival asks fourteen and the lightest tools ask seven, close to double the field. That is the trade-off: a specification that fits costs you more of your time at the keyboard.
+Allium makes the opposite trade-off: it asks instead of assuming, and there is nothing more to it than that. It asks around twenty-two questions, against the nearest rival's fourteen and the lightest tools' seven, close to double the field. That is the cost: a specification that fits takes more of your time at the keyboard.
 
 <figure style="margin: 2.5rem 0;">
 <svg viewBox="0 0 640 380" role="img" aria-label="Scatter chart of requirements captured against questions asked, one point per tool. Seven tools cluster between 7 and 14 questions at 62 to 71 percent captured, a nearly flat band. Allium sits apart at 22 questions and 91 percent, far above and to the right, so the gains come only from asking well beyond where the others stop." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
