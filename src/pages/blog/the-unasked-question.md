@@ -155,16 +155,16 @@ The full run is below, every task and each of its three repeats.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Every run in full. Each cell is the number of fourteen hidden decisions captured on that run of that task (three repeats per task). Coverage is the mean across all nine runs; Questions is the mean number asked.</figcaption>
 </figure>
 
-## Why asking wins
+## What asking buys
 
 The other tools make a deliberate trade-off. Given the brief, most get straight to work: they draft a specification and fill the gaps with sensible industry defaults. If your requirements are common, that is just what you want, since you do not have to spell everything out and the defaults are usually right. But faced with our loan, the obvious defaults are penalties first and two decimal places, and both are wrong for this bank. A default is a decision made without asking you, and when your case is unusual, that is a fast way to build the wrong thing.
 
 <span class="pullquote" text-content="A default is a decision made without asking you."></span>
 
-Allium makes the opposite trade-off: it asks instead of assuming, and there is nothing more to it than that. It asks around twenty-two questions, against the nearest rival's fourteen and the lightest tools' seven, close to double the field. That is the cost: a specification that fits takes more of your time at the keyboard.
+Allium makes the opposite trade-off: it asks instead of assuming. That means around twenty-two questions, against the nearest rival's fourteen and the lightest tools' seven, close to double the field.
 
 <figure style="margin: 2.5rem 0;">
-<svg viewBox="0 0 640 380" role="img" aria-label="Scatter chart of requirements captured against questions asked, one point per tool. Seven tools cluster between 7 and 14 questions at 62 to 71 percent captured, a nearly flat band. Allium sits apart at 22 questions and 91 percent, far above and to the right, so the gains come only from asking well beyond where the others stop." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
+<svg viewBox="0 0 640 380" role="img" aria-label="Scatter chart of requirements captured against questions asked, one point per tool. Seven tools cluster between 7 and 14 questions at 62 to 71 percent captured, a nearly flat band. Allium sits apart at 22 questions and 91 percent, far above the shallow trend the other tools trace, capturing more for each question it asks, not only asking more." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
   <line x1="60" y1="60" x2="60" y2="330" stroke="currentColor" stroke-opacity="0.35"/>
   <line x1="60" y1="330" x2="610" y2="330" stroke="currentColor" stroke-opacity="0.35"/>
   <line x1="60" y1="195" x2="610" y2="195" stroke="currentColor" stroke-opacity="0.1"/>
@@ -197,7 +197,7 @@ Allium makes the opposite trade-off: it asks instead of assuming, and there is n
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured against questions asked, one point per tool (means across the three tasks). The dotted line is the trend across the other tools; Allium sits well above it, capturing more for each question it asks.</figcaption>
 </figure>
 
-There is more to it than volume. Across the other tools the dotted line slopes gently upward, so asking more does capture a little more. Allium sits well above that line. At twenty-two questions the trend would predict a result in the mid-seventies, and Allium reaches ninety-one, so it draws more from each question it asks. It spends its questions on the decisions that move the money, asking how the bank rounds instead of assuming, then writing the answer down where it cannot be lost. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before any code exists to unpick.
+There is more to it than volume. Across the other tools the dotted line slopes gently upward, so asking more does capture a little more. Allium sits well above that line. At twenty-two questions the trend would predict a result in the mid-seventies, and Allium reaches ninety-one, so it draws more from each one. The difference is which questions it asks: it spends them on the decisions that move the money, like how the bank rounds. How it finds those is for a later article. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before any code exists to unpick.
 
 ## The lie in the middle
 
