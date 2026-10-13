@@ -112,11 +112,11 @@ tr:nth-child(even) {
 .languages-frameworks h2,
 .languages-frameworks h3,
 .languages-frameworks .category-top-label-run {
-  color: #E8AA41;
+  color: #C7880A;
 }
 
 .languages-frameworks .category-cover-header {
-  background: #E8AA41;
+  background: #C7880A;
   color: #ffffff;
 }
 
@@ -128,11 +128,11 @@ tr:nth-child(even) {
 .techniques h2,
 .techniques h3,
 .techniques .category-top-label-run {
-  color: #F26A24;
+  color: #D24F2C;
 }
 
 .techniques .category-cover-header {
-  background: #F26A24;
+  background: #D24F2C;
   color: #ffffff;
 }
 
@@ -144,11 +144,11 @@ tr:nth-child(even) {
 .tools h2,
 .tools h3,
 .tools .category-top-label-run {
-  color: #CA4527;
+  color: #039DA0;
 }
 
 .tools .category-cover-header {
-  background: #CA4527;
+  background: #039DA0;
   color: #ffffff;
 }
 
@@ -160,11 +160,11 @@ tr:nth-child(even) {
 .platforms h2,
 .platforms h3,
 .platforms .category-top-label-run {
-  color: #F09758;
+  color: #247668;
 }
 
 .platforms .category-cover-header {
-  background: #F09758;
+  background: #247668;
   color: #ffffff;
 }
 

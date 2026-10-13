@@ -137,10 +137,10 @@
   height: 52mm;     /* 49mm visible (matches old gradient band) + 3mm top bleed */
   z-index: -1;
 }
-.category-cover-page.languages-frameworks .category-absolute-top-band { background-color: #E8AA41; }
-.category-cover-page.techniques .category-absolute-top-band { background-color: #F26A24; }
-.category-cover-page.tools .category-absolute-top-band { background-color: #CA4527; }
-.category-cover-page.platforms .category-absolute-top-band { background-color: #F09758; }
+.category-cover-page.languages-frameworks .category-absolute-top-band { background-color: #C7880A; }
+.category-cover-page.techniques .category-absolute-top-band { background-color: #D24F2C; }
+.category-cover-page.tools .category-absolute-top-band { background-color: #039DA0; }
+.category-cover-page.platforms .category-absolute-top-band { background-color: #247668; }
 
 /* Assign page names to each category cover */
 /* Note: both classes are on the same element, not parent/child */

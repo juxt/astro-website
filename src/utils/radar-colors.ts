@@ -1,9 +1,9 @@
 const baseColors = {
   // === QUADRANT COLORS ===
-  platforms: '#F09758',
-  tools: '#CA4527',
-  languagesFrameworks: '#E8AA41',
-  techniques: '#F26A24',
+  platforms: '#247668',
+  tools: '#039DA0',
+  languagesFrameworks: '#C7880A',
+  techniques: '#D24F2C',
 
   // === RADAR STRUCTURE COLORS ===
   radarBackground: '#ffffff',
