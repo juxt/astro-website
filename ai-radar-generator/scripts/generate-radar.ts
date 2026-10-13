@@ -1408,6 +1408,7 @@ async function main() {
       // Blank page before the back cover (thank-you)
       if (section.htmlFile.includes('thank-you')) {
         parts.push(blankPageHtml)
+        parts.push(blankPageHtml)
       }
       // Clear running label inline at the start of the next wrapped page to avoid blank pages
       parts.push(
