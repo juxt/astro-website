@@ -27,7 +27,7 @@ Realising these benefits requires quality training data and staff with appropria
 
 ## RAG
 
-Retrieval-Augmented Generation (RAG) combines search and text generation to ground responses in real data and reduce confabulation. It is valuable where accuracy and traceability matter, such as customer service or compliance; the work is in document processing and embedding strategy, though tooling has lowered the barriers.
+Retrieval-Augmented Generation (RAG) combines search and text generation to ground responses in real data and reduce confabulation. It is valuable where accuracy and traceability are the priority, such as customer service or compliance; the work is in document processing and embedding strategy, though tooling has lowered the barriers.
 
 We're watching techniques such as [Self-RAG](https://arxiv.org/abs/2310.11511), which prompts the model to gather more evidence before answering and shows early reductions in confabulation.
 
@@ -55,7 +55,7 @@ See also: [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gat
 
 ## BERT variants
 
-[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised NLP by processing words in relation to their whole context rather than sequentially, and the family keeps evolving, with [ModernBERT](https://huggingface.co/blog/modernbert) the latest iteration. Where generative models produce text, BERT-style encoders are optimised for understanding tasks such as classification and sentiment analysis, and they remain the basis for the semantic embeddings RAG uses.
+[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) changed NLP by processing words in relation to their whole context rather than sequentially, and the family keeps evolving, with [ModernBERT](https://huggingface.co/blog/modernbert) the latest iteration. Where generative models produce text, BERT-style encoders are optimised for understanding tasks such as classification and sentiment analysis, and they remain the basis for the semantic embeddings RAG uses.
 
 We recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for new NLP projects, for its disentangled attention; [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) is smaller and faster where latency is tight; and domain-specific variants exist for biomedical [(BioBERT)](https://github.com/dmis-lab/biobert) and financial text [(FinBERT)](https://huggingface.co/ProsusAI/finbert).
 
@@ -119,7 +119,7 @@ Promising approaches with growing adoption, worth exploring for teams ready to i
 
 ## Cross-encoder reranking
 
-[Cross-encoder reranking](https://sbert.net/examples/applications/retrieve_rerank/README.html) enhances AI search and chat systems by examining initial search results more carefully. While embedding search is fast and good at finding broadly relevant content, cross-encoder reranking excels at understanding subtle relevance signals by examining the query and potential results together.
+[Cross-encoder reranking](https://sbert.net/examples/applications/retrieve_rerank/README.html) enhances AI search and chat systems by examining initial search results more carefully. While embedding search is fast and good at finding broadly relevant content, cross-encoder reranking picks up subtle relevance signals by examining the query and potential results together.
 
 Most teams use a two-step process: embedding search finds 50-100 potentially relevant items, then cross-encoder reranking sorts these candidates to surface the most relevant. The technique often reduces confabulations in downstream LLM responses by ensuring higher quality context selection. Implementation has become straightforward with libraries such as [sentence-transformers](https://www.sbert.net/) providing ready-to-use models. Teams should be mindful of the additional latency and may need to tune the number of candidates based on performance requirements.
 
@@ -127,7 +127,7 @@ Most teams use a two-step process: embedding search finds 50-100 potentially rel
 
 ## Ontologies for AI grounding
 
-As AI systems scale beyond isolated experiments, shared meaning becomes critical infrastructure. Ontologies provide what LLMs lack: authoritative definitions of entities and relationships that don't shift with statistical probability. They ground responses in agreed definitions, enable knowledge graph traversal that pure RAG cannot achieve and support the structured outputs that agentic systems require.
+Ontologies provide what LLMs lack: authoritative definitions of entities and relationships that don't shift with statistical probability. They ground responses in agreed definitions, enable knowledge graph traversal that pure RAG cannot achieve and supply the structured outputs that agentic systems require.
 
 Traditional ontology development tends toward two failure modes: academic approaches aiming for formal completeness using OWL, and pragmatic approaches creating spreadsheets that grow unmaintainable. The key is to start lightweight and formalise selectively. Mark Burgess [argues](https://arxiv.org/abs/2512.19084) that traditional ontologies impose rigid hierarchies that don't match how language models represent meaning, proposing alternative graph structures designed to work with vector embeddings. For organisations needing to ground AI in domain knowledge today, ontologies offer a practical path with mature tooling.
 
@@ -235,7 +235,7 @@ Neurosymbolic AI combines neural networks with symbolic reasoning to address fun
 
 Fundamentally, this is an architectural problem. LLMs operate through probabilistic pattern matching over language, not causal modelling. As Mark Burgess argues in his [work on semantic spacetime](https://arxiv.org/abs/2512.19084), language models "paraphrase intentional knowledge" rather than tracing actual causal chains. Precise answers to precise questions require systems that explicitly encode what causes what.
 
-This matters most in regulated sectors. Regulatory rules are non-negotiable constraints, not suggestions a model can approximate. Risk models need to know what entities are and how they relate, and compliance requires explainable decision trails. Similar pressures apply across financial services, healthcare and insurance.
+The case is strongest in regulated sectors. Regulatory rules are non-negotiable constraints, not suggestions a model can approximate. Risk models need to know what entities are and how they relate, and compliance requires explainable decision trails. Similar pressures apply across financial services, healthcare and insurance.
 
 Practical implementations range from lightweight to sophisticated. On the simpler end, teams constrain LLM outputs to valid ontology terms or use knowledge graphs to ground RAG retrieval. More advanced implementations use symbolic reasoning engines to validate LLM-generated conclusions. Renewed interest in [Prolog](/ai-radar/languages-frameworks/#prolog) reflects exploration of logic programming alongside LLMs.
 
@@ -249,7 +249,7 @@ See also: Prolog, Ontologies for AI grounding, Agentic tool use, World models.
 
 World models sit in the Assess ring as an emerging alternative to pure language model architectures for tasks requiring causal reasoning and planning. Where LLMs predict the next token based on statistical patterns in text, world models build internal representations of how environments behave, enabling systems to simulate outcomes before acting.
 
-The field is developing along several paths. [Yann LeCun's Joint Embedding Predictive Architecture (JEPA)](https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/) learns by predicting missing information in an abstract embedding space rather than reconstructing raw pixels or tokens. Meta's V-JEPA and [VL-JEPA](https://arxiv.org/abs/2512.10942) extend this to video and vision-language tasks with significantly fewer parameters than autoregressive alternatives. [Karl Friston's active inference framework](https://www.verses.ai/), implemented by Verses AI in their AXIOM system, takes a different approach rooted in how biological systems model their environments. Rather than chasing reward signals, active inference agents build generative models and act to minimise prediction error, with Verses reporting 60% performance improvement using only 3% of comparable deep learning compute. Generative world models form a third strand, with [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) and Google DeepMind's Genie 3 creating physically plausible simulated environments for training robots and autonomous systems.
+The field is developing along several paths. [Yann LeCun's Joint Embedding Predictive Architecture (JEPA)](https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/) learns by predicting missing information in an abstract embedding space rather than reconstructing raw pixels or tokens. Meta's V-JEPA and [VL-JEPA](https://arxiv.org/abs/2512.10942) extend this to video and vision-language tasks with far fewer parameters than autoregressive alternatives. [Karl Friston's active inference framework](https://www.verses.ai/), implemented by Verses AI in their AXIOM system, takes a different approach rooted in how biological systems model their environments. Rather than chasing reward signals, active inference agents build generative models and act to minimise prediction error, with Verses reporting 60% performance improvement using only 3% of comparable deep learning compute. Generative world models form a third strand, with [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) and Google DeepMind's Genie 3 creating physically plausible simulated environments for training robots and autonomous systems.
 
 For financial services, [MarS](https://github.com/microsoft/MarS/) from Microsoft Research demonstrates the pattern applied to market simulation, generating realistic interactive market scenarios for forecasting and anomaly detection without real capital at risk. The paper was accepted at ICLR 2025.
 
@@ -335,7 +335,7 @@ Physical AI represents the convergence of foundation model capabilities with rob
 
 The technical breakthrough is Vision-Language-Action (VLA) models, which extend vision-language models to include physical action outputs. [NVIDIA's Isaac GR00T N1](https://developer.nvidia.com/isaac/foundation-models) represents the first open humanoid robot foundation model, using a dual-system architecture that separates deliberate planning from rapid reactive control. [Google's Gemini Robotics](https://deepmind.google/discover/blog/gemini-robotics-brings-ai-into-the-physical-world/) is advancing similar capabilities. World Foundation Models complement these by enabling simulation-based training: [NVIDIA Cosmos](https://www.nvidia.com/en-us/ai/cosmos/) generates physically plausible synthetic environments that can train robots on scenarios too dangerous or rare to capture in the real world.
 
-Production deployments remain concentrated in well-resourced organisations. The gap between research demonstrations and reliable industrial deployment is substantial. Hardware costs have fallen substantially over the past few years, but perception and control challenges in unstructured environments remain formidable. Organisations with physical AI ambitions should be experimenting, while approaching production timelines with caution.
+Production deployments remain concentrated in well-resourced organisations. The gap between research demonstrations and reliable industrial deployment is wide. Hardware costs have fallen over the past few years, but perception and control challenges in unstructured environments remain formidable. Organisations with physical AI ambitions should be experimenting, while approaching production timelines with caution.
 
 See also: Digital twin platforms, World models.
 
@@ -373,7 +373,7 @@ Not recommended for new projects; better alternatives exist.
 
 ## Word2Vec & GloVe
 
-We've placed both [GloVe (Global Vectors for Word Representation)](https://nlp.stanford.edu/projects/glove/) and [Word2Vec (Word to Vector)](https://www.tensorflow.org/text/tutorials/word2vec) in the Hold ring of our techniques quadrant. While these word embedding techniques were groundbreaking when introduced and served as fundamental building blocks for many NLP applications, they have been largely superseded by more advanced approaches.
+We've placed both [GloVe (Global Vectors for Word Representation)](https://nlp.stanford.edu/projects/glove/) and [Word2Vec (Word to Vector)](https://www.tensorflow.org/text/tutorials/word2vec) in the Hold ring of our techniques quadrant. While these word embedding techniques broke new ground when introduced and underpinned many NLP applications, they have been largely superseded by more advanced approaches.
 
 These older embedding techniques, though computationally efficient, lack the contextual understanding that modern transformer-based models provide. Modern large language models and contextual embeddings such as BERT produce more nuanced representations that capture word meaning based on surrounding context, rather than the static embeddings that GloVe and Word2Vec generate. For new projects, we recommend exploring more recent embedding techniques (see "BERT Variants" in our Adopt ring) unless you have very specific constraints around computational resources or model size that make these older approaches necessary.
 
@@ -381,7 +381,7 @@ These older embedding techniques, though computationally efficient, lack the con
 
 ## Zero-shot prompting
 
-Zero-shot prompting, the practice of asking Large Language Models to perform tasks without examples or training, has been a quick way to get started with AI. However, we strongly recommend against using zero-shot prompts in production without appropriate guardrails and safety measures. We've heard of multiple incidents where unprotected prompts led to harmful or inappropriate outputs, potentially exposing organisations to significant risks.
+Zero-shot prompting, the practice of asking Large Language Models to perform tasks without examples or training, has been a quick way to get started with AI. We recommend against using zero-shot prompts in production without appropriate guardrails and safety measures. We've heard of multiple incidents where unprotected prompts led to harmful or inappropriate outputs that exposed organisations to reputational and compliance risk.
 
 Our view is that zero-shot prompting should always be combined with input validation and output filtering. While it can be valuable for prototyping and exploration, moving to few-shot prompting or fine-tuning with careful guardrails is a more robust approach for production systems. The current placement in Hold reflects our concern about organisations rushing to deploy unsafe prompt patterns rather than taking the time to implement proper controls.
 
