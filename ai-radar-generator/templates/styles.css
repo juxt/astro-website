@@ -305,12 +305,12 @@ tr:nth-child(even) {
 /* Large decorative cover image (square, replaces previous circle) */
 .cover-image {
   position: absolute;
-  width: 400pt;
-  height: 400pt;
+  width: 210mm; /* full page width */
+  height: 200mm;
   object-fit: cover;
-  top: 45%;
+  top: 58%;
   left: 50%;
-  transform: translate(-50%, -25%);
+  transform: translate(-50%, -50%);
   z-index: 0; /* sit behind footer/logo */
 }
 
@@ -730,6 +730,11 @@ p {
   text-transform: uppercase;
 }
 
+.glance-col--languages .glance-list-section h3 { color: #C7880A; }
+.glance-col--techniques .glance-list-section h3 { color: #D24F2C; }
+.glance-col--tools .glance-list-section h3 { color: #039DA0; }
+.glance-col--platforms .glance-list-section h3 { color: #247668; }
+
 .glance-list {
   margin: 0;
   padding: 0;
@@ -777,7 +782,7 @@ p {
 
 @page thank-you {
   margin: 0;
-  background-color: #ffffff;
+  background-color: #000000;
   @bottom-left {
     content: none;
   }
@@ -838,11 +843,15 @@ p {
   width: 60mm;
   height: 60mm;
   display: block;
+  background: #ffffff;
+  padding: 4mm;
+  border-radius: 2mm;
+  box-sizing: content-box;
 }
 
 .thank-you-url {
   font-size: 14pt;
-  color: var(--color-text-main);
+  color: #ffffff;
   margin: 3mm 0 0 0;
 }
 
@@ -856,6 +865,6 @@ p {
 .thank-you-disclaimer {
   font-size: 9pt;
   line-height: 1.5;
-  color: var(--color-text-muted);
+  color: #b3b3b3;
   margin: 0;
 }
