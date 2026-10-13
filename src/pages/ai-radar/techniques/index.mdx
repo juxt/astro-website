@@ -389,7 +389,7 @@ Our view is that zero-shot prompting should always be combined with input valida
 
 ## Chain of thought (CoT)
 
-[Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) has moved to Hold. While useful when it emerged, [research from Wharton's Generative AI Labs](https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/) demonstrates diminishing returns: gains are rarely worth the time cost, and for reasoning models such as o3 and GPT-5.2, CoT prompting can decrease performance since step-by-step reasoning is already internalised at the architecture level.
+[Chain of Thought (CoT)](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/chain-of-thought-prompting) sits in Hold. While useful when it emerged, [research from Wharton's Generative AI Labs](https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/) demonstrates diminishing returns: gains are rarely worth the time cost, and for reasoning models such as o3 and GPT-5.2, CoT prompting can decrease performance since step-by-step reasoning is already internalised at the architecture level.
 
 For non-reasoning models, CoT still shows modest benefits on mathematical and symbolic reasoning tasks, but these are precisely the domains where better alternatives are emerging. Dedicated reasoning models handle them natively, while neurosymbolic architectures offer more reliable solutions by coupling LLMs with explicit reasoning engines.
 
