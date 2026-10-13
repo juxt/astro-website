@@ -45,6 +45,8 @@ A broader architectural concern surfaced in April 2026 when OX Security demonstr
 
 For simpler workflows that operate on local files and code rather than external services, [Claude Skills](/ai-radar/techniques/#claude-skills) offer a lighter-weight alternative worth considering before committing to MCP server development.
 
+The protocol is also starting to grow. [MCP Apps](https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/) (SEP-1865), its first official extension, lets a server ship interactive UI to the host through a `ui://` resource scheme, so a tool can render a form or a view rather than return plain text. Developed by MCP maintainers at Anthropic and OpenAI with the MCP-UI community, it folds two earlier efforts into one standard. Rendering server-supplied markup inside a host is a fresh injection and exfiltration surface, so the spec makes sandboxed iframes and a Content Security Policy mandatory. It went official at the start of 2026 and support is still rolling out across hosts, so it is far less proven than the base protocol.
+
 See also: [Claude Skills](/ai-radar/techniques/#claude-skills), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use).
 
 # Trial
