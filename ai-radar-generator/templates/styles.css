@@ -250,7 +250,8 @@ tr:nth-child(even) {
   height: 297mm; /* A4 height */
   width: 210mm; /* A4 width */
   padding: 14mm 20mm 24mm 20mm; /* Reduced top padding to compensate for border */
-  background: var(--color-bg-cover); /* Cream/beige background */
+  background: #000000; /* Black cover background */
+  color: #ffffff; /* White cover text */
   position: relative;
   page-break-after: always;
   /* Border was moved to page footer area */
@@ -289,7 +290,7 @@ tr:nth-child(even) {
   line-height: 1.4;
   margin: 0;
   font-weight: 400;
-  color: var(--color-text-main);
+  color: #ffffff;
   flex: 1;
 }
 

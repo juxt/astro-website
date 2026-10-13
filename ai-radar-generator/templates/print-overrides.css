@@ -22,7 +22,7 @@
 @page cover {
   bleed: 3mm;
   marks: crop cross;
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 .cover-page {
