@@ -5,7 +5,7 @@ description: 'I gave eight AI requirements tools the same thin brief, hiding fou
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-09-29'
-heroImage: 'machine-human.jpg'
+heroImage: 'the-cost-of-being-helpful.jpg'
 draft: true
 tags:
   - 'ai'
