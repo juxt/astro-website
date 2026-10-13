@@ -210,6 +210,18 @@ For regulated industries, agent memory introduces governance questions your exis
 
 See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Harness engineering](/ai-radar/techniques/#harness-engineering), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework).
 
+<div data-radar data-label="AI governance platforms" data-ring="trial" data-change="up" />
+
+## AI governance platforms
+
+The EU AI Act is phasing in. Its high-risk obligations, conformity assessments, risk documentation, human oversight and ongoing monitoring, were pushed to December 2027 by the Digital Omnibus, but the programmes to meet them take years to build. Banks and insurers already operate under model risk management frameworks (SR 11-7 in the US, SS1/23 in the UK), but these were written for statistical models with stable inputs and deterministic outputs. Extending them to LLM-based systems requires tooling that existing GRC platforms were not designed to provide.
+
+[Credo AI](https://www.credo.ai/) has emerged as the leading dedicated platform, providing AI risk classification aligned to the EU AI Act, NIST AI RMF and ISO 42001. It powers the compliance accelerators in [IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance) through an OEM partnership, and Microsoft is integrating it with Azure AI Foundry. Others compose governance workflows from existing tools: model cards in Hugging Face, risk registers in GRC platforms, audit trails from observability tooling. Dedicated platforms offer structured workflows out of the box, while bespoke approaches require more engineering but can match how your organisation already works.
+
+We move this to Trial. The space is young and consolidating fast, but the tooling is now worth investing time to evaluate, particularly for financial services organisations with EU AI Act obligations, even as the vendor landscape keeps shifting.
+
+See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
+
 # Assess
 
 Emerging or specialised services that require careful evaluation before adoption.
@@ -261,18 +273,6 @@ The trade-off is radical inflexibility. Each chip runs exactly one model. When t
 We've placed Taalas in Assess because the technology is early and the economics only work at significant scale. The assumption that a single model will remain useful long enough to justify dedicated silicon runs counter to how fast the field is moving.
 
 See also: [Open weight LLMs](/ai-radar/platforms/#open-weight-llms), [Local model execution environments](/ai-radar/tools/#local-model-execution-environments).
-
-<div data-radar data-label="AI governance platforms" data-ring="assess" />
-
-## AI governance platforms
-
-The EU AI Act reaches full enforcement in August 2026. High-risk AI systems must demonstrate conformity assessments, risk documentation, human oversight and ongoing monitoring. Banks and insurers already operate under model risk management frameworks (SR 11-7 in the US, SS1/23 in the UK), but these were written for statistical models with stable inputs and deterministic outputs. Extending them to LLM-based systems requires tooling that existing GRC platforms were not designed to provide.
-
-[Credo AI](https://www.credo.ai/) has emerged as the leading dedicated platform, providing AI risk classification aligned to the EU AI Act, NIST AI RMF and ISO 42001. It powers the compliance accelerators in [IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance) through an OEM partnership, and Microsoft is integrating it with Azure AI Foundry. Others compose governance workflows from existing tools: model cards in Hugging Face, risk registers in GRC platforms, audit trails from observability tooling. Dedicated platforms offer structured workflows out of the box, while bespoke approaches require more engineering but can match how your organisation already works.
-
-The space is young and consolidating fast. Financial services organisations should be evaluating now, particularly those with EU AI Act obligations, but should expect the vendor landscape to shift.
-
-See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
 
 <div data-radar data-label="Managed agent platforms" data-ring="assess" data-change="new" />
 
