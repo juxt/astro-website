@@ -117,7 +117,7 @@ See also: [MCP](/ai-radar/languages-frameworks/#mcp), [Agentic tool use](/ai-rad
 
 Promising approaches with growing adoption, worth exploring for teams ready to invest in emerging patterns.
 
-<div data-radar data-label="Cross-encoder reranking" data-ring="trial" />
+<div data-radar data-label="Cross-encoder reranking" data-ring="trial" data-published="false" />
 
 ## Cross-encoder reranking
 
@@ -137,7 +137,7 @@ Graph databases such as [Neo4j](https://neo4j.com/) provide accessible implement
 
 See also: LinkML, Neurosymbolic AI, Prolog.
 
-<div data-radar data-label="Model distillation & synthetic data" data-ring="trial" />
+<div data-radar data-label="Model distillation & synthetic data" data-ring="trial" data-published="false" />
 
 ## Model distillation & synthetic data
 
@@ -245,7 +245,7 @@ We've placed this in Assess because production patterns are still emerging, but 
 
 See also: Prolog, Ontologies for AI grounding, Agentic tool use, World models.
 
-<div data-radar data-label="World models" data-ring="assess" />
+<div data-radar data-label="World models" data-ring="assess" data-published="false" />
 
 ## World models
 
@@ -329,7 +329,7 @@ Tools such as Lightning AI's [lit-gpt](https://github.com/Lightning-AI/litgpt/tr
 
 Reinforcement fine-tuning has become the other half of this story. Where LoRA adapts a model on examples, reinforcement fine-tuning trains it against a reward: run the model on a task, score the result with a programmable grader or an LLM judge, and use GRPO-style updates to reinforce what worked. In 2026 this became a common way to turn an off-the-shelf model into a reliable domain agent on tool-calling and coding, and a tooling layer formed around it, with RL environments packaged as installable Python artifacts (Prime Intellect's [verifiers](https://github.com/PrimeIntellect-ai/verifiers) and prime-rl, OpenPipe's [ART](https://art.openpipe.ai/)) and LLM-as-judge reward shaping such as RULER. We keep it in Assess alongside LoRA. For most teams reward design and environment construction are still specialist work, the failure mode is reward hacking rather than the behaviour you were after, and an RL-tuned model is harder to explain under model risk management than a prompted one, since the behaviour now lives in shifted weights rather than an inspectable prompt.
 
-<div data-radar data-label="Physical AI and robotics foundation models" data-ring="assess" />
+<div data-radar data-label="Physical AI and robotics foundation models" data-ring="assess" data-published="false" />
 
 ## Physical AI and robotics foundation models
 
@@ -387,7 +387,7 @@ Zero-shot prompting, the practice of asking Large Language Models to perform tas
 
 Our view is that zero-shot prompting should always be combined with input validation and output filtering. While it can be valuable for prototyping and exploration, moving to few-shot prompting or fine-tuning with careful guardrails is a more robust approach for production systems. The current placement in Hold reflects our concern about organisations rushing to deploy unsafe prompt patterns rather than taking the time to implement proper controls.
 
-<div data-radar data-label="Chain of thought (CoT)" data-ring="hold" />
+<div data-radar data-label="Chain of thought (CoT)" data-ring="hold" data-published="false" />
 
 ## Chain of thought (CoT)
 
@@ -399,7 +399,7 @@ The frontier of prompt engineering has moved to structuring problems effectively
 
 See also: Neurosymbolic AI.
 
-<div data-radar data-label="AI pull request review" data-ring="hold" />
+<div data-radar data-label="AI pull request review" data-ring="hold" data-published="false" />
 
 ## AI pull request review
 
