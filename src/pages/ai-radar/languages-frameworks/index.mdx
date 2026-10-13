@@ -19,17 +19,13 @@ Mature, well-supported technologies ready for production use.
 
 ## PyTorch
 
-[PyTorch](https://pytorch.org/) has demonstrated consistent maturity and widespread adoption across both research and production environments, which is why we place it in our Adopt ring. We're seeing it emerge as the default choice for many machine learning teams, particularly those working on deep learning projects, thanks to its intuitive Python-first approach and dynamic computational graphs that make debugging and prototyping significantly easier.
-
-The framework's robust ecosystem, exceptional documentation and strong community support make it a reliable choice for teams at any scale. While TensorFlow remains relevant, particularly in production deployments, PyTorch's seamless integration with popular machine learning tools, extensive pre-trained model repository and growing deployment options through TorchServe have addressed previous concerns about production readiness. The framework's adoption by major technology organisations and research institutions, coupled with its regular release cycle and stability, gives us confidence in recommending it as a default choice for new machine learning projects.
+[PyTorch](https://pytorch.org/) is the default choice for most machine learning teams, particularly for deep learning, thanks to its Python-first approach and dynamic computational graphs that make debugging and prototyping easier. The ecosystem, documentation and community are strong, and TorchServe and an extensive pre-trained model repository settled the old questions about production readiness long ago. We recommend it as the default for new machine learning projects.
 
 <div data-radar data-label='dbt' data-ring='adopt' />
 
 ## dbt
 
-We've placed [dbt (data build tool)](https://www.getdbt.com/) in the Adopt ring because it has proven to be an essential framework for organising and managing the data transformations that feed AI systems. dbt brings software engineering best practices such as version control and testing to data transformation workflows, which is crucial when preparing data for AI model training and inference.
-
-The reliability and maintainability of AI systems heavily depend on the quality of their input data, and dbt helps teams achieve this by making data transformations more transparent and trustworthy. We've seen teams successfully use dbt to create clean, well-documented data pipelines that connect data warehouses to AI applications, while maintaining the agility to quickly adapt to changing requirements. Its integration with modern data platforms and strong community support make it a solid choice for organisations building out their AI infrastructure.
+[dbt (data build tool)](https://www.getdbt.com/) brings software engineering practices, version control and testing, to the data transformations that feed AI systems. Since the reliability of an AI system depends heavily on the quality of its input data, that discipline matters: dbt makes the pipelines connecting data warehouses to AI applications transparent and maintainable. Its integration with modern data platforms makes it a solid default for teams building out AI infrastructure.
 
 <div data-radar data-label='MCP' data-ring='adopt' />
 
@@ -137,15 +133,11 @@ See also: [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-
 
 ## Formal specification languages
 
-Formal specification languages allow teams to describe system behaviour with enough precision that properties can be verified before code is written. They sit on a spectrum: lightweight languages that structure intent, model checkers that explore state spaces and full theorem provers that deliver mathematical proof. AI assistants have lowered the barrier to entry, making formal specification viable for a broader range of software than the safety-critical systems that historically justified the investment.
+Formal specification languages describe system behaviour precisely enough that properties can be verified before code is written, on a spectrum from lightweight languages that structure intent, through model checkers that explore state spaces, to theorem provers that deliver mathematical proof. [TLA+](https://lamport.azurewebsites.net/tla/tla.html), created by Leslie Lamport, is the most widely adopted for distributed systems; Amazon used it to find subtle AWS bugs that testing could not surface. [Alloy](https://alloytools.org/) takes a lighter, auto-analysed approach, while [Dafny](https://dafny.org/) and [Lean 4](https://lean-lang.org/) have drawn substantial AI-assisted proof-synthesis work this year. AI assistants have lowered the barrier enough to make specification viable well beyond the safety-critical systems that once justified it.
 
-[TLA+](https://lamport.azurewebsites.net/tla/tla.html), created by Leslie Lamport, is the most widely adopted formal specification language for distributed systems. Amazon used it to find subtle bugs in AWS infrastructure that testing alone could not surface. [Alloy](https://alloytools.org/), developed by Daniel Jackson at MIT, takes a lighter approach with automatic analysis, well suited for exploring design spaces and finding counterexamples early. [FizzBee](https://fizzbee.io/) offers a more accessible alternative to TLA+ designed for practitioners. On the verification-aware end of the spectrum, [Dafny](https://dafny.org/) and [Lean 4](https://lean-lang.org/) have both seen substantial AI-assisted activity over the past year, with dedicated POPL workshops and research projects targeting them as LLM proof-synthesis targets.
+We develop [Allium](https://github.com/juxt/allium), our own language at the practical end: it captures behaviour in a structured, machine-readable form that AI agents use to guide implementation and generate tests. It cannot prove properties across all states the way TLA+ or Alloy can, but it captures intent precisely enough to serve as a contract between human and agent. AI has shifted the economics, since agents now both author specifications and implement against them, which makes rigorous specification cheaper than it was and more necessary, given how readily models resolve ambiguity in directions you did not intend.
 
-We've been developing [Allium](https://github.com/juxt/allium), our own specification language at the practical end of this spectrum. Allium captures system behaviour in a structured, machine-readable format that AI agents can use to guide implementation and generate tests. It cannot prove properties hold across all possible states the way TLA+ or Alloy can, but it captures intent precisely enough to serve as contracts between humans and AI. The right level of formality depends on what is at stake.
-
-AI has shifted the economics. Specifying behaviour rigorously used to be reserved for systems where the cost of failure was high enough to justify the upfront effort. With AI agents now both authoring specifications and producing implementations against them, behavioural specification is more cost-effective than it was, and arguably more necessary, given how readily models resolve ambiguity in directions you did not intend.
-
-See also: [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai), [Prolog](/ai-radar/languages-frameworks/#prolog).
+See also: [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai).
 
 # Assess
 
@@ -215,7 +207,7 @@ The framework emerged from biomedical informatics but applies broadly. For AI ap
 
 Not recommended for new projects; better alternatives exist.
 
-<div data-radar data-label='AutoGen' data-ring='hold' data-published="false" />
+<div data-radar data-label='AutoGen' data-ring='hold' />
 
 ## AutoGen
 
