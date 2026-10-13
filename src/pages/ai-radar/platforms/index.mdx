@@ -19,7 +19,7 @@ Established, well-supported services ready for production AI deployments.
 
 ## Foundation models
 
-Foundation model providers continue to evolve rapidly. Major players such as OpenAI, Anthropic, Google, Microsoft and Meta compete alongside a fast-growing open-weight field including DeepSeek, Alibaba, Moonshot AI and NVIDIA. Consolidation has begun as well: Cohere and Aleph Alpha signed a definitive agreement in September 2026 to combine as a transatlantic sovereign-AI provider, subject to regulatory approval.
+OpenAI, Anthropic, Google, Microsoft and Meta compete alongside a fast-growing open-weight field including DeepSeek, Alibaba, Moonshot AI and NVIDIA. Consolidation has begun too: Cohere and Aleph Alpha signed a definitive agreement in September 2026 to combine as a transatlantic sovereign-AI provider, subject to regulatory approval.
 
 Providers differentiate across three tiers: smaller, faster models optimised for speed and cost; larger, more capable models balancing capabilities with response times; and specialised reasoning models for complex problem-solving. The distinction between general and reasoning models has largely dissolved, with the current flagships from OpenAI, Anthropic and Google integrating extended reasoning natively rather than exposing it through separate variants.
 
@@ -87,7 +87,7 @@ National and regional programmes are the last group, and most compete on languag
 
 CoreWeave acquired Weights & Biases in May 2025. The platform continues under new ownership and our recommendation stands, though teams should monitor how the product evolves.
 
-[Weights & Biases](https://wandb.ai/site/) tracks and visualises machine learning experiments. It provides a robust solution for managing ML workflows, particularly with complex models and large datasets. By making experiment tracking light touch, requiring just a few lines of code, it removes the friction that prevents teams from maintaining good measurement practices.
+[Weights & Biases](https://wandb.ai/site/) tracks and visualises machine learning experiments, which helps when managing complex models and large datasets. By making experiment tracking light touch, requiring just a few lines of code, it removes the friction that prevents teams from maintaining good measurement practices.
 
 Collaboration features such as shared dashboards and reports make results visible to the whole team. Rather than knowledge being siloed in individual notebooks, experiments become shared assets. This visibility leads to faster knowledge sharing and quicker iteration cycles. However, tool adoption alone isn't enough; teams need to actively foster a culture that values measurement and experimentation for these benefits to materialise.
 
@@ -148,7 +148,7 @@ The key benefit is proactive detection: organisations learn about performance de
 
 Open weight LLMs (sometimes incorrectly called "open source") reached maturity in 2025, with some surpassing frontier models on specific tasks. [Moonshot's Kimi K3](https://huggingface.co/moonshotai/Kimi-K3), [Zhipu's GLM-5](https://open.bigmodel.cn/) and [DeepSeek V4](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) compete directly with closed models on coding and reasoning benchmarks. Meta has returned to open weights for local use with [Muse Glimmer](https://huggingface.co/meta-models/Muse-Glimmer-30B), a 30B model distilled from its closed Muse Spark flagship, released under Apache 2.0 and built to run as an on-device agent on a single consumer GPU. Smaller models such as Microsoft's [Phi-4](https://huggingface.co/microsoft/phi-4) and Google's [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4) run on consumer hardware, making self-hosted inference practical for local coding assistants, on-device processing and latency-sensitive applications.
 
-This quarter, source code was accidentally exposed through AI provider tooling, and autonomous agents with broad permissions destroyed production data. A self-hosted deployment puts data flow and model versioning under the operator's control. Prompts, outputs and proprietary code stay within the organisation, and the model only changes when the operator changes it. The pull, in short, is towards organisations retaining ownership of their data and the models that act on it.
+This quarter, source code was accidentally exposed through AI provider tooling, and autonomous agents with broad permissions destroyed production data. A self-hosted deployment puts data flow and model versioning under the operator's control. Prompts, outputs and proprietary code stay within the organisation, and the model only changes when the operator changes it. The pull is towards organisations retaining ownership of their data and the models that act on it.
 
 Regulation is heading the same way. The EU AI Act, financial services rules and healthcare frameworks all want organisations to show where data flowed and how models behaved, not take a vendor's word for it. GLM-5 was trained entirely on Huawei Ascend chips with no NVIDIA dependency, a reminder that supply chain sovereignty extends down to the silicon.
 
@@ -167,7 +167,7 @@ Small language models (SLMs) are the smaller cousins of the open weight LLMs abo
 
 In our experience, the case for SLMs comes down to using your own data. A few thousand labelled examples and a fine-tuning run produce a model that has the organisation's terminology and edge cases built in. Hosted in-house, the data stays within the organisation, and the resulting model is small enough to deploy on the infrastructure that team already operates rather than something purpose-built.
 
-The natural fit is classification work where the language is nuanced and the cost of getting it wrong is real: routing customer messages by intent, triaging support tickets, tagging documents against a controlled vocabulary or extracting structured fields from free text. These are jobs that traditional keyword and feature-engineered approaches have never handled well, and where reaching for a frontier API on every request is overkill on both cost and latency. A fine-tuned SLM responds in the low hundreds of milliseconds on commodity hardware, faster on a GPU, and improves as more of the organisation's examples are added.
+The natural fit is classification work where the language is nuanced and a wrong call is costly: routing customer messages by intent, triaging support tickets, tagging documents against a controlled vocabulary or extracting structured fields from free text. These are jobs that traditional keyword and feature-engineered approaches have never handled well, and where reaching for a frontier API on every request is overkill on both cost and latency. A fine-tuned SLM responds in the low hundreds of milliseconds on commodity hardware, faster on a GPU, and improves as more of the organisation's examples are added.
 
 The trade-off is scope and discipline. SLMs will not match frontier models on open-ended reasoning or breadth of world knowledge, and getting them to behave reliably means taking the task definition, the labelling pipeline and evaluation seriously rather than leaning on clever prompting. For teams prepared to do that work, the result is a model that is cheap to run, fits the infrastructure they already have and is trained on the data they already own.
 
@@ -233,11 +233,11 @@ Emerging or specialised services that require careful evaluation before adoption
 
 ## Galileo
 
-[Galileo](https://www.galileo.ai) takes a distinctive approach to AI evaluation: rather than relying on expensive frontier LLMs as judges, it uses purpose-built small language models called Luna-2 for low-latency evaluation of hallucination detection, context adherence and output quality. This matters in production, where evaluation metrics need to run at serving latency to act as quality gates.
+[Galileo](https://www.galileo.ai) takes a distinctive approach to AI evaluation: rather than relying on expensive frontier LLMs as judges, it uses purpose-built small language models called Luna-2 for low-latency evaluation of hallucination detection, context adherence and output quality. In production, evaluation metrics need to run at serving latency to act as quality gates.
 
 For agent debugging, Galileo provides Timeline, Conversation and Graph views for tracing execution paths. Cloud and on-prem deployment options make it viable for regulated industries with data residency requirements.
 
-The Luna-2 approach is a differentiator. Most evaluation platforms use frontier models as judges, which is slow, expensive and creates a circular dependency on the providers you're evaluating.
+The Luna-2 approach sets Galileo apart. Most evaluation platforms use frontier models as judges, which is slow, expensive and creates a circular dependency on the providers you're evaluating.
 
 The trade-off is vendor dependency. Teams wanting open-source flexibility should consider [Langfuse](https://langfuse.com/) for tracing or [Phoenix](https://phoenix.arize.com/) for observability. The evaluation tooling space remains competitive, and we want to see how it settles before moving Galileo beyond Assess.
 
@@ -298,7 +298,7 @@ Not recommended for new projects; better alternatives exist.
 
 ## Building against vendor-specific APIs
 
-Tightly coupling applications to vendor-specific LLM APIs poses significant risk in a market where capabilities and pricing shift monthly. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges.
+Tightly coupling applications to vendor-specific LLM APIs is risky in a market where capabilities and pricing shift monthly. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges.
 
 We recommend abstraction libraries that provide a common interface to multiple providers. [AISuite](https://github.com/andrewyng/aisuite) or Simon Willison's [LLM CLI](https://github.com/simonw/llm) let you switch between models with minimal code changes, handling the nuances of different APIs behind a consistent interface. These abstractions add some complexity and may limit access to vendor-specific features, but the protection against lock-in outweighs these drawbacks in most cases.
 </ChildSectionAiRadarLayout>
