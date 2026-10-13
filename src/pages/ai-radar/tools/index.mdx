@@ -19,7 +19,7 @@ Mature, well-supported tools with proven track records in production development
 
 ## Software engineering copilots
 
-AI-augmented development represents a permanent shift in software engineering. Teams not actively building capability here are falling behind.
+AI-augmented development is a permanent shift in software engineering. Teams not building capability here are falling behind.
 
 The tooling falls into two categories. Model-agnostic interfaces let teams switch between providers: [OpenCode](https://opencode.ai/) stands out for its terminal experience and breadth of integration, [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf) and [Zed](https://zed.dev/) are standalone editors, and CLI tools such as [Aider](https://github.com/Aider-AI/aider), [Cline](https://github.com/cline/cline) and Block's [Goose](https://block.github.io/goose/) work across providers. Provider-specific tools such as [Claude Code](https://claude.ai/code), [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli) and [OpenAI Codex](https://openai.com/codex/) are optimised for their respective models. [GitHub Copilot](https://github.com/features/copilot) and [Tabnine](https://www.tabnine.com/) offer traditional IDE integrations.
 
@@ -56,7 +56,7 @@ Promising tools with growing adoption that are worth exploring for teams buildin
 
 MLflow runs self-hosted or as a managed service on Databricks, SageMaker, Azure ML, Red Hat OpenShift AI and Nebius. That breadth is part of the appeal: teams avoid the lock-in of monolithic MLOps platforms while still being able to pick a managed offering where one fits.
 
-Realising the benefits self-hosted requires technical expertise to configure and integrate. Unlike a turnkey platform such as [Vertex AI](https://cloud.google.com/vertex-ai), MLflow does not provide a plug-and-play experience; its modular components must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
+Self-hosting requires technical expertise to configure and integrate. Unlike a turnkey platform such as [Vertex AI](https://cloud.google.com/vertex-ai), MLflow is not plug-and-play; its modular components must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
 
 <div data-radar data-label="Vector databases" data-ring="trial" />
 
@@ -86,7 +86,7 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 [Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate). [Galileo](https://www.galileo.ai/) takes a distinct angle, using purpose-built small models (its Luna family) for low-latency evaluation rather than frontier-model judges, with cloud and on-prem deployment for regulated teams.
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, a natural choice where a team wants a single platform across classical ML and GenAI. Since these tools capture prompt and response data, data sovereignty is a concern: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate). [Galileo](https://www.galileo.ai/) takes a distinct angle, using purpose-built small models (its Luna family) for low-latency evaluation rather than frontier-model judges, with cloud and on-prem deployment for regulated teams.
 
 <div data-radar data-label="LLM API gateways" data-ring="trial" />
 
@@ -96,7 +96,7 @@ As organisations adopt multiple model providers, an infrastructure layer emerges
 
 [LiteLLM](https://github.com/BerriAI/litellm) is the most widely adopted open-source option, providing an OpenAI-compatible proxy with spend tracking, budget controls and key management. [Portkey](https://portkey.ai/) offers a managed alternative with semantic caching and conditional routing. [Kong](https://konghq.com/) brings enterprise API management experience to LLM traffic.
 
-The operational value for multi-provider deployments is clear: centralised audit logging, per-team budget enforcement and automatic failover. Worth evaluating whether a gateway simplifies the operational story before building equivalent functionality in-house.
+For multi-provider deployments, a gateway centralises audit logging, per-team budget enforcement and automatic failover. Worth evaluating whether it simplifies the operational story before building equivalent functionality in-house.
 
 See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [MCP gateways](/ai-radar/tools/#mcp-gateways).
 
@@ -242,7 +242,7 @@ See also: [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agen
 
 ## Conversational data analysis
 
-Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/) and [Julius](https://julius.ai/) enable natural language querying of databases. Modern MCP servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's [XTDB](https://xtdb.com/) revealed remarkable moments where models traversed complex table structures with apparent ease.
+Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/) and [Julius](https://julius.ai/) enable natural language querying of databases. Modern MCP servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's [XTDB](https://xtdb.com/) showed models traversing complex table structures with apparent ease.
 
 For experienced analysts, these tools represent a meaningful productivity boost, converting natural language into draft queries that can be refined. However, generated queries can be inefficient or incorrect despite appearing plausible. Uber's [QueryGPT](https://www.uber.com/en-GB/blog/query-gpt/) demonstrates both the potential and complexity, highlighting the guardrails required for reliable results.
 
