@@ -27,17 +27,17 @@ Realising these benefits requires quality training data and staff with appropria
 
 ## RAG
 
-Retrieval-Augmented Generation (RAG) combines search and text generation to produce more accurate responses, grounding them in real data and reducing confabulation. It is valuable where accuracy and traceability matter, such as customer service or compliance. Implementation requires attention to document processing and embedding strategies, but tooling has lowered the barriers.
+Retrieval-Augmented Generation (RAG) combines search and text generation to ground responses in real data and reduce confabulation. It is valuable where accuracy and traceability matter, such as customer service or compliance; the work is in document processing and embedding strategy, though tooling has lowered the barriers.
 
-We're watching techniques such as [Self-RAG](https://arxiv.org/abs/2310.11511), which prompts the model to gather more evidence or refine its responses; early results suggest it reduces confabulations further.
+We're watching techniques such as [Self-RAG](https://arxiv.org/abs/2310.11511), which prompts the model to gather more evidence before answering and shows early reductions in confabulation.
 
-A different pipeline is gaining ground for visually complex documents. The usual route parses a PDF, runs OCR, chunks the text and embeds it, which mangles tables, forms and scanned pages. Late-interaction visual retrieval, the [ColPali](https://arxiv.org/abs/2407.01449) and ColQwen family, skips OCR by embedding the page image directly at patch level and matching with MaxSim, so layout survives. It is strong on exactly the documents text pipelines struggle with, at the cost of a much heavier index that multi-vector stores such as Vespa and Qdrant now tame with compression schemes like MUVERA. Worth evaluating where your corpus is slides, forms or scans rather than clean prose.
+For visually complex documents a different pipeline is gaining ground. The usual parse-OCR-chunk-embed route mangles tables, forms and scanned pages; late-interaction visual retrieval, the [ColPali](https://arxiv.org/abs/2407.01449) and ColQwen family, instead embeds the page image at patch level and matches with MaxSim, so layout survives. The cost is a much heavier index, which stores like Vespa and Qdrant tame with compression such as MUVERA. Worth evaluating where your corpus is slides, forms or scans rather than clean prose.
 
-For coding agents working over a live codebase, the calculus has changed. Anthropic's Claude Code team [found](https://github.com/nibzard/awesome-agentic-patterns/blob/main/patterns/agentic-search-over-vector-embeddings.md) that agentic search, grep, glob and reading files directly, outperformed a pre-built embedding index, and Claude Code deliberately does not embed the codebase: an index goes stale as code changes, and conceptually similar matches without a shared token are usually noise. The lesson is scoped. For grounding over document corpora, RAG remains the right tool; for navigating code, direct search often beats retrieval.
+For coding agents over a live codebase the calculus differs. Anthropic's Claude Code team [found](https://github.com/nibzard/awesome-agentic-patterns/blob/main/patterns/agentic-search-over-vector-embeddings.md) that direct agentic search, grep, glob and reading files, beat a pre-built embedding index, which goes stale as code changes. For document corpora RAG remains the right tool; for navigating code, direct search often wins.
 
-RAG introduces an indirect prompt injection attack surface. Retrieved documents are injected into model context, so adversarial content in any document reaches the prompt via the retrieval step. Retrieval access controls and provenance tracking for ingested documents help mitigate this risk.
+RAG also introduces an indirect prompt-injection surface: adversarial content in any retrieved document reaches the prompt through the retrieval step, so apply retrieval access controls and track provenance on ingested documents.
 
-See also: Cross-encoder reranking, Structured RAG.
+See also: Structured RAG.
 
 <div data-radar data-label="LLM-as-a-judge" data-ring="adopt" />
 
@@ -55,11 +55,9 @@ See also: [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gat
 
 ## BERT variants
 
-[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised NLP by processing words in relation to their entire context rather than sequentially. The family has continued to evolve, with [ModernBERT](https://huggingface.co/blog/modernbert) the latest iteration, improving training times and accuracy through architectural updates.
+[Bidirectional Encoder Representations from Transformers (BERT)](https://huggingface.co/docs/transformers/en/model_doc/bert) revolutionised NLP by processing words in relation to their whole context rather than sequentially, and the family keeps evolving, with [ModernBERT](https://huggingface.co/blog/modernbert) the latest iteration. Where generative models produce text, BERT-style encoders are optimised for understanding tasks such as classification and sentiment analysis, and they remain the basis for the semantic embeddings RAG uses.
 
-BERT-style models serve a different purpose from generative models. Where GPT generates text, BERT models are optimised for understanding tasks such as classification and sentiment analysis. They are also the basis for the semantic vector embeddings that RAG systems use to retrieve relevant context for generative models.
-
-We recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for new NLP projects, as it handles word relationships more effectively using a disentangled attention mechanism. [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) is smaller and faster whilst retaining most performance, valuable for production deployments with strict latency requirements. Domain-specific variants exist for biomedical [(BioBERT)](https://github.com/dmis-lab/biobert) and financial text [(FinBERT)](https://huggingface.co/ProsusAI/finbert), though these require expertise to use effectively.
+We recommend [DeBERTa](https://huggingface.co/microsoft/deberta-v3-base) for new NLP projects, for its disentangled attention; [DistilBERT](https://huggingface.co/docs/transformers/model_doc/distilbert) is smaller and faster where latency is tight; and domain-specific variants exist for biomedical [(BioBERT)](https://github.com/dmis-lab/biobert) and financial text [(FinBERT)](https://huggingface.co/ProsusAI/finbert).
 
 <div data-radar data-label="Few-shot prompting" data-ring="adopt" />
 
