@@ -360,6 +360,30 @@ function stringifyInline(headingNode: MdNode): string {
   return s.trim()
 }
 
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+}
+
+function hastText(node: any): string {
+  if (node.type === 'text') return node.value
+  if (node.children) return node.children.map(hastText).join('')
+  return ''
+}
+
+// Rewrite internal radar links (relative /ai-radar/... or absolute juxt.pro
+// equivalents) to in-document fragment links so they jump within the PDF.
+function rewriteRadarLinks(html: string): string {
+  return html.replace(
+    /href="(?:https?:\/\/[^"]*?)?\/ai-radar\/([a-z0-9-]+)\/?(#[^"]*)?"/g,
+    (_m: string, quad: string, frag: string) =>
+      `href="${frag ? frag : '#' + quad}"`
+  )
+}
+
 async function renderNodesToHtml(nodes: MdNode[]): Promise<string> {
   const root: MdAst = { type: 'root', children: nodes }
   // Convert mdast -> hast
@@ -381,7 +405,18 @@ async function renderNodesToHtml(nodes: MdNode[]): Promise<string> {
       }
     }
   )
-  // Convert relative links to plain text (they don't work in PDFs)
+  // Give headings slug ids so in-document links can target them
+  visit(hast as any, 'element', (node: any) => {
+    if (/^h[1-6]$/.test(node.tagName)) {
+      const text = hastText(node)
+      if (text) {
+        node.properties = node.properties || {}
+        if (!node.properties.id) node.properties.id = slugifyHeading(text)
+      }
+    }
+  })
+  // Rewrite internal radar links to in-document fragment jumps so they work in
+  // the PDF; other relative links can't resolve in a PDF, so render them as text.
   visit(
     hast as any,
     'element',
@@ -389,12 +424,16 @@ async function renderNodesToHtml(nodes: MdNode[]): Promise<string> {
       if (!parent || index == null) return
       if (node.tagName === 'a' && node.properties?.href) {
         const href = node.properties.href as string
-        // Check if it's a relative link (starts with / but not //)
         if (href.startsWith('/') && !href.startsWith('//')) {
-          // Replace <a> with <span> containing the same children
-          node.tagName = 'span'
-          delete node.properties.href
-          delete node.properties.target
+          const m = href.match(/^\/ai-radar\/([a-z0-9-]+)\/?(#.+)?$/)
+          if (m) {
+            node.properties.href = m[2] ? m[2] : '#' + m[1]
+            delete node.properties.target
+          } else {
+            node.tagName = 'span'
+            delete node.properties.href
+            delete node.properties.target
+          }
         }
       }
     }
@@ -528,7 +567,7 @@ async function maybeReadExtraHtml(
 ): Promise<string> {
   const abs = resolve(join(projectRoot, relPath))
   const html = await readFile(abs, 'utf8')
-  return html
+  return rewriteRadarLinks(html)
 }
 
 function renderList(
@@ -681,7 +720,7 @@ async function buildCategoryCoverFromTemplate(
   // Add category class to section for CSS-based styling
   html = html.replace(
     '<section class="category-cover-page">',
-    `<section class="category-cover-page ${categorySlug}">`
+    `<section class="category-cover-page ${categorySlug}" id="${categorySlug}">`
   )
   return html
 }
