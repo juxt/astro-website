@@ -3,22 +3,22 @@ layout: '../../layouts/CareerPost.astro'
 location: 'London / Hybrid'
 department: 'Engineering'
 contract: 'Full Time'
-position: 'Senior / Principal Go Engineer'
-description: 'Join JUXT as a Senior / Principal Go Engineer, building secure platforms and AI tooling for a global financial leader. Full-time, mostly remote role based in London.'
+position: 'Go Engineer'
+description: 'Join JUXT as a Go Engineer, building secure platforms and AI tooling for a global financial leader. Full-time, mostly remote role based in London.'
 draft: false
 weight: 2
 googleJobs:
   {
     location: 'London',
-    position: 'Senior / Principal Go Engineer',
+    position: 'Go Engineer',
     publishedDate: '2026-02-23',
     validThrough: '2027-12-31T00:00',
     employmentType: 'FULL_TIME',
     salary:
       {
         currency: 'GBP',
-        minValue: 120000,
-        maxValue: 160000,
+        minValue: 75000,
+        maxValue: 125000,
         unitText: 'YEAR'
       }
   }
@@ -26,7 +26,7 @@ googleJobs:
 
 ## Job Description
 
-We’re looking for experienced Golang engineers to join us on a cutting-edge platform engineering and AI programme with a global financial leader.
+We’re looking for Golang engineers to join us on a cutting-edge platform engineering and AI programme with a global financial leader. We’re hiring at junior, mid, and senior levels.
 
 You’ll be part of a high-calibre engineering team building secure, scalable AI platforms. You’ll work on Platform Engineering and Internal Developer Platform initiatives that help engineering teams move faster, and on agentic AI tooling that's transforming how we work.
 
@@ -36,7 +36,7 @@ If you enjoy solving complex problems, learning new technologies, and contributi
 
 ## Core skills
 
-* Strong commercial experience with Go — this is essential
+* Commercial experience with Go — this is essential
 * Deep knowledge of Kubernetes
 * Solid understanding of cloud-native architecture, scaling, SRE and DevOps practices
 * Breadth across core engineering disciplines (infrastructure, architecture frameworks, CI/CD, security, scaling)
