@@ -86,7 +86,7 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 [Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, a natural choice where a team wants a single platform across classical ML and GenAI. Since these tools capture prompt and response data, data sovereignty is a concern: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate). [Galileo](https://www.galileo.ai/) takes a distinct angle, using purpose-built small models (its Luna family) for low-latency evaluation rather than frontier-model judges, with cloud and on-prem deployment for regulated teams.
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, a natural choice where a team wants a single platform across classical ML and GenAI. Since these tools capture prompt and response data, data sovereignty is a concern: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate). [Galileo](https://www.galileo.ai/) took a distinct angle, using purpose-built small models (its Luna family) for low-latency evaluation rather than frontier-model judges; Cisco acquired it in 2026 and it now ships as Splunk Agent Observability.
 
 <div data-radar data-label="LLM API gateways" data-ring="trial" />
 
@@ -134,11 +134,25 @@ The category has purpose-built providers. [E2B](https://e2b.dev/) runs each sess
 
 We place agent code sandboxes in Trial. The threat model is clear and the tooling is mature enough to adopt now: a team letting an agent execute generated code outside a throwaway environment is carrying avoidable risk. Prompt injection makes this more pressing, not less, since the untrusted input and the code path are one and the same, so isolation is a containment measure, not a cure.
 
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [CaMeL](/ai-radar/techniques/#camel), [Managed agent platforms](/ai-radar/platforms/#managed-agent-platforms).
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [CaMeL](/ai-radar/techniques/#camel), [Managed agent platforms](/ai-radar/platforms/#managed-agent-platforms), [Supervising multiple agents](/ai-radar/tools/#supervising-multiple-agents).
 
 # Assess
 
 Emerging tools that require careful evaluation before adoption.
+
+<div data-radar data-label="Supervising multiple agents" data-ring="assess" data-change="new" />
+
+## Supervising multiple agents
+
+Running several coding agents at once is much harder than running one. You lose track of what each is doing and which one is waiting for you. The field is early, and tools are trying very different interfaces for it.
+
+**Staying engaged.** The most useful thing one of these tools could do is work like an inbox: interrupt you only when an agent needs a decision, instead of leaving you to check each one in turn. Few do this yet. [Claude Squad](https://github.com/smtg-ai/claude-squad) shows a list of running agents for you to look through. [Conductor](https://conductor.build/) and Imbue's [Sculptor](https://imbue.com/product/sculptor/) are built around reviewing each agent's changes, and Sculptor can drop you straight into an agent's work on your own machine to take over. VS Code and GitHub's Agent HQ add a shared view across your agents. None yet lets you move smoothly between agents, and the inbox idea is barely in coding tools so far. The risk is that you stop reading the changes and just approve them.
+
+**Keeping it local.** To run agents in parallel, each needs its own copy of the code so they do not overwrite each other: a git worktree per agent, or a container per agent, as Sculptor does. A container can also act as a sandbox, stopping the agent from reaching the rest of your machine or the network. Keep the agents on your own machine and your code and credentials stay with you, or use hosted services such as Factory and Devin, which run them on their own servers and suit sensitive or regulated work less well.
+
+We place this in Assess: the tools change fast, and some have already shut down or gone commercial, so do not become too invested in any one tool. Running each agent in its own workspace is sensible now, and we would prefer tools that keep everything on your own machines.
+
+See also: [Agent code sandboxes](/ai-radar/tools/#agent-code-sandboxes), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), [Harness engineering](/ai-radar/techniques/#harness-engineering).
 
 <div data-radar data-label="AI application bootstrappers" data-ring="assess" data-published="false" />
 
