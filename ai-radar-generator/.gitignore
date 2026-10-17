@@ -15,8 +15,9 @@ output/*
 # ICC profiles (licensed downloads, not for committing)
 profiles/*.icc
 
-# Large cover source images (regenerate locally)
+# Large cover source images (keep locally, not committed)
 public/Cover-*.tif
+public/Cover-2026Q4.png
 
 # IDE
 .vscode/
