@@ -19,29 +19,29 @@ Mature, well-supported technologies ready for production use.
 
 ## PyTorch
 
-[PyTorch](https://pytorch.org/) is the default for most machine learning teams, particularly for deep learning: its Python-first design and dynamic computational graphs make debugging and prototyping easier, and mature deployment tooling such as TorchServe settled the old production-readiness questions. We recommend it as the default for new machine learning projects.
+[PyTorch](https://pytorch.org/) is the default for most machine learning teams, particularly for deep learning. Its Python-first design and dynamic computational graphs make debugging and prototyping easier, and mature deployment tooling such as TorchServe settled the old production-readiness questions. We recommend it as the default for new machine learning projects.
 
 <div data-radar data-label='dbt' data-ring='adopt' />
 
 ## dbt
 
-[dbt (data build tool)](https://www.getdbt.com/) brings software engineering practice, version control and testing, to the data transformations that feed AI systems. An AI system is only as reliable as its input data, and dbt keeps that data trustworthy: the pipelines connecting warehouses to AI applications stay transparent and maintainable. Its integration with modern data platforms makes it a solid choice for teams building out AI infrastructure.
+[dbt (data build tool)](https://www.getdbt.com/) brings software engineering practice, such as version control and testing, to the data transformations that feed AI systems. An AI system is only as reliable as its input data, and dbt helps keep that data trustworthy: the pipelines connecting warehouses to AI applications stay transparent and maintainable. Its integration with modern data platforms makes it a solid choice for teams building out AI infrastructure.
 
 <div data-radar data-label='MCP' data-ring='adopt' />
 
 ## MCP
 
-The [Model Context Protocol (MCP)](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) standardises how language models connect to external tools and data, replacing the custom, per-connection integration work teams used to write by hand. Servers are straightforward to create, and a growing ecosystem of community-built ones cuts the effort further. Created by Anthropic, MCP is now a vendor-neutral project governed by the Agentic AI Foundation under the Linux Foundation, the same body that stewards [AGENTS.md](/ai-radar/languages-frameworks/#agentsmd-and-steering-files).
+The [Model Context Protocol (MCP)](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) standardises how language models connect to external tools and data, replacing the custom, per-connection integration work teams would otherwise write by hand. Servers are straightforward to create, and a growing ecosystem of community-built ones cuts the effort further. Created by Anthropic, MCP is now a vendor-neutral project governed by the Agentic AI Foundation under the Linux Foundation, the same body that stewards [AGENTS.md](/ai-radar/languages-frameworks/#agentsmd-and-steering-files).
 
-Uptake has been rapid. Some organisations aim to make every internal API AI-accessible through MCP, a single interface for assistants to reach enterprise systems, and the work that level of coverage takes is easy to underestimate.
+Uptake has been rapid and decisive. Some large organisations are aiming to make every internal API AI-accessible through MCP.
 
-Security needs to be a first-class concern. Every MCP server must enforce authentication and authorisation independently of the calling model, with tool grants following the principle of least privilege. Audit logging of all tool calls is essential for traceability. MCP servers returning untrusted data can become an indirect prompt injection vector, so outputs from external sources need careful sanitisation before being fed back into model context.
+Clearly, security needs to be a first-class concern. Every MCP server must enforce authentication and authorisation independently of the calling model, with tool grants following the principle of least privilege. Audit logging of all tool calls is essential for traceability. MCP servers returning untrusted data can become an indirect prompt injection vector, so outputs from external sources need careful sanitisation before being fed back into model context.
 
 A broader architectural concern surfaced in April 2026 when OX Security demonstrated that MCP's STDIO transport executes arbitrary commands without validation, leading to multiple CVEs across downstream projects. More concerning was their proof of concept showing malicious entries accepted by most MCP registries. Treat MCP servers sourced from public marketplaces with the same caution as any third-party dependency: review the code, pin versions and run servers with minimal permissions.
 
 For simpler workflows that operate on local files and code rather than external services, [Claude Skills](/ai-radar/techniques/#claude-skills) offer a lighter-weight alternative worth considering before committing to MCP server development.
 
-The protocol is also starting to grow. [MCP Apps](https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/) (SEP-1865), its first official extension, lets a server ship interactive UI to the host through a `ui://` resource scheme, so a tool can render a form or a view rather than return plain text. Developed by MCP maintainers at Anthropic and OpenAI with the MCP-UI community, it folds two earlier efforts into one standard. Rendering server-supplied markup inside a host is a fresh injection and exfiltration surface, so the spec makes sandboxed iframes and a Content Security Policy mandatory. It went official at the start of 2026 and support is still rolling out across hosts, so it is far less proven than the base protocol.
+We tend to think of MCP as headless plumbing, a way to hand an agent the tools and data it needs with no human in the loop. The surprise this quarter is [MCP Apps](https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/), an official extension that lets a server render a visual interface, a form or a live dashboard, directly in the host. It is early but not a toy: Claude, VS Code and Microsoft 365 Copilot already support it, and companies such as Postman, Shopify and Hugging Face are building on it. Server-supplied UI opens a fresh attack surface, so treat it as promising rather than proven.
 
 See also: [Claude Skills](/ai-radar/techniques/#claude-skills), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use).
 
