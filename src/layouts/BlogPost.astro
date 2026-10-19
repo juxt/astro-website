@@ -21,6 +21,12 @@ const {
   publishedDate
 } = (Astro.props.frontmatter || Astro.props.content) as Blog
 
+// A draft post is built at both its canonical /blog/<slug> URL and a noindex
+// preview at /blog/drafts/<slug>; both render this layout. Without this, Pagefind
+// indexes the draft twice and it appears twice in the listing. Keep Pagefind off
+// the preview route so the canonical page remains the single card.
+const isDraftPreview = Astro.url.pathname.includes('/blog/drafts/')
+
 const people = Object.values(import.meta.glob<MarkdownInstance<Person>>(
   '../data/people/{*.mdx,*.md}', { eager: true }
 ))
@@ -185,6 +191,7 @@ const categoryHref = `/blog?category=${encodeURIComponent(category)}`
   <DraftBanner draft={draft} pageName='Blog' />
   <main
     class='transition-colors dark:bg-gray-900'
+    data-pagefind-ignore={isDraftPreview ? true : undefined}
     data-pagefind-filter='blog:true'
     data-published-date={publishedDate}
     data-pagefind-meta='publishedDate[data-published-date]'
@@ -291,7 +298,7 @@ const categoryHref = `/blog?category=${encodeURIComponent(category)}`
 
     <article
       class='px-4 pb-20 lg:px-0 mx-auto prose prose-a:text-juxt hover:prose-a:text-black prose-a:transition-colors dark:prose-invert dark:hover:prose-a:text-white'
-      data-pagefind-body
+      data-pagefind-body={isDraftPreview ? undefined : true}
     >
       <slot />
     </article>
