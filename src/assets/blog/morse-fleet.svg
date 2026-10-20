@@ -1,0 +1,65 @@
+<svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t">
+  <title id="t">Many repositories, each with its own journal, aggregated by the Morse managed service into Jira, Confluence and pull requests</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: Inter, system-ui, sans-serif; fill: #0b0e14; }
+    .n { fill: #6b7280; font-size: 13px; }
+    .l { font-size: 15px; font-weight: 600; }
+    .m { font-size: 14px; }
+  </style>
+  <rect x="0" y="0" width="860" height="300" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <!-- repo grid -->
+  <g>
+    <rect x="70" y="40" width="95" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="117" y="63" font-size="13" text-anchor="middle">Repo</text>
+    <circle cx="117" cy="78" r="4" fill="#f4901d"/>
+    <rect x="185" y="40" width="95" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="232" y="63" font-size="13" text-anchor="middle">Repo</text>
+    <circle cx="232" cy="78" r="4" fill="#f4901d"/>
+    <rect x="70" y="110" width="95" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="117" y="133" font-size="13" text-anchor="middle">Repo</text>
+    <circle cx="117" cy="148" r="4" fill="#f4901d"/>
+    <rect x="185" y="110" width="95" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="232" y="133" font-size="13" text-anchor="middle">Repo</text>
+    <circle cx="232" cy="148" r="4" fill="#f4901d"/>
+    <rect x="70" y="180" width="95" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="117" y="203" font-size="13" text-anchor="middle">Repo</text>
+    <circle cx="117" cy="218" r="4" fill="#f4901d"/>
+    <rect x="185" y="180" width="95" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="232" y="203" font-size="13" text-anchor="middle">Repo</text>
+    <circle cx="232" cy="218" r="4" fill="#f4901d"/>
+  </g>
+  <text x="175" y="266" class="n" text-anchor="middle">A journal in every repo</text>
+
+  <g stroke="#6b7280" stroke-width="1.5">
+    <line x1="284" y1="67" x2="376" y2="140" marker-end="url(#a)"/>
+    <line x1="284" y1="137" x2="376" y2="148" marker-end="url(#a)"/>
+    <line x1="284" y1="207" x2="376" y2="158" marker-end="url(#a)"/>
+  </g>
+  <text x="330" y="54" class="n" text-anchor="middle">Aggregates</text>
+
+  <rect x="380" y="118" width="170" height="64" rx="8" fill="#fff7ed" stroke="#f4901d" stroke-width="2"/>
+  <text x="465" y="144" class="l" text-anchor="middle">Morse</text>
+  <text x="465" y="163" class="n" text-anchor="middle">Managed service</text>
+
+  <g stroke="#6b7280" stroke-width="1.5">
+    <line x1="555" y1="140" x2="636" y2="66" marker-end="url(#a)"/>
+    <line x1="555" y1="150" x2="636" y2="134" marker-end="url(#a)"/>
+    <line x1="555" y1="160" x2="636" y2="202" marker-end="url(#a)"/>
+  </g>
+
+  <rect x="640" y="42" width="150" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="715" y="71" class="m" text-anchor="middle">Jira tickets</text>
+  <rect x="640" y="110" width="150" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="715" y="130" class="m" text-anchor="middle">Confluence</text>
+  <text x="715" y="147" class="n" text-anchor="middle">Summaries</text>
+  <rect x="640" y="178" width="150" height="48" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="715" y="198" class="m" text-anchor="middle">Pull requests</text>
+  <text x="715" y="215" class="n" text-anchor="middle">GitHub · Bitbucket</text>
+  <text x="715" y="266" class="n" text-anchor="middle">Where your teams already look</text>
+</svg>
