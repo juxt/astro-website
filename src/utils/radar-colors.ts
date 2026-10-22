@@ -37,7 +37,7 @@ export const RADAR_COLORS = {
   ...baseColors,
 
   // === BANNER GRADIENT ===
-  mainRadarBanner: `linear-gradient(to right, ${baseColors.platforms}, ${baseColors.tools}, ${baseColors.languagesFrameworks}, ${baseColors.techniques})`
+  mainRadarBanner: `linear-gradient(to right, ${baseColors.techniques}, ${baseColors.languagesFrameworks}, ${baseColors.tools}, ${baseColors.platforms})`
 } as const
 
 // Helper function to get quadrant color based on quadrant name

@@ -82,10 +82,10 @@ export function radar_visualization(config: RadarConfig): void {
     'links_in_new_tabs' in config ? config.links_in_new_tabs : true
   config.repo_url = config.repo_url || '#'
   config.legend_offset = config.legend_offset || [
-    { x: 450, y: 110 },
-    { x: -675, y: 110 },
-    { x: -675, y: -330 },
-    { x: 450, y: -330 }
+    { x: 450, y: 160 },
+    { x: -675, y: 160 },
+    { x: -675, y: -360 },
+    { x: 450, y: -360 }
   ]
   config.title_offset = config.title_offset || { x: -675, y: -420 }
   config.footer_offset = config.footer_offset || { x: -155, y: 450 }
@@ -433,88 +433,85 @@ export function radar_visualization(config: RadarConfig): void {
         .style('font-weight', 'bold')
         .style('fill', config.quadrants[quadrant].color)
 
-      // Two-column layout: Left (Adopt→Trial), Right (Assess→Hold)
-      // Render items one at a time so we can measure actual heights
-      const columnRings = [[0, 1], [2, 3]]
+      // Vertical layout: ring sections stacked (Adopt → Trial → Assess → Hold),
+      // each ring's entries split across two columns to use the horizontal space.
+      // Render items one at a time so we can measure actual heights.
+      let y = 0
+      for (let ring = 0; ring < 4; ring++) {
+        // Ring heading, aligned with the first column
+        legend
+          .append('text')
+          .attr('class', 'radar-ring-label')
+          .attr(
+            'transform',
+            translate(
+              config.legend_offset[quadrant].x,
+              config.legend_offset[quadrant].y + y
+            )
+          )
+          .text(config.rings[ring].name)
+          .style('font-family', config.font_family)
+          .style('font-size', '12px')
+          .style('font-weight', 'bold')
+          .style(
+            'fill',
+            config.themeColors?.ringTextColor || RADAR_COLORS.lightRingText
+          )
 
-      for (const [topRing, bottomRing] of columnRings) {
-        let y = 0
-        const dx = topRing < 2 ? 0 : config.legend_column_width
+        y += 18 // space after heading
 
-        for (const ring of [topRing, bottomRing]) {
-          const isBottomSection = ring === bottomRing
+        // Split entries into two balanced columns, filling the left first
+        const entries = segmented[quadrant][ring]
+        const rowsPerColumn = Math.ceil(entries.length / 2)
+        const columnY = [y, y]
 
-          // Add spacing before bottom section
-          if (isBottomSection) {
-            y += 20
-          }
+        entries.forEach((entry, index) => {
+          const column = index < rowsPerColumn ? 0 : 1
+          const dx = column * config.legend_column_width
 
-          // Draw ring heading
-          legend
+          const link = legend
+            .append('a')
+            .attr('href', entry.link || '#')
+            .attr('target', entry.link && config.links_in_new_tabs ? '_blank' : null)
+
+          const textEl = link
             .append('text')
-            .attr('class', 'radar-ring-label')
             .attr(
               'transform',
               translate(
                 config.legend_offset[quadrant].x + dx,
-                config.legend_offset[quadrant].y + y
+                config.legend_offset[quadrant].y + columnY[column]
               )
             )
-            .text(config.rings[ring].name)
+            .attr('class', 'radar-entry-text')
+            .attr('id', 'legendItem' + entry.id)
+            .text(entry.id + '. ' + entry.label)
             .style('font-family', config.font_family)
-            .style('font-size', '12px')
-            .style('font-weight', 'bold')
+            .style('font-size', '11px')
             .style(
               'fill',
-              config.themeColors?.ringTextColor || RADAR_COLORS.lightRingText
+              config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText
             )
+            .on('mouseover', function () {
+              highlightLegendItem(entry)
+            })
+            .on('mouseout', function () {
+              unhighlightLegendItem(entry)
+            })
 
-          y += 18 // space after heading
+          // Apply text wrapping
+          wrap_text(textEl)
 
-          // Draw entries one at a time, measuring each
-          const entries = segmented[quadrant][ring]
-          for (const entry of entries) {
-            const link = legend
-              .append('a')
-              .attr('href', entry.link || '#')
-              .attr('target', entry.link && config.links_in_new_tabs ? '_blank' : null)
-
-            const textEl = link
-              .append('text')
-              .attr(
-                'transform',
-                translate(
-                  config.legend_offset[quadrant].x + dx,
-                  config.legend_offset[quadrant].y + y
-                )
-              )
-              .attr('class', 'radar-entry-text')
-              .attr('id', 'legendItem' + entry.id)
-              .text(entry.id + '. ' + entry.label)
-              .style('font-family', config.font_family)
-              .style('font-size', '11px')
-              .style(
-                'fill',
-                config.themeColors?.mainTextColor || RADAR_COLORS.lightMainText
-              )
-              .on('mouseover', function () {
-                highlightLegendItem(entry)
-              })
-              .on('mouseout', function () {
-                unhighlightLegendItem(entry)
-              })
-
-            // Apply text wrapping
-            wrap_text(textEl)
-
-            // Measure actual height and advance y
-            const node = textEl.node() as SVGTextElement
-            if (node) {
-              const bbox = node.getBBox()
-              y += bbox.height + 5 // gap between entries
-            }
+          // Measure actual height and advance this column
+          const node = textEl.node() as SVGTextElement
+          if (node) {
+            const bbox = node.getBBox()
+            columnY[column] += bbox.height + 5 // gap between entries
           }
-        }
+        })
+
+        // Advance below the taller column, leaving a gap before the next ring
+        y = Math.max(columnY[0], columnY[1]) + 20
       }
     }
   }
