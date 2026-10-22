@@ -19,170 +19,153 @@ Mature, well-supported technologies ready for production use.
 
 ## PyTorch
 
-[PyTorch](https://pytorch.org/) has demonstrated consistent maturity and widespread adoption across both research and production environments, which is why we place it in our Adopt ring. We're seeing it emerge as the default choice for many machine learning teams, particularly those working on deep learning projects, thanks to its intuitive Python-first approach and dynamic computational graphs that make debugging and prototyping significantly easier.
+[PyTorch](https://pytorch.org/) is the default for most machine learning teams, especially for deep learning. Its Python-first design and dynamic computational graphs make models straightforward to write, debug and step through, which is why it took hold in research first, before production. The ecosystem around it runs deep: clear documentation, a large catalogue of pre-trained models and an active community that keeps the common paths well worn, so teams of any size can get moving quickly.
 
-The framework's robust ecosystem, exceptional documentation and strong community support make it a reliable choice for teams at any scale. While TensorFlow remains relevant, particularly in production deployments, PyTorch's seamless integration with popular machine learning tools, extensive pre-trained model repository and growing deployment options through TorchServe have addressed previous concerns about production readiness. The framework's adoption by major technology organisations and research institutions, coupled with its regular release cycle and stability, gives us confidence in recommending it as a default choice for new machine learning projects.
+Earlier doubts about production readiness have largely gone. Deployment tooling such as TorchServe, close integration with the rest of the ML stack and a steady, stable release cadence make it dependable at scale, and it's what most major technology firms and research groups now build on. TensorFlow still has its place, particularly in established production systems, but for new machine learning work we recommend PyTorch as the default.
 
 <div data-radar data-label='dbt' data-ring='adopt' />
 
 ## dbt
 
-We've placed [dbt (data build tool)](https://www.getdbt.com/) in the Adopt ring because it has proven to be an essential framework for organising and managing the data transformations that feed AI systems. dbt brings software engineering best practices such as version control and testing to data transformation workflows, which is crucial when preparing data for AI model training and inference.
+[dbt (data build tool)](https://www.getdbt.com/) brings software engineering practice, version control and testing, to the data transformations that feed AI systems. That discipline is worth having because a model is only as reliable as the data behind it, and dbt keeps the transformation layer transparent and easy to trust.
 
-The reliability and maintainability of AI systems heavily depend on the quality of their input data, and dbt helps teams achieve this by making data transformations more transparent and trustworthy. We've seen teams successfully use dbt to create clean, well-documented data pipelines that connect data warehouses to AI applications, while maintaining the agility to quickly adapt to changing requirements. Its integration with modern data platforms and strong community support make it a solid choice for organisations building out their AI infrastructure.
+In practice, teams use it to build clean, well-documented pipelines from the warehouse through to AI applications, and to adapt them quickly as requirements change. It works with the data platforms most shops already run and has a strong community behind it, which makes it a sound default when you're building out AI infrastructure.
 
 <div data-radar data-label='MCP' data-ring='adopt' />
 
 ## MCP
 
-Anthropic's [Model Context Protocol (MCP)](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) has rapidly gained adoption, addressing the need for standardised integration between language models and external tools. MCP solves the common problem of connecting AI models to organisational data without requiring custom integration work for each connection. MCP servers are straightforward to create, and the growing ecosystem of community-created servers reduces development overhead further.
+The [Model Context Protocol (MCP)](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) standardises how language models connect to external tools and data, replacing the custom, per-connection integration work teams would otherwise write by hand. Servers are straightforward to create, and a growing ecosystem of community-built ones cuts the effort further. MCP is now a vendor-neutral project governed by the Agentic AI Foundation under the Linux Foundation, the same body that stewards [AGENTS.md](/ai-radar/techniques/#agentsmd-and-steering-files).
 
-Since our last radar, we've seen rapid uptake within organisations. Some are pursuing ambitious goals of making all internal APIs AI-accessible via MCP servers, creating a unified interface through which AI assistants interact with enterprise systems. The implementation investment for that level of coverage is easy to underestimate.
+Uptake has been fast. Some large organisations are aiming to make every internal API AI-accessible through MCP.
 
 Security needs to be a first-class concern. Every MCP server must enforce authentication and authorisation independently of the calling model, with tool grants following the principle of least privilege. Audit logging of all tool calls is essential for traceability. MCP servers returning untrusted data can become an indirect prompt injection vector, so outputs from external sources need careful sanitisation before being fed back into model context.
 
-A broader architectural concern surfaced in April 2026 when OX Security demonstrated that MCP's STDIO transport executes arbitrary commands without validation, leading to multiple CVEs across downstream projects. More concerning was their proof of concept showing malicious entries accepted by most MCP registries. Treat MCP servers sourced from public marketplaces with the same caution as any third-party dependency: review the code, pin versions and run servers with minimal permissions.
+A broader architectural concern surfaced in April 2026 when OX Security demonstrated that MCP's STDIO transport executes arbitrary commands without validation, leading to multiple CVEs across downstream projects. Their proof of concept also showed malicious entries accepted by most MCP registries. Treat MCP servers sourced from public marketplaces with the same caution as any third-party dependency: review the code, pin versions and run servers with minimal permissions.
 
 For simpler workflows that operate on local files and code rather than external services, [Claude Skills](/ai-radar/techniques/#claude-skills) offer a lighter-weight alternative worth considering before committing to MCP server development.
+
+We tend to think of MCP as headless plumbing, a way to hand an agent the tools and data it needs with no human in the loop. The surprise this quarter is [MCP Apps](https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/), an official extension that lets a server render a visual interface, a form or a live dashboard, directly in the host. It is early but not a toy: Claude, VS Code and Microsoft 365 Copilot already support it, and companies such as Postman, Shopify and Hugging Face are building on it. Server-supplied UI opens a fresh attack surface, so treat it as promising rather than proven.
 
 See also: [Claude Skills](/ai-radar/techniques/#claude-skills), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use).
 
 # Trial
 
-Promising technologies with growing adoption that are worth exploring in production-adjacent settings.
+Promising technologies with growing adoption, worth exploring for specific use cases.
 
-<div data-radar data-label='Microsoft Agent Framework' data-ring='trial' data-change="new" />
+<div data-radar data-label='Microsoft Agent Framework' data-ring='trial' />
 
 ## Microsoft Agent Framework
 
 [Microsoft Agent Framework (MAF)](https://learn.microsoft.com/en-us/agent-framework/overview/) launched in October 2025, merging AutoGen's agent abstractions with Semantic Kernel's enterprise features into a single open-source platform. MAF supports Python and .NET, offering graph-based workflows for multi-agent orchestration alongside session-based state management and telemetry.
 
-We've placed it in Trial rather than Adopt because the framework is still reaching stability. That said, it consolidates Microsoft's previously fragmented agent story, and organisations building multi-agent systems on Microsoft's stack should evaluate it as their primary framework.
+The framework is still reaching stability, which keeps it in Trial, but it consolidates Microsoft's previously fragmented agent story, and teams building multi-agent systems on Microsoft's stack should evaluate it as their primary framework.
 
 As with any agent framework granting tool access, apply least-privilege scoping and build in prompt injection awareness from the start.
 
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [MCP](/ai-radar/languages-frameworks/#mcp), [A2A](/ai-radar/languages-frameworks/#a2a).
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [MCP](/ai-radar/languages-frameworks/#mcp), [A2A](/ai-radar/languages-frameworks/#a2a), [Vendor agent SDKs](/ai-radar/languages-frameworks/#vendor-agent-sdks).
+
+<div data-radar data-label='Vendor agent SDKs' data-ring='trial' data-change="new" />
+
+## Vendor agent SDKs
+
+The frontier labs now ship their own SDKs for building agents directly against their models: Anthropic's [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview), [OpenAI's Agents SDK](https://openai.github.io/openai-agents-python/) and Google's [Agent Development Kit](https://adk.dev/). Each hands you the agent loop, tool calling, sessions and context management as a library you drive from your own code, so you write less orchestration yourself.
+
+The Claude Agent SDK runs the harness that powers Claude Code as a library, with its built-in tools, subagents, hooks and permissions. OpenAI's Agents SDK is the production-ready successor to Swarm, code-first by design: your server owns the tools, state and approval decisions while the SDK runs the loop. Google's ADK is the most enterprise-oriented, model-agnostic through LiteLLM though tuned for Gemini, with Vertex AI's Agent Engine as its managed runtime.
+
+There's the standard trade-off against agnostic frameworks such as [LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) and [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework): a vendor SDK tracks its model's newest capabilities closely, at the cost of coupling you tightly to one provider. Use a first-party SDK when you're committed to a model and want its full capability surface, and an agnostic framework when portability is the priority.
+
+All of these run tool-calling agents that act on files, shells, APIs and MCP connectors, so take prompt injection seriously: content returned by a tool can steer the agent into actions you didn't intend. Scope tool permissions tightly, keep a human approval step for anything that changes state, sandbox execution and treat everything a tool returns as untrusted input.
+
+See also: [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), [MCP](/ai-radar/languages-frameworks/#mcp), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Managed agent platforms](/ai-radar/platforms/#managed-agent-platforms).
 
 <div data-radar data-label='A2A' data-ring='trial' />
 
 ## A2A
 
-Google's [Agent2Agent (A2A) protocol](https://a2aprotocol.ai/) addresses the need for standardised communication between AI agents. Launched in April 2025 and now governed by the Linux Foundation, A2A enables agents from different providers to discover capabilities and collaborate without custom integration.
+Google's [Agent2Agent (A2A) protocol](https://a2aprotocol.ai/) standardises communication between AI agents. Launched in April 2025 and now governed by the Linux Foundation, it lets agents from different providers discover each other's capabilities and collaborate without custom integration.
 
-The protocol complements [MCP](/ai-radar/languages-frameworks/#mcp) rather than competing with it. MCP connects models to tools and data sources; A2A handles agent-to-agent communication. The design centres on "Agent Cards" that advertise capabilities in JSON format, enabling dynamic task delegation. The protocol supports text and video streaming with built-in security features for enterprise deployment.
+It complements [MCP](/ai-radar/languages-frameworks/#mcp) rather than competing with it: MCP connects models to tools and data sources, A2A handles agent-to-agent communication. The design centres on "Agent Cards" that advertise capabilities in JSON, so agents can delegate tasks to one another dynamically, over text or video streaming.
 
-We've placed A2A in Trial because it remains relatively new with limited production deployment patterns. The protocol's complexity is justified when agents need to collaborate across runtime boundaries: different vendors, different stacks or different organisations.
-
-Inside a single runtime, simpler options usually suffice. A single orchestrating agent can call tools directly through [MCP](/ai-radar/languages-frameworks/#mcp). A workflow engine such as [Temporal](/ai-radar/platforms/#temporal) or an [AI-powered workflow automation platform](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) coordinates LLM steps deterministically. A multi-agent framework such as [LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) handles orchestration in-process. Reach for A2A when none of these fit your topology.
+A2A's complexity is justified when agents must collaborate across runtime boundaries, whether different vendors, stacks or organisations. Inside a single runtime, simpler options usually suffice: an orchestrating agent calling tools directly through [MCP](/ai-radar/languages-frameworks/#mcp), a workflow engine such as [Temporal](/ai-radar/platforms/#temporal) or an [AI-powered workflow automation platform](/ai-radar/platforms/#ai-powered-workflow-automation) coordinating LLM steps deterministically, or a multi-agent framework such as [LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) handling orchestration in-process. Reach for A2A when none of these fit your topology.
 
 <div data-radar data-label='LLM testing frameworks' data-ring='trial' />
 
 ## LLM testing frameworks
 
-[DeepEval](https://github.com/confident-ai/deepeval) provides a systematic framework for evaluating LLM outputs, with built-in metrics for relevance, factual accuracy, hallucination detection and toxicity. It integrates with pytest, making it accessible to teams familiar with Python testing workflows.
+[DeepEval](https://github.com/confident-ai/deepeval) evaluates LLM outputs against built-in metrics for relevance, factual accuracy, hallucination detection and toxicity. It integrates with pytest, so teams already running Python test suites can adopt it without new tooling.
 
 [Promptfoo](https://www.promptfoo.dev/) takes a CLI-first approach with strong CI/CD integration. Where DeepEval is a Python library you embed in your test suite, Promptfoo runs as a standalone tool comparing outputs across models and prompt variants. OpenAI acquired Promptfoo in March 2026, though it remains open-source under the MIT licence. Teams running multi-model strategies should consider whether the acquisition affects their comfort with Promptfoo as a neutral evaluation tool.
 
-DeepEval suits teams that want evaluation embedded in their Python test suite. Promptfoo suits teams wanting standalone prompt regression testing, particularly those with CI/CD pipelines that gate deployments on evaluation results.
+Consider DeepEval if you want evaluation inside an existing Python test suite, and Promptfoo if you want standalone prompt regression testing, particularly where CI/CD pipelines gate deployments on the results.
 
 See also: [LLM-as-a-judge](/ai-radar/techniques/#llm-as-a-judge), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
 
-<div data-radar data-label='LlamaIndex' data-ring='trial' />
+<div data-radar data-label='LlamaIndex' data-ring='trial' data-published="false" />
 
 ## LlamaIndex
 
 [LlamaIndex](https://www.llamaindex.ai/), formerly GPT Index, started as a framework for indexing data so that LLMs could retrieve it efficiently. It has matured considerably since then, with production deployments across Fortune 500 organisations and a [Workflows 1.0](https://www.llamaindex.ai/blog/announcing-workflows-1-0-a-lightweight-framework-for-agentic-systems) release that adds a lightweight agentic orchestration layer alongside the retrieval core.
 
-We keep it in Trial because LlamaIndex's strongest case is narrower than its scope suggests: retrieval-heavy systems that benefit from its 100+ data connectors and fine-grained indexing controls. For RAG over large corpora or enterprise knowledge bases, it is the framework we would recommend looking at first. For general LLM orchestration, [LangChain & LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) tend to be a better fit.
+We keep it in Trial because LlamaIndex's strongest case is narrower than its scope suggests: retrieval-heavy systems that benefit from its 100+ data connectors and fine-grained indexing controls. For RAG over large corpora or enterprise knowledge bases, it is the framework we would recommend looking at first. For general LLM orchestration though, [LangChain & LangGraph](/ai-radar/languages-frameworks/#langchain--langgraph) or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework) tend to be a better fit.
 
-<div data-radar data-label='LangChain & LangGraph' data-ring='trial' data-change="up" />
+<div data-radar data-label='LangChain & LangGraph' data-ring='trial' />
 
 ## LangChain & LangGraph
 
-[LangChain](https://www.langchain.com/) and its companion [LangGraph](https://www.langchain.com/langgraph) move up to Trial this quarter. LangGraph 1.0 reached stable release, addressing earlier concerns about abstraction churn and giving teams a more reliable foundation for building multi-step LLM workflows.
+[LangChain](https://www.langchain.com/) handles general-purpose LLM interactions while its companion [LangGraph](https://www.langchain.com/langgraph) extends this to stateful, graph-based agent workflows.
 
-LangChain handles general-purpose LLM interactions while LangGraph extends this to stateful, graph-based agent workflows. The rapid pace of change in the underlying AI platforms means that some of LangChain's abstractions may still become less relevant as the ecosystem evolves, so we recommend focused experiments that test whether these tools simplify your specific use case.
+Both reached 1.0 in late 2025, with a commitment to no breaking changes before 2.0. That settles the abstraction churn that made earlier versions awkward to build on. LangGraph's graph model is worth the overhead when you need durable, resumable state across long-running or multi-agent workflows. It stays in Trial because simpler agents rarely need it: if no state has to persist across a crash or a pause, a provider SDK and a plain tool loop is less to maintain. Try it where your control flow and state are complex enough to justify the framework.
 
 See also: [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), [AutoGen](/ai-radar/languages-frameworks/#autogen).
 
-<div data-radar data-label="Formal specification languages" data-ring="trial" data-change="new" />
+<div data-radar data-label="Formal specification languages" data-ring="trial" />
 
 ## Formal specification languages
 
-Formal specification languages allow teams to describe system behaviour with enough precision that properties can be verified before code is written. They sit on a spectrum: lightweight languages that structure intent, model checkers that explore state spaces and full theorem provers that deliver mathematical proof. AI assistants have lowered the barrier to entry, making formal specification viable for a broader range of software than the safety-critical systems that historically justified the investment.
+Formal specification languages describe system behaviour precisely enough that properties can be verified before code is written. They sit on a spectrum from lightweight languages that structure intent, through model checkers that explore state spaces, to theorem provers that deliver mathematical proof. [TLA+](https://lamport.azurewebsites.net/tla/tla.html) is the most widely adopted for distributed systems; Amazon used it to find subtle AWS bugs that testing could not surface. [Alloy](https://alloytools.org/) takes a lighter, auto-analysed approach, while [Dafny](https://dafny.org/) and [Lean 4](https://lean-lang.org/) have drawn substantial AI-assisted proof-synthesis work this year. AI assistants have lowered the barrier enough to make specification viable well beyond the safety-critical systems that once justified it.
 
-[TLA+](https://lamport.azurewebsites.net/tla/tla.html), created by Leslie Lamport, is the most widely adopted formal specification language for distributed systems. Amazon used it to find subtle bugs in AWS infrastructure that testing alone could not surface. [Alloy](https://alloytools.org/), developed by Daniel Jackson at MIT, takes a lighter approach with automatic analysis, well suited for exploring design spaces and finding counterexamples early. [FizzBee](https://fizzbee.io/) offers a more accessible alternative to TLA+ designed for practitioners. On the verification-aware end of the spectrum, [Dafny](https://dafny.org/) and [Lean 4](https://lean-lang.org/) have both seen substantial AI-assisted activity over the past year, with dedicated POPL workshops and research projects targeting them as LLM proof-synthesis targets.
+We develop [Allium](https://github.com/juxt/allium), our own language at the practical end: it captures behaviour in a structured, machine-readable form that AI agents use to guide implementation and generate tests. It cannot prove properties across all states the way TLA+ or Alloy can, but it captures intent precisely enough to serve as a contract between human and agent.
 
-We've been developing [Allium](https://github.com/juxt/allium), our own specification language at the practical end of this spectrum. Allium captures system behaviour in a structured, machine-readable format that AI agents can use to guide implementation and generate tests. It cannot prove properties hold across all possible states the way TLA+ or Alloy can, but it captures intent precisely enough to serve as contracts between humans and AI. The right level of formality depends on what is at stake.
+AI has shifted the economics of rigour. Agents have rendered formal specification much less costly and much more necessary, given how readily models resolve ambiguity in directions you did not intend.
 
-AI has shifted the economics. Specifying behaviour rigorously used to be reserved for systems where the cost of failure was high enough to justify the upfront effort. With AI agents now both authoring specifications and producing implementations against them, behavioural specification is more cost-effective than it was, and arguably more necessary, given how readily models resolve ambiguity in directions you did not intend.
-
-See also: [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai), [Prolog](/ai-radar/languages-frameworks/#prolog).
+See also: [Spec-driven development](/ai-radar/techniques/#spec-driven-development), [Neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai).
 
 # Assess
 
 Emerging or specialised technologies that merit evaluation for specific use cases.
 
-<div data-radar data-label='Prolog' data-ring='assess' />
-
-## Prolog
-
-[Prolog](http://www.gprolog.org/) sits in Assess due to its renewed relevance for [neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai) architectures. This decades-old logic programming language offers something LLMs fundamentally lack: guaranteed logical inference with explainable reasoning chains.
-
-LLMs excel at understanding natural language but cannot reliably follow complex rules or explain why they reached a conclusion. Prolog does exactly this. By coupling an LLM with a Prolog reasoning engine, teams can build systems where the LLM handles ambiguous input and Prolog enforces business logic, validates conclusions or traverses knowledge graphs. Implementations typically use Prolog to represent domain rules that validate LLM outputs before they reach users. This pattern is particularly valuable in regulated industries where decisions must be auditable.
-
-We've kept Prolog in Assess because the tooling ecosystem for LLM integration remains immature and performance can be challenging at scale. Teams should also consider whether semantic web technologies (RDF, OWL, SPARQL) might serve similar purposes with better tooling support.
-
-See also: Neurosymbolic AI, Ontologies for AI grounding.
-
 <div data-radar data-label='JAX' data-ring='assess' />
 
 ## JAX
 
-[JAX](https://github.com/jax-ml/jax) sits in our Assess ring as we observe increasing interest in this ML framework that combines NumPy's familiar API with hardware acceleration and automatic differentiation. While TensorFlow and PyTorch remain dominant in the ML ecosystem, we're seeing JAX gain traction particularly in research settings and among teams working on custom ML architectures.
+[JAX](https://github.com/jax-ml/jax) combines NumPy's familiar API with hardware acceleration and automatic differentiation, and interest in it is growing. TensorFlow and PyTorch remain dominant, but JAX is gaining traction in research settings and among teams working on custom ML architectures.
 
-JAX's functional approach to ML computation and its ability to compile to multiple hardware targets through XLA (Accelerated Linear Algebra) set it apart from more established frameworks. It shows promise for projects requiring high-performance numerical computing, though teams should weigh its relative immaturity in deployment tooling and a smaller ecosystem of pre-built components. We recommend teams experimenting with JAX do so on research projects or contained proofs-of-concept before considering broader adoption.
+Its functional approach to ML computation and its ability to compile to multiple hardware targets through XLA (Accelerated Linear Algebra) distinguish it from more established frameworks. It suits projects that need high-performance numerical computing, though teams should weigh its relative immaturity in deployment tooling and a smaller ecosystem of pre-built components. We recommend experimenting with JAX on research projects or contained proofs-of-concept before considering broader adoption.
 
-
-<div data-radar data-label="OpenAI AgentKit" data-ring="assess" />
-
-## OpenAI AgentKit
-
-OpenAI launched [AgentKit](https://openai.com/index/introducing-agentkit/) at DevDay in October 2025, comprising Agent Builder for visual workflow design, ChatKit for embeddable interfaces, integrated evals and a Connector Registry for tool integration. ChatKit and the evals capabilities are generally available; Agent Builder and the Connector Registry are still in beta.
-
-AgentKit sits in Assess because adopting it represents a substantial commitment to the OpenAI ecosystem. Unlike framework-agnostic alternatives such as LangChain or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), teams using AgentKit tie their agent infrastructure to a single provider's roadmap. There is no separate AgentKit fee, since usage rolls into standard API pricing, but agentic workloads consume tokens unpredictably and the cost trajectory needs modelling up front.
-
-For organisations already invested in OpenAI's platform, AgentKit offers a streamlined path from prototype to production. Teams that need vendor flexibility will want to evaluate open alternatives first.
-
-<div data-radar data-label="PydanticAI" data-ring="assess" />
-
-## PydanticAI
-
-[PydanticAI](https://ai.pydantic.dev/) brings the developer experience of FastAPI to generative AI application development. It is built by the team behind Pydantic, the validation layer that underpins the OpenAI, Anthropic and Google ADK SDKs alongside LangChain, LlamaIndex and others. It offers model-agnostic LLM support, structured responses through Pydantic validation and a dependency injection system for testing.
-
-PydanticAI reached v1 in September 2025 and has since added durable execution, streaming structured outputs and graph-based control flow. It uses existing Python patterns rather than introducing new paradigms, which makes it immediately approachable for teams already familiar with the ecosystem. Production deployments are appearing, and for Python-first stacks it is a strong default to evaluate.
-
-<div data-radar data-label='Smolagents' data-ring='assess' />
+<div data-radar data-label='Smolagents' data-ring='assess' data-published="false" />
 
 ## Smolagents
 
 [Smolagents](https://github.com/huggingface/smolagents) is Hugging Face's minimalist agent framework. The core fits inside a thousand lines of code. Its distinguishing feature is the code agent pattern: rather than calling tools through structured tool-call protocols, agents write Python snippets that run against the tool catalogue. This typically reduces LLM calls per task by around a third and produces more transparent reasoning traces.
 
-The natural concern is that letting an agent run arbitrary Python is a security risk. Smolagents addresses this through sandboxed execution backends, including Blaxel, E2B, Modal and Docker, which the framework expects to be enabled outside local development. We keep it in Assess because adoption outside Hugging Face's own examples is still limited, and the code-agent pattern is more opinionated than standard tool-calling. For teams in the Hugging Face stack who want a lighter alternative to LangGraph or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), it is worth a look.
+The natural concern is that letting an agent run arbitrary Python is a security risk. Smolagents addresses this through sandboxed execution backends, including Blaxel, E2B, Modal and Docker, which the framework expects to be enabled outside local development. For teams unwilling to execute model-written code at all, smolagents also offers a ToolCallingAgent mode that emits standard JSON tool calls rather than Python, trading some of the code agent's efficiency for a smaller attack surface.
 
-<div data-radar data-label='CrewAI' data-ring='assess' />
+We keep it in Assess because adoption outside Hugging Face's own examples is still limited. For teams in the Hugging Face stack who want a lighter alternative to LangGraph or [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), it is well worth a look.
+
+<div data-radar data-label='CrewAI' data-ring='assess' data-published="false" />
 
 ## CrewAI
 
-[CrewAI](https://crewai.com/) is a framework for orchestrating teams of specialised agents that collaborate through defined roles and task delegation. It supports human-in-the-loop integration and has become one of the most-adopted multi-agent frameworks, with substantial enterprise use and a dedicated production architecture called CrewAI Flows.
+[CrewAI](https://crewai.com/) orchestrates teams of specialised agents that collaborate through defined roles and task delegation. It supports human-in-the-loop integration and ships a dedicated production architecture, CrewAI Flows, and it has found wide adoption for agent collaboration, including in enterprises.
 
-CrewAI is now the de facto choice for many organisations building agent collaboration. Best practices for multi-agent design are still emerging across the industry, and managing several agents adds operational overhead that a single orchestrating agent often avoids. Worth evaluating where the work benefits from multiple specialised agents rather than one capable one.
+Best practices for multi-agent design are still emerging, and managing several agents adds operational overhead that a single orchestrating agent often avoids. Worth evaluating where the work benefits from multiple specialised agents rather than one capable one.
 
 <div data-radar data-label="DSPy" data-ring="assess" />
 
 ## DSPy
 
-[DSPy](https://dspy-docs.vercel.app/) treats prompts as optimisable programs rather than handcrafted text. Developed at Stanford, developers define signatures (input-output specifications) and modules (composable building blocks), and DSPy's optimisers automatically generate effective prompts based on example data. The optimisation process can discover strategies that humans might not have considered.
+[DSPy](https://dspy-docs.vercel.app/) treats prompts as optimisable programs rather than handcrafted text. You define signatures (input-output specifications) and modules (composable building blocks), and DSPy's optimisers automatically generate effective prompts based on example data. The optimisation process can discover strategies that humans might not have considered.
 
 The framework shows particular promise for complex pipelines involving multiple LLM calls or retrieval steps. DSPy remains in Assess because it introduces a programming paradigm unfamiliar to most teams, and the investment pays off only for systems that benefit from automated prompt optimisation. For simpler single-prompt applications, traditional approaches may remain more practical.
 
@@ -194,11 +177,29 @@ The framework shows particular promise for complex pipelines involving multiple 
 
 The framework emerged from biomedical informatics but applies broadly. For AI applications, LinkML models can define entities and relationships for knowledge graphs and structured output schemas for LLMs. It remains in Assess because adoption is relatively niche. Organisations already committed to JSON Schema may find less incremental value, but for teams starting fresh on knowledge representation, LinkML offers a middle path between ad-hoc schemas and full OWL modelling.
 
+<div data-radar data-label="PydanticAI" data-ring="assess" />
+
+## PydanticAI
+
+[PydanticAI](https://ai.pydantic.dev/) brings the developer experience of FastAPI to generative AI application development. It is built by the team behind Pydantic, the validation layer that underpins the OpenAI, Anthropic and Google ADK SDKs alongside LangChain, LlamaIndex and others. It offers model-agnostic LLM support, structured responses through Pydantic validation and a dependency injection system for testing.
+
+PydanticAI reached v1 in September 2025 and has since added durable execution, streaming structured outputs and graph-based control flow. It uses existing Python patterns rather than introducing new paradigms, which makes it immediately approachable for teams already familiar with the ecosystem. Production deployments are appearing, and for Python-first stacks it is a strong default to evaluate.
+
+<div data-radar data-label='Prolog' data-ring='assess' />
+
+## Prolog
+
+[Prolog](http://www.gprolog.org/) has regained relevance for [neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai) architectures. This decades-old logic programming language gives you guaranteed logical inference with explainable reasoning chains, which LLMs can't reliably supply: they handle ambiguous language well but can't follow complex rules or explain why they reached a conclusion. By coupling an LLM with a Prolog reasoning engine, teams can build systems where the model handles the input and Prolog enforces business logic, validates conclusions or traverses knowledge graphs. Implementations typically use Prolog to represent domain rules that validate LLM outputs before they reach users. This pattern suits regulated industries where decisions must be auditable.
+
+We keep Prolog in Assess because the tooling for LLM integration remains immature and performance can suffer at scale. Teams should also consider whether semantic web technologies (RDF, OWL, SPARQL) might serve similar purposes with better tooling support.
+
+See also: [Neurosymbolic AI](/ai-radar/techniques/#neurosymbolic-ai), [Ontologies for AI grounding](/ai-radar/techniques/#ontologies-for-ai-grounding).
+
 # Hold
 
 Not recommended for new projects; better alternatives exist.
 
-<div data-radar data-label='AutoGen' data-ring='hold' data-change="down" data-published="false" />
+<div data-radar data-label='AutoGen' data-ring='hold' />
 
 ## AutoGen
 
@@ -208,31 +209,31 @@ Not recommended for new projects; better alternatives exist.
 
 ## TensorFlow
 
-We have placed [TensorFlow](https://www.tensorflow.org/) in the Hold ring for several reasons. While TensorFlow remains a capable deep learning framework that helped popularise machine learning at scale, we're seeing teams struggle with its larger API surface and fragmented deployment story compared to more modern alternatives. The framework's syntax and intricate architecture could act as headwinds for teams new to machine learning.
+[TensorFlow](https://www.tensorflow.org/) remains a capable deep learning framework and helped popularise machine learning at scale, but its large API surface, fragmented deployment story and intricate architecture make it harder going than more modern alternatives, especially for newcomers.
 
-PyTorch has emerged as the clear community favourite for both research and production deployments, with arguably a more intuitive programming model and better debugging capabilities. For new projects we recommend exploring higher-level tools or PyTorch unless there are compelling reasons to use TensorFlow, such as maintaining existing deployments or specific requirements around TensorFlow Extended (TFX) for ML pipelines.
+PyTorch is now the community favourite for research and production, with a more intuitive model and better debugging. For new projects we recommend PyTorch or higher-level tools unless you have a reason to stay on TensorFlow, such as existing deployments or TensorFlow Extended (TFX) for ML pipelines.
 
-<div data-radar data-label='Keras' data-ring='hold' data-published="false" />
+<div data-radar data-label='Keras' data-ring='hold' />
 
 ## Keras
 
-We have placed [Keras](https://keras.io/) in the Hold ring primarily due to its transition from a standalone deep learning framework to becoming more tightly integrated with TensorFlow, along with the emergence of more modern alternatives that offer better developer experiences.
+[Keras](https://keras.io/) has moved from a standalone deep learning framework to tighter integration with TensorFlow.
 
-While Keras served as an excellent entry point for many developers into deep learning, providing an intuitive API that made neural networks more accessible, the deep learning ecosystem has evolved significantly. Frameworks such as PyTorch have gained substantial momentum, offering clearer debugging, better documentation and a more Pythonic approach. Additionally, recent high-level frameworks such as Lightning and FastAI provide similar ease-of-use benefits while maintaining closer alignment with current best practices in deep learning development. For new projects, we recommend exploring these alternatives rather than investing in Keras-specific expertise.
+Keras was an intuitive entry point into deep learning, with an API that made neural networks more accessible, but the ecosystem has moved on. PyTorch has gained momentum, with clearer debugging, better documentation and a more Pythonic approach. Lightning and FastAI offer similar ease of use while staying closer to current practice. For new projects, we recommend these alternatives rather than investing in Keras-specific expertise.
 
-<div data-radar data-label='R' data-ring='hold' data-published="false" />
+<div data-radar data-label='R' data-ring='hold' />
 
 ## R
 
-Despite [R](https://www.r-project.org/)'s historical significance in data science and statistical computing, we've placed it in the Hold ring for new projects. While R remains capable for statistical analysis and data visualisation, we're seeing its adoption declining in favour of Python's more comprehensive ecosystem for machine learning and AI workflows.
+[R](https://www.r-project.org/) has a long history in data science and statistical computing, but we place it in Hold for new projects. It remains capable for statistical analysis and visualisation, though its adoption is declining in favour of Python's broader ML and AI ecosystem.
 
-The key factors driving this recommendation are the overwhelming industry preference for Python-based ML frameworks and the stronger integration of Python with modern AI platforms and tools. While R retains some advantages for specific statistical applications and academic research, we believe teams starting new AI initiatives will benefit from standardising on Python to maximise their access to cutting-edge AI libraries and tools.
+The industry now prefers Python-based ML frameworks, and Python integrates more tightly with modern AI platforms. R retains some advantages for specific statistical applications and academic research, but teams starting new AI initiatives will benefit from standardising on Python and the AI libraries that reach it first.
 
 <div data-radar data-label='OpenCL' data-ring='hold' data-published="false" />
 
 ## OpenCL
 
-We've placed [OpenCL](https://www.khronos.org/opencl/) in the Hold ring of our Languages & Frameworks quadrant. While OpenCL (Open Computing Language) was groundbreaking when introduced as a standard for parallel programming across different types of processors, we believe teams should look to alternatives for new projects.
+[OpenCL](https://www.khronos.org/opencl/) (Open Computing Language) was an early standard for parallel programming across different types of processors, but for new projects teams should look to alternatives.
 
-Despite its promise of write-once-run-anywhere code for GPUs, CPUs, and other accelerators, OpenCL has seen declining industry support and faces significant challenges. Major hardware vendors have shifted their focus to more specialised frameworks such as CUDA for NVIDIA hardware, while newer alternatives such as SYCL and modern GPU compute frameworks offer better developer experiences with similar cross-platform benefits. The complexity of the OpenCL programming model, combined with inconsistent tooling support and a fragmented ecosystem, makes it increasingly difficult to justify for new development compared to more actively maintained alternatives.
+Its promise was write-once-run-anywhere code for GPUs, CPUs and other accelerators, yet industry support has declined. Major hardware vendors have shifted focus to more specialised frameworks such as CUDA for NVIDIA hardware, while newer alternatives such as SYCL offer better developer experiences with similar cross-platform benefits. A complex programming model, inconsistent tooling and a fragmented ecosystem make OpenCL hard to justify for new development against more actively maintained alternatives.
 </ChildSectionAiRadarLayout>

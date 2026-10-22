@@ -13,25 +13,29 @@ Software that enhances AI development workflows without being embedded in your a
 
 # Adopt
 
-Mature, well-supported tools with proven track records in production development workflows.
+Mature, well-supported tools ready for production use.
 
 <div data-radar data-label="Software engineering copilots" data-ring="adopt" />
 
 ## Software engineering copilots
 
-AI-augmented development represents a permanent shift in software engineering. Teams not actively building capability here are falling behind.
+Copilots that write and run code from a natural-language brief are now part of normal engineering practice, which is why they sit in Adopt. Most teams already have one in place, so the practical choices now are which tool to pick and how best to work with it.
 
-The tooling falls into two categories. Model-agnostic interfaces let teams switch between providers: [OpenCode](https://opencode.ai/) stands out for its terminal experience and breadth of integration, [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf) and [Zed](https://zed.dev/) are standalone editors, and CLI tools such as [Aider](https://github.com/Aider-AI/aider) and [Cline](https://github.com/cline/cline) work across providers. Provider-specific tools such as [Claude Code](https://claude.ai/code), [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli) and [OpenAI Codex](https://openai.com/codex/) are optimised for their respective models. [GitHub Copilot](https://github.com/features/copilot) and [Tabnine](https://www.tabnine.com/) offer traditional IDE integrations.
+Broadly, the tools split into two kinds: those you can point at any provider, and those tuned to a single model. Among the model-agnostic ones, [OpenCode](https://opencode.ai/) stands out for its terminal experience and breadth of integration; [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf) and [Zed](https://zed.dev/) are standalone editors; and CLI tools such as [Aider](https://github.com/Aider-AI/aider), [Cline](https://github.com/cline/cline) and Block's [Goose](https://block.github.io/goose/) run against any provider. The provider-specific tools, [Claude Code](https://claude.ai/code), [Gemini CLI](https://ai.google.dev/gemini-api/docs/cli) and [OpenAI Codex](https://openai.com/codex/), are each built around their own model, while [GitHub Copilot](https://github.com/features/copilot) and [Tabnine](https://www.tabnine.com/) live inside the IDE.
 
-Two approaches have emerged: free-form "vibe coding" and structured methodologies. [Kiro](https://kiroai.com/) offers both, with a conversational mode and a dedicated specs mode for drafting requirements before code generation. [Cursor](https://www.cursor.com/) enables teams to codify standards through .cursorrules.
+The field keeps fragmenting, with no consolidation in sight. Claude Code is the strongest for long, autonomous work but also the heaviest and most tied to one provider, and as usage-based pricing bites, teams increasingly pair a capable proprietary tool for the hard problems with cheaper, model-agnostic ones running on open weight models for routine changes. Most of the recent movement is in that agnostic layer, because it keeps the provider choice open.
 
-Senior engineers derive the greatest value, using AI for routine tasks whilst maintaining quality oversight. Junior developers often struggle to evaluate AI suggestions. Success correlates with intentional training around effective AI collaboration and a "trust but verify" mindset.
+Teams work with these tools interactively in two broad styles: free-form "vibe coding", steered by conversation, and a more structured, spec-first approach that works out what's needed before any code is written. [Kiro](https://kiro.dev/) does both, pairing a conversational mode with a specs mode for drafting requirements first. Either way, project conventions increasingly live in [AGENTS.md and steering files](/ai-radar/techniques/#agentsmd-and-steering-files) that every tool can read, rather than in a separate dotfile for each tool.
+
+A newer mode is different again: it hands a scoped task to a cloud agent that runs unattended in its own sandbox and opens a pull request; OpenAI's Codex cloud and Google's [Jules](https://jules.google/) both work this way. This shifts the load onto review and widens the attack surface, so scope these agents tightly and keep a person in the loop. We cover the mechanics under [Agent code sandboxes](/ai-radar/tools/#agent-code-sandboxes) and [Supervising multiple agents](/ai-radar/tools/#supervising-multiple-agents).
+
+Senior engineers get the most from these tools, handing over routine work while keeping a close eye on quality; less experienced developers can struggle to tell a sound suggestion from a plausible but wrong one. The teams that do well treat that as a training problem and keep a trust-but-verify habit.
 
 <div data-radar data-label="Provider-agnostic LLM facades" data-ring="adopt" />
 
 ## Provider-agnostic LLM facades
 
-The LLM market moves quickly enough that today's best choice may be displaced within months. A facade between your application and the underlying provider keeps that switching cost manageable. Options range from the lightweight [AISuite](https://github.com/andrewyng/aisuite) and Simon Willison's [LLM](https://github.com/simonw/llm) library to heavier alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/). A thin in-house wrapper is also a reasonable choice for teams that prefer to minimise dependencies. We have seen enough projects hampered by tight coupling to a single provider to consider some form of abstraction a default.
+The LLM market moves quickly enough that today's best choice may be displaced within months. A facade between your application and the underlying provider keeps that switching cost manageable. Options range from the lightweight [AISuite](https://github.com/andrewyng/aisuite) and Simon Willison's [LLM](https://github.com/simonw/llm) library to heavier alternatives such as [LangChain](https://www.langchain.com/) and [LlamaIndex](https://www.llamaindex.ai/). A thin in-house wrapper is also a reasonable choice for teams that prefer to minimise dependencies. We've seen enough projects hampered by tight coupling to a single provider to treat some form of abstraction as a default.
 
 <div data-radar data-label="Notebooks" data-ring="adopt" />
 
@@ -41,10 +45,10 @@ Notebooks remain the de facto standard for data science and ML experimentation. 
 
 # Trial
 
-Promising tools with growing adoption that are worth exploring for teams building AI systems.
+Promising tools with growing adoption, worth exploring for specific use cases.
 
 
-<div data-radar data-label="MLflow" data-ring="trial" />
+<div data-radar data-label="MLflow" data-ring="trial" data-published="false" />
 
 ## MLflow
 
@@ -52,7 +56,7 @@ Promising tools with growing adoption that are worth exploring for teams buildin
 
 MLflow runs self-hosted or as a managed service on Databricks, SageMaker, Azure ML, Red Hat OpenShift AI and Nebius. That breadth is part of the appeal: teams avoid the lock-in of monolithic MLOps platforms while still being able to pick a managed offering where one fits.
 
-Realising the benefits self-hosted requires technical expertise to configure and integrate. Unlike a turnkey platform such as [Vertex AI](https://cloud.google.com/vertex-ai), MLflow does not provide a plug-and-play experience; its modular components must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
+Self-hosting requires technical expertise to configure and integrate. Unlike a turnkey platform such as [Vertex AI](https://cloud.google.com/vertex-ai), MLflow is not plug-and-play; its modular components must be tailored to specific use cases. We recommend it for organisations that value flexibility and have the proficiency to manage integrations.
 
 <div data-radar data-label="Vector databases" data-ring="trial" />
 
@@ -60,9 +64,11 @@ Realising the benefits self-hosted requires technical expertise to configure and
 
 Vector databases have emerged as specialised tools for managing the high-dimensional embeddings required by AI models. Prominent solutions include [Pinecone](https://www.pinecone.io/), [Qdrant](https://qdrant.tech/), [Milvus](https://milvus.io/) and [Weaviate](https://weaviate.io/).
 
-Traditional databases may suffice for simpler operations, and alternative approaches such as Timescale's [PGAI](https://github.com/timescale/pgai) vectorizer bring vector search directly into Postgres, avoiding the data consistency challenges of keeping embeddings synchronised across databases. If a dedicated vector database is required, Pinecone leads in production readiness but comes with managed service costs, while open-source alternatives such as Qdrant and Milvus offer greater control but demand more operational expertise.
+Traditional databases may suffice for simpler operations, and alternative approaches such as [pgvector](https://github.com/pgvector/pgvector) with [pgvectorscale](https://github.com/timescale/pgvectorscale) bring vector search directly into Postgres, avoiding the data consistency challenges of keeping embeddings synchronised across databases. If a dedicated vector database is required, Pinecone leads in production readiness but comes with managed service costs, while open-source alternatives such as Qdrant and Milvus offer greater control but demand more operational expertise.
 
 For prototyping, [Chroma](https://www.trychroma.com/) offers a Python-first approach with minimal configuration. A 2025 Rust rewrite improved performance, though it remains best suited for small-to-medium scale applications. [LanceDB](https://lancedb.com/) takes a different approach as an embedded vector database, similar in philosophy to SQLite. It operates as a library within your application using Apache Arrow's columnar format, making it compelling for local AI assistants and edge deployments where data must remain on-device. The trade-off is limited high-concurrency support.
+
+One caution on scope. For retrieval over document corpora, where questions and source text use different words for the same idea, vector search remains the right tool. For agents working across a codebase, it increasingly is not: teams are finding that agentic search, direct grep and file traversal, beats a pre-built embedding index that goes stale as the code changes. Reach for a vector database when semantic similarity is the problem, not as a reflex for every retrieval task. See [RAG](/ai-radar/techniques/#rag) for the fuller argument.
 
 <div data-radar data-label="Local model execution environments" data-ring="trial" />
 
@@ -80,33 +86,33 @@ Modern agentic builds involve multi-step reasoning, tool orchestration, RAG retr
 
 [Phoenix](https://phoenix.arize.com/), from Arize AI, has emerged as a leading open-source option. Built on OpenTelemetry, it provides tracing and evaluation with auto-instrumentation for LangChain, LlamaIndex, DSPy and direct integrations with OpenAI, Anthropic and AWS Bedrock. [Langfuse](https://langfuse.com/) is the most popular fully open-source alternative (MIT licence), combining tracing and evaluation with strong multi-turn conversation support.
 
-For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, which is a natural choice where a single platform across classical ML and GenAI matters. Since these tools capture prompt and response data, data sovereignty matters too: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements.
+For LangChain-committed teams, [LangSmith](https://smith.langchain.com/) provides native integration that surfaces framework internals in debugging views. [Helicone](https://helicone.ai/) takes a lightweight proxy approach: route API calls through its endpoint for observability without SDK changes. [MLflow](/ai-radar/tools/#mlflow) 3 also offers OpenTelemetry-based tracing for LLMs and agents, a natural choice where a team wants a single platform across classical ML and GenAI. Since these tools capture prompt and response data, data sovereignty is a concern: Phoenix and Langfuse both offer self-hosting for teams with data residency requirements. Both have also added evaluations that run as CI gates, so a tracing tool can now block a regression before it ships; that practice is covered under [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate). [Galileo](https://www.galileo.ai/) uses purpose-built small models (its Luna family) for low-latency evaluation rather than frontier-model judges; Cisco acquired it in 2026, and it now ships as Splunk Agent Observability.
 
-<div data-radar data-label="LLM API gateways" data-ring="trial" data-change="new" />
+<div data-radar data-label="LLM API gateways" data-ring="trial" />
 
 ## LLM API gateways
 
-As organisations adopt multiple model providers, an infrastructure layer emerges between applications and providers. LLM API gateways handle routing, caching, failover, rate limiting and cost tracking at the proxy level, complementing code-level abstraction from libraries such as AISuite. A facade is a developer choice about how to call models; a gateway is a platform decision about how to manage model traffic across the organisation.
+As organisations adopt multiple model providers, an infrastructure layer emerges between applications and providers. LLM API gateways handle routing, caching, failover, rate limiting and cost tracking at the proxy level, complementing code-level abstraction from libraries such as [AISuite](https://github.com/andrewyng/aisuite). A facade is a developer choice about how to call models; a gateway is a platform decision about how to manage model traffic across the organisation.
 
 [LiteLLM](https://github.com/BerriAI/litellm) is the most widely adopted open-source option, providing an OpenAI-compatible proxy with spend tracking, budget controls and key management. [Portkey](https://portkey.ai/) offers a managed alternative with semantic caching and conditional routing. [Kong](https://konghq.com/) brings enterprise API management experience to LLM traffic.
 
-The operational value for multi-provider deployments is clear: centralised audit logging, per-team budget enforcement and automatic failover. Worth evaluating whether a gateway simplifies the operational story before building equivalent functionality in-house.
+For multi-provider deployments, a gateway centralises audit logging, per-team budget enforcement and automatic failover. Check whether it simplifies the operational story before you build equivalent functionality in-house.
 
-See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
+See also: [Provider-agnostic LLM facades](/ai-radar/tools/#provider-agnostic-llm-facades), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [MCP gateways](/ai-radar/tools/#mcp-gateways).
 
-<div data-radar data-label="AI red teaming tools" data-ring="trial" data-change="new" />
+<div data-radar data-label="AI red teaming tools" data-ring="trial" />
 
 ## AI red teaming tools
 
-Our security coverage has grown this quarter, with guidance on prompt injection in [MCP](/ai-radar/languages-frameworks/#mcp) and [RAG](/ai-radar/techniques/#rag) and architectural defences such as [CaMeL](/ai-radar/techniques/#camel). Missing has been offensive testing: tools that systematically probe AI systems for vulnerabilities before attackers do.
+Our security coverage has grown this quarter, with guidance on prompt injection in [MCP](/ai-radar/languages-frameworks/#mcp) and [RAG](/ai-radar/techniques/#rag) and architectural defences such as [CaMeL](/ai-radar/techniques/#camel). Red teaming is offensive testing: tools that systematically probe AI systems for vulnerabilities before attackers do.
 
 [Promptfoo](https://www.promptfoo.dev/) is the standout, evolving from a prompt evaluation CLI into a comprehensive red teaming platform. OpenAI [acquired it](https://www.promptfoo.dev/blog/openai/) in March 2026 but the MIT licence remains. It ships [financial services plugins](https://www.promptfoo.dev/docs/red-team/plugins/financial/) for PCI DSS and banking regulation testing. Microsoft's [PyRIT](https://github.com/Azure/PyRIT) focuses on multi-turn attack orchestration with Azure AI Foundry integration. NVIDIA's [Garak](https://github.com/NVIDIA/garak) takes an agentic approach, autonomously probing for prompt injection, data leakage and toxicity.
 
-The EU AI Act will require adversarial testing for high-risk systems by August 2026. We recommend starting with Promptfoo for breadth and CI/CD integration.
+The EU AI Act will require adversarial testing for high-risk systems, an obligation the Digital Omnibus moved to December 2027. We recommend starting with Promptfoo for breadth and CI/CD integration.
 
-See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools).
+See also: [CaMeL](/ai-radar/techniques/#camel), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [LLM observability tools](/ai-radar/tools/#llm-observability-tools), [Evals as a release gate](/ai-radar/techniques/#evals-as-a-release-gate).
 
-<div data-radar data-label="AI-assisted code migration" data-ring="trial" data-change="new" />
+<div data-radar data-label="AI-assisted code migration" data-ring="trial" />
 
 ## AI-assisted code migration
 
@@ -118,11 +124,37 @@ These migrations are well-understood but labour-intensive, exactly where determi
 
 See also: [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [Spec-driven development](/ai-radar/techniques/#spec-driven-development).
 
+<div data-radar data-label="Agent code sandboxes" data-ring="trial" data-change="new" />
+
+## Agent code sandboxes
+
+Agents increasingly write code and run it, to analyse data or drive a tool as they work through a task. That code is untrusted: it's generated at runtime and often shaped by input an attacker can influence, so you don't want it running on the host that holds your credentials and source. An agent code sandbox gives it somewhere safe to run: an isolated, disposable environment with limited filesystem and network access, torn down after use.
+
+The category has purpose-built providers. [E2B](https://e2b.dev/) runs each session in a Firecracker microVM, while [Modal](https://modal.com/) isolates sandboxes with [gVisor](https://gvisor.dev/) by default and offers a full-VM option for workloads that need their own kernel; [Daytona](https://www.daytona.io/) and [Cloudflare's Sandbox SDK](https://github.com/cloudflare/sandbox-sdk) offer isolated containers with fast start-up; Pydantic's [monty](https://github.com/pydantic/monty) is a minimal secure Python interpreter for LLM-generated code with no container overhead. For local work, [Anthropic's sandbox-runtime](https://github.com/anthropics/sandbox-runtime) confines an agent's processes at the OS level using Seatbelt, bubblewrap and network namespaces. This is a different concern from [local model execution environments](/ai-radar/tools/#local-model-execution-environments), which run the model itself; here we isolate the code the model produces.
+
+We place agent code sandboxes in Trial: the tooling is mature enough to adopt now, and a team that lets an agent run generated code outside a throwaway environment is taking an avoidable risk. Prompt injection makes isolation more important, because the untrusted input flows straight into the code the agent runs. A sandbox contains the damage when that happens; it doesn't stop the injection itself.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [CaMeL](/ai-radar/techniques/#camel), [Managed agent platforms](/ai-radar/platforms/#managed-agent-platforms), [Supervising multiple agents](/ai-radar/tools/#supervising-multiple-agents).
+
 # Assess
 
-Emerging tools that require careful evaluation before adoption.
+Emerging or specialised tools that merit evaluation for specific use cases.
 
-<div data-radar data-label="AI application bootstrappers" data-ring="assess" />
+<div data-radar data-label="Supervising multiple agents" data-ring="assess" data-change="new" />
+
+## Supervising multiple agents
+
+Running several coding agents at once is much harder than running one. You lose track of what each is doing and which one is waiting for you. The field is early, and tools are trying quite different interfaces for it.
+
+Staying engaged. The most useful thing one of these tools could do is work like an inbox: interrupt you only when an agent needs a decision, instead of leaving you to check each one in turn. Few do this yet. [Claude Squad](https://github.com/smtg-ai/claude-squad) shows a list of running agents for you to look through. [Conductor](https://conductor.build/) and Imbue's [Sculptor](https://imbue.com/product/sculptor/) are built around reviewing each agent's changes, and Sculptor can drop you straight into an agent's work on your own machine to take over. VS Code and GitHub's Agent HQ add a shared view across your agents. None yet lets you move smoothly between agents, and the inbox idea has barely reached coding tools so far. The risk is that you stop reading the changes and just approve them.
+
+Keeping it local. To run agents in parallel, each needs its own copy of the code so they don't overwrite each other: a git worktree per agent, or a container per agent, as Sculptor does. A container can also act as a sandbox, stopping the agent from reaching the rest of your machine or the network. Keep the agents on your own machine and your code and credentials stay with you, or use hosted services such as Factory and Devin, which run them on their own servers and suit sensitive or regulated work less well.
+
+We place this in Assess: the tools change fast, and some have already shut down or gone commercial, so don't become too invested in any one tool. Running each agent in its own workspace is sensible now, and we would prefer tools that keep everything on your own machines.
+
+See also: [Agent code sandboxes](/ai-radar/tools/#agent-code-sandboxes), [Orchestrator-worker agents](/ai-radar/techniques/#orchestrator-worker-agents), [Harness engineering](/ai-radar/techniques/#harness-engineering).
+
+<div data-radar data-label="AI application bootstrappers" data-ring="assess" data-published="false" />
 
 ## AI application bootstrappers
 
@@ -134,7 +166,7 @@ However, success still correlates strongly with existing engineering expertise. 
 
 We recommend these primarily for prototyping and proof-of-concept work, with clear separation from production codebases unless your team has the engineering depth to take ownership of generated code.
 
-<div data-radar data-label="Visual computer use agents" data-ring="assess" />
+<div data-radar data-label="Visual computer use agents" data-ring="assess" data-published="false" />
 
 ## Visual computer use agents
 
@@ -142,13 +174,13 @@ AI agents that interact with computers through visual understanding have matured
 
 Reliability for bounded tasks has improved, with standard office workflows seeing success rates in the high 80s. However, prompt injection attacks, where malicious instructions hidden on web pages hijack agent behaviour, represent a systemic vulnerability. OpenAI has [acknowledged](https://openai.com/index/hardening-atlas-against-prompt-injection/) this problem "may never be fully solved".
 
-For many automation needs, programmatic approaches via APIs and [workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation-platforms) remain more reliable and secure. Visual computer use is best suited to isolated environments where the agent cannot access sensitive data. Teams should grant minimal permissions and maintain human oversight for high-stakes actions.
+For many automation needs, programmatic approaches via APIs and [workflow automation platforms](/ai-radar/platforms/#ai-powered-workflow-automation) remain more reliable and secure. Visual computer use is best suited to isolated environments where the agent cannot access sensitive data. Teams should grant minimal permissions and maintain human oversight for high-stakes actions.
 
 See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [CaMeL](/ai-radar/techniques/#camel).
 
 This section was previously titled "Agentic computer use".
 
-<div data-radar data-label="Lakera" data-ring="assess" />
+<div data-radar data-label="Lakera" data-ring="assess" data-published="false" />
 
 ## Lakera
 
@@ -160,35 +192,73 @@ Technical limitations from our earlier evaluation still apply: scanning is text-
 
 ## Structured output libraries
 
-Libraries such as [Instructor](https://python.useinstructor.com/), [Outlines](https://github.com/outlines-dev/outlines) and [Marvin](https://www.askmarvin.ai/) address a common challenge: LLMs naturally produce freeform text, but applications need structured data. These libraries constrain outputs to match specified structures through prompting, logit manipulation or grammar-based generation. Instead of hoping an LLM produces valid JSON, developers specify Pydantic models and receive guaranteed-valid objects. For agentic systems this is essential, as agents need to produce function calls and decision objects that downstream code can reliably process.
+Libraries such as [Instructor](https://python.useinstructor.com/), [Outlines](https://github.com/outlines-dev/outlines) and [Marvin](https://www.askmarvin.ai/) bridge a gap: LLMs produce freeform text, but applications need structured data. These libraries constrain outputs to match specified structures through prompting, logit manipulation or grammar-based generation. Instead of hoping an LLM produces valid JSON, developers specify Pydantic models and receive guaranteed-valid objects. For agentic systems this is essential, as agents need to produce function calls and decision objects that downstream code can reliably process.
+
+Before reaching for one, check whether the task needs generation at all. If all you need is one label from a fixed set, that's classification, and a [purpose-built classifier](/ai-radar/techniques/#purpose-built-classifiers) such as TypeSafe's Jev returns it directly, faster and cheaper than constraining a generative model to produce it. Keep these libraries for when you need the model to fill in a richer object.
 
 The space is evolving quickly. Instructor has gained traction for its simplicity and Pydantic integration, while Outlines offers more sophisticated constrained generation. Native structured output features from model providers (OpenAI's JSON mode, Anthropic's tool use) may reduce the need for external libraries in some scenarios.
 
-A broader category of runtime guardrails has grown up alongside these libraries. NVIDIA's [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://www.guardrailsai.com/) go beyond schema conformance to include prompt injection scanning, content filtering and hallucination checks. Teams building production LLM applications should evaluate both levels: structured outputs for type safety and guardrails for content safety.
+A broader category of runtime guardrails has grown up alongside these libraries. NVIDIA's [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) and [Guardrails AI](https://www.guardrailsai.com/) go beyond schema conformance to include prompt injection scanning, content filtering and hallucination checks. [Lakera](https://www.lakera.ai/) Guard scans inputs and outputs for prompt injection, toxic content and data leakage; following its acquisition by Check Point it is best assessed as part of that stack rather than as a standalone product. Teams building production LLM applications should evaluate both levels: structured outputs for type safety and guardrails for content safety.
 
-See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [Lakera](/ai-radar/tools/#lakera), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
+See also: [PydanticAI](/ai-radar/languages-frameworks/#pydanticai), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
+
+<div data-radar data-label="MCP gateways" data-ring="assess" data-change="new" />
+
+## MCP gateways
+
+An MCP gateway sits between AI clients and MCP servers as a controlled proxy. As [MCP](/ai-radar/languages-frameworks/#mcp) moves into production, it raises the same governance questions as any other integration point: who may call which server, with whose credentials, and how it's all audited. A gateway answers them at that one point, adding access control, credential handling and audit logging, and some products also inspect the traffic for data loss and prompt injection.
+
+Several vendors now offer products under this label. [Lasso's MCP Gateway](https://github.com/lasso-security/mcp-gateway) concentrates on inspecting content, masking secrets, redacting personal data and blocking malicious servers. [MintMCP](https://mintmcp.com/) and [Workato](https://www.workato.com/) add single sign-on, role-based access and identity-aware policy. [Docker's MCP gateway](https://docs.docker.com/ai/mcp-catalog-and-toolkit/) runs servers in isolated containers behind one managed endpoint, while [Kong](https://konghq.com/) brings its existing API-management machinery to MCP traffic. The recurring hard part is credentials: the MCP authorization spec makes each server an OAuth resource server and forbids passing tokens straight through, so most of the engineering effort goes into handling that cleanly at runtime.
+
+We place MCP gateways in Assess. The problem is worth solving and the security concerns are well founded, but the products are young and fragmented, and they differ enough that you can't yet count on moving between them. Pilot one where you're taking MCP into production, alongside the security guidance in the [MCP](/ai-radar/languages-frameworks/#mcp) entry. It's a different layer from [LLM API gateways](/ai-radar/tools/#llm-api-gateways), which govern model-provider traffic rather than tool calls.
+
+See also: [MCP](/ai-radar/languages-frameworks/#mcp), [LLM API gateways](/ai-radar/tools/#llm-api-gateways), [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools).
+
+<div data-radar data-label="Agentic vulnerability discovery" data-ring="assess" data-change="new" />
+
+## Agentic vulnerability discovery
+
+Agents that read source code can now find security vulnerabilities and often propose a fix. Because the agent reasons over the code rather than matching patterns, it catches classes of bug that scanners and fuzzers miss, and it can carry a finding through to a candidate fix rather than stopping at a ticket. This is separate from [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools), which probe a model's behaviour for jailbreaks and unsafe outputs; here the target is defects in conventional code.
+
+This is already working in practice. Google's [Big Sleep](https://projectzero.google/2024/10/from-naptime-to-big-sleep.html), a Project Zero and DeepMind effort, has found live bugs in widely used code including a SQLite flaw, and [Mozilla's run of a frontier model against the Firefox source](https://blog.mozilla.org/en/firefox/privacy-security/ai-security-zero-day-vulnerabilities/) surfaced logic bugs conventional tooling had missed. GitHub's [Copilot Autofix](https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/) suggests fixes for code-scanning alerts, with an agentic assign-and-open-a-PR flow in preview, and OpenAI has opened gated access to cyber-tuned models through its Trusted Access for Cyber programme. Visa's open-source [Vulnerability Agentic Harness](https://github.com/visa/visa-vulnerability-agentic-harness) brings this into the development pipeline: a chain of agents that discovers a vulnerability, verifies it, proposes a fix and validates the result, so code is hardened as it is written rather than audited after release.
+
+We place this in Assess: the strongest tooling is still gated or in preview, and the patterns for folding it into a security programme are only forming. Regulated teams should watch closely and run the generally available pieces, such as Copilot Autofix where code scanning is already in place. Two cautions for regulated code: proprietary source sent to a hosted model leaves your boundary, so prefer self-hosted or on-premise options such as Visa's harness; and an agent-authored fix is a proposal, not a merge, so keep a person in the loop rather than auto-applying patches.
+
+See also: [AI red teaming tools](/ai-radar/tools/#ai-red-teaming-tools), [AI supply-chain security](/ai-radar/tools/#ai-supply-chain-security), [AI-assisted code migration](/ai-radar/tools/#ai-assisted-code-migration).
+
+<div data-radar data-label="AI supply-chain security" data-ring="assess" data-change="new" />
+
+## AI supply-chain security
+
+AI systems have inherited every software-supply-chain risk and added a few of their own. The [LiteLLM package compromise](https://github.com/BerriAI/litellm/issues/24518) in March 2026 shows the inherited kind: a poisoned Trivy scanner, running unpinned in CI, stole the project's PyPI publish token and pushed backdoored releases with a credential-stealer inside. It was an ordinary pipeline attack that happened to land on AI infrastructure, a reminder that the AI stack is now a target in its own right. The newer risks sit around the models and the tooling. On the model side, weight files can execute code when you load them, and models are pulled from hubs with no record of where they came from. On the tooling side, a [self-propagating npm worm](https://socket.dev/blog/sandworm-mode-npm-worm-ai-toolchain-poisoning) has shown how a coding assistant's MCP configuration can be poisoned with a rogue server, whose tool descriptions smuggle in prompt-injection instructions to exfiltrate credentials and spread.
+
+The defences are maturing, and the starting point is to treat a downloaded model as an untrusted binary and prefer serialisation formats that don't run code on load. On top of that, keep a machine-readable inventory of the models and AI services in use: [ML-BOM](https://cyclonedx.org/capabilities/mlbom/) is now a standardised CycloneDX capability, and vendors such as [Endor Labs](https://www.endorlabs.com/) add model discovery and malicious-model detection to conventional software composition analysis. Signing goes further than an inventory, and OpenSSF's [Model Signing](https://github.com/ossf/model-signing-spec) specification, built on Sigstore, covers a model's weights, tokeniser, config and datasets as one verifiable unit, so you can confirm the files are the ones the publisher signed and nothing was swapped in transit or on a registry. Google and Kaggle have demonstrated it, though adoption across model hubs and CI is still thin.
+
+We place this in Assess. Only a small part of this is AI-specific, but that part isn't covered elsewhere: [AI governance platforms](/ai-radar/platforms/#ai-governance-platforms) handle compliance rather than artefact integrity, and red teaming targets model behaviour. Start with model provenance and an inventory, then extend the supply-chain controls you already run to cover the AI stack rather than standing up something separate.
+
+See also: [Agentic vulnerability discovery](/ai-radar/tools/#agentic-vulnerability-discovery), [MCP](/ai-radar/languages-frameworks/#mcp), [AI governance platforms](/ai-radar/platforms/#ai-governance-platforms).
 
 # Hold
 
-Not recommended for new projects due to better alternatives or limited long-term viability.
+Not recommended for new projects; better alternatives exist.
 
-<div data-radar data-label="OpenClaw" data-ring="hold" data-change="new" />
+<div data-radar data-label="OpenClaw" data-ring="hold" />
 
 ## OpenClaw
 
-[OpenClaw](https://github.com/openclaw/openclaw) is an open-source agent runtime created by Peter Steinberger, who later joined OpenAI. It runs persistent, always-on AI agents that execute multi-step tasks by controlling computers: clicking, typing, navigating applications, browsing the web. OpenClaw supports Claude, DeepSeek and OpenAI as backends, and has spawned a wave of imitators. [NVIDIA's NemoClaw](https://github.com/NVIDIA/NemoClaw) wraps OpenClaw in the NVIDIA Agent Toolkit with sandboxed execution against Nemotron 3 Super models. [Moonshot's KimiClaw](https://kimi-claw.com/) runs natively on kimi.com with a community skill marketplace and persistent cloud memory.
+[OpenClaw](https://github.com/openclaw/openclaw) is an open-source runtime for persistent, always-on AI agents that execute multi-step tasks by controlling a computer: clicking, typing, navigating applications and browsing the web. It supports Claude, DeepSeek and OpenAI as backends, and has spawned a wave of imitators. [NVIDIA's NemoClaw](https://github.com/NVIDIA/NemoClaw) wraps OpenClaw in the NVIDIA Agent Toolkit with sandboxed execution against Nemotron 3 Super models. [Moonshot's KimiClaw](https://kimi-claw.com/) runs natively on kimi.com with a community skill marketplace and persistent cloud memory.
 
-The security model has not been figured out across any of these variants. Persistent agent runtimes grant broad computer access to AI agents processing potentially untrusted instructions. The same prompt injection vulnerabilities that affect all visual computer use agents apply here, amplified by the breadth of access and the always-on character of the deployment. An agent with permission to control your browser, email and file system has an enormous blast radius if compromised.
+The security model hasn't been figured out across any of these variants. Persistent agent runtimes grant broad computer access to AI agents processing potentially untrusted instructions. The same prompt injection vulnerabilities that affect all visual computer use agents apply here, amplified by the breadth of access and the always-on character of the deployment. An agent with permission to control your browser, email and file system has an enormous blast radius if compromised.
 
-We do not recommend OpenClaw or its variants for new projects until the security model matures. Teams already using one should enforce strict sandboxing, limit accessible applications and maintain human oversight for actions involving sensitive data.
+We don't recommend OpenClaw or its variants for new projects until the security model matures. Teams already using one should enforce strict sandboxing, limit accessible applications and maintain human oversight for actions involving sensitive data.
 
 See also: [Visual computer use agents](/ai-radar/tools/#visual-computer-use-agents), [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Software engineering copilots](/ai-radar/tools/#software-engineering-copilots), [CaMeL](/ai-radar/techniques/#camel).
 
-<div data-radar data-label="Conversational data analysis" data-ring="hold" />
+<div data-radar data-label="Conversational data analysis" data-ring="hold" data-published="false" />
 
 ## Conversational data analysis
 
-Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/) and [Julius](https://julius.ai/) enable natural language querying of databases. Modern MCP servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's [XTDB](https://xtdb.com/) revealed remarkable moments where models traversed complex table structures with apparent ease.
+Tools such as [pandas-ai](https://github.com/sinaptik-ai/pandas-ai), [tablegpt](https://github.com/tablegpt/tablegpt-agent), [promptql](https://promptql.hasura.io/) and [Julius](https://julius.ai/) enable natural language querying of databases. Modern MCP servers can provide substantial context to models, including schema understanding and data contents. Our experience with JUXT's [XTDB](https://xtdb.com/) showed models traversing complex table structures with apparent ease.
 
 For experienced analysts, these tools represent a meaningful productivity boost, converting natural language into draft queries that can be refined. However, generated queries can be inefficient or incorrect despite appearing plausible. Uber's [QueryGPT](https://www.uber.com/en-GB/blog/query-gpt/) demonstrates both the potential and complexity, highlighting the guardrails required for reliable results.
 

@@ -1,12 +1,12 @@
 {
-  "title": "JUXT AI Radar – Q3 2026",
+  "title": "JUXT AI Radar – Q4 2026",
   "cover": {
     "title": "JUXT AI Radar",
     "subtitle": "An engineer's guide to the AI landscape\nfrom JUXT's CTO & AI chapter members",
-    "date": "Q3 2026",
+    "date": "Q4 2026",
     "companyName": "JUXT | A GRID DYNAMICS COMPANY",
-    "imagePath": "../public/Cover-RGB.jpg",
-    "printImagePath": "../public/Cover-RGB.tif"
+    "imagePath": "../public/Cover-2026Q4-web.jpg",
+    "printImagePath": "../public/Cover-2026Q4.png"
   },
   "sourceRoot": "../src/pages/ai-radar",
   "sections": [

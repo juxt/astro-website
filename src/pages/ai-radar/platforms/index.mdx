@@ -13,17 +13,17 @@ Infrastructure and managed services that host and run AI workloads: cloud AI ser
 
 # Adopt
 
-Established, well-supported services ready for production AI deployments.
+Mature, well-supported platforms ready for production use.
 
 <div data-radar data-label="Foundation models" data-ring="adopt" />
 
 ## Foundation models
 
-Foundation model providers continue to evolve rapidly. Major players such as OpenAI, Anthropic, Google and Meta compete alongside emerging organisations including DeepSeek, Alibaba and IBM.
+OpenAI, Anthropic, Google, Microsoft and Meta compete alongside a fast-growing open-weight field including DeepSeek, Alibaba, Moonshot AI and NVIDIA. Consolidation has begun too: Cohere and Aleph Alpha signed a definitive agreement in September 2026 to combine as a transatlantic sovereign-AI provider, subject to regulatory approval.
 
-Providers differentiate across three tiers: smaller, faster models optimised for speed and cost; larger, more capable models balancing capabilities with response times; and specialised reasoning models for complex problem-solving. The distinction between general and reasoning models is blurring, with GPT-5.4 and Claude Opus 4.6 integrating extended reasoning natively rather than through separate variants.
+Providers differentiate across three tiers: smaller, faster models optimised for speed and cost; larger, more capable models balancing capabilities with response times; and specialised reasoning models for complex problem-solving. The distinction between general and reasoning models has largely dissolved, with the current flagships from OpenAI, Anthropic and Google integrating extended reasoning natively rather than exposing it through separate variants.
 
-Foundation models warrant adoption for many business applications when paired with appropriate infrastructure (few-shot prompting, guardrails, RAG and evaluation frameworks). There is no universal "best model". We recommend benchmarking against your specific use cases, considering factors beyond raw performance: pricing, reliability, data privacy requirements and deployment options. High-quality open weight models with permissive licensing provide additional options for organisations with specific security or deployment requirements.
+Foundation models warrant adoption for many business applications when paired with appropriate infrastructure (few-shot prompting, guardrails, RAG and evaluation frameworks). There is no universal "best model", so benchmark against your own use cases and weigh factors beyond raw performance: pricing, reliability, data privacy requirements and deployment options. High-quality open weight models provide additional options for organisations with specific security or deployment requirements, though licensing increasingly varies: several 2026 flagships ship under custom, revenue-gated terms rather than permissive open-source licences.
 
 ### Key considerations
 
@@ -34,32 +34,48 @@ Foundation models warrant adoption for many business applications when paired wi
 - **Integration & lifecycle management** (context limitations, version control, updates)
 - **Vendor stability & support** (roadmap alignment, documentation, community)
 
-### Foundation model providers feature comparison (April 2026)
+### Foundation model providers feature comparison (October 2026)
 
 <div className="overflow-x-auto">
-| Provider             | Open Weights | Enterprise Focus | Reasoning Models | Edge Deployment | Long Context | Embedding API | Agentic Workflows | Model Selection Link                                                          |
-| -------------------- | ------------ | ---------------- | ---------------- | --------------- | ------------ | ------------- | ----------------- | ----------------------------------------------------------------------------- |
-| Alibaba              | ✓            |                  |                  | ✓               | ✓            | ✓             |                   | [Models](https://www.alibabacloud.com/help/en/model-studio/model-user-guide/) |
-| Anthropic            |              | ✓                | ✓                |                 | ✓            |               | ✓                 | [Models](https://docs.anthropic.com/en/docs/about-claude/models/all-models)   |
-| AWS                  |              | ✓                | ✓                |                 | ✓            |               |                   | [Models](https://aws.amazon.com/ai/generative-ai/nova/)                       |
-| Cohere               | ✓            | ✓                | ✓                |                 | ✓            | ✓             |                   | [Models](https://docs.cohere.com/docs/models)                                 |
-| DeepSeek             | ✓            |                  | ✓                | ✓               |              |               |                   | [Models](https://api-docs.deepseek.com/quick_start/pricing)                   |
-| Google               |              | ✓                | ✓                |                 | ✓            | ✓             | ✓                 | [Models](https://ai.google.dev/gemini-api/docs/models)                        |
-| IBM                  | ✓            | ✓                | ✓                | ✓               | ✓            |               |                   | [Models](https://www.ibm.com/granite)                                         |
-| Meta                 | ✓            |                  |                  | ✓               | ✓            |               |                   | [Models](https://www.llama.com/docs/model-cards-and-prompt-formats/)          |
-| MiniMax              | ✓            |                  |                  | ✓               | ✓            |               | ✓                 | [Models](https://www.minimax.io/)                                             |
-| Mistral&nbsp;AI      | ✓            | ✓                | ✓                | ✓               |              | ✓             |                   | [Models](https://docs.mistral.ai/getting-started/models/models_overview/)     |
-| OpenAI               | ✓            | ✓                | ✓                | ✓               | ✓            | ✓             | ✓                 | [Models](https://platform.openai.com/docs/models)                             |
-| Stability&nbsp;AI    | ✓            |                  |                  | ✓               |              |               |                   | [Models](https://platform.stability.ai/docs/getting-started)                  |
-| X                    | ✓            |                  | ✓                |                 | ✓            |               | ✓                 | [Models](https://docs.x.ai/docs/models)                                       |
-| Zhipu&nbsp;AI        | ✓            | ✓                | ✓                |                 | ✓            |               |                   | [Models](https://open.bigmodel.cn/)                                           |
+| Provider | Open Weights | Licence | Enterprise Focus | Edge Deployment | Long Context | Embedding API | Agentic Workflows | Model Selection Link |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Ai2 | ✓ | Permissive |  |  |  |  |  | [Models](https://allenai.org/language-models) |
+| AI21&nbsp;Labs | ✓ | Custom | ✓ | ✓ | ✓ |  | ✓ | [Models](https://huggingface.co/ai21labs) |
+| Alibaba | ✓ | Permissive |  | ✓ | ✓ | ✓ | ✓ | [Models](https://www.alibabacloud.com/help/en/model-studio/model-user-guide/) |
+| Anthropic |  | Proprietary | ✓ |  | ✓ |  | ✓ | [Models](https://docs.anthropic.com/en/docs/about-claude/models/all-models) |
+| AWS |  | Proprietary | ✓ |  | ✓ | ✓ | ✓ | [Models](https://aws.amazon.com/ai/generative-ai/nova/) |
+| Baidu | ✓ | Permissive | ✓ | ✓ |  | ✓ | ✓ | [Models](https://huggingface.co/baidu) |
+| ByteDance | ✓ | Permissive | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://huggingface.co/ByteDance-Seed) |
+| Cohere | ✓ | Permissive | ✓ |  | ✓ | ✓ | ✓ | [Models](https://docs.cohere.com/docs/models) |
+| DeepSeek | ✓ | Permissive |  | ✓ | ✓ |  | ✓ | [Models](https://api-docs.deepseek.com/quick_start/pricing) |
+| Google | ✓ | Custom | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://ai.google.dev/gemini-api/docs/models) |
+| IBM | ✓ | Permissive | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://www.ibm.com/granite) |
+| Liquid&nbsp;AI | ✓ | Custom |  | ✓ |  |  | ✓ | [Models](https://www.liquid.ai/models) |
+| Meta | ✓ | Custom |  | ✓ | ✓ |  | ✓ | [Models](https://www.llama.com/models/) |
+| Microsoft | ✓ | Permissive | ✓ | ✓ | ✓ |  | ✓ | [Models](https://ai.azure.com/catalog/models) |
+| MiniMax | ✓ | Custom |  | ✓ | ✓ |  | ✓ | [Models](https://www.minimax.io/) |
+| Mistral&nbsp;AI | ✓ | Custom | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://docs.mistral.ai/getting-started/models/models_overview/) |
+| Moonshot&nbsp;AI | ✓ | Custom | ✓ |  | ✓ |  | ✓ | [Models](https://huggingface.co/moonshotai) |
+| NVIDIA | ✓ | Custom | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://build.nvidia.com/models) |
+| OpenAI | ✓ | Permissive | ✓ | ✓ | ✓ | ✓ | ✓ | [Models](https://platform.openai.com/docs/models) |
+| Reka&nbsp;AI | ✓ | Permissive | ✓ | ✓ |  |  | ✓ | [Models](https://www.reka.ai/) |
+| Stability&nbsp;AI | ✓ | Custom |  | ✓ |  |  |  | [Models](https://platform.stability.ai/docs/getting-started) |
+| Tencent | ✓ | Permissive |  |  | ✓ |  | ✓ | [Models](https://github.com/Tencent-Hunyuan) |
+| X | ✓ | Custom | ✓ |  | ✓ |  | ✓ | [Models](https://docs.x.ai/docs/models) |
+| Zhipu&nbsp;AI | ✓ | Permissive | ✓ |  | ✓ |  | ✓ | [Models](https://open.bigmodel.cn/) |
 </div>
+
+The capability gap between closed and open weights has narrowed to the point where it rarely decides the choice on its own. OpenAI, Anthropic and Google still set the frontier, and Microsoft now trains its own MAI models instead of relying on its OpenAI partnership alone. The open-weight field has drawn level on the coding and reasoning work our clients run day to day: DeepSeek, Alibaba's Qwen, Moonshot's Kimi and Tencent's Hunyuan are all competitive against those benchmarks, and Meta has rejoined them with Muse Glimmer. NVIDIA is the one to watch: its Nemotron models are open, built for agentic work, and increasingly a base other labs fine-tune rather than a product chasing end users.
+
+Open weights no longer guarantees permissive terms. Several of the strongest releases, Meta's Llama and Moonshot's Kimi K3, now ship under custom licences with revenue or user thresholds rather than Apache or MIT. Weigh the licence terms alongside the benchmark scores and your own testing before deciding whether a model fits your use case. For high stakes applications you may also want to check provenance: Ai2's OLMo publishes its training data and code alongside the weights, so you can see exactly what went into the model. At the small end, Liquid AI and the sub-10B models have made on-device inference workable where data cannot leave the device.
+
+National and regional programmes are the last group, and most compete on language coverage and jurisdiction rather than capability. A growing number post-train a shared open base instead of pretraining from scratch, layering local language, data residency and governance on top. Singapore's [SEA-LION](https://sea-lion.ai) builds on Gemma and Llama, and NVIDIA is positioning Nemotron as a base for sovereign builders. At the time of writing, two stand out for their unusual engineering: TII's [Falcon-H1](https://falcon-lm.github.io/blog/falcon-h1/) runs attention and Mamba-2 state-space heads in parallel within each layer, Aleph Alpha's [T-Free](https://arxiv.org/abs/2406.19223) line drops the fixed token vocabulary altogether. Both are worth watching, especially for teams with data-residency requirements.
 
 ### Feature definitions
 
 - **Open Weights**: Models whose weights are publicly available for download and customisation
+- **Licence**: How the open weights are licensed. Permissive means an OSI-approved licence (Apache 2.0 or MIT) with no revenue or user gate. Custom means open weights under bespoke terms, such as revenue thresholds, user caps or acceptable-use conditions. Proprietary means no public weights, available through an API only. Where a provider ships a mix, the classification follows its flagship open model.
 - **Enterprise Focus**: Strong emphasis on governance, security, and enterprise integration
-- **Reasoning Models**: Specialised models for complex reasoning tasks such as mathematics or step-by-step problem solving
 - **Edge Deployment**: Optimised for deployment on edge devices or resource-constrained environments
 - **Long Context**: Support for context windows of 250K tokens or more
 - **Embedding API**: Dedicated text embedding models and APIs for generating vector representations of text for semantic search and similarity tasks
@@ -69,11 +85,9 @@ Foundation models warrant adoption for many business applications when paired wi
 
 ## Weights & Biases
 
-CoreWeave acquired Weights & Biases in May 2025. The platform continues under new ownership and our recommendation stands, though teams should monitor how the product evolves.
+[Weights & Biases](https://wandb.ai/site/) tracks and visualises machine learning experiments, which helps when managing complex models and large datasets. By making experiment tracking light touch, needing just a few lines of code, it removes the friction that sometimes stops teams keeping up good measurement practices. CoreWeave acquired it in May 2025, and our recommendation stands, though we're watching how the product evolves under new ownership.
 
-[Weights & Biases](https://wandb.ai/site/) tracks and visualises machine learning experiments. It provides a robust solution for managing ML workflows, particularly with complex models and large datasets. By making experiment tracking light touch, requiring just a few lines of code, it removes the friction that prevents teams from maintaining good measurement practices.
-
-Collaboration features such as shared dashboards and reports make results visible to the whole team. Rather than knowledge being siloed in individual notebooks, experiments become shared assets. This visibility leads to faster knowledge sharing and quicker iteration cycles. However, tool adoption alone isn't enough; teams need to actively foster a culture that values measurement and experimentation for these benefits to materialise.
+Shared dashboards and reports make results visible to the whole team, so experiments become shared assets rather than knowledge siloed in individual notebooks, which speeds up iteration. The benefits only arrive, though, where a team already values measurement and experimentation.
 
 <div data-radar data-label="Temporal" data-ring="adopt" />
 
@@ -81,11 +95,13 @@ Collaboration features such as shared dashboards and reports make results visibl
 
 [Temporal](https://temporal.io/) is a workflow orchestration platform that provides durable execution for long-running processes. Although not AI-specific, it has become increasingly relevant as organisations build production agentic systems that must survive failures and run reliably over extended periods.
 
-The core value is durability. If a multi-step process fails halfway through, it resumes from exactly where it left off. This differs from Kubernetes, which restarts crashed containers but knows nothing about application state. Temporal remembers that your workflow was on step 5 of 10, waiting for human approval, with specific context variables intact. The two are complementary, each handling failures at its respective layer.
+Durable execution means that if a multi-step process fails halfway through, it resumes from exactly where it left off. This differs from Kubernetes, which restarts crashed containers but knows nothing about application state, and it [differs from checkpointing](https://www.diagrid.io/blog/checkpoints-are-not-durable-execution-why-langgraph-crewai-google-adk-and-others-fall-short-for-production-agent-workflows) as used by LangGraph, CrewAI and Google's ADK. A saved checkpoint gives you no guarantee that the run finishes, that it recovers cleanly after a crash, or that it avoids repeating work already done. Temporal remembers that your workflow was on step 5 of 10, waiting for human approval, with specific context variables intact. The two are complementary, each handling failures at its respective layer.
 
 Temporal's programming model treats workflows as ordinary code in familiar languages (Go, Java, Python, TypeScript, .NET) rather than configuration or visual diagrams. For agentic systems specifically, it addresses failure modes that many agent frameworks ignore: LLM calls timing out, tool invocations needing retry with backoff, human approvals taking days. Built-in retry policies and the ability to pause workflows indefinitely handle these cleanly.
 
-We recommend Temporal for organisations moving beyond prototype agents toward production deployments where reliability matters. For simpler use cases, lighter-weight alternatives may suffice.
+Other durable execution frameworks are available, such as Restate, DBOS and Inngest, and its [LangGraph plugin](https://temporal.io/blog/temporal-langgraph-plugin-durable-execution), in public preview since mid-2026, runs LangGraph nodes as Temporal activities so the agent stays ordinary code while durability lives underneath.
+
+We recommend Temporal for teams moving beyond prototype agents towards production deployments that have to run reliably. For simpler use cases, lighter-weight alternatives may suffice.
 
 <div data-radar data-label="Data pipeline orchestration tools" data-ring="adopt" />
 
@@ -105,16 +121,13 @@ Model hosting has evolved beyond simple API access, with distinct platforms serv
 
 Enterprise production environments typically use [AWS Bedrock](https://aws.amazon.com/bedrock/), [Google Vertex AI](https://cloud.google.com/vertex-ai) or [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/), which provide fine-tuning capabilities with enterprise security and integration with existing cloud infrastructure. For performance-critical applications, specialised providers such as [Fireworks AI](https://fireworks.ai/) and [Together AI](https://www.together.ai/) focus on inference optimisation and custom model deployment, though teams must weigh simplified deployment against reduced ecosystem integration.
 
-The inference hardware market is shifting beneath these platforms. [Groq](https://groq.com/)'s custom LPU chips and [Cerebras](https://cerebras.ai/)'s wafer-scale processors have attracted major investment. For most organisations, these developments improve existing hosting providers' offerings rather than requiring a direct relationship with the chip makers.
+A separate class of providers now competes on latency. [Groq](https://groq.com/) and [Cerebras](https://cerebras.ai/) run inference on purpose-built silicon, serving a small catalogue of open-weight models at token throughput the general-purpose clouds don't match. The gain shows up in interactive and agentic workloads, where one task makes many sequential model calls and each round of latency adds up. The trade-off is coverage: fewer models, and little of the governance and integration tooling the larger platforms provide.
 
-Development teams and startups often prefer [Replicate](https://replicate.com/), [Modal](https://modal.com/) or [Hugging Face Inference Endpoints](https://huggingface.co/inference-endpoints/), which offer direct paths from trained model to production API with flexible pricing. Hugging Face supports deployment of 60,000+ models with minimal configuration. The trade-off is more limited enterprise governance.
-
-The choice reflects organisational priorities: enterprises with compliance requirements gravitate towards major cloud providers, performance-focused teams benefit from specialised inference platforms, and development teams prioritising rapid iteration prefer simplified deployment.
+Development teams and startups often prefer [Replicate](https://replicate.com/), [Modal](https://modal.com/) or [Hugging Face Inference Endpoints](https://huggingface.co/inference-endpoints/), which offer direct paths from trained model to production API with flexible pricing, at the cost of more limited enterprise governance.
 
 # Trial
 
-Platforms with growing adoption that offer innovative approaches worth exploring for specific use cases.
-
+Promising platforms with growing adoption, worth exploring for specific use cases.
 
 <div data-radar data-label="Production AI monitoring platforms" data-ring="trial" />
 
@@ -122,45 +135,40 @@ Platforms with growing adoption that offer innovative approaches worth exploring
 
 Whilst experiment tracking tools such as Weights & Biases and MLflow excel at managing the development lifecycle, a distinct category has emerged to monitor AI systems in production. These tools detect drift and unexpected behaviour in deployed models that only surface when models encounter real-world data at scale.
 
-[Arize AI](https://arize.com/) provides unified observability across traditional ML and LLM applications, continuously tracking feature and embedding drift. [Evidently AI](https://www.evidentlyai.com/) offers both an open-source library and cloud platform, with over 100 metrics covering data quality and drift monitoring.
+[Arize AI](https://arize.com/) provides unified observability across traditional ML and LLM applications, continuously tracking feature and embedding drift (its open-source [Phoenix](/ai-radar/tools/#llm-observability-tools) handles run-level tracing; the platform adds drift monitoring at scale). [Evidently AI](https://www.evidentlyai.com/) offers both an open-source library and cloud platform, with over 100 metrics covering data quality and drift monitoring.
 
-The key benefit is proactive detection: organisations learn about performance degradation before customer impact rather than discovering issues through support tickets. For teams already practising observability, AI-specific monitoring represents a natural extension of existing practices.
+The payoff is early detection: you learn about performance degradation before it surfaces in support tickets. For teams already practising observability, AI-specific monitoring represents a natural extension of existing practices. This is the post-deployment counterpart to [gating a release on evals](/ai-radar/techniques/#evals-as-a-release-gate): the gate catches regressions before they ship, monitoring catches the drift that only appears once live traffic arrives.
 
 <div data-radar data-label="Open weight LLMs" data-ring="trial" />
 
 ## Open weight LLMs
 
-Open weight LLMs (sometimes incorrectly called "open source") reached maturity in 2025, with some surpassing frontier models on specific tasks. [MiniMax M2.7](https://www.minimax.io/news/minimax-m2), [Moonshot's Kimi K2.5](https://moonshotai.github.io/Kimi-K2/), [Zhipu's GLM-5](https://open.bigmodel.cn/) and [DeepSeek V3.2](https://www.deepseek.com/) compete directly with closed models on coding and reasoning benchmarks. Smaller models such as Microsoft's [Phi-4](https://huggingface.co/microsoft/phi-4) and Google's [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4) run on consumer hardware, making self-hosted inference practical for local coding assistants, on-device processing and latency-sensitive applications.
+Open weight models are now good enough for most production coding and reasoning, so teams usually choose one for control rather than capability. When you run the model yourself, your prompts and outputs stay inside the organisation, you decide when the version changes, and you can fine-tune it on your own data. For teams working with regulated or sensitive data, that control is usually the deciding factor.
 
-This quarter, source code was accidentally exposed through AI provider tooling, and autonomous agents with broad permissions destroyed production data. A self-hosted deployment puts data flow and model versioning under the operator's control. Prompts, outputs and proprietary code stay within the organisation, and the model only changes when the operator changes it. The pull, in short, is towards organisations retaining ownership of their data and the models that act on it.
-
-Regulation is heading the same way. The EU AI Act, financial services rules and healthcare frameworks all want organisations to show where data flowed and how models behaved, not take a vendor's word for it. GLM-5 was trained entirely on Huawei Ascend chips with no NVIDIA dependency, a reminder that supply chain sovereignty extends down to the silicon.
-
-Self-hosting still needs considerable ML engineering expertise, and total cost of ownership isn't always lower than API alternatives once compute and engineering time are factored in. For routine work, pay-per-use APIs still win. For regulated or sensitive data, the calculation has changed.
+You don't have to self-host to get this. Inference providers such as [Fireworks AI](https://fireworks.ai/) and [Baseten](https://www.baseten.co/) will run open-weight models on infrastructure you control, under a private contract and often with no data retention, and because they carry no frontier training costs the price per token is usually lower than the proprietary APIs. Running your own GPUs takes serious ML engineering and is rarely cheaper once that work is counted, so most teams are better off starting with a managed open-weight endpoint and self-hosting only when they need to control the full stack.
 
 
-<div data-radar data-label="Small language models" data-ring="trial" data-change="new" />
+<div data-radar data-label="Small language models" data-ring="trial" />
 
 ## Small language models
 
-Small language models (SLMs) are the smaller cousins of the open weight LLMs above. The current crop sits in the 1B–7B parameter range and runs comfortably on a single GPU, a modern laptop or in some cases a phone. Microsoft's [Phi-4-Mini](https://azure.microsoft.com/en-us/products/phi) (3.8B), Google's [Gemma 4 E2B and E4B](https://deepmind.google/models/gemma/gemma-4/) (2–4B effective parameters), [Meta's Llama 3.2 1B and 3B](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/) and Mistral's Ministral variants now perform at a level that was out of reach at this size two years ago.
+Small language models (SLMs) are the smaller cousins of the open weight LLMs above. The current crop sits in the 1B–7B parameter range and runs comfortably on a single GPU, a modern laptop, or in some cases a phone. Microsoft's [Phi-4-Mini](https://azure.microsoft.com/en-us/products/phi) (3.8B), Google's [Gemma 4 E2B and E4B](https://deepmind.google/models/gemma/gemma-4/) (2–4B effective parameters), [Meta's Llama 3.2 1B and 3B](https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/) and Mistral's Ministral variants, joined by [Liquid AI's LFM2.5 series](https://www.liquid.ai/models) engineered specifically for on-device inference, now perform at a level that was out of reach at this size two years ago.
 
-In our experience, the case for SLMs comes down to using your own data. A few thousand labelled examples and a fine-tuning run produce a model that has the organisation's terminology and edge cases built in. Hosted in-house, the data stays within the organisation, and the resulting model is small enough to deploy on the infrastructure that team already operates rather than something purpose-built.
+In our experience, the case for SLMs is strongest for organisations with their own data to fine-tune on. A few thousand labelled examples and a fine-tuning run produce a model that has the organisation's terminology and edge cases built in. Hosted in-house, the data stays within the organisation, and the resulting model is small enough to deploy on the infrastructure the team already runs rather than dedicated hardware.
 
-The natural fit is classification work where the language is nuanced and the cost of getting it wrong is real: routing customer messages by intent, triaging support tickets, tagging documents against a controlled vocabulary or extracting structured fields from free text. These are jobs that traditional keyword and feature-engineered approaches have never handled well, and where reaching for a frontier API on every request is overkill on both cost and latency. A fine-tuned SLM responds in the low hundreds of milliseconds on commodity hardware, faster on a GPU, and improves as more of the organisation's examples are added.
+The natural fit is classification work where the language is nuanced and a wrong call is costly: routing customer messages by intent, triaging support tickets, tagging documents against a controlled vocabulary or extracting structured fields from free text. These are jobs that traditional keyword and feature-engineered approaches have never handled well, and where reaching for a frontier API on every request is overkill on both cost and latency. A fine-tuned SLM responds in the low hundreds of milliseconds or less and improves as more of the organisation's examples are added.
 
-The trade-off is scope and discipline. SLMs will not match frontier models on open-ended reasoning or breadth of world knowledge, and getting them to behave reliably means taking the task definition, the labelling pipeline and evaluation seriously rather than leaning on clever prompting. For teams prepared to do that work, the result is a model that is cheap to run, fits the infrastructure they already have and is trained on the data they already own.
+The trade-off is scope and discipline. SLMs will not match frontier models on open-ended reasoning or breadth of world knowledge, and getting them to behave reliably means taking the task definition, the labelling pipeline and evaluation seriously rather than leaning on clever prompting. For teams prepared to invest the time, the result is a model that is cheap to run, fits the infrastructure they already have and is trained on the data they already own.
 
 See also: [Open weight LLMs](/ai-radar/platforms/#open-weight-llms), [Local model execution environments](/ai-radar/tools/#local-model-execution-environments).
 
+<div data-radar data-label="AI-powered workflow automation" data-ring="trial" />
 
-<div data-radar data-label="AI-powered workflow automation platforms" data-ring="trial" />
-
-## AI-powered workflow automation platforms
+## AI-powered workflow automation
 
 Visual workflow automation platforms allow teams to build AI-powered business processes through drag-and-drop interfaces rather than code. [Zapier](https://zapier.com) focuses on connecting SaaS applications with AI capabilities. [n8n](https://n8n.io) offers self-hosting, open-source licensing and extensive customisation for technical teams. [Microsoft Power Automate](https://www.microsoft.com/en-us/power-platform/products/power-automate/) provides native Office 365 integration with enterprise governance. [Make.com](https://www.make.com) emphasises sophisticated visual workflow design with AI agent functionality.
 
-Common use cases include lead qualification using LLM analysis, automated content generation, customer support routing and data processing pipelines incorporating AI models.
+Common use cases in banking include onboarding document checks, statement and form data extraction, support ticket triage and transaction categorisation.
 
 When evaluating, consider technical capability, data sovereignty requirements and scalability. Self-hosted solutions such as n8n offer maximum control but require expertise, while SaaS offerings reduce overhead but may have cost implications at scale. Teams should also assess error recovery and debugging capabilities, as AI components can fail less predictably than traditional integrations.
 
@@ -168,33 +176,49 @@ When evaluating, consider technical capability, data sovereignty requirements an
 
 ## Digital twin platforms
 
-A digital twin is a virtual representation of a physical system that maintains bidirectional synchronisation with its real-world counterpart. Unlike traditional simulation, digital twins continuously ingest live sensor data, enabling organisations to test changes in simulation before deploying them, diagnose problems without physical inspection and simulate the impact of new equipment on existing workflows.
+A digital twin is a working model of a system that stays in step with live data, so you can test a change against it and see the effect before rolling it out. The most developed versions are physical, like [NVIDIA Omniverse](https://www.nvidia.com/en-us/omniverse/), which simulates factories and logistics networks in enough detail to plan from. Few banks run that kind of infrastructure, so the version that reaches this audience models a business process or the organisation itself rather than a plant.
 
-[NVIDIA Omniverse](https://www.nvidia.com/en-us/omniverse/) has emerged as the dominant platform, providing a simulation environment built on OpenUSD that enables physically accurate rendering and real-time collaboration. Its [Isaac Sim](https://developer.nvidia.com/isaac/sim) extension targets robotics simulation specifically.
+A twin of a loan or onboarding workflow lets you find where it stalls and try a redesign before it affects production, and the same approach run against a portfolio shows how it copes under a rate shock or a liquidity squeeze, the kind of stress a regulator will eventually apply. Platforms such as [Simudyne](https://simudyne.com/) build these as agent-based simulations, where each customer or counterparty is represented as an agent and the behaviour you care about emerges from how they interact. This works best on top of [process mining](/ai-radar/platforms/#process-mining-platforms), which reconstructs the current workflow from event logs, so what you simulate against reflects how the process runs in practice.
 
-Digital twin platforms remain in Trial because successful deployment requires significant organisational investment beyond the platform itself. The challenge lies in data integration, maintaining synchronisation between physical and virtual systems and building capability to act on simulation insights. These are most relevant for organisations operating complex physical infrastructure: manufacturing plants, logistics networks, energy systems or robotics deployments. Organisations earlier in their data maturity journey should ensure foundational sensor instrumentation and data pipelines are in place before investing.
+We keep this in Trial because the platform is rarely the thing that stops a project. A twin is only as useful as the live data feeding it and the model behind it, and in a regulated firm a simulation that informs a lending or capital decision falls under the same model-risk governance and audit requirements as anything else the firm relies on. Most of the effort goes into the data integration and the validation needed before anyone can act on the result, which is why few of these programmes have moved past pilots.
+
+<div data-radar data-label="Agent memory architectures" data-ring="trial" data-change="up" />
+
+## Agent memory architectures
+
+Stateless agents hit a wall quickly. An AI coding assistant that forgets what it learned yesterday or a customer service agent that can't recall a conversation from last week force users to re-establish context on every interaction. Agent memory architectures address this with tiered storage: working context for the current session, long-term memory for persistent knowledge and episodic recall for past interactions. Over the past year memory has moved from a nice-to-have to a first-order design decision for anyone running agents beyond a single session.
+
+[Mem0](https://mem0.ai/) has gained the most traction, and ships as a native integration for AWS's Strands Agents SDK, one of several supported memory backends. It sits alongside your agent framework, automatically extracting and retrieving memories without changes to orchestration logic. [Letta](https://letta.com/) (formerly MemGPT) pioneered treating context management like virtual memory, paging information in and out as needed. [Zep](https://www.getzep.com/) differentiates on temporal accuracy, maintaining a knowledge graph that tracks how facts change over time. A theme this year is the move away from pure vector recall towards schema- and graph-grounded memory, which retrieves by structure rather than similarity alone and tends to be easier to audit.
+
+Persistent memory is also an attack surface, and a nastier one than a stray prompt. Adversarial content written once into persistent memory can outlast the session then surface weeks later. OWASP now tracks memory and context poisoning separately from prompt injection. The defences differ from request-time filtering: scan content before it is written, make writes permission-aware, keep provenance on memory entries, and watch retrieval for behavioural drift. None is production-proven yet and reported attack success rates run high, so treat what an agent remembers with the same suspicion as any other untrusted input.
+
+The frontier is memory that improves the agent. Systems such as Google's [ReasoningBank](https://research.google/blog/reasoningbank-enabling-agents-to-learn-from-experience/) turn an agent's own successes, and more usefully its failures, into reusable lessons retrieved on later tasks, so the agent gets better at the work it repeats. It is early, but it points at where memory is heading: not just recall, but steady improvement from experience.
+
+For regulated industries, agent memory introduces governance questions your existing data policies may not cover. Where does the memory reside? How do you audit what an agent "knows" about a customer? How do you comply with deletion requests? Involve compliance and data protection teams early.
+
+See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Harness engineering](/ai-radar/techniques/#harness-engineering), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework), [Agent identity](/ai-radar/techniques/#agent-identity), [CaMeL](/ai-radar/techniques/#camel), [RAG](/ai-radar/techniques/#rag).
+
+<div data-radar data-label="AI governance platforms" data-ring="trial" data-change="up" />
+
+## AI governance platforms
+
+The EU AI Act is phasing in. Its high-risk obligations, conformity assessments, risk documentation, human oversight and ongoing monitoring, were pushed to December 2027 by the Digital Omnibus, but the programmes to meet them take years to build. Banks and insurers already operate under model risk management frameworks (SR 11-7 in the US, SS1/23 in the UK), but these were written for statistical models with stable inputs and deterministic outputs. Extending them to LLM-based systems requires tooling that existing GRC platforms were not designed to provide.
+
+[Credo AI](https://www.credo.ai/) has emerged as the leading dedicated platform, providing AI risk classification aligned to the EU AI Act, NIST AI RMF and ISO 42001. It powers the compliance accelerators in [IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance) through an OEM partnership, and Microsoft is integrating it with Azure AI Foundry. Others compose governance workflows from existing tools: model cards in Hugging Face, risk registers in GRC platforms, audit trails from observability tooling. Dedicated platforms offer structured workflows out of the box, while bespoke approaches require more engineering but can match how your organisation already works.
+
+We move this to Trial. The space is young and consolidating fast, but the tooling is now worth the time to evaluate, particularly for financial services firms with EU AI Act obligations, even as the vendors keep shifting under them.
+
+See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
 
 # Assess
 
-Emerging or specialised services that require careful evaluation before adoption.
-
-
-<div data-radar data-label="Galileo" data-ring="assess" />
+Emerging or specialised platforms that merit evaluation for specific use cases.
 
 ## Galileo
 
-[Galileo](https://www.galileo.ai) takes a distinctive approach to AI evaluation: rather than relying on expensive frontier LLMs as judges, it uses purpose-built small language models called Luna-2 for low-latency evaluation of hallucination detection, context adherence and output quality. This matters in production, where evaluation metrics need to run at serving latency to act as quality gates.
+Cisco acquired Galileo in 2026 and folded it into Splunk Agent Observability, so the independent evaluation tool we assessed no longer stands alone. For current options see [LLM observability tools](/ai-radar/tools/#llm-observability-tools); for open, self-hostable tooling, [Langfuse](https://langfuse.com/) or [Phoenix](https://phoenix.arize.com/).
 
-For agent debugging, Galileo provides Timeline, Conversation and Graph views for tracing execution paths. Cloud and on-prem deployment options make it viable for regulated industries with data residency requirements.
-
-The Luna-2 approach is a differentiator. Most evaluation platforms use frontier models as judges, which is slow, expensive and creates a circular dependency on the providers you're evaluating.
-
-The trade-off is vendor dependency. Teams wanting open-source flexibility should consider [Langfuse](https://langfuse.com/) for tracing or [Phoenix](https://phoenix.arize.com/) for observability. The evaluation tooling space remains competitive, and we want to see how it settles before moving Galileo beyond Assess.
-
-See also: LLM observability tools, Production AI monitoring platforms.
-
-
-<div data-radar data-label="Kubeflow" data-ring="assess" />
+<div data-radar data-label="Kubeflow" data-ring="assess" data-published="false" />
 
 ## Kubeflow
 
@@ -204,17 +228,17 @@ Several factors keep Kubeflow in Assess. Implementing it demands expertise in bo
 
 Organisations with established ML practices and Kubernetes expertise should consider it, particularly for challenges around model deployment, experiment reproducibility or resource utilisation. Smaller teams or those earlier in their ML journey may prefer managed options such as [Vertex AI Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction).
 
-<div data-radar data-label="Process mining platforms" data-ring="assess" />
+<div data-radar data-label="Process mining platforms" data-ring="assess" data-published="false" />
 
 ## Process mining platforms
 
-You cannot reliably automate processes that have not yet been optimised. Most of a process flows as expected, but the exceptions and edge cases determine whether automation succeeds or fails. As agentic AI moves toward enterprise deployment, process mining is becoming essential preparation: it uses event logs from enterprise systems to discover how processes actually execute versus the designed workflow. The related discipline of task mining records user activity at the desktop level, capturing the tacit knowledge of how workers handle exceptions and workarounds. Together, these capabilities map the reality that AI agents would need to replicate.
+You cannot reliably automate a process you do not yet understand, and its edge cases decide whether automation succeeds or fails. As agentic AI moves into the enterprise, process mining has become the preparation step: it reads event logs to show how a process actually runs, rather than how it was meant to. Task mining adds the desktop view, capturing how people handle the exceptions and workarounds that never reached the documented process. Together they map the reality an agent has to replicate.
 
-The major platforms serve different organisational profiles. [Celonis](https://www.celonis.com/), the market leader, delivers the deepest analytics for complex multi-system processes but requires significant investment. [ABBYY Timeline](https://www.abbyy.com/timeline/) offers integrated process and task mining in a more accessible package, suited to business users who want to identify bottlenecks without coding. [QPR ProcessAnalyzer](https://www.qpr.com/process-mining), available in the Snowflake Marketplace, is the natural choice for Snowflake-centric companies. [UiPath Process Mining](https://www.uipath.com/product/process-mining) provides seamless integration between discovery and automation execution, though this creates ecosystem lock-in. [Microsoft Power Automate Process Mining](https://learn.microsoft.com/en-us/power-automate/process-advisor-overview) is limited compared to specialist platforms but lowers the barrier for organisations already on the Microsoft stack. [Fluxicon Disco](https://fluxicon.com/disco/) is a standalone desktop application best suited for consultants and rapid proof-of-concept projects.
+Which platform you pick is mostly settled by the stack you already run. [Celonis](https://www.celonis.com/) leads on depth for complex, multi-system processes, if you can fund the investment it takes. Otherwise the choice tends to follow your existing tooling: [QPR ProcessAnalyzer](https://www.qpr.com/process-mining) for Snowflake shops, [UiPath](https://www.uipath.com/product/process-mining) or [Microsoft Power Automate Process Mining](https://learn.microsoft.com/en-us/power-automate/process-advisor-overview) where you are already committed to that automation stack, and [ABBYY Timeline](https://www.abbyy.com/timeline/) for business users who want process and task mining without code. For a contained proof of concept, [Fluxicon Disco](https://fluxicon.com/disco/) runs on the desktop with no platform commitment.
 
-We recommend starting with process discovery in a contained domain rather than attempting an enterprise-wide rollout.
+As ever, we recommend starting in one business area rather than an enterprise-wide rollout from a standing start.
 
-<div data-radar data-label="Taalas" data-ring="assess" data-change="new" />
+<div data-radar data-label="Taalas" data-ring="assess" data-published="false" />
 
 ## Taalas
 
@@ -226,29 +250,19 @@ We've placed Taalas in Assess because the technology is early and the economics 
 
 See also: [Open weight LLMs](/ai-radar/platforms/#open-weight-llms), [Local model execution environments](/ai-radar/tools/#local-model-execution-environments).
 
-<div data-radar data-label="AI governance platforms" data-ring="assess" data-change="new" />
+<div data-radar data-label="Managed agent platforms" data-ring="assess" data-change="new" />
 
-## AI governance platforms
+## Managed agent platforms
 
-The EU AI Act reaches full enforcement in August 2026. High-risk AI systems must demonstrate conformity assessments, risk documentation, human oversight and ongoing monitoring. Banks and insurers already operate under model risk management frameworks (SR 11-7 in the US, SS1/23 in the UK), but these were written for statistical models with stable inputs and deterministic outputs. Extending them to LLM-based systems requires tooling that existing GRC platforms were not designed to provide.
+The counterpart to building your own [harness](/ai-radar/techniques/#harness-engineering) is renting one. Managed agent platforms run the agent for you, offering a hosted harness with sandboxed code execution, persistent memory, scoped permissions and durable long-running sessions behind an API. [AWS Bedrock AgentCore](https://aws.amazon.com/bedrock/agentcore/) is the clearest example, a serverless, framework-agnostic runtime that hosts an agent built in any stack on isolated microVMs. [Anthropic's Managed Agents](https://claude.com/blog/claude-managed-agents) and [Google's Managed Agents](https://ai.google.dev/gemini-api/docs/agents) take a more opinionated line, provisioning a sandbox where their own agent reasons, runs code and browses, while [Vercel's Agent Stack](https://vercel.com/blog/agent-stack) assembles the same pieces from durable functions and sandboxes. Coding-specific services such as Cursor's cloud agents sit alongside, and [Temporal](/ai-radar/platforms/#temporal) provides the durable-execution layer several of these build on.
 
-[Credo AI](https://www.credo.ai/) has emerged as the leading dedicated platform, providing AI risk classification aligned to the EU AI Act, NIST AI RMF and ISO 42001. It powers the compliance accelerators in [IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance) through an OEM partnership, and Microsoft is integrating it with Azure AI Foundry. Others compose governance workflows from existing tools: model cards in Hugging Face, risk registers in GRC platforms, audit trails from observability tooling. Dedicated platforms offer structured workflows out of the box, while bespoke approaches require more engineering but can match how your organisation already works.
+The trade is the familiar one: time-to-production against control and portability. A managed platform removes the undifferentiated work of running sandboxes, memory and retries, at the cost of tying your agent to a vendor's runtime and pricing, typically billed per token plus a session-hour fee.
 
-The space is young and consolidating fast. Financial services organisations should be evaluating now, particularly those with EU AI Act obligations, but should expect the vendor landscape to shift.
+A hosted agent that runs code and browses still inherits the unsolved problem of prompt injection and the trust boundary now runs through a third party's runtime. Least privilege still applies, and is harder to see from the outside: what credentials does the sandbox hold, and what can it reach on your behalf? For regulated teams there's a data-sovereignty question too, since prompts, retrieved context and tool traffic all cross into the vendor's infrastructure, which has a bearing on where regulated data is allowed to go.
 
-See also: [LLM reproducibility](/ai-radar/techniques/#llm-reproducibility), [Production AI monitoring platforms](/ai-radar/platforms/#production-ai-monitoring-platforms).
+We place managed agent platforms in Assess. The category is real and moving quickly, but most offerings reached preview or general availability only this quarter, pricing is unsettled, and portability between them is unproven. AgentCore is the most production-ready for teams that want to move sooner. Self-hosted, single-user runtimes such as [OpenClaw](/ai-radar/tools/#openclaw) sit at the opposite end and stay in Hold.
 
-<div data-radar data-label="Agent memory architectures" data-ring="assess" data-change="new" />
-
-## Agent memory architectures
-
-Stateless agents hit a wall quickly. An AI coding assistant that forgets what it learned yesterday, or a customer service agent that can't recall a conversation from last week, forces users to re-establish context on every interaction. Agent memory architectures address this with tiered storage: working context for the current session, long-term memory for persistent knowledge and episodic recall for past interactions.
-
-[Mem0](https://mem0.ai/) has gained the most traction, serving as the exclusive memory provider for the AWS Agent SDK. It sits alongside your agent framework, automatically extracting and retrieving memories without changes to orchestration logic. [Letta](https://letta.com/) (formerly MemGPT) pioneered treating context management like virtual memory, paging information in and out as needed. [Zep](https://www.getzep.com/) differentiates on temporal accuracy, maintaining a knowledge graph that tracks how facts change over time.
-
-For regulated industries, agent memory introduces governance questions your existing data policies may not cover. Where does the memory reside? How do you audit what an agent "knows" about a customer? How do you comply with deletion requests? Involve compliance and data protection teams early.
-
-See also: [Agentic tool use](/ai-radar/techniques/#agentic-tool-use), [Microsoft Agent Framework](/ai-radar/languages-frameworks/#microsoft-agent-framework).
+See also: [Harness engineering](/ai-radar/techniques/#harness-engineering), [Temporal](/ai-radar/platforms/#temporal), [Agent code sandboxes](/ai-radar/tools/#agent-code-sandboxes), [AI-powered workflow automation](/ai-radar/platforms/#ai-powered-workflow-automation), [Vendor agent SDKs](/ai-radar/languages-frameworks/#vendor-agent-sdks).
 
 # Hold
 
@@ -258,7 +272,7 @@ Not recommended for new projects; better alternatives exist.
 
 ## Building against vendor-specific APIs
 
-Tightly coupling applications to vendor-specific LLM APIs poses significant risk in a market where capabilities and pricing shift monthly. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs often find themselves locked in, facing painful migrations when a better or more cost-effective model emerges.
+Tightly coupling applications to vendor-specific LLM APIs is risky in a market where capabilities and pricing shift monthly. Organisations that build directly against OpenAI, Anthropic or other proprietary APIs risk finding themselves locked in, facing painful migrations when a better or more cost-effective model emerges.
 
 We recommend abstraction libraries that provide a common interface to multiple providers. [AISuite](https://github.com/andrewyng/aisuite) or Simon Willison's [LLM CLI](https://github.com/simonw/llm) let you switch between models with minimal code changes, handling the nuances of different APIs behind a consistent interface. These abstractions add some complexity and may limit access to vendor-specific features, but the protection against lock-in outweighs these drawbacks in most cases.
 </ChildSectionAiRadarLayout>
