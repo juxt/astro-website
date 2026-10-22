@@ -59,6 +59,7 @@ if (seo[currentPageName] && seo[currentPageName].image) {
   let importedPic = await getImage({
     src: import(`../assets/site/${imgNoExt}.jpg`),
     width: 1700,
+    format: 'jpg',
     alt: 'background',
     quality: 90
   }).then((img) => img.src)
