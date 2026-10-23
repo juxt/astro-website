@@ -68,7 +68,7 @@ export interface RadarConfig {
 export function radar_visualization(config: RadarConfig): void {
   config.svg_id = config.svg_id || 'radar'
   config.width = config.width || 1450
-  config.height = config.height || 1050
+  config.height = config.height || 1130
   const structureColors = getRadarStructureColors()
   config.colors =
     'colors' in config
