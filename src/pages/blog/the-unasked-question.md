@@ -25,25 +25,25 @@ We set out to test requirements-capture tools. If you under-specify your goals, 
 
 ## The experiment
 
-At JUXT we build software for financial services, much of it in capital markets. It is code that has to be right. So we built a gauntlet to test seven requirements-capture skills, open for anyone to run. Its three tasks come from that world, all to do with loan repayments and interest. A capable engineer writing plain prose is the control.
+At JUXT we build software for financial services, much of it in capital markets, where a rounding rule in the wrong place becomes a production incident. So we built a gauntlet, open for anyone to run. It puts seven requirements-capture skills through three tasks from that world, all to do with loan repayments and interest, with a capable engineer writing plain prose as the control.
 
-Each task begins as a thin brief, an initial idea rather than a finished specification. One is no more than "add payment allocation to our loan servicing system". The skill has to turn that into a spec, and a stakeholder agent answers its questions as it goes. Behind the brief the agent holds fourteen more requirements. It volunteers none of them. Each emerges only when the skill asks.
+Each task begins as a thin brief, an initial idea rather than a finished specification. One reads, in full, "add payment allocation to our loan servicing system". The skill has to turn that into a spec, and a stakeholder agent answers its questions as it works, though it holds back fourteen further requirements and gives up each one only when asked.
 
 <figure style="margin:2.5rem 0;">
 <img src="/images/gauntlet-capture.png" alt="A stakeholder agent, holding a hidden list of fourteen numbered requirements in a thought bubble, talks with the skill under test, which then writes a specification." style="display:block;margin:0 auto;width:100%;max-width:680px;height:auto;background:#fff;padding:1rem;border-radius:8px;box-sizing:border-box;" />
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The stakeholder agent answers the skill's questions but releases each of its fourteen requirements only when asked. What the skill draws out becomes the specification.</figcaption>
 </figure>
 
-None of the fourteen is a gotcha. Each is an ordinary choice that is simply not the default, like how a currency rounds or the order in which fees and penalties apply. All are real options exposed by [Apache Fineract](https://fineract.apache.org/), a widely used open-source core-banking platform. The loan here runs at a Bahraini bank, so amounts use three decimal places rather than two, and a residual below 0.005 dinar is written off. With only the brief and no one to ask, capable models got between a fifth and two fifths of them.
+None of the fourteen is a trap. Each is an ordinary choice that simply isn't the default: how a currency rounds, say, or whether fees come before penalties. All of them are real options that [Apache Fineract](https://fineract.apache.org/), a widely used open-source core-banking platform, exposes as configuration. This loan belongs to a Bahraini bank, so its amounts use three decimal places rather than two, and anything below 0.005 dinar is written off. Given only the brief and no one to ask, capable models recover between a fifth and two fifths of them.
 
-The skill writes a specification. An evaluator agent scores it against the list and counts how many of the fourteen made it in.
+The skill produces a specification, which an evaluator agent then scores against the list, counting how many of the fourteen made it in.
 
 <figure style="margin:2.5rem 0;">
 <img src="/images/gauntlet-evaluation.png" alt="The finished specification feeds an evaluator agent, which marks each of the fourteen requirements captured or missed: one captured, two and three missed, and so on to fourteen captured." style="display:block;margin:0 auto;width:100%;max-width:340px;height:auto;background:#fff;padding:1rem;border-radius:8px;box-sizing:border-box;" />
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The evaluator agent reads the finished specification and scores how many of the fourteen it captured.</figcaption>
 </figure>
 
-Each skill was installed the way a user would, and run live. Nothing we wrote was fed to any model, and every transcript is published. The seven are [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process and the [Superpowers](https://github.com/obra/superpowers) brainstorming skill.
+Each skill was installed as a user would and run live, with nothing we wrote fed to any model and every transcript published. The seven are [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process and the [Superpowers](https://github.com/obra/superpowers) brainstorming skill.
 
 ## The results
 
