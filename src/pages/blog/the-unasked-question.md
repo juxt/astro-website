@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'The cost of being helpful'
-description: 'I gave eight AI requirements tools the same thin brief, hiding fourteen decisions you would only get by asking. Several did no better than going without one.'
+description: 'I gave seven AI requirements tools a deliberately thin brief, hiding fourteen decisions you would only get by asking. Several did no better than going without one.'
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-09-29'
@@ -25,16 +25,16 @@ We set out to test requirements-capture tools. If you under-specify your goals, 
 
 ## The experiment
 
-At JUXT we build software for financial services, much of it in capital markets, where a rounding rule in the wrong place becomes a production incident. So we built a gauntlet, open for anyone to run. It puts seven requirements-capture skills through three tasks from that world, all to do with loan repayments and interest, with a capable engineer writing plain prose as the control.
+At JUXT we build software for banks and other financial institutions, where a rounding rule in the wrong place becomes a production incident. So we built a gauntlet, open for anyone to run. It puts seven requirements-capture skills through three core-banking tasks: applying a loan payment, building a repayment schedule and posting savings interest. A capable engineer writing plain prose is the control.
 
-Each task begins as a thin brief, an initial idea rather than a finished specification. One reads, in full, "add payment allocation to our loan servicing system". The skill has to turn that into a spec, and a stakeholder agent answers its questions as it works, though it holds back fourteen further requirements and gives up each one only when asked.
+Each task opens with a deliberately thin brief. The loan one names a function to build, `allocate_payment(payment, loan)`, sketches the domain in a few lines and ends by telling the author to "establish whatever details you need to implement it correctly". It never says to ask. Whether to question the stakeholder or build on assumptions is left to each process. The stakeholder answers only what it is asked, holding back fourteen requirements the brief omits and revealing each only when a question reaches it.
 
 <figure style="margin:2.5rem 0;">
 <img src="/images/gauntlet-capture.png" alt="A stakeholder agent, holding a hidden list of fourteen numbered requirements in a thought bubble, talks with the skill under test, which then writes a specification." style="display:block;margin:0 auto;width:100%;max-width:680px;height:auto;background:#fff;padding:1rem;border-radius:8px;box-sizing:border-box;" />
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The stakeholder agent answers the skill's questions but releases each of its fourteen requirements only when asked. What the skill draws out becomes the specification.</figcaption>
 </figure>
 
-None of the fourteen is a trap. Each is an ordinary choice that simply isn't the default: how a currency rounds, say, or whether fees come before penalties. All of them are real options that [Apache Fineract](https://fineract.apache.org/), a widely used open-source core-banking platform, exposes as configuration. This loan belongs to a Bahraini bank, so its amounts use three decimal places rather than two, and anything below 0.005 dinar is written off. Given only the brief and no one to ask, capable models recover between a fifth and two fifths of them.
+None of the fourteen is a trap. Each is an ordinary choice that simply isn't the default: how a currency rounds, say, or whether fees come before penalties. All of them are real options that [Apache Fineract](https://fineract.apache.org/), a widely used open-source core-banking platform, exposes as configuration. This loan is in Bahraini dinar, so its amounts use three decimal places rather than two, and a residual below 0.005 dinar is written off. Given only the brief and no one to ask, capable models recover between a fifth and two fifths of them.
 
 The skill produces a specification, which an evaluator agent then scores against the list, counting how many of the fourteen made it in.
 
@@ -95,7 +95,7 @@ The chart below shows each tool's mean coverage across the three tasks.
   <text x="363" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">50</text>
   <text x="578" y="334" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity="0.5">100%</text>
 </svg>
-<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three loan-servicing tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three core-banking tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
 Allium captures about nine of every ten hidden decisions. Every other tool scores between three-fifths and seven-tenths, clustered around plain prose. A capable engineer with no tool and no method, asking only a few questions of their own accord, matches most of the tools built for the job and beats several of them.
