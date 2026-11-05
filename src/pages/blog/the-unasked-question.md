@@ -177,7 +177,9 @@ The full results are below: every task and all three repeats.
 
 ## Why asking captures more
 
-The other tools make a deliberate trade-off. Given the brief, most start work at once: they draft a specification and fill the gaps with common industry defaults. When your requirements are ordinary, this is what you want. You need not spell everything out, and the defaults are usually correct. For this loan, though, the obvious defaults are penalties first and two decimal places, both wrong for a Bahraini bank. A default is a decision made without asking you, and when your case is unusual, it is a quick way to build the wrong thing.
+The other tools make a deliberate trade-off. Given the brief, most start work at once: they draft a specification and fill the gaps with common industry defaults. When your requirements are ordinary, this is what you want: you need not spell everything out, and the defaults are usually correct.
+
+For this loan, though, the obvious defaults are penalties first and two decimal places, and both are wrong here. We measured it: told to guess with no stakeholder, capable models chose those same defaults in all ten runs, and this bank's rule in none. A model does not hedge on a decision it cannot infer; it commits to the common answer with full confidence. A default is a decision made without asking you, and when your case is unusual, it is a quick way to build the wrong thing.
 
 <span class="pullquote" text-content="A default is a decision made without asking you."></span>
 
