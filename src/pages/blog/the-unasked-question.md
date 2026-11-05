@@ -25,9 +25,25 @@ We set out to test requirements-capture tools. If you under-specify your goals, 
 
 ## The experiment
 
-We built a small, open harness to find out. It simulates a requirements-capture process with seven AI skills, against a control of plain prose: a capable engineer with no tool. Each run starts from the same thin brief: "add payment allocation to our loan servicing system". Behind it is a hidden answer key of fourteen decisions the brief does not settle. The system belongs to a Bahraini bank, so amounts use three decimal places, not two; fees come before penalties; a residual below 0.005 dinar is written off. These are production options from [Apache Fineract](https://fineract.apache.org/), not defaults a model would assume: given only the brief, with no one to ask, capable models got between a fifth and two fifths of them. A stakeholder answers only what it is asked, and an auditor scores each result against the key.
+Specification is a verb: you often do not know how to specify something until you start trying, so a skill that draws it out of you could help. We built a gauntlet, open for anyone to run, to test seven such skills across three banking tasks.
 
-Each skill was installed the way a user would install it and run live, with nothing we wrote fed to any model, and every transcript is published. The seven are [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process and the [Superpowers](https://github.com/obra/superpowers) brainstorming skill.
+In each run a stakeholder agent hands the skill under test a thin brief, no more than "add payment allocation to our loan servicing system", and then answers its questions. It holds a list of fourteen latent requirements and gives up each one only when the skill asks.
+
+<figure style="margin:2.5rem 0;">
+<img src="/images/gauntlet-capture.png" alt="A stakeholder agent, holding a hidden list of fourteen numbered requirements in a thought bubble, talks with the skill under test, which then writes a specification." style="display:block;margin:0 auto;width:100%;max-width:680px;height:auto;background:#fff;padding:1rem;border-radius:8px;box-sizing:border-box;" />
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The stakeholder agent answers the skill's questions, but each of its fourteen hidden requirements surfaces only if the skill thinks to ask. Whatever is drawn out ends up in the specification.</figcaption>
+</figure>
+
+The fourteen are not exotic. Each is a non-standard but ordinary choice, common enough to be a configuration option in [Apache Fineract](https://fineract.apache.org/): how a currency is rounded, how interest is calculated, whether fees come before penalties. On the loan task the bank is Bahraini, so amounts use three decimal places rather than two, and a residual below 0.005 dinar is written off. Given only the brief and no one to ask, capable models get between a fifth and two fifths of them.
+
+The skill produces a specification. An evaluator agent reads it and marks how many of the fourteen made it in.
+
+<figure style="margin:2.5rem 0;">
+<img src="/images/gauntlet-evaluation.png" alt="The finished specification feeds an evaluator agent, which marks each of the fourteen requirements captured or missed: one captured, two and three missed, and so on to fourteen captured." style="display:block;margin:0 auto;width:100%;max-width:340px;height:auto;background:#fff;padding:1rem;border-radius:8px;box-sizing:border-box;" />
+<figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The evaluator agent reads the finished specification and scores how many of the fourteen it captured.</figcaption>
+</figure>
+
+Each skill was installed the way a user would and run live, with nothing we wrote fed to any model, and every transcript is published. The seven are [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process and the [Superpowers](https://github.com/obra/superpowers) brainstorming skill. As a control, a capable engineer wrote plain prose with no tool at all.
 
 ## The results
 
@@ -217,4 +233,4 @@ You will never write down everything you know. A specification you can execute w
 
 ---
 
-The harness, the tasks and every scored transcript are open, so you can reproduce the results yourself. If you would rather have your intent questioned and tested before it reaches code, [that is what Allium is for](https://github.com/juxt/allium).
+The gauntlet, the tasks and every scored transcript are open, so you can reproduce the results yourself. If you would rather have your intent questioned and tested before it reaches code, [that is what Allium is for](https://github.com/juxt/allium).
