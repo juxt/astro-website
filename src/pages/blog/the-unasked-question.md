@@ -15,15 +15,15 @@ tags:
   - 'requirements'
 ---
 
-<p class="lede">"We can know more than we can tell," the philosopher <a href="https://en.wikipedia.org/wiki/Michael_Polanyi" target="_blank">Michael Polanyi</a> wrote in 1966, and anyone who has tried to hand over a job they know by heart would recognise it. When the <a href="https://en.wikipedia.org/wiki/TEA_laser" target="_blank">TEA laser</a> appeared in the early 1970s its design was published in full, yet lab after lab followed the papers and failed. The sociologist <a href="https://en.wikipedia.org/wiki/Harry_Collins" target="_blank">Harry Collins</a> found that no one ever built a working one from the design alone; every success came from time spent in a lab that already had one. The people who had it could not say what more they knew.</p>
+<p class="lede">When the <a href="https://en.wikipedia.org/wiki/TEA_laser" target="_blank">TEA laser</a> was invented in the early 1970s, its design was published in full, yet lab after lab followed the papers and failed to build a working one. The sociologist <a href="https://en.wikipedia.org/wiki/Harry_Collins" target="_blank">Harry Collins</a> looked into why, and found that no team succeeded from the written design alone: every working laser was built by someone who had spent time in a lab that already had one. They could build the device but could not fully say what they knew. "We can know more than we can tell," as the philosopher <a href="https://en.wikipedia.org/wiki/Michael_Polanyi" target="_blank">Michael Polanyi</a> put it, and anyone who has handed over work they know well has met the same gap.</p>
 
-We brief our AIs the same way, from a document. You are the lab with the working laser: you know your domain so well that much of it has gone tacit, more than you could ever write down. The model has only your words, and it is eager to please, [a habit trained into it](https://arxiv.org/abs/2310.13548). So it fails you two ways. Leave something unsaid and it guesses. Say everything and it can do exactly what you asked and still miss what you meant, the way a coding agent rewarded for passing the tests will [make them pass without doing the work](https://metr.org/blog/2025-06-05-recent-reward-hacking/).
+We brief an AI the same way, from a document. You are the lab with the working laser. You know your domain well enough that much of it has become tacit, more than you would think to write down. The model has only the words you give it, and it is trained to be [helpful](https://arxiv.org/abs/2310.13548). That produces two kinds of error. If you leave something out, the model fills the gap with a guess. If you specify everything, it can still do what you asked and miss what you meant, the way a coding agent rewarded for passing tests will [make them pass without doing the work](https://metr.org/blog/2025-06-05-recent-reward-hacking/).
 
 ## The experiment
 
-The first of those two failures is the one you can measure. Does making the AI question you before it builds close the gap? We built a small, open harness to find out. Every process starts from the same thin brief, "add payment allocation to our loan servicing system", and behind it is a hidden answer key of fourteen decisions that only asking can settle: this is a Bahraini bank, so three decimal places rather than two, fees before penalties, a residual under 0.005 dinar written off. These are options a production system exposes, drawn from [Apache Fineract](https://fineract.apache.org/), and not defaults a model would reach for: given only the brief and no one to ask, capable models guessed no more than a fifth to two fifths of them. A stakeholder answers only what it is asked, a neutral auditor scores what each finished specification got right, and the only way to score well is to ask.
+The first kind of error is the one you can measure. Does making the AI ask questions before it builds close the gap? We built a small, open harness to test it. Each run starts from the same thin brief, "add payment allocation to our loan servicing system". Behind the brief sits a hidden answer key of fourteen decisions that only asking can settle. The system belongs to a Bahraini bank, so amounts use three decimal places rather than two; fees are applied before penalties; a residual below 0.005 dinar is written off. These are configuration options a production system exposes, drawn from [Apache Fineract](https://fineract.apache.org/), not defaults a model would assume. Given only the brief and no one to ask, capable models recovered between a fifth and two fifths of the fourteen. In the harness, a stakeholder answers only what it is asked and a neutral auditor scores each finished specification against the key, so the only way to score well is to ask.
 
-Each tool is installed as a user would and run live, with nothing we wrote fed to any model, and every transcript is published. We put eight through the same loop: [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process, the [Superpowers](https://github.com/obra/superpowers) brainstorming skill and, as a control, plain prose: a capable engineer with no tool at all.
+Each tool was installed the way a user would install it and run live, with nothing we wrote fed to any model, and every transcript is published. We ran eight through the same loop: [Allium](https://github.com/juxt/allium)'s elicitation skill, [GitHub Spec Kit](https://github.com/github/spec-kit), [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), [Tessl](https://github.com/tesslio), Kiro, the AI Unified Process and the [Superpowers](https://github.com/obra/superpowers) brainstorming skill. As a control, we added plain prose: a capable engineer with no tool at all.
 
 ## The results
 
@@ -78,9 +78,9 @@ The chart below shows each tool's mean coverage across the three tasks.
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three loan-servicing tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
-Allium captures nine of every ten hidden decisions. Everything else lands between three-fifths and seven-tenths, bunched around the line for plain prose. A capable engineer with no requirements tool and no method, working from nothing but the instinct to ask a few questions, scores as well as most of the tools built for the job, and better than several of them.
+Allium captures about nine of every ten hidden decisions. Every other tool scores between three-fifths and seven-tenths, clustered around plain prose. A capable engineer with no tool and no method, asking only a few questions of their own accord, matches most of the tools built for the job and beats several of them.
 
-The headline number flattens two kinds of decision. About two fifths of the answer key is inferable, the decisions a model can guess from the brief, and every tool captures most of them. What separates the tools is the rest: the non-inferable decisions that only asking can reach. On those, Allium captures around five in six. Every other tool, the ones built for the job included, lands between a half and three fifths.
+The single coverage figure hides two kinds of decision. About two fifths of the answer key is inferable: a model can guess it from the brief, and every tool captures most of it. The rest is non-inferable, reachable only by asking, and this is where the tools diverge. On those decisions, Allium captures around five in six. Every other tool, including the ones built for the job, captures between a half and three fifths.
 
 <figure style="margin:2.5rem 0;overflow-x:auto;">
 <svg viewBox="0 0 640 372" role="img" aria-label="Stacked bar chart splitting each skill's coverage into inferable decisions a model can guess from the brief and non-inferable decisions that require asking. Every skill captures most inferable decisions; on the non-inferable ones Allium reaches about five in six while every other tool lands between a half and three fifths." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
@@ -128,9 +128,9 @@ The headline number flattens two kinds of decision. About two fifths of the answ
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Each skill's coverage split by decision type. About two fifths of the answer key is inferable, guessable from the brief, and every tool captures most of it. The difference is the non-inferable decisions, the ones only asking reaches: Allium gets most of them, the rest little more than half.</figcaption>
 </figure>
 
-That is an indictment. A requirements tool that does no better than typing your thoughts into an empty box has no place in your workflow. Several of them ask for more of your time and give nothing back for it.
+This is a poor showing for tools built for the task. A requirements process that does no better than an empty text box is not worth adopting, and several of these cost more of your time than plain prose while adding nothing.
 
-The full run is below, every task and each of its three repeats.
+The full results are below: every task and all three repeats.
 
 <figure style="margin:2.5rem 0;overflow-x:auto;">
 <table style="border-collapse:collapse;font-size:0.8rem;min-width:660px;width:100%;font-family:system-ui,-apple-system,sans-serif;">
@@ -157,11 +157,11 @@ The full run is below, every task and each of its three repeats.
 
 ## Why asking captures more
 
-The other tools make a deliberate trade-off. Given the brief, most get straight to work: they draft a specification and fill the gaps with sensible industry defaults. If your requirements are common, that is just what you want, since you do not have to spell everything out and the defaults are usually right. But faced with our loan, the obvious defaults are penalties first and two decimal places, and both are wrong for this bank. A default is a decision made without asking you, and when your case is unusual, that is a fast way to build the wrong thing.
+The other tools make a deliberate trade-off. Given the brief, most start work at once: they draft a specification and fill the gaps with common industry defaults. When your requirements are ordinary, this is what you want. You need not spell everything out, and the defaults are usually correct. For this loan, though, the obvious defaults are penalties first and two decimal places, both wrong for a Bahraini bank. A default is a decision made without asking you, and when your case is unusual, it is a quick way to build the wrong thing.
 
 <span class="pullquote" text-content="A default is a decision made without asking you."></span>
 
-Allium makes the opposite trade-off: it asks instead of assuming. That means around twenty-two questions, against the nearest rival's fourteen and the lightest tools' seven, close to double the field.
+Allium makes the opposite trade-off: it asks rather than assumes. That comes to about twenty-two questions per run, against fourteen for the next most inquisitive tool and seven for the lightest, roughly double the rest of the field.
 
 <figure style="margin: 2.5rem 0;">
 <svg viewBox="0 0 640 380" role="img" aria-label="Scatter chart of requirements captured against questions asked, one point per tool. Seven tools cluster between 7 and 14 questions at 62 to 71 percent captured, a nearly flat band. Allium sits apart at 22 questions and 91 percent, far above the shallow trend the other tools trace, capturing more for each question it asks, not only asking more." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
@@ -197,20 +197,20 @@ Allium makes the opposite trade-off: it asks instead of assuming. That means aro
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured against questions asked, one point per tool (means across the three tasks). The dotted line is the trend across the other tools; Allium sits well above it, capturing more for each question it asks.</figcaption>
 </figure>
 
-Volume is only part of it. Across the other tools the dotted line slopes gently upward, so asking more does capture a little more. Allium sits well above that line. At twenty-two questions the trend would predict a result in the mid-seventies, and Allium reaches ninety-one, so it draws more from each one. The difference is which questions it asks: it spends them on the decisions that move the money, like how the bank rounds. How it finds those is for a later article. The cost is a few more minutes of conversation, and the return is a specification that fits the institution rather than the industry average, before any code exists to unpick.
+The number of questions is only part of it. Across the other tools, more questions bought a little more coverage: the trend line slopes gently upward. Allium sits well above that line. At twenty-two questions the trend predicts coverage in the mid-seventies; Allium reaches ninety-one. It draws more from each question because of which questions it asks, spending them on the decisions that are most expensive to get wrong, such as how the bank rounds. How it chooses them is for a later article. The cost is a few more minutes of conversation; the return is a specification that fits the specific institution rather than the industry average, caught before any code is written.
 
 ## Before you build
 
-None of this argues for big design up front. One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not. You only learn some things once your idea meets reality, but you can spare yourself a lot of waste before then.
+None of this is an argument for big design up front. Agile tells you to start and work it out as you go; waterfall told you to settle everything first. Both treat all uncertainty as the same kind. Some of it you can only resolve by building; much of it you can resolve by asking first, which is cheaper.
 
-<span class="pullquote left" text-content="One of the lies of agile is that you should just start and figure it out as you go. One of the lies of waterfall was that you should not."></span>
+<span class="pullquote left" text-content="Agile tells you to start and work it out as you go; waterfall told you to settle everything first."></span>
 
-The laser can look like a vote for agile: if a document is never enough, build the thing. But those scientists did not need to build the finished laser. They needed time beside one that already worked, fixing their attempts while that was cheap.
+The laser story can read as support for the agile position: if a written design is never enough, you have to build. But the physicists did not need a finished, working laser to learn what the papers left out. They needed time alongside one that already worked, correcting their attempts while correction was cheap.
 
-Your AI has no working example to stand beside, but a specification it can run is the next best thing. The running itself, Allium's model checking, is for another article. It rests on the asking: a model is only worth checking if it captures the decisions that count, and you get there by building it as you ask. The model cannot be finished while those decisions stay open.
+Your AI has no working example to work from, but a specification it can execute is the next best thing. Executing it, through Allium's model checking, is the subject of a later article. It depends on elicitation: a model is only worth checking once it captures the decisions that distinguish your case, and it captures them as you ask. Leave those decisions open and the model stays unfinished.
 
-You will never write down everything you know. A specification you can run will show you where your design goes wrong before you build on it.
+You will never write down everything you know. A specification you can execute will show you where the design is wrong before you have built anything on it.
 
 ---
 
-The harness, the tasks and every scored transcript are open, so you can run it yourself. If you would rather your intent were questioned and stress-tested before it ships, [that is what Allium is built to do](https://github.com/juxt/allium).
+The harness, the tasks and every scored transcript are open, so you can reproduce the results yourself. If you would rather have your intent questioned and tested before it reaches code, [that is what Allium is for](https://github.com/juxt/allium).
