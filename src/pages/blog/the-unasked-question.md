@@ -25,14 +25,16 @@ We set out to test requirements-capture tools. If you under-specify your goals, 
 
 ## The experiment
 
-We built a gauntlet to test seven requirements-capture skills. It is open for anyone to run. Each skill works through three banking tasks, and a capable engineer writing plain prose is the control. In a run, the skill interviews a stakeholder agent. The agent hands over a thin brief, no more than "add payment allocation to our loan servicing system". Behind it sit fourteen more requirements. The agent volunteers none of them, and reveals each only when the skill asks.
+At JUXT we build software for financial services, much of it in capital markets. It is code that has to be right. So we built a gauntlet to test seven requirements-capture skills, open for anyone to run. Its three tasks come from that world, all to do with loan repayments and interest. A capable engineer writing plain prose is the control.
+
+Each task begins as a thin brief, an initial idea rather than a finished specification. One is no more than "add payment allocation to our loan servicing system". The skill has to turn that into a spec, and a stakeholder agent answers its questions as it goes. Behind the brief the agent holds fourteen more requirements. It volunteers none of them. Each emerges only when the skill asks.
 
 <figure style="margin:2.5rem 0;">
 <img src="/images/gauntlet-capture.png" alt="A stakeholder agent, holding a hidden list of fourteen numbered requirements in a thought bubble, talks with the skill under test, which then writes a specification." style="display:block;margin:0 auto;width:100%;max-width:680px;height:auto;background:#fff;padding:1rem;border-radius:8px;box-sizing:border-box;" />
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The stakeholder agent answers the skill's questions but releases each of its fourteen requirements only when asked. What the skill draws out becomes the specification.</figcaption>
 </figure>
 
-The fourteen are not defaults a model would assume. They are production options, the kind a system like [Apache Fineract](https://fineract.apache.org/) exposes. The loan runs at a Bahraini bank, so amounts use three decimal places rather than two; fees come before penalties; a residual below 0.005 dinar is written off. With only the brief and no one to ask, capable models got between a fifth and two fifths of them.
+None of the fourteen is a gotcha. Each is an ordinary choice that is simply not the default, like how a currency rounds or the order in which fees and penalties apply. All are real options exposed by [Apache Fineract](https://fineract.apache.org/), a widely used open-source core-banking platform. The loan here runs at a Bahraini bank, so amounts use three decimal places rather than two, and a residual below 0.005 dinar is written off. With only the brief and no one to ask, capable models got between a fifth and two fifths of them.
 
 The skill writes a specification. An evaluator agent scores it against the list and counts how many of the fourteen made it in.
 
