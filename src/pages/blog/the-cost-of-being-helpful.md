@@ -6,7 +6,7 @@ category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-11-09'
 heroImage: 'the-cost-of-being-helpful.jpg'
-draft: true
+draft: false
 tags:
   - 'ai'
   - 'agentic coding'
