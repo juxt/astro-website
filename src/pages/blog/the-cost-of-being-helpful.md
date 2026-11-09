@@ -1,7 +1,7 @@
 ---
 author: 'hga'
 title: 'The cost of being helpful'
-description: "When requirements aren't explicit, they have to be guessed or gathered. We evaluated eight AI requirements capture tools against a vague brief to see what they did."
+description: "When requirements aren't explicit, they have to be gathered or guessed. We evaluated eight AI requirements capture tools against a vague brief to see what they did."
 category: 'ai'
 layout: '../../layouts/BlogPost.astro'
 publishedDate: '2026-11-09'
@@ -15,34 +15,40 @@ tags:
   - 'requirements'
 ---
 
-<p class="lede">In 1958, the legal philosopher <a href="https://en.wikipedia.org/wiki/H._L._A._Hart" target="_blank">H.L.A. Hart</a> devised an intentionally ambiguous rule to make a point: <em>'no vehicle may be taken into the park'</em>. Obviously, this includes cars. But what about a child's bicycle or a pair of roller skates? What about an ambulance answering a 999 call or a tank as a war memorial on a plinth?</p>
+<p class="lede">In 1958, the legal philosopher <a href="https://en.wikipedia.org/wiki/H._L._A._Hart" target="_blank">H.L.A. Hart</a> devised an intentionally ambiguous rule to make a point: <em>'no vehicle may be taken into the park'</em>. Obviously, this includes cars. But what about a child's bicycle or a pair of roller skates? What about an ambulance answering a 999 call or a tank on a plinth as a war memorial?</p>
 
 The words we use ordinarily have a well-understood core and then a fuzzy border, where interpretation becomes much more subjective. Hart called this the [open texture](https://en.wikipedia.org/wiki/Open_texture) of language.
 
-This isn't unique to legal interpretation. Ask a programmer to 'remove duplicates from a list' and you might get back a list in which every item now appears once, or one from which everything that was repeated has been stripped away.
+This isn't unique to legal interpretation. Ask a programmer to 'remove duplicates from a list' and the result might be a list in which every unique item appears just once, or one from which every repeated item has been removed.
 
-Nor is it limited to technical disciplines like law and software engineering: tell a colleague that 'next Wednesday's meeting has been moved forward two days' and, [as the cognitive scientist Lera Boroditsky has found](https://pages.ucsd.edu/~scoulson/203/boroditsky.pdf), about half will take it to mean Monday, and half Friday.
+Nor is it limited to technical disciplines like law and software engineering: tell a colleague that 'next Wednesday's meeting has been moved forward two days' and, as the cognitive scientist Lera Boroditsky [has found](https://pages.ucsd.edu/~scoulson/203/boroditsky.pdf), about half will interpet the new day as Monday, and the other half Friday.
 
-The challenge of clear communication has taken on a new urgency with the rise of AI, now that many of us with domain-specific knowledge or a tacit understanding of a problem have to explain it to an agent. Research has repeatedly shown that LLMs are happy to plug uncertainties with plausible interpretations of anything not specified sufficiently well. This can sometimes be [helpful](https://arxiv.org/abs/2310.13548). But what about when it isn't?
+The challenge of clear communication has taken on a new urgency with the rise of AI, now that many people with domain-specific knowledge have to explain it to an agent. Research has repeatedly shown that LLMs will transparently resolve uncertainties with plausible interpretations. This can sometimes be [helpful](https://arxiv.org/abs/2310.13548), but what about when it isn't?
 
-Some gaps turn out to be material. In a financial application, you need to know [how the currency should round](https://en.wikipedia.org/wiki/Vancouver_Stock_Exchange#Rounding_errors_on_its_Index_price), or [whether fees come out before penalties](https://www.nbcnews.com/businessmain/wells-fargo-ordered-again-pay-203m-overdraft-case-1C9939781). There will be many systems much like the one you are building, and the decisions they made exert a gravitational pull on your own, whether you like it or not.
+Some uncertainties turn out to have material implications. In financial applications, you need to be certain of [how the currency should round](https://en.wikipedia.org/wiki/Vancouver_Stock_Exchange#Rounding_errors_on_its_Index_price) or [whether fees come out before penalties](https://www.nbcnews.com/businessmain/wells-fargo-ordered-again-pay-203m-overdraft-case-1C9939781).
 
-We wanted to see how the dedicated requirements-capture skills handle this, given little to go on. Do they prompt you to be more specific, or fill the gaps with plausible guesswork?
+<span class="pullquote" text-content="The decisions other similar systems make will exert a gravitational pull on the direction your ambiguities get resolved by an AI"></span>
+
+From the AI's perspective, there may be many systems which appear similar to the one you are building. The decisions other similar systems make will exert a gravitational pull on the direction your ambiguities get resolved by an AI, whether you agree with them or not.
+
+We wanted to see how the dedicated requirements-capture skills handle this when given little to go on. Do they prompt you to be more specific, or fill the gaps with guesswork?
 
 ## Running the gauntlet
 
-At JUXT we build software for banks and those operating in capital markets, so we built a test gauntlet around three core-banking tasks: applying a loan payment, building a repayment schedule and posting interest on a savings account. Each task sets an objective and leaves almost every important detail undefined.
+At JUXT we build software for banks and capital markets, so we built a test gauntlet around three core-banking tasks: applying a loan payment, building a repayment schedule, and posting interest on a savings account. Each task sets a high level objective and intentionally leaves almost every important detail undefined.
 
-For example, the loan task describes a function and sketches the domain in a few lines, then ends with an instruction to "establish whatever details you need to implement it correctly". The brief is reproduced in full [at the foot of this article](#fn-brief).
+For example, the loan task describes some desired functionality in a few lines, then ends with an instruction to "establish whatever details you need to implement it correctly". The brief is reproduced in full [at the end of this article](#fn-brief).
 
-Driving each skill under test is a stakeholder agent, briefed with fourteen 'latent requirements' that would shape the implementation. It offers them up when asked, but it doesn't volunteer them otherwise. This isn't intended as a trap: it simulates what we see on real projects all the time. A stakeholder may simply not know which details are relevant, may struggle to recall them in the moment, or may regard them as so obvious that it never occurs to them to mention them at all.
+<span class="pullquote left" text-content="A stakeholder may regard requirements as 'so obvious' that they don't need to be mentioned at all"></span>
+
+Driving each skill under test is a stakeholder agent, briefed with fourteen 'latent requirements' that would shape the implementation. It offers them up when asked directly, but it doesn't volunteer them otherwise. This behaviour isn't intended as a trap: it simulates what we see on real projects all the time. A stakeholder may simply not know which details are relevant, may struggle to recall them in the moment, or may regard them as 'so obvious' that they don't need to be mentioned at all.
 
 <figure style="margin:2.5rem 0;">
 <img src="/images/requirements-capture-1.png" alt="A stakeholder agent, holding a hidden list of fourteen numbered requirements in a thought bubble, talks with the skill under test, which then writes a specification." style="display:block;margin:0 auto;width:100%;max-width:680px;height:auto;" />
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">The stakeholder agent answers the skill's questions but releases each of its fourteen requirements only when asked. What the skill draws out becomes the specification.</figcaption>
 </figure>
 
-Each of the fourteen latent requirements is an ordinary choice that happens _not_ to be the common default. To make sure we weren't being unfairly obscure, every requirement maps to setting that [Apache Fineract](https://fineract.apache.org/), (a widely used open-source core-banking platform), exposes as a configuration option. The loan, for instance, is denominated in Bahraini dinar, which runs to [three decimal places](https://github.com/apache/fineract/blob/d63beed7ccfeadaffa0c7842b1011bc88451376f/fineract-core/src/main/java/org/apache/fineract/organisation/monetary/domain/OrganisationCurrency.java#L38-L41), and a residual of 0.005 dinar or less is [written off](https://github.com/apache/fineract/blob/d63beed7ccfeadaffa0c7842b1011bc88451376f/fineract-loan/src/main/java/org/apache/fineract/portfolio/loanproduct/domain/LoanProductRelatedDetail.java#L134). After eliciting requirements from our stakeholder agent, each skill produces a specification in Markdown or some other structured form.
+Each of the fourteen latent requirements is an ordinary choice that isn't the common default. To make sure we weren't being unfairly obscure, every latent requirement maps directly to a setting that [Apache Fineract](https://fineract.apache.org/) (a widely used open-source core-banking platform) exposes as a configuration option. The loan, for instance, is denominated in Bahraini dinar, which runs to [three decimal places](https://github.com/apache/fineract/blob/d63beed7ccfeadaffa0c7842b1011bc88451376f/fineract-core/src/main/java/org/apache/fineract/organisation/monetary/domain/OrganisationCurrency.java#L38-L41), and a residual of 0.005 dinar or less is [written off](https://github.com/apache/fineract/blob/d63beed7ccfeadaffa0c7842b1011bc88451376f/fineract-loan/src/main/java/org/apache/fineract/portfolio/loanproduct/domain/LoanProductRelatedDetail.java#L134). After eliciting requirements from our stakeholder agent, each skill produces a specification in Markdown or some other structured form.
 
 In a second phase, that specification is handed to an evaluator agent, along with the same fourteen latent requirements. The evaluator studies the spec and reports how many of the fourteen were captured.
 
@@ -62,7 +68,7 @@ Each skill was installed from its instructions and, aside from being driven by a
 - **[Tessl](https://github.com/tesslio)** ships a `requirement-gathering` skill, which we ran. It asks one question at a time.
 - **[Superpowers](https://github.com/obra/superpowers)** is a library of agent skills. We ran its `brainstorming` skill, which also probes one question at a time.
 
-Last, as a control, we added a [short prompt](#fn-baseline) that asks the LLM to act as an engineer and put clarifying questions to the stakeholder before drafting a spec. The prompt is short and replicated in full at the end of this article. It sets a bar the dedicated skills ought to clear.
+Lastly we added a [short prompt](#fn-baseline) as a control that asks the LLM to act as an engineer and 'ask the stakeholder clarifying questions' before drafting a spec. The prompt is short and replicated in full at the end of this article. It sets a baseline which the dedicated skills ought to clear.
 
 ## What the tools showed
 
@@ -121,7 +127,7 @@ The chart shows each tool's mean proportion of captured requirements across the 
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured, of fourteen hidden decisions, as a mean of nine runs per tool across three core-banking tasks. The dashed line marks plain prose, a capable engineer with no tool.</figcaption>
 </figure>
 
-The baseline short prompt captured just over 60% of the hidden requirements, placing it near the foot of the table. Nearly all of the dedicated skills did better. Only one did worse: Spec Kit.
+The baseline prompt captured just over 60% of the hidden requirements, placing it near the bottom of the table. All of the dedicated skills did better except one: Spec Kit.
 
 The full results are shown below, every task across all three repeats.
 
@@ -151,11 +157,11 @@ The full results are shown below, every task across all three repeats.
 
 ## What the tools missed
 
-Spec Kit is the one tool that explicitly limits how much it asks, and it shows. Its skills cap the stakeholder exchange at a 'maximum of 5 total questions across the whole session' and allow at most '3 [NEEDS CLARIFICATION] markers total' in the spec. For any requirements still open, the model is told to 'make informed guesses based on context and industry standards'. It asked the fewest questions of any tool and captured the fewest requirements.
+Spec Kit is the only tool that explicitly limits how much it asks during requirements capture, and it shows. Its instructions cap the stakeholder exchange at a 'maximum of 5 total questions across the whole session' and allow at most '3 [NEEDS CLARIFICATION] markers total' in the spec. For any unresolved requirements, the model is told to 'make informed guesses based on context and industry standards'.
 
-That may be a reasonable trade-off in many situations. For software in financial services, we don't think it is. Our own tool Allium makes the opposite choice. Its elicitation skill is built to leave no material detail unasked, down to an explicit instruction not to settle for a vague answer: 'Do not accept "yes" without specifics. You said yes, [X can happen]. How many times? Is there a limit? What happens after that?' The full script is published in the [Allium repository](https://github.com/juxt/allium).
+<span class="pullquote" text-content="The more the skill asks, the more it tends to capture"></span>
 
-Allium simply asks more questions, which makes it a more demanding partner in the conversation. We think these results demonstrate the value of the approach.
+That may be a reasonable trade-off in many situations. For software in financial services, we don't think it is. Our own tool Allium makes the opposite choice. Its elicitation skill is instructed to leave no material detail unasked, down to an explicit instruction not to settle for a vague answer: 'Do not accept "yes" without specifics. You said yes, [X can happen]. How many times? Is there a limit? What happens after that?' The full script is published in the [Allium repository](https://github.com/juxt/allium).
 
 <figure style="margin: 2.5rem 0;">
 <svg viewBox="0 0 640 380" role="img" aria-label="Scatter chart of requirements captured against questions asked, one point per tool. Coverage rises with the number of questions asked: Spec Kit asks about five and captures least, Allium asks about twenty-two and captures most, and the other tools fall in between along a rising trend." style="width:100%;height:auto;font-family:system-ui,-apple-system,sans-serif;">
@@ -193,15 +199,19 @@ Allium simply asks more questions, which makes it a more demanding partner in th
 <figcaption style="font-size:0.85rem;opacity:0.7;margin-top:0.5rem;">Requirements captured against questions asked, one point per tool (means across the three tasks). The dotted line is the trend: coverage rises with the number of questions a skill asks.</figcaption>
 </figure>
 
-Draw a trend line between the number of questions a skill asks and the share of requirements it captures and it slopes upward: the more a skill asks, the more it tends to capture. Allium asks the most, and it also captures the most.
+Draw a trend line between the number of questions asked and the share of requirements captured, and a clear pattern emerges: the more a skill asks, the more it tends to capture. Allium asks more questions, which makes it a more demanding partner in the conversation. I think these results demonstrate the value of the approach.
 
 ## The cost of being helpful
 
-We set out to learn whether the dedicated requirements-capture skills would push a vague user to be specific or fill the gaps with assumptions. Most of them don't push the user much, they fill in gaps with assumptions or industry defaults. We think that is a serious risk for software built with AI.
+We set out to learn whether the dedicated requirements-capture skills would push a vague user to be more precise.
 
-Think back to Hart's sign: everything we say has a central meaning and subjective edges. Back when requirements were gathered by hand, an engineer would usually stop and ask when a requirement was uncertain. If you are using an AI skill to elicit your requirements and write your specification, please ensure you read the resulting specification carefully to make sure you are comfortable with when it is choosing to substitute with 'informed guesses'.
+The answer is that most tools don't demand too much of the stakeholder. They tend to cluster together as measured by the number of questions asked. They accept the ambiguity, with one tool even intentionally masking it with guesswork. I think this is a risk for software built with AI.
 
-The designer [Charles Eames](https://www.eamesoffice.com/) said it simply: 'the details are not the details, they make the design'.
+<span class="pullquote" text-content="The details are not the details, they make the design"></span>
+
+Remember Hart's vehicle rule: everything we communicate usually has a well-understood core and a fuzzy border. Back when specifications were gathered by hand, an engineer would usually stop and ask when a requirement's interpretation seemed to sit near the subjective edge.
+
+The designer [Charles Eames](https://www.eamesoffice.com/) said it simply: 'the details are not the details, they make the design'. If you're using an AI to elicit requirements and write specifications, are you taking the time to ensure you agree with the 'informed guesses' being made on your behalf?
 
 ---
 
